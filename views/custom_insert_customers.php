@@ -852,9 +852,14 @@ if ($customers['image'] != '') {
 								<div class="float-right cover-btn">
 									<input type="hidden" name="vendor_id" value=<?php echo $customers['id']; ?> />
 									<button type="submit" name="submit" class="btn btn-primary m-r-20 m-b-20">
-										<?php if ($customers['id'] != "") { ?><i class="fa fa-check-square"></i>
-											<?= __('Update'); ?> <?php } else { ?><i class="icofont icofont-plus"></i>
-											<?= __('Submit'); ?><?php } ?> </button>
+										<?php if ($customers['id'] != "") { ?>
+											<i class="fa fa-check-square"></i>
+											<?= __('Update'); ?>
+										<?php } else { ?>
+											<i class="icofont icofont-plus"></i>
+											<?= __('Submit'); ?>
+										<?php } ?>
+									</button>
 									<input type="hidden" name="rid" value="<?php echo $rid; ?>">
 								</div>
 							</div>
@@ -2208,7 +2213,7 @@ if ($customers['image'] != '') {
 								<span class="form-label"><?= __('Billing Adderss') ?></span>
 								<div class="kt-input-icon">
 									<textarea type="text" class="form-control" placeholder="<?= __('Billing Adderss') ?>" name="billing_address[]" id="billing_address_`+ mkseq + `" title="<?= __('Billing Adderss') ?>" aria-label="Billing Adderss"></textarea>
-								</div> 
+								</div>
 							</div>
 							<div class="form-group col-lg-3 w-full" >
 								<span class="form-label"><?= __('Country') ?></span>
@@ -2245,7 +2250,7 @@ if ($customers['image'] != '') {
 							<div class="form-group col-lg-3 p-r-5" style="float: left;">
 								<span class="form-label"><?= __('Mobile') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control" type="number" id="mobile_`+ mkseq + `" name="mobile[]" value="" title="<?= __('Mobile') ?>" aria-label="Mobile">	
+									<input class="form-control" type="number" id="mobile_`+ mkseq + `" name="mobile[]" value="" title="<?= __('Mobile') ?>" aria-label="Mobile">
 								</div>
 							</div>
 							<div class="form-group col-lg-3 p-r-5" style="float: right;">
@@ -2255,7 +2260,7 @@ if ($customers['image'] != '') {
 								</div>
 							</div>
 						</div>
-					</div>	
+					</div>
 					<div class="col-lg-6" style="float: left;">
 						<div class="row">
 							<div class="form-group col-lg-9" >
@@ -2275,12 +2280,12 @@ if ($customers['image'] != '') {
 									<input type="radio"  name="is_default" value="`+ (mkseq - 1) + `" title="<?= __('Is Default') ?>" aria-label="Is Default">
 									<span><?= htmlspecialchars(__('Make Default'), ENT_QUOTES, 'UTF-8'); ?></span>
 								</div>
-							</div>        	
+							</div>
 							<div class="form-group col-lg-12" >
 								<span class="form-label"><?= __('Shipping Adderss') ?></span>
 								<div class="kt-input-icon">
 									<textarea type="text" class="form-control" placeholder="<?= __('Street') ?>" name="shipping_address[]" id="shipping_address_`+ mkseq + `" title="<?= __('Street') ?>" aria-label="Street"></textarea>
-								</div> 
+								</div>
 							</div>
 							<div class="form-group col-lg-3  w-full" >
 								<span class="form-label"><?= __('Country') ?></span>
@@ -2306,7 +2311,7 @@ if ($customers['image'] != '') {
 							<div class="form-group col-lg-3" >
 								<span class="form-label"><?= __('Pincode') ?></span>
 								<input class="form-control" placeholder="<?= __('Pincode') ?>" type="number" id="shipping_post_code_`+ mkseq + `" name="shipping_post_code[]" value="" title="<?= __('Pincode') ?>" aria-label="Pincode">
-							</div>									
+							</div>
 						</div>
 					</div>
 				</div>`;

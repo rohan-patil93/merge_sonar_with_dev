@@ -338,87 +338,87 @@ class integartionClass{
 			}
 		}
 
-		$query = "SELECT 
-		emp.id, 
-		emp.emp_code, 
-		emp.display_name, 
-		emp.image, 
+		$query = "SELECT
+		emp.id,
+		emp.emp_code,
+		emp.display_name,
+		emp.image,
 		CONCAT( FLOOR( DATEDIFF(NOW(), emp.date_of_birth)/ 365)) age,
 		(
-		SELECT 
-		department_name 
-		FROM 
-		`departments` dep 
-		WHERE 
-		dep.company_id = emp.company_id 
+		SELECT
+		department_name
+		FROM
+		`departments` dep
+		WHERE
+		dep.company_id = emp.company_id
 		AND dep.id = emp.department_id
 		AND dep.is_active = emp.is_active
-		) department_name, 
+		) department_name,
 		(
-		SELECT 
-		designation_name 
-		FROM 
-		`designations` des 
-		WHERE 
-		des.is_active = emp.is_active 
-		AND des.company_id = emp.company_id 
+		SELECT
+		designation_name
+		FROM
+		`designations` des
+		WHERE
+		des.is_active = emp.is_active
+		AND des.company_id = emp.company_id
 		AND des.id = emp.designation_id
 		) designation_name,
 		(
-		SELECT 
-		job_title 
-		FROM 
-		`job_titles` jbt 
-		WHERE 
-		jbt.company_id = emp.company_id 
+		SELECT
+		job_title
+		FROM
+		`job_titles` jbt
+		WHERE
+		jbt.company_id = emp.company_id
 		AND jbt.id = emp.job_title_id
-		AND jbt.is_active = emp.is_active 
-		) job_title, 
+		AND jbt.is_active = emp.is_active
+		) job_title,
 		(
-		SELECT 
-		lc.location_name 
-		FROM 
-		locations lc 
-		WHERE 
-		lc.company_id = emp.company_id 
+		SELECT
+		lc.location_name
+		FROM
+		locations lc
+		WHERE
+		lc.company_id = emp.company_id
 		AND lc.id = emp.location_id
-		AND lc.is_active = emp.is_active 
+		AND lc.is_active = emp.is_active
 		) location_name,
 		(
-		SELECT 
-		es.employment_status_name 
-		FROM 
-		employment_statuses es 
-		WHERE 
-		es.company_id = emp.company_id 
+		SELECT
+		es.employment_status_name
+		FROM
+		employment_statuses es
+		WHERE
+		es.company_id = emp.company_id
 		AND es.id = emp.employee_type
-		AND es.is_active = emp.is_active 
+		AND es.is_active = emp.is_active
 		) employment_status_name,
 		(
-		SELECT 
-		divi.division_name 
-		FROM 
-		divisions divi 
-		WHERE 
-		divi.company_id = emp.company_id 
+		SELECT
+		divi.division_name
+		FROM
+		divisions divi
+		WHERE
+		divi.company_id = emp.company_id
 		AND divi.id = emp.division_id
-		AND divi.is_active = emp.is_active 
+		AND divi.is_active = emp.is_active
 		) division_name
-		FROM 
+		FROM
 		employees emp
-		where 
+		where
 		emp.company_id = ".$get['company_id']."
 		AND (
 		CASE WHEN (
-		emp.date_of_leaving IS NOT NULL 
+		emp.date_of_leaving IS NOT NULL
 		AND emp.date_of_leaving >= now()
 		) THEN 1 WHEN (
-		emp.date_of_leaving IS NULL 
+		emp.date_of_leaving IS NULL
 		AND emp.is_active = 0
 		) THEN 1 ELSE 2 END
 		)= 1 ".$whr."
-		AND emp.is_active = '0' 
-		order by 
+		AND emp.is_active = '0'
+		order by
 		emp.display_name ASC";
 		$return['emp_query'] = $query;
 		$return['emp_data'] = $callConfig->getAllRows($query);
@@ -530,87 +530,87 @@ class integartionClass{
 	  			$whr.= " AND emp.".$wrkey." IN(".implode(",",$post[$whra]).") ";
 	  		}
 	  	}
-	  	$query = "SELECT 
-	  	emp.id, 
-	  	emp.emp_code, 
-	  	emp.display_name, 
-	  	emp.image, 
+	  	$query = "SELECT
+	  	emp.id,
+	  	emp.emp_code,
+	  	emp.display_name,
+	  	emp.image,
 	  	emp.gender,
 	  	(
-	  	SELECT 
-	  	department_name 
-	  	FROM 
-	  	`departments` dep 
-	  	WHERE 
-	  	dep.company_id = emp.company_id 
+	  	SELECT
+	  	department_name
+	  	FROM
+	  	`departments` dep
+	  	WHERE
+	  	dep.company_id = emp.company_id
 	  	AND dep.id = emp.department_id
 	  	AND dep.is_active = emp.is_active
-	  	) department_name, 
+	  	) department_name,
 	  	(
-	  	SELECT 
-	  	designation_name 
-	  	FROM 
-	  	`designations` des 
-	  	WHERE 
-	  	des.is_active = emp.is_active 
-	  	AND des.company_id = emp.company_id 
+	  	SELECT
+	  	designation_name
+	  	FROM
+	  	`designations` des
+	  	WHERE
+	  	des.is_active = emp.is_active
+	  	AND des.company_id = emp.company_id
 	  	AND des.id = emp.designation_id
 	  	) designation_name,
 	  	(
-	  	SELECT 
-	  	job_title 
-	  	FROM 
-	  	`job_titles` jbt 
-	  	WHERE 
-	  	jbt.company_id = emp.company_id 
+	  	SELECT
+	  	job_title
+	  	FROM
+	  	`job_titles` jbt
+	  	WHERE
+	  	jbt.company_id = emp.company_id
 	  	AND jbt.id = emp.job_title_id
-	  	AND jbt.is_active = emp.is_active 
-	  	) job_title, 
+	  	AND jbt.is_active = emp.is_active
+	  	) job_title,
 	  	(
-	  	SELECT 
-	  	lc.location_name 
-	  	FROM 
-	  	locations lc 
-	  	WHERE 
-	  	lc.company_id = emp.company_id 
+	  	SELECT
+	  	lc.location_name
+	  	FROM
+	  	locations lc
+	  	WHERE
+	  	lc.company_id = emp.company_id
 	  	AND lc.id = emp.location_id
-	  	AND lc.is_active = emp.is_active 
+	  	AND lc.is_active = emp.is_active
 	  	) location_name,
 	  	(
-	  	SELECT 
-	  	es.employment_status_name 
-	  	FROM 
-	  	employment_statuses es 
-	  	WHERE 
-	  	es.company_id = emp.company_id 
+	  	SELECT
+	  	es.employment_status_name
+	  	FROM
+	  	employment_statuses es
+	  	WHERE
+	  	es.company_id = emp.company_id
 	  	AND es.id = emp.employee_type
-	  	AND es.is_active = emp.is_active 
+	  	AND es.is_active = emp.is_active
 	  	) employment_status_name,
 	  	(
-	  	SELECT 
-	  	divi.division_name 
-	  	FROM 
-	  	divisions divi 
-	  	WHERE 
-	  	divi.company_id = emp.company_id 
+	  	SELECT
+	  	divi.division_name
+	  	FROM
+	  	divisions divi
+	  	WHERE
+	  	divi.company_id = emp.company_id
 	  	AND divi.id = emp.division_id
-	  	AND divi.is_active = emp.is_active 
+	  	AND divi.is_active = emp.is_active
 	  	) division_name
-	  	FROM 
+	  	FROM
 	  	employees emp
-	  	where 
+	  	where
 	  	emp.company_id = ".$get['company_id']."
 	  	AND (
 	  	CASE WHEN (
-	  	emp.date_of_leaving IS NOT NULL 
+	  	emp.date_of_leaving IS NOT NULL
 	  	AND emp.date_of_leaving >= now()
 	  	) THEN 1 WHEN (
-	  	emp.date_of_leaving IS NULL 
+	  	emp.date_of_leaving IS NULL
 	  	AND emp.is_active = 0
 	  	) THEN 1 ELSE 2 END
 	  	)= 1 ".$whr."
-	  	AND emp.is_active = '0' 
-	  	order by 
+	  	AND emp.is_active = '0'
+	  	order by
 	  	emp.display_name ASC";
 	  	$return['emp_query'] = $query;
 	  	$return['emp_data'] = $callConfig->getAllRows($query);
@@ -628,10 +628,10 @@ class integartionClass{
   		}
   		$query = "SELECT emp.id, emp.emp_code, emp.display_name, emp.image, emp.employee_type, st.ctc_yearly,st.ctc_monthly,st.affected_date FROM salary_template st, employees emp WHERE st.company_id = emp.company_id AND st.company_id = 1 AND st.employee_id = emp.id AND (
   		CASE WHEN (
-  		emp.date_of_leaving IS NOT NULL 
+  		emp.date_of_leaving IS NOT NULL
   		AND emp.date_of_leaving >= now()
   		) THEN 1 WHEN (
-  		emp.date_of_leaving IS NULL 
+  		emp.date_of_leaving IS NULL
   		AND emp.is_active = 0
   		) THEN 1 ELSE 2 END
   		)= 1 ".$whr." AND st.employee_id IN (SELECT employee_id FROM salary_template WHERE company_id =1 GROUP By employee_id  HAVING COUNT(employee_id)>1) ORDER BY emp.display_name";
@@ -649,83 +649,83 @@ class integartionClass{
 	  			$whr.= " AND emp.".$wrkey." IN(".implode(",",$post[$whra]).") ";
 	  		}
 	  	}
-	  	$query = "SELECT 
-	  	emp.id, 
-	  	emp.emp_code, 
-	  	emp.display_name, 
-	  	emp.image, 
+	  	$query = "SELECT
+	  	emp.id,
+	  	emp.emp_code,
+	  	emp.display_name,
+	  	emp.image,
 	  	emp.gender,
 	  	(
-	  	SELECT 
-	  	department_name 
-	  	FROM 
-	  	`departments` dep 
-	  	WHERE 
-	  	dep.company_id = emp.company_id 
+	  	SELECT
+	  	department_name
+	  	FROM
+	  	`departments` dep
+	  	WHERE
+	  	dep.company_id = emp.company_id
 	  	AND dep.id = emp.department_id
 	  	AND dep.is_active = emp.is_active
-	  	) department_name, 
+	  	) department_name,
 	  	(
-	  	SELECT 
-	  	designation_name 
-	  	FROM 
-	  	`designations` des 
-	  	WHERE 
-	  	des.is_active = emp.is_active 
-	  	AND des.company_id = emp.company_id 
+	  	SELECT
+	  	designation_name
+	  	FROM
+	  	`designations` des
+	  	WHERE
+	  	des.is_active = emp.is_active
+	  	AND des.company_id = emp.company_id
 	  	AND des.id = emp.designation_id
 	  	) designation_name,
 	  	(
-	  	SELECT 
-	  	job_title 
-	  	FROM 
-	  	`job_titles` jbt 
-	  	WHERE 
-	  	jbt.company_id = emp.company_id 
+	  	SELECT
+	  	job_title
+	  	FROM
+	  	`job_titles` jbt
+	  	WHERE
+	  	jbt.company_id = emp.company_id
 	  	AND jbt.id = emp.job_title_id
-	  	AND jbt.is_active = emp.is_active 
-	  	) job_title, 
+	  	AND jbt.is_active = emp.is_active
+	  	) job_title,
 	  	(
-	  	SELECT 
-	  	lc.location_name 
-	  	FROM 
-	  	locations lc 
-	  	WHERE 
-	  	lc.company_id = emp.company_id 
+	  	SELECT
+	  	lc.location_name
+	  	FROM
+	  	locations lc
+	  	WHERE
+	  	lc.company_id = emp.company_id
 	  	AND lc.id = emp.location_id
-	  	AND lc.is_active = emp.is_active 
+	  	AND lc.is_active = emp.is_active
 	  	) location_name,
 	  	(
-	  	SELECT 
-	  	es.employment_status_name 
-	  	FROM 
-	  	employment_statuses es 
-	  	WHERE 
-	  	es.company_id = emp.company_id 
+	  	SELECT
+	  	es.employment_status_name
+	  	FROM
+	  	employment_statuses es
+	  	WHERE
+	  	es.company_id = emp.company_id
 	  	AND es.id = emp.employee_type
-	  	AND es.is_active = emp.is_active 
+	  	AND es.is_active = emp.is_active
 	  	) employment_status_name,
 	  	(
-	  	SELECT 
-	  	divi.division_name 
-	  	FROM 
-	  	divisions divi 
-	  	WHERE 
-	  	divi.company_id = emp.company_id 
+	  	SELECT
+	  	divi.division_name
+	  	FROM
+	  	divisions divi
+	  	WHERE
+	  	divi.company_id = emp.company_id
 	  	AND divi.id = emp.division_id
-	  	AND divi.is_active = emp.is_active 
+	  	AND divi.is_active = emp.is_active
 	  	) division_name,
 	  	emp.joining_date,
 	  	emp.date_of_leaving
-	  	FROM 
+	  	FROM
 	  	employees emp
-	  	where 
+	  	where
 	  	emp.company_id = ".$get['company_id']."
 	  	AND( emp.joining_date >= '".$post['fromdate']."'
 	  	AND emp.joining_date <= '".$post['todate']."')
 	  	OR (emp.date_of_leaving >= '".$post['fromdate']."'
 	  	AND emp.date_of_leaving <= '".$post['todate']."')
-	  	order by 
+	  	order by
 	  	emp.display_name ASC";
 	  	$return['emp_query'] = $query;
 	  	$return['emp_data'] = $callConfig->getAllRows($query);
@@ -744,80 +744,80 @@ class integartionClass{
   			$whr.= " AND emp.".$wrkey." IN(".implode(",",$post[$whra]).") ";
   		}
   	}
-  	$query ="SELECT 
-  	emp.id, 
-  	emp.emp_code, 
-  	emp.display_name, 
-  	emp.image, 
+  	$query ="SELECT
+  	emp.id,
+  	emp.emp_code,
+  	emp.display_name,
+  	emp.image,
   	emp.gender,
   	(
-  	SELECT 
-  	department_name 
-  	FROM 
-  	`departments` dep 
-  	WHERE 
-  	dep.company_id = emp.company_id 
+  	SELECT
+  	department_name
+  	FROM
+  	`departments` dep
+  	WHERE
+  	dep.company_id = emp.company_id
   	AND dep.id = emp.department_id
   	AND dep.is_active = emp.is_active
-  	) department_name, 
+  	) department_name,
   	(
-  	SELECT 
-  	designation_name 
-  	FROM 
-  	`designations` des 
-  	WHERE 
-  	des.is_active = emp.is_active 
-  	AND des.company_id = emp.company_id 
+  	SELECT
+  	designation_name
+  	FROM
+  	`designations` des
+  	WHERE
+  	des.is_active = emp.is_active
+  	AND des.company_id = emp.company_id
   	AND des.id = emp.designation_id
   	) designation_name,
   	(
-  	SELECT 
-  	job_title 
-  	FROM 
-  	`job_titles` jbt 
-  	WHERE 
-  	jbt.company_id = emp.company_id 
+  	SELECT
+  	job_title
+  	FROM
+  	`job_titles` jbt
+  	WHERE
+  	jbt.company_id = emp.company_id
   	AND jbt.id = emp.job_title_id
-  	AND jbt.is_active = emp.is_active 
-  	) job_title, 
+  	AND jbt.is_active = emp.is_active
+  	) job_title,
   	(
-  	SELECT 
-  	lc.location_name 
-  	FROM 
-  	locations lc 
-  	WHERE 
-  	lc.company_id = emp.company_id 
+  	SELECT
+  	lc.location_name
+  	FROM
+  	locations lc
+  	WHERE
+  	lc.company_id = emp.company_id
   	AND lc.id = emp.location_id
-  	AND lc.is_active = emp.is_active 
+  	AND lc.is_active = emp.is_active
   	) location_name,
   	(
-  	SELECT 
-  	es.employment_status_name 
-  	FROM 
-  	employment_statuses es 
-  	WHERE 
-  	es.company_id = emp.company_id 
+  	SELECT
+  	es.employment_status_name
+  	FROM
+  	employment_statuses es
+  	WHERE
+  	es.company_id = emp.company_id
   	AND es.id = emp.employee_type
-  	AND es.is_active = emp.is_active 
+  	AND es.is_active = emp.is_active
   	) employment_status_name,
   	(
-  	SELECT 
-  	divi.division_name 
-  	FROM 
-  	divisions divi 
-  	WHERE 
-  	divi.company_id = emp.company_id 
+  	SELECT
+  	divi.division_name
+  	FROM
+  	divisions divi
+  	WHERE
+  	divi.company_id = emp.company_id
   	AND divi.id = emp.division_id
-  	AND divi.is_active = emp.is_active 
+  	AND divi.is_active = emp.is_active
   	) division_name,
   	emp.joining_date
-  	FROM 
+  	FROM
   	employees emp
-  	where 
+  	where
   	emp.company_id = ".$get['company_id']."
   	".$whr."
-  	AND emp.is_active = '0' 
-  	order by 
+  	AND emp.is_active = '0'
+  	order by
   	emp.display_name ASC";
   	$return['emp_query'] = $query;
   	$return['emp_data'] = $callConfig->getAllRows($query);
@@ -837,89 +837,89 @@ class integartionClass{
   			$whr.= " AND emp.".$wrkey." IN(".implode(",",$post[$whra]).") ";
   		}
   	}
-  	$query ="SELECT 
-  	emp.id, 
-  	emp.emp_code, 
-  	emp.display_name, 
-  	emp.image, 
+  	$query ="SELECT
+  	emp.id,
+  	emp.emp_code,
+  	emp.display_name,
+  	emp.image,
   	emp.gender,
   	(
-  	SELECT 
-  	department_name 
-  	FROM 
-  	`departments` dep 
-  	WHERE 
-  	dep.company_id = emp.company_id 
+  	SELECT
+  	department_name
+  	FROM
+  	`departments` dep
+  	WHERE
+  	dep.company_id = emp.company_id
   	AND dep.id = emp.department_id
   	AND dep.is_active = emp.is_active
-  	) department_name, 
+  	) department_name,
   	(
-  	SELECT 
-  	designation_name 
-  	FROM 
-  	`designations` des 
-  	WHERE 
-  	des.is_active = emp.is_active 
-  	AND des.company_id = emp.company_id 
+  	SELECT
+  	designation_name
+  	FROM
+  	`designations` des
+  	WHERE
+  	des.is_active = emp.is_active
+  	AND des.company_id = emp.company_id
   	AND des.id = emp.designation_id
   	) designation_name,
   	(
-  	SELECT 
-  	job_title 
-  	FROM 
-  	`job_titles` jbt 
-  	WHERE 
-  	jbt.company_id = emp.company_id 
+  	SELECT
+  	job_title
+  	FROM
+  	`job_titles` jbt
+  	WHERE
+  	jbt.company_id = emp.company_id
   	AND jbt.id = emp.job_title_id
-  	AND jbt.is_active = emp.is_active 
-  	) job_title, 
+  	AND jbt.is_active = emp.is_active
+  	) job_title,
   	(
-  	SELECT 
-  	lc.location_name 
-  	FROM 
-  	locations lc 
-  	WHERE 
-  	lc.company_id = emp.company_id 
+  	SELECT
+  	lc.location_name
+  	FROM
+  	locations lc
+  	WHERE
+  	lc.company_id = emp.company_id
   	AND lc.id = emp.location_id
-  	AND lc.is_active = emp.is_active 
+  	AND lc.is_active = emp.is_active
   	) location_name,
   	(
-  	SELECT 
-  	es.employment_status_name 
-  	FROM 
-  	employment_statuses es 
-  	WHERE 
-  	es.company_id = emp.company_id 
+  	SELECT
+  	es.employment_status_name
+  	FROM
+  	employment_statuses es
+  	WHERE
+  	es.company_id = emp.company_id
   	AND es.id = emp.employee_type
-  	AND es.is_active = emp.is_active 
+  	AND es.is_active = emp.is_active
   	) employment_status_name,
   	(
-  	SELECT 
-  	divi.division_name 
-  	FROM 
-  	divisions divi 
-  	WHERE 
-  	divi.company_id = emp.company_id 
+  	SELECT
+  	divi.division_name
+  	FROM
+  	divisions divi
+  	WHERE
+  	divi.company_id = emp.company_id
   	AND divi.id = emp.division_id
-  	AND divi.is_active = emp.is_active 
+  	AND divi.is_active = emp.is_active
   	) division_name,
   	emp.joining_date
-  	FROM 
+  	FROM
   	employees emp
-  	where 
+  	where
   	emp.company_id = ".$get['company_id']."
   	AND (
   	CASE WHEN (
-  	emp.date_of_leaving IS NOT NULL 
+  	emp.date_of_leaving IS NOT NULL
   	AND emp.date_of_leaving >= now()
   	) THEN 1 WHEN (
-  	emp.date_of_leaving IS NULL 
+  	emp.date_of_leaving IS NULL
   	AND emp.is_active = 0
   	) THEN 1 ELSE 2 END
   	)= 2
   	".$whr."
-  	AND emp.is_active = '0' 
-  	order by 
+  	AND emp.is_active = '0'
+  	order by
   	emp.display_name ASC";
   	$return['emp_query'] = $query;
   	$return['emp_data'] = $callConfig->getAllRows($query);
@@ -938,10 +938,10 @@ class integartionClass{
   	}
   	$query = "SELECT emp.id, emp.emp_code, emp.display_name, emp.image, emp.employee_type, emp.department_id, emp.designation_id, st.ctc_yearly,st.ctc_monthly,st.affected_date FROM salary_template st, employees emp WHERE st.company_id = emp.company_id AND st.company_id = 1 AND st.employee_id = emp.id AND (
   	CASE WHEN (
-  	emp.date_of_leaving IS NOT NULL 
+  	emp.date_of_leaving IS NOT NULL
   	AND emp.date_of_leaving >= now()
   	) THEN 1 WHEN (
-  	emp.date_of_leaving IS NULL 
+  	emp.date_of_leaving IS NULL
   	AND emp.is_active = 0
   	) THEN 1 ELSE 2 END
   )= 1 ".$whr." AND emp.is_active = '0'  ORDER BY emp.display_name, st.affected_date";
@@ -2281,7 +2281,7 @@ public function emailtemplate($send_data){
 		&nbsp;
 		</td>
 		</tr>
-		
+
 		<tr>
 		<td style="padding-left:33px; font-size:13px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
 		'.$this->emaildatareplace($send_data, $emailcontentres->email_content_2).'
@@ -3740,7 +3740,7 @@ public function togetdcumentdashboarddetails($get){
 	}
 	$return['lists'] = $task;
 	$return['assign_data'] = $this->getassignfrom16aemployeelist($get);
-	$query = "SELECT `id`, `company_id`, `emp_id`, ( SELECT display_name FROM employees emp	WHERE 
+	$query = "SELECT `id`, `company_id`, `emp_id`, ( SELECT display_name FROM employees emp	WHERE
 	emp.id = emp_id) 'display_name', `assessment_year`, `certificate_no`, `certificate_date`, created_date, current_status FROM `emp_tax_deposit_respect` WHERE company_id =".$get['company_id']."  AND is_active = 0 ORDER by id DESC";
 	$return['emp_tax_deposit_respect'] = $callConfig->getAllRows($query);
 
@@ -3996,56 +3996,56 @@ public function toimportthedataintotablesemployeessalary($get){
 		IFNULL(job_title, 'Not Defined') job_title,
 		customer_id vendor_id,
 		IFNULL(vendor_name, 'Not Defined') vendor_name,
-        min_exp, 
-        max_exp, 
+        min_exp,
+        max_exp,
         company_id,
         transaction_id,
         transaction_number,
         purchase_uom,
         item_wise_price,
-        item_price	
+        item_price
 		FROM (
     	SELECT  vrcitm.item_id,
                 (
-                    SELECT  jt.job_title 
-                    FROM    job_titles jt 
+                    SELECT  jt.job_title
+                    FROM    job_titles jt
                     WHERE   jt.company_id = vrc.company_id
                     AND     jt.id = vrcitm.item_id
                 ) job_title,
                 (
-                SELECT  vend.company 
-                FROM    vendors_vms vend 
+                SELECT  vend.company
+                FROM    vendors_vms vend
                 WHERE   vend.company_id = vrc.company_id
                 AND     vend.id = vrc.customer_id
             	) vendor_name,
     			vrc.customer_id,
     			vrc.transaction_number,
-            	vrcitm.min_exp, 
+            	vrcitm.min_exp,
                 vrcitm.max_exp,
                 vrcitm.purchase_uom,
-                vrcitm.item_price as item_wise_price, 
+                vrcitm.item_price as item_wise_price,
                 CASE
         WHEN vrcitm.purchase_uom ='PH' THEN vrcitm.item_price*240
         WHEN vrcitm.purchase_uom ='PD' THEN vrcitm.item_price*30
         WHEN vrcitm.purchase_uom ='PW' THEN vrcitm.item_price*4
         WHEN vrcitm.purchase_uom ='PY' THEN vrcitm.item_price/12
         WHEN vrcitm.purchase_uom ='PS' THEN vrcitm.item_price/6
-        WHEN vrcitm.purchase_uom ='PT' THEN vrcitm.item_price/4   
+        WHEN vrcitm.purchase_uom ='PT' THEN vrcitm.item_price/4
         ELSE vrcitm.item_price
-    	END AS item_price, 
+    	END AS item_price,
                 vrcitm.company_id,
                 vrcitm.transaction_id
 		    FROM    vendor_rate_cards vrc, `vrc_items` vrcitm
 		    WHERE   vrc.company_id = vrcitm.company_id
 		    AND 	vrc.company_id = ".$get['company_id']."
 		    AND     vrc. id = vrcitm.transaction_id
-		    AND     vrcitm.min_exp IS NOT NULL 
+		    AND     vrcitm.min_exp IS NOT NULL
 		    AND     vrc.is_active = 0
 		    AND     vrcitm.is_active = 0
 		    AND     vrc.effective_from_date >= '".$get['fromdate']."'
 		    AND     vrc.effective_to_date <=  '".$get['todate']."'
-		   
-		)a 
+
+		)a
 		WHERE
 			company_id = '".$get['company_id']."' ".$whr;
 	 	$return['data_query'] = $data_query;
@@ -4788,8 +4788,7 @@ public function toimportthedataintotablesemployeessalary($get){
 		}elseif($main_transaction_no_type=="LT"){
 			$main_transaction_number = $lifetime_transaction_number;
 		}
-		$returnres = array('main_transaction_number'=>$main_transaction_number,'monthly_transaction_number'=>$monthly_transaction_number, 'yearly_transaction_number'=>$yearly_transaction_number, 'lifetime_transaction_number'=>$lifetime_transaction_number);
-		return 	$returnres;
+		return array('main_transaction_number'=>$main_transaction_number,'monthly_transaction_number'=>$monthly_transaction_number, 'yearly_transaction_number'=>$yearly_transaction_number, 'lifetime_transaction_number'=>$lifetime_transaction_number);
 	}
 
 	public function getApplicationSerialNumbers($get){
@@ -5243,9 +5242,9 @@ public function toimportthedataintotablesemployeessalary($get){
     public function getStationeryAvailableItemsData($get){
         global $callConfig;
         $return = array();
-        $query = "SELECT id, name 
-            FROM stationery_categories 
-            WHERE company_id = ".$get['company_id']." 
+        $query = "SELECT id, name
+            FROM stationery_categories
+            WHERE company_id = ".$get['company_id']."
             AND is_active = 0
             ORDER BY name ASC";
         $data = $callConfig->getAllRows($query);
@@ -5266,7 +5265,7 @@ public function toimportthedataintotablesemployeessalary($get){
                 $whr .= " AND si.location_id = ".$get['location_id']." ";
             }
 
-            $query = "SELECT 
+            $query = "SELECT
                     l.location_name AS location_name,
                     sc.name AS category_name,
                     si.item_name,
@@ -5275,12 +5274,12 @@ public function toimportthedataintotablesemployeessalary($get){
                     IFNULL(SUM(sil.out_qty),0) AS consumed,
                     (IFNULL(SUM(sil.in_qty),0) - IFNULL(SUM(sil.out_qty),0)) AS balance
                 FROM stationery_items si
-                INNER JOIN stationery_categories sc 
+                INNER JOIN stationery_categories sc
                     ON sc.id = si.category_id AND sc.company_id = si.company_id AND sc.is_active=0
                 LEFT JOIN locations l
                     ON l.id = si.location_id AND l.company_id = si.company_id AND l.is_active = 0
-                LEFT JOIN stationery_item_ledger sil 
-                    ON sil.item_id = si.id AND sil.company_id = si.company_id 
+                LEFT JOIN stationery_item_ledger sil
+                    ON sil.item_id = si.id AND sil.company_id = si.company_id
                     AND sil.is_active = 0
                 WHERE si.company_id = ".$get['company_id']."
                 AND si.is_active = 0
@@ -5505,7 +5504,7 @@ public function toimportthedataintotablesemployeessalary($get){
                     AND si.is_active = 0
                 INNER JOIN stationery_categories sc
                     ON sc.id = si.category_id
-                    AND sc.is_active = 0 
+                    AND sc.is_active = 0
                 LEFT JOIN locations l
                     ON l.id = si.location_id
                     AND l.company_id = si.company_id
@@ -5801,13 +5800,13 @@ public function toimportthedataintotablesemployeessalary($get){
 		foreach((array)$serial_rows as $row){
 			$rows[] = array('id'=>intval($row->id),'type'=>'SERIAL','no'=>$row->serial_no,'lot_qty'=>0);
 		}
-		if(count($rows) == 0){
+		if(empty($rows)){
 			$lot_rows = $callConfig->getAllRows("SELECT id, lot_no, lot_quantity FROM item_lot_nos WHERE company_id = '{$company_id}' AND transaction_table = '{$process}' AND transaction_id = '{$tranid}' AND item_id = '{$item_id}' AND is_active = 0 ORDER BY id ASC");
 			foreach((array)$lot_rows as $row){
 				$rows[] = array('id'=>intval($row->id),'type'=>'LOT','no'=>$row->lot_no,'lot_qty'=>$row->lot_quantity);
 			}
 		}
-		if(count($rows) == 0){
+		if(empty($rows)){
 			$rows[] = array('id'=>0,'type'=>'ITEM','no'=>$item->item_name ?? 'Item QC','lot_qty'=>0);
 		}
 		return $rows;
@@ -5893,7 +5892,7 @@ public function toimportthedataintotablesemployeessalary($get){
 		$tranid = intval($tranid);
 		$item_id = intval($item_id);
 		$process = $callConfig->real_escape_string($process);
-		$row = $callConfig->getRow("SELECT 
+		$row = $callConfig->getRow("SELECT
 			COUNT(1) AS total,
 			SUM(CASE WHEN qc_status = 0 THEN 1 ELSE 0 END) AS pending,
 			SUM(CASE WHEN qc_status = 1 THEN 1 ELSE 0 END) AS draft,
@@ -5972,7 +5971,7 @@ public function toimportthedataintotablesemployeessalary($get){
 				$param_meta[intval($param['id'])] = $param;
 			}
 		}
-		if(count($param_meta) == 0){ return array();
+		if(empty($param_meta)){ return array();
 		}
 		$ids = implode(',', array_keys($param_meta));
 		$params = $callConfig->getAllRows("SELECT * FROM quality_parameters WHERE company_id = ".intval($company_id)." AND id IN (".$ids.") AND is_active = 0 ORDER BY quality_parameter_group_id ASC, id ASC");
@@ -5981,7 +5980,7 @@ public function toimportthedataintotablesemployeessalary($get){
 			$group_ids[intval($param->quality_parameter_group_id)] = intval($param->quality_parameter_group_id);
 		}
 		$group_names = array();
-		if(count($group_ids) > 0){
+		if(!empty($group_ids)){
 			$groups = $callConfig->getAllRows("SELECT id, group_name FROM quality_parameters_groups WHERE company_id = ".intval($company_id)." AND id IN (".implode(',', $group_ids).")");
 			foreach((array)$groups as $group){
 				$group_names[intval($group->id)] = $group->group_name;
@@ -6127,7 +6126,7 @@ public function toimportthedataintotablesemployeessalary($get){
 		$checked_count = 0;
 		$failed_count = 0;
 		$detail_ids = array();
-		$has_required_params = count($required) > 0;
+		$has_required_params = !empty($required);
 		foreach($responses as $pid=>$value){
 			$pid = intval($pid);
 			if(!isset($valid_param_ids[$pid]) || trim((string)$value) === ''){

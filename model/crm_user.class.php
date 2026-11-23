@@ -395,15 +395,15 @@ class crmuserClass extends userClass{
                 $senddata['lead_date_time'] = $this->dateconvertdbformat($post['date'])." ".$post['time'];
                 $senddata['lead_Task'] = $post['comment'];
                 $senddata['assign_user_list'] = $assign_user_list;
-                $res = $this->emailsendmediaternew($senddata);
+                $this->emailsendmediaternew($senddata);
 
                 $msg = "New Task Assign For You :".$post['comment'];
                 $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $sendnotification = $this->tosendnotifiations($notdataa);
+                $this->tosendnotifiations($notdataa);
                 $notdataa['notification_message'] = "New Task Assign Successfully";
                 $notdataa['notification_users'] = $ccuserarray;
                 $notdataa['type'] = "INFORMATION";
-                $sendnotification = $this->tosendnotifiations($notdataa);
+                $this->tosendnotifiations($notdataa);
 
             }
             if($post['lead_type'] == '7'){
@@ -411,22 +411,22 @@ class crmuserClass extends userClass{
                 $senddata['lead_date_time'] = $this->dateconvertdbformat($post['date'])." ".$post['time'];
                 $senddata['lead_Task'] = $post['comment'];
                 $senddata['assign_user_list'] = $assign_user_list;
-                $res = $this->emailsendmediaternew($senddata);
+                $this->emailsendmediaternew($senddata);
 
                 $msg = "New Meeting Assign For You :".$post['comment'];
                 $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $sendnotification = $this->tosendnotifiations($notdataa);
+                $this->tosendnotifiations($notdataa);
                 $notdataa['notification_message'] = "New Meeting Assign Successfully";
                 $notdataa['notification_users'] = $ccuserarray;
                 $notdataa['type'] = "INFORMATION";
-                $sendnotification = $this->tosendnotifiations($notdataa);
+                $this->tosendnotifiations($notdataa);
             }
             if($post['lead_type'] == '5'){
                 $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>$post['email_content_id'],'to_users'=>$ccuserarray,'cc_users'=>array(),'recipient_email_id'=>array($post['recipient_email_id']));
-                $res = $this->emailsendmediaternew($senddata);
+                $this->emailsendmediaternew($senddata);
                 $msg = "Email Send Successfully";
                 $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'INFORMATION', 'notification_users'=>$ccuserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $sendnotification = $this->tosendnotifiations($notdataa);
+                $this->tosendnotifiations($notdataa);
             }
         }
         $return['res'] = $crmleaddetails;
@@ -483,7 +483,7 @@ class crmuserClass extends userClass{
                 $email = $email_array['mesg'];
                 $file_path='uploads/email/'.$file_name;
                 file_put_contents($file_path, $email);
-                $lenn = $this->sendEmailslistnew($email_array);
+                $this->sendEmailslistnew($email_array);
                 $ress[] = $email_array;
             }
         }
@@ -494,7 +494,7 @@ class crmuserClass extends userClass{
         $email_data = array('email_source'=>$data['sender'], 'content'=>$data['content'], 'email_type'=>$data['email_type'], 'is_active'=>0 , 'current_status'=>0,'email_content_ref_id'=>$data['email_content_ref_id'], 'created_by'=>$data['created_by'] ,'created_date'=> date('Y-m-d H:i:s'));
         foreach ($data['revicer'] as $email) {
             $email_data['email'] = $email;
-            $email_res=$callConfig->insertRecord(TBL_EMAIL_LOGS,$email_data);
+            $callConfig->insertRecord(TBL_EMAIL_LOGS,$email_data);
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             // More headers
@@ -607,7 +607,6 @@ class crmuserClass extends userClass{
             //Statrt Get Post Code
             preg_match('/\b\d{6}\b/', $cust->billing_address, $postalCodeMatch);
             $postalCode = $postalCodeMatch[0] ?? null;
-            $address = trim(str_replace($postalCode, '', $cust->billing_address));
             $customers[$cust->id]['post_code'] = $postalCode;
             //End Get Post Code
 
@@ -685,7 +684,6 @@ class crmuserClass extends userClass{
     public function leadAndContactAssigning($get,$post){
         global $callConfig;
         $return['post'] = $post;
-        $order_by = $post['order_by'];
         $assign_lead_contact = $post['assign_lead_contact'];
         if($get['admin_type'] != 1){
             $originatercondition = " AND originator = '".$get['user_id']."'";
@@ -724,7 +722,7 @@ class crmuserClass extends userClass{
 
                 $msg = $contact. " : New Lead/Cntacts Assign For You";
                 $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>"",'application_table_name'=>'crm_lead_and_contact_assignings', 'type'=>'INFORMATION', 'notification_users'=>array($uids),'option'=>'','assigner_id'=>$post['user_id']);
-                $sendnotification = $this->tosendnotifiations($notdataa);
+                $this->tosendnotifiations($notdataa);
 
             }
         }
@@ -842,7 +840,6 @@ class crmuserClass extends userClass{
 
     public function getSalesInvoiceDynamicData($get){
         global $callConfig;
-        $accountlist = array();
         $return['get'] = $get;
         $sql = "SELECT s.id,s.user_name,s.party_name,s.mobile_no,s.expiry_date,s.bill_no, s.plan_name,
                 CASE
@@ -888,7 +885,6 @@ class crmuserClass extends userClass{
 
     public function getSalesInvoiceDynamicExcelList($get){
         global $callConfig;
-        $accountlist = array();
         $condlimi = '';
         if($get['LIMIT']!=""){
             $condlimi = " LIMIT ".$get['LIMIT'];
@@ -914,7 +910,7 @@ class crmuserClass extends userClass{
         $sales_tables = array('enquiries','estimates','delivery_orders','sales_orders','sales_returns');
         $hsnary = array('5'=>array('hsn_id'=>141,'hsn_name'=>'0303.00.00','percentage'=>5),'12'=>array('hsn_id'=>5,'hsn_name'=>'0101.21.00','percentage'=>12),'18'=>array('hsn_id'=>245,'hsn_name'=>'0402.91.10','percentage'=>18),'28'=>array('hsn_id'=>1086,'hsn_name'=>'1703.00.00','percentage'=>28));
         if(count((array)$selected_ids)!= 0){
-            $bill_no_array = $application_usersuser_name =$application_usersdiplay_name = $customerscompany = $customersdisplay_name = array();
+            $bill_no_array = $customerscompany = $customersdisplay_name = array();
             $implodeid = implode("','",$selected_ids);
             $query = "SELECT * FROM sales_invoice_data_excel WHERE bill_no IN ('".$implodeid."') AND company_id = ".$get['company_id']." AND parent_id = '".$post['sales_invoice_data_parent_id']."' AND is_active = 0";
             $query_result = $callConfig->getAllRows($query);
@@ -938,7 +934,7 @@ class crmuserClass extends userClass{
 
             $tax_authorities_rates_splitsql = "SELECT id, split_name, (tax_rate/100) as tax_rate, account_code, split_type, sales_account_code FROM `tax_authorities_rates_split` WHERE company_id = '".$post['company_id']."' AND is_active =0";
             $tax_authorities_rates_splitres1 = $callConfig->getAllRows($tax_authorities_rates_splitsql);
-            foreach($bill_no_array as $billno=>$billitems){
+            foreach($bill_no_array as $billitems){
                 $first = $billitems[0];
 
 
@@ -1099,7 +1095,6 @@ class crmuserClass extends userClass{
 
                             $itemssku[$itmlist->plan_name] = $itemdetail;
                         }
-                        $item_data = [];
 
 
 
@@ -1144,7 +1139,7 @@ class crmuserClass extends userClass{
                                 $tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txper1,'tax_amount'=>$txval1,'account_code'=>$split_1_gl_account_code));
                                 $taxfield['tax_split_details'] = json_encode($tax_split_details);
                             }
-                            $itax_id2=$callConfig->insertRecord('si_item_taxes',$taxfield);
+                            $callConfig->insertRecord('si_item_taxes',$taxfield);
                             $return['res_itm_tax'][] = $taxfield;
                         }
 
@@ -1152,7 +1147,7 @@ class crmuserClass extends userClass{
                  }
 
                  $query4 = "UPDATE sales_invoice_data_excel SET table_name ='sales_invoices', table_id = '".$res1['LASTID']."',comments = '',current_status=".ST_APPROVED." WHERE bill_no = '".$first->bill_no."'";
-                $res323 = $callConfig->executeQuery($query4);
+                $callConfig->executeQuery($query4);
 
             }
         }
@@ -1238,7 +1233,6 @@ class crmuserClass extends userClass{
 
     public function insertcontactdata($get, $post){
         global $callConfig;
-        $return = [];
         $rows = $post['rows'] ?? [];
         $files = $post['files'][0] ?? [];
         $inserted = 0;
@@ -1272,7 +1266,6 @@ class crmuserClass extends userClass{
 
     public function insertleaddata($get, $post){
         global $callConfig;
-        $return = [];
         $rows = $post['rows'] ?? [];
         $files = $post['files'][0] ?? [];
         $inserted = 0;
@@ -1394,11 +1387,9 @@ class crmuserClass extends userClass{
     }
     public function getFeasibilityFields($get){
         global $callConfig;
-        $return = array();
         if(isset($get['rid']) && $get['rid'] != ''){
             $query = "SELECT * FROM feasibility_fields WHERE feasibility_type_id = ".$get['rid']." AND company_id=".$get['company_id']." AND is_active=0";
             $data = $callConfig->getAllRows($query);
-            $feasibility_fields_res = array();
             $html = "";
 
             foreach ($data as $row) {
@@ -2365,7 +2356,6 @@ $html .= "</div>";
     }
     public function getCRMAIDashboards($get){
         global $callConfig;
-        $todaydate = date("Y-m-d");
         $originatercondition = '';
         $crm_leadssql = "SELECT id, type_name, type, created_date, created_by FROM crm_activity_types WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
         $crm_leadsres=$callConfig->getAllRows($crm_leadssql);

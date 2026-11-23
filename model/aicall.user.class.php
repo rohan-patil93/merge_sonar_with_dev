@@ -36,7 +36,6 @@ class aicallUserClass extends userClass{
 	public function aiToGetRecruitmentData($get){
 		global $callConfig;
 		$return = array();
-		$post_id = $get['job_post_id'];
 		$gettype = $get['gettype'];
 		if($gettype == "getJobPostings"){
 			$query = "SELECT jp.id, jp.company_id, jp.job_number, jp.job_name, jp.job_desc, jp.job_responsibility, jp.requested_date, jp.required_date, jp.min_exp, jp.max_exp, jp.no_of_resources, jp.min_salary, jp.max_salary, jp.question, jp.candidate_mandatory_field FROM job_postings jp WHERE jp.is_active = 0";
@@ -67,7 +66,6 @@ class aicallUserClass extends userClass{
 	}
 	public function aitoaddcandidatedetails($get, $data){
 		global $callConfig;
-		$return = array();
 		$insert_array = array(
 			'company_id'                => $get['company_id'],
 		    'first_name'                => $data['first_name'],

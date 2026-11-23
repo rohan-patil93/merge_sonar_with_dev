@@ -110,12 +110,12 @@ $job_posting_candidates = $result['job_posting_candidates'];
     var max = 500;
     function addQuestionsTextFileds(val = '') {
         max++;
-        var html = `<div class="row rows` + max + ` mt-2"> 
+        var html = `<div class="row rows` + max + ` mt-2">
                 <div class="col-lg-10">
                     <input class="form-control" type="text" name="screening_question[`+ max + `]" value="` + val + `" placeholder="<?= __('Eg. Tell me about yourself') ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i title="<?= __('Delete Question') ?>" onclick="deleteQuestion(`+ max + `)" class="fa fa-trash text-danger cursor-pointer"></i> 
+                    <i title="<?= __('Delete Question') ?>" onclick="deleteQuestion(`+ max + `)" class="fa fa-trash text-danger cursor-pointer"></i>
                 </div>
             </div>`;
         $("#videoquestiontextfileds").append(html);

@@ -62,7 +62,7 @@ if($page == "elementordesign"){
 	<div class="col-6">
 	<span class="switch switch-icon">
 	<label>
-	<input type="checkbox" data-id="'.$_POST['id'].'" class="elementory_labelandinputtype js-switch_append'.$_POST['increment'].'" data-elementory_id="inputbox'.$_POST['id'].'" data-label="inputlabel'.$_POST['id'].'" data-div="divbox'.$_POST['id'].'"  
+	<input type="checkbox" data-id="'.$_POST['id'].'" class="elementory_labelandinputtype js-switch_append'.$_POST['increment'].'" data-elementory_id="inputbox'.$_POST['id'].'" data-label="inputlabel'.$_POST['id'].'" data-div="divbox'.$_POST['id'].'"
 	name="labelandinputineline['.$_POST['increment'].']" />
 	<span></span>
 	</label>
@@ -190,8 +190,8 @@ if($page == "elementordesign"){
 	</div>
 	</div></div></div></div>';
 	$inputtype ='<div class="divbox'.$_POST['id'].'  col-lg-6" id="divid'.$_POST['id'].'" >
-	<label class="textcapital col-form-label text-lg-right inputlabel'.$_POST['id'].'"><span class="labletext'.$_POST['id'].'">'.__('labe').'</span><span class="text-danger labletextrequerd'.$_POST['id'].'" style="display:none"  > * </span></label>	
-	<div class="inputtypediv'.$_POST['id'].'" >			
+	<label class="textcapital col-form-label text-lg-right inputlabel'.$_POST['id'].'"><span class="labletext'.$_POST['id'].'">'.__('labe').'</span><span class="text-danger labletextrequerd'.$_POST['id'].'" style="display:none"  > * </span></label>
+	<div class="inputtypediv'.$_POST['id'].'" >
 	<input type="text"  class="form-control form-control-lg inputbox'.$_POST['id'].'" name="inputtype'.$_POST['id'].'" placeholder="" />
 	</div></div>';
 	echo json_encode(array('setting'=>$message,'textfileds'=>$inputtype));

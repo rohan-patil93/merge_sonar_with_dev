@@ -32,7 +32,6 @@ class webViewClass extends userClass{
 		$table_name = $get['table'];
 		$rid = $get['rid'];
 		$company_id = $get['company_id'];
-		$user_id = $get['user_id'];
 
         if(isset($rid) && $rid != ''){
         	$configsql = "SELECT name, display_logo, default_bank_account_id,number_format, date_separator, date_format,pan_number,phone_number, gst_number, billing_address, contact_address  FROM config WHERE company_id = '".$get['company_id']."' AND is_active =0";
@@ -49,7 +48,7 @@ class webViewClass extends userClass{
             $data = $callConfig->getRow($query);
             $return['data'] = $data;
             if($child_table != ''){
-            	$query = "SELECT t2.*, concat(uoms.uom_short_code,'-',uoms.uom_name) unit_name FROM $child_table t2 
+            	$query = "SELECT t2.*, concat(uoms.uom_short_code,'-',uoms.uom_name) unit_name FROM $child_table t2
             	LEFT JOIN  unit_of_measurements uoms ON uoms.id = t2.purchase_uom AND uoms.company_id=$company_id AND uoms.is_active=0
             	WHERE t2.transaction_id=$rid AND  t2.company_id=$company_id AND t2.is_active=0";
             	$data = $callConfig->getAllRows($query);
@@ -70,7 +69,6 @@ class webViewClass extends userClass{
 		global $callConfig;
 		$return = array();
 		$company_id = $get['company_id'];
-		$user_id = $get['user_id'];
 
 		$sql = "SELECT id, page_title FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= 'attendenace_regularization_requests' AND is_active = 0 ";
 	    $res = $callConfig->getRow($sql);
@@ -105,11 +103,10 @@ class webViewClass extends userClass{
 		$return = array();
 		$rid = $get['id'];
 		$company_id = $get['company_id'];
-		$user_id = $get['user_id'];
 
         if(isset($rid) && $rid != ''){
 
-            $query = "SELECT arr.*, emp.display_name, atrreason.reason_name  
+            $query = "SELECT arr.*, emp.display_name, atrreason.reason_name
             FROM attendenace_regularization_requests arr
             LEFT JOIN employees emp ON emp.id = arr.employee_id AND emp.company_id = arr.company_id AND emp.is_active=0
             LEFT JOIN attedenace_regularizaton_reasons atrreason ON atrreason.id = arr.regularization_reason AND atrreason.company_id = arr.company_id AND atrreason.is_active=0
@@ -319,7 +316,7 @@ class webViewClass extends userClass{
 			$data = $callConfig->getRow($query);
 			$return['data'] = $data;
 
-			$itemSql = "SELECT sc.id, sc.item_id, sc.qty, sc.color_id, sc.size_id, 
+			$itemSql = "SELECT sc.id, sc.item_id, sc.qty, sc.color_id, sc.size_id,
 				si.item_name, si.category_id,
 				scateg.name AS category_name
 			FROM stationery_cart sc
@@ -450,7 +447,7 @@ class webViewClass extends userClass{
 		$rid = $get['rid'] ?? '';
 
 		if (isset($rid) && $rid != '') {
-			$query = "SELECT wfh.id, wfh.transaction_no, wfh.request_type, wfh.effective_from_date, 
+			$query = "SELECT wfh.id, wfh.transaction_no, wfh.request_type, wfh.effective_from_date,
 				wfh.effective_to_date, wfh.number_days, wfh.special_request, wfh.current_status,
 				wfh.status_date, wfh.created_date, wfh.created_by,
 				emp.display_name AS employee_name, emp.email_id AS employee_email
@@ -487,7 +484,7 @@ class webViewClass extends userClass{
 		if ($user_id != '') {
 			$whr .= " AND wfh.created_by={$user_id}";
 		}
-		$query = "SELECT wfh.id, wfh.transaction_no, wfh.request_type, wfh.effective_from_date, 
+		$query = "SELECT wfh.id, wfh.transaction_no, wfh.request_type, wfh.effective_from_date,
 			wfh.effective_to_date, wfh.number_days, wfh.current_status, wfh.created_date,
 			emp.display_name AS employee_name
 		FROM request_work_from_home wfh
@@ -590,7 +587,7 @@ class webViewClass extends userClass{
 		$access = $this->canAccessApprovalDiscussion($get);
 		$return['can_view'] = $access['can_view'];
 		$return['can_post'] = $access['can_post'];
-		if ($access['can_view'] != true) {
+		if (!$access['can_view']) {
 			$return['status'] = 'error';
 			return $return;
 		}
@@ -641,7 +638,7 @@ class webViewClass extends userClass{
 		}
 
 		$access = $this->canAccessApprovalDiscussion($post);
-		if ($access['can_post'] != true) {
+		if (!$access['can_post']) {
 			$return['message'] = 'You are not authorized to post in this discussion.';
 			return $return;
 		}

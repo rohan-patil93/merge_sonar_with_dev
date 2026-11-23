@@ -133,7 +133,7 @@ class manufacturingUserClass extends userClass{
 		}
 		if($validMaterialRows == 0){ $errors[] = 'At least one material item with quantity is required.';
 		}
-		if(count($errors) > 0){
+		if(!empty($errors)){
 			$return['manufacturing_boms'] = array('status'=>'fail','message'=>implode(' ', $errors));
 			return $return;
 		}
@@ -773,8 +773,7 @@ class manufacturingUserClass extends userClass{
 	    	$data = $callConfig->getRow($query);
 	    	$upquery = "UPDATE manufacturing_forecast_items SET current_status =".ST_APPROVED." WHERE company_id=".$get['company_id']." AND year='".$data->year."' AND is_active=0";
 	    }
-	    $exquery = $callConfig->executeQuery($upquery);
-	    return $exquery;
+	    return $callConfig->executeQuery($upquery);
 	}
 	public function toafterapprovaltoupdatemanufirmorder($transaction_no, $get){
 	    global $callConfig;

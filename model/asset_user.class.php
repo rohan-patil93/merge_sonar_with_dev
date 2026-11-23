@@ -382,10 +382,10 @@ class assetUserClass extends userClass{
 			$user_ids = array('0'=>$post['approval_user_id']);
 			$msg = "Asset Request ".$insert_requstres['LASTID'];
 			$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$insert_requstres['LASTID'],'application_table_name'=>'asset_transfer_requests', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>'COM_LIST_ASSET_REQUESTS');
-			$sendnotification = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 			$notdataa['type'] = "INFORMATION";
 			$notdataa['notification_users'] = array('0'=>$post['user_id']);
-			$sendnotification = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 		}
 		return $return;
 	}
@@ -485,11 +485,11 @@ class assetUserClass extends userClass{
 		$user_ids = array('0'=>$post['user_id']);
 		$msg = "Asset Request Transfer Successfully";
 		$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$insert_requstres['LASTID'],'application_table_name'=>'asset_transfer_requests', 'type'=>'INFORMATION', 'notification_users'=>$user_ids,'option'=>'COM_LIST_ASSET_REQUESTS');
-		$sendnotification = $this->tosendnotifiations($notdataa);
+		$this->tosendnotifiations($notdataa);
 		$notdataa['option'] = "";
 		$notdataa['type'] = "ACTION";
 		$notdataa['notification_users'] = array('0'=>$asset_requestsres->originator);
-		$sendnotification = $this->tosendnotifiations($notdataa);
+		$this->tosendnotifiations($notdataa);
 
 		return $return;
 	}
@@ -508,8 +508,7 @@ class assetUserClass extends userClass{
 		foreach($res2 as $asres1){
 			$asset_ids[$asres1->asset_id] = $asres1->asset_id;
 		}
-		$asset_id = implode(",",(array)$asset_ids);
-		return $asset_id;
+		return implode(",",(array)$asset_ids);
 	}
 	public function insertAssetVerification($get,$post){
 		global $callConfig;
@@ -524,7 +523,7 @@ class assetUserClass extends userClass{
 		$user_ids = array('0'=>$post['verification_user_id']);
 		$msg = "Asset Verification Schedule From - ".$post['start_date_time']." TO ".$post['end_date_time'];
 		$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$insert_requstres['LASTID'],'application_table_name'=>'asset_transfer_requests', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>'COM_VIEW_ASSET_VERIFICATIONS');
-		$sendnotification = $this->tosendnotifiations($notdataa);
+		$this->tosendnotifiations($notdataa);
 		return $res;
 	}
 
@@ -623,7 +622,7 @@ class assetUserClass extends userClass{
 			$user_ids = array('0'=>$asset_request_transfersres->originator,'1'=>$post['user_id']);
 			$option = "";
 			$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['asset_id'],'application_table_name'=>'asset_request_transfers', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
-			$sendnotification = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 		}
 
 		return $returnresult;
@@ -636,7 +635,7 @@ public function updateAssetAllocation($get, $post){
 			$insert_array['updated_date'] = date('Y-m-d H:i:s');
 			$insert_array['updated_by'] = $post['user_id'];
 			$where = "id = '".$rid."'";
-			$res=$callConfig->updateRecord("assets",$insert_array,"","",$where);
+			$callConfig->updateRecord("assets",$insert_array,"","",$where);
 			$returncdc['res'][] = $insert_array;
 			$lastid['LASTID'] = $rid;
 			$lastid['asset_id'] = $rid;
@@ -736,11 +735,11 @@ public function insertAsset($post){
 			$option = "COM_LIST_ASSET_RETURNS";
 			$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$res['LASTID'],'application_table_name'=>'asset_requests', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 			$returnresult['notification_array']  = $notdataa;
-			$sendnotification = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 			$notdataa['option'] = "";
 			$notdataa['type'] = "ACTION";
 			$notdataa['notification_users'] = array('0'=>$user_assetsres->user_id);
-			$sendnotification = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 
 		}
 		return $return;
@@ -786,12 +785,7 @@ public function insertAsset($post){
 	public function getAssetAllocation_old($get){
 		global $callConfig;
 		$conditionassetlist = "";
-		$empassetcoditon = "";
 		$todaytedate = date('Y-m-d');
-		$admin_access_employee = $get['admin_access_employee'];
-		if($get['admin_type'] !=1 || $admin_access_employee =='Y'){
-    		$codition = " AND av.user_id = '".$get['user_id']."'";
-    	}
 		if($get['list']=='Y'){
 			if(isset($get['assetid']) && $get['assetid'] !=""){
 				$conditionassetlist .= " AND ass.id IN(".$get['assetid'].")";
@@ -986,11 +980,11 @@ public function insertAsset($post){
 			$option = "COM_LIST_ASSET_ALLOCATIONS";
 			$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$res['LASTID'],'application_table_name'=>'user_assets', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 			$returnresult['notification_array']  = $notdataa;
-			$sendnotification = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 		}else{
 			$select_user_id =  $post['select_user_id'];
 			$option = "";
-			foreach($post['asset_id'] as $asset_idkey=>$asset_id){
+			foreach($post['asset_id'] as $asset_id){
 				$insert_array = array('company_id' =>$post['company_id'],'asset_id'=>$asset_id,'user_id'=>$select_user_id,'start_date'=>$this->dateconvertdbformat($post['start_date']),'end_date'=>$this->dateconvertdbformat($post['end_date']),'received_note'=>$post['remarks'],'received_date'=>date('Y-m-d'),'is_active' =>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date('Y-m-d H:i:s'));
 				$res = $callConfig->insertRecord('user_assets',$insert_array);
 				$returnresult['user_assets']  = $res;
@@ -1002,7 +996,7 @@ public function insertAsset($post){
 				$user_ids = array('0'=>$select_user_id,'1'=>$post['user_id']);
 				$option = "";
 				$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$asset_id,'application_table_name'=>'user_assets', 'type'=>'ACTION', 'notification_users'=>$select_user_id,'option'=>$option);
-				$sendnotification = $this->tosendnotifiations($notdataa);
+				$this->tosendnotifiations($notdataa);
 			}
 
 /**
@@ -1037,7 +1031,7 @@ public function insertAsset($post){
 			$assetupdatearray['updated_date'] = date('Y-m-d H:i:s');
 			$assetupdatearray['updated_by'] = $post['user_id'];
 			$where = "id = '".$asset_id."'";
-			$assetupdate=$callConfig->updateRecord("assets",$assetupdatearray,"","",$where);
+			$callConfig->updateRecord("assets",$assetupdatearray,"","",$where);
 		}
 		$oldassetsql = "SELECT * FROM assets WHERE is_active =0 AND company_id = '".$post['company_id']."' AND id ='".$asset_id."'";
 		$oldassetsqldetyails=$callConfig->getRow($oldassetsql);
@@ -1046,7 +1040,7 @@ public function insertAsset($post){
 		$returnresult['oldassetsqldetyails'][]  = $jsonold;
 
 		$insert_history = array('company_id' =>$post['company_id'],'is_active' =>'0','current_status'=>'0','asset_code'=>$asset_id,'trans_type'=>$table,'trans_ref'=>$res['LASTID'],'trans_date'=>date("Y-m-d"),'asset_detail'=>$jsonold,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$post['user_id'],'asset_trans_type'=>$res['asset_trans_type']);
-		$insert_history_res = $callConfig->insertRecord('asset_transactions',$insert_history);
+		$callConfig->insertRecord('asset_transactions',$insert_history);
 		$returnresult['insert_history_res'][]  =$insert_history;
 		return $returnresult;
 	}
@@ -1070,7 +1064,7 @@ public function insertAsset($post){
 			$option = "COM_LIST_ASSET_REQUESTS";
 			$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$insert_requstres['LASTID'],'application_table_name'=>'asset_transfer_requests', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 			$returnresult['notification_array']  = $notdataa;
-			$sendnotification = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 		}else{
 			$returnresult['error'] = "404";
 		}
@@ -1094,7 +1088,7 @@ public function insertAsset($post){
 			$option = "COM_LIST_ASSET_REQUESTS";
 			$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$insert_requstres['LASTID'],'application_table_name'=>'asset_transfer_requests', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 			$returnresult['notification_array']  = $notdataa;
-			$sendnotification = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 		}else{
 			$returnresult['error'] = "404";
 		}

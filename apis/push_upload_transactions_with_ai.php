@@ -98,10 +98,10 @@ if (curl_errno($ch)) {
                     curl_setopt($upch, CURLOPT_RETURNTRANSFER, true);
                     curl_exec($upch);
                     echo '<div class="card-px text-center ">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Oops.. Processing is taking longer than expected. Please re-upload the file. -  '.$retres['errorMessage'].'</p>   
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Oops.. Processing is taking longer than expected. Please re-upload the file. -  '.$retres['errorMessage'].'</p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="../assets/images/work.png">
-                        </div>   
+                        </div>
                     </div>';
                }
             }
@@ -125,7 +125,7 @@ function transactionDetailsUI($retres, $fullPathfilename){
             </ul>';
    if(is_numeric($infisuiteLastId)){
         $html .= '<div class="tab-content tabs">
-                    <div class="tab-pane card-body p-0 active show" id="response" role="tabpanel"> 
+                    <div class="tab-pane card-body p-0 active show" id="response" role="tabpanel">
                         <div class="alert alert-primary alert-dismissible">
                         <strong class="text-dark">Transaction has been successfully created. </strong> <a class="text-primary" href="index.php?option=COM_INSERT_PURCHASE_ORDERS&Rid='.$encodeId.'">Click here to open the transaction.</a>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -133,7 +133,7 @@ function transactionDetailsUI($retres, $fullPathfilename){
                     </div>';
    }else{
         $html .= '<div class="tab-content tabs">
-                    <div class="tab-pane card-body p-0 active show" id="response" role="tabpanel"> 
+                    <div class="tab-pane card-body p-0 active show" id="response" role="tabpanel">
                         <div class="alert alert-danger alert-dismissible">
                         <strong class="text-danger">We encountered an error while uploading the document. Please review and try uploading it again.</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -160,7 +160,7 @@ function transactionDetailsUI($retres, $fullPathfilename){
           $matcherorse1++;
           }
     $html .= '</tbody>
-        </table>  
+        </table>
     </div>
     <div class="col-lg-6">
         <table class="table table-hover m-b-0" style="font-size:13px;">
@@ -292,7 +292,7 @@ function transactionDetailsUI($retres, $fullPathfilename){
             }
     $html .= '</tbody>
         </table></div>';
-    $html .= '<div class="tab-pane card-body p-0 text-center" id="documents" role="tabpanel"> 
+    $html .= '<div class="tab-pane card-body p-0 text-center" id="documents" role="tabpanel">
             <iframe src="'.$fullPathfilename.'" height="700" width="1000" title="Iframe Example"></iframe>
         </div>';
     $html .= '</div>';

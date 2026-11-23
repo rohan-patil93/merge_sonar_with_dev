@@ -35,7 +35,6 @@ class pmsUserClass extends userClass{
 		foreach($ogoalsres as $ogres){
 			$locdepdesiarray[$ogres->location_id][$ogres->department_id][$ogres->job_title_id][] = $ogres->id;
 		}
-		$empwithuser = array();
 		$insert_heade = "INSERT INTO `employee_performance_appraisals` (`company_id`, `appraisal_id`, `employee_id`,`organization_goal_id`,`start_date`,`end_date`, `is_active`, `current_status`, `created_by`, `created_date`) VALUES ";
 		foreach($emplist as $empd){
 			$organization_goals = array();
@@ -81,18 +80,16 @@ class pmsUserClass extends userClass{
 	public function inserPerformanaceAppraiser($post){
 	global $callConfig;
 	$returnaray = array();
-	$insertfields = "";
 	$inserexc = "N";
 	foreach($post['emp_goal_id'] as $gkey => $gid){
 		$up_array_emp = array('self_achievement'=>$post['self_achievement'][$gkey],'achievement_percent'=>$post['achievement_percent'][$gkey],'approved_achievement'=>$post['approved_achievement'][$gkey],'approved_score'=>$post['approved_score'][$gkey]);
 		$resupdate[] = $callConfig->updateRecord('employee_goals',$up_array_emp,'id',$gid);
 	}
-	$up_array = array('is_active'=>null);
 	$insertsql = "INSERT INTO employee_performance_appraisal_details (company_id, epa_header_id, appraisal_id, employee_id, assessment_year, header_id, filed_1, filed_2, filed_3, filed_4, filed_5, filed_6, is_active, current_status, created_date, created_by) VALUES ";
 	// used how meny time loop run
 	$newewarray = array();
 	foreach($post['filed'] as $headerid => $headerow){
-		foreach($headerow as $kkey=>$valu){
+		foreach($headerow as $valu){
 			$newewarray[$headerid] = $valu;
 		}
 	}
@@ -204,7 +201,7 @@ class pmsUserClass extends userClass{
 }**/
 	public function getPerFormanceAppraisalReport($get){
 		global $callConfig;
-		$returnaray = $employees = array();
+		$employees = array();
 		$sql = "SELECT emp.id, emp.display_name, emp.emp_code, emp.image FROM employees emp, application_users au WHERE emp.company_id = '".$get['company_id']."' AND emp.company_id = au.company_id AND emp.user_id = au.id AND emp.is_active = 0 AND emp.is_active = au.is_active AND (('1' = '".$get['admin_type']."') OR au.reports_to = '".$get['user_id']."' OR au.id = '".$get['user_id']."' OR hr_buddy = '".$get['emp_id']."') AND emp.is_active = 0";
 		$retuenres['empsql'] = $sql;
 		$empres = $callConfig->getAllRows($sql);
@@ -460,7 +457,7 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		global $callConfig;
 		$returnarray = array();
 		$updateset = array("is_active"=>null);
-		$res_filters =$callConfig->updateRecord('performance_appraisal_questions',$updateset,'appraisal_id',$post['appraisal_id']);
+		$callConfig->updateRecord('performance_appraisal_questions',$updateset,'appraisal_id',$post['appraisal_id']);
 
 		foreach($post['question'] as $key=>$val){
 			$display_answer = json_encode($post['display_answer'][$key]);
@@ -481,8 +478,7 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 				$returnarray['insert'][] = $insert;
 			}
 		}
-		$return = $returnarray;
-		return $return;
+		return $returnarray;
 	}
 	public function getKipAndKraDetails($get){// getOrganizationGoalsSetails
 		global $callConfig;
@@ -547,8 +543,6 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 	}
 	public function addorupdatekpi($get,$post){
 		global $callConfig;
-		$returnres = array();
-		$kratable  = $post['kratable'];
 		$kpitable = $post['kpitable'];
 		$kpitasktable = $post['kpitasktable'];
 		foreach ($post['name'] as  $key1=>$values) {
@@ -589,13 +583,12 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 	}
 	public function insertAppraisalKRA($get){
 		global $callConfig;
-		$returnaray = array();
 		$insertkra = "INSERT INTO `appraisal_key_result_areas`(`company_id`, `appraisal_id`,`kra_id`,`area_name`, `description`, `weightage`, `kra_type`, `is_active`, `current_status`, `created_date`, `created_by`)SELECT '".$get['company_id']."','".$get['appraisal_id']."',`id`, `area_name`, `description`, `weightage`, `kra_type`, '0','0','".date('Y-m-d h:i:s')."','".$get['user_id']."' FROM `key_result_areas` WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$insertkrares = $callConfig->executeQuery($insertkra);
 		$returnara['insertkrares'] =$insertkrares;
 		$returnara['insertkraressql'] =$insertkra;
 
-		$insertkpi = "INSERT INTO `appraisal_key_performance_indicators`(`company_id`, `kpi_id`, `indicator_name`, `key_reslut_id`, `weightage`, `model`, `uom`, `display_sequence`, `role_id`, `version_no`, `is_active`, `current_status`,`created_date`, `created_by`) 
+		$insertkpi = "INSERT INTO `appraisal_key_performance_indicators`(`company_id`, `kpi_id`, `indicator_name`, `key_reslut_id`, `weightage`, `model`, `uom`, `display_sequence`, `role_id`, `version_no`, `is_active`, `current_status`,`created_date`, `created_by`)
 		SELECT  '".$get['company_id']."',`id`,`indicator_name`,(SELECT id FROM appraisal_key_result_areas akra WHERE kpi.company_id =akra.company_id AND kpi.key_reslut_id = akra.kra_id AND akra.appraisal_id = '".$get['appraisal_id']."') akra_id, `weightage`, `model`, `uom`, `display_sequence`, `role_id`, `version_no`, '0','0','".date('Y-m-d h:i:s')."','".$get['user_id']."' FROM key_performance_indicators kpi WHERE kpi.company_id = '".$get['company_id']."' AND key_reslut_id IN(SELECT id FROM `key_result_areas` WHERE company_id = '".$get['company_id']."' AND is_active = 0) AND kpi.is_active = 0";
 		$insertkpires = $callConfig->executeQuery($insertkpi);
 		$returnara['insertkpiresres'] =$insertkpires;
@@ -717,9 +710,6 @@ public function insertGoalData($get,$post){
 		global $callConfig;
 		$returnaray = array();
 		$returnaray['post'] = $post;
-		$formtable = '';
-		$where = '';
-		$select = '';
 		$kra_ids = implode(',', (array)$post['kra_ids']);
 		$locatdepdesignatio =  json_decode($post['locatdepdesignatio'],1);
 
@@ -736,7 +726,7 @@ public function insertGoalData($get,$post){
 						$goalid = $post['goalsid'][$resultrow->kra_id][$resultrow->kpi_id];
 						if($goalid != ""){
 							$insert_array = array('assessment_frequency'=>$post['assessment_frequency'][$resultrow->kra_id][$resultrow->kpi_id],'traget'=>$post['traget'][$resultrow->kra_id][$resultrow->kpi_id],'is_active'=>'0','updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d h:i:s'));
-							$insert = $callConfig->updateRecord('organization_goals',$insert_array,'id',$goalid);
+							$callConfig->updateRecord('organization_goals',$insert_array,'id',$goalid);
 
 						}else{
 							$setinsertsql = 0;
@@ -917,7 +907,6 @@ public function getOrganizationGoals($get){
 				$insert_array['updated_by'] = $post['userid'];
 				$insert_array['updated_date'] = date('Y-m-d h:i:s');
 				$insert = $callConfig->updateRecord('goals',$insert_array,'id',$post['rid']);
-				$rid = $post['rid'];
 			}else{
 				$insert_array['company_id'] = $post['company_id'];
 				$insert_array['is_active'] = '0';
@@ -925,7 +914,6 @@ public function getOrganizationGoals($get){
 				$insert_array['created_by'] = $post['userid'];
 				$insert_array['created_date'] = date('Y-m-d h:i:s');
 				$insert = $callConfig->insertRecord('goals',$insert_array);
-				$rid = $insert['LASTID'];
 			}
 			$returnarray['insert'] = $insert;
 		}
@@ -1006,7 +994,6 @@ public function getOrganizationGoals($get){
 				$insert_array['updated_by'] = $post['userid'];
 				$insert_array['updated_date'] = date('Y-m-d h:i:s');
 				$insert = $callConfig->updateRecord('feedbacks',$insert_array,'id',$post['rid']);
-				$rid = $post['rid'];
 			}else{
 				$insert_array['company_id'] = $post['company_id'];
 				$insert_array['is_active'] = '0';
@@ -1014,7 +1001,6 @@ public function getOrganizationGoals($get){
 				$insert_array['created_by'] = $post['userid'];
 				$insert_array['created_date'] = date('Y-m-d h:i:s');
 				$insert = $callConfig->insertRecord('feedbacks',$insert_array);
-				$rid = $insert['LASTID'];
 			}
 			$returnarray['insert'] = $insert;
 		}
@@ -1119,7 +1105,7 @@ public function getOrganizationGoals($get){
 		$insertsql = "INSERT INTO employee_performance_appraisal_details (company_id, employee_performance_appraisal_id, appraisal_id, employee_id, header_id, filed_1, filed_2, filed_3, filed_4, filed_5, filed_6, is_active, current_status, created_date, created_by) VALUES ";
 		$newewarray = array();
 		foreach($post['filed'] as $headerid => $headerow){
-			foreach($headerow as $kkey=>$valu){
+			foreach($headerow as $valu){
 				$newewarray[$headerid] = $valu;
 			}
 		}
@@ -1387,7 +1373,6 @@ public function getOrganizationGoals($get){
 	public function getAppraisalBellCurves($get){
 		global $callConfig;
 		$return = array();
-		$condition = "";
 		$post = array();
 		$return['post'] = $post;
 		$appraisal_rating_slabssql = "SELECT id, slabs_name, background_color, font_color FROM appraisal_rating_slabs WHERE company_id='".$get['company_id']."' AND is_active=0";
@@ -1410,7 +1395,6 @@ public function getOrganizationGoals($get){
 			$insert_array['updated_by'] = $post['userid'];
 			$insert_array['updated_date'] = date('Y-m-d h:i:s');
 			$insert = $callConfig->updateRecord('appraisal_bell_curves',$insert_array,'id',$post['rid']);
-			$rid = $post['rid'];
 		}else{
 			$insert_array['company_id'] = $post['company_id'];
 			$insert_array['is_active'] = '0';
@@ -1418,14 +1402,12 @@ public function getOrganizationGoals($get){
 			$insert_array['created_by'] = $post['userid'];
 			$insert_array['created_date'] = date('Y-m-d h:i:s');
 			$insert = $callConfig->insertRecord('appraisal_bell_curves',$insert_array);
-			$rid = $insert['LASTID'];
 		}
 		$returnarray['insert'] = $insert;
 		return $returnarray;
 	}
 	public function publishCommentAndRank($get,$post){
 		global $callConfig;
-		$returnarray = array();
 		$insert_array['updated_by'] = $post['userid'];
 		$insert_array['updated_date'] = date('Y-m-d h:i:s');
 		if($post['type']=="C"){
@@ -1434,9 +1416,7 @@ public function getOrganizationGoals($get){
 			$insert_array['publish_comment'] = 0;
 			$insert_array['publish_rank'] = 0;
 		}
-		$insert = $callConfig->updateRecord('employee_performance_appraisals',$insert_array,'id',$post['rid']);
-
-		return $insert;
+		return $callConfig->updateRecord('employee_performance_appraisals',$insert_array,'id',$post['rid']);
 	}
 }
 

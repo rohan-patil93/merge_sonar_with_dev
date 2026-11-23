@@ -54,7 +54,8 @@ $mopdulesetup = json_decode($mopdule_setup,1);
         htmlRows += '<td><input type="text" name="reference_field_name[]" class="form-control"  required aria-label="<?= htmlspecialchars(__('Reference Field Name'), ENT_QUOTES, 'UTF-8'); ?>"></td>';
         htmlRows += '<td><textarea  name="help_text[]" class="form-control" required aria-label="<?= htmlspecialchars(__('Help Text'), ENT_QUOTES, 'UTF-8'); ?>"></textarea></td>';
         htmlRows += '<td> <select class="form-select js-example-basic-single"  name="field_type[]" aria-label="<?= htmlspecialchars(__('Field Type'), ENT_QUOTES, 'UTF-8'); ?>"><?php foreach($filed_array as $key=>$value){ ?>
-<option value="<?php echo $key; ?>"  <?php echo $respons['field_type']==$key?"selected":""; ?>><?php echo $value; ?></option><?php } ?></select></td>';
+<option value="<?php echo $key; ?>"  <?php echo $respons['field_type']==$key?"selected":""; ?>><?php echo $value; ?></option><?php
+} ?></select></td>';
    htmlRows += '<td><input type="text" name="sequence[]"  class="form-control"  required aria-label="<?= htmlspecialchars(__('Sequence'), ENT_QUOTES, 'UTF-8'); ?>"></td>';
    htmlRows += '<td><input type="checkbox" class="js-switch'+count+'" name="display['+count+']" value="1" / aria-label="Display[&#039;+count+&#039;]"></td>';
         htmlRows += '</tr>';
@@ -103,7 +104,8 @@ function deleteitem(cardid){
 				<option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>><?= __('Other Table') ?></option>
 		</select>
 		<?php if($_GET['table']=="-1"){ ?>
-		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="<?= htmlspecialchars(__('Enter Table/Page Name'), ENT_QUOTES, 'UTF-8'); ?>"> <?php } ?>
+		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="<?= htmlspecialchars(__('Enter Table/Page Name'), ENT_QUOTES, 'UTF-8'); ?>">
+		<?php } ?>
 
 	</div>
 

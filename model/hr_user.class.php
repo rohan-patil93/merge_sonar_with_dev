@@ -71,7 +71,7 @@ class hrUserClass extends userClass{
 
         $shiftkeys = "SELECT id, key_short_code, display_value, color_code, key_name FROM attendance_key_types WHERE company_id=".$get['company_id']." AND leave_category_id IS NULL AND is_active=0";
         $shiftkeysdata = $callConfig->getAllRows($shiftkeys); // working //absent
-        foreach ($shiftkeysdata as $skey=>$svalue) {
+        foreach ($shiftkeysdata as $svalue) {
             $shift[$svalue->key_short_code] = (array)$svalue;
         }
 
@@ -112,7 +112,7 @@ class hrUserClass extends userClass{
          $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
         $holidaysdata = $callConfig->getAllRows($holidays); //holidays
         $holidaysdatas = array();
-        foreach ($holidaysdata as $hkey=>$hvalue) {
+        foreach ($holidaysdata as $hvalue) {
             $holidaysdatas[] = $hvalue->holiday_date;
         }
         $checkupdate = "SELECT id FROM `employee_daily_attendances` WHERE is_active='0' and company_id=".$get['company_id']." AND MONTH(attendace_date) = '".$month."' AND YEAR(attendace_date) = '".$year."'";
@@ -129,8 +129,6 @@ class hrUserClass extends userClass{
         foreach ($tempdetailsdata as $tempary) {
             $tempdetailary[$tempary->employee_id][$tempary->attendance_date] = array("date"=>$tempary->attendance_date,"type"=>$tempary->attendance_key_short_code,"start_half_day"=>$tempary->start_half_day,"end_half_day"=>$tempary->end_half_day,'clock_in'=>$tempary->clock_in,'clock_out'=>$tempary->clock_out);
         }
-        $min_working_hours = explode(":", $atsdata->minimum_hours_required);
-        $half_working_hours = explode(":", $atsdata->half_day_hours);
         $timeshetetrys = array();
         $i = 0;
         $notleaveattendancekey = array('P','R','A','H','O','Z');
@@ -287,7 +285,6 @@ class hrUserClass extends userClass{
     }
     public function insertEmployeeWorkAttendances($get){
         global $callConfig;
-        $submitattendancess = array();
         $lastid = '';
         $shift_check = SHIFT_CHECK; //1 meaning yes
         $month = $get['month'];
@@ -312,7 +309,7 @@ class hrUserClass extends userClass{
         $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
         $holidaysdata = $callConfig->getAllRows($holidays); //holidays
         $holidaysdatas = array();
-        foreach ($holidaysdata as $hkey=>$hvalue) {
+        foreach ($holidaysdata as $hvalue) {
             $holidaysdatas[] = $hvalue->holiday_date;
         }
 
@@ -403,7 +400,7 @@ class hrUserClass extends userClass{
         }
         $insdailyattendance = substr($insdailyattendance, 0, -1);
         $insdailyattendance .= " ON DUPLICATE KEY UPDATE updated_date ='".date("Y-m-d H:i:s")."'";
-        $res = $callConfig->executeQueryString($insdailyattendance);
+        $callConfig->executeQueryString($insdailyattendance);
         $returnarray['employee_daily_attendances'][] =  $insdailyattendance;
         $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
         $res1 = $callConfig->executeQueryString($insdailyattendancedetails);
@@ -484,11 +481,11 @@ class hrUserClass extends userClass{
                     if($data['presentcheck'] == '3'){
                         $insert_array['is_active'] = "";
                     }
-                    $approval_id=$callConfig->updateRecord("temp_attendance_details",$insert_array,"","",$where);
+                    $callConfig->updateRecord("temp_attendance_details",$insert_array,"","",$where);
                 }else{
                     if($data['presentcheck'] != '3'){
                         $insert_array = array('shift_settings_id'=>$shiftres->id,'company_id'=>$data['company_id'],'employee_id'=>$data['emp_id'],'attendance_date'=>$date,'attendance_key_short_code'=>$data['presentcheck'],'leave_type_id'=>$data['leave_type_id'],'leave_from'=>$date,'leave_to'=>$date,'leave_days'=>$halfdaysleave,'created_by'=>$get['user_id'],'created_date'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','start_half_day'=>$start_half_days,'end_half_day'=>$end_half_days);
-                        $approval_id=$callConfig->insertRecord('temp_attendance_details',$insert_array);
+                        $callConfig->insertRecord('temp_attendance_details',$insert_array);
                     }
                 }
                 $returnarray['leavedate'][] =$date;
@@ -514,11 +511,9 @@ class hrUserClass extends userClass{
         $tapres = $callConfig->insertRecord('import_swap_in_outs',$insertuserarray1);
         $returnaray['respons'] = $tapres;
         $lastid = $tapres['LASTID'];
-        $i=1;
         $coulunarray = array();
-        foreach($importrows as $colunm){
-            $coulunarray[] = "column".$i;
-            $i++;
+        for ($i = 1; $i <= count((array)$importrows); $i++) {
+            $coulunarray[] = "column" . $i;
         }
         $sql = "INSERT INTO `import_swap_in_out_details`(company_id, import_swap_in_out_id,is_active,".implode(',',$coulunarray).") VALUES";
         foreach ($importdata as $row){
@@ -581,7 +576,7 @@ class hrUserClass extends userClass{
             unset($imposrtfileres[0]);
             foreach($imposrtfileres as $importres){
                 $empid[$importres->column2] = $importres->column2;
-                $offarray = $sundaycnt =$pressentcnt = $absenttcnt= $total_day  =$leaveclcnt =$leaveelcnt=$leavemlcnt =$leaveslcnt =$leavewpcnt =$leavecocnt = $leaveplcnt = $leavemrcnt= $halfdaycnt = $halfdayabsentcnt = $leavecnt = 0;
+                $offarray = $sundaycnt = $pressentcnt = $absenttcnt = $total_day = $halfdaycnt = $halfdayabsentcnt = $leavecnt = 0;
                 foreach($dates as $field=>$columns){
                     $total_day++;
                     $dayName = date("l", strtotime($columns));
@@ -675,7 +670,6 @@ class hrUserClass extends userClass{
                             if(strpos(strtoupper(trim($rows->column1)), strtoupper("Employee")) !== false) {
                                 $explode = explode(":", $rows->column4);
                                 $empnamed = str_replace(' ', '_', strtoupper(trim($explode[0])));
-                                $displayempnamed = strtolower(trim($explode[1]));
                             }
                             if($empnamed!="" && $rows->column1 !=""){
                                 $departmentwithemp[$empnamed][] = $rows;
@@ -684,11 +678,8 @@ class hrUserClass extends userClass{
                     }
                 }
                 $return['total_emp_record_excel'] = count((array)$departmentwithemp);
-                $employerowdetails = array('0'=>'Employee','1'=>'Status','2'=>'InTime','3'=>'OutTime','4'=>'Duration','5'=>'Late_By','6'=>'Early_by','7'=>'OT');
                 $dateaarray = array('01'=>'column3','02'=>'column4','03'=>'column6','04'=>'column7','05'=>'column8','06'=>'column9','07'=>'column11','08'=>'column12','09'=>'column14','10'=>'column15','11'=>'column16','12'=>'column17','13'=>'column18','14'=>'column19','15'=>'column20','16'=>'column21','17'=>'column22','18'=>'column23','19'=>'column24','20'=>'column25','21'=>'column16','22'=>'column27','23'=>'column28','24'=>'column29','25'=>'column30','26'=>'column32','27'=>'column33','28'=>'column34','29'=>'column35','30'=>'column36','31'=>'column37');
-            $notrefcode = array();
             $insdailyattendancedetails = "INSERT INTO `temp_attendance_details`(`company_id`, `employee_id`, `attendance_date`, `attendance_key_short_code`, `clock_in`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
-            $insertattendanceempcount = 0;
             $notinsertattendanceempcount = 0;
             $attendanceempcount = 0;
             $all_emp = $insert_emp = $not_insert_emp = array();
@@ -738,7 +729,7 @@ class hrUserClass extends userClass{
         $sql = "SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11`, `column12`, `column13`, `column14`, `column15`, `column16`, `column17`, `column18`, `column19`, `column20`, `column21`, `column22`, `column23`, `column24`, `column25`, `column26`, `column27`, `column28`, `column29`, `column30`, `column31`, `column32`, `column33`, `column34`, `column35`, `column36`, `column37`, `column38`, `column39`, `column40`, `column41`, `column42`, `column43`, `column44`, `column45`, `column46`, `column47`, `column48`, `column49`, `column50`, `column51`, `column52`, `column53`, `column54`, `column55`, `column56`, `column57`, `column58`, `column59`, `column60`, `column61`, `column62`, `column63`, `column64`, `column65`, `column66`, `column67`, `column68`, `column69` FROM import_swap_in_out_details WHERE company_id = '".$get['company_id']."' AND import_swap_in_out_id = '".$post['rid']."' AND is_active = 0";
         $imposrtfileres=$callConfig->getAllRows($sql);
         $return['import_swap_in_out_details'] = $imposrtfileres;
-        $empdetails = $dates = $empid =  array();
+        $dates = $empid = array();
         $notdates = array('column1','column2','column3');
         $notleaveattendancekey = array('P','R','A','H','O','F','Z');
         foreach($imposrtfileres[0] as $keystr=>$getdate){
@@ -770,10 +761,9 @@ class hrUserClass extends userClass{
         $insdailyattendancedetails = "INSERT INTO `temp_attendance_details`(`company_id`, `employee_id`, `attendance_date`,`leave_type_id`,`attendance_key_short_code`, `leave_from`, `leave_to`, `leave_days`, `start_half_day`, `end_half_day`, `is_active`, `current_status`,`created_date`, `created_by`,`clock_in`,`clock_out`) VALUES ";
         foreach($imposrtfileres as $importres){
             $empid[$importres->column2] = $importres->column2;
-            $offarray = $sundaycnt =$pressentcnt = $absenttcnt= $total_day  =$leaveclcnt =$leaveelcnt=$leavemlcnt =$leaveslcnt =$leavewpcnt =$leavecocnt = $leaveplcnt = $leavemrcnt= 0;
+            $total_day = 0;
             foreach($dates as $field=>$dateval){
                 $total_day++;
-                $sunday = date("D",strtotime($dateval));
                 $attendance_date = date("Y-m-d",strtotime($dateval));
                 if($employee_terminations[$importres->column2] !="" && strtotime($employee_terminations[$importres->column2]) <= strtotime($dateval)){
                     $insdailyattendancedetails .= "('".$post['company_id']."', '".$importres->column2."', '".$attendance_date."','','A','','','','','','0','0', '".date("Y-m-d H:i:s")."', '".$post['user_id']."','',''),";
@@ -811,7 +801,7 @@ class hrUserClass extends userClass{
         $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
         $insdailyattendancedetails .= " ON DUPLICATE KEY UPDATE attendance_key_short_code = '".$importres->$field."'";
         $return['employee_daily_attendance_details_sql'] =  $insdailyattendancedetails;
-        $res1 = $callConfig->executeQueryString($insdailyattendancedetails);
+        $callConfig->executeQueryString($insdailyattendancedetails);
         $insertuserarray2=array('company_id'=>$post['company_id'],'import_swap_in_out_id'=>$post['rid'],'month_year'=>$post['month_year'],'type'=>'R','user_id'=>$post['user_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
         $tapres = $callConfig->insertRecord('work_attendance_logs',$insertuserarray2);
         $return['work_attendance_logs'] = $tapres;
@@ -841,7 +831,7 @@ class hrUserClass extends userClass{
     public function saveshiftemployee($get,$post){
         global $callConfig;
         $query = "UPDATE emp_shifts SET is_active =1 WHERE emp_id=".$post['newempid'];
-        $res = $callConfig->executeQuery($query);
+        $callConfig->executeQuery($query);
         $insert_array = array('company_id'=>$get['company_id'],'emp_id'=>$post['newempid'],'shift_id'=>$post['shift_id'],'shift_work_day_id'=>$post['shift_setting_id'],'shift_from'=>date('Y-m-d'),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
         return $callConfig->insertRecord('emp_shifts',$insert_array);
     }
@@ -962,11 +952,11 @@ class hrUserClass extends userClass{
         $return['hquery'] = $hquery;
         $return['hudata'] = $hudata;
         if($hudata->id !=""){
-            $res=$callConfig->updateRecord('payroll_exclusions', array('is_active'=>1),'id',$hudata->id);
+            $callConfig->updateRecord('payroll_exclusions', array('is_active'=>1),'id',$hudata->id);
         }else{
             $insert_array = array('company_id'=>$get['company_id'],'emp_id'=>$post['emp_id'],'category_id'=>$post['category_id'],'pay_year'=>$post['pay_year'],'pay_month'=>$post['pay_month'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'pay_area_id'=>$post['pay_area_id']);
             $return['insert_array'] = $insert_array;
-            $res = $callConfig->insertRecord('payroll_exclusions',$insert_array);
+            $callConfig->insertRecord('payroll_exclusions',$insert_array);
         }
         return $return;
     }
@@ -974,7 +964,7 @@ class hrUserClass extends userClass{
         global $callConfig;
         $insert_array = array('company_id'=>$get['company_id'],'emp_id'=>$post['emp_id'],'category_id'=>$post['category_id'],'pay_year'=>$post['pay_year'],'pay_month'=>$post['pay_month'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'pay_area_id'=>$post['pay_area_id']);
         $return['insert_array'] = $insert_array;
-        $res = $callConfig->insertRecord('payroll_exclusions',$insert_array);
+        $callConfig->insertRecord('payroll_exclusions',$insert_array);
         $hquery = $callConfig->selectQuery('employees','id,emp_code, display_name, user_id','id='.$post['emp_id'],'','','');
         return $callConfig->getRow($hquery);
     }
@@ -997,7 +987,7 @@ class hrUserClass extends userClass{
     public function togetpayrollstepsdetails($get){
         global $callConfig;
         $get['payroll_steps_cat'] = 1;
-        $start = $this->tocheckpayrolldetailsfull($get);
+        $this->tocheckpayrolldetailsfull($get);
         $dates = $this->payrollfromtodates($get);
         $date1 = $dates['date1'];
         $date2 = $dates['date2'];
@@ -1211,18 +1201,17 @@ class hrUserClass extends userClass{
                 $retresult['application_users'] = $res;
                 if(isset($res['LASTID'])){
                     $query = "SELECT application_module,id,role_short_code FROM application_roles where role_short_code IN('".$role_id."')";
-                    $roleres = $callConfig->getAllRows($query);
                     $retresult['query'] = $query;
                     $rolere = (object) array('application_module' => '', 'id' => '', 'role_short_code' => '');
                     $insertarray = array("company_id"=>$post['company_id'],"user_id"=>$res['LASTID'],"module_setup_id"=>$rolere->application_module,"application_module_id"=>$rolere->application_module,"role_id"=>$rolere->id,"role_short_code"=>$rolere->role_short_code,"is_active"=>"0","current_status"=>"0","created_date"=>date('Y-m-d h:i:s'),"created_by"=>$post['user_id']);
-                    $insert = $callConfig->insertRecord('application_user_module_roles',$insertarray);
+                    $callConfig->insertRecord('application_user_module_roles',$insertarray);
                     $rolesids[] = $rolere->role_short_code;
                     $user_module_id = $rolere->application_module;
 
                     $applicationuserinvoiteary = array('company_id'=>$post['company_id'],'user_name'=>$post['user_name'],'first_name'=>$post['first_name'][$key],'last_name'=>$post['last_name'][$key],'display_name'=>$post['display_name'],'user_email'=>$post['user_email'][$key],'user_mobile'=>$post['user_mobile'][$key],'user_type'=>$post['user_type'][$key],'user_id'=>$res['LASTID'],'role_id'=>json_encode($post['role_id'][$key]),'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date('Y-m-d H:i:s'));
                     $res1=$callConfig->insertRecord('application_user_invitations',$applicationuserinvoiteary);
                     $customerarray = array('company_id'=>$post['company_id'],'first_name'=>$post['first_name'][$key],'last_name'=>$post['last_name'][$key],'display_name'=>$post['display_name'],'email    '=>$post['user_email'][$key],'phone    '=>$post['user_mobile'][$key],'user_id'=>$res['LASTID'],'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-                    $customr_res=$callConfig->insertRecord('customers',$customerarray);
+                    $callConfig->insertRecord('customers',$customerarray);
 
                     $retresult['application_user_invitations'] = $res1;
                     $emailarray['user_company_id'] = $post['company_id'];
@@ -1239,7 +1228,7 @@ class hrUserClass extends userClass{
                     $emailarray['user_email'] = $post['user_email'][$key];
                     $emailarray['company_id'] = $post['company_id'];
                     $emailarray['template_reference_id'] = 3;
-                    $emill = $this->NewUserformate($emailarray,$post['data_name']);
+                    $this->NewUserformate($emailarray,$post['data_name']);
                     $retresult['email'] = $emailarray;
                 }
 
@@ -1258,20 +1247,20 @@ class hrUserClass extends userClass{
         global $callConfig;
         if(isset($post['exemptions']) && count((array)$post['exemptions'])>0){
             $upquer = "UPDATE professional_tax_exemptions SET is_active=1 WHERE company_id = ".$get['company_id']." AND is_active = 0";
-            $ress = $callConfig->executeQuery($upquer);
+            $callConfig->executeQuery($upquer);
             foreach($post['exemptions'] as $key=>$emption){
                 $query = "SELECT * FROM professional_tax_exemptions WHERE id=".$key;
                 $singledata = $callConfig->getRow($query);
                 $updaterecord = array('company_id'=>$get['company_id'],'exemption_name'=>$emption,'exemption_code'=>$post['exemption_code'][$key],'employee_field_name'=>$post['employee_field_name'][$key], 'range_type'=>$post['range_type'][$key], 'minmum_range'=>$post['minmum_range'][$key], 'is_active'=>0);
-                $res = $callConfig->updateRecord('professional_tax_exemptions',$updaterecord,'id',$key);
+                $callConfig->updateRecord('professional_tax_exemptions',$updaterecord,'id',$key);
                 $insert_array = array('company_id'=>$get['company_id'],'application_table_name'=>'professional_tax_exemptions','transaction_id'=>$key,'old_data'=>json_encode($singledata),'new_data'=>json_encode($updaterecord),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
-                $res = $callConfig->insertRecord('application_table_histories',$insert_array);
+                $callConfig->insertRecord('application_table_histories',$insert_array);
             }
         }
         if(isset($post['newexemptions']) && count((array)$post['newexemptions'])>0){
             foreach($post['newexemptions'] as $key=>$emption){
                 $insert_array = array('company_id'=>$get['company_id'],'exemption_name'=>$emption,'exemption_code'=>$post['newexemption_code'][$key],'employee_field_name'=>$post['newemployee_field_name'][$key],  'range_type'=>$post['newrange_type'][$key], 'minmum_range'=>$post['newminmum_range'][$key],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
-                $res = $callConfig->insertRecord('professional_tax_exemptions',$insert_array);
+                $callConfig->insertRecord('professional_tax_exemptions',$insert_array);
             }
 
         }
@@ -1521,7 +1510,7 @@ class hrUserClass extends userClass{
         global $callConfig;
         if($post['rid']!=""){
             $upquery = "UPDATE contract_employee_pay SET is_active = NULL WHERE id =".$post['rid'];
-            $res = $callConfig->executeQuery($upquery);
+            $callConfig->executeQuery($upquery);
         }
         unset($post['submit']);
         unset($post['submit_value_exit']);
@@ -1542,7 +1531,7 @@ class hrUserClass extends userClass{
         if(isset($post['assessment_year_old'])){
             $query="UPDATE tax_slads SET is_active=NULL, updated_by=".$get['user_id']." WHERE assessment_year='".$post['assessment_year_old']."' AND tax_slab_name='".$post['tax_slab_name_old']."' AND is_active = 0";
             $return['query'] = $query;
-            $res = $callConfig->executeQuery($query);
+            $callConfig->executeQuery($query);
 
         }
         foreach($post['slab_from'] as $key=>$val) {
@@ -1602,7 +1591,7 @@ class hrUserClass extends userClass{
         $erans = $callConfig->getAllRows($query);
         if(count((array)$erans)==0){
             $inquery = "INSERT INTO `earnings` (`id`, `company_id`, `category_id`, `report_group_id`, `name`, `code`, `payslip_name`, `calculation_type`, `payroll_calculation_type`, `calculation_mode`, `calculation_mode_type`, `calculation_category`, `calculation_link`, `calculation_number`, `calculation_formula`, `varible_pay`, `part_of_ctc`, `display_in_payslip`, `pro_rata`, `editable`, `mandatory`, `display_seq`, `pay_generate_sequence`, `default_display`, `taxable`, `taxable_limit`, `min_range`, `max_range`, `note`, `formula_details`, `display_in_salary_structure`, `display_sequence_ctc_report`, `view_salary_display`, `view_salary_sequence`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`) VALUES (NULL, '1', '2', '0', 'Fixed CTC', 'PAY_CTC', 'Total CTC', 'A', 'A', 'STATIC', '1', '0', '0', '0.00', ' ', '0', '1', '0', '0', '1', '1', '0', '10', '0', '0', '0.00', '0.00', '0.00', NULL, '{\"count\":0,\"details\":null}', NULL, '0', '1', '0', '0', '0', '2024-05-26 22:31:21', '2024-06-19', '2079-06-19', '2024-05-26 22:31:21', '1', '2', '2025-02-27 23:12:23'), (NULL, '1', '3', '0', 'Total', 'TOTAL_EARNING_OTHER', 'Total', 'F', 'F', 'STATIC', '1', '0', '0', '0.00', NULL, '0', '0', '1', '0', '1', '1', '1000', '170', '0', '0', '0.00', '0.00', '0.00', NULL, NULL, NULL, '130', '0', '130', '0', '0', '2024-05-29 22:22:52', '2024-06-27', '2079-06-27', '2024-05-29 22:22:52', '2', '1', '2025-02-28 09:01:22'), (NULL, '1', '4', '0', 'Total Deduction', 'TOTAL_DEDUCTION', 'Total Deduction', 'F', 'F', 'STATIC', '2', '0', '0', '0.00', NULL, '0', '0', '1', '0', '1', '1', '2000', '200', '0', '0', '0.00', '0.00', '0.00', NULL, NULL, NULL, '190', '1', '190', '0', '0', '2024-05-29 22:31:32', '2025-02-25', '2080-02-25', '2024-05-29 22:31:32', '2', '1', '2025-02-28 09:01:36'), (NULL, '1', '4', '0', 'Net Salary', 'NETPAYABLE', 'Net Salary', 'F', 'F', 'STATIC', '1', '0', '0', '0.00', NULL, '0', '0', '1', '0', '1', '1', '200', '210', '0', '0', '0.00', '0.00', '0.00', NULL, NULL, NULL, '200', '1', '200', '0', '0', '2024-05-29 22:33:40', '2024-05-30', '2079-05-30', '2024-05-29 22:33:40', '2', NULL, '2025-02-27 12:39:57')";
-            $res = $callConfig->executeQuery($inquery);
+            $callConfig->executeQuery($inquery);
             $erans = $callConfig->getAllRows($query);
         }
 
@@ -2639,7 +2628,7 @@ class hrUserClass extends userClass{
 
         $shiftkeys = "SELECT id, key_short_code, display_value, color_code, key_name FROM attendance_key_types WHERE company_id=".$get['company_id']." AND leave_category_id IS NULL AND is_active=0";
         $shiftkeysdata = $callConfig->getAllRows($shiftkeys); // working //absent
-        foreach ($shiftkeysdata as $skey=>$svalue) {
+        foreach ($shiftkeysdata as $svalue) {
             $shift[$svalue->key_short_code] = (array)$svalue;
         }
 
@@ -2680,7 +2669,7 @@ class hrUserClass extends userClass{
          $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
         $holidaysdata = $callConfig->getAllRows($holidays); //holidays
         $holidaysdatas = array();
-        foreach ($holidaysdata as $hkey=>$hvalue) {
+        foreach ($holidaysdata as $hvalue) {
             $holidaysdatas[] = $hvalue->holiday_date;
         }
         $checkupdate = "SELECT id FROM `employee_daily_attendances` WHERE is_active='0' and company_id=".$get['company_id']." AND MONTH(attendace_date) = '".$month."' AND YEAR(attendace_date) = '".$year."'";
@@ -2697,8 +2686,6 @@ class hrUserClass extends userClass{
         foreach ($tempdetailsdata as $tempary) {
             $tempdetailary[$tempary->employee_id][$tempary->attendance_date] = array("date"=>$tempary->attendance_date,"type"=>$tempary->attendance_key_short_code,"start_half_day"=>$tempary->start_half_day,"end_half_day"=>$tempary->end_half_day,'clock_in'=>$tempary->clock_in,'clock_out'=>$tempary->clock_out);
         }
-        $min_working_hours = explode(":", $atsdata->minimum_hours_required);
-        $half_working_hours = explode(":", $atsdata->half_day_hours);
         $timeshetetrys = array();
         $i = 0;
         $notleaveattendancekey = array('P','R','A','H','O','Z');
@@ -2881,7 +2868,7 @@ class hrUserClass extends userClass{
         $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
         $holidaysdata = $callConfig->getAllRows($holidays); //holidays
         $holidaysdatas = array();
-        foreach ($holidaysdata as $hkey=>$hvalue) {
+        foreach ($holidaysdata as $hvalue) {
             $holidaysdatas[] = $hvalue->holiday_date;
         }
 
@@ -2986,7 +2973,7 @@ class hrUserClass extends userClass{
         }
         $insdailyattendance = substr($insdailyattendance, 0, -1);
         $insdailyattendance .= " ON DUPLICATE KEY UPDATE updated_date ='".date("Y-m-d H:i:s")."'";
-        $res = $callConfig->executeQueryString($insdailyattendance);
+        $callConfig->executeQueryString($insdailyattendance);
         $returnarray['employee_daily_attendances'][] =  $insdailyattendance;
         $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
         $res1 = $callConfig->executeQueryString($insdailyattendancedetails);

@@ -250,7 +250,7 @@ $totaldiscountamt = 0;
 $discount_amt = 0;
 foreach($items as $item){
     if(($table_name == 'quotations' || $table_name == 'purchase_orders') && $rtable_name !=''){
-        if(count($reftableitemlist) !=0){
+        if(!empty($reftableitemlist)){
             $subt_amount+=$item['item_price'] * $reftableitemlist[$item['item_id']]['pending_qty'];
         }else{
             $subt_amount+=$item['item_price'] * $item['pending_qty'];
@@ -279,7 +279,7 @@ foreach($items as $item){
         if(($table_name == 'quotations' || $table_name == 'purchase_orders') && $rtable_name !=''){
             $tax_val = $tax_valuearray[$item['item_id']] !=''?$tax_valuearray[$item['item_id']] :0;
 
-            if(count($reftableitemlist) !=0){
+            if(!empty($reftableitemlist)){
                 $itemda['quantity']= $reftableitemlist[$item['item_id']]['pending_qty'];
                 $item['pending_qty'] = $reftableitemlist[$item['item_id']]['pending_qty'];
             }else{

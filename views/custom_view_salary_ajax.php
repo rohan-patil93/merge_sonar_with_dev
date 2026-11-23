@@ -96,25 +96,20 @@ function tocalucalteepf($code_data,$val,$list=""){
     $basic = $code_data['BASIC'];
     $da = $code_data['DA']!=""?$code_data['DA']:'0';
     $basicda = $basic+$da;
-    $basic_amount = $basicda;
     $cackval = $list['condition_limit'];
     $basicsp = $cackval;
     if($basicda<=$cackval ){
         $sa = $code_data['OA'];
         $basicsp = $basic+$sa;
         if($basicsp<=$cackval ){
-            $basic_amount = $basicsp;
-
             $month_amount = ($basicsp*$val)/100;
         }else{
-            $basic_amount = $cackval;
             $month_amount = ($cackval *$val)/100;
         }
     }else{
         $month_amount = ($cackval *$val)/100;
     }
-    $return = array('basic_amount'=>$basicsp,'cal_formula'=>$basic_faormula,'amount'=>$month_amount);
-    return $return;
+    return array('basic_amount'=>$basicsp,'cal_formula'=>$basic_faormula,'amount'=>$month_amount);
 }
 function tocalucaltesi($code_data,$val,$catcode,$type,$pass_esi_val=""){
     $basic_faormula = $basic_faormula ?? '';
@@ -132,8 +127,7 @@ function tocalucaltesi($code_data,$val,$catcode,$type,$pass_esi_val=""){
     }else{
         $month_amount =0;
     }
-    $return = array('basic_amount'=>$basic_amount,'cal_formula'=>$basic_faormula,'amount'=>$month_amount);
-    return $return;
+    return array('basic_amount'=>$basic_amount,'cal_formula'=>$basic_faormula,'amount'=>$month_amount);
     }
 function tocalucaltPTX($code_data,$val,$catcode,$pass_esi_val=""){
     $month1 = $month1 ?? '';
@@ -154,8 +148,7 @@ function tocalucaltPTX($code_data,$val,$catcode,$pass_esi_val=""){
             break;
         }
     }
-    $return = array('basic_amount'=>$catlink_value,'cal_formula'=>$basic_faormula,'amount'=>$month_amount);
-    return $return;
+    return array('basic_amount'=>$catlink_value,'cal_formula'=>$basic_faormula,'amount'=>$month_amount);
 }
 echo "<pre>"; print_r($code_data); echo "</pre>";
 ?>

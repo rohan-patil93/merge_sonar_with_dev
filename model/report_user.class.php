@@ -560,10 +560,10 @@ function getSalesRegisterReport($get)
 			$listre->po_number = '';
 			$listre->po_date = '';
 			if (!empty($listre->ref_id)) {
-				$posql = "SELECT transaction_number, transaction_date 
-					FROM purchase_orders 
-					WHERE company_id = '" . $get['company_id'] . "' 
-					AND id = '" . $listre->ref_id . "' 
+				$posql = "SELECT transaction_number, transaction_date
+					FROM purchase_orders
+					WHERE company_id = '" . $get['company_id'] . "'
+					AND id = '" . $listre->ref_id . "'
 					AND is_active = 0";
 				$pores = $callConfig->getRow($posql);
 				if ($pores) {
@@ -997,7 +997,6 @@ function getSalesRegisterReport($get)
             foreach($employees_res as $emp_row){
                 $eid = is_array($emp_row) ? $emp_row['id'] : $emp_row->id;
                 $ename = is_array($emp_row) ? $emp_row['display_name'] : $emp_row->display_name;
-                $user_id = is_array($emp_row) ? (isset($emp_row['user_id']) ? $emp_row['user_id'] : '') : (isset($emp_row->user_id) ? $emp_row->user_id : '');
                 $map[$eid] = $ename;
             }
         }

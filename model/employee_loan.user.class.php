@@ -622,8 +622,6 @@ class employeeLoanClass extends userClass
         $res['get'] = $get;
         $res['post'] = $post;
 
-        $entry_id = $post['entry_id'];
-
         $method_type = $post['method_type'];
         $time_value = $post['exit_time'] ?? date('H:i:s');
         $date_value = $post['exit_date'] ?? date('Y-m-d');

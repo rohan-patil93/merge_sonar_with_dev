@@ -979,10 +979,10 @@ foreach ($emptypes_details as $emptypes) {
                     <th scope="col" class="" style="width: 20%;"><?= __('From / To') ?></th>
 
                   </tr>
-                  <?php if(count((array)$exp_details)=='0'){ 
+                  <?php if(count((array)$exp_details)=='0'){
                           $exp_details[] = array('company_name'=>"");
                         }
-                        $k=1; 
+                        $k=1;
                         if(count((array)$exp_details)>0){
                           foreach ($exp_details as $expe){
 
@@ -1041,7 +1041,7 @@ foreach ($emptypes_details as $emptypes) {
 
                       <th scope="col" class="thheader" style="width: 15%;"><?= __('Score') ?></th>
                     </tr>
-                    <?php if(count((array)$edu_details)=='0'){ 
+                    <?php if(count((array)$edu_details)=='0'){
                       $edu_details[] = array('institute_name'=>"");
                         }
 if(count((array)$edu_details)>0){
@@ -1104,7 +1104,7 @@ if(count((array)$edu_details)>0){
                     <th scope="col" class="thheader" style="width: 20%;"><?= __('Relationship Type') ?></th>
                     <th scope="col" class="thheader" style="width: 20%;"><?= __('DOB') ?></th>
                   </tr>
-                  <?php if(count((array)$dep_details)=='0'){ 
+                  <?php if(count((array)$dep_details)=='0'){
                       $dep_details[] = array('institute_name'=>"");
                     }
                     if(count((array)$dep_details)>0){
@@ -1162,7 +1162,7 @@ if(count((array)$edu_details)>0){
                   <th scope="col" class="thheader" style="width: 25%;"><?= __('Mobile No') ?></th>
 
                 </tr>
-                <?php  if(count((array)$emerge_details)=='0'){ 
+                <?php  if(count((array)$emerge_details)=='0'){
                         $emerge_details[] = array('contact_name'=>"");
                       }
                       if(count((array)$emerge_details)>0){

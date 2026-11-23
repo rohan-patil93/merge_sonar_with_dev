@@ -448,12 +448,6 @@ class attendanceUserClass extends userClass{
             );
         }
 
-        $insert_array = array(
-            'data' => $payload,
-            'created_date' => date('Y-m-d H:i:s'),
-            'process_val' => 1
-        );
-
 
             $process_post = $post;
             $process_post['_skip_raw_save'] = 1;
@@ -482,7 +476,7 @@ class attendanceUserClass extends userClass{
             "SELECT id, shift_id FROM emp_shifts
              WHERE emp_id = {$emp_id} AND company_id = {$company_id} AND is_active = 0"
         );
-        if (empty($data1) || !($data1->shift_id > 0)) {
+        if (empty($data1) || $data1->shift_id <= 0) {
             return '';
         }
 
@@ -490,7 +484,7 @@ class attendanceUserClass extends userClass{
             "SELECT * FROM shifts
              WHERE id = {$data1->shift_id} AND company_id = {$company_id} AND is_active = 0"
         );
-        if (empty($data2) || !($data2->shift_setting_id > 0)) {
+        if (empty($data2) || $data2->shift_setting_id <= 0) {
             return '';
         }
 
@@ -504,7 +498,7 @@ class attendanceUserClass extends userClass{
 
         $in  = new DateTime($clock_in_date . ' ' . $clock_in);
         $out = new DateTime($clock_out_date . ' ' . $clock_out);
-        if (!($out > $in)) {
+        if ($out <= $in) {
             return '';
         }
 
@@ -687,7 +681,7 @@ class attendanceUserClass extends userClass{
                     } else {
                         $old_in_ts = strtotime($final_clock_in_date . ' ' . $final_clock_in);
                         $new_in_ts = strtotime($clock_in_date . ' ' . $clock_in);
-                        if ($new_in_ts != false && ($old_in_ts == false || $new_in_ts < $old_in_ts)) {
+                        if ($new_in_ts && (!$old_in_ts || $new_in_ts < $old_in_ts)) {
                             $final_clock_in = $clock_in;
                             $final_clock_in_date = $clock_in_date;
                         }
@@ -702,7 +696,7 @@ class attendanceUserClass extends userClass{
                     } else {
                         $old_out_ts = strtotime($final_clock_out_date . ' ' . $final_clock_out);
                         $new_out_ts = strtotime($clock_out_date . ' ' . $clock_out);
-                        if ($new_out_ts != false && ($old_out_ts == false || $new_out_ts > $old_out_ts)) {
+                        if ($new_out_ts && (!$old_out_ts || $new_out_ts > $old_out_ts)) {
                             $final_clock_out = $clock_out;
                             $final_clock_out_date = $clock_out_date;
                         }
@@ -969,8 +963,6 @@ class attendanceUserClass extends userClass{
 
             }
 
-            $raw_in_out_mode = isset($desc['in_out_mode']) ? (int)$desc['in_out_mode'] : null;
-
             $id_parts = explode('|', (string)($desc['id'] ?? ''));
 
             $direction_part = $id_parts[0] ?? '';
@@ -1122,7 +1114,7 @@ class attendanceUserClass extends userClass{
 
                 $new_in_ts = strtotime($event_date . ' ' . $event_time);
 
-                if ($new_in_ts != false && ($old_in_ts == false || $new_in_ts < $old_in_ts)) {
+                if ($new_in_ts && (!$old_in_ts || $new_in_ts < $old_in_ts)) {
 
                     $should_update_clock_in = true;
 
@@ -1437,7 +1429,7 @@ class attendanceUserClass extends userClass{
                         } else {
                             $old_in_ts = strtotime($final_clock_in_date . ' ' . $final_clock_in);
                             $new_in_ts = strtotime($clock_in_date . ' ' . $clock_in);
-                            if ($new_in_ts != false && ($old_in_ts == false || $new_in_ts > $old_in_ts)) {
+                            if ($new_in_ts && (!$old_in_ts || $new_in_ts > $old_in_ts)) {
                                 $clock_in = $final_clock_in;
                                 $clock_in_date =  $final_clock_in_date;
                             }
@@ -1452,7 +1444,7 @@ class attendanceUserClass extends userClass{
                         } else {
                             $old_out_ts = strtotime($final_clock_out_date . ' ' . $final_clock_out);
                             $new_out_ts = strtotime($clock_out_date . ' ' . $clock_out);
-                            if ($new_out_ts != false && ($old_out_ts == false || $new_out_ts < $old_out_ts)) {
+                            if ($new_out_ts && (!$old_out_ts || $new_out_ts < $old_out_ts)) {
                                 $clock_out = $final_clock_out;
                                 $clock_out_date =$final_clock_out_date;
                             }
@@ -1548,6 +1540,5 @@ class attendanceUserClass extends userClass{
     }
 
 }
-?>
 
 

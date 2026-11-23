@@ -607,8 +607,6 @@ class dashboardUserClass{
 		if ($pay_year == '') {
 			$pay_year = date('Y');
 		}
-		$month      = str_pad((int)$pay_month, 2, '0', STR_PAD_LEFT);
-		$year       = (int)$pay_year;
 		$start_date = $pay_year . '-' . $pay_month . '-01';
 		$end_date   = date('Y-m-t', strtotime($start_date));
 		$today      = date('Y-m-d');

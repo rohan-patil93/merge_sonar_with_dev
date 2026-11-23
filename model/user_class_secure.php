@@ -7,25 +7,18 @@ class userClass{
 		global $callConfig;
 		$login_type = 'N';
 	   $where="user_email='?'  and is_active ='0'";
-	   $params = [$where, $post];
 	   if($post['zqr_connect'] !=""){
 	   		$where .=" AND zqr_connect = '?'";
-	   		$params = [$where, $post];
 	   }
 	   $query=$callConfig->selectQuery(MAINDB.'.'.TBL_USER_REGISTIRED_GROUPS,'*',$where,'','','');
-	   $params = [$query, $callConfig->selectQuery, $where];
 	   $row=$callConfig->getRowNew($query);
 	   if($row->id!="" && $row->email_active==1) {
 	   	$whr=" id='?' and  is_active='0'";
-	   	$params = [$whr, $row->zqr_connect];
 	   	$query_db=$callConfig->selectQuery(MAINDB.'.'.TBL_DATABASE_ALLOCATIONS,'*',$whr,'','','');
-	   	$params = [$query_db, $callConfig->selectQuery, $whr];
 	   	$row_db=$callConfig->getRowNew($query_db);
 	   	$row->db = $row_db->db_name;
 	   	$wheres ="user_email='?' and user_password='?' and is_active ='0'";
-	   	$params = [$wheres, $post, $callConfig->passwordEncrypt, $post];
 	   	$query_user=$callConfig->selectQuery($row_db->db_name.'.application_users','*',$wheres,'','','');
-	   	$params = [$query_user, $callConfig->selectQuery, $row_db->db_name, $wheres];
 	   	$user = $callConfig->getRowNew($query_user);
 	   	if($user->id != ''){
 	   		$login_type = 'U';
@@ -33,21 +26,17 @@ class userClass{
 	   		$timm =date("Y-m-d H:i:s");
 	   		$fieldnames=array('company_id'=>$user->company_id,'user_id'=>$user->id,'login_from'=>$timm,'login_ip'=>$post['ip'],'login_browser'=>$post['browser'], 'php_session'=>$post['php_session']);
 	   		$query_last = "SELECT * FROM ?.application_user_logins where user_id =? ORDER BY id DESC LIMIT 0,1";
-	   		$params = [$query_last, $row_db->db_name, $user->id];
 	   		$last = $callConfig->getRowNew($query_last);
 	   		$user->lastlogin =$last->login_from;
 	   		$user->reset_password = $row->reset_password;
-	   		$res=$callConfig->insertRecord($row_db->db_name.'.application_user_logins',$fieldnames);
-	   		$params = [$res, $callConfig->insertRecord, $row_db->db_name, $fieldnames];
+	   		$callConfig->insertRecord($row_db->db_name.'.application_user_logins',$fieldnames);
 	   		unset($user->user_password);
 	   		$user->data_name = $row_db->db_name;
 	   		$query_employee = "SELECT id FROM ?.employees where user_id =? AND is_active=0 ";
-	   		$params = [$query_employee, $row_db->db_name, $user->id];
 				$employee = $callConfig->getRowNew($query_employee);
 				$user->emp_id = $employee->id;
 	   		if($post['mobile']=='Y'){
 				$query_mobile = "SELECT id FROM ?.user_otp_authentication where user_id =? AND current_status =199 AND is_active=0 ";
-				$params = [$query_mobile, $row_db->db_name, $user->id];
 				$mobile = $callConfig->getRowNew($query_mobile);
 				$user->base_url = $this->togetbaseurlcreate($post);
 				$user->user_toke = '';
@@ -70,9 +59,7 @@ class userClass{
 	   	}else{
 	   		if($post['mobile']=='Y'){
 				$wheres ="user_email='?' and user_password='?' and is_active ='0'";
-				$params = [$wheres, $post, $callConfig->passwordEncrypt, $post];
 				$query_user=$callConfig->selectQuery(MAINDB.'.mobile_user_registrations','*',$wheres,'','','');
-				$params = [$query_user, $callConfig->selectQuery, $wheres];
 				$user = $callConfig->getRowNew($query_user);
 				if($user->id != ''){
 					$login_type = 'M';
@@ -97,13 +84,11 @@ class userClass{
     	global $callConfig;
     	$user_email = $get['chrUserName'];
     	$query = "SELECT * FROM ".MAINDB.".registered_groups WHERE id in (SELECT group_id FROM ".MAINDB.".user_registered_groups WHERE user_email = '?' AND is_active=0)";
-    	$params = [$query, $user_email];
     	$data = $callConfig->getRowNew($query);
 
    		$subdomain = '';
    		$host = $_SERVER['HTTP_HOST'];
 	    $parts = explode('.', $host);
-	    $params = [$parts, $host];
 	    if (count($parts) > 2) {
 	      $subdomain = $parts[0];
 	      if($subdomain == "www"){
@@ -112,7 +97,6 @@ class userClass{
 	    }
 	    $httpshttp = isset($_SERVER['HTTPS']) ? 'https' : 'http';
 	    $baseurl = $httpshttp."://".str_replace($subdomain,$data->domain_name,$host);
-	    $params = [$baseurl, $httpshttp, $subdomain, $data->domain_name, $host];
 	    return $baseurl;
     }
 	public function loginafterdetails($get){
@@ -134,7 +118,6 @@ class userClass{
 		$return['users'] = $userrow;
 		print_r($return); exit;
 		$whrs2 = "company_id= ? AND user_id= ? AND is_active = 0";
-		$params = [$whrs2, $get, $get];
 		$query2 = $callConfig->selectQuery('application_user_module_roles','module_setup_id,role_id,role_short_code',$whrs2,'','','');
 
 		$userrow2 = $callConfig->getAllRowsNew($query2);
@@ -151,13 +134,11 @@ class userClass{
 		$return['configsetornot'] = (!isset($configrow->id))?"N":"Y";
 		if($return['configsetornot'] =="Y"){
 			$whrs1 = "company_id= ? AND id=".$configrow->default_currency_id;
-			$params = [$whrs1, $get, $configrow->default_currency_id];
 			$query1 = $callConfig->selectQuery('currencies','currency_symbol',$whrs1,'','','');
 			$currencysymboll = $callConfig->getRowNew($query1);
 			$configrow->currency_symbol  = $currencysymboll->currency_symbol;
 
 			$whrs2 = "company_id= ? AND id=".$configrow->default_country_id;
-			$params = [$whrs2, $get, $configrow->default_country_id];
 			$query2 = $callConfig->selectQuery('countries','*',$whrs2,'','','');
 			$currencysymboll = $callConfig->getRowNew($query2);
 			$configrow->countries  = $currencysymboll;
@@ -170,7 +151,6 @@ class userClass{
 
 		//To Get login user actionlog Deatails
 		$whrs = "company_id = ? AND user_id= ".$get['user_id'];
-		$params = [$whrs, $get, $get];
 		$query = $callConfig->selectQuery('action_log','*',$whrs,'id DESC','0','5');
 		$actionlogrow = $callConfig->getRowNew($query);
 		$return['actionlog'] = $actionlogrow;
@@ -180,7 +160,6 @@ class userClass{
 		$alluserrow = $callConfig->getAllRowsNew($query);
 		foreach ($alluserrow as  $value) {
 			$name[$value->id] = $value->display_name!="" ?$value->display_name:$value->first_name." ? ".$value->last_name;
-			$params = [$name, $value->id, $value->display_name, $value->display_name, $value->first_name, $value->middle_name, $value->last_name];
 			$images[$value->id]= $value->user_photo;
 		}
 		$return['allusers'] = array('name'=>$name,'image'=>$images);
@@ -201,7 +180,6 @@ class userClass{
 
 
 		$whrs = "company_id = ? AND is_active = 0 ";
-		$params = [$whrs, $get];
 		$query = $callConfig->selectQuery('module_setup','*',$whrs,'','','');
 		$module_setuprow = $callConfig->getAllRowsNew($query);
 		foreach($module_setuprow as $module){
@@ -226,7 +204,6 @@ class userClass{
 		$return['working_role_short_code'] = $working_role_short_code;
 		$modulearray[] = $defaultmoduleid;
 		$linkingmodulesql = "SELECT msl.module_id,ms.module_name FROM module_setup_linkings msl, module_setup ms WHERE msl.company_id =? AND ms.company_id=msl.company_id AND ms.module_id=msl.module_id  AND msl.parent_module_id = '?' AND ms.is_active=msl.is_active AND msl.is_active = 0";
-		$params = [$linkingmodulesql, $get, $defaultmoduleid];
 		$linkingmoduleres = $callConfig->getAllRowsNew($linkingmodulesql);
 		foreach($linkingmoduleres as $linkingmoduleres){
 			$modulearray[] = $linkingmoduleres->module_id;
@@ -239,7 +216,6 @@ class userClass{
 
 
 		$query = "SELECT * FROM application_menu WHERE company_id =? AND aplication_module IN(".implode(",",(array)$modulearray).") AND is_active = 0 ORDER BY display_priority ASC";
-		$params = [$query, $get, $modulearray];
 		$menurow = $callConfig->getAllRowsNew($query);
 		$return['application_menu'] = $menurow;
 		//To Get  all Status  Deatails
@@ -263,14 +239,12 @@ class userClass{
 
 		//To Get login employee Deatails
 		$whrs = "company_id =? AND user_id= ? AND is_active=0";
-		$params = [$whrs, $get, $get];
 		$query = $callConfig->selectQuery('employees','*',$whrs,'','','');
 		$employeerow = $callConfig->getRowNew($query);
 		$return['employees'] = $employeerow;
 		// To Get employee_daily_attendances Details
 		if($employeerow->id != ""){
 			$whrs = "company_id =? AND employee_id= ? AND attendace_date ='".date('Y-m-d')."' AND is_active=0";
-			$params = [$whrs, $get, $employeerow->id];
 			$query = $callConfig->selectQuery('employee_daily_attendances','*',$whrs,'','','');
 			$employee_daily_attendances = $callConfig->getRowNew($query);
 		}
@@ -278,7 +252,6 @@ class userClass{
 
 		// To GET field_secruity_configurations details
 		$whrs = "company_id = ? AND is_active=0 ";
-		$params = [$whrs, $get];
 		$query = $callConfig->selectQuery('field_secruity_configurations','*',$whrs,'','','');
 		$allfield = $callConfig->getAllRowsNew($query);
 		foreach($allfield as $value){
@@ -287,7 +260,6 @@ class userClass{
 		$return['field_secruity'] = $fileds;
 		// To GET status details
 		$whrs = "company_id = ? AND is_active=0 ";
-		$params = [$whrs, $get];
 		$query = $callConfig->selectQuery('status','id,name_value,name,background_color,color',$whrs,'','','');
 		$allstatus = $callConfig->getAllRowsNew($query);
 
@@ -302,22 +274,18 @@ class userClass{
 
 		if($employeerow->id!=""){
 			$query = "SELECT * FROM pay_areas WHERE id IN ( SELECT pay_area_id FROM pay_area_employees WHERE company_id =? AND emp_id = '?' AND is_active = 0) ";
-			$params = [$query, $get, $employeerow->id];
 			$return['emp_pay_area'] = $callConfig->getRowNew($query);
 
 			$query = "SELECT count(id) as adminval FROM payroll_admins WHERE company_id =? AND  emp_id = '?' AND is_active = 0";
-			$params = [$query, $get, $employeerow->id];
 			$pay_admin_emp = $callConfig->getRowNew($query);
 			$return['pay_admin_emp'] = $pay_admin_emp->adminval;
 		}
     	$setup_page_logssql = "SELECT setup_page_id,current_status FROM `setup_page_logs` WHERE company_id = '?' AND is_active=0 ORDER BY created_date DESC LIMIT 1";
-    	$params = [$setup_page_logssql, $get];
     	$setup_page_logsres = $callConfig->getRowNew($setup_page_logssql);
     	$return['setup_page_logs'] = $setup_page_logsres;
 
     	$today = date('Y-m-d');
     	$query = "SELECT * FROM emp_clock_status WHERE  company_id =? AND user_id = ? AND  effective_from_date <= '?' AND effective_to_date >= '?' AND is_active = 0";
-    	$params = [$query, $get, $get, $today, $today];
 		$return['emp_clock_status'] = $callConfig->getRowNew($query);
 		$return['emp_clock_status_query'] = $query;
 		return $return;

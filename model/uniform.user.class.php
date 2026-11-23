@@ -4,9 +4,6 @@ class uniformClass extends userClass{
 	public function getUniformStockData($get) {
 	    global $callConfig;
 	    $company_id  = $get['company_id'];
-	    $location_id = isset($get['location_id']) && $get['location_id'] != ""
-	                    ? $get['location_id']
-	                    : 1; // Default location
 	    $query1 = "SELECT id, name
 	        FROM stationery_categories
 	        WHERE company_id = '{$company_id}'
@@ -26,39 +23,39 @@ class uniformClass extends userClass{
         $item = array();
         $items = array();
         if($item_id != '' && $item_id>0){
-		    $sql = "SELECT  si.*, 
+		    $sql = "SELECT  si.*,
 		                CONCAT(c.genc_detail_name,' - ',c.description) AS color_name,
 		                CONCAT(s.genc_detail_name,' - ',s.description) AS size_name
 		            FROM stationery_items si
-		            LEFT JOIN general_code_details c 
-		                ON c.company_id=si.company_id 
-		               AND c.genc_code='UNIFORM_COLOR' 
-		               AND c.genc_detail_code=si.color 
-		            LEFT JOIN general_code_details s 
-		                ON s.company_id=si.company_id 
-		               AND s.genc_code='UNIFORM_SIZE' 
-		               AND s.genc_detail_code=si.size 
-		            WHERE si.category_id='{$category_id}' 
-		              AND si.id='{$item_id}' 
-		              AND si.company_id='{$company_id}' 
+		            LEFT JOIN general_code_details c
+		                ON c.company_id=si.company_id
+		               AND c.genc_code='UNIFORM_COLOR'
+		               AND c.genc_detail_code=si.color
+		            LEFT JOIN general_code_details s
+		                ON s.company_id=si.company_id
+		               AND s.genc_code='UNIFORM_SIZE'
+		               AND s.genc_detail_code=si.size
+		            WHERE si.category_id='{$category_id}'
+		              AND si.id='{$item_id}'
+		              AND si.company_id='{$company_id}'
 		              AND si.is_active=0";
 
 		    $item = $callConfig->getRow($sql);
 	    }else{
-	    	$sql = "SELECT  si.*, 
+	    	$sql = "SELECT  si.*,
 		                CONCAT(c.genc_detail_name,' - ',c.description) AS color_name,
 		                CONCAT(s.genc_detail_name,' - ',s.description) AS size_name
 		            FROM stationery_items si
-		            LEFT JOIN general_code_details c 
-		                ON c.company_id=si.company_id 
-		               AND c.genc_code='UNIFORM_COLOR' 
-		               AND c.genc_detail_code=si.color 
-		            LEFT JOIN general_code_details s 
-		                ON s.company_id=si.company_id 
-		               AND s.genc_code='UNIFORM_SIZE' 
-		               AND s.genc_detail_code=si.size 
-		            WHERE si.category_id='{$category_id}' 
-		              AND si.company_id='{$company_id}' 
+		            LEFT JOIN general_code_details c
+		                ON c.company_id=si.company_id
+		               AND c.genc_code='UNIFORM_COLOR'
+		               AND c.genc_detail_code=si.color
+		            LEFT JOIN general_code_details s
+		                ON s.company_id=si.company_id
+		               AND s.genc_code='UNIFORM_SIZE'
+		               AND s.genc_detail_code=si.size
+		            WHERE si.category_id='{$category_id}'
+		              AND si.company_id='{$company_id}'
 		              AND si.is_active=0";
 
 		    $items = $callConfig->getAllRows($sql);
@@ -88,8 +85,8 @@ class uniformClass extends userClass{
 	    $cfg_jobgrade = $get['config_jobgrade']; // pass from API call
 
 	    // get all employees
-	    $q1 = "SELECT id, first_name, last_name, display_name, location_id, job_grade_id,user_id 
-	           FROM employees 
+	    $q1 = "SELECT id, first_name, last_name, display_name, location_id, job_grade_id,user_id
+	           FROM employees
 	           WHERE company_id='{$company_id}' AND is_active=0";
 	    $emp_arr = $callConfig->getAllRows($q1);
 
@@ -113,9 +110,9 @@ class uniformClass extends userClass{
 	    if($cfg_jobgrade == "Y"){
 	        // get job grade row
 	        if(!empty($logged_emp->job_grade_id)){
-	            $q2 = "SELECT id, job_grade_name, uniform_color 
-	                   FROM job_grade 
-	                   WHERE id='{$logged_emp->job_grade_id}' 
+	            $q2 = "SELECT id, job_grade_name, uniform_color
+	                   FROM job_grade
+	                   WHERE id='{$logged_emp->job_grade_id}'
 	                   AND company_id='{$company_id}' AND is_active=0";
 	            $job_grade = $callConfig->getRow($q2);
 	            $job_grade_color = $job_grade ? $job_grade->uniform_color : null;
@@ -144,7 +141,7 @@ class uniformClass extends userClass{
 	    $allowed_sizes = array_column($employee_uniforms, "size_id");
 
 	    // get UNIFORM category_id
-	    $qc = "SELECT id FROM stationery_categories 
+	    $qc = "SELECT id FROM stationery_categories
 	           WHERE company_id='{$company_id}' AND code='UNIFORM' AND is_active=0 LIMIT 1";
 	    $cat = $callConfig->getRow($qc);
 	    $category_id = $cat ? $cat->id : 0;
@@ -207,7 +204,7 @@ class uniformClass extends userClass{
 	    $job_grades = $callConfig->getAllRows("
 		    SELECT id, job_grade_name, uniform_color
 		    FROM job_grade
-		    WHERE company_id='{$company_id}' 
+		    WHERE company_id='{$company_id}'
 		      AND is_active=0
 		    ORDER BY job_grade_name ASC
 		");
@@ -238,7 +235,7 @@ class uniformClass extends userClass{
 	    	$rid = $post['rid'];
 		    $company_id = $get['company_id'];
 
-		    $sql = "SELECT available_qty FROM stationery_items 
+		    $sql = "SELECT available_qty FROM stationery_items
 		            WHERE id='{$rid}' AND company_id='{$company_id}' AND is_active=0";
 		    $old = $callConfig->getRow($sql);
 		    $old_qty = intval($old->available_qty);
@@ -331,7 +328,7 @@ class uniformClass extends userClass{
 	    $location_id = ($get['location_id'] != "" ? $get['location_id'] : 1);
 
 	    // get UNIFORM category_id
-	    $q1 = "SELECT id,name 
+	    $q1 = "SELECT id,name
 	           FROM stationery_categories
 	           WHERE company_id='{$company_id}'
 	             AND code='UNIFORM'
@@ -402,7 +399,7 @@ class uniformClass extends userClass{
 	    $location_id = $get['location_id'];
 	    $category_id = $get['category_id'];
 	    // fetch item names only
-	    $q1 = "SELECT DISTINCT item_name 
+	    $q1 = "SELECT DISTINCT item_name
 	           FROM stationery_items
 	           WHERE company_id='{$company_id}'
 	             AND location_id='{$location_id}'
@@ -426,8 +423,8 @@ class uniformClass extends userClass{
 	    $location_id = $data['location_id'];
 	    $category_id = $data['category_id'];
 
-	    $q = "SELECT id,available_qty 
-	          FROM stationery_items 
+	    $q = "SELECT id,available_qty
+	          FROM stationery_items
 	          WHERE company_id='{$company_id}'
 	            AND location_id='{$location_id}'
 	            AND category_id='{$category_id}'
@@ -468,7 +465,7 @@ class uniformClass extends userClass{
 	    $topup_qty   = intval($post['topup_qty']);
 
 	    // check existing combination
-	    $q = "SELECT id,available_qty 
+	    $q = "SELECT id,available_qty
 	          FROM stationery_items
 	          WHERE company_id='{$company_id}'
 	            AND location_id='{$location_id}'
@@ -609,7 +606,7 @@ class uniformClass extends userClass{
 	    $request_id = $res1['LASTID'];
 
 	    if (isset($res->id)) {
-            $update = $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $res->serial_number + 1), 'id', $res->id);
+            $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $res->serial_number + 1), 'id', $res->id);
         }
 
 	    // Insert request item row
@@ -729,7 +726,7 @@ class uniformClass extends userClass{
 	    global $callConfig;
 
 	    // Get current qty
-	    $sql = "SELECT available_qty FROM stationery_items 
+	    $sql = "SELECT available_qty FROM stationery_items
 	            WHERE id='{$item_id}' AND company_id='{$company_id}' AND is_active=0";
 	    $row = $callConfig->getRow($sql);
 
@@ -787,7 +784,7 @@ class uniformClass extends userClass{
 	    ----------------------------------------------------------*/
 	    $q1 = "SELECT uniform_type_id, size_id
 	        FROM emp_uniforms
-	        WHERE company_id='{$company_id}' 
+	        WHERE company_id='{$company_id}'
 	          AND employee_id='{$employee_id}'
 	          AND is_active=0";
 	    $emp_uniforms = $callConfig->getAllRows($q1);
@@ -804,20 +801,20 @@ class uniformClass extends userClass{
 	    ----------------------------------------------------------*/
 	    $job_grade_color = "";
 	    if($config_jobgrade != ''  && $config_jobgrade =='Y'){
-		    $qEmp = "SELECT job_grade_id 
-		        FROM employees 
-		        WHERE id='{$employee_id}' 
-		          AND company_id='{$company_id}' 
+		    $qEmp = "SELECT job_grade_id
+		        FROM employees
+		        WHERE id='{$employee_id}'
+		          AND company_id='{$company_id}'
 		          AND is_active=0 LIMIT 1";
 		    $empRow = $callConfig->getRow($qEmp);
 
 		    if (!empty($empRow->job_grade_id)) {
 
 		        $qJG = "
-		            SELECT uniform_color 
-		            FROM job_grade 
-		            WHERE id='{$empRow->job_grade_id}' 
-		              AND company_id='{$company_id}' 
+		            SELECT uniform_color
+		            FROM job_grade
+		            WHERE id='{$empRow->job_grade_id}'
+		              AND company_id='{$company_id}'
 		              AND is_active=0
 		            LIMIT 1
 		        ";
@@ -858,10 +855,10 @@ class uniformClass extends userClass{
 	        4️⃣ Get UNIFORM category_id
 	    ----------------------------------------------------------*/
 	    $qCat = "
-	        SELECT id 
+	        SELECT id
 	        FROM stationery_categories
-	        WHERE company_id='{$company_id}' 
-	          AND code='UNIFORM' 
+	        WHERE company_id='{$company_id}'
+	          AND code='UNIFORM'
 	          AND is_active=0
 	        LIMIT 1
 	    ";
@@ -872,13 +869,13 @@ class uniformClass extends userClass{
 	        5️⃣ Final Query to Fetch Items
 	    ----------------------------------------------------------*/
 	    $qItems = "
-	        SELECT 
+	        SELECT
 	            si.*,
 	            ut.uniform_type_name, si.uniform_type_id,
 	            c.genc_detail_name AS color_name,c.genc_detail_code AS color_id,
 	            s.genc_detail_name AS size_name,s.genc_detail_code AS size_id
 	        FROM stationery_items si
-	        LEFT JOIN uniform_types ut 
+	        LEFT JOIN uniform_types ut
 	               ON ut.id = si.uniform_type_id
 	        LEFT JOIN general_code_details c
 	               ON c.genc_detail_code = si.color
@@ -917,7 +914,7 @@ class uniformClass extends userClass{
 	    }
 
 	    // Base SELECT for main request table
-	    $sql = "SELECT 
+	    $sql = "SELECT
 	            r.id,
 	            r.request_no,
 	            r.user_id,
@@ -930,7 +927,7 @@ class uniformClass extends userClass{
 
 	        FROM stationery_requests r
 	        LEFT JOIN employees e
-	            ON e.user_id = r.user_id 
+	            ON e.user_id = r.user_id
 	            AND e.company_id = r.company_id
 
 	        LEFT JOIN locations l
@@ -960,7 +957,7 @@ class uniformClass extends userClass{
 
 	    // Fetch all items for the request
 	    $sql = "
-	        SELECT 
+	        SELECT
 	            c.id,
 	            c.item_id,
 	            c.qty,
@@ -1017,7 +1014,6 @@ class uniformClass extends userClass{
 	    global $callConfig;
 	    $company_id = $get['company_id'];
 	    $rid        = $get['rid'];    // stationery_requests.id
-	    $user_id    = $get['user_id'];
 	    if (empty($rid)) {
 	        return array("status" => "error", "msg" => "Request ID missing");
 	    }
@@ -1031,13 +1027,13 @@ class uniformClass extends userClass{
 	               l.location_name,
 	               st.name AS status_text
 	        FROM stationery_requests sr
-	        LEFT JOIN employees u 
+	        LEFT JOIN employees u
 	               ON u.user_id = sr.user_id
-	        LEFT JOIN locations l 
+	        LEFT JOIN locations l
 	               ON l.id = sr.location_id
 	        LEFT JOIN status_progress st
 	               ON st.status = sr.current_status AND table_name='trips'
-	        WHERE sr.company_id='{$company_id}' 
+	        WHERE sr.company_id='{$company_id}'
 	          AND sr.id='{$rid}' AND sr.is_active=0
 	        LIMIT 1";
 	    $parent = $callConfig->getRow($q1);
@@ -1054,17 +1050,17 @@ class uniformClass extends userClass{
 	               c.genc_detail_name AS color_name,
 	               s.genc_detail_name AS size_name
 	        FROM stationery_cart sc
-	        LEFT JOIN stationery_items si 
+	        LEFT JOIN stationery_items si
 	               ON si.id = sc.item_id
 	        LEFT JOIN uniform_types ut
 	               ON ut.id = sc.uniform_type_id
-	        LEFT JOIN general_code_details c 
-	               ON c.genc_detail_code = sc.color_id 
+	        LEFT JOIN general_code_details c
+	               ON c.genc_detail_code = sc.color_id
 	              AND c.company_id='{$company_id}' AND c.genc_code='UNIFORM_COLOR'
-	        LEFT JOIN general_code_details s 
-	               ON s.genc_detail_code = sc.size_id 
+	        LEFT JOIN general_code_details s
+	               ON s.genc_detail_code = sc.size_id
 	              AND s.company_id='{$company_id}' AND s.genc_code='UNIFORM_SIZE'
-	        WHERE sc.company_id='{$company_id}' 
+	        WHERE sc.company_id='{$company_id}'
 	          AND sc.request_id='{$rid}'
 	          AND sc.is_active=0";
 
@@ -1112,7 +1108,7 @@ class uniformClass extends userClass{
 	        return array("status" => "error", "msg" => "Invalid Request ID");
 	    }
 	    $update = array("is_active" => null);
-	    $res = $callConfig->updateRecord('stationery_requests',$update,'id',$rid);
+	    $callConfig->updateRecord('stationery_requests',$update,'id',$rid);
 	    return array(
 	        "status" => "success",
 	        "msg"    => "Request deleted successfully"

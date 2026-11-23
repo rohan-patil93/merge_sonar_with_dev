@@ -206,7 +206,7 @@ class vMSUserClass extends userClass{
 			FROM employees emp, project_timesheets pt, application_users au
 			WHERE emp.company_id = pt.company_id
 			AND emp.id = pt.emp_id
-			AND emp.joining_date <= '".$enddate."' 
+			AND emp.joining_date <= '".$enddate."'
 			AND (emp.date_of_leaving >= '".$startdate."' OR emp.date_of_leaving IS NULL)
 			AND emp.company_id = '".$company_id."'
 			AND MONTH(pt.timesheet_date) = '".$mm."'
@@ -295,7 +295,7 @@ class vMSUserClass extends userClass{
 		l_item_price budgeted_amount,
 		l_billable_amount billable_amount,
 		vrc_item_price vrc_budgeted_amount,
-		vrc_billable_amount, 
+		vrc_billable_amount,
 		(
 		SUM(nonbillable_hrs) *(
 		SUM(l_billable_amount) / SUM(billable_hrs)
@@ -334,7 +334,7 @@ class vMSUserClass extends userClass{
 		emp.billable AS emp_billable,
 		COALESCE(emp.total_experiance, '0') AS total_experiance,
 		mpcitems.purchase_uom as mpc_uom,
-		vriitems.purchase_uom as vrc_uom, 
+		vriitems.purchase_uom as vrc_uom,
 		vriitems.experience_base,
 		(
 		SELECT
@@ -434,11 +434,11 @@ class vMSUserClass extends userClass{
 		application_users au
 		WHERE
 		emp.company_id = 1 AND emp.is_active = '0' AND vend.company_id = emp.company_id AND vend.id = emp.vendor_id AND vrc.company_id = emp.company_id AND mpcitems.company_id = vrc.company_id AND mpcitems.transaction_id = vrc.id AND vrc.customer_id = emp.vendor_id AND ewo.company_id = emp.company_id AND ewo.emp_id = emp.id AND mpcitems.transaction_id = ewo.work_order_id AND mpcitems.id = ewo.work_order_detail_id AND vriitems.company_id = ewo.company_id AND vriitems.transaction_id = ewo.vrc_id AND vriitems.id = ewo.vrc_item_id AND ebava.company_id = ewo.company_id AND ewo.is_active = ebava.is_active AND vrc.is_active = vriitems.is_active AND ewo.is_active = vrc.is_active AND emp.company_id = au.company_id AND au.id = emp.user_id AND CASE WHEN 3 != '".$get['user_type']."' THEN(
-		('1' = '".$get['admin_type']."') 
-		OR(au.reports_to = '".$get['user_id']."') 
-		OR(emp.hr_buddy ='".$get['emp_id']."') 	
+		('1' = '".$get['admin_type']."')
+		OR(au.reports_to = '".$get['user_id']."')
+		OR(emp.hr_buddy ='".$get['emp_id']."')
 		OR(emp.finance_buddy = '".$get['emp_id']."')
-		OR(emp.admin_buddy  ='".$get['emp_id']."') 	
+		OR(emp.admin_buddy  ='".$get['emp_id']."')
 		OR(emp.project_buddy  = '".$get['emp_id']."')
 		OR(emp.loc_buddy   = '".$get['emp_id']."')
 		)
@@ -490,14 +490,14 @@ class vMSUserClass extends userClass{
 		    FROM	vendors vend
 		    WHERE	vend.company_id = emp.company_id
 		    AND		vend.id = emp.vendor_id
-		), 'Uassigned') vendor_name, 
-		emp.id as employee_id, 
-		emp.display_name as employee_name, 
+		), 'Uassigned') vendor_name,
+		emp.id as employee_id,
+		emp.display_name as employee_name,
 		emp.department_id,
 		emp.location_id,
 		emp.vertical_id,
 		(
-		    SELECT	dept.department_name	
+		    SELECT	dept.department_name
 		    FROM 	departments dept
 		    WHERE	dept.company_id = emp.company_id
 		    AND		dept.id = emp.department_id
@@ -517,7 +517,7 @@ class vMSUserClass extends userClass{
 		    AND		jt.id = emp.job_title_id
 		) job_title,
 		emp.billable as emp_billable,
-		empptsumm.billable_hrs, 
+		empptsumm.billable_hrs,
 		empptsumm.nonbillable_hrs,
 		empleaves.leave_days,
 		vrc_vrcitems.experience_base,
@@ -525,17 +525,17 @@ class vMSUserClass extends userClass{
 			SELECT	sts.name
 			FROM	status sts
 			WHERE	sts.company_id = emp.company_id
-			AND 	sts.name_value = emp.current_status 
+			AND 	sts.name_value = emp.current_status
 		)current_status,
 		(
-		    SELECT		
-		    	CASE 
-		            WHEN mpcitems.purchase_uom = 'PT' 
-		                THEN mpcitems.item_price / 3 
-		            WHEN mpcitems.purchase_uom = 'PS' 
-		                THEN mpcitems.item_price / 6 
-		            WHEN mpcitems.purchase_uom = 'PY' 
-		                THEN mpcitems.item_price / 12 
+		    SELECT
+		    	CASE
+		            WHEN mpcitems.purchase_uom = 'PT'
+		                THEN mpcitems.item_price / 3
+		            WHEN mpcitems.purchase_uom = 'PS'
+		                THEN mpcitems.item_price / 6
+		            WHEN mpcitems.purchase_uom = 'PY'
+		                THEN mpcitems.item_price / 12
 		            ELSE mpcitems.item_price
 				END
 		    FROM	manpower_contracts mpc,	mpc_items mpcitems
@@ -544,19 +544,19 @@ class vMSUserClass extends userClass{
 		    AND		mpc.id = mpcitems.transaction_id
 		    AND		mpc.id = empwo.work_order_id
 		AND		mpcitems.id = empwo.work_order_detail_id
-		AND mpcitems.effective_date <=  '".$startdate."'	
+		AND mpcitems.effective_date <=  '".$startdate."'
 		AND mpcitems.expire_date >= '".$enddate."'
 		)budgeted_amount,
 		empptsumm.billable_amount,
 		(
-		    SELECT		
-		    	CASE 
-		            WHEN vrcitems.purchase_uom = 'PT' 
-		                THEN vrcitems.item_price / 3 
-		            WHEN vrcitems.purchase_uom = 'PS' 
-		                THEN vrcitems.item_price / 6 
-		            WHEN vrcitems.purchase_uom = 'PY' 
-		                THEN vrcitems.item_price / 12 
+		    SELECT
+		    	CASE
+		            WHEN vrcitems.purchase_uom = 'PT'
+		                THEN vrcitems.item_price / 3
+		            WHEN vrcitems.purchase_uom = 'PS'
+		                THEN vrcitems.item_price / 6
+		            WHEN vrcitems.purchase_uom = 'PY'
+		                THEN vrcitems.item_price / 12
 		            ELSE vrcitems.item_price
 				END
 		    FROM	vendor_rate_cards vrc,	vrc_items vrcitems
@@ -565,7 +565,7 @@ class vMSUserClass extends userClass{
 		    AND		vrc.id = vrcitems.transaction_id
 		    AND		vrc.id = empwo.vrc_id
 		AND		vrcitems.id = empwo.vrc_item_id
-		AND vrc.effective_from_date  <=  '".$startdate."'	
+		AND vrc.effective_from_date  <=  '".$startdate."'
 		AND vrc.effective_to_date >= '".$enddate."'
 		 )vrc_budgeted_amount,
 		vrc_billable_amount,
@@ -586,12 +586,12 @@ class vMSUserClass extends userClass{
 		            DATEDIFF(NOW(), `joining_date`) / 365)
 		        ) BETWEEN min_exp AND max_exp THEN '' ELSE 'Experiance Missmatch'
 			END remark,
-		au.reports_to,    
+		au.reports_to,
 			empwo.work_order_id,
 		empwo.work_order_detail_id,
 		empwo.vrc_id,
 		empwo.vrc_item_id,
-		mpc_mpcitems.mpc_item_price,	
+		mpc_mpcitems.mpc_item_price,
 		vrc_vrcitems.vrc_item_price
 		FROM	employees emp
 		LEFT JOIN (	SELECT	pt.company_id, pt.emp_id, pt.work_order, SUM(billable_hrs) billable_hrs, SUM(bill_amount) billable_amount, SUM(nonbillable_hrs) nonbillable_hrs, SUM(vrc_billable_amount) vrc_billable_amount, round(pt.rate_per_hrs) as rate_per_hrs
@@ -601,7 +601,7 @@ class vMSUserClass extends userClass{
 			)empptsumm on (	empptsumm.company_id = emp.company_id AND empptsumm.emp_id = emp.id )
 		JOIN application_users au on ( emp.company_id = au.company_id and emp.user_id = au.id)
 		LEFT JOIN  (	SELECT	el.company_id, el.employee_id, el.leave_from, el.leave_to,
-						DATEDIFF(LEAST(el.leave_to,last_day(el.leave_from)),el.leave_from)+ 
+						DATEDIFF(LEAST(el.leave_to,last_day(el.leave_from)),el.leave_from)+
 						DATEDIFF(el.leave_to,GREATEST(el.leave_from,DATE_SUB(LAST_DAY(el.leave_to),INTERVAL DAY(LAST_DAY(el.leave_to)) - 1 DAY))) leave_days
 				FROM	employee_leaves el
 				WHERE	((el.leave_from >='".$startdate."' AND el.leave_from <='".$enddate."') OR (el.leave_to>='".$startdate."' AND el.leave_to <='".$enddate."'))
@@ -609,16 +609,16 @@ class vMSUserClass extends userClass{
 		LEFT JOIN	(
 						SELECT	ewo.company_id, ewo.emp_id, ewo.work_order_id, ewo.work_order_detail_id, ewo.vrc_id, ewo.vrc_item_id,effective_from_date, effective_to_date
 						FROM	emp_work_order ewo
-					)empwo on ( empwo.company_id = emp.company_id AND empwo.emp_id = emp.id AND empptsumm.work_order = empwo.work_order_id AND empwo.effective_from_date <='".$startdate."' AND empwo.effective_to_date >='".$enddate."' )  
+					)empwo on ( empwo.company_id = emp.company_id AND empwo.emp_id = emp.id AND empptsumm.work_order = empwo.work_order_id AND empwo.effective_from_date <='".$startdate."' AND empwo.effective_to_date >='".$enddate."' )
 		LEFT JOIN	(
-						SELECT mpc.company_id, mpc.id work_order_id, mpcitems.id work_order_detail_id, mpcitems.purchase_uom mpcitm_purchase_uom,		
-							CASE 
-								WHEN mpcitems.purchase_uom = 'PT' 
-									THEN mpcitems.item_price / 3 
-								WHEN mpcitems.purchase_uom = 'PS' 
-									THEN mpcitems.item_price / 6 
-								WHEN mpcitems.purchase_uom = 'PY' 
-									THEN mpcitems.item_price / 12 
+						SELECT mpc.company_id, mpc.id work_order_id, mpcitems.id work_order_detail_id, mpcitems.purchase_uom mpcitm_purchase_uom,
+							CASE
+								WHEN mpcitems.purchase_uom = 'PT'
+									THEN mpcitems.item_price / 3
+								WHEN mpcitems.purchase_uom = 'PS'
+									THEN mpcitems.item_price / 6
+								WHEN mpcitems.purchase_uom = 'PY'
+									THEN mpcitems.item_price / 12
 								ELSE mpcitems.item_price
 							END mpc_item_price
 						FROM	manpower_contracts mpc,	mpc_items mpcitems
@@ -626,15 +626,15 @@ class vMSUserClass extends userClass{
 						AND		mpc.id = mpcitems.transaction_id
 					)mpc_mpcitems on ( mpc_mpcitems.company_id = emp.company_id AND mpc_mpcitems.work_order_id = empwo.work_order_id AND  mpc_mpcitems.work_order_detail_id = empwo.work_order_detail_id)
 		LEFT JOIN	(
-						SELECT vrc.company_id, vrc.id vrc_id, vrcitems.id vrc_detail_id, vrcitems.purchase_uom vrcitm_purchase_uom, 
-		    					vrcitems.experience_base, vrcitems.max_exp, vrcitems.min_exp, 		
-							CASE 
-								WHEN vrcitems.purchase_uom = 'PT' 
-									THEN vrcitems.item_price / 3 
-								WHEN vrcitems.purchase_uom = 'PS' 
-									THEN vrcitems.item_price / 6 
-								WHEN vrcitems.purchase_uom = 'PY' 
-									THEN vrcitems.item_price / 12 
+						SELECT vrc.company_id, vrc.id vrc_id, vrcitems.id vrc_detail_id, vrcitems.purchase_uom vrcitm_purchase_uom,
+		    					vrcitems.experience_base, vrcitems.max_exp, vrcitems.min_exp,
+							CASE
+								WHEN vrcitems.purchase_uom = 'PT'
+									THEN vrcitems.item_price / 3
+								WHEN vrcitems.purchase_uom = 'PS'
+									THEN vrcitems.item_price / 6
+								WHEN vrcitems.purchase_uom = 'PY'
+									THEN vrcitems.item_price / 12
 								ELSE vrcitems.item_price
 							END vrc_item_price
 						FROM	vendor_rate_cards vrc,	vrc_items vrcitems
@@ -643,7 +643,7 @@ class vMSUserClass extends userClass{
 					)vrc_vrcitems on ( vrc_vrcitems.company_id = emp.company_id AND vrc_vrcitems.vrc_id = empwo.vrc_id AND  vrc_vrcitems.vrc_detail_id = empwo.vrc_item_id)
 		WHERE emp.vendor_id IS NOT NULL
 		AND	(
-		CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$startdate."') 
+		CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$startdate."')
 			THEN 1
 		WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0)
 			THEN 1
@@ -651,7 +651,7 @@ class vMSUserClass extends userClass{
 		END
 		)=1
 		AND 	(
-			CASE	WHEN '3' <> '".$get['user_type']."'  
+			CASE	WHEN '3' <> '".$get['user_type']."'
 						THEN(
 								 ('1' = '".$get['admin_type']."')
 		OR(au.reports_to = '".$user_id."')
@@ -659,7 +659,7 @@ class vMSUserClass extends userClass{
 		OR(emp.finance_buddy = '".$emp_id."')
 		OR(emp.admin_buddy  ='".$emp_id."')
 		OR(emp.project_buddy  = '".$emp_id."')
-		OR(emp.loc_buddy   = '".$emp_id."')							
+		OR(emp.loc_buddy   = '".$emp_id."')
 							)
 						ELSE(
 							emp.vendor_id =
@@ -754,7 +754,7 @@ class vMSUserClass extends userClass{
 		(
 		SELECT	job_title
 		FROM	job_titles jt
-		WHERE	jt.id = emp.job_title_id 
+		WHERE	jt.id = emp.job_title_id
 		AND		jt.company_id = emp.company_id
 		) job_title,
 		emp.display_name employee_name,
@@ -765,24 +765,24 @@ class vMSUserClass extends userClass{
 		pt.rate_per_hrs rate_per_hrs,
 		pt.bill_amount bill_amount,
 		pt.vrc_billable_amount vrc_billable_amount,
-		CASE WHEN mpcitems.purchase_uom = 'PT' 
-		THEN mpcitems.item_price / 3 
-		WHEN mpcitems.purchase_uom = 'PS' 
-		THEN mpcitems.item_price / 6 
-		WHEN mpcitems.purchase_uom = 'PY' 
-		THEN mpcitems.item_price / 12 
-		WHEN mpcitems.purchase_uom = 'PM' 
-		THEN mpcitems.item_price 
+		CASE WHEN mpcitems.purchase_uom = 'PT'
+		THEN mpcitems.item_price / 3
+		WHEN mpcitems.purchase_uom = 'PS'
+		THEN mpcitems.item_price / 6
+		WHEN mpcitems.purchase_uom = 'PY'
+		THEN mpcitems.item_price / 12
+		WHEN mpcitems.purchase_uom = 'PM'
+		THEN mpcitems.item_price
 		ELSE mpcitems.item_price
 		END l_item_price,
-		CASE WHEN vrcitems.purchase_uom = 'PT' 
-		THEN vrcitems.item_price / 3 
-		WHEN vrcitems.purchase_uom = 'PS' 
-		THEN vrcitems.item_price / 6 
-		WHEN vrcitems.purchase_uom = 'PY' 
-		THEN vrcitems.item_price / 12 
-		WHEN vrcitems.purchase_uom = 'PM' 
-		THEN vrcitems.item_price 
+		CASE WHEN vrcitems.purchase_uom = 'PT'
+		THEN vrcitems.item_price / 3
+		WHEN vrcitems.purchase_uom = 'PS'
+		THEN vrcitems.item_price / 6
+		WHEN vrcitems.purchase_uom = 'PY'
+		THEN vrcitems.item_price / 12
+		WHEN vrcitems.purchase_uom = 'PM'
+		THEN vrcitems.item_price
 		ELSE vrcitems.item_price
 		END vrc_item_price,
 		mpcitems.purchase_uom purchase_uom,
@@ -805,7 +805,7 @@ class vMSUserClass extends userClass{
 		(
 		SELECT	sts.name
 		FROM	status sts
-		WHERE	sts.name_value = pt.current_status 
+		WHERE	sts.name_value = pt.current_status
 		AND		sts.company_id = pt.company_id
 		) current_status
 		FROM
@@ -818,26 +818,26 @@ class vMSUserClass extends userClass{
 		emp_work_order ewo,
 		application_users au,
 		project_timesheets pt
-		WHERE	emp.company_id = '".$company_id."' 
-		AND emp.is_active = '0' 
+		WHERE	emp.company_id = '".$company_id."'
+		AND emp.is_active = '0'
 		AND emp.billable != 3
-		AND vend.company_id = emp.company_id 
+		AND vend.company_id = emp.company_id
 		AND vend.id = emp.vendor_id
-		AND mpc.company_id = emp.company_id 
-		AND mpcitems.company_id = mpc.company_id 
-		AND mpcitems.transaction_id = mpc.id 
-		AND mpcitems.is_active = mpc.is_active 
-		AND mpc.customer_id = emp.vendor_id 
-		AND ewo.company_id = emp.company_id 
-		AND ewo.emp_id = emp.id 
-		AND mpcitems.transaction_id = ewo.work_order_id 
-		AND mpcitems.id = ewo.work_order_detail_id 
-		AND vrcitems.company_id = vrc.company_id 
-		AND vrcitems.transaction_id = vrc.id 
-		AND vrcitems.is_active = vrc.is_active 
-		AND vrcitems.company_id = mpc.company_id 
-		AND vrcitems.transaction_id = ewo.vrc_id 
-		AND vrcitems.id = ewo.vrc_item_id 
+		AND mpc.company_id = emp.company_id
+		AND mpcitems.company_id = mpc.company_id
+		AND mpcitems.transaction_id = mpc.id
+		AND mpcitems.is_active = mpc.is_active
+		AND mpc.customer_id = emp.vendor_id
+		AND ewo.company_id = emp.company_id
+		AND ewo.emp_id = emp.id
+		AND mpcitems.transaction_id = ewo.work_order_id
+		AND mpcitems.id = ewo.work_order_detail_id
+		AND vrcitems.company_id = vrc.company_id
+		AND vrcitems.transaction_id = vrc.id
+		AND vrcitems.is_active = vrc.is_active
+		AND vrcitems.company_id = mpc.company_id
+		AND vrcitems.transaction_id = ewo.vrc_id
+		AND vrcitems.id = ewo.vrc_item_id
 		AND emp.company_id = au.company_id
 		AND au.id = emp.user_id
 		AND emp.company_id = pt.company_id
@@ -916,7 +916,7 @@ class vMSUserClass extends userClass{
 		ELSE
 		vrcitems.item_price
 		END	l_item_price,
-		vrcitems.purchase_uom purchase_uom, 
+		vrcitems.purchase_uom purchase_uom,
 		vrcitems.item_price,
 		(
 		SELECT DATEDIFF (least(el.leave_to,last_day(el.leave_from)),el.leave_from)
@@ -961,7 +961,7 @@ class vMSUserClass extends userClass{
 		AND vri.transaction_id = ewo.vrc_id
 		AND vri.id =  ewo.vrc_item_id
 		AND emp.company_id = au.company_id
-		AND au.id = emp.user_id		
+		AND au.id = emp.user_id
 		AND emp.company_id = pt.company_id
 		AND emp.id = pt.emp_id
 		AND au.reports_to = ".$get['user_id']."
@@ -1109,40 +1109,40 @@ class vMSUserClass extends userClass{
 		project_timesheets pt,
 		employee_buddies empbuddy
 		WHERE
-		emp.company_id = '".$company_id."' 
-		AND emp.is_active = '0' 
+		emp.company_id = '".$company_id."'
+		AND emp.is_active = '0'
 		AND emp.billable != 3
-		AND vend.company_id = emp.company_id 
-		AND vend.id = emp.vendor_id 
-		AND mpc.company_id = emp.company_id 
-		AND mpc_items.company_id = mpc.company_id 
-		AND mpc_items.transaction_id = mpc.id 
-		AND mpc.customer_id = emp.vendor_id 
-		AND ewo.company_id = emp.company_id 
-		AND ewo.emp_id = emp.id 
-		AND mpc_items.transaction_id = ewo.work_order_id 
+		AND vend.company_id = emp.company_id
+		AND vend.id = emp.vendor_id
+		AND mpc.company_id = emp.company_id
+		AND mpc_items.company_id = mpc.company_id
+		AND mpc_items.transaction_id = mpc.id
+		AND mpc.customer_id = emp.vendor_id
+		AND ewo.company_id = emp.company_id
+		AND ewo.emp_id = emp.id
+		AND mpc_items.transaction_id = ewo.work_order_id
 		AND mpc_items.id = ewo.work_order_detail_id
 		AND vrc.company_id = vrc_items.company_id
 		AND vrc.id = vrc_items.transaction_id
 		AND vrc.is_active = vrc_items.is_active
-		AND vrc.is_active = emp.is_active	
-		AND vrc_items.company_id = mpc.company_id 
-		AND vrc_items.transaction_id = ewo.vrc_id 
-		AND vrc_items.id = ewo.vrc_item_id 
-		AND emp.company_id = au.company_id 
-		AND au.id = emp.user_id 
-		AND emp.company_id = pt.company_id 
-		AND emp.id = pt.emp_id 
+		AND vrc.is_active = emp.is_active
+		AND vrc_items.company_id = mpc.company_id
+		AND vrc_items.transaction_id = ewo.vrc_id
+		AND vrc_items.id = ewo.vrc_item_id
+		AND emp.company_id = au.company_id
+		AND au.id = emp.user_id
+		AND emp.company_id = pt.company_id
+		AND emp.id = pt.emp_id
 		AND emp.is_active = ewo.is_active
 		AND emp.is_active = vrc.is_active
 		AND emp.is_active = mpc_items.is_active
-		AND empbuddy.company_id = emp.company_id 
-		AND empbuddy.employee_id = emp.id 
+		AND empbuddy.company_id = emp.company_id
+		AND empbuddy.employee_id = emp.id
 		AND empbuddy.is_active = 0
 		AND ewo.effective_from_date <= '".$startdate."'
 		AND ewo.effective_to_date >= '".$endtdate."'
 		AND empbuddy.hr_buddy = '".$get['emp_id']."'
-		AND MONTH(pt.timesheet_date) = '".$month."' 
+		AND MONTH(pt.timesheet_date) = '".$month."'
 		AND YEAR(pt.timesheet_date) = '".$year."'
 		) abc
 		GROUP BY
@@ -1165,179 +1165,179 @@ class vMSUserClass extends userClass{
 		$year = $get['year'];
 		$startdate = $get['year']."-".$get['month']."-01";
 		$endtdate = date("Y-m-t",strtotime($startdate));
-		$query ="SELECT 
-		vendor_id, 
-		vendor_name, 
+		$query ="SELECT
+		vendor_id,
+		vendor_name,
 		employee_id,
-		location_id,  
-		employee_name, 
-		emp_billable, 
-		reports_to, 	
-		reports_to_name, 	
-		user_id, 
-		MAX(emp_image) emp_image, 
-		job_title, 
-		SUM(billable_hrs) billable_hrs, 
-		SUM(nonbillable_hrs) nonbillable_hrs, 
-		leave_days_from + leave_days_to as leave_days, 
+		location_id,
+		employee_name,
+		emp_billable,
+		reports_to,
+		reports_to_name,
+		user_id,
+		MAX(emp_image) emp_image,
+		job_title,
+		SUM(billable_hrs) billable_hrs,
+		SUM(nonbillable_hrs) nonbillable_hrs,
+		leave_days_from + leave_days_to as leave_days,
 		vrc_max_leave,
-		pt_status_id, 
-		current_status, 
-		purchase_uom, 
-		vrc_purchase_uom, 
-		MAX(l_item_price) budgeted_amount, 
-		MAX(vrc_item_price) vrc_budgeted_amount, 
-		SUM(bill_amount) as billable_amount, 
-		SUM(vrc_billable_amount) as vrc_billable_amount, 
-		SUM(nonbillable_hrs * rate_per_hrs) as nonbillable_amount 
-		from 
+		pt_status_id,
+		current_status,
+		purchase_uom,
+		vrc_purchase_uom,
+		MAX(l_item_price) budgeted_amount,
+		MAX(vrc_item_price) vrc_budgeted_amount,
+		SUM(bill_amount) as billable_amount,
+		SUM(vrc_billable_amount) as vrc_billable_amount,
+		SUM(nonbillable_hrs * rate_per_hrs) as nonbillable_amount
+		from
 		(
-		SELECT 
-		emp.vendor_id as vendor_id, 
-		vend.display_name as vendor_name, 
+		SELECT
+		emp.vendor_id as vendor_id,
+		vend.display_name as vendor_name,
 		emp.id employee_id,
-		emp.location_id,	  
-		emp.first_working_date, 
-		emp.joining_date, 
+		emp.location_id,
+		emp.first_working_date,
+		emp.joining_date,
 		emp.total_experiance,
-		vrc_items.max_leave AS vrc_max_leave,	  
+		vrc_items.max_leave AS vrc_max_leave,
 		emp.user_id user_id,
 		(
-		select 
-		job_title 
-		from 
-		job_titles jt 
-		where 
-		jt.id = emp.job_title_id 
+		select
+		job_title
+		from
+		job_titles jt
+		where
+		jt.id = emp.job_title_id
 		and jt.company_id = emp.company_id
-		) job_title, 
-		emp.display_name employee_name, 
-		emp.billable emp_billable, 
+		) job_title,
+		emp.display_name employee_name,
+		emp.billable emp_billable,
 		emp.image emp_image,
-		au.reports_to reports_to, 	
-		(	
-		select 	
-		display_name 	
-		from 	
-		application_users aur 	
-		where 	
-		aur.id = au.reports_to	
-		) reports_to_name,
-		pt.billable_hrs billable_hrs, 
-		pt.nonbillable_hrs nonbillable_hrs, 
-		pt.rate_per_hrs rate_per_hrs, 
-		pt.bill_amount bill_amount, 
-		pt.vrc_billable_amount vrc_billable_amount, 
-		CASE WHEN mpc_items.purchase_uom = 'PT' THEN mpc_items.item_price / 3 WHEN mpc_items.purchase_uom = 'PS' THEN mpc_items.item_price / 6 WHEN mpc_items.purchase_uom = 'PY' THEN mpc_items.item_price / 12 WHEN mpc_items.purchase_uom = 'PM' THEN mpc_items.item_price ELSE mpc_items.item_price END l_item_price, 
-		CASE WHEN vrc_items.purchase_uom = 'PT' THEN vrc_items.item_price / 3 WHEN vrc_items.purchase_uom = 'PS' THEN vrc_items.item_price / 6 WHEN vrc_items.purchase_uom = 'PY' THEN vrc_items.item_price / 12 WHEN vrc_items.purchase_uom = 'PM' THEN vrc_items.item_price ELSE vrc_items.item_price END vrc_item_price, 
-		mpc_items.purchase_uom purchase_uom, 
-		mpc_items.item_price, 
-		vrc_items.purchase_uom vrc_purchase_uom, 
-		vrc_items.item_price vrc_item_prices, 
+		au.reports_to reports_to,
 		(
-		SELECT 
+		select
+		display_name
+		from
+		application_users aur
+		where
+		aur.id = au.reports_to
+		) reports_to_name,
+		pt.billable_hrs billable_hrs,
+		pt.nonbillable_hrs nonbillable_hrs,
+		pt.rate_per_hrs rate_per_hrs,
+		pt.bill_amount bill_amount,
+		pt.vrc_billable_amount vrc_billable_amount,
+		CASE WHEN mpc_items.purchase_uom = 'PT' THEN mpc_items.item_price / 3 WHEN mpc_items.purchase_uom = 'PS' THEN mpc_items.item_price / 6 WHEN mpc_items.purchase_uom = 'PY' THEN mpc_items.item_price / 12 WHEN mpc_items.purchase_uom = 'PM' THEN mpc_items.item_price ELSE mpc_items.item_price END l_item_price,
+		CASE WHEN vrc_items.purchase_uom = 'PT' THEN vrc_items.item_price / 3 WHEN vrc_items.purchase_uom = 'PS' THEN vrc_items.item_price / 6 WHEN vrc_items.purchase_uom = 'PY' THEN vrc_items.item_price / 12 WHEN vrc_items.purchase_uom = 'PM' THEN vrc_items.item_price ELSE vrc_items.item_price END vrc_item_price,
+		mpc_items.purchase_uom purchase_uom,
+		mpc_items.item_price,
+		vrc_items.purchase_uom vrc_purchase_uom,
+		vrc_items.item_price vrc_item_prices,
+		(
+		SELECT
 		DATEDIFF (
 		least(
-		el.leave_to, 
+		el.leave_to,
 		last_day(el.leave_from)
-		), 
+		),
 		el.leave_from
-		) 
-		FROM 
-		employee_leaves el 
-		WHERE 
-		el.company_id = emp.company_id 
-		AND el.employee_id = emp.id 
+		)
+		FROM
+		employee_leaves el
+		WHERE
+		el.company_id = emp.company_id
+		AND el.employee_id = emp.id
 		AND MONTH(el.leave_from) = '".$month."'
 		AND YEAR(el.leave_from) = '".$year."'
-		) leave_days_from, 
+		) leave_days_from,
 		(
-		SELECT 
+		SELECT
 		DATEDIFF (
-		el2.leave_to, 
+		el2.leave_to,
 		greatest(
-		el2.leave_from, 
+		el2.leave_from,
 		DATE_SUB(
-		LAST_DAY(el2.leave_to), 
+		LAST_DAY(el2.leave_to),
 		INTERVAL DAY(
 		LAST_DAY(el2.leave_to)
 		)-1 DAY
 		)
 		)
-		) 
-		FROM 
-		employee_leaves el2 
-		WHERE 
-		el2.company_id = emp.company_id 
-		AND el2.employee_id = emp.id 
+		)
+		FROM
+		employee_leaves el2
+		WHERE
+		el2.company_id = emp.company_id
+		AND el2.employee_id = emp.id
 		AND MONTH(el2.leave_to) = '".$month."'
 		AND YEAR(el2.leave_to) = '".$year."'
-		) leave_days_to, 
-		vrc_items.min_exp, 
-		vrc_items.max_exp, 
-		pt.current_status as pt_status_id, 
+		) leave_days_to,
+		vrc_items.min_exp,
+		vrc_items.max_exp,
+		pt.current_status as pt_status_id,
 		(
-		SELECT 
-		sts.name 
-		FROM 
-		status sts 
-		WHERE 
-		sts.name_value = pt.current_status 
+		SELECT
+		sts.name
+		FROM
+		status sts
+		WHERE
+		sts.name_value = pt.current_status
 		AND sts.company_id = pt.company_id
-		) current_status 
-		FROM 
-		employees emp, 
-		vendors vend, 
-		manpower_contracts mpc, 
-		mpc_items mpc_items, 
+		) current_status
+		FROM
+		employees emp,
+		vendors vend,
+		manpower_contracts mpc,
+		mpc_items mpc_items,
 		vendor_rate_cards vrc,
-		vrc_items vrc_items, 
-		emp_work_order ewo, 
-		application_users au, 
+		vrc_items vrc_items,
+		emp_work_order ewo,
+		application_users au,
 		project_timesheets pt,
-		employee_buddies empbuddy 
-		WHERE 
+		employee_buddies empbuddy
+		WHERE
 		emp.company_id = '".$company_id."'
-		AND emp.is_active = '0' 
+		AND emp.is_active = '0'
 		AND emp.billable != 3
-		AND vend.company_id = emp.company_id 
-		AND vend.id = emp.vendor_id 
-		AND mpc.company_id = emp.company_id 
-		AND mpc_items.company_id = mpc.company_id 
-		AND mpc_items.transaction_id = mpc.id 
-		AND vrc_items.company_id = mpc.company_id 
-		AND mpc.customer_id = emp.vendor_id 
-		AND ewo.company_id = emp.company_id 
-		AND ewo.emp_id = emp.id 
-		AND mpc.id = ewo.work_order_id 
-		AND mpc_items.id = ewo.work_order_detail_id 
-		AND vrc.id = ewo.vrc_id 
-		AND vrc_items.id = ewo.vrc_item_id 
-		AND emp.company_id = au.company_id 
-		AND au.id = emp.user_id 
-		AND emp.company_id = pt.company_id 
-		AND emp.id = pt.emp_id 
+		AND vend.company_id = emp.company_id
+		AND vend.id = emp.vendor_id
+		AND mpc.company_id = emp.company_id
+		AND mpc_items.company_id = mpc.company_id
+		AND mpc_items.transaction_id = mpc.id
+		AND vrc_items.company_id = mpc.company_id
+		AND mpc.customer_id = emp.vendor_id
+		AND ewo.company_id = emp.company_id
+		AND ewo.emp_id = emp.id
+		AND mpc.id = ewo.work_order_id
+		AND mpc_items.id = ewo.work_order_detail_id
+		AND vrc.id = ewo.vrc_id
+		AND vrc_items.id = ewo.vrc_item_id
+		AND emp.company_id = au.company_id
+		AND au.id = emp.user_id
+		AND emp.company_id = pt.company_id
+		AND emp.id = pt.emp_id
 		AND emp.is_active = ewo.is_active
 		AND emp.is_active = vrc_items.is_active
 		AND emp.is_active = mpc_items.is_active
-		AND empbuddy.company_id = emp.company_id 	
-		AND empbuddy.employee_id = emp.id 
+		AND empbuddy.company_id = emp.company_id
+		AND empbuddy.employee_id = emp.id
 		AND empbuddy.is_active = 0
 		AND ewo.effective_from_date <= '".$startdate."'
-		AND ewo.effective_to_date >= '".$endtdate."'	  
+		AND ewo.effective_to_date >= '".$endtdate."'
 		AND empbuddy.finance_buddy = '".$get['emp_id']."'
-		AND MONTH(pt.timesheet_date) = '".$month."' 
+		AND MONTH(pt.timesheet_date) = '".$month."'
 		AND YEAR(pt.timesheet_date) = '".$year."'
-		) abc 
-		GROUP by 
-		vendor_id, 
-		vendor_name, 
+		) abc
+		GROUP by
+		vendor_id,
+		vendor_name,
 		employee_id,
-		location_id,  
-		employee_name, 
-		current_status, 
-		pt_status_id, 
-		purchase_uom, 
+		location_id,
+		employee_name,
+		current_status,
+		pt_status_id,
+		purchase_uom,
 		vrc_purchase_uom,
 		vrc_max_leave";
 		return $callConfig->getAllRows($query);
@@ -1437,13 +1437,13 @@ class vMSUserClass extends userClass{
 		AND vri.transaction_id = ewo.vrc_id
 		AND vri.id =  ewo.vrc_item_id
 		AND emp.company_id = au.company_id
-		AND au.id = emp.user_id        
+		AND au.id = emp.user_id
 		AND emp.company_id = pt.company_id
 		AND emp.id = pt.emp_id
 		AND empbuddy.company_id = emp.company_id
 		AND empbuddy.employee_id = emp.id
 		AND empbuddy.is_active = 0
-		AND 
+		AND
 		CASE
 		WHEN 1 = '1' THEN
 		(empbuddy.hr_buddy = '".$get['emp_id']."')
@@ -1453,7 +1453,7 @@ class vMSUserClass extends userClass{
 		au.reports_to =  '".$get['user_id']."'
 		END
 		AND MONTH(pt.timesheet_date) = '".$month."'
-		AND YEAR(pt.timesheet_date) = '".$year."' 
+		AND YEAR(pt.timesheet_date) = '".$year."'
 		)abc
 		GROUP by
 		reporting_manger,
@@ -1517,7 +1517,7 @@ class vMSUserClass extends userClass{
 
 	  	//echo "test3"; exit;
 	  	//--------------------------- Reportmanager Names -------------------//
-	  	if(count($reporting_mangers)>0){
+	  	if(!empty($reporting_mangers)){
 		  	$reportmangerquery = "SELECT id,display_name,user_name,user_email FROM application_users WHERE  company_id = '".$geet['company_id']."' AND id IN (".implode(",",$reporting_mangers).") AND is_active = 0 ";
 		  	$reportmangers = $callConfig->getAllRows($reportmangerquery);
 		  	foreach($reportmangers as $reportmanger){
@@ -1533,7 +1533,7 @@ class vMSUserClass extends userClass{
 
 	  	//echo "test4"; exit;
 	  	//--------------------------- Aprovalmanager Names -------------------//
-	  	if(count($approval_managers)>0){
+	  	if(!empty($approval_managers)){
 		  	 $approvalmanagerquery = "SELECT id,display_name,user_name,user_email FROM application_users  WHERE  company_id = '".$geet['company_id']."' AND id IN (".implode(",",$approval_managers).") AND is_active = 0";
 
 		  	$approvemanagers = $callConfig->getAllRows($approvalmanagerquery);
@@ -1611,7 +1611,7 @@ class vMSUserClass extends userClass{
 		}
 		//print_r($email_array);print_r($reporting_mangers);print_r($approval_managers); print_r($user_emailids); exit;
 		//--------------------------- Reportmanager Names -------------------//
-		if(count($reporting_mangers)>0){
+		if(!empty($reporting_mangers)){
 		$reportmangerquery = "SELECT id,display_name,user_name,user_email FROM application_users WHERE is_active = 0 AND company_id = '".$get['company_id']."' AND id IN (".implode(",",$reporting_mangers).")";
 		$reportmangers = $callConfig->getAllRows($reportmangerquery);
 		foreach($reportmangers as $reportmanger){
@@ -1626,7 +1626,7 @@ class vMSUserClass extends userClass{
 		}
 		//print_r($email_array);print_r($reporting_mangers);print_r($approval_managers); print_r($user_emailids); exit;
 		//--------------------------- Aprovalmanager Names -------------------//
-		if(count($approval_managers)>0){
+		if(!empty($approval_managers)){
 		$approvalmanagerquery = "SELECT id,display_name,user_name,user_email FROM application_users WHERE is_active = 0 AND company_id = '".$get['company_id']."' AND id IN (".implode(",",$approval_managers).")";
 		$approvemanagers = $callConfig->getAllRows($approvalmanagerquery);
 		foreach($approvemanagers as $approvemanager){
@@ -1706,7 +1706,7 @@ class vMSUserClass extends userClass{
 		}
 		//print_r($email_array);print_r($reporting_mangers);print_r($approval_managers); print_r($user_emailids); exit;
 		//--------------------------- Reportmanager Names -------------------//
-		if(count($reporting_mangers)>0){
+		if(!empty($reporting_mangers)){
 		$reportmangerquery = "SELECT id,display_name,user_name,user_email FROM application_users WHERE is_active = 0 AND company_id = '".$get['company_id']."' AND id IN (".implode(",",$reporting_mangers).")";
 		$reportmangers = $callConfig->getAllRows($reportmangerquery);
 		foreach($reportmangers as $reportmanger){
@@ -1721,7 +1721,7 @@ class vMSUserClass extends userClass{
 		}
 		//print_r($email_array);print_r($reporting_mangers);print_r($approval_managers); print_r($user_emailids); exit;
 		//--------------------------- Aprovalmanager Names -------------------//
-		if(count($approval_managers)>0){
+		if(!empty($approval_managers)){
 		$approvalmanagerquery = "SELECT id,display_name,user_name,user_email FROM application_users WHERE is_active = 0 AND company_id = '".$get['company_id']."' AND id IN (".implode(",",$approval_managers).")";
 		$approvemanagers = $callConfig->getAllRows($approvalmanagerquery);
 		foreach($approvemanagers as $approvemanager){
@@ -1736,7 +1736,7 @@ class vMSUserClass extends userClass{
 		}
 
 		//--------------------------- HR Buddy Names -------------------//
-		if(count($hrbuddies)>0){
+		if(!empty($hrbuddies)){
 		$hrbuddiesquery = "SELECT id,display_name,email_id,user_id FROM employees WHERE is_active = 0 AND company_id = '".$get['company_id']."' AND id IN (".implode(",",$hrbuddies).")";
 		$hrbbdata = $callConfig->getAllRows($hrbuddiesquery);
 		foreach($hrbbdata as $hrbata){
@@ -1816,8 +1816,8 @@ class vMSUserClass extends userClass{
 		emp_work_order ewo,
 		mpc_items mpcitems
 		WHERE
-		ewo.company_id = emp.company_id AND mpcitems.transaction_id = ewo.work_order_id AND mpcitems.id = ewo.work_order_detail_id AND ewo.emp_id = emp.id AND ewo.is_active = 0 AND ewo.effective_from_date <= '".$startdate."' 
-		AND ewo.effective_to_date >= '".$enddate."' 
+		ewo.company_id = emp.company_id AND mpcitems.transaction_id = ewo.work_order_id AND mpcitems.id = ewo.work_order_detail_id AND ewo.emp_id = emp.id AND ewo.is_active = 0 AND ewo.effective_from_date <= '".$startdate."'
+		AND ewo.effective_to_date >= '".$enddate."'
 		) budgeted_amount,
 		(
 		SELECT
@@ -1826,8 +1826,8 @@ class vMSUserClass extends userClass{
 		emp_work_order ewo,
 		mpc_items mpcitems
 		WHERE
-		ewo.company_id = emp.company_id AND mpcitems.transaction_id = ewo.work_order_id AND mpcitems.id = ewo.work_order_detail_id AND ewo.emp_id = emp.id AND ewo.is_active = 0 AND ewo.effective_from_date <= '".$startdate."' 
-		AND ewo.effective_to_date >= '".$enddate."' 
+		ewo.company_id = emp.company_id AND mpcitems.transaction_id = ewo.work_order_id AND mpcitems.id = ewo.work_order_detail_id AND ewo.emp_id = emp.id AND ewo.is_active = 0 AND ewo.effective_from_date <= '".$startdate."'
+		AND ewo.effective_to_date >= '".$enddate."'
 		) purchase_uom,
 		(
 		SELECT CASE WHEN
@@ -1837,7 +1837,7 @@ class vMSUserClass extends userClass{
 		emp_work_order ewo,
 		vrc_items vrcitems
 		WHERE
-		ewo.company_id = emp.company_id AND vrcitems.transaction_id = ewo.vrc_id AND vrcitems.id = ewo.vrc_item_id AND ewo.emp_id = emp.id AND ewo.is_active = 0 AND ewo.effective_from_date <= '".$startdate."' AND ewo.effective_to_date >= '".$enddate."' 
+		ewo.company_id = emp.company_id AND vrcitems.transaction_id = ewo.vrc_id AND vrcitems.id = ewo.vrc_item_id AND ewo.emp_id = emp.id AND ewo.is_active = 0 AND ewo.effective_from_date <= '".$startdate."' AND ewo.effective_to_date >= '".$enddate."'
 		) vrc_budgeted_amount,
 		(
 		SELECT
@@ -1846,7 +1846,7 @@ class vMSUserClass extends userClass{
 		emp_work_order ewo,
 		vrc_items vrcitems
 		WHERE
-		ewo.company_id = emp.company_id AND vrcitems.transaction_id = ewo.vrc_id AND vrcitems.id = ewo.vrc_item_id AND ewo.emp_id = emp.id AND ewo.is_active = 0 AND ewo.effective_from_date <= '".$startdate."' AND ewo.effective_to_date >= '".$enddate."' 
+		ewo.company_id = emp.company_id AND vrcitems.transaction_id = ewo.vrc_id AND vrcitems.id = ewo.vrc_item_id AND ewo.emp_id = emp.id AND ewo.is_active = 0 AND ewo.effective_from_date <= '".$startdate."' AND ewo.effective_to_date >= '".$enddate."'
 		) l_rate_card_item_uom */
 		FROM
 		employees emp,  application_users au
@@ -1860,10 +1860,10 @@ class vMSUserClass extends userClass{
 		application_users
 		WHERE
 		reports_to = ".$get['user_id']." AND is_active = '0'
-		) 
+		)
 		AND emp.joining_date < '".$joidate."'
 		AND	(
-		CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$joidate."') 
+		CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$joidate."')
 		THEN 1
 		WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0)
 		THEN 1
@@ -2200,8 +2200,7 @@ class vMSUserClass extends userClass{
 		}
 		}
 
-		$connectdetails = array('hr_connect'=>$hr_connect_id,'finance_connect'=>$finance_connect_id,'admin_connect'=>$admin_connect_id);
-		return $connectdetails;
+		return array('hr_connect'=>$hr_connect_id,'finance_connect'=>$finance_connect_id,'admin_connect'=>$admin_connect_id);
 	}
 	public function empList($data){
 		global $callConfig;
@@ -2278,8 +2277,7 @@ class vMSUserClass extends userClass{
 			$row=$callConfig->getRow($sql);
 			$string[]=round($row->sum);
 		}
-			$return =  array("timesheet_total_hrs"=>$string);
-			return $return;
+			return array("timesheet_total_hrs"=>$string);
 	}
 	public function nextMonthProjection($data){
 		global $callConfig;
@@ -2717,7 +2715,7 @@ class vMSUserClass extends userClass{
     	global $callConfig;
     	$query ="SELECT
     	eba.id esign_id,
-    	vrc.id vendor_rate_card_id,		
+    	vrc.id vendor_rate_card_id,
     	vrci.id vendor_rate_card_item_id,
     	vrci.item_price bill_rate,
     	vrci.purchase_uom uom,
@@ -2745,17 +2743,17 @@ class vMSUserClass extends userClass{
     }
     public function getprojecttimesheetworkorderid($data){
 		global $callConfig;
-		$workordersql = "SELECT mpc.id,mpc.transaction_number  
-		FROM `emp_work_order` ewo, manpower_contracts mpc  
+		$workordersql = "SELECT mpc.id,mpc.transaction_number
+		FROM `emp_work_order` ewo, manpower_contracts mpc
 		WHERE   ewo.company_id='".$data['company_id']."'
 		AND ewo.company_id = mpc.company_id
 		AND ewo.work_order_id = mpc.id
 		AND ewo.emp_id='".$data['emp_id']."'
-		AND ewo.work_order_detail_id !='' 
-		AND ewo.work_order_id !='' 
-		AND ewo.vrc_id !='' 
+		AND ewo.work_order_detail_id !=''
+		AND ewo.work_order_id !=''
+		AND ewo.vrc_id !=''
 		AND ewo.vrc_item_id !=''
-		AND ewo.is_active = 0 
+		AND ewo.is_active = 0
 		AND ewo.effective_from_date <= '".$data['startdate']."'
 		AND ewo.effective_to_date >= '".$data['enddate']."'";
 		return $callConfig->getAllRows($workordersql);
@@ -3010,117 +3008,117 @@ class vMSUserClass extends userClass{
 		$filname = $data['reportfieldname'];
 		$filempname = $data['reportempfieldname'];
 
-		$query ="SELECT ".$filempname.",  dept_name, 
-		  sum(m12) as s12 , 
-		  sum(m11) as s11 , 
-		  sum(m10) as s10 , 
-		  sum(m9) as s9 , 
-		  sum(m8) as s8 , 
-		  sum(m7) as s7 , 
-		  sum(m6) as s6 , 
-		  sum(m5) as s5 , 
-		  sum(m4) as s4 , 
-		  sum(m3) as s3 , 
-		  sum(m2) as s2 , 
+		$query ="SELECT ".$filempname.",  dept_name,
+		  sum(m12) as s12 ,
+		  sum(m11) as s11 ,
+		  sum(m10) as s10 ,
+		  sum(m9) as s9 ,
+		  sum(m8) as s8 ,
+		  sum(m7) as s7 ,
+		  sum(m6) as s6 ,
+		  sum(m5) as s5 ,
+		  sum(m4) as s4 ,
+		  sum(m3) as s3 ,
+		  sum(m2) as s2 ,
 		  sum(m1) as s1
-		FROM 
+		FROM
 		  (
-		    SELECT 
-		      emp.".$filempname.", 
+		    SELECT
+		      emp.".$filempname.",
 		      DATE_FORMAT(
-		        ('2022-07-31' - INTERVAL 12 MONTH), 
+		        ('2022-07-31' - INTERVAL 12 MONTH),
 		        '%Y-%m'
-		      ), 
-		      DATE_FORMAT(pt.timesheet_date, '%Y-%m'), 
+		      ),
+		      DATE_FORMAT(pt.timesheet_date, '%Y-%m'),
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 11 MONTH), 
+		        ('".$last_date."' - INTERVAL 11 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M12, 
+		      ) THEN sum(pt.vrc_billable_amount) END M12,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 10 MONTH), 
+		        ('".$last_date."' - INTERVAL 10 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M11, 
+		      ) THEN sum(pt.vrc_billable_amount) END M11,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 9 MONTH), 
+		        ('".$last_date."' - INTERVAL 9 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M10, 
+		      ) THEN sum(pt.vrc_billable_amount) END M10,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 8 MONTH), 
+		        ('".$last_date."' - INTERVAL 8 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M9, 
+		      ) THEN sum(pt.vrc_billable_amount) END M9,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 7 MONTH), 
+		        ('".$last_date."' - INTERVAL 7 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M8, 
+		      ) THEN sum(pt.vrc_billable_amount) END M8,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 6 MONTH), 
+		        ('".$last_date."' - INTERVAL 6 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M7, 
+		      ) THEN sum(pt.vrc_billable_amount) END M7,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 5 MONTH), 
+		        ('".$last_date."' - INTERVAL 5 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M6, 
+		      ) THEN sum(pt.vrc_billable_amount) END M6,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 4 MONTH), 
+		        ('".$last_date."' - INTERVAL 4 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M5, 
+		      ) THEN sum(pt.vrc_billable_amount) END M5,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 3 MONTH), 
+		        ('".$last_date."' - INTERVAL 3 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M4, 
+		      ) THEN sum(pt.vrc_billable_amount) END M4,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 2 MONTH), 
+		        ('".$last_date."' - INTERVAL 2 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M3, 
+		      ) THEN sum(pt.vrc_billable_amount) END M3,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 1 MONTH), 
+		        ('".$last_date."' - INTERVAL 1 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M2, 
+		      ) THEN sum(pt.vrc_billable_amount) END M2,
 		      CASE WHEN DATE_FORMAT(pt.timesheet_date, '%Y-%m') = DATE_FORMAT(
-		        ('".$last_date."' - INTERVAL 0 MONTH), 
+		        ('".$last_date."' - INTERVAL 0 MONTH),
 		        '%Y-%m'
-		      ) THEN sum(pt.vrc_billable_amount) END M1, 
+		      ) THEN sum(pt.vrc_billable_amount) END M1,
 		      IFNULL(
 		        (
-		          SELECT 
-		            dept.".$filname." 
-		          FROM 
-		            ".$data['reporttable']." dept 
-		          WHERE 
-		            dept.company_id = emp.company_id 
+		          SELECT
+		            dept.".$filname."
+		          FROM
+		            ".$data['reporttable']." dept
+		          WHERE
+		            dept.company_id = emp.company_id
 		            AND dept.id = emp.".$filempname."
-		        ), 
+		        ),
 		        'Uassigned'
-		      ) dept_name, 
-		      DATE_FORMAT(pt.timesheet_date, '%Y-%m') monyr, 
-		      sum(pt.bill_amount) as po_billable_amount, 
-		      sum(pt.vrc_billable_amount) as vrc_billable_amount 
-		    FROM 
-		      employees emp, 
-		      project_timesheets pt 
-		    WHERE 
-		      emp.company_id = pt.company_id 
+		      ) dept_name,
+		      DATE_FORMAT(pt.timesheet_date, '%Y-%m') monyr,
+		      sum(pt.bill_amount) as po_billable_amount,
+		      sum(pt.vrc_billable_amount) as vrc_billable_amount
+		    FROM
+		      employees emp,
+		      project_timesheets pt
+		    WHERE
+		      emp.company_id = pt.company_id
 		      AND emp.id = pt.emp_id
 		      AND emp.billable != 3
 
 		      AND	(
-				CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$last_date."') 
+				CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$last_date."')
 					THEN 1
 				WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0)
 					THEN 1
 				ELSE	2
 				END
-			)=1 
-		      AND pt.timesheet_date >= '".$fl_date."' 
+			)=1
+		      AND pt.timesheet_date >= '".$fl_date."'
 		      AND pt.timesheet_date <= '".$last_date."'
-		      AND pt.is_active = 0 
+		      AND pt.is_active = 0
 		    GROUP BY
-		     emp.company_id, 
-		      emp.".$filempname.", 
+		     emp.company_id,
+		      emp.".$filempname.",
 		      pt.timesheet_date
-		  ) a 
-		GROUP BY 
-		  ".$filempname.", 
+		  ) a
+		GROUP BY
+		  ".$filempname.",
 		  dept_name
 		ORDER by  2";
 		$return = $callConfig->getAllRows($query);
@@ -3220,8 +3218,8 @@ class vMSUserClass extends userClass{
 			}
 			$returnarray['work_order_list'] =$workorderslist;
 
-		$leavessql = "select employee_id,leave_from,leave_to,leave_type_id,datelist 
-		from employee_leaves, 
+		$leavessql = "select employee_id,leave_from,leave_to,leave_type_id,datelist
+		from employee_leaves,
 		(select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) datelist from
 		 (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
 		 (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
@@ -3330,13 +3328,13 @@ class vMSUserClass extends userClass{
 		AND emp.billable != 3
 		AND joining_date <= '".$enddate."'
 		AND	(
-				CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$enddate."') 
+				CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$enddate."')
 					THEN 1
 				WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0)
 					THEN 1
 				ELSE	2
 				END
-			)=1 
+			)=1
 		AND (date_of_leaving >= '".$startdate."' OR date_of_leaving IS NULL)
 		AND pt.current_status = '".ST_APPROVED."'
 		AND pt.timesheet_date <= '".$enddate."'
@@ -3396,7 +3394,7 @@ class vMSUserClass extends userClass{
 			AND emp.is_active = pt.is_active
 			AND pt.is_active = 0
 			AND emp.billable != 3
-			AND emp.joining_date <= '".$enddate."' 
+			AND emp.joining_date <= '".$enddate."'
 			AND (emp.date_of_leaving >= '".$startdate."' OR emp.date_of_leaving IS NULL)
 			AND au.approval_manager = '".$approval_manager."'
 			AND pt.company_id = '".$company_id."'
@@ -3413,8 +3411,7 @@ class vMSUserClass extends userClass{
 			foreach($timesheetsyattosubmitres as $row2){
 				$retrunyattusubmit[$row2->id] =  $row2;
 			}
-			$retrunarry = array("res"=>$result,'yattosubmit'=>$retrunyattusubmit,'sqlapproval'=>$query,'yattosubmitsql'=>$timesheetsyattosubmitsql);
-			return $retrunarry;
+			return array("res"=>$result,'yattosubmit'=>$retrunyattusubmit,'sqlapproval'=>$query,'yattosubmitsql'=>$timesheetsyattosubmitsql);
 	}
 	public function changestatusweeklybulkapproval($get){
 		global $callConfig;
@@ -3740,7 +3737,7 @@ class vMSUserClass extends userClass{
 	   if($get['admin']=='0'){
 		   $reproting_manager = "  AND au.reports_to='".$get['user_id']."'";
 	   }
-	   $query = "SELECT emp_id, display_name, reports_to, approval_manager, SUM(totalhrs) total_hrs, 
+	   $query = "SELECT emp_id, display_name, reports_to, approval_manager, SUM(totalhrs) total_hrs,
 		SUM(0w1) YS_week_1, SUM(8w1) RM_week_1, SUM(10w1) AM_week_1, SUM(102w1) HR_week_1, SUM(104w1) FN_week_1, SUM(199w1) AP_week_1,
 		IFNULL(SUM(0w1),0) + IFNULL(SUM(8w1),0) + IFNULL(SUM(10w1),0) + IFNULL(SUM(102w1),0) + IFNULL(SUM(104w1),0) + IFNULL(SUM(199w1),0) TOT_week_1,
 		SUM(0w2) YS_week_2, SUM(8w2) RM_week_2, SUM(10w2) AM_week_2, SUM(102w2) HR_week_2, SUM(104w2) FN_week_2, SUM(199w2) AP_week_2,
@@ -3842,7 +3839,7 @@ class vMSUserClass extends userClass{
 					END 104W5,
 					CASE WHEN current_status = '".ST_APPROVED."' AND week_of_month = 5
 						THEN sum(billable_hrs)
-					END 199W5				
+					END 199W5
 
 			FROM (
 					SELECT pt.emp_id, emp.display_name, au.reports_to, au.approval_manager, pt.timesheet_date, pt.billable_hrs,
@@ -3860,15 +3857,15 @@ class vMSUserClass extends userClass{
 					AND emp.is_active = pt.is_active
 					AND joining_date <= '".$enddate."'
 					AND	(
-				CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$enddate."') 
+				CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$enddate."')
 					THEN 1
 				WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0)
 					THEN 1
 				ELSE	2
 				END
-			)=1 
+			)=1
 					AND (date_of_leaving >= '".$startdate."' OR date_of_leaving IS NULL)
-					AND pt.timesheet_date <= '".$enddate."' 
+					AND pt.timesheet_date <= '".$enddate."'
 					AND pt.timesheet_date >= '".$startdate."' ".$reproting_manager."
 					group by pt.emp_id, emp.display_name, au.reports_to, au.approval_manager,pt.timesheet_date, pt.billable_hrs, pt.current_status
 				)a
@@ -4094,23 +4091,23 @@ class vMSUserClass extends userClass{
 		    AND empleaves.employee_id = emp.id
 		  )
 		  LEFT JOIN (
-			SELECT 
-          ewo.company_id, 
-          ewo.emp_id, 
-          ewo.work_order_id, 
-          ewo.work_order_detail_id, 
-          ewo.vrc_id, 
-          ewo.vrc_item_id, 
-          ewo.effective_from_date, 
-          ewo.effective_to_date, 
-          ewo.is_active 
-        FROM 
+			SELECT
+          ewo.company_id,
+          ewo.emp_id,
+          ewo.work_order_id,
+          ewo.work_order_detail_id,
+          ewo.vrc_id,
+          ewo.vrc_item_id,
+          ewo.effective_from_date,
+          ewo.effective_to_date,
+          ewo.is_active
+        FROM
           emp_work_order ewo
       ) empwo on (
-        empwo.company_id = emp.company_id 
-        AND empwo.emp_id = emp.id 
-        AND empwo.is_active = 0 
-        AND empwo.effective_from_date <= '".$startdate."' 
+        empwo.company_id = emp.company_id
+        AND empwo.emp_id = emp.id
+        AND empwo.is_active = 0
+        AND empwo.effective_from_date <= '".$startdate."'
         AND empwo.effective_to_date >= '".$enddate."'
 		  )
 		  LEFT JOIN (
@@ -4155,7 +4152,7 @@ class vMSUserClass extends userClass{
 		WHERE
 		  emp.vendor_id IS NOT NULL
 		  AND	(
-		CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$enddate."') 
+		CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$enddate."')
 			THEN 1
 		WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0)
 			THEN 1
@@ -4230,13 +4227,13 @@ class vMSUserClass extends userClass{
 		$condition = "
 		(
 	    CASE WHEN (
-	      emp.date_of_leaving IS NOT NULL 
+	      emp.date_of_leaving IS NOT NULL
 	      AND emp.date_of_leaving >= '".$startdate."'
 	    ) THEN 1 WHEN (
-	      emp.date_of_leaving IS NULL 
+	      emp.date_of_leaving IS NULL
 	      AND emp.is_active = 0
 	    ) THEN 1 ELSE 2 END
-	  )= 1 
+	  )= 1
 		AND (
 	        CASE WHEN '3' <> '".$data['user_type']."'
 	            THEN(
@@ -4277,8 +4274,7 @@ class vMSUserClass extends userClass{
 			$totalvendor[$emplist->vendor_id] = $emplist->vendor_id;
 			}
 		}
-		$return =   array("total_emp"=>$totalactive,"this_month_join"=>$join,"previous_month_join"=>$prejoin,"this_month_leaving"=>$resign,"previous_month_leaving"=>$preresign,"total_ven"=>count($totalvendor),"sql"=>$sql);
-		return $return;
+		return array("total_emp"=>$totalactive,"this_month_join"=>$join,"previous_month_join"=>$prejoin,"this_month_leaving"=>$resign,"previous_month_leaving"=>$preresign,"total_ven"=>count($totalvendor),"sql"=>$sql);
 	}
 	public function bugetaccrualvendorrareport($get){
 		global $callConfig;
@@ -4298,14 +4294,14 @@ class vMSUserClass extends userClass{
 	            FROM	vendors vend
 	            WHERE	vend.company_id = emp.company_id
 	            AND		vend.id = emp.vendor_id
-	        ), 'Uassigned') vendor_name, 
-			emp.id as employee_id, 
-	        emp.display_name as employee_name, 
+	        ), 'Uassigned') vendor_name,
+			emp.id as employee_id,
+	        emp.display_name as employee_name,
 			emp.department_id,
 			emp.location_id,
 			emp.vertical_id,
 	        (
-	            SELECT	dept.department_name	
+	            SELECT	dept.department_name
 	            FROM 	departments dept
 	            WHERE	dept.company_id = emp.company_id
 	            AND		dept.id = emp.department_id
@@ -4324,8 +4320,8 @@ class vMSUserClass extends userClass{
 	            WHERE	jt.company_id = emp.company_id
 	            AND		jt.id = emp.job_title_id
 	        ) job_title,
-	        emp.billable as emp_billable, 
-			empptsumm.billable_hrs, 
+	        emp.billable as emp_billable,
+			empptsumm.billable_hrs,
 			empptsumm.nonbillable_hrs,
 			empleaves.leave_days,
 			vrc_vrcitems.experience_base,
@@ -4333,42 +4329,42 @@ class vMSUserClass extends userClass{
 				SELECT	sts.name
 				FROM	status sts
 				WHERE	sts.company_id = emp.company_id
-				AND 	sts.name_value = emp.current_status 
+				AND 	sts.name_value = emp.current_status
 			)current_status,
 			(
-	 			SELECT 
-	          CASE WHEN mpcitems.purchase_uom = 'PT' THEN mpcitems.item_price / 3 WHEN mpcitems.purchase_uom = 'PS' THEN mpcitems.item_price / 6 WHEN mpcitems.purchase_uom = 'PY' THEN mpcitems.item_price / 12 ELSE mpcitems.item_price END 
-	        FROM 
-	          manpower_contracts mpc, 
-	          mpc_items mpcitems 
-	        WHERE 
-	          mpc.company_id = emp.company_id 
-	          AND mpc.company_id = mpcitems.company_id 
-	          AND mpc.id = mpcitems.transaction_id 
-	          AND mpc.id = empwo.work_order_id 
-	          AND mpcitems.id = empwo.work_order_detail_id 
-	          AND mpcitems.effective_date <= '".$startdate."' 
+	 			SELECT
+	          CASE WHEN mpcitems.purchase_uom = 'PT' THEN mpcitems.item_price / 3 WHEN mpcitems.purchase_uom = 'PS' THEN mpcitems.item_price / 6 WHEN mpcitems.purchase_uom = 'PY' THEN mpcitems.item_price / 12 ELSE mpcitems.item_price END
+	        FROM
+	          manpower_contracts mpc,
+	          mpc_items mpcitems
+	        WHERE
+	          mpc.company_id = emp.company_id
+	          AND mpc.company_id = mpcitems.company_id
+	          AND mpc.id = mpcitems.transaction_id
+	          AND mpc.id = empwo.work_order_id
+	          AND mpcitems.id = empwo.work_order_detail_id
+	          AND mpcitems.effective_date <= '".$startdate."'
 	          AND mpcitems.expire_date >= '".$enddate."'
 	 	       )budgeted_amount,
 			empptsumm.billable_amount,
 	        (
-			SELECT 
-	          CASE WHEN vrcitems.purchase_uom = 'PT' THEN vrcitems.item_price / 3 WHEN vrcitems.purchase_uom = 'PS' THEN vrcitems.item_price / 6 WHEN vrcitems.purchase_uom = 'PY' THEN vrcitems.item_price / 12 ELSE vrcitems.item_price END 
-	        FROM 
-	          vendor_rate_cards vrc, 
-	          vrc_items vrcitems 
-	        WHERE 
-	          vrc.company_id = emp.company_id 
-	          AND vrc.company_id = vrcitems.company_id 
-	          AND vrc.id = vrcitems.transaction_id 
-	          AND vrc.id = empwo.vrc_id 
-	          AND vrcitems.id = empwo.vrc_item_id 
+			SELECT
+	          CASE WHEN vrcitems.purchase_uom = 'PT' THEN vrcitems.item_price / 3 WHEN vrcitems.purchase_uom = 'PS' THEN vrcitems.item_price / 6 WHEN vrcitems.purchase_uom = 'PY' THEN vrcitems.item_price / 12 ELSE vrcitems.item_price END
+	        FROM
+	          vendor_rate_cards vrc,
+	          vrc_items vrcitems
+	        WHERE
+	          vrc.company_id = emp.company_id
+	          AND vrc.company_id = vrcitems.company_id
+	          AND vrc.id = vrcitems.transaction_id
+	          AND vrc.id = empwo.vrc_id
+	          AND vrcitems.id = empwo.vrc_item_id
 	          AND vrc.effective_from_date <= '".$startdate."'
-	          AND vrc.effective_to_date >= '".$enddate."'      
+	          AND vrc.effective_to_date >= '".$enddate."'
 	        )vrc_budgeted_amount,
 			vrc_billable_amount,
 			(empptsumm.nonbillable_hrs * empptsumm.rate_per_hrs) as nonbillable_amount,
-		
+
 	        (
 	            emp.total_experiance +(
 	                DATEDIFF(NOW(), emp.joining_date) / 365)
@@ -4384,12 +4380,12 @@ class vMSUserClass extends userClass{
 	                    DATEDIFF(NOW(), `joining_date`) / 365)
 	                ) BETWEEN min_exp AND max_exp THEN '' ELSE 'Experiance Missmatch'
 				END remark,
-	        au.reports_to,    
+	        au.reports_to,
 	 		empwo.work_order_id,
 			empwo.work_order_detail_id,
 			empwo.vrc_id,
 			empwo.vrc_item_id,
-	        mpc_mpcitems.mpc_item_price,	
+	        mpc_mpcitems.mpc_item_price,
 	        vrc_vrcitems.vrc_item_price
 			FROM	employees emp
 			LEFT JOIN (	SELECT	pt.company_id, pt.emp_id, pt.work_order, SUM(billable_hrs) billable_hrs, SUM(bill_amount) billable_amount, SUM(nonbillable_hrs) nonbillable_hrs, SUM(vrc_billable_amount) vrc_billable_amount, round(pt.rate_per_hrs) as rate_per_hrs
@@ -4399,40 +4395,40 @@ class vMSUserClass extends userClass{
 				)empptsumm on (	empptsumm.company_id = emp.company_id AND empptsumm.emp_id = emp.id )
 			JOIN application_users au on ( emp.company_id = au.company_id and emp.user_id = au.id)
 			LEFT JOIN  (	SELECT	el.company_id, el.employee_id, el.leave_from, el.leave_to,
-							DATEDIFF(LEAST(el.leave_to,last_day(el.leave_from)),el.leave_from)+ 
+							DATEDIFF(LEAST(el.leave_to,last_day(el.leave_from)),el.leave_from)+
 							DATEDIFF(el.leave_to,GREATEST(el.leave_from,DATE_SUB(LAST_DAY(el.leave_to),INTERVAL DAY(LAST_DAY(el.leave_to)) - 1 DAY))) leave_days
 					FROM	employee_leaves el
 					WHERE	((el.leave_from >='".$startdate."' AND el.leave_from <='".$enddate."') OR (el.leave_to>='".$startdate."' AND el.leave_to <='".$enddate."'))
 				)empleaves on ( empleaves.company_id = emp.company_id AND empleaves.employee_id = emp.id )
-			LEFT JOIN	(	SELECT 
-	          ewo.company_id, 
-	          ewo.emp_id, 
-	          ewo.work_order_id, 
-	          ewo.work_order_detail_id, 
-	          ewo.vrc_id, 
-	          ewo.vrc_item_id, 
-	          ewo.effective_from_date, 
-	          ewo.effective_to_date, 
-	          ewo.is_active 
-	        FROM 
+			LEFT JOIN	(	SELECT
+	          ewo.company_id,
+	          ewo.emp_id,
+	          ewo.work_order_id,
+	          ewo.work_order_detail_id,
+	          ewo.vrc_id,
+	          ewo.vrc_item_id,
+	          ewo.effective_from_date,
+	          ewo.effective_to_date,
+	          ewo.is_active
+	        FROM
 	          emp_work_order ewo
 	      ) empwo on (
-	        empwo.company_id = emp.company_id 
-	        AND empwo.emp_id = emp.id 
-	        AND empwo.is_active = 0 
-	        AND empwo.effective_from_date <= '".$startdate."' 
+	        empwo.company_id = emp.company_id
+	        AND empwo.emp_id = emp.id
+	        AND empwo.is_active = 0
+	        AND empwo.effective_from_date <= '".$startdate."'
 	        AND empwo.effective_to_date >='".$enddate."'
-								
-					 )  
+
+					 )
 			LEFT JOIN	(
-							SELECT mpc.company_id, mpc.id work_order_id, mpcitems.id work_order_detail_id, mpcitems.purchase_uom mpcitm_purchase_uom,		
-								CASE 
-									WHEN mpcitems.purchase_uom = 'PT' 
-										THEN mpcitems.item_price / 3 
-									WHEN mpcitems.purchase_uom = 'PS' 
-										THEN mpcitems.item_price / 6 
-									WHEN mpcitems.purchase_uom = 'PY' 
-										THEN mpcitems.item_price / 12 
+							SELECT mpc.company_id, mpc.id work_order_id, mpcitems.id work_order_detail_id, mpcitems.purchase_uom mpcitm_purchase_uom,
+								CASE
+									WHEN mpcitems.purchase_uom = 'PT'
+										THEN mpcitems.item_price / 3
+									WHEN mpcitems.purchase_uom = 'PS'
+										THEN mpcitems.item_price / 6
+									WHEN mpcitems.purchase_uom = 'PY'
+										THEN mpcitems.item_price / 12
 									ELSE mpcitems.item_price
 								END mpc_item_price
 							FROM	manpower_contracts mpc,	mpc_items mpcitems
@@ -4440,15 +4436,15 @@ class vMSUserClass extends userClass{
 							AND		mpc.id = mpcitems.transaction_id
 						)mpc_mpcitems on ( mpc_mpcitems.company_id = emp.company_id AND mpc_mpcitems.work_order_id = empwo.work_order_id AND  mpc_mpcitems.work_order_detail_id = empwo.work_order_detail_id)
 			LEFT JOIN	(
-							SELECT vrc.company_id, vrc.id vrc_id, vrcitems.id vrc_detail_id, vrcitems.purchase_uom vrcitm_purchase_uom, 
-	            					vrcitems.experience_base, vrcitems.max_exp, vrcitems.min_exp, 		
-								CASE 
-									WHEN vrcitems.purchase_uom = 'PT' 
-										THEN vrcitems.item_price / 3 
-									WHEN vrcitems.purchase_uom = 'PS' 
-										THEN vrcitems.item_price / 6 
-									WHEN vrcitems.purchase_uom = 'PY' 
-										THEN vrcitems.item_price / 12 
+							SELECT vrc.company_id, vrc.id vrc_id, vrcitems.id vrc_detail_id, vrcitems.purchase_uom vrcitm_purchase_uom,
+	            					vrcitems.experience_base, vrcitems.max_exp, vrcitems.min_exp,
+								CASE
+									WHEN vrcitems.purchase_uom = 'PT'
+										THEN vrcitems.item_price / 3
+									WHEN vrcitems.purchase_uom = 'PS'
+										THEN vrcitems.item_price / 6
+									WHEN vrcitems.purchase_uom = 'PY'
+										THEN vrcitems.item_price / 12
 									ELSE vrcitems.item_price
 								END vrc_item_price
 							FROM	vendor_rate_cards vrc,	vrc_items vrcitems
@@ -4457,7 +4453,7 @@ class vMSUserClass extends userClass{
 						)vrc_vrcitems on ( vrc_vrcitems.company_id = emp.company_id AND vrc_vrcitems.vrc_id = empwo.vrc_id AND  vrc_vrcitems.vrc_detail_id = empwo.vrc_item_id)
 	 		WHERE emp.vendor_id IS NOT NULL
 				AND	(
-						CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$enddate."') 
+						CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$enddate."')
 							THEN 1
 						WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0)
 							THEN 1
@@ -4465,10 +4461,10 @@ class vMSUserClass extends userClass{
 						END
 					)=1
 				 AND 	(
-				CASE	WHEN '3' <> '".$get['user_type']."'  
+				CASE	WHEN '3' <> '".$get['user_type']."'
 							THEN(
-									('1' = '".$get['admin_type']."') OR (au.reports_to = '".$get['user_id']."') 
-									OR(fn_employee_buddy_id(emp.company_id, emp.id, 'HR') ='".$get['emp_id']."') 	
+									('1' = '".$get['admin_type']."') OR (au.reports_to = '".$get['user_id']."')
+									OR(fn_employee_buddy_id(emp.company_id, emp.id, 'HR') ='".$get['emp_id']."')
 									OR(fn_employee_buddy_id(emp.company_id, emp.id, 'FIN') = '".$get['emp_id']."')
 								)
 						ELSE(
@@ -4578,466 +4574,466 @@ class vMSUserClass extends userClass{
                 $loccondition = "  AND (emp.location_id = ".$get['location_id_value'].")";
         }
 
-		$query= "SELECT 
+		$query= "SELECT
 		  customer_id as vendor_id,
-		  vendor_name, 
+		  vendor_name,
 		  employee_id,
-		  emp_code, 
+		  emp_code,
 		  display_name as employee_name,
-		  department_id, 
+		  department_id,
 		  location_id,
 		  vertical_id,
-		  department_name, 
+		  department_name,
 		  location_name,
 		  job_title_id,
 		  job_title,
 		  emp_billable,
-		  billable_hrs, 
-		  nonbillable_hrs, 
+		  billable_hrs,
+		  nonbillable_hrs,
 		  leave_days,
 		  experience_base,
 		  current_status,
-		  budgeted_amount, 
-		  billable_amount, 
+		  budgeted_amount,
+		  billable_amount,
 		  vrc_budgeted_amount,
-		  vrc_billable_amount, 
-		  ( nonbillable_hrs * rate_per_hrs ) as nonbillable_amount,  
-		  exp_joining_date, 
+		  vrc_billable_amount,
+		  ( nonbillable_hrs * rate_per_hrs ) as nonbillable_amount,
+		  exp_joining_date,
 		  min_exp,
 		  max_exp,
-		  mpc_uom, 
-		  vrc_uom, 
+		  mpc_uom,
+		  vrc_uom,
 		  joining_date,
 		  total_experiance,
-		  remark, 
-		  reports_to, 
-		  work_order_id, 
-		  work_order_detail_id, 
-		  vrc_id, 
-		  vrc_item_id, 
-		  mpc_item_price, 
+		  remark,
+		  reports_to,
+		  work_order_id,
+		  work_order_detail_id,
+		  vrc_id,
+		  vrc_item_id,
+		  mpc_item_price,
 		  vrc_item_price,
-		  verticle_name, 
-		  cost_center_name 
-		FROM 
+		  verticle_name,
+		  cost_center_name
+		FROM
 		  (
-			SELECT 
-			  * 
-			FROM 
+			SELECT
+			  *
+			FROM
 			  (
-				SELECT 
-				  'Q1' AS 'Q', 
-				  emp.id emp_id, 
-				  emp.company_id emp_company_id, 
+				SELECT
+				  'Q1' AS 'Q',
+				  emp.id emp_id,
+				  emp.company_id emp_company_id,
 				  (
-					SELECT 
-					  IFNULL(vend.company, vend.display_name) 
-					FROM 
-					  vendors vend 
-					WHERE 
-					  vend.company_id = vrc.company_id 
+					SELECT
+					  IFNULL(vend.company, vend.display_name)
+					FROM
+					  vendors vend
+					WHERE
+					  vend.company_id = vrc.company_id
 					  AND vend.id = vrc.customer_id
-				  ) vendor_name, 
-				  vrc.customer_id, 
-				  emp.emp_code, 
-				  emp.id employee_id, 
-				  emp.display_name, 
-				  emp.department_id, 
+				  ) vendor_name,
+				  vrc.customer_id,
+				  emp.emp_code,
+				  emp.id employee_id,
+				  emp.display_name,
+				  emp.department_id,
 				  (
-					SELECT 
-					  dept.department_name 
-					FROM 
-					  departments dept 
-					WHERE 
-					  dept.company_id = emp.company_id 
+					SELECT
+					  dept.department_name
+					FROM
+					  departments dept
+					WHERE
+					  dept.company_id = emp.company_id
 					  AND dept.id = emp.department_id
-				  ) department_name, 
-				  emp.location_id, 
+				  ) department_name,
+				  emp.location_id,
 				  (
-					SELECT 
-					  loc.location_name 
-					FROM 
-					  locations loc 
-					WHERE 
-					  loc.company_id = emp.company_id 
+					SELECT
+					  loc.location_name
+					FROM
+					  locations loc
+					WHERE
+					  loc.company_id = emp.company_id
 					  AND loc.id = emp.location_id
-				  ) location_name, 
-				  emp.vertical_id, 
+				  ) location_name,
+				  emp.vertical_id,
 				  (
-					SELECT 
-					  vc.vertical_name 
-					FROM 
-					  verticals vc 
-					WHERE 
-					  vc.company_id = emp.company_id 
+					SELECT
+					  vc.vertical_name
+					FROM
+					  verticals vc
+					WHERE
+					  vc.company_id = emp.company_id
 					  AND vc.id = emp.vertical_id
-				  ) verticle_name, 
+				  ) verticle_name,
 				  (
-					SELECT 
-					  cc.cost_center_name 
-					FROM 
-					  cost_centers cc 
-					WHERE 
-					  cc.company_id = au.company_id 
+					SELECT
+					  cc.cost_center_name
+					FROM
+					  cost_centers cc
+					WHERE
+					  cc.company_id = au.company_id
 					  AND cc.id = au.cost_center
-				  ) cost_center_name, 
-				  emp.job_title_id AS job_title_id, 
+				  ) cost_center_name,
+				  emp.job_title_id AS job_title_id,
 				  (
-					SELECT 
-					  jt.job_title 
-					FROM 
-					  job_titles jt 
-					WHERE 
-					  jt.company_id = emp.company_id 
+					SELECT
+					  jt.job_title
+					FROM
+					  job_titles jt
+					WHERE
+					  jt.company_id = emp.company_id
 					  AND jt.id = emp.job_title_id
-				  ) job_title, 
-				  emp.billable AS emp_billable, 
+				  ) job_title,
+				  emp.billable AS emp_billable,
 				  (
-					SELECT 
+					SELECT
 					  DATEDIFF(
 						LEAST(
-						  el.leave_to, 
+						  el.leave_to,
 						  last_day(el.leave_from)
-						), 
+						),
 						el.leave_from
 					  ) + DATEDIFF(
-						el.leave_to, 
+						el.leave_to,
 						GREATEST(
-						  el.leave_from, 
+						  el.leave_from,
 						  DATE_SUB(
-							LAST_DAY(el.leave_to), 
+							LAST_DAY(el.leave_to),
 							INTERVAL DAY(
 							  LAST_DAY(el.leave_to)
 							) -1 DAY
 						  )
 						)
-					  ) leave_days 
-					FROM 
-					  employee_leaves el 
-					WHERE 
-					  emp.company_id = el.company_id 
-					  AND emp.id = el.employee_id 
+					  ) leave_days
+					FROM
+					  employee_leaves el
+					WHERE
+					  emp.company_id = el.company_id
+					  AND emp.id = el.employee_id
 					  AND (
 						(
-						  el.leave_FROM >= '".$startdate."' 
+						  el.leave_FROM >= '".$startdate."'
 						  AND el.leave_FROM <= '".$enddate."'
-						) 
+						)
 						OR (
-						  el.leave_to >= '".$startdate."' 
+						  el.leave_to >= '".$startdate."'
 						  AND el.leave_to <= '".$enddate."'
 						)
 					  )
-				  ) leave_days, 
-				  vrcitems.experience_base, 
+				  ) leave_days,
+				  vrcitems.experience_base,
 				  (
-					SELECT 
-					  sts.name 
-					FROM 
-					  status sts 
-					WHERE 
-					  sts.company_id = emp.company_id 
+					SELECT
+					  sts.name
+					FROM
+					  status sts
+					WHERE
+					  sts.company_id = emp.company_id
 					  AND sts.name_value = emp.current_status
-				  ) current_status, 
-				  CASE WHEN mpcitems.purchase_uom = 'PT' THEN mpcitems.item_price / 3 WHEN mpcitems.purchase_uom = 'PS' THEN mpcitems.item_price / 6 WHEN mpcitems.purchase_uom = 'PY' THEN mpcitems.item_price / 12 ELSE mpcitems.item_price END budgeted_amount, 
-				  CASE WHEN vrcitems.purchase_uom = 'PT' THEN vrcitems.item_price / 3 WHEN vrcitems.purchase_uom = 'PS' THEN vrcitems.item_price / 6 WHEN vrcitems.purchase_uom = 'PY' THEN vrcitems.item_price / 12 ELSE vrcitems.item_price END vrc_budgeted_amount, 
+				  ) current_status,
+				  CASE WHEN mpcitems.purchase_uom = 'PT' THEN mpcitems.item_price / 3 WHEN mpcitems.purchase_uom = 'PS' THEN mpcitems.item_price / 6 WHEN mpcitems.purchase_uom = 'PY' THEN mpcitems.item_price / 12 ELSE mpcitems.item_price END budgeted_amount,
+				  CASE WHEN vrcitems.purchase_uom = 'PT' THEN vrcitems.item_price / 3 WHEN vrcitems.purchase_uom = 'PS' THEN vrcitems.item_price / 6 WHEN vrcitems.purchase_uom = 'PY' THEN vrcitems.item_price / 12 ELSE vrcitems.item_price END vrc_budgeted_amount,
 				  (
 					emp.total_experiance + (
 					  DATEDIFF(NOW(), emp.joining_date) / 365
 					)
-				  ) exp_joining_date, 
-				  vrcitems.min_exp, 
-				  vrcitems.max_exp, 
-				  mpcitems.purchase_uom AS mpc_uom, 
-				  vrcitems.purchase_uom AS vrc_uom, 
-				  emp.joining_date, 
-				  COALESCE(emp.total_experiance, '0') AS total_experiance, 
+				  ) exp_joining_date,
+				  vrcitems.min_exp,
+				  vrcitems.max_exp,
+				  mpcitems.purchase_uom AS mpc_uom,
+				  vrcitems.purchase_uom AS vrc_uom,
+				  emp.joining_date,
+				  COALESCE(emp.total_experiance, '0') AS total_experiance,
 				  CASE WHEN (
 					total_experiance + (
 					  DATEDIFF(NOW(), `joining_date`) / 365
 					)
-				  ) BETWEEN vrcitems.min_exp 
-				  AND vrcitems.max_exp THEN '' ELSE 'Experience Mismatch' END remark, 
-				  au.reports_to, 
-				  ewo.work_order_detail_id, 
-				  ewo.vrc_id, 
-				  ewo.vrc_item_id, 
-				  ewo.work_order_id, 
-				  mpcitems.item_price mpc_item_price, 
-				  vrcitems.item_price vrc_item_price 
-				FROM 
-				  employees emp 
-				  JOIN application_users au ON emp.company_id = au.company_id 
-				  AND emp.user_id = au.id 
-				  JOIN vendor_rate_cards vrc ON emp.company_id = vrc.company_id 
-				  JOIN vrc_items vrcitems ON vrc.company_id = vrcitems.company_id 
-				  AND vrc.id = vrcitems.transaction_id 
-				  JOIN manpower_contracts mpc ON emp.company_id = mpc.company_id 
-				  JOIN mpc_items mpcitems ON mpc.company_id = mpcitems.company_id 
-				  AND mpc.id = mpcitems.transaction_id 
-				  JOIN emp_work_order ewo ON vrc.id = ewo.vrc_id 
-				  AND vrcitems.id = ewo.vrc_item_id 
-				  AND emp.company_id = ewo.company_id 
-				  AND emp.id = ewo.emp_id 
-				  AND mpc.id = ewo.work_order_id 
-				  AND mpcitems.id = ewo.work_order_detail_id 
-				WHERE 
-				  ewo.effective_from_date <= '".$enddate."' 
-				  AND ewo.effective_to_date >= '".$startdate."' 
-				  AND emp.employee_type = 2 
+				  ) BETWEEN vrcitems.min_exp
+				  AND vrcitems.max_exp THEN '' ELSE 'Experience Mismatch' END remark,
+				  au.reports_to,
+				  ewo.work_order_detail_id,
+				  ewo.vrc_id,
+				  ewo.vrc_item_id,
+				  ewo.work_order_id,
+				  mpcitems.item_price mpc_item_price,
+				  vrcitems.item_price vrc_item_price
+				FROM
+				  employees emp
+				  JOIN application_users au ON emp.company_id = au.company_id
+				  AND emp.user_id = au.id
+				  JOIN vendor_rate_cards vrc ON emp.company_id = vrc.company_id
+				  JOIN vrc_items vrcitems ON vrc.company_id = vrcitems.company_id
+				  AND vrc.id = vrcitems.transaction_id
+				  JOIN manpower_contracts mpc ON emp.company_id = mpc.company_id
+				  JOIN mpc_items mpcitems ON mpc.company_id = mpcitems.company_id
+				  AND mpc.id = mpcitems.transaction_id
+				  JOIN emp_work_order ewo ON vrc.id = ewo.vrc_id
+				  AND vrcitems.id = ewo.vrc_item_id
+				  AND emp.company_id = ewo.company_id
+				  AND emp.id = ewo.emp_id
+				  AND mpc.id = ewo.work_order_id
+				  AND mpcitems.id = ewo.work_order_detail_id
+				WHERE
+				  ewo.effective_from_date <= '".$enddate."'
+				  AND ewo.effective_to_date >= '".$startdate."'
+				  AND emp.employee_type = 2
 				  AND emp.billable != 2
 				  AND (
 					CASE WHEN (
-					  emp.date_of_leaving IS NOT NULL 
+					  emp.date_of_leaving IS NOT NULL
 					  AND emp.date_of_leaving >= '".$startdate."'
 					) THEN 1 WHEN (
-					  emp.date_of_leaving IS NULL 
+					  emp.date_of_leaving IS NULL
 					  AND emp.is_active = 0
 					) THEN 1 ELSE 2 END
-				  ) = 1 
+				  ) = 1
 				  AND (
 					CASE WHEN '3' <> '1' THEN (
-					  ('1' = '1') 
-					  OR (au.reports_to = '".$user_id."') 
-					  OR (emp.hr_buddy = '".$emp_id."') 
-					  OR (emp.finance_buddy = '".$emp_id."') 
-					  OR (emp.admin_buddy = '".$emp_id."') 
-					  OR (emp.project_buddy = '".$emp_id."') 
+					  ('1' = '1')
+					  OR (au.reports_to = '".$user_id."')
+					  OR (emp.hr_buddy = '".$emp_id."')
+					  OR (emp.finance_buddy = '".$emp_id."')
+					  OR (emp.admin_buddy = '".$emp_id."')
+					  OR (emp.project_buddy = '".$emp_id."')
 					  OR (emp.loc_buddy = '".$emp_id."')
 					) ELSE (
 					  emp.vendor_id = (
-						SELECT 
-						  id 
-						FROM 
-						  vendors ven2 
-						WHERE 
-						  ven2.email = '".$get['user_email']."'
-					  )
-					) END
-				  )
-			  ) alltables 
-			  JOIN (
-				SELECT 
-				  pt.company_id AS pt_company_id, 
-				  pt.emp_id AS pt_emp_id, 
-				  pt.work_order, 
-				  SUM(billable_hrs) billable_hrs, 
-				  SUM(bill_amount) billable_amount, 
-				  SUM(nonbillable_hrs) nonbillable_hrs, 
-				  SUM(vrc_billable_amount) vrc_billable_amount, 
-				  ROUND(pt.rate_per_hrs) AS rate_per_hrs 
-				FROM 
-				  project_timesheets pt 
-				WHERE 
-				  pt.is_active = 0 
-				  AND pt.current_status > 0 
-				  AND pt.timesheet_date >=  '".$startdate."' 
-				  AND pt.timesheet_date <= '".$enddate."' 
-				GROUP BY 
-				  pt.company_id, 
-				  pt.emp_id, 
-				  pt.work_order , ROUND(pt.rate_per_hrs)
-				  ) empptsumm ON empptsumm.pt_company_id = alltables.emp_company_id 
-			  AND empptsumm.pt_emp_id = alltables.emp_id 
-			  AND empptsumm.work_order = alltables.work_order_id 
-			UNION 
-			SELECT 
-			  distinct * 
-			FROM 
-			  (
-				SELECT 
-				  'Q2' AS 'Q2', 
-				  emp.id emp_id, 
-				  emp.company_id emp_company_id, 
-				  (
-					SELECT 
-					  IFNULL(vend.company, vend.display_name) 
-					FROM 
-					  vendors vend 
-					WHERE 
-					  vend.company_id = emp.company_id 
-					  AND vend.id = emp.vendor_id
-				  ) vendor_name, 
-				  emp.vendor_id, 
-				  emp.emp_code, 
-				  emp.id employee_id, 
-				  emp.display_name, 
-				  emp.department_id, 
-				  (
-					SELECT 
-					  dept.department_name 
-					FROM 
-					  departments dept 
-					WHERE 
-					  dept.company_id = emp.company_id 
-					  AND dept.id = emp.department_id
-				  ) department_name, 
-				  emp.location_id, 
-				  (
-					SELECT 
-					  loc.location_name 
-					FROM 
-					  locations loc 
-					WHERE 
-					  loc.company_id = emp.company_id 
-					  AND loc.id = emp.location_id
-				  ) location_name, 
-				  emp.vertical_id, 
-				  (
-					SELECT 
-					  vc.vertical_name 
-					FROM 
-					  verticals vc 
-					WHERE 
-					  vc.company_id = emp.company_id 
-					  AND vc.id = emp.vertical_id
-				  ) verticle_name, 
-				  (
-					SELECT 
-					  cc.cost_center_name 
-					FROM 
-					  cost_centers cc 
-					WHERE 
-					  cc.company_id = au.company_id 
-					  AND cc.id = au.cost_center
-				  ) cost_center_name, 
-				  emp.job_title_id AS job_title_id, 
-				  (
-					SELECT 
-					  jt.job_title 
-					FROM 
-					  job_titles jt 
-					WHERE 
-					  jt.company_id = emp.company_id 
-					  AND jt.id = emp.job_title_id
-				  ) job_title, 
-				  emp.billable AS emp_billable, 
-				  (
-					SELECT 
-					  DATEDIFF(
-						LEAST(
-						  el.leave_to, 
-						  last_day(el.leave_from)
-						), 
-						el.leave_from
-					  ) + DATEDIFF(
-						el.leave_to, 
-						GREATEST(
-						  el.leave_from, 
-						  DATE_SUB(
-							LAST_DAY(el.leave_to), 
-							INTERVAL DAY(
-							  LAST_DAY(el.leave_to)
-							) -1 DAY
-						  )
-						)
-					  ) leave_days 
-					FROM 
-					  employee_leaves el 
-					WHERE 
-					  emp.company_id = el.company_id 
-					  AND emp.id = el.employee_id 
-					  AND (
-						(
-						  el.leave_FROM >=  '".$startdate."' 
-						  AND el.leave_FROM <= '".$enddate."'
-						) 
-						OR (
-						  el.leave_to >= '".$startdate."' 
-						  AND el.leave_to <= '".$enddate."'
-						)
-					  )
-				  ) leave_days, 
-				  0 AS experience_base, 
-				  (
-					SELECT 
-					  sts.name 
-					FROM 
-					  status sts 
-					WHERE 
-					  sts.company_id = emp.company_id 
-					  AND sts.name_value = emp.current_status
-				  ) current_status, 
-				  0 AS budgeted_amount, 
-				  0 AS vrc_budgeted_amount, 
-				  (
-					emp.total_experiance + (
-					  DATEDIFF(NOW(), emp.joining_date) / 365
-					)
-				  ) exp_joining_date, 
-				  0 AS min_exp,				 
-				  0 AS max_exp,
-				  '' AS mpc_uom,
-				  ' ' AS vrc_uom,
-				  emp.joining_date, 
-				  COALESCE(emp.total_experiance, '0') AS total_experiance, 
-				  ' ' remark, 
-				  au.reports_to, 
-				  ' ' AS work_order_detail_id, 
-				  ' ' AS vrc_id, 
-				  ' ' AS vrc_item_id,
-				  ' ' AS work_order_id,
-				  ' ' AS mpc_item_price,
-				  ' ' AS vrc_item_price,
-				  emp.company_id, 
-				  emp.id, 
-				  0 AS pt_work_order, 
-				  0 AS billable_hrs, 
-				  0 AS billable_amount, 
-				  0 AS nonbillable_hrs, 
-				  0 AS vrc_billable_amount, 
-				  0 AS rate_per_hrs 
-				FROM 
-				  employees emp 
-				  JOIN application_users au ON emp.company_id = au.company_id 
-				  AND emp.user_id = au.id 
-				  AND NOT EXISTS (
-					SELECT 
-					  'X' 
-					FROM 
-					  project_timesheets pt 
-					WHERE 
-					  pt.company_id = emp.company_id 
-					  AND pt.emp_id = emp.id 
-					  AND pt.is_active = 0 
-					  AND pt.current_status > 0 
-					  AND pt.timesheet_date >= '".$startdate."' 
-					  AND pt.timesheet_date <= '".$enddate."' 
-					LIMIT 
-					  1
-				  ) AND emp.employee_type = 2 
-				  AND emp.billable != 2
-				  AND (
-					CASE WHEN (
-					  emp.date_of_leaving IS NOT NULL 
-					  AND emp.date_of_leaving >= '".$startdate."'
-					) THEN 1 WHEN (
-					  emp.date_of_leaving IS NULL 
-					  AND emp.is_active = 0
-					) THEN 1 ELSE 2 END
-				  ) = 1 
-				  AND (
-					CASE WHEN '3' <> '1' THEN (
-					  ('1' = '1') 
-					  OR (au.reports_to = '".$user_id."') 
-					  OR (emp.hr_buddy = '".$emp_id."') 
-					  OR (emp.finance_buddy = '".$emp_id."') 
-					  OR (emp.admin_buddy = '".$emp_id."') 
-					  OR (emp.project_buddy = '".$emp_id."') 
-					  OR (emp.loc_buddy = '".$emp_id."')
-					) ELSE (
-					  emp.vendor_id = (
-						SELECT 
-						  id 
-						FROM 
-						  vendors ven2 
-						WHERE 
+						SELECT
+						  id
+						FROM
+						  vendors ven2
+						WHERE
 						  ven2.email = '".$get['user_email']."'
 					  )
 					) END
 				  )
 			  ) alltables
-		  ) a 
-		ORDER BY 
+			  JOIN (
+				SELECT
+				  pt.company_id AS pt_company_id,
+				  pt.emp_id AS pt_emp_id,
+				  pt.work_order,
+				  SUM(billable_hrs) billable_hrs,
+				  SUM(bill_amount) billable_amount,
+				  SUM(nonbillable_hrs) nonbillable_hrs,
+				  SUM(vrc_billable_amount) vrc_billable_amount,
+				  ROUND(pt.rate_per_hrs) AS rate_per_hrs
+				FROM
+				  project_timesheets pt
+				WHERE
+				  pt.is_active = 0
+				  AND pt.current_status > 0
+				  AND pt.timesheet_date >=  '".$startdate."'
+				  AND pt.timesheet_date <= '".$enddate."'
+				GROUP BY
+				  pt.company_id,
+				  pt.emp_id,
+				  pt.work_order , ROUND(pt.rate_per_hrs)
+				  ) empptsumm ON empptsumm.pt_company_id = alltables.emp_company_id
+			  AND empptsumm.pt_emp_id = alltables.emp_id
+			  AND empptsumm.work_order = alltables.work_order_id
+			UNION
+			SELECT
+			  distinct *
+			FROM
+			  (
+				SELECT
+				  'Q2' AS 'Q2',
+				  emp.id emp_id,
+				  emp.company_id emp_company_id,
+				  (
+					SELECT
+					  IFNULL(vend.company, vend.display_name)
+					FROM
+					  vendors vend
+					WHERE
+					  vend.company_id = emp.company_id
+					  AND vend.id = emp.vendor_id
+				  ) vendor_name,
+				  emp.vendor_id,
+				  emp.emp_code,
+				  emp.id employee_id,
+				  emp.display_name,
+				  emp.department_id,
+				  (
+					SELECT
+					  dept.department_name
+					FROM
+					  departments dept
+					WHERE
+					  dept.company_id = emp.company_id
+					  AND dept.id = emp.department_id
+				  ) department_name,
+				  emp.location_id,
+				  (
+					SELECT
+					  loc.location_name
+					FROM
+					  locations loc
+					WHERE
+					  loc.company_id = emp.company_id
+					  AND loc.id = emp.location_id
+				  ) location_name,
+				  emp.vertical_id,
+				  (
+					SELECT
+					  vc.vertical_name
+					FROM
+					  verticals vc
+					WHERE
+					  vc.company_id = emp.company_id
+					  AND vc.id = emp.vertical_id
+				  ) verticle_name,
+				  (
+					SELECT
+					  cc.cost_center_name
+					FROM
+					  cost_centers cc
+					WHERE
+					  cc.company_id = au.company_id
+					  AND cc.id = au.cost_center
+				  ) cost_center_name,
+				  emp.job_title_id AS job_title_id,
+				  (
+					SELECT
+					  jt.job_title
+					FROM
+					  job_titles jt
+					WHERE
+					  jt.company_id = emp.company_id
+					  AND jt.id = emp.job_title_id
+				  ) job_title,
+				  emp.billable AS emp_billable,
+				  (
+					SELECT
+					  DATEDIFF(
+						LEAST(
+						  el.leave_to,
+						  last_day(el.leave_from)
+						),
+						el.leave_from
+					  ) + DATEDIFF(
+						el.leave_to,
+						GREATEST(
+						  el.leave_from,
+						  DATE_SUB(
+							LAST_DAY(el.leave_to),
+							INTERVAL DAY(
+							  LAST_DAY(el.leave_to)
+							) -1 DAY
+						  )
+						)
+					  ) leave_days
+					FROM
+					  employee_leaves el
+					WHERE
+					  emp.company_id = el.company_id
+					  AND emp.id = el.employee_id
+					  AND (
+						(
+						  el.leave_FROM >=  '".$startdate."'
+						  AND el.leave_FROM <= '".$enddate."'
+						)
+						OR (
+						  el.leave_to >= '".$startdate."'
+						  AND el.leave_to <= '".$enddate."'
+						)
+					  )
+				  ) leave_days,
+				  0 AS experience_base,
+				  (
+					SELECT
+					  sts.name
+					FROM
+					  status sts
+					WHERE
+					  sts.company_id = emp.company_id
+					  AND sts.name_value = emp.current_status
+				  ) current_status,
+				  0 AS budgeted_amount,
+				  0 AS vrc_budgeted_amount,
+				  (
+					emp.total_experiance + (
+					  DATEDIFF(NOW(), emp.joining_date) / 365
+					)
+				  ) exp_joining_date,
+				  0 AS min_exp,
+				  0 AS max_exp,
+				  '' AS mpc_uom,
+				  ' ' AS vrc_uom,
+				  emp.joining_date,
+				  COALESCE(emp.total_experiance, '0') AS total_experiance,
+				  ' ' remark,
+				  au.reports_to,
+				  ' ' AS work_order_detail_id,
+				  ' ' AS vrc_id,
+				  ' ' AS vrc_item_id,
+				  ' ' AS work_order_id,
+				  ' ' AS mpc_item_price,
+				  ' ' AS vrc_item_price,
+				  emp.company_id,
+				  emp.id,
+				  0 AS pt_work_order,
+				  0 AS billable_hrs,
+				  0 AS billable_amount,
+				  0 AS nonbillable_hrs,
+				  0 AS vrc_billable_amount,
+				  0 AS rate_per_hrs
+				FROM
+				  employees emp
+				  JOIN application_users au ON emp.company_id = au.company_id
+				  AND emp.user_id = au.id
+				  AND NOT EXISTS (
+					SELECT
+					  'X'
+					FROM
+					  project_timesheets pt
+					WHERE
+					  pt.company_id = emp.company_id
+					  AND pt.emp_id = emp.id
+					  AND pt.is_active = 0
+					  AND pt.current_status > 0
+					  AND pt.timesheet_date >= '".$startdate."'
+					  AND pt.timesheet_date <= '".$enddate."'
+					LIMIT
+					  1
+				  ) AND emp.employee_type = 2
+				  AND emp.billable != 2
+				  AND (
+					CASE WHEN (
+					  emp.date_of_leaving IS NOT NULL
+					  AND emp.date_of_leaving >= '".$startdate."'
+					) THEN 1 WHEN (
+					  emp.date_of_leaving IS NULL
+					  AND emp.is_active = 0
+					) THEN 1 ELSE 2 END
+				  ) = 1
+				  AND (
+					CASE WHEN '3' <> '1' THEN (
+					  ('1' = '1')
+					  OR (au.reports_to = '".$user_id."')
+					  OR (emp.hr_buddy = '".$emp_id."')
+					  OR (emp.finance_buddy = '".$emp_id."')
+					  OR (emp.admin_buddy = '".$emp_id."')
+					  OR (emp.project_buddy = '".$emp_id."')
+					  OR (emp.loc_buddy = '".$emp_id."')
+					) ELSE (
+					  emp.vendor_id = (
+						SELECT
+						  id
+						FROM
+						  vendors ven2
+						WHERE
+						  ven2.email = '".$get['user_email']."'
+					  )
+					) END
+				  )
+			  ) alltables
+		  ) a
+		ORDER BY
 		  1,3";
 	        return $callConfig->getAllRows($query);
 	}
@@ -5466,10 +5462,10 @@ class vMSUserClass extends userClass{
 	}
 	public function togetempvmsdetails($get){
 		global $callConfig;
-		$query = "SELECT 	
-		emp.id as employee_id, 
+		$query = "SELECT
+		emp.id as employee_id,
         emp.emp_code,
-	    emp.display_name as employee_name, 
+	    emp.display_name as employee_name,
         emp.joining_date,
         emp.email_id,
 		emp.vendor_id,
@@ -5478,30 +5474,30 @@ class vMSUserClass extends userClass{
 	            FROM	vendors vend
 	            WHERE	vend.company_id = emp.company_id
 	            AND		vend.id = emp.vendor_id
-	        ), 'Unassigned') vendor_name, 
-			
+	        ), 'Unassigned') vendor_name,
+
 			emp.department_id,
             (
-	            SELECT	dept.department_name	
+	            SELECT	dept.department_name
 	            FROM 	departments dept
 	            WHERE	dept.company_id = emp.company_id
 	            AND		dept.id = emp.department_id
 	        )department_name,
 			emp.location_id,
             (
-	            SELECT	loc.location_name	
+	            SELECT	loc.location_name
 	            FROM 	locations loc
 	            WHERE	loc.company_id = emp.company_id
 	            AND		loc.id = emp.location_id
 	        )location_name,
 			emp.vertical_id,
 	         (
-	            SELECT	vr.vertical_name	
+	            SELECT	vr.vertical_name
 	            FROM 	verticals vr
 	            WHERE	vr.company_id = emp.company_id
 	            AND		vr.id = emp.vertical_id
 	        )vertical_name,
-			
+
 	        emp.job_title_id as job_title_id,
 	        (
 	            SELECT	jt.job_title
@@ -5509,7 +5505,7 @@ class vMSUserClass extends userClass{
 	            WHERE	jt.company_id = emp.company_id
 	            AND		jt.id = emp.job_title_id
 	        ) job_title,
-            
+
             emp.approval_manager_id,
             (
 	            SELECT	au.display_name
@@ -5544,27 +5540,27 @@ class vMSUserClass extends userClass{
 	            FROM 	employees em
 	            WHERE	em.company_id = emp.company_id
 	            AND		em.id = emp.admin_buddy
-	        ) admin_buddy           
-		FROM employees emp 
-		WHERE 
+	        ) admin_buddy
+		FROM employees emp
+		WHERE
 			emp.id = ".$get['empid'];
 		$return['emp_detail_query'] = $query;
 		$return['emp_detail'] = $callConfig->getRow($query);
-		$wquery = "SELECT 	
-		ewo.id as work_order_id, 
+		$wquery = "SELECT
+		ewo.id as work_order_id,
         ewo.emp_id employee_id,
-	    ewo.effective_from_date, 
+	    ewo.effective_from_date,
         ewo.effective_to_date,
        	ewo.work_order_id mpc_id,
             (
-	            SELECT	mc.transaction_number	
+	            SELECT	mc.transaction_number
 	            FROM 	manpower_contracts mc
 	            WHERE	mc.company_id = ewo.company_id
 	            AND		mc.id = ewo.work_order_id
 	        ) mpc_transaction_number,
 		ewo.vrc_id,
             (
-	            SELECT	vrc.transaction_number	
+	            SELECT	vrc.transaction_number
 	            FROM 	vendor_rate_cards vrc
 	            WHERE	vrc.company_id = ewo.company_id
 	            AND		vrc.id = ewo.vrc_id
@@ -5576,16 +5572,16 @@ class vMSUserClass extends userClass{
 	            WHERE	mpci.company_id = ewo.company_id
 	            AND		mpci.id = ewo.work_order_detail_id
 	        ) mpc_amount,
-			
+
 	       ewo.vrc_item_id ,
 	         (
-	            SELECT	vrci.item_price	
+	            SELECT	vrci.item_price
 	            FROM 	vrc_items vrci
 	            WHERE	vrci.company_id = ewo.company_id
 	            AND		vrci.id = ewo.vrc_item_id
 	        ) vrc_amount
-		FROM emp_work_order ewo 
-		WHERE 
+		FROM emp_work_order ewo
+		WHERE
 		ewo.emp_id = ".$get['empid']."
 	    AND is_active =0
 	    ORDER BY effective_from_date DESC";
@@ -5838,42 +5834,42 @@ class vMSUserClass extends userClass{
 		IFNULL(job_title, 'Not Defined') job_title,
 		customer_id vendor_id,
 		IFNULL(vendor_name, 'Not Defined') vendor_name,
-        min_exp, 
-        max_exp, 
+        min_exp,
+        max_exp,
         company_id,
         transaction_id,
-        item_price	
+        item_price
 		FROM (
     	SELECT  vrcitm.item_id,
                 (
-                    SELECT  jt.job_title 
-                    FROM    job_titles jt 
+                    SELECT  jt.job_title
+                    FROM    job_titles jt
                     WHERE   jt.company_id = vrc.company_id
                     AND     jt.id = vrcitm.item_id
                 ) job_title,
                 (
-                SELECT  vend.company 
-                FROM    vendors vend 
+                SELECT  vend.company
+                FROM    vendors vend
                 WHERE   vend.company_id = vrc.company_id
                 AND     vend.id = vrc.customer_id
             	) vendor_name,
     			vrc.customer_id,
-            	vrcitm.min_exp, 
-                vrcitm.max_exp, 
-                vrcitm.item_price, 
+            	vrcitm.min_exp,
+                vrcitm.max_exp,
+                vrcitm.item_price,
                 vrcitm.company_id,
                 vrcitm.transaction_id
 		    FROM    vendor_rate_cards vrc, `vrc_items` vrcitm
 		    WHERE   vrc.company_id = vrcitm.company_id
 		    AND 	vrc.company_id = ".$get['company_id']."
 		    AND     vrc. id = vrcitm.transaction_id
-		    AND     vrcitm.min_exp IS NOT NULL 
+		    AND     vrcitm.min_exp IS NOT NULL
 		    AND     vrc.is_active = 0
 		    AND     vrcitm.is_active = 0
 		    AND     vrc.effective_from_date >= '".$get['fromdate']."'
 		    AND     vrc.effective_to_date <=  '".$get['todate']."'
-		   
-		)a 
+
+		)a
 		WHERE
 			company_id = '".$get['company_id']."' ".$whr;
 	 	$return['data_query'] = $data_query;
@@ -5930,17 +5926,17 @@ class vMSUserClass extends userClass{
      	$atquery="SELECT *  FROM attendance_settings WHERE company_id='".$get['company_id']."' AND is_active=0 LIMIT 0,1";
     	$attendance  = $callConfig->getRow($atquery);
 
-    	$workordersql = "SELECT ewo.id,mpc.transaction_number  
-		FROM `emp_work_order` ewo, manpower_contracts mpc  
+    	$workordersql = "SELECT ewo.id,mpc.transaction_number
+		FROM `emp_work_order` ewo, manpower_contracts mpc
 		WHERE   ewo.company_id='".$get['company_id']."'
 		AND ewo.company_id = mpc.company_id
 		AND ewo.work_order_id = mpc.id
 		AND ewo.emp_id='".$get['empid']."'
-		AND ewo.work_order_detail_id !='' 
-		AND ewo.work_order_id !='' 
-		AND ewo.vrc_id !='' 
+		AND ewo.work_order_detail_id !=''
+		AND ewo.work_order_id !=''
+		AND ewo.vrc_id !=''
 		AND ewo.vrc_item_id !=''
-		AND ewo.is_active = 0 
+		AND ewo.is_active = 0
 		AND ewo.effective_from_date <= '".$valid_from."'
 		AND ewo.effective_to_date >= '".$valid_to."'";
     	$details['workorder_query'] = $workordersql;
@@ -6294,13 +6290,13 @@ class vMSUserClass extends userClass{
 		$condition = "
 		(
 	    CASE WHEN (
-	      emp.date_of_leaving IS NOT NULL 
+	      emp.date_of_leaving IS NOT NULL
 	      AND emp.date_of_leaving >= '".$startdate."'
 	    ) THEN 1 WHEN (
-	      emp.date_of_leaving IS NULL 
+	      emp.date_of_leaving IS NULL
 	      AND emp.is_active = 0
 	    ) THEN 1 ELSE 2 END
-	  )= 1 
+	  )= 1
 		AND (
 	        CASE WHEN '3' <> '".$data['user_type']."'
 	            THEN(
@@ -6473,8 +6469,8 @@ public function  vendorstaqAdminDashboard($get){
 	AND   emp.id = pt.emp_id
 	AND   emp.joining_date <= '".$endtdate."'
 	AND   emp.company_id = '1'
-	AND	  pt.timesheet_date >= '".$startdate."'    
-	AND	  pt.timesheet_date <= '".$endtdate."'    
+	AND	  pt.timesheet_date >= '".$startdate."'
+	AND	  pt.timesheet_date <= '".$endtdate."'
 	AND   emp.company_id = au.company_id
 	AND   emp.user_id = au.id
 	AND	  emp.employee_type = 2
@@ -6483,7 +6479,7 @@ public function  vendorstaqAdminDashboard($get){
 	AND (
 		CASE WHEN '3' <> '".$get['user_type']."'
 			THEN(
-				
+
 	('1' = '".$get['admin_type']."') OR (au.reports_to = '".$application_user_id."') OR (emp.hr_buddy = '".$employee_id."') OR (emp.finance_buddy  = '".$employee_id."') OR (emp.admin_buddy = '".$employee_id."') OR (emp.project_buddy = '".$employee_id."') OR (emp.loc_buddy = '".$employee_id."')
 	  ) ELSE
 		  ( emp.vendor_id = (
@@ -6537,8 +6533,7 @@ public function  vendorstaqAdminDashboard($get){
 	$thismongthjoin[$i->format('Y-m')] = $join;
 	$thismonthresigning[$i->format('Y-m')]  = $resign;
 	}
-	$returnarry = array("mainemp"=>$postarray,'joining'=>$thismongthjoin,'resign'=>$thismonthresigning,'sql'=>$query);
-	return $returnarry;
+	return array("mainemp"=>$postarray,'joining'=>$thismongthjoin,'resign'=>$thismonthresigning,'sql'=>$query);
 }
 
 public function vendorlistforadminmanag($get){
@@ -6706,10 +6701,10 @@ public function  vmssingleemployeedashoard_new($get){
 		global $callConfig;
 		$query = "SELECT id, emp_code, display_name, email_id, joining_date, date_of_leaving, image FROM employees WHERE company_id = ".$get['company_id']." AND user_id IN (SELECT id FROM application_users WHERE company_id = ".$get['company_id']." AND approval_manager = ".$get['user_id']." AND is_active =0) AND joining_date >= ".$get['endingdate']." AND  (
 			 CASE WHEN (
-			 	date_of_leaving IS NOT NULL 
+			 	date_of_leaving IS NOT NULL
 			 AND date_of_leaving <= '".$get['endingdate']."'
 			 ) THEN 1 WHEN (
-			  date_of_leaving IS NULL 
+			  date_of_leaving IS NULL
 			 AND  is_active = 0
 			 ) THEN 1 ELSE 2 END
 			 )= 1 AND is_active =0";
@@ -6890,43 +6885,43 @@ public function  vmssingleemployeedashoard_new($get){
 		}
 
 		$query = "
-			SELECT 
-			  DISTINCT ewo.emp_id, 
-			  e.display_name AS employee_name, 
-			  e.location_id, 
-			  v.id As vendor_id, 
-			  v.display_name AS vendor_name, 
-			  vi.item_price, 
-			  vi.purchase_uom As uom, 
+			SELECT
+			  DISTINCT ewo.emp_id,
+			  e.display_name AS employee_name,
+			  e.location_id,
+			  v.id As vendor_id,
+			  v.display_name AS vendor_name,
+			  vi.item_price,
+			  vi.purchase_uom As uom,
 			  (
-			        SELECT SUM(pt.vrc_billable_amount) 
-			        FROM project_timesheets pt 
+			        SELECT SUM(pt.vrc_billable_amount)
+			        FROM project_timesheets pt
 			        WHERE pt.emp_id = ewo.emp_id
-			          AND pt.timesheet_date >= '".$startdate."' 
+			          AND pt.timesheet_date >= '".$startdate."'
 			          AND pt.timesheet_date <= '".$enddate."'
-				  AND pt.is_active=0 
+				  AND pt.is_active=0
 			    ) AS bill,
 			   (
-			        SELECT SUM(pt.billable_hrs)/8 as work_day 
-			        FROM project_timesheets pt 
+			        SELECT SUM(pt.billable_hrs)/8 as work_day
+			        FROM project_timesheets pt
 			        WHERE pt.emp_id = ewo.emp_id
-			         AND pt.timesheet_date >= '".$startdate."' 
+			         AND pt.timesheet_date >= '".$startdate."'
 			         AND pt.timesheet_date <= '".$enddate."'
 		                  AND pt.is_active=0
 			    ) AS work_day,
-			  vrc.transaction_number 
-			FROM 
-			  emp_work_order ewo 
-			  INNER JOIN employees e ON e.id = ewo.emp_id 
-			  INNER JOIN vendor_rate_cards vrc ON ewo.vrc_id = vrc.id 
-			  INNER JOIN vrc_items vi ON vi.transaction_id = vrc.id 
-			  AND vi.id = ewo.vrc_item_id 
-			  INNER JOIN vendors v ON v.id = vrc.customer_id 
-			WHERE 
-			  ewo.company_id = 1 
-			  AND ewo.effective_from_date <= '".$startdate."' 
-			  AND ewo.effective_to_date >= '".$enddate."' 
-			ORDER BY 
+			  vrc.transaction_number
+			FROM
+			  emp_work_order ewo
+			  INNER JOIN employees e ON e.id = ewo.emp_id
+			  INNER JOIN vendor_rate_cards vrc ON ewo.vrc_id = vrc.id
+			  INNER JOIN vrc_items vi ON vi.transaction_id = vrc.id
+			  AND vi.id = ewo.vrc_item_id
+			  INNER JOIN vendors v ON v.id = vrc.customer_id
+			WHERE
+			  ewo.company_id = 1
+			  AND ewo.effective_from_date <= '".$startdate."'
+			  AND ewo.effective_to_date >= '".$enddate."'
+			ORDER BY
 			  ewo.emp_id";
 		$data = $callConfig->getAllRows($query);
 		$return['query']=$query;
@@ -6949,10 +6944,10 @@ public function  vmssingleemployeedashoard_new($get){
 	    // ================================
 	    // 1️⃣ Fetch Old Vendor Header
 	    // ================================
-	    $query = "SELECT transaction_number, ref_total_amount 
-	              FROM vendor_rate_cards 
-	              WHERE id = {$transaction_record_id} 
-	              AND company_id='{$get['company_id']}' 
+	    $query = "SELECT transaction_number, ref_total_amount
+	              FROM vendor_rate_cards
+	              WHERE id = {$transaction_record_id}
+	              AND company_id='{$get['company_id']}'
 	              AND is_active = 0";
 	    $old_header = $callConfig->getRow($query);
 	    $old_transaction_no = $old_header->transaction_number;
@@ -6969,7 +6964,7 @@ public function  vmssingleemployeedashoard_new($get){
 	    }
 	    if(($transaction_number != $old_header->transaction_number) ||
 	       ($ref_total_amount != "" && $ref_total_amount != $old_header->ref_total_amount)){
-	        $upquery = "UPDATE vendor_rate_cards SET {$condt} 
+	        $upquery = "UPDATE vendor_rate_cards SET {$condt}
 	                    WHERE id = {$transaction_record_id} AND is_active = 0";
 	        $res1 = $callConfig->executeQuery($upquery);
 	        $return['vrc_update'] = $res1;
@@ -6979,9 +6974,9 @@ public function  vmssingleemployeedashoard_new($get){
 	    // 3️⃣ Update vrc_items (as before)
 	    // ================================
 	    $item_query = "SELECT id, item_id, item_quantity, min_exp, max_exp
-	                   FROM vrc_items 
-	                   WHERE transaction_id = {$transaction_record_id} 
-	                   AND company_id='{$get['company_id']}' 
+	                   FROM vrc_items
+	                   WHERE transaction_id = {$transaction_record_id}
+	                   AND company_id='{$get['company_id']}'
 	                   AND is_active = 0";
 	    $old_items = $callConfig->getAllRows($item_query);
 	    $old_qty_map = [];
@@ -7000,9 +6995,9 @@ public function  vmssingleemployeedashoard_new($get){
 	        $itemQtyMap[$row['id']] = $row['quantity'];
 
 	        if($new_qty != $old_qty){
-	            $upquery = "UPDATE vrc_items 
-	                        SET item_quantity = '{$new_qty}', 
-	                            updated_by = '{$get['user_id']}', 
+	            $upquery = "UPDATE vrc_items
+	                        SET item_quantity = '{$new_qty}',
+	                            updated_by = '{$get['user_id']}',
 	                            updated_date = '". date('Y-m-d H:i:s')."'
 	                        WHERE id = '{$item_id}' AND is_active = 0";
 	            $callConfig->executeQuery($upquery);
@@ -7015,10 +7010,10 @@ public function  vmssingleemployeedashoard_new($get){
 	    // 4️⃣ Find linked manpower_contract
 	    // ================================
 	    $manpower_contract = $callConfig->getRow("
-	        SELECT id, transaction_number, ref_total_amount 
-	        FROM manpower_contracts 
-	        WHERE transaction_number = '{$old_transaction_no}' 
-	        AND company_id='{$get['company_id']}' 
+	        SELECT id, transaction_number, ref_total_amount
+	        FROM manpower_contracts
+	        WHERE transaction_number = '{$old_transaction_no}'
+	        AND company_id='{$get['company_id']}'
 	        AND is_active = 0
 	    ");
 	    if($manpower_contract){
@@ -7037,8 +7032,8 @@ public function  vmssingleemployeedashoard_new($get){
 
 	        if(($transaction_number != $manpower_contract->transaction_number) ||
 	           ($ref_total_amount != "" && $ref_total_amount != $manpower_contract->ref_total_amount)){
-	            $upquery = "UPDATE manpower_contracts 
-	                        SET {$mpc_condt} 
+	            $upquery = "UPDATE manpower_contracts
+	                        SET {$mpc_condt}
 	                        WHERE id = {$mpc_id} AND is_active = 0";
 	            $callConfig->executeQuery($upquery);
 	        }
@@ -7053,12 +7048,12 @@ public function  vmssingleemployeedashoard_new($get){
 	            $max_exp = $vrc_data->max_exp;
 	            $new_qty = $itemQtyMap[$vrc_item_id] ?? '';
 
-	            $upquery = "UPDATE mpc_items 
-	                        SET item_quantity = '{$new_qty}', 
-	                            updated_by = '{$get['user_id']}', 
+	            $upquery = "UPDATE mpc_items
+	                        SET item_quantity = '{$new_qty}',
+	                            updated_by = '{$get['user_id']}',
 	                            updated_date = '". date('Y-m-d H:i:s')."'
-	                        WHERE transaction_id = {$mpc_id} 
-	                        AND item_id = '{$vrc_itemid}' 
+	                        WHERE transaction_id = {$mpc_id}
+	                        AND item_id = '{$vrc_itemid}'
 	                        AND min_exp = '{$min_exp}'
 	                        AND max_exp = '{$max_exp}'
 	                        AND is_active = 0";
@@ -7067,12 +7062,12 @@ public function  vmssingleemployeedashoard_new($get){
 	        }
 	    }
 
-		$query = "UPDATE vendor_rate_cards 
+		$query = "UPDATE vendor_rate_cards
 		          SET total_amount = IFNULL((SELECT SUM(total_amount) FROM vrc_items WHERE transaction_id = {$transaction_record_id}), 0)
 		          WHERE id = {$transaction_record_id} AND is_active = 0";
 		$callConfig->executeQuery($query);
 
-		$query = "UPDATE manpower_contracts 
+		$query = "UPDATE manpower_contracts
 		          SET total_amount = IFNULL((SELECT SUM(total_amount) FROM mpc_items WHERE transaction_id = {$mpc_id}), 0)
 		          WHERE id = {$mpc_id} AND is_active = 0";
 		$callConfig->executeQuery($query);
@@ -7202,18 +7197,17 @@ public function  vmssingleemployeedashoard_new($get){
 	        $search = addslashes($search);
 	        $query .= " AND (display_name LIKE '%$search%' OR email_id LIKE '%$search%' OR emp_code LIKE '%$search%')";
 	    }
-		$response = $callConfig->getAllRows($query);
-	    return $response;
+		return $callConfig->getAllRows($query);
 	}
 	public function empresignapprovalpendingdata($get, $search=''){
 	   	global $callConfig;
-	    $query = "SELECT 
-	                et.id AS termination_id, 
-	                et.emp_id, 
-	                et.effective_date AS resign_date, 
-	                et.employee_leaving_date AS last_working_date, 
-	                emps.display_name, 
-	                emps.email_id, 
+	    $query = "SELECT
+	                et.id AS termination_id,
+	                et.emp_id,
+	                et.effective_date AS resign_date,
+	                et.employee_leaving_date AS last_working_date,
+	                emps.display_name,
+	                emps.email_id,
 	                emps.emp_code,
 	                -- Role-wise approvals
 	                SUM(CASE WHEN tal.doa_id = 1 AND tal.response_type = 199 THEN 1 ELSE 0 END) AS admin_approved,
@@ -7221,22 +7215,22 @@ public function  vmssingleemployeedashoard_new($get){
 	                SUM(CASE WHEN tal.doa_id = 3 AND tal.response_type = 199 THEN 1 ELSE 0 END) AS it_team_approved,
 	                SUM(CASE WHEN tal.doa_id = 4 AND tal.response_type = 199 THEN 1 ELSE 0 END) AS final_approved
 	              FROM employee_terminations et
-	              LEFT JOIN employees emps 
-	                ON emps.id = et.emp_id 
-	               AND emps.company_id = et.company_id 
+	              LEFT JOIN employees emps
+	                ON emps.id = et.emp_id
+	               AND emps.company_id = et.company_id
 	               AND emps.is_active = 0
 	              LEFT JOIN transaction_approval_logs tal
-	                ON tal.transaction_id = et.id 
-	               AND tal.company_id = et.company_id 
+	                ON tal.transaction_id = et.id
+	               AND tal.company_id = et.company_id
 	               AND tal.transaction_table = 'employee_terminations'
-	              WHERE et.company_id = {$get['company_id']} 
-	                AND et.current_status < 199 
+	              WHERE et.company_id = {$get['company_id']}
+	                AND et.current_status < 199
 	                AND et.is_active = 0";
 
 	    if ($search != '') {
 	        $search = addslashes($search);
-	        $query .= " AND (emps.display_name LIKE '%$search%' 
-	                      OR emps.email_id LIKE '%$search%' 
+	        $query .= " AND (emps.display_name LIKE '%$search%'
+	                      OR emps.email_id LIKE '%$search%'
 	                      OR emps.emp_code LIKE '%$search%')";
 	    }
 
@@ -7253,15 +7247,14 @@ public function  vmssingleemployeedashoard_new($get){
 		    $search = addslashes($search);
 		    $query .= " AND (emps.display_name LIKE '%$search%' OR emps.email_id LIKE '%$search%' OR emps.emp_code LIKE '%$search%')";
 		}
-		$response = $callConfig->getAllRows($query);
-	    return $response;
+		return $callConfig->getAllRows($query);
 	}
 	public function approvalpendingdata($get, $search = ''){
 	    global $callConfig;
 	    $empRow = $callConfig->getRow("SELECT id FROM employees WHERE user_id = '{$get['user_id']}' AND company_id = '{$get['company_id']}' AND is_active=0");
 		$employee_id = $empRow->id ?? 0;
 	    $query = "
-	        SELECT DISTINCT 
+	        SELECT DISTINCT
 	            tal.id AS tranaction_approval_id,
 	            tal.doa_id,
 	            emp.display_name,
@@ -7273,13 +7266,13 @@ public function  vmssingleemployeedashoard_new($get){
 	            et.employee_leaving_date AS leaving_date,
 	            et.remarks_by_employee
 	        FROM transaction_approval_logs tal
-	        INNER JOIN employee_terminations et 
-	            ON et.id = tal.transaction_id 
-	            AND tal.company_id = et.company_id 
+	        INNER JOIN employee_terminations et
+	            ON et.id = tal.transaction_id
+	            AND tal.company_id = et.company_id
 	            AND et.is_active = 0
-	        INNER JOIN employees emp 
+	        INNER JOIN employees emp
 	            ON emp.id = et.emp_id
-	            AND emp.company_id = et.company_id 
+	            AND emp.company_id = et.company_id
 	            AND emp.is_active = 0
 	        WHERE tal.transaction_table = 'employee_terminations'
 	          AND tal.response_type = 101
@@ -7296,8 +7289,8 @@ public function  vmssingleemployeedashoard_new($get){
 
 	    if ($search != '') {
 	        $search = addslashes($search);
-	        $query .= " AND (emp.display_name LIKE '%$search%' 
-	                      OR emp.email_id LIKE '%$search%' 
+	        $query .= " AND (emp.display_name LIKE '%$search%'
+	                      OR emp.email_id LIKE '%$search%'
 	                      OR emp.emp_code LIKE '%$search%')";
 	    }
 
@@ -7308,16 +7301,16 @@ public function  vmssingleemployeedashoard_new($get){
 	    global $callConfig;
 	    $empRow = $callConfig->getRow("SELECT id FROM employees WHERE user_id = '{$get['user_id']}' AND company_id = '{$get['company_id']}' AND is_active=0");
 		$employee_id = $empRow->id ?? 0;
-	    $query = "SELECT DISTINCT 
+	    $query = "SELECT DISTINCT
 	            tal.id AS tranaction_approval_id,tal.doa_id,emp.id as emp_id, emp.display_name,emp.email_id,emp.emp_code,et.id AS termination_id,et.termination_type,et.effective_date AS resignation_date,et.employee_leaving_date AS leaving_date,et.remarks_by_employee
 	        FROM transaction_approval_logs tal
-	        INNER JOIN employee_terminations et 
-	            ON et.id = tal.transaction_id 
-	            AND tal.company_id = et.company_id 
+	        INNER JOIN employee_terminations et
+	            ON et.id = tal.transaction_id
+	            AND tal.company_id = et.company_id
 	            AND et.is_active = 0
-	        INNER JOIN employees emp 
+	        INNER JOIN employees emp
 	            ON emp.id = et.emp_id
-	            AND emp.company_id = et.company_id 
+	            AND emp.company_id = et.company_id
 	            AND emp.is_active = 0
 	        WHERE tal.transaction_table = 'employee_terminations'
 	          AND tal.company_id = '{$get['company_id']}'
@@ -7331,8 +7324,8 @@ public function  vmssingleemployeedashoard_new($get){
 
 	    if ($search != '') {
 	        $search = addslashes($search);
-	        $query .= " AND (emp.display_name LIKE '%$search%' 
-	                      OR emp.email_id LIKE '%$search%' 
+	        $query .= " AND (emp.display_name LIKE '%$search%'
+	                      OR emp.email_id LIKE '%$search%'
 	                      OR emp.emp_code LIKE '%$search%')";
 	    }
 
@@ -7576,8 +7569,8 @@ public function  vmssingleemployeedashoard_new($get){
 
 			        foreach ($roles as $roleId) {
 			            $row = $callConfig->getRow("
-			                SELECT COUNT(*) AS cnt 
-			                FROM transaction_approval_logs 
+			                SELECT COUNT(*) AS cnt
+			                FROM transaction_approval_logs
 			                WHERE transaction_table='employee_terminations'
 			                  AND transaction_id={$transaction_id}
 			                  AND company_id={$company_id}
@@ -7591,7 +7584,7 @@ public function  vmssingleemployeedashoard_new($get){
 			        // ---- If all 4 roles approved → mark termination as completed
 			        if (count($approvedRoles) === count($roles)) {
 			            $callConfig->executeQuery("
-			                UPDATE employee_terminations 
+			                UPDATE employee_terminations
 			                SET current_status=199, updated_by='{$updated_by}', updated_date='{$updated_date}'
 			                WHERE id={$transaction_id} AND company_id={$company_id} AND is_active=0
 			            ");
@@ -7605,8 +7598,8 @@ public function  vmssingleemployeedashoard_new($get){
 	                $transaction_id = $tranRow['transaction_id'];
 	                $company_id     = $tranRow['company_id'];
 	                $callConfig->executeQuery("
-	                    UPDATE employee_terminations 
-	                    SET current_status = 201, updated_by='{$updated_by}', updated_date='{$updated_date}' 
+	                    UPDATE employee_terminations
+	                    SET current_status = 201, updated_by='{$updated_by}', updated_date='{$updated_date}'
 	                    WHERE id = {$transaction_id} AND company_id = {$company_id} AND is_active=0
 	                ");
 	            }
@@ -7624,7 +7617,7 @@ public function  vmssingleemployeedashoard_new($get){
 	public function getexitemployeeapprovalpopupdata($get){
 		global $callConfig;
 	    $transaction_approval_id = intval($get['transaction_approval_id'] ?? 0);
-	    $query = "SELECT 
+	    $query = "SELECT
 	            tal.id AS tranaction_approval_id,
 	            tal.doa_id,
 	            et.id AS termination_id,
@@ -7636,11 +7629,11 @@ public function  vmssingleemployeedashoard_new($get){
 	            et.employee_leaving_date AS leaving_date,
 	            et.remarks_by_employee
 	        FROM transaction_approval_logs tal
-	        INNER JOIN employee_terminations et 
+	        INNER JOIN employee_terminations et
 	            ON et.id = tal.transaction_id
 	           AND tal.company_id = et.company_id
 	           AND et.is_active = 0
-	        INNER JOIN employees emp 
+	        INNER JOIN employees emp
 	            ON emp.id = et.emp_id
 	           AND emp.company_id = et.company_id
 	           AND emp.is_active = 0
@@ -7675,7 +7668,7 @@ public function  vmssingleemployeedashoard_new($get){
 
 	    // Fetch employee details
 	    $empQuery = "
-	        SELECT 
+	        SELECT
 	            e.id, e.company_id, e.emp_code,
 	            e.display_name,
 	            e.first_name, e.middle_name, e.last_name,
@@ -7700,10 +7693,10 @@ public function  vmssingleemployeedashoard_new($get){
 
 	    // Fetch termination details for this employee
 	    $termQuery = "
-	        SELECT 
-	            id, emp_id, termination_type, effective_date, employee_leaving_date, 
+	        SELECT
+	            id, emp_id, termination_type, effective_date, employee_leaving_date,
 	            remarks_by_employee, created_date
-	        FROM employee_terminations 
+	        FROM employee_terminations
 	        WHERE emp_id = {$employee_id} AND company_id = {$company_id} AND is_active = 0
 	        ORDER BY id DESC LIMIT 1";
 	    $termination = $callConfig->getRow($termQuery);
@@ -7727,13 +7720,13 @@ public function  vmssingleemployeedashoard_new($get){
 	    if ($termination_id > 0) {
 	        foreach ($sections as $doa_id => $section_name) {
 	            $clrQuery = "
-	                SELECT 
-	                    tal.response_type, 
+	                SELECT
+	                    tal.response_type,
 	                    emp.display_name AS approver_name
 	                FROM transaction_approval_logs tal
-	                LEFT JOIN employees emp 
-	                    ON emp.id = tal.user_id 
-	                    AND emp.company_id = tal.company_id 
+	                LEFT JOIN employees emp
+	                    ON emp.id = tal.user_id
+	                    AND emp.company_id = tal.company_id
 	                    AND emp.is_active = 0
 	                WHERE tal.transaction_table = 'employee_terminations'
 	                  AND tal.transaction_id = {$termination_id}
@@ -7756,7 +7749,7 @@ public function  vmssingleemployeedashoard_new($get){
 	    }
 
 	    // Final structured data
-	    $return = [
+	    return [
 	        'status' => 'success',
 	        'employee' => [
 	            'display_name' => trim($employee->display_name ?? ($employee->first_name . ' ' . $employee->last_name)),
@@ -7787,8 +7780,6 @@ public function  vmssingleemployeedashoard_new($get){
 	            'signature' => ''
 	        ]
 	    ];
-
-	    return $return;
 	}
 	public function togetaccourreportquatrly($get){
 		global $callConfig;
@@ -7827,7 +7818,7 @@ public function  vmssingleemployeedashoard_new($get){
 			$fdate = $year."-".$ex_month['0']."-01";
 			$wdate = $year."-".$ex_month['2']."-01";
 			$ldate = date("Y-m-t", strtotime($wdate));
-			$query = "SELECT 
+			$query = "SELECT
 					    e.emp_id,
 					    e.vrc_id,
 					    e.vrc_item_id,
@@ -7842,18 +7833,18 @@ public function  vmssingleemployeedashoard_new($get){
 					    vi.purchase_uom
 					FROM emp_work_order e
 					JOIN (
-					    SELECT 
-					        emp_id, 
+					    SELECT
+					        emp_id,
 					        MAX(effective_to_date) AS max_date
 					    FROM emp_work_order
 					    WHERE company_id = ".$company_id."
 					    GROUP BY emp_id
-					) x ON e.emp_id = x.emp_id 
+					) x ON e.emp_id = x.emp_id
 					   AND e.effective_to_date = x.max_date
 					JOIN employees emp ON e.emp_id = emp.id
 					JOIN vendor_rate_cards vrc ON e.vrc_id = vrc.id
 					JOIN vrc_items vi ON e.vrc_item_id = vi.id
-					WHERE 
+					WHERE
 					    (emp.date_of_leaving >= '".$fdate."' OR emp.date_of_leaving IS NULL)
 					    AND emp.is_active = 0
 					    AND emp.employee_type =2
@@ -7980,24 +7971,24 @@ public function  vmssingleemployeedashoard_new($get){
 	            qar.created_by
 
 	        FROM quarterly_accrual_revenue qar
-	        LEFT JOIN vendors v 
-	            ON qar.vendor_id = v.id 
-	            AND v.company_id = qar.company_id 
+	        LEFT JOIN vendors v
+	            ON qar.vendor_id = v.id
+	            AND v.company_id = qar.company_id
 	            AND v.is_active = 0
 
-	        JOIN employees e 
-	            ON qar.emp_id = e.id 
-	            AND e.company_id = qar.company_id 
+	        JOIN employees e
+	            ON qar.emp_id = e.id
+	            AND e.company_id = qar.company_id
 	            AND e.is_active = 0  $whr
 
-	        LEFT JOIN job_titles jt 
-	            ON qar.job_title_id = jt.id 
-	            AND jt.company_id = qar.company_id 
+	        LEFT JOIN job_titles jt
+	            ON qar.job_title_id = jt.id
+	            AND jt.company_id = qar.company_id
 	            AND jt.is_active = 0
 
-	        LEFT JOIN general_code_details u 
+	        LEFT JOIN general_code_details u
 	            ON qar.uom = u.genc_detail_code  AND u.genc_code = 'JOBUOM'
-	            AND u.company_id = qar.company_id 
+	            AND u.company_id = qar.company_id
 	            AND u.is_active = 0
 
 	        WHERE qar.company_id = '{$company_id}'
@@ -8027,21 +8018,21 @@ public function  vmssingleemployeedashoard_new($get){
 	            u.genc_detail_code,
 	            u.genc_detail_name
 	        FROM quarterly_accrual_revenue qar
-	        LEFT JOIN vendors v 
-	               ON v.id = qar.vendor_id 
-	              AND v.company_id = qar.company_id 
+	        LEFT JOIN vendors v
+	               ON v.id = qar.vendor_id
+	              AND v.company_id = qar.company_id
 	              AND v.is_active = 0
 	        LEFT JOIN employees e
-	               ON e.id = qar.emp_id 
-	              AND e.company_id = qar.company_id 
+	               ON e.id = qar.emp_id
+	              AND e.company_id = qar.company_id
 	              AND e.is_active = 0
 	        LEFT JOIN job_titles jt
-	               ON jt.id = qar.job_title_id 
-	              AND jt.company_id = qar.company_id 
+	               ON jt.id = qar.job_title_id
+	              AND jt.company_id = qar.company_id
 	              AND jt.is_active = 0
-	        LEFT JOIN general_code_details u 
+	        LEFT JOIN general_code_details u
 	            ON qar.uom = u.genc_detail_code  AND  genc_code = 'JOBUOM'
-	            AND u.company_id = qar.company_id 
+	            AND u.company_id = qar.company_id
 	            AND u.is_active = 0
 	        WHERE qar.company_id = '{$company_id}'
 	          AND qar.id = '{$id}'
@@ -8054,7 +8045,7 @@ public function  vmssingleemployeedashoard_new($get){
 	    // -----------------------------------
 	    // 2. Vendor List
 	    // -----------------------------------
-	    $sql_vendor = "SELECT id, display_name 
+	    $sql_vendor = "SELECT id, display_name
 	        FROM vendors
 	        WHERE company_id = '{$company_id}'
 	          AND is_active = 0
@@ -8074,7 +8065,7 @@ public function  vmssingleemployeedashoard_new($get){
 	    // -----------------------------------
 	    // 4. Job Title List
 	    // -----------------------------------
-	    $sql_jobs = "SELECT id, job_title 
+	    $sql_jobs = "SELECT id, job_title
 	        FROM job_titles
 	        WHERE company_id = '{$company_id}'
 	          AND is_active = 0
@@ -8169,7 +8160,7 @@ public function  vmssingleemployeedashoard_new($get){
 		    $manager_id = intval($get['manager_id']);
 		    $query = "SELECT DISTINCT e.vendor_id
 		        FROM employees e
-		        INNER JOIN application_users u 
+		        INNER JOIN application_users u
 		            ON e.user_id = u.id
 		        WHERE u.reports_to = $manager_id
 		          AND u.company_id = ".$get['company_id']."
@@ -8279,7 +8270,7 @@ public function  vmssingleemployeedashoard_new($get){
 		$query = "
 		    SELECT DISTINCT m.id, m.display_name
 		    FROM application_users u
-		    INNER JOIN application_users m 
+		    INNER JOIN application_users m
 		        ON u.reports_to = m.id
 		    WHERE u.company_id = ".$get['company_id']."
 		      AND u.reports_to IS NOT NULL
@@ -8421,7 +8412,7 @@ public function  vmssingleemployeedashoard_new($get){
             }
         }
 
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             return array(
                 'status' => 'partial',
                 'message' => 'Some records failed to save',
@@ -8452,7 +8443,7 @@ public function  vmssingleemployeedashoard_new($get){
         $employees_count_row = $callConfig->getRow($employees_count_query);
         $employees_count = isset($employees_count_row->cnt) ? (int)$employees_count_row->cnt : 0;
 
-        $query = "SELECT 
+        $query = "SELECT
                     e.id AS employee_id,
                     e.emp_code,
                     e.display_name,
@@ -8696,11 +8687,11 @@ public function  vmssingleemployeedashoard_new($get){
 			$listholidays[] = $holida->holiday_date;
 		}
 
-		$equery = "SELECT el.*, lc.name as leave_type_name, lc.back_ground_color as leave_color 
-		           FROM employee_leaves el 
-		           LEFT JOIN leave_categories lc ON lc.id = el.leave_type_id 
-		           WHERE el.company_id='".$company_id."' AND el.employee_id='".$empid."' 
-		             AND el.leave_from <= '".$end_date."' AND el.leave_to >= '".$start_date."' 
+		$equery = "SELECT el.*, lc.name as leave_type_name, lc.back_ground_color as leave_color
+		           FROM employee_leaves el
+		           LEFT JOIN leave_categories lc ON lc.id = el.leave_type_id
+		           WHERE el.company_id='".$company_id."' AND el.employee_id='".$empid."'
+		             AND el.leave_from <= '".$end_date."' AND el.leave_to >= '".$start_date."'
 		             AND el.is_active=0 AND el.current_status NOT IN (30, 40)";
 		$leaves_res = $callConfig->getAllRows($equery);
 		$workleave_from = array();

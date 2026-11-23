@@ -831,8 +831,7 @@ class mobileUserClass extends userClass{
 	    	$res=$callConfig->updateRecord('employee_daily_attendance_details',$insert_array,'id',$datad->id);
 	    	$res=$callConfig->updateRecord('employee_daily_attendances',$insert_array,'id',$data->id);
 	    }
-	    $return = $this->togetemployeeattendatailsbasedondate($get);
-	    return $return;
+	    return $this->togetemployeeattendatailsbasedondate($get);
 	}
 	public function mobileemployeeclocks($get){
     	global $callConfig;
@@ -856,8 +855,7 @@ class mobileUserClass extends userClass{
 	    	$insert_array = array('clock_out'=>$get['time'],'check_out_type'=>'1','in_out'=>1,'clock_out_date'=>$get['date']);
 	    	$res=$callConfig->updateRecord('employee_daily_attendances',$insert_array,'id',$data->id);
 	    }
-	    $return = $this->togetemployeeattendatailsbasedondate($get);
-	    return $return;
+	    return $this->togetemployeeattendatailsbasedondate($get);
 	}
 	public function listgetmonthattendancedetails($get){
 		global $callConfig;
@@ -899,7 +897,7 @@ class mobileUserClass extends userClass{
     	$query = "SELECT id, working_days, full_day_hours FROM shift_settings WHERE id IN (SELECT shift_setting_id FROM shifts WHERE id IN ( SELECT shift_id FROM `emp_shifts` WHERE company_id = ".$get['company_id']."  AND emp_id = ".$get['emp_id']." AND is_active=0))";
     	$weak_off_arr = $callConfig->getRow($query);
     	if($weak_off_arr->id==''){
-	    	$qry = "SELECT id, working_days, full_day_hours FROM attendance_settings 
+	    	$qry = "SELECT id, working_days, full_day_hours FROM attendance_settings
 			        WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY id ASC LIMIT 1";
 			$weak_off_arr = $callConfig->getRow($qry);
 		}
@@ -1028,7 +1026,7 @@ class mobileUserClass extends userClass{
     	$query = "SELECT id, working_days, full_day_hours FROM shift_settings WHERE id IN (SELECT shift_setting_id FROM shifts WHERE id IN ( SELECT shift_id FROM `emp_shifts` WHERE company_id = ".$get['company_id']."  AND emp_id = ".$get['emp_id']." AND is_active=0))";
     	$weak_off_arr = $callConfig->getRow($query);
     	if($weak_off_arr->id==''){
-	    	$qry = "SELECT id, working_days, full_day_hours FROM attendance_settings 
+	    	$qry = "SELECT id, working_days, full_day_hours FROM attendance_settings
 			        WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY id ASC LIMIT 1";
 			$weak_off_arr = $callConfig->getRow($qry);
 		}
@@ -1943,8 +1941,7 @@ class mobileUserClass extends userClass{
     	global $callConfig;
     	$insert_array = array('company_id'=>$get['company_id'],'user_id'=>$get['user_id'],'name'=>$post['name'], 'email'=>$post['email'], 'phone'=>$post['phone'], 'message'=>$post['message'],'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
     	// post : name, email, phone, message : get : company_id , user_id
-		$res=$callConfig->insertRecord('mobile_help',$insert_array);
-		return $res;
+		return $callConfig->insertRecord('mobile_help',$insert_array);
     }
     public function tomapouttimeallcase($get){
  		global $callConfig;
@@ -2028,12 +2025,12 @@ class mobileUserClass extends userClass{
     }
     public function togetfieldworkdailyplansfrmobile($get){
     	global $callConfig;
-    	$query = "SELECT 
-				  au.id, 
-				  au.display_name, 
-				  au.user_email, 
-				  au.user_field_work_type, 
-				  '".$get['date']."' AS map_date, 
+    	$query = "SELECT
+				  au.id,
+				  au.display_name,
+				  au.user_email,
+				  au.user_field_work_type,
+				  '".$get['date']."' AS map_date,
 				  count(
 				    DISTINCT(fwdp.id)
 				  ) AS total_plan,
@@ -2042,44 +2039,44 @@ class mobileUserClass extends userClass{
 				  ) AS total_work,
 				  SUM(
 				    IF(
-				      fwump.field_work_daily_plan_id = fwdp.id, 
+				      fwump.field_work_daily_plan_id = fwdp.id,
 				      1, 0
 				    )
-				  ) AS visited, 
+				  ) AS visited,
 				  count(
 				    DISTINCT(fwump.id)
 				  ) - SUM(
 				    IF(
-				      fwump.field_work_daily_plan_id = fwdp.id, 
+				      fwump.field_work_daily_plan_id = fwdp.id,
 				      1, 0
 				    )
-				  ) AS extra, 
+				  ) AS extra,
 				  count(
 				    DISTINCT(fwdp.id)
 				  ) - SUM(
 				    IF(
-				      fwump.field_work_daily_plan_id = fwdp.id, 
+				      fwump.field_work_daily_plan_id = fwdp.id,
 				      1, 0
 				    )
-				  ) AS pending 
-				FROM 
+				  ) AS pending
+				FROM
 				field_work_daily_plans fwdp
-				  
-				  
-				  LEFT JOIN  field_work_user_map_points fwump ON fwdp.user_id = fwump.user_id 
-				  AND fwdp.plan_date = fwump.map_date 
-				  AND fwdp.company_id = fwump.company_id 
-				  AND fwdp.is_active = '0' 
+
+
+				  LEFT JOIN  field_work_user_map_points fwump ON fwdp.user_id = fwump.user_id
+				  AND fwdp.plan_date = fwump.map_date
+				  AND fwdp.company_id = fwump.company_id
+				  AND fwdp.is_active = '0'
 				  LEFT JOIN application_users au ON ( fwdp.user_id = au.id OR  fwump.user_id = au.id)
-				WHERE 
+				WHERE
 				  fwdp.company_id = '" . $get['company_id'] . "'
-				  AND fwdp.user_id = '".$get['user_id']."' 
+				  AND fwdp.user_id = '".$get['user_id']."'
 				  AND fwdp.plan_date = '".$get['date']."'
-				  AND fwdp.is_active = '0' 
-				GROUP BY 
-				  fwump.user_id, 
-				  fwump.map_date 
-				ORDER BY 
+				  AND fwdp.is_active = '0'
+				GROUP BY
+				  fwump.user_id,
+				  fwump.map_date
+				ORDER BY
 				  fwump.map_date";
         $data = $callConfig->getAllRows($query);
         $return['data'] = null;
@@ -2435,7 +2432,7 @@ class mobileUserClass extends userClass{
         $return = array();
         $originator = $get['id'];
         $query = "SELECT so.id, so.party_name, so.transaction_date, so.transaction_number, COALESCE(soi.items, 0) AS items  FROM  ". $table_name ." so
-        LEFT JOIN (SELECT transaction_id, count(transaction_id) as items  FROM ".$sub_table." GROUP BY 
+        LEFT JOIN (SELECT transaction_id, count(transaction_id) as items  FROM ".$sub_table." GROUP BY
         transaction_id) AS soi ON soi.transaction_id = so.id
         where so.originator = '".$originator."' AND  so.company_id = '" . $get['company_id'] . "' AND so.is_active=0";
         $query_res = $callConfig->getAllRows($query);
@@ -2453,7 +2450,7 @@ class mobileUserClass extends userClass{
         $return = array();
         $return['get'] = $get;
         $transaction_id = $get['id'];
-        $query = "SELECT * FROM  ".$table_name." so 
+        $query = "SELECT * FROM  ".$table_name." so
         where so.id=".$transaction_id."  AND  so.company_id = ".$get['company_id']." AND so.is_active=0";
 
         $return['query'] = $query;
@@ -2772,24 +2769,24 @@ class mobileUserClass extends userClass{
 		global $callConfig;
 		$str="ta.user_id = ".$get['user_id']." AND ";
 		if($get['driver_id']!=""){
-			$query = "SELECT 
+			$query = "SELECT
 				    t.vehicle_name,
 				    t.registration_number,
 				    ta.*
-				FROM 
+				FROM
 				    transport_assign ta
-				JOIN 
-				    transports t ON ta.transport_id =  t.id 
-				WHERE 
+				JOIN
+				    transports t ON ta.transport_id =  t.id
+				WHERE
 					ta.company_id = ".$get['company_id']." AND
 				    ta.driver_id = ".$get['driver_id']." AND
 					ta.is_active = 0";
 		}else{
-			$query = "SELECT 
+			$query = "SELECT
 				    ta.*
-				FROM 
+				FROM
 				    transport_assign ta
-				WHERE 
+				WHERE
 					ta.company_id = ".$get['company_id']." AND
 				    ta.user_id = ".$get['user_id']." AND
 					ta.is_active = 0";
@@ -2829,20 +2826,20 @@ class mobileUserClass extends userClass{
 		if($row->id!=""){
 			$return['data'] = (array)$row;
 
-			$query = "SELECT 
-			    eed.id, 
-			    eed.emp_expenses_id, 
-			    eed.merchant_name, 
-			    eed.bill_no, 
-			    eed.bill_date, 
-			    eed.bill_file, 
-			    eed.description, 
+			$query = "SELECT
+			    eed.id,
+			    eed.emp_expenses_id,
+			    eed.merchant_name,
+			    eed.bill_no,
+			    eed.bill_date,
+			    eed.bill_file,
+			    eed.description,
 			    eed.payment_mode,
 			    (SELECT ge.genc_detail_name FROM general_code_details as ge WHERE ge.genc_detail_code  = eed.payment_mode  AND ge.genc_code= 'PAYMETHOD') as payment_mode_name ,
-			   
-			    eed.tax_amount, 
-			    eed.expense_amount 
-			FROM 
+
+			    eed.tax_amount,
+			    eed.expense_amount
+			FROM
 				emp_expenses_details AS eed
 			WHERE  eed.company_id = ".$get['company_id']." AND eed.emp_expenses_id = ".$row->id." AND eed.is_active =0";
 			$sdata = $callConfig->getAllRows($query);
@@ -2905,11 +2902,11 @@ class mobileUserClass extends userClass{
     	if( $get['role_short_code']!='TASKDA_ADMIN'){
     		$uwhr = " LEFT JOIN project_task_teams ptt
 					    ON ptt.project_task_id = pt.id
-					   AND ptt.project_id = p.id				   
+					   AND ptt.project_id = p.id
 					   AND ptt.user_id = ".$get['user_id'];
 			$cwhr = "AND  ptt.user_id IS NOT NULL ";
     	}
-    	$query = "SELECT 
+    	$query = "SELECT
 		    pws.id AS workspace_id,
 		    pws.name AS workspace_name,
 		    pws.created_by as workspace_creater,
@@ -2923,20 +2920,20 @@ class mobileUserClass extends userClass{
 			        ) / NULLIF(COUNT(DISTINCT pt.id), 0),
 			        2
 			    ) AS completion_percentage
-		FROM 
+		FROM
 		    project_work_spaces pws
-		LEFT JOIN 
+		LEFT JOIN
 		    projects p ON p.project_work_space_id = pws.id AND p.is_active=0
-		LEFT JOIN 
+		LEFT JOIN
 		    project_task_details pt ON pt.project_id = p.id AND pt.is_active=0
 		".$uwhr."
-		WHERE 
+		WHERE
 			pws.company_id = ".$get['company_id']."
 			".$cwhr."
-			AND pws.is_active=0 
-		GROUP BY 
+			AND pws.is_active=0
+		GROUP BY
 		    pws.id, pws.name
-		ORDER BY 
+		ORDER BY
 		    pws.name";
 		return $callConfig->getAllRows($query);
     }
@@ -2961,7 +2958,7 @@ class mobileUserClass extends userClass{
     		$work_ids[] = $work->id;
     	}
     	$return['get'] = $get;
-    	if(count($work_ids)>0){
+    	if(!empty($work_ids)){
     		$query = "SELECT project_id, count(id) as cc FROM project_phases WHERE company_id =".$get['company_id']." AND project_id IN (".implode(",",$work_ids).") AND is_active =0 GROUP BY project_id";
 			$project_phases = $callConfig->getAllRows($query);
 			$query = "SELECT project_id,count(id) as cc FROM project_teams WHERE company_id =".$get['company_id']." AND project_id IN (".implode(",",$work_ids).") AND is_active =0 GROUP BY project_id";
@@ -3167,8 +3164,7 @@ class mobileUserClass extends userClass{
 			$emill = $this->sendNotificationAndEmails($notarry,$array,99);
 		}
 
-		$return = $insert;
-		return $return;
+		return $insert;
     }
     public function togetmobileprojectdetails($get){
 
@@ -3350,9 +3346,8 @@ class mobileUserClass extends userClass{
 		$person_details = json_encode($person_detai,1);
 		$insert_array = array('company_id'=>$get['company_id'],'user_id'=>$post['emp_id'],'vehicle_number'=>$post['vehicle_number'],'person_details'=>$person_details,'visit_purpose'=>$post['visit_purpose'],'location'=>$post['location'],'entry_date'=>$post['entry_date'],'entry_time'=>$post['entry_time'],'method_type'=>$post['method_type'],'authorized_by'=>$get['user_id'], 'created_by'=>$get['user_id']);
 
-		$res=$callConfig->updateRecord('transport_personal_gateway',$insert_array,'id',$get['trn_id']);
 		// emp_id, employee_name, employee_contact, vehicle_number, visit_purpose, location, entry_date, entry_time, method_type,
-		return $res;
+		return $callConfig->updateRecord('transport_personal_gateway',$insert_array,'id',$get['trn_id']);
 	}
 	public function getAttendanceRegularizationRequestData($get){
 	    global $callConfig;
@@ -3410,8 +3405,8 @@ class mobileUserClass extends userClass{
         $return = array();
         $company_id = $get['company_id'];
 
-        $statusQuery = "SELECT id, name, name_value, background_color, color FROM status 
-                        WHERE company_id = " . $company_id . " 
+        $statusQuery = "SELECT id, name, name_value, background_color, color FROM status
+                        WHERE company_id = " . $company_id . "
                         AND is_active = 0";
         $statusList = $callConfig->getAllRows($statusQuery);
         $return['status_list'] = $statusList;
@@ -3461,8 +3456,8 @@ class mobileUserClass extends userClass{
 
 	        $vehicles = $callConfig->getAllRows("SELECT  m.* ,    IFNULL(
 		        (
-		            SELECT 
-		                CASE 
+		            SELECT
+		                CASE
 		                    WHEN tg.process_val = 1 THEN 'OUT'
 		                    WHEN tg.process_val = 2 THEN 'IN'
 		                    ELSE 'IN'
@@ -3474,7 +3469,7 @@ class mobileUserClass extends userClass{
 		            LIMIT 1
 		        ),
 		        'IN'
-		    ) AS vehicle_status 
+		    ) AS vehicle_status
 		 FROM transport_vehicle_master m WHERE m.company_id = " . $company_id. " AND  m.is_active = 0  AND m.vehicle_reg_no != '' AND m.vehicle_type = 'demo' $where  ORDER BY m.vehicle_reg_no ASC");
 
 	        $return['vehicles'] = $vehicles;
@@ -4552,7 +4547,7 @@ public function GETProcurementModulesDashboardSummaryBalanceSheets($get){
 	$pre_othercurrentassets= ($totalcoa['10008000']['pre_start_balance']!=""?$totalcoa['10008000']['pre_start_balance']:0);
 	//End preview Balances
 
-	$retarray = [
+	return [
         "equity_liabilities" => [
             "shareholders_funds" => [
                 "share_capital" => [
@@ -4673,8 +4668,6 @@ public function GETProcurementModulesDashboardSummaryBalanceSheets($get){
             ]
         ]
     ];
-
-    return $retarray;
 }
 
 /**
@@ -5590,7 +5583,7 @@ $creditside = array('credit_notes','payments');
 	            $transaction_details = $callConfig->getRow($query);
 	            $return['transaction_details'] = $transaction_details;
 	            if($child_table != ''){
-	            	$query = "SELECT t2.*, concat(uoms.uom_short_code,'-',uoms.uom_name) unit_name FROM $child_table t2 
+	            	$query = "SELECT t2.*, concat(uoms.uom_short_code,'-',uoms.uom_name) unit_name FROM $child_table t2
 	            	JOIN  unit_of_measurements uoms ON uoms.id = t2.purchase_uom AND uoms.company_id=$company_id AND uoms.is_active=0
 	            	WHERE t2.transaction_id=$rid AND  t2.company_id=$company_id AND t2.is_active=0";
 	            	$data = $callConfig->getAllRows($query);
@@ -5796,8 +5789,8 @@ $creditside = array('credit_notes','payments');
 		    // On leave count for that date
 		    $next_day = date('Y-m-d', strtotime($trend_date . ' +1 day'));
 		    $leavequery = "SELECT emp.id FROM employees emp, employee_leaves el
-		        WHERE emp.company_id = '".$get['company_id']."' AND emp.is_active = 0 $division_whr 
-		        AND (CASE 
+		        WHERE emp.company_id = '".$get['company_id']."' AND emp.is_active = 0 $division_whr
+		        AND (CASE
 		                WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate."') THEN 1
 		                WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0) THEN 1
 		                ELSE 2
@@ -5836,8 +5829,8 @@ $creditside = array('credit_notes','payments');
 
 		$resigned_employees_query = "SELECT emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image, emp.reporting_manager_id, et.employee_leaving_date, COUNT(ea.id) AS asset_count
 		FROM employees emp
-		INNER JOIN employee_terminations et ON et.emp_id = emp.id AND et.company_id = emp.company_id AND et.is_active = 0 
-		LEFT JOIN employee_assets ea ON ea.emp_id = emp.id AND ea.company_id = emp.company_id AND ea.is_active = 0 
+		INNER JOIN employee_terminations et ON et.emp_id = emp.id AND et.company_id = emp.company_id AND et.is_active = 0
+		LEFT JOIN employee_assets ea ON ea.emp_id = emp.id AND ea.company_id = emp.company_id AND ea.is_active = 0
 		WHERE emp.company_id = '".$get['company_id']."' AND emp.is_active = 0 GROUP BY emp.id,emp.display_name,emp.email_id,emp.gender,emp.employee_type,emp.emp_code,emp.phone,emp.image,emp.reporting_manager_id";
 
 		$resigned_employees = $callConfig->getAllRows($resigned_employees_query);
@@ -5858,7 +5851,7 @@ $creditside = array('credit_notes','payments');
 	 	$data['todayattendants']['transport_getway'] = 0;
 	 	$data['todayattendants']['transport_getway_ids'] = array();
 	 	$query = "SELECT tpg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, emp.gender, emp.phone, emp.image, emp.reporting_manager_id,  emp.designation_id, emp.department_id, CONCAT('Visit Purpose : ', tpg.visit_purpose) as other, GROUP_CONCAT(emp1.display_name) as emp_names FROM transport_gateway tpg
-            LEFT JOIN employees emp ON (emp.id = tpg.driver_name OR emp.id=tpg.user_id) AND emp.company_id = tpg.company_id AND emp.is_active=0 
+            LEFT JOIN employees emp ON (emp.id = tpg.driver_name OR emp.id=tpg.user_id) AND emp.company_id = tpg.company_id AND emp.is_active=0
             LEFT JOIN employees emp1 ON FIND_IN_SET(emp1.id, tpg.emp_ids) AND emp1.company_id = tpg.company_id  AND emp1.is_active = 0
             WHERE  tpg.company_id={$get['company_id']} AND tpg.is_active=0 AND ( tpg.entry_date ='".$today_date."' OR tpg.exit_date ='".$today_date."' ) AND tpg.is_active = 0  GROUP BY tpg.id";
 	 	$transport_getway_data = $callConfig->getAllRows($query);
@@ -5938,7 +5931,7 @@ $creditside = array('credit_notes','payments');
 		// make IN clause properly
 		$table_list = "'" . implode("','", $tables_array) . "'";
 
-		$query = "SELECT 
+		$query = "SELECT
             tal.id AS transaction_approval_log_id,
             tal.transaction_table AS type,
             tal.transaction_id AS rid,
@@ -5946,11 +5939,11 @@ $creditside = array('credit_notes','payments');
             COALESCE(emp2.display_name, '-') AS pending_approval,
             tal.previous_status AS current_status
           FROM transaction_approval_logs tal
-          LEFT JOIN employees emp1 
+          LEFT JOIN employees emp1
                  ON tal.assigner_user_id = emp1.user_id
                 AND emp1.company_id = tal.company_id
                 AND emp1.is_active = 0
-          LEFT JOIN employees emp2 
+          LEFT JOIN employees emp2
                  ON tal.user_id = emp2.user_id
                 AND emp2.company_id = tal.company_id
                 AND emp2.is_active = 0
@@ -6044,16 +6037,16 @@ $creditside = array('credit_notes','payments');
 	 	sum(lm3) as r3,
 	 	sum(lm2) as r2,
 	 	sum(lm1) as r1
-	 	FROM    ( 
-	 	SELECT    DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt, 
-	 	DATE_FORMAT(emp.joining_date, '%Y-%m')dojm, 
-	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) 
+	 	FROM    (
+	 	SELECT    DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt,
+	 	DATE_FORMAT(emp.joining_date, '%Y-%m')dojm,
+	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END M12,
-	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) 
+	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END M11,
-	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) 
+	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END M10,
 	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' )
@@ -6084,14 +6077,14 @@ $creditside = array('credit_notes','payments');
 	 	THEN 1
 	 	END M1,
 	 	DATE_FORMAT(emp.joining_date, '%Y-%m') monyr,
-	 	DATE_FORMAT(emp.date_of_leaving, '%Y-%m')dolm, 
-	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) 
+	 	DATE_FORMAT(emp.date_of_leaving, '%Y-%m')dolm,
+	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END LM12,
-	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) 
+	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END LM11,
-	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) 
+	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END LM10,
 	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' )
@@ -6122,12 +6115,12 @@ $creditside = array('credit_notes','payments');
 	 	THEN 1
 	 	END LM1,
 	 	DATE_FORMAT(emp.date_of_leaving, '%Y-%m') lmonyrl
-	 	FROM     employees emp 
+	 	FROM     employees emp
 	 	WHERE    emp.company_id = 1
 	 	AND       (
-	 	(emp.joining_date >= '".$thisyearfirstmonthlastdate."' AND emp.joining_date <= '".$endate."') 
+	 	(emp.joining_date >= '".$thisyearfirstmonthlastdate."' AND emp.joining_date <= '".$endate."')
 	 	OR (emp.date_of_leaving >= '".$thisyearfirstmonthlastdate."' AND emp.date_of_leaving <= '".$endate."')
-	 	)  
+	 	)
 	 	AND emp.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get['admin_type']."') OR (emp.reporting_manager_id = '".$get['user_id']."') OR (emp.hr_buddy = '".$get['emp_id']."') OR (emp.finance_buddy = '".$get['emp_id']."') ) ELSE( emp.vendor_id = (SELECT id FROM vendors ven2 WHERE ven2.email = '".$get['user_email']."'))END))a";
 
 	 	$sqqlgraphres = $callConfig->getRow($sqqlgraph);
@@ -6242,7 +6235,7 @@ $creditside = array('credit_notes','payments');
 	 	$data['todayattendants']['transport_getway'] = 0;
 	 	$data['todayattendants']['transport_getway_ids'] = array();
 	 	$query = "SELECT tpg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, emp.gender, emp.phone, emp.image, emp.reporting_manager_id,  emp.designation_id, emp.department_id, CONCAT('Visit Purpose : ', tpg.visit_purpose) as other, GROUP_CONCAT(emp1.display_name) as emp_names FROM transport_gateway tpg
-            LEFT JOIN employees emp ON (emp.id = tpg.driver_name OR emp.id=tpg.user_id) AND emp.company_id = tpg.company_id AND emp.is_active=0 
+            LEFT JOIN employees emp ON (emp.id = tpg.driver_name OR emp.id=tpg.user_id) AND emp.company_id = tpg.company_id AND emp.is_active=0
             LEFT JOIN employees emp1 ON FIND_IN_SET(emp1.id, tpg.emp_ids) AND emp1.company_id = tpg.company_id  AND emp1.is_active = 0
             WHERE  tpg.company_id={$get['company_id']} AND tpg.is_active=0 AND ( tpg.entry_date ='".$today_date."' OR tpg.exit_date ='".$today_date."' ) AND tpg.is_active = 0  GROUP BY tpg.id";
 
@@ -6357,10 +6350,10 @@ $creditside = array('credit_notes','payments');
 	    $user_id = $get['user_id'];
 
 	    // Always get all categories
-	    $cat_query = "SELECT id, name 
-	                  FROM stationery_categories 
-	                  WHERE company_id = '{$company_id}' 
-	                    AND is_active = 0 
+	    $cat_query = "SELECT id, name
+	                  FROM stationery_categories
+	                  WHERE company_id = '{$company_id}'
+	                    AND is_active = 0
 	                  ORDER BY name ASC";
 
 	    $categories = $callConfig->getAllRows($cat_query);
@@ -6374,7 +6367,7 @@ $creditside = array('credit_notes','payments');
 	    if (isset($get['category_id']) && $get['category_id'] != '') {
 	        $category_id = $get['category_id'];
 
-	        $items_query = "SELECT 
+	        $items_query = "SELECT
 	                si.id,
 	                si.item_name,
 	                si.description,
@@ -6384,7 +6377,7 @@ $creditside = array('credit_notes','payments');
 	                sc.id AS cart_id,
 	                COALESCE(sc.qty, 0) AS cart_qty
 	            FROM stationery_items si
-	            LEFT JOIN stationery_cart sc 
+	            LEFT JOIN stationery_cart sc
 	                ON sc.item_id = si.id
 	                AND sc.company_id = '{$company_id}'
 	                AND sc.user_id = '{$user_id}'
@@ -6421,7 +6414,7 @@ $creditside = array('credit_notes','payments');
 	    // Escape special characters for LIKE query
 	    $item_name = $callConfig->real_escape_string($item_name);
 
-	    $query = "SELECT 
+	    $query = "SELECT
 	            si.id,
 	            si.item_name,
 	            si.description,
@@ -6431,7 +6424,7 @@ $creditside = array('credit_notes','payments');
 	            sc.id AS cart_id,
 	            COALESCE(sc.qty, 0) AS cart_qty
 	        FROM stationery_items si
-	        LEFT JOIN stationery_cart sc 
+	        LEFT JOIN stationery_cart sc
 	            ON sc.item_id = si.id
 	            AND sc.company_id = '{$company_id}'
 	            AND sc.user_id = '{$user_id}'
@@ -6484,10 +6477,10 @@ $creditside = array('credit_notes','payments');
 	    if ($cart_type == 1) {
 	        // If cart_id is provided, update that specific cart item
 	        if (!empty($cart_id)) {
-	            $check_query = "SELECT id, qty FROM stationery_cart 
+	            $check_query = "SELECT id, qty FROM stationery_cart
 	                            WHERE id = '{$cart_id}'
-	                              AND company_id = '{$company_id}' 
-	                              AND user_id = '{$user_id}' 
+	                              AND company_id = '{$company_id}'
+	                              AND user_id = '{$user_id}'
 	                              AND item_id = '{$item_id}'
 	                              AND request_no IS NULL
 	                              AND is_active = 0
@@ -6515,9 +6508,9 @@ $creditside = array('credit_notes','payments');
 	            }
 	        } else {
 	            // No cart_id provided, check if item already exists in temp cart by item_id
-	            $check_query = "SELECT id, qty FROM stationery_cart 
-	                            WHERE company_id = '{$company_id}' 
-	                              AND user_id = '{$user_id}' 
+	            $check_query = "SELECT id, qty FROM stationery_cart
+	                            WHERE company_id = '{$company_id}'
+	                              AND user_id = '{$user_id}'
 	                              AND item_id = '{$item_id}'
 	                              AND request_no IS NULL
 	                              AND is_active = 0
@@ -6571,7 +6564,7 @@ $creditside = array('credit_notes','payments');
 	        }
 
 	        // Get current quantity
-	        $check_query = "SELECT qty FROM stationery_cart 
+	        $check_query = "SELECT qty FROM stationery_cart
 	                        WHERE id = '{$cart_id}'
 	                          AND company_id = '{$company_id}'
 	                          AND user_id = '{$user_id}'
@@ -6614,8 +6607,8 @@ $creditside = array('credit_notes','payments');
 	    }
 
 	    // Get total cart items count
-	    $count_query = "SELECT SUM(qty) as total_items 
-	                    FROM stationery_cart 
+	    $count_query = "SELECT SUM(qty) as total_items
+	                    FROM stationery_cart
 	                    WHERE company_id = '{$company_id}'
 	                      AND user_id = '{$user_id}'
 	                      AND request_no IS NULL
@@ -6645,7 +6638,7 @@ $creditside = array('credit_notes','payments');
 	    $user_id = $get['user_id'];
 
 	    // Fetch all cart items with full item details
-	    $query = "SELECT 
+	    $query = "SELECT
 	            sc.id AS cart_id,
 	            sc.item_id AS id,
 	            sc.qty AS cart_qty,
@@ -6658,7 +6651,7 @@ $creditside = array('credit_notes','payments');
 	            si.category_id,
 	            cat.name AS category_name
 	        FROM stationery_cart sc
-	        INNER JOIN stationery_items si 
+	        INNER JOIN stationery_items si
 	            ON si.id = sc.item_id
 	            AND si.company_id = sc.company_id
 	            AND si.is_active = 0
@@ -6676,10 +6669,10 @@ $creditside = array('credit_notes','payments');
 	    $cart_items = $callConfig->getAllRows($query);
 
 	    // Get total cart count
-	    $count_query = "SELECT 
+	    $count_query = "SELECT
 	                    COUNT(*) as total_items,
 	                    SUM(qty) as total_qty
-	                FROM stationery_cart 
+	                FROM stationery_cart
 	                WHERE company_id = '{$company_id}'
 	                  AND user_id = '{$user_id}'
 	                  AND request_no IS NULL
@@ -6760,8 +6753,8 @@ $creditside = array('credit_notes','payments');
 	    $request_id = $request_res['LASTID'];
 
 	    /* ===== 3. Get all temporary cart items (request_no IS NULL) ===== */
-	    $cart_query = "SELECT id, item_id, qty, color_id, size_id, uniform_type_id 
-	                   FROM stationery_cart 
+	    $cart_query = "SELECT id, item_id, qty, color_id, size_id, uniform_type_id
+	                   FROM stationery_cart
 	                   WHERE company_id = '{$company_id}'
 	                     AND user_id = '{$user_id}'
 	                     AND request_no IS NULL
@@ -6930,12 +6923,12 @@ $creditside = array('credit_notes','payments');
 		}
 
 		// Get asset request details with related data
-		$query = "SELECT ar.*, 
+		$query = "SELECT ar.*,
 			ac.category_description AS category_name,
 			loc.location_name,
-			au.display_name AS originator_name, 
+			au.display_name AS originator_name,
 			au.user_email AS originator_email,
-			apu.display_name AS approval_name, 
+			apu.display_name AS approval_name,
 			apu.user_email AS approval_email
 		FROM asset_requests ar
 		LEFT JOIN asset_categories ac ON ac.id = ar.category_id AND ac.company_id = ar.company_id AND ac.is_active=0
@@ -6965,7 +6958,7 @@ $creditside = array('credit_notes','payments');
 		if (count($attribute_ids) > 0) {
 			$attribute_ids = array_map('intval', $attribute_ids);
 			$attr_ids = implode(',', $attribute_ids);
-			$attr_query = "SELECT id, name FROM asset_attributes 
+			$attr_query = "SELECT id, name FROM asset_attributes
 				WHERE company_id = {$company_id} AND is_active = 0 AND id IN ({$attr_ids})";
 			$attributes = $callConfig->getAllRows($attr_query);
 		}
@@ -7049,7 +7042,7 @@ $creditside = array('credit_notes','payments');
 			return $return;
 		}
 
-		$query = "SELECT rwfh.*, 
+		$query = "SELECT rwfh.*,
 			emp.emp_code,
 			emp.display_name AS emp_name
 		FROM request_work_from_home rwfh
@@ -7085,7 +7078,7 @@ $creditside = array('credit_notes','payments');
             }
 
             // Query 1: Get all active users from application_users
-            $users_query = "SELECT 
+            $users_query = "SELECT
                     id,
                     display_name,
                     user_email,
@@ -7096,7 +7089,7 @@ $creditside = array('credit_notes','payments');
                     last_logged_in_at,
                     user_type
                 FROM " . TBL_USERS . "
-                WHERE company_id = '" . $company_id . "' 
+                WHERE company_id = '" . $company_id . "'
                 AND user_activated = 0
                 AND is_active = 0
                 ORDER BY display_name ASC";
@@ -7104,9 +7097,9 @@ $creditside = array('credit_notes','payments');
             $all_users = (array)$callConfig->getAllRows($users_query);
 
             // Query 2: Get unique user IDs who have logged in via mobile
-            $mobile_users_query = "SELECT DISTINCT user_id 
-                FROM user_mobile_details 
-                WHERE company_id = '" . $company_id . "' 
+            $mobile_users_query = "SELECT DISTINCT user_id
+                FROM user_mobile_details
+                WHERE company_id = '" . $company_id . "'
                 AND (is_active = 0 OR is_active IS NULL)
                 AND user_id IS NOT NULL";
 
@@ -7344,16 +7337,16 @@ $creditside = array('credit_notes','payments');
 	 	sum(lm3) as r3,
 	 	sum(lm2) as r2,
 	 	sum(lm1) as r1
-	 	FROM    ( 
-	 	SELECT    DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt, 
-	 	DATE_FORMAT(emp.joining_date, '%Y-%m')dojm, 
-	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) 
+	 	FROM    (
+	 	SELECT    DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt,
+	 	DATE_FORMAT(emp.joining_date, '%Y-%m')dojm,
+	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END M12,
-	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) 
+	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END M11,
-	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) 
+	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END M10,
 	 	CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' )
@@ -7384,14 +7377,14 @@ $creditside = array('credit_notes','payments');
 	 	THEN 1
 	 	END M1,
 	 	DATE_FORMAT(emp.joining_date, '%Y-%m') monyr,
-	 	DATE_FORMAT(emp.date_of_leaving, '%Y-%m')dolm, 
-	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) 
+	 	DATE_FORMAT(emp.date_of_leaving, '%Y-%m')dolm,
+	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END LM12,
-	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) 
+	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END LM11,
-	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) 
+	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' )
 	 	THEN 1
 	 	END LM10,
 	 	CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' )
@@ -7422,12 +7415,12 @@ $creditside = array('credit_notes','payments');
 	 	THEN 1
 	 	END LM1,
 	 	DATE_FORMAT(emp.date_of_leaving, '%Y-%m') lmonyrl
-	 	FROM     employees emp 
+	 	FROM     employees emp
 	 	WHERE    emp.company_id = 1 AND emp.division_id='{$division_id}'
 	 	AND       (
-	 	(emp.joining_date >= '".$thisyearfirstmonthlastdate."' AND emp.joining_date <= '".$endate."') 
+	 	(emp.joining_date >= '".$thisyearfirstmonthlastdate."' AND emp.joining_date <= '".$endate."')
 	 	OR (emp.date_of_leaving >= '".$thisyearfirstmonthlastdate."' AND emp.date_of_leaving <= '".$endate."')
-	 	)  
+	 	)
 	 	AND emp.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get['admin_type']."') OR (emp.reporting_manager_id = '".$get['user_id']."') OR (emp.hr_buddy = '".$get['emp_id']."') OR (emp.finance_buddy = '".$get['emp_id']."') ) ELSE( emp.vendor_id = (SELECT id FROM vendors ven2 WHERE ven2.email = '".$get['user_email']."'))END))a";
 
 	 	$sqqlgraphres = $callConfig->getRow($sqqlgraph);
@@ -7613,8 +7606,8 @@ $creditside = array('credit_notes','payments');
 		    // On leave count for that date
 		    $next_day = date('Y-m-d', strtotime($trend_date . ' +1 day'));
 		    $leavequery = "SELECT emp.id FROM employees emp, employee_leaves el
-		        WHERE emp.company_id = '".$get['company_id']."' AND emp.is_active = 0 $division_whr 
-		        AND (CASE 
+		        WHERE emp.company_id = '".$get['company_id']."' AND emp.is_active = 0 $division_whr
+		        AND (CASE
 		                WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate."') THEN 1
 		                WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0) THEN 1
 		                ELSE 2
@@ -7653,8 +7646,8 @@ $creditside = array('credit_notes','payments');
 
 		$resigned_employees_query = "SELECT emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image, emp.reporting_manager_id, et.employee_leaving_date, COUNT(ea.id) AS asset_count
 		FROM employees emp
-		INNER JOIN employee_terminations et ON et.emp_id = emp.id AND et.company_id = emp.company_id AND et.is_active = 0 
-		LEFT JOIN employee_assets ea ON ea.emp_id = emp.id AND ea.company_id = emp.company_id AND ea.is_active = 0 
+		INNER JOIN employee_terminations et ON et.emp_id = emp.id AND et.company_id = emp.company_id AND et.is_active = 0
+		LEFT JOIN employee_assets ea ON ea.emp_id = emp.id AND ea.company_id = emp.company_id AND ea.is_active = 0
 		WHERE emp.company_id = '".$get['company_id']."' AND emp.is_active = 0 GROUP BY emp.id,emp.display_name,emp.email_id,emp.gender,emp.employee_type,emp.emp_code,emp.phone,emp.image,emp.reporting_manager_id";
 
 		$resigned_employees = $callConfig->getAllRows($resigned_employees_query);
@@ -7754,7 +7747,7 @@ $creditside = array('credit_notes','payments');
 		// make IN clause properly
 		$table_list = "'" . implode("','", $tables_array) . "'";
 
-		$query = "SELECT 
+		$query = "SELECT
             tal.id AS transaction_approval_log_id,
             tal.transaction_table AS transaction_table,
             tal.transaction_id AS rid,
@@ -7762,11 +7755,11 @@ $creditside = array('credit_notes','payments');
             COALESCE(emp2.display_name, '-') AS pending_approval,
             tal.previous_status AS current_status
           FROM transaction_approval_logs tal
-          LEFT JOIN employees emp1 
+          LEFT JOIN employees emp1
                  ON tal.assigner_user_id = emp1.user_id
                 AND emp1.company_id = tal.company_id
                 AND emp1.is_active = 0
-          LEFT JOIN employees emp2 
+          LEFT JOIN employees emp2
                  ON tal.user_id = emp2.user_id
                 AND emp2.company_id = tal.company_id
                 AND emp2.is_active = 0
@@ -7923,7 +7916,7 @@ $creditside = array('credit_notes','payments');
 	    }
 	    $employee_query = "SELECT emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image, emp.reporting_manager_id, et.id as termination_id, et.termination_type, et.termination_reason, et.notice_period_required, et.effective_date, et.noticeperiod_days, et.shortfalldays_in_noticeperiod, et.employee_leaving_date, et.exclude_final_settlement, et.remarks_by_employee, et.current_status
             FROM employees emp
-            INNER JOIN employee_terminations et ON et.emp_id = emp.id AND et.company_id = emp.company_id AND et.is_active = 0 
+            INNER JOIN employee_terminations et ON et.emp_id = emp.id AND et.company_id = emp.company_id AND et.is_active = 0
             WHERE emp.company_id = '".$company_id."' AND emp.id = '".$emp_id."' AND emp.is_active = 0 ORDER BY et.id DESC LIMIT 1";
 	    $employee_result = $callConfig->getRow($employee_query);
 
@@ -7947,7 +7940,7 @@ $creditside = array('credit_notes','payments');
 	public function togetjobpostingdetailsbyid($get){
 		global $callConfig;
 		//CAST(FROM_BASE64(jp.job_desc) AS CHAR) AS`job_desc`,
-		$query = "SELECT 
+		$query = "SELECT
 				    jp.id,
 				    jp.job_code,
 				    jp.job_number,
@@ -7983,7 +7976,7 @@ $creditside = array('credit_notes','payments');
 				FROM job_postings jp WHERE jp.company_id =".$get['company_id']."  AND jp.id=".$get['job_post_id']."  AND jp.is_active = 0 ";
 		$rows = $callConfig->getRow($query);
 		$return['data'] = $rows;
-		$query = "SELECT 
+		$query = "SELECT
 				jpc.id,
 			    jpc.`candidate_name`,
 			    jpc.`candidate_email`,
@@ -7995,7 +7988,7 @@ $creditside = array('credit_notes','payments');
 			    jpc.`candidate_id`,
 			    jpc.`created_date`,
 			    jpc.`job_selection_process_step_id`,
-			    
+
 			    CASE
 			        WHEN jpc.candidate_id IS NOT NULL THEN 'Selected'
 			        WHEN jpc.job_selection_process_step_id IS NOT NULL THEN
@@ -8015,7 +8008,7 @@ $creditside = array('credit_notes','payments');
 	public function tocandidatedetailsbyid($get){
 		global $callConfig;
 
-		$query = "SELECT 
+		$query = "SELECT
 			    jpc.`candidate_name`,
 			    jpc.`candidate_email`,
 			    jpc.`candidate_phone`,
@@ -8026,7 +8019,7 @@ $creditside = array('credit_notes','payments');
 			    jpc.`candidate_id`,
 			    jpc.`created_date`,
 			    jpc.`job_selection_process_step_id`,
-			    
+
 			    CASE
 			        WHEN jpc.candidate_id IS NOT NULL THEN 'Selected'
 			        WHEN jpc.job_selection_process_step_id IS NOT NULL THEN
@@ -8175,7 +8168,7 @@ $creditside = array('credit_notes','payments');
 		global $callConfig;
 
 		$claimObj=new claimUserClass();
-        $return = $claimObj->insertAndUpdateTrevllingPlans($get, $post);
+        return $claimObj->insertAndUpdateTrevllingPlans($get, $post);
 
 		/**
 		//echo "<pre>"; print_r($get); print_r($post); exit;
@@ -8235,8 +8228,6 @@ $creditside = array('credit_notes','payments');
 		}
 		$return['estimation'] = '20000';
 		**/
-
-		return $return;
 	}
 	public function togettripsdetails($get){
 		global $callConfig;
@@ -8535,9 +8526,8 @@ $creditside = array('credit_notes','payments');
 		$project = (object)array('project_name'=>'');
 		$email_content_id =38;
 		$senddata = array('session_company_id'=>$get['company_id'],'email_content_id'=>$email_content_id, 'project_name'=>$project->project_name,'user_display_name'=>$taskowner->display_name,'cc_users'=>$notuser,'to_users'=>$owneuser,'task_name'=>$taskdetails->task_name,'assigners_name'=>'','planned_start'=>$taskdetails->planned_start,'planned_finish'=>$taskdetails->planned_finish,'current_status'=>$statuslist[$taskdetails->current_status]);
-		$res = $this->emailsendmediater($senddata);
 		//rohan added
-		return $res;
+		return $this->emailsendmediater($senddata);
 	}
 	public function passprojectTaskid($post,$get,$task_id){
 		global $callConfig;

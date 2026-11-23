@@ -8,7 +8,6 @@ class demoClass extends userClass{
 			if($rid ==""){
 			$rid = $get['rid'];
 			}
-			$return = array();
 			$configsql = "SELECT * FROM config WHERE company_id = '".$get['company_id']."' AND is_active =0";
 			$configres=$callConfig->getRow($configsql);
 
@@ -62,7 +61,7 @@ class demoClass extends userClass{
 					                    Payment Terms &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; NET +  '.$rental_invoicesres->payment_terms.' DAYS<br/><br/>
 					                    Place Of Supply &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;'.$rental_invoicesres->place_of_supply.'
 					                    </p>
-					                </div>    
+					                </div>
 					            </td>
 					        </tr>
 					    </table>
@@ -145,7 +144,7 @@ class demoClass extends userClass{
           $content .= '<div class="invoice-bottom">
                             <div class="row">
                                 <div class="col-sm-6">
-                                
+
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="amount text-end">
@@ -287,7 +286,6 @@ class demoClass extends userClass{
 					$query=$callConfig->selectQuery(TBL_APPLICATION_PAGES,'*',$whr,'','','');
 					$data33 = $callConfig->getRow($query);
 					if($data33->id ==''){
-						$field=array('company_id'=>$get['company_id'],'application_table_name'=>$tablesname,'list_page_name'=>strtoupper("COM_LIST_".$tablesname),'insert_page_name'=>strtoupper("COM_INSERT_".$tablesname),'edit_page_name'=>strtoupper("COM_EDIT_".$tablesname),'view_page_name'=>strtoupper("COM_view_".$tablesname),'list_page_type'=>1,'insert_page_type'=>1,'edit_page_type'=>1,'view_page_type'=>1,'Current_Status'=>0,'is_active'=>'0');
 						$res222 = array();
 						$return[$tablesname][] = $res222;
 					}
@@ -302,7 +300,6 @@ class demoClass extends userClass{
 			if($rid ==""){
 			$rid = $get['rid'];
 			}
-			$return = array();
 			$configsql = "SELECT * FROM config WHERE company_id = '".$get['company_id']."' AND is_active =0";
 			$configres=$callConfig->getRow($configsql);
 

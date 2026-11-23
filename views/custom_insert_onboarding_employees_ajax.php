@@ -28,7 +28,6 @@ $locations = $result['locations'];
 $employment_bands = $result['employment_bands'];
 $employment_levels = $result['employment_levels'];
 $employment_roles = $result['employment_roles'];
-$application_roles = $result['application_roles'];
 $marital_statuses = $result['marital_statuses'];
 $blood_groups = $result['blood_groups'];
 $verticals = $result['verticals'];
@@ -47,11 +46,8 @@ $countries = $result['countries'];
 $emp_visa = $result['emp_visa'];
 $emp_skills = $result['emp_skills'];
 $skills = $result['skills'];
-$teams =  $result['teams'];
 $emp_banks = $result['emp_banks'];
 $emp_bank_status = $result['emp_bank_status'];
-$employee_access = $result['employee_access'];
-$employee_other_access = $result['employee_other_access'];
 $statuse = ViewStatusData();
 
 

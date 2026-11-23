@@ -423,7 +423,7 @@ class manfacturingForecastUserClass extends userClass{
                 ON mo.id = o.manufacturing_operation_id
                 AND mo.company_id = o.company_id
                 AND mo.is_active = 0
-            WHERE o.company_id = w.company_id  
+            WHERE o.company_id = w.company_id
               AND o.transaction_id = w.id
               AND o.is_active = 0 ), ''), ']') AS operations FROM manufacturing_work_orders w LEFT JOIN status s ON s.company_id = w.company_id AND s.name_value = w.current_status AND s.is_active = 0  LEFT JOIN items p  ON p.id = w.work_order_item_id  AND p.company_id = w.company_id  AND p.is_active = 0  WHERE w.company_id = '" . $company_id . "'  AND w.is_active = 0 ";
         $results = $callConfig->getAllRows($query);
@@ -1158,7 +1158,7 @@ class manfacturingForecastUserClass extends userClass{
         // Fetch all active work orders for the company
         $query = "SELECT mwo.id,mwo.transaction_no
             FROM manufacturing_work_orders mwo
-            WHERE mwo.company_id = '{$company_id}' 
+            WHERE mwo.company_id = '{$company_id}'
                 AND mwo.is_active = 0 AND current_status=199
                 AND IFNULL(mwo.completed_qty, 0) < IFNULL(mwo.work_order_item_qty, 0)
             ORDER BY mwo.id DESC";
@@ -1170,8 +1170,8 @@ class manfacturingForecastUserClass extends userClass{
         if($production_note_id != '' && $production_note_id != 0){
             $query = "SELECT mpn.transaction_no, mpn.transaction_date, mpn.work_order_id, mpn.item_id, mpn.request_qty, mpn.produced_qty, mpn.wastage_qty, mpn.remarks, i.item_name
                 FROM manufacturing_product_notes mpn
-                LEFT JOIN items i 
-                    ON i.id = mpn.item_id 
+                LEFT JOIN items i
+                    ON i.id = mpn.item_id
                     AND i.company_id = mpn.company_id
                 WHERE mpn.company_id = '{$company_id}'
                     AND mpn.id = '{$production_note_id}'
@@ -1182,10 +1182,10 @@ class manfacturingForecastUserClass extends userClass{
 
             $query2 = "SELECT mpni.id, mpni.transaction_id, mpni.work_order_id, mpni.item_id, mpni.received_qty, mpni.produced_qty, mpni.wastage_qty, i.item_name
                 FROM manufacturing_product_note_items mpni
-                LEFT JOIN items i ON i.id = mpni.item_id 
+                LEFT JOIN items i ON i.id = mpni.item_id
                     AND i.company_id = mpni.company_id
-                WHERE mpni.company_id = '{$company_id}' 
-                    AND mpni.transaction_id = '{$production_note_id}' 
+                WHERE mpni.company_id = '{$company_id}'
+                    AND mpni.transaction_id = '{$production_note_id}'
                     AND mpni.is_active = 0";
             $items = $callConfig->getAllRows($query2);
             $return['product_note_items'] = $items;
@@ -1194,8 +1194,8 @@ class manfacturingForecastUserClass extends userClass{
             // ===== 1. Get Work Order Master =====
             $query = "SELECT mwo.id,mwo.transaction_no,mwo.transaction_date,mwo.work_order_item_qty,mwo.completed_qty,mwo.planned_start_date,mwo.planned_end_date,mwo.work_log_status,i.item_name, mwo.work_order_item_id
                 FROM manufacturing_work_orders mwo
-                LEFT JOIN items i 
-                    ON i.id = mwo.work_order_item_id 
+                LEFT JOIN items i
+                    ON i.id = mwo.work_order_item_id
                     AND i.company_id = mwo.company_id
                 WHERE mwo.company_id = '{$company_id}'
                     AND mwo.id = '{$work_order_id}'
@@ -1206,12 +1206,12 @@ class manfacturingForecastUserClass extends userClass{
             // ===== 2. Get Work Order Items =====
             $query2 = "SELECT mwoi.id,i.item_name,mwoi.request_qty,mwoi.stock_request_qty, mwoi.stock_receipts_qty, mwoi.completed_qty, i.item_name, concat(uom.uom_short_code,'-',uom.uom_name) as unit, mwoi.item_id
                 FROM manufacturing_work_order_items mwoi
-                LEFT JOIN items i ON i.id = mwoi.item_id 
+                LEFT JOIN items i ON i.id = mwoi.item_id
                     AND i.company_id = mwoi.company_id
-                LEFT JOIN unit_of_measurements uom ON uom.id = mwoi.uom 
+                LEFT JOIN unit_of_measurements uom ON uom.id = mwoi.uom
                 AND i.company_id = mwoi.company_id
-                WHERE mwoi.company_id = '{$company_id}' 
-                    AND mwoi.transaction_id = '{$work_order_id}' 
+                WHERE mwoi.company_id = '{$company_id}'
+                    AND mwoi.transaction_id = '{$work_order_id}'
                     AND mwoi.is_active = 0";
             $items = $callConfig->getAllRows($query2);
             $return['work_order_items'] = $items;
@@ -1299,7 +1299,7 @@ class manfacturingForecastUserClass extends userClass{
             $return['product_note_id'] = $note_id;
 
             if (isset($res->id)) {
-                $update = $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $res->serial_number + 1), 'id', $res->id);
+                $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $res->serial_number + 1), 'id', $res->id);
             }
             // ===== Insert into manufacturing_product_note_items (Child Loop) =====
             if (count((array)$post['note_items'])>0) {
@@ -1564,7 +1564,7 @@ class manfacturingForecastUserClass extends userClass{
                 $lot_total += $lot_qty;
                 $lot_nos[] = $lot_no;
             }
-            if (count($lot_nos) == 0) {
+            if (empty($lot_nos)) {
                 return array('status' => 'fail', 'message' => 'Please enter at least one lot number.');
             }
             if (count($lot_nos) != count(array_unique($lot_nos))) {
@@ -1746,7 +1746,7 @@ class manfacturingForecastUserClass extends userClass{
         $work_order_id = $get['work_order_id'] ?? 0;
         $query = "SELECT mwo.id,mwo.transaction_no
             FROM manufacturing_work_orders mwo
-            WHERE mwo.company_id = '{$company_id}' 
+            WHERE mwo.company_id = '{$company_id}'
                 AND mwo.is_active = 0 AND current_status=199 ORDER BY mwo.id DESC";
         $res = $callConfig->getAllRows($query);
         $return['data'] = $res ?? array();
@@ -1755,8 +1755,8 @@ class manfacturingForecastUserClass extends userClass{
             // ===== 1. Get Work Order Master =====
             $query = "SELECT mwo.id,mwo.transaction_no,mwo.transaction_date,mwo.work_order_item_qty,mwo.completed_qty,mwo.planned_start_date,mwo.planned_end_date,mwo.work_log_status,i.item_name, mwo.work_order_item_id
                 FROM manufacturing_work_orders mwo
-                LEFT JOIN items i 
-                    ON i.id = mwo.work_order_item_id 
+                LEFT JOIN items i
+                    ON i.id = mwo.work_order_item_id
                     AND i.company_id = mwo.company_id
                 WHERE mwo.company_id = '{$company_id}'
                     AND mwo.id = '{$work_order_id}'
@@ -1767,22 +1767,22 @@ class manfacturingForecastUserClass extends userClass{
             // ===== 2. Get Work Order Items =====
             $query2 = "SELECT mwoi.id,i.item_name,mwoi.request_qty,mwoi.stock_request_qty, mwoi.stock_receipts_qty, mwoi.completed_qty, i.item_name, concat(uom.uom_short_code,'-',uom.uom_name) as unit, mwoi.item_id
                 FROM manufacturing_work_order_items mwoi
-                LEFT JOIN items i ON i.id = mwoi.item_id 
+                LEFT JOIN items i ON i.id = mwoi.item_id
                     AND i.company_id = mwoi.company_id
-                LEFT JOIN unit_of_measurements uom ON uom.id = mwoi.uom 
+                LEFT JOIN unit_of_measurements uom ON uom.id = mwoi.uom
                 AND i.company_id = mwoi.company_id
-                WHERE mwoi.company_id = '{$company_id}' 
-                    AND mwoi.transaction_id = '{$work_order_id}' 
+                WHERE mwoi.company_id = '{$company_id}'
+                    AND mwoi.transaction_id = '{$work_order_id}'
                     AND mwoi.is_active = 0";
             $items = $callConfig->getAllRows($query2);
             $return['work_order_items'] = $items;
 
-            $query = "SELECT id,work_order_id,log_date,log_qty,remarks FROM manufacturing_work_order_logs 
+            $query = "SELECT id,work_order_id,log_date,log_qty,remarks FROM manufacturing_work_order_logs
                 WHERE company_id = '{$company_id}' AND work_order_id = '{$work_order_id}' AND is_active = 0";
             $work_order_logs = $callConfig->getAllRows($query);
             $return['work_order_logs'] = $work_order_logs;
 
-            $query = "SELECT mo.operation_name, mwoo.operation_time, mwoo.operation_manpower, mwoo.operation_note  FROM manufacturing_work_order_operations mwoo 
+            $query = "SELECT mo.operation_name, mwoo.operation_time, mwoo.operation_manpower, mwoo.operation_note  FROM manufacturing_work_order_operations mwoo
             LEFT JOIN manufacturing_operations mo ON mo.id = mwoo.manufacturing_operation_id AND mo.company_id = mwoo.company_id AND  mo.is_active = 0
                 WHERE mwoo.company_id = '{$company_id}' AND mwoo.transaction_id = '{$work_order_id}' AND mwoo.is_active = 0";
             $work_order_operations = $callConfig->getAllRows($query);
@@ -1800,7 +1800,7 @@ class manfacturingForecastUserClass extends userClass{
         // ===== Always get stock requests with pending manufacturing transfer qty =====
         $query = "SELECT id, transaction_number, transaction_date, party_name, transaction_location_id, request_warehouse_id, total_amount, ref_type, ref_no
             FROM stock_requests
-            WHERE company_id = '{$company_id}' 
+            WHERE company_id = '{$company_id}'
                 AND is_active = 0
                 AND ref_type = 'manufacturing_work_orders'
                 AND current_status = '".ST_APPROVED."'
@@ -1831,17 +1831,17 @@ class manfacturingForecastUserClass extends userClass{
             $return['work_order_no'] = !empty($stock_request->id) ? ($stock_request->ref_no ?? '') : '';
 
             // Get stock request items
-            $query2 = "SELECT sri.id, sri.item_id, sri.item_name, sri.item_quantity, sri.item_price, sri.item_amount, 
-                        sri.approved_quantity, sri.transaction_qty, sri.pending_qty, 
+            $query2 = "SELECT sri.id, sri.item_id, sri.item_name, sri.item_quantity, sri.item_price, sri.item_amount,
+                        sri.approved_quantity, sri.transaction_qty, sri.pending_qty,
                         i.sku, i.purchase_uom, i.sale_uom,
                         concat(uom.uom_short_code,'-',uom.uom_name) as unit
                 FROM stkreq_items sri
-                LEFT JOIN items i ON i.id = sri.item_id 
+                LEFT JOIN items i ON i.id = sri.item_id
                     AND i.company_id = sri.company_id
-                LEFT JOIN unit_of_measurements uom ON uom.id = i.purchase_uom 
+                LEFT JOIN unit_of_measurements uom ON uom.id = i.purchase_uom
                     AND uom.company_id = sri.company_id
-                WHERE sri.company_id = '{$company_id}' 
-                    AND sri.transaction_id = '{$stock_request_id}' 
+                WHERE sri.company_id = '{$company_id}'
+                    AND sri.transaction_id = '{$stock_request_id}'
                     AND sri.is_active = 0";
             $items = $callConfig->getAllRows($query2);
             $return['stock_request_items'] = $items ?? array();
@@ -2100,7 +2100,7 @@ class manfacturingForecastUserClass extends userClass{
         // ===== Always get list of stock requests for initial selection =====
         $stock_requests_query = "SELECT id, transaction_number, transaction_date, ref_type, ref_no
             FROM stock_requests
-            WHERE company_id = '{$company_id}' 
+            WHERE company_id = '{$company_id}'
                 AND is_active = 0
                 AND ref_type = 'manufacturing_work_orders'
             ORDER BY id DESC";
@@ -2143,8 +2143,8 @@ class manfacturingForecastUserClass extends userClass{
             $query2 = "SELECT id, item_id, item_name, item_quantity, pending_qty, item_price, item_amount,
                         purchase_uom
                 FROM stktrn_items
-                WHERE company_id = '{$company_id}' 
-                    AND transaction_id = '{$stock_transfer_id}' 
+                WHERE company_id = '{$company_id}'
+                    AND transaction_id = '{$stock_transfer_id}'
                     AND IFNULL(pending_qty, 0) > 0
                     AND is_active = 0";
             $items = $callConfig->getAllRows($query2);
@@ -2470,7 +2470,7 @@ class manfacturingForecastUserClass extends userClass{
         }
 
         // Fetch manufacturing work order
-        $wo_query = "SELECT mwo.id, mwo.transaction_no, mwo.transaction_date, mwo.work_order_item_qty, mwo.completed_qty, 
+        $wo_query = "SELECT mwo.id, mwo.transaction_no, mwo.transaction_date, mwo.work_order_item_qty, mwo.completed_qty,
                      mwo.planned_start_date, mwo.planned_end_date, mwo.actual_start_date, mwo.actual_end_date, mwo.work_log_status,
                      mwo.work_order_item_id, i.item_name AS product_name, i.sku AS product_sku, IFNULL(i.quality_check, 0) AS quality_check,
                      IFNULL(i.tracking_type, 0) AS tracking_type, u.uom_short_code AS product_uom
@@ -2488,7 +2488,7 @@ class manfacturingForecastUserClass extends userClass{
         }
 
         // Fetch manufacturing work order items
-        $items_query = "SELECT mwoi.id, mwoi.item_id, mwoi.uom, mwoi.request_qty, mwoi.stock_receipts_qty, mwoi.completed_qty, 
+        $items_query = "SELECT mwoi.id, mwoi.item_id, mwoi.uom, mwoi.request_qty, mwoi.stock_receipts_qty, mwoi.completed_qty,
                         i.item_name, i.sku, u.uom_short_code
                         FROM manufacturing_work_order_items mwoi
                         LEFT JOIN items i ON i.id = mwoi.item_id AND i.company_id = '{$company_id}'
@@ -2509,7 +2509,6 @@ class manfacturingForecastUserClass extends userClass{
 
     public function updateManufacturingProductionData($get, $post) {
         global $callConfig;
-        $return = array();
 
         $work_order_id = $post['work_order_id'] ?? 0;
         $company_id = $post['company_id'] ?? 0;
@@ -2699,7 +2698,7 @@ class manfacturingForecastUserClass extends userClass{
                 'created_date' => date('Y-m-d H:i:s')
             );
 
-            $prod_result = $callConfig->insertRecord('manufacturing_production', $production_data);
+            $callConfig->insertRecord('manufacturing_production', $production_data);
 
             // 2. Update manufacturing_work_orders
             $total_completed_qty = $current_completed_qty + $session_completed_qty;
@@ -2714,7 +2713,7 @@ class manfacturingForecastUserClass extends userClass{
                 $wo_update['actual_end_date'] = date('Y-m-d H:i:s');
             }
 
-            $wo_result = $callConfig->updateRecord('manufacturing_work_orders', $wo_update, 'id', $work_order_id);
+            $callConfig->updateRecord('manufacturing_work_orders', $wo_update, 'id', $work_order_id);
 
             $production_post = array(
                 'company_id' => $company_id,

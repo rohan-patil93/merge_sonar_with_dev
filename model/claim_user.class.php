@@ -64,9 +64,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 		}
 		public function getReimbursementDashboardChart($get){
 			global $callConfig;
-			$exploderole = explode(',', $get['roleshortcode']);
 
-			//}
 			if($get['paymentsdashboard'] == 'Y'){
 				$employeessql = "SELECT emp.id, emp.user_id FROM employees emp WHERE emp.company_id = '".$get['company_id']."' AND emp.finance_buddy = '".$get['emp_id']."' AND emp.is_active = 0 ";
 				$employeesres = $callConfig->getAllRows($employeessql);
@@ -126,7 +124,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			}
 			$expempid = implode(',', (array)$empidlist);
 
-			$emp_expensescntsql = "SELECT sum(if(current_status=".ST_APPROVED.",1,0)) as total_cnt , sum(if(current_status=".ST_APPROVED.",total_amount,0)) as total_amount,sum(if(current_status=".ST_APPROVED.",pending_amount,0)) as pending_amount ,sum(if(current_status=".ST_APPROVED." AND pending_amount <= 0,1,0)) as inprocess_cnt, 
+			$emp_expensescntsql = "SELECT sum(if(current_status=".ST_APPROVED.",1,0)) as total_cnt , sum(if(current_status=".ST_APPROVED.",total_amount,0)) as total_amount,sum(if(current_status=".ST_APPROVED.",pending_amount,0)) as pending_amount ,sum(if(current_status=".ST_APPROVED." AND pending_amount <= 0,1,0)) as inprocess_cnt,
 			sum(if(current_status =".ST_APPROVED." AND pending_amount > 0,1,0)) as total_approved_cnt FROM emp_expenses WHERE company_id = '".$get['company_id']."' AND emp_id IN(".$expempid.") AND is_active = 0";
 			$emp_expensescntres = $callConfig->getRow($emp_expensescntsql);
 			$emp_expensescntres->paid_amount = $emp_expensescntres->total_amount - $emp_expensescntres->pending_amount;

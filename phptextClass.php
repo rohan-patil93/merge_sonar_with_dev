@@ -24,7 +24,7 @@ class phptextClass
 		}
 
 		imagefill($im,0,0,$backgroundColor);
-		list($x, $y) = $this->ImageTTFCenter($im, $text, $font, $fontSize);
+		list($x, $y) = $this->imageTtfCenter($im, $text, $font, $fontSize);
 		imagettftext($im, $fontSize, 0, $x, $y, $textColor, $font, $text);
 		if(imagejpeg($im,$dir.$fileName,90)){/*save image as JPG*/
 			imagedestroy($im);
@@ -65,7 +65,7 @@ class phptextClass
 		}
 
 		imagefill($im,0,0,$backgroundColor);
-		list($x, $y) = $this->ImageTTFCenter($im, $text, $font, $fontSize);
+		list($x, $y) = $this->imageTtfCenter($im, $text, $font, $fontSize);
 		imagettftext($im, $fontSize, 0, $x, $y, $textColor, $font, $text);
 
 		imagejpeg($im,null,90);/* Showing image */
@@ -105,7 +105,7 @@ class phptextClass
 	}
 
 	/*function to get center position on image*/
-	protected function ImageTTFCenter($image, $text, $font, $size, $angle = 8)
+	protected function imageTtfCenter($image, $text, $font, $size, $angle = 8)
 	{
 		$xi = imagesx($image);
 		$yi = imagesy($image);

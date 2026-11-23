@@ -52,8 +52,7 @@ function replaceNetTabAndsinglequote($string)
 {
 	$search = ["\t", "'"]; // Characters to search for: tab and single quote
 	$replace = ''; // Empty string to remove the characters
-	$result = str_replace($search, $replace, $string);
-	return $result;
+	return str_replace($search, $replace, $string);
 }
 
 

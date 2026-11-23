@@ -316,7 +316,7 @@
 
 
 </script>
-<?php 
+<?php
     if($timeprint == '1' && $maxtimeshow >= '18'){ echo "Start Header after script  - ".date('m/d/Y h:i:s a')."</br>";
     }
 ?>
@@ -366,7 +366,7 @@
 <?php if($_SESSION['user_activated'] == 'Y'){ ?>
          <?php  ?>
                 <li class="header-notification m-r-20">
-                 <?php 
+                 <?php
                      if(in_array($_SESSION['work_module_setup_id'], array(MODUL_HR,MODUL_ATTENDANCE))  && (/*$_SESSION['emp_pay_area']['attendance_by'] == 1*/ $_SESSION['user_clock_status'] == 'Y' || $_SESSION['admin_type'] ==1 )&& (in_array(EMPLOYEE_ROLE,(array)$_SESSION['role_ids'])) ){     ?>
                     <div class="my-lg-0 my-3">
                         <?php
@@ -678,7 +678,7 @@
     <?php } ?>
     <input type="hidden" id="work_module_setup_id" value="<?php echo base64_encode($_SESSION['work_module_setup_id']); ?>">
 </ul>
-<?php 
+<?php
     if($timeprint == '1' && $maxtimeshow >= '18'){ echo "After Header Menu  - ".date('m/d/Y h:i:s a')."</br>";
     }
 ?>

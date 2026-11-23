@@ -67,7 +67,7 @@ $row = $data['rowdata'];
 				</select>
 		</div>
 	</div>
-	<?php 
+	<?php
 		if($row['id'] !=""){?>
 
 		<div class="form-group">

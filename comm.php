@@ -1499,11 +1499,12 @@ function todisplayquerylist($data)
 {
 	$question_display = 'Y';
 	$replay_display = 'N';
-	$trnsation_no = $data['transaction_number'];
 	if ($_SESSION['userid'] == $data['originator']) {
 		$question_display = 'N';
 		$replay_display = 'Y';
 	}
+	$data['question_display'] = $question_display;
+	$data['replay_display'] = $replay_display;
 	ob_start();
 	echo '<div class="col-lg-6">';
 	include_once "views/custom_query.php";

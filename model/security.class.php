@@ -42,7 +42,7 @@ class SecurityClass
         $location_id = ' AND location_id=' . $get['location_id'];
     }
 
-    $queryTotals = "SELECT  
+    $queryTotals = "SELECT
                 COUNT(*) AS total_visitors,
                 SUM(in_datetime >= CURDATE() AND in_datetime < CURDATE() + INTERVAL 1 DAY) AS today_visitors,
                 SUM(in_datetime >= CURDATE() - INTERVAL 1 DAY AND in_datetime < CURDATE()) AS yesterday_visitors,
@@ -282,7 +282,6 @@ public function getVisitorsDataBasedOnDate($get)
     $return = array();
     $company_id = (int) ($get['company_id'] ?? 0);
     $type = trim($get['type'] ?? '');   // visitor|delivery|service|employee|others
-    $gate_id = trim($get['gate_id'] ?? '');   // '0' or numeric string
     $searchId = trim($get['id'] ?? '');   // typed ID (ID card / employee id)
     // -----------------------------
     // 1) Build LIKE search on visitor_logs
@@ -388,7 +387,6 @@ public function getVisitorsDataBasedOnDate($get)
     public function getVisitorInsertRelatedData($get){
         global $callConfig;
         $return = array();
-        $company_id = (int)($get['company_id'] ?? 0);
         $rid        = trim($get['rid'] ?? '');
         if($get['transaction_id']!="" && $get['transaction_table']!=""){
             $userObj=new userClass();
@@ -574,7 +572,7 @@ public function getVisitorsDataBasedOnDate($get)
         if (isset($get['rid']) &&  $get['rid'] != '') {
             $whr .= " AND id = '" . $get['rid'] . "' ";
         }
-        $query = "SELECT id, `display_name`, `phone`, `email_id`,  `emp_code`, address, is_active, current_Status FROM employees 
+        $query = "SELECT id, `display_name`, `phone`, `email_id`,  `emp_code`, address, is_active, current_Status FROM employees
         WHERE  company_id = " . $get['company_id'] . "    $whr  AND is_active = 0 ORDER BY id DESC LIMIT 1";
         $data = $callConfig->getRow($query);
         $return['employee_logs_res'] = $data;
@@ -595,7 +593,7 @@ public function getVisitorsDataBasedOnDate($get)
             $location_id = ' AND location_id='.$get['location_id'];
         }
         if ($phone != '') {
-            $query = "SELECT id, `name`, `phone`, `email`, `address`, `whom_to_meet`, `purpose`, `idcard_type`, `idcard_number`, `visit_type`, `image_path`, `visitor_idcard_no`, `in_gate_no`, `in_datetime`, `in_security_id`, `out_security_id`, `out_datetime`, `out_gate_no`, `remarks`, is_active, current_Status FROM visitor_logs 
+            $query = "SELECT id, `name`, `phone`, `email`, `address`, `whom_to_meet`, `purpose`, `idcard_type`, `idcard_number`, `visit_type`, `image_path`, `visitor_idcard_no`, `in_gate_no`, `in_datetime`, `in_security_id`, `out_security_id`, `out_datetime`, `out_gate_no`, `remarks`, is_active, current_Status FROM visitor_logs
             WHERE company_id = " . $get['company_id'] . " AND phone = '" . $phone . "' AND is_active = 0 $location_id ORDER BY id DESC LIMIT 5";
             $data = $callConfig->getAllRows($query);
             $return['visitor_logs_res'] = $data;
@@ -674,8 +672,7 @@ public function getVisitorsDataBasedOnDate($get)
     public function makeCode($name,$company_id){
         global $callConfig;
         $row = $callConfig->getRow("SELECT genc_detail_code FROM general_code_details WHERE company_id={$company_id} AND genc_code='{$name}' AND is_active=0 ORDER BY genc_detail_code DESC LIMIT 1");
-        $code = $row->genc_detail_code ? (int)$row->genc_detail_code + 1 : 1;
-        return $code;
+        return $row->genc_detail_code ? (int)$row->genc_detail_code + 1 : 1;
     }
     public function insertVisitorBundle($get, $post) {
         global $callConfig;
@@ -1588,7 +1585,7 @@ public function getVisitorsDataBasedOnDate($get)
         // ---------------------------
         $outLugInserted = 0;
         if (!empty($post['taking_out']) && $post['taking_out'] === 'yes' && !empty($post['out_luggage'])) {
-            foreach ($post['out_luggage'] as $rowKey => $row) {
+            foreach ($post['out_luggage'] as $row) {
                 // Skip empty rows
                 $hasAny = false;
                 foreach (['item_key','item_name','brand_name','qty','serial_or_remarks','returnable','return_date','id'] as $k) {
@@ -2407,7 +2404,7 @@ public function getVisitorProfilesReportData($get)
                 $search_cond = " AND (v.company LIKE '%{$s}%' OR v.display_name LIKE '%{$s}%' OR latest.vendor_supplier_vendor_id = '{$s}')";
             }
 
-            $query = "SELECT 
+            $query = "SELECT
                         latest.id AS latest_log_id,
                         latest.company_id,
                         latest.visit_type,
@@ -2418,18 +2415,18 @@ public function getVisitorProfilesReportData($get)
                         v.display_name AS vendor_name,
                         total_visits.count AS total_visits
                       FROM (
-                          SELECT 
-                              id, 
-                              company_id, 
-                              visit_type, 
+                          SELECT
+                              id,
+                              company_id,
+                              visit_type,
                               vendor_supplier_vendor_id,
-                              email, 
+                              email,
                               in_datetime
                           FROM visitor_logs
                           WHERE is_active = 0 AND company_id = {$company_id} {$whr}
                       ) latest
                       INNER JOIN (
-                          SELECT 
+                          SELECT
                               vendor_supplier_vendor_id AS group_vendor,
                               MAX(id) AS max_id
                           FROM visitor_logs
@@ -2437,7 +2434,7 @@ public function getVisitorProfilesReportData($get)
                           GROUP BY group_vendor
                       ) grp ON latest.id = grp.max_id
                       INNER JOIN (
-                          SELECT 
+                          SELECT
                               vendor_supplier_vendor_id AS group_vendor,
                               COUNT(*) AS count
                           FROM visitor_logs
@@ -2454,7 +2451,7 @@ public function getVisitorProfilesReportData($get)
                 $search_cond = " AND (latest.visitor_name LIKE '%{$s}%' OR latest.visitor_phone LIKE '%{$s}%' OR latest.company_name LIKE '%{$s}%')";
             }
 
-            $query = "SELECT 
+            $query = "SELECT
                         latest.id AS latest_log_id,
                         latest.company_id,
                         latest.visit_type,
@@ -2465,12 +2462,12 @@ public function getVisitorProfilesReportData($get)
                         latest.visitor_name,
                         total_visits.count AS total_visits
                       FROM (
-                          SELECT 
-                              id, 
-                              company_id, 
-                              visit_type, 
-                              company_name, 
-                              email, 
+                          SELECT
+                              id,
+                              company_id,
+                              visit_type,
+                              company_name,
+                              email,
                               in_datetime,
                               {$coalescePhone} AS visitor_phone,
                               {$coalesceName} AS visitor_name
@@ -2478,7 +2475,7 @@ public function getVisitorProfilesReportData($get)
                           WHERE is_active = 0 AND company_id = {$company_id} {$whr}
                       ) latest
                       INNER JOIN (
-                          SELECT 
+                          SELECT
                               {$coalescePhone} AS group_phone,
                               MAX(id) AS max_id
                           FROM visitor_logs
@@ -2486,7 +2483,7 @@ public function getVisitorProfilesReportData($get)
                           GROUP BY group_phone
                       ) grp ON latest.id = grp.max_id
                       INNER JOIN (
-                          SELECT 
+                          SELECT
                               {$coalescePhone} AS group_phone,
                               COUNT(*) AS count
                           FROM visitor_logs
@@ -2529,7 +2526,7 @@ public function getVisitorProfilesReportData($get)
             $whereClause = "{$coalescePhone} = '" . $callConfig->real_escape_string($phone) . "'";
         }
 
-        $queryLogs = "SELECT vl.*, 
+        $queryLogs = "SELECT vl.*,
                       loc.short_name AS location_name,
                       in_gate.name AS in_gate_name,
                       out_gate.name AS out_gate_name,

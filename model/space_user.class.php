@@ -19,7 +19,7 @@ class spaceUserClass extends userClass{
 			$return['result'] =$tapres;
 		}
 		$wh = "company_id = '".$post['company_id']."' AND is_active =0 AND building_id = '".$building_id."'";
-		$res = $callConfig->updateRecord('building_floors',array('is_active'=>null),'','',$wh); // all disabled
+		$callConfig->updateRecord('building_floors',array('is_active'=>null),'','',$wh); // all disabled
 		foreach((array)$building_floors['floor_name'] as $key=>$keyvalue){
 			$insertary=array('building_id'=>$building_id,'floor_name'=>$building_floors['floor_name'][$key],'floor_image'=>$building_floors['floor_image'][$key],'is_active'=>'0');
 
@@ -127,14 +127,12 @@ class spaceUserClass extends userClass{
 			$insertary['updated_date']=date('Y-m-d h:i:s');
 			$insertary['updated_by']=$post['user_id'];
 			$return['result'] = $callConfig->updateRecord('building_floor_spaces',$insertary,'id',$post['building_floor_cabin_id']);
-			$building_id = $post['building_floor_cabin_id'];
 		}else{
 			$insertary['created_by']=$post['user_id'];
 			$insertary['company_id']=$post['company_id'];
 			$insertary['is_active']=0;
 			$insertary['created_date']=date("Y-m-d H:i:s");
 			$tapres = $callConfig->insertRecord('building_floor_spaces',$insertary);
-			$building_id = $tapres['LASTID'];
 			$return['result'] =$tapres;
 		}
 		return $return;
@@ -596,7 +594,6 @@ class spaceUserClass extends userClass{
 					$asset_allocations[$ass->asset_id] = $ass;
 				}
 				$return['asset_allocations'] =$asset_allocations;
-				$alreadyusedassetids = implode(',', (array)$alreadyusedassetid);
 
 				$assetssql = "SELECT ass.id,ass.asset_description,ass.asset_code FROM assets ass WHERE ass.company_id = '".$get['company_id']."' AND ass.id NOT IN(SELECT aa.asset_id FROM asset_allocations aa WHERE aa.company_id = ass.company_id AND aa.is_active = ass.is_active AND building_floor_space_id !='".$get['building_floor_space_id']."') AND ass.is_active = 0";
 				$assetsres = $callConfig->getAllRows($assetssql);
@@ -715,7 +712,7 @@ class spaceUserClass extends userClass{
 				$return['select_employees'] =$employeesres;
 
 
-				$building_floor_space_allocationssql = "SELECT bfs.id, bfs.building_floor_id, bfs.cabin_name, bfs.space_type_id, bfsa.building_floor_space_id, bfsa.emp_id, bfsa.reserve_pool_id, bf.floor_name, b.building_name FROM building_floor_spaces bfs, building_floor_space_allocations bfsa, building_floors bf, buildings b  WHERE bfs.company_id = '".$get['company_id']."' AND bfs.company_id = bfsa.company_id AND bfs.id = bfsa.building_floor_space_id AND bfs.is_active = bfsa.is_active 
+				$building_floor_space_allocationssql = "SELECT bfs.id, bfs.building_floor_id, bfs.cabin_name, bfs.space_type_id, bfsa.building_floor_space_id, bfsa.emp_id, bfsa.reserve_pool_id, bf.floor_name, b.building_name FROM building_floor_spaces bfs, building_floor_space_allocations bfsa, building_floors bf, buildings b  WHERE bfs.company_id = '".$get['company_id']."' AND bfs.company_id = bfsa.company_id AND bfs.id = bfsa.building_floor_space_id AND bfs.is_active = bfsa.is_active
 				AND bf.company_id = bfsa.company_id AND bf.id = bfs.building_floor_id AND bf.is_active = bfsa.is_active AND b.company_id = bfsa.company_id AND b.id = bf.building_id AND b.is_active = bfsa.is_active AND bfs.is_active = 0 AND bfsa.emp_id IS NOT NULL";
 				$building_floor_space_allocationsres = $callConfig->getAllRows($building_floor_space_allocationssql);
 				$return['building_floor_space_allocations'] =$building_floor_space_allocationsres;
@@ -930,7 +927,6 @@ class spaceUserClass extends userClass{
 					$insertary['is_active']=0;
 					$insertary['created_date']=date("Y-m-d H:i:s");
 					$tapres = $callConfig->insertRecord('asset_allocations',$insertary);
-					$building_id = $tapres['LASTID'];
 					$return['result'] =$tapres;
 
 					$insertlog=array('company_id'=>$post['company_id'],'equipment_id'=>$post['asset_id'],'log_type'=>'EA','log_datetime'=>date("Y-m-d H:i:s"),'user_id'=>$post['user_id'],'building_floor_space_id'=>$post['building_floor_id'],'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"), 'current_status'=>'0','is_active'=>'0');
@@ -1071,7 +1067,7 @@ class spaceUserClass extends userClass{
 		$return['emp_asssign_status']  = $emp_asssign_status;
 		// return  $return;
 		//update all record same building space
-		$upres = $callConfig->updateRecord('building_floor_space_allocations',array("is_active"=>null),'building_floor_space_id',$post['building_floor_space_id']);
+		$callConfig->updateRecord('building_floor_space_allocations',array("is_active"=>null),'building_floor_space_id',$post['building_floor_space_id']);
 		//update all record same building space
 	//	return  $return;
 		//Start approval usert id get and email or notification get
@@ -1139,7 +1135,7 @@ class spaceUserClass extends userClass{
 		}
 		if($emp_asssign_status=="Y" || $emp_asssign_status=="N"){
 
-			foreach($informationlist as $keydata=>$userdetails){
+			foreach($informationlist as $userdetails){
 				foreach($userdetails as $listdetails){
 					//notification
 						$notarry['notification_users'] = array($listdetails->user_id);

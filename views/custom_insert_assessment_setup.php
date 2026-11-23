@@ -411,8 +411,8 @@ function getnamelist(){
                   $copvalue = $checkstatus=='checked'? $opvalue : '';
                   $display_question .= '
                                   
-                  </div><div class="col-lg-8"> 
-				         <div class="input-group input-group-button"> 
+                  </div><div class="col-lg-8">
+				         <div class="input-group input-group-button">
         <input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="'.__('Option').'" value="'.$opvalue.'" aria-label="Option">
         <span class="input-group-text addon-style">
             <span class=""><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i></span>

@@ -2685,7 +2685,7 @@ if($checktimeprint > 0){
 
                                             foreach($compliance_specification_documents as $atchmnt){
                                                 $csdatchmt[$atchmnt['item_name']][] = $atchmnt;
-                                            };
+                                            }
 
                                             foreach($csdatchmt as $itmname => $atchmnt){
 
@@ -2925,7 +2925,7 @@ if($checktimeprint > 0){
                          <?php  if(count((array)$distax)){
                                     $tattax = 0;
                                     foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
-                                    <?php 
+                                    <?php
                                         if($table1['originator_state_id'] == $table1['supplier_state_id']){ ?>
                                     <tr>
                                         <td class="p-2">  <?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?>
@@ -3088,7 +3088,9 @@ if($checktimeprint > 0){
                                         <td class="p-2"><?php echo fromDate($pth['due_date']); ?></td>
                                         <td class="p-2 text-right"><?php echo customeummarmonyformate($pth['amount']); ?>
                                         <?php if($pth['extra_date'] !="" && $pth['extra_amt'] !=""){?>
-                                        <span class='d-block f-10 f-w-600'><?php echo __('Before Date'); ?> <?php echo fromDate($pth['extra_date'])." (".customeummarmonyformate($pth['extra_amt']).")"; ?></span> <?php } ?></td>
+                                        <span class='d-block f-10 f-w-600'><?php echo __('Before Date'); ?> <?php echo fromDate($pth['extra_date'])." (".customeummarmonyformate($pth['extra_amt']).")"; ?></span>
+                                        <?php } ?>
+                                        </td>
                                     </tr>
                                         <?php echo '<input type="hidden" name="payment_term_history['.$mjk.'][due_date]" value="'.$pth['due_date'].'">
                                             <input type="hidden" name="payment_term_history['.$mjk.'][amount]" value="'.$pth['amount'].'">
@@ -3104,7 +3106,7 @@ if($checktimeprint > 0){
                        </div>
                    </div>
                     <div class="tab-pane card-body p-0 suppliercurrencycalc_tab" id="suppliercurrencycalc" role="tabpanel">
- <?php 
+ <?php
      ?>
                         <table   class=" table table-bordered exchange" <?php echo $currency_conversion_style; ?>>
                                     <tr class="bg-primary" >

@@ -189,9 +189,9 @@ class purchasingUserClass extends userClass{
         $return = array();
         // Case A: Dropdown list - no rid provided
             $sql = "SELECT id, transaction_number
-                    FROM subcontract_work_orders 
-                    WHERE company_id = '".$get['company_id']."' 
-                    AND is_active = 0 
+                    FROM subcontract_work_orders
+                    WHERE company_id = '".$get['company_id']."'
+                    AND is_active = 0
                     AND current_status = '".ST_APPROVED."'
                     ORDER BY transaction_date DESC";
             $records = $callConfig->getAllRows($sql);
@@ -209,8 +209,8 @@ class purchasingUserClass extends userClass{
                            LEFT JOIN warehouses rw ON swo.request_warehouse_id = rw.id AND rw.is_active = 0
                            LEFT JOIN warehouses pw ON swo.party_warehouse_id = pw.id AND pw.is_active = 0
                            LEFT JOIN items itm ON swo.product_id = itm.id AND itm.company_id = '".$get['company_id']."' AND itm.is_active = 0
-                           WHERE swo.id = '".$rid."' 
-                           AND swo.company_id = '".$get['company_id']."' 
+                           WHERE swo.id = '".$rid."'
+                           AND swo.company_id = '".$get['company_id']."'
                            AND swo.is_active = 0";
             $parent = $callConfig->getRow($parent_sql);
 
@@ -220,7 +220,7 @@ class purchasingUserClass extends userClass{
                 return $return;
             }
             // Fetch child items
-            $child_sql = "SELECT 
+            $child_sql = "SELECT
                             swoi.*,
                             i.sku,
                             i.item_name,
@@ -230,8 +230,8 @@ class purchasingUserClass extends userClass{
                             FROM subcontract_work_order_items swoi
                             LEFT JOIN items i ON swoi.item_id = i.id AND i.company_id = '".$get['company_id']."' AND i.is_active = 0
                             LEFT JOIN unit_of_measurements u ON swoi.purchase_uom = u.id AND u.company_id = '".$get['company_id']."' AND u.is_active = 0
-                            WHERE swoi.transaction_id = '".$rid."' 
-                            AND swoi.company_id = '".$get['company_id']."' 
+                            WHERE swoi.transaction_id = '".$rid."'
+                            AND swoi.company_id = '".$get['company_id']."'
                             AND swoi.is_active = 0
                             ORDER BY swoi.id ASC";
             $child_items = $callConfig->getAllRows($child_sql);
@@ -261,7 +261,7 @@ class purchasingUserClass extends userClass{
                 }
             }
 
-            if(count($history_issue_ids) > 0){
+            if(!empty($history_issue_ids)){
                 $history_issue_ids = array_unique($history_issue_ids);
                 $issue_ids_in = "'".implode("','", $history_issue_ids)."'";
 
@@ -308,7 +308,6 @@ class purchasingUserClass extends userClass{
             $rid = $post['rid'] ?? '';
             $issues_qty = isset($post['issues_qty']) && is_array($post['issues_qty']) ? $post['issues_qty'] : array();
             $child_ids = isset($post['id']) && is_array($post['id']) ? $post['id'] : array();
-            $item_ids = isset($post['item_id']) && is_array($post['item_id']) ? $post['item_id'] : array();
 
             if (!$rid) {
                 $return['status'] = 'error';
@@ -317,9 +316,9 @@ class purchasingUserClass extends userClass{
             }
 
             // 1. Fetch parent record from subcontract_work_orders
-            $parent_sql = "SELECT * FROM subcontract_work_orders 
-                           WHERE id = '$rid' 
-                           AND company_id = '" . $get['company_id'] . "' 
+            $parent_sql = "SELECT * FROM subcontract_work_orders
+                           WHERE id = '$rid'
+                           AND company_id = '" . $get['company_id'] . "'
                            AND is_active = 0";
             $parent_record = $callConfig->getRow($parent_sql);
 
@@ -333,10 +332,10 @@ class purchasingUserClass extends userClass{
             $child_items = array();
             if (count($child_ids) > 0) {
                 $child_ids_str = "'" . implode("','", $child_ids) . "'";
-                $child_sql = "SELECT * FROM subcontract_work_order_items 
-                              WHERE id IN ($child_ids_str) 
-                              AND transaction_id = '$rid' 
-                              AND company_id = '" . $get['company_id'] . "' 
+                $child_sql = "SELECT * FROM subcontract_work_order_items
+                              WHERE id IN ($child_ids_str)
+                              AND transaction_id = '$rid'
+                              AND company_id = '" . $get['company_id'] . "'
                               AND is_active = 0";
                 $child_items = $callConfig->getAllRows($child_sql);
             }
@@ -457,7 +456,7 @@ class purchasingUserClass extends userClass{
 
         if($get['rid'] != ""){
             $rid = $get['rid'];
-            $parent_sql = "SELECT scwoi.*, 
+            $parent_sql = "SELECT scwoi.*,
                                   swo.transaction_number as subcontract_work_order_number,
                                   rw.warehouse_name as request_warehouse_name,
                                   pw.warehouse_name as party_warehouse_name,
@@ -479,7 +478,7 @@ class purchasingUserClass extends userClass{
                 return $return;
             }
 
-            $child_sql = "SELECT scwoii.*, 
+            $child_sql = "SELECT scwoii.*,
                                  itm.sku,
                                  itm.item_name,
                                  u.uom_name,
@@ -1023,7 +1022,7 @@ class purchasingUserClass extends userClass{
                 }
             }
 
-            if(count($tax_split_details) == 0){
+            if(empty($tax_split_details)){
                 $tax_sql = "SELECT tax_name, tax_value as tax_percentage, tax_amount
                             FROM subcontract_work_order_receipt_item_taxes
                             WHERE company_id = '".$get['company_id']."'

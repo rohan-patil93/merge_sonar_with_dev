@@ -49,17 +49,14 @@ class amcAccountDetailsClass extends userClass{
       $insertary['updated_by'] = $post['user_id'];
       $res = $callConfig->updateRecord('amc_account_details', $insertary, 'id', $post['rid']);
       $return['res'] = $res;
-      $customer_id = $post['rid'];
     } else {
       $insertary['is_active'] = 0;
       $insertary['current_status'] = 0;
-      
+
       $insertary['created_by'] = $post['user_id'];
       $insertary['created_date'] = date("Y-m-d H:i:s");
       $res = $callConfig->insertRecord('amc_account_details', $insertary);
       $return['res'] = $res;
-
-      $customer_id = $res['LASTID'];
     }
     return $return;
   }
@@ -322,7 +319,6 @@ class amcAccountDetailsClass extends userClass{
                 'updated_date' => date("Y-m-d H:i:s")
               );
               $callConfig->updateRecord('application_check_lists', $update_check_array, 'id', $check_id);
-              continue;
             }else{
               // Insert new checklist item
               $check_array = array(
@@ -817,7 +813,7 @@ class amcAccountDetailsClass extends userClass{
       $whr .= " AND s.service_date LIKE'%{$data['activation_date']}%'";
     }
 
-    $query = "SELECT s.* FROM  amc_service_schedules  s 
+    $query = "SELECT s.* FROM  amc_service_schedules  s
     LEFT JOIN amc_registration_details r ON r.id=s.registration_id AND r.company_id=s.company_id AND r.is_active=0
     WHERE s.company_id= {$get['company_id']} AND s.is_active=0 $whr";
     $res = $callConfig->getAllRows($query);
@@ -939,12 +935,12 @@ class amcAccountDetailsClass extends userClass{
       $table_details = $callConfig->getRow($table_details);
       $return['table'] = $table_details;
 
-      $query = "SELECT * FROM  application_attachments  
+      $query = "SELECT * FROM  application_attachments
         WHERE transaction_id = '{$get['rid']}' AND application_table_name = 'complaints'   AND  company_id='{$get['company_id']}' AND  is_active='0' ";
         $res = $callConfig->getAllRows($query);
       $return['complaints_images_data'] = $res;
 
-      $query = "SELECT t1.id, t1.user_id,t1.transaction_date,t1.remarks, t2.display_name 
+      $query = "SELECT t1.id, t1.user_id,t1.transaction_date,t1.remarks, t2.display_name
         FROM  complaint_responses t1
         LEFT JOIN application_users t2 ON t2.id = t1.user_id
         WHERE t1.complaint_id = '{$get['rid']}' AND t1.company_id='{$get['company_id']}' AND  t1.is_active=0";
@@ -953,7 +949,7 @@ class amcAccountDetailsClass extends userClass{
       $return['complaint_responses_images_data'] = array();
       if(count((array)$res)>0){
         foreach ($res as $row) {
-          $query = "SELECT * FROM  application_attachments  
+          $query = "SELECT * FROM  application_attachments
             WHERE transaction_id = $row->id AND application_table_name = 'complaint_responses'   AND  company_id='{$get['company_id']}' AND  is_active='0' ";
             $res1 = $callConfig->getAllRows($query);
           $return['complaint_responses_images_data'][$row->id] = $res1;
@@ -993,7 +989,7 @@ class amcAccountDetailsClass extends userClass{
           // ==== Fetch GRN Items (Child) ====
           $sql_items = "SELECT sgi.id, sgi.item_id, i.item_name, sgi.qty, sgi.amount
                         FROM stationery_grn_items sgi
-                        LEFT JOIN stationery_items i  ON i.id = sgi.item_id  AND i.company_id = sgi.company_id 
+                        LEFT JOIN stationery_items i  ON i.id = sgi.item_id  AND i.company_id = sgi.company_id
                         WHERE sgi.grn_id = '{$grn_id}' AND sgi.company_id = '{$company_id}' AND sgi.is_active = 0";
           $child_res = $callConfig->getAllRows($sql_items);
           $return['grn_items'] = $child_res;
@@ -1085,7 +1081,7 @@ class amcAccountDetailsClass extends userClass{
           $note_id = $result['LASTID'];
 
           if (isset($res->id)) {
-              $update = $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $res->serial_number + 1), 'id', $res->id);
+              $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $res->serial_number + 1), 'id', $res->id);
           }
           // ===== Insert into manufacturing_product_note_items (Child Loop) =====
           if (count((array)$post['item_id'])>0) {
@@ -1115,9 +1111,9 @@ class amcAccountDetailsClass extends userClass{
 
     $company_id = $get['company_id'];
 
-    $sql = "SELECT id, item_name 
-            FROM stationery_items 
-            WHERE company_id = '{$company_id}' 
+    $sql = "SELECT id, item_name
+            FROM stationery_items
+            WHERE company_id = '{$company_id}'
               AND is_active = 0
             ORDER BY item_name ASC";
     $res = $callConfig->getAllRows($sql);
@@ -1146,10 +1142,10 @@ class amcAccountDetailsClass extends userClass{
                   i.item_name
               FROM  stationery_grn_items sgi
               LEFT JOIN stationery_grn sg
-                  ON sgi.grn_id = sg.id 
+                  ON sgi.grn_id = sg.id
                  AND sgi.company_id = sg.company_id
-              LEFT JOIN stationery_items i 
-                  ON i.id = sgi.item_id 
+              LEFT JOIN stationery_items i
+                  ON i.id = sgi.item_id
                  AND i.company_id = sg.company_id
               {$whr}
               ORDER BY sg.transaction_date DESC, i.item_name ASC";
@@ -1172,15 +1168,15 @@ class amcAccountDetailsClass extends userClass{
                   i.id,
                   i.item_name,
                   COALESCE(SUM(
-                      CASE 
-                          WHEN sg.transaction_date < '{$from_date}' THEN sgi.qty 
-                          ELSE 0 
+                      CASE
+                          WHEN sg.transaction_date < '{$from_date}' THEN sgi.qty
+                          ELSE 0
                       END
                   ), 0) AS total_qty,
                   COALESCE(SUM(
-                      CASE 
-                          WHEN sg.transaction_date < '{$from_date}' THEN sgi.amount 
-                          ELSE 0 
+                      CASE
+                          WHEN sg.transaction_date < '{$from_date}' THEN sgi.amount
+                          ELSE 0
                       END
                   ), 0) AS total_amount
               FROM stationery_items AS i
@@ -1196,7 +1192,7 @@ class amcAccountDetailsClass extends userClass{
                 {$whr1}
               GROUP BY
                   i.item_name
-              ORDER BY 
+              ORDER BY
                   i.item_name ASC";
 
           $opening_res = $callConfig->getAllRows($sql_opening);
@@ -1234,7 +1230,7 @@ class amcAccountDetailsClass extends userClass{
 
       // MAIN QUERY WITH NECESSARY JOINS
       $sql = "
-          SELECT 
+          SELECT
               c.*,
               i.item_name,
               a.asset_code,
@@ -1243,19 +1239,19 @@ class amcAccountDetailsClass extends userClass{
 
           FROM complaints c
 
-          LEFT JOIN items i 
-              ON i.id = c.item_id 
-              AND i.company_id = c.company_id 
+          LEFT JOIN items i
+              ON i.id = c.item_id
+              AND i.company_id = c.company_id
               AND i.is_active = 0
 
-          LEFT JOIN assets a 
-              ON a.id = c.asset_id 
-              AND a.company_id = c.company_id 
+          LEFT JOIN assets a
+              ON a.id = c.asset_id
+              AND a.company_id = c.company_id
               AND a.is_active = 0
 
-          LEFT JOIN locations l 
-              ON l.id = c.location_id 
-              AND l.company_id = c.company_id 
+          LEFT JOIN locations l
+              ON l.id = c.location_id
+              AND l.company_id = c.company_id
               AND l.is_active = 0
           {$whr}
           ORDER BY c.transaction_date DESC, c.id DESC";
@@ -1270,14 +1266,14 @@ class amcAccountDetailsClass extends userClass{
       $return = [];
       // 1. Load Master Items & Master Assets
       $return['items_master'] = $callConfig->getAllRows("
-          SELECT id, item_name 
+          SELECT id, item_name
           FROM items
           WHERE company_id='{$company_id}' AND is_active=0
           ORDER BY item_name ASC
       ");
 
       $return['assets_master'] = $callConfig->getAllRows("
-          SELECT id, asset_code, asset_description 
+          SELECT id, asset_code, asset_description
           FROM assets
           WHERE company_id='{$company_id}' AND is_active=0
           ORDER BY asset_code ASC
@@ -1310,7 +1306,7 @@ class amcAccountDetailsClass extends userClass{
     // 3. FINAL SINGLE QUERY WITH ALL REQUIRED JOINs
     // --------------------------------------------------------
     $sql = "
-        SELECT 
+        SELECT
             c.*,
             l.short_name AS location_name,
             i.item_name,
@@ -1319,17 +1315,17 @@ class amcAccountDetailsClass extends userClass{
 
         FROM complaint_qr_codes c
 
-        LEFT JOIN locations l 
+        LEFT JOIN locations l
             ON l.id = c.location_id
             AND l.company_id = c.company_id
             AND l.is_active = 0
 
-        LEFT JOIN items i 
+        LEFT JOIN items i
             ON i.id = c.item_id
             AND i.company_id = c.company_id
             AND i.is_active = 0
 
-        LEFT JOIN assets a 
+        LEFT JOIN assets a
             ON a.id = c.asset_id
             AND a.company_id = c.company_id
             AND a.is_active = 0
@@ -1446,7 +1442,7 @@ class amcAccountDetailsClass extends userClass{
 
       // 6) AMC registrations
       $sql = "
-        SELECT 
+        SELECT
             COUNT(*) AS total,
             SUM(CASE WHEN ars.registration_id IS NOT NULL THEN 1 ELSE 0 END) AS schedule,
             SUM(CASE WHEN ars.registration_id IS NULL THEN 1 ELSE 0 END) AS pending,
@@ -1457,8 +1453,8 @@ class amcAccountDetailsClass extends userClass{
             SELECT DISTINCT registration_id, company_id
             FROM amc_service_schedules
             WHERE is_active = 0
-        ) ars 
-            ON ars.registration_id = ard.id 
+        ) ars
+            ON ars.registration_id = ard.id
           AND ars.company_id = ard.company_id
         WHERE ard.company_id = '{$company_id}'
           AND ard.is_active = 0
@@ -1487,7 +1483,7 @@ class amcAccountDetailsClass extends userClass{
     $return=array();
     $return['date']=$date;
 
-    $sql="SELECT 
+    $sql="SELECT
         ars.service_date AS date,
         ard.amc_name,
         pm.product_name,

@@ -1059,9 +1059,9 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 
 					<div class="card-body d-flex flex-column px-0">
 
-						<input type="hidden" name="" id="lamonths" value="<?php 
+						<input type="hidden" name="" id="lamonths" value="<?php
 						 ?>">
-						<input type="hidden" name="" id="lauitlize" value="<?php 
+						<input type="hidden" name="" id="lauitlize" value="<?php
 						 ?>">
 						<div id="kt_tiles_widget_1_chart" data-color="info" style="height: 125px"></div>
 

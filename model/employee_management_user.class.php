@@ -76,7 +76,7 @@ class employeeManagementUserClass extends userClass{
                     $taskfilterary[$tasks2->transaction_id] = $tasks2;
                 }
             }
-            foreach ($task_data as $key => $tasks){
+            foreach ($task_data as $tasks){
                 $task_array = array();
                 // Start check employee validate or Not For this Task
                 $filterres = $taskfilterary[$tasks->id];
@@ -208,7 +208,6 @@ class employeeManagementUserClass extends userClass{
     }
     public function updateSendVerificationDocuments($get,$post){
         global $callConfig;
-        $return = array();
         $transaction_table = $post['transaction_table'];
         $transaction_id = $post['transaction_id'];
         //Start All task Sedn to Approve

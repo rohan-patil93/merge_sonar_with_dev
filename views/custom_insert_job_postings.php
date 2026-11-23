@@ -180,7 +180,7 @@ $joblevel_list = $results['job_grade'];
     var max = 500;
     function addQuestionsTextFileds(val = '') {
         max++;
-        var html = `<div class="row rows` + max + ` mt-2"> 
+        var html = `<div class="row rows` + max + ` mt-2">
                 <input type="hidden" name="screening_question_seq[`+ max + `]" name="` + max + `">
                 <div class="col-lg-5">
                     <input class="form-control" type="text" name="screening_question[`+ max + `]" value="` + val + `" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>">
@@ -194,15 +194,15 @@ $joblevel_list = $results['job_grade'];
                     <input class="form-control" type="text" name="screening_question_answer[`+ max + `]" value="" placeholder="<?php echo __('Eg. Yes,No'); ?>" aria-label="<?php echo __('Eg. Yes,No'); ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(`+ max + `)" class="fa fa-trash text-danger cursor-pointer"></i> 
+                    <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(`+ max + `)" class="fa fa-trash text-danger cursor-pointer"></i>
                 </div>
             </div>`;
-        // var html = `<div class="row rows`+max+` mt-2"><input type="hidden" name="question_seq[]" name="`+max+`"> 
+        // var html = `<div class="row rows`+max+` mt-2"><input type="hidden" name="question_seq[]" name="`+max+`">
         //         <div class="col-lg-10">
         //             <input class="form-control" type="text" name="question[`+max+`]" value="`+val+`" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>">
         //         </div>
         //         <div class="col-lg-2">
-        //             <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(`+max+`)" class="fa fa-trash text-danger cursor-pointer"></i> 
+        //             <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(`+max+`)" class="fa fa-trash text-danger cursor-pointer"></i>
         //         </div>
         //     </div>`;
         $("#videoquestiontextfileds").append(html);

@@ -255,7 +255,7 @@ class esopUserClass extends userClass{
 				$roleres = $callConfig->getRow($query);
 
 				$insertarray = array("company_id"=>$post['company_id'],"user_id"=>$userid,"module_setup_id"=>$roleres->application_module,"application_module_id"=>$roleres->application_module,"role_id"=>$roleres->id,"role_short_code"=>$roleres->role_short_code,"is_active"=>"0","current_status"=>"0","created_date"=>date('Y-m-d h:i:s'),"created_by"=>$post['user_id']);
-				$insert = $callConfig->insertRecord('application_user_module_roles',$insertarray);
+				$callConfig->insertRecord('application_user_module_roles',$insertarray);
 
 				$emailarray['user_type'] =1;
 				$emailarray['user_company_id'] = $post['company_id'];
@@ -269,7 +269,7 @@ class esopUserClass extends userClass{
 				$emailarray['user_email'] =  $post['user_email'];
 				$emailarray['company_id'] = $post['company_id'];
 				$emailarray['template_reference_id'] = 3;
-				$data = $this->NewUserformate($emailarray,$callConfig->dbname);
+				$this->NewUserformate($emailarray,$callConfig->dbname);
 			}
 		}else{
 			$userid = $aures->id;
@@ -313,7 +313,6 @@ class esopUserClass extends userClass{
 			$insertary['updated_by']=$post['user_id'];
 			$res= $callConfig->updateRecord('esop_allocations',$insertary,'id',$post['rid']);
 			$return['res'] = $res;
-			$rid = $post['rid'];
 
 
 			$updatesql = "UPDATE esop_plan_buckets SET allocated_shares = allocated_shares  - ".$esopallocatres->option_granted." , unallocated_shares = unallocated_shares + ".$esopallocatres->option_granted." WHERE company_id = ".$post['company_id']." AND id = '".$esopallocatres->esop_bucket_id."' AND is_active = 0";
@@ -328,7 +327,6 @@ class esopUserClass extends userClass{
 			$insertary['user_id'] = $userid;
 			$res = $callConfig->insertRecord('esop_allocations',$insertary);
 			$return['res'] = $res;
-			$rid = $res['LASTID'];
 		}
 		$updatesql1 = "UPDATE esop_plan_buckets SET allocated_shares = allocated_shares  + ".$post['option_granted']." , unallocated_shares = unallocated_shares - ".$post['option_granted']." WHERE company_id = ".$post['company_id']." AND id = '".$post['esop_bucket_id']."' AND is_active = 0";
 		$callConfig->executeQuery($updatesql1);
@@ -344,7 +342,6 @@ class esopUserClass extends userClass{
 			$usertype = $investortype = array();
 			$company_contribution_userssql = "SELECT id, display_name, user_type, investor_type FROM company_contribution_users WHERE company_id = '".$get['company_id']."' AND is_active=0";
 	    	$company_contribution_usersres = $callConfig->getAllRows($company_contribution_userssql);
-	    	$companycontributionusers = array();
 	    	foreach($company_contribution_usersres as $ccu){
 	    		$usertype[$ccu->id] =$ccu->user_type;
 	    		$investortype[$ccu->id] =$ccu->investor_type;

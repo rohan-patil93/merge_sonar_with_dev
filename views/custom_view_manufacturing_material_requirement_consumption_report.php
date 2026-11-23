@@ -5,15 +5,15 @@ $url = API . "?mode=getmanufacturingmaterialrequirementconsumptionreport&from_da
 $rows = json_decode(callAPI($url), true)['data'] ?? array();
 $_SESSION['download_data'] = array();
 $csvdata = array();
-function mfg_mrc_num($value)
+function mfgMrcNum($value)
 {
     return rtrim(rtrim(number_format((float)$value, 2, '.', ''), '0'), '.');
 }
-function mfg_mrc_date($value)
+function mfgMrcDate($value)
 {
     return ($value == '' || $value == '0000-00-00') ? '-' : date('d-m-Y', strtotime($value));
 }
-function csv_safe($value)
+function csvSafe($value)
 {
     $value = (string)($value ?? '-');
 
@@ -57,34 +57,34 @@ function csv_safe($value)
                     </tr>
                     <?php foreach ($rows as $row) {
                         $csvdata[] = [
-                            'Production Notes' => csv_safe($row['production_note_no'] ?? '-'),
-                            'Last Production Date' => csv_safe(mfg_mrc_date($row['transaction_date'] ?? '')),
-                            'WO No' => csv_safe($row['work_order_no'] ?? '-'),
-                            'Product' => csv_safe($row['product_name'] ?? '-'),
-                            'Material' => csv_safe($row['material_name'] ?? '-'),
-                            'Required' => csv_safe(mfg_mrc_num($row['required_qty'] ?? 0)),
-                            'Stock Requested' => csv_safe(mfg_mrc_num($row['stock_request_qty'] ?? 0)),
-                            'Stock Received' => csv_safe(mfg_mrc_num($row['stock_receipts_qty'] ?? 0)),
-                            'Production Received' => csv_safe(mfg_mrc_num($row['production_received_qty'] ?? 0)),
-                            'Consumed' => csv_safe(mfg_mrc_num($row['consumed_qty'] ?? 0)),
-                            'Wastage' => csv_safe(mfg_mrc_num($row['wastage_qty'] ?? 0)),
-                            'Variance' => csv_safe(mfg_mrc_num($row['variance_qty'] ?? 0)),
-                            'UOM' => csv_safe($row['uom_name'] ?? '-'),
+                            'Production Notes' => csvSafe($row['production_note_no'] ?? '-'),
+                            'Last Production Date' => csvSafe(mfgMrcDate($row['transaction_date'] ?? '')),
+                            'WO No' => csvSafe($row['work_order_no'] ?? '-'),
+                            'Product' => csvSafe($row['product_name'] ?? '-'),
+                            'Material' => csvSafe($row['material_name'] ?? '-'),
+                            'Required' => csvSafe(mfgMrcNum($row['required_qty'] ?? 0)),
+                            'Stock Requested' => csvSafe(mfgMrcNum($row['stock_request_qty'] ?? 0)),
+                            'Stock Received' => csvSafe(mfgMrcNum($row['stock_receipts_qty'] ?? 0)),
+                            'Production Received' => csvSafe(mfgMrcNum($row['production_received_qty'] ?? 0)),
+                            'Consumed' => csvSafe(mfgMrcNum($row['consumed_qty'] ?? 0)),
+                            'Wastage' => csvSafe(mfgMrcNum($row['wastage_qty'] ?? 0)),
+                            'Variance' => csvSafe(mfgMrcNum($row['variance_qty'] ?? 0)),
+                            'UOM' => csvSafe($row['uom_name'] ?? '-'),
                             'data' => []
                         ];
                     ?><tr>
                             <td><?php echo htmlspecialchars($row['production_note_no']); ?></td>
-                            <td><?php echo mfg_mrc_date($row['transaction_date']); ?></td>
+                            <td><?php echo mfgMrcDate($row['transaction_date']); ?></td>
                             <td><?php echo htmlspecialchars($row['work_order_no']); ?></td>
                             <td><?php echo htmlspecialchars($row['product_name']); ?></td>
                             <td><?php echo htmlspecialchars($row['material_name']); ?></td>
-                            <td><?php echo mfg_mrc_num($row['required_qty']); ?></td>
-                            <td><?php echo mfg_mrc_num($row['stock_request_qty']); ?></td>
-                            <td><?php echo mfg_mrc_num($row['stock_receipts_qty']); ?></td>
-                            <td><?php echo mfg_mrc_num($row['production_received_qty']); ?></td>
-                            <td><?php echo mfg_mrc_num($row['consumed_qty']); ?></td>
-                            <td><?php echo mfg_mrc_num($row['wastage_qty']); ?></td>
-                            <td><?php echo mfg_mrc_num($row['variance_qty']); ?></td>
+                            <td><?php echo mfgMrcNum($row['required_qty']); ?></td>
+                            <td><?php echo mfgMrcNum($row['stock_request_qty']); ?></td>
+                            <td><?php echo mfgMrcNum($row['stock_receipts_qty']); ?></td>
+                            <td><?php echo mfgMrcNum($row['production_received_qty']); ?></td>
+                            <td><?php echo mfgMrcNum($row['consumed_qty']); ?></td>
+                            <td><?php echo mfgMrcNum($row['wastage_qty']); ?></td>
+                            <td><?php echo mfgMrcNum($row['variance_qty']); ?></td>
                             <td><?php echo htmlspecialchars($row['uom_name']); ?></td>
                         </tr><?php }
                             if (count((array)$rows) == 0) { ?><tr>

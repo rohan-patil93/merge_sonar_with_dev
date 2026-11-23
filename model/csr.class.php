@@ -93,12 +93,12 @@ class CSRClass
     {
         global $callConfig;
         $query = "SELECT DISTINCT c.proposal_id,  p.subject, p.date, p.total_budget_grand_total, p.name,
-        (SELECT COUNT(*) 
-            FROM csr_project_tracking 
+        (SELECT COUNT(*)
+            FROM csr_project_tracking
             WHERE proposal_id = c.proposal_id) AS proposal_count
         FROM csr_project_tracking c
         JOIN csr_proposal_data p ON p.id = c.proposal_id
-        WHERE p.tracking_status = '0' AND p.company_id='" . $get['company_id'] . "' 
+        WHERE p.tracking_status = '0' AND p.company_id='" . $get['company_id'] . "'
         AND c.proposal_id IN (
         SELECT proposal_id
         FROM csr_project_tracking
@@ -112,8 +112,8 @@ class CSRClass
     {
         global $callConfig;
         $rid = $get['id'];
-        $query = "SELECT 
-    COUNT(*) AS total_rows, 
+        $query = "SELECT
+    COUNT(*) AS total_rows,
     SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed_count
     FROM csr_project_tracking
     WHERE proposal_id=" . $rid . " AND company_id='" . $get['company_id'] . "'";
@@ -123,9 +123,9 @@ class CSRClass
     public function getCommitteMembers($get)
     {
         global $callConfig;
-        $query = "SELECT au.id, au.display_name, au.user_email FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id 
+        $query = "SELECT au.id, au.display_name, au.user_email FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id
     WHERE aumr.role_short_code='CSR_COMMITTEE_MEMBER'
-    AND aumr.company_id='" . $get['company_id'] . "' 
+    AND aumr.company_id='" . $get['company_id'] . "'
     AND aumr.is_active='0'";
         return $callConfig->getAllRows($query);
     }
@@ -136,10 +136,10 @@ class CSRClass
         $id = $get['id'] ?? '';
         $current_status = $get['current_status'] ?? '';
 
-        $query = "SELECT cpd.id, cpd.date, cpd.project_start_date, cpd.project_end_date, cpd.subject, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
-        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
+        $query = "SELECT cpd.id, cpd.date, cpd.project_start_date, cpd.project_end_date, cpd.subject, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal
+        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id
         WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
-        AND tal.company_id='" . $get['company_id'] . "' 
+        AND tal.company_id='" . $get['company_id'] . "'
         AND cpd.is_active='0' ORDER BY cpd.id DESC";
         $total_records_query = $callConfig->getAllRows($query);
         $total_records = array();
@@ -150,11 +150,11 @@ class CSRClass
         }
         $return['total_records'] = $total_records;
 
-        $pending_approval_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
-        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
+        $pending_approval_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal
+        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id
         WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
-        AND (tal.response_type = 0 OR tal.response_type IS NULL) 
-        AND tal.company_id='" . $get['company_id'] . "' 
+        AND (tal.response_type = 0 OR tal.response_type IS NULL)
+        AND tal.company_id='" . $get['company_id'] . "'
         AND cpd.is_active='0' AND cpd.current_status='" . $current_status . "' ORDER BY cpd.id DESC";
 
 
@@ -168,11 +168,11 @@ class CSRClass
 
         $return['pending_approvals'] = $pending_approvals;
 
-        $approved_by_me_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
-        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
+        $approved_by_me_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal
+        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id
         WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
         AND tal.response_type != 0
-        AND tal.company_id='" . $get['company_id'] . "' 
+        AND tal.company_id='" . $get['company_id'] . "'
         AND cpd.is_active='0'  ORDER BY cpd.id DESC";
         $approved_by_me_query = $callConfig->getAllRows($approved_by_me_query);
         $approved_by_me = array();
@@ -183,11 +183,11 @@ class CSRClass
         }
         $return['approved_by_me'] = $approved_by_me;
 
-        $approval_inprogress_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
-        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
+        $approval_inprogress_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal
+        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id
         WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
         AND tal.previous_status < cpd.current_status
-        AND tal.company_id='" . $get['company_id'] . "' 
+        AND tal.company_id='" . $get['company_id'] . "'
         AND cpd.is_active='0' AND cpd.current_status NOT IN ('199', '30', '20', '0')  ORDER BY cpd.id DESC";
         $approval_inprogress_query = $callConfig->getAllRows($approval_inprogress_query);
         $approval_inprogress = array();
@@ -198,11 +198,11 @@ class CSRClass
         }
         $return['approval_inprogress'] = $approval_inprogress;
 
-        $approved_query = "SELECT cpd.id, cpd.date, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
-        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
+        $approved_query = "SELECT cpd.id, cpd.date, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal
+        LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id
         WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
-        
-        AND tal.company_id='" . $get['company_id'] . "' 
+
+        AND tal.company_id='" . $get['company_id'] . "'
         AND cpd.is_active='0' AND cpd.current_status = '199' ORDER BY cpd.id DESC";
         $approved_query = $callConfig->getAllRows($approved_query);
         $approved = array();
@@ -214,13 +214,13 @@ class CSRClass
         $return['approved'] = $approved;
 
         // traking queries
-        $tracking_pending_query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total,current_status, tracking_status from csr_proposal_data  
+        $tracking_pending_query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total,current_status, tracking_status from csr_proposal_data
             WHERE tracking_status=0 AND id in (
-            SELECT cpt.proposal_id  FROM transaction_approval_logs tal 
-            LEFT JOIN csr_project_tracking cpt ON cpt.id = tal.transaction_id 
+            SELECT cpt.proposal_id  FROM transaction_approval_logs tal
+            LEFT JOIN csr_project_tracking cpt ON cpt.id = tal.transaction_id
             WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_project_tracking'
             AND tal.response_type = 0 AND tal.previous_status = cpt.current_status
-            AND tal.company_id='" . $get['company_id'] . "' 
+            AND tal.company_id='" . $get['company_id'] . "'
             AND cpt.is_active='0')  ORDER BY id DESC";
 
 
@@ -233,13 +233,13 @@ class CSRClass
         }
         $return['tracking_pending'] = $tracking_pending;
 
-        $tracking_inprogress_query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total,current_status, tracking_status from csr_proposal_data  
+        $tracking_inprogress_query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total,current_status, tracking_status from csr_proposal_data
             WHERE id in (
-            SELECT cpt.proposal_id  FROM transaction_approval_logs tal 
-            LEFT JOIN csr_project_tracking cpt ON cpt.id = tal.transaction_id 
+            SELECT cpt.proposal_id  FROM transaction_approval_logs tal
+            LEFT JOIN csr_project_tracking cpt ON cpt.id = tal.transaction_id
             WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_project_tracking'
             AND tal.previous_status < cpt.current_status
-            AND tal.company_id='" . $get['company_id'] . "' 
+            AND tal.company_id='" . $get['company_id'] . "'
             AND cpt.is_active='0') AND tracking_status = 0  ORDER BY id DESC";
 
         $tracking_inprogress_query = $callConfig->getAllRows($tracking_inprogress_query);
@@ -252,9 +252,9 @@ class CSRClass
 
         $return['tracking_inprogress'] = $tracking_inprogress;
 
-        $tracking_completed_query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total, current_status, tracking_status from csr_proposal_data  
+        $tracking_completed_query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total, current_status, tracking_status from csr_proposal_data
             WHERE tracking_status=1 AND id in (
-            SELECT tal.transaction_id   FROM transaction_approval_logs tal 
+            SELECT tal.transaction_id   FROM transaction_approval_logs tal
             WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
 
             AND tal.company_id='" . $get['company_id'] . "')  ORDER BY id DESC";
@@ -270,19 +270,19 @@ class CSRClass
         $return['tracking_completed'] = $tracking_completed;
 
         //newly added
-        $tracking_percentage_query = "SELECT proposal_id, 
+        $tracking_percentage_query = "SELECT proposal_id,
                    ROUND((SUM(IF(`status` = 'completed', 1, 0)) / COUNT(id)) * 100) AS percent
-            FROM csr_project_tracking 
-            WHERE company_id = '" . $get['company_id'] . "' 
+            FROM csr_project_tracking
+            WHERE company_id = '" . $get['company_id'] . "'
             AND proposal_id IN (
-                SELECT cpd.id 
-                FROM csr_proposal_data cpd 
+                SELECT cpd.id
+                FROM csr_proposal_data cpd
                 INNER JOIN transaction_approval_logs tal ON cpd.id = tal.transaction_id
-                WHERE tal.user_id = '" . $id . "' 
-                AND cpd.company_id = '" . $get['company_id'] . "'  
+                WHERE tal.user_id = '" . $id . "'
+                AND cpd.company_id = '" . $get['company_id'] . "'
                 AND cpd.is_active = 0
-            ) 
-            AND is_active = 0 
+            )
+            AND is_active = 0
             GROUP BY proposal_id  ORDER BY id DESC";
 
         $tracking_percentage_query = $callConfig->getAllRows($tracking_percentage_query);
@@ -302,9 +302,9 @@ class CSRClass
         $id = $get['id'];
         $table = $get['table'];
         $query = "SELECT au.id, au.display_name, au.user_email FROM transaction_approval_logs tal
-    LEFT JOIN application_users au ON au.id = tal.user_id 
+    LEFT JOIN application_users au ON au.id = tal.user_id
     WHERE tal.transaction_id = '" . $id . "' AND tal.transaction_table='" . $table . "'
-    AND tal.company_id='" . $get['company_id'] . "' 
+    AND tal.company_id='" . $get['company_id'] . "'
     AND au.is_active='0'";
         return $callConfig->getAllRows($query);
     }
@@ -323,7 +323,7 @@ class CSRClass
         global $callConfig;
         $return = array();
 
-        $countries_details = "SELECT id, country_name FROM  countries WHERE  company_id='" . $get['company_id'] . "' 
+        $countries_details = "SELECT id, country_name FROM  countries WHERE  company_id='" . $get['company_id'] . "'
     AND  is_active =0 ";
         $countries_details = $callConfig->getAllRows($countries_details);
         $ct_details = array();
@@ -334,7 +334,7 @@ class CSRClass
         }
         $return['ct_details'] = $ct_details;
 
-        $application_users_details = "SELECT id, display_name, user_field_work_type FROM  application_users WHERE company_id='" . $get['company_id'] . "' 
+        $application_users_details = "SELECT id, display_name, user_field_work_type FROM  application_users WHERE company_id='" . $get['company_id'] . "'
     AND is_active =0";
         $application_users_details = $callConfig->getAllRows($application_users_details);
         $application_users = array();
@@ -345,7 +345,7 @@ class CSRClass
         }
         $return['application_users'] = $application_users;
 
-        $currencies_details = "SELECT id, concat(currency_short_code,'-', currency_name) as currency FROM  currencies WHERE  company_id='" . $get['company_id'] . "' 
+        $currencies_details = "SELECT id, concat(currency_short_code,'-', currency_name) as currency FROM  currencies WHERE  company_id='" . $get['company_id'] . "'
     AND is_active = 0 ";
         $currencies_details = $callConfig->getAllRows($currencies_details);
         $cr_details = array();
@@ -589,26 +589,26 @@ class CSRClass
                   SUM(IF( fwump.field_work_daily_plan_id = fwdp.id,1,0))  AS visited,
                   count(DISTINCT(fwump.id)) - SUM(IF( fwump.field_work_daily_plan_id = fwdp.id,1,0)) AS extra,
                   count(DISTINCT(fwdp.id)) - SUM(IF( fwump.field_work_daily_plan_id = fwdp.id,1,0)) AS pending
-                FROM 
+                FROM
                     field_work_user_map_points fwump
                 LEFT JOIN application_users au ON fwump.user_id = au.id
-                LEFT JOIN 
-                    field_work_daily_plans fwdp 
-                    ON fwdp.user_id = fwump.user_id 
-                    AND fwdp.plan_date = fwump.map_date 
-                    AND fwdp.company_id = fwump.company_id 
+                LEFT JOIN
+                    field_work_daily_plans fwdp
+                    ON fwdp.user_id = fwump.user_id
+                    AND fwdp.plan_date = fwump.map_date
+                    AND fwdp.company_id = fwump.company_id
                     AND fwdp.is_active = '0'
-                WHERE 
+                WHERE
                     fwump.user_id = '" . $userid . "'
                     AND fwump.map_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
                     AND fwump.company_id = '" . $get['company_id'] . "'
                     AND fwump.is_active = '0'
-                GROUP BY 
+                GROUP BY
                     fwump.user_id, fwump.map_date
-                ORDER BY 
+                ORDER BY
                     fwump.map_date";
             } else {
-                $query1 = "SELECT au.id, au.display_name, au.user_email,  au.user_field_work_type, fwump.map_date map_date, 
+                $query1 = "SELECT au.id, au.display_name, au.user_email,  au.user_field_work_type, fwump.map_date map_date,
                 COUNT(fwump.map_date) visited, '0' as extra, '0' as pending
                 FROM     application_users au
                 LEFT JOIN     field_work_user_map_points fwump ON  fwump.user_id = au.id
@@ -708,10 +708,10 @@ class CSRClass
         }
         $return['csr_proposal_arr'] = $csr_proposal_arr;
 
-        $query1 = "SELECT proposal_id, 
-        ROUND((sum(if(`status`='completed',1,0))/count(id))*100) as percent 
-        FROM csr_project_tracking WHERE company_id = '" . $get['company_id'] . "' AND 
-        proposal_id IN (SELECT id FROM csr_proposal_data WHERE company_id = '" . $get['company_id'] . "' AND orgininaor ='" . $orgininaor . "' AND is_active = 0) 
+        $query1 = "SELECT proposal_id,
+        ROUND((sum(if(`status`='completed',1,0))/count(id))*100) as percent
+        FROM csr_project_tracking WHERE company_id = '" . $get['company_id'] . "' AND
+        proposal_id IN (SELECT id FROM csr_proposal_data WHERE company_id = '" . $get['company_id'] . "' AND orgininaor ='" . $orgininaor . "' AND is_active = 0)
         AND is_active=0 GROUP BY proposal_id";
 
         $query1_res = $callConfig->getAllRows($query1);
@@ -721,8 +721,8 @@ class CSRClass
         }
         $return['tracking_percent_arr'] = $tracking_percent_arr;
 
-        $query2 = "SELECT DISTINCT proposal_id 
-            FROM csr_project_tracking 
+        $query2 = "SELECT DISTINCT proposal_id
+            FROM csr_project_tracking
             WHERE status IN ('started', 'hold', 'completed') AND
             proposal_id IN (SELECT id FROM csr_proposal_data WHERE company_id = '" . $get['company_id'] . "' AND orgininaor = '" . $orgininaor . "' AND is_active = 0 AND current_status = 199  AND tracking_status=0)  ORDER BY proposal_id DESC";
         $query2_res = $callConfig->getAllRows($query2);
@@ -769,10 +769,10 @@ class CSRClass
         }
         $return['csr_proposal_arr'] = $csr_proposal_arr;
 
-        $query1 = "SELECT proposal_id, 
-        ROUND((sum(if(`status`='completed',1,0))/count(id))*100) as percent 
-        FROM csr_project_tracking WHERE company_id = '" . $get['company_id'] . "' AND 
-        proposal_id IN (SELECT id FROM csr_proposal_data WHERE company_id = '" . $get['company_id'] . "'  AND is_active = 0) 
+        $query1 = "SELECT proposal_id,
+        ROUND((sum(if(`status`='completed',1,0))/count(id))*100) as percent
+        FROM csr_project_tracking WHERE company_id = '" . $get['company_id'] . "' AND
+        proposal_id IN (SELECT id FROM csr_proposal_data WHERE company_id = '" . $get['company_id'] . "'  AND is_active = 0)
         AND is_active=0 GROUP BY proposal_id";
 
 
@@ -784,9 +784,9 @@ class CSRClass
         $return['tracking_percent_arr'] = $tracking_percent_arr;
 
 
-        $query2 = "SELECT au.id, au.display_name, au.user_email, aumr.role_short_code FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id 
+        $query2 = "SELECT au.id, au.display_name, au.user_email, aumr.role_short_code FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id
         WHERE aumr.role_short_code IN ('CSR_CREATER', 'CSR_CREATOR', 'CSR_COMMITTEE_GROUP', 'CSR_COMMITTEE_MEMBER', 'CSR_COMMITTEE_HEAD')
-        AND aumr.company_id='" . $get['company_id'] . "' 
+        AND aumr.company_id='" . $get['company_id'] . "'
         AND aumr.is_active='0'";
 
         $query2_res = $callConfig->getAllRows($query2);
@@ -1275,7 +1275,7 @@ class CSRClass
         $from_db = $get['data_name'];
         $to_db = $get['target_db'] ?? '';
         // Get last sync time from sync_logs
-        $syncQuery = "SELECT last_sync_time FROM sync_logs 
+        $syncQuery = "SELECT last_sync_time FROM sync_logs
                     WHERE company_id = '$company_id' AND from_db = '$from_db' AND to_db = '$to_db'
                     ORDER BY id DESC LIMIT 1";
         $syncRow = $callConfig->getRow($syncQuery);
@@ -1389,7 +1389,7 @@ class CSRClass
         }
 
         // Get last sync time from sync_logs
-        $syncQuery = "SELECT last_sync_time FROM sync_logs 
+        $syncQuery = "SELECT last_sync_time FROM sync_logs
                     WHERE company_id = '$company_id' AND from_db = '$from_db' AND to_db = '$to_db'
                     ORDER BY id DESC LIMIT 1";
         $syncRow = $callConfig->getRow($syncQuery);
@@ -1617,10 +1617,10 @@ class CSRClass
         }
 
         // Fetch Financial Years from general_code_details
-        $fyQuery = "SELECT genc_detail_code 
-                    FROM general_code_details 
-                    WHERE company_id = '" . $get['company_id'] . "' 
-                    AND genc_code = 'CSR_FINANCIAL_YEAR' 
+        $fyQuery = "SELECT genc_detail_code
+                    FROM general_code_details
+                    WHERE company_id = '" . $get['company_id'] . "'
+                    AND genc_code = 'CSR_FINANCIAL_YEAR'
                     AND is_active = 0
                     ORDER BY id ASC";
 
@@ -1642,7 +1642,7 @@ class CSRClass
                 p.financial_year AS project_related_to_fy,
                 po.financial_year AS po_issued_year,
                 po.po_no, po.po_date, po.po_value_ex AS po_value_excl_tax, ROUND(po.po_value_ex * (po.gst / 100), 2) AS gst_18, po.po_value_in AS po_value_incl_tax, po.business_code AS bp_code, po.business_name AS bp_name,
-                inv.financial_year AS invoice_accounting_year, 
+                inv.financial_year AS invoice_accounting_year,
                 inv.inv_no AS invoice_number, inv.inv_date, inv.taxable_value, inv.gst_amount, 0 AS other_cost, inv.total_spent, inv.tds_deducted, 0 AS any_other_deduction, inv.net_payable,
                 ROUND((IFNULL(inv.total_spent,0) / NULLIF(po.po_value_in,0)) * 100, 2) AS spent_percent,
                 ROUND(100 - ((IFNULL(inv.total_spent,0) / NULLIF(po.po_value_in,0)) * 100), 2) AS unspent_percent,
@@ -1652,7 +1652,7 @@ class CSRClass
                 inv.paid_bank AS paid_from_bank,
                 p.project_end_date AS project_completion_date,
 
-                CASE 
+                CASE
                     WHEN COALESCE(ts.total_rows, 0) = 0 THEN 'Not Started'
                     WHEN COALESCE(ts.null_rows, 0) = ts.total_rows THEN 'Not Started'
                     WHEN  ts.completed_rows = ts.total_rows OR p.tracking_status = 1 THEN 'Completed'
@@ -1661,7 +1661,7 @@ class CSRClass
             FROM csr_proposal_data p
             LEFT JOIN (SELECT proposal_id,COUNT(*) AS total_rows, SUM(CASE WHEN status IS NULL THEN 1 ELSE 0 END) AS null_rows, SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed_rows FROM csr_project_tracking WHERE is_active = 0 GROUP BY proposal_id) ts ON ts.proposal_id = p.id
             LEFT JOIN csr_po_details po  ON po.project_id = p.id  AND po.is_active = 0
-            LEFT JOIN csr_invoice_details inv ON inv.project_id = p.id AND inv.csr_po_details_id = po.id AND inv.company_id = p.company_id AND inv.is_active = 0 
+            LEFT JOIN csr_invoice_details inv ON inv.project_id = p.id AND inv.csr_po_details_id = po.id AND inv.company_id = p.company_id AND inv.is_active = 0
             LEFT JOIN csr_type_of_works tow ON tow.id = p.type_of_work AND tow.company_id = p.company_id AND tow.is_active = 0
             LEFT JOIN csr_areas cas ON cas.id = p.working_area AND cas.company_id = p.company_id AND cas.is_active = 0
             LEFT JOIN general_code_details ged ON ged.genc_detail_code = p.type_of_project AND ged.genc_code = 'CSR_PROJECT_TYPE' AND ged.company_id = p.company_id AND ged.is_active = 0
@@ -1736,45 +1736,45 @@ class CSRClass
                           ELSE financial_year END) = '" . $selected_year . "'"
             : "";
 
-        $query = "SELECT 
-            loc.location_name AS location, 
-            p.subject AS project_name, 
-            p.SDGproposal AS nature_of_work_done, 
-            tow.type_of_work, 
-            ged.genc_detail_name AS type_of_project, 
-            cas.csr_area AS area, 
+        $query = "SELECT
+            loc.location_name AS location,
+            p.subject AS project_name,
+            p.SDGproposal AS nature_of_work_done,
+            tow.type_of_work,
+            ged.genc_detail_name AS type_of_project,
+            cas.csr_area AS area,
 
-            ROUND(IFNULL(po.total_po_excl_gst, 0), 2) AS total_po_excl_gst, 
-            ROUND(IFNULL(inv.total_spent_excl_gst, 0), 2) AS total_spent_excl_gst, 
+            ROUND(IFNULL(po.total_po_excl_gst, 0), 2) AS total_po_excl_gst,
+            ROUND(IFNULL(inv.total_spent_excl_gst, 0), 2) AS total_spent_excl_gst,
 
             ROUND(
-            IFNULL(po.total_po_excl_gst, 0) - IFNULL(inv.total_spent_excl_gst, 0), 
+            IFNULL(po.total_po_excl_gst, 0) - IFNULL(inv.total_spent_excl_gst, 0),
             2
             ) AS unspent_amount,
 
-            CASE 
-            WHEN IFNULL(po.total_po_excl_gst, 0) > 0 
+            CASE
+            WHEN IFNULL(po.total_po_excl_gst, 0) > 0
             THEN ROUND((IFNULL(inv.total_spent_excl_gst, 0) / po.total_po_excl_gst) * 100, 2)
-            ELSE 0 
+            ELSE 0
             END AS spent_percent,
 
-            CASE 
-            WHEN IFNULL(po.total_po_excl_gst, 0) > 0 
+            CASE
+            WHEN IFNULL(po.total_po_excl_gst, 0) > 0
             THEN ROUND(100 - ((IFNULL(inv.total_spent_excl_gst, 0) / po.total_po_excl_gst) * 100), 2)
-            ELSE 0 
+            ELSE 0
             END AS unspent_percent,
 
-            CASE 
+            CASE
             WHEN IFNULL(tr.total_tracking, 0) = 0 THEN 'Not Started'
             WHEN IFNULL(tr.null_status_count, 0) = tr.total_tracking THEN 'Not Started'
             WHEN p.tracking_status = 1 THEN 'Completed'
             ELSE 'In Progress'
             END AS project_status
 
-            FROM csr_proposal_data p 
+            FROM csr_proposal_data p
 
             LEFT JOIN (
-                SELECT 
+                SELECT
                 project_id,
                 company_id,
                 SUM(IFNULL(po_value_in, 0)) AS total_po_excl_gst
@@ -1785,7 +1785,7 @@ class CSRClass
             AND po.company_id = p.company_id
 
             LEFT JOIN (
-                SELECT 
+                SELECT
                 project_id,
                 company_id,
                 SUM(IFNULL(total_spent, 0)) AS total_spent_excl_gst
@@ -1805,30 +1805,30 @@ class CSRClass
                 GROUP BY proposal_id
             ) tr ON tr.proposal_id = p.id
 
-            LEFT JOIN locations loc ON loc.id = p.csr_location 
-            AND loc.company_id = p.company_id 
-            AND loc.is_active = 0 
+            LEFT JOIN locations loc ON loc.id = p.csr_location
+            AND loc.company_id = p.company_id
+            AND loc.is_active = 0
 
-            LEFT JOIN csr_type_of_works tow ON tow.id = p.type_of_work 
-            AND tow.company_id = p.company_id 
-            AND tow.is_active = 0 
+            LEFT JOIN csr_type_of_works tow ON tow.id = p.type_of_work
+            AND tow.company_id = p.company_id
+            AND tow.is_active = 0
 
-            LEFT JOIN csr_areas cas ON cas.id = p.working_area 
-            AND cas.company_id = p.company_id 
-            AND cas.is_active = 0 
+            LEFT JOIN csr_areas cas ON cas.id = p.working_area
+            AND cas.company_id = p.company_id
+            AND cas.is_active = 0
 
-            LEFT JOIN general_code_details ged ON ged.genc_detail_code = p.type_of_project 
-            AND ged.genc_code = 'CSR_PROJECT_TYPE' 
-            AND ged.company_id = p.company_id 
-            AND ged.is_active = 0 
+            LEFT JOIN general_code_details ged ON ged.genc_detail_code = p.type_of_project
+            AND ged.genc_code = 'CSR_PROJECT_TYPE'
+            AND ged.company_id = p.company_id
+            AND ged.is_active = 0
 
-            WHERE 
-            p.current_status = " . ST_APPROVED . " 
-            AND p.is_active = 0 
-            AND p.company_id = $company_id" . $proposal_fy_where . " 
+            WHERE
+            p.current_status = " . ST_APPROVED . "
+            AND p.is_active = 0
+            AND p.company_id = $company_id" . $proposal_fy_where . "
 
-            ORDER BY 
-            p.csr_location, 
+            ORDER BY
+            p.csr_location,
             p.subject";
         $res = $callConfig->getAllRows($query);
         $return['project_summary_list'] = $res;
@@ -1841,11 +1841,11 @@ class CSRClass
         $return = array();
         $return['get'] = $get;
         $company_id = isset($get['company_id']) ? $get['company_id'] : 0;
-        $fyQuery = "SELECT genc_detail_code 
-            FROM general_code_details 
-            WHERE company_id = '" . $company_id . "' 
+        $fyQuery = "SELECT genc_detail_code
+            FROM general_code_details
+            WHERE company_id = '" . $company_id . "'
             AND genc_code = 'CSR_FINANCIAL_YEAR' AND genc_detail_code NOT IN ('2013-14','2014-15','2015-16','2016-17', '2017-18', '2018-19', '2019-20')
-            AND is_active = 0 
+            AND is_active = 0
             ORDER BY id ASC";
 
         $fyRows = $callConfig->getAllRows($fyQuery);
@@ -1867,7 +1867,7 @@ class CSRClass
                 ";
             }
         }
-        $query = "SELECT 
+        $query = "SELECT
                 p.id AS project_id,
                 p.subject AS project_name,
                 p.SDGproposal AS nature_of_work_done,
@@ -1879,11 +1879,11 @@ class CSRClass
                 ROUND(100 - ( (SELECT IFNULL(SUM(inv.total_spent),0) FROM csr_invoice_details inv WHERE inv.csr_po_details_id = po.id AND inv.is_active = 0) / NULLIF(po.po_value_in,0) ) * 100,2) AS unspent_percent
                 $fyColumns
             FROM csr_proposal_data p
-            LEFT JOIN csr_po_details po 
+            LEFT JOIN csr_po_details po
                 ON po.project_id = p.id AND po.is_active = 0
-            LEFT JOIN csr_areas cas 
-                ON cas.id = p.working_area 
-                AND cas.company_id = p.company_id 
+            LEFT JOIN csr_areas cas
+                ON cas.id = p.working_area
+                AND cas.company_id = p.company_id
                 AND cas.is_active = 0
             WHERE p.current_status=" . ST_APPROVED . " AND p.is_active = 0 AND p.company_id = '" . $company_id . "'
             ORDER BY p.subject, po.po_no";
@@ -1902,11 +1902,11 @@ class CSRClass
         $company_id = isset($get['company_id']) ? $get['company_id'] : 0;
 
         // 📅 Fetch Financial Years from general_code_details
-        $fyQuery = "SELECT genc_detail_code 
-            FROM general_code_details 
-            WHERE company_id = '" . $company_id . "' 
-            AND genc_code = 'CSR_FINANCIAL_YEAR' 
-            AND is_active = 0 
+        $fyQuery = "SELECT genc_detail_code
+            FROM general_code_details
+            WHERE company_id = '" . $company_id . "'
+            AND genc_code = 'CSR_FINANCIAL_YEAR'
+            AND is_active = 0
             ORDER BY id ASC";
 
         $fyRows = $callConfig->getAllRows($fyQuery);
@@ -1931,7 +1931,7 @@ class CSRClass
         }
 
         // 💰 Fetch total spent by FY
-        $spentQuery = "SELECT 
+        $spentQuery = "SELECT
             CAST(CONCAT('20', SUBSTRING_INDEX(financial_year, '-', -1)) AS UNSIGNED) AS fy,
             SUM(total_spent) as total_spent
         FROM csr_invoice_details
@@ -1996,18 +1996,18 @@ class CSRClass
         $company_id = isset($get['company_id']) ? $get['company_id'] : 0;
 
         // ✅ 1. Get yearly budgets (net profit)
-        $budgets_sql = "SELECT financial_year AS year, net_profit_before_tax_mtipl AS finance_budget 
-                        FROM csr_complaince 
+        $budgets_sql = "SELECT financial_year AS year, net_profit_before_tax_mtipl AS finance_budget
+                        FROM csr_complaince
                         WHERE company_id = '" . $company_id . "' AND is_active = 0
                         ORDER BY financial_year ASC";
         $budgets = $callConfig->getAllRows($budgets_sql);
 
         // ✅ 2. Get actual CSR spend per FY
-        $spend_sql = "SELECT 
+        $spend_sql = "SELECT
                         CONCAT(YEAR(inv_date), '-', LPAD((YEAR(inv_date)+IF(MONTH(inv_date)>=4,1,0))%100,2,'0')) AS fy_label,
                         YEAR(inv_date) + IF(MONTH(inv_date)>=4,1,0) AS fy_year,
                         SUM(total_spent) AS total_spent
-                    FROM csr_invoice_details 
+                    FROM csr_invoice_details
                     WHERE company_id = '" . $company_id . "' AND is_active = 0
                     GROUP BY fy_label, fy_year
                     ORDER BY fy_year ASC";
@@ -2120,7 +2120,7 @@ class CSRClass
         }
 
         // Fetch spent data
-        $spentQuery = "SELECT 
+        $spentQuery = "SELECT
                 CAST(CONCAT('20', SUBSTRING_INDEX(financial_year, '-', -1)) AS UNSIGNED) AS fy,
                 SUM(total_spent) AS total_spent
             FROM csr_invoice_details
@@ -2217,9 +2217,9 @@ class CSRClass
     public function getCSRProjects($get)
     {
         global $callConfig;
-        $query = "SELECT id, subject 
-            FROM csr_proposal_data 
-            WHERE company_id = {$get['company_id']} 
+        $query = "SELECT id, subject
+            FROM csr_proposal_data
+            WHERE company_id = {$get['company_id']}
               AND is_active = 0
             ORDER BY id ASC";
 

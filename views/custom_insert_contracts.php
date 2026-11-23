@@ -746,7 +746,7 @@ function validateUnifiedContractBasics(&$notification)
         return false;
     }
 
-    if (parseUnifiedContractDates($notification) == false) {
+    if (!parseUnifiedContractDates($notification)) {
         return false;
     }
 
@@ -786,7 +786,7 @@ function handleContractRenewal()
     }
 
     $contractDates = parseUnifiedContractDates($notification);
-    if ($contractDates == false) {
+    if (!$contractDates) {
         return;
     }
     $startYmd = $contractDates['start_date'];
@@ -897,9 +897,7 @@ function handleContractRenewal()
 
     try {
         $renewalUrl = API . "?mode=renewcontractreact&method=post&user_id={$user_id}&company_id={$company_id}";
-        $response = file_post_contents($renewalUrl, $renewalData, 'renew');
-        $result = json_decode($response, true);
-
+        file_post_contents($renewalUrl, $renewalData, 'renew');
 
         $notification = ['message' => 'Contract renewed successfully!', 'type' => 'success'];
 
@@ -969,7 +967,7 @@ function handleContractSubmission()
     }
 
     $contractDates = parseUnifiedContractDates($notification);
-    if ($contractDates == false) {
+    if (!$contractDates) {
         return;
     }
     $startYmd = $contractDates['start_date'];
@@ -1103,7 +1101,7 @@ function generateAmcBillingMilestones($startYmd, $endYmd, $cycle, $billingDay, $
         $cursor->setDate((int) $cursor->format('Y'), (int) $cursor->format('m'), min($billingDay, $daysInMonth));
     }
 
-    if (count($dates) === 0) {
+    if (empty($dates)) {
         $dates[] = $start->format('Y-m-d');
     }
 
@@ -1180,7 +1178,7 @@ function handleAmcContractSubmission($isRenewFlow = false)
     }
 
     $contractDates = parseUnifiedContractDates($notification);
-    if ($contractDates == false) {
+    if (!$contractDates) {
         return;
     }
     $startYmd = $contractDates['start_date'];
@@ -1440,7 +1438,7 @@ function handleAmcContractRenewal()
     }
 
     $contractDates = parseUnifiedContractDates($notification);
-    if ($contractDates == false) {
+    if (!$contractDates) {
         return;
     }
     $startYmd = $contractDates['start_date'];
@@ -1706,7 +1704,7 @@ function handleDocumentSubmission()
     $docUrl = API . "?mode=insertdocumnentreact&method=post";
     $response = file_post_contents($docUrl, $postData, 'insert');
 
-    $result = json_decode($response, true);
+    json_decode($response, true);
 
     if (json_last_error() !== JSON_ERROR_NONE) {
         $notification = ['message' => 'JSON Decode Error: ' . json_last_error_msg(), 'type' => 'danger'];
@@ -1750,8 +1748,7 @@ function handlePermissionSubmission()
         ];
 
         $permUrl = API . "?mode=insertpermissionreact&method=post";
-        $response = file_post_contents($permUrl, $submissionData, 'insert');
-        $result = json_decode($response, true);
+        file_post_contents($permUrl, $submissionData, 'insert');
 
         $notification = ['message' => 'Permissions updated successfully!', 'type' => 'success'];
 
@@ -1789,8 +1786,7 @@ function handleWorkflowSubmission()
         ];
 
         $workflowUrl = API . "?mode=insertworkflowreact&method=post";
-        $response = file_post_contents($workflowUrl, $submissionData, 'insert');
-        $result = json_decode($response, true);
+        file_post_contents($workflowUrl, $submissionData, 'insert');
 
         $notification = ['message' => 'Workflow updated successfully!', 'type' => 'success'];
 

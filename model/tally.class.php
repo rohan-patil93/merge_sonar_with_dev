@@ -727,11 +727,8 @@ class tallyClass extends userClass{
 		}
 
 		//end get master
-		$api_master_id = $apimastersres->id;
-		$api_url = $apimastersres->end_point;
 		$api_code = $apimastersres->api_code;
  		$api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-		$api_mastersr_api_response_details = json_decode($apimastersres->api_response_details, 1);
 		$responsary = $receipt_allocations= array();
 		$getstringlist = '';
 
@@ -884,11 +881,8 @@ class tallyClass extends userClass{
 		}
 
 		//end get master
-		$api_master_id = $apimastersres->id;
-		$api_url = $apimastersres->end_point;
 		$api_code = $apimastersres->api_code;
  		$api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-		$api_mastersr_api_response_details = json_decode($apimastersres->api_response_details, 1);
 		$responsary = $receipt_allocations= array();
 		$getstringlist = '';
 		$payment_id = '';
@@ -1068,13 +1062,11 @@ class tallyClass extends userClass{
 		        $stringary['error'] = 'Duplicate Entry';
 			}else{
 				$currency_id = "";
-				$taxarray = array();
 				$party_id = $parties[$apihitre['PARTYNAME']]->id;
 				$party_name = $parties[$apihitre['PARTYNAME']]->company;
 				$mobile_number = $apihitre['mobile_number'] !="N/A"?$apihitre['mobile_number']:"";
 				$email_address = $apihitre['email_address'] !="N/A"?$apihitre['email_address']:"";
-				$tax_amount= 0;
-				$maintotal_amount = $mainamount = $tax_amount = $tax_percentage   =$maintax_amount_total = 0;
+				$maintotal_amount = 0;
 				$tax_state = "I";
 				foreach($apihitre['Item_Entries'] as $itmss){
 					$maintotal_amount +=$itmss['AMOUNT'];
@@ -1083,9 +1075,7 @@ class tallyClass extends userClass{
 				$maintransactionary = array('company_id'=>$company_id,'transaction_number'=>$apihitre['VOUCHERNUMBER'],'transaction_date'=>$this->dateconvertdbformat($apihitre['InvDate']),'cost_center_id'=>$application_usersres->cost_center,'party_name'=>$party_name,'party_id'=>$party_id,'party_address'=>$apihitre['STATE'],'supplier_state_id'=>'','place_of_supply'=>'','party_phone'=>$mobile_number,'party_email'=>$email_address,'amount'=>$maintotal_amount,'tax_amount'=>0,'total_amount'=>$maintotal_amount,'pending_amount'=>$maintotal_amount,'transaction_location_id'=>$application_usersres->location_id, 'transaction_warehouse_id'=>$application_usersres->default_warehouse_id, 'originator_currency_id'=>$originator_currency_id, 'currency_id'=>$currency_id, 'currency_rate'=>'1' ,'originator'=>$get['user_id'], 'originator_state_id'=>$originator_state_id,'payment_terms'=>'','payment_term_history'=>'', 'due_date'=>$this->dateconvertdbformat($apihitre['InvDate']),'tax_state'=>$tax_state,'is_active'=>'0','current_status'=>'199','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"));
 
 				foreach($apihitre['Item_Entries'] as $itementry){
-					$tax_amount = $tax_percentage  = $amount =$tax_total_amount = 0;
 					$child_total_amount = $itementry['AMOUNT'];
-					$tax_id = $tax_name = "";
 					if(isset($chart_of_accounts_name[$itementry['Stock_Item']])){
 						$account_code = $chart_of_accounts_name[$itementry['Stock_Item']]->account_code;
 						$account_name = $chart_of_accounts_name[$itementry['Stock_Item']]->account_name;
@@ -1172,7 +1162,6 @@ class tallyClass extends userClass{
 	public function tallyAPIReceiveTransactions($get,$post,$api_hitsres,$apimastersres){
 		global $callConfig;
 
-		$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];
 	 	$checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
 	 	$company_id = $get['company_id'];
 	 	$api_code = $apimastersres->api_code;
@@ -1196,12 +1185,9 @@ class tallyClass extends userClass{
 		foreach($itemsres as $itmre){
 			$items[$itmre->sku] =  $itmre; //marge two table data
  		}
-	 	$transaction_location_id = "";
-	 	$transaction_warehouse_id = "";
 	 	$originator_currency_id = $application_usersres->default_currency_id;
 	 	$originator_state_id = $application_usersres->default_state_id;
 	 	$api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-		$api_mastersr_api_response_details = json_decode($apimastersres->api_response_details, 1);
 		$responsary = array();
 
 		$displayattributessql = "SELECT id,application_table_name,help_text,list_attributes,empty_table_message,insert_page_type FROM display_attributes WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$application_table."' AND is_active = 0";
@@ -1254,7 +1240,6 @@ class tallyClass extends userClass{
 		        $stringary['error'] = 'Duplicate Entry';
 			}else{
 				$currency_id = "";
-				$taxarray = array();
 				$party_id = $fieldkeywithvalue['party_id'][$apihitre['PARTYNAME']];
 				if(isset($fieldkeywithvalue['place_of_supply'][$apihitre['PLACEOFSUPPLY']])){
 					$place_of_supply = $fieldkeywithvalue['place_of_supply'][$apihitre['PLACEOFSUPPLY']];
@@ -1265,8 +1250,7 @@ class tallyClass extends userClass{
 				$mobile_number = $apihitre['mobile_number'] !="N/A"?$apihitre['mobile_number']:"";
 				$email_address = $apihitre['email_address'] !="N/A"?$apihitre['email_address']:"";
 				$tallywiithgstamount = str_replace(",","",$apihitre['Voucher_Amount']);
-				$tax_amount= 0;
-				$maintotal_amount = $mainamount = $tax_amount = $tax_percentage   =$maintax_amount_total = 0;
+				$maintotal_amount = $mainamount = $maintax_amount_total = 0;
 				foreach($apihitre['Item_Entries'] as $itmss){
 					if(isset($items[$itmss['part_no']])){
 						$tax_percentage = $items[$itmss['part_no']]->gst;
@@ -1292,7 +1276,7 @@ class tallyClass extends userClass{
 				$maintransactionary = array('company_id'=>$company_id,'transaction_number'=>$apihitre['VOUCHERNUMBER'],'transaction_date'=>$this->dateconvertdbformat($apihitre['InvDate']),'cost_center_id'=>$application_usersres->cost_center,'party_name'=>$apihitre['PARTYNAME'],'party_id'=>$party_id,'party_address'=>$apihitre['STATE'],'supplier_state_id'=>$supplier_state_id,'place_of_supply'=>$place_of_supply,'party_phone'=>$mobile_number,'party_email'=>$email_address,'amount'=>$mainamount,'tax_amount'=>$maintax_amount_total,'total_amount'=>$maintotal_amount,'pending_amount'=>$maintotal_amount,'transaction_location_id'=>$application_usersres->location_id, 'transaction_warehouse_id'=>$application_usersres->default_warehouse_id, 'originator_currency_id'=>$originator_currency_id, 'currency_id'=>$currency_id, 'currency_rate'=>'1' ,'originator'=>$get['user_id'], 'originator_state_id'=>$originator_state_id,'payment_terms'=>'','payment_term_history'=>'', 'due_date'=>$this->dateconvertdbformat($apihitre['InvDate']),'tax_state'=>$tax_state,'is_active'=>'0','current_status'=>'199','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"));
 
 				foreach($apihitre['Item_Entries'] as $itementry){
-					$tax_amount = $tax_percentage  = $amount =$tax_total_amount = 0;
+					$tax_amount = 0;
 					$total_amount = $itementry['AMOUNT'];
 					$tax_id = $tax_name = "";
 					if(isset($items[$itementry['part_no']])){
@@ -1309,9 +1293,6 @@ class tallyClass extends userClass{
 							$tax_id =$items[$itementry['part_no']]->hsn_and_sac_code_id;
 
 							$tax_name =$items[$itementry['part_no']]->code;
-							$amount =$total_amount;
-							$tax_total_amount =$total_amount;
-							$details =$items[$itementry['part_no']];
 
 							$transactionitemtaxary[] = array('company_id'=>$company_id, 'transaction_id'=>$transaction_id, 'transaction_item_id'=>$item_id, 'tax_name'=>$tax_name, 'tax_value'=>$tax_percentage, 'tax_id'=>$tax_id, 'amount'=>$itementry['AMOUNT'], 'tax_amount'=>$tax_amount, 'total_amount'=>$total_amount, 'tax_type'=>$tax_state, 'tax_split_details'=>'', 'is_active'=>0, 'current_status'=>0, 'created_date'=>date("Y-m-d H:i:s"), 'created_by'=>0);
 
@@ -1395,8 +1376,6 @@ class tallyClass extends userClass{
 	      	$apimastersres = $callConfig->getRow($apimasterssql);
       		$return['api_masters'] = $apimastersres;
 
-  			$api_master_id = $apimastersres->id;
-  			$api_url = $apimastersres->end_point;
   			$api_code = $apimastersres->api_code;
 
   			if($apimastersres->api_type == "S"){
@@ -1512,7 +1491,7 @@ class tallyClass extends userClass{
 
 	  				if($checkstatus == "S"){
 	  					$api_hits_sync = array('company_id'=>$get['company_id'],'api_hit_id'=>$api_hit_id,'originator'=>$get['user_id'],'application_table'=>$apimastersres->application_table,'sync_datetime'=>date('Y-m-d H:i:s'), 'sync_details'=>urlencode(json_encode((array)$responsary)),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-	  					$syncres = $callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
+	  					$callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
 					}
 
 				}
@@ -1577,8 +1556,6 @@ class tallyClass extends userClass{
 	      	$apimastersres = $callConfig->getRow($apimasterssql);
       		$return['api_masters'] = $apimastersres;
 
-  			$api_master_id = $apimastersres->id;
-  			$api_url = $apimastersres->end_point;
   			$api_code = $apimastersres->api_code;
 
   			if($apimastersres->api_type == "S"){
@@ -1708,7 +1685,7 @@ class tallyClass extends userClass{
 
   				if($checkstatus == "S"){
   					$api_hits_sync = array('company_id'=>$get['company_id'],'api_hit_id'=>$api_hit_id,'originator'=>$get['user_id'],'application_table'=>$apimastersres->application_table,'sync_datetime'=>date('Y-m-d H:i:s'), 'sync_details'=>urlencode(json_encode((array)$responsary)),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-  					$syncres = $callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
+  					$callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
 				}
 
 
@@ -1739,8 +1716,6 @@ class tallyClass extends userClass{
 	      	$apimastersres = $callConfig->getRow($apimasterssql);
       		$return['api_masters'] = $apimastersres;
 
-  			$api_master_id = $apimastersres->id;
-  			$api_url = $apimastersres->end_point;
   			$api_code = $apimastersres->api_code;
   			if($apimastersres->api_type == "S"){
 				//Send /...................
@@ -1859,7 +1834,7 @@ class tallyClass extends userClass{
   				}
   				if($checkstatus == "S"){
   					$api_hits_sync = array('company_id'=>$get['company_id'],'api_hit_id'=>$api_hit_id,'originator'=>$get['user_id'],'application_table'=>$apimastersres->application_table,'sync_datetime'=>date('Y-m-d H:i:s'), 'sync_details'=>urlencode(json_encode((array)$responsary)),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-  					$syncres = $callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
+  					$callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
 				}
 				//echo "<pre>"; print_r($fieldkeywithvalue); exit;
 				$return['status'] = "Good";
@@ -1924,8 +1899,6 @@ echo "<pre>cvfcgbfgjh"; print_r($api_hit_api_response_details); exit;
 	      	$apimastersres = $callConfig->getRow($apimasterssql);
       		$return['api_masters'] = $apimastersres;
 
-  			$api_master_id = $apimastersres->id;
-  			$api_url = $apimastersres->end_point;
   			$api_code = $apimastersres->api_code;
   			if($apimastersres->api_type == "S"){
 				//Send /...................
@@ -2029,7 +2002,7 @@ echo "<pre>cvfcgbfgjh"; print_r($api_hit_api_response_details); exit;
 
   				if($checkstatus == "S"){
   					$api_hits_sync = array('company_id'=>$get['company_id'],'api_hit_id'=>$api_hit_id,'originator'=>$get['user_id'],'application_table'=>$apimastersres->application_table,'sync_datetime'=>date('Y-m-d H:i:s'), 'sync_details'=>urlencode(json_encode((array)$responsary)),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-  					$syncres = $callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
+  					$callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
 				}
 
   			}

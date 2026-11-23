@@ -52,11 +52,11 @@ class vendorPortelUserClass extends userClass
 		$user_ids = array($adminres->id);
 		$option = "";
 		$notdataa = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $res['LASTID'], 'application_table_name' => 'application_tickets', 'type' => 'ACTION', 'notification_users' => $user_ids, 'option' => $option, 'assigner_id' => $post['user_id']);
-		$emails = $this->sendNotificationAndEmails($notdataa, $emailarray, 59);
+		$this->sendNotificationAndEmails($notdataa, $emailarray, 59);
 
 		$notdataa['type'] = "INFORMATION";
 		$notdataa['notification_users'] = array($post['user_id']);
-		$emails = $this->tosendnotifiations($notdataa);
+		$this->tosendnotifiations($notdataa);
 		return $res;
 	}
 	public function updateApplicationTickets($get, $post)
@@ -82,7 +82,7 @@ class vendorPortelUserClass extends userClass
 		$return['details'] = $data;
 		//update query
 		$query = "UPDATE vendors SET vendor_import_date = '" . date('Y-m-d h:i:s') . "'  WHERE vendor_import = 1 AND is_active =0";
-		$daa = $callConfig->executeQuery($query);
+		$callConfig->executeQuery($query);
 		return $return;
 	}
 	public function vmsvendorupdatetoapi($get)
@@ -320,7 +320,7 @@ class vendorPortelUserClass extends userClass
 			$option = "COM_INSERT_VENDOR_REGISTERS&VTYPE=VR";
 		}
 		$notdataa = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $vendorres->id, 'application_table_name' => 'vendor_registration_requests', 'type' => 'ACTION', 'notification_users' => $user_ids, 'option' => $option, 'assigner_id' => $post['user_id']);
-		$emails = $this->tosendnotifiations($notdataa);
+		$this->tosendnotifiations($notdataa);
 
 		//Profile Verifications email Code Start
 		$impoduserid = implode(',', (array) $user_ids);
@@ -373,7 +373,6 @@ class vendorPortelUserClass extends userClass
 	public function updateVendorProfileUpdateStatus($get, $post)
 	{
 		global $callConfig;
-		$return = array();
 		$transaction_table = $_POST['transaction_table'];
 		$transaction_id = $_POST['transaction_id'];
 
@@ -393,7 +392,6 @@ class vendorPortelUserClass extends userClass
 		$return = array();
 		$transaction_table = $_POST['transaction_table'];
 		$transaction_id = $_POST['transaction_id'];
-		$verification_type = $_POST['verification_type'];
 		$vendorsql = "SELECT id, display_name, user_id, vendor_verifications FROM " . $transaction_table . " WHERE company_id = '" . $post['company_id'] . "' AND id = '" . $transaction_id . "' AND  is_active =0";
 		$return['vendorsql'] = $vendorsql;
 		$vendorres = $callConfig->getRow($vendorsql);
@@ -434,7 +432,7 @@ class vendorPortelUserClass extends userClass
 				$last = $callConfig->getRow($query_last);
 				$user->lastlogin = $last->login_from;
 				$user->reset_password = $row->reset_password;
-				$res = $callConfig->insertRecord($row_db->db_name . '.application_user_logins', $fieldnames);
+				$callConfig->insertRecord($row_db->db_name . '.application_user_logins', $fieldnames);
 				unset($user->user_password);
 				$return = $user;
 			} else {
@@ -575,7 +573,7 @@ class vendorPortelUserClass extends userClass
 			if ($gst_type == "new") {
 				$is_default = ($gst_default == 'new') ? 'Y' : 'N';
 				$insertuserarray = ['company_id' => $post['company_id'], 'transaction_table' => $post['transaction_table'], 'customer_vendor_id' => $transaction_id, 'gstin' => $gstin, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'shipping_address' => $shipping_address, 'billing_address' => $billing_address, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'is_default' => $is_default, 'is_active' => 0, 'current_status' => 0, 'created_by' => $post['user_id'], 'created_date' => date("Y-m-d H:i:s"),];
-				$insert_id = $callConfig->insertRecord('customer_vendor_gst_billing_details', $insertuserarray);
+				$callConfig->insertRecord('customer_vendor_gst_billing_details', $insertuserarray);
 				$updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => date("Y-m-d H:i:s"),];
 				if ($is_default == 'Y') {
 					$updateary = ['billing_address' => $billing_address, 'shipping_address' => $shipping_address, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'vendor_verifications' => json_encode($vendor_verification), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => date("Y-m-d H:i:s")];
@@ -586,7 +584,7 @@ class vendorPortelUserClass extends userClass
 				$gstdetail = $callConfig->getRow($gstdetailsql);
 				if ($gstdetail->id == "") {
 					$insertuserarray = ['company_id' => $post['company_id'], 'transaction_table' => $post['transaction_table'], 'customer_vendor_id' => $transaction_id, 'gstin' => $gstin, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'shipping_address' => $shipping_address, 'billing_address' => $billing_address, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'is_default' => 'Y', 'is_active' => 0, 'current_status' => 0, 'created_by' => $post['user_id'], 'created_date' => date("Y-m-d H:i:s"),];
-					$insert_id = $callConfig->insertRecord('customer_vendor_gst_billing_details', $insertuserarray);
+					$callConfig->insertRecord('customer_vendor_gst_billing_details', $insertuserarray);
 				}
 				$updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => date("Y-m-d H:i:s"), 'billing_address' => $billing_address, 'shipping_address' => $shipping_address, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city,];
 				$res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
@@ -976,7 +974,6 @@ class vendorPortelUserClass extends userClass
 						} else {
 							$approval_user_id = $aures->user_id;
 						}
-						$planned_finish = date('Y-m-d', strtotime($tasks->planned_day . ' days', strtotime($days_ago)));
 
 						if ($approval_user_id != "" && $assigned_to != "") {
 							$task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
@@ -1055,7 +1052,6 @@ class vendorPortelUserClass extends userClass
 		$process_type = $post['transaction_table'] == "vendors" ? "VEDR" : "VR";
 		$role_id = json_encode(array($post['role_id']));
 		$connectuser = $post['connect'];
-		$connect_users = json_encode((array) $connectuser);
 		$display_name = $post['first_name'] . " " . $post['last_name'];
 		$passrd = 'PensAndPencils123';
 		$password = $callConfig->passwordEncrypt($passrd);
@@ -1070,20 +1066,19 @@ class vendorPortelUserClass extends userClass
 			$rolesids = array();
 			foreach ($roleres as $rolere) {
 				$insertarray = array("company_id" => $post['company_id'], "user_id" => $res['LASTID'], "module_setup_id" => $rolere->application_module, "application_module_id" => $rolere->application_module, "role_id" => $rolere->id, "role_short_code" => $rolere->role_short_code, "is_active" => "0", "current_status" => "0", "created_date" => date('Y-m-d h:i:s'), "created_by" => $post['user_id']);
-				$insert = $callConfig->insertRecord('application_user_module_roles', $insertarray);
+				$callConfig->insertRecord('application_user_module_roles', $insertarray);
 				$rolesids[] = $rolere->role_short_code;
 				$user_module_id = $rolere->application_module;
 			}
 			$applicationuserinvoiteary = array('company_id' => $post['company_id'], 'company_name' => $post['company_name'], 'user_name' => $post['user_name'], 'first_name' => $post['first_name'], 'last_name' => $post['last_name'], 'display_name' => $display_name, 'user_email' => $post['user_email'], 'user_mobile' => $post['user_mobile'], 'user_type' => $post['user_type'], 'user_id' => $res['LASTID'], 'role_id' => $post['role_id'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $post['user_id'], 'created_date' => date('Y-m-d H:i:s'), 'transaction_table' => $transaction_table);
 			$res1 = $callConfig->insertRecord('application_user_invitations', $applicationuserinvoiteary);
-			$web_site = $facsimile_number = $country_id = $state_id = "";
+			$web_site = $facsimile_number = $country_id = "";
 			if ($post['vendor_registration_request_id'] != "") {
 				$query1 = "SELECT id, web_site, facsimile_number, country_id, state_id FROM vendor_registration_requests where company_id = '" . $post['company_id'] . "' AND id = '" . $post['vendor_registration_request_id'] . "' AND is_active = 0";
 				$res11 = $callConfig->getRow($query1);
 				$web_site = $res11->web_site;
 				$facsimile_number = $res11->facsimile_number;
 				$country_id = $res11->country_id;
-				$state_id = $res11->state_id;
 			}
 			$vendor_verifications = json_encode(array("PAN" => array("status" => "N"), "GSTIN" => array("status" => "N"), "TAN" => array("status" => "N"), "BANK" => array("status" => "N"), 'MSME' => array("status" => "N")));
 			$msme_register_yes_no = $post['msme_register_yes_no'] == "Y" ? "Y" : "N";
@@ -1111,7 +1106,7 @@ class vendorPortelUserClass extends userClass
 				$task_data = $callConfig->getAllRows($task_query);
 				$retresult['task_query'] = $task_query;
 				$retresult['task_data'] = $task_data;
-				foreach ($task_data as $key => $tasks) {
+				foreach ($task_data as $tasks) {
 					$days_ago = $transaction_date;
 					if ($tasks->action_no == '1') {
 						if ($tasks->action_frequency == 'DY') {
@@ -1165,7 +1160,6 @@ class vendorPortelUserClass extends userClass
 						} else {
 							$approval_user_id = $aures->user_id;
 						}
-						$planned_finish = date('Y-m-d', strtotime($tasks->planned_day . ' days', strtotime($days_ago)));
 						if ($approval_user_id != "" && $assigned_to != "") {
 							$task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
 							$res = $callConfig->insertRecord('transaction_activity_schedule', $task_array);
@@ -1193,7 +1187,7 @@ class vendorPortelUserClass extends userClass
 			$emailarray['user_email'] = $post['user_email'];
 			$emailarray['company_id'] = $post['company_id'];
 			$emailarray['template_reference_id'] = 3;
-			$emill = $this->NewUserformate($emailarray, $post['data_name']);
+			$this->NewUserformate($emailarray, $post['data_name']);
 
 		}
 		return $retresult;
@@ -1299,7 +1293,6 @@ class vendorPortelUserClass extends userClass
 				$return['total_record_cnt'] = $cntres;
 				$respons_data_cnt = ($cntres->cnt != "" && $cntres->cnt != 0) ? $cntres->cnt : 0;
 
-				$divide_limit = $respons_data_cnt / $get['limit_select'];
 				$total_pages = ceil($respons_data_cnt / $get['limit_select']);
 				$current_page = isset($get['current_page']) ? (int) $get['current_page'] : 1;
 				$current_page = max(1, min($current_page, $total_pages));

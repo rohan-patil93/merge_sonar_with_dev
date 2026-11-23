@@ -71,7 +71,7 @@ class surveyPollUserClass extends userClass
 				$response_array = array('company_id'=>$main['company_id'],'is_active'=>'0','created_by'=>$main['created_by'],'created_date'=>$main['created_date'],'employee_id'=>$ids['id_value'],'survey_id'=>$s_id,'category'=>$main['category']);
 				$res=$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$response_array);
 			}
-			foreach ($quesion_data as $key => $value) {
+			foreach ($quesion_data as $value) {
 				$value['survey_id'] = $s_id;
 				$survey_question_option['survey_question_option'] = $value['survey_question_option'];
 				$survey_question_option['survey_id'] = $s_id;
@@ -80,7 +80,7 @@ class surveyPollUserClass extends userClass
 				$qres=$callConfig->insertRecord($table_questions,$quesion_array);
 				$survey_question_option['question_id'] = $qres['LASTID'];
 				$answer_array = array_merge($survey_question_option,$array);
-				$qrespons=$callConfig->insertRecord($table_options,$answer_array);
+				$callConfig->insertRecord($table_options,$answer_array);
 			}
 			$retunn_survey_id = $s_id;
 		} else {
@@ -165,10 +165,9 @@ class surveyPollUserClass extends userClass
     	public function savesurveyreponses($post, $get) {
     		global $callConfig;
     	// set is_active 1 bsed on survey id and empid
-    		$updatearray = array('is_active'=>'1');
     		$whr = "survey_id=".$post['survey_response']['survey_id']." and employee_id=".$post['survey_response']['employee_id'];
-    		$res=$callConfig->updateRecord(TBL_SURVEY_RESPONSES,array('is_active'=>'1'),'','',$whr);
-    		$res=$callConfig->updateRecord(TBL_SURVEY_RESPONSE_DETAILS,array('is_active'=>'1'),'','',$whr);
+    		$callConfig->updateRecord(TBL_SURVEY_RESPONSES,array('is_active'=>'1'),'','',$whr);
+    		$callConfig->updateRecord(TBL_SURVEY_RESPONSE_DETAILS,array('is_active'=>'1'),'','',$whr);
     		$qresponseid=$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$post['survey_response']);
 
     		for($i=0;$i<count((array)$post['survey_response_details']);$i++){
@@ -329,7 +328,7 @@ class surveyPollUserClass extends userClass
 
     	public function getsurveyreport($get){
     		global $callConfig;
-    		$Qtypes = array('MultilpleChoice'=>'1','Rating'=>'2','Ranking'=>'3','FreeText'=>'4');
+    		$qtypes = array('MultilpleChoice'=>'1','Rating'=>'2','Ranking'=>'3','FreeText'=>'4');
 
     		$whr="company_id=".$get['company_id']." and is_active='0' and survey_id=".$get['survey_id'];
     		$query=$callConfig->selectQuery(TBL_SURVEY_SETUP_QUESTIONS,'*',$whr,'','','');
@@ -343,16 +342,15 @@ class surveyPollUserClass extends userClass
     			$details['question_id'][$value->id] = $value->id;
     			$details['survey_question'][$value->id] = $value->survey_question;
     			$qtype = $value->options_display_type;
-    			if($qtype==$Qtypes['MultilpleChoice'] || $qtype==$Qtypes['Ranking']){
+    			if($qtype==$qtypes['MultilpleChoice'] || $qtype==$qtypes['Ranking']){
     				$detailoptions = json_decode($survey_answer_details->survey_question_option,1);
     			}
-    			elseif($qtype==$Qtypes['Rating']){
+    			elseif($qtype==$qtypes['Rating']){
     				$rating = json_decode($survey_answer_details->survey_question_option,1)[0];
     				for($no=1; $no<=$rating; $no++){
     					$detailoptions[] = $no;
     				}
     			}else{
-    				$freetext = json_decode($survey_answer_details->survey_question_option,1)[0];
     				$detailoptions[] = "Remarks";
     			}
     			$optionid = 0;
@@ -414,7 +412,7 @@ class surveyPollUserClass extends userClass
     				if($list->current_status == ST_COMPLETE){
     					$surveyvalues['completionrate'] = ST_COMPLETE;
     					$surveyvalues['completionratecolor'] = "success";
-    				}elseif (date('Y-m-d') > $svalues->survey_end_date && strtotime($enddatatime = $svalues->survey_end_date." ".$svalues->survey_end_time) < strtotime(date('Y-m-d H:i:s'))) {
+    				}elseif (date('Y-m-d') > $svalues->survey_end_date && strtotime($svalues->survey_end_date." ".$svalues->survey_end_time) < strtotime(date('Y-m-d H:i:s'))) {
                 			$surveyvalues['completionratecolor'] = "warning"; // Expired
                 			$surveyvalues['completionrate'] = ST_INACTIVE;
                 		} else {
@@ -474,11 +472,11 @@ class surveyPollUserClass extends userClass
 		if($survey->current_status == ST_ACTIVE){
 			return array('code'=>'draft','label'=>'Draft','color'=>'warning');
 		}
-		if($endTs != false && $endTs < $nowTs){
+		if($endTs && $endTs < $nowTs){
 			return array('code'=>'completed','label'=>'Completed','color'=>'secondary');
 		}
 
-		if($startTs != false && $endTs != false && $nowTs >= $startTs && $nowTs <= $endTs){
+		if($startTs && $endTs && $nowTs >= $startTs && $nowTs <= $endTs){
 			return array('code'=>'running','label'=>'Running','color'=>'success');
 		}
 
@@ -589,7 +587,7 @@ class surveyPollUserClass extends userClass
 
 				$endTime = $surveyRow->survey_end_time != "" ? $surveyRow->survey_end_time : "12:00:00";
 				$endTs = strtotime($surveyRow->survey_end_date." ".$endTime);
-				if($endTs != false && $endTs < $nowTs){
+				if($endTs && $endTs < $nowTs){
 					if($endTs >= $last30Start){
 						$completedEndLast30++;
 					}elseif($endTs >= $prev30Start && $endTs < $last30Start){
@@ -734,7 +732,7 @@ class surveyPollUserClass extends userClass
 		$endTime = $surveyRow->survey_end_time != "" ? $surveyRow->survey_end_time : "12:00:00";
 		$endTs = strtotime($surveyRow->survey_end_date." ".$endTime);
 		$nowTs = time();
-		$isExpired = ($endTs != false && $endTs < $nowTs);
+		$isExpired = ($endTs && $endTs < $nowTs);
 
 		if($responseRow->current_status == ST_COMPLETE){
 			return array(
@@ -951,7 +949,7 @@ class surveyPollUserClass extends userClass
 
 				$endTime = $surveyRow->survey_end_time != "" ? $surveyRow->survey_end_time : "12:00:00";
 				$endTs = strtotime($surveyRow->survey_end_date." ".$endTime);
-				$isExpired = ($endTs != false && $endTs < $nowTs);
+				$isExpired = ($endTs && $endTs < $nowTs);
 
 				if(!$tableOnlyMode){
 					$details['summary']['assigned']++;
@@ -997,7 +995,7 @@ class surveyPollUserClass extends userClass
 						}
 
 						if(!$isExpired){
-							$daysLeft = $endTs != false ? (int)ceil(($endTs - $nowTs) / 86400) : 0;
+							$daysLeft = $endTs ? (int)ceil(($endTs - $nowTs) / 86400) : 0;
 							if($daysLeft < 0){
 								$daysLeft = 0;
 							}
@@ -1207,7 +1205,7 @@ class surveyPollUserClass extends userClass
 		$holidays = "SELECT holiday_date, location_id FROM holidays WHERE company_id=".$get['company_id']." AND holiday_date >='".$get['from_date']."' AND holiday_date <='".$get['to_date']."' AND is_active=0 ";
 		$holidaysdata = $callConfig->getAllRows($holidays);
 		$holidaydates = array();
-		foreach ((array)$holidaysdata as $hkey=>$hvalue) {
+		foreach ((array)$holidaysdata as $hvalue) {
 			$holidaydates[$hvalue->location_id][] = $hvalue->holiday_date;
 		}
 		$attendancewhurl1 = "SELECT id,minimum_hours_required,working_days FROM attendance_settings WHERE is_active=0 and company_id=".$get['company_id'];

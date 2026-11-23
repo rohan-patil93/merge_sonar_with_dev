@@ -46,7 +46,7 @@ class ComplaintsClass{
 		if($id && $column){
 			$whr = $column.'='.$id.' AND ';
 		}
-		$table_details = "SELECT * FROM  $table_name 
+		$table_details = "SELECT * FROM  $table_name
 		WHERE $whr company_id={$get['company_id']} AND  is_active='0' ";
 		$table_details = $callConfig->getAllRows($table_details);
 		$table = array();
@@ -127,7 +127,7 @@ class ComplaintsClass{
 			$whr .= "application_table_name = '$table_name' AND ";
 		}
 
-		$table_details = "SELECT * FROM  application_attachments 
+		$table_details = "SELECT * FROM  application_attachments
 		WHERE $whr company_id='{$get['company_id']}' AND  is_active='0' ";
 		$table_details = $callConfig->getAllRows($table_details);
 		$table = array();
@@ -146,15 +146,15 @@ class ComplaintsClass{
 		$whr = '';
 		$user_id = $data->user_id;
 		if ($user_id && $user_id != ''){
-			$whr .= "(user_name LIKE '%$user_id%' 
-		     OR user_email LIKE '%$user_id%' 
+			$whr .= "(user_name LIKE '%$user_id%'
+		     OR user_email LIKE '%$user_id%'
 		     OR user_mobile LIKE '%$user_id%') AND";
 		}
 		$from_date = $data->from_date;
 		$to_date = $data->to_date;
 		$table_details = "SELECT `id`, `user_name`, `user_email`, `user_mobile`, `created_date` FROM  ".MAINDB."."."
 		    mobile_user_registrations
-		WHERE 
+		WHERE
 		   $whr DATE(created_date) BETWEEN '$from_date' AND '$to_date' AND is_active='0' ";
 
 		$table_details = $callConfig->getAllRows($table_details);
@@ -174,13 +174,13 @@ class ComplaintsClass{
 		$whr = '';
 		$user_id = $data->user_id;
 		if ($user_id && $user_id != ''){
-			$whr .= "(au.display_name LIKE '%$user_id%' 
-		     OR au.user_email LIKE '%$user_id%' 
+			$whr .= "(au.display_name LIKE '%$user_id%'
+		     OR au.user_email LIKE '%$user_id%'
 		     OR uoa.mobile LIKE '%$user_id%') AND";
 		}
 		$from_date = $data->from_date;
 		$to_date = $data->to_date;
-		$table_details = "SELECT uoa.id, au.display_name,au.user_email, uoa.mobile,au.created_date 
+		$table_details = "SELECT uoa.id, au.display_name,au.user_email, uoa.mobile,au.created_date
 		FROM  user_otp_authentication uoa
 		LEFT JOIN application_users au ON au.id = uoa.user_id
 		WHERE $whr DATE(au.created_date) BETWEEN '$from_date' AND '$to_date' AND uoa.company_id='{$get['company_id']}' AND  uoa.is_active='0' AND uoa.current_status='199' ";
@@ -205,7 +205,7 @@ class ComplaintsClass{
 		if($id && $column){
 			$whr = $column.'='.$id.' AND ';
 		}
-		$table_details = "SELECT t1.*, t2.display_name 
+		$table_details = "SELECT t1.*, t2.display_name
 			FROM  $table_name t1
 			LEFT JOIN application_users t2 ON t2.id = t1.user_id
 			WHERE {$whr} t1.company_id='{$get['company_id']}' AND  t1.is_active='0' ";

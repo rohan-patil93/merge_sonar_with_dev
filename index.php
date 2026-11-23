@@ -451,7 +451,7 @@ if($_SESSION['timesheetalertshow'] != '0' && in_array('11',(array)$_SESSION['mod
 						 <div class="page-header card" style="margin: 15px !important;">
 
 
-     <?php 
+     <?php
 if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
      $disptemp = 'views/custom_insert_application_users.php';
 }else{
@@ -752,11 +752,11 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 	<script type="text/javascript" src="assets/bower_components/fullcalendar/js/fullcalendar.min.js"></script>
 	<script type="text/javascript" src="assets/pages/full-calender/calendar.js"></script>
 	<?php } ?>
-	<?php 
+	<?php
 		 if($_SESSION['apply_js']['role']==1){  ?>
 		<script src="assets/js/custom_insert_application_role.js"></script>
 	<?php  } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['jobposting']==1){  ?>
  		<script src="assets/js/custom_job_post.js"></script>
 	<?php } ?>
@@ -768,15 +768,15 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 	<?php if($_SESSION['apply_js']['tour']==1){ ?>
 		<script type="text/javascript" src="assets/bower_components/intro.js/js/intro.js"></script>
 	<?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['custom_insert_display_attributes']==1){ ?>
 	<script src="assets/js/custom_insert_display_attributes.js"></script>
 	<?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['custom_insert_letters']==1){ ?>
 	<script src="assets/js/custom_insert_latter.js"></script>
 	<?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['custom_insert_my_reports']==1){ ?>
 	<script src="assets/js/custom_insert_my_reports.js"></script>
 	<?php } ?>
@@ -785,23 +785,23 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 		<!-- Knob Chart js -->
    		<script type="text/javascript" src="assets/pages/chart/knob/knob-custom-chart.js"></script>
 	<?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['vendorstaq_admin_dashboarad_new']==1){ ?>
             <script src="assets/pages/widget/amchart/amcharts.js"></script>
             <script src="assets/pages/widget/amchart/serial.js"></script>
             <script src="assets/bower_components/chartist/js/chartist.js"></script>
             <script type="text/javascript" src="assets/pages/widget/vendorstaq_admin_dashboarad.js"></script>
 	<?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['employee_leaves']==1){ ?>
 	    <script type="text/javascript" src="assets/pages/widget/leaves_widget.js"></script>
 	<?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['bulk_project_timesheet']==1){ ?>
 
 	    <script type="text/javascript" src="assets/pages/widget/demo_dashboard4.js"></script>
 	<?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['hr_admin_dashboard']==1){ ?>
             <script src="assets/pages/widget/amchart/amcharts.js"></script>
             <script src="assets/pages/widget/amchart/serial.js"></script>
@@ -827,13 +827,13 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 <script type="text/javascript" src="assets/pages/chart/google/js/com_view_dash_board_vendor_employee_charts.js"></script>
 <!-- End google chart -->
 <?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['googlechart']==1){  ?>
 		<!-- google chart custom_list_candidate_offer-->
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript" src="assets/pages/chart/google/js/custom-google-chart.js"></script><!-- End google chart --->
 	<?php } ?>
-	<?php 
+	<?php
 		if($_SESSION['apply_js']['payslipchart']==1){ 	?>
 		<!-- google chart custom_list_candidate_offer-->
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

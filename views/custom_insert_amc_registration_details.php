@@ -85,7 +85,7 @@ foreach ($gc_details as $row) {
             <form action="" method="POST">
                 <?php if ($isEdit){ ?>
                     <input type="hidden" name="record_id" value="<?php echo $editData['id']; ?>">
-                <?php }; ?>
+                <?php } ?>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -131,7 +131,7 @@ foreach ($gc_details as $row) {
                                     <option value="<?php echo $p['id']; ?>" <?php echo $isEdit && $editData['product_id']==$p['id']?'selected':''; ?>>
                                         <?php echo htmlspecialchars($p['item_name']); ?>
                                     </option>
-                                <?php }; ?>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -204,7 +204,7 @@ foreach ($gc_details as $row) {
                                     <option value="<?php echo $pt['genc_detail_code']; ?>" <?php echo $isEdit && $editData['payment_type']==$pt['genc_detail_code']?'selected':''; ?>>
                                         <?php echo __($pt['genc_detail_name']); ?>
                                     </option>
-                                <?php }; ?>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -228,7 +228,7 @@ foreach ($gc_details as $row) {
                                     <option value="<?php echo $k; ?>" <?php echo $isEdit && $editData['account_group_id']==$k?'selected':''; ?>>
                                         <?php echo $v; ?>
                                     </option>
-                                <?php }; ?>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -241,7 +241,7 @@ foreach ($gc_details as $row) {
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php if ($isEdit && !empty($editData['technician_id'])){ ?>
                                     <option value="<?php echo $editData['technician_id']; ?>" selected><?php echo $editData['technician_name']; ?></option>
-                                <?php }; ?>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -255,7 +255,7 @@ foreach ($gc_details as $row) {
                                     <option value="<?php echo $s['genc_detail_code']; ?>" <?php echo $isEdit && $editData['service_on']==$s['genc_detail_code']?'selected':''; ?>>
                                         <?php echo __($s['genc_detail_name']); ?>
                                     </option>
-                                <?php }; ?>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -289,7 +289,7 @@ foreach ($gc_details as $row) {
                                             <?php echo $isEdit && $editData['building_id']==$row['id']?'selected':''; ?>>
                                             <?php echo $row['building_name']; ?>
                                         </option>
-                                    <?php }; ?>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -552,7 +552,7 @@ $(document).ready(function(){
     $(".js-example-basic-single").select2();
     <?php if ($isEdit && !empty($editData['account_group_id'])){ ?>
         updateGroups(document.getElementById('selectGroup'));
-    <?php }; ?>
+    <?php } ?>
     // auto generate dynamic fields on edit
     if('<?php echo $isEdit ? $editData['no_of_services'] : ''; ?>'){
         generateServiceFields();

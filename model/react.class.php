@@ -40,8 +40,7 @@ class reactClass extends userClass{
 			$field = $_GET['field'] !='' ? $_GET['field'] : '*';
 
 		}
-		$res = $this->getAllTablesData($_GET['table'],'*',$whr,$orderby);
-		return $res;
+		return $this->getAllTablesData($_GET['table'],'*',$whr,$orderby);
 	}
 	public function dyanamicautosuggictionselectdata($get){
 		global $callConfig;
@@ -2109,7 +2108,7 @@ class reactClass extends userClass{
 			}
 
     // Bypassing updateRecord due to broken action_log table columns in the core db.class.php
-			$sql = "UPDATE contracts SET 
+			$sql = "UPDATE contracts SET
 			cancel_status = 'Y',
 			cancel_reason = '" . mysqli_real_escape_string($callConfig->con, $reason) . "',
 			cancel_date = '" . date('Y-m-d') . "',
@@ -2804,13 +2803,13 @@ class reactClass extends userClass{
 				}
 			}
 		}
-		if (count($locationIdsForContract) > 0) {
+		if (!empty($locationIdsForContract)) {
 			$callConfig->updateRecord('contracts', array('locations' => json_encode(array_values(array_unique($locationIdsForContract)))), 'id', $contract_id);
 		}
 
 		$return['schedule_inserts'] = array();
 		$return['schedule_errors'] = array();
-		if (count($insertedAssetsForSchedule) > 0) {
+		if (!empty($insertedAssetsForSchedule)) {
 			$deactivate('contract_amc_service_schedules');
 			foreach ($insertedAssetsForSchedule as $assetRow) {
 				$assetScheduleRows = $this->generateContractAmcSchedulesForAsset($contract_id, $companyId, $userId, $assetRow, $now);
@@ -3243,13 +3242,13 @@ class reactClass extends userClass{
 			return '—';
 		}
 		$ts = strtotime($datetime);
-		if ($ts == false) {
+		if (!$ts) {
 			return $datetime;
 		}
 		$sessionFormat = $_SESSION['date_formate'] ?? '';
 		$dateFormat = ($sessionFormat != '' && $sessionFormat != '0') ? $sessionFormat : 'd-m-Y';
 		$datePart = date($dateFormat, $ts);
-		if ($datePart == '' || $datePart == false) {
+		if ($datePart == '') {
 			$datePart = date('d-m-Y', $ts);
 		}
 		$hasTime = date('H:i', $ts) != '00:00';
@@ -6419,7 +6418,7 @@ class reactClass extends userClass{
 		}
 		$sql = "SELECT id, sku, item_name, item_description
 			FROM items
-			WHERE company_id = {$companyId} AND is_active = 0  AND item_name != '' 
+			WHERE company_id = {$companyId} AND is_active = 0  AND item_name != ''
 			ORDER BY item_name ASC";
 		$rows = $callConfig->getAllRows($sql);
 		$items = array();
@@ -9628,6 +9627,5 @@ class reactClass extends userClass{
 
 
 	}
-	?>
 
 

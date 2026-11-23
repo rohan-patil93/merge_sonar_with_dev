@@ -261,7 +261,7 @@ const grantAccess = () => {
 </svg>
 
 <!-- include in a container a heading, paragraph and svg for the keyhole -->
-<?php 
+<?php
     if(!isset($_GET['error'])){
         $_GET['error'] = "403";
       }

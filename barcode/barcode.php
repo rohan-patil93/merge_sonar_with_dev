@@ -10,7 +10,7 @@ $sizefactor = (isset($_GET["sizefactor"])?$_GET["sizefactor"]:"1");
 // This function call can be copied into your project and can be made from anywhere in your code
 barcode( $filepath, $text, $size, $orientation, $code_type, $print, $sizefactor );
 
-function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal", $code_type="code128", $print=false, $SizeFactor=1 ) {
+function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal", $code_type="code128", $print=false, $sizefactor=1 ) {
 	$code_string = "";
 	// Translate the $text into barcode the correct $code_type
 	if ( in_array(strtolower($code_type), array("code128", "code128b")) ) {
@@ -19,10 +19,10 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 		$code_array = array(" "=>"212222","!"=>"222122","\""=>"222221","#"=>"121223","$"=>"121322","%"=>"131222","&"=>"122213","'"=>"122312","("=>"132212",")"=>"221213","*"=>"221312","+"=>"231212",","=>"112232","-"=>"122132","."=>"122231","/"=>"113222","0"=>"123122","1"=>"123221","2"=>"223211","3"=>"221132","4"=>"221231","5"=>"213212","6"=>"223112","7"=>"312131","8"=>"311222","9"=>"321122",":"=>"321221",";"=>"312212","<"=>"322112","="=>"322211",">"=>"212123","?"=>"212321","@"=>"232121","A"=>"111323","B"=>"131123","C"=>"131321","D"=>"112313","E"=>"132113","F"=>"132311","G"=>"211313","H"=>"231113","I"=>"231311","J"=>"112133","K"=>"112331","L"=>"132131","M"=>"113123","N"=>"113321","O"=>"133121","P"=>"313121","Q"=>"211331","R"=>"231131","S"=>"213113","T"=>"213311","U"=>"213131","V"=>"311123","W"=>"311321","X"=>"331121","Y"=>"312113","Z"=>"312311","["=>"332111","\\"=>"314111","]"=>"221411","^"=>"431111","_"=>"111224","\`"=>"111422","a"=>"121124","b"=>"121421","c"=>"141122","d"=>"141221","e"=>"112214","f"=>"112412","g"=>"122114","h"=>"122411","i"=>"142112","j"=>"142211","k"=>"241211","l"=>"221114","m"=>"413111","n"=>"241112","o"=>"134111","p"=>"111242","q"=>"121142","r"=>"121241","s"=>"114212","t"=>"124112","u"=>"124211","v"=>"411212","w"=>"421112","x"=>"421211","y"=>"212141","z"=>"214121","{"=>"412121","|"=>"111143","}"=>"111341","~"=>"131141","DEL"=>"114113","FNC 3"=>"114311","FNC 2"=>"411113","SHIFT"=>"411311","CODE C"=>"113141","FNC 4"=>"114131","CODE A"=>"311141","FNC 1"=>"411131","Start A"=>"211412","Start B"=>"211214","Start C"=>"211232","Stop"=>"2331112");
 		$code_keys = array_keys($code_array);
 		$code_values = array_flip($code_keys);
-		for ( $X = 1; $X <= strlen($text); $X++ ) {
-			$activeKey = substr( $text, ($X-1), 1);
+		for ( $x = 1; $x <= strlen($text); $x++ ) {
+			$activeKey = substr( $text, ($x-1), 1);
 			$code_string .= $code_array[$activeKey];
-			$chksum=($chksum + ($code_values[$activeKey] * $X));
+			$chksum=($chksum + ($code_values[$activeKey] * $x));
 		}
 		$code_string .= $code_array[$code_keys[($chksum - (intval($chksum / 103) * 103))]];
 
@@ -34,10 +34,10 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 		$code_array = array(" "=>"212222","!"=>"222122","\""=>"222221","#"=>"121223","$"=>"121322","%"=>"131222","&"=>"122213","'"=>"122312","("=>"132212",")"=>"221213","*"=>"221312","+"=>"231212",","=>"112232","-"=>"122132","."=>"122231","/"=>"113222","0"=>"123122","1"=>"123221","2"=>"223211","3"=>"221132","4"=>"221231","5"=>"213212","6"=>"223112","7"=>"312131","8"=>"311222","9"=>"321122",":"=>"321221",";"=>"312212","<"=>"322112","="=>"322211",">"=>"212123","?"=>"212321","@"=>"232121","A"=>"111323","B"=>"131123","C"=>"131321","D"=>"112313","E"=>"132113","F"=>"132311","G"=>"211313","H"=>"231113","I"=>"231311","J"=>"112133","K"=>"112331","L"=>"132131","M"=>"113123","N"=>"113321","O"=>"133121","P"=>"313121","Q"=>"211331","R"=>"231131","S"=>"213113","T"=>"213311","U"=>"213131","V"=>"311123","W"=>"311321","X"=>"331121","Y"=>"312113","Z"=>"312311","["=>"332111","\\"=>"314111","]"=>"221411","^"=>"431111","_"=>"111224","NUL"=>"111422","SOH"=>"121124","STX"=>"121421","ETX"=>"141122","EOT"=>"141221","ENQ"=>"112214","ACK"=>"112412","BEL"=>"122114","BS"=>"122411","HT"=>"142112","LF"=>"142211","VT"=>"241211","FF"=>"221114","CR"=>"413111","SO"=>"241112","SI"=>"134111","DLE"=>"111242","DC1"=>"121142","DC2"=>"121241","DC3"=>"114212","DC4"=>"124112","NAK"=>"124211","SYN"=>"411212","ETB"=>"421112","CAN"=>"421211","EM"=>"212141","SUB"=>"214121","ESC"=>"412121","FS"=>"111143","GS"=>"111341","RS"=>"131141","US"=>"114113","FNC 3"=>"114311","FNC 2"=>"411113","SHIFT"=>"411311","CODE C"=>"113141","CODE B"=>"114131","FNC 4"=>"311141","FNC 1"=>"411131","Start A"=>"211412","Start B"=>"211214","Start C"=>"211232","Stop"=>"2331112");
 		$code_keys = array_keys($code_array);
 		$code_values = array_flip($code_keys);
-		for ( $X = 1; $X <= strlen($text); $X++ ) {
-			$activeKey = substr( $text, ($X-1), 1);
+		for ( $x = 1; $x <= strlen($text); $x++ ) {
+			$activeKey = substr( $text, ($x-1), 1);
 			$code_string .= $code_array[$activeKey];
-			$chksum=($chksum + ($code_values[$activeKey] * $X));
+			$chksum=($chksum + ($code_values[$activeKey] * $x));
 		}
 		$code_string .= $code_array[$code_keys[($chksum - (intval($chksum / 103) * 103))]];
 
@@ -48,8 +48,8 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 		// Convert to uppercase
 		$upper_text = strtoupper($text);
 
-		for ( $X = 1; $X<=strlen($upper_text); $X++ ) {
-			$code_string .= $code_array[substr( $upper_text, ($X-1), 1)] . "1";
+		for ( $x = 1; $x<=strlen($upper_text); $x++ ) {
+			$code_string .= $code_array[substr( $upper_text, ($x-1), 1)] . "1";
 		}
 
 		$code_string = "1211212111" . $code_string . "121121211";
@@ -57,19 +57,19 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 		$code_array1 = array("1","2","3","4","5","6","7","8","9","0");
 		$code_array2 = array("3-1-1-1-3","1-3-1-1-3","3-3-1-1-1","1-1-3-1-3","3-1-3-1-1","1-3-3-1-1","1-1-1-3-3","3-1-1-3-1","1-3-1-3-1","1-1-3-3-1");
 
-		for ( $X = 1; $X <= strlen($text); $X++ ) {
-			for ( $Y = 0; $Y < count($code_array1); $Y++ ) {
-				if ( substr($text, ($X-1), 1) == $code_array1[$Y] )
-					$temp[$X] = $code_array2[$Y];
+		for ( $x = 1; $x <= strlen($text); $x++ ) {
+			for ( $y = 0; $y < count($code_array1); $y++ ) {
+				if ( substr($text, ($x-1), 1) == $code_array1[$y] )
+					$temp[$x] = $code_array2[$y];
 			}
 		}
 
-		for ( $X=1; $X<=strlen($text); $X+=2 ) {
-			if ( isset($temp[$X]) && isset($temp[($X + 1)]) ) {
-				$temp1 = explode( "-", $temp[$X] );
-				$temp2 = explode( "-", $temp[($X + 1)] );
-				for ( $Y = 0; $Y < count($temp1); $Y++ )
-					$code_string .= $temp1[$Y] . $temp2[$Y];
+		for ( $x=1; $x<=strlen($text); $x+=2 ) {
+			if ( isset($temp[$x]) && isset($temp[($x + 1)]) ) {
+				$temp1 = explode( "-", $temp[$x] );
+				$temp2 = explode( "-", $temp[($x + 1)] );
+				for ( $y = 0; $y < count($temp1); $y++ )
+					$code_string .= $temp1[$y] . $temp2[$y];
 			}
 		}
 
@@ -81,10 +81,10 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 		// Convert to uppercase
 		$upper_text = strtoupper($text);
 
-		for ( $X = 1; $X<=strlen($upper_text); $X++ ) {
-			for ( $Y = 0; $Y<count($code_array1); $Y++ ) {
-				if ( substr($upper_text, ($X-1), 1) == $code_array1[$Y] )
-					$code_string .= $code_array2[$Y] . "1";
+		for ( $x = 1; $x<=strlen($upper_text); $x++ ) {
+			for ( $y = 0; $y<count($code_array1); $y++ ) {
+				if ( substr($upper_text, ($x-1), 1) == $code_array1[$y] )
+					$code_string .= $code_array2[$y] . "1";
 			}
 		}
 		$code_string = "11221211" . $code_string . "1122121";
@@ -103,11 +103,11 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
         }
 
 	if ( strtolower($orientation) == "horizontal" ) {
-		$img_width = $code_length*$SizeFactor;
+		$img_width = $code_length*$sizefactor;
 		$img_height = $size;
 	} else {
 		$img_width = $size;
-		$img_height = $code_length*$SizeFactor;
+		$img_height = $code_length*$sizefactor;
 	}
 
 	$image = imagecreate($img_width, $img_height + $text_height);
@@ -123,9 +123,9 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 	for ( $position = 1 ; $position <= strlen($code_string); $position++ ) {
 		$cur_size = $location + ( substr($code_string, ($position-1), 1) );
 		if ( strtolower($orientation) == "horizontal" )
-			imagefilledrectangle( $image, $location*$SizeFactor, 0, $cur_size*$SizeFactor, $img_height, ($position % 2 == 0 ? $white : $black) );
+			imagefilledrectangle( $image, $location*$sizefactor, 0, $cur_size*$sizefactor, $img_height, ($position % 2 == 0 ? $white : $black) );
 		else
-			imagefilledrectangle( $image, 0, $location*$SizeFactor, $img_width, $cur_size*$SizeFactor, ($position % 2 == 0 ? $white : $black) );
+			imagefilledrectangle( $image, 0, $location*$sizefactor, $img_width, $cur_size*$sizefactor, ($position % 2 == 0 ? $white : $black) );
 		$location = $cur_size;
 	}
 
