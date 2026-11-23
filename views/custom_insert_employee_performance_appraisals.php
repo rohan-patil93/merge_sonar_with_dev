@@ -1,4 +1,6 @@
 <?php
+defined('ATTR_BTN_DISABLED_STYLE') || define('ATTR_BTN_DISABLED_STYLE', ATTR_BTN_DISABLED_STYLE);
+defined('ATTR_DISPLAY_NONE_STYLE') || define('ATTR_DISPLAY_NONE_STYLE', ATTR_DISPLAY_NONE_STYLE);
 $File_Uploads_Path = "uploads/all/";
 $_SESSION['apply_js']['multiselest'] = 1;
 if(isset($_POST['submitperformance'])){
@@ -83,13 +85,13 @@ foreach($workflowsteps['all_steps_workflow'] as $wfstatus=>$wflow){
 
 if($workflow_approval_level[ST_APPROVED2] == $_SESSION['userid']){
     if($employee_performance_appraisals['current_status'] != ST_APPROVED2){
-        $updatebtndisable = 'style="pointer-events: none; opacity: 0.6;"';
+        $updatebtndisable = ATTR_BTN_DISABLED_STYLE;
     }
     $loginuser_type = "HOD"; //EMP,RO,HOD
 }elseif($workflow_approval_level[ST_APPROVED1] == $_SESSION['userid']){
     $loginuser_type = "RO"; //EMP,RO,HOD
     if($employee_performance_appraisals['current_status'] != ST_APPROVED1){
-        $updatebtndisable = 'style="pointer-events: none; opacity: 0.6;"';
+        $updatebtndisable = ATTR_BTN_DISABLED_STYLE;
     }
     if($employee_performance_appraisals['normalization_approved_status'] == '0'){
         $final_ranking_id = $employee_performance_appraisals['normalization_ranking'];
@@ -106,29 +108,21 @@ if($workflow_approval_level[ST_APPROVED2] == $_SESSION['userid']){
 }elseif($employee['user_id'] == $_SESSION['userid'] || $_SESSION['admin_type'] == '1'){
     $loginuser_type = "EMP"; //EMP,RO,HOD
     if($employee_performance_appraisals['current_status'] != ST_DRAFT && $employee_performance_appraisals['current_status'] != ST_ACTIVE && $pepah_res['current_status'] != ST_SEND_BACK && $employee_performance_appraisals['current_status'] != ST_CALLBACK){
-        $updatebtndisable = 'style="pointer-events: none; opacity: 0.6;"';
+        $updatebtndisable = ATTR_BTN_DISABLED_STYLE;
     }
 }
 
-if($loginuser_type == "RO" || $loginuser_type == "HOD" || $employee_performance_appraisals['publish_comment']=='0' || $employee_performance_appraisals['current_status'] ==ST_APPROVED){
-
-}else{
-    $notshowro = "style='display:none'";
+if(!($loginuser_type == "RO" || $loginuser_type == "HOD" || $employee_performance_appraisals['publish_comment']=='0' || $employee_performance_appraisals['current_status'] ==ST_APPROVED)){
+    $notshowro = ATTR_DISPLAY_NONE_STYLE;
 }
-if($loginuser_type == "HOD" || $employee_performance_appraisals['publish_comment']=='0' || $employee_performance_appraisals['current_status'] ==ST_APPROVED){
-
-}else{
-    $notshowhod = "style='display:none'";
+if(!($loginuser_type == "HOD" || $employee_performance_appraisals['publish_comment']=='0' || $employee_performance_appraisals['current_status'] ==ST_APPROVED)){
+    $notshowhod = ATTR_DISPLAY_NONE_STYLE;
 }
-if($loginuser_type == "RO" || $loginuser_type == "HOD" || $employee_performance_appraisals['publish_rank']=='0' || $employee_performance_appraisals['current_status'] ==ST_APPROVED){
-
-}else{
-    $ranknotshowro = "style='display:none'";
+if(!($loginuser_type == "RO" || $loginuser_type == "HOD" || $employee_performance_appraisals['publish_rank']=='0' || $employee_performance_appraisals['current_status'] ==ST_APPROVED)){
+    $ranknotshowro = ATTR_DISPLAY_NONE_STYLE;
 }
-if($loginuser_type == "HOD" || $employee_performance_appraisals['publish_rank']=='0' || $employee_performance_appraisals['current_status'] ==ST_APPROVED){
-
-}else{
-    $ranknotshowhod = "style='display:none'";
+if(!($loginuser_type == "HOD" || $employee_performance_appraisals['publish_rank']=='0' || $employee_performance_appraisals['current_status'] ==ST_APPROVED)){
+    $ranknotshowhod = ATTR_DISPLAY_NONE_STYLE;
 }
 
 ?>
@@ -425,14 +419,14 @@ if($employee_performance_appraisals['id'] !=""){
                 <?php
 
                     if($workflowsteps['next_status'] ==ST_APPROVED && $workflowsteps['next_step_owner'] == $_SESSION['userid']){ ?>
-                        <div class="btn-group workflow-btn" role="group" >
+                        <fieldset class="btn-group workflow-btn border-0 p-0 m-0">
                             <?php if($employee_performance_appraisals['publish_comment']!='0'){ ?>
                             <button type="button" class="btn btn-success btn-sm waves-effect waves-light" onclick="publishCommentAndRank('C','<?php echo $employee_performance_appraisals['id']; ?>')"><i class="ti-comment-alt"></i> <?= __('Publish Comments') ?></button>
                             <?php } ?>
                             <?php if($employee_performance_appraisals['publish_rank']!='0'){ ?>
                             <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" onclick="publishCommentAndRank('CR','<?php echo $employee_performance_appraisals['id']; ?>')"><i class="ti-cup"></i> <?= __('Publish') ?> <?php echo ($employee_performance_appraisals['publish_comment']!='0') ? __('Comment And') . " " : ""; ?><?= __('Ranks') ?></button>
                         <?php }     ?>
-                        </div>
+                        </fieldset>
                 <?php } ?>
                 <?php if($employee_performance_appraisals['publish_rank']=='0'){ echo '<span class="form-label label label-md label-primary m-r-50"><span class="fa fa-thumbs-up text-white"></span> ' . __('Rank publish') . '</span>';
 } ?>
@@ -466,7 +460,7 @@ if($employee_performance_appraisals['id'] !=""){
                         </div>
                         <div class="col-md-12">
                             <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo round($employee_performance_appraisals['ro_total']); ?>%;" aria-valuenow="<?php echo round($employee_performance_appraisals['ro_total']); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                <progress class="progress-bar progress-bar-success" value="<?php echo round($employee_performance_appraisals['ro_total']); ?>;" aria-valuenow="<?php echo round($employee_performance_appraisals['ro_total']); ?>" max="100" style="width: <?php echo round($employee_performance_appraisals['ro_total']); ?>%;" aria-valuenow="<?php echo round($employee_performance_appraisals['ro_total']); ?>;"></progress>
                             </div>
                         </div>
                     </div>
@@ -882,7 +876,7 @@ if($employee_performance_appraisals['id'] !=""){
 } ?>
                                                     <?php if($paheaders['sub_header_addmore'] == '0'){ //delete button visible 0 or 1 is not ?>
                                                         <td>
-                                                            <i class="fa fa-trash text-danger" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                                            <button type="button" class="btn btn-link p-0 border-0 text-danger" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)" aria-label="Delete"><i class="fa fa-trash text-danger"></i></button>
                                                         </td>
                                                     <?php } ?>
                                                 </tr>
@@ -1001,7 +995,7 @@ if($employee_performance_appraisals['id'] !=""){
                                 <tbody>
                                     <?php $efseq = 1; foreach($employee_feedbacks as $ef){
                                         ?>
-                                        <tr onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                        <tr onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')">
                                             <td class="p-2" style="width: 10%;"><i class="fa fa-edit"></i> <?php echo $efseq; ?></td>
                                             <td class="p-2 w-b-w-s" style="width: 70%;">
                                                 <?php echo __($ef['question'] ?? ''); ?>
@@ -1009,7 +1003,7 @@ if($employee_performance_appraisals['id'] !=""){
                                             <td class="p-2 text-center" style="width: 20%;">
                                                 <?php if($ef['response_status']==''){ echo __('Pendding');
 }else{  ?>
-                                                    <i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('View FeedBack') ?>" onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0" onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')" aria-label="View Feedback"><i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('View FeedBack') ?>" ></i></button>
                                                 <?php } ?>
                                             </td>
                                         </tr>

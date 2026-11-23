@@ -42,7 +42,7 @@
                             </button>
                         </div>
                         <div class="modal fade" id="courier-in-Modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog">
                                 <div class="modal-content align-left">
                                     <div class="modal-header">
                                         <h4 class="modal-title"><?= __('Courier in'); ?></h4>
@@ -83,7 +83,7 @@
                             </button>
                         </div>
                         <div class="modal fade" id="courier-out-Modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog">
                                 <div class="modal-content align-left">
                                     <div class="modal-header">
                                         <h4 class="modal-title"><?= __('Courier in'); ?></h4>
@@ -167,7 +167,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -185,7 +185,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -203,7 +203,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -247,7 +247,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -265,7 +265,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -283,7 +283,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -327,7 +327,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -345,7 +345,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -363,7 +363,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -394,7 +394,7 @@
                         <span class="ti-plus m-r-5"></span><?= __('Create'); ?>
                     </button>
                     <div class="modal fade" id="create-product-modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog">
                             <div class="modal-content align-left">
                                 <div class="modal-header">
                                     <h4 class="modal-title"><?= __('Sell new product'); ?></h4>
@@ -434,7 +434,7 @@
                             <img src="../files/assets/images/p-img.jpg" class="img-fluid" alt="">
                             <a type="button" data-bs-toggle="modal" data-bs-target="#add-product-modal" class="add-pro text-white f-w-600 f-18" href="" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Add Product'); ?></a>
                             <div class="modal fade" id="add-product-modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Add Product'); ?></h4>
@@ -472,7 +472,7 @@
                                 <i class="ti-pencil-alt"></i>
                             </button>
                             <div class="modal fade" id="edit-product-modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Edit Product'); ?></h4>
@@ -506,7 +506,7 @@
                             <img src="../files/assets/images/p-img-2.jpg" class="img-fluid" alt="">
                             <a type="button" data-bs-toggle="modal" data-bs-target="#add-product-modal" class="add-pro text-white f-w-600 f-18" href="" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Add Product'); ?></a>
                             <div class="modal fade" id="add-product-modal_2" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Add Product'); ?></h4>
@@ -544,7 +544,7 @@
                                 <i class="ti-pencil-alt"></i>
                             </button>
                             <div class="modal fade" id="edit-product-modal_2" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Edit Product'); ?></h4>
@@ -578,7 +578,7 @@
                             <img src="../files/assets/images/p-img-3.jpg" class="img-fluid" alt="">
                             <a type="button" data-bs-toggle="modal" data-bs-target="#add-product-modal" class="add-pro text-white f-w-600 f-18" href="" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Add Product'); ?></a>
                             <div class="modal fade" id="add-product-modal_3" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Add Product'); ?></h4>
@@ -616,7 +616,7 @@
                                 <i class="ti-pencil-alt"></i>
                             </button>
                             <div class="modal fade" id="edit-product-modal_3" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Edit Product'); ?></h4>
@@ -652,7 +652,7 @@
                             <img src="../files/assets/images/p-img.jpg" class="img-fluid" alt="">
                             <a type="button" data-bs-toggle="modal" data-bs-target="#add-product-modal" class="add-pro text-white f-w-600 f-18" href="" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Add Product'); ?></a>
                             <div class="modal fade" id="add-product-modal_4" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Add Product'); ?></h4>
@@ -690,7 +690,7 @@
                                 <i class="ti-pencil-alt"></i>
                             </button>
                             <div class="modal fade" id="edit-product-modal_4" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Edit Product'); ?></h4>
@@ -724,7 +724,7 @@
                             <img src="../files/assets/images/p-img-2.jpg" class="img-fluid" alt="">
                             <a type="button" data-bs-toggle="modal" data-bs-target="#add-product-modal" class="add-pro text-white f-w-600 f-18" href="" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Add Product'); ?></a>
                             <div class="modal fade" id="add-product-modal_5" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Add Product'); ?></h4>
@@ -762,7 +762,7 @@
                                 <i class="ti-pencil-alt"></i>
                             </button>
                             <div class="modal fade" id="edit-product-modal_5" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Edit Product'); ?></h4>
@@ -796,7 +796,7 @@
                             <img src="../files/assets/images/p-img-3.jpg" class="img-fluid" alt="">
                             <a type="button" data-bs-toggle="modal" data-bs-target="#add-product-modal" class="add-pro text-white f-w-600 f-18" href="" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Add Product'); ?></a>
                             <div class="modal fade" id="add-product-modal_6" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Add Product'); ?></h4>
@@ -834,7 +834,7 @@
                                 <i class="ti-pencil-alt"></i>
                             </button>
                             <div class="modal fade" id="edit-product-modal_6" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Edit Product'); ?></h4>

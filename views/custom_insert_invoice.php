@@ -1,4 +1,9 @@
 <?php
+defined('HDR_LOCATION_OPTION') || define('HDR_LOCATION_OPTION', 'location:index.php?option=');
+defined('KEY_TABLE_NAME') || define('KEY_TABLE_NAME', 'table_name');
+defined('KEY_STATUS_VALUES') || define('KEY_STATUS_VALUES', 'status_values');
+defined('KEY_COST_CENTER') || define('KEY_COST_CENTER', 'cost_center');
+defined('KEY_PETTY_CASH') || define('KEY_PETTY_CASH', 'petty_cash');
 $option = strtoupper($_GET['option']);
 $list = str_replace('INSERT', 'LIST', $option);
 
@@ -12,15 +17,15 @@ if($_POST['submit'] == 'reply'){
 if($_POST['submit1'] == 'Add'){
     $_POST['created_by'] = $_SESSION['userid'];
     $_POST['created_date'] = nowDate();
-    $url = API."?mode=addinvoietype&table=".$_POST['table_name']."&method=post";
+    $url = API."?mode=addinvoietype&table=".$_POST[KEY_TABLE_NAME]."&method=post";
     $response = file_post_contents($url, $_POST, 'insert');
      if ($response) {
         if ($_POST['submit_value'] == 'continue'){
                 $LASTID = json_decode($response,1);
                 $nrid = "id:".$LASTID['LASTID'];
-                header("location:index.php?option=".$option."&Rid=".deocdeId($nrid));
+                header(HDR_LOCATION_OPTION.$option."&Rid=".deocdeId($nrid));
             }else{
-                header("location:index.php?option=".$list);
+                header(HDR_LOCATION_OPTION.$list);
             }
     }
 }
@@ -28,33 +33,33 @@ if($_POST['submit1'] == 'Update'){
     $_POST['updated_by'] = $_SESSION['userid'];
     $_POST['updated_date'] = nowDate();
 
-    if($_POST['status_values'] == ST_PURCHASE_ORDER_GENRATED){
+    if($_POST[KEY_STATUS_VALUES] == ST_PURCHASE_ORDER_GENRATED){
         $retun_list = toGetpageOptionName('purchase_orders');
-        header("location:index.php?option=".$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
+        header(HDR_LOCATION_OPTION.$retun_list['option_url']."&table=".$_POST[KEY_TABLE_NAME]."&Rid=".$_POST['hid']);
     }
-    if($_POST['status_values'] == ST_APPROVAL_PENDING){
-        $checkurl = API."?mode=tocheckDAO&table=".$_POST['table_name']."&status=".$_POST['status_values']."&amount=".$_POST['grandtotal']."&status_old_value=".$_POST['status_old_value']."&cost_center=".$_POST['cost_center'];
-        $originator_tab = array('bills', 'petty_cash');
-        if(!in_array($_POST['table_name'], (array)$originator_tab)){
+    if($_POST[KEY_STATUS_VALUES] == ST_APPROVAL_PENDING){
+        $checkurl = API."?mode=tocheckDAO&table=".$_POST[KEY_TABLE_NAME]."&status=".$_POST[KEY_STATUS_VALUES]."&amount=".$_POST['grandtotal']."&status_old_value=".$_POST['status_old_value']."&cost_center=".$_POST[KEY_COST_CENTER];
+        $originator_tab = array('bills', KEY_PETTY_CASH);
+        if(!in_array($_POST[KEY_TABLE_NAME], (array)$originator_tab)){
              $checkurl.="&opex_cpex=".$_POST['opex_cpex']."&category_type=".$_POST['type'];
         }
         $check_data = callAPI($checkurl);
         $check_data = json_decode($check_data,1);
         if(!isset($check_data['id']) || $check_data['id'] == ''){
-            header("location:index.php?option=".$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
+            header(HDR_LOCATION_OPTION.$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
         }
     }
-    $_POST['file_add'] = $_SESSION['file_add'][$_POST['table_name']][$_POST['hid']];
-    $_SESSION['file_add'][$_POST['table_name']][$_POST['hid']]= array();
-    $url = API."?mode=addinvoietype&table=".$_POST['table_name']."&method=post&type=update";
+    $_POST['file_add'] = $_SESSION['file_add'][$_POST[KEY_TABLE_NAME]][$_POST['hid']];
+    $_SESSION['file_add'][$_POST[KEY_TABLE_NAME]][$_POST['hid']]= array();
+    $url = API."?mode=addinvoietype&table=".$_POST[KEY_TABLE_NAME]."&method=post&type=update";
     $response = file_post_contents($url, $_POST, 'update');
     if ($response) {
-        header("location:index.php?option=".$list);
+        header(HDR_LOCATION_OPTION.$list);
     }
 }
-$originator_tables = array('requisitions', 'petty_cash');
+$originator_tables = array('requisitions', KEY_PETTY_CASH);
 $stock_table = array('stock_request', 'stock_transfer');
-$originator_table_withbill = array('requisitions', 'petty_cash','bills', 'stock_request');
+$originator_table_withbill = array('requisitions', KEY_PETTY_CASH,'bills', 'stock_request');
 $table_list = toCreateInvoicePages();
 $table_name = $table_list[$option]['table'];
 
@@ -78,7 +83,7 @@ foreach ($cusresponse as  $cust) {
     $locares = json_decode($locares,1);
     $location_state = $locares['location_state'];
     $table1['location_id'] =  $cusdata['location_id'];
-    $table1['cost_center'] =  $cusdata['cost_center'];
+    $table1[KEY_COST_CENTER] =  $cusdata[KEY_COST_CENTER];
 if(in_array($table_name, (array)$originator_table_withbill)){
 
     $table1['party_id'] = $_SESSION['userid'];
@@ -169,7 +174,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     }
     $table1['originator'] = $rpdata['originator'];
     $table1['currency_id'] = $rpdata['currency_id'];
-    $table1['cost_center'] = $rpdata['cost_center_id'];
+    $table1[KEY_COST_CENTER] = $rpdata['cost_center_id'];
     $table1['currency_rate'] = $rpdata['currency_rate'];
     $table1['payment_terms'] = $rpdata['payment_terms'];
     $table1['place_of_supply'] = $rpdata['place_of_supply'];
@@ -234,7 +239,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $item_ids = "";
     $item_ids = implode(',', (array)$itemid);
     $acode['account_code']=$account_code;
-    $acode['cost_center_id']=$table1['cost_center'];
+    $acode['cost_center_id']=$table1[KEY_COST_CENTER];
     $acode['company_id']=$_SESSION['company_id'];
     $acode['fiscal_year']=$table1['qo_date'];
     $acurl = API."?mode=budgetcheckreftadledata&method=post";
@@ -306,7 +311,7 @@ $_SESSION['file_add'][$table_name][$rid]= array();
        }
     }
 $petty_cash_style = "";
-if($table_name == 'petty_cash' || $table_name == 'bills') {
+if($table_name == KEY_PETTY_CASH || $table_name == 'bills') {
     $petty_cash_style = "style='display:none;'";
 }
 if(in_array($table_name, (array)$stock_table)){
@@ -389,7 +394,7 @@ function removefile(val){
     function validateForm(){
         var res = 'N';
         var x = document.getElementById("status_values").value;
-        var table_name = document.forms["myForm"]['table_name'].value;
+        var table_name = document.forms["myForm"][KEY_TABLE_NAME].value;
         var table_id = document.forms["myForm"]['hid'].value;
         var tranid = document.forms["myForm"]['invoice_number'].value;
         if(x == 20 ||  x == 30 || 100 < x < 110 || x == 199 ){
@@ -405,7 +410,7 @@ function removefile(val){
          if( x != 2 ){
 
             if( table_name == 'requisitions'){
-                var cost_center = document.forms["myForm"]['cost_center'].value;
+                var cost_center = document.forms["myForm"][KEY_COST_CENTER].value;
                 if(cost_center == 0){
                      res = 'Y';
                     document.getElementById('cost_center_err').style.display = "block";
@@ -476,7 +481,7 @@ function removefile(val){
             document.getElementById('party_tax_number').value="";
             document.getElementById('party_address').value="";
             document.getElementById('party_ship_adderss').value="";
-            document.getElementById('cost_center').value="";
+            document.getElementById(KEY_COST_CENTER).value="";
             document.getElementById('party_payment_terms').value="0";
         }else{
         $("#loaderIcon").show();
@@ -492,7 +497,7 @@ function removefile(val){
             document.getElementById('party_phone').value=obj.phone;
             document.getElementById('party_tax_number').value=obj.gstin;
             document.getElementById('currency_id').value=obj.currency_id;
-            document.getElementById('cost_center').value=obj.cost_center;
+            document.getElementById(KEY_COST_CENTER).value=obj.cost_center;
             document.getElementById('party_address').value=obj.billing_address+','+obj.billing_city+','+obj.billing_state+','+obj.billing_post_code;
             document.getElementById('party_ship_adderss').value=obj.billing_address+','+obj.billing_city+','+obj.billing_state+','+obj.billing_post_code;
             document.getElementById("party_payment_terms").value = obj.payment_terms;
@@ -986,10 +991,10 @@ function calculateTotal(){
  function changestatus(val,val2){
     $('#status_values').val(val);
         var x = val;
-        var table_name = document.getElementById('table_name').value;
+        var table_name = document.getElementById(KEY_TABLE_NAME).value;
         var table_id =document.getElementById('hid').value;
         var tranid = document.getElementById('invoice_number').value;
-        var table = document.getElementById('table_name');
+        var table = document.getElementById(KEY_TABLE_NAME);
         var val_sub = "234";
     if(val2 == 2){
 
@@ -1060,436 +1065,11 @@ function calculateTotal(){
 <form class="kt-form kt-form--label-right" name="myForm" id="myForm" action="" method="post" enctype="multipart/form-data"  >
 <div class="kt-portlet">
 
-<!--begin::Invoice Head -->
- <div class="kt-portlet__head">
-    <div class="kt-portlet__head-label">
-        <h3 class="kt-portlet__head-title">
-            <?php echo $title; ?>
-        </h3>
-    </div>
-    <div class="kt-portlet__head-toolbar">
-     <?php if($rid != "" && $copy == 1){?>
-        <a target="_blank" href="index.php?option=COM_QO_PRINT&rid=<?php echo $rid; ?>&table=<?php echo $table_name; ?>&title=<?php echo urlencode($title); ?>" class="btn btn-clean kt-margin-r-10">
-                <i class="flaticon2-print"></i>
 
-         </a>
-            $nmm= ViewStatusValue($table1['current_status']);
-            $lists = toGetStatusProgressAction($table_name, $table1['current_status']);
-            $lists1 = $lists;
-              $appruser_list_data = togetaprovaluserlist($table_name, $rid);
 
-                $appruser_list = $appruser_list_data['user'];
-                $appruser_data =  $appruser_list_data['details'];
-            if($_SESSION['userid'] != $table1['originator']){
-                $small_sub = 0;
 
-                if(!in_array($_SESSION['userid'], (array)$appruser_list)){
-                    $lists = array();
-                    $small_sub = 1;
-                }else{
-                   $aptlv = $appruser_data[$_SESSION['userid']]['response_type'];
-                    if( $aptlv !=0){
-                        $sss =  ViewStatusValue($aptlv);
 
-                        $nmm['name'] = $sss['name'];
-                        $lists = array();
-                        $small_sub = 2;
-                         $commentss[] = $appruser_data[$_SESSION['userid']];
-                    }
 
-                }
-            }else{
-                $commentss = $appruser_data;
-                 if(!($table1['current_status'] == ST_ACTIVE || $table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_SEND_BACK || $table1['current_status'] == ST_QUOTATION_GENERATED || $table1['current_status'] == ST_PURCHASE_ORDER_GENRATED || $table1['current_status'] == ST_APPROVED)){
-                      $lists = array();
-                 }
-            }
-                ?>
-        <div class="btn-group">
-            <button class="btn btn-primary btn-sm dropdown-toggle" style="background: #<?php echo $nmm['background_color']; ?>;border: #<?php echo $nmm['background_color']; ?>; color:#<?php echo $nmm['color']; ?>  " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?php echo $nmm['name']; ?>
-            </button>
-            <?php if(count((array)$lists)>0){ ?>
-            <div class="dropdown-menu">
-
-                <?php foreach ($lists as $list) {
-                    if($list['status'] == ST_QUOTATION_GENERATED ){ ?>
-                    <div class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'2')" name="status" id="status" value="<?php echo $list['status']; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $list['action_label']; ?> </div>
-                <?php }elseif( $list['status'] ==  ST_PURCHASE_ORDER_GENRATED || $list['status'] == ST_INVOICE_GENERATED){ ?>
-                    <div class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'3')" name="status" id="status_2" value="<?php echo $list['status']; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $list['action_label']; ?></div>
-                <?php }elseif($list['status'] != ST_ACTIVE  && $list['status'] != ST_APPROVAL_PENDING){ ?>
-                    <div class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'1')" name="status" id="status_3" value="<?php echo $list['status']; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $list['action_label']; ?></div>
-                <?php }else{?>
-                    <div class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'4')" name="status" id="status_4" value="<?php echo $list['status']; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $list['action_label']; ?></div>
-
-            <?php } ?>
-            <?php } ?>
-
-            </div>
-           <?php  } ?>
-        </div>
-
-    <?php } ?>
-        <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
-            <i class="la la-arrow-left"></i>
-            <span class="kt-hidden-mobile"><?php echo __('Back'); ?></span>
-        </a>
-        <input type="hidden" name="status_values" id="status_values" value="<?php echo $table1['current_status']; ?>">
-        <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
-    </div>
-</div>
-<!--END::Invoice Head -->
-
-<!--begin::Page frist part-->
-<div class="kt-portlet__body">
-<div class="form-group row">
-<?php
-   $tran_no =  $table1['qo_number'];
- ?>
-
-<div>
-    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Transaction Date:'); ?></span>
-    <div class=" col-lg-3 col-md-9 col-sm-12">
-        <div class="input-group date">
-            <?php $from = fromDate($table1['qo_date']); ?>
-            <input aria-label="<?php echo __('Input field'); ?>"  class="form-control" onblur="duedate()" type='text' autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  />
-            <div class="input-group-append">
-                <span class="input-group-text"> <i class="la la-calendar"></i></span>
-             </div>
-        </div>
-    </div>
-</div>
-
- <?php if(in_array($table_name, (array)$originator_tables)){  ?>
-   <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Originator:'); ?></span>
-    <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="<?php echo __('Party'); ?>" class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValueEmployee(this.value)" >
-            <option value="0"> <?php echo __('Select Any EMployee'); ?> </option>
-            <?php foreach ($cusresponse as $key => $cus) {  ?>
-            <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php
-} ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['first_name']," ".$cus['middle_name']."".$cus['last_name']; ?>
-            </option>
-            <?php } ?>
-        </select>
-    </div>
-<?php } elseif(in_array($table_name, (array)$stock_table)){ ?>
-    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Location:'); ?></span>
-    <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="<?php echo __('Transfer Location'); ?>" class="form-control" id="transfer_location_id" name= "transfer_location_id" >
-            <option value="0"> <?php echo __('Select Any Location'); ?> </option>
-            <?php foreach ($locations_data as $locatdata) {  ?>
-            <option  <?php if($table1['transfer_location_id'] == $locatdata['id']){ ?> selected  <?php
-} ?> value = <?php echo $locatdata['id'] ?>   >      <?php echo $locatdata['location_description']; ?>
-            </option>
-        <?php } ?>
-        </select>
-    </div>
-
-<?php }else{ ?>
-    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Vendor:'); ?></span>
-    <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="<?php echo __('Party'); ?>" class="form-control" id="party_id_2" name= "party_id" onchange="GetSelectedTextValue(this.value)" >
-            <option value="0"> <?php echo __('Select Any Vendor'); ?> </option>
-            <?php foreach ($cusresponse as $key => $cus) {  ?>
-            <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php
-} ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?>
-            </option>
-        <?php } ?>
-        </select>
-    </div>
-<?php } ?>
-    <span class="col-lg-2 col-form-label"><?php echo __('Transaction Number:'); ?></span>
-    <div class="col-lg-3">
-        <input class="form-control" type='hidden' id="ord_no" value='<?php echo $invoicenumber; ?>' name="invoice_serial_number"/>
-        <input aria-label="<?php echo __('Input field'); ?>"  class="form-control" readonly type='text' value='<?php echo $tran_no; ?>'   name="invoice_number" id="invoice_number" />
-
-    </div>
-</div>
-<div class="form-group row">
-    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Cost Center:'); ?></span>
-    <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="<?php echo __('Cost Center'); ?>" class="form-control" id="cost_center" name="cost_center">
-            <option value="0"> <?php echo __('Select any'); ?>  </option>
-            <?php foreach ($costs as  $k1 =>$pos) {  ?>
-                <optgroup label="<?php echo $k1; ?>">
-
-                <?php foreach ($pos as $k2=> $pos1) {  ?>
-                <option  <?php if($table1['cost_center'] == $k2){ ?> selected  <?php
-} ?>  value ="<?php echo $k2; ?>"> <?php echo $pos1; ?> </option>
-            <?php } ?>
-            </optgroup>
-        <?php } ?>
-        </select>
-    </div>
-    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Transaction Date:'); ?></span>
-    <div class=" col-lg-3 col-md-9 col-sm-12">
-        <div class="input-group date">
-            <?php $from = fromDate($table1['qo_date']); ?>
-            <input aria-label="<?php echo __('Input field'); ?>"  class="form-control" onblur="duedate()" type='text' autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3_2"  />
-            <div class="input-group-append">
-                <span class="input-group-text"> <i class="la la-calendar"></i></span>
-             </div>
-        </div>
-    </div>
-</div>
-<div class="form-group row" <?php echo $petty_cash_style; ?>>
-    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Department:'); ?></span>
-    <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="<?php echo __('Param'); ?>" class="form-control kt-select2" id="kt_select2_3" name="param">
-           <?php foreach ($departmentslist as  $department) { ?>
-
-            <option value="<?php echo $department['id']; ?>"><?php echo $department['department_name']; ?></option>
-            <?php } ?>
-        </select>
-    </div>
-     <?php $table1['place_of_supply'] = $table1['place_of_supply'] !='' ? $table1['place_of_supply'] : $location_state; ?>
-    <span class="col-lg-2 col-form-label"><?php echo __('Place Of Supply:'); ?></span>
-    <div class="col-lg-3">
-        <select aria-label="<?php echo __('Place Of Supply'); ?>" class="form-control" name="place_of_supply" id="party_place_of_supply" onchange="displaytaxes()">
-            <option value="0"> <?php echo __('Select Any Place'); ?> </option>
-            <?php foreach ($posresponse as $key => $pos) {  ?>
-                <option   <?php if($table1['place_of_supply'] == $pos['id']){ ?>selected <?php
-} ?>  value ="<?php echo $pos['id']; ?>" > <?php echo $pos['state_name']; ?> </option>
-            <?php } ?>
-        </select>
-        <input type="hidden" name="old_place" id="old_place" value="<?php echo $location_state;?>">
-
-    </div>
-</div>
-<div class="form-group row">
-<?php if($table_name != 'petty_cash'){
-        if($table_name != 'bills'){
-    ?>
-<span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Category:'); ?></span>
-<div class=" col-lg-3 col-md-9 col-sm-12">
-    <select aria-label="<?php echo __('Type'); ?>" class="form-control" id="kt_select2_4" name= "type"  >
-               <?php foreach ($itemtypelist as $itemtype) {  ?>
-                     <option   <?php if($table1['type'] == $itemtype['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $itemtype['genc_detail_code']; ?>" > <?php echo __($itemtype['genc_detail_name']); ?> </option>
-                <?php } ?>
-     </select>
-</div>
-<?php } ?>
-<?php } else { ?>
-<span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Branch:'); ?></span>
-<div class=" col-lg-3 col-md-9 col-sm-12">
-    <select aria-label="<?php echo __('Type'); ?>" class="form-control" id="kt_select2_4_2" name= "type"  >
-               <?php foreach ($boxlist as $itemtype) {  ?>
-                     <option   <?php if($table1['id'] == $itemtype['id']){ ?>selected <?php
-} ?>  value ="<?php echo $itemtype['id']; ?>" > <?php echo $itemtype['pc_box_code']; ?> </option>
-                <?php } ?>
-     </select>
-</div>
-<?php } ?>
-<span class="col-lg-2 col-form-label" <?php echo $petty_cash_style; ?>><?php echo __('Type:'); ?></span>
-<div class="col-lg-3" <?php echo $petty_cash_style; ?>>
-    <div class="kt-radio-inline">
-        <label class="kt-radio"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio"  <?php if($table1['opex_cpex']== 0){ ?>checked <?php
-} ?> name="opex_cpex" value='0'><?php echo __('Opex'); ?>    <span></span></label>
-        <label class="kt-radio"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio"  <?php if($table1['opex_cpex'] == 1){ ?>checked <?php
-} ?> name="opex_cpex" value='1'><?php echo __('Cpex'); ?>    <span></span></label>
-    </div>
-</div>
-</div>
-<div class="form-group row"  <?php echo $petty_cash_style; ?>>
-    <div class="col-md-6 col-12 mrgn-btm">
-        <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6_inv">
-
-            <div class="card">
-                <div class="card-header" id="headingTwo6">
-                    <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo6" aria-expanded="false" aria-controls="collapseTwo6">
-                         <?php echo __('Contact Detail'); ?>
-                    </div>
-                </div>
-                <div id="collapseTwo6" class="collapse" aria-labelledby="headingTwo6" data-parent="#accordionExample6_inv">
-                    <div class="card-body">
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Name'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                  <input aria-label="<?php echo __('Party Name'); ?>" readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $table1['party_name']; ?>" />
-                                </div>
-                            </div>
-                            <div class="">
-                                <div class="form-group row">
-                                    <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Billing Address'); ?></span>
-                                    <div class="col-lg-8 col-md-8 col-sm-12">
-                                       <textarea aria-label="<?php echo __('Enter your address'); ?>" type="text" name="party_address" id="party_address" class="form-control" placeholder="<?php echo __('Enter your address'); ?>"><?php echo $table1['party_address'] ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="">
-                                <div class="form-group row">
-                                    <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Shipping Address'); ?></span>
-                                    <div class="col-lg-8 col-md-8 col-sm-12">
-                                       <textarea aria-label="<?php echo __('Enter your address'); ?>" type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="<?php echo __('Enter your address'); ?>"><?php echo $table1['party_address'] ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Email Address'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input aria-label="<?php echo __('Party Email'); ?>" type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $table1['party_email']; ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Phone Number'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input aria-label="<?php echo __('Party Phone'); ?>" type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $table1['party_phone']; ?>" />
-                                    <input type='hidden'  name="company_id" id="company_id" class="form-control" readonly value="<?php echo $_SESSION['company_id']; ?>" />
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-   <div class="col-md-6 col-12 mrgn-btm-2" >
-        <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6_2">
-
-            <div class="card">
-                <div class="card-header" id="headingTax">
-                    <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTax" aria-expanded="false" aria-controls="collapseTax">
-                    <?php echo __('Tax/Other Details'); ?>
-                    </div>
-                    <input type="hidden" name="location_id" value="<?php echo $table1['location_id']; ?>">
-                </div>
-                <div id="collapseTax" class="collapse" aria-labelledby="headingTax" data-parent="#collapseTax">
-                    <div class="card-body">
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Tax Number'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input aria-label="<?php echo __('Party Tax Number'); ?>" type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $table1['party_tax_number']; ?>" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Payment Terms'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                     <select aria-label="<?php echo __('Payment Terms'); ?>" class="form-control"  onchange="duedate()"  name="payment_terms" id="party_payment_terms">
-                                            <option value="0"> <?php echo __('Select Any Term'); ?> </option>
-                                        <?php foreach ($posresponsept as $key => $pos) {  ?>
-                                            <option   <?php if($table1['payment_terms'] == $pos['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo __($pos['genc_detail_name']); ?> </option>
-                                        <?php } ?>
-                                    </select>
-                                    <?php
-                                    $originator = $table1['originator'] !="" ? $table1['originator']  : $_SESSION['userid']; ?>
-                                    <input type="hidden" name="originator" value="<?php echo $originator;  ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Currency'); ?></span>
-                                <?php  $table1['currency_id'] =  $table1['currency_id'] !="" ? $table1['currency_id'] : $_SESSION['config']['default_currency_id'];?>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <select aria-label="<?php echo __('Select option'); ?>" class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id">
-                                        <option value="0"> <?php echo __('Select Any Currency'); ?> </option>
-                                        <?php
-                                        foreach ($cr_data as  $crpos) {  ?>
-                                            <option  <?php if($table1['currency_id'] == $crpos['id']){ ?> selected  <?php
-} ?>   value ="<?php echo $crpos['id']; ?>" > <?php echo base64_decode($crpos['currency_list']); ?> </option>
-                                        <?php } ?>
-                                    </select>
-                                     <input type='hidden' class="form-control" id="config_currency_id"  name=""  value="<?php echo $_SESSION['config']['default_currency_id']; ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Ex Rate'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                   <input aria-label="<?php echo __('Currency Rate'); ?>" type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Due Date:'); ?></span>
-                                  <?php $duee = $table1['due_date'] !='' ?  fromDate($table1['due_date']) :  ''; ?>
-                                   <div class="col-lg-8 col-md-8 col-sm-12">
-                                <input aria-label="<?php echo __('Due Date'); ?>" type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly />
-                            </div>
-                            </div>
-                            <?php if(!in_array($table_name, (array)$originator_table_withbill)){
-                                  $req_list = toGetPendingRequisitionQty($rtable_name);?>
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                     <select aria-label="<?php echo __('Ref'); ?>" class="form-control"  name="ref_id" id="ref_id" onchange="toredriacte(this.value,<?php echo  "'".$option."'"; ?>,<?php echo  "'".$rtable_name."'"; ?>)">
-                                        <option value="0"> <?php echo __('Select Any Refernce'); ?> </option>
-                                        <?php foreach ($req_list as  $req) {  ?>
-                                            <option  <?php if($table1['ref_id'] == $req['id']){ ?> selected  <?php
-} ?>   value ="<?php echo $req['id']; ?>" > <?php echo $req['transaction_number']; ?> </option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type='hidden' class="form-control"  name="ref_no"  value="<?php echo $table1['ref_no']; ?>"/>
-                                    <input type='hidden' class="form-control"  name="ref_type"  value="<?php echo $table1['ref_type']; ?>"/>
-                                </div>
-
-                            </div>
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Date'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <div class="kt-input-icon kt-input-icon--right" >
-                                        <input aria-label="<?php echo __('Ref Date'); ?>" type='text' class="form-control" readonly id="ref_date"  name="ref_date"  value="<?php echo $table1['ref_date']; ?>"/>
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-calendar"></i></span></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }
-                            if($table_name == 'bills'){?>
-                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-
-                                    <input aria-label="<?php echo __('Doc Ref No'); ?>" type='text' class="form-control"  name="doc_ref_no"  value="<?php echo $table1['doc_ref_no']; ?>"/>
-                                </div>
-
-                            </div>
-                            <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Date'); ?></span>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <div class="kt-input-icon kt-input-icon--right" >
-                                        <input aria-label="<?php echo __('Doc Ref Date'); ?>" type='text' class="form-control"  id="kt_datepicker_32"  name="doc_ref_date"  value="<?php echo $table1['doc_ref_date']; ?>"/>
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-calendar"></i></span></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php } ?>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<!--End::Page frist part-->
-
-<!--begin::Page second part -->
-
-<div class="kt-portlet__head">
-        <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"> <?php echo __('Items/Services'); ?> </h3></div>
-    <div class="kt-portlet__head-label" style="float: right;">
-         <div class="form-group col-lg-12">
-            <select aria-label="<?php echo __('Tax Type'); ?>" class="form-control" id="taxtype" name= "tax_type" onchange="calculateTotal()" >
-                    <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php
-} ?> value="E"> <?php echo __('Exclusive'); ?> </option>
-                    <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php
-} ?> value="I"> <?php echo __('Inclusive'); ?> </option>
-                    <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php
-} ?> value="O"> <?php echo __('Out Of scope'); ?> </option>
-            </select>
-        </div>
-     </div>
-</div>
-<div class="kt-portlet__body1" style="padding-top: 10px;">
-
-<div >
-<?php
-    $array_table = array('requisition'=>'quotation_table','petty_cash'=>'petty_cash_table','bills'=>'bill_table','goods_receipt_notes'=>'grn_table','stock_receipts'=>'stock_receive_table','stock_adjustments'=>'stock_adjust_table','genral'=>'genral_table','account'=>'account_table');
-   $display_table =$array_table[$table_list[$option]['display_table']].'.php';
-
-    include_once $display_table;
-    ?>
-
-<!--END::Page second part -->
 
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -1626,7 +1206,7 @@ function calculateTotal(){
 
         <tr>
             <td colspan="2" >
-                <table role="presentation" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
+                <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
                     <tbody id='display_tax'>
                         <?php  if(count((array)$taxes)){
                         foreach ($distax as $ktax) { ?>
@@ -1766,80 +1346,7 @@ function calculateTotal(){
 </div>
 <?php } ?>
 
-<!--begin::Submit part -->
-<?php
-$check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK);
-$disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $disable = "disabled" ;
-} ?>
-<div class="kt-portlet__foot">
-    <div class="kt-form__actions">
-        <div class="row">
-            <div class="col-lg-4">
-                 <input type="hidden" id="table_name" name="table_name" value=<?php echo $table_name; ?> />
-                 <input type="hidden" id="user_id" name="user_id" value=<?php echo $_SESSION['userid']; ?> />
-                 <input type="hidden" id="now_date" name="now_date" value="<?php echo date("Y-m-d H:i:s"); ?>" />
-                 <input type="hidden" name="old_place1" id="old_place1" value="<?php echo $location_state;?>">
-                <?php if(isset($_GET['Rid']) && $_GET['Rid'] !='' && $copy == '1'){ ?>
-                        <input type="hidden" id="hid"name="hid" value="<?php echo $rid; ?>" />
-                        <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
-                        <input type="hidden" name="submit1" value="Update" />
-                        <button id="kt_llogin_signup_submit_2" <?php echo $disable; ?> class="btn btn-brand" ><i class="la la-check"></i><?php echo __('Upadate'); ?></button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
-                <?php } else{ ?>
-                        <input type="hidden" name="submit1" value="Add" />
-                        <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
-                        <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
-                <?php } ?>
-            </div>
-            <div class="col-lg-6">
-            <?php if(count((array)$vdata_details) > 0){ ?>
-                <div class="accordion accordion-light  accordion-toggle-arrow" id="accordionExample2_2">
 
-                    <div class="card">
-                        <div class="card-header" id="headingTwo2">
-                            <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                <?php echo __('Transaction Timeline'); ?>
-                            </div>
-                        </div>
-                        <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2">
-                            <div class="card-body">
-                                <div class="kt-timeline-v2">
-                                    <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
-                                        <?php foreach ($vdata_details as  $vdvalue) { ?>
-                                        <div class="kt-timeline-v2__item">
-
-                                            <div class="kt-timeline-v2__item-cricle">
-                                                <?php if($vdvalue['transaction_type'] == 'INSERT'){ ?>
-                                                <i class="fa fa-genderless kt-font-success"></i>
-                                                <?php } ?>
-                                                <?php if($vdvalue['transaction_type'] == 'UPDATE'){ ?>
-                                                <i class="fa fa-genderless kt-font-warning"></i>
-                                                <?php } ?>
-                                            </div>
-                                            <div class="kt-timeline-v2__item-text  kt-padding-top-5">
-                                                <b> <?php echo date("M d, Y g:i A", strtotime($vdvalue['action_date'])); ?></b>
-                                                <?php echo " ".$vdvalue['action_log']. " ".$_SESSION['users'][$vdvalue['user_id']]." with Status ".$_SESSION['status'][$vdvalue['status_value']]['name']; ?>
-
-                                            </div>
-                                        </div>
-                                        <?php  } ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-            </div>
-            <div class="col-lg-2 kt-align-right">
-                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
-            </div>
-        </div>
-    </div>
-</div>
-</form>
-<!--END::Submit part -->
 <?php
 if($rid != ''){
     $question_display ='Y';
@@ -1857,7 +1364,7 @@ if($rid != ''){
 
 </div></div></div></div>
 
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
             <div class="modal-dialog modal-xl" style="max-width: 800px;">
                 <div class="modal-content" style="min-height: 50px;width: 800px;" id="popup1">
 

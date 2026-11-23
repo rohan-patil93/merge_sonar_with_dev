@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+defined('DATE_FMT_DISPLAY') || define('DATE_FMT_DISPLAY', 'M d, Y');
 $_SESSION['apply_js']['multiselest'] = '1';
 
 $curl = curl_init();
@@ -64,16 +65,13 @@ $colClass = $totalCards > 0 ? intval(12 / min($totalCards, 6)) : 12;
 
 function formatPriority($priority)
 {
-    switch ($priority) {
-        case '1':
-            return '<span class="px-2 py-1 badge bg-success">'.__('Low').'</span>';
-        case '2':
-            return '<span class="px-2 py-1 badge bg-warning">'.__('Medium').'</span>';
-        case '3':
-            return '<span class="px-2 py-1 badge bg-danger">'.__('High').'</span>';
-        default:
-            return '<span class="px-2 py-1 badge bg-secondary">'.__('Unknown').'</span>';
-    }
+    $map = [
+        '1' => ['bg-success', __('Low')],
+        '2' => ['bg-warning', __('Medium')],
+        '3' => ['bg-danger', __('High')],
+    ];
+    $entry = $map[$priority] ?? ['bg-secondary', __('Unknown')];
+    return '<span class="px-2 py-1 badge ' . $entry[0] . '">' . $entry[1] . '</span>';
 }
 function formatStatus($status)
 {
@@ -140,9 +138,7 @@ foreach ($ticketHistories as $ticket) {
                     <h6 class="text-uppercase fw-semibold text-primary"><?= __('Open Tickets'); ?></h6>
                     <h2 class="fw-bold text-primary my-2"><?= $opentickets; ?></h2>
                     <div class="progress rounded-pill" style="height:6px;">
-                        <div class="progress-bar bg-primary" role="progressbar"
-                            style="width:<?= $totaltickets > 0 ? round(($opentickets / $totaltickets) * 100, 2) : 0; ?>%">
-                        </div>
+                        <progress class="progress-bar bg-primary" value="<?= $totaltickets > 0 ? round(($opentickets / $totaltickets) * 100, 2) : 0; ?>" max="100" style="width:<?= $totaltickets > 0 ? round(($opentickets / $totaltickets) * 100, 2) : 0; ?>%"></progress>
                     </div>
                     <span class="badge mt-3 rounded-pill bg-primary-subtle text-primary px-3 py-2">
                         <?= $totaltickets > 0 ? round(($opentickets / $totaltickets) * 100, 2) : 0; ?>%
@@ -156,9 +152,7 @@ foreach ($ticketHistories as $ticket) {
                     <h6 class="text-uppercase fw-semibold text-warning "><?= __('In Progress'); ?></h6>
                     <h2 class="fw-bold text-warning my-2"><?= $inprogress; ?></h2>
                     <div class="progress rounded-pill" style="height:6px;">
-                        <div class="progress-bar bg-warning" role="progressbar"
-                            style="width:<?= $totaltickets > 0 ? round(($inprogress / $totaltickets) * 100, 2) : 0; ?>%">
-                        </div>
+                        <progress class="progress-bar bg-warning" value="<?= $totaltickets > 0 ? round(($inprogress / $totaltickets) * 100, 2) : 0; ?>" max="100" style="width:<?= $totaltickets > 0 ? round(($inprogress / $totaltickets) * 100, 2) : 0; ?>%"></progress>
                     </div>
                     <span class="badge mt-3 rounded-pill bg-warning-subtle text-warning px-3 py-2">
                         <?= $totaltickets > 0 ? round(($inprogress / $totaltickets) * 100, 2) : 0; ?>%
@@ -172,9 +166,7 @@ foreach ($ticketHistories as $ticket) {
                     <h6 class="text-uppercase fw-semibold text-success "><?= __('Fixed Tickets'); ?></h6>
                     <h2 class="fw-bold text-success my-2"><?= $fixedtickets; ?></h2>
                     <div class="progress rounded-pill" style="height:6px;">
-                        <div class="progress-bar bg-success" role="progressbar"
-                            style="width:<?= $totaltickets > 0 ? round(($fixedtickets / $totaltickets) * 100, 2) : 0; ?>%">
-                        </div>
+                        <progress class="progress-bar bg-success" value="<?= $totaltickets > 0 ? round(($fixedtickets / $totaltickets) * 100, 2) : 0; ?>" max="100" style="width:<?= $totaltickets > 0 ? round(($fixedtickets / $totaltickets) * 100, 2) : 0; ?>%"></progress>
                     </div>
                     <span class="badge mt-3 rounded-pill bg-success-subtle text-success px-3 py-2">
                         <?= $totaltickets > 0 ? round(($fixedtickets / $totaltickets) * 100, 2) : 0; ?>%
@@ -188,9 +180,7 @@ foreach ($ticketHistories as $ticket) {
                     <h6 class="text-uppercase fw-semibold text-danger"><?= __('Closed Tickets'); ?></h6>
                     <h2 class="fw-bold text-danger my-2"><?= $closetickets; ?></h2>
                     <div class="progress rounded-pill" style="height:6px;">
-                        <div class="progress-bar bg-danger" role="progressbar"
-                            style="width:<?= $totaltickets > 0 ? round(($closetickets / $totaltickets) * 100, 2) : 0; ?>%">
-                        </div>
+                        <progress class="progress-bar bg-danger" value="<?= $totaltickets > 0 ? round(($closetickets / $totaltickets) * 100, 2) : 0; ?>" max="100" style="width:<?= $totaltickets > 0 ? round(($closetickets / $totaltickets) * 100, 2) : 0; ?>%"></progress>
                     </div>
                     <span class="badge mt-3 rounded-pill bg-danger-subtle text-danger px-3 py-2">
                         <?= $totaltickets > 0 ? round(($closetickets / $totaltickets) * 100, 2) : 0; ?>%
@@ -229,19 +219,19 @@ foreach ($ticketHistories as $ticket) {
 <div class="row">
     <div class="col-lg-12">
         <ul class="nav nav-tabs" id="ticketTab">
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
                 <a class="nav-link active" id="cards-tab" data-bs-toggle="tab" href="#cardsView" role="tab"
                     aria-controls="cardsView" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-grid-3x3-gap"></i> <?= __('Grid View'); ?>
                 </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
                 <a class="nav-link" id="table-tab" data-bs-toggle="tab" href="#tableView" role="tab"
                     aria-controls="tableView" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-table"></i> <?= __('Table View'); ?>
                 </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
                 <a class="nav-link" id="notifications-tab" data-bs-toggle="tab" href="#notificationsView" role="tab"
                     aria-controls="notificationsView" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-bell"></i> <?= __('Notifications'); ?>
@@ -313,9 +303,9 @@ foreach ($ticketHistories as $ticket) {
                                                                 <?= htmlspecialchars($ticket['ticket_id']); ?></p>
                                                             <p class="mb-1 small">
                                                                 <i class="ti-calendar"></i> <?= __('Req'); ?>:
-                                                                <?= date('M d, Y', strtotime($ticket['request_date'])); ?><br>
+                                                                <?= date(DATE_FMT_DISPLAY, strtotime($ticket['request_date'])); ?><br>
                                                                 <i class="ti-clock-history"></i> <?= __('Upd'); ?>:
-                                                                <?= $ticket['updated_date'] ? date('M d, Y', strtotime($ticket['updated_date'])) : 'N/A'; ?>
+                                                                <?= $ticket['updated_date'] ? date(DATE_FMT_DISPLAY, strtotime($ticket['updated_date'])) : 'N/A'; ?>
                                                             </p>
                                                             <div class="d-flex gap-1">
                                                                 <div class="mb-1"><?= formatPriority($ticket['priority']); ?></div>
@@ -344,10 +334,9 @@ foreach ($ticketHistories as $ticket) {
                                                                             'holding_type' => 'Y'
                                                                         ]; ?>
                                                                          <li>
-                                                                             <a class="dropdown-item" tabindex="0" role="button" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
-                                                                                 onclick="dynamicStatusUpdate('<?= urlencode(json_encode($sendpost)); ?>','','<?= $transactionLogId; ?>','Y','<?= $sendpost['next_status']; ?>')">
+                                                                             <button type="button" class="dropdown-item" onclick="dynamicStatusUpdate('<?= urlencode(json_encode($sendpost)); ?>','','<?= $transactionLogId; ?>','Y','<?= $sendpost['next_status']; ?>')">
                                                                                  <?= htmlspecialchars($statuses[$nextstatus['status']]['action_label'] ?? 'Action'); ?>
-                                                                             </a>
+                                                                             </button>
                                                                          </li>
                                                                     <?php }
                                                                 } ?>
@@ -369,10 +358,9 @@ foreach ($ticketHistories as $ticket) {
                                                                         'holding_type' => $holdType
                                                                     ]; ?>
                                                                     <li>
-                                                                         <a class="dropdown-item" tabindex="0" role="button" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
-                                                                             onclick="dynamicStatusUpdate('<?= urlencode(json_encode($sendpost)); ?>','','<?= $transactionLogId; ?>','<?= $holdType; ?>','<?= $sendpost['next_status']; ?>')">
+                                                                         <button type="button" class="dropdown-item" onclick="dynamicStatusUpdate('<?= urlencode(json_encode($sendpost)); ?>','','<?= $transactionLogId; ?>','<?= $holdType; ?>','<?= $sendpost['next_status']; ?>')">
                                                                              <?= $holdLabel; ?>
-                                                                         </a>
+                                                                         </button>
                                                                      </li>
                                                                 <?php endif; ?>
                                                                 <li>
@@ -497,10 +485,9 @@ foreach ($ticketHistories as $ticket) {
                                                                         'ticket_id' => $ticket['ticket_id'],
                                                                         'holding_type' => 'Y'
                                                                     ]; ?>
-                                                                    <a class="dropdown-item" tabindex="0" role="button" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
-                                                                        onclick="dynamicStatusUpdate('<?= urlencode(json_encode($sendpost)); ?>','','<?= $transactionLogId; ?>','Y','<?= $sendpost['next_status']; ?>')">
+                                                                    <button type="button" class="dropdown-item" onclick="dynamicStatusUpdate('<?= urlencode(json_encode($sendpost)); ?>','','<?= $transactionLogId; ?>','Y','<?= $sendpost['next_status']; ?>')">
                                                                         <?= htmlspecialchars($statuses[$nextstatus['status']]['action_label'] ?? 'Action'); ?>
-                                                                    </a>
+                                                                    </button>
                                                                 <?php }
                                                             } ?>
                                                             <?php if (!in_array($currentStatus, [ST_REJECTED, ST_CANCEL, ST_APPROVED])): ?>
@@ -520,10 +507,9 @@ foreach ($ticketHistories as $ticket) {
                                                                     'ticket_id' => $ticket['ticket_id'],
                                                                     'holding_type' => $holdType
                                                                 ]; ?>
-                                                                <a class="dropdown-item" tabindex="0" role="button" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
-                                                                    onclick="dynamicStatusUpdate('<?= urlencode(json_encode($sendpost)); ?>','','<?= $transactionLogId; ?>','<?= $holdType; ?>','<?= $sendpost['next_status']; ?>')">
+                                                                <button type="button" class="dropdown-item" onclick="dynamicStatusUpdate('<?= urlencode(json_encode($sendpost)); ?>','','<?= $transactionLogId; ?>','<?= $holdType; ?>','<?= $sendpost['next_status']; ?>')">
                                                                     <?= $holdLabel; ?>
-                                                                </a>
+                                                                </button>
                                                             <?php endif; ?>
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="#top" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
@@ -605,7 +591,7 @@ foreach ($ticketHistories as $ticket) {
                                                         <small class="text-secondary">
                                                             <i class="ti-calendar-event me-1"></i>
                                                             <strong><?= __('Request'); ?>:</strong>
-                                                            <?= $requestDate ? date('M d, Y', strtotime($requestDate)) : 'N/A' ?>
+                                                            <?= $requestDate ? date(DATE_FMT_DISPLAY, strtotime($requestDate)) : 'N/A' ?>
                                                         </small>
                                                     </div>
                                                 </div>
@@ -625,7 +611,7 @@ foreach ($ticketHistories as $ticket) {
         </div>
     </div>
 </div>
-<div id="kt_modal_insert_ticket" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_insert_ticket" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" id="insertTicketContent"></div>
     </div>

@@ -61,7 +61,7 @@
                             </table>
                         </td>
 
-                        <td style="width: 4%;">&nbsp;</td>
+                <div style="width: 4%;">&nbsp;</div>
 
                         <!-- Right Info Box -->
                         <td style="width: 48%; vertical-align: top; border: 1px solid #cccccc; padding: 6px;">
@@ -124,17 +124,17 @@
                             </table>
                         </td>
 
-                        <td style="width: 3.5%;">&nbsp;</td>
+                <div style="width: 3.5%;">&nbsp;</div>
 
-                        <!-- Billed to -->
-                        <td style="width: 31%; vertical-align: top; border: 1px solid #cccccc; padding: 6px; white-space: normal;">
-                            <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">
-                                <?= __('Billed to (Consignee)'); ?></div>
-                            <div style="font-weight: bold; font-size: 12px;"><?= __('National Rubber Industries'); ?>
-                            </div>
-                            <div style="font-size: 12px;">
-                                <?= __('NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063'); ?>
-                            </div>
+                <!-- Billed to -->
+                <div style="width: 31%; border: 1px solid #cccccc; padding: 6px; white-space: normal; box-sizing: border-box;">
+                    <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">
+                        <?= __('Billed to (Consignee)'); ?></div>
+                    <div style="font-weight: bold; font-size: 12px;"><?= __('National Rubber Industries'); ?>
+                    </div>
+                    <div style="font-size: 12px;">
+                        <?= __('NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063'); ?>
+                    </div>
 
                             <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                                 <tr>
@@ -150,17 +150,17 @@
                             </table>
                         </td>
 
-                        <td style="width: 3.5%;">&nbsp;</td>
+                <div style="width: 3.5%;">&nbsp;</div>
 
-                        <!-- Shipped to -->
-                        <td style="width: 31%; vertical-align: top; border: 1px solid #cccccc; padding: 6px; white-space: normal;">
-                            <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">
-                                <?= __('Shipped to (Delivery Address)'); ?></div>
-                            <div style="font-weight: bold; font-size: 12px;"><?= __('National Rubber Industries'); ?>
-                            </div>
-                            <div style="font-size: 12px;">
-                                <?= __('NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063'); ?>
-                            </div>
+                <!-- Shipped to -->
+                <div style="width: 31%; border: 1px solid #cccccc; padding: 6px; white-space: normal; box-sizing: border-box;">
+                    <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">
+                        <?= __('Shipped to (Delivery Address)'); ?></div>
+                    <div style="font-weight: bold; font-size: 12px;"><?= __('National Rubber Industries'); ?>
+                    </div>
+                    <div style="font-size: 12px;">
+                        <?= __('NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063'); ?>
+                    </div>
 
                             <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                                 <tr>
@@ -181,54 +181,52 @@
         </tr>
 
         <!-- ITEMS TABLE -->
-        <tr>
-            <td style="padding: 5px 10px;">
-                <table style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse; font-size: 10px;">
-                    <thead>
-                        <tr style="font-weight: bold; text-align: center; border: 1px solid #cccccc;">
-                            <th scope="col" style="width: 5%; border: 1px solid #cccccc; padding: 5px;">#</th>
-                            <th scope="col" style="width: 12%; border: 1px solid #cccccc; padding: 5px;"><?= __('Item Code'); ?></th>
-                            <th scope="col" style="width: 35%; border: 1px solid #cccccc; padding: 5px;"><?= __('Description'); ?>
-                            </th>
-                            <th scope="col" style="width: 13%; border: 1px solid #cccccc; padding: 5px;"><?= __('HSN/SAC'); ?></th>
-                            <th scope="col" style="width: 8%; border: 1px solid #cccccc; padding: 5px;"><?= __('UOM'); ?></th>
-                            <th scope="col" style="width: 7%; border: 1px solid #cccccc; padding: 5px;"><?= __('QTY.'); ?></th>
-                            <th scope="col" style="width: 12%; border: 1px solid #cccccc; padding: 5px;">
-                                <?= __('Unit Description'); ?></th>
-                            <th scope="col" style="width: 8%; border: 1px solid #cccccc; padding: 5px;"><?= __('Remarks'); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">1</td>
-                            <td style="text-align: center; font-weight: bold; border: 1px solid #cccccc; padding: 5px;">
-                                <?= __('N-01-AX308'); ?></td>
-                            <td style="white-space: normal; border: 1px solid #cccccc; padding: 5px;">
-                                <?= __('Neauseal US 2560, Autoclave Door Gasket, US2500 FDA, SIL Pt Red Colour, Square Solid Type, 2950 * 21 * 21'); ?>
-                            </td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('NO-HSN-CODE'); ?></td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('NOS'); ?></td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">4.00</td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('Pieces'); ?></td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">-</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">2</td>
-                            <td style="text-align: center; font-weight: bold; border: 1px solid #cccccc; padding: 5px;">
-                                <?= __('N-01-AX310'); ?></td>
-                            <td style="white-space: normal; border: 1px solid #cccccc; padding: 5px;">
-                                <?= __('Neauseal US 2560 Autoclave Door Gasket US2500 FDA SIL Pt Red Colour Square Solid Type 2350 * 21 * 21 Chamber Size: 600 * 600'); ?>
-                            </td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('NO-HSN-CODE'); ?></td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('NOS'); ?></td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">4.00</td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('Pieces'); ?></td>
-                            <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">-</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
+        <div style="padding: 5px 10px;">
+            <table style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse; font-size: 10px;">
+                <thead>
+                    <tr style="font-weight: bold; text-align: center; border: 1px solid #cccccc;">
+                        <th scope="col" style="width: 5%; border: 1px solid #cccccc; padding: 5px;">#</th>
+                        <th scope="col" style="width: 12%; border: 1px solid #cccccc; padding: 5px;"><?= __('Item Code'); ?></th>
+                        <th scope="col" style="width: 35%; border: 1px solid #cccccc; padding: 5px;"><?= __('Description'); ?>
+                        </th>
+                        <th scope="col" style="width: 13%; border: 1px solid #cccccc; padding: 5px;"><?= __('HSN/SAC'); ?></th>
+                        <th scope="col" style="width: 8%; border: 1px solid #cccccc; padding: 5px;"><?= __('UOM'); ?></th>
+                        <th scope="col" style="width: 7%; border: 1px solid #cccccc; padding: 5px;"><?= __('QTY.'); ?></th>
+                        <th scope="col" style="width: 12%; border: 1px solid #cccccc; padding: 5px;">
+                            <?= __('Unit Description'); ?></th>
+                        <th scope="col" style="width: 8%; border: 1px solid #cccccc; padding: 5px;"><?= __('Remarks'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">1</td>
+                        <td style="text-align: center; font-weight: bold; border: 1px solid #cccccc; padding: 5px;">
+                            <?= __('N-01-AX308'); ?></td>
+                        <td style="white-space: normal; border: 1px solid #cccccc; padding: 5px;">
+                            <?= __('Neauseal US 2560, Autoclave Door Gasket, US2500 FDA, SIL Pt Red Colour, Square Solid Type, 2950 * 21 * 21'); ?>
+                        </td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('NO-HSN-CODE'); ?></td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('NOS'); ?></td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">4.00</td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('Pieces'); ?></td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">-</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">2</td>
+                        <td style="text-align: center; font-weight: bold; border: 1px solid #cccccc; padding: 5px;">
+                            <?= __('N-01-AX310'); ?></td>
+                        <td style="white-space: normal; border: 1px solid #cccccc; padding: 5px;">
+                            <?= __('Neauseal US 2560 Autoclave Door Gasket US2500 FDA SIL Pt Red Colour Square Solid Type 2350 * 21 * 21 Chamber Size: 600 * 600'); ?>
+                        </td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('NO-HSN-CODE'); ?></td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('NOS'); ?></td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">4.00</td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;"><?= __('Pieces'); ?></td>
+                        <td style="text-align: center; border: 1px solid #cccccc; padding: 5px;">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <!-- PACKAGES & REMARKS SECTION -->
         <tr>
@@ -307,7 +305,7 @@
                             </table>
                         </td>
 
-                        <td style="width: 2%;">&nbsp;</td>
+                <div style="width: 2%;">&nbsp;</div>
 
                         <!-- Middle: Schedule & Payment Terms -->
                         <td style="width: 28%; vertical-align: top;">
@@ -347,25 +345,23 @@
 
                         <td style="width: 2%;">&nbsp;</td>
 
-                        <!-- Right: Signature Box -->
-                        <td style="width: 33%; vertical-align: top; text-align: center; padding-top: 10px;">
-                            <div style="font-weight: bold; font-size: 10px; margin-bottom: 40px;">
-                                <?= __('For National Rubber Industries'); ?></div>
-                            <div style="border-top: 1px solid #cccccc; width: 80%; margin: 0 auto;"></div>
-                            <div style="font-weight: bold; font-size: 10px; margin-top: 4px;">
-                                <?= __('Authorised Signature'); ?></div>
-                            <div style="font-size: 9px; margin-top: 10px;">
-                                <?= __('This is a computer generated document'); ?><br><?= __('no signature required'); ?>
-                            </div>
-                            <div style="font-size: 10px; margin-top: 8px;">
-                                <?= htmlspecialchars(__('E. & O.E.'), ENT_QUOTES, 'UTF-8'); ?></div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+                <!-- Right: Signature Box -->
+                <div style="width: 33%; text-align: center; padding-top: 10px; box-sizing: border-box;">
+                    <div style="font-weight: bold; font-size: 10px; margin-bottom: 40px;">
+                        <?= __('For National Rubber Industries'); ?></div>
+                    <div style="border-top: 1px solid #cccccc; width: 80%; margin: 0 auto;"></div>
+                    <div style="font-weight: bold; font-size: 10px; margin-top: 4px;">
+                        <?= __('Authorised Signature'); ?></div>
+                    <div style="font-size: 9px; margin-top: 10px;">
+                        <?= __('This is a computer generated document'); ?><br><?= __('no signature required'); ?>
+                    </div>
+                    <div style="font-size: 10px; margin-top: 8px;">
+                        <?= htmlspecialchars(__('E. & O.E.'), ENT_QUOTES, 'UTF-8'); ?></div>
+                </div>
+            </div>
+        </div>
 
-    </table>
+    </div>
 
 </div>
 

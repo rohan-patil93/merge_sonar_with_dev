@@ -321,7 +321,7 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer m-l-10" onclick="recicedcourier(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer m-l-10" onclick="recicedcourier(<?php echo $down['id']; ?>)">
                                 <a href="#!">
                                     <h6 class="text-primary"><?php echo $down['courier_company']; ?></h6>
                                 </a>
@@ -331,7 +331,7 @@
                                     <i class="far fa-clock m-r-10"></i>
                                     <?php echo notificationdatesdiff($down['courier_date'], 'N'); ?>
                                 </span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -360,14 +360,14 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer m-l-10" onclick="recicedcourier(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer m-l-10" onclick="recicedcourier(<?php echo $down['id']; ?>)">
                                 <a href="#!">
                                     <h6 class="text-primary"><?php echo $down['courier_company']; ?></h6>
                                 </a>
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0 f-12 f-w-600 m-t-5"><?php echo $down['courier_ref_no']; ?></p>
                                 <span class="deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['courier_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -416,14 +416,14 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer m-l-10" onclick="sendcourier(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer m-l-10" onclick="sendcourier(<?php echo $down['id']; ?>)">
                                 <a href="#!">
                                     <h6 class="text-primary"><?php echo $down['courier_name']; ?></h6>
                                 </a>
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0 f-12 f-w-600 m-t-5"><?php echo $down['courier_mobile']; ?></p>
                                 <span class="deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['courier_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -450,14 +450,14 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer m-l-10" onclick="sendcourier(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer m-l-10" onclick="sendcourier(<?php echo $down['id']; ?>)">
                                 <a href="#!">
                                     <h6 class="text-primary"><?php echo $down['courier_company']; ?></h6>
                                 </a>
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0 f-12 f-w-600 m-t-5"><?php echo $down['courier_ref_no']; ?></p>
                                 <span class="deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['courier_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -506,14 +506,14 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer m-l-10" onclick="cartviewreqlist('<?php echo $down['request_no']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer m-l-10" onclick="cartviewreqlist('<?php echo $down['request_no']; ?>')">
                                 <a href="#!">
                                     <h6 class="text-primary"><?php echo $down['request_no']; ?></h6>
                                 </a>
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0 f-12 f-w-600 m-t-5"><?php echo displayDate($down['require_date']); ?></p>
                                 <span class="deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['request_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -540,14 +540,14 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer m-l-10" onclick="cartviewreqlist('<?php echo $down['request_no']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer m-l-10" onclick="cartviewreqlist('<?php echo $down['request_no']; ?>')">
                                 <a href="#!">
                                     <h6 class="text-primary"><?php echo $down['request_no']; ?></h6>
                                 </a>
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0 f-12 f-w-600 m-t-5"><?php echo displayDate($down['require_date']); ?></p>
                                 <span class="deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['request_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -577,7 +577,7 @@
                      ?>
                     <div class="align-middle mb-2 bg-gray b-radius-5">
 
-                        <div class="d-inline-block cursor-pointer" onclick="addandupdatestationery(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                        <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer" onclick="addandupdatestationery(<?php echo $down['id']; ?>)">
                             <a href="#!"><h6>
                                 <?php echo $down['item_name']; ?>
                             </h6></a>
@@ -586,7 +586,7 @@
                                 <?= __('Available Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['available_qty']; ?></span>
                                 <?= __('Minmum Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['minmum_qty']; ?> </span>
                             </p>
-                        </div>
+                        </button>
                     </div>
                     <?php }
                         if($checkb ==0){?>
@@ -631,14 +631,14 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer m-l-10" onclick="viewtransportrequest('<?php echo $down['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer m-l-10" onclick="viewtransportrequest('<?php echo $down['id']; ?>')">
                                 <a href="#!">
                                     <h6 class="text-primary"><?php echo $down['pickup_point']; ?></h6>
                                 </a>
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0 f-12 f-w-600 m-t-5"><?php echo displayDate($down['transport_date']); ?></p>
                                 <span class="deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['created_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -665,14 +665,14 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer m-l-10" onclick="viewtransportrequest('<?php echo $down['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer m-l-10" onclick="viewtransportrequest('<?php echo $down['id']; ?>')">
                                 <a href="#!">
                                     <h6 class="text-primary"><?php echo $down['pickup_point']; ?></h6>
                                 </a>
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0 f-12 f-w-600 m-t-5"><?php echo displayDate($down['transport_date']); ?></p>
                                 <span class="deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['created_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -719,14 +719,14 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer" onclick="viewfoodinsert(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer" onclick="viewfoodinsert(<?php echo $down['id']; ?>)">
                                 <a href="#!"><h6>
                                     <?php echo $food[$down['food_option_id']]['food_option']; ?>
                                 </h6></a>
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0"><?php echo displayDate($down['start_date']); ?></p>
                                 <span class="status deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['created_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }
@@ -753,7 +753,7 @@
                             <?php }else{ ?>
                                 <a href=""><span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black "><?php echo initials($data['emps'][$down['user_id']]['display_name']); ?></span></a>
                             <?php } ?>
-                            <div class="d-inline-block cursor-pointer" onclick="viewfoodinsert(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <button type="button" class="btn btn-link p-0 border-0 d-inline-block cursor-pointer" onclick="viewfoodinsert(<?php echo $down['id']; ?>)">
                                 <a href="#!"><h6>
 
                                     <?php echo $food[$down['food_option_id']]['food_option']; ?>
@@ -761,7 +761,7 @@
                                 <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                                 <p class="text-muted m-b-0"><?php echo displayDate($down['start_date']); ?></p>
                                 <span class="status deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['created_date'], 'N'); ?></span>
-                            </div>
+                            </button>
                         </div>
                         <?php } ?>
                         <?php }

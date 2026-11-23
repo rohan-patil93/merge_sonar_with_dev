@@ -1,4 +1,9 @@
 <?php
+defined('KEY_COMPANY_ID') || define('KEY_COMPANY_ID', 'company_id');
+defined('KEY_CATEGORY') || define('KEY_CATEGORY', 'category');
+defined('KEY_VALUE_ID') || define('KEY_VALUE_ID', 'value_id');
+defined('KEY_RESPONSE_OPTION') || define('KEY_RESPONSE_OPTION', 'response_option');
+defined('KEY_RESPONSE_START_TIME') || define('KEY_RESPONSE_START_TIME', 'response_start_time');
 if($_GET['Rid']!=""){
   $rid =  encodeId($_GET['Rid']);
   $rid = urldecode($rid);
@@ -7,7 +12,7 @@ if($_GET['Rid']!=""){
 }
 $category = array('1' =>'Survey', '2'=> 'Poll' );
 $table_list = array(TBL_SURVEY_SETUP,TBL_SURVEY_SETUP_QUESTIONS,TBL_SURVEY_SETUP_QUESTION_OPTIONS);
-$company_id = $_SESSION['company_id'];
+$company_id = $_SESSION[KEY_COMPANY_ID];
 $emp_id = $_SESSION['emp_id'];
 
 $vurl = API."?mode=getsharedsurveydetails&company_id=".$company_id."&emp_id=".$emp_id."&is_active=0"."&survey_id=".$survey_id;
@@ -22,7 +27,7 @@ $survey_end_time = $survey_details['survey_end_time'];
 $allocated_time =  $survey_details['allocated_time'] == '0'? ST_SURVEY_DURATION_IN_MINUTES : $survey_details['allocated_time'];
 $allocated_time = $allocated_time * 60;
 $display_questions = $surveyData['questions'];
-$display_tag = $category[$survey_details['category']];
+$display_tag = $category[$survey_details[KEY_CATEGORY]];
 $markedanswer = $surveyData['resultdata'];
 
 $qustion_types = $surveyData['qustion_types'];
@@ -44,9 +49,9 @@ if(isset($_POST['clear'])) {
 if(isset($_POST['submit'])){
   $partial_complete = 1;
   $answered = 0;
-  if (count((array)$_POST['value_id']) > 0) {
-    foreach ($_POST['value_id'] as $q_no) {
-      $ans_data = $_POST['response_option'.$q_no];
+  if (count((array)$_POST[KEY_VALUE_ID]) > 0) {
+    foreach ($_POST[KEY_VALUE_ID] as $q_no) {
+      $ans_data = $_POST[KEY_RESPONSE_OPTION.$q_no];
       if (count((array)$ans_data) > 0 && trim($ans_data[0]) != '') {
         $answered++;
       }
@@ -57,11 +62,11 @@ if(isset($_POST['submit'])){
     $partial_complete = 0;
   }
 
-  $diff = (strtotime(date('H:i:s'))-strtotime($_SESSION['response_start_time'])) > 0 ? (strtotime(date('H:i:s'))-strtotime($_SESSION['response_start_time']) ) : 3600;
+  $diff = (strtotime(date('H:i:s'))-strtotime($_SESSION[KEY_RESPONSE_START_TIME])) > 0 ? (strtotime(date('H:i:s'))-strtotime($_SESSION[KEY_RESPONSE_START_TIME]) ) : 3600;
 
   $duration_taken = round(abs($diff)/3600,2);
 
-  $commondata = array('duration_taken'=>$duration_taken,'partial_complete'=>$partial_complete,'category'=>$_POST['category'],'employee_id'=>$_POST['emp_id'],'survey_id'=>$_POST['survey_id'],'response_start_date'=>date('Y-m-d'),'response_start_time'=>$_SESSION['response_start_time'],'response_end_date'=>date('Y-m-d'),'response_end_time'=>date('H:i:s'),'created_date'=>date('Y-m-d'),'created_by'=>$_SESSION['user_id'],'is_active'=>'0','company_id'=>$_SESSION['company_id']);
+  $commondata = array('duration_taken'=>$duration_taken,'partial_complete'=>$partial_complete,KEY_CATEGORY=>$_POST[KEY_CATEGORY],'employee_id'=>$_POST['emp_id'],'survey_id'=>$_POST['survey_id'],'response_start_date'=>date('Y-m-d'),KEY_RESPONSE_START_TIME=>$_SESSION[KEY_RESPONSE_START_TIME],'response_end_date'=>date('Y-m-d'),'response_end_time'=>date('H:i:s'),'created_date'=>date('Y-m-d'),'created_by'=>$_SESSION['user_id'],'is_active'=>'0',KEY_COMPANY_ID=>$_SESSION[KEY_COMPANY_ID]);
   if($_POST['submit']=='Submit '.$display_tag) {
     $commondata['current_status'] = ST_COMPLETE;
   }else{
@@ -71,12 +76,12 @@ if(isset($_POST['submit'])){
 
   unset($commondata['duration_taken']);
   unset($commondata['partial_complete']);
-  unset($commondata['category']);
+  unset($commondata[KEY_CATEGORY]);
 
-  foreach($_POST['value_id'] as $q_no) {
-   $ans_data= $_POST['response_option'.$q_no];
+  foreach($_POST[KEY_VALUE_ID] as $q_no) {
+   $ans_data= $_POST[KEY_RESPONSE_OPTION.$q_no];
    $commondata['question_id']=$_POST['questionid'.$q_no];
-   $commondata['response_option']=json_encode($ans_data,1);
+   $commondata[KEY_RESPONSE_OPTION]=json_encode($ans_data,1);
    $data['survey_response_details'][] = $commondata;
  }
  $url = API."?mode=savesurveyreponses&table=survey_responses&method=post";
@@ -141,7 +146,7 @@ function callnext(qno,currentqno,qtype) {
    }
 
  }else{
-  var respEl = document.getElementById('response_option'+currentqno) || document.getElementById('response_option_scale_'+currentqno);
+  var respEl = document.getElementById(KEY_RESPONSE_OPTION+currentqno) || document.getElementById('response_option_scale_'+currentqno);
   var textval = respEl ? respEl.value : "";
   if(textval.length>0){
     //document.getElementById('summary'+currentqno).style.backgroundColor = '#0BB783' ;
@@ -173,7 +178,7 @@ function callclear(qno,qtype){
       inputs[i].checked = false;
     }
   }else{
-    var respEl = document.getElementById('response_option'+qno) || document.getElementById('response_option_scale_'+qno);
+    var respEl = document.getElementById(KEY_RESPONSE_OPTION+qno) || document.getElementById('response_option_scale_'+qno);
     if (respEl) { respEl.value = ""; }
   }
   document.getElementById('summary'+qno).style.backgroundColor = '#FFFFFF' ;
@@ -256,7 +261,7 @@ function submitsurvey(){
           </div>
         </div>
         <input type="hidden" name="emp_id" value="<?php echo $_SESSION['emp_id'];?>">
-        <input type="hidden" id="category" name="category" value="<?php echo $survey_details['category'];?>">
+        <input type="hidden" id="category" name="category" value="<?php echo $survey_details[KEY_CATEGORY];?>">
         <input type="hidden" id="allocatedtime" value="<?php echo ST_SURVEY_DURATION_IN_MINUTES;?>">
         <input type="hidden" id="total_q" value="<?php echo $total_q;?>" name="total_q" >
         <input type="hidden" id="survey_id" value="<?php echo $survey_id;?>" name="survey_id">

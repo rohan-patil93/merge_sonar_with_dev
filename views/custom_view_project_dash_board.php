@@ -1,4 +1,6 @@
 <?php
+defined('COM_VIEW_PROJECT_URL') || define('COM_VIEW_PROJECT_URL', 'index.php?option=COM_VIEW_PROJECT&RID=');
+defined('COM_VIEW_PROJECT_KANBAN_URL') || define('COM_VIEW_PROJECT_KANBAN_URL', 'index.php?option=COM_VIEW_PROJECT_KANBAN&RID=');
 $url = API."?mode=togetprojectdashboarddetails";
 if(in_array('TASKDA_USER',$_SESSION['role_ids'])){
     $url = API."?mode=togetprojectdashboarddetails&role_id=employee&userid=".$_SESSION['userid'];
@@ -353,7 +355,7 @@ function dashchange(val){
                                             <div class="card prod-p-card card-blue mb-0 border b-radius-10">
                                                 <div class="card-body">
                                                     <div class="row align-items-center">
-                                                        <div class="col close" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=0';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                        <button type="button" class="col close text-start border-0 bg-transparent p-0 w-100" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=0';">
                                                             <h6 class="m-b-5 text-primary"><?= __('Total Projects'); ?></h6>
                                                             <h3 class="m-b-0 f-w-700 text-primary f-30 mt-3">
                                                                 <?php  $total = $top['total'];
@@ -372,7 +374,7 @@ function dashchange(val){
                                             <div class="card prod-p-card card-info mb-0">
                                                 <div class="card-body">
                                                     <div class="row align-items-center">
-                                                        <div class="col close" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=1';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                        <button type="button" class="col close text-start border-0 bg-transparent p-0 w-100" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=1';">
                                                             <h6 class="m-b-5 text-success"><?= __('Yet To Start Projects'); ?></h6>
                                                             <h3 class="m-b-0 f-w-700 text-success f-30 mt-3">
                                                                 <?php echo $top['0']!="" ? $top['0']: 0; ?>
@@ -390,7 +392,7 @@ function dashchange(val){
                                             <div class="card prod-p-card card-yellow mb-0">
                                                 <div class="card-body">
                                                     <div class="row align-items-center">
-                                                        <div class="col close" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=2';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                        <button type="button" class="col close text-start border-0 bg-transparent p-0 w-100" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=2';">
                                                             <h6 class="m-b-5 text-warning"><?= __('Inprogress Projects'); ?></h6>
                                                             <h3 class="m-b-0 f-w-700 text-warning f-30 mt-3">
                                                                 <?php echo $top['total']-($top['4']+$top['0']); ?>
@@ -408,7 +410,7 @@ function dashchange(val){
                                             <div class="card prod-p-card card-info mb-0">
                                                 <div class="card-body">
                                                     <div class="row align-items-center">
-                                                        <div class="col close" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=3';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                        <button type="button" class="col close text-start border-0 bg-transparent p-0 w-100" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=3';">
                                                             <h6 class="m-b-5 text-success"><?= __('Completed Projects'); ?></h6>
                                                             <h3 class="m-b-0 f-w-700 text-success f-30 mt-3">
                                                                 <?php echo $top['4']!="" ? $top['4'] :0; ?>
@@ -439,7 +441,7 @@ function dashchange(val){
                                             foreach((array)$details['workspace'] as $workspace){ ?>
                                                 <div class="card-block pt-2 pb-2 position-relative">
                                                     <div class="row mt-1 pb-3 close"  style="border-bottom:1px dashed #cccccc;">
-                                                        <div class="col-auto" onclick="location.href='index.php?option=COM_VIEW_PROJECT_WORK_SPACE_DETAILS&TAB=<?php echo $workspace['id']; ?>';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                        <button type="button" class="col-auto text-start border-0 bg-transparent p-0" onclick="location.href='index.php?option=COM_VIEW_PROJECT_WORK_SPACE_DETAILS&TAB=<?php echo $workspace['id']; ?>';">
                                                             <div class="p-2 bg-green-100 b-radius-10 text-center left-icon-width text-success" style="background-color: <?php echo $_SESSION['status'][$rcent['current_status']]['background_color']; ?>">
                                                                 <i class="fa fa-flag f-w-600"></i>
                                                             </div>
@@ -450,7 +452,7 @@ function dashchange(val){
                                                         </div>
                                                     </div>
                                                     <div class="position-absolute" style="right:10px; top: 20px;">
-                                                        <i class="ti ti-pencil cursor-pointer" onclick="dynamicinsertworkspacepopup(<?php echo $workspace['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                                        <button type="button" class="btn btn-link p-0 border-0 align-baseline" onclick="dynamicinsertworkspacepopup(<?php echo $workspace['id']; ?>)" aria-label="<?= htmlspecialchars(__('Edit Workspace'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti ti-pencil cursor-pointer"></i></button>
                                                     </div>
                                                 </div>
                                             <?php } ?>
@@ -530,9 +532,9 @@ function dashchange(val){
                                             <?php
                                             if(count((array)$details['recentlycreated'])>0){
                                                 foreach((array)$details['recentlycreated'] as $rcent){
-                                                    $vieopt = "index.php?option=COM_VIEW_PROJECT&RID=".$rcent['id'];
+                                                    $vieopt = COM_VIEW_PROJECT_URL.$rcent['id'];
                                                     if(in_array($_SESSION['userid'],(array)$projcetroleuser[$rcent['id']][2])){
-                                                       $vieopt = "index.php?option=COM_VIEW_PROJECT_KANBAN&RID=".$rcent['id'];
+                                                       $vieopt = COM_VIEW_PROJECT_KANBAN_URL.$rcent['id'];
                                                    }
                                                    ?>
                                                    <div   class="row mt-3 pb-3 " style="border-bottom:1px dashed #cccccc;">
@@ -546,7 +548,7 @@ function dashchange(val){
                                                             <?php } ?>
                                                         </div>
                                                         <div class="col p-0">
-                                                            <div class="f-w-600 f-13 close m-0 text-muted" onclick="location.href='<?php echo $vieopt; ?>';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                            <button type="button" class="f-w-600 f-13 close m-0 text-muted border-0 bg-transparent p-0 text-start" onclick="location.href='<?php echo $vieopt; ?>';">
                                                                 <?php echo $rcent['project_name']; ?>
                                                             </div>
                                                             <span class="text-muted f-12">
@@ -632,7 +634,7 @@ function dashchange(val){
                                                                                     <span> <?php echo $emps[$emp_ass['assigen_id']]['display_name']; ?> </span>
                                                                                 </td>
                                                                                 <td style="white-space: normal;">
-                                                                                    <span class="cursor-pointer text-c-blue" onclick="taskdetailspopup(<?php echo $emp_ass['id'];  ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <?php echo $emp_ass['task_name'];  ?></span>
+                                                                                    <button type="button" class="btn btn-link p-0 border-0 align-baseline cursor-pointer text-c-blue" onclick="taskdetailspopup(<?php echo $emp_ass['id'];  ?>)"><?php echo $emp_ass['task_name'];  ?></button>
 
                                                                                 </td>
                                                                                 <td>
@@ -744,17 +746,17 @@ function dashchange(val){
                                                                         <?php } ?>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="label label-sm label-info m-0 cursor-pointer" onclick="addprojectassign(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                        <button type="button" class="btn btn-link p-0 border-0 align-baseline" onclick="addprojectassign(<?php echo $alluser['id']; ?>)"><span class="label label-sm label-info m-0 cursor-pointer">
                                                                             <?= __('Add Project Team'); ?>
                                                                         </span>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="label label-sm label-info m-0 cursor-pointer" onclick="addprojecttaskstouser(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                        <button type="button" class="btn btn-link p-0 border-0 align-baseline" onclick="addprojecttaskstouser(<?php echo $alluser['id']; ?>)"><span class="label label-sm label-info m-0 cursor-pointer">
                                                                             <?= __('Assign Task'); ?>
                                                                         </span>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="label label-sm label-info m-0 cursor-pointer" onclick="usertaskhistory(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                        <button type="button" class="btn btn-link p-0 border-0 align-baseline" onclick="usertaskhistory(<?php echo $alluser['id']; ?>)"><span class="label label-sm label-info m-0 cursor-pointer">
                                                                             <?= __('History'); ?>
                                                                         </span>
                                                                     </td>
@@ -811,17 +813,17 @@ function dashchange(val){
                                                                         <?php } ?>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="label label-sm label-info m-0 cursor-pointer" onclick="addprojectassign(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                        <button type="button" class="btn btn-link p-0 border-0 align-baseline" onclick="addprojectassign(<?php echo $alluser['id']; ?>)"><span class="label label-sm label-info m-0 cursor-pointer">
                                                                             <?= __('Add Project Team'); ?>
                                                                         </span>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="label label-sm label-info m-0 cursor-pointer" onclick="addprojecttaskstouser(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                        <button type="button" class="btn btn-link p-0 border-0 align-baseline" onclick="addprojecttaskstouser(<?php echo $alluser['id']; ?>)"><span class="label label-sm label-info m-0 cursor-pointer">
                                                                             <?= __('Assign Task'); ?>
                                                                         </span>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="label label-sm label-info m-0 cursor-pointer" onclick="usertaskhistory(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                        <button type="button" class="btn btn-link p-0 border-0 align-baseline" onclick="usertaskhistory(<?php echo $alluser['id']; ?>)"><span class="label label-sm label-info m-0 cursor-pointer">
                                                                             <?= __('History'); ?>
                                                                         </span>
                                                                     </td>
@@ -856,11 +858,11 @@ function dashchange(val){
                                         <div class="card-body custom-scroll mb-2" style="max-height:320px;">
                                             <?php if(count((array)$details['recentlyinprogress'])>0){
                                             foreach((array)$details['recentlyinprogress'] as $rcent){
-                                                $vieopt = "index.php?option=COM_VIEW_PROJECT&RID=".$rcent['id'];
+                                                $vieopt = COM_VIEW_PROJECT_URL.$rcent['id'];
                                                 if(in_array($_SESSION['userid'],(array)$projcetroleuser[$rcent['id']][2])){
-                                                 $vieopt = "index.php?option=COM_VIEW_PROJECT_KANBAN&RID=".$rcent['id'];
+                                                 $vieopt = COM_VIEW_PROJECT_KANBAN_URL.$rcent['id'];
                                              } ?>
-                                            <div class="row mt-3 pb-3 close" onclick="location.href='<?php echo $vieopt; ?>';"  style="border-bottom:1px dashed #cccccc;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="row mt-3 pb-3 close text-start border-0 bg-transparent p-0 w-100" onclick="location.href='<?php echo $vieopt; ?>';" style="border-bottom:1px dashed #cccccc;">
                                                 <div class="col-auto">
                                                     <?php if($rcent['project_logo']!=""){ ?>
                                                         <img  class="img-50" src="uploads/all/<?php echo $rcent['project_logo']; ?>" alt='<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>'>
@@ -892,11 +894,11 @@ function dashchange(val){
                                         <div class="card-body custom-scroll" style="max-height:270px;" >
                                             <?php if(count((array)$details['recentlycompleted'])>0){
                                                 foreach((array)$details['recentlycompleted'] as $rcent){
-                                                    $vieopt = "index.php?option=COM_VIEW_PROJECT&RID=".$rcent['id'];
+                                                    $vieopt = COM_VIEW_PROJECT_URL.$rcent['id'];
                                                     if(in_array($_SESSION['userid'],(array)$projcetroleuser[$rcent['id']][2])){
-                                                       $vieopt = "index.php?option=COM_VIEW_PROJECT_KANBAN&RID=".$rcent['id'];
+                                                       $vieopt = COM_VIEW_PROJECT_KANBAN_URL.$rcent['id'];
                                                    } ?>
-                                                   <div class="row mt-1 pb-3 close" onclick="location.href='<?php echo $vieopt; ?>';"  style="border-bottom:1px dashed #cccccc;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                   <button type="button" class="row mt-1 pb-3 close text-start border-0 bg-transparent p-0 w-100" onclick="location.href='<?php echo $vieopt; ?>';" style="border-bottom:1px dashed #cccccc;">
                                                     <div class="col-lg-3">
                                                         <?php if($rcent['project_logo']!=""){ ?>
                                                             <img  class="img-50" src="uploads/all/<?php echo $rcent['project_logo']; ?>" alt='<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>'>
@@ -936,10 +938,10 @@ function dashchange(val){
                                         <div class="card-header">
                                             <h5><?php echo $pemp['display_name']; ?></h5>
                                             <div class="card-header-right" style="width:15%;">
-                                                <span class="float-left" onclick="viegraph(<?php echo $pemp['id']; ?>,'G')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                <button type="button" class="btn btn-link p-0 border-0 align-baseline float-left" onclick="viegraph(<?php echo $pemp['id']; ?>,'G')">
                                                     <i class="ti-bar-chart text-primary"></i>
                                                 </span>
-                                                <span class=""  onclick="viegraph(<?php echo $pemp['id']; ?>,'L')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                <button type="button" class="btn btn-link p-0 border-0 align-baseline" onclick="viegraph(<?php echo $pemp['id']; ?>,'L')">
                                                     <i class="ti-view-list-alt text-success"></i>
                                                 </span>
                                             </div>
@@ -1038,7 +1040,7 @@ function dashchange(val){
                                                                 </div>
                                                             </div>
                                                             <div class="row p-l-15 p-r-15 mb-2 text-muted">
-                                                                <div class="col-lg-6 mt-2 f-12" style="cursor: pointer;" onclick="listtaskdetails('<?php echo implode(",",(array)$due_array); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                <button type="button" class="col-lg-6 mt-2 f-12 text-start border-0 bg-transparent p-0" style="cursor: pointer;" onclick="listtaskdetails('<?php echo implode(",",(array)$due_array); ?>')">
                                                                     <div class="s-cont d-inline-block" style="width:90%" >
                                                                         <span class="m-b-0" ><?= __('Due'); ?></span>
                                                                         <span class="f-w-700 m-b-0 m-l-5 float-right">
@@ -1046,7 +1048,7 @@ function dashchange(val){
                                                                         </span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-6 mt-2 f-12" style="cursor: pointer;" onclick="listtaskdetails('<?php echo implode(",",$over_due_array); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                <button type="button" class="col-lg-6 mt-2 f-12 text-start border-0 bg-transparent p-0" style="cursor: pointer;" onclick="listtaskdetails('<?php echo implode(",",$over_due_array); ?>')">
                                                                     <div class="s-cont d-inline-block" style="width:90%">
                                                                         <span class="m-b-0" ><?= __('Over Due'); ?></span>
                                                                         <span class="f-w-700 m-b-0 m-l-5 float-right"  style="color: #e74242;">
@@ -1056,7 +1058,7 @@ function dashchange(val){
                                                                 </div>
                                                                <?php
                                                                 foreach($starrv as $vkey=>$vsta){ ?>
-                                                                    <div class="col-lg-6 mt-2 f-12" style="cursor: pointer;" onclick="listtaskdetails('<?php echo implode(",",(array)$viewlisttask_array[$vkey]); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                    <button type="button" class="col-lg-6 mt-2 f-12 text-start border-0 bg-transparent p-0" style="cursor: pointer;" onclick="listtaskdetails('<?php echo implode(",",(array)$viewlisttask_array[$vkey]); ?>')">
                                                                         <div class="s-cont d-inline-block" style="width:90%">
                                                                             <span class="m-b-0" ><?php echo $vsta;  ?></span>
                                                                             <span class="f-w-700 m-b-0 m-l-5 float-right">
@@ -1104,7 +1106,7 @@ function dashchange(val){
                                                                         $chhck =1;
                                                                     }
                                                                 if($chhck ==1){ $totalchhck = $totalchhck+1; $nodata = 1; ?>
-                                                                    <div  onclick="taskdetailspopup(<?php echo $rcent['id']; ?>)"  class="row mt-1 pb-3 pt-3 close" style="border-bottom:1px dashed #cccccc;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                                    <button type="button" onclick="taskdetailspopup(<?php echo $rcent['id']; ?>)" class="row mt-1 pb-3 pt-3 close text-start border-0 bg-transparent p-0 w-100" style="border-bottom:1px dashed #cccccc;">
                                                                         <div class="col-auto">
                                                                             <div class="p-2 bg-primary b-radius-10 text-center left-icon-width" style="background-color: <?php echo $_SESSION['status'][$rcent['current_status']]['background_color']; ?>">
                                                                                 <i class="fa fa-trophy f-w-600"></i>

@@ -1,4 +1,9 @@
 <?php
+defined('KEY_PAN_NUMBER') || define('KEY_PAN_NUMBER', 'pan_number');
+defined('KEY_ERROR_MESSAGE') || define('KEY_ERROR_MESSAGE', 'error_message');
+defined('KEY_ADMIN_EMAIL') || define('KEY_ADMIN_EMAIL', 'admin_email');
+defined('MSG_VERIFIED_SUCCESS') || define('MSG_VERIFIED_SUCCESS', 'Verified Successfully');
+defined('LBL_PAN_NUMBER') || define('LBL_PAN_NUMBER', 'PAN Number');
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -59,7 +64,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             $('#'+btn_id).removeAttr("onclick");
 
                             pangstlist +='<tr><th scope="col" class="p-2"><?= __('Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['display_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.name+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Pan Number') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['pan_number']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.number+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Pan Number') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates[KEY_PAN_NUMBER]); ?></td><td class="p-2 w-b-w-s text-danger">'+res.number+'</td></tr>';
                             pangstlist +='<tr><th scope="col" class="p-2"><?= __('First Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['first_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.firstName+'</td></tr>';
                             pangstlist +='<tr><th scope="col" class="p-2"><?= __('Middle Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['middle_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.middleName+'</td></tr>';
                             pangstlist +='<tr><th scope="col" class="p-2"><?= __('Last Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['last_name']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.lastName+'</td></tr>';
@@ -89,7 +94,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                         $('#'+btn_id).removeClass("disabled");
                         $('#'+tab_id).attr('class', 'ti-alert text-danger f-30 align-middle');
                     }else{
-                        $('.pan_verification_error').text('<?php echo $_SESSION['error_message']['9135']." ".$_SESSION['config']['admin_email']; ?>');
+                        $('.pan_verification_error').text('<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9135']." ".$_SESSION['config'][KEY_ADMIN_EMAIL]; ?>');
                             $('#'+btn_id).text(btn_text);
                             $('#'+btn_id).removeClass("disabled");
                             $('#'+tab_id).attr('class', 'ti-alert text-danger f-30 align-middle');
@@ -99,7 +104,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     if(res.error.message !=""){
                         var errormsg = res.error.message;
                     }else{
-                        var errormsg = '<?php echo $_SESSION['error_message']['9135']." ".$_SESSION['config']['admin_email']; ?>';
+                        var errormsg = '<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9135']." ".$_SESSION['config'][KEY_ADMIN_EMAIL]; ?>';
                     }
                     $('.pan_verification_error').text(errormsg);
                     $('#'+btn_id).text(btn_text);
@@ -108,7 +113,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                 }
             },
             error:function (){
-                $('.pan_verification_error').text('<?php echo $_SESSION['error_message']['9135']." ".$_SESSION['config']['admin_email']; ?>');
+                $('.pan_verification_error').text('<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9135']." ".$_SESSION['config'][KEY_ADMIN_EMAIL]; ?>');
                 $('#'+btn_id).text(btn_text);
                 $('#'+btn_id).removeClass("disabled");
                 $('#'+tab_id).attr('class', 'ti-alert text-danger f-30 align-middle');
@@ -116,8 +121,8 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
           });
     }
     function verificationPANSuccess(verification_type,api_hit_id){
-        $('.tan_verification_error').text('<?php echo $_SESSION['error_message']['9136']; ?>');
-        verificationSuccess(verification_type,api_hit_id,'<?php echo $_SESSION['error_message']['9138']; ?>');
+        $('.tan_verification_error').text('<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9136']; ?>');
+        verificationSuccess(verification_type,api_hit_id,'<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9138']; ?>');
     }
     function adhaarVerification(btn_id,btn_text,tab_id){
         var adhaar_no_popup = $("#adhaar_no_popup").val();
@@ -139,16 +144,16 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                 try {
                     if(res && res.response_code =="200"){
                         if(res.result.verified == true){
-                            $('.adhaar_verification_error').text('<?php echo $_SESSION['error_message']['9139']; ?>');
-                            var htmloader = '<i class="ti-check-box"></i>  <?= htmlspecialchars(__('Verified Successfully'), ENT_QUOTES, 'UTF-8'); ?>';
+                            $('.adhaar_verification_error').text('<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9139']; ?>');
+                            var htmloader = '<i class="ti-check-box"></i>  <?= htmlspecialchars(__(MSG_VERIFIED_SUCCESS), ENT_QUOTES, 'UTF-8'); ?>';
                             $('#'+btn_id).html(htmloader);
                             $('#'+tab_id).attr('class', 'ti-check-box f-30 align-middle');
                             $('#'+btn_id).removeClass('btn-danger');
                             $('#'+btn_id).addClass('btn-success');
                             $('#'+btn_id).removeAttr("onclick");
-                            verificationSuccess("AADHAAR",res.api_hit_id,'<?php echo $_SESSION['error_message']['9139']; ?>');
+                            verificationSuccess("AADHAAR",res.api_hit_id,'<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9139']; ?>');
                         }else{
-                            $('.adhaar_verification_error').text('<?php echo $_SESSION['error_message']['9135']." ".$_SESSION['config']['admin_email']; ?>');
+                            $('.adhaar_verification_error').text('<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9135']." ".$_SESSION['config'][KEY_ADMIN_EMAIL]; ?>');
                             $('#'+btn_id).text(btn_text);
                             $('#'+btn_id).removeClass("disabled");
                             $('#'+tab_id).attr('class', 'ti-alert text-danger f-30 align-middle');
@@ -165,7 +170,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     if(res.error.message !=""){
                         var errormsg = res.error.message;
                     }else{
-                        var errormsg = '<?php echo $_SESSION['error_message']['9135']." ".$_SESSION['config']['admin_email']; ?>';
+                        var errormsg = '<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9135']." ".$_SESSION['config'][KEY_ADMIN_EMAIL]; ?>';
                     }
                     $('.adhaar_verification_error').text(errormsg);
                     $('#'+btn_id).text(btn_text);
@@ -174,7 +179,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                 }
             },
             error:function (){
-                $('.adhaar_verification_error').text('<?php echo $_SESSION['error_message']['9135']." ".$_SESSION['config']['admin_email']; ?>');
+                $('.adhaar_verification_error').text('<?php echo $_SESSION[KEY_ERROR_MESSAGE]['9135']." ".$_SESSION['config'][KEY_ADMIN_EMAIL]; ?>');
                 $('#'+btn_id).text(btn_text);
                 $('#'+btn_id).removeClass("disabled");
                 $('#'+tab_id).attr('class', 'ti-alert text-danger f-30 align-middle');
@@ -190,7 +195,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
             type: "POST",
             success:function(data11){
                 if(msg ==""){
-                    msg = '<?php echo $_SESSION['error_message']['3001']; ?>';
+                    msg = '<?php echo $_SESSION[KEY_ERROR_MESSAGE]['3001']; ?>';
                 }
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',msg,'');
                 verificationVendorDetails(verification_type);
@@ -209,7 +214,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
         <div class="col-lg-3">
             <ul class="nav nav-tabs md-tabs d-block bg-gray">
                 <li class="nav-item text-start p-2">
-                    <a class="nav-link p-3 border <?php echo ($verification_type =="" || $verification_type == "PAN")?"active":""; ?>" data-bs-toggle="tab" href="#panverification_tab"  role="tab" aria-selected="false"><?php echo $vendor_verifications['PAN']['status'] == "Y"?'<i class="ti-check-box f-30 align-middle" id="panverification_tabs"></i>':'<i class="ti-alert text-danger f-30 align-middle" id="panverification_tabs_2"></i>'; ?><span class="ml-2 d-inline-block align-middle"><?= __('PAN Number') ?></span></a>
+                    <a class="nav-link p-3 border <?php echo ($verification_type =="" || $verification_type == "PAN")?"active":""; ?>" data-bs-toggle="tab" href="#panverification_tab"  role="tab" aria-selected="false"><?php echo $vendor_verifications['PAN']['status'] == "Y"?'<i class="ti-check-box f-30 align-middle" id="panverification_tabs"></i>':'<i class="ti-alert text-danger f-30 align-middle" id="panverification_tabs_2"></i>'; ?><span class="ml-2 d-inline-block align-middle"><?= __(LBL_PAN_NUMBER) ?></span></a>
                 </li>
                 <li class="nav-item text-start p-2">
                     <a class="nav-link p-3 border <?php echo ($verification_type == "AADHAAR")?"active":""; ?>" data-bs-toggle="tab" href="#adhaarverification" role="tab"><?php echo $vendor_verifications['AADHAAR']['status'] == "Y"?'<i class="ti-check-box f-30 align-middle" id="adhaarverification_tabs"></i>':'<i class="ti-alert text-danger f-30 align-middle" id="adhaarverification_tabs_2"></i>'; ?> <span class="ml-2 d-inline-block align-middle"><?= __('Aadhaar Number') ?></span></a>
@@ -226,9 +231,9 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     $onclickfun = $label = $class = $spanmsg = $disbled_btn = "";
                     if($vendor_verifications['PAN']['status'] == "Y"){
                         $onclickfun = "";
-                        $label = '<i class="ti-check-box"></i> ' . __('Verified Successfully');
+                        $label = '<i class="ti-check-box"></i> ' . __(MSG_VERIFIED_SUCCESS);
                         $class = "btn-success";
-                        $spanmsg = $_SESSION['error_message']['9136'];
+                        $spanmsg = $_SESSION[KEY_ERROR_MESSAGE]['9136'];
                         $disbled_btn = "disabled";
                     }else{
                         $onclickfun = "panVerification('btn_pan_no_popup','Check PAN','panverification_tabs')";
@@ -236,17 +241,17 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                         $class = "btn-danger";
                         $spanmsg = __("PAN verification is pending");
                     }
-                    if($candidates['pan_number'] ==""){
+                    if($candidates[KEY_PAN_NUMBER] ==""){
                         $disbled_btn = "disabled";
                     }
                     ?>
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <span class="form-label"><?= __('PAN Number') ?></span>
-                            <?php echo $candidates['pan_number'] ==""?"<span class='text-danger d-block f-12'><?= __('Please Update PAN Number') ?></span>":""; ?>
+                            <span class="form-label"><?= __(LBL_PAN_NUMBER) ?></span>
+                            <?php echo $candidates[KEY_PAN_NUMBER] ==""?"<span class='text-danger d-block f-12'><?= __('Please Update PAN Number') ?></span>":""; ?>
                             <div class="input-group input-group-button mb-0">
-                                <input aria-label="<?= htmlspecialchars(__('Pan No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="pan_no_popup" value="<?php  echo $candidates['pan_number']; ?>" autocomplete="off" readonly>
+                                <input aria-label="<?= htmlspecialchars(__('Pan No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="pan_no_popup" value="<?php  echo $candidates[KEY_PAN_NUMBER]; ?>" autocomplete="off" readonly>
                                 <button class="btn <?php echo $class; ?>" type="button" id="btn_pan_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
                             </div>
                             <span class="f-12 text-danger pan_verification_error" ><?php echo $spanmsg; ?></span>
@@ -261,7 +266,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                         <thead>
                             <tr>
                                 <th scope="col" class=""><?= __('Company Name') ?></th>
-                                <th scope="col" class=""><?= __('PAN Number') ?></th>
+                                <th scope="col" class=""><?= __(LBL_PAN_NUMBER) ?></th>
                                 <th scope="col" class=""><?= __('Validated Company Name') ?></th>
                                 <th scope="col" class=""><?= __('Date Time') ?></th>
                                 <th scope="col" class=""><?= __('Status') ?></th>
@@ -280,7 +285,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             <td class="w-b-w-s text-danger p-2">
                                 <?php
                                     if($api_response_details['result']['verified'] == "true"){
-                                        echo $_SESSION['error_message']['9136'];
+                                        echo $_SESSION[KEY_ERROR_MESSAGE]['9136'];
                                     }elseif($api_response_details['result']['verified'] == "false"){
                                         echo $api_response_details['result']['message'];
                                     }else{
@@ -301,9 +306,9 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     $onclickfun = $label = $class = $spanmsg = $disbled_btn = "";
                     if($vendor_verifications['AADHAAR']['status'] == "Y"){
                         $onclickfun = "";
-                        $label = '<i class="ti-check-box"></i> ' . __('Verified Successfully');
+                        $label = '<i class="ti-check-box"></i> ' . __(MSG_VERIFIED_SUCCESS);
                         $class = "btn-success";
-                        $spanmsg = $_SESSION['error_message']['9139'];
+                        $spanmsg = $_SESSION[KEY_ERROR_MESSAGE]['9139'];
                         $disbled_btn = "disabled";
                     }else{
                         $onclickfun = "adhaarVerification('btn_adhaar_no_popup','Click To Verify Aadhaar','adhaarverification_tabs')";
@@ -338,7 +343,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                                     $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'tiff'];
                     ?>
 
-                        <div class="col-xl-4 col-md-6" onclick="dynamicFilePriviews('<?php echo $path; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Attachments Preview') ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                        <button type="button" class="col-xl-4 col-md-6 btn text-left bg-transparent border-0 p-0" onclick="dynamicFilePriviews('<?php echo $path; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Attachments Preview') ?>">
                             <div class="card social-card">
                                 <div class="card-body text-center p-0">
                                     <h2 class="text-facebook m-b-5">
@@ -350,8 +355,8 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
 
                                     </h2>
                                     <a  class="f-12 text-primary custom-limit-text mt-3 cursor-pointer" style="--linehide: 1;"><?php echo htmlspecialchars(__($clist['name'] ?? '')); ?></a>
-                                </div>
-                            </div>
+                                </button>
+</div>
                         </div>
                     <?php } ?>
                     <?php } ?>

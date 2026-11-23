@@ -51,12 +51,7 @@ $module_setup = $result['module_setup'];
       </div>
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
-        <!-- <div class="input-group input-group-button mb-0" >
-            <input type="text" id="dynamicfilterhideshow" data-id='applicationrolesid' data-type="div" class="form-control form-control-sm width1"  placeholder="<?= __('Search') ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
-            <span class="input-group-text addon-style">
-                <label class=""><span class="ti-search text-white mt-2"></span></label>
-            </span>
-        </div> -->
+        
       </div>
 
     </div>
@@ -68,9 +63,7 @@ $module_setup = $result['module_setup'];
         if ($jj == '0') {
           $i = 2; ?>
           <div class="col-lg-3 col-md-6 col-sm-6 col-12 hideall addmore" style="display: none">
-              <div class="card card-custom cursor-pointer card-stretch" role="button" tabindex="0"
-                onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                onclick="addrolemodal()">
+              <button type="button" class="card card-custom cursor-pointer card-stretch w-100 text-left border-0 bg-transparent p-0" onclick="addrolemodal()">
                 <div class="card-header">
                   <div class="card-title">
                     <img alt="" style="width: 100%;" src="assets/images/role_edite.png">
@@ -79,8 +72,8 @@ $module_setup = $result['module_setup'];
                 <div class="card-body" style="min-height: 106px;">
                   <h3 class="text-gray-600" style="text-align: center;"><?= __('Add New Role'); ?></h3>
                 </div>
-              </div>
-            </div>
+              </button>
+</div>
           <?php } ?>
           <div
             class="col-lg-3 col-md-6 col-sm-6 col-12 hideall modulegrpid_<?php echo $resultlist['application_module']; ?> "
@@ -129,15 +122,15 @@ $module_setup = $result['module_setup'];
             </div>
           </div>
           <?php $i++;
-          $jj++; /*if($i==5){ echo '</div><div class="row mt-4">'; $i=1; }*/
+          $jj++; 
       } ?>
       </div>
     </div>
   </div>
 
 
-  <div class="modal fade updaterolemodal" id="large-Modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-xl" role="document">
+  <div class="modal fade updaterolemodal" id="large-Modal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title"><?= __('Role'); ?></h4>

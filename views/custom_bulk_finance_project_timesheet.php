@@ -1,5 +1,6 @@
 <?php
-    if($_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m');
+defined('LAC_LABEL_SUFFIX') || define('LAC_LABEL_SUFFIX', LAC_LABEL_SUFFIX);
+if($_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m');
     }
     if($_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');
     }
@@ -389,7 +390,7 @@ $erp = json_decode($erp_data,1);
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header table-card-header">
-                        <h5><?= __("Bulk Time Sheet Approval") ?></h5> <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Take A Tour'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Take A Tour'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                        <h5><?= __("Bulk Time Sheet Approval") ?></h5> <button type="button" class="btn btn-link p-0 text-primary border-0 align-baseline" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Take A Tour'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Take A Tour'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-info-alt f-20 text-primary"></i></button>
                         <div class="card-header-right table-card-header ">
 
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -449,10 +450,9 @@ $erp = json_decode($erp_data,1);
                                                 </div>
                                                 <div class="col p-l-0">
                                                     <h6 class="m-b-5 f-14"><?= __("Current Vs Previous") ?></h6>
-                                                <!--    <h6 class="m-b-0 text-c-blue"><?php echo customeummarmonyformate($ttcount/100000); ?> L Vs <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L</h6> -->
-                                                <h6 class="m-b-0 text-c-blue"><button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Current',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'apv_list')" >
+                                                <h6 class="m-b-0 text-c-blue"><button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Current',<?php echo "'".customeummarmonyformate($ttcount/100000).LAC_LABEL_SUFFIX; ?>,'apv_list')" >
                 <?php echo customeummarmonyformate($ttcount/100000); ?> L
-                </button> <?= __('Vs'); ?> <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000)." Lac'"; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </button></h6>
+                </button> <?= __('Vs'); ?> <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000).LAC_LABEL_SUFFIX; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </button></h6>
             <input type="hidden" name="apv_list" id="apv_list" value='<?php echo json_encode($apv_list); ?>' >
             <input type="hidden"  id="apv_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_hrs'=>'billable_hrs','billable_amount'=>'billable_amount')); ?>' >
             <input type="hidden" id="last_pre_list" value='<?php echo json_encode($last_pre_list); ?>' >
@@ -483,9 +483,7 @@ $erp = json_decode($erp_data,1);
                                                 </div>
                                                 <div class="col p-l-0">
                                                     <h6 class="m-b-5 f-14"><?= __('Budget Vs Actuals'); ?></h6>
-                                                <!---    <h6 class="m-b-0 text-c-green"><?php echo $total_budget_hrs; ?> H Vs <?php echo $total_billabe_hrs; ?> H</h6> -->
-
-                                            <h6 class="m-b-0 text-c-green">
+                                                <h6 class="m-b-0 text-c-green">
             <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Budget',<?php echo "'".$total_budget_hrs." Hrs'"; ?>,'bg_hr_list')" >
                 <?php echo $total_budget_hrs; ?> H </button>
              <?= __('Vs'); ?> <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" >
@@ -517,10 +515,9 @@ $erp = json_decode($erp_data,1);
                                                 </div>
                                                 <div class="col p-l-0">
                                                     <h6 class="m-b-5"><?= __('Budget Vs Utilization'); ?></h6>
-                                                <!--    <h6 class="m-b-0 text-c-red"><?php echo customeummarmonyformate($total_budget_amount/100000); ?> L Vs <?php echo customeummarmonyformate($ttcount/100000); ?> L</h6> --->
                                                 <h6 class="m-b-0 text-c-red">
-             <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Budget',<?php echo "'".customeummarmonyformate($total_budget_amount/100000)." Lac'"; ?>,'bg_ut_list')" >
-            <?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</button> <?= __('Vs'); ?>  <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </button></h6>
+             <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Budget',<?php echo "'".customeummarmonyformate($total_budget_amount/100000).LAC_LABEL_SUFFIX; ?>,'bg_ut_list')" >
+            <?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</button> <?= __('Vs'); ?>  <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000).LAC_LABEL_SUFFIX; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </button></h6>
             <input type="hidden" name="bg_ut_list" id="bg_ut_list" value='<?php echo json_encode($emp_sub); ?>' >
             <input type="hidden"  id="bg_ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budgeted_amount'=>'budgeted_amount','billable_amount'=>'billable_amount')); ?>' >
                                                 </div>
@@ -551,10 +548,9 @@ $erp = json_decode($erp_data,1);
                                                 </div>
                                                 <div class="col p-l-0">
                                                     <h6 class="m-b-5"><?= __('Utilization Vs Approved'); ?></h6>
-                                                <!---    <h6 class="m-b-0 text-c-yellow"> <?php echo customeummarmonyformate($ttcount/100000); ?> L  Vs <?php echo customeummarmonyformate($apv_billable_amount/100000); ?> L</h6> -->
-                                                    <h6 class="m-b-0 text-c-yellow">
-                 <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'ut_list')" >
-                <?php echo customeummarmonyformate($ttcount/100000); ?> L </button> <?= __('Vs'); ?><button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000)." Lac'"; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </button></h6>
+                                                <h6 class="m-b-0 text-c-yellow">
+                 <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000).LAC_LABEL_SUFFIX; ?>,'ut_list')" >
+                <?php echo customeummarmonyformate($ttcount/100000); ?> L </button> <?= __('Vs'); ?><button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000).LAC_LABEL_SUFFIX; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </button></h6>
             <input type="hidden" name="bg_hr_list" id="ut_list" value='<?php echo json_encode($apv_list); ?>' >
             <input type="hidden"  id="ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_amount'=>'billable_amount','utilize'=>'Status')); ?>' >
                                                 </div>
@@ -652,7 +648,7 @@ $erp = json_decode($erp_data,1);
                                         <div class="btn-group" id="status_dropdown" style="display:none;" name="submit_for_fin_approval">
                                              <button class="btn btn-primary dropdown-toggle font-size-sm" style="color: <?php echo "#".$stausresult[ST_APPROVED4]['color']; ?>;    background:  <?php echo "#".strval($stausresult[ST_APPROVED4]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[ST_APPROVED4]['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $statu_progress[ST_APPROVED4]['name']; ?> </button>
                                             <div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
-                                                <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item cursor-pointer" onclick="updateprojecttimesheetsblukapprovefinace(<?php echo ST_APPROVED ?>)" name="status" id="status" value="<?php echo ST_APPROVED ?>"><?php echo $statu_progress[ST_APPROVED]['action_label']; ?> </div>
+                                                <button type="button" class="dropdown-item cursor-pointer" onclick="updateprojecttimesheetsblukapprovefinace(<?php echo ST_APPROVED ?>)" name="status" id="status" value="<?php echo ST_APPROVED ?>"><?php echo $statu_progress[ST_APPROVED]['action_label']; ?></button>
                                             </div>
 
                                         </div>
@@ -767,7 +763,7 @@ $llablecolor = lableandleave($k);
         <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['vrc_budgeted_amount'])); ?></span>
     </div>
     <div class="progress progress-xs w-100">
-        <div class="progress-bar <?php echo "bg-".$vrcbbg_color; ?>" role="progressbar" style="width: <?php echo $vrcsb_bp; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        <progress class="progress-bar <?php echo "bg-".$vrcbbg_color; ?>" value="<?php echo $vrcsb_bp; ?>" max="100" style="width: <?php echo $vrcsb_bp; ?>%;"></progress>
     </div>
     <div class="text-center"><?php echo $vrcsb_bp; ?>%</div>
 </div>
@@ -780,24 +776,15 @@ $llablecolor = lableandleave($k);
                                                                             <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['budgeted_amount']*$mulval)); ?></span>
                                                                         </div>
                                                                         <div class="progress progress-xs w-100">
-                                                                            <div class="progress-bar <?php echo "bg-".$bbg_color; ?>" role="progressbar" style="width: <?php echo $sb_bp; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            <progress class="progress-bar <?php echo "bg-".$bbg_color; ?>" value="<?php echo $sb_bp; ?>" max="100" style="width: <?php echo $sb_bp; ?>%;"></progress>
                                                                         </div>
 <div class="text-center"><?php echo $sb_bp; ?>%</div>
                                                                     </div>
                                                                 </td>
 
-                                                <!-- <td class="text-right">
-                                                    <span class="text-dark-75 font-weight-500 d-block font-size-lg">
-                                                        <?php echo customeummarmonyformate($sb['billable_amount']); ?>
-                                                    </span>
-
-                                                </td> -->
                                                 <td class="text-center">
                                                     <span class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
                                                 </td>
-                                                <!-- <td class="text-right">
-                                                    <span class="text-muted font-weight-500"><?php echo $sb['nonbillable_hrs']; ?></span>
-                                                </td> -->
                                                 <td class="text-center">
 <span class="form-label label label-lg label-warning"  style="color: <?php echo "#".$stausresult[$sb['pt_status_id']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$sb['pt_status_id']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$sb['pt_status_id']]['background_color']); ?> "><?php echo $st_prog[$sb['pt_status_id']]; ?></span>
                                                 </td>
@@ -841,7 +828,7 @@ $llablecolor = lableandleave($k);
         <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_ra_budget)); ?></span>
     </div>
     <div class="progress progress-xs w-100">
-        <div class="progress-bar <?php echo "bg-".$vrcbbg_color; ?>" role="progressbar" style="width: <?php echo $td_ra_pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        <progress class="progress-bar <?php echo "bg-".$vrcbbg_color; ?>" value="<?php echo $td_ra_pre; ?>" max="100" style="width: <?php echo $td_ra_pre; ?>%;"></progress>
     </div>
     <div class="text-center"><?php echo $td_ra_pre; ?>%</div>
 </div>                                                    </td>
@@ -853,7 +840,7 @@ $llablecolor = lableandleave($k);
         <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_budget)); ?></span>
     </div>
     <div class="progress progress-xs w-100">
-        <div class="progress-bar <?php echo "bg-".$bbg_color; ?> " role="progressbar" style="width: <?php echo $td_pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        <progress class="progress-bar <?php echo "bg-".$bbg_color; ?> " value="<?php echo $td_pre; ?>" max="100" style="width: <?php echo $td_pre; ?>%;"></progress>
     </div>
     <div class="text-center"><?php echo $td_pre; ?>%</div>
 </div>
@@ -967,7 +954,7 @@ $llablecolor = lableandleave($k);
         <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['vrc_budgeted_amount'])); ?></span>
     </div>
     <div class="progress progress-xs w-100">
-        <div class="progress-bar <?php echo "bg-".$vrcbbg_color; ?>" role="progressbar" style="width: <?php echo $vrcsb_bp; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        <progress class="progress-bar <?php echo "bg-".$vrcbbg_color; ?>" value="<?php echo $vrcsb_bp; ?>" max="100" style="width: <?php echo $vrcsb_bp; ?>%;"></progress>
     </div>
     <div class="text-center"><?php echo $vrcsb_bp; ?>%</div>
 </div>
@@ -978,34 +965,14 @@ $llablecolor = lableandleave($k);
                                                                                             <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['budgeted_amount']*$mulval)); ?></span>
                                                                                         </div>
                                                                                         <div class="progress progress-xs w-100">
-                                                                                            <div class="progress-bar <?php echo "bg-".$bbg_color; ?> " role="progressbar" style="width: <?php echo $sb_bp; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                            <progress class="progress-bar <?php echo "bg-".$bbg_color; ?> " value="<?php echo $sb_bp; ?>" max="100" style="width: <?php echo $sb_bp; ?>%;"></progress>
                                                                                         </div>
             <div class="text-center"><?php echo $sb_bp; ?>%</div>
                                                                                     </div>
                                                                                 </td>
-                                                <!-- <td>
-                                                    <div class="d-flex flex-column w-100 mr-2">
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <span class="text-muted mr-2 font-size-sm font-weight-bold"><?php echo $sb_bp; ?>%</span>
-                                                            <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate($sb['billable_amount']); ?></span>
-                                                        </div>
-                                                        <div class="progress progress-xs w-100">
-                                                            <div class="progress-bar <?php echo "bg-".$bbg_color; ?>" role="progressbar" style="width: <?php echo $sb_bp; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td> -->
-                                                <!-- <td class="text-right">
-                                                    <span class="text-dark-75 font-weight-500 d-block font-size-lg">
-                                                        <?php echo customeummarmonyformate($sb['billable_amount']); ?>
-                                                    </span>
-
-                                                </td> -->
                                                 <td class="text-right">
                                                     <span class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
                                                 </td>
-                                                <!-- <td class="text-center">
-                                                    <span class="label label-lg label-light-warning label-inline"><?php echo $sb['nonbillable_hrs']; ?></span>
-                                                </td> -->
                                                 <td class="text-center">
 <span class="form-label label label-lg label-warning"  style="color: <?php echo "#".$stausresult[$sb['pt_status_id']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$sb['pt_status_id']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$sb['pt_status_id']]['background_color']); ?> "><?php echo $st_prog[$sb['pt_status_id']]; ?></span>
                                                 </td>
@@ -1049,7 +1016,7 @@ $llablecolor = lableandleave($k);
         <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_ra_budget)); ?></span>
     </div>
     <div class="progress progress-xs w-100">
-        <div class="progress-bar <?php echo "bg-".$vrcbbg_color; ?>" role="progressbar" style="width: <?php echo $td_ra_pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        <progress class="progress-bar <?php echo "bg-".$vrcbbg_color; ?>" value="<?php echo $td_ra_pre; ?>" max="100" style="width: <?php echo $td_ra_pre; ?>%;"></progress>
     </div>
     <div class="text-center"><?php echo $td_ra_pre; ?>%</div>
 </div>                                                    </td>
@@ -1061,7 +1028,7 @@ $llablecolor = lableandleave($k);
         <span class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_budget)); ?></span>
     </div>
     <div class="progress progress-xs w-100">
-        <div class="progress-bar <?php echo "bg-".$bbg_color; ?> " role="progressbar" style="width: <?php echo $td_pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        <progress class="progress-bar <?php echo "bg-".$bbg_color; ?> " value="<?php echo $td_pre; ?>" max="100" style="width: <?php echo $td_pre; ?>%;"></progress>
     </div>
     <div class="text-center"><?php echo $td_pre; ?>%</div>
 </div>
@@ -1085,69 +1052,6 @@ $llablecolor = lableandleave($k);
                 </div>
                 <!--end::Advance Table Widget 2-->
             </div>
-            <!-- <div class="col-lg-4">
-                <div class="card card-custom gutter-b card-stretch">
-
-                    <div class="card-header border-0 pt-5">
-                        <div class="card-title">
-                            <div class="card-label">
-                                <div class="font-weight-bolder">Last 6 Months Utilization</div>
-                                <div class="font-size-sm text-muted mt-2"><?php echo customeummarmonyformate($ltotal); ?></div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="card-body d-flex flex-column px-0">
-
-                        <input type="hidden" name="" id="lamonths" value="<?php /* echo implode(",",$dismonth); */ ?>">
-                        <input type="hidden" name="" id="lauitlize" value="<?php /* echo implode(",",$disuitlize); */ ?>" >
-                        <div id="kt_tiles_widget_1_chart" data-color="info" style="height: 125px"></div>
-
-                        <div class="flex-grow-1 card-spacer-x mt-10">
-
-                            <div class="d-flex align-items-center justify-content-between mb-10">
-                                <div class="d-flex align-items-center mr-2">
-
-                                    <div>
-                                        <a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Last Month Budget</a>
-                                        <div class="font-size-sm text-muted font-weight-bold mt-1">
-                                            <?php echo date('M-Y',strtotime($lmonth['period'])); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base"><?php echo customeummarmonyformate($lmonth['budgeted_amount']); ?></div>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between mb-10">
-                                <div class="d-flex align-items-center mr-2">
-
-                                    <div>
-                                        <a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Last Month Approved Budget</a>
-                                        <div class="font-size-sm text-muted font-weight-bold mt-1"><?php echo date('M-Y',strtotime($lmonth['period'])); ?></div>
-                                    </div>
-                                </div>
-                                <div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base"><?php echo customeummarmonyformate($lmonth['billable_amount']); ?></div>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center mr-2">
-
-                                    <div>
-                                        <a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Vendor - Resoureces</a>
-                                        <div class="font-size-sm text-muted font-weight-bold mt-1"><?php echo $lmonth['vendor_ids']."-".$lmonth['employee_ids']; ?> </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div> -->
             <div class="col-lg-8">
                 <?php include_once 'custom_bulk_timesheet_chart.php'; ?>
             </div>
@@ -1183,32 +1087,7 @@ $llablecolor = lableandleave($k);
                             <p class="m-b-0 m-t-15"><?= __('Leaves'); ?></p>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-12 col-md-12">
-                        <div class="card o-hidden">
-                            <div class="card-header">
-                                <h5><?= __("Last 6 Months Utilization") ?></h5>
-                                <span><?php echo customeummarmonyformate($ltotal); ?></span>
-                            </div>
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <p class="text-muted m-b-5">Last Month Assign Budget</p>
-                                        <h6><?php echo customeummarmonyformate($lmonth['budgeted_amount']); ?></h6>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-muted m-b-5">Last Month Approved Budget</p>
-                                        <h6><?php echo customeummarmonyformate($lmonth['billable_amount']); ?></h6>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-muted m-b-5">Vendor &nbsp;&nbsp;-&nbsp;&nbsp; Resoureces</p>
-                                        <h6><?php echo $lmonth['vendor_ids']."-".$lmonth['employee_ids']; ?></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="income-analysis" style="height:100px"></div>
-                        </div>
-                    </div> -->
-                </div>
+                    </div>
             </div>
         </div>
         <!--end::Row-->

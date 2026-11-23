@@ -1,4 +1,8 @@
 <?php
+defined('PARAM_YEAR') || define('PARAM_YEAR', '&year=');
+defined('PARAM_VENDOR_ID') || define('PARAM_VENDOR_ID', '&vendor_id=');
+defined('PARAM_EMP_NAME') || define('PARAM_EMP_NAME', '&emp_name=');
+defined('LAC_LABEL_SUFFIX') || define('LAC_LABEL_SUFFIX', " Lac'");
 $post_vendor = 0;
 $post_reports = 0;
 $emp_name = 0;
@@ -15,15 +19,15 @@ if ($_GET['PAY_MONTH'] == '') {
 if ($_GET['PAY_YEAR'] == '') {
     $_GET['PAY_YEAR'] = date('Y');
 }
-$approval_url = API . "?mode=toGetblukProjectTimesheet&month=" . $_GET['PAY_MONTH'] . "&year=" . $_GET['PAY_YEAR'] . "&vendor_id=" . $post_vendor . "&emp_name=" . $emp_name . "&approval_manager=" . $approval_manager;
+$approval_url = API . "?mode=toGetblukProjectTimesheet&month=" . $_GET['PAY_MONTH'] . PARAM_YEAR . $_GET['PAY_YEAR'] . PARAM_VENDOR_ID . $post_vendor . PARAM_EMP_NAME . $emp_name . "&approval_manager=" . $approval_manager;
 $app_data = callAPI($approval_url);
 $app_data = json_decode($app_data, 1);
 $getym = $_GET['PAY_YEAR'] . "-" . $_GET['PAY_MONTH'] . "-01";
 $lastdd = date("Y-m-d", strtotime('-1 months', strtotime($getym)));
-$lastapproval_url = API . "?mode=toGetblukProjectTimesheet&month=" . date('m', strtotime($lastdd)) . "&year=" . date('Y', strtotime($lastdd)) . "&vendor_id=" . $post_vendor . "&emp_name=" . $emp_name;
+$lastapproval_url = API . "?mode=toGetblukProjectTimesheet&month=" . date('m', strtotime($lastdd)) . PARAM_YEAR . date('Y', strtotime($lastdd)) . PARAM_VENDOR_ID . $post_vendor . PARAM_EMP_NAME . $emp_name;
 $last_data = callAPI($lastapproval_url);
 $last_data = json_decode($last_data, 1);
-$team_count_url = API . "?mode=togetteamcount&month=" . $_GET['PAY_MONTH'] . "&year=" . $_GET['PAY_YEAR'] . "&vendor_id=" . $post_vendor . "&emp_name=" . $emp_name . "&approval_manager=" . $approval_manager;
+$team_count_url = API . "?mode=togetteamcount&month=" . $_GET['PAY_MONTH'] . PARAM_YEAR . $_GET['PAY_YEAR'] . PARAM_VENDOR_ID . $post_vendor . PARAM_EMP_NAME . $emp_name . "&approval_manager=" . $approval_manager;
 $team_count_data = callAPI($team_count_url);
 $team_count_data = json_decode($team_count_data, 1);
 $gtnvk = $_GET['TNVAL'] != "" ? $_GET['TNVAL'] : "2";
@@ -173,7 +177,7 @@ $allvendors = array();
 foreach ((array) $allvendors_list as $allvendors_li) {
     $allvendors[$allvendors_li['id']] = $allvendors_li['display_name'];
 }
-$erp_url = API . "?mode=togetempvmstransactionslist&month=" . $_GET['PAY_MONTH'] . "&year=" . $_GET['PAY_YEAR'];
+$erp_url = API . "?mode=togetempvmstransactionslist&month=" . $_GET['PAY_MONTH'] . PARAM_YEAR . $_GET['PAY_YEAR'];
 $erp_data = callAPI($erp_url);
 $erp = json_decode($erp_data, 1);
 ?>
@@ -522,13 +526,13 @@ $erp = json_decode($erp_data, 1);
                                                     <h6 class="m-b-0 text-c-blue"><button type="button"
                                                             class="p-0 border-0 bg-transparent align-baseline"
                                                             style="font:inherit;color:inherit;cursor:pointer;"
-                                                            onclick="cvppopup('Current',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'apv_list')">
+                                                            onclick="cvppopup('Current',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . LAC_LABEL_SUFFIX; ?>,'apv_list')">
                                                             <?php echo customeummarmonyformate($ttcount / 100000); ?>
                                                             L
                                                         </button> <?= __('Vs'); ?> <button type="button"
                                                             class="p-0 border-0 bg-transparent align-baseline"
                                                             style="font:inherit;color:inherit;cursor:pointer;"
-                                                            onclick="cvppopup('Previous',<?php echo "'" . customeummarmonyformate(($lmonth['billable_amount'] + $lmonth['nonbillable_amount']) / 100000) . " Lac'"; ?>,'last_pre_list')">
+                                                            onclick="cvppopup('Previous',<?php echo "'" . customeummarmonyformate(($lmonth['billable_amount'] + $lmonth['nonbillable_amount']) / 100000) . LAC_LABEL_SUFFIX; ?>,'last_pre_list')">
                                                             <?php echo customeummarmonyformate(($lmonth['billable_amount'] + $lmonth['nonbillable_amount']) / 100000); ?>
                                                             L </button></h6>
                                                     <input type="hidden" name="apv_list" id="apv_list"
@@ -551,7 +555,7 @@ $erp = json_decode($erp_data, 1);
 
                                             </div>
                                             <div class="progress" style="height:6px;">
-                                                <div class="progress-bar bg-c-blue"
+                                                <progress class="progress-bar bg-c-blue"
                                                     style="width:<?php echo $total_vs_p; ?>%"></div>
                                             </div>
                                             <h6 class="pt-badge bg-c-blue"><?php echo $total_vs_p; ?>%</h6>
@@ -627,12 +631,12 @@ $erp = json_decode($erp_data, 1);
                                                         <button type="button"
                                                             class="p-0 border-0 bg-transparent align-baseline"
                                                             style="font:inherit;color:inherit;cursor:pointer;"
-                                                            onclick="cvppopup('Budget',<?php echo "'" . customeummarmonyformate($total_budget_amount / 100000) . " Lac'"; ?>,'bg_ut_list')">
+                                                            onclick="cvppopup('Budget',<?php echo "'" . customeummarmonyformate($total_budget_amount / 100000) . LAC_LABEL_SUFFIX; ?>,'bg_ut_list')">
                                                             <?php echo customeummarmonyformate($total_budget_amount / 100000); ?>
                                                             L</button> <?= __('Vs'); ?> <button type="button"
                                                             class="p-0 border-0 bg-transparent align-baseline"
                                                             style="font:inherit;color:inherit;cursor:pointer;"
-                                                            onclick="cvppopup('Utilization',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'bg_ut_list')">
+                                                            onclick="cvppopup('Utilization',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . LAC_LABEL_SUFFIX; ?>,'bg_ut_list')">
                                                             <?php echo customeummarmonyformate($ttcount / 100000); ?> L
                                                         </button>
                                                     </h6>
@@ -671,12 +675,12 @@ $erp = json_decode($erp_data, 1);
                                                         <button type="button"
                                                             class="p-0 border-0 bg-transparent align-baseline"
                                                             style="font:inherit;color:inherit;cursor:pointer;"
-                                                            onclick="cvppopup('Utilization',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'ut_list')">
+                                                            onclick="cvppopup('Utilization',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . LAC_LABEL_SUFFIX; ?>,'ut_list')">
                                                             <?php echo customeummarmonyformate($ttcount / 100000); ?> L
                                                         </button> <?= __('Vs'); ?><button type="button"
                                                             class="p-0 border-0 bg-transparent align-baseline"
                                                             style="font:inherit;color:inherit;cursor:pointer;"
-                                                            onclick="cvppopup('Approved',<?php echo "'" . customeummarmonyformate($apv_billable_amount / 100000) . " Lac'"; ?>,'ut_list')">
+                                                            onclick="cvppopup('Approved',<?php echo "'" . customeummarmonyformate($apv_billable_amount / 100000) . LAC_LABEL_SUFFIX; ?>,'ut_list')">
                                                             <?php echo $apv_billable_amount != "0" ? customeummarmonyformate($apv_billable_amount / 100000) : 0; ?>
                                                             L </button>
                                                     </h6>
@@ -855,20 +859,10 @@ $erp = json_decode($erp_data, 1);
                                                             </button>
                                                             <div class="dropdown-menu"
                                                                 id="dropdownlist_<?php echo $fid; ?>">
-                                                                <div class="dropdown-item cursor-pointer" role="button"
-                                                                    tabindex="0"
-                                                                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
-                                                                    onclick="statuspopup('101','2')" name="status"
-                                                                    id="status" value="101">
-                                                                    <?php echo $statu_progress['101']['action_label']; ?>
-                                                                </div>
-                                                                <div class="dropdown-item cursor-pointer" role="button"
-                                                                    tabindex="0"
-                                                                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
-                                                                    onclick="statuspopup('20','2')" name="status"
-                                                                    id="status_20" value="20">
-                                                                    <?php echo $statu_progress['20']['action_label']; ?>
-                                                                </div>
+                                                                <button type="button" class="dropdown-item cursor-pointer" onclick="statuspopup('101','2')" name="status"
+                                                                    id="status" value="101"><?php echo $statu_progress['101']['action_label']; ?></button>
+                                                                <button type="button" class="dropdown-item cursor-pointer" onclick="statuspopup('20','2')" name="status"
+                                                                    id="status_20" value="20"><?php echo $statu_progress['20']['action_label']; ?></button>
                                                             </div>
 
                                                         </div>
@@ -882,7 +876,6 @@ $erp = json_decode($erp_data, 1);
                                                         <?php if ($apv_count > 0) { ?>
                                                             <div class="col-lg-12">
                                                                 <div class="col-lg-2 float-right">
-                                                                    <?php /* ?>    <button <?php $btnch=1;  if($btncheck!=1 ){?> onclick="projecttimesheetsubmittohr()" <?php }else{ echo "disabled"; } ?> class="btn btn-primary font-size-sm float-right <?php if($btncheck==1){ echo "disabled"; } ?>" ><?php echo $statu_progress['102']['name']; ?></button> <?php */ ?>
                                                                     <button onclick="projecttimesheetsubmittohr()"
                                                                         class="btn btn-primary font-size-sm float-right"><?php echo $statu_progress['103']['name']; ?></button>
 
@@ -1010,12 +1003,7 @@ $erp = json_decode($erp_data, 1);
                                                                                                     class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['vrc_budgeted_amount'])); ?></span>
                                                                                             </div>
                                                                                             <div class="progress progress-xs w-100">
-                                                                                                <div class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>"
-                                                                                                    role="progressbar"
-                                                                                                    style="width: <?php echo $vrcsb_bp; ?>%;"
-                                                                                                    aria-valuenow="50"
-                                                                                                    aria-valuemin="0"
-                                                                                                    aria-valuemax="100"></div>
+                                                                                                <div class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>" value="<?php echo $vrcsb_bp; ?>" max="100" style="width: <?php echo $vrcsb_bp; ?>%;"></progress>
                                                                                             </div>
                                                                                             <div class="text-center">
                                                                                                 <?php echo $vrcsb_bp; ?>%</div>
@@ -1031,23 +1019,12 @@ $erp = json_decode($erp_data, 1);
                                                                                                     class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['budgeted_amount'] * $mulval)); ?></span>
                                                                                             </div>
                                                                                             <div class="progress progress-xs w-100">
-                                                                                                <div class="progress-bar <?php echo "bg-" . $bbg_color; ?> "
-                                                                                                    role="progressbar"
-                                                                                                    style="width: <?php echo $sb_bp; ?>%;"
-                                                                                                    aria-valuenow="50"
-                                                                                                    aria-valuemin="0"
-                                                                                                    aria-valuemax="100"></div>
+                                                                                                <progress class="progress-bar <?php echo "bg-" . $bbg_color; ?>" value="<?php echo $sb_bp; ?>" max="100" style="width: <?php echo $sb_bp; ?>%;"></progress>
                                                                                             </div>
                                                                                             <div class="text-center">
                                                                                                 <?php echo $sb_bp; ?>%</div>
                                                                                         </div>
                                                                                     </td>
-                                                                                    <!-- <td class="text-right">
-                                                                    <span class="text-dark-75 font-weight-500 d-block font-size-sm">
-                                                                        <?php echo customeummarmonyformate($sb['billable_amount']); ?>
-                                                                    </span>
-
-                                                                </td> -->
                                                                                     <td class="text-center">
                                                                                         <span
                                                                                             class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
@@ -1107,12 +1084,7 @@ $erp = json_decode($erp_data, 1);
                                                                                                 class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_ra_budget)); ?></span>
                                                                                         </div>
                                                                                         <div class="progress progress-xs w-100">
-                                                                                            <div class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>"
-                                                                                                role="progressbar"
-                                                                                                style="width: <?php echo $td_ra_pre; ?>%;"
-                                                                                                aria-valuenow="50"
-                                                                                                aria-valuemin="0"
-                                                                                                aria-valuemax="100"></div>
+                                                                                            <progress class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>" value="<?php echo $td_ra_pre; ?>" max="100" style="width: <?php echo $td_ra_pre; ?>%;"></progress>
                                                                                         </div>
                                                                                         <div class="text-center">
                                                                                             <?php echo $td_ra_pre; ?>%</div>
@@ -1129,12 +1101,7 @@ $erp = json_decode($erp_data, 1);
                                                                                                 class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_budget)); ?></span>
                                                                                         </div>
                                                                                         <div class="progress progress-xs w-100">
-                                                                                            <div class="progress-bar <?php echo "bg-" . $bbg_color; ?> "
-                                                                                                role="progressbar"
-                                                                                                style="width: <?php echo $td_pre; ?>%;"
-                                                                                                aria-valuenow="50"
-                                                                                                aria-valuemin="0"
-                                                                                                aria-valuemax="100"></div>
+                                                                                            <progress class="progress-bar <?php echo "bg-" . $bbg_color; ?>" value="<?php echo $td_pre; ?>" max="100" style="width: <?php echo $td_pre; ?>%;"></progress>
                                                                                         </div>
                                                                                         <div class="text-center">
                                                                                             <?php echo $td_pre; ?>%</div>
@@ -1277,12 +1244,7 @@ $erp = json_decode($erp_data, 1);
                                                                                                     class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['vrc_budgeted_amount'])); ?></span>
                                                                                             </div>
                                                                                             <div class="progress progress-xs w-100">
-                                                                                                <div class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>"
-                                                                                                    role="progressbar"
-                                                                                                    style="width: <?php echo $vrcsb_bp; ?>%;"
-                                                                                                    aria-valuenow="50"
-                                                                                                    aria-valuemin="0"
-                                                                                                    aria-valuemax="100"></div>
+                                                                                                <progress class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>" value="<?php echo $vrcsb_bp; ?>" max="100" style="width: <?php echo $vrcsb_bp; ?>%;"></progress>
                                                                                             </div>
                                                                                             <div class="text-center">
                                                                                                 <?php echo $vrcsb_bp; ?>%</div>
@@ -1299,23 +1261,12 @@ $erp = json_decode($erp_data, 1);
                                                                                                     class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['budgeted_amount'] * $mulval)); ?></span>
                                                                                             </div>
                                                                                             <div class="progress progress-xs w-100">
-                                                                                                <div class="progress-bar <?php echo "bg-" . $bbg_color; ?>"
-                                                                                                    role="progressbar"
-                                                                                                    style="width: <?php echo $sb_bp; ?>%;"
-                                                                                                    aria-valuenow="50"
-                                                                                                    aria-valuemin="0"
-                                                                                                    aria-valuemax="100"></div>
+                                                                                                <progress class="progress-bar <?php echo "bg-" . $bbg_color; ?>" value="<?php echo $sb_bp; ?>" max="100" style="width: <?php echo $sb_bp; ?>%;"></progress>
                                                                                             </div>
                                                                                             <div class="text-center">
                                                                                                 <?php echo $sb_bp; ?>%</div>
                                                                                         </div>
                                                                                     </td>
-                                                                                    <!-- <td class="text-right">
-                                                    <span class="text-dark-75 font-weight-500 d-block font-size-sm">
-                                                        <?php echo customeummarmonyformate(round($sb['billable_amount'])); ?>
-                                                    </span>
-
-                                                </td> -->
                                                                                     <td class="text-center">
                                                                                         <span
                                                                                             class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
@@ -1378,12 +1329,7 @@ $erp = json_decode($erp_data, 1);
                                                                                                 class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_ra_budget)); ?></span>
                                                                                         </div>
                                                                                         <div class="progress progress-xs w-100">
-                                                                                            <div class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>"
-                                                                                                role="progressbar"
-                                                                                                style="width: <?php echo $td_ra_pre; ?>%;"
-                                                                                                aria-valuenow="50"
-                                                                                                aria-valuemin="0"
-                                                                                                aria-valuemax="100"></div>
+                                                                                            <progress class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>" value="<?php echo $td_ra_pre; ?>" max="100" style="width: <?php echo $td_ra_pre; ?>%;"></progress>
                                                                                         </div>
                                                                                         <div class="text-center">
                                                                                             <?php echo $td_ra_pre; ?>%</div>
@@ -1400,12 +1346,7 @@ $erp = json_decode($erp_data, 1);
                                                                                                 class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_budget)); ?></span>
                                                                                         </div>
                                                                                         <div class="progress progress-xs w-100">
-                                                                                            <div class="progress-bar <?php echo "bg-" . $bbg_color; ?> "
-                                                                                                role="progressbar"
-                                                                                                style="width: <?php echo $td_pre; ?>%;"
-                                                                                                aria-valuenow="50"
-                                                                                                aria-valuemin="0"
-                                                                                                aria-valuemax="100"></div>
+                                                                                            <progress class="progress-bar <?php echo "bg-" . $bbg_color; ?>" value="<?php echo $td_pre; ?>" max="100" style="width: <?php echo $td_pre; ?>%;"></progress>
                                                                                         </div>
                                                                                         <div class="text-center">
                                                                                             <?php echo $td_pre; ?>%</div>
@@ -1530,12 +1471,7 @@ $erp = json_decode($erp_data, 1);
                                                                                                     class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($sb['vrc_budgeted_amount'])); ?></span>
                                                                                             </div>
                                                                                             <div class="progress progress-xs w-100">
-                                                                                                <div class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>"
-                                                                                                    role="progressbar"
-                                                                                                    style="width: <?php echo $vrcsb_bp; ?>%;"
-                                                                                                    aria-valuenow="50"
-                                                                                                    aria-valuemin="0"
-                                                                                                    aria-valuemax="100"></div>
+                                                                                                <progress class="progress-bar <?php echo "bg-" . $vrcbbg_color; ?>" value="<?php echo $vrcsb_bp; ?>" max="100" style="width: <?php echo $vrcsb_bp; ?>%;"></progress>
                                                                                             </div>
                                                                                             <div class="text-center">
                                                                                                 <?php echo $vrcsb_bp; ?>%</div>
@@ -1551,23 +1487,12 @@ $erp = json_decode($erp_data, 1);
                                                                                                     class="text-muted font-size-sm font-weight-bold"><?php echo customeummarmonyformate($sb['budgeted_amount'] * $mulval); ?></span>
                                                                                             </div>
                                                                                             <div class="progress progress-xs w-100">
-                                                                                                <div class="progress-bar <?php echo "bg-" . $bbg_color; ?>"
-                                                                                                    role="progressbar"
-                                                                                                    style="width: <?php echo $sb_bp; ?>%;"
-                                                                                                    aria-valuenow="50"
-                                                                                                    aria-valuemin="0"
-                                                                                                    aria-valuemax="100"></div>
+                                                                                                <progress class="progress-bar <?php echo "bg-" . $bbg_color; ?>" value="<?php echo $sb_bp; ?>" max="100" style="width: <?php echo $sb_bp; ?>%;"></progress>
                                                                                             </div>
                                                                                             <div class="text-center">
                                                                                                 <?php echo $sb_bp; ?>%</div>
                                                                                         </div>
                                                                                     </td>
-                                                                                    <!--  <td class="text-right">
-                                                    <span class="text-dark-75 font-weight-500 d-block font-size-sm">
-                                                        <?php ?>
-                                                    </span>
-
-                                                </td> -->
                                                                                     <td class="text-center">
                                                                                         <span
                                                                                             class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>

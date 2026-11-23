@@ -28,43 +28,6 @@ if(isset($_POST['monthyear'])){
     echo "<div style='display:none' id='hide_result'><pre>"; print_r($admindashboardd); echo "</pre></div>";
 
 }
-/**
-if(isset($_POST['submittenantbills'])){
-    $_POST['company_id'] = $_SESSION['company_id'];
-    $_POST['user_id'] = $_SESSION['userid'];
-       $url = API."?mode=updatepropertytenantbillings&method=post";
-    $response1 = file_post_contents($url, $_POST, 'insert');
-    $res = json_decode($response1,1);
-     ?>
-    <script type="text/javascript">
-        document.onreadystatechange = function(){
-            if(document.readyState == "complete") {
-                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]; ?>','');
-            }
-        }
-    </script>
-    <?php
-}
-    if(isset($_POST['month']) AND $_POST['month'] !=""){
-        $monthyear = explode('-',$_POST['month']);
-        $year = $monthyear[0];
-        $month = $monthyear[1];
-    }else{
-        $year = date('m');
-        $month = date('Y');
-    }
-    $year = 2023;
-    $month = 11;
-    $url1 = API."?mode=getpropertytenantbillings&year=$year&month=$month";
-    $data_details1 = callAPI($url1);
-    $result =  json_decode($data_details1,1);
-
-    $property_tenant_billings = $result['property_tenant_billings'];
-    $property_owners = $result['property_owners'];
-    $property_owner_details = $result['property_owner_details'];
-    $rental_bill_types = $result['rental_bill_types'];
-
-    **/
 
     $property_tenant_billings = $tenant_billings['property_tenant_billings'];
     $invoicetobegenerated = $invoicetobeemailed = $invoicesharedwithtenant = $utility_invoicetobegenerated = $utility_invoicetobeemailed = $utility_invoicesharedwithtenant= array();
@@ -249,7 +212,7 @@ if(isset($_POST['submittenantbills'])){
                                             <div class="card-header">
                                                 <h5><?php echo __('Property Tenant Billing'); ?></h5>
                                                 <div class="card-header-right">
-                                                    <i class="ti-close" role="button" tabindex="0" aria-label="<?php echo __('Closed'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="closePopUp('<?php echo $ptb['id']; ?>')" aria-label="<?php echo __('Closed'); ?>"><i class="ti-close" aria-label="<?php echo __('Closed'); ?>" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i></button>
                                                 </div>
                                             </div>
                                             <form method="post" id="form_id_<?php echo $ptb['id']; ?>">
@@ -257,10 +220,10 @@ if(isset($_POST['submittenantbills'])){
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                                                         <thead>
                                                             <tr>
-                                                                <th width="5%">#</th>
-                                                                <th width="37%"><?php echo __('Utility'); ?></th>
-                                                                <th width="18%" class="text-right"><?php echo __('Amount'); ?></th>
-                                                                <th width="30%"><?php echo __('Remark'); ?></th>
+                                                                <th style="width: 5%;">#</th>
+                                                                <th style="width: 37%;"><?php echo __('Utility'); ?></th>
+                                                                <th style="width: 18%;" class="text-right"><?php echo __('Amount'); ?></th>
+                                                                <th style="width: 30%;"><?php echo __('Remark'); ?></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -294,7 +257,7 @@ if(isset($_POST['submittenantbills'])){
                                         </div>
 
                                         </td>
-                                        <td class="p-2 text-center"><i class="fa fa-cog  f-16" role="button" tabindex="0" aria-label="<?php echo __('Utility Bill'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityPopUp('<?php echo $ptb['id']; ?>')" ></i>
+                                        <td class="p-2 text-center"><button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="opentTenantUtilityPopUp('<?php echo $ptb['id']; ?>')" aria-label="<?php echo __('Utility Bill'); ?>"><i class="fa fa-cog f-16" aria-label="<?php echo __('Utility Bill'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>"></i></button>
                                         </td>
                                     </tr>
                                     <?php  $m++;
@@ -509,7 +472,7 @@ if(isset($_POST['submittenantbills'])){
                                                 <div class="card-header">
                                                     <h5><?php echo __('Utility Tenant Billing'); ?></h5>
                                                     <div class="card-header-right">
-                                                        <i class="ti-close" role="button" tabindex="0" aria-label="<?php echo __('Closed'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
+                                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="closePopUp('<?php echo $ptb['id']; ?>')" aria-label="<?php echo __('Closed'); ?>"><i class="ti-close" aria-label="<?php echo __('Closed'); ?>" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i></button>
                                                     </div>
                                                 </div>
                                                 <form method="post" id="form_id_utility_<?php echo $ptb['id']; ?>">
@@ -517,10 +480,10 @@ if(isset($_POST['submittenantbills'])){
                                                         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                                                             <thead>
                                                                 <tr>
-                                                                    <th width="5%">#</th>
-                                                                    <th width="37%"><?php echo __('Utility'); ?></th>
-                                                                    <th width="18%" class="text-right"><?php echo __('Amount'); ?></th>
-                                                                    <th width="30%"><?php echo __('Remark'); ?></th>
+                                                                    <th style="width: 5%;">#</th>
+                                                                    <th style="width: 37%;"><?php echo __('Utility'); ?></th>
+                                                                    <th style="width: 18%;" class="text-right"><?php echo __('Amount'); ?></th>
+                                                                    <th style="width: 30%;"><?php echo __('Remark'); ?></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -553,7 +516,7 @@ if(isset($_POST['submittenantbills'])){
                                                 </div>
                                                 </div>
                                         </td>
-                                        <td class="p-2 text-center"><i class="fa fa-cog  f-16" role="button" tabindex="0" aria-label="<?php echo __('Utility Bill'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityonlyPopUp('<?php echo $ptb['id']; ?>')" ></i>
+                                        <td class="p-2 text-center"><button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="opentTenantUtilityonlyPopUp('<?php echo $ptb['id']; ?>')" aria-label="<?php echo __('Utility Bill'); ?>"><i class="fa fa-cog f-16" aria-label="<?php echo __('Utility Bill'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>"></i></button>
                                         </td>
                                     </tr>
                                     <?php  $m++;

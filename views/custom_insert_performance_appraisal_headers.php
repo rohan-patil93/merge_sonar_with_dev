@@ -1,4 +1,8 @@
 <?php
+defined('KEY_ERROR_NO') || define('KEY_ERROR_NO', 'error_no');
+defined('LBL_INPUT_FIELD') || define('LBL_INPUT_FIELD', 'Input field');
+defined('ATTR_DISPLAY_NONE_STYLE') || define('ATTR_DISPLAY_NONE_STYLE', "style='display:none'");
+defined('KEY_SUB_HEADER_ADDMORE') || define('KEY_SUB_HEADER_ADDMORE', 'sub_header_addmore');
 $url = API."?mode=getperformanaceappraiserheader&assessment_year=".$assemnt_year."&appraisal_id=".$performance_appraisal_setup_id;
 $response = callAPI($url);
 $kipandkradetails = json_decode($response,1);
@@ -12,12 +16,12 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
     $response1 = json_decode($response0,1);
     $response = $response1['exicute'];
     if($response['status'] == 'fail'){
-        if(isset($_SESSION['error'][$response['error_no']])){
+        if(isset($_SESSION['error'][$response[KEY_ERROR_NO]])){
             $dis_err = explode(",", $response['other']);
             foreach ($dis_err as $va) {
                 $dis_er [] = $dis_labels[$va];
             }
-            $error_message = $response['error_no'] ." : ".$_SESSION['error'][$response['error_no']]." : ".implode(", ", (array)$dis_er);
+            $error_message = $response[KEY_ERROR_NO] ." : ".$_SESSION['error'][$response[KEY_ERROR_NO]]." : ".implode(", ", (array)$dis_er);
         }else{
             $error_message = $response['message'];
         }
@@ -47,7 +51,7 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                 rowCount2 = rowCount-2;
                 console.log(rowCount);
                 $("#dinamictable_"+id).find('th').eq(rowCount2).after('<th scope="col" class="head_text_'+id+rowCount+'"><?php echo __('Column'); ?></th>');
-                $("#dinamictable_"+id).find('td').eq(rowCount2).after('<td><div class="" id="chengetypetextselect_'+id+rowCount+'"><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" id="" value=""></div></td>');
+                $("#dinamictable_"+id).find('td').eq(rowCount2).after('<td><div class="" id="chengetypetextselect_'+id+rowCount+'"><input aria-label="<?php echo __(LBL_INPUT_FIELD); ?>" type="text" class="form-control" id="" value=""></div></td>');
             }
         });
     }
@@ -116,7 +120,7 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
             textoption ='<select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single"><option><?php echo __('Yes'); ?></option><option><?php echo __('No'); ?></option><option><?php echo __('maybe'); ?></option></selecte>';
 
         }else{
-            textoption ='<input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" id="" value="">';
+            textoption ='<input aria-label="<?php echo __(LBL_INPUT_FIELD); ?>" type="text" class="form-control" id="" value="">';
         }
         $("#chengetypetextselect_"+id).html(textoption)
         $(".js-example-basic-single").select2();
@@ -190,7 +194,7 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                             <div class="form-group mb-2"  >
                                                 <span class="form-label"><?php echo __('Appraisal Name'); ?></span>
                                                 <input type="hidden" class="form-control" name="appraisal_id"  value="<?php echo $performance_appraisal_setup_id ?>">
-                                                <input aria-label="<?php echo __('Input field'); ?>" type="text"  class="form-control"  value="<?php echo $performance_setup['name']; ?>" readonly>
+                                                <input aria-label="<?php echo __(LBL_INPUT_FIELD); ?>" type="text"  class="form-control"  value="<?php echo $performance_setup['name']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -225,16 +229,16 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                         <p class="f-w-400" id="header_comment_<?php echo $paheaders['id']; ?>"><?php echo $paheaders['header_comment']; ?></p>
                                     </div>
                                     <div class="col-lg-1">
-                                        <i class="fa fa-edit" onclick="editHeader('<?php echo $paheaders['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0" onclick="editHeader('<?php echo $paheaders['id']; ?>')" aria-label="Edit"><i class="fa fa-edit"></i></button>
                                     </div>
                                 </div>
                             </a>
                             <div class="accordion-desc">
                                 <p class="dynamic_page_Y_<?php echo $paheaders['id']; ?>" <?php if($paheaders['dynamic_page']=='0'){
-}else{ echo "style='display:none'";
+}else{ echo ATTR_DISPLAY_NONE_STYLE;
 } ?>><?php echo __('Page URL'); ?></p>
                                 <div class="table-responsive dynamic_page_N_<?php echo $paheaders['id']; ?>" <?php if($paheaders['dynamic_page']=='1'){
-}else{ echo "style='display:none'";
+}else{ echo ATTR_DISPLAY_NONE_STYLE;
 } ?>>
                                         <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                             <thead>
@@ -246,8 +250,8 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                                     <?php $fildcnt++;
 }  ?>
 
-                                                        <th scope="col" class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders['sub_header_addmore']=='0'){
-}else{ echo "style='display:none'";
+                                                        <th scope="col" class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]=='0'){
+}else{ echo ATTR_DISPLAY_NONE_STYLE;
 } ?>><?php echo __('Action'); ?></th>
 
                                                 </tr>
@@ -270,15 +274,15 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                                                     <?PHP if($sub_headerres["type"] =="S"){ ?>
                                                                         <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single"><option><?php echo __('Yes'); ?></option><option><?php echo __('No'); ?></option><option><?php echo __('maybe'); ?></option></selecte>
                                                                     <?php }else{ ?>
-                                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" id="" value="">
+                                                                        <input aria-label="<?php echo __(LBL_INPUT_FIELD); ?>" type="text" class="form-control" id="" value="">
                                                                     <?php } ?>
                                                                 </div>
                                                             </td>
                                                         <?php  $fieldcnt++;
 } ?>
 
-                                                            <td class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders['sub_header_addmore']=='0'){
-}else{ echo "style='display:none'";
+                                                            <td class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]=='0'){
+}else{ echo ATTR_DISPLAY_NONE_STYLE;
 } ?>>
                                                                 <button type="button" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger btn-primary" >
                                                                     <i class="fa fa-trash"></i><?php echo __('Delete'); ?>
@@ -291,8 +295,8 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                                 </tbody>
                                             </table>
 
-                                                <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders['sub_header_addmore']=='0'){
-}else{ echo "style='display:none'";
+                                                <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]=='0'){
+}else{ echo ATTR_DISPLAY_NONE_STYLE;
 } ?>>
                                                     <i class="fa fa-plus"></i><?php echo __('Add'); ?>
                                                 </button>

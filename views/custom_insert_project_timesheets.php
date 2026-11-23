@@ -1,13 +1,13 @@
 <?php
-
+defined('FMT_ZERO_AMOUNT') || define('FMT_ZERO_AMOUNT', FMT_ZERO_AMOUNT);
+defined('ATTR_TABINDEX_NEG1') || define('ATTR_TABINDEX_NEG1', ATTR_TABINDEX_NEG1);
 function numberformatechnagetime($val){
- $value = strlen(number_format($val,2))!='5'?'0'.number_format($val,2):number_format($val,2);
- return $value;
+ return strlen(number_format($val,2))!='5'?'0'.number_format($val,2):number_format($val,2);
 }
 function customeummarmonyformatenew($number){
  $num = $_SESSION['configdata']['number_format'] !='' ? $_SESSION['configdata']['number_format'] :2;
  $return = number_format($number, $num, '.', ',');
- return $return!='00.00' ? $return : '00.00';
+ return $return!=FMT_ZERO_AMOUNT ? $return : FMT_ZERO_AMOUNT;
 }
 function houreConvertRounvalue($fulltime){
   $hour=0;
@@ -196,18 +196,18 @@ if(isset($_POST['savetimesheet'])){
 
 
 
-  function checkValidationholidayworkingdays($holidaylist,$working_days,$checkdate,$leavesemp=array(),$vl=""){
+  function checkValidationholidayworkingdays($holidaylist,$working_days,$checkdate,$leavesemp=array()){
     $checkdateworkholiday = date('Y-m-d',strtotime($checkdate));
     $day = date('l',strtotime($checkdate));
+    $result = array("color"=>'','msg'=>"",'error'=>"",'read'=>'N');
     if(in_array($checkdateworkholiday, (array)$holidaylist)){
-      return array("color"=>"background-color:#0dcaf0",'msg'=>"Holidays",'error'=>'tabindex="-1"','read'=>'Y');
+      $result = array("color"=>"background-color:#0dcaf0",'msg'=>"Holidays",'error'=>ATTR_TABINDEX_NEG1,'read'=>'Y');
     }elseif(in_array($checkdateworkholiday, (array)$leavesemp)){
-      return array("color"=>'background-color:#e3c1c1','msg'=>"Leave",'error'=>'tabindex="-1"','read'=>'N');
+      $result = array("color"=>'background-color:#e3c1c1','msg'=>"Leave",'error'=>ATTR_TABINDEX_NEG1,'read'=>'N');
     }elseif(!in_array($day, (array)$working_days)){
-      return array("color"=>'background-color:#e1e1e1','msg'=>"No Working Day",'error'=>'tabindex="-1"','read'=>'Y');
-    }else{
-      return array("color"=>'','msg'=>"",'error'=>"",'read'=>'N');
+      $result = array("color"=>'background-color:#e1e1e1','msg'=>"No Working Day",'error'=>ATTR_TABINDEX_NEG1,'read'=>'Y');
     }
+    return $result;
   }
 
   $getworkorderid = (isset($_GET['WID']) && $_GET['WID']!="" && $_GET['WID']!="0")?$_GET['WID']:$projectdetails['work_order'];
@@ -660,10 +660,10 @@ function changeselectdate(){
  <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" type="text" onblur="calculateRowSum('<?php echo $j;?>','<?php echo $r;?>')"
  <?php if($emp_bill==1){ echo __('readonly');
-} ?>  name="<?php echo $datename;?>_billable[]" id="task_r<?php echo $j;?>_billable_c<?php echo $r;?>" value="<?php echo $taskslistdata[$timesheet_dates[$r-1]]['billable_hrs']=='0'?'00.00':$billable_hrs; ?>" maxlength="5" tabindex=""  data-rowcol="<?php echo $j.'-'.$r; ?>">
+} ?>  name="<?php echo $datename;?>_billable[]" id="task_r<?php echo $j;?>_billable_c<?php echo $r;?>" value="<?php echo $taskslistdata[$timesheet_dates[$r-1]]['billable_hrs']=='0'?FMT_ZERO_AMOUNT:$billable_hrs; ?>" maxlength="5" tabindex=""  data-rowcol="<?php echo $j.'-'.$r; ?>">
 
                          <input aria-label="<?php echo __('Input field'); ?>" <?php echo $datevalidation['error']; ?> class="form-control bg-warning-o-40 text-right timesheet_time <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
-}?>" type="text" onblur="calculateRowSum('<?php echo $j;?>','<?php echo $r;?>')" value="<?php echo $taskslistdata[$timesheet_dates[$r-1]]['nonbillable_hrs']=='0'?'00.00':$nonbillable_hrs; ?>" name="<?php echo $datename;?>_nonbillable[]" id="task_r<?php echo $j;?>_nonbillable_c<?php echo $r;?>" maxlength="5" data-rowcol="<?php echo $j.'-'.$r; ?>">
+}?>" type="text" onblur="calculateRowSum('<?php echo $j;?>','<?php echo $r;?>')" value="<?php echo $taskslistdata[$timesheet_dates[$r-1]]['nonbillable_hrs']=='0'?FMT_ZERO_AMOUNT:$nonbillable_hrs; ?>" name="<?php echo $datename;?>_nonbillable[]" id="task_r<?php echo $j;?>_nonbillable_c<?php echo $r;?>" maxlength="5" data-rowcol="<?php echo $j.'-'.$r; ?>">
                       </td>
                       <?php }
                       $gtt['billable'] = $gtt['billable'] +  $totalbillable;

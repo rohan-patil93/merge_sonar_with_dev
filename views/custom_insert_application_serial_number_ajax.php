@@ -1,4 +1,5 @@
 <?php
+defined('LBL_POSITION_SUFFIX') || define('LBL_POSITION_SUFFIX', '- Position');
 if (isset($_POST['process_name']) && $_POST['process_name'] != "") {
     include_once '../includes/session.php';
     include_once '../dbconfig.php';
@@ -17,49 +18,41 @@ $staticpoint = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 
 
+function resolveSerialAffixPart($enabled, $position, $slot, $type, $val)
+{
+    if (!$enabled || $position != $slot) {
+        return null;
+    }
+    if ($type == "STATIC" && !empty($val)) {
+        return $val;
+    }
+    return ($type == "DYNAMIC") ? 'FIELDVALUE' : null;
+}
+
 function serialNumberPreview($data)
 {
-    // Extract values from array (simulate form inputs)
     $preFix = $data['pre_fix'] ?? '';
     $postFix = $data['post_fix'] ?? '';
     $serial = $data['serial_number'] ?? '';
     $numLength = !empty($data['doc_no_length']) ? (int) $data['doc_no_length'] : strlen($serial);
     $sep = $data['separator_symbols'] ?? '';
     $fy = $data['financial_year'] ?? '';
-
     $serial = str_pad((string) $serial, $numLength, '0', STR_PAD_LEFT);
-    $pre_fix_position = $data['pre_fix_position'] ?? 0;
-    $post_fix_position = $data['post_fix_position'] ?? 0;
-    $serial_number_position = $data['serial_number_position'] ?? 0;
-    $financial_year_position = $data['financial_year_position'] ?? 0;
 
-    $pre_fix_check = $data['pre_fix_check'] == "Y" ? true : false;
-    $post_fix_check = $data['post_fix_check'] == "Y" ? true : false;
-    $financial_year_check = $data['financial_year_check'] == "Y" ? true : false;
-
-    $pre_fix_type = $data['pre_fix_type'];
-    $post_fix_type = $data['post_fix_type'];
-    // Build output in order
     $parts = [];
     for ($m = 1; $m <= 4; $m++) {
-        if ($pre_fix_check && $pre_fix_position == $m) {
-            if ($pre_fix_type == "STATIC" && !empty($preFix)) {
-                $parts[] = $preFix;
-            } elseif ($pre_fix_type == "DYNAMIC") {
-                $parts[] = 'FIELDVALUE';
-            }
+        $prePart = resolveSerialAffixPart(($data['pre_fix_check'] ?? '') == "Y", $data['pre_fix_position'] ?? 0, $m, $data['pre_fix_type'] ?? '', $preFix);
+        if ($prePart !== null) {
+            $parts[] = $prePart;
         }
-        if (!empty($serial) && $serial_number_position == $m) {
+        if (!empty($serial) && ($data['serial_number_position'] ?? 0) == $m) {
             $parts[] = $serial;
         }
-        if ($post_fix_check && $post_fix_position == $m) {
-            if ($post_fix_type == "STATIC" && !empty($postFix)) {
-                $parts[] = $postFix;
-            } elseif ($post_fix_type == "DYNAMIC") {
-                $parts[] = 'FIELDVALUE';
-            }
+        $postPart = resolveSerialAffixPart(($data['post_fix_check'] ?? '') == "Y", $data['post_fix_position'] ?? 0, $m, $data['post_fix_type'] ?? '', $postFix);
+        if ($postPart !== null) {
+            $parts[] = $postPart;
         }
-        if (!empty($fy) && $financial_year_check && $financial_year_position == $m) {
+        if (!empty($fy) && ($data['financial_year_check'] ?? '') == "Y" && ($data['financial_year_position'] ?? 0) == $m) {
             $parts[] = $fy;
         }
     }
@@ -253,12 +246,8 @@ function serialNumberPreview($data)
                                 name="serial_number_position" id="serial_number_position" onmousedown="storeOld(this)"
                                 onchange="positionChange(this)">
                                 <?php foreach ($staticpoint as $i) { ?>
-                                    <option value="<?php echo $i; ?>" <?php if ($asnres['serial_number_position'] == $i) {
-                                           echo "selected";
-                                       } elseif ($asnres['serial_number_position'] == "" && $i == '1') {
-                                           echo "selected";
-                                       } ?>>
-                                        <?php echo $i . "- Position"; ?>
+                                    <option value="<?php echo $i; ?>" <?php if ($asnres['serial_number_position']  == $i || ($asnres['serial_number_position']  == "" && $i == '1')) { echo "selected"; } ?>>
+                                        <?php echo $i . LBL_POSITION_SUFFIX; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -277,12 +266,8 @@ function serialNumberPreview($data)
                                 name="financial_year_position" id="financial_year_position"
                                 onchange="positionChange(this)">
                                 <?php foreach ($staticpoint as $i) { ?>
-                                    <option value="<?php echo $i; ?>" <?php if ($asnres['financial_year_position'] == $i) {
-                                           echo "selected";
-                                       } elseif ($asnres['financial_year_position'] == "" && $i == '2') {
-                                           echo "selected";
-                                       } ?>>
-                                        <?php echo $i . "- Position"; ?>
+                                    <option value="<?php echo $i; ?>" <?php if ($asnres['financial_year_position']  == $i || ($asnres['financial_year_position']  == "" && $i == '2')) { echo "selected"; } ?>>
+                                        <?php echo $i . LBL_POSITION_SUFFIX; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -375,12 +360,8 @@ function serialNumberPreview($data)
                                             name="additional_settings[positions][]" id="positions_<?php echo $seq; ?>"
                                             onchange="positionChange(this)">
                                                 <?php foreach ($staticpoint as $i) { ?>
-                                                <option value="<?php echo $i; ?>" <?php if ($asettings['positions'] == $i) {
-                                                       echo "selected";
-                                                   } elseif ($asettings['positions'] == "" && $i == '3') {
-                                                       echo "selected";
-                                                   } ?>>
-                                                    <?php echo $i . "- Position"; ?>
+                                                <option value="<?php echo $i; ?>" <?php if ($asettings['positions']  == $i || ($asettings['positions']  == "" && $i == '3')) { echo "selected"; } ?>>
+                                                    <?php echo $i . LBL_POSITION_SUFFIX; ?>
                                                 </option>
                                             <?php } ?>
                                         </select>
@@ -459,7 +440,7 @@ function serialNumberPreview($data)
               <select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="pre_fix_position" id="pre_fix_position" onchange="positionChange(this)" >
                   <?php foreach($staticpoint as $i){ ?>
                       <option value="<?php echo $i; ?>" <?php if($asnres['pre_fix_position'] ==$i){ echo "selected"; }elseif($asnres['pre_fix_position'] == "" AND $i=='1'){ echo "selected"; } ?>>
-                      <?php echo $i."- Position"; ?>
+                      <?php echo $i.LBL_POSITION_SUFFIX; ?>
                       </option>
                 <?php } ?>
               </select>
@@ -468,7 +449,7 @@ function serialNumberPreview($data)
               <select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="post_fix_position" id="post_fix_position" onchange="positionChange(this)" >
                   <?php foreach($staticpoint as $i){ ?>
                       <option value="<?php echo $i; ?>" <?php if($asnres['post_fix_position'] == $i){ echo "selected"; }elseif($asnres['post_fix_position'] == "" AND $i=='2'){ echo "selected"; } ?>>
-                      <?php echo $i."- Position"; ?>
+                      <?php echo $i.LBL_POSITION_SUFFIX; ?>
                       </option>
                 <?php } ?>
               </select>

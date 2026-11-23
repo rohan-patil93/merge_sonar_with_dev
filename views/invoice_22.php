@@ -42,11 +42,22 @@ function currencyFormat($number,$config){
         }
     }
 }
-function numberToWordFormate($number){
+function formatInvoiceWordSegment($number, $str, $words, $digits){
+    if (!$number) {
+        return null;
+    }
+    $counter = count((array)$str);
+    $plural = ($counter && $number > 9) ? 's' : null;
+    $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+    if ($number < 21) {
+        return $words[$number] . " " . $digits[$counter] . $plural . " " . $hundred;
+    }
+    return $words[floor($number / 10) * 10] . " " . $words[$number % 10] . " " . $digits[$counter] . $plural . " " . $hundred;
+}
 
+function numberToWordFormate($number){
     $no = floor($number ?? 0);
     $point = (int) round((($number ?? 0) - $no) * 100);
-    $hundred = null;
     $digits_1 = strlen($no);
     $i = 0;
     $str = array();
@@ -63,29 +74,18 @@ function numberToWordFormate($number){
     $digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
     while ($i < $digits_1) {
         $divider = ($i == 2) ? 10 : 100;
-        $number = floor($no % $divider);
+        $segment = floor($no % $divider);
         $no = floor($no / $divider);
         $i += ($divider == 10) ? 1 : 2;
-        if ($number) {
-            $plural = (($counter = count((array)$str)) && $number > 9) ? 's' : null;
-            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
-            $str [] = ($number < 21) ? $words[$number] .
-            " " . $digits[$counter] . $plural . " " . $hundred
-            :
-            $words[floor($number / 10) * 10]
-            . " " . $words[$number % 10] . " "
-            . $digits[$counter] . $plural . " " . $hundred;
-        } else $str[] = null;
+        $str[] = formatInvoiceWordSegment($segment, $str, $words, $digits);
     }
-    $str = array_reverse((array)$str);
-    $result = implode('', (array)$str);
-    $points = ($point) ?
-    ". " . $words[(int)($point / 10)] . " " . $words[$point = $point % 10] : '';
-    if($result !=''){
-        $result = $result . "Rupees  ";
+    $result = implode('', array_reverse((array)$str));
+    $points = ($point) ? ". " . $words[(int)($point / 10)] . " " . $words[$point % 10] : '';
+    if($result != ''){
+        $result .= "Rupees  ";
     }
-    if($points !=''){
-        $result.= $points . " Paise  ";
+    if($points != ''){
+        $result .= $points . " Paise  ";
     }
     echo ucwords($result." only");
 }
@@ -191,13 +191,13 @@ function emptyCheck($valu){
                         <b class="f-w-600 m-0"><?= __('Web Design'); ?></b>
                         <p class="m-0 f-12"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                     </td>
-                    <th scope="col" class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" style="text-align: center; border-right: 1px solid #000000;">
                         $150.00
                     </th>
-                    <th scope="col" class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" style="text-align: center; border-right: 1px solid #000000;">
                         2
                     </th>
-                    <th scope="col" class="f-12 text-end" align="right">
+                    <th scope="col" class="f-12 text-end" style="text-align: right;">
                         $150.00
                     </th>
                 </tr>
@@ -206,13 +206,13 @@ function emptyCheck($valu){
                         <b class="f-w-600 m-0"><?= __('Wedding Photography'); ?></b>
                         <p class="m-0 f-12"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                     </td>
-                    <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" style="text-align: right; border-right: 1px solid #000000;">
                         $150.00
                     </th>
-                    <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" style="text-align: right; border-right: 1px solid #000000;">
                         2
                     </th>
-                    <th scope="col" class="f-12 text-end" align="right">
+                    <th scope="col" class="f-12 text-end" style="text-align: right;">
                         $150.00
                     </th>
                 </tr>
@@ -221,13 +221,13 @@ function emptyCheck($valu){
                         <b class="f-w-600 m-0"><?= __('Web Development'); ?></b>
                         <p class="m-0 f-12"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                     </td>
-                    <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" style="text-align: right; border-right: 1px solid #000000;">
                         $150.00
                     </th>
-                    <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" style="text-align: right; border-right: 1px solid #000000;">
                         2
                     </th>
-                    <th scope="col" class="f-12 text-end" align="right">
+                    <th scope="col" class="f-12 text-end" style="text-align: right;">
                         $150.00
                     </th>
                 </tr>
@@ -235,24 +235,24 @@ function emptyCheck($valu){
                     <td class="f-12" style="border-right: 1px solid #000000;">
                         -
                     </td>
-                    <td class="f-12" align="right" style="border-right: 1px solid #000000;">
+                    <td class="f-12" style="text-align: right; border-right: 1px solid #000000;">
                         -
                     </td>
-                    <td class="f-12" align="right" style="border-right: 1px solid #000000;">
+                    <td class="f-12" style="text-align: right; border-right: 1px solid #000000;">
                         -
                     </td>
-                    <td class="f-12" align="right">
+                    <td class="f-12" style="text-align: right;">
                         -
                     </td>
                 </tr>
                 <tr>
                     <td class="border-0"></td>
-                    <td class="f-12 border-0" colspan="" align="left">
+                    <td class="f-12 border-0" colspan="" style="text-align: left;">
                         <b class="f-w-600"><?= __('Sub Total'); ?></b>
                         <b class="d-block"><?= __('Tax Vet 10%'); ?></b>
                         <b class="d-block"><?= __('Discount 10%'); ?></b>
                     </td>
-                    <td class="f-12 border-0" colspan="2" align="right">
+                    <td class="f-12 border-0" colspan="2" style="text-align: right;">
                         <b class="f-w-600">$450.00</b>
                         <b class="d-block">$120.00</b>
                         <b class="d-block">-$100.00</b>
@@ -270,22 +270,22 @@ function emptyCheck($valu){
                             <b><?= __('Lorem Ipsum is simply dummy text of'); ?></b>
                         </p>
                     </td>
-                    <td class="f-12" colspan="" align="left" style="border-top:1px solid #000000; border-bottom: 0; vertical-align: top;">
+                    <td class="f-12" colspan="" style="text-align: left; border-top:1px solid #000000; border-bottom: 0; vertical-align: top;">
                         <b class="f-w-600"><?= __('Grand Total'); ?></b>
                     </td>
-                    <td class="f-12" colspan="2" align="right" style="border-top:1px solid #000000; border-bottom: 0; vertical-align: top;">
+                    <td class="f-12" colspan="2" style="text-align: right; border-top:1px solid #000000; border-bottom: 0; vertical-align: top;">
                         <b class="f-w-600">$670.00</b>
                     </td>
                 </tr>
                 <tr>
-                    <td class="f-12 border-0 pt-3" colspan="2" align="">
+                    <td class="f-12 border-0 pt-3" colspan="2">
                         <b class="f-w-600"><?= __('Contact'); ?></b>
                         <p class="m-0 f-12">
                             <?= __('812, Block 5, MH2 BUILDING, HYD,500009'); ?>
                         </p>
                         <b class="f-w-600">xyz@gmail.com</b>
                     </td>
-                    <td class="f-12 border-0" colspan="2" align="">
+                    <td class="f-12 border-0" colspan="2">
                         <b class="d-block" style="font-family: cursive; font-style: oblique; font-size: 14px;"><?= __('Mark Willams'); ?></b>
                         <b class="f-w-600"><?= __('Mark Willams'); ?></b>
                         <p class="m-0 f-12">
@@ -294,7 +294,7 @@ function emptyCheck($valu){
                     </td>
                 </tr>
                 <tr>
-                    <td class="f-12 pt-3 pb-3 border-0" colspan="4" align="">
+                    <td class="f-12 pt-3 pb-3 border-0" colspan="4">
                         <b class="f-w-600"><?= htmlspecialchars(__('Term & Condition'), ENT_QUOTES, 'UTF-8'); ?></b>
                         <b class="d-block"><?= __('Lorem Ipsum is simply dummy text of'); ?></b>
                     </td>

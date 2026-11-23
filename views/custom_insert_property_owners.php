@@ -341,7 +341,7 @@ function addMoreAttachment(rowid){
                         <a class="accordion-msg waves-effect waves-dark card_id_<?php echo $i; ?>" >
                             <div class="row">
                                 <div class="col-lg-11"><span class="text-capitalize"><?php echo $pod['property_name']; ?></span></div>
-                                <div class="col-lg-1"><i role="button" tabindex="0" aria-label="<?php echo __('Delete Details'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger"  onclick="deletCard('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Delete Details'); ?>"></i></div>
+                                <button type="button" class="btn text-left bg-transparent border-0 p-0 col-lg-1" ><i aria-label="<?php echo __('Delete Details'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger"  onclick="deletCard('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Delete Details'); ?>"></i></div>
                             </div>
                         </a>
                         <div class="accordion-desc p-0 card_id_<?php echo $i; ?>">
@@ -358,14 +358,14 @@ function addMoreAttachment(rowid){
                                                         <div class="row">
                                                             <input type="hidden" name="property_type[<?php echo $i; ?>]" id="property_type_<?php echo $i; ?>" value="<?php echo $pod['property_type']; ?>">
                                                             <?php foreach($propertyparenttypes as $ppt){?>
-                                                            <div class="col-lg-6" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getPropertParentType('<?php echo $ppt['id']; ?>','<?php echo $i; ?>')">
+                                                            <button type="button" class="col-lg-6 btn text-left bg-transparent border-0 p-0" onclick="getPropertParentType('<?php echo $ppt['id']; ?>','<?php echo $i; ?>')">
                                                                 <div class="card text-center <?php echo $ppt['id']==$pod['property_type']?"bg-success text-white":"";?> removeselected_<?php echo $i; ?>" id="propertyparenttype_<?php echo $i; ?>_<?php echo $ppt['id']; ?>">
                                                                     <div class="card-body">
                                                                         <span class="d-block f-22"><?php echo $ppt['icon'];?></span>
                                                                         <span><?php echo ucwords($ppt['property_type_name']); ?></span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </button>
                                                         <?php } ?>
                                                         </div>
                                                     </div>
@@ -394,12 +394,7 @@ function addMoreAttachment(rowid){
                                                         <span class="form-label d-inline-block fw-bold"><?php echo __('Latitude'); ?></span>
                                                         <input aria-label="<?= htmlspecialchars(__('Latitude'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="latitude[<?php echo $i; ?>]" value="<?php echo $pod['latitude']; ?>">
                                                     </div>
-                                                    <div class="form-group col-lg-12">
-                                                    <?php
-                                                        $attachments = json_decode($pod['attachment'],1);
-                                                        foreach($attachments as $attachment){ ?>
-                                                            <div class="label-main d-block" id="remove_attache_<?php echo $attchmentseq; ?>">
-                                    <a href="uploads/all/<?php echo $attachment['attachment']; ?>" target="_blank"><span class="form-label label label-success cursor-pointer d-inline-block fw-bold" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Download'); ?>"><i class="ti-cloud-down"></i> &nbsp; <?php echo $attachment['attachment_name'] !=""?$attachment['attachment_name']:$attachment['attachment']; ?></span></a> <i role="button" tabindex="0" aria-label="<?php echo __('Remove'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash float-end text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="removeFile('remove_attache_<?php echo $attchmentseq; ?>')"></i>
+                                                    <button type="button" class="btn text-left bg-transparent border-0 p-0 form-group col-lg-12" > <?php $attachments = json_decode($pod['attachment'],1); foreach($attachments as $attachment){ ?> <div id="remove_attache_<?php echo $attchmentseq; ?>"> <a href="uploads/all/<?php echo $attachment['attachment']; ?>" target="_blank"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Download'); ?>"><i></i> &nbsp; <?php echo $attachment['attachment_name'] !=""?$attachment['attachment_name']:$attachment['attachment']; ?></span></a> <i aria-label="<?php echo __('Remove'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash float-end text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="removeFile('remove_attache_<?php echo $attchmentseq; ?>')"></i>
                                      <input type="hidden" name="old_attachment[<?php echo $i; ?>][]" class="form-control" value="<?php echo $attachment['attachment']; ?>">
                                      <input type="hidden" name="old_attachment_name[<?php echo $i; ?>][]" class="form-control" value="<?php echo $attachment['attachment_name']; ?>">
                               </div>
@@ -456,7 +451,7 @@ function addMoreAttachment(rowid){
                                                 </div>
                                                 <div class="form-group col-lg-1">
                                                     <?php if($mck != 1){ ?>
-                                                     <i role="button" tabindex="0" aria-label="<?php echo __('Remove'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRowjoinOwner('<?php echo $deleteid; ?>')"></i>
+                                                     <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?php echo __('Remove'); ?>" onclick="deletRowjoinOwner('<?php echo $deleteid; ?>')"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>"></i></button>
                                                     <?php } ?>
                                                 </div>
                                             </div>
@@ -512,7 +507,7 @@ function addMoreAttachment(rowid){
                                                 </div>
                                                 <div class="form-group col-lg-1 p-1">
                                     <?php if($vd['property_tenant_detail_id'] ==""){ ?>
-                                                   <i role="button" tabindex="0" aria-label="<?php echo __('Remove'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRow('<?php echo $mk; ?>','<?php echo $i; ?>')"></i>
+                                                   <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?php echo __('Remove'); ?>" onclick="deletRow('<?php echo $mk; ?>','<?php echo $i; ?>')"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>"></i></button>
                                    <?php }else{ echo "<i class='ti ti-alert text-danger' data-bs-toggle='tooltip' data-placement='bottom' title='' data-bs-original-title='".htmlspecialchars(__('Already Area Available In Rent'), ENT_QUOTES, 'UTF-8')."'></i>";
                                    } ?>
                                                 </div>
@@ -548,8 +543,7 @@ function addMoreAttachment(rowid){
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
-            </div>
-        </div>
+            </button></div>
     <?php } ?>
     </div>
 </div>

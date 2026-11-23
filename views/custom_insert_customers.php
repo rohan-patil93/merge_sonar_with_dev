@@ -941,10 +941,6 @@ if ($customers['image'] != '') {
                                     </div>
                                     <table class="table m-0">
                                         <tbody>
-                                            <!-- <tr>
-                                                <th scope="row"><?= __('Title') ?></th>
-                                                <td><?php echo emptytextdashShow($customers['title']); ?></td>
-                                            </tr> -->
                                             <tr>
                                                 <th scope="row"><?= __('Name') ?></th>
                                                 <td><?php echo $customers['first_name'] . $customers['middle_name'] . " " . $customers['last_name']; ?>
@@ -1250,10 +1246,6 @@ if ($customers['image'] != '') {
                                            <th scope="row"><?= __('Payment Discount Percentage') ?></th>
                                            <td><?php echo emptytextdashShow(customeummarmonyformate($customers['payment_discount_perc'])); ?></td>
                                        </tr>
-                                       <!-- <tr>
-                                           <th scope="row"><?= __('Sales Type') ?></th>
-                                           <td><?php echo emptytextdashShow($customers['sales_type']); ?></td>
-                                       </tr>  -->
                                    </tbody>
                                </table>
                            </div>
@@ -1265,13 +1257,6 @@ if ($customers['image'] != '') {
                         role="tabpanel">
                         <div class="row">
                             <div class="form-group row">
-                                <!-- <div class="col-lg-3 p-r-5" style="float: left;">
-                                    <span class="form-label"><?= __('Title') ?></span>
-                                    <div class="kt-input-icon">
-                                        <input class="form-control" type="text" id="title" name="title" value="<?php echo $customers['title']; ?>" title="<?= __('Title') ?>" aria-label="Title">
-                                    </div>
-                                    <div style="display: none;color: red;" id="title_err"> Please enter title </div>
-                                </div> -->
                                 <div class="form-group col-lg-3 p-r-5" style="float: left;">
                                     <span class="form-label"><?= __('First Name'); ?> <span
                                             class="text-danger">*</span></span>
@@ -1380,26 +1365,6 @@ if ($customers['image'] != '') {
                                     <div style="display: none;color: red;" id="email_err1">
                                         <?= __('Please enter parent_customer'); ?> </div>
                                 </div>
-                                <!-- <div class="form-group col-lg-3">
-                                    <span class="form-label"><?= __('Bill With Parent') ?></span>
-                                    <div class="kt-input-icon">
-                                        <input class="form-control" type="number" id="bill_with_parent" name="bill_with_parent" value="<?php echo $customers['bill_with_parent']; ?>" title="<?= __('Bill With Parent') ?>" aria-label="Bill With Parent">
-                                    </div>
-                                    <div style="display: none;color: red;" id="bill_with_parent_err"> Please enter bill_with_parent </div>
-                                </div> -->
-                                <!-- <div class="form-group col-lg-3">
-                                    <span class="form-label"><?= __('Language') ?></span>
-                                    <div class="kt-input-icon">
-                                        <input class="form-control" type="text" id="language_id" name="language_id" value="<?php echo $customers['language_id']; ?>" title="<?= __('Language Id') ?>" aria-label="Language Id">
-                                    </div>
-                                    <div style="display: none;color: red;" id="language_id_err"> Please enter language </div>
-                                </div>
-                                <div class="col-lg-3" style="float: left;">
-                                    <span class="form-label"><?= __('Hold Reason') ?></span>
-                                    <div class="kt-input-icon">
-                                        <input class="form-control" type="text" id="hold_reason" name="hold_reason" value="<?php echo $customers['hold_reason']; ?>" title="<?= __('Hold Reason') ?>" aria-label="Hold Reason">
-                                    </div>
-                                </div> -->
                                 <div class="form-group col-lg-3 p-r-5" style="float: right;">
                                     <span class="form-label"><?= __('Website') ?></span>
                                     <div class="kt-input-icon">
@@ -1596,13 +1561,11 @@ if ($customers['image'] != '') {
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 text-right d-flex flex-column justify-content-between ">
-                                                <span role="button" tabindex="0"
-                                                    onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                                    data-bs-toggle="tooltip" data-placement="bottom" title=""
+                                                <button type="button" class="btn btn-link p-0 border-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title=""
                                                     data-bs-original-title="<?= __('Cliek To Remove') ?>"
                                                     class="cursor-pointer" onclick="removeGSTDiv(<?php echo $mkseq; ?>)">
                                                     <i class="ti-trash text-danger"></i> <?= __('Remove'); ?>
-                                                </span>
+                                                </button>
                                                 <div class="form-group ">
                                                     <input type="radio" id="is_default" name="is_default"
                                                         value="<?php echo $mkseq - 1; ?>" <?php
@@ -1611,11 +1574,6 @@ if ($customers['image'] != '') {
                                                         aria-label="<?= htmlspecialchars(__('Is Default'), ENT_QUOTES, 'UTF-8'); ?>"><span><?= __('Make Default'); ?></span>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-lg-3 text-right">
-                                            <span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Cliek To Remove') ?>" class="cursor-pointer" onclick="removeGSTDiv(<?php echo $mkseq; ?>)">
-                                                <i class="ti-trash text-danger"></i> Remove
-                                            </span>
-                                        </div> -->
                                             <div class="form-group col-lg-12">
                                                 <span class="form-label"><?= __('Shipping Adderss') ?></span>
                                                 <div class="kt-input-icon">
@@ -1824,7 +1782,7 @@ if ($customers['image'] != '') {
                                             </div>
                                             <div class="col-lg-2 d-flex align-items-center">
                                                 <button type="button"
-                                                    class="btn btn-sm lock-btn <?php echo ($bond['lock_status'] == 0) ? 'btn-success locked' . ($bond['id'] ? ' permanently-locked' : '') : 'btn-warning'; ?>"
+                                                    <?php $lockedBtnClass = 'btn-success locked' . ($bond['id'] ? ' permanently-locked' : ''); $lockStatusClass = ($bond['lock_status'] == 0) ? $lockedBtnClass : 'btn-warning'; ?> class="btn btn-sm lock-btn <?php echo $lockStatusClass; ?>"
                                                     onclick="toggleRowLock(this)">
                                                     <?php if ($bond['lock_status'] == 0) { ?>
                                                         <?php if ($bond['id']) { ?>
@@ -1928,15 +1886,6 @@ if ($customers['image'] != '') {
                                     <?php } ?>
                                 </select>
                             </div>
-                            <!-- <div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
-                                <span class="form-label"><?= __('Preferred Payment Method') ?></span>
-                                <select name="payment_terms" class="form-control form-select js-example-basic-single" title="<?= __('Payment Terms') ?>" aria-label="Payment Terms">
-                                    <option value=""><?= __('Select Any One') ?></option>
-                                    <?php foreach ($payment_method as $key => $pm) { ?>
-                                        <option value="<?php echo $key; ?>" <?php echo $vendordetail['pref_payment_method'] == $key ? 'selected' : ''; ?> ><?php echo $pm; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div> -->
                             <div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
                                 <span class="form-label d-block"><?= __('Preferred Delivery Method') ?></span>
                                 <select name="preferred_deliver_method"
@@ -2024,15 +1973,6 @@ if ($customers['image'] != '') {
                                         aria-label="<?= htmlspecialchars(__('Payment Discount Perc'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
-                                <span class="form-label"><?= __('Sales Type') ?></span>
-                                <select name="sales_type" class="form-control form-select js-example-basic-single" title="<?= __('Sales Type') ?>" aria-label="Sales Type">
-                                    <option value=""><?= __('Select Any One') ?></option>
-                                    <?php foreach ($salestype as $key => $st) { ?>
-                                        <option value="<?php echo $key; ?>" <?php echo $customers['sales_type'] == $key ? 'selected' : ''; ?> ><?php echo $st; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div> -->
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary m-t-20">
                             <?php if ($customers['id'] != "") { ?><i class="fa fa-check-square"></i> <?= __('Update'); ?>
@@ -2046,12 +1986,12 @@ if ($customers['image'] != '') {
                      <div class="form-group col-lg-12">
                          <table class="table table-bordered " id="edutable">
                              <tr>
-                                 <th scope="col" class="" width="2%"><?= __('Sl NO') ?></th>
-                                 <th scope="col" class="" width="25%"><?= __('Type') ?></th>
-                                 <th scope="col" class="thheader" width="20%"><?= __('Number') ?></th>
-                                 <th scope="col" class="" width="20%"><?= __('Sign Date') ?></th>
-                                 <th scope="col" class="thheader" width="20%"><?= __('Expiry Date') ?></th>
-                                 <th scope="col" class="thheader" width="15%"><?= __('Files') ?></th>
+                                 <th scope="col" class="" style="width: 2%;"><?= __('Sl NO') ?></th>
+                                 <th scope="col" class="" style="width: 25%;"><?= __('Type') ?></th>
+                                 <th scope="col" class="thheader" style="width: 20%;"><?= __('Number') ?></th>
+                                 <th scope="col" class="" style="width: 20%;"><?= __('Sign Date') ?></th>
+                                 <th scope="col" class="thheader" style="width: 20%;"><?= __('Expiry Date') ?></th>
+                                 <th scope="col" class="thheader" style="width: 15%;"><?= __('Files') ?></th>
                              </tr>
                          <?php $k=0;  if(count((array)$aggrements) != '0'){ $aggrements[] = array('agreement_name'=>''); }
                          foreach ($aggrements as $inst) { $k++;?>
@@ -2089,7 +2029,6 @@ if ($customers['image'] != '') {
                      </table>
                      <div class="row">
                          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                             <!--  <button class="btn btn-danger float-left delete " id="removeRows" onclick="removerows()"  type="button"><?= __('Delete') ?></button> -->
                              <button class="btn btn-success float-left" onclick="addedurows()" id="addRows" type="button"><?= __('+ Add More') ?></button>
                          </div>
                      </div>
@@ -2139,7 +2078,7 @@ if ($customers['image'] != '') {
                                                     <tr onclick="getProperty('<?php echo deocdeId("id:" . $inst['id']); ?>')"
                                                         tabindex="0"
                                                         onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
-                                                        role="button">
+                                                        >
 
                                                         <td><?php echo ucwords($property_owners[$inst['property_owner_id']]['owner_name']); ?>
                                                         </td>

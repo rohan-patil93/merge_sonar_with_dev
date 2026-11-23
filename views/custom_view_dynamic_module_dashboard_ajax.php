@@ -254,7 +254,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=''){
                         <div class="card-header-right custom-right-header">
                             <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars(__('Add').' '.$_POST['menu_label'], ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars(__('Add').' '.$_POST['menu_label'], ENT_QUOTES, 'UTF-8'); ?>" <?php echo $insert_permissionbtn; ?>> <i class="icofont icofont-plus icon-dark"></i> </a>
                             <a href="index.php?option=<?php echo $optiondetails['list_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('List'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('List'), ENT_QUOTES, 'UTF-8'); ?>"<?php echo $permission_listbtn; ?>> <i class="ti ti-timer icon-dark"></i></a>
-                            <a href="#!" role="button" aria-label="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('Details'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('Details'), ENT_QUOTES, 'UTF-8'); ?>"<?php echo $permission_listbtn; ?> onclick="getTransactionInvoiceList()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"> <i class="ti-eye icon-dark"></i></a>
+                            <button type="button" class="btn btn-link p-0 border-0 align-baseline" aria-label="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('Details'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('Details'), ENT_QUOTES, 'UTF-8'); ?>"<?php echo $permission_listbtn; ?> onclick="getTransactionInvoiceList()"> <i class="ti-eye icon-dark"></i></button>
                         </div>
                     </div>
                     <div class="card-block text-center">
@@ -337,7 +337,6 @@ if($totaldoc != 0 && $totaldoc !=""){
                                 $Notification_DateTime = date('d M',strtotime($holiday['holiday_date']));
                                 ?>
                                 <div class="align-middle m-b-10" style="border-bottom:1px dashed #cccccc;">
-                                    <!-- <span class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($Notification_Message); ?></span> -->
                                     <div class="">
                                         <p class="text-muted m-b-5 f-12"><?php echo $Notification_Message; ?>  <span class="float-right"><?php echo $Notification_DateTime; ?></span></p>
                                     </div>
@@ -397,8 +396,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                         <?php  foreach($generatedocs as $trnstabkey=>$gdocs){ ?>
                             <li class="nav-item">
                                 <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tabsopen" role="tab" aria-selected="true" onclick="openApprovedPage('<?php echo $trnstabkey; ?>','<?php echo $table_name; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"><?php echo __("Approved ".ucwords(str_replace('_',' ',$trnstabkey))); ?>
-                                <!-- <span class="label label-xs label-success m-l-10"><?php echo count((array)$gdocs);?></span>-->
-</a>                            </li>
+                                </a>                            </li>
                         <?php } ?>
                         <?php  /** if($table_name == 'work_orders'){ ?>
                         <li class="nav-item">
@@ -480,9 +478,9 @@ if($totaldoc != 0 && $totaldoc !=""){
                                             $list = $categorydatalist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20">
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0 align-baseline" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','F')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti ti-star"></i></button>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0 align-baseline" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-star text-danger"></i></button>
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['category_description']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -579,9 +577,9 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                                             $list = $locationlist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20">
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0 align-baseline" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','F')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti ti-star"></i></button>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0 align-baseline" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-star text-danger"></i></button>
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['location_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -668,9 +666,9 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                                             $list = $costcenterlist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray" ><span class="m-r-20">
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0 align-baseline" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','F')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti ti-star"></i></button>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0 align-baseline" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-star text-danger"></i></button>
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['cost_center_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -888,7 +886,7 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                             <h5><?= __('Draft'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_DRAFT]['color']; ?>; background-color:<?php echo $statuse[ST_DRAFT]['background_color']; ?>;"><?php echo count((array)$draftres); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
+                            <button type="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" class="btn btn-link p-0 border-0 align-baseline b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                         </div>
                         <div class="card-body">
                             <?php
@@ -896,9 +894,7 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                              } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
-                                    <!-- <div class="p-1 b-radius-25 text-center left-icon-width" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;"> -->
-
-                <div class="align-middle">
+                                    <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
@@ -945,16 +941,13 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <h5><?= __('Active'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_ACTIVE]['color']; ?>; background-color:<?php echo $statuse[ST_ACTIVE]['background_color']; ?>;"><?php echo count((array)$activeres); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
+                            <button type="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" class="btn btn-link p-0 border-0 align-baseline b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$activeres) !=0){ foreach($activeres as $activeres1){ if($mm == 4){ break;
                             } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
-                                    <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;">
-                                        <i class=" ti-briefcase f-w-600"></i>
-                                    </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
@@ -1002,16 +995,13 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <h5><?= __('In Process'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED1]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED1]['background_color']; ?>;"><?php echo count((array)$inprocessres); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
+                            <button type="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" class="btn btn-link p-0 border-0 align-baseline b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$inprocessres) !=0){ foreach($inprocessres as $activeres1){ if($mm == 4){ break;
                             } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
-                                    <!-- <div class="p-2 b-radius-5 text-center left-icon-width"style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;">
-                                        <i class=" ti-briefcase f-w-600"></i>
-                                    </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
@@ -1061,16 +1051,13 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <h5><?= __('Approved'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$approvedres); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
+                            <button type="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" class="btn btn-link p-0 border-0 align-baseline b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$approvedres) !=0){ foreach($approvedres as $activeres1){ if($mm == 4){ break;
                             } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
-                                    <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;">
-                                        <i class=" ti-briefcase f-w-600"></i>
-                                    </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
@@ -1122,7 +1109,7 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <h5><?= __('Approval Pending'); ?>
                                 <span class="label label-xs label-danger m-l-10" ><?php echo count((array)$pendinglog); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVEPENDING')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
+                            <button type="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVEPENDING')" class="btn btn-link p-0 border-0 align-baseline b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$pendinglog) !=0){ foreach($pendinglog as $logdetails){
@@ -1130,9 +1117,6 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                 } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
-                                    <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$logdetails['current_status']]['color']; ?>; background-color:<?php echo $statuse[$logdetails['current_status']]['background_color']; ?>;">
-                                        <i class=" ti-briefcase f-w-600"></i>
-                                    </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
@@ -1166,7 +1150,7 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <h5><?= __('Approved'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$aprovedlog); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVELOG')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
+                            <button type="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVELOG')" class="btn btn-link p-0 border-0 align-baseline b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$aprovedlog) !=0){ foreach($aprovedlog as $logdetails){
@@ -1174,9 +1158,6 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                 } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
-                                    <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$logdetails['current_status']]['color']; ?>; background-color:<?php echo $statuse[$logdetails['current_status']]['background_color']; ?>;">
-                                        <i class=" ti-briefcase f-w-600"></i>
-                                    </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
@@ -1209,7 +1190,7 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <h5><?= __('Send Back'); ?>
                                 <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$sendbacklog); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','SENDBACK')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
+                            <button type="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','SENDBACK')" class="btn btn-link p-0 border-0 align-baseline b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$sendbacklog) !=0){ foreach($sendbacklog as $logdetails){
@@ -1217,9 +1198,6 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                 } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
-                                    <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$logdetails['current_status']]['color']; ?>; background-color:<?php echo $statuse[$logdetails['current_status']]['background_color']; ?>;">
-                                        <i class=" ti-briefcase f-w-600"></i>
-                                    </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
@@ -1252,7 +1230,7 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <h5><?= __('Rejected'); ?>
                                 <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$rejectlog); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','REJECTED')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
+                            <button type="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','REJECTED')" class="btn btn-link p-0 border-0 align-baseline b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$rejectlog) !=0){ foreach($rejectlog as $logdetails){
@@ -1260,9 +1238,6 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                 } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
-                                    <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$logdetails['current_status']]['color']; ?>; background-color:<?php echo $statuse[$logdetails['current_status']]['background_color']; ?>;">
-                                        <i class=" ti-briefcase f-w-600"></i>
-                                    </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >

@@ -107,14 +107,14 @@ foreach($dretrundataind as $key=>$rfrr){
                   <tbody>
                     <td>Invoice</td>
 
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $one; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($total); ?> </span> </td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $two; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($retrundataind['15']);  ?> </span>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $one; ?>)"> <?php echo customeummarmonyformate($total); ?> </button> </td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $two; ?>)"> <?php echo customeummarmonyformate($retrundataind['15']);  ?> </button>
                     </td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $three; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($retrundataind['30']); ?> </span> </td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $four; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($retrundataind['45']); ?> </span> </td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $five; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($retrundataind['60']); ?> </span></td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $six; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($retrundataind['90']); ?> </span> </td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $seven; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($retrundataind['120']); ?></span></td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $three; ?>)"> <?php echo customeummarmonyformate($retrundataind['30']); ?> </button> </td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $four; ?>)"> <?php echo customeummarmonyformate($retrundataind['45']); ?> </button> </td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $five; ?>)"> <?php echo customeummarmonyformate($retrundataind['60']); ?> </button></td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $six; ?>)"> <?php echo customeummarmonyformate($retrundataind['90']); ?> </button> </td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $seven; ?>)"> <?php echo customeummarmonyformate($retrundataind['120']); ?></button></td>
                   </tbody>
                 </table>
                 <table class=" table table-hover m-b-0 m-t-5">
@@ -129,7 +129,7 @@ foreach($dretrundataind as $key=>$rfrr){
                     <th scope="col" class="text-right"> > 90 Days</th>
                   </thead>
                   <tbody>
-                    foreach ($vendortotal as $vendor_id => $value) {
+                    <?php foreach ($vendortotal as $vendor_id => $value) {
                       $one = "'".implode("-",(array)$vendordaytotal[$vendor_id])."'";
                       $two = "'".implode("-",(array)$vendordayleveltotal[$vendor_id]['15'])."'";
                       $three = "'".implode("-",(array)$vendordayleveltotal[$vendor_id]['30'])."'";
@@ -140,13 +140,13 @@ foreach($dretrundataind as $key=>$rfrr){
                     ?>
                     <tr>
                     <td class="text-capitalize"><?php echo $_SESSION['users'][$vendor_id]; ?></td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $one; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($value); ?> </span> </td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $two; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['15']);  ?> </span></td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $three; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['30']); ?></span></td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $four; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['45']); ?></span></td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $five; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['60']); ?></span></td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $six; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['90']); ?></span></td>
-                    <td class="text-right"> <span class="cursor-pointer" onclick="todisplayviewvendor(<?php echo $seven; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['120']); ?></span></td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $one; ?>)"> <?php echo customeummarmonyformate($value); ?> </button> </td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $two; ?>)"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['15']);  ?> </button></td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $three; ?>)"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['30']); ?></button></td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $four; ?>)"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['45']); ?></button></td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $five; ?>)"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['60']); ?></button></td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $six; ?>)"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['90']); ?></button></td>
+                    <td class="text-right"> <button type="button" class="btn btn-link p-0 text-dark border-0 align-baseline cursor-pointer" onclick="todisplayviewvendor(<?php echo $seven; ?>)"> <?php echo customeummarmonyformate($returnvendorind[$vendor_id]['120']); ?></button></td>
                     </tr>
                   <?php  } ?>
                   </tbody>

@@ -1,8 +1,12 @@
 <?php
+defined('API_SALARY_TEMPLATE') || define('API_SALARY_TEMPLATE', '?mode=gettabledetailswithconditions&table=salary_template&data=');
+defined('KEY_COMPANY_ID') || define('KEY_COMPANY_ID', 'company_id');
+defined('KEY_IS_ACTIVE') || define('KEY_IS_ACTIVE', 'is_active');
+defined('KEY_EMPLOYEE_ID') || define('KEY_EMPLOYEE_ID', 'employee_id');
 $cand_detaail = $data;
 if (isset($_POST['submit'])) {
     $option = $_GET['option'];
-    $_POST['company_id'] = $_SESSION['company_id'];
+    $_POST[KEY_COMPANY_ID] = $_SESSION[KEY_COMPANY_ID];
     $_POST['created_by'] = $_SESSION['userid'];
     $_POST['created_date'] = nowDate();
     $url = API . "?mode=addsalary&method=post";
@@ -20,7 +24,7 @@ if (isset($_POST['submit'])) {
 $pageurl = API . "?mode=togetsalarycatdetaillist";
 $data = callAPI($pageurl);
 $data = json_decode($data, 1);
-$vdata1["where"] = array('company_id' => $_SESSION['company_id'], 'is_active' => '0', 'employee_type' => 1);
+$vdata1["where"] = array(KEY_COMPANY_ID => $_SESSION[KEY_COMPANY_ID], KEY_IS_ACTIVE => '0', 'employee_type' => 1);
 $vdata = urlencode(json_encode($vdata1));
 $vurl = API . "?mode=gettabledetailswithconditions&table=employees&data=" . $vdata;
 $configesponse = callAPI($vurl);
@@ -31,9 +35,9 @@ if ($_GET['Rid'] != "" || $_GET['SEid'] != "") {
         $main_ids = encodeId($_GET['Rid']);
         $main_id = explode(":", $main_ids);
         $rid = $main_id['1'];
-        $datawr["where"] = array('is_active' => '0', 'id' => $main_id['1']);
+        $datawr["where"] = array(KEY_IS_ACTIVE => '0', 'id' => $main_id['1']);
         $costdata = urlencode(json_encode($datawr));
-        $url = API . "?mode=gettabledetailswithconditions&table=salary_template&data=" . $costdata;
+        $url = API . API_SALARY_TEMPLATE . $costdata;
         $salarydata = callAPI($url);
         $salarydata = json_decode($salarydata, 1);
         $salarydata = $salarydata[0];
@@ -45,9 +49,9 @@ if ($_GET['Rid'] != "" || $_GET['SEid'] != "") {
         $main_ids = encodeId($_GET['SEid']);
         $disabled = "disabled";
         $main_id = explode(":", $main_ids);
-        $datawr["where"] = array('is_active' => '0', 'employee_id' => $main_id['1']);
+        $datawr["where"] = array(KEY_IS_ACTIVE => '0', KEY_EMPLOYEE_ID => $main_id['1']);
         $costdata = urlencode(json_encode($datawr));
-        $url = API . "?mode=gettabledetailswithconditions&table=salary_template&data=" . $costdata;
+        $url = API . API_SALARY_TEMPLATE . $costdata;
         $salarydata = callAPI($url);
         $salarydata = json_decode($salarydata, 1);
         $salarydata = $salarydata[0];
@@ -57,15 +61,15 @@ if ($_GET['Rid'] != "" || $_GET['SEid'] != "") {
         if ($cand_detaail['current_status'] == ST_APPROVED) {
             $disabled = "disabled";
         }
-        $datawr["where"] = array('is_active' => '0', 'candidate_id' => $_GET['SCid']);
+        $datawr["where"] = array(KEY_IS_ACTIVE => '0', 'candidate_id' => $_GET['SCid']);
         $costdata = urlencode(json_encode($datawr));
-        $url = API . "?mode=gettabledetailswithconditions&table=salary_template&data=" . $costdata;
+        $url = API . API_SALARY_TEMPLATE . $costdata;
         $salarydata = callAPI($url);
         $salarydata = json_decode($salarydata, 1);
         $salarydata = $salarydata[0];
         $salary_temp_id = $salarydata['id'];
     }
-    $stpdata["where"] = array('is_active' => '0', 'salary_template_id' => $salarydata['id']);
+    $stpdata["where"] = array(KEY_IS_ACTIVE => '0', 'salary_template_id' => $salarydata['id']);
     $stpdata["order"] = "component_cat_id ASC";
     $stpmdata = urlencode(json_encode($stpdata));
     $stpurl = API . "?mode=gettabledetailswithconditions&table=salary_template_components&data=" . $stpmdata;
@@ -92,7 +96,7 @@ foreach ($data as $dat) {
         }
     }
 }
-$eedata1["where"] = array('company_id' => $_SESSION['company_id'], 'is_active' => 0);
+$eedata1["where"] = array(KEY_COMPANY_ID => $_SESSION[KEY_COMPANY_ID], KEY_IS_ACTIVE => 0);
 $eedata1["order"] = "id Desc";
 $eedata1["limit"] = "0,1";
 $eedata = urlencode(json_encode($eedata1));
@@ -111,7 +115,7 @@ $esival['employee_contribution'] = $esdata['employee_contribution'];
 $esival['employer_contribution'] = $esdata['employer_contribution'];
 $esival['check_value'] = '21000';
 
-$ptdata1["where"] = array('company_id' => $_SESSION['company_id'], 'is_active' => 0);
+$ptdata1["where"] = array(KEY_COMPANY_ID => $_SESSION[KEY_COMPANY_ID], KEY_IS_ACTIVE => 0);
 $ptdata1["order"] = "id Desc";
 $ptdata1["limit"] = "0,1";
 $ptdata = urlencode(json_encode($ptdata1));
@@ -120,7 +124,7 @@ $ptdata = callAPI($pturl);
 $ptdata = json_decode($ptdata, 1);
 $ptsalabs = $ptdata['0']['slabs'];
 
-$sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_GET['newempid'];
+$sal_emp_id = $salarydata[KEY_EMPLOYEE_ID] != "" ? $salarydata[KEY_EMPLOYEE_ID] : $_GET['newempid'];
 
 ?>
 <script type="text/javascript">
@@ -709,7 +713,7 @@ $sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_
                                                 <div class="col-lg-4">
                                                     <label for="kt_select2_41"><?php echo __('Employee'); ?> </label>
                                                     <select class="form-select js-example-basic-single" id="kt_select2_41"
-                                                        name='employee_id'>
+                                                        name=KEY_EMPLOYEE_ID>
                                                         <option> <?php echo __('Select Any One'); ?></option>
                                                         <?php foreach ($employees as $employe) { ?>
                                                             <option <?php if ($sal_emp_id == $employe['id']) {
@@ -773,7 +777,7 @@ $sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_
                                                 } else {
                                                 }
                                                 ?>
-                                                <table role="presentation" <?php echo $maincss; ?>
+                                                <table <?php echo $maincss; ?>
                                                     id="invoiceItem<?php echo $dat['id']; ?>">
                                                     <tbody>
                                                         <tr id="<?php echo "cat_" . $dat['id']; ?>">
@@ -943,8 +947,8 @@ $sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_
                 </div>
             </div>
         </div>
-        <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true"
-            role="dialog" aria-hidden="true">
+        <div id="kt_modal_KTDatatable_remote" class="modal fade" tabindex="-1" aria-hidden="true"
+            aria-hidden="true">
             <div class="modal-dialog ">
                 <div class="modal-content">
 
@@ -965,7 +969,7 @@ $sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_
             </div>
         </div>
     <?php } else {
-                    $datacat["where"] = array('is_active' => '0');
+                    $datacat["where"] = array(KEY_IS_ACTIVE => '0');
                     $catdata = urlencode(json_encode($datacat));
                     $caturl = API . "?mode=gettabledetailswithconditions&table=salary_categories&data=" . $catdata;
                     $salarycatdata = callAPI($caturl);
@@ -990,13 +994,13 @@ $sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_
                     <div class="row align-items-center" style="margin-top: 10px;padding: 0px 10%;" id="printarea">
 
                         <div class="col-lg-12" style="page-break-before: always;">
-                            <table width="80%" align="center"
+                            <table style="width: 80%; margin-left: auto; margin-right: auto;"
                                 style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px;">
                                 <tr style="height: 50px;border: 1px solid #000;">
                                     <td style="border:1px solid #000;padding: 5px;" class="f-w-600">
                                         <?php echo __('Name'); ?> </td>
                                     <td style="border:1px solid #000;padding: 5px;" colspan="2">
-                                        &nbsp;<?php echo $empdata[$salarydata['employee_id']]; ?></td>
+                                        &nbsp;<?php echo $empdata[$salarydata[KEY_EMPLOYEE_ID]]; ?></td>
                                 </tr>
 
                                 <tr style="border: 1px solid #000;">
@@ -1029,34 +1033,10 @@ $sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_
                                             <?php echo customeummarmonyformate($stvalue['yearly_amount']); ?></td>
                                     </tr>
                                 <?php } ?>
-                                <!--  <tr style="border: 1px solid #000;" >
-                            <td style="border:1px solid #000;padding: 5px;" ><?php echo "Total"; ?></td>
-                            <td style="text-align: center;border:1px solid #000;padding: 5px;"> <?php echo customeummarmonyformate($salarydata['company_cost_monthly']); ?></td>
-                            <td style="text-align: center;border:1px solid #000;padding: 5px;"><?php echo customeummarmonyformate($salarydata['company_cost_yearly']); ?></td>
-                        </tr>
-                        <tr style="border: 1px solid #000;" >
-                            <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  Notes: </br>
-                                <p style="padding: 0px 5%;"><?php echo $salarydata['note']; ?></p>
-                            </td>
-
-                        </tr> -->
+                                
                             </table>
                         </div>
-                        <!-- <div style="width: 50%; display: inline-block; margin: 30px 0 0 0;">
-                    <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">With best wishes.<br />For <?php echo $send_data['company_name']; ?></b>
-                </div>
-                <div style="width: 48%; display: inline-block; margin: 30px 0 0 0; text-align: right;">
-                    <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">ANJANA AUDUKOORI<br />DIRECTOR HR</b>
-                </div>
-                <div style="width: 50%; display: inline-block; margin: 40px 0 0 0;">
-                    <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
-                    <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Candidate Signature</b>
-                </div>
-                <div style="width: 48%; display: inline-block; margin: 40px 0 0 0; text-align: right;">
-                    <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
-                    <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Date</b>
-                </div>
- -->
+                        
                     </div>
                     <!--end: Search Form -->
                 </div>

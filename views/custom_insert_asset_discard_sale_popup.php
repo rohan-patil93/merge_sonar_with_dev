@@ -74,9 +74,9 @@ function submitdetails(){
                 <th scope="col"><?= __('Brand') ?></th>
                 <th scope="col"><?= __('Model') ?></th>
                 <th scope="col"><?= __('Serial Number') ?></th>
-                <!-- <th scope="col"><?= __('Status') ?></th> -->
-                <!-- <th scope="col"><?= __('Condition') ?></th> -->
-                <!-- <th scope="col"><?= __('Asset Value') ?> <span class="requried text-danger">*</span></th> -->
+                
+                
+                
             </tr>
         </thead>
         <tbody>
@@ -90,30 +90,9 @@ function submitdetails(){
                         <td><?php echo $list_asset['brand']; ?></td>
                         <td><?php echo $list_asset['model']; ?></td>
                         <td><?php echo $list_asset['serial_no']; ?></td>
-                        <!-- <td>
-                            <select  class="form-select js-example-basic-single " name="asset_location[]">
-                                <option value=""><?= __('Select Any One') ?></option>
-                                <?php foreach ($locations as $location) { ?>
-                                    <option location value="<?php echo $location['id']; ?>" <?php echo $location['id'] == $list_asset['asset_location']?"selected":""; ?>><?php echo ucwords($location['location_name']); ?></option>
-                                <?php } ?>
-                            </select>
-                        </td> -->
-                        <!-- <td><?php ?>
-                            <select  class="form-select js-example-basic-single" name="asset_status[]">
-                                <option value=""><?= __('Select Any One') ?></option>
-                                <?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>
-                                    <option  value="<?php echo $ass_statuskey; ?>" <?php echo $ass_statuskey == $list_asset['status']?"selected":""; ?>><?php echo ucwords($ass_statuss); ?></option>
-                                <?php }  ?>
-                            </select>
-                        </td> -->
-                        <!-- <td>
-                            <select  class="form-select js-example-basic-single " name="conditions[]">
-                                <option value=""><?= __('Select Any One') ?></option>
-                                <?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>
-                                    <option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $list_asset['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
-                                <?php } ?>
-                            </select>
-                        </td> -->
+                        
+                        
+                        
                 </tr>
             <?php } ?>
 

@@ -4,9 +4,9 @@ if ($checktimeprint > 0) {
     echo "Check Step - " . $checktimeprint . " Date Time : " . date('m/d/Y h:i:s a') . "</br>";
     $checktimeprint++;
 }
-$_SESSION['apply_js']['multiselest'] = "1";
-$_SESSION['apply_js']['dropzone'] = "1";
-$_SESSION['apply_js']['from-validation'] = "1";
+$_SESSION[KEY_APPLY_JS]['multiselest'] = "1";
+$_SESSION[KEY_APPLY_JS]['dropzone'] = "1";
+$_SESSION[KEY_APPLY_JS]['from-validation'] = "1";
 $option = strtoupper($_GET['option']);
 $list = str_replace('INSERT', 'LIST', $option);
 if ($_POST['submit'] == 'query') {
@@ -1765,7 +1765,7 @@ if ($qoriginatorCurrencyId != '' && $qoriginatorCurrencyId != '0' && $qcurrencyI
         var table_name = document.getElementById('table_name').value;
         var table_id = document.getElementById('hid').value;
         var tranid = document.getElementById('transaction_number').value;
-        var table = document.getElementById('table_name');
+        var table = document.getElementById(KEY_TABLE_NAME);
         var val_sub = "234";
         if (val2 == 2) {
             jQuery.ajax({
@@ -1896,7 +1896,7 @@ if ($qoriginatorCurrencyId != '' && $qoriginatorCurrencyId != '0' && $qcurrencyI
     }
     function checkMandatoryArray() {
         var mandatory_array = $("#mandatory_array").val();
-        var table_name = document.getElementById('table_name').value;
+        var table_name = document.getElementById(KEY_TABLE_NAME).value;
         //console.log(mandatory_array);
         var fieldmsg = "";
         var countitemrow = $('.itemRow').length;
