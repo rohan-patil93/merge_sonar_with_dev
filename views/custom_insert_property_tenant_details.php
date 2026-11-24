@@ -638,8 +638,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                     <div class="card-header-right table-card-header m-r-50">
                         <?php echo $workflowsteps['workflow_btn']; ?>
                         <?php /** if($property_tenant_details['property_owner_id'] !='' AND $property_tenant_details['lock_tenant']==''){ ?>
-               <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="lockTenanatDetails()"><i class="ti-lock text-white"></i> <?php echo __('Lock Up Details?'); ?></button>
-           <?php } **/ ?>
+          <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="lockTenanatDetails()"><i class="ti-lock text-white"></i> <?php echo __('Lock Up Details?'); ?></button>
+      <?php } **/ ?>
 
                     </div>
                 </div>
@@ -657,7 +657,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                 <option value=""><?php echo __('Select Any One'); ?> </option>
                                 <?php foreach ($property_owners as $coa) { ?>
                                     <option value="<?php echo $coa['id']; ?>" <?php echo $property_tenant_details['property_owner_id'] == $coa['id'] ? "selected" : ""; ?>>
-                                        <?php echo $coa['owner_name']; ?></option>
+                                        <?php echo $coa['owner_name']; ?>
+                                    </option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -673,7 +674,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                 <option value=""><?php echo __('Select Any One'); ?> </option>
                                 <?php foreach ($property_owner_details as $pod) { ?>
                                     <option value="<?php echo $pod['id']; ?>" <?php echo $property_tenant_details['property_owner_detail_id'] == $pod['id'] ? "selected" : ""; ?>>
-                                        <?php echo $pod['property_name']; ?></option>
+                                        <?php echo $pod['property_name']; ?>
+                                    </option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -742,10 +744,12 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                                     <div class="row">
                                                         <div class="col-lg-4"><span
                                                                 class="f-w-600"><?php echo __('Area'); ?></span> :
-                                                            <?php echo $detail['property_area']; ?></div>
+                                                            <?php echo $detail['property_area']; ?>
+                                                        </div>
                                                         <div class="col-lg-4"><span
                                                                 class="f-w-600"><?php echo __('UOM'); ?></span> :
-                                                            <?php echo $poda['uom']; ?></div>
+                                                            <?php echo $poda['uom']; ?>
+                                                        </div>
                                                         <div class="col-lg-4"><span
                                                                 class="f-w-600"><?php echo __('Rate'); ?></span> :
                                                             <?php echo customeummarmonyformate($detail['per_sq_ft_rate']); ?>
@@ -812,7 +816,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             </div>
                         </div>
                         <div class="form-group col-lg-5">
-                            <label for="rent_free_period_day" class="form-label"><?php echo __('Rent Free Period'); ?></label>
+                            <label for="rent_free_period_day"
+                                class="form-label"><?php echo __('Rent Free Period'); ?></label>
                             <div class="input-group input-group-button ">
                                 <input type="number" name="rent_free_period_day" id="rent_free_period_day"
                                     class="form-control form-control-sm width1 text-right"
@@ -825,7 +830,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         </div>
                         <div class="col-lg-2 text-center"></div>
                         <div class="form-group col-lg-5">
-                            <label for="rent_commencement_date" class="form-label"><?php echo __('Rent Commencement Date'); ?> <span
+                            <label for="rent_commencement_date"
+                                class="form-label"><?php echo __('Rent Commencement Date'); ?> <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control " name="rent_commencement_date"
                                 id="rent_commencement_date"
@@ -837,7 +843,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                 value="<?php echo $_SESSION['config']['system_start_date']; ?>" readonly>
                         </div>
                         <div class="form-group col-lg-5">
-                            <label for="rent_escalation_after_month" class="form-label"><?php echo __('Rent Escalation After'); ?> </label>
+                            <label for="rent_escalation_after_month"
+                                class="form-label"><?php echo __('Rent Escalation After'); ?> </label>
                             <div class="input-group input-group-button ">
                                 <input type="number" id="rent_escalation_after_month" name="rent_escalation_after_month"
                                     class="form-control form-control-sm width1 text-right"
@@ -849,7 +856,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         </div>
                         <div class="col-lg-2 text-center"> </div>
                         <div class="form-group col-lg-5">
-                            <label for="rent_escalation_percentage" class="form-label"><?php echo __('Rent Escalation Percentage'); ?> </label>
+                            <label for="rent_escalation_percentage"
+                                class="form-label"><?php echo __('Rent Escalation Percentage'); ?> </label>
                             <div class="input-group input-group-button ">
                                 <input type="number" id="rent_escalation_percentage" name="rent_escalation_percentage"
                                     class="form-control form-control-sm width1 text-right"
@@ -872,15 +880,18 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         </div>
                         <div class="col-lg-2 text-center"> </div>
                         <div class="form-group col-lg-5">
-                            <label for="security_deposit" class="form-label "><?php echo __('Security Deposit'); ?></label>
-                            <input type="number" id="security_deposit" class="form-control text-right " name="security_deposit"
+                            <label for="security_deposit"
+                                class="form-label "><?php echo __('Security Deposit'); ?></label>
+                            <input type="number" id="security_deposit" class="form-control text-right "
+                                name="security_deposit"
                                 value="<?php echo $property_tenant_details['security_deposit']; ?>">
                         </div>
 
 
 
                         <div class="form-group col-lg-5">
-                            <label for="locking_period_tenant" class="form-label"><?php echo __('Locking Period Tenant'); ?></label>
+                            <label for="locking_period_tenant"
+                                class="form-label"><?php echo __('Locking Period Tenant'); ?></label>
                             <div class="input-group input-group-button ">
                                 <input type="number" id="locking_period_tenant" name="locking_period_tenant"
                                     class="form-control form-control-sm width1 text-right"
@@ -892,7 +903,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         </div>
                         <div class="col-lg-2 text-center"> </div>
                         <div class="form-group col-lg-5">
-                            <label for="locking_period_landlord" class="form-label"><?php echo __('Locking Period Landlord'); ?></label>
+                            <label for="locking_period_landlord"
+                                class="form-label"><?php echo __('Locking Period Landlord'); ?></label>
                             <div class="input-group input-group-button ">
                                 <input type="number" id="locking_period_landlord" name="locking_period_landlord"
                                     class="form-control form-control-sm width1 text-right"
@@ -903,7 +915,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             </div>
                         </div>
                         <div class="form-group col-lg-5">
-                            <label for="rent_bill_to_be_raise" class="form-label"><?php echo __('Rent Bill To Be Raise'); ?> <span
+                            <label for="rent_bill_to_be_raise"
+                                class="form-label"><?php echo __('Rent Bill To Be Raise'); ?> <span
                                     class="text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -912,7 +925,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                         class="form-control form-select js-example-basic-single f-14 requried_field">
                                         <?php for ($r = 1; $r <= 31; $r++) { ?>
                                             <option value="<?php echo $r; ?>" <?php echo $r == $property_tenant_details['rent_bill_to_be_raise'] ? "selected" : ""; ?>>
-                                                <?php echo $r; ?></option>
+                                                <?php echo $r; ?>
+                                            </option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -930,7 +944,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         </div>
                         <div class="col-lg-2 text-center"> </div>
                         <div class="form-group col-lg-5">
-                            <label for="due_bill_to_be_raise_type" class="form-label"><?php echo __('Due Bill To Be Raise'); ?> <span
+                            <label for="due_bill_to_be_raise_type"
+                                class="form-label"><?php echo __('Due Bill To Be Raise'); ?> <span
                                     class="text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -962,7 +977,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                         id="due_bill_to_be_raise_dt_select">
                                         <?php for ($r = 1; $r <= 31; $r++) { ?>
                                             <option value="<?php echo $r; ?>" <?php echo $r == $property_tenant_details['due_bill_to_be_raise'] ? "selected" : ""; ?>>
-                                                <?php echo $r; ?></option>
+                                                <?php echo $r; ?>
+                                            </option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -975,13 +991,17 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             <div class="form-radio">
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input type="radio" name="gst_added" value="0" onclick="checkGSTAdded('0')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php echo $property_tenant_details['gst_added'] == '0' ? "checked" : ""; ?>>
+                                        <input type="radio" name="gst_added" value="0" onclick="checkGSTAdded('0')"
+                                            onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"
+                                            <?php echo $property_tenant_details['gst_added'] == '0' ? "checked" : ""; ?>>
                                         <i class="helper"></i><?php echo __('Yes'); ?>
                                     </label>
                                 </div>
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input type="radio" name="gst_added" value="" onclick="checkGSTAdded('')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php echo $property_tenant_details['gst_added'] == '' ? "checked" : ""; ?>>
+                                        <input type="radio" name="gst_added" value="" onclick="checkGSTAdded('')"
+                                            onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"
+                                            <?php echo $property_tenant_details['gst_added'] == '' ? "checked" : ""; ?>>
                                         <i class="helper"></i><?php echo __('No'); ?>
                                     </label>
                                 </div>
@@ -989,11 +1009,12 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         </div>
                         <div class="col-lg-2 text-center"> </div>
                         <div class="form-group  col-lg-5" id="checkgstadded_hsn_code" <?php echo $property_tenant_details['gst_added'] == '0' ? "" : ATTR_DISPLAY_NONE_STYLE; ?>>
-                            <label for="hsn_and_sac_code_id" class="form-label d-block"><?php echo __('GST HSN Code'); ?> </label>
-                            <select id="hsn_and_sac_code_id" name="hsn_and_sac_code_id" class="form-control js-data-example-ajax-hsncodes"
-                                data-tablename="hsn_and_sac_codes" data-fieldsname="code_description"
-                                data-fieldsname1="code" data-fieldsname2="code_description" data-fieldsname3="gst"
-                                data-category="id">
+                            <label for="hsn_and_sac_code_id"
+                                class="form-label d-block"><?php echo __('GST HSN Code'); ?> </label>
+                            <select id="hsn_and_sac_code_id" name="hsn_and_sac_code_id"
+                                class="form-control js-data-example-ajax-hsncodes" data-tablename="hsn_and_sac_codes"
+                                data-fieldsname="code_description" data-fieldsname1="code"
+                                data-fieldsname2="code_description" data-fieldsname3="gst" data-category="id">
                                 <option value=""><?php echo __('Select Any One'); ?> </option>
                                 <?php foreach ($hsn_and_sac_codes as $hsncodes) { ?>
                                     <option value="<?php echo $hsncodes['id']; ?>" <?php echo $hsncodes['id'] == $property_tenant_details['hsn_and_sac_code_id'] ? "selected" : ""; ?>>
@@ -1020,13 +1041,15 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             <div class="form-radio">
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input type="radio" name="rental_invoice_to_be_raised" value="Y" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == '' || $property_tenant_details['rental_invoice_to_be_raised'] == 'Y') ? "checked" : ""; ?> onclick="checkRentalInvoiceRaised('Y')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
+                                        <input type="radio" name="rental_invoice_to_be_raised" value="Y" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == '' || $property_tenant_details['rental_invoice_to_be_raised'] == 'Y') ? "checked" : ""; ?> onclick="checkRentalInvoiceRaised('Y')"
+                                            onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
                                         <i class="helper"></i><?php echo __('Yes'); ?>
                                     </label>
                                 </div>
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input type="radio" name="rental_invoice_to_be_raised" value="N" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == 'N') ? "checked" : ""; ?> onclick="checkRentalInvoiceRaised('N')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
+                                        <input type="radio" name="rental_invoice_to_be_raised" value="N" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == 'N') ? "checked" : ""; ?> onclick="checkRentalInvoiceRaised('N')"
+                                            onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
                                         <i class="helper"></i><?php echo __('No'); ?>
                                     </label>
                                 </div>
@@ -1034,7 +1057,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         </div>
                         <div class="col-lg-2 text-center"> </div>
                         <div class="col-lg-5 " id="checkrentalinvoiceraised_rental_stop_date" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == 'N') ? "" : ATTR_DISPLAY_NONE_STYLE; ?>>
-                            <label for="rental_invoice_stoped_from" class="form-label d-block"><?php echo __('Rental Invoice Stoped From'); ?> </label>
+                            <label for="rental_invoice_stoped_from"
+                                class="form-label d-block"><?php echo __('Rental Invoice Stoped From'); ?> </label>
                             <input type="month" class="form-control" name="rental_invoice_stoped_from"
                                 value="<?php echo $property_tenant_details['rental_invoice_stoped_from'] != "" ? $property_tenant_details['rental_invoice_stoped_from'] : date('Y-m'); ?>"
                                 id="rental_invoice_stoped_from">
@@ -1054,8 +1078,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                 <div class="form-radio">
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input type="radio" name="rental_bill_types[<?php echo $rbt['id']; ?>]" value="0"
-                                                <?php echo $rbtyp['status'] == '0' ? "checked" : ""; ?>
+                                            <input type="radio" name="rental_bill_types[<?php echo $rbt['id']; ?>]"
+                                                value="0" <?php echo $rbtyp['status'] == '0' ? "checked" : ""; ?>
                                                 onchange="getRentalBillType(<?php echo $rbt['id']; ?>,this.value)">
                                             <i class="helper"></i><?php echo __('Yes'); ?>
                                         </label>
@@ -1106,29 +1130,31 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                     <table class="table table-hover m-b-0"
                                         id="utility_bill_manual_amount_<?php echo $rbt['id']; ?>" <?php echo $rbtyp['utility_bill_auto_and_fix'] == 'M' ? "" : ATTR_DISPLAY_NONE_STYLE; ?>>
 
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 5%;"></th>
-                                                <th style="width: 40%;"><?php echo __('Particulars'); ?></th>
-                                                <th class="text-right" style="width: 20%;"><?php echo __('Qty'); ?></th>
-                                                <th class="text-right" style="width: 10%;"><?php echo __('Opr'); ?></th>
-                                                <th class="text-right" style="width: 20%;"><?php echo __('Rate'); ?></th>
-                                                <th style="width: 10%;"><?php echo __('UOM'); ?></th>
-                                            </tr>
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;"></th>
+                                                    <th style="width: 40%;"><?php echo __('Particulars'); ?></th>
+                                                    <th class="text-right" style="width: 20%;"><?php echo __('Qty'); ?></th>
+                                                    <th class="text-right" style="width: 10%;"><?php echo __('Opr'); ?></th>
+                                                    <th class="text-right" style="width: 20%;"><?php echo __('Rate'); ?>
+                                                    </th>
+                                                    <th style="width: 10%;"><?php echo __('UOM'); ?></th>
+                                                </tr>
                                         </thead>
                                         <?php foreach ($rental_bill_sub_types[$rbt['id']] as $rudetail) { ?>
                                             <tr>
                                                 <td class="p-2">
                                                     <div class="checkbox-fade fade-in-primary m-0">
-                                                        <label class="form-label  m-0 w-b-w-s" aria-label="<?php echo htmlspecialchars(__('Select Utility'), ENT_QUOTES, 'UTF-8'); ?>">
-                                                            <input type="checkbox" value="Y"
-                                                                aria-label="<?php echo htmlspecialchars(__('Select Utility'), ENT_QUOTES, 'UTF-8'); ?>"
-                                                                name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][check]"
-                                                                <?php echo $rbtyp['child_utility'][$rudetail['id']]['check'] == "Y" ? "checked" : ""; ?>
-                                                                onchange="childUtilityCheckBocChecked(this,'<?php echo $rudetail['id']; ?>')">
-                                                            <span class="cr  m-0"><i
-                                                                    class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                                        </label>
+                                                            <label class="form-label  m-0 w-b-w-s"
+                                                                aria-label="<?php echo htmlspecialchars(__('Select Utility'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                                <input type="checkbox" value="Y"
+                                                                    aria-label="<?php echo htmlspecialchars(__('Select Utility'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                                    name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][check]"
+                                                                    <?php echo $rbtyp['child_utility'][$rudetail['id']]['check'] == "Y" ? "checked" : ""; ?>
+                                                                    onchange="childUtilityCheckBocChecked(this,'<?php echo $rudetail['id']; ?>')">
+                                                                <span class="cr  m-0"><i
+                                                                        class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                                            </label>
                                                     </div>
                                                     <input type="hidden"
                                                         name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][rental_bill_type_id]"
@@ -1139,7 +1165,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                                     <?php echo $rudetail['type_name']; ?><input type="hidden"
                                                         name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][rental_bill_type_name]"
                                                         class="form-control text-right"
-                                                        value="<?php echo $rudetail['type_name']; ?>"></td>
+                                                        value="<?php echo $rudetail['type_name']; ?>">
+                                                </td>
                                                 <td
                                                     class="p-2 w-b-w-s child_utility_class_<?php echo $rudetail['id']; ?> <?php echo $rbtyp['child_utility'][$rudetail['id']]['check'] == "Y" ? "" : "event_disabled"; ?>">
                                                     <input type="number"
@@ -1200,66 +1227,67 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             <div class="card-body" <?php echo $un_lockdyncss; ?>>
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label" for="customer_id"><?php echo __('Tenant List'); ?> <span
-                                                class="text-danger">*</span></label>
+                                                class="form-label" for="customer_id"><?php echo __('Tenant List'); ?>
+                                                <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <select name="customer_id" id="customer_id"
                                             class="form-control form-select js-example-basic-single requried_field"
                                             onchange="getCustomerId(this.value)">
 
                                             <?php foreach ($customers as $cust) { ?>
-                                                <option value="<?php echo $cust['id']; ?>" <?php echo $property_tenant_details['customer_id'] == $cust['id'] ? "selected" : ""; ?>
-                                                    <?php echo $_SESSION['userid'] != $cust['created_by'] ? "disabled" : ""; ?>>
-                                                    <?php echo $cust['display_name']; ?></option>
+                                                <option value="<?php echo $cust['id']; ?>" <?php echo $property_tenant_details['customer_id'] == $cust['id'] ? "selected" : ""; ?>     <?php echo $_SESSION['userid'] != $cust['created_by'] ? "disabled" : ""; ?>>
+                                                    <?php echo $cust['display_name']; ?>
+                                                </option>
                                             <?php } ?>
                                             <option value="0" <?php echo $property_tenant_details['customer_id'] == "" ? "selected" : ""; ?>>
-                                                <?php echo __('New Tenant'); ?></option>
+                                                <?php echo __('New Tenant'); ?>
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row" id="insertfrmopen" <?php echo $property_tenant_details['customer_id'] != "" ? 'style="pointer-events:none;opacity:0.8"' : ''; ?>>
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label" for="company_name"><?php echo __('Company Name'); ?> <span
-                                                class="text-danger">*</span></label>
+                                                class="form-label" for="company_name"><?php echo __('Company Name'); ?>
+                                                <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="company_name"
                                             id="company_name"
                                             value="<?php echo $property_tenant_details['company_name']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label" for="tenant_name"><?php echo __('Tenant Name'); ?> <span
-                                                class="text-danger">*</span></label>
+                                                class="form-label" for="tenant_name"><?php echo __('Tenant Name'); ?>
+                                                <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="tenant_name"
                                             id="tenant_name"
                                             value="<?php echo $property_tenant_details['tenant_name']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label" for="tenant_email"><?php echo __('Email'); ?> <span
-                                                class="text-danger">*</span></label>
+                                                class="form-label" for="tenant_email"><?php echo __('Email'); ?> <span
+                                                    class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="tenant_email"
                                             id="tenant_email"
                                             value="<?php echo $property_tenant_details['tenant_email']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label" for="tenant_mobile"><?php echo __('Mobile'); ?> <span
-                                                class="text-danger">*</span></label>
+                                                class="form-label" for="tenant_mobile"><?php echo __('Mobile'); ?> <span
+                                                    class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="number" class="form-control requried_field" name="tenant_mobile"
                                             id="tenant_mobile"
                                             value="<?php echo $property_tenant_details['tenant_mobile']; ?>">
                                     </div>
                                     <div class="form-group col-lg-8">
-                                        <label class="form-label" for="tenant_address"><?php echo __('Address'); ?> <span
-                                                class="text-danger">*</span></label>
+                                                class="form-label" for="tenant_address"><?php echo __('Address'); ?>
+                                                <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <textarea class="form-control requried_field" name="tenant_address"
                                             id="tenant_address"><?php echo $property_tenant_details['tenant_address']; ?></textarea>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <label class="form-label" for="tenant_pin_code"><?php echo __('Pin Code'); ?> <span
-                                                class="text-danger">*</span></label>
+                                                class="form-label" for="tenant_pin_code"><?php echo __('Pin Code'); ?>
+                                                <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="number" class="form-control requried_field" name="tenant_pin_code"
                                             id="tenant_pin_code"
@@ -1350,8 +1378,9 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         <input type="hidden" name="submittenantdetails">
                         <button type="button"
                             class="input-group-text addon-style cursor-pointer float-left btn btn-primary"
-                            onclick="formSubmitTenantDetails()"> <?php echo $rid != "" ? "Update" : "Submit"; ?></button>
-                                            </div>
+                            onclick="formSubmitTenantDetails()">
+                            <?php echo $rid != "" ? "Update" : "Submit"; ?></button>
+                    </div>
 
                 </div>
             </div>
@@ -1398,9 +1427,9 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
  text-white"></i> <?php echo __('Extend Agreement'); ?></button>
                         <?php } ?>
                         <?php /**
-                   if($property_tenant_details['lock_tenant']=='0' AND $property_tenant_details['originator']==$_SESSION['userid'] AND $property_tenant_details['un_lock_tenant_date']==''){ ?>
-                   <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-10" onclick="unlockTenant('<?php echo $rid; ?>')"><i class="ti-unlock text-white"></i>  <?php echo __('Amend'); ?></button>
-               <?php } **/ ?>
+                  if($property_tenant_details['lock_tenant']=='0' AND $property_tenant_details['originator']==$_SESSION['userid'] AND $property_tenant_details['un_lock_tenant_date']==''){ ?>
+                  <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-10" onclick="unlockTenant('<?php echo $rid; ?>')"><i class="ti-unlock text-white"></i>  <?php echo __('Amend'); ?></button>
+              <?php } **/ ?>
                     </div>
                 </div>
                 <div class="card-body ">
@@ -1442,7 +1471,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                             $totalary[$datekey] += $billingdetails1['rent'];
                                             ?>
                                             <td class="text-right p-2">
-                                                <?php echo customeummarmonyformateifine($billingdetails1['rent']); ?></td>
+                                                <?php echo customeummarmonyformateifine($billingdetails1['rent']); ?>
+                                            </td>
                                         <?php } ?>
                                     </tr>
                                 <?php } ?>
