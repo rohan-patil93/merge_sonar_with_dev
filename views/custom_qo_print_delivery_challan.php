@@ -7,13 +7,13 @@
 
 
 
-    <table
+    <table role="presentation"
         style="border: 1px solid #cccccc; border-collapse: collapse; background-color: #ffffff; margin-left: auto; margin-right: auto;">
 
         <!-- HEADER SECTION -->
         <tr>
             <td style="padding: 10px; border-bottom: 1px solid #cccccc;">
-                <table style="width: 100%; border-collapse: collapse;">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="font-size: 16px; font-weight: bold; font-family: Arial, sans-serif;">
                             <?= __('DELIVERY CHALLAN'); ?>
@@ -33,11 +33,11 @@
         <!-- CONTACT PERSON & CHALLAN INFO -->
         <tr>
             <td style="padding: 10px 10px 5px 10px;">
-                <table style="width: 100%; border-collapse: collapse;">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <!-- Left Info Box -->
                         <td style="width: 48%; vertical-align: top; border: 1px solid #cccccc; padding: 6px;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 11px;">
                                 <tr>
                                     <td style="width: 35%; font-weight: bold; padding: 2px;"><?= __('Contact Person'); ?></td>
                                     <td style="width: 5%; padding: 2px;">:</td>
@@ -65,7 +65,7 @@
 
                         <!-- Right Info Box -->
                         <td style="width: 48%; vertical-align: top; border: 1px solid #cccccc; padding: 6px;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 11px;">
                                 <tr>
                                     <td style="width: 35%; font-weight: bold; padding: 2px;"><?= __('Challan No.'); ?></td>
                                     <td style="width: 5%; padding: 2px;">:</td>
@@ -101,7 +101,7 @@
         <!-- ADDRESSES SECTION -->
         <tr>
             <td style="padding: 5px 10px;">
-                <table style="width: 100%; border-collapse: collapse;">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <!-- Billed by -->
                         <td style="width: 31%; vertical-align: top; border: 1px solid #cccccc; padding: 6px;">
@@ -110,7 +110,7 @@
                             <div style="font-weight: bold; font-size: 12px;"><?= __('Suresh Enterprises'); ?></div>
                             <div style="font-size: 12px;"><?= __('Suresh Enterprises'); ?></div>
 
-                            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 11px;">
                                 <tr>
                                     <td style="width: 30%; font-weight: bold; padding: 1px;"><?= __('GSTIN'); ?></td>
                                     <td style="width: 10%; padding: 1px;">:</td>
@@ -136,7 +136,7 @@
                         <?= __('NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063'); ?>
                     </div>
 
-                            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 11px;">
                                 <tr>
                                     <td style="width: 30%; font-weight: bold; padding: 1px;"><?= __('GSTIN'); ?></td>
                                     <td style="width: 10%; padding: 1px;">:</td>
@@ -162,7 +162,7 @@
                         <?= __('NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063'); ?>
                     </div>
 
-                            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 11px;">
                                 <tr>
                                     <td style="width: 30%; font-weight: bold; padding: 1px;"><?= __('GSTIN'); ?></td>
                                     <td style="width: 10%; padding: 1px;">:</td>
@@ -231,10 +231,10 @@
         <!-- PACKAGES & REMARKS SECTION -->
         <tr>
             <td style="padding: 5px 10px;">
-                <table style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse;">
+                <table role="presentation" style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse;">
                     <tr>
                         <td style="width: 50%; vertical-align: top; border-right: 1px solid #cccccc; padding: 6px;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 10px;">
                                 <tr>
                                     <td style="width: 45%; font-weight: bold; padding: 2px;"><?= __('Total Packages / Boxes'); ?></td>
                                     <td style="width: 5%; padding: 2px;">:</td>
@@ -275,13 +275,13 @@
         <!-- FOOTER SECTION -->
         <tr>
             <td style="padding: 5px 10px 10px 10px;">
-                <table style="width: 100%; border-collapse: collapse;">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <!-- Left: Acknowledgment Box -->
                         <td style="width: 35%; vertical-align: top; border: 1px solid #cccccc; padding: 6px;">
                             <div style="font-weight: bold; font-size: 10px; margin-bottom: 12px;">
                                 <?= __('Received the above goods in good condition'); ?></div>
-                            <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 10px;">
                                 <tr>
                                     <td style="width: 30%; padding: 4px;"><?= __('Name'); ?></td>
                                     <td style="width: 5%; padding: 2px;">:</td>
@@ -309,7 +309,7 @@
 
                         <!-- Middle: Schedule & Payment Terms -->
                         <td style="width: 28%; vertical-align: top;">
-                            <table style="width: 100%; border-collapse: collapse;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse;">
                                 <tr>
                                     <td style="border: 1px solid #cccccc; padding: 4px; text-align: center;">
                                         <div style="font-weight: bold; font-size: 10px;"><?= __('Delivery Schedule'); ?>
@@ -332,7 +332,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <table style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse; font-size: 10px; text-align: center;">
+                                        <table role="presentation" style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse; font-size: 10px; text-align: center;">
                                             <tr>
                                                 <td style="width: 50%; border: 1px solid #cccccc; padding: 4px;">02 Sep 2026</td>
                                                 <td style="width: 50%; border: 1px solid #cccccc; padding: 4px;">&#8377;35,966.40</td>

@@ -1515,9 +1515,9 @@ if (isset($_POST['Save'])) {
                                           <span class="cr">
                                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                           </span>
-                                          <span> <a href="#"
+                                          <span> <button type="button" class="btn btn-link p-0 text-decoration-none"
                                               onclick="showpopup('Earning','<?php echo $scvalue['id']; ?>','system_earnings');">
-                                              <label><?php echo $scvalue['name']; ?></label></a></span>
+                                              <span><?php echo $scvalue['name']; ?></span></button></span>
                                         </label>
                                       </div>
 
@@ -1526,10 +1526,10 @@ if (isset($_POST['Save'])) {
 
 
                                     <div class="col-xl-2">
-                                      <label><?php echo $scvalue['code']; ?></label>
+                                      <span><?php echo $scvalue['code']; ?></span>
                                     </div>
                                     <div class="col-xl-5">
-                                      <label>
+                                      <span>
                                         <?php $scvalue['varible_pay'] == '0' ?
                                           $display_text_calculationtype = "Variable; " : $display_text_calculationtype = "Fixed; ";
 
@@ -1548,7 +1548,7 @@ if (isset($_POST['Save'])) {
                                         }
 
                                         echo $display_text_calculationtype; ?>
-                                      </label>
+                                      </span>
                                     </div>
                                   </div>
                                   <?php
@@ -1557,10 +1557,10 @@ if (isset($_POST['Save'])) {
                               <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel"
                                 aria-labelledby="kt_tab_pane_2">
                                 <div class="text-right">
-                                  <a href="#" onclick="showpopup('Deduction','','system_earnings');"
+                                  <button type="button" onclick="showpopup('Deduction','','system_earnings');"
                                     class="btn btn-success waves-effect waves-light">
                                     <i class="ti-plus "></i> New Deduction
-                                  </a>
+                                  </button>
                                 </div>
                                 <div class="row mt-2">
                                   <div class="col-xl-5">
@@ -1591,9 +1591,9 @@ if (isset($_POST['Save'])) {
                                           <span class="cr">
                                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                           </span>
-                                          <span> <a href="#"
+                                          <span> <button type="button" class="btn btn-link p-0 text-decoration-none"
                                               onclick="showpopup('Deduction','<?php echo $scvalue['id']; ?>','system_earnings');">
-                                              <label><?php echo $scvalue['name']; ?></label> </a></span>
+                                              <span><?php echo $scvalue['name']; ?></span> </button></span>
                                         </label>
                                       </div>
 
@@ -1601,10 +1601,10 @@ if (isset($_POST['Save'])) {
 
                                     </div>
                                     <div class="col-xl-2">
-                                      <label><?php echo $scvalue['code']; ?></label>
+                                      <span><?php echo $scvalue['code']; ?></span>
                                     </div>
                                     <div class="col-xl-5">
-                                      <label>
+                                      <span>
                                         <?php $scvalue['varible_pay'] == '0' ?
                                           $display_text_calculationtype = "Variable; " : $display_text_calculationtype = "Fixed; ";
 
@@ -1623,7 +1623,7 @@ if (isset($_POST['Save'])) {
                                         }
 
                                         echo $display_text_calculationtype; ?>
-                                      </label>
+                                      </span>
                                     </div>
                                   </div>
                                   <?php
@@ -1632,10 +1632,10 @@ if (isset($_POST['Save'])) {
                               <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel"
                                 aria-labelledby="kt_tab_pane_3">
                                 <div class="text-right">
-                                  <a href="#" onclick="showreimburse('Reimbursement','','system_other_earnings');"
+                                  <button type="button" onclick="showreimburse('Reimbursement','','system_other_earnings');"
                                     class="btn btn-success waves-effect waves-light">
                                     <i class="ti-plus"></i> New Reimbursement
-                                  </a>
+                                  </button>
                                 </div>
                                 <div class="row mt-2">
                                   <div class="col-xl-5">
@@ -1668,19 +1668,19 @@ if (isset($_POST['Save'])) {
                                           <span class="cr">
                                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                           </span>
-                                          <span> <a href="#"
+                                          <span> <button type="button" class="btn btn-link p-0 text-decoration-none"
                                               onclick="showreimburse('Reimbursement','<?php echo $scvalue['id']; ?>','system_other_earnings');">
-                                              <label><?php echo $scvalue['earning_name']; ?></label> </a></span>
+                                              <span><?php echo $scvalue['earning_name']; ?></span> </button></span>
                                         </label>
                                       </div>
 
 
                                     </div>
                                     <div class="col-xl-2">
-                                      <label><?php echo $scvalue['system_code']; ?></label>
+                                      <span><?php echo $scvalue['system_code']; ?></span>
                                     </div>
                                     <div class="col-xl-5">
-                                      <label> <?php echo $scvalue['earning_upto_amount'] . " Per month"; ?></label>
+                                      <span> <?php echo $scvalue['earning_upto_amount'] . " Per month"; ?></span>
                                     </div>
                                   </div>
                                   <?php
@@ -1717,11 +1717,14 @@ if (isset($_POST['Save'])) {
               </div>
               <div class="">
                 <div class="modal-body j-pro j-content">
+                  <input type="hidden" id="pop_table_name" value="">
+                  <input type="hidden" id="pop_calculation_mode" value="">
+                  <input type="hidden" id="updaterowid" value="">
                   <div id="earnings_popup" style="display: none">
                     <div class="row">
                       <div class="form-group col-xl-6">
-                        <label>Component Category</label></br>
-                        <select class="form-select js-example-basic-single  kt_select2_46" title="Select"
+                        <label for="pop_component_category">Component Category</label></br>
+                        <select id="pop_component_category" class="form-select js-example-basic-single  kt_select2_46" title="Select"
                           aria-label="Select">
                           <option value=0> Select Any One </option>
                           <?php foreach ($salary_categories as $catname) { ?>
@@ -1731,7 +1734,7 @@ if (isset($_POST['Save'])) {
                         <span class="form-text text-muted"><?php echo $helptext['compcat']; ?> </span>
                       </div>
                       <div class="form-group col-lg-6">
-                        <label>Component Name</label>
+                        <label for="pop_name">Component Name</label>
                         <div class="input-group input-icon-right">
                           <input type="text" class="form-control" id="pop_name"
                             placeholder="<?php echo $placeholder['compname']; ?>" name="pop_name" title="Pop Name"
@@ -1742,7 +1745,7 @@ if (isset($_POST['Save'])) {
                     </div>
                     <div class="row">
                       <div class="form-group col-lg-6">
-                        <label>Component Type</label>
+                        <label for="pop_code">Component Type</label>
                         <div class="input-group input-icon-right">
                           <input type="text" class="form-control" id="pop_code"
                             placeholder="<?php echo $placeholder['comptype']; ?>" name="pop_code" title="Pop Code"
@@ -1751,7 +1754,7 @@ if (isset($_POST['Save'])) {
                         <span class="form-text text-muted"><?php echo $helptext['comptype']; ?> </span>
                       </div>
                       <div class="form-group col-lg-6">
-                        <label>Name in Payslip</label>
+                        <label for="pop_payslip_name">Name in Payslip</label>
                         <div class="input-group input-icon-right">
                           <input type="text" class="form-control" id="pop_payslip_name"
                             placeholder="<?php echo $placeholder['compdisplay']; ?>" name="pop_payslip_name"
@@ -1814,7 +1817,7 @@ if (isset($_POST['Save'])) {
                     </div>
                     <div class="row">
                       <div class="col-lg-6 form-group">
-                        <label>Calculation Value</label>
+                        <label for="pop_calculation_number">Calculation Value</label>
                         <div class="input-group input-group-button">
                           <button class="btn btn-info" type="button">Rs.</button>
                           <input type="text" id="pop_calculation_number"
@@ -1824,8 +1827,8 @@ if (isset($_POST['Save'])) {
                         </div>
                       </div>
                       <div class="col-xl-6 form-group">
-                        <div><label>Component Category</label> </div>
-                        <select class="form-select js-example-basic-single kt_select2_47" title="Select"
+                        <div><label for="pop_calc_component_category">Component Category</label> </div>
+                        <select id="pop_calc_component_category" class="form-select js-example-basic-single kt_select2_47" title="Select"
                           aria-label="Select">
                           <option value="">Select Any One</option>
                           <?php foreach ($earnings_componentlist as $earn) { ?>
@@ -1833,18 +1836,13 @@ if (isset($_POST['Save'])) {
                           <?php } ?>
                         </select>
                       </div>
-                      <input type="hidden" id="pop_table_name" value="">
-                      <input type="hidden" id="pop_calculation_mode" value="">
-                      <input type="hidden" id="updaterowid" value="">
                     </div>
                   </div>
 
                   <div id="reimburse_popup" style="display: none">
-                    <input type="hidden" id="pop_table_name" value="">
-                    <input type="hidden" id="updaterowid" value="">
                     <div class="row">
                       <div class="form-group col-lg-6">
-                        <label>Component Name</label>
+                        <label for="reimpop_name">Component Name</label>
                         <div class="input-group input-icon-right">
                           <input type="text" class="form-control" id="reimpop_name"
                             placeholder="<?php echo $placeholder['rcompname']; ?>" name="reimpop_name"
@@ -1853,7 +1851,7 @@ if (isset($_POST['Save'])) {
                         <!-- <span class="form-text text-muted"><?php echo $helptext['compname']; ?> </span> -->
                       </div>
                       <div class="form-group col-lg-6">
-                        <label>Component Type</label>
+                        <label for="reimpop_code">Component Type</label>
                         <div class="input-group input-icon-right">
                           <input type="text" class="form-control" id="reimpop_code"
                             placeholder="<?php echo $placeholder['rcomptype']; ?>" name="reimpop_code"
@@ -1862,7 +1860,7 @@ if (isset($_POST['Save'])) {
                         <!-- <span class="form-text text-muted"><?php echo $helptext['rcomptype']; ?> </span> -->
                       </div>
                       <div class="form-group col-lg-6">
-                        <label>Name in Payslip</label>
+                        <label for="reimpop_payslip_name">Name in Payslip</label>
                         <div class="input-group input-icon-right">
                           <input type="text" class="form-control" id="reimpop_payslip_name"
                             placeholder="<?php echo $placeholder['rcompdisplay']; ?>" name="reimpop_payslip_name"
@@ -1871,7 +1869,7 @@ if (isset($_POST['Save'])) {
                         <!-- <span class="form-text text-muted"><?php echo $helptext['rcompdisplay']; ?> </span> -->
                       </div>
                       <div class="form-group col-lg-6">
-                        <label>Enter Amount</label>
+                        <label for="reimpop_calculation_number">Enter Amount</label>
                         <!-- <div class="input-group input-icon-right">
   <div class="input-group-prepend"><span class="input-group-text"><span>Rs</span></span></div>
   <input type="text" class="form-control" id="reimpop_calculation_number" placeholder="<?php echo $placeholder['compamt']; ?>" name="reimpop_calculation_number" title="Reimpop Calculation Number" aria-label="Reimpop Calculation Number">

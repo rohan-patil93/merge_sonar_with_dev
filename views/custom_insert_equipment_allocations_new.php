@@ -247,9 +247,9 @@ function addMorefloorSpaces(){
 
                 <button type="button" class="btn btn-link p-0 border-0 all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $editbtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>"><i class="fa fa-edit"></i> <?php echo __('Edit'); ?></button>
 
-                <button type="button" class="btn btn-link p-0 border-0 cursor-pointer m-l-20 text-danger" id="allocateequipment_btn_<?php echo $cabincnt; ?>"> <?php if($cabin['id']!=""){ ?> <span onclick="removeEquipmentAllocations('<?php echo $cabin['id']; ?>')"><i class="fa fa-trash"></i> <?php echo __('Remove'); ?></button>
-                    <?php } ?>
-                </span>
+                <?php if($cabin['id']!=""){ ?>
+                    <button type="button" class="btn btn-link p-0 border-0 cursor-pointer m-l-20 text-danger" id="allocateequipment_btn_<?php echo $cabincnt; ?>" onclick="removeEquipmentAllocations('<?php echo $cabin['id']; ?>')"><i class="fa fa-trash"></i> <?php echo __('Remove'); ?></button>
+                <?php } ?>
                 <span class="text-danger sub_error d-block" id="submit_error_<?php echo $cabincnt; ?>" ></span>
                 </div>
             </div>

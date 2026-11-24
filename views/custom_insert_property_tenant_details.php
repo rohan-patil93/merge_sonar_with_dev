@@ -1106,7 +1106,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                     <table class="table table-hover m-b-0"
                                         id="utility_bill_manual_amount_<?php echo $rbt['id']; ?>" <?php echo $rbtyp['utility_bill_auto_and_fix'] == 'M' ? "" : ATTR_DISPLAY_NONE_STYLE; ?>>
 
-                                        <head>
+                                        <thead>
                                             <tr>
                                                 <th style="width: 5%;"></th>
                                                 <th style="width: 40%;"><?php echo __('Particulars'); ?></th>
@@ -1115,13 +1115,14 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                                 <th class="text-right" style="width: 20%;"><?php echo __('Rate'); ?></th>
                                                 <th style="width: 10%;"><?php echo __('UOM'); ?></th>
                                             </tr>
-                                        </head>
+                                        </thead>
                                         <?php foreach ($rental_bill_sub_types[$rbt['id']] as $rudetail) { ?>
                                             <tr>
                                                 <td class="p-2">
                                                     <div class="checkbox-fade fade-in-primary m-0">
-                                                        <label class="form-label  m-0 w-b-w-s">
+                                                        <label class="form-label  m-0 w-b-w-s" aria-label="<?php echo htmlspecialchars(__('Select Utility'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <input type="checkbox" value="Y"
+                                                                aria-label="<?php echo htmlspecialchars(__('Select Utility'), ENT_QUOTES, 'UTF-8'); ?>"
                                                                 name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][check]"
                                                                 <?php echo $rbtyp['child_utility'][$rudetail['id']]['check'] == "Y" ? "checked" : ""; ?>
                                                                 onchange="childUtilityCheckBocChecked(this,'<?php echo $rudetail['id']; ?>')">
@@ -1142,6 +1143,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                                 <td
                                                     class="p-2 w-b-w-s child_utility_class_<?php echo $rudetail['id']; ?> <?php echo $rbtyp['child_utility'][$rudetail['id']]['check'] == "Y" ? "" : "event_disabled"; ?>">
                                                     <input type="number"
+                                                        aria-label="<?php echo htmlspecialchars(__('Qty'), ENT_QUOTES, 'UTF-8'); ?>"
                                                         name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][qty]"
                                                         class="form-control text-right"
                                                         value="<?php echo $rbtyp['child_utility'][$rudetail['id']]['qty']; ?>">
@@ -1149,6 +1151,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                                 <td
                                                     class="p-2 w-b-w-s child_utility_class_<?php echo $rudetail['id']; ?> <?php echo $rbtyp['child_utility'][$rudetail['id']]['check'] == "Y" ? "" : "event_disabled"; ?>">
                                                     <select
+                                                        aria-label="<?php echo htmlspecialchars(__('Condition'), ENT_QUOTES, 'UTF-8'); ?>"
                                                         name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][condition]"
                                                         class="form-control js-example-basic-single">
                                                         <option value="+" <?php echo $rbtyp['child_utility'][$rudetail['id']]['condition'] == "+" ? "selected" : ""; ?>>+</option>
@@ -1161,12 +1164,14 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                                 <td
                                                     class="p-2 child_utility_class_<?php echo $rudetail['id']; ?> <?php echo $rbtyp['child_utility'][$rudetail['id']]['check'] == "Y" ? "" : "event_disabled"; ?>">
                                                     <input type="number"
+                                                        aria-label="<?php echo htmlspecialchars(__('Rate'), ENT_QUOTES, 'UTF-8'); ?>"
                                                         name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][rate]"
                                                         class="form-control text-right"
                                                         value="<?php echo $rbtyp['child_utility'][$rudetail['id']]['rate']; ?>">
                                                 </td>
                                                 <td class="p-2">
                                                     <select
+                                                        aria-label="<?php echo htmlspecialchars(__('UOM'), ENT_QUOTES, 'UTF-8'); ?>"
                                                         name="utility_bill_manual_amount[<?php echo $rbt['id']; ?>][<?php echo $rudetail['id']; ?>][uom]"
                                                         class="form-control js-example-basic-single">
 
@@ -1195,7 +1200,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             <div class="card-body" <?php echo $un_lockdyncss; ?>>
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label "><?php echo __('Tenant List'); ?> <span
+                                        <label class="form-label" for="customer_id"><?php echo __('Tenant List'); ?> <span
                                                 class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <select name="customer_id" id="customer_id"
@@ -1214,7 +1219,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                 </div>
                                 <div class="row" id="insertfrmopen" <?php echo $property_tenant_details['customer_id'] != "" ? 'style="pointer-events:none;opacity:0.8"' : ''; ?>>
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label "><?php echo __('Company Name'); ?> <span
+                                        <label class="form-label" for="company_name"><?php echo __('Company Name'); ?> <span
                                                 class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="company_name"
@@ -1222,7 +1227,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                             value="<?php echo $property_tenant_details['company_name']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label "><?php echo __('Tenant Name'); ?> <span
+                                        <label class="form-label" for="tenant_name"><?php echo __('Tenant Name'); ?> <span
                                                 class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="tenant_name"
@@ -1230,7 +1235,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                             value="<?php echo $property_tenant_details['tenant_name']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label "><?php echo __('Email'); ?> <span
+                                        <label class="form-label" for="tenant_email"><?php echo __('Email'); ?> <span
                                                 class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="tenant_email"
@@ -1238,7 +1243,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                             value="<?php echo $property_tenant_details['tenant_email']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label class="form-label "><?php echo __('Mobile'); ?> <span
+                                        <label class="form-label" for="tenant_mobile"><?php echo __('Mobile'); ?> <span
                                                 class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="number" class="form-control requried_field" name="tenant_mobile"
@@ -1246,14 +1251,14 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                             value="<?php echo $property_tenant_details['tenant_mobile']; ?>">
                                     </div>
                                     <div class="form-group col-lg-8">
-                                        <label class="form-label "><?php echo __('Address'); ?> <span
+                                        <label class="form-label" for="tenant_address"><?php echo __('Address'); ?> <span
                                                 class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <textarea class="form-control requried_field" name="tenant_address"
                                             id="tenant_address"><?php echo $property_tenant_details['tenant_address']; ?></textarea>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <label class="form-label "><?php echo __('Pin Code'); ?> <span
+                                        <label class="form-label" for="tenant_pin_code"><?php echo __('Pin Code'); ?> <span
                                                 class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="number" class="form-control requried_field" name="tenant_pin_code"
@@ -1272,13 +1277,13 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-lg-4">
-                                        <label class="form-label "><?php echo __('Name'); ?></label>
+                                        <span class="form-label d-block fw-bold"><?php echo __('Name'); ?></span>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <label class="form-label "><?php echo __('Address'); ?></label>
+                                        <span class="form-label d-block fw-bold"><?php echo __('Address'); ?></span>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <label class="form-label "><?php echo __('Details'); ?></label>
+                                        <span class="form-label d-block fw-bold"><?php echo __('Details'); ?></span>
                                     </div>
 
                                 </div>
@@ -1294,19 +1299,23 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                             <div class="form-group col-lg-4  p-1">
                                                 <input type="text" name="following_name[]"
                                                     class="form-control form-control-sm"
+                                                    aria-label="<?php echo htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     value="<?php echo $fa['following_name']; ?>"
                                                     placeholder="<?php echo __('Name'); ?>">
 
                                             </div>
                                             <div class="form-group col-lg-4  p-1">
                                                 <textarea class="form-control" name="following_address[]"
+                                                    aria-label="<?php echo htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     style="height: 91px;"><?php echo $fa['following_address']; ?></textarea>
                                             </div>
                                             <div class="form-group col-lg-4  p-1">
                                                 <input type="text" class="form-control" name="following_email[]"
+                                                    aria-label="<?php echo htmlspecialchars(__('Email Id'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     value="<?php echo $fa['following_email']; ?>"
                                                     placeholder="<?php echo __('Email Id'); ?>">
                                                 <input type="number" class="form-control mt-2" name="following_mobile[]"
+                                                    aria-label="<?php echo htmlspecialchars(__('Contact Number'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     value="<?php echo $fa['following_mobile']; ?>"
                                                     placeholder="<?php echo __('Contact Number'); ?>">
                                             </div>

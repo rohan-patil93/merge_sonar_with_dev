@@ -39,7 +39,7 @@ function replacestringwithpreview($data,$val){
         </div>
     </div>
 <div class="" style="  width: 100%;">
-<table style="padding: 20px; background-color: #f5f5f5; width: 100%; display: inline-block; border-collapse: collapse;">
+<table role="presentation" style="padding: 20px; background-color: #f5f5f5; width: 100%; display: inline-block; border-collapse: collapse;">
         <tr>
         <td style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424;padding:15px 0px;">
         <img class="fix" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
@@ -47,7 +47,7 @@ function replacestringwithpreview($data,$val){
         </tr>
         <tr>
         <td>
-        <table style="padding: 10px; background-color: #FFFFFF; width: 100%; display: inline-block; border-collapse: collapse;">
+        <table role="presentation" style="padding: 10px; background-color: #FFFFFF; width: 100%; display: inline-block; border-collapse: collapse;">
         <tr>
         <td style="padding-left:32px; padding-top:20px; font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424" >
         <?php  echo replacestringwithpreview($inputFildsArray, $emailHeader);?>
@@ -149,18 +149,18 @@ function replacestringwithpreview($data,$val){
         </div>
     </div>
 
-    <table style="width: 100%; background-color: #f6f8f1; border-collapse: collapse;">
+    <table role="presentation" style="width: 100%; background-color: #f6f8f1; border-collapse: collapse;">
                 <tr>
                 <td>
                 <!--[if (gte mso 9)|(IE)]>
-                <table style="width: 600px; margin-left: auto; margin-right: auto; border-collapse: collapse;">
+                <table role="presentation" style="width: 600px; margin-left: auto; margin-right: auto; border-collapse: collapse;">
                 <tr>
                 <td>
                 <![endif]-->
-                <table class="content" style="background-color: #ffffff; margin-left: auto; margin-right: auto; border-collapse: collapse;">
+                <table role="presentation" class="content" style="background-color: #ffffff; margin-left: auto; margin-right: auto; border-collapse: collapse;">
                 <tr>
                 <td class="header" style="background-color: #f0f0f0;">
-                <table style="width: 70px; border-collapse: collapse;">
+                <table role="presentation" style="width: 70px; border-collapse: collapse;">
                 <tr>
                 <td style="height: 70px; padding: 15px 0;">
                 <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" /><br>
@@ -173,7 +173,7 @@ function replacestringwithpreview($data,$val){
                 </tr>
                 <tr>
                 <td class="innerpadding borderbottom">
-                <table style="width: 100%; border-collapse: collapse;">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
                 <tr>
                 <td class="h2">
                 <?php echo  replacestringwithpreview($inputFildsArray, $emailHeader);?>
@@ -191,7 +191,7 @@ function replacestringwithpreview($data,$val){
                 </tr>
                 <tr>
                 <td class="innerpadding borderbottom">
-                <table style="width: 100%; border-collapse: collapse;">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
                 <tr>
                 <td class="h2">
                 <?php echo  replacestringwithpreview($inputFildsArray, $emailAddressed);?>
@@ -208,10 +208,10 @@ function replacestringwithpreview($data,$val){
                 </tr>
                 <tr>
                 <td style="padding: 20px 0 0 0;">
-                <table>
+                <table role="presentation">
                 <tr>
                 <td>
-                <a role="button" class="buttonwrapper button" target="_blank" rel="noopener noreferrer" href="#"><?= __('View Order') ?></a>
+                <a class="buttonwrapper button" target="_blank" rel="noopener noreferrer" href="#"><?= __('View Order') ?></a>
                 </td>
                 </tr>
                 </table>
@@ -240,7 +240,7 @@ function replacestringwithpreview($data,$val){
             <h6 class="float-end"><?php echo date("h : i A"); ?></h6>
         </div>
     </div>
-    <table style="width: 70%; padding: 20px; background-color: #f5f5f5; margin-left: auto; margin-right: auto; border-collapse: collapse;">
+    <table role="presentation" style="width: 70%; padding: 20px; background-color: #f5f5f5; margin-left: auto; margin-right: auto; border-collapse: collapse;">
         <tr>
         <td style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424; padding:15px 0px;">
         <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
@@ -249,7 +249,7 @@ function replacestringwithpreview($data,$val){
         </tr>
         <tr>
         <td>
-        <table style="width: 100%; padding: 10px; background-color: #FFFFFF; border-collapse: collapse;">
+        <table role="presentation" style="width: 100%; padding: 10px; background-color: #FFFFFF; border-collapse: collapse;">
         <tr>
         <td style="padding-left:32px; padding-top:20px; font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424" >
                 <?php echo  replacestringwithpreview($inputFildsArray, $emailHeader);?>

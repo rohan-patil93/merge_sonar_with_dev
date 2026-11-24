@@ -2849,11 +2849,6 @@ class userClass
             $query2 = $callConfig->selectQuery($tables['item'], '*', $whr2, '', '', '');
             $itemrows = $callConfig->getAllRows($query2);
             $total_item = count((array) $itemrows);
-            if ($total_item != 0) {
-                /* unused */
-            } else {
-                /* unused */
-            }
             $itemsitemid = array();
             foreach ($itemrows as $itemrow) {
                 $itemsitemid[$itemrow->item_id] = $itemrow->item_id;
@@ -3579,11 +3574,6 @@ class userClass
         exit;
         $mtable = 'journal_vouchers';
         $fieldarray = $this->toGetInvoicetables();
-        if ($post['old_place'] == $post['place_of_supply']) {
-            /* unused */
-        } else {
-            /* unused */
-        }
         $status = $post['status_values'] != '' ? $post['status_values'] : ST_DRAFT;
         if ($type == 'update' && $status > ST_DRAFT) {
             $sarray = array('comments' => $post['comments'], 'response_type' => $status, 'user_id' => $post['updated_by'], 'response_date' => date("Y-m-d"), 'table' => $post['table_name'], 'hid' => $post['hid'], 'amount' => $post['grandtotal'], 'status_old' => $post['status_old_value'], 'company_id' => $post['company_id']);
@@ -30721,16 +30711,6 @@ emp.display_name";
         }
         $newtotalworkingdays = $this->togetnewwithoutworkindays($date1, $date2);
         foreach ($emps as $emp) {
-
-            if ($cfdata->professional_tax_type == 1) {
-                /* unused */
-            } elseif ($cfdata->professional_tax_type == 2) {
-                /* unused */
-            } elseif ($cfdata->professional_tax_type == 3) {
-                /* unused */
-            } else {
-                /* unused */
-            }
             if (isset($cdata[$emp->id])) {
 
                 $mndata = $cdata[$emp->id];

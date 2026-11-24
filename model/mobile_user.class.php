@@ -1582,7 +1582,7 @@ class mobileUserClass extends userClass{
          global $callConfig;
          $complaint_image = '';
          $insert_array = array('complaint_name'=>$post['complaint_name'],'complaint_type'=>$post['complaint_type'], 'complaint_priority'=>$post['complaint_priority'],'building_id'=>$post['building_id'],'building_floor_id'=>$post['building_floor_id'],'building_floor_space_id'=>$post['building_floor_space_id'],self::KEY_ITEM_ID=>$post[self::KEY_ITEM_ID],'asset_id'=>$post['asset_id'],'complaint_image'=>$complaint_image, self::KEY_REMARKS=>$post[self::KEY_REMARKS],self::KEY_IS_ACTIVE=>0,self::KEY_CURRENT_STATUS=>0,self::KEY_UPDATED_BY=>$get[self::KEY_USER_ID]);
-         $callConfig->updateRecord('complaints', $insert_array,'id',$get['complaint_id']);
+         $res = $callConfig->updateRecord('complaints', $insert_array,'id',$get['complaint_id']);
         $ret['Update'] =$res;
         return $ret;
          //complaint_name, complaint_type, complaint_description, building_id, building_floor_id, building_floor_space_id, item_id, asset_id, complaint_image, remarks
@@ -1828,7 +1828,7 @@ class mobileUserClass extends userClass{
              $plan_date = $post[self::KEY_PLAN_DATE] !="" ? $post[self::KEY_PLAN_DATE] : $feilddata->plan_date;
              $plan_time = $post['plan_time'] !="" ? $post['plan_time'] : $feilddata->plan_time;
              $insert_array = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID], self::KEY_USER_ID=>$user_id, 'contact_person'=>$feilddata->contact_person, 'mobile'=>$feilddata->mobile, self::KEY_PLAN_DATE=>$plan_date, 'plan_time'=>$plan_time, 'plan_longitude'=>$feilddata->plan_longitude, 'plan_latitude'=>$feilddata->plan_latitude, 'plan_distance'=>$feilddata->plan_distance, 'plan_location'=>$feilddata->plan_location, 'plan_address'=>$feilddata->plan_address,  self::KEY_IS_ACTIVE=>'0', self::KEY_CURRENT_STATUS=>'0',self::KEY_CREATED_DATE=>date(self::DATETIME_FORMAT_YMD_HIS), self::KEY_CREATED_BY=>$get[self::KEY_USER_ID]);
-             $callConfig->insertRecord('field_work_daily_plans',$insert_array);
+             $res = $callConfig->insertRecord('field_work_daily_plans',$insert_array);
              $uparray = array('comments'=>$post['comments'], 'update_type'=>$post['update_type'], self::KEY_REF_ID=>$res[self::KEY_LASTID]);
              if($post['update_type']=='REASSIGN'){
                  $query = "SELECT display_name FROM application_users WHERE id=".$user_id;
@@ -2242,6 +2242,7 @@ class mobileUserClass extends userClass{
         $originator_state_id = $application_usersres->default_state_id;
         $currency_id = "";
         list($mainamount, $maintax_amount_total, $maintotal_amount) = $this->calculatePurchaseOrderTotals($items, $post['data']);
+        $supplier_state_id = isset($post['supplier_state_id']) ? $post['supplier_state_id'] : ($customer->shipping_state ?? ($customer->billing_state ?? ''));
         $tax_state = ($supplier_state_id == $originator_state_id) ? "S" : "I";
         $transaction_number=$this->toGetApplicationSerialNumber($application_table,$post);
         $maintransactionary = array(self::KEY_COMPANY_ID=>$company_id,self::KEY_TRANSACTION_NUMBER=>$transaction_number,self::KEY_TRANSACTION_DATE=>date(self::DATE_FORMAT_YMD),'cost_center_id'=>$application_usersres->cost_center,self::KEY_PARTY_ID=>$customer_id,'party_name'=>$customer->display_name,'party_email'=>$customer->email,'party_tax_number'=>$customer->customer_tax_reg_no,'party_phone'=>$customer->phone,'party_address'=>$customer->billing_address, 'party_ship_adderss    '=>$customer->shipping_address, 'amount'=>$mainamount,self::KEY_TAX_AMOUNT=>$maintax_amount_total,self::KEY_TOTAL_AMOUNT=>$maintotal_amount, 'order_required_date'=>$post['order_required_date'],'pending_amount'=>$maintotal_amount,'transaction_location_id'=>$application_usersres->location_id, 'transaction_warehouse_id'=>$application_usersres->default_warehouse_id, 'originator_currency_id'=>$originator_currency_id, 'currency_id'=>$currency_id, 'currency_rate'=>'1' ,'originator'=>$get[self::KEY_USER_ID], 'originator_state_id'=>$originator_state_id,'payment_terms'=>'','tax_state'=>$tax_state,self::KEY_IS_ACTIVE=>'0',self::KEY_CURRENT_STATUS=>'199',self::KEY_CREATED_BY=>1,self::KEY_CREATED_DATE=>date(self::DATETIME_FORMAT_YMD_HIS));
@@ -2475,7 +2476,7 @@ class mobileUserClass extends userClass{
             $levcatres=$callConfig->getRow($levcatsql);
 
             $insert_array = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID], self::KEY_EMPLOYEE_ID=>$post[self::KEY_EMPLOYEE_ID], self::KEY_LEAVE_TYPE_ID=>$post[self::KEY_LEAVE_TYPE_ID], self::KEY_LEAVE_FROM=>$this->dateconvertdbformat($post[self::KEY_LEAVE_FROM]), self::KEY_LEAVE_TO=>$this->dateconvertdbformat($post[self::KEY_LEAVE_TO]), self::KEY_LEAVE_DAYS=>$leave_days, 'application_date'=>date(self::DATETIME_FORMAT_YMD_HIS), self::KEY_SPECIAL_REQUEST=>$post[self::KEY_SPECIAL_REQUEST], self::KEY_CURRENT_STATUS=>'0', self::KEY_IS_ACTIVE=>'0', self::KEY_CREATED_BY=>$post[self::KEY_USER_ID],'leave_category_id'=>$levcatres->leave_category_id);
-            $callConfig->insertRecord(self::TBL_EMPLOYEE_LEAVES,$insert_array);
+            $res = $callConfig->insertRecord(self::TBL_EMPLOYEE_LEAVES,$insert_array);
             $transaction_id = $res[self::KEY_LASTID];
             $res[self::KEY_MESSAGE] = 'Record Inserted Successfully';
             $return  = $res;
@@ -2505,6 +2506,7 @@ class mobileUserClass extends userClass{
     }
     public function getMobileReportingManagerEmployeeLeave($get){
         global $callConfig;
+        $useriid = $get[self::KEY_USER_ID] ?? ($get['user_id'] ?? '');
         $leave_from = $get[self::KEY_LEAVE_FROM] !=""?$get[self::KEY_LEAVE_FROM]:'2024-07-11';
         $leave_to = $get[self::KEY_LEAVE_TO] !=""?$get[self::KEY_LEAVE_TO]:'2024-07-11';
         $condition = "";
@@ -3031,7 +3033,7 @@ class mobileUserClass extends userClass{
             return array(self::KEY_STATUS=>'fail',self::KEY_MESSAGE=>'user already exits');
         }else{
             $insert_array = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID],self::KEY_PROJECT_ID=>$post[self::KEY_PROJECT_ID], 'project_task_id'=>$post[self::KEY_TASK_ID], 'project_role_id'=>$post['role_id'],self::KEY_USER_ID=>$post['member_ids'],self::KEY_IS_ACTIVE=>'0',self::KEY_CURRENT_STATUS=>'0',self::KEY_CREATED_BY=>$get[self::KEY_USER_ID],self::KEY_CREATED_DATE=>date(self::DATETIME_FORMAT_YMD_HIS));
-            $callConfig->insertRecord('project_task_teams',$insert_array);
+            $insert = $callConfig->insertRecord('project_task_teams',$insert_array);
 
             $task_query = "SELECT id, task_name, project_id FROM project_task_details WHERE company_id = ".$get[self::KEY_COMPANY_ID]."   AND id =".$post[self::KEY_TASK_ID]." is_active = 0";
             $task_data = $callConfig->getRow($task_query);
@@ -3183,7 +3185,7 @@ class mobileUserClass extends userClass{
         $update = "update user_mobile_details set is_active = NULL, updated_by = ".$get[self::KEY_USER_ID]." where user_id ='".$get[self::KEY_USER_ID].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $callConfig->executeQuery($update);
         $upquery = "UPDATE appliccation_user_login_tokens SET s_active = NULL, updated_by = ".$get[self::KEY_USER_ID]." WHERE company_id= ".$get[self::KEY_COMPANY_ID].self::SQL_AND_USER_ID.$get[self::KEY_USER_ID]." AND login_type = 'Mobile' AND is_active=0";
-        $callConfig->executeQuery($upquery);
+        $update_data = $callConfig->executeQuery($upquery);
         return $update_data;
     }
     public function togetpersonalgatewaydetails($get){
@@ -3220,10 +3222,10 @@ class mobileUserClass extends userClass{
             $insert_array = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID],self::KEY_USER_ID=>$post[self::KEY_EMP_ID] ?? null,'vehicle_number'=>$post['vehicle_number'] ?? null,'notes'=>$post['notes'] ?? null,'person_details'=>$person_details,'visit_purpose'=>$post['visit_purpose'] ?? null,self::KEY_LOCATION=>$post[self::KEY_LOCATION] ?? null,'exit_date'=>$post['entry_date'] ?? null,'exit_time'=>$post['entry_time'] ?? null,'method_type'=>$post['method_type'] ?? null,'authorized_by'=>$get[self::KEY_USER_ID], self::KEY_CREATED_BY=>$get[self::KEY_USER_ID],"gateway_type" => $post['gateway_type'],"process_val" => 1);
 
             // $callConfig->updateRecord('transport_personal_gateway',$insert_array,'id',$get['rid']); changed by koti
-            $callConfig->updateRecord(self::TBL_TRANSPORT_PERSONAL_GATEWAY,$insert_array,'id',$get['rid']);
+            $res = $callConfig->updateRecord(self::TBL_TRANSPORT_PERSONAL_GATEWAY,$insert_array,'id',$get['rid']);
         }else{
         $insert_array = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID],self::KEY_USER_ID=>$post[self::KEY_EMP_ID] ?? null,'vehicle_number'=>$post['vehicle_number'] ?? null,'notes'=>$post['notes'] ?? null,'person_details'=>$person_details,'visit_purpose'=>$post['visit_purpose'] ?? null,self::KEY_LOCATION=>$post[self::KEY_LOCATION] ?? null,'exit_date'=>$post['entry_date'] ?? null,'exit_time'=>$post['entry_time'] ?? null,'method_type'=>$post['method_type'] ?? null,'authorized_by'=>$get[self::KEY_USER_ID], self::KEY_IS_ACTIVE=>0,self::KEY_CURRENT_STATUS=>0,self::KEY_CREATED_BY=>$get[self::KEY_USER_ID],"gateway_type" => $post['gateway_type'],"process_val" => 1);
-            $callConfig->insertRecord(self::TBL_TRANSPORT_PERSONAL_GATEWAY,$insert_array);
+            $res = $callConfig->insertRecord(self::TBL_TRANSPORT_PERSONAL_GATEWAY,$insert_array);
         }
         // emp_id, employee_name, employee_contact, vehicle_number, visit_purpose, location, entry_date, entry_time, method_type,
         return $res;
@@ -4835,6 +4837,10 @@ public function GETProcurementVendorLedger($get){
     public function togetmobileadminhrdashboard($get){
          global $callConfig;
          $endate = date('Y')."-12-31";
+         $thisyearfirstmonthlastdate = date('Y') . "-01-01";
+         $thisyearfirstmonth = date('Y') . "-01";
+         $thismonthstartdate = date("Y-m-d", strtotime('first day of this month', time()));
+         $thismonthenddate = date("Y-m-d", strtotime('last day of this month', time()));
         //new
         if($get['dash_date']!=""){
             $today_date = $get['dash_date'];
@@ -5316,14 +5322,20 @@ public function GETProcurementVendorLedger($get){
          AND emp.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') ) ELSE( emp.vendor_id = (SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'))END))a";
 
          $sqqlgraphres = $callConfig->getRow($sqqlgraph);
-         foreach($sqqlgraphres as $sqkey=>$sqq){
-             $passsqqlgraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+         $passsqqlgraphres = array();
+         if ($sqqlgraphres) {
+             foreach($sqqlgraphres as $sqkey=>$sqq){
+                 $passsqqlgraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+             }
          }
          $data['graphjoinandleave'] = $passsqqlgraphres;
          $salarygraph ="SELECT sum(m12) as j12, sum(m11) as j11, sum(m10) as j10, sum(m9) as j9, sum(m8) as j8, sum(m7) as j7, sum(m6) as j6, sum(m5) as j5, sum(m4) as j4, sum(m3) as j3, sum(m2) as j2, sum(m1) as j1 FROM ( SELECT DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt, DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m')dojm, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M12, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M11, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M10, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M9, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M8, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M7, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M6, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M5, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M4, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M3, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M2, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M1, DATE_FORMAT(emp.joining_date, '%Y-%m') monyr FROM employees emp, pay_run_summary prs, pay_run_summary_components prsc WHERE emp.company_id = 1 AND emp.id = prs.employee_id AND emp.company_id = prs.company_id AND prsc.company_id = prs.company_id AND prsc.pay_run_summary_id = prs.id AND prsc.employee_id = emp.id AND prsc.component_id = 1 AND (( DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') >= '".$thisyearfirstmonth."') AND ( DATE_FORMAT(CONCAT(prs.pay_year, '-',prs.pay_month, '-','01'), '%Y-%m') <= '".$thisyearfirstmonth."')) AND prsc.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') )ELSE ( emp.vendor_id = ( SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."' ) ) END ) ) a";
          $salarygraphres = $callConfig->getRow($salarygraph);
-         foreach($salarygraphres as $sqkey=>$sqq){
-             $passsalarygraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+         $passsalarygraphres = array();
+         if ($salarygraphres) {
+             foreach($salarygraphres as $sqkey=>$sqq){
+                 $passsalarygraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+             }
          }
          $data['salarygraphres'] = $passsalarygraphres;
 
@@ -6288,6 +6300,10 @@ public function GETProcurementVendorLedger($get){
     public function togetmobilemanagerdashboard($get){
          global $callConfig;
          $endate = date('Y')."-12-31";
+         $thisyearfirstmonthlastdate = date('Y') . "-01-01";
+         $thisyearfirstmonth = date('Y') . "-01";
+         $thismonthstartdate = date("Y-m-d", strtotime('first day of this month', time()));
+         $thismonthenddate = date("Y-m-d", strtotime('last day of this month', time()));
         //new
         if($get['dash_date']!=""){
             $today_date = $get['dash_date'];
@@ -6537,14 +6553,20 @@ public function GETProcurementVendorLedger($get){
          AND emp.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') ) ELSE( emp.vendor_id = (SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'))END))a";
 
          $sqqlgraphres = $callConfig->getRow($sqqlgraph);
-         foreach($sqqlgraphres as $sqkey=>$sqq){
-             $passsqqlgraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+         $passsqqlgraphres = array();
+         if ($sqqlgraphres) {
+             foreach($sqqlgraphres as $sqkey=>$sqq){
+                 $passsqqlgraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+             }
          }
          $data['graphjoinandleave'] = $passsqqlgraphres;
          $salarygraph ="SELECT sum(m12) as j12, sum(m11) as j11, sum(m10) as j10, sum(m9) as j9, sum(m8) as j8, sum(m7) as j7, sum(m6) as j6, sum(m5) as j5, sum(m4) as j4, sum(m3) as j3, sum(m2) as j2, sum(m1) as j1 FROM ( SELECT DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt, DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m')dojm, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M12, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M11, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M10, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M9, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M8, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M7, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M6, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M5, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M4, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M3, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M2, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M1, DATE_FORMAT(emp.joining_date, '%Y-%m') monyr FROM employees emp, pay_run_summary prs, pay_run_summary_components prsc WHERE emp.company_id = 1 AND emp.id = prs.employee_id AND emp.company_id = prs.company_id AND prsc.company_id = prs.company_id AND prsc.pay_run_summary_id = prs.id AND prsc.employee_id = emp.id AND prsc.component_id = 1 AND emp.division_id='{$division_id}' AND (( DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') >= '".$thisyearfirstmonth."') AND ( DATE_FORMAT(CONCAT(prs.pay_year, '-',prs.pay_month, '-','01'), '%Y-%m') <= '".$thisyearfirstmonth."')) AND prsc.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') )ELSE ( emp.vendor_id = ( SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."' ) ) END ) ) a";
          $salarygraphres = $callConfig->getRow($salarygraph);
-         foreach($salarygraphres as $sqkey=>$sqq){
-             $passsalarygraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+         $passsalarygraphres = array();
+         if ($salarygraphres) {
+             foreach($salarygraphres as $sqkey=>$sqq){
+                 $passsalarygraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+             }
          }
          $data['salarygraphres'] = $passsalarygraphres;
          return $data;
@@ -7320,6 +7342,7 @@ public function GETProcurementVendorLedger($get){
         $query = "SELECT user_id, ( SELECT user_mobile FROM application_users au WHERE au.id=user_id) as user_mobile FROM project_task_teams WHERE company_id =".$get[self::KEY_COMPANY_ID]." AND project_task_id = ".$post[self::KEY_TRANSACTION_ID]."  AND is_active = 0";
 
         $lists = $callConfig->getAllRows($query);
+        $mobres = null;
         foreach($lists as $list){
             $notuser2[] = $list->user_id;
         }
@@ -7332,7 +7355,7 @@ public function GETProcurementVendorLedger($get){
                     $mobilsendnotification[self::KEY_USER_ID] =$list->user_id;
                     $mobilsendnotification['title'] = 'Task Comment';
                     $mobilsendnotification['data'] = array('module' => 'TASKDA', self::KEY_MODULE_ID => '25', 'click_action' => 'OPEN_TASK',self::KEY_TASK_ID =>$post[self::KEY_TRANSACTION_ID], self::KEY_PROJECT_ID =>$transaction_number, 'event_type' => 'task_assign', self::KEY_APPLICATION_TABLE_NAME => self::TBL_PROJECT_TASK_DETAILS);
-                    $this->tocallmobilenotificationmob($mobilsendnotification);
+                    $mobres = $this->tocallmobilenotificationmob($mobilsendnotification);
 
                 }
 
@@ -7418,7 +7441,7 @@ public function GETProcurementVendorLedger($get){
             $post['fielddata'] = date(self::DATE_FORMAT_YMD, strtotime(str_replace('/"', '-', $post['fielddata'])));
         }
         $query = "UPDATE ".$post[self::KEY_TABLE_NAME]." SET ".$post[self::KEY_FIELD]."='".$post['fielddata']."' WHERE id=".$post['update_id'];
-        $callConfig->executeQuery($query);
+        $res = $callConfig->executeQuery($query);
 
         if($post[self::KEY_TABLE_NAME]==self::TBL_PROJECT_TASK_DETAILS){
             $task_query = "SELECT id, project_id, task_name FROM project_task_details WHERE id=".$post['update_id'];

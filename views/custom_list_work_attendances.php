@@ -379,7 +379,7 @@ function getWorkAttendanceLogs(yearmonth){
 
                 }
                 ?>
-                <td colspan="" class="position-relative LI-LO f-12 f-w-600 line-height26 empid<?php echo $keye; ?>date<?php echo $date2; ?>" onclick="edittimesheettime('<?php echo $timesheetid; ?>','<?php echo $date2; ?>','<?php echo $keye; ?>','<?php echo $workingentrys['min_working_hours_full']; ?>','<?php echo $elist['display_name']; ?>','<?php echo $valuedisplaytype; ?>','<?php echo $mnth; ?>')" style="text-align: center; <?php echo $workingtypecolor; ?>">
+                <td colspan="" class="position-relative LI-LO f-12 f-w-600 line-height26 empid<?php echo $keye; ?>date<?php echo $date2; ?>" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="edittimesheettime('<?php echo $timesheetid; ?>','<?php echo $date2; ?>','<?php echo $keye; ?>','<?php echo $workingentrys['min_working_hours_full']; ?>','<?php echo $elist['display_name']; ?>','<?php echo $valuedisplaytype; ?>','<?php echo $mnth; ?>')" style="text-align: center; <?php echo $workingtypecolor; ?>">
                   <?php
                       echo $display_value;
                       $download[$mk][$dl] =$display_value;

@@ -1052,7 +1052,7 @@ return month_amount;
                         </div>
                     </div>
                     <div  class="col-lg-12" style="page-break-before: always;">
-                        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;">
+                        <table role="presentation" style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;">
                             <tr style="height: 50px;border: 1px solid #000;">
                                 <td style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;" class="f-w-600" ><?php echo __('Name'); ?> </td>
                                 <td  style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;"colspan="2">&nbsp;<?php echo   $emp_data['display_name']." (".$emp_data['emp_code'].")"; ?></td>

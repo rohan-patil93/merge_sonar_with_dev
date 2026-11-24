@@ -1468,8 +1468,7 @@ class hrUserClass extends userClass{
         $data['eraning_query'] = $query;
         $data['eraning'] = $erans;
         $query = "SELECT * FROM salary_stracture WHERE company_id =".$get['company_id']." AND id=1 AND is_active = 0";
-        $callConfig->getRow($query);
-        $data['salary_stracture'] = $sal;
+        $data['salary_stracture'] = $callConfig->getRow($query);
         return $data;
     }
     public function togetemloyeesalarydetails($get){

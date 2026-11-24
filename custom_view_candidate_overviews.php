@@ -490,7 +490,7 @@ $due_date_period_list = $result['period_list'];
 
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Profile Readiness</a>
                 <div class="accordion-desc p-0">
-                  <table class="table table-hover table-md">
+                  <table role="presentation" class="table table-hover table-md">
                     <tbody>
                       <?php foreach ($profilereadiness as $keylabel => $profilereadines) {
                         $complete_field = $total_field = 0;
@@ -565,7 +565,7 @@ $due_date_period_list = $result['period_list'];
               ?>
         <a class="accordion-msg b-none waves-effect waves-light f-w-700"><i class="fa fa-folder"></i> <?php echo ucwords(strtolower($parentdocuments['document_name'])); ?></a>
         <div class="accordion-desc p-0">
-          <table class="table table-hover m-b-0 " style="font-size:13px;">
+          <table role="presentation" class="table table-hover m-b-0 " style="font-size:13px;">
             <tbody>
               <?php foreach ($vdata_details as $details){
                 $candidatedocument = $checkl[$details['id']];
@@ -711,7 +711,7 @@ $due_date_period_list = $result['period_list'];
                               Completed</span>
                           </a>
                           <div class="accordion-desc">
-                            <table class="table table-hover">
+                            <table role="presentation" class="table table-hover">
                               <tbody>
                                 <?php foreach ($transactionactivityschedule as $tas) { ?>
                                   <tr id="custom-popup-tas-<?php echo $tas['id']; ?>">
@@ -752,7 +752,7 @@ $due_date_period_list = $result['period_list'];
                                               </div>
                                             </div>
                                             <div class="card-body">
-                                              <table style="width: 100%;">
+                                              <table role="presentation" style="width: 100%;">
                                                 <tbody>
 
                                                   <?php
@@ -899,7 +899,7 @@ $due_date_period_list = $result['period_list'];
           ;?> of <?php echo $linkcomplitedtask[$key1] !=""?$linkcomplitedtask[$key1]:"0";?> Completed</span>
         </a>
         <div class="accordion-desc">
-          <table class="table table-hover">
+          <table role="presentation" class="table table-hover">
             <tbody>
               <?php foreach($transactionactivityschedule11 as $tas){
                 ?>
@@ -935,7 +935,7 @@ $due_date_period_list = $result['period_list'];
   <?php **/ ?>
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Policies And Procedures</a>
                 <div class="accordion-desc">
-                  <table class="table table-hover">
+                  <table role="presentation" class="table table-hover">
                     <tbody>
                       <tr>
                         <td>
@@ -1132,74 +1132,13 @@ $due_date_period_list = $result['period_list'];
                   <div class="tab-content card-block p-0">
                     <div class="tab-pane active" id="uploaddocumentstab" role="tabpanel">
                       <form method="post" enctype="multipart/form-data" class="row">
-                        <?php
-                        if (false) {
-                          foreach ([] as $parentdocuments) {
-                            foreach ([] as $value) {
-                              ?>
-                              <?php if ($value['document_shared'] != "" AND $_SESSION['user_type'] != '4') { ?>
-                                <div class="dropdown-primary dropdown open"
-                                  title="<?php if ($value['current_status'] == ST_REJECTED) {
-                                    echo "Rejected";
-                                  } elseif ($value['current_status'] == ST_APPROVED) {
-                                    echo "Approved";
-                                  } else {
-                                    echo "Active";
-                                  } ?>">
-                                  <button class="label label-sm label-success" style="height: 18px; border-radius: 30px;"
-                                    type="button" data-content="<?php echo $value[$current_status]['name']; ?>"></button>
-                                  <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
-                                    data-dropdown-out="fadeOut">
-                                    <?php if ($value['current_status'] == 0) { ?>
-                                      <button type="button"
-                                        class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED ? "active" : ""; ?>"
-                                        onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"
-                                        name="status" value="<?php echo ST_APPROVED; ?>">Approved</button>
-                                      <button type="button"
-                                        class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED ? "active" : ""; ?>"
-                                        onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"
-                                        name="status" value="<?php echo ST_REJECTED; ?>">Rejected</button>
-                                    <?php } ?>
-                                  </div>
-                                </div>
-
-                              <?php } ?>
-
+                        <div class="card-px text-center py-20 mt-2">
+                          <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Required Documents</p>
+                          <div class="text-center px-4">
+                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                           </div>
                         </div>
-                        <div class="text-right">
-                          <span id="attchmentfilename_<?php echo $value['id'] ?>" class="text-info"></span>
-                        </div>
-                      </div>
-                    </div>
-
-                  <?php } //} ?>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <?php } ?>
-      <div class="card-footer">
-        <div class="row">
-          <div class="col-lg-4">
-            <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>" />
-            <input type="hidden" name="submit_doc" value="submit_doc" />
-            <button id="kt_login_signin_submit" class="btn btn-primary mr-2" name="submitto" value="exit"><i
-                class="la la-check"></i>Submit</button>
-          </div>
-        </div>
-      </div>
-    <?php } else { ?>
-
-      <div class="card-px text-center py-20 mt-2">
-        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Required Documents</p>
-        <div class="text-center px-4">
-          <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-        </div>
-      </div>
-    <?php } ?>
-    <form>
+                      </form>
 
   </div>
   <div class="tab-pane" id="reqquestdocumentstab" role="tabpanel">

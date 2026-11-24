@@ -618,9 +618,11 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
           </div>
         <?php } ?>
           <!----------------- DESCRPTION --------------------------->
-          <button type="button" class="btn btn-link p-0 border-0 text-left mt-4" > <h6><i></i> <?php echo __('Description'); ?></h6> <div id="hidedescription" onclick="viewdescrption()">
+          <div class="mt-4">
+            <h6><i></i> <?php echo __('Description'); ?></h6>
+            <div id="hidedescription" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="viewdescrption()">
               <?php echo $task['description']!="" ? $task['description'] : "Add a more detailed description…"; ?>
-            </button>
+            </div>
             <div class="m-l-40 mt-4" id="description" style="display:none;">
               <textarea aria-label="<?php echo __('Text area'); ?>" class="w-100 mb-2 text-start toptextarea" onblur="updatedetail('description', <?php echo $task_id; ?> ,this.value)" placeholder=""><?php echo $task['description']; ?></textarea>
             </div>
@@ -639,15 +641,23 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
               <div class="float-right">
                 <button class="btn btn-primary" onclick="submitactivty()"> <?php echo __('Save'); ?></button>
               </div>
-              <button type="button" class="btn btn-link p-0 border-0 text-left mt-3" id="someacty"> <h7> <?php echo __('Comment History :'); ?></h7> <div id="someactydetail" style="word-wrap: break-word;"> <?php foreach((array)$data['activty'] as $act){ if($act['activity_type']=="activity"){ ?> <div id="comment_<?php echo $act['id']; ?>"> <span><?php echo initials($emps[$act['created_by']]['display_name']); ?></span> <span > <?php echo $emps[$act['created_by']]['display_name']; ?> </span> <span id="comment_data_<?php echo $act['id']; ?>"><?php echo $act['comments']; ?></span> <span onclick="editcomment(<?php echo $act['id']; ?>>)"><i class="fa fa-edit"></i></span>
-                        </br>
-                        <span class="text-muted f-12 m-l-50"> <?php echo  notificationdatesdiff($act['created_date']);  ?></span>
-                      </button>
-                      <div class=" mt-2" id="textarea_comment_<?php echo $act['id']; ?>" style="display: none;">
-                        <textarea aria-label="<?php echo __('Text area'); ?>" class="form-control" onblur="updatedynamicfiledtable(this.value, <?php echo $act['id']; ?>, 'comments', 'project_task_activities')" ><?php echo $act['comments']; ?></textarea>
-                      </div>
-                      <div style="clear:both;"></div>
-                    <?php }
+              <div class="mt-3" id="someacty">
+                <h7> <?php echo __('Comment History :'); ?></h7>
+                <div id="someactydetail" style="word-wrap: break-word;">
+                  <?php foreach((array)$data['activty'] as $act){ if($act['activity_type']=="activity"){ ?>
+                    <div id="comment_<?php echo $act['id']; ?>">
+                      <span><?php echo initials($emps[$act['created_by']]['display_name']); ?></span>
+                      <span> <?php echo $emps[$act['created_by']]['display_name']; ?> </span>
+                      <span id="comment_data_<?php echo $act['id']; ?>"><?php echo $act['comments']; ?></span>
+                      <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="editcomment(<?php echo $act['id']; ?>)" aria-label="<?= htmlspecialchars(__('Edit Comment'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></button>
+                      <br>
+                      <span class="text-muted f-12 m-l-50"> <?php echo  notificationdatesdiff($act['created_date']);  ?></span>
+                    </div>
+                    <div class=" mt-2" id="textarea_comment_<?php echo $act['id']; ?>" style="display: none;">
+                      <textarea aria-label="<?php echo __('Text area'); ?>" class="form-control" onblur="updatedynamicfiledtable(this.value, <?php echo $act['id']; ?>, 'comments', 'project_task_activities')" ><?php echo $act['comments']; ?></textarea>
+                    </div>
+                    <div style="clear:both;"></div>
+                  <?php }
                   } ?>
                 </div>
               </div>

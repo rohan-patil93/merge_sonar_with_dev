@@ -807,12 +807,14 @@ $joblevel_list = $results['job_grade'];
                                                             placeholder="<?php echo __('Eg. Yes,No'); ?>"
                                                             aria-label="<?php echo __('Eg. Yes,No'); ?>">
                                                     </div>
-                                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick=""><div class="col-lg-2"> <i aria-label="<?php echo htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                    <div class="col-lg-2">
+                                                        <button type="button" class="btn btn-link p-0 border-0 text-reset"
                                                             title="<?php echo __('Delete Question'); ?>"
-                                                            onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                                            onclick="deleteQuestion(<?php echo $ij; ?>)"
-                                                            class="fa fa-trash text-danger cursor-pointer"></i>
-                                                    </div></button>
+                                                            aria-label="<?php echo htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                            onclick="deleteQuestion(<?php echo $ij; ?>)">
+                                                            <i class="fa fa-trash text-danger cursor-pointer"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <?php
                                                 $ij++;

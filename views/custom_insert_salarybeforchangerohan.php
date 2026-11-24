@@ -777,7 +777,7 @@ $sal_emp_id = $salarydata[KEY_EMPLOYEE_ID] != "" ? $salarydata[KEY_EMPLOYEE_ID] 
                                                 } else {
                                                 }
                                                 ?>
-                                                <table <?php echo $maincss; ?>
+                                                <table role="presentation" <?php echo $maincss; ?>
                                                     id="invoiceItem<?php echo $dat['id']; ?>">
                                                     <tbody>
                                                         <tr id="<?php echo "cat_" . $dat['id']; ?>">

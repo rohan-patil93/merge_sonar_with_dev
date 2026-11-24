@@ -234,9 +234,9 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                 <div class="">
                                     <div class="card-header p-1 mb-4">
                                         <h5><?= __('Filter'); ?></h5>
-                                        <div class="card-header-right filter-close" onclick="filterclose()" style="top:0;cursor:pointer;">
+                                        <button type="button" class="card-header-right filter-close btn border-0 bg-transparent p-0" onclick="filterclose()" style="top:0;cursor:pointer;" aria-label="<?= htmlspecialchars(__('Close Filter'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <span class="ti-close"></span>
-                                        </div>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -373,7 +373,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                 $counttask[$pts['assigen_id']][$progress['status']] = $counttask[$pts['assigen_id']][$progress['status']]+1;
                                 $counttask[$pts['assigen_id']]['total'] = $counttask[$pts['assigen_id']]['total']+1;
                             ?>
-                                <div class="todo p-2" id="tsakid_<?php echo $pts['id']; ?>" draggable="true"   onclick="taskdetailspopup(<?php echo $pts['id']; ?>)">
+                                <div class="todo p-2" id="tsakid_<?php echo $pts['id']; ?>" draggable="true" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="taskdetailspopup(<?php echo $pts['id']; ?>)">
                                     <i class="ti-pencil float-end f-12"></i>
                                     <div class="col-lg-12" id="clc_<?php echo $cl; ?>" >
                                         <?php foreach((array)$colors as $color){ ?>
@@ -455,9 +455,9 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                     <button class="btn btn-primary" type="button" onclick="submitaddcard(<?php echo $progress['status'].",".$project_id; ?>)"> <?= __('Save'); ?> </button>
                                 </div>
                             </div>
-                            <div class="text-primary p-2 float-right" onclick="addcard(<?php echo $progress['status']; ?>)">
+                            <button type="button" class="btn btn-link text-primary p-2 float-right border-0 text-decoration-none" onclick="addcard(<?php echo $progress['status']; ?>)">
                                 <i class="ti-plus "></i> &nbsp; <?= __('Add a Card'); ?>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -481,9 +481,9 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                         <button class="btn btn-primary cursor-pointer" type="button" onclick="submitaddlist(<?php echo $project_id; ?>)"> <?= __('Save'); ?> </button>
                     </div>
                 </div>
-                <div class="text-primary p-2 float-right" onclick="addlist()">
+                <button type="button" class="btn btn-link text-primary p-2 float-right border-0 text-decoration-none" onclick="addlist()">
                    <i class="ti-plus "></i> &nbsp; <?= __('Add another list'); ?>
-               </div>
+               </button>
             </div>
             <div class="card">
                 <div class="card-header">
@@ -515,7 +515,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                         <?php foreach((array)$counttask as $emp_key => $employee){
                             if($emp_key != 'total'){ ?>
                                 <div class="mt-3">
-                                    <div class=" row col-lg-12" style="cursor: pointer;" onclick="shwgraph('<?php echo $emp_key; ?>')">
+                                    <div class=" row col-lg-12" style="cursor: pointer;" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="shwgraph('<?php echo $emp_key; ?>')">
                                         <input type="hidden" name="" id="shoegraphval_<?php echo $emp_key; ?>" value="0">
                                         <div class="col-lg-3">
                                             <span class="user-name ">

@@ -349,6 +349,7 @@ function renderOnbViewWorkDetails($vars) {
 
 if (!function_exists('renderOnbViewPersonalDetails')) {
 function renderOnbViewPersonalDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $data = $vars['data'] ?? null;
     $agecalc = $vars['agecalc'] ?? null;
@@ -444,6 +445,7 @@ function renderOnbViewPersonalDetails($vars) {
 
 if (!function_exists('renderOnbViewBankDetails')) {
 function renderOnbViewBankDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $bank_work_flow = $vars['bank_work_flow'] ?? null;
     $emp_banks = $vars['emp_banks'] ?? null;
     $emp_bank = $vars['emp_bank'] ?? null;
@@ -530,6 +532,7 @@ function renderOnbViewBankDetails($vars) {
 
 if (!function_exists('renderOnbViewProofDetails')) {
 function renderOnbViewProofDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $data = $vars['data'] ?? null;
     $attached_files = $vars['attached_files'] ?? null;
@@ -648,6 +651,7 @@ function renderOnbViewProofDetails($vars) {
 
 if (!function_exists('renderOnbViewExperienceDetails')) {
 function renderOnbViewExperienceDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $emp_work_experiences = $vars['emp_work_experiences'] ?? null;
     $expe = $vars['expe'] ?? null;
         $fieldaccesright = $vafield['experience_details'];
@@ -690,6 +694,7 @@ function renderOnbViewExperienceDetails($vars) {
 
 if (!function_exists('renderOnbViewEmployeeQualifications')) {
 function renderOnbViewEmployeeQualifications($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $emp_educations = $vars['emp_educations'] ?? null;
     $emp_edu = $vars['emp_edu'] ?? null;
     $education_type = $vars['education_type'] ?? null;
@@ -734,6 +739,7 @@ function renderOnbViewEmployeeQualifications($vars) {
 
 if (!function_exists('renderOnbViewEmployeeDependents')) {
 function renderOnbViewEmployeeDependents($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $emp_dependents = $vars['emp_dependents'] ?? null;
     $emp_dep = $vars['emp_dep'] ?? null;
     $relations = $vars['relations'] ?? null;
@@ -771,6 +777,7 @@ function renderOnbViewEmployeeDependents($vars) {
 
 if (!function_exists('renderOnbViewEmployeeContacts')) {
 function renderOnbViewEmployeeContacts($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $emp_contacts = $vars['emp_contacts'] ?? null;
     $emp_con = $vars['emp_con'] ?? null;
     $relations = $vars['relations'] ?? null;
@@ -813,6 +820,7 @@ function renderOnbViewEmployeeContacts($vars) {
 
 if (!function_exists('renderOnbViewEmployeeBuddies')) {
 function renderOnbViewEmployeeBuddies($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $employment_roles = $vars['employment_roles'] ?? null;
     $data = $vars['data'] ?? null;
@@ -872,6 +880,7 @@ function renderOnbViewEmployeeBuddies($vars) {
 
 if (!function_exists('renderOnbViewEmployeeAccess')) {
 function renderOnbViewEmployeeAccess($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $data = $vars['data'] ?? null;
         $fieldaccesright = $vafield['employee_access'];
@@ -910,6 +919,7 @@ function renderOnbViewEmployeeAccess($vars) {
 
 if (!function_exists('renderOnbViewEmployeeOtherAccess')) {
 function renderOnbViewEmployeeOtherAccess($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $designations = $vars['designations'] ?? null;
     $data = $vars['data'] ?? null;
@@ -941,6 +951,7 @@ function renderOnbViewEmployeeOtherAccess($vars) {
 
 if (!function_exists('renderOnbViewEmpVisa')) {
 function renderOnbViewEmpVisa($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $emp_visa = $vars['emp_visa'] ?? null;
     $emp_v = $vars['emp_v'] ?? null;
     $countries = $vars['countries'] ?? null;
@@ -981,6 +992,7 @@ function renderOnbViewEmpVisa($vars) {
 
 if (!function_exists('renderOnbViewEmpSkills')) {
 function renderOnbViewEmpSkills($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $emp_skills = $vars['emp_skills'] ?? null;
     $emp_skil = $vars['emp_skil'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
@@ -1028,6 +1040,7 @@ function renderOnbViewEmpSkills($vars) {
 
 if (!function_exists('renderOnbEditBasicInformation')) {
 function renderOnbEditBasicInformation($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $data = $vars['data'] ?? null;
@@ -1380,6 +1393,7 @@ function renderOnbEditWorkDetails($vars) {
 
 if (!function_exists('renderOnbEditPersonalDetails')) {
 function renderOnbEditPersonalDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $data = $vars['data'] ?? null;
@@ -1561,6 +1575,7 @@ function renderOnbEditPersonalDetails($vars) {
 
 if (!function_exists('renderOnbEditBankDetails')) {
 function renderOnbEditBankDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $bank_work_flow = $vars['bank_work_flow'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
@@ -1610,6 +1625,7 @@ function renderOnbEditBankDetails($vars) {
 
 if (!function_exists('renderOnbEditEmployeeBuddies')) {
 function renderOnbEditEmployeeBuddies($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $employment_roles = $vars['employment_roles'] ?? null;
@@ -1748,6 +1764,7 @@ function renderOnbEditEmployeeBuddies($vars) {
 
 if (!function_exists('renderOnbEditEmployeeOtherAccess')) {
 function renderOnbEditEmployeeOtherAccess($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $job_titles = $vars['job_titles'] ?? null;
@@ -1833,6 +1850,7 @@ function renderOnbEditEmployeeOtherAccess($vars) {
 
 if (!function_exists('renderOnbEditEmployeeAccess')) {
 function renderOnbEditEmployeeAccess($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $data = $vars['data'] ?? null;
@@ -1949,6 +1967,7 @@ function renderOnbEditEmployeeAccess($vars) {
 
 if (!function_exists('renderOnbEditProofDetails')) {
 function renderOnbEditProofDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $fieldaccesright = $vars['fieldaccesright'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $data = $vars['data'] ?? null;
@@ -2109,6 +2128,7 @@ function renderOnbEditProofDetails($vars) {
 
 if (!function_exists('renderOnbEditExperienceDetails')) {
 function renderOnbEditExperienceDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $k = $vars['k'] ?? null;
     $emp_work_experiences = $vars['emp_work_experiences'] ?? null;
@@ -2188,6 +2208,7 @@ function renderOnbEditExperienceDetails($vars) {
 
 if (!function_exists('renderOnbEditEmployeeQualifications')) {
 function renderOnbEditEmployeeQualifications($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $emp_educations = $vars['emp_educations'] ?? null;
     $mk = $vars['mk'] ?? null;
@@ -2278,6 +2299,7 @@ function renderOnbEditEmployeeQualifications($vars) {
 
 if (!function_exists('renderOnbEditEmployeeDependents')) {
 function renderOnbEditEmployeeDependents($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $emp_dependents = $vars['emp_dependents'] ?? null;
     $dk = $vars['dk'] ?? null;
@@ -2340,6 +2362,7 @@ function renderOnbEditEmployeeDependents($vars) {
 
 if (!function_exists('renderOnbEditEmployeeContacts')) {
 function renderOnbEditEmployeeContacts($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $emp_contacts = $vars['emp_contacts'] ?? null;
     $ck = $vars['ck'] ?? null;
@@ -2406,6 +2429,7 @@ function renderOnbEditEmployeeContacts($vars) {
 
 if (!function_exists('renderOnbEditEmpVisa')) {
 function renderOnbEditEmpVisa($vars) {
+    $vafield = $vars['vafield'] ?? null;
     $readonlycheck = $vars['readonlycheck'] ?? null;
     $emp_visa = $vars['emp_visa'] ?? null;
     $vk = $vars['vk'] ?? null;

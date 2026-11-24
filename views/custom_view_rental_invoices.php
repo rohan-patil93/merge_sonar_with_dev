@@ -343,7 +343,7 @@ function emptyCheck($valu){
                             </tr>
                             <tr style="border: 1px solid #cccccc;">
                                 <td colspan="3">
-                                    <table style="width:65%;margin:10px  10px 10px;">
+                                    <table role="presentation" style="width:65%;margin:10px  10px 10px;">
                                         <?php foreach($valu['CHILD'] as $ta){ ?>
                                         <tr style="border: 1px solid #cccccc;">
                                             <td style="padding:5px;font-size: 12px; word-break: break-word; white-space: initial;     font-weight: 100;"><?php print_r($perentchieldary); echo $ta['item_name']; ?></td>
