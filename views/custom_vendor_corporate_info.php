@@ -464,8 +464,7 @@
                                                     aria-haspopup="true" aria-expanded="true" aria-disabled="false"
                                                     aria-labelledby="select2-kt_select2_1-container"
                                                     aria-owns="select2-kt_select2_1-results"
-                                                    aria-controls="select2-kt_select2_1-results"
-                                                    aria-activedescendant="select2-kt_select2_1-result-i5cn-AZ"><span
+                                                    aria-controls="select2-kt_select2_1-results"><span
                                                         class="select2-selection__rendered"
                                                         id="select2-kt_select2_1-container" aria-readonly="true"
                                                         title="<?= htmlspecialchars(__('Alaska'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Alaska'); ?></span><span

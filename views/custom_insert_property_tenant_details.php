@@ -1227,8 +1227,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             <div class="card-body" <?php echo $un_lockdyncss; ?>>
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                                class="form-label" for="customer_id"><?php echo __('Tenant List'); ?>
-                                                <span class="text-danger">*</span></label>
+                                        <label class="form-label" for="customer_id"><?php echo __('Tenant List'); ?>
+                                            <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <select name="customer_id" id="customer_id"
                                             class="form-control form-select js-example-basic-single requried_field"
@@ -1247,47 +1247,47 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                 </div>
                                 <div class="row" id="insertfrmopen" <?php echo $property_tenant_details['customer_id'] != "" ? 'style="pointer-events:none;opacity:0.8"' : ''; ?>>
                                     <div class="form-group col-lg-6">
-                                                class="form-label" for="company_name"><?php echo __('Company Name'); ?>
-                                                <span class="text-danger">*</span></label>
+                                        <label class="form-label" for="company_name"><?php echo __('Company Name'); ?>
+                                            <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="company_name"
                                             id="company_name"
                                             value="<?php echo $property_tenant_details['company_name']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                                class="form-label" for="tenant_name"><?php echo __('Tenant Name'); ?>
-                                                <span class="text-danger">*</span></label>
+                                        <label class="form-label" for="tenant_name"><?php echo __('Tenant Name'); ?>
+                                            <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="tenant_name"
                                             id="tenant_name"
                                             value="<?php echo $property_tenant_details['tenant_name']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                                class="form-label" for="tenant_email"><?php echo __('Email'); ?> <span
-                                                    class="text-danger">*</span></label>
+                                        <label class="form-label" for="tenant_email"><?php echo __('Email'); ?> <span
+                                                class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="text" class="form-control requried_field" name="tenant_email"
                                             id="tenant_email"
                                             value="<?php echo $property_tenant_details['tenant_email']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
-                                                class="form-label" for="tenant_mobile"><?php echo __('Mobile'); ?> <span
-                                                    class="text-danger">*</span></label>
+                                        <label class="form-label" for="tenant_mobile"><?php echo __('Mobile'); ?> <span
+                                                class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="number" class="form-control requried_field" name="tenant_mobile"
                                             id="tenant_mobile"
                                             value="<?php echo $property_tenant_details['tenant_mobile']; ?>">
                                     </div>
                                     <div class="form-group col-lg-8">
-                                                class="form-label" for="tenant_address"><?php echo __('Address'); ?>
-                                                <span class="text-danger">*</span></label>
+                                        <label class="form-label" for="tenant_address"><?php echo __('Address'); ?>
+                                            <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <textarea class="form-control requried_field" name="tenant_address"
                                             id="tenant_address"><?php echo $property_tenant_details['tenant_address']; ?></textarea>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                                class="form-label" for="tenant_pin_code"><?php echo __('Pin Code'); ?>
-                                                <span class="text-danger">*</span></label>
+                                        <label class="form-label" for="tenant_pin_code"><?php echo __('Pin Code'); ?>
+                                            <span class="text-danger">*</span></label>
                                         <span class="d-block error-message text-danger"></span>
                                         <input type="number" class="form-control requried_field" name="tenant_pin_code"
                                             id="tenant_pin_code"
