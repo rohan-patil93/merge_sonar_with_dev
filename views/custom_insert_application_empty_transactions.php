@@ -167,7 +167,7 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
                         <textarea type="text" class="form-control" name="extra_message[]" id="extra_message_<?php echo $im; ?>" aria-label="<?= htmlspecialchars(__('Extra Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $ttj['extra_message']; ?></textarea>
                     </div>
                     <div class="col-lg-1">
-                        <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" onclick="removeRow('<?php echo $rowid; ?>')"></i>
+                        <button type="button" class="btn btn-link p-0 border-0 text-danger" aria-label="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" onclick="removeRow('<?php echo $rowid; ?>')"><i class="ti-trash text-danger"></i></button>
                     </div>
                 </div>
             <?php $im++;

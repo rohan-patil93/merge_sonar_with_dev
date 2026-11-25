@@ -99,7 +99,7 @@ function verificationSubmitdetails(){
                     <?php $mm=1; foreach($list_assets as $list_asset){ ?>
                     <input type="hidden" name="asset_id[]" value="<?php echo $list_asset['id']; ?>">
                     <tr class="<?php echo isset($asset_verifications[$list_asset['id']])?"bg-danger text-white":"";?>">
-                        <td scope="row"><?php echo $mm; ?></td>
+                        <td><?php echo $mm; ?></td>
                         <td class="tabledit-view-mode" style="pointer-events: none;"><span class="tabledit-span"><?php echo $list_asset['asset_code']; ?></span>
                             <input aria-label="<?= htmlspecialchars(__('Asset Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="tabledit-input form-control input-sm" type="text" name="asset_code[]" value="<?php echo $list_asset['asset_code']; ?>" style="display:none;">
                         </td>

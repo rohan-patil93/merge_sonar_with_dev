@@ -1,4 +1,6 @@
 <?php
+defined('DATE_FORMAT_DMY') || define('DATE_FORMAT_DMY', 'd M Y');
+
 if($_GET['print'] =="Y"){
     include_once '../includes/session.php';
     include_once '../dbconfig.php';
@@ -52,7 +54,6 @@ function emaildatareplaceNew1($data,$val){
     foreach($data as $fieldkey=>$result1){
         $inputFildsArray["{".trim($fieldkey)."}"] = trim($result1);
     }
-    $str = "";
     foreach($inputFildsArray as $key => $value){
         $repl =  str_replace(trim($key), trim($value), trim($val));
         $val = $repl;
@@ -173,7 +174,7 @@ function emaildatareplaceNew1($data,$val){
                     </div>';
                     $signature = '<img src="'.$data['signature'].'" alt="Preview" />';
 
-          $replacearray = array("admin_company_name"=>$_SESSION['config']['name'],"admin_address"=>$_SESSION['config']['contact_address'],"admin_display_name"=>$admin_application_users['display_name'],"admin_display_name"=>$admin_application_users['display_name'],"date"=>date("d M Y"),"candidates.display_name"=>$data['display_name'],"candidates.job_title"=>$jobcodedata->job_title,"candidates.expected_ctc"=>$data['offer_ctc'],"candidates.reporting_date"=>date("d M Y",strtotime($data['reporting_date'])),"candidates.email_id"=>$data['email_id'],"candidates.offer_validity"=>date("d M Y",strtotime($data['offer_validity'])) ,"rm_display_name"=>$rm_application_users['display_name'],"rm_contact_number"=>$rm_application_users['user_mobile'],"rm_email_id"=>$rm_application_users['user_email'],'candidates.salary_structure_template'=>$slarytempate,"candidates.signature"=>$signature);
+          $replacearray = array("admin_company_name"=>$_SESSION['config']['name'],"admin_address"=>$_SESSION['config']['contact_address'],"admin_display_name"=>$admin_application_users['display_name'],"admin_display_name"=>$admin_application_users['display_name'],"date"=>date(DATE_FORMAT_DMY),"candidates.display_name"=>$data['display_name'],"candidates.job_title"=>$jobcodedata->job_title,"candidates.expected_ctc"=>$data['offer_ctc'],"candidates.reporting_date"=>date(DATE_FORMAT_DMY,strtotime($data['reporting_date'])),"candidates.email_id"=>$data['email_id'],"candidates.offer_validity"=>date(DATE_FORMAT_DMY,strtotime($data['offer_validity'])) ,"rm_display_name"=>$rm_application_users['display_name'],"rm_contact_number"=>$rm_application_users['user_mobile'],"rm_email_id"=>$rm_application_users['user_email'],'candidates.salary_structure_template'=>$slarytempate,"candidates.signature"=>$signature);
 
                         echo emaildatareplaceNew1($replacearray,$emailres['email_content_to']);
                         ?>

@@ -66,7 +66,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
 
             <link rel="stylesheet" type="text/css" href="assets/css/custom_view_csr_proposal_details.css">
 
-           <table role="presentation" class="w-100 border-collapse">
+           <table class="w-100 border-collapse">
 
                <tr>
                    <td colspan="2" class="f-16 f-w-500 text-capitalize"><?= __('GENERAL INSTRUCTIONS'); ?>:</td>

@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_DS_M_Y')) {
+    define('DATE_FORMAT_DS_M_Y', DATE_FORMAT_DS_M_Y);
+}
+
 $_SESSION['apply_js']['calender'] = '1';
     if($_GET['Rid']!=""){
         $rid =  encodeId($_GET['Rid']);
@@ -189,7 +193,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                         <div class="mt-4">
                                             <div class="text-dark-75 font-weight-bolder font-size-lg mb-0 f-16"><?php echo  viewTitle($emps['display_name']); ?></div>
                                             <a href="#" class="sub-title text-muted font-weight-bold text-hover-primary f-14">
-                                                <?php echo date('dS M Y',strtotime($empl['leave_from']))." To ".date('dS M Y',strtotime($empl['leave_to']))." (". $all_leave_categories[$empl['leave_type_id']]['name'].") Total Day(s) - ".number_format($empl['leave_days'],2); ?></a>
+                                                <?php echo date(DATE_FORMAT_DS_M_Y,strtotime($empl['leave_from']))." To ".date(DATE_FORMAT_DS_M_Y,strtotime($empl['leave_to']))." (". $all_leave_categories[$empl['leave_type_id']]['name'].") Total Day(s) - ".number_format($empl['leave_days'],2); ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +232,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                 <div class="ml-4">
                                                     <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?php echo $empdata[$othemp['employee_id']]['display_name']; ?> <?php $statusVal = $stausresult[$othemp['current_status']];?>
                                             <span class="badge m-l-50 " style="background-color: <?php echo $statusVal['background_color'] ?>; color: <?php echo $statusVal['color'] ?>; "><?php echo $statusVal['name']; ?></span></div>
-                                                    <a href="index.php?option=COM_INSERT_APPROVAL_LEAVE&Rid=<?php  echo deocdeId("id:".$othemp['id']); ?>" class="text-muted font-weight-bold text-hover-primary"> <?php echo date('dS M Y',strtotime($othemp['leave_from']))." To ".date('dS M Y',strtotime($othemp['leave_to']))." (". $all_leave_categories[$othemp['leave_type_id']]['name'].")"; ?> </a>
+                                                    <a href="index.php?option=COM_INSERT_APPROVAL_LEAVE&Rid=<?php  echo deocdeId("id:".$othemp['id']); ?>" class="text-muted font-weight-bold text-hover-primary"> <?php echo date(DATE_FORMAT_DS_M_Y,strtotime($othemp['leave_from']))." To ".date(DATE_FORMAT_DS_M_Y,strtotime($othemp['leave_to']))." (". $all_leave_categories[$othemp['leave_type_id']]['name'].")"; ?> </a>
                                                 </div>
                                             </div>
 

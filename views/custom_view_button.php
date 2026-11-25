@@ -43,10 +43,10 @@
         <ul>
             <?php for($i=1; $i<200; $i++){ ?>
             <li>
-                <span class="popup" onclick="openPopup(this,<?php echo $i; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $i; ?></span>
+                <button type="button" class="popup btn p-0 border-0 bg-transparent text-reset" onclick="openPopup(this,<?php echo $i; ?>)"><?php echo $i; ?></button>
                 <div class="open_popup" id="popup_<?php echo $i; ?>">
                     <?= __('PoPup'); ?>
-                    <b class="close" onclick="closePopup(<?php echo $i; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('close'); ?></b>
+                    <button type="button" class="close btn p-0 border-0 bg-transparent" onclick="closePopup(<?php echo $i; ?>)"><?= __('close'); ?></button>
                 </div>
             </li>
             <?php } ?>

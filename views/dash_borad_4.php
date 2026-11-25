@@ -41,8 +41,8 @@
                     <div id="month_display1"> <h3 class="card-label" ><?= __('Month Wise - Employees'); ?> </h3> </div>
                     <div style="display: none;" id="month_display2"> <h3 class="card-label" ><?= __('Month Wise - Salaries'); ?> </h3> </div>
                     <div class="card-toolbar ml-15">
-                        <div onclick="changegraph('1')" id="revenue" class="btn btn-primary font-weight-bolder" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?= __('Salaries'); ?></div>
-                        <div  class="btn btn-primary font-weight-bolder" onclick="changegraph('2')" id="act_emp" style="display: none;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?= __('Count'); ?></div>
+                        <button type="button" onclick="changegraph('1')" id="revenue" class="btn btn-primary font-weight-bolder"><?= __('Salaries'); ?></button>
+                        <button type="button" class="btn btn-primary font-weight-bolder" onclick="changegraph('2')" id="act_emp" style="display: none;"><?= __('Count'); ?></button>
                     </div>
                 </div>
             </div>

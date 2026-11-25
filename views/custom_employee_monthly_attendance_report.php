@@ -5,7 +5,7 @@ $employee_id = 0;
 $month = '';
 
 // Fetch employees
-if ((isset($_POST['search']))) {
+if (isset($_POST['search'])) {
     $employee_id = $_REQUEST['employee_id'] ?? 0;
     $month       = $_REQUEST['month'] ?? '';
     header("location:index?option=COM_EMPLOYEE_MONTHLY_ATTENDANCE_REPORT&employee_id=".$employee_id."&month=".$month ); exit;

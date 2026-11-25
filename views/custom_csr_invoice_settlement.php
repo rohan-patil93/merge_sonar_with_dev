@@ -65,7 +65,7 @@ $fyRows = $return['fyRows'] ?? array();
                         <select id="fld_csr_po_details_id_<?php echo $index; ?>" class="form-control js-example-basic-single" name="csr_po_details_id[]">
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach ((array)$csr_pos as $po) { ?>
-                                <option value="<?php echo htmlspecialchars($po['id']); ?>" <?php if ($row['csr_po_details_id'] == $po['id']) echo 'selected'; ?>>
+                                <option value="<?php echo htmlspecialchars($po['id']); ?>" <?php if ($row['csr_po_details_id'] == $po['id']) { echo 'selected'; } ?>>
                                     <?php echo htmlspecialchars($po['po_no']); ?>
                                 </option>
                             <?php } ?>

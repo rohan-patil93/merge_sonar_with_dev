@@ -1,4 +1,6 @@
 <?php
+defined('ZERO_DATETIME') || define('ZERO_DATETIME', ZERO_DATETIME);
+defined('DATE_FORMAT_DMY_HI_A') || define('DATE_FORMAT_DMY_HI_A', DATE_FORMAT_DMY_HI_A);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -38,7 +40,7 @@ $uom_map = $data['uom_map'] ?? [];
 $overall_materials = [];
 foreach ($logs as $log) {
     if (!empty($log['luggages'])) {
-        $has_checked_out = !empty($log['out_datetime']) && $log['out_datetime'] !== '0000-00-00 00:00:00';
+        $has_checked_out = !empty($log['out_datetime']) && $log['out_datetime'] !== ZERO_DATETIME;
         foreach ($log['luggages'] as $lug) {
             $itemName = trim($lug['item_name']);
             $brandOrUom = trim($lug['brand_name']);
@@ -232,10 +234,10 @@ foreach ($overall_materials as $mat) {
                 </thead>
                 <tbody>
                     <?php foreach ($logs as $index => $log):
-                        $in_dt = !empty($log['in_datetime']) && $log['in_datetime'] !== '0000-00-00 00:00:00' ? date('d-M-Y h:i A', strtotime($log['in_datetime'])) : '—';
-                        $out_dt = !empty($log['out_datetime']) && $log['out_datetime'] !== '0000-00-00 00:00:00' ? date('d-M-Y h:i A', strtotime($log['out_datetime'])) : '—';
-                        $load_start = !empty($log['vendor_supplier_loading_start']) ? date('d-M-Y h:i A', strtotime($log['vendor_supplier_loading_start'])) : '—';
-                        $load_end = !empty($log['vendor_supplier_loading_end']) ? date('d-M-Y h:i A', strtotime($log['vendor_supplier_loading_end'])) : '—';
+                        $in_dt = !empty($log['in_datetime']) && $log['in_datetime'] !== ZERO_DATETIME ? date(DATE_FORMAT_DMY_HI_A, strtotime($log['in_datetime'])) : '—';
+                        $out_dt = !empty($log['out_datetime']) && $log['out_datetime'] !== ZERO_DATETIME ? date(DATE_FORMAT_DMY_HI_A, strtotime($log['out_datetime'])) : '—';
+                        $load_start = !empty($log['vendor_supplier_loading_start']) ? date(DATE_FORMAT_DMY_HI_A, strtotime($log['vendor_supplier_loading_start'])) : '—';
+                        $load_end = !empty($log['vendor_supplier_loading_end']) ? date(DATE_FORMAT_DMY_HI_A, strtotime($log['vendor_supplier_loading_end'])) : '—';
                     ?>
                         <tr>
                             <td><?= $index + 1 ?></td>

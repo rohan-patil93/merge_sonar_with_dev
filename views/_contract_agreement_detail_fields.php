@@ -1,4 +1,32 @@
 <?php
+if (!function_exists('renderAgreementTypeOptions')) {
+    function renderAgreementTypeOptions($genc, $selectedCode) {
+        if (count((array)$genc) <= 0) {
+            return;
+        }
+        foreach ($genc as $item) {
+            $gi = is_array($item) ? $item : json_decode(json_encode($item), true);
+            $code = $gi['genc_detail_code'] ?? '';
+            $sel = ($selectedCode !== '' && $selectedCode == $code) ? 'selected' : '';
+            echo '<option value="' . htmlspecialchars($code) . '" ' . $sel . '>' . htmlspecialchars(__($gi['genc_detail_name'] ?? '')) . '</option>';
+        }
+    }
+}
+
+if (!function_exists('renderAgreementDescriptionOptions')) {
+    function renderAgreementDescriptionOptions($des, $selectedId) {
+        if (count((array)$des) <= 0) {
+            return;
+        }
+        foreach ($des as $d) {
+            $dr = is_array($d) ? $d : json_decode(json_encode($d), true);
+            $id = $dr['id'] ?? '';
+            $sel = ($selectedId !== '' && $selectedId == $id) ? 'selected' : '';
+            echo '<option value="' . htmlspecialchars($id) . '" ' . $sel . '>' . htmlspecialchars(__($dr['description_type'] ?? '')) . '</option>';
+        }
+    }
+}
+
 if (!function_exists('renderContractAgreementClassification')) {
     function renderContractAgreementClassification($fieldDisplay, $genc, $des, $formData) {
 ?>
@@ -6,26 +34,14 @@ if (!function_exists('renderContractAgreementClassification')) {
                             <label for="fld_typeofaggrements" class="form-label"><?= __('Type of Agreements '.$fieldDisplay['typeofaggrements']['star']) ?></label>
                             <select id="fld_typeofaggrements" class="form-control js-example-basic-single" name="typeofaggrements" <?= $fieldDisplay['typeofaggrements']['required'] ?>>
                                 <option value=""><?= __('Select Type of Agreements') ?></option>
-                                <?php if (count((array)$genc) > 0) {
-                                    foreach ($genc as $item) {
-                                        $gi = is_array($item) ? $item : json_decode(json_encode($item), true);
-                                        $sel = (isset($formData['typeofaggrements']) && $formData['typeofaggrements'] == ($gi['genc_detail_code'] ?? '')) ? 'selected' : ''; ?>
-                                        <option value="<?= htmlspecialchars($gi['genc_detail_code'] ?? '') ?>" <?= $sel ?>><?= htmlspecialchars(__($gi['genc_detail_name'] ?? '')) ?></option>
-                                    <?php }
-                                } ?>
+                                <?php renderAgreementTypeOptions($genc, $formData['typeofaggrements'] ?? ''); ?>
                             </select>
                         </div>
                         <div class="col-md-4" style="<?= $fieldDisplay['description_id']['style'] ?>">
                             <label for="fld_description_id" class="form-label"><?= __('Description '.$fieldDisplay['description_id']['star']) ?></label>
                             <select id="fld_description_id" class="form-control js-example-basic-single" name="description_id" <?= $fieldDisplay['description_id']['required'] ?>>
                                 <option value=""><?= __('Select Description') ?></option>
-                                <?php if (count((array)$des) > 0) {
-                                    foreach ($des as $d) {
-                                        $dr = is_array($d) ? $d : json_decode(json_encode($d), true);
-                                        $sel = (($formData['description_id'] ?? '') == ($dr['id'] ?? '')) ? 'selected' : ''; ?>
-                                        <option value="<?= htmlspecialchars($dr['id'] ?? '') ?>" <?= $sel ?>><?= htmlspecialchars(__($dr['description_type'] ?? '')) ?></option>
-                                    <?php }
-                                } ?>
+                                <?php renderAgreementDescriptionOptions($des, $formData['description_id'] ?? ''); ?>
                             </select>
                         </div>
 <?php

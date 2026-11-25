@@ -99,7 +99,7 @@ $purchase_invoices = $result['purchase_invoices'];
         </form>
 
 <?php if($_REQUEST['vendor_id'] != ""){  ?>
-        <table role="presentation" style="width:100%;border-collapse:collapse;" class="mt-5">
+        <table style="width:100%;border-collapse:collapse;" class="mt-5">
         <tr>
             <td style="font-size:24px;font-family:'Tahoma';font-weight:500;text-transform:capitalize;"><?= __('Purchase Ledger'); ?> <?php echo date('M Y',strtotime($from_date)); ?> <?= __('to'); ?> <?php echo date('M Y',strtotime($to_date)); ?></td>
             <td style="font-size:24px;font-family:'Tahoma';font-weight:500;text-transform:capitalize;"><?php echo $vendors[$_REQUEST['vendor_id']]['company']." (".$vendors[$_REQUEST['vendor_id']]['display_name'].")"; ?></td>

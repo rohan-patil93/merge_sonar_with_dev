@@ -1,4 +1,8 @@
 <?php
+if (!defined('PO_NO_NON_PO')) {
+    define('PO_NO_NON_PO', PO_NO_NON_PO);
+}
+
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -62,9 +66,9 @@ $fyRows = $return ?? array();
                 if (count((array)$poData) > 0) {
                     foreach ($poData as $i => $row) {
                         $index = $i + 1;
-                        $checkedYes = $row['po_no'] != 'NON PO' ? 'checked' : '';
-                        $checkedNo  = $row['po_no'] == 'NON PO' ? 'checked' : '';
-                        $poNoHidden = $row['po_no'] == 'NON PO' ? 'd-none' : '';
+                        $checkedYes = $row['po_no'] != PO_NO_NON_PO ? 'checked' : '';
+                        $checkedNo  = $row['po_no'] == PO_NO_NON_PO ? 'checked' : '';
+                        $poNoHidden = $row['po_no'] == PO_NO_NON_PO ? 'd-none' : '';
                 ?>
                         <div class="row po-row border-bottom mb-3 pb-2" data-row="<?php echo $index; ?>">
                             <input type="hidden" name="id[]" value="<?php echo $row['id']; ?>">

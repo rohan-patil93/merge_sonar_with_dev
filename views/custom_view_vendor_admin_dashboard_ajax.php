@@ -78,10 +78,7 @@ if(count((array)($vendors)) != 0){  ?>
                 $verification_profile_users = json_decode($onboard_emp['verification_profile_users'],1);
                 if(count((array)$verification_profile_users) != 0){
                     foreach($verification_profile_users as $uidkey=>$vpu){
-                        if($vpu['status'] == 'Y'){
-                        }elseif($vpu['status'] == 'N'){
-                            $allaproveprofile = 1;
-                        }else{
+                        if ($vpu['status'] !== 'Y') {
                             $allaproveprofile = 1;
                         }
                     }
@@ -131,7 +128,7 @@ if(count((array)($vendors)) != 0){  ?>
                                     } ?>
 
                                     <?php
-                                    if (($onboard_emp['vendor_id'] == "" && ($_SESSION['admin_type'] == '1' || $onboard_emp['originator'] == $_SESSION['userid']) && $taskresult['total_task_cnt'] == $taskresult['approve_cnt'] && $onboard_emp['send_verification_profile_status'] == "Y" && $allaproveprofile == '0' && $onboard_emp['vendor_type_id'] == "1")) {
+                                    if ($onboard_emp['vendor_id'] == "" && ($_SESSION['admin_type'] == '1' || $onboard_emp['originator'] == $_SESSION['userid']) && $taskresult['total_task_cnt'] == $taskresult['approve_cnt'] && $onboard_emp['send_verification_profile_status'] == "Y" && $allaproveprofile == '0' && $onboard_emp['vendor_type_id'] == "1") {
 
                                         ?>
                                         <button class="btn btn-info waves-effect waves-light btn-mini createVendorRegisterToVendor" data-vendor-id="<?php echo $onboard_emp['id']; ?>"><i class="ti ti-user"></i> <?= __('Create Vendor'); ?></button>

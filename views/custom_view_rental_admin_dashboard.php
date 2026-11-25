@@ -917,7 +917,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="progress  progress-xs">
-                                                        <div class="progress-bar progress-bar-pink " role="progressbar" style="width: <?php echo $percengraf; ?>%;" aria-valuenow="<?php echo $percengraf; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar progress-bar-pink " style="width: <?php echo $percengraf; ?>%;" aria-valuenow="<?php echo $percengraf; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -986,7 +986,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="progress  progress-xs">
-                                                        <div class="progress-bar progress-bar-pink " role="progressbar" style="width: <?php echo $percengraf; ?>%;" aria-valuenow="<?php echo $percengraf; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar progress-bar-pink " style="width: <?php echo $percengraf; ?>%;" aria-valuenow="<?php echo $percengraf; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                                 </div>

@@ -20,9 +20,9 @@ $googledocsfile = array('docx','pdf');
 
     <?php if(in_array($file_extension, $googledocsfile)){ ?>
 
-        <iframe src="<?php echo $path; ?>" width="600" height="400" frameborder="0" id="myIframe_2" title="<?= htmlspecialchars(__('File Preview'), ENT_QUOTES, 'UTF-8'); ?>"></iframe>
+        <iframe src="<?php echo $path; ?>" width="600" height="400" style="border:0;" id="myIframe_2" title="<?= htmlspecialchars(__('File Preview'), ENT_QUOTES, 'UTF-8'); ?>"></iframe>
     <?php }else{  ?>
-        <iframe src="<?php echo $path; ?>" width="600" height="400" frameborder="0" id="myIframe_3" title="<?= htmlspecialchars(__('File Preview'), ENT_QUOTES, 'UTF-8'); ?>"></iframe>
+        <iframe src="<?php echo $path; ?>" width="600" height="400" style="border:0;" id="myIframe_3" title="<?= htmlspecialchars(__('File Preview'), ENT_QUOTES, 'UTF-8'); ?>"></iframe>
     <?php } ?>
 </div>
 <div class="modal-footer">

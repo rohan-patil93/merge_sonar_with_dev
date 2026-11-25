@@ -5,7 +5,7 @@ $employee_id = 0;
 $assessment_year = '';
 
 // Fetch employees
-if ((isset($_POST['search']))) {
+if (isset($_POST['search'])) {
     $employee_id = $_REQUEST['employee_id'] ?? 0;
     $assessment_year       = $_REQUEST['assessment_year'] ?? '';
     header("location:index?option=COM_EMPLOYEE_ASSIGN_RELEASE_DOCUMENTS&employee_id=".$employee_id."&assessment_year=".$assessment_year ); exit;

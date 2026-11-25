@@ -1,7 +1,8 @@
 <?php
+defined('KANBAN_ALL_EMP') || define('KANBAN_ALL_EMP', '99999');
 $project_id = $_GET['RID'];
 $lemps = "";
-$laemp = array("0" => "99999");
+$laemp = array("0" => KANBAN_ALL_EMP);
 if (in_array('TASKDA_USER', $_SESSION['role_ids'])) {
     $lemps = $_SESSION['userid'];
 }
@@ -10,7 +11,7 @@ if (isset($_POST['submit'])) {
         $laemp = (array) $_POST['emps'];
         $lemps = implode(",", (array) $_POST['emps']);
         foreach ($laemp as $lae) {
-            if ($lae == '99999') {
+            if ($lae == KANBAN_ALL_EMP) {
                 $lemps = "";
                 break;
             }
@@ -234,7 +235,7 @@ $change_words = array(
                                     <div class="border-checkbox-group border-checkbox-group-warning">
                                         <input
                                             aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"
-                                            class="border-checkbox" <?php if (in_array('99999', $laemp)) {
+                                            class="border-checkbox" <?php if (in_array(KANBAN_ALL_EMP, $laemp)) {
                                                 echo "checked";
                                             } ?> name="emps[]" type="checkbox" value="99999" id="all">
                                         <label class="form-label border-checkbox-label mb-0"

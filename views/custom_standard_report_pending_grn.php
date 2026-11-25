@@ -59,7 +59,7 @@ $_SESSION['download_data'] = [];
                         <tr>
                             <!-- Left Column: GRN/PO Info -->
                             <td>
-                                <table role="presentation">
+                                <table>
                                     <tr>
                                         <td class="p-1"><?= __('GRN No.'); ?></td>
                                         <td class="p-1"><?php echo $rows[0]['grn_no']; ?></td>

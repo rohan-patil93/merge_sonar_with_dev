@@ -1,4 +1,8 @@
 <?php
+if (!defined('ZERO_DATE')) {
+    define('ZERO_DATE', ZERO_DATE);
+}
+
 if(isset($_POST['emp_id'])){
   include_once '../includes/session.php';
   include_once '../dbconfig.php';
@@ -556,7 +560,7 @@ function save_statuse_bilable_onsite(){
                                                    if($fieldaccesright['field']['joining_date']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Date of Joining') ?></th>
-                                                      <td><?php $date_pic = $data['joining_date'] !='0000-00-00'?$data['joining_date']:nowDate(); echo dateFormate($date_pic); ?></td>
+                                                      <td><?php $date_pic = $data['joining_date'] !=ZERO_DATE?$data['joining_date']:nowDate(); echo dateFormate($date_pic); ?></td>
                                                    </tr>
                                                    <?php }
                                                    if($fieldaccesright['field']['experience_current_organization']!="NA"){  ?>
@@ -780,7 +784,7 @@ function save_statuse_bilable_onsite(){
                                              </td>
 
                                              <td>
-                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['passport_expiry_date']!="0000-00-00"?$data['passport_expiry_date']:""; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['passport_expiry_date']!=ZERO_DATE?$data['passport_expiry_date']:""; ?>" disabled>
                                              </td>
                                           </tr>
                                          <?php }
@@ -795,7 +799,7 @@ function save_statuse_bilable_onsite(){
                                              </td>
 
                                              <td>
-                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['driving_licence_expiry_date']!="0000-00-00"?$data['driving_licence_expiry_date']:""; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['driving_licence_expiry_date']!=ZERO_DATE?$data['driving_licence_expiry_date']:""; ?>" disabled>
                                              </td>
                                           </tr>
                                           <?php }

@@ -122,7 +122,7 @@ $module_setup = $result['module_setup'];
             </div>
           </div>
           <?php $i++;
-          $jj++; 
+          $jj++;
       } ?>
       </div>
     </div>

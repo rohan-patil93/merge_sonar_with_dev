@@ -83,86 +83,91 @@ if(!empty((array)$resulta['terminations'])){
 }
 $banks = $presulta['banks'];
 
+function renderEmployeeCtcComponentCell($names1, $report_item, $viewlist) {
+    if (in_array($names1, (array)$viewlist)) {
+        return;
+    }
+    $listvalue = filterArrayValue($report_item, 'name', $names1);
+    $aval = 0;
+    if (count((array)$listvalue) > 0) {
+        $aval = $listvalue[0]['salary_component_actual'] == '' ? '-' : $listvalue[0]['salary_component_actual'];
+    }
+    echo '<td class="text-right">';
+    if (isset($_GET['ROUND'])) {
+        echo customeNumberFormate(round($aval, $_GET['ROUND']));
+    } else {
+        echo customeNumberFormate(round($aval));
+    }
+    echo '</td>';
+}
+
+function renderEmployeeCtcTable($report_list, $unique, $banks, $teremp) {
+    $viewlist = array('Pay CTC', 'TOTAL LTA', 'Total Medical Insurance Premium', 'CTC', 'Variable Pay Per Year', 'ITAX Arrear');
+    ?>
+    <div class="table-responsive">
+        <table class="table table-bordered custom-table-border display nowrap " style="width: 100%;">
+        <thead>
+            <tr>
+                <th scope="col"><?= __('S.No.'); ?></th>
+                <th scope="col"><?= __('Employee Code'); ?></th>
+                <th scope="col"><?= __('Employee Name'); ?></th>
+                <th scope="col"><?= __('DOJ'); ?></th>
+                <th scope="col"><?= __('Location'); ?> </th>
+                <th scope="col"><?= __('Department'); ?></th>
+                <th scope="col"><?= __('Designation'); ?></th>
+                <th scope="col"><?= __('Job Title'); ?></th>
+                <th scope="col"><?= __('PAN No.'); ?></th>
+                <th scope="col"><?= __('UAN No.'); ?></th>
+                <th scope="col"><?= __('Bank Name'); ?></th>
+                <th scope="col"><?= __('IFSC Code'); ?></th>
+                <th scope="col"><?= __('Bank Ac'); ?></th>
+                <th scope="col"><?= __('Working Days'); ?></th>
+                <th scope="col"><?= __('Payable Days'); ?></th>
+                <?php foreach((array)$unique as $aaarray ){ if(!in_array($aaarray,(array)$viewlist)){ ?>
+                    <th scope="col"><?php echo $aaarray; ?></th>
+                <?php } ?>
+                <?php } ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(!empty($report_list)){ ?>
+                <?php $i=1; foreach((array)$report_list as $key=>$rows){
+                    $row_data = $rows[0];
+                    $femp_id = $row_data['id'];
+                    ?>
+                    <tr <?php if(in_array($femp_id,(array)$teremp)){ ?> class="bg-warning" <?php } ?> >
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo valueemtpydash($row_data['emp_code']); ?></td>
+                        <td><?php echo valueemtpydash(ucwords($row_data['Employee Name'])); ?></td>
+                        <td><?php echo valueemtpydash(ucwords($row_data['DOJ'])); ?></td>
+                        <td><?php echo valueemtpydash($row_data['Location']); ?></td>
+                        <td><?php echo valueemtpydash($row_data['Department']); ?></td>
+                        <td><?php echo valueemtpydash($row_data['Designation']); ?></td>
+                        <td><?php echo valueemtpydash($row_data['Job Title']); ?></td>
+                        <td><?php echo renderSensitiveDataWithToggle($row_data['pan_number'], 'pan'); ?></td>
+                        <td><?php echo renderSensitiveDataWithToggle($row_data['pf_uan'], 'uan_number'); ?></td>
+                        <td><?php echo $banks[$row_data['bank_id']]; ?></td>
+                        <td><?php echo $row_data['bank_link']; ?></td>
+                        <td><?php echo renderSensitiveDataWithToggle($row_data['bank_account_no'], 'bank_account', false); ?></td>
+                        <td class="text-right"><?php echo valueemtpydash($row_data['Total Days']); ?></td>
+                        <td class="text-right"><?php echo valueemtpydash($row_data['Payable Days']); ?></td>
+                        <?php foreach((array)$unique as $names1){
+                            renderEmployeeCtcComponentCell($names1, $report_list[$key], $viewlist);
+                        } ?>
+                    </tr>
+                <?php $i++; } ?>
+            <?php }else{ ?>
+                <tr><td colspan="16" class="text-center"><h4 class="mt-4"><i class="fa fa-warning"></i> <?= __('No Employee CTC Details'); ?></h4></td></tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    </div>
+    <?php
+}
+
 if(!function_exists('render_employee_ctc_table')){
     function render_employee_ctc_table($report_list, $unique, $banks, $teremp){
-        $viewlist = array('Pay CTC', 'TOTAL LTA', 'Total Medical Insurance Premium', 'CTC', 'Variable Pay Per Year', 'ITAX Arrear');
-        ?>
-        <div class="table-responsive">
-            <table class="table table-bordered custom-table-border display nowrap " style="width: 100%;">
-            <thead>
-                <tr>
-                    <th scope="col"><?= __('S.No.'); ?></th>
-                    <th scope="col"><?= __('Employee Code'); ?></th>
-                    <th scope="col"><?= __('Employee Name'); ?></th>
-                    <th scope="col"><?= __('DOJ'); ?></th>
-                    <th scope="col"><?= __('Location'); ?> </th>
-                    <th scope="col"><?= __('Department'); ?></th>
-                    <th scope="col"><?= __('Designation'); ?></th>
-                    <th scope="col"><?= __('Job Title'); ?></th>
-                    <th scope="col"><?= __('PAN No.'); ?></th>
-                    <th scope="col"><?= __('UAN No.'); ?></th>
-                    <th scope="col"><?= __('Bank Name'); ?></th>
-                    <th scope="col"><?= __('IFSC Code'); ?></th>
-                    <th scope="col"><?= __('Bank Ac'); ?></th>
-                    <th scope="col"><?= __('Working Days'); ?></th>
-                    <th scope="col"><?= __('Payable Days'); ?></th>
-                    <?php foreach((array)$unique as $aaarray ){ if(!in_array($aaarray,(array)$viewlist)){ ?>
-                        <th scope="col"><?php echo $aaarray; ?></th>
-                    <?php } ?>
-                    <?php } ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if(!empty($report_list)){ ?>
-                    <?php $i=1; foreach((array)$report_list as $key=>$rows){
-                        $rows = $rows[0];
-                        $femp_id = $rows['id'];
-                        ?>
-                        <tr <?php if(in_array($femp_id,(array)$teremp)){ ?> class="bg-warning" <?php
-}?> >
-                            <td><?php echo $i; ?></td>
-                            <td><?php echo valueemtpydash($rows['emp_code']); ?></td>
-                            <td><?php echo valueemtpydash(ucwords($rows['Employee Name'])); ?></td>
-                            <td><?php echo valueemtpydash(ucwords($rows['DOJ'])); ?></td>
-                            <td><?php echo valueemtpydash($rows['Location']); ?></td>
-                            <td><?php echo valueemtpydash($rows['Department']); ?></td>
-                            <td><?php echo valueemtpydash($rows['Designation']); ?></td>
-                            <td><?php echo valueemtpydash($rows['Job Title']); ?></td>
-                            <td><?php echo renderSensitiveDataWithToggle($rows['pan_number'], 'pan'); ?></td>
-                            <td><?php echo renderSensitiveDataWithToggle($rows['pf_uan'], 'uan_number'); ?></td>
-                            <td><?php echo $banks[$rows['bank_id']]; ?></td>
-                            <td><?php echo $rows['bank_link']; ?></td>
-                            <td><?php echo renderSensitiveDataWithToggle($rows['bank_account_no'], 'bank_account', false); ?></td>
-                            <td class="text-right"><?php echo valueemtpydash($rows['Total Days']); ?></td>
-                            <td class="text-right"><?php echo valueemtpydash($rows['Payable Days']); ?></td>
-                            <?php foreach((array)$unique as $names1){
-                                if(!in_array($names1,(array)$viewlist)){
-                                    $listvalue = filterArrayValue($report_list[$key],'name',$names1);
-                                    $aval =0;
-                                    if(count((array)$listvalue)>0){
-                                        $aval = $listvalue[0]['salary_component_actual']==""?"-":$listvalue[0]['salary_component_actual'];
-                                    }
-                                    ?>
-                                    <td class="text-right">
-                                    <?php
-                                    if(isset($_GET['ROUND'])){
-                                        echo customeNumberFormate(round($aval,$_GET['ROUND']));
-                                    }else{
-                                        echo customeNumberFormate(round($aval));
-                                    }
-                                    ?>
-                                    </td>
-                                <?php } ?>
-                                <?php } ?>
-                        </tr>
-                    <?php $i++;
-} ?>
-                <?php }else{ ?>
-                    <tr><td colspan="16" class="text-center"><h4 class="mt-4"><i class="fa fa-warning"></i> <?= __('No Employee CTC Details'); ?></h4></td></tr>
-                <?php } ?>
-            </tbody>
-        </table>
-        <?php
+        renderEmployeeCtcTable($report_list, $unique, $banks, $teremp);
     }
 }
 
@@ -217,11 +222,11 @@ if(!function_exists('render_employee_ctc_table')){
 
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="ctc-tab-all" role="tabpanel">
-                                <?php render_employee_ctc_table($all_ctc_list, $unique, $banks, $teremp); ?>
+                                <?php renderEmployeeCtcTable($all_ctc_list, $unique, $banks, $teremp); ?>
                             </div>
                             <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                                 <div class="tab-pane fade" id="ctc-tab-<?php echo $pay_area_id; ?>" role="tabpanel">
-                                    <?php render_employee_ctc_table((array)$pay_area_wise_list[$pay_area_id], $unique, $banks, $teremp); ?>
+                                    <?php renderEmployeeCtcTable((array)$pay_area_wise_list[$pay_area_id], $unique, $banks, $teremp); ?>
                                 </div>
                             <?php } ?>
                         </div>

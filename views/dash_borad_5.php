@@ -1,3 +1,11 @@
+<?php
+if (!defined('AMOUNT_17800')) {
+    define('AMOUNT_17800', '17,800');
+}
+if (!defined('AMOUNT_1800')) {
+    define('AMOUNT_1800', '1,800');
+}
+?>
 <div class="row">
     <div class="col-xl-6">
         <div class="card card-custom gutter-b">
@@ -14,11 +22,11 @@
                         <div class="card-body my-4">
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Total Receivable'); ?>
-                                <span class="float-right">₹<?php echo "17,800"; ?></span>
+                                <span class="float-right">₹<?php echo AMOUNT_17800; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Balance'); ?>
-                                <span class="float-right">₹<?php echo "1,800"; ?></span>
+                                <span class="float-right">₹<?php echo AMOUNT_1800; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Overdue Balance'); ?>
@@ -49,11 +57,11 @@
                         <div class="card-body my-4">
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Total Paybale'); ?>
-                                <span class="float-right">₹<?php echo "17,800"; ?></span>
+                                <span class="float-right">₹<?php echo AMOUNT_17800; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Balance'); ?>
-                                <span class="float-right">₹<?php echo "1,800"; ?></span>
+                                <span class="float-right">₹<?php echo AMOUNT_1800; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Overdue Balance'); ?>
@@ -214,11 +222,11 @@
                         <div class="card-body my-4">
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Liability'); ?>
-                                <span class="float-right">₹<?php echo "17,800"; ?></span>
+                                <span class="float-right">₹<?php echo AMOUNT_17800; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Equity'); ?>
-                                <span class="float-right">₹<?php echo "1,800"; ?></span>
+                                <span class="float-right">₹<?php echo AMOUNT_1800; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
                                 <?= __('Ratio'); ?>

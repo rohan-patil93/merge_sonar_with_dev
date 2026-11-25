@@ -1,4 +1,8 @@
 <?php
+if (!defined('CLS_SHOW_ACTIVE')) {
+    define('CLS_SHOW_ACTIVE', CLS_SHOW_ACTIVE);
+}
+
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -85,7 +89,7 @@ $totaldislikes= count((array)$dislikelist);
                         </li>
                     </ul>
                     <div class="tab-content mt-5" id="myTabContent4">
-                        <div class="tab-pane fade <?php echo $viewtab == 'comment'? 'show active':'';?>" id="home-4" role="tabpanel" aria-labelledby="home-tab-4">
+                        <div class="tab-pane fade <?php echo $viewtab == 'comment'? CLS_SHOW_ACTIVE:'';?>" id="home-4" role="tabpanel" aria-labelledby="home-tab-4">
 
                             <?php
                             foreach ($commentslist as $cmtdata) {
@@ -132,7 +136,7 @@ $totaldislikes= count((array)$dislikelist);
 
                             <?php } ?>
                         </div>
-                        <div class="tab-pane fade <?php echo $viewtab == 'likes'? 'show active':'';?>"" id="profile-4" role="tabpanel" aria-labelledby="profile-tab-4"> <?php
+                        <div class="tab-pane fade <?php echo $viewtab == 'likes'? CLS_SHOW_ACTIVE:'';?>"" id="profile-4" role="tabpanel" aria-labelledby="profile-tab-4"> <?php
                         foreach ($likelist as $cmtdata) {
                             ?>
                             <div class="d-flex align-items-center p-b-10">
@@ -160,7 +164,7 @@ $totaldislikes= count((array)$dislikelist);
                                 </div>
                                 <!--end::Section-->
                             </div> <?php } ?></div>
-                            <div class="tab-pane fade <?php echo $viewtab == 'dislikes'? 'show active':'';?>"" id="contact-4" role="tabpanel" aria-labelledby="contact-tab-4"> <?php
+                            <div class="tab-pane fade <?php echo $viewtab == 'dislikes'? CLS_SHOW_ACTIVE:'';?>"" id="contact-4" role="tabpanel" aria-labelledby="contact-tab-4"> <?php
                             foreach ($dislikelist as $cmtdata) {
                                 ?>
                                 <div class="d-flex align-items-center p-b-10">

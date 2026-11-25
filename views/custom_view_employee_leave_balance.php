@@ -75,8 +75,8 @@ $currentYear = date('Y');
 </div>
 
 <!-- Add Leave Allocation Modal -->
-<div class="modal fade" id="addAllocationModal" tabindex="-1" role="dialog" aria-labelledby="addAllocationModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="addAllocationModal" tabindex="-1" aria-labelledby="addAllocationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addAllocationModalLabel"><?= __('Add Leave Allocation'); ?></h5>

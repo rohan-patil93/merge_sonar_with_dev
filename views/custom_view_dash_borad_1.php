@@ -199,7 +199,7 @@ if($att_list1['pc_limit'] != 0 && $att_list1['pc_limit'] !=""){
                                                                                     <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
-                                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-danger" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -293,7 +293,7 @@ if($att_list1['pc_limit'] != 0 && $att_list1['pc_limit'] !=""){
                                                                                     <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
-                                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-danger" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>

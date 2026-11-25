@@ -165,9 +165,7 @@ foreach ((array) $locdata as $locda) {
         foreach ((array) $table2 as $tab2) {
             $tab2['id'] = 0; ?>
             <div class="col-md-6 itemRow cardid<?php echo $i; ?>">
-                <div class="card  p-5 "><span class="deleteiconcustom text-danger  text-right f-22" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Delete VRC Card'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
-                        onclick="deleteitem(<?php echo $i; ?>)" data-container="body" data-toggle="tooltip"
-                        data-placement="bottom" title="<?= htmlspecialchars(__('Delete VRC Card'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash"></i></span>
+                <div class="card  p-5 "><button type="button" class="btn btn-link p-0 border-0 deleteiconcustom text-danger text-right f-22" onclick="deleteitem(<?php echo $i; ?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Delete VRC Card'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Delete VRC Card'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash"></i></button>
                     <div class="row">
                         <div class="col-md-5">
                             <label for="productCode_<?php echo $i; ?>"><?= __('job Title'); ?></label>
@@ -324,10 +322,7 @@ foreach ((array) $locdata as $locda) {
                     <div class="row">
                         <div class="col-md-2 ">
                             <?php if ($_GET['Rid'] != "" && isset($_GET['Rid'])) { ?>
-                                <div class="btn btn-icon btn-primary btn-circle mr-2" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
-                                    onclick="toopenpredim(<?php echo $i . "," . $tab2['id']; ?>)" data-container="body"
-                                    data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>"><i
-                                        class="fas fa-dollar-sign"></i></div>
+                                <button type="button" class="btn btn-icon btn-primary btn-circle mr-2" onclick="toopenpredim(<?php echo $i . ',' . $tab2['id']; ?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fas fa-dollar-sign"></i></button>
                             <?php } ?>
                         </div>
                         <div class="col-md-5">

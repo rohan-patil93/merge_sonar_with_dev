@@ -32,7 +32,7 @@ $statuse = ViewStatusData();
             <?php foreach($transactiontables as $trans_id=>$tableslist){ ?>
             <tr >
                 <td>
-                    <table role="presentation">
+                    <table>
                         <tr>
                             <td class="p-1">transaction_number</td>
                             <td  class="p-1"><?php echo $tableslist[0]['transaction_number']; ?></td>

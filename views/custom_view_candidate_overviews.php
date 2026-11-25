@@ -476,7 +476,7 @@ function candidateUploadDocuments(){
                       ?>
                       <tr>
                         <th scope="col">
-                          <h6 class="mb-0 f-14"><i class="ti-pencil" onclick="window.open('index.php?option=COM_INSERT_CANDIDATE&ETYPE=<?php echo str_replace(" ","_",$keylabel); ?>&Rid=<?php echo $_GET['Rid']; ?>', '_blank');" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>  <?php echo $keylabel; ?></h6>
+                          <h6 class="mb-0 f-14"><button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="window.open('index.php?option=COM_INSERT_CANDIDATE&ETYPE=<?php echo str_replace(" ","_",$keylabel); ?>&Rid=<?php echo $_GET['Rid']; ?>', '_blank');" aria-label="<?= htmlspecialchars(__('Edit candidate section'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil"></i></button>  <?php echo $keylabel; ?></h6>
                         </th>
                         <th scope="col" style="text-align: right;">
                           <div class="d-flex align-items-center w-100px w-sm-120px flex-column ">
@@ -486,7 +486,7 @@ function candidateUploadDocuments(){
                             </div>
                             <div class="col-md-12">
                               <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-<?php echo round($percentage)>=50?"success":"danger"; ?>" role="progressbar" style="width:  <?php echo round($percentage); ?>%;" aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-<?php echo round($percentage)>=50?"success":"danger"; ?>" style="width:  <?php echo round($percentage); ?>%;" aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                             </div>
                           </div>

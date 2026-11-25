@@ -118,7 +118,7 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
                     <div class="col-sm-12">
                         <table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" aria-describedby="kt_datatable_info" style="width: 1236px;">
                             <thead>
-                                <tr role="row" bgcolor="#f7f7f7">
+                                <tr role="row" style="background-color: #f7f7f7;">
                                     <th scope="col"><?= __('Employee ID'); ?></th>
                                     <th scope="col"><?= __('Insurance Person Name'); ?></th>
                                     <th scope="col"><?= __('Paid Days'); ?></th>

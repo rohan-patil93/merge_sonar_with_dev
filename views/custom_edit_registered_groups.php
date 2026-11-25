@@ -332,7 +332,7 @@ function refrashpage(){
                                                             <input class="form-control" type="text" name="fieldvalue[]" value="<?php echo $custoval; ?>" aria-label="<?= __('Field Value') ?>">
                                                         </td>
                                                         <td>
-                                                            <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Delete row'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" onclick="deleteRow('1')"></i>
+                                                            <button type="button" class="btn btn-link p-0 border-0 text-danger" onclick="deleteRow('1')" aria-label="<?= htmlspecialchars(__('Delete row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash text-danger"></i></button>
 
                                                         </td>
                                                     </tr>

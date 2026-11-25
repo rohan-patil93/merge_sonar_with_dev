@@ -98,7 +98,8 @@ foreach($transaction_approval_logs as $tal){
             <div class="tab-pane card-body" id="appraisal_setting_self" role="tabpanel">
                 <div class="row">
                     <?php if(count((array)$performancesetupselfary) != 0){ foreach($performancesetupselfary as $assetyaerkey=>$performancesetupary){?>
-                    <div class="col-xl-2" onclick="showAppraisalList('<?php echo $assetyaerkey; ?>','pageviewself','S')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <div class="col-xl-2">
+                        <button type="button" class="btn p-0 border-0 text-start w-100 h-100 bg-transparent" onclick="showAppraisalList('<?php echo $assetyaerkey; ?>','pageviewself','S')">
                         <div class="card comp-card">
                             <div class="card-body empty_pageviewself" id="pageviewself_1_<?php echo $assetyaerkey; ?>">
                                 <div class="row align-items-center">
@@ -111,6 +112,7 @@ foreach($transaction_approval_logs as $tal){
                                 </div>
                             </div>
                         </div>
+                        </button>
                     </div>
                     <?php } ?>
                     <?php } else { ?>

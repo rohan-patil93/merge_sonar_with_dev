@@ -41,16 +41,18 @@ $monthLabels = array(
 function ppmInhouseFormatDate($date)
 {
     if (empty($date)) {
-        return '-';
+        $formatted = '-';
+    } else {
+        $ts = strtotime($date);
+        if ($ts === false) {
+            $formatted = '-';
+        } elseif (date('H:i', $ts) != '00:00') {
+            $formatted = date('d-m-Y h:i A', $ts);
+        } else {
+            $formatted = date('d-m-Y', $ts);
+        }
     }
-    $ts = strtotime($date);
-    if ($ts === false) {
-        return '-';
-    }
-    if (date('H:i', $ts) != '00:00') {
-        return date('d-m-Y h:i A', $ts);
-    }
-    return date('d-m-Y', $ts);
+    return $formatted;
 }
 
 function ppmInhouseGetVisitCellDisplay($planned, $actualStart)
@@ -132,35 +134,32 @@ function ppmInhouseFrequencyDisplayOrder()
     return array('yearly', 'halfyearly', 'quarterly', 'monthly', 'weekly', 'daily', 'custom');
 }
 
-function ppmInhouseGroupRowsByFrequency($rows)
+function ppmInhouseBuildFrequencyGroups($rows)
 {
     $groups = array();
-    if (count((array)$rows) > 0) {
-        foreach ($rows as $row) {
-            if (is_object($row)) {
-                $row = json_decode(json_encode($row), true);
-            }
-            $slug = ppmInhouseNormalizeFrequencySlug($row['frequency'] ?? '');
-            if (!isset($groups[$slug])) {
-                $groups[$slug] = array();
-            }
-            $groups[$slug][] = $row;
+    foreach ((array)$rows as $row) {
+        if (is_object($row)) {
+            $row = json_decode(json_encode($row), true);
         }
+        $slug = ppmInhouseNormalizeFrequencySlug($row['frequency'] ?? '');
+        $groups[$slug][] = $row;
     }
+    return $groups;
+}
+
+function ppmInhouseGroupRowsByFrequency($rows)
+{
+    $groups = ppmInhouseBuildFrequencyGroups($rows);
     $ordered = array();
-    if (count((array)ppmInhouseFrequencyDisplayOrder()) > 0) {
-        foreach (ppmInhouseFrequencyDisplayOrder() as $slug) {
-            if (count((array)($groups[$slug] ?? array())) > 0) {
-                $ordered[$slug] = $groups[$slug];
-                unset($groups[$slug]);
-            }
+    foreach ((array)ppmInhouseFrequencyDisplayOrder() as $slug) {
+        if (!empty($groups[$slug])) {
+            $ordered[$slug] = $groups[$slug];
+            unset($groups[$slug]);
         }
     }
-    if (count((array)$groups) > 0) {
-        foreach ($groups as $slug => $items) {
-            if (count((array)$items) > 0) {
-                $ordered[$slug] = $items;
-            }
+    foreach ($groups as $slug => $items) {
+        if (!empty($items)) {
+            $ordered[$slug] = $items;
         }
     }
     return $ordered;

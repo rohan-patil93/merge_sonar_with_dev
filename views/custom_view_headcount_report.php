@@ -127,14 +127,14 @@ if(isset($_POST['applyform'])) {
                                 <div class="d-flex mt-10">
                                     <span class="font-weight-bold mr-4"><?php echo $yearslist[0];?></span>
                                     <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-30px w-xl-70px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-primary" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span class="font-weight-bolder text-dark ml-4"><?php echo $Total_Head_Count_CurrentYear;?></span>
                                 </div>
                                 <div class="d-flex mt-5">
                                     <span class="font-weight-bold mr-4"><?php echo $yearslist[1];?></span>
                                     <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-30px w-xl-70px">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-warning" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span class="font-weight-bolder text-dark ml-4"><?php echo $Total_Head_Count_PrevYear    ;?></span>
                                 </div>

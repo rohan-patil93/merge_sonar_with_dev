@@ -61,7 +61,7 @@ $_SESSION['download_data'] = array();
             <tr>
               <!-- Left Column: Header Info -->
               <td>
-                <table role="presentation">
+                <table>
                   <tr>
                     <td class="p-1"><?= __('Requisition No.'); ?></td>
                     <td class="p-1"><?php echo $tableslist[0]['transaction_number']; ?></td>

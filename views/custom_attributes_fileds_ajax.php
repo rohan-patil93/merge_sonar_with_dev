@@ -1,4 +1,9 @@
 <?php
+if (!defined('ATTR_DATA_ID')) {
+    define('ATTR_DATA_ID', ATTR_DATA_ID);
+}
+?>
+<?php
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -34,14 +39,14 @@ if($page == "elementordesign"){
     <div class="form-group row">
     <label class="col-6 col-form-label">' . __('Field Name') . '</label>
     <div class="col-6">
-    <input class="form-control elementor_fieldname space elementor_fieldname'.$_POST['id'].'" data-id="'.$_POST['id'].'"  type="text" name="fieldname[]" value="" />
+    <input class="form-control elementor_fieldname space elementor_fieldname'.$_POST['id'].ATTR_DATA_ID.$_POST['id'].'"  type="text" name="fieldname[]" value="" />
     </div>
     </div>
 
     <div class="form-group row">
     <label  class="col-6 col-form-label ">' . __('Field Type') . '</label>
     <div class="col-6">
-    <select class="form-control elementor_fieldtype elementor_fieldtype'.$_POST['id'].' form-select js-example-basic-single" name="elementorfieldtype[]" data-elementory_id="inputbox'.$_POST['id'].'" data-id="'.$_POST['id'].'"  >
+    <select class="form-control elementor_fieldtype elementor_fieldtype'.$_POST['id'].' form-select js-example-basic-single" name="elementorfieldtype[]" data-elementory_id="inputbox'.$_POST['id'].ATTR_DATA_ID.$_POST['id'].'"  >
     <option value="varchar" >' . __('String') . '</option>
     <option value="text" >' . __('Description') . '</option>
     <option value="int" >' . __('Number') . '</option>
@@ -73,14 +78,14 @@ if($page == "elementordesign"){
     <div class="form-group row">
     <label  class="col-6 col-form-label ">' . __('Type') . '</label>
     <div class="col-6">
-    <select class=" elementor_text_box_type form-select js-example-basic-single" onchange="Getinserttype(this.id,this.value)" id="type" name="elementorytexttype[]" data-elementory_id="inputbox'.$_POST['id'].'" data-id="'.$_POST['id'].'" >'.$filedTypes.'
+    <select class=" elementor_text_box_type form-select js-example-basic-single" onchange="Getinserttype(this.id,this.value)" id="type" name="elementorytexttype[]" data-elementory_id="inputbox'.$_POST['id'].ATTR_DATA_ID.$_POST['id'].'" >'.$filedTypes.'
     </select>
     </div>
     </div>
     <div class="form-group row">
     <label  class="col-6 col-form-label">' . __('Label') . '</label>
     <div class="col-6">
-    <input class="form-control elementory_lable elementory_lable'.$_POST['id'].'" data-labletext="labletext'.$_POST['id'].'" data-elementory_id="inputlabel'.$_POST['id'].'" data-id="'.$_POST['id'].'"  type="text" value="label"  name="elementorylabel[]" />
+    <input class="form-control elementory_lable elementory_lable'.$_POST['id'].'" data-labletext="labletext'.$_POST['id'].'" data-elementory_id="inputlabel'.$_POST['id'].ATTR_DATA_ID.$_POST['id'].'"  type="text" value="label"  name="elementorylabel[]" />
     </div>
     </div>
     <div class="form-group row">
@@ -88,7 +93,7 @@ if($page == "elementordesign"){
     <div class="col-6">
     <span class="switch switch-icon">
     <label>
-    <input type="checkbox" class="display_status js-switch_append'.$_POST['increment'].'" data-id="'.$_POST['id'].'" checked name="display['.$_POST['increment'].']" />
+    <input type="checkbox" class="display_status js-switch_append'.$_POST['increment'].ATTR_DATA_ID.$_POST['id'].'" checked name="display['.$_POST['increment'].']" />
     <span></span>
     </label>
     </span>
@@ -99,7 +104,7 @@ if($page == "elementordesign"){
     <div class="col-6">
     <span class="switch switch-icon">
     <label>
-    <input type="checkbox" checked  class="display_status js-switch_append'.$_POST['increment'].'" data-id="'.$_POST['id'].'" name="insert_display_list['.$_POST['increment'].']" />
+    <input type="checkbox" checked  class="display_status js-switch_append'.$_POST['increment'].ATTR_DATA_ID.$_POST['id'].'" name="insert_display_list['.$_POST['increment'].']" />
     <span></span>
     </label>
     </span>

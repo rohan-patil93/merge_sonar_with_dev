@@ -147,7 +147,7 @@ $who_can_see_the_results = json_decode($assessment_details['who_can_see_the_resu
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="progress  progress-xs">
-                                                    <div class="progress-bar progress-bar-pink " role="progressbar" style="width: <?php echo $rate; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar progress-bar-pink " style="width: <?php echo $rate; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -204,7 +204,7 @@ $who_can_see_the_results = json_decode($assessment_details['who_can_see_the_resu
                             </div>
                         </div>
 
-                        <div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+                        <div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
                             <div class="modal-dialog modal-xl modal-dialog-scrollable"  >
                                 <div class="modal-content"  id="popup2">
 

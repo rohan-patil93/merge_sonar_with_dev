@@ -52,7 +52,7 @@ if(isset($_POST['log_id'])){
                         $reqestdays = notificationdatesdiff($date_ime);
 
                         ?>
-                        <tr class="unread" onclick="loadPage('<?php echo $jsonencode['option'];?>','<?php echo deocdeId("id:".$jsonencode['id']); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                        <tr class="unread cursor-pointer" onclick="loadPage('<?php echo $jsonencode['option'];?>','<?php echo deocdeId("id:".$jsonencode['id']); ?>')">
                             <td class="p-1" style="width: 10%;">
                                 <div class="check-star">
                                     <?php if($disimage != ""){ ?>
@@ -80,7 +80,7 @@ if(isset($_POST['log_id'])){
                             <?php } ?>
 
                         </td>
-                        <td class="email-time p-1 <?php echo $class_text; ?>" width="30%">
+                        <td class="email-time p-1 <?php echo $class_text; ?>" style="width: 30%;">
                             <?php echo $date_ime; ?>
                             <p ><?php echo $reqestdays;  ?></p>
 

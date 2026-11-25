@@ -72,5 +72,3 @@ if($return == 0){
     include_once $disptemp;
 
 }
-?>
-

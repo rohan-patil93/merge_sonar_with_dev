@@ -36,11 +36,18 @@ if (!function_exists('renderContractAmcRepairItemCell')) {
 }
 
 if (!function_exists('renderContractAmcRepairCell')) {
-    function renderContractAmcRepairCell($rowEditable, $lineIdx, $field, $value, $fallback, $type = 'text', $extraClass = '', $placeholder = '', $ariaLabel = null) {
+    function renderContractAmcRepairCell($rowEditable, $lineIdx, $field, $value, $fallback, $options = array()) {
         if (!$rowEditable) {
             echo escapeContractAmcRepairValue($value ?? $fallback);
             return;
         }
+        if (is_string($options)) {
+            $options = array('type' => $options);
+        }
+        $type = $options['type'] ?? 'text';
+        $extraClass = $options['extraClass'] ?? '';
+        $placeholder = $options['placeholder'] ?? '';
+        $ariaLabel = $options['ariaLabel'] ?? null;
         $inputAria = $ariaLabel !== null ? $ariaLabel : __('Input');
         $stepAttr = ($type === 'number') ? ' step="0.01" min="0"' : '';
         $phAttr = ($placeholder !== '') ? ' placeholder="' . escapeContractAmcRepairValue($placeholder) . '"' : '';
@@ -65,14 +72,14 @@ if (!function_exists('renderContractAmcScheduleRepairLineRow')) {
         <?php renderContractAmcRepairCell($rowEditable, $lineIdx, 'part_description', $line['part_description'] ?? null, '—'); ?>
     </td>
     <td>
-        <?php renderContractAmcRepairCell($rowEditable, $lineIdx, 'qty', $rowEditable ? ($line['qty'] ?? '1') : ($line['qty'] ?? null), '—', 'number'); ?>
+        <?php renderContractAmcRepairCell($rowEditable, $lineIdx, 'qty', $rowEditable ? ($line['qty'] ?? '1') : ($line['qty'] ?? null), '—', array('type' => 'number')); ?>
     </td>
     <td>
         <?php $opt = __('Optional'); ?>
-        <?php renderContractAmcRepairCell($rowEditable, $lineIdx, 'po_number', $line['po_number'] ?? null, '—', 'text', 'repair-line-po', $opt, $opt); ?>
+        <?php renderContractAmcRepairCell($rowEditable, $lineIdx, 'po_number', $line['po_number'] ?? null, '—', array('type' => 'text', 'extraClass' => 'repair-line-po', 'placeholder' => $opt, 'ariaLabel' => $opt)); ?>
     </td>
     <td>
-        <?php renderContractAmcRepairCell($rowEditable, $lineIdx, 'amount', $line['amount'] ?? '0', '0', 'number'); ?>
+        <?php renderContractAmcRepairCell($rowEditable, $lineIdx, 'amount', $line['amount'] ?? '0', '0', array('type' => 'number')); ?>
     </td>
     <?php if ($rowEditable) { ?>
     <td class="text-center">

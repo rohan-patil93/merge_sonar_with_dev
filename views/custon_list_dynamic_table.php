@@ -1,4 +1,6 @@
 <?php
+defined('URL_INDEX_OPTION') || define('URL_INDEX_OPTION', 'index.php?option=');
+defined('URL_PARAM_RID') || define('URL_PARAM_RID', '&Rid=');
  if($_POST['filterajax'] =="Y"){
   $_GET['option'] = $_POST['option'];
   include_once '../includes/session.php';
@@ -185,12 +187,12 @@ $total_pages = $dynamictableres['total_pages'];
                                 $edit_insert = 'COM_VIEW_VMS_EMPLOYEE';
                                 $insert = $edit_insert;
                             }
-                            $edit = $edit_permission == 1 ? "index.php?option=".$insert."&Rid=".$rid : "javascript:showpermission()";
-                            $link_copy = $insert_permission == 1 ? "index.php?option=".$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
-                            $edit =  "index.php?option=".$insert."&Rid=".$rid;
-                            $link_copy =  "index.php?option=".$insert."&copy=1&Rid=".$rid;
+                            $edit = $edit_permission == 1 ? URL_INDEX_OPTION.$insert.URL_PARAM_RID.$rid : "javascript:showpermission()";
+                            $link_copy = $insert_permission == 1 ? URL_INDEX_OPTION.$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
+                            $edit =  URL_INDEX_OPTION.$insert.URL_PARAM_RID.$rid;
+                            $link_copy =  URL_INDEX_OPTION.$insert."&copy=1&Rid=".$rid;
 
-                            $view =  "index.php?option=".$view_page."&Rid=".$rid
+                            $view =  URL_INDEX_OPTION.$view_page.URL_PARAM_RID.$rid
                           ?>
 
                   <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $edit_permissionbtn; ?>><i class="fa fa-edit" ></i></a>

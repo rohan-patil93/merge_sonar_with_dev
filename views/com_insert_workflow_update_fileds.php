@@ -212,8 +212,7 @@ for($i=0;$i <= 1;$i++){
 <?php } ?>
 <div class="modal-footer">
     <input type="hidden" name="Rid" value="<?php echo $_POST['rid']; ?>">
-<!--     <input type="hidden" name="type" value="<?php echo $_POST['type']; ?>">
- -->        <input type="hidden" name="type" id="type" value="<?php echo $_POST['type']; ?>">
+        <input type="hidden" name="type" id="type" value="<?php echo $_POST['type']; ?>">
     <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel') ?></button>
     <button type="button" class="btn btn-primary mr-2" onclick="submitrom('<?php echo $_POST['type']; ?>')" ><?= __('Submit') ?></button>
 </div>

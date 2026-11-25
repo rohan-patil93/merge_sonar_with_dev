@@ -219,14 +219,14 @@ $stausresult = ViewStatusData();
     </div>
 <input type="hidden" name="table_name" id="table_name" value="<?php echo $table; ?>">
 
- <div id="kt_modal_KTDatatable_remote_2" class="modal fade" role="dialog" aria-hidden="true">
+ <div id="kt_modal_KTDatatable_remote_2" class="modal fade" aria-hidden="true">
     <div class="modal-dialog " >
         <div class="modal-content"  id="popup1_2">
 
         </div>
     </div>
 </div>
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content"  id="popup2">
 

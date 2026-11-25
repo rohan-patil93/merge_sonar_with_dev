@@ -8,7 +8,7 @@
                 <div class="font-weight-bold text-muted font-size-sm">
                 <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo "18" ?> </span><?= __('Lac'); ?></div>
                 <div class="progress progress-xs mt-7 bg-success-o-60">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 78%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success" style="width: 78%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
             <!--end:: Body-->
@@ -24,7 +24,7 @@
                 <div class="font-weight-bold text-muted font-size-sm">
                 <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo "13"; ?> </span><?= __('Lac'); ?></div>
                 <div class="progress progress-xs mt-7 bg-dark-o-60">
-                    <div class="progress-bar bg-dark" role="progressbar" style="width: 84%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-dark" style="width: 84%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
             <!--end:: Body-->

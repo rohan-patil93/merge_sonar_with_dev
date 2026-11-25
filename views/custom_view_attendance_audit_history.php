@@ -100,7 +100,8 @@ function attendanceHistoryDetailPairs($attendance){
 }
 
 $has_history = !empty($attendance);
-$created_actor = $has_history ? attendanceHistoryUserName(isset($attendance['created_by']) ? $attendance['created_by'] : '', $users) : '';
+$history_creator = isset($attendance['created_by']) ? $attendance['created_by'] : '';
+$created_actor = $has_history ? attendanceHistoryUserName($history_creator, $users) : '';
 $attendance_details = $has_history ? attendanceHistoryDetailPairs($attendance) : array();
 
 $audits_with_changes = array();
@@ -176,7 +177,8 @@ foreach((array)$audits as $audit_row){
                                 </div>
                             <?php }else{ ?>
                                 <?php foreach($audits_with_changes as $audit){
-                                    $audit_actor_id = isset($audit['created_by']) && trim((string)$audit['created_by']) != '' ? $audit['created_by'] : (isset($audit['user_id']) ? $audit['user_id'] : '');
+                                    $fallback_user_id = isset($audit['user_id']) ? $audit['user_id'] : '';
+                                    $audit_actor_id = (isset($audit['created_by']) && trim((string)$audit['created_by']) != '') ? $audit['created_by'] : $fallback_user_id;
                                     $audit_actor = attendanceHistoryUserName($audit_actor_id, $users);
                                     $changed_fields = isset($audit['_changed_fields']) && is_array($audit['_changed_fields']) ? $audit['_changed_fields'] : array();
                                     $icon_type = '<span class="ti-pencil"></span>';

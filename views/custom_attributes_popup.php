@@ -570,7 +570,8 @@ elem.forEach(function(html) {
                                                                     <option <?php if ($td['drop_condition'] == $dd) {
                                                                         echo "selected";
                                                                     }
-                                                                    ?> value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?>
+                                                                    ?> value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option>
+                                                                <?php } ?>
                                                                 </select>
                                                             </td>
                                                             <td>

@@ -115,27 +115,7 @@ function fyLabel($year) {
             <td class="text-end"><?= number_format($fy['current_unspent'], 2) ?></td>
           </tr>
 
-         <?php /* ?> <!-- Previous Year CF -->
-          <tr>
-            <th scope="col">C/F Balance amount unspent for FY <?= fyLabel($fy['year'] - 1) ?></th>
-            <th scope="col" class="text-end"><?= number_format($fy['carry_forward_previous'], 2) ?></th>
-          </tr>
-
-          <tr>
-            <td>Less: Amount spent in FY <?= $label ?></td>
-            <th scope="col" class="text-end"><?= number_format($fy['spent_from_py'], 2) ?></th>
-          </tr>
-
-          <tr>
-            <th scope="col">Balance amount unspent for FY <?= fyLabel($fy['year'] - 1) ?></th>
-            <th scope="col" class="text-end"><?= number_format($fy['cf_balance_py'], 2) ?></th>
-          </tr>
-
-          <!-- Net Unspent -->
-          <tr>
-            <th scope="col">Amount remaining unspent during FY <?= $label ?> after adjusting PY</th>
-            <th scope="col" class="text-end"><?= number_format($fy['remaining_unspent'], 2) ?></th>
-          </tr> <?php */ ?>
+         
 
           <?php } else { ?>
             <tr>

@@ -37,7 +37,7 @@ if (isset($_POST['applyform']) && $_POST['applyform'] == 'apply') {
         $fromDateTime = strtotime($from_date . ' ' . $from_time);
         $toDateTime = strtotime($to_date . ' ' . $to_time);
 
-        if ($fromDateTime == false || $toDateTime == false) {
+        if (!$fromDateTime || !$toDateTime) {
             $errorMessage = 'Invalid date/time format.';
         } elseif ($fromDateTime > $toDateTime) {
             $errorMessage = 'From date time should be less than or equal to To date time.';

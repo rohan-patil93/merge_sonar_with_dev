@@ -328,9 +328,9 @@ $announcement_reslut_view = 'Y';
                               <?php } elseif($annvalue['video_url']!='')  { ?>
                                  <div class="embed-responsive embed-responsive-16by9">
 
-                                    <iframe width="640" height="360" src="https://www.youtube.com/embed/h5H_JzGhENc" title="Taskda |  Manage Your Tasks 4 Easy Steps" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    <iframe width="640" height="360" src="https://www.youtube.com/embed/h5H_JzGhENc" title="Taskda |  Manage Your Tasks 4 Easy Steps" style="border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                  </div>
-                           } ?>
+                           <?php } ?>
                            <?php } ?>
 
                            <?php
@@ -550,7 +550,7 @@ $announcement_reslut_view = 'Y';
                            </div>
                            </div>
                         </div>
-                        <div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+                        <div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
                            <div class="modal-dialog modal-lg modal-dialog-scrollable"  >
                               <div class="modal-content"  id="popup2">
                               </div>

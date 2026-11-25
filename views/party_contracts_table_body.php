@@ -1,6 +1,6 @@
 <?php
-if (!function_exists('party_contracts_render_row')) {
-    function party_contracts_render_row($index, $row)
+if (!function_exists('partyContractsRenderRow')) {
+    function partyContractsRenderRow($index, $row)
     {
         if (is_object($row)) {
             $row = json_decode(json_encode($row), true);
@@ -50,8 +50,15 @@ if (!function_exists('party_contracts_render_row')) {
     }
 }
 
-if (!function_exists('party_contracts_render_rows')) {
-    function party_contracts_render_rows($contracts)
+if (!function_exists('party_contracts_render_row')) {
+    function party_contracts_render_row($index, $row)
+    {
+        partyContractsRenderRow($index, $row);
+    }
+}
+
+if (!function_exists('partyContractsRenderRows')) {
+    function partyContractsRenderRows($contracts)
     {
         if (count((array)$contracts) <= 0) {
             ?>
@@ -65,5 +72,12 @@ if (!function_exists('party_contracts_render_rows')) {
         foreach ($contracts as $row) {
             party_contracts_render_row($i++, $row);
         }
+    }
+}
+
+if (!function_exists('party_contracts_render_rows')) {
+    function party_contracts_render_rows($contracts)
+    {
+        partyContractsRenderRows($contracts);
     }
 }

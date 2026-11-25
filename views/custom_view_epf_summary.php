@@ -49,65 +49,73 @@ function valueemtpydash($val){
     return $val=="" || $val=="0"?" - ":$val;
 }
 
+function renderEpfSummaryEmployeeRow($ecr_data, $unique) {
+    $employee_rows = (array)$ecr_data;
+    $first_row = $employee_rows[0];
+    $employer_contributions = array();
+    foreach ($employee_rows as $row) {
+        $employer_contributions[$row['component_short_name']] = $row['esbi_employer_contributions'];
+    }
+    ?>
+    <tr role="row" class="odd">
+        <th scope="col"><?php echo valueemtpydash($first_row['emp_code']); ?></th>
+        <th scope="col"><?php echo valueemtpydash($first_row['Employee_Name']); ?></th>
+        <th scope="col"><?php echo renderSensitiveDataWithToggle($first_row['pf_uan'], 'uan_number'); ?></th>
+        <th scope="col" class="text-right"><?php echo valueemtpydash(customeummarmonyformate($first_row['epf_base_amount'])); ?></th>
+        <th scope="col" class="text-right"><?php echo valueemtpydash(customeummarmonyformate($first_row['pf_salary_component_actual'])); ?></th>
+        <td class="">-</td>
+        <?php foreach((array)$unique as $names1){ ?>
+            <td class="text-right">
+                <?php
+                $percentage = isset($employer_contributions[$names1]) ? $employer_contributions[$names1] : "";
+                echo $percentage === "" ? "-" : valueemtpydash(customeummarmonyformate(round(($percentage * $first_row['epf_base_amount']) / 100)));
+                ?>
+            </td>
+        <?php } ?>
+    </tr>
+    <?php
+}
+
+function renderEpfSummaryTable($report_rows, $unique) {
+    $total_columns = 6 + count((array)$unique);
+    ?>
+    <div class="dt-responsive table-responsive">
+        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+            <thead>
+                <tr role="row" style="background-color: #f7f7f7;">
+                    <th scope="col" rowspan="2"><?= __('Employee Code'); ?></th>
+                    <th scope="col" rowspan="2"><?= __('Employee Name'); ?></th>
+                    <th scope="col" rowspan="2"><?= __('PF Account Number'); ?></th>
+                    <th scope="col" rowspan="2" class="text-right"><?= __('PF Wages'); ?></th>
+                    <th scope="col" colspan="2"><?= __('Employee\'s Contribution'); ?></th>
+                    <th scope="col" colspan="<?php echo count((array)$unique); ?>"><?= __('Employer\'s Contribution'); ?></th>
+                </tr>
+                <tr>
+                    <th scope="col" class="text-right"><?= __('PF Amount'); ?></th>
+                    <th scope="col" class="text-right"><?= __('VPF Amount'); ?></th>
+                    <?php foreach((array)$unique as $names){ ?>
+                        <th scope="col" class="text-right"><?php echo $names; ?></th>
+                    <?php } ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if(!empty($report_rows)){
+                    foreach($report_rows as $ecr_data){
+                        renderEpfSummaryEmployeeRow($ecr_data, $unique);
+                    }
+                }else{
+                    echo "<tr role='row'><td colspan='".$total_columns."'><h4 class='text-center mt-4'><i class='fa fa-warning'></i>".__('No EPF Summary Reports')."</h4></td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}
+
 if(!function_exists('render_epf_summary_table')){
     function render_epf_summary_table($report_rows, $unique){
-        $total_columns = 6 + count((array)$unique);
-        ?>
-        <div class="dt-responsive table-responsive">
-            <table id="basic-btn" class="table table-striped table-bordered nowrap">
-                <thead>
-                    <tr role="row" style="background-color: #f7f7f7;">
-                        <th scope="col" rowspan="2"><?= __('Employee Code'); ?></th>
-                        <th scope="col" rowspan="2"><?= __('Employee Name'); ?></th>
-                        <th scope="col" rowspan="2"><?= __('PF Account Number'); ?></th>
-                        <th scope="col" rowspan="2" class="text-right"><?= __('PF Wages'); ?></th>
-                        <th scope="col" colspan="2"><?= __('Employee\'s Contribution'); ?></th>
-                        <th scope="col" colspan="<?php echo count((array)$unique); ?>"><?= __('Employer\'s Contribution'); ?></th>
-                    </tr>
-                    <tr>
-                        <th scope="col" class="text-right"><?= __('PF Amount'); ?></th>
-                        <th scope="col" class="text-right"><?= __('VPF Amount'); ?></th>
-                        <?php foreach((array)$unique as $names){ ?>
-                            <th scope="col" class="text-right"><?php echo $names; ?></th>
-                        <?php } ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if(!empty($report_rows)){
-                        foreach($report_rows as $ecr_data){
-                            $employee_rows = (array)$ecr_data;
-                            $first_row = $employee_rows[0];
-                            $employer_contributions = array();
-                            foreach($employee_rows as $row){
-                                $employer_contributions[$row['component_short_name']] = $row['esbi_employer_contributions'];
-                            }
-                            ?>
-                            <tr role="row" class="odd">
-                                <th scope="col"><?php echo valueemtpydash($first_row['emp_code']); ?></th>
-                                <th scope="col"><?php echo valueemtpydash($first_row['Employee_Name']); ?></th>
-                                <th scope="col"><?php echo renderSensitiveDataWithToggle($first_row['pf_uan'], 'uan_number'); ?></th>
-                                <th scope="col" class="text-right"><?php echo valueemtpydash(customeummarmonyformate($first_row['epf_base_amount'])); ?></th>
-                                <th scope="col" class="text-right"><?php echo valueemtpydash(customeummarmonyformate($first_row['pf_salary_component_actual'])); ?></th>
-                                <td class="">-</td>
-                                <?php foreach((array)$unique as $names1){ ?>
-                                    <td class="text-right">
-                                        <?php
-                                        $percentage = isset($employer_contributions[$names1]) ? $employer_contributions[$names1] : "";
-                                        echo $percentage === "" ? "-" : valueemtpydash(customeummarmonyformate(round(($percentage * $first_row['epf_base_amount']) / 100)));
-                                        ?>
-                                    </td>
-                                <?php } ?>
-                            </tr>
-                            <?php
-                        }
-                    }else{
-                        echo "<tr role='row'><td colspan='".$total_columns."'><h4 class='text-center mt-4'><i class='fa fa-warning'></i>".__('No EPF Summary Reports')."</h4></td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-        <?php
+        renderEpfSummaryTable($report_rows, $unique);
     }
 }
 
@@ -164,11 +172,11 @@ if(!function_exists('render_epf_summary_table')){
 
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="summary-tab-all" role="tabpanel">
-                                            <?php render_epf_summary_table($all_ecr_list, $unique); ?>
+                                            <?php renderEpfSummaryTable($all_ecr_list, $unique); ?>
                                         </div>
                                         <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                                             <div class="tab-pane fade" id="summary-tab-<?php echo $pay_area_id; ?>" role="tabpanel">
-                                                <?php render_epf_summary_table((array)$pay_area_wise_list[$pay_area_id], $unique); ?>
+                                                <?php renderEpfSummaryTable((array)$pay_area_wise_list[$pay_area_id], $unique); ?>
                                             </div>
                                         <?php } ?>
                                     </div>

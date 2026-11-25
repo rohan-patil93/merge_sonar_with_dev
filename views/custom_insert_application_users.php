@@ -59,7 +59,7 @@ document.onreadystatechange = function(){
   }
 }
 </script>
-<?php	}
+<?php    }
 }
 if(isset($_POST['skip_compliance'])){
     $_SESSION['user_activated'] = 'Y';

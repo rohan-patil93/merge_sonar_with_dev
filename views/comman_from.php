@@ -43,7 +43,7 @@ foreach ($disarray as $diskey => $disvalue) {
                         <div class="card-body">
                             <div class="kt-portlet__body">
                                 <div class="form-group row ">
-<?php	}
+<?php    }
 
 foreach($disvalue as  $fullvalue){
     $key = $fullvalue['table'];

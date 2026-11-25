@@ -309,7 +309,7 @@ $locations =$result['locations'];
                         <input aria-label="<?= htmlspecialchars(__('Amount'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="amount[]" onblur="checkdebitandcredit()" id="debit_<?php echo $i; ?>" class="form-control text-right all_amount" value="<?php echo $amount; ?>" autocomplete="off">
                     </td>
                     <td class="p-2">
-                        <i class="ti-trash"  onclick="deletRow('jvrow_<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                        <button type="button" class="btn btn-link p-0 border-0 text-danger" onclick="deletRow('jvrow_<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash"></i></button>
                     </td>
                 </tr>
                 <?php $i++;

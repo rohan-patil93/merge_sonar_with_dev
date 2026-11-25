@@ -111,7 +111,7 @@ $statuse = ViewStatusData();
                     </td>
                     <td class="p-2">
                         <?php if($auasset['current_status'] == 0){ ?>
-                        <i class="ti ti-eye" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Return Request'), ENT_QUOTES, 'UTF-8'); ?>" onclick="assetRequestTransfersAcceptOrReject('<?php echo $auasset['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                        <button type="button" class="btn btn-link p-0 border-0 text-reset" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Return Request'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-original-title="<?= htmlspecialchars(__('Return Request'), ENT_QUOTES, 'UTF-8'); ?>" onclick="assetRequestTransfersAcceptOrReject('<?php echo $auasset['id']; ?>')" aria-label="<?= htmlspecialchars(__('Return Request'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti ti-eye"></i></button>
                     <?php }else{ echo "-";
 } ?>
                     </td>
@@ -226,7 +226,7 @@ $statuse = ViewStatusData();
                     <td class="p-2">
                         <?php if(isset($asset_returns[$auasset['asset_id']])){ echo __('Return Process');
 }else{ ?>
-                         <i class="ti ti-unlink"  return request  onclick="assetReturnRequest('<?php echo $auasset['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                         <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="assetReturnRequest('<?php echo $auasset['id']; ?>')" aria-label="<?= htmlspecialchars(__('Return Request'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti ti-unlink"></i></button>
                      <?php  } ?>
                     </td>
                 </tr>

@@ -1,4 +1,8 @@
 <?php
+if (!defined('HTML_NBSP')) {
+    define('HTML_NBSP', '&nbsp;');
+}
+
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -84,7 +88,7 @@ foreach($bulkdata as $bulkd){
                             <div class="d-inline-block width73">
                                 <a href="#!" class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6>
                                 </a>
-                                <p class="text-muted m-b-0"><?php echo $value['user_email']!="" ? $value['user_email'] : "&nbsp;"; ?></p>
+                                <p class="text-muted m-b-0"><?php echo $value['user_email']!="" ? $value['user_email'] : HTML_NBSP; ?></p>
 
                             </div>
 
@@ -125,7 +129,7 @@ foreach($bulkdata as $bulkd){
                                         <span></span>
                                       </label>
                                     </div>
-                                <p class="text-muted m-b-0"><?php echo $value['user_email']!="" ? $value['user_email'] : "&nbsp;"; ?></p>
+                                <p class="text-muted m-b-0"><?php echo $value['user_email']!="" ? $value['user_email'] : HTML_NBSP; ?></p>
 
                             </div>
                         </div>
@@ -145,7 +149,7 @@ foreach($bulkdata as $bulkd){
                             <?php } ?>
                             <div class="d-inline-block width73">
                                 <a href="#!" class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></a>
-                                <p class="text-muted m-b-0"><?php echo $value['user_email']!="" ? $value['user_email'] : "&nbsp;"; ?></p>
+                                <p class="text-muted m-b-0"><?php echo $value['user_email']!="" ? $value['user_email'] : HTML_NBSP; ?></p>
                             </div>
                         </div>
                       </div>
@@ -164,7 +168,7 @@ foreach($bulkdata as $bulkd){
                             <?php } ?>
                             <div class="d-inline-block width73">
                                 <a href="#!" class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></a>
-                                <p class="text-muted m-b-0"><?php echo $value['user_email']!="" ? $value['user_email'] : "&nbsp;"; ?></p>
+                                <p class="text-muted m-b-0"><?php echo $value['user_email']!="" ? $value['user_email'] : HTML_NBSP; ?></p>
 
                             </div>
                         </div>

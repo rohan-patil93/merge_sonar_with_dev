@@ -163,16 +163,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                 <div class="card">
                     <div class="card-body">
                         <input type="hidden" name="chart_data_gender" id="chart_data_bill_vendor" value='<?php echo json_encode((array)$spend_by_vendor_category_graph); ?>' >
-                        <?php if(0 =='1'){ ?>
-                          <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
-                                <div class="text-center px-4">
-                                    <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                                </div>
-                            </div>
-                        <?php }else{ ?>
                           <div id="chart_by_category" style="width: 100%; height: 400px;"></div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -306,16 +297,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                 <div class="card">
                     <div class="card-body">
                         <input type="hidden" name="chart_data_gender" id="chart_data_bill_customer" value='<?php echo json_encode((array)$spend_by_customer_category_graph); ?>' >
-                        <?php if(0 =='1'){ ?>
-                          <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
-                                <div class="text-center px-4">
-                                    <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                                </div>
-                            </div>
-                        <?php }else{ ?>
                           <div id="chart_by_customer" style="width: 100%; height: 400px;"></div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>

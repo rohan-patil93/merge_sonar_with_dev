@@ -103,7 +103,7 @@ function deleteitem(cardid){
             <option value = "0"> <?= __('Select Any One'); ?></option>
             <?php foreach ($showtables as $data) {  ?>
                 <option  <?php if($resarray[0][KEY_APP_TABLE_NAME] == $data[KEY_APP_TABLE_NAME]){ ?> selected  <?php } ?> value = <?php echo $data[KEY_APP_TABLE_NAME] ?>   > <?php echo ucwords(str_replace('_',' ',$data[KEY_APP_TABLE_NAME])); ?> </option>
-        <?php	} ?>
+        <?php    } ?>
                 <option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>><?= __('Other Table') ?></option>
         </select>
         <?php if($_GET['table']=="-1"){ ?>

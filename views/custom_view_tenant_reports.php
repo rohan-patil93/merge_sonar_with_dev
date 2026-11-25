@@ -68,7 +68,7 @@ $property_owner_details = $result['property_owner_details'];
                     <th scope="col"><?= __('No. Property'); ?></th>
                 </tr>
                 <?php $parenttb = 1; foreach($customers as $po){ ?>
-                    <tr class="main" onclick="openSubTable('<?php echo $parenttb; ?>','firstlevelchildcheck','firstlevelchildhideshow')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <tr class="main cursor-pointer" onclick="openSubTable('<?php echo $parenttb; ?>','firstlevelchildcheck','firstlevelchildhideshow')">
                         <td class="cursor-pointer">
                             <i class="ti-angle-double-down" ></i>
                             <input type="hidden" id="firstlevelchildcheck_<?php echo $parenttb; ?>" value="0">
@@ -106,7 +106,7 @@ $property_owner_details = $result['property_owner_details'];
                                     $podas = json_decode($pod['property_owner_detail_areas'],1);
                                 ?>
 
-                                    <tr onclick="openSubTable('<?php echo $parentchildtb; ?>','secondlevelchildcheck','secondlevelchildhideshow')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                    <tr class="cursor-pointer" onclick="openSubTable('<?php echo $parentchildtb; ?>','secondlevelchildcheck','secondlevelchildhideshow')">
                                         <td class="cursor-pointer">
                                             <i class="ti-angle-double-down" ></i>
                                             <input type="hidden" id="secondlevelchildcheck_<?php echo $parentchildtb; ?>" value="0">

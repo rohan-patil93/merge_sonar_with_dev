@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_MDY_HIS_A')) {
+    define('DATE_FORMAT_MDY_HIS_A', DATE_FORMAT_MDY_HIS_A);
+}
+
   $_SESSION['apply_js']['multiselest'] = "1";
   if($_POST['option']!=""){
     $_GET['option'] = $_POST['option'];
@@ -24,20 +28,20 @@ if($_SESSION['insert_msg'] !=""){
 
 $viewtime =0;
 if($viewtime ==1 ){
-  echo "after include center start - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center start - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $page_details= toGetTableNameBaseApplicationPagesList('list_page_name', $_GET['option']);
 
 $menu_details= toGetMenuDetailsBaseMenuPageName($_GET['option']);
 if($viewtime ==1 ){
-  echo "after include center Step :1 - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center Step :1 - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $current_page = $_POST['current_page']!=""?$_POST['current_page']:1;
   $dynamictableurl = API."?mode=getdynamictabledetails&application_table_name=".$page_details['application_table_name']."&admin_type=".$_SESSION['admin_type']."&user_type=".$_SESSION['user_type']."&vendor_id=".$_SESSION['vendor_id']."&emp_id=".$_SESSION['emp_id']."&admin_access_employee=".$_SESSION['admin_access_employee']."&limit_select=20&current_page=".$current_page;
 $dynamictableresult = callAPI($dynamictableurl);
 $dynamictableres = json_decode($dynamictableresult,1);
 if($viewtime ==1 ){
-  echo "after include center Step :2 - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center Step :2 - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $list = $dynamictableres['display_attributes'];
 $statusjsondecode = $dynamictableres['status_progress'];
@@ -66,7 +70,7 @@ $type_array = array('select','multi_select','disable_select','radio','checklist'
 $whrcon = array();
 $emp_array   = array();
 if($viewtime ==1 ){
-  echo "after include center Step :3 - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center Step :3 - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 foreach ($lists as $key => $value) {
   $tablefiledslist[$key] = $value['lable'];
@@ -84,11 +88,11 @@ if(count((array)$dis) !=0){
  $field =  $dynamictableres['field_result'];
  $primary = $dynamictableres['primarykey'];
  if($viewtime ==1 ){
-  echo "after include center Step :5 - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center Step :5 - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
  include_once "new_from_submit.php";
  if($viewtime ==1 ){
-  echo "after include center Step :6 - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center Step :6 - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $stausresult = ViewStatusData();
 $bills = $dynamictableres['dynmictabler'];
@@ -229,7 +233,7 @@ function goSelectExtraColumn(){
 </script>
 <?php
 if($viewtime ==1 ){
-  echo "after include center HTML - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center HTML - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 ?>
  <div class="pcoded-inner-content mob-pd">
@@ -453,7 +457,7 @@ if($viewtime ==1 ){
 <?php
 
 if($viewtime ==1 ){
-  echo "after include center page include - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center page include - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $pageurl = "custon_list_dynamic_table.php";
 if(file_exists($pageurl)){
@@ -474,7 +478,7 @@ if(file_exists($pageurl)){
     <!-- Page-body end -->
   </div>
 </div>
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content"  id="popup2">
 
@@ -484,6 +488,6 @@ if(file_exists($pageurl)){
 <?php
 
 if($viewtime ==1 ){
-  echo "after include center page include - ".date('m/d/Y h:i:s a')."</br>";
+  echo "after include center page include - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 ?>

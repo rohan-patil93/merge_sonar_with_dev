@@ -96,7 +96,15 @@ if ($scheduleVendorLabel == '') {
                 <input type="hidden" name="repair_order_id" value="<?php echo (int) ($repairOrder['id'] ?? 0); ?>">
                 <input type="hidden" name="complaint_id" value="<?php echo (int) ($repairOrder['complaint_id'] ?? $complaint_id); ?>">
                 <input type="hidden" name="schedule_id" value="<?php echo (int) ($repairOrder['schedule_id'] ?? $schedule_id); ?>">
-                <input type="hidden" name="source_type" value="<?php echo htmlspecialchars($repairOrder['source_type'] ?? ($isFromSchedule ? 'planned_visit' : ($complaint_id ? 'adhoc_complaint' : 'manual')), ENT_QUOTES, 'UTF-8'); ?>">
+                <?php
+                $defaultSourceType = 'manual';
+                if ($isFromSchedule) {
+                    $defaultSourceType = 'planned_visit';
+                } elseif ($complaint_id) {
+                    $defaultSourceType = 'adhoc_complaint';
+                }
+                ?>
+                <input type="hidden" name="source_type" value="<?php echo htmlspecialchars($repairOrder['source_type'] ?? $defaultSourceType, ENT_QUOTES, 'UTF-8'); ?>">
                 <input type="hidden" name="contract_amc_location_id" value="<?php echo (int) ($repairOrder['contract_amc_location_id'] ?? 0); ?>">
                 <div class="row g-3 mb-3">
                     <div class="col-md-3">

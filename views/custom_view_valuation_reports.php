@@ -108,7 +108,7 @@ foreach($distribution as $distribution1){
  <div class="card p-2 m-2">
     <h5 class="font-weight-bold m-0 f-14">&nbsp</h5>
     <div class="card-body employee-table p-0">
-        <table class="table mt-3" style="margin-bottom: 5px !important;" role="presentation">
+        <table class="table mt-3" style="margin-bottom: 5px !important;">
         <?php
             foreach($rows as $uuid){
                 if(isset($distribution[$uuid])){

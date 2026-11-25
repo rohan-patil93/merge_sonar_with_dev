@@ -323,7 +323,7 @@ foreach((array)$result as $key=>$ressum){
                         <td></td>
                         <td class="f-12"> <?php echo $m; ?></td>
 
-                          <td style="width: 300px;" class="f-12"><?php //echo $data['display_name']; ?>
+                          <td style="width: 300px;" class="f-12">
                             <a target="_blank" class="text-primary d-block" href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo $pay_year; ?>&PAY_MONTH=<?php echo $pay_month; ?>&EMP=<?php echo $data['emp_id']; ?>"><?php echo $data['display_name']; ?> </a>
                             <p class="f-10 text-primary1"> <?php echo $_SESSION['users'][$data['approval_manager']]; ?></p>
                         </td>
@@ -455,7 +455,7 @@ foreach((array)$result as $key=>$ressum){
                     <?php } ?>
                 </table>
             </div>
-            <?php $_SESSION['download_data'] = $lists; //echo "<pre>"; print_r($_SESSION['download_data']); ?>
+            <?php $_SESSION['download_data'] = $lists; ?>
         </div>
     </div>
 </div>

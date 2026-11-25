@@ -286,8 +286,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 <?php
     $workflowsteps = getWorkflowStatus($table_name,$role['id'],$role['current_status']);
     $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,ST_CALLBACK,'');
-    if(in_array($trip_res['current_status'], (array)$check_array)){
-    }else{
+    if (!in_array($trip_res['current_status'], (array)$check_array)) {
         $disable = "disabled";
         $formdisable = "event_disabled";
     }
@@ -429,7 +428,7 @@ $select= 1; $after=2; $mutiselet=1; $dateid=1; $img=1; $slider=1; $date_pick = a
 <!-- Custom js -->
 <script type="text/javascript" src="assets/pages/advance-elements/select2-custom.js"></script>
 <?php } ?>
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog " >
         <div class="modal-content"  id="popup1">
 

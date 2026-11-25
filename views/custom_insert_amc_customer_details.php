@@ -177,7 +177,7 @@ foreach ($st_details as $st) {
                                     <select name="country_id" id="country_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" data-selected-state="<?php echo $amc_customer_details['state_id']; ?>" data-selected-city="<?php echo $amc_customer_details['city_id']; ?>">
                                         <option value="0">--<?= __('Select'); ?>--</option>
                                         <?php foreach ($states_list as $id => $country_name): ?>
-                                            <option value="<?php echo $id; ?>" <?php if ($amc_customer_details['country_id'] == $id) echo 'selected'; ?>>
+                                            <option value="<?php echo $id; ?>" <?php if ($amc_customer_details['country_id'] == $id) { echo 'selected'; } ?>>
                                                 <?php echo $country_name; ?>
                                             </option>
                                         <?php endforeach; ?>

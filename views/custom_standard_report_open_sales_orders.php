@@ -59,7 +59,7 @@ $_SESSION['download_data'] = array();
           foreach ($salesorders as $so_id => $tableslist) { ?>
             <tr>
               <td>
-                <table role="presentation">
+                <table>
                   <tr><td class="p-1"><?= __('SO No.'); ?></td><td class="p-1"><?php echo $tableslist[0]['so_no']; ?></td></tr>
                   <tr><td class="p-1"><?= __('SO Date'); ?></td><td class="p-1"><?php echo fromDate($tableslist[0]['so_date']); ?></td></tr>
                   <tr><td class="p-1"><?= __('Customer'); ?></td><td class="p-1"><?php echo $tableslist[0]['customer_name']; ?></td></tr>

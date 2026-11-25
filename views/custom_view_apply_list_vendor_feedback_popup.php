@@ -73,15 +73,14 @@ function appliedvendorfeedbackapplyed(vendor_id,setup_id){
                         <?php }else{ ?>
                                 <span class="text-success f-16 f-w-600 "> <?= __('Completed'); ?></span>
                         <?php }
-                }else{
                 } ?>
             </td>
             <td>
-                <div  <?php if(isset($rat[$dat['id']]) && $dat['allow_multiple_times']==1){ ?> class="text-muted" <?php
-}else{ ?>  class="text-info cursor-pointer" onclick="appliedvendorfeedbackapplyed(<?php echo $_POST['vendor_id'].",".$dat['id']; ?>)" <?php
-} ?> role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                <?= __('Feedback'); ?>
-                </div>
+                <?php if(isset($rat[$dat['id']]) && $dat['allow_multiple_times']==1){ ?>
+                    <span class="text-muted"><?= __('Feedback'); ?></span>
+                <?php }else{ ?>
+                    <button type="button" class="btn btn-link p-0 border-0 text-info cursor-pointer" onclick="appliedvendorfeedbackapplyed(<?php echo $_POST['vendor_id'].",".$dat['id']; ?>)"><?= __('Feedback'); ?></button>
+                <?php } ?>
             </td>
         </tr>
         <?php $i++;

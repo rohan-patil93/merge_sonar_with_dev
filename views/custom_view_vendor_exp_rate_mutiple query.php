@@ -20,13 +20,13 @@ $_SESSION['download_data'] = array();
       <div class="table-responsive mt-3">
         <!-- table table-hover -->
         <table class=" table table-bordered">
-          <tr bgcolor="#eeeeee">
+          <tr style="background-color: #eeeeee;">
             <th scope="col" colspan="3"></th>
             <?php foreach ($result['vendor_data'] as $kyloc=>$locdata) { ?>
             <th scope="col" colspan="<?php echo count((array)$locdata); ?>"><?php echo $result['location'][$kyloc]; ?></th>
             <?php } ?>
           </tr>
-          <tr bgcolor="#eeeeee">
+          <tr style="background-color: #eeeeee;">
             <th scope="col">#</th>
             <th scope="col"><?= __('Job Title'); ?></th>
             <th scope="col"><?= __('Exp'); ?></th>

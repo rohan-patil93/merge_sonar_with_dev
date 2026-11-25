@@ -1,4 +1,11 @@
 <?php
+if (!defined('URL_INDEX_OPTION')) {
+    define('URL_INDEX_OPTION', 'index.php?option=');
+}
+if (!defined('URL_PARAM_RID')) {
+    define('URL_PARAM_RID', '&Rid=');
+}
+
 $page_details= toGetTableNameBaseApplicationPagesList('list_page_name', $_GET['option']);
 $menu_details= toGetMenuDetailsBaseMenuPageName($_GET['option']);
 $pageurl = API."?mode=displayattributesview&fid=application_table_name&view=".$page_details['application_table_name'];
@@ -117,7 +124,7 @@ foreach ($lists as $key => $value) {
                         </div>
                         &nbsp;
                         <?php
-                        $link = "index.php?option=".$insert  ?>
+                        $link = URL_INDEX_OPTION.$insert  ?>
                         <a href="<?php echo $link; ?>"  class="btn btn-brand btn-elevate btn-icon-sm">
                             <i class="la la-plus"></i>
                             <?php echo $title;  ?>
@@ -212,12 +219,12 @@ foreach ($lists as $key => $value) {
                         <?php }?>
                         <td>
                             <?php
-                                $edit = $edit_permission == 1 ? "index.php?option=".$insert."&Rid=".$rid : "javascript:showpermission()";
-                                $link_copy = $insert_permission == 1 ? "index.php?option=".$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
-                                $edit =  "index.php?option=".$insert."&Rid=".$rid;
-                                $link_copy =  "index.php?option=".$insert."&copy=1&Rid=".$rid;
+                                $edit = $edit_permission == 1 ? URL_INDEX_OPTION.$insert.URL_PARAM_RID.$rid : "javascript:showpermission()";
+                                $link_copy = $insert_permission == 1 ? URL_INDEX_OPTION.$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
+                                $edit =  URL_INDEX_OPTION.$insert.URL_PARAM_RID.$rid;
+                                $link_copy =  URL_INDEX_OPTION.$insert."&copy=1&Rid=".$rid;
 
-                                $view =  "index.php?option=".$view_page."&Rid=".$rid
+                                $view =  URL_INDEX_OPTION.$view_page.URL_PARAM_RID.$rid
                             ?>
 
                             <div style="float: left;">

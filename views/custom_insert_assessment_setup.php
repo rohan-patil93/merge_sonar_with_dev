@@ -1,4 +1,8 @@
 <?php
+if (!defined('ATTR_VALUE')) {
+    define('ATTR_VALUE', ATTR_VALUE);
+}
+
 //id:3 => YVdRNk13PT0=
 $_GET['CAT'] =1;
 $category = array('1' =>'Assessment');
@@ -364,10 +368,10 @@ function getnamelist(){
             $question_id = $value['question_id'];
            $rid = $value['rid'];
             $display_question .= ' <div class="mt-5" id="'.$qkey.'"> <div class="col-lg-12 table-bordered">
-            <input type="hidden" name="question_id'.$value_id.'" value="'.$question_id.'">
+            <input type="hidden" name="question_id'.$value_id.ATTR_VALUE.$question_id.'">
             <input type="hidden" name="rid" value="'.$rid.'">
             <input type="hidden" name="value_id[]" value="'.$value_id.'">
-            <input type="hidden" name="options_display_type'.$value_id.'" value="'.$value['type'].'">
+            <input type="hidden" name="options_display_type'.$value_id.ATTR_VALUE.$value['type'].'">
 
             <div class="modal-header" >
             <h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
@@ -383,7 +387,7 @@ function getnamelist(){
             </div>';
             $display_question .= '<div class="col-lg-4">
             <label for="markfield'.$value_id.'">'.__('Marks').' <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="markfield'.$value_id.'" name="marks'.$value_id.'" value="'.$marks.'" aria-label="Marks">
+            <input type="text" class="form-control" id="markfield'.$value_id.'" name="marks'.$value_id.ATTR_VALUE.$marks.'" aria-label="Marks">
             </div>';
 
             $display_question .= '</div>';
@@ -413,7 +417,7 @@ function getnamelist(){
 
                   </div><div class="col-lg-8">
                          <div class="input-group input-group-button">
-        <input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="'.__('Option').'" value="'.$opvalue.'" aria-label="Option">
+        <input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="'.__('Option').ATTR_VALUE.$opvalue.'" aria-label="Option">
         <span class="input-group-text addon-style">
             <span class=""><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i></span>
         </span>

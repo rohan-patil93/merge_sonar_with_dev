@@ -1,4 +1,8 @@
 <?php
+if (!defined('PARAM_TABLE')) {
+    define('PARAM_TABLE', '&table=');
+}
+
 if (isset($_POST['submit'])){
     $data = $_POST;
     unset($data['submit']);
@@ -6,7 +10,7 @@ if (isset($_POST['submit'])){
     $url="";
     $urldata = urlencode(json_encode($data,true));
     $urldata = urlencode(json_encode($data,true));
-    $url = API."?mode=updaterowtabledata&rid=".$_POST['hid']."&table=".TPREFIX.TBL_CONFIG."&data=$urldata";
+    $url = API."?mode=updaterowtabledata&rid=".$_POST['hid'].PARAM_TABLE.TPREFIX.TBL_CONFIG."&data=$urldata";
     $response = file_get_contents($url, false, $context);
     if ($response) {
         header("location:index.php?option=com_config&Rid=TVE9PQ==");
@@ -16,7 +20,7 @@ if (isset($_POST['submit'])){
 }
 if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $rid =  base64_decode(base64_decode($_GET['Rid']));
-    $url = API."?mode=singlerowtabledata&rid=".$rid."&table=".TPREFIX.TBL_CONFIG;
+    $url = API."?mode=singlerowtabledata&rid=".$rid.PARAM_TABLE.TPREFIX.TBL_CONFIG;
     $response = file_get_contents($url, false, $context);
     $data = json_decode($response,1);
 }
@@ -24,10 +28,10 @@ $time_zones = timezoan();
 $typeurl = API."?mode=gettabledetails&fid=genc_code&rid=INVOICEPREFIX&table=".TBL_GENRAL_CODE_DETAILS;
 $typeresponse = file_get_contents($typeurl, false, $context);
 $perfixresponse = json_decode($typeresponse,1);
-$taxurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id']."&table=".TPREFIX.TBL_TAXES;
+$taxurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id'].PARAM_TABLE.TPREFIX.TBL_TAXES;
 $taxres = file_get_contents($taxurl, false, $context);
 $taxres = json_decode($taxres,1);
-$currencyurl = API."?mode=gettabledetails&table=".TBL_CURRENCIES;
+$currencyurl = API."?mode=gettabledetails" . PARAM_TABLE.TBL_CURRENCIES;
 $currencyres = file_get_contents($currencyurl, false, $context);
 $currencyres = json_decode($currencyres,1);
 $languurl = API."?mode=gettabledetails&fid=genc_code&rid=LANGUAGE&table=".TBL_GENRAL_CODE_DETAILS;

@@ -114,7 +114,7 @@ foreach($transactionwithdates as $keydate=>$transction){
             </div>
         </form>
 <?php if($_POST['customer_id'] != ""){     ?>
-    <table role="presentation" style="width:100%;border-collapse:collapse;" class="mt-5">
+    <table style="width:100%;border-collapse:collapse;" class="mt-5">
         <tr>
             <td style="font-size:24px;font-family:'Tahoma';font-weight:500;text-transform:capitalize;"><?= __('Customer Ledge'); ?> <?php echo date('M Y',strtotime($from_date)); ?> <?= __('to'); ?> <?php echo date('M Y',strtotime($to_date)); ?></td>
             <td style="font-size:24px;font-family:'Tahoma';font-weight:500;text-transform:capitalize;"><?php echo $customers[$_POST['vendor_id']]['company']." (".$customers[$_POST['customer_id']]['display_name'].")"; ?></td>
@@ -164,7 +164,7 @@ foreach($transactionwithdates as $keydate=>$transction){
                         <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;">
                             -
                         </td>
-                        <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; <?php echo ($last_account_balances['closing_balance'] < 0)?; text-align: right;"color:#f00":""; ?>"><?php echo $last_account_balances['closing_balance']!=""?accountingAmontFormat($last_account_balances['closing_balance']):"-"; ?></td>
+                        <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? 'color:#f00;' : ''; ?>"><?php echo $last_account_balances['closing_balance']!=""?accountingAmontFormat($last_account_balances['closing_balance']):"-"; ?></td>
                     </tr>
                     <?php
                     $closingbal = $last_account_balances['closing_balance'];
@@ -193,7 +193,7 @@ foreach($transactionwithdates as $keydate=>$transction){
 }else{ echo "-";
 } ?>
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; <?php echo ($closingbal < 0)?; text-align: right;"color:#f00":""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? 'color:#f00;' : ''; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
                             </tr>
                             <?php } ?>
                     <?php } ?>

@@ -278,7 +278,7 @@ function viewdeliverschdule(){
         <div style="display: none;color: red;" id="<?php echo 'uom_err_'.$i;  ?>"> <?= __('Enter UOM'); ?></div>
             <p class="mt-3" id="item_history_detail_btn_<?php echo $i; ?>">
                 <?php if($tab2['item_name'] !=""){ ?>
-                    <span class="m-l-5 text-primary cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Click To Open Item History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getPreviousOrder('<?php echo $tab2['item_id']; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti ti-timer icon-dark"></i> <?= __('Item History'); ?></span>
+                    <button type="button" class="btn btn-link p-0 border-0 m-l-5 text-primary cursor-pointer text-decoration-none" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Click To Open Item History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getPreviousOrder('<?php echo $tab2['item_id']; ?>','<?php echo $i; ?>')"><i class="ti ti-timer icon-dark"></i> <?= __('Item History'); ?></button>
                 <?php } ?>
             </p>
             <div id="custom-popup_3">
@@ -402,9 +402,9 @@ function viewdeliverschdule(){
             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control  m-t-20 datepicker date_custom_width"  value="<?php echo reqDate($tab2['req_date']); ?>"  name="req_date[]"  id="kt_datepicker_3<?php echo $dateid; ?>" />
             </div>
             <div style="width: 10%;">
-                <div onclick="viewdeliverschdule()" class="cursor-pointer" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                <button type="button" class="btn btn-link p-0 border-0 cursor-pointer text-reset" onclick="viewdeliverschdule()" aria-label="<?= htmlspecialchars(__('Delivery Schedule'), ENT_QUOTES, 'UTF-8'); ?>">
                     <i class="fa fa-server"></i>
-                </div>
+                </button>
             </div>
             </div>
         </td>

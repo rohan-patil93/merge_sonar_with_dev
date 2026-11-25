@@ -115,7 +115,7 @@ foreach($transactionwithdates as $keydate=>$transction){
         </form>
         <div class="table-responsive">
 <?php if($_POST['customer_id'] != ""){     ?>
-    <table role="presentation" style="width:100%;border-collapse:collapse;" class="mt-5">
+    <table style="width:100%;border-collapse:collapse;" class="mt-5">
         <tr>
             <td style="font-size:24px;font-family:'Tahoma';font-weight:500;text-transform:capitalize;"><?= __('Customer Ledge'); ?> <?php echo date('M Y',strtotime($from_date)); ?> <?= __('to'); ?> <?php echo date('M Y',strtotime($to_date)); ?></td>
             <td style="font-size:24px;font-family:'Tahoma';font-weight:500;text-transform:capitalize;"><?php echo $customers[$_POST['customer_id']]['company']." (".$customers[$_POST['customer_id']]['display_name'].")"; ?></td>

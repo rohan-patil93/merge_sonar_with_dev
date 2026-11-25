@@ -206,7 +206,12 @@ $myTitle = $_GET['CAT'] == '2' ? __('My Poll') : __('My Survey');
                                 <?php if(count((array)$upcomingDeadlines) > 0) {
                                     foreach($upcomingDeadlines as $deadlineRow) {
                                         $urgency = $deadlineRow['urgency'] != "" ? $deadlineRow['urgency'] : 'info';
-                                        $dateClass = $urgency == 'danger' ? 'text-danger' : ($urgency == 'warning' ? 'text-warning' : 'text-muted');
+                                        $dateClass = 'text-muted';
+                                        if ($urgency == 'danger') {
+                                            $dateClass = 'text-danger';
+                                        } elseif ($urgency == 'warning') {
+                                            $dateClass = 'text-warning';
+                                        }
                                 ?>
                                 <div class="row align-items-center mb-3">
                                     <div class="col-lg-7">

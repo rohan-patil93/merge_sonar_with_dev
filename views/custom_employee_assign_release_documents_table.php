@@ -33,7 +33,7 @@ $data = $response['data'] ?? array();
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" width="5%"><?= __('S.No') ?></th>
+                            <th scope="col" style="width: 5%;"><?= __('S.No') ?></th>
                             <th scope="col"><?= __('Employee') ?></th>
                             <th scope="col"><?= __('Assessment Year') ?></th>
                             <th scope="col"><?= __('Document Name') ?></th>
