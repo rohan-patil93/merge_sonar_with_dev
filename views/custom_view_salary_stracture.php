@@ -39,7 +39,7 @@ foreach((array)$earnings as $ern){
         htmlRows+='<div class="row align-items-end pd_row" id="pd_'+count+'">';
         htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14"><?= htmlspecialchars(__('Title'), ENT_QUOTES, 'UTF-8'); ?></span><input type="text" class="form-control" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></div> </div>';
         htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14"><?= htmlspecialchars(__('Value'), ENT_QUOTES, 'UTF-8'); ?></span><input type="text" class="form-control" placeholder="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"> </div></div>';
-        htmlRows+='<div class="col-lg-2 text-end mb-3"><span onclick="deleterow(\'pd_' + count + '\',\'paydetails\')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i> </span><button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>  </div>';
+        htmlRows+='<div class="col-lg-2 text-end mb-3"><button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="deleterow(\'pd_' + count + '\',\'paydetails\')" aria-label="Delete Row"><i class="fa fa-trash"></i></button><button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>  </div>';
         htmlRows+='</div>';
         console.log(htmlRows);
         $('.draggablepaylList').append(htmlRows);
@@ -51,7 +51,7 @@ foreach((array)$earnings as $ern){
         htmlRows+='<div class="row align-items-end emp_row" id="emp_'+count+'">';
         htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14"><?= htmlspecialchars(__('Title'), ENT_QUOTES, 'UTF-8'); ?></span><input type="text" class="form-control" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></div> </div>';
         htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14"><?= htmlspecialchars(__('Value'), ENT_QUOTES, 'UTF-8'); ?></span><input type="text" class="form-control" placeholder="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"> </div></div>';
-        htmlRows+='<div class="col-lg-2 text-end mb-3"> <span onclick="deleterow(\'emp_' + count + '\',\'paydetails\')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-trash"></i> </span> <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>  </div>';
+        htmlRows+='<div class="col-lg-2 text-end mb-3"> <button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="deleterow(\'emp_' + count + '\',\'paydetails\')" aria-label="Delete Row"><i class="fa fa-trash"></i></button> <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>  </div>';
         htmlRows+='</div>';
         $('.draggableemplList').append(htmlRows);
     }
@@ -167,7 +167,7 @@ foreach((array)$earnings as $ern){
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
-                                        <span onclick="deleterow('pd_1', 'paydetails')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i></span>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="deleterow('pd_1', 'paydetails')" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                         <button type="button" class="btn p-0 m-l-10"><i class="fa fa-pause-circle"></i></button>
 
                                     </div>
@@ -186,7 +186,7 @@ foreach((array)$earnings as $ern){
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
-                                        <span onclick="deleterow('pd_2', 'paydetails')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i></span>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="deleterow('pd_2', 'paydetails')" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                         <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@ foreach((array)$earnings as $ern){
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
-                                        <span onclick="deleterow('emp_1','empdetails')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i></span>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="deleterow('emp_1','empdetails')" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                         <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
 
                                     </div>
@@ -235,7 +235,7 @@ foreach((array)$earnings as $ern){
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
-                                        <span onclick="deleterow('emp_2','empdetails')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i> </span>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="deleterow('emp_2','empdetails')" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                         <button type="button" class="btn p-0 m-l-10"><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
@@ -348,7 +348,7 @@ foreach((array)$earnings as $ern){
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
-                                          <span onclick="deleterow('er_<?php echo $e; ?>','earnings',<?php echo $ern['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i></span>
+                                          <button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="deleterow('er_<?php echo $e; ?>','earnings',<?php echo $ern['id']; ?>)" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                         <button type="button" onclick="earningdata(<?php echo $ern['id'].",'er',".$e; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
@@ -430,7 +430,7 @@ foreach((array)$earnings as $ern){
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
-                                          <span onclick="deleterow('dd_<?php echo $e; ?>','deduction',<?php echo $ern['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i></span>
+                                          <button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="deleterow('dd_<?php echo $e; ?>','deduction',<?php echo $ern['id']; ?>)" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                         <button type="button" onclick="earningdata(<?php echo $ern['id'].",'dd',".$e; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>

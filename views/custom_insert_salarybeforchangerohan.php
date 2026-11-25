@@ -664,7 +664,8 @@ $sal_emp_id = $salarydata[KEY_EMPLOYEE_ID] != "" ? $salarydata[KEY_EMPLOYEE_ID] 
                                                                     value="<?php echo in_array($addsaldata, (array) $checkdata) ? 1 : 0; ?>">
                                                                 <input type="checkbox" <?php if (in_array($addsaldata, (array) $checkdata)) {
                                                                     echo __('checked ');
-                                                                } ?> <?php if (in_array($addsaldata, (array) $mandatroy)) {
+                                                                } ?>
+                                                                <?php if (in_array($addsaldata, (array) $mandatroy)) {
                                                                     echo __('disabled');
                                                                 } ?> name="Checkboxes1"
                                                                     onclick="addsaldata(<?php echo "'" . $addsaldata . "'"; ?>)"
@@ -774,10 +775,9 @@ $sal_emp_id = $salarydata[KEY_EMPLOYEE_ID] != "" ? $salarydata[KEY_EMPLOYEE_ID] 
                                             foreach ($data as $dat) {
                                                 if (in_array($dat['id'], (array) $checkmainids)) {
                                                     $maincss = "";
-                                                } else {
                                                 }
                                                 ?>
-                                                <table role="presentation" <?php echo $maincss; ?>
+                                                <table <?php echo $maincss; ?>
                                                     id="invoiceItem<?php echo $dat['id']; ?>">
                                                     <tbody>
                                                         <tr id="<?php echo "cat_" . $dat['id']; ?>">

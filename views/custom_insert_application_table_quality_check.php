@@ -1313,7 +1313,6 @@ function viewApprovalAllUsers(id){
 
                     <?php echo $rtable_name ==""?$workflowsteps['workflow_btn']:""; ?>
                  &nbsp;  &nbsp;
-                    <!-- <input type="hidden" name="status_values" id="status_values" value="<?php ?>"> -->
                 <input type="hidden" name="status_values" id="status_values" value="<?php echo  ($table1['current_status']!="" && $rtable_name =="")?$table1['current_status']:ST_DRAFT; ?>">
                 <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
                 </div>
@@ -1391,8 +1390,8 @@ function viewApprovalAllUsers(id){
                         <table class=" table table-bordered custom_dynamic_transaction_table" >
                             <tr class="bg-primary" ><th scope="col" colspan="2" class="p-2 text-center"><?= __('Order Summary') ?></th></tr>
                             <tr>
-                                <th scope="col" class="amount text-start p-2" width="40%" style="width:40%"><span><?= __('Sub Total') ?></span></th>
-                                <th scope="col" class="p-2 text-right" width="60%" style="width:40%">
+                                <th scope="col" class="amount text-start p-2" style="width:40%"><span><?= __('Sub Total') ?></span></th>
+                                <th scope="col" class="p-2 text-right" style="width:60%">
                                     <span id="dis_subTotalid">
                                         <?php echo customeummarmonyformateifine($table1['sub_total']); ?>
                                     </span>

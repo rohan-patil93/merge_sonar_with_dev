@@ -69,7 +69,7 @@
             <span class="f-w-600 f-14">₹38 L</span>
           </div>
           <div class="progress progress-sm mt-1">
-            <div class="progress-bar progress-bar-success" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="70"></div>
+            <div class="progress-bar progress-bar-success" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="70"></div>
           </div>
         </div>
         <div class="mt-4">
@@ -78,7 +78,7 @@
             <span class="f-w-600 f-14">₹24 L</span>
           </div>
           <div class="progress progress-sm mt-1">
-            <div class="progress-bar progress-bar-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="60"></div>
+            <div class="progress-bar progress-bar-warning" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="60"></div>
           </div>
         </div>
         <div class="mt-4">
@@ -87,7 +87,7 @@
             <span class="f-w-600 f-14">₹12 L</span>
           </div>
           <div class="progress progress-sm mt-1">
-            <div class="progress-bar progress-bar-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50"></div>
+            <div class="progress-bar progress-bar-info" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50"></div>
           </div>
         </div>
         <div class="mt-4">
@@ -96,7 +96,7 @@
             <span class="f-w-600 f-14">₹9 L</span>
           </div>
           <div class="progress progress-sm mt-1">
-            <div class="progress-bar progress-bar-info" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30"></div>
+            <div class="progress-bar progress-bar-info" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30"></div>
           </div>
         </div>
       </div>

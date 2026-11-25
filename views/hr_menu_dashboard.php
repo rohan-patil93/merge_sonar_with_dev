@@ -1,54 +1,64 @@
 <?php
 defined('OPT_LIST_MYTASK') || define('OPT_LIST_MYTASK', 'COM_LIST_MYTASK');
+defined('MENU_MY_INFORMATION') || define('MENU_MY_INFORMATION', MENU_MY_INFORMATION);
+defined('MENU_MY_LEAVES') || define('MENU_MY_LEAVES', MENU_MY_LEAVES);
+defined('MENU_MY_PAY') || define('MENU_MY_PAY', MENU_MY_PAY);
+defined('MENU_MY_TIMESHEETS') || define('MENU_MY_TIMESHEETS', MENU_MY_TIMESHEETS);
+defined('MENU_MY_TASKS') || define('MENU_MY_TASKS', MENU_MY_TASKS);
+defined('MENU_MY_NOTES') || define('MENU_MY_NOTES', MENU_MY_NOTES);
+defined('MENU_JOB_POSTINGS') || define('MENU_JOB_POSTINGS', MENU_JOB_POSTINGS);
+defined('MENU_CREATE_TIME_SHEET') || define('MENU_CREATE_TIME_SHEET', MENU_CREATE_TIME_SHEET);
+defined('MENU_APPLY_LEAVES') || define('MENU_APPLY_LEAVES', MENU_APPLY_LEAVES);
+defined('MENU_SELF_SERVICES') || define('MENU_SELF_SERVICES', MENU_SELF_SERVICES);
 $disview_array['employee']['step1'] = array(
-    array('name'=>'MY Information','icon'=>'ti-user','url'=>'COM_LIST_NEW_EMPLOYEE&NI=560'),
-    array('name'=>'MY LEAVES','icon'=>'ti-car','url'=>'COM_LIST_NEW_EMPLOYEE&NI=566'),
-    array('name'=>'MY Pay','icon'=>'ti-time','url'=>'COM_LIST_NEW_EMPLOYEE&NI=674'),
-    array('name'=>'MY TIMESHEETs','icon'=>'ti-time','url'=>'COM_LIST_NEW_EMPLOYEE&NI=564'),
-    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
-    array('name'=>'MY Notes','icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
+    array('name'=>MENU_MY_INFORMATION,'icon'=>'ti-user','url'=>'COM_LIST_NEW_EMPLOYEE&NI=560'),
+    array('name'=>MENU_MY_LEAVES,'icon'=>'ti-car','url'=>'COM_LIST_NEW_EMPLOYEE&NI=566'),
+    array('name'=>MENU_MY_PAY,'icon'=>'ti-time','url'=>'COM_LIST_NEW_EMPLOYEE&NI=674'),
+    array('name'=>MENU_MY_TIMESHEETS,'icon'=>'ti-time','url'=>'COM_LIST_NEW_EMPLOYEE&NI=564'),
+    array('name'=>MENU_MY_TASKS,'icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
+    array('name'=>MENU_MY_NOTES,'icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
     array('name'=>'recognition','icon'=>'ti-time','url'=>'COM_LIST_NEW_EMPLOYEE&NI=679'),
-     array('name'=>'Job Postings','icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
+     array('name'=>MENU_JOB_POSTINGS,'icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
     );
 $disview_array['employee']['step2'] = array(
-    array('name'=>'CREATE TiME SHEET','icon'=>'ti-bag','bg_color'=>'danger','url'=>'COM_INSERT_PROJECT_TIMESHEETS'),
-    array('name'=>'Apply  LEAVES','bg_color'=>'blue','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'),
-    array('name'=>'Self Services','bg_color'=>'green','icon'=>'ti-bag','url'=>'COM_LIST_NEW_EMPLOYEE&NI=673'),
+    array('name'=>MENU_CREATE_TIME_SHEET,'icon'=>'ti-bag','bg_color'=>'danger','url'=>'COM_INSERT_PROJECT_TIMESHEETS'),
+    array('name'=>MENU_APPLY_LEAVES,'bg_color'=>'blue','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'),
+    array('name'=>MENU_SELF_SERVICES,'bg_color'=>'green','icon'=>'ti-bag','url'=>'COM_LIST_NEW_EMPLOYEE&NI=673'),
     array('name'=>'performance','bg_color'=>'info','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'));
 
 $disview_array['payroll']['step1'] = array(
-    array('name'=>'MY Information','icon'=>'ti-user','url'=>'COM_INSERT_BASIC_INFO'),
-    array('name'=>'MY LEAVES','icon'=>'ti-car','url'=>'COM_LIST_EMPLOYEE_LEAVES'),
-    array('name'=>'MY Pay','icon'=>'ti-time','url'=>'COM_INSERT_PAYSLIP'),
-    array('name'=>'MY TIMESHEETs','icon'=>'ti-time','url'=>'COM_INSERT_PROJECT_TIMESHEET_CALENDER'),
-    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
-    array('name'=>'MY Notes','icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
+    array('name'=>MENU_MY_INFORMATION,'icon'=>'ti-user','url'=>'COM_INSERT_BASIC_INFO'),
+    array('name'=>MENU_MY_LEAVES,'icon'=>'ti-car','url'=>'COM_LIST_EMPLOYEE_LEAVES'),
+    array('name'=>MENU_MY_PAY,'icon'=>'ti-time','url'=>'COM_INSERT_PAYSLIP'),
+    array('name'=>MENU_MY_TIMESHEETS,'icon'=>'ti-time','url'=>'COM_INSERT_PROJECT_TIMESHEET_CALENDER'),
+    array('name'=>MENU_MY_TASKS,'icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
+    array('name'=>MENU_MY_NOTES,'icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
     array('name'=>'recognition','icon'=>'ti-time','url'=>'COM_INSERT_EMPLOYEE_RECOGNITION'),
-     array('name'=>'Job Postings','icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
+     array('name'=>MENU_JOB_POSTINGS,'icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
     );
 $disview_array['payroll']['step2'] = array(
-    array('name'=>'CREATE TiME SHEET','icon'=>'ti-bag','bg_color'=>'danger','url'=>'COM_INSERT_PROJECT_TIMESHEETS'),
-    array('name'=>'Apply  LEAVES','bg_color'=>'blue','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'),
-    array('name'=>'Self Services','bg_color'=>'green','icon'=>'ti-bag','url'=>'CUSTOM_LIST_ESS'),
+    array('name'=>MENU_CREATE_TIME_SHEET,'icon'=>'ti-bag','bg_color'=>'danger','url'=>'COM_INSERT_PROJECT_TIMESHEETS'),
+    array('name'=>MENU_APPLY_LEAVES,'bg_color'=>'blue','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'),
+    array('name'=>MENU_SELF_SERVICES,'bg_color'=>'green','icon'=>'ti-bag','url'=>'CUSTOM_LIST_ESS'),
     array('name'=>'performance','bg_color'=>'info','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'));
 
 $disview_array['payroll']['step2'][] = array('name'=>'Salary setting','bg_color'=>'inverse','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST');
    $disview_array['payroll']['step2'][] =  array('name'=>'Generate Pyroll','bg_color'=>'warning','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST');
 
 $disview_array['admin']['step1'] = array(
-    array('name'=>'MY Information','icon'=>'ti-user','url'=>'COM_INSERT_BASIC_INFO'),
-    array('name'=>'MY LEAVES','icon'=>'ti-car','url'=>'COM_LIST_EMPLOYEE_LEAVES'),
-    array('name'=>'MY Pay','icon'=>'ti-time','url'=>'COM_INSERT_PAYSLIP'),
-    array('name'=>'MY TIMESHEETs','icon'=>'ti-time','url'=>'COM_INSERT_PROJECT_TIMESHEET_CALENDER'),
-    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
-    array('name'=>'MY Notes','icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
+    array('name'=>MENU_MY_INFORMATION,'icon'=>'ti-user','url'=>'COM_INSERT_BASIC_INFO'),
+    array('name'=>MENU_MY_LEAVES,'icon'=>'ti-car','url'=>'COM_LIST_EMPLOYEE_LEAVES'),
+    array('name'=>MENU_MY_PAY,'icon'=>'ti-time','url'=>'COM_INSERT_PAYSLIP'),
+    array('name'=>MENU_MY_TIMESHEETS,'icon'=>'ti-time','url'=>'COM_INSERT_PROJECT_TIMESHEET_CALENDER'),
+    array('name'=>MENU_MY_TASKS,'icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
+    array('name'=>MENU_MY_NOTES,'icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
     array('name'=>'recognition','icon'=>'ti-time','url'=>'COM_INSERT_EMPLOYEE_RECOGNITION'),
-     array('name'=>'Job Postings','icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
+     array('name'=>MENU_JOB_POSTINGS,'icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
     );
 $disview_array['admin']['step2'] = array(
-    array('name'=>'CREATE TiME SHEET','icon'=>'ti-bag','bg_color'=>'danger','url'=>'COM_INSERT_PROJECT_TIMESHEETS'),
-    array('name'=>'Apply  LEAVES','bg_color'=>'blue','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'),
-    array('name'=>'Self Services','bg_color'=>'green','icon'=>'ti-bag','url'=>'CUSTOM_LIST_ESS'),
+    array('name'=>MENU_CREATE_TIME_SHEET,'icon'=>'ti-bag','bg_color'=>'danger','url'=>'COM_INSERT_PROJECT_TIMESHEETS'),
+    array('name'=>MENU_APPLY_LEAVES,'bg_color'=>'blue','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'),
+    array('name'=>MENU_SELF_SERVICES,'bg_color'=>'green','icon'=>'ti-bag','url'=>'CUSTOM_LIST_ESS'),
     array('name'=>'performance','bg_color'=>'info','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST'));
 
    $disview_array['admin']['step2'][] = array('name'=>'recruitment ','bg_color'=>'inverse','icon'=>'ti-bag','url'=>'COM_INSERT_LEAVE_REQUEST');

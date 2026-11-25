@@ -45,9 +45,9 @@ foreach($result['warehouses'] as $ware){
         <td class="p-2"><?php echo $item_categories[$itm['category_id']]['category_description']; ?></td>
         <td class="p-2"><?php echo '-' ?></td>
         <td class="p-2"><?php echo $warehouses[$itm['warehouse_id']]['warehouse_name']; ?></td>
-         <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('U','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> <?= __('User'); ?></span></td>
-        <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('V','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> <?= __('Vendor'); ?></span></td>
-        <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('C','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> <?= __('Customer'); ?></span></td>
+         <td class="p-2"><button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('U','<?php echo $itm['id']; ?>')"><i class="ti-arrow-circle-down"></i> <?= __('User'); ?></button></td>
+        <td class="p-2"><button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('V','<?php echo $itm['id']; ?>')"><i class="ti-arrow-circle-down"></i> <?= __('Vendor'); ?></button></td>
+        <td class="p-2"><button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('C','<?php echo $itm['id']; ?>')"><i class="ti-arrow-circle-down"></i> <?= __('Customer'); ?></button></td>
     </tr>
     <?php } ?>
 </body>

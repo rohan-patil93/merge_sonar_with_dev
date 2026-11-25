@@ -1,4 +1,5 @@
 <?php
+defined('TIME_ZERO') || define('TIME_ZERO', '00:00:00');
 $_SESSION['apply_js']['multiselest'] = 1;
 $_SESSION['apply_js']['datepicker'] = 1;
 
@@ -26,9 +27,9 @@ function formatVehicleStatus($vehicle) {
     $entry_time = $vehicle['entry_time'] ?? null;
     $exit_time = $vehicle['exit_time'] ?? null;
 
-    if ($entry_time === '00:00:00') { $entry_time = null;
+    if ($entry_time === TIME_ZERO) { $entry_time = null;
 }
-    if ($exit_time === '00:00:00') { $exit_time = null;
+    if ($exit_time === TIME_ZERO) { $exit_time = null;
 }
 
     if ($method_type == 'exit_first') {
@@ -182,9 +183,9 @@ $vehicleTypes = [
                                 $out_time = $vehicle['exit_time'] ?? null;
                                 $record_date = $vehicle['entry_date'] ?? $vehicle['exit_date'] ?? null;
 
-                                if ($in_time === '00:00:00') { $in_time = null;
+                                if ($in_time === TIME_ZERO) { $in_time = null;
 }
-                                if ($out_time === '00:00:00') { $out_time = null;
+                                if ($out_time === TIME_ZERO) { $out_time = null;
 }
 
                                 if ($method_type == 'exit_first') {
@@ -287,8 +288,8 @@ $vehicleTypes = [
     </div>
 </div>
 
-<div class="modal fade" id="printSlipModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="printSlipModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="ti-printer"></i> <?= __('Vehicle Gate Pass'); ?></h4>
@@ -310,8 +311,8 @@ $vehicleTypes = [
 </div>
 
 <!-- Exit/Return Modal -->
-<div class="modal fade" id="exitModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="exitModal" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="actionModalTitle"><i class="ti-export"></i> <?= __('Record Out Time'); ?></h4>

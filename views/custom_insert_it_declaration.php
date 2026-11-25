@@ -1,4 +1,8 @@
 <?php
+if (!defined('API_UPDATE_ROW_TABLE_DATA_RID')) {
+    define('API_UPDATE_ROW_TABLE_DATA_RID', '?mode=updaterowtabledata&rid=');
+}
+
   if(isset($_POST['it_declaration'])){
       $hid = $_POST['it_plan'];
       unset($_POST['it_declaration']);
@@ -10,7 +14,7 @@
       }else{
              $_POST['updated_date'] = nowDate();
            $_POST['updated_by'] = $_SESSION['userid'];
-           $url = API."?mode=updaterowtabledata&rid=".$hid."&table=emp_it_declaration&method=post";
+           $url = API.API_UPDATE_ROW_TABLE_DATA_RID.$hid."&table=emp_it_declaration&method=post";
           $response = file_post_contents($url, $_POST, 'update');
         }
       if ($response){
@@ -42,10 +46,8 @@
        }else{
             $insert_data['updated_date'] = nowDate();
            $insert_data['updated_by'] = $_SESSION['userid'];
-           $url = API."?mode=updaterowtabledata&rid=".$_POST['house_id']."&table=emp_it_declaration_houserent&method=post";
+           $url = API.API_UPDATE_ROW_TABLE_DATA_RID.$_POST['house_id']."&table=emp_it_declaration_houserent&method=post";
            $response = file_post_contents($url, $insert_data, 'update');
-           if ($response) {
-           }
 
        }
   }
@@ -69,10 +71,8 @@
       }else{
          $insert_data['updated_date'] = nowDate();
          $insert_data['updated_by'] = $_SESSION['userid'];
-         $url = API."?mode=updaterowtabledata&rid=".$pervious_id."&table=emp_perevious_details&method=post";
+         $url = API.API_UPDATE_ROW_TABLE_DATA_RID.$pervious_id."&table=emp_perevious_details&method=post";
          $response = file_post_contents($url, $insert_data, 'update');
-         if ($response) {
-         }
       }
   }
   if(isset($_POST['Add80cDeclaration'])) {

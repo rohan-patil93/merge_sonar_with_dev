@@ -188,47 +188,45 @@ function calculateProgress($contract, $allpermissions, $alldocuments)
 
     return max(0, round($baseProgress));
 }
+function contractMatchesSearchQuery($contract, $searchQuery)
+{
+    if (empty($searchQuery)) {
+        return true;
+    }
+    foreach ($contract as $value) {
+        if ($value && stripos($value, $searchQuery) !== false) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function filterAndSortContracts($contractsList, $partyType, $searchQuery = '', $sortConfig = ['key' => 'contract_name', 'direction' => 'asc'])
 {
-    $a = $a ?? '';
-    $b = $b ?? '';
     $filtered = [];
-
     foreach ($contractsList as $contract) {
-        if (strtolower($contract['party_type'] ?? '') !== strtolower($partyType))
-            { continue;
-}
-
-        if (!empty($searchQuery)) {
-            $found = false;
-            foreach ($contract as $value) {
-                if ($value && stripos($value, $searchQuery) !== false) {
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found)
-                { continue;
-}
+        if (strtolower($contract['party_type'] ?? '') !== strtolower($partyType)) {
+            continue;
         }
-
+        if (!contractMatchesSearchQuery($contract, $searchQuery)) {
+            continue;
+        }
         $filtered[] = $contract;
     }
 
-    // Sort contracts
     usort($filtered, function ($a, $b) use ($sortConfig) {
-        $filtered = $filtered ?? [];
-        $sortConfig = $sortConfig ?? [];
-        $aVal = $a[$sortConfig['key']] ?? '';
-        $bVal = $b[$sortConfig['key']] ?? '';
+        $sortKey = $sortConfig['key'] ?? 'contract_name';
+        $direction = $sortConfig['direction'] ?? 'asc';
+        $aVal = $a[$sortKey] ?? '';
+        $bVal = $b[$sortKey] ?? '';
 
-        if (strpos($sortConfig['key'], 'date') !== false) {
+        if (strpos($sortKey, 'date') !== false) {
             $aVal = strtotime($aVal);
             $bVal = strtotime($bVal);
         }
 
         $comparison = $aVal <=> $bVal;
-        return $sortConfig['direction'] === 'desc' ? -$comparison : $comparison;
+        return $direction === 'desc' ? -$comparison : $comparison;
     });
 
     return $filtered;
@@ -349,12 +347,12 @@ function getLatestContracts($contracts, $limit = 15)
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
         <div class="col">
             <div class="card prod-p-card card-red">
-                <div class="card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($allowedContractsids)); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    <div class="row align-items-center m-b-30">
+                <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($allowedContractsids)); ?>')">
+<div class="row align-items-center m-b-30">
                         <div class="col">
                             <h6 class="m-b-5 text-white"><?= __('Contracts'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white"><?= count((array)$allowedContracts) ?></h3>
-                        </div>
+</button>
                         <div class="col-auto">
                             <i class="fa fa-file text-c-red f-18"></i>
                         </div>
@@ -365,12 +363,12 @@ function getLatestContracts($contracts, $limit = 15)
         </div>
         <div class="col">
             <div class="card prod-p-card card-blue">
-                <div class="card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($activeContractsids)); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    <div class="row align-items-center m-b-30">
+                <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($activeContractsids)); ?>')">
+<div class="row align-items-center m-b-30">
                         <div class="col">
                             <h6 class="m-b-5 text-white"><?= __('Active'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white"><?= count((array)$activeContracts) ?></h3>
-                        </div>
+</button>
                         <div class="col-auto">
                             <i class="fa fa-check text-c-blue f-18"></i>
                         </div>
@@ -381,12 +379,12 @@ function getLatestContracts($contracts, $limit = 15)
         </div>
         <div class="col">
             <div class="card prod-p-card card-yellow">
-                <div class="card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($expiredContractsids)); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    <div class="row align-items-center m-b-30">
+                <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($expiredContractsids)); ?>')">
+<div class="row align-items-center m-b-30">
                         <div class="col">
                             <h6 class="m-b-5 text-white"><?= __('Expired'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white"><?= count((array)$expiredContracts) ?></h3>
-                        </div>
+</button>
                         <div class="col-auto">
                             <i class="fa fa-times text-c-yellow f-18"></i>
                         </div>
@@ -523,7 +521,7 @@ function getLatestContracts($contracts, $limit = 15)
                                             <td>
                                                 <?php $progress = calculateProgress($contract, $allpermissions, $alldocuments); ?>
                                                 <div class="progress progress-sm">
-                                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                                    <div class="progress-bar progress-bar-primary"
                                                         style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>"
                                                         aria-valuemin="0" aria-valuemax="100">
                                                         <?= $progress ?>%

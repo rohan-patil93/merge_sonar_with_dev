@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+}
+
 if (isset($_POST['submit_vendor'])) {
     $transaction_table = ($_POST['transaction_table'] == 'vendor_registers') ? 'vendor_registers' : 'vendors';
     $data        = $_POST;
@@ -68,12 +72,12 @@ if (isset($_POST['submit_vendor'])) {
             $row['is_default'] = $is_default == $i ? 'Y' : 'N';
             $row['customer_vendor_gst_billing_details_id']  = $_POST['customer_vendor_gst_billing_details_id'][$i];
             if($row_id == ''){
-                $row['created_date']        = date('Y-m-d H:i:s');
+                $row['created_date']        = date(DATE_FORMAT_YMD_HIS);
                 $row['created_by']          = $_SESSION['userid'] ?? '';
                 $row['transaction_table']   = $transaction_table ?? '';
                 $row['customer_vendor_id']  = $vendor_id_for_children ?? '';
             }else{
-                $row['updated_date'] = date('Y-m-d H:i:s');
+                $row['updated_date'] = date(DATE_FORMAT_YMD_HIS);
                 $row['updated_by']   = $_SESSION['userid'] ?? '';
             }
             $data['customer_vendor_gst_billing_details'][] = $row;
@@ -106,7 +110,7 @@ if (isset($_POST['submit_vendor'])) {
     }
     //Documnet uploading End
     if ($_POST['submit_vendor'] == 'Add') {
-        $data['created_date'] = date('Y-m-d H:i:s');
+        $data['created_date'] = date(DATE_FORMAT_YMD_HIS);
         $data['created_by']   = $_SESSION['userid'] ?? '';
         $data['is_active']   = 0;
         $data['current_status'] = ST_DRAFT;
@@ -136,7 +140,7 @@ if (isset($_POST['submit_vendor'])) {
             }
         }
     } else { // UPDATE
-        $data['updated_date'] = date('Y-m-d H:i:s');
+        $data['updated_date'] = date(DATE_FORMAT_YMD_HIS);
         $data['updated_by']   = $_SESSION['userid'] ?? '';
         $vendor_id_for_children = $_POST['vendor_id'] ?? '';
         $ridParam = $_POST['hid'] ?? '';
@@ -365,7 +369,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                             <?php } ?>
                         </div>
                         <?php if ($vendordetail['email'] != "") { ?>
-                            <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5">
+                            <a href="mailto:<?php echo $vendordetail['email']; ?>" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5">
                                 <i class="ti-email f-14 text-primary"></i>&nbsp;<?php echo $vendordetail['email']; ?></a>
                         <?php }
                         if ($vendordetail['phone'] != "") {  ?>
@@ -373,7 +377,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                 <i class="fa fa-phone f-14 text-primary"></i>&nbsp;<?php echo DynamicPhoneNumberFormt($vendordetail['phone']); ?></a>
                         <?php }  ?>
                         <?php if ($vendordetail['billing_address'] != "") { ?>
-                            <a class="font-weight-bold text-dark-50 d-block mb-2 mt-2"><i class="ti-location-pin text-primary f-18"></i>&nbsp;<?php echo $vendordetail['billing_address'] . " " . $vendordetail['post_code']; ?> </a>
+                            <span class="font-weight-bold text-dark-50 d-block mb-2 mt-2"><i class="ti-location-pin text-primary f-18"></i>&nbsp;<?php echo $vendordetail['billing_address'] . " " . $vendordetail['post_code']; ?> </span>
                         <?php } ?>
                         <div class="font-weight-bold text-dark-50 mt-1 f-14">
                             <?php if ($vendordetail['established_year'] != "" && $vendordetail['established_year'] != "0") {  ?>
@@ -555,7 +559,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="progress progress-xs">
-                                                            <div class="progress-bar progress-bar-<?php echo round($percentage) >= 50 ? "success" : "danger"; ?>" role="progressbar" style="width:  <?php echo round($percentage); ?>%;" aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            <div class="progress-bar progress-bar-<?php echo round($percentage) >= 50 ? "success" : "danger"; ?>" style="width:  <?php echo round($percentage); ?>%;" aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
                                                 </div>

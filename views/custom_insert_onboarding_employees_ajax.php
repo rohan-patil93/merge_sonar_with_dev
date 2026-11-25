@@ -94,46 +94,54 @@ $text_color_ebi = $ctx['text_color_ebi'] ?? '';
 $text_color_gen = $ctx['text_color_gen'] ?? '';
 $read_only_ln = $ctx['read_only_ln'] ?? '';
 $job_titles = $ctx['job_titles'] ?? array();
-$employees_display_fields = $result['employees_display_fields'];
+$employees_display_fields = $result['employees_display_fields'] ?? array();
 $vafield = json_decode((string)($employees_display_fields['field_list'] ?? ''), true);
-$departments = $result['departments'];
-$designations = $result['designations'];
-$divisions     = $result['divisions'];
-$locations = $result['locations'];
-$employment_bands = $result['employment_bands'];
-$employment_levels = $result['employment_levels'];
-$employment_roles = $result['employment_roles'];
-$marital_statuses = $result['marital_statuses'];
-$blood_groups = $result['blood_groups'];
-$verticals = $result['verticals'];
-$gender_details = $result['gender_details'];
-$employeement_types = $result['employeement_types'];
-$education_type = $result['education_type'];
-$banks = $result['banks'];
-$emp_educations = $result['emp_educations'];
-$emp_dependents = $result['emp_dependents'];
-$emp_contacts = $result['emp_contacts'];
-$emp_work_experiences = $result['emp_work_experiences'];
-$relations = $result['relations'];
-$application_users = $result['application_users'];
-$all_employees = $result['all_employees'];
-$countries = $result['countries'];
-$emp_visa = $result['emp_visa'];
-$emp_skills = $result['emp_skills'];
-$skills = $result['skills'];
-$emp_banks = $result['emp_banks'];
-$emp_bank_status = $result['emp_bank_status'];
+$departments = $result['departments'] ?? array();
+$designations = $result['designations'] ?? array();
+$divisions     = $result['divisions'] ?? array();
+$locations = $result['locations'] ?? array();
+$employment_bands = $result['employment_bands'] ?? array();
+$employment_levels = $result['employment_levels'] ?? array();
+$employment_roles = $result['employment_roles'] ?? array();
+$marital_statuses = $result['marital_statuses'] ?? array();
+$blood_groups = $result['blood_groups'] ?? array();
+$verticals = $result['verticals'] ?? array();
+$gender_details = $result['gender_details'] ?? array();
+$employeement_types = $result['employeement_types'] ?? array();
+$education_type = $result['education_type'] ?? array();
+$banks = $result['banks'] ?? array();
+$emp_educations = $result['emp_educations'] ?? array();
+$emp_dependents = $result['emp_dependents'] ?? array();
+$emp_contacts = $result['emp_contacts'] ?? array();
+$emp_work_experiences = $result['emp_work_experiences'] ?? array();
+$relations = $result['relations'] ?? array();
+$application_users = $result['application_users'] ?? array();
+$all_employees = $result['all_employees'] ?? array();
+$countries = $result['countries'] ?? array();
+$emp_visa = $result['emp_visa'] ?? array();
+$emp_skills = $result['emp_skills'] ?? array();
+$skills = $result['skills'] ?? array();
+$emp_banks = $result['emp_banks'] ?? array();
+$emp_bank_status = $result['emp_bank_status'] ?? array();
 $statuse = ViewStatusData();
 
 
 $billable = array("0"=>"Yes","1"=>"No"," "=>"Not Defined");
 $yesno = array('0'=>'Yes','1'=>'No');
 
-$birthDate = new DateTime((string)($data['date_of_birth'] ?? ''));
-$current = new DateTime(date('Y-m-d'));
-$interval = $birthDate->diff($current);
-$agemonth = ($interval->m < 10 && $interval->m >= 0) ? '0'.$interval->m:$interval->m;
-$agecalc = $interval->y.".".$agemonth;
+$agecalc = '';
+$dobRaw = $data['date_of_birth'] ?? '';
+if (!empty($dobRaw) && $dobRaw !== DATE_ZERO) {
+    try {
+        $birthDate = new DateTime((string)$dobRaw);
+        $current = new DateTime(date('Y-m-d'));
+        $interval = $birthDate->diff($current);
+        $agemonth = ($interval->m < 10 && $interval->m >= 0) ? '0'.$interval->m : (string)$interval->m;
+        $agecalc = $interval->y.".".$agemonth;
+    } catch (Throwable $e) {
+        $agecalc = '';
+    }
+}
 $bank_work_flow = "Y";
 ?>
 <script>
@@ -1367,7 +1375,7 @@ function renderOnbEditBankDetails($vars) {
         <div class="col-xl-6 mt-2" >
             <label class="form-label"><?php echo __('Bank'); ?></label>
             <div class="<?php echo $readonlycheck; ?>">
-                <select class ="form-control form-control-lg form-select js-example-basic-single"  name="bank_id">
+                <select aria-label="<?= htmlspecialchars(__('Bank'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single"  name="bank_id">
                     <option value=""><?php echo __(ONB_SELECT_ANY_ONE); ?></option>
                     <?php renderOnbSelectOptions($banks, $data['bank_id'], 'id', 'bank_name', false); ?>
                 </select>

@@ -1,4 +1,8 @@
 <?php
+defined('ARROW_UP') || define('ARROW_UP', ARROW_UP);
+defined('ARROW_DOWN') || define('ARROW_DOWN', ARROW_DOWN);
+defined('CLS_SPACE_ACTIVE') || define('CLS_SPACE_ACTIVE', CLS_SPACE_ACTIVE);
+
 $admin_type = 1;
 if ($_SESSION['working_role_short_code'] == 'FIELD_EMPLOYEE') {
   $admin_type = 3;
@@ -114,25 +118,26 @@ function dodDashboardVisitDateTime($date, $time) {
 
 function dodDashboardEmployeeStatus($row) {
   $title = strtolower(trim((string)($row['map_title'] ?? '')));
+  $status = 'Active in field';
   if ($title == 'check-in' || $title == 'check in' || strpos($title, 'dod_test_check-in') !== false) {
     $dateTime = trim((string)($row['map_date'] ?? '') . ' ' . (string)($row['map_time'] ?? ''));
     if ($dateTime != '') {
       $diffMins = floor((time() - strtotime($dateTime)) / 60);
       if ($diffMins < 1) {
-        return 'Checked in just now';
+        $status = 'Checked in just now';
+      } elseif ($diffMins < 60) {
+        $status = 'Checked in ' . $diffMins . ' mins ago';
+      } else {
+        $diffHours = floor($diffMins / 60);
+        $status = 'Checked in ' . $diffHours . ' hrs ago';
       }
-      if ($diffMins < 60) {
-        return 'Checked in ' . $diffMins . ' mins ago';
-      }
-      $diffHours = floor($diffMins / 60);
-      return 'Checked in ' . $diffHours . ' hrs ago';
+    } else {
+      $status = 'Checked in today';
     }
-    return 'Checked in today';
+  } elseif ($title != '') {
+    $status = 'At ' . str_replace('dod_test_', '', $row['map_title']) . ' visit';
   }
-  if ($title != '') {
-    return 'At ' . str_replace('dod_test_', '', $row['map_title']) . ' visit';
-  }
-  return 'Active in field';
+  return $status;
 }
 
 function dodDashboardAvatarClass($index) {
@@ -150,9 +155,9 @@ $extraSparkPoints = dodDashboardSparklinePoints($extraSparkline);
 $plannedRingDash = dodDashboardRingDash($plannedProgressPct, 22);
 $progressRingDash = dodDashboardRingDash($completionPct, 40);
 $successRingDash = dodDashboardRingDash($successRate, 55);
-$employeesGrowthLabel = ($employeesGrowth >= 0 ? '&#8593; ' : '&#8595; ') . abs($employeesGrowth) . '% from last month';
-$extraChangeLabel = ($extraChangeToday >= 0 ? '&#8593; ' : '&#8595; ') . abs($extraChangeToday) . ' today';
-$successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs($successRateChange) . '% from last month';
+$employeesGrowthLabel = ($employeesGrowth >= 0 ? ARROW_UP : ARROW_DOWN) . abs($employeesGrowth) . '% from last month';
+$extraChangeLabel = ($extraChangeToday >= 0 ? ARROW_UP : ARROW_DOWN) . abs($extraChangeToday) . ' today';
+$successChangeLabel = ($successRateChange >= 0 ? ARROW_UP : ARROW_DOWN) . abs($successRateChange) . '% from last month';
 ?>
 <link rel="stylesheet" href="assets/css/custom_view_daily_operations_dashboard.css">
 
@@ -283,11 +288,11 @@ $successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs(
         <h3 class="dod-card-title"><?= __('Today\'s Route'); ?></h3>
         <div class="dod-map-mode-toggle" id="dodMapModeToggle">
           <?php if ($mapRole == 'employee') { ?>
-            <button type="button" class="dod-map-mode-btn<?php echo $mapDefaultMode == 'planned' ? ' active' : ''; ?>" data-map-mode="planned"><?= __('Planned'); ?></button>
-            <button type="button" class="dod-map-mode-btn<?php echo $mapDefaultMode == 'visits' ? ' active' : ''; ?>" data-map-mode="visits"><?= __('Visits'); ?></button>
+            <button type="button" class="dod-map-mode-btn<?php echo $mapDefaultMode == 'planned' ? CLS_SPACE_ACTIVE : ''; ?>" data-map-mode="planned"><?= __('Planned'); ?></button>
+            <button type="button" class="dod-map-mode-btn<?php echo $mapDefaultMode == 'visits' ? CLS_SPACE_ACTIVE : ''; ?>" data-map-mode="visits"><?= __('Visits'); ?></button>
           <?php } else { ?>
-            <button type="button" class="dod-map-mode-btn<?php echo $mapDefaultMode == 'next_planned' ? ' active' : ''; ?>" data-map-mode="next_planned"><?= __('Next planned'); ?></button>
-            <button type="button" class="dod-map-mode-btn<?php echo $mapDefaultMode == 'last_visit' ? ' active' : ''; ?>" data-map-mode="last_visit"><?= __('Last visit'); ?></button>
+            <button type="button" class="dod-map-mode-btn<?php echo $mapDefaultMode == 'next_planned' ? CLS_SPACE_ACTIVE : ''; ?>" data-map-mode="next_planned"><?= __('Next planned'); ?></button>
+            <button type="button" class="dod-map-mode-btn<?php echo $mapDefaultMode == 'last_visit' ? CLS_SPACE_ACTIVE : ''; ?>" data-map-mode="last_visit"><?= __('Last visit'); ?></button>
           <?php } ?>
         </div>
       </div>

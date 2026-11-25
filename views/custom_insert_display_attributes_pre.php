@@ -69,9 +69,6 @@ if(isset($_POST['submit'])){
         $res =  callAPI($checkurl);
     }
     $response = file_post_contents($url, $data);
-    if ($response) {
-
-    }
 }
 
 if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']!=""){
@@ -250,7 +247,7 @@ function fileUplodingDisplay(){
                                            <option value = "0"><?= __('Select Any One') ?></option>
                                            <?php foreach ($showtables as $key => $data) {  ?>
                                                <option  <?php if($table == $data){ ?> selected  <?php } ?> value = <?php echo $data ?>   > <?php echo ucwords(str_replace('_',' ',$data)); ?> </option>
-                                       <?php	} ?>
+                                       <?php    } ?>
                                    </select>
                                    <div  style="display: none;color: red;" id="table_err"> <?= __('Please Select Any List'); ?></div>
 
@@ -399,7 +396,6 @@ function fileUplodingDisplay(){
                                 </div>
 
                                 <div class="col-lg-1">
-                                    <?php// echo $value['display_list']; ?>
                                     <span class="switch switch-outline switch-icon switch-primary">
                                         <input class="js-switch" type="checkbox" <?php if($value['display_list'] == '1') { ?> checked="checked" <?php } ?>  value="1"  name="display_list[<?php echo $len; ?>]" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </span>

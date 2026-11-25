@@ -659,11 +659,14 @@ $erp = json_decode($erp_data,1);
                                 <?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH'];
                                 } ?>
                                 <span class="radio nav-item d-inline-block fw-bold" name="all_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active';
-                                } ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo __("All"); ?></a> </span>
+                                } ?>">
+                                <?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo __("All"); ?></a> </span>
                                 <span class="radio nav-item d-inline-block fw-bold" name="billale_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?php if($gtnvk==1){ echo 'active';
-                                } ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Billable"); ?></a> </span>
+                                } ?>">
+                                <?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Billable"); ?></a> </span>
                                 <span class="radio nav-item d-inline-block fw-bold" name="nonbillable_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active';
-                                } ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Non-billable"); ?></a> </span>
+                                } ?>">
+                                <?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Non-billable"); ?></a> </span>
                             </div>
                         </div>
                     </div>

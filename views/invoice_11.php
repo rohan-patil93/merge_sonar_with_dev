@@ -1,5 +1,5 @@
 <?php
-if((isset($_GET['print']) && $_GET['print'] === "Y")){
+if (isset($_GET['print']) && $_GET['print'] === "Y") {
     include_once '../includes/session.php';
     include_once '../dbconfig.php';
     include_once '../comm.php';
@@ -44,12 +44,24 @@ function currencyFormat($number, $config){
     }
 }
 }
+if (!function_exists('formatInvoice11WordChunk')) {
+    function formatInvoice11WordChunk($number, $counter, $words, $digits, $hasPrevious)
+    {
+        $plural = ($counter && $number > 9) ? 's' : null;
+        $hundred = ($counter == 1 && $hasPrevious) ? ' and ' : null;
+        if ($number < 21) {
+            return $words[$number] . " " . $digits[$counter] . $plural . " " . $hundred;
+        }
+        return $words[floor($number / 10) * 10]
+            . " " . $words[$number % 10] . " "
+            . $digits[$counter] . $plural . " " . $hundred;
+    }
+}
+
 if (!function_exists('numberToWordFormate')) {
 function numberToWordFormate($number){
-
     $no = floor($number ?? 0);
     $point = (int) round((($number ?? 0) - $no) * 100);
-    $hundred = null;
     $digits_1 = strlen($no);
     $i = 0;
     $str = array();
@@ -70,14 +82,9 @@ function numberToWordFormate($number){
         $no = floor($no / $divider);
         $i += ($divider == 10) ? 1 : 2;
         if ($number) {
-            $plural = (($counter = count((array)$str)) && $number > 9) ? 's' : null;
-            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
-            $str [] = ($number < 21) ? $words[$number] .
-            " " . $digits[$counter] . $plural . " " . $hundred
-            :
-            $words[floor($number / 10) * 10]
-            . " " . $words[$number % 10] . " "
-            . $digits[$counter] . $plural . " " . $hundred;
+            $counter = count((array)$str);
+            $hasPrevious = !empty($str[0]);
+            $str[] = formatInvoice11WordChunk($number, $counter, $words, $digits, $hasPrevious);
         } else {
             $str[] = null;
         }
@@ -159,39 +166,31 @@ function emptyCheck($valu){
                     </td>
                     <td colspan="4" class="border-0 p-1" style="width: 55%;">
                         <div class="table-responsive">
-                            <table role="presentation" class="table">
-                                <tr>
-                                    <td class="f-12"><?= __('TO'); ?></td>
-                                    <td class="f-12" style="text-align: right;">
+                            <div class="d-flex flex-column gap-1 w-100">
+                                <div class="d-flex justify-content-between f-12 py-1 border-bottom">
+                                    <span><?= __('TO'); ?></span>
+                                    <span class="text-right">
                                         <span><?= __('FIRST NAME'); ?></span>
                                         <span class="m-l-10"><?= __('LAST NAME'); ?></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="f-12"><?= __('CUSTOMER ID'); ?></td>
-                                    <td class="f-12" style="text-align: right;">
-                                        <span>12345</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="f-12"><?= __('DATE'); ?></td>
-                                    <td class="f-12" style="text-align: right;">
-                                        <span><?= __('DD-MM-YY'); ?></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="f-12"><?= __('ORDER NO'); ?></td>
-                                    <td class="f-12" style="text-align: right;">
-                                        <span><?= __('T-TF'); ?></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="f-12"><?= __('NUMBER OF ITEMS'); ?></td>
-                                    <td class="f-12" style="text-align: right;">
-                                        <span>3</span>
-                                    </td>
-                                </tr>
-                            </table>
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between f-12 py-1 border-bottom">
+                                    <span><?= __('CUSTOMER ID'); ?></span>
+                                    <span class="text-right">12345</span>
+                                </div>
+                                <div class="d-flex justify-content-between f-12 py-1 border-bottom">
+                                    <span><?= __('DATE'); ?></span>
+                                    <span class="text-right"><?= __('DD-MM-YY'); ?></span>
+                                </div>
+                                <div class="d-flex justify-content-between f-12 py-1 border-bottom">
+                                    <span><?= __('ORDER NO'); ?></span>
+                                    <span class="text-right"><?= __('T-TF'); ?></span>
+                                </div>
+                                <div class="d-flex justify-content-between f-12 py-1">
+                                    <span><?= __('NUMBER OF ITEMS'); ?></span>
+                                    <span class="text-right">3</span>
+                                </div>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -266,8 +265,8 @@ function emptyCheck($valu){
                     <td colspan="4" class="border-0 p-1">
                             <table class="table">
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" width="50%"><?= __('TOTAL'); ?></th>
-                                    <th scope="col" width="50%" class="text-right f-12 p-0 pt-1 pb-1">
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" style="width: 50%;"><?= __('TOTAL'); ?></th>
+                                    <th scope="col" class="text-right f-12 p-0 pt-1 pb-1" style="width: 50%;">
                                         <?= __('INR 1,20,000/'); ?>-
                                     </th>
                                 </tr>

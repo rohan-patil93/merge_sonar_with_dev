@@ -109,9 +109,9 @@ $application_pages = $return['application_pages'];
                     <table class="table table-bordered" id="process-table">
                         <thead class="bg-light">
                             <tr>
-                                <th scope="col" width="25%"><?= __('Process Name') ?></th>
-                                <th scope="col" width="65%"><?= __('Pages') ?></th>
-                                <th scope="col" width="10%"><?= __('Action') ?></th>
+                                <th scope="col" style="width: 25%;"><?= __('Process Name') ?></th>
+                                <th scope="col" style="width: 65%;"><?= __('Pages') ?></th>
+                                <th scope="col" style="width: 10%;"><?= __('Action') ?></th>
                             </tr>
                         </thead>
                         <tbody>

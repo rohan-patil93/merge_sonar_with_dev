@@ -219,7 +219,7 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
         position: relative;
     }
 </style>
-<div id="modal_uom_deatils" class="modal fade" role="dialog" aria-hidden="true">
+<div id="modal_uom_deatils" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-lg" >
         <div class="modal-content"  id="modal_uom_page">
 
@@ -309,25 +309,25 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
                             <div class="form-group col-lg-6">
 
                                 <div class="form-radio mt-4">
-                                    <div class="radio radio-inline" onclick="stocktakeFilter()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                    <div class="radio radio-inline" onclick="stocktakeFilter()">
                                         <label class="form-label">
                                             <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" checked="checked" value="all">
                                             <i class="helper"></i><?= __('Show All'); ?>
                                         </label>
                                     </div>
-                                    <div class="radio radio-inline" onclick="stocktakeFilter()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                    <div class="radio radio-inline" onclick="stocktakeFilter()">
                                         <label class="form-label">
                                             <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_add">
                                             <i class="helper"></i><?= __('Positive Variance'); ?>
                                         </label>
                                     </div>
-                                    <div class="radio radio-inline" onclick="stocktakeFilter()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                    <div class="radio radio-inline" onclick="stocktakeFilter()">
                                         <label class="form-label">
                                             <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_sub">
                                             <i class="helper"></i><?= __('Negative Variance'); ?>
                                         </label>
                                     </div>
-                                    <div class="radio radio-inline" onclick="stocktakeFilter()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                    <div class="radio radio-inline" onclick="stocktakeFilter()">
                                         <label class="form-label">
                                             <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_zero">
                                             <i class="helper"></i><?= __('No Variance'); ?>

@@ -1,4 +1,8 @@
 <?php
+if (!defined('ATTR_VALUE_QUOTE')) {
+    define('ATTR_VALUE_QUOTE', ATTR_VALUE_QUOTE);
+}
+
 $_SESSION['apply_js']['multiselest'] = 1;
    $category = array('1' =>'Survey', '2'=> 'Poll');
    if ($_GET['CAT']=="" && $_GET['option']="COM_INSERT_SURVEY_SETUP") {
@@ -279,10 +283,10 @@ function getnamelist(emplist){
             $display_question = '';
             $display_question .= ' <div class="mt-5" id="'.$question_id.'"> <div class="col-lg-12 table-bordered">
             <input type="hidden" name="totalquestion" value="'.$totalquestion.'">
-            <input type="hidden" name="question_id'.$qkey.'" value="'.$question_id.'">
+            <input type="hidden" name="question_id'.$qkey.ATTR_VALUE_QUOTE.$question_id.'">
             <input type="hidden" name="rid" value="'.$rid.'">
             <input type="hidden" name="value_id[]" value="'.$question_id.'">
-            <input type="hidden" name="options_display_type'.$qkey.'" value="'.$value['type'].'">
+            <input type="hidden" name="options_display_type'.$qkey.ATTR_VALUE_QUOTE.$value['type'].'">
 
             <div class="modal-header" >
             <h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
@@ -323,7 +327,7 @@ function getnamelist(emplist){
                   <div class="col-lg-1"></div>
                   <div class="col-lg-8">
                           <div class="input-group input-group-button">
-        <input aria-label="'.__('Option').'" type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="'.__('Option').'" value="'.$opvalue.'">
+        <input aria-label="'.__('Option').'" type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="'.__('Option').ATTR_VALUE_QUOTE.$opvalue.'">
         <span class="input-group-text addon-style">
             <span class=""><button type="button" class="border-0 bg-transparent p-0 text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$qkey."'".')"><i class="ti-trash close"></i></button> </span>
         </span>
@@ -346,7 +350,7 @@ function getnamelist(emplist){
             if($value['type']==2)   {
                $display_question .= '  <div class="form-group text-left mt-10">
                <span>'.__('Scale from 1 to:').' <span class="text-danger">*</span></span>
-               <input aria-label="'.__('Survey Question Option').'" type="number" name="survey_question_option'.$qkey.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" >
+               <input aria-label="'.__('Survey Question Option').'" type="number" name="survey_question_option'.$qkey.'[]"  class="form-control" placeholder="'.$options[0].ATTR_VALUE_QUOTE.$options[0].'" >
                </div>';
             }
             if($value['type']==4)   {
@@ -364,13 +368,13 @@ function getnamelist(emplist){
 </div>
 
 
-<div id="kt_modal_KTDatatable_setup" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_setup" class="modal fade" aria-hidden="true">
    <div class="modal-dialog  modal-lg" >
       <div class="modal-content j-pro"  id="popup2">
       </div>
    </div>
 </div>
- <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+ <div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog " >
         <div class="modal-content"  id="popup1">
 

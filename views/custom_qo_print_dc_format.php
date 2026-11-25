@@ -12,7 +12,7 @@
                 </th>
             </tr>
             <tr>
-                <th scope="col" bgcolor="#eeeeee" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
+                <th scope="col" colspan="2" style="background-color: #eeeeee; font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
                     <?= __('1. Client Details'); ?>
                 </th>
             </tr>
@@ -31,7 +31,7 @@
                 </th>
             </tr>
             <tr>
-                <th scope="col" bgcolor="#eeeeee" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
+                <th scope="col" colspan="2" style="background-color: #eeeeee; font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
                     <?= __('2. Transaction Details'); ?>
                 </th>
             </tr>
@@ -62,7 +62,7 @@
             </tr>
 
             <tr>
-                <th scope="col" bgcolor="#eeeeee" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
+                <th scope="col" colspan="2" style="background-color: #eeeeee; font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
                     <?= __('3. Party Details'); ?>
                 </th>
             </tr>
@@ -81,7 +81,7 @@
                 </td>
             </tr>
             <tr>
-                <th scope="col" bgcolor="#eeeeee" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
+                <th scope="col" colspan="2" style="background-color: #eeeeee; font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
                     <?= __('4. Details of Goods / Services'); ?>
                 </th>
             </tr>

@@ -30,7 +30,7 @@ foreach ($menu_data as $menu) {
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class="container-fluid">
-        <!--begin::Todo-->
+        <!--begin::TasksSection-->
         <div class="p-0 m-0">
             <!--begin::Aside-->
             <div class="flex-row-auto offcanvas-mobile w-200px w-xxl-275px row col-lg-12 pt-5 pb-5 p-0 m-0 padding-0"
@@ -155,16 +155,14 @@ foreach ($menu_data as $menu) {
                                 <!--end::Info-->
                                 <!--begin::Users-->
                                 <div class="symbol-group symbol-hover py-2">
-                                    <div class="symbol symbol-30 symbol-light-primary" data-toggle="tooltip"
+                                    <button type="button" class="btn p-0 border-0 bg-transparent symbol symbol-30 symbol-light-primary" data-toggle="tooltip"
                                         data-placement="top"
                                         title="<?= htmlspecialchars(__('New user'), ENT_QUOTES, 'UTF-8'); ?>"
-                                        tabindex="0"
-                                        onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
-                                        role="button">
+                                        aria-label="<?= htmlspecialchars(__('New user'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <span class="symbol-label font-weight-bold">
                                             <i class="fa flaticon2-plus font-size-sm"></i>
                                         </span>
-                                    </div>
+                                    </button>
                                 </div>
                                 <!--end::Users-->
                             </div>
@@ -196,7 +194,7 @@ foreach ($menu_data as $menu) {
                 </div>
 
             </div>
-            <!--end::Todo-->
+            <!--end::TasksSection-->
         </div>
         <!--end::Container-->
     </div>

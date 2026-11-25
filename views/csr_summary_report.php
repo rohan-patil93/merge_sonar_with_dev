@@ -42,11 +42,11 @@ $summary = $result['summary'] ?? [];
             </tr>
             <tr>
               <td>i) <?= __('Construction/acquisition of any asset') ?></td>
-              <td align="right"></td>
+              <td class="text-end"></td>
             </tr>
             <tr>
               <td><?= __('ii)'); ?> <?= __('On purposes other than (i) above') ?></td>
-              <td align="right"></td>
+              <td class="text-end"></td>
             </tr>
 
             <!-- Total Spent -->
@@ -58,7 +58,7 @@ $summary = $result['summary'] ?? [];
             <!-- Unspent Current Year -->
             <tr>
               <th scope="col"><?= __('Balance amount unspent for FY') ?> <?= $fy['label'] ?></th>
-              <td align="right"><?= number_format($fy['current_unspent'], 2) ?></td>
+              <td class="text-end"><?= number_format($fy['current_unspent'], 2) ?></td>
             </tr>
 
             <!-- Previous Year CF -->

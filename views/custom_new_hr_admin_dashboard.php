@@ -7,6 +7,16 @@ $url = API . "?mode=togetHRAdminDashboardData&date=" . $date;
 $apires = callAPI($url);
 $result = json_decode($apires, true);
 
+if (!defined('DIR_UPLOADS_ALL')) {
+    define('DIR_UPLOADS_ALL', 'uploads/all/');
+}
+if (!defined('DEFAULT_AVATAR_IMAGE')) {
+    define('DEFAULT_AVATAR_IMAGE', 'uploads/all/1.jpg');
+}
+if (!defined('DATE_FORMAT_DMY')) {
+    define('DATE_FORMAT_DMY', 'd M Y');
+}
+
 ?>
 
 <link rel="stylesheet" href="../assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
@@ -38,7 +48,7 @@ $result = json_decode($apires, true);
     </script>
 
     <div class="modal fade" id="large-Modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-      <div class="modal-dialog modal-lg text-start" role="document">
+      <div class="modal-dialog modal-lg text-start">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title"><?= __('Modal title'); ?></h4>
@@ -397,7 +407,7 @@ $result = json_decode($apires, true);
               ];
               ?>
 
-              <table class="table table-borderless table-sm align-middle pedding-approvals" role="presentation">
+              <div class="pedding-approvals d-flex flex-column gap-2">
                 <?php if (count((array)$pendingApprovals) > 0) { ?>
                   <?php foreach ($pendingApprovals as $key => $approval) {
                     $tableName = $approval['transaction_table'] ?? '';
@@ -405,32 +415,28 @@ $result = json_decode($apires, true);
                     $label = formatApprovalLabel($tableName);
                     $style = $approvalStyles[$key % count($approvalStyles)];
                   ?>
-                    <tr>
-                      <td>
-                        <span class="user-icon-40 b-radius-15 <?php echo $style['bg']; ?> f-14 f-w-600 text-center">
+                    <div class="d-flex align-items-center justify-content-between py-1">
+                      <div class="d-flex align-items-center">
+                        <span class="user-icon-40 b-radius-15 <?php echo $style['bg']; ?> f-14 f-w-600 text-center mr-2">
                           <i class="far fa-user f-16 <?php echo $style['text']; ?> f-w-600"></i>
                         </span>
-                      </td>
-
-                      <td class="f-12 f-w-600">
-                        <?php echo htmlspecialchars($label); ?>
-                      </td>
-
-                      <td>
+                        <span class="f-12 f-w-600">
+                          <?php echo htmlspecialchars($label); ?>
+                        </span>
+                      </div>
+                      <div>
                         <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">
                           <?php echo (int)$pendingCount; ?>
                         </span>
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                   <?php } ?>
                 <?php } else { ?>
-                  <tr>
-                    <td colspan="3" class="text-center text-muted f-12">
-                      <?= __('No pending approvals found'); ?>
-                    </td>
-                  </tr>
+                  <div class="text-center text-muted f-12 py-2">
+                    <?= __('No pending approvals found'); ?>
+                  </div>
                 <?php } ?>
-              </table>
+              </div>
             </div>
 
           </div>
@@ -499,14 +505,14 @@ $result = json_decode($apires, true);
                     $image = $joiner['image'] ?? '';
 
                     if ($image != '') {
-                      $imagePath = 'uploads/all/' . $image;
+                      $imagePath = DIR_UPLOADS_ALL . $image;
                     } else {
-                      $imagePath = 'uploads/all/1.jpg';
+                      $imagePath = DEFAULT_AVATAR_IMAGE;
                     }
 
                     $formattedJoiningDate = '-';
                     if ($joiningDate != '') {
-                      $formattedJoiningDate = date('d M Y', strtotime($joiningDate));
+                      $formattedJoiningDate = date(DATE_FORMAT_DMY, strtotime($joiningDate));
                     }
                   ?>
                     <tr>
@@ -560,14 +566,14 @@ $result = json_decode($apires, true);
                     $image = $exit['image'] ?? '';
 
                     if ($image != '') {
-                      $imagePath = 'uploads/all/' . $image;
+                      $imagePath = DIR_UPLOADS_ALL . $image;
                     } else {
-                      $imagePath = 'uploads/all/1.jpg';
+                      $imagePath = DEFAULT_AVATAR_IMAGE;
                     }
 
                     $formattedExitDate = '-';
                     if ($exitDate != '') {
-                      $formattedExitDate = date('d M Y', strtotime($exitDate));
+                      $formattedExitDate = date(DATE_FORMAT_DMY, strtotime($exitDate));
                     }
                   ?>
                     <tr>
@@ -622,7 +628,7 @@ $result = json_decode($apires, true);
 
                     $formattedDate = '-';
                     if ($startDate != '') {
-                      $formattedDate = date('d M Y', strtotime($startDate));
+                      $formattedDate = date(DATE_FORMAT_DMY, strtotime($startDate));
                     }
                   ?>
                     <tr>
@@ -873,9 +879,9 @@ $result = json_decode($apires, true);
                 $image = $birthday['image'] ?? '';
 
                 if ($image != '') {
-                  $imagePath = 'uploads/all/' . $image;
+                  $imagePath = DIR_UPLOADS_ALL . $image;
                 } else {
-                  $imagePath = 'uploads/all/1.jpg';
+                  $imagePath = DEFAULT_AVATAR_IMAGE;
                 }
 
                 if ($birthdayDate == '' && !empty($birthday['date_of_birth'])) {

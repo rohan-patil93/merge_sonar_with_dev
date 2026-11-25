@@ -265,8 +265,8 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                 <h3 class="card-label"><?= __('Month Wise - Salaries'); ?> </h3>
                             </div>
                             <div class="card-header-right">
-                                <div class="badge badge-inverse-primary font-weight-bolder Active cursor-pointer" onclick="changegraph('2')" id="count_btn" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?= __('Count'); ?></div>
-                                <div onclick="changegraph('1')" class="badge badge-inverse-primary font-weight-bolder cursor-pointer" id="salary_btn" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?= __('Salaries'); ?></div>
+                                <button type="button" class="btn p-0 border-0 bg-transparent badge badge-inverse-primary font-weight-bolder Active cursor-pointer" onclick="changegraph('2')" id="count_btn"><?= __('Count'); ?></button>
+                                <button type="button" onclick="changegraph('1')" class="btn p-0 border-0 bg-transparent badge badge-inverse-primary font-weight-bolder cursor-pointer" id="salary_btn"><?= __('Salaries'); ?></button>
 
                             </div>
                         </div>
@@ -549,8 +549,8 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                     <a href="#!" class="text-primary text-capitalize" onclick="getBasicInfoPopUp(<?php echo $joins['id'];?>)">
                                         <h6 class="f-12 mb-1 text-uppercase f-w-600"><?php echo $joins['display_name']; ?></h6>
                                         <div id="useractive_<?php echo $joins['id']; ?>" >
-                                            <i <?php  if($joins['user_id']==""){  ?> onclick="useractivethedashboard(<?php echo $joins['id'].",'".$joins['display_name']."'"; ?>)" <?php
-} ?> class="fa fa-user-plus float-right text-<?php echo $iccolor; ?>" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="<?php echo $sidetittle; ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                            <button type="button" class="btn p-0 border-0 bg-transparent float-right" <?php  if($joins['user_id']==""){  ?> onclick="useractivethedashboard(<?php echo $joins['id'].",'".$joins['display_name']."'"; ?>)" <?php
+} ?> data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="<?php echo $sidetittle; ?>" aria-label="<?php echo $sidetittle; ?>"><i class="fa fa-user-plus text-<?php echo $iccolor; ?>"></i></button>
                                         </div>
                                     </a>
                                     <p class="text-muted m-b-0 f-12"> <?= __('Joining Date'); ?>
@@ -605,9 +605,8 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                         <h6 class="f-12 mb-1 text-uppercase f-w-600"><?php echo $joins['display_name']; ?>
                                         </h6>
                                         <div id="deactive_<?php echo $joins['user_id']; ?>">
-                                            <i <?php  if($joins['is_active']=="0"){ ?> onclick="userdeactive(<?php echo $joins['user_id'].",'".$joins['display_name']."'"; ?>)" <?php
-} ?> class="fa fa-user-times float-right text-<?php echo $iccolor; ?>" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="<?php echo $sidetittle; ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                            </i>
+                                            <button type="button" class="btn p-0 border-0 bg-transparent float-right" <?php  if($joins['is_active']=="0"){ ?> onclick="userdeactive(<?php echo $joins['user_id'].",'".$joins['display_name']."'"; ?>)" <?php
+} ?> data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="<?php echo $sidetittle; ?>" aria-label="<?php echo $sidetittle; ?>"><i class="fa fa-user-times text-<?php echo $iccolor; ?>"></i></button>
                                         </div>
                                     </a>
                                     <p class="text-muted m-b-0 f-12"> <?= __('Joining Date'); ?>

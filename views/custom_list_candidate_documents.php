@@ -286,8 +286,8 @@ $parentdocuments  = json_decode($parentdocuments,1);
       <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
 
 
-        <div class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"  name="status" id="status" value="<?php echo ST_APPROVED; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></div>
-        <div class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status_2" value="<?php echo ST_REJECTED; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Rejected'); ?></div>
+        <button type="button" class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED ? "active" : ""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"><?= __('Approved'); ?></button>
+        <button type="button" class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED ? "active" : ""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"><?= __('Rejected'); ?></button>
       </div>
     </div>
 
@@ -340,7 +340,7 @@ $parentdocuments  = json_decode($parentdocuments,1);
 </div>
 </div></div>
 
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
   <div class="modal-dialog " >
     <div class="modal-content"  id="popup1">
 

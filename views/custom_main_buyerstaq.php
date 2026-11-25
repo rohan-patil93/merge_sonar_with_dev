@@ -159,7 +159,7 @@
                                                                                     <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
-                                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-danger" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -184,7 +184,7 @@
                                                                                     <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
-                                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-danger" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -209,7 +209,7 @@
                                                                                     <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
-                                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-danger" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -234,7 +234,7 @@
                                                                                     <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
-                                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-danger" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -259,7 +259,7 @@
                                                                                     <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
-                                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-danger" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>

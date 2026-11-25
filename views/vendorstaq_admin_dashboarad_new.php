@@ -1,4 +1,17 @@
 <?php
+if (!defined('PARAM_USER_TYPE')) {
+    define('PARAM_USER_TYPE', '&user_type=');
+}
+if (!defined('PARAM_USER_EMAIL')) {
+    define('PARAM_USER_EMAIL', '&user_email=');
+}
+if (!defined('PARAM_EMPLOYEE_ID')) {
+    define('PARAM_EMPLOYEE_ID', '&employee_id=');
+}
+if (!defined('PARAM_APPLICATION_USER_ID')) {
+    define('PARAM_APPLICATION_USER_ID', '&application_user_id=');
+}
+
 $_SESSION['apply_js']['vendorstaq_admin_dashboarad_new']=1;
 $startyearmonth = date('Y-m-d', strtotime('-1 year'));
 $sixmonthmonth = date('Ym', strtotime('-6 month'));
@@ -44,11 +57,11 @@ if($_SESSION['admin_type'] !=1 || (isset($_GET['LOC']) && $_GET['LOC']!="")){
         $locstr="&location_id=0&location_id_value=".implode(",",(array)$loca_ids);
      }
 }
-$url1 = API."?mode=admindashboarddetails_newdashboard&admin_type=".$admin_type."&user_type=".$_SESSION['user_type']."&user_email=".$_SESSION['user_email']."&employee_id=".$employee_id."&emp_id=".$employee_id."&application_user_id=".$application_user_id."&check=1".$locstr;
+$url1 = API."?mode=admindashboarddetails_newdashboard&admin_type=".$admin_type.PARAM_USER_TYPE.$_SESSION['user_type'].PARAM_USER_EMAIL.$_SESSION['user_email'].PARAM_EMPLOYEE_ID.$employee_id."&emp_id=".$employee_id.PARAM_APPLICATION_USER_ID.$application_user_id."&check=1".$locstr;
 $data_details1 = callAPI($url1);
 $emp_count_dashboard = json_decode($data_details1,1);
 
-$url = API."?mode=vendorstaqadmindashboard&admin_type=".$admin_type."&user_type=".$_SESSION['user_type']."&user_email=".$_SESSION['user_email']."&employee_id=".$employee_id."&application_user_id=".$application_user_id."&start_date=".$startyearmonth."&end_date=".$endyearmonth;
+$url = API."?mode=vendorstaqadmindashboard&admin_type=".$admin_type.PARAM_USER_TYPE.$_SESSION['user_type'].PARAM_USER_EMAIL.$_SESSION['user_email'].PARAM_EMPLOYEE_ID.$employee_id.PARAM_APPLICATION_USER_ID.$application_user_id."&start_date=".$startyearmonth."&end_date=".$endyearmonth;
 $data_details1 = callAPI($url);
 $new_dashboard = json_decode($data_details1,1);
 $budgetthisyear = 0;
@@ -109,7 +122,7 @@ $actualdata = implode('|', (array)$maingra['billable']);
 $estimationdata = implode('|', (array)$maingra['bdget']);
 $emp_data = $emp_count_dashboard['emp_data'];
 
-$venurl = API."?mode=vendorlistforadminmanag&admin_type=".$admin_type."&user_type=".$_SESSION['user_type']."&user_email=".$_SESSION['user_email']."&employee_id=".$employee_id."&emp_id=".$employee_id."&application_user_id=".$application_user_id."&check=1".$locstr;
+$venurl = API."?mode=vendorlistforadminmanag&admin_type=".$admin_type.PARAM_USER_TYPE.$_SESSION['user_type'].PARAM_USER_EMAIL.$_SESSION['user_email'].PARAM_EMPLOYEE_ID.$employee_id."&emp_id=".$employee_id.PARAM_APPLICATION_USER_ID.$application_user_id."&check=1".$locstr;
 $eerw = callAPI($venurl);
 $vendoralkadetails = json_decode($eerw,1);
 function numberToLakh($num){

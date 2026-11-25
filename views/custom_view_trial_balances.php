@@ -107,7 +107,7 @@ function showPopupNote(id){
                             ?>
                             <tr>
                                 <td class="<?php echo count((array)$Alevel2) !='0'?"f-w-700":"NNN"; ?> w-b-w-s"><span class=""><?php echo $i.") ".$level1['group_name']." - ".$level1['short_code']; ?></span></td>
-                                 <td id="notenumberid_<?php echo $level1['id']; ?>" onclick="showPopupNote('<?php echo $level1['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></td>
+                                 <td id="notenumberid_<?php echo $level1['id']; ?>"><button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="showPopupNote('<?php echo $level1['id']; ?>')" aria-label="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></button></td>
                                  <td> <?php
                                  echo dashprint($debitcredit[$level1['id']]['finalamt']);
                                   ?> </td>
@@ -118,7 +118,7 @@ function showPopupNote(id){
                                 ?>
                                 <tr>
                                     <td   class="<?php echo count((array)$Alevel3) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-20"><?php echo $mk.") ".$level2['group_name']." - ".$level2['short_code']; ?></span></td>
-                                    <td id="notenumberid_<?php echo $level2['id']; ?>" onclick="showPopupNote('<?php echo $level2['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></td>
+                                    <td id="notenumberid_<?php echo $level2['id']; ?>"><button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="showPopupNote('<?php echo $level2['id']; ?>')" aria-label="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></button></td>
 
                                     <td> <?php
                                     echo dashprint($debitcredit[$level2['id']]['finalamt']); ?> </td>
@@ -128,7 +128,7 @@ function showPopupNote(id){
                                     ?>
                                     <tr>
                                         <td  class="<?php echo count((array)$Alevel4) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-40"><?php echo $mj.") ".$level3['group_name']." - ".$level3['short_code']; ?></span></td>
-                                        <td id="notenumberid_<?php echo $level3['id']; ?>" onclick="showPopupNote('<?php echo $level3['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></td>
+                                        <td id="notenumberid_<?php echo $level3['id']; ?>"><button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="showPopupNote('<?php echo $level3['id']; ?>')" aria-label="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></button></td>
                                         <td> <?php
                                          echo dashprint($debitcredit[$level3['id']]['finalamt']);?> </td>
 
@@ -138,7 +138,7 @@ function showPopupNote(id){
                                         ?>
                                         <tr>
                                             <td  class="<?php echo count((array)$Alevel5) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-60"><?php echo $mm.") ".$level4['group_name']." - ".$level4['short_code']; ?></span></td>
-                                            <td id="notenumberid_<?php echo $level4['id']; ?>" onclick="showPopupNote('<?php echo $level4['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></td>
+                                            <td id="notenumberid_<?php echo $level4['id']; ?>"><button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="showPopupNote('<?php echo $level4['id']; ?>')" aria-label="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></button></td>
                                             <td> <?php
                                              echo dashprint($debitcredit[$level4['id']]['finalamt']);?> </td>
                                         </tr>
@@ -147,7 +147,7 @@ function showPopupNote(id){
                                             ?>
                                             <tr>
                                                 <td  class="<?php echo count((array)$Alevel6) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-80"><?php echo $jm.") ".$level5['group_name']." - ".$level5['short_code']; ?></span></td>
-                                                 <td id="notenumberid_<?php echo $level5['id']; ?>" onclick="showPopupNote('<?php echo $level5['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></td>
+                                                 <td id="notenumberid_<?php echo $level5['id']; ?>"><button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="showPopupNote('<?php echo $level5['id']; ?>')" aria-label="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-plus-square" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Select Note Number'), ENT_QUOTES, 'UTF-8'); ?>"></i></button></td>
                                                  <td>
                                                   <?php echo dashprint($debitcredit[$level5['id']]['finalamt']);
                                                   ?> </td>

@@ -162,7 +162,7 @@ ul.pro-menu li.active a{border-bottom: 3px solid #4099ff;}
                       <input type="hidden" name="project_type" id="project_type" value="0">
                       <h3><?php echo __('Project Type'); ?></h3>
                       <p><?php echo __('If you need more info, please check out'); ?> <a href=""><?php echo __('FAQ Page'); ?></a></p>
-                      <div class="personal-pro mt-5 close bg-pop-active " id="changeprojecttype0" onclick="changeprojecttype(0)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                      <button type="button" class="btn text-start p-0 border-0 bg-transparent personal-pro mt-5 close bg-pop-active d-block w-100" id="changeprojecttype0" onclick="changeprojecttype(0)">
                         <div class="d-inline-block align-top">
                           <img src="/assets/images/feature.jpg" class="img-radius img-40" alt="">
                         </div>
@@ -171,7 +171,7 @@ ul.pro-menu li.active a{border-bottom: 3px solid #4099ff;}
                           <p class="m-0"><?php echo __('Visualize and advance your project forward'); ?> </br><?php echo __('using issues on a powerful board.'); ?></p>
                         </div>
                       </div>
-                       <div class="personal-pro mt-4 close bg-pop-white " id="changeprojecttype1"  onclick="changeprojecttype(1)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                       <button type="button" class="btn text-start p-0 border-0 bg-transparent personal-pro mt-4 close bg-pop-white d-block w-100" id="changeprojecttype1" onclick="changeprojecttype(1)">
                         <div class="d-inline-block align-top">
                           <img src="/assets/images/support.png" class="img-radius img-40" alt="">
                         </div>
@@ -180,7 +180,7 @@ ul.pro-menu li.active a{border-bottom: 3px solid #4099ff;}
                           <p class="m-0"><?php echo __('Sprint toward your project goals with a board,'); ?></br> <?php echo __('backlog, and roadmap.'); ?></p>
                         </div>
                       </div>
-                      <div class="personal-pro mt-4 close bg-pop-white " id="changeprojecttype2"  onclick="changeprojecttype(2)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                      <button type="button" class="btn text-start p-0 border-0 bg-transparent personal-pro mt-4 close bg-pop-white d-block w-100" id="changeprojecttype2" onclick="changeprojecttype(2)">
                         <div class="d-inline-block align-top">
                           <img src="/assets/images/bug.jpg" class="img-radius img-40" alt="">
                         </div>

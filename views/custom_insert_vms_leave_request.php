@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_MDY_HIS_A')) {
+    define('DATE_FORMAT_MDY_HIS_A', 'm/d/Y h:i:s a');
+}
+
 $timeprint = '0';
 $maxtimeshow = 40;
 $_SESSION['apply_js']['calender'] = '1';
@@ -68,10 +72,7 @@ if(isset($_POST['submit'])){
                     }else{
                         $error_message = $response['message'];
                     }
-                }else{
-
-
-}
+                }
 
 }
 
@@ -82,7 +83,7 @@ if(isset($_POST['submit'])){
 
 
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "gettocheckleavetypecriteria - ".date('m/d/Y h:i:s a')."</br>";
+    echo "gettocheckleavetypecriteria - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 
 $emp_id = $_SESSION['emp_id'];
@@ -92,7 +93,7 @@ $leavecriterialistres = json_decode($leavecriterialistres,1);
 $leavetype_detrails  = $leavecriterialistres['leavetype_detrails'];
 $buddy_details  = $leavecriterialistres['buddy_details'];
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "gettabledetailswithconditions&table=employee_leaves - ".date('m/d/Y h:i:s a')."</br>";
+    echo "gettabledetailswithconditions&table=employee_leaves - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $rid =  encodeId($_GET['Rid']);
 $rid = explode(":",$rid);
@@ -107,7 +108,7 @@ if($Rid!=""){
     $employee_leaves = $employee_leaves[0];
 }
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "gettabledetailswithconditions&table=employees- ".date('m/d/Y h:i:s a')."</br>";
+    echo "gettabledetailswithconditions&table=employees- ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $vdata1["where"] = array('is_active'=> 0);
 $vdata1["field"] = "id,image,display_name";
@@ -119,7 +120,7 @@ foreach ($emplos as  $value) {
     $empdata[$value['id']] =$value;
 }
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "tosearchempleavesbydate - ".date('m/d/Y h:i:s a')."</br>";
+    echo "tosearchempleavesbydate - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $leavedate = date('Y-m-d');
 $otstdate = date('Y-m-d', strtotime('-20 day', strtotime($leavedate)));
@@ -139,11 +140,11 @@ foreach($otheremp as $loopdetails){
     }
 }
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "status start  - ".date('m/d/Y h:i:s a')."</br>";
+    echo "status start  - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $stausresult = ViewStatusData();
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "status end - ".date('m/d/Y h:i:s a')."</br>";
+    echo "status end - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 ?>
 <script type="text/javascript">
@@ -330,8 +331,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                             <input type="hidden" name="finance_user_id" id="finance_user_id" value="<?php echo $buddy_details['finance_connect']; ?>">
                             <?php  $leavae = array(array('leves'=>10,'cons'=>5),array('leves'=>12,'cons'=>0),array('leves'=>20,'cons'=>10),array('leves'=>7,'cons'=>0),array('leves'=>10,'cons'=>0));?>
                                 <?php
-                                    if($employee_leaves['current_status'] ==ST_DRAFT || $employee_leaves['current_status'] ==ST_ACTIVE || $employee_leaves['current_status'] ==ST_SEND_BACK || $employee_leaves['current_status'] ==ST_CALLBACK || $employee_leaves['current_status']==""){
-}else{
+                                    if (!($employee_leaves['current_status'] == ST_DRAFT || $employee_leaves['current_status'] == ST_ACTIVE || $employee_leaves['current_status'] == ST_SEND_BACK || $employee_leaves['current_status'] == ST_CALLBACK || $employee_leaves['current_status'] == "")) {
                                         $disbalediv = 'style="pointer-events: none; opacity: 0.8;"';
                                     }  ?>
 

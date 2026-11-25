@@ -1,4 +1,10 @@
 <?php
+defined('LABEL_PREFIX_PERSON') || define('LABEL_PREFIX_PERSON', LABEL_PREFIX_PERSON);
+defined('LABEL_PREFIX_CODE') || define('LABEL_PREFIX_CODE', LABEL_PREFIX_CODE);
+defined('LABEL_PREFIX_DRIVER') || define('LABEL_PREFIX_DRIVER', LABEL_PREFIX_DRIVER);
+defined('LABEL_PREFIX_VEHICLE') || define('LABEL_PREFIX_VEHICLE', LABEL_PREFIX_VEHICLE);
+defined('MSG_NO_CONTACT_DETAILS') || define('MSG_NO_CONTACT_DETAILS', MSG_NO_CONTACT_DETAILS);
+defined('DATE_FORMAT_DMY_HI_A') || define('DATE_FORMAT_DMY_HI_A', DATE_FORMAT_DMY_HI_A);
 $day_type = 'TODAY';
 $location_id = $location_id ?? $_GET['location_id'] ?? $_SESSION['location_id'] ?? 0;
 if (isset($_GET['page']) && $_GET['page'] === 'AJAX_CALL' && isset($_GET['day_type'])) {
@@ -220,7 +226,7 @@ $ITEM_SETS = [
                                     $svcCompany = trim($service_company_res[$v['service_company']] ?? '');
                                     $svcPerson = trim($v['service_person'] ?? '');
                                     $displayName = $svcCompany ?: ($svcPerson ?: trim($v['name'] ?? ''));
-                                    $line2 = $svcPerson ? ('Person: ' . $svcPerson) : '';
+                                    $line2 = $svcPerson ? (LABEL_PREFIX_PERSON . $svcPerson) : '';
                                     $whoCell = $employees_map[$v['authorized_employee']] ?? $users_map[$v['authorized_employee']] ?? $_SESSION['employees'][$v['authorized_employee']] ?? $_SESSION['users'][$v['authorized_employee']] ?? '-';
                                     break;
                                 case 'employee':
@@ -229,7 +235,7 @@ $ITEM_SETS = [
                                         $displayName = $emp['display_name'] ?? $displayName;
                                         $line2 = $emp['email_id'] ?? $line2;
                                     }
-                                    if (empty($displayName)) { $displayName = 'Code: ' . ($v['employee_code'] ?? '-');
+                                    if (empty($displayName)) { $displayName = LABEL_PREFIX_CODE . ($v['employee_code'] ?? '-');
 }
                                     $whoCell = $v['employee_department'] ?? '-';
                                     break;
@@ -243,9 +249,9 @@ $ITEM_SETS = [
                                     $vendorName = trim($vendors_res[$v['vendor_supplier_vendor_id']] ?? '');
                                     $driverName = trim($v['vendor_supplier_driver_name'] ?? '');
                                     $displayName = $vendorName ?: ($driverName ?: trim($v['name'] ?? ''));
-                                    $line2 = $driverName ? ('Driver: ' . $driverName) : '';
+                                    $line2 = $driverName ? (LABEL_PREFIX_DRIVER . $driverName) : '';
                                     if (!empty($v['vendor_supplier_vehicle_number'])) {
-                                        $line2 .= ($line2 ? ' · ' : '') . 'Vehicle: ' . $v['vendor_supplier_vehicle_number'];
+                                        $line2 .= ($line2 ? ' · ' : '') . LABEL_PREFIX_VEHICLE . $v['vendor_supplier_vehicle_number'];
                                     }
                                     $whoCell = $employees_map[$v['whom_to_meet']] ?? $users_map[$v['whom_to_meet']] ?? $_SESSION['employees'][$v['whom_to_meet']] ?? $_SESSION['users'][$v['whom_to_meet']] ?? '-';
                                     break;
@@ -264,7 +270,7 @@ $ITEM_SETS = [
                                         <?php } ?>
                                         <div>
                                             <span class="lbl-name"><?= htmlspecialchars($displayName) ?></span>
-                                            <span class="lbl-subtext"><?= htmlspecialchars($line2 ?: ($line3 ?: 'No contact details')) ?></span>
+                                            <span class="lbl-subtext"><?= htmlspecialchars($line2 ?: ($line3 ?: MSG_NO_CONTACT_DETAILS)) ?></span>
                                         </div>
                                     </div>
                                 </td>
@@ -290,10 +296,10 @@ $ITEM_SETS = [
                                     </div>
                                 </td>
                                 <td class="text-dark"><?= htmlspecialchars($whoCell) ?></td>
-                                <td class="text-muted"><?= date('d-M-Y h:i A', strtotime($v['in_datetime'])) ?></td>
+                                <td class="text-muted"><?= date(DATE_FORMAT_DMY_HI_A, strtotime($v['in_datetime'])) ?></td>
                                 <td>
                                     <?php if (!empty($v['out_datetime']) || $current_status === 199) { ?>
-                                        <span class="text-muted"><?= date('d-M-Y h:i A', strtotime($v['out_datetime'])) ?></span>
+                                        <span class="text-muted"><?= date(DATE_FORMAT_DMY_HI_A, strtotime($v['out_datetime'])) ?></span>
                                     <?php } elseif ($current_status === 10) { ?>
                                         <span class="badge bg-warning text-dark py-1 px-2" style="font-size: 11px; border-radius: 6px; font-weight: 600;"><i class="fa fa-clock me-1"></i> <?= __('Awaiting Approval'); ?></span>
                                     <?php } else {
@@ -400,7 +406,7 @@ $ITEM_SETS = [
                                     $svcCompany = trim($service_company_res[$v['service_company']] ?? '');
                                     $svcPerson = trim($v['service_person'] ?? '');
                                     $displayName = $svcCompany ?: ($svcPerson ?: trim($v['name'] ?? ''));
-                                    $line2 = $svcPerson ? ('Person: ' . $svcPerson) : '';
+                                    $line2 = $svcPerson ? (LABEL_PREFIX_PERSON . $svcPerson) : '';
                                     $whoCell = $employees_map[$v['authorized_employee']] ?? $users_map[$v['authorized_employee']] ?? $_SESSION['employees'][$v['authorized_employee']] ?? $_SESSION['users'][$v['authorized_employee']] ?? '-';
                                     break;
                                 case 'employee':
@@ -409,7 +415,7 @@ $ITEM_SETS = [
                                         $displayName = $emp['display_name'] ?? $displayName;
                                         $line2 = $emp['email_id'] ?? $line2;
                                     }
-                                    if (empty($displayName)) { $displayName = 'Code: ' . ($v['employee_code'] ?? '-');
+                                    if (empty($displayName)) { $displayName = LABEL_PREFIX_CODE . ($v['employee_code'] ?? '-');
 }
                                     $whoCell = $v['employee_department'] ?? '-';
                                     break;
@@ -423,9 +429,9 @@ $ITEM_SETS = [
                                     $vendorName = trim($vendors_res[$v['vendor_supplier_vendor_id']] ?? '');
                                     $driverName = trim($v['vendor_supplier_driver_name'] ?? '');
                                     $displayName = $vendorName ?: ($driverName ?: trim($v['name'] ?? ''));
-                                    $line2 = $driverName ? ('Driver: ' . $driverName) : '';
+                                    $line2 = $driverName ? (LABEL_PREFIX_DRIVER . $driverName) : '';
                                     if (!empty($v['vendor_supplier_vehicle_number'])) {
-                                        $line2 .= ($line2 ? ' · ' : '') . 'Vehicle: ' . $v['vendor_supplier_vehicle_number'];
+                                        $line2 .= ($line2 ? ' · ' : '') . LABEL_PREFIX_VEHICLE . $v['vendor_supplier_vehicle_number'];
                                     }
                                     $whoCell = $employees_map[$v['whom_to_meet']] ?? $users_map[$v['whom_to_meet']] ?? $_SESSION['employees'][$v['whom_to_meet']] ?? $_SESSION['users'][$v['whom_to_meet']] ?? '-';
                                     break;
@@ -444,7 +450,7 @@ $ITEM_SETS = [
                                         <?php } ?>
                                         <div>
                                             <span class="lbl-name"><?= htmlspecialchars($displayName) ?></span>
-                                            <span class="lbl-subtext"><?= htmlspecialchars($line2 ?: ($line3 ?: 'No contact details')) ?></span>
+                                            <span class="lbl-subtext"><?= htmlspecialchars($line2 ?: ($line3 ?: MSG_NO_CONTACT_DETAILS)) ?></span>
                                         </div>
                                     </div>
                                 </td>
@@ -467,7 +473,7 @@ $ITEM_SETS = [
                                     </div>
                                 </td>
                                 <td class="text-dark"><?= htmlspecialchars($whoCell) ?></td>
-                                <td class="text-muted"><?= date('d-M-Y h:i A', strtotime($v['in_datetime'])) ?></td>
+                                <td class="text-muted"><?= date(DATE_FORMAT_DMY_HI_A, strtotime($v['in_datetime'])) ?></td>
                                 <td>
                                     <?php
                                     $searchTerm = $v['visitor_idcard_no'] ?? ($v['employee_code'] ?? ($v['phone'] ?? $displayName));
@@ -559,7 +565,7 @@ $ITEM_SETS = [
                                     $svcCompany = trim($service_company_res[$v['service_company']] ?? '');
                                     $svcPerson = trim($v['service_person'] ?? '');
                                     $displayName = $svcCompany ?: ($svcPerson ?: trim($v['name'] ?? ''));
-                                    $line2 = $svcPerson ? ('Person: ' . $svcPerson) : '';
+                                    $line2 = $svcPerson ? (LABEL_PREFIX_PERSON . $svcPerson) : '';
                                     $whoCell = $employees_map[$v['authorized_employee']] ?? $users_map[$v['authorized_employee']] ?? $_SESSION['employees'][$v['authorized_employee']] ?? $_SESSION['users'][$v['authorized_employee']] ?? '-';
                                     break;
                                 case 'employee':
@@ -568,7 +574,7 @@ $ITEM_SETS = [
                                         $displayName = $emp['display_name'] ?? $displayName;
                                         $line2 = $emp['email_id'] ?? $line2;
                                     }
-                                    if (empty($displayName)) { $displayName = 'Code: ' . ($v['employee_code'] ?? '-');
+                                    if (empty($displayName)) { $displayName = LABEL_PREFIX_CODE . ($v['employee_code'] ?? '-');
 }
                                     $whoCell = $v['employee_department'] ?? '-';
                                     break;
@@ -582,9 +588,9 @@ $ITEM_SETS = [
                                     $vendorName = trim($vendors_res[$v['vendor_supplier_vendor_id']] ?? '');
                                     $driverName = trim($v['vendor_supplier_driver_name'] ?? '');
                                     $displayName = $vendorName ?: ($driverName ?: trim($v['name'] ?? ''));
-                                    $line2 = $driverName ? ('Driver: ' . $driverName) : '';
+                                    $line2 = $driverName ? (LABEL_PREFIX_DRIVER . $driverName) : '';
                                     if (!empty($v['vendor_supplier_vehicle_number'])) {
-                                        $line2 .= ($line2 ? ' · ' : '') . 'Vehicle: ' . $v['vendor_supplier_vehicle_number'];
+                                        $line2 .= ($line2 ? ' · ' : '') . LABEL_PREFIX_VEHICLE . $v['vendor_supplier_vehicle_number'];
                                     }
                                     $whoCell = $employees_map[$v['whom_to_meet']] ?? $users_map[$v['whom_to_meet']] ?? $_SESSION['employees'][$v['whom_to_meet']] ?? $_SESSION['users'][$v['whom_to_meet']] ?? '-';
                                     break;
@@ -603,7 +609,7 @@ $ITEM_SETS = [
                                         <?php } ?>
                                         <div>
                                             <span class="lbl-name"><?= htmlspecialchars($displayName) ?></span>
-                                            <span class="lbl-subtext"><?= htmlspecialchars($line2 ?: ($line3 ?: 'No contact details')) ?></span>
+                                            <span class="lbl-subtext"><?= htmlspecialchars($line2 ?: ($line3 ?: MSG_NO_CONTACT_DETAILS)) ?></span>
                                         </div>
                                     </div>
                                 </td>
@@ -626,8 +632,8 @@ $ITEM_SETS = [
                                     </div>
                                 </td>
                                 <td class="text-dark"><?= htmlspecialchars($whoCell) ?></td>
-                                <td class="text-muted"><?= date('d-M-Y h:i A', strtotime($v['in_datetime'])) ?></td>
-                                <td class="text-muted"><?= date('d-M-Y h:i A', strtotime($v['out_datetime'])) ?></td>
+                                <td class="text-muted"><?= date(DATE_FORMAT_DMY_HI_A, strtotime($v['in_datetime'])) ?></td>
+                                <td class="text-muted"><?= date(DATE_FORMAT_DMY_HI_A, strtotime($v['out_datetime'])) ?></td>
                             </tr>
                         <?php }
                     } else { ?>

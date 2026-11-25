@@ -1,4 +1,11 @@
 <?php
+if (!defined('ATTR_STYLE_DISPLAY_NONE')) {
+    define('ATTR_STYLE_DISPLAY_NONE', ATTR_STYLE_DISPLAY_NONE);
+}
+if (!defined('STYLE_DISPLAY_NONE_NOSPACE')) {
+    define('STYLE_DISPLAY_NONE_NOSPACE', 'display: none');
+}
+
 $_SESSION['apply_js']['multiselest'] = '1';
 $_SESSION['apply_js']['from-validation'] = "1";
 if($_POST['submit_value'] == 'allocatetransaction'){
@@ -404,11 +411,11 @@ foreach($invdata as  $transationtable=>$resultdata) {
                             <div class="col-lg-6 form-validation-class" >
                                 <?php
                                 if($payment_transaction_type !="" && $payment_transaction_type =="employees"){
-                                    $vendisable = "style='display:none'";
-                                    $custdisable = "style='display:none'";
+                                    $vendisable = ATTR_STYLE_DISPLAY_NONE;
+                                    $custdisable = ATTR_STYLE_DISPLAY_NONE;
                                  }else{
-                                    $empdisable = "style='display:none'";
-                                    $vendisable = "style='display:none'";
+                                    $empdisable = ATTR_STYLE_DISPLAY_NONE;
+                                    $vendisable = ATTR_STYLE_DISPLAY_NONE;
 
                                  }
                                  ?>
@@ -430,7 +437,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                                 </div>
                             </div>
 
-                            <div class="form-group col-lg-12 w-full" id='transaction_customers' style="<?php echo $postdata['transaction_type']!='customers'?"display: none":""; ?>">
+                            <div class="form-group col-lg-12 w-full" id='transaction_customers' style="<?php echo $postdata['transaction_type']!='customers'?STYLE_DISPLAY_NONE_NOSPACE:""; ?>">
                                 <span class="form-label"><?php echo __('Customer &nbsp;'); ?><span class="text-danger">*</span></span>
                                 <select aria-label="<?php echo __('Customer []'); ?>" class="form-control form-select js-example-basic-single" id="customer_id" name="customer_id[]" onchange="anyChange()" >
 
@@ -442,7 +449,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                                 </select>
                                 <span class="messages"></span>
                             </div>
-                            <div class="form-group col-lg-12 w-full" id='transaction_employess' style="<?php echo $postdata['transaction_type']!='employees'?"display: none":""; ?>">
+                            <div class="form-group col-lg-12 w-full" id='transaction_employess' style="<?php echo $postdata['transaction_type']!='employees'?STYLE_DISPLAY_NONE_NOSPACE:""; ?>">
                                 <span class="form-label"><?php echo __('Employees &nbsp;'); ?><span class="text-danger">*</span></span>
                                 <select aria-label="<?php echo __('Employee []'); ?>" class="form-control form-select js-example-basic-multiple" id="employee_id" name="employee_id[]" onchange="anyChange()" multiple>
 
@@ -481,7 +488,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                     <input aria-label="<?php echo __('Amount'); ?>" class="form-control text-right" type="text" name="amount"  id="amount" value="<?php echo $postdata['amount']; ?>"  onblur="anyChange()" required>
                      <span class="messages"></span>
                 </div>
-                <div class="form-group col-lg-12 w-full" id="bankaccount" style="<?php echo $postdata['payment_type']=='bank'?"":"display: none"; ?>">
+                <div class="form-group col-lg-12 w-full" id="bankaccount" style="<?php echo $postdata['payment_type']=='bank'?"":STYLE_DISPLAY_NONE_NOSPACE; ?>">
                         <select aria-label="<?php echo __('Bank Account'); ?>" class="form-control form-select js-example-basic-single" id="bank_account_id" name="bank_account_id" <?php echo $postdata['payment_type']=='bank'?"required":""; ?>>
                             <option value=""> <?php echo __('Select Any Bank'); ?> </option>
                             <?php foreach ($bank_accounts as $cus) { ?>
@@ -570,10 +577,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                   foreach ($invdata as  $transationtable=>$resultdata) {
                       foreach ($resultdata as  $value) {
                         $trclass = ""; $dueamt = 0;
-                        if($transationtable == 'credit_notes' && $post_transaction_type == "vendors"){
-                            $trclass = "bg-info";
-                            $dueamt = $value['pending_amount'];
-                        }elseif($transationtable == 'debit_notes' && $post_transaction_type == "customers"){
+                        if (($transationtable == 'credit_notes' && $post_transaction_type == "vendors") || ($transationtable == 'debit_notes' && $post_transaction_type == "customers")) {
                             $trclass = "bg-info";
                             $dueamt = $value['pending_amount'];
                         }

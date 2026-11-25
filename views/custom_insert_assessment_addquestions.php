@@ -133,7 +133,7 @@ else{
                     <div class="input-group input-icon-right">
                     <input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"  placeholder="<?= __('Option') ?>" aria-label="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style">
-    <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Delete option'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid1')"></i>    </span>
+    <button type="button" class="btn btn-link p-0 border-0" aria-label="<?= htmlspecialchars(__('Delete option'), ENT_QUOTES, 'UTF-8'); ?>" onclick="deloptionrows('s1rowid1')"><i class="fa fa-trash"></i></button>
 </span></div>
                 </div>
             </div>
@@ -156,7 +156,7 @@ else{
                 <input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"   placeholder="<?= __('Option') ?>" aria-label="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>">
 
                         <span class="input-group-text addon-style">
-    <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Delete option'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid2')"></i>    </span>
+    <button type="button" class="btn btn-link p-0 border-0" aria-label="<?= htmlspecialchars(__('Delete option'), ENT_QUOTES, 'UTF-8'); ?>" onclick="deloptionrows('s1rowid2')"><i class="fa fa-trash"></i></button>
 </span>
 
                 </div>
@@ -175,7 +175,6 @@ else { ?>
     <div class="modal-footer">
         <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= __('Close') ?></button>
         <button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" ><?= __('Save') ?></button>
-    <!--    <button class="btn btn-success"  onclick="questionsubmit()" type="button"><?= __('Save') ?></button>-->
     </div>
 
 </div>

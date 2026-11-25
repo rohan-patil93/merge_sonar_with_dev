@@ -11,12 +11,12 @@
 ?>
 <table class=" table table-hover " id="invoiceItem">
 <tr>
-    <th width="30%" class="p-1"><?= __('Items/Service'); ?> <span class="requried"></span></th>
-    <th class="thheader p-1" width="10%"><?= __('HSN/Tax'); ?> <span class="requried">*</span></th>
-    <th class="thheader p-1 text-right" width="15%"><?= __('Qty'); ?> <span class="requried">*</span></th>
-    <th class="thheader p-1 text-right" width="15%"><?= __('UOM'); ?> <span class="requried">*</span></th>
-    <th class="thheader p-1 text-right" width="15%"><?= __('Rate'); ?> <span class="requried">*</span></th>
-    <th class="thheader p-1 text-right" width="20%"><?= __('Amount'); ?></th>
+    <th class="p-1" style="width: 30%;"><?= __('Items/Service'); ?> <span class="requried"></span></th>
+    <th class="thheader p-1" style="width: 10%;"><?= __('HSN/Tax'); ?> <span class="requried">*</span></th>
+    <th class="thheader p-1 text-right" style="width: 15%;"><?= __('Qty'); ?> <span class="requried">*</span></th>
+    <th class="thheader p-1 text-right" style="width: 15%;"><?= __('UOM'); ?> <span class="requried">*</span></th>
+    <th class="thheader p-1 text-right" style="width: 15%;"><?= __('Rate'); ?> <span class="requried">*</span></th>
+    <th class="thheader p-1 text-right" style="width: 20%;"><?= __('Amount'); ?></th>
 </tr>
 <?php if(count((array)$table2)>0){ $i=1;  ///echo "<pre>"; print_r($table2); echo "</pre>";
  foreach ($table2 as $tab2) {

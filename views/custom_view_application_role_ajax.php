@@ -225,10 +225,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                         </td>
                         <td class="text-center p-1 align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                             <?php $checkedbox = "";
-                            if($approvedusercriteria['permission_view'] == '0'){
-                                $checkedbox = "checked";
-                            }elseif($application_process_pages_single['permission_view'] == '0' && count((array)$transaction_access_permission) ==0){ $checkedbox = "checked";
-} ?>
+                            if ($approvedusercriteria['permission_view'] == '0' || ($application_process_pages_single['permission_view'] == '0' && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } ?>
                             <div class="checkbox-fade fade-in-primary m-0">
                                 <label class="form-label  m-0">
                                     <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="listcheckedbox<?php echo $userlists['id'];?>"  name="excludes[list][<?php echo $userlists['id'];?>]" <?php echo $checkedbox; ?> >
@@ -240,10 +237,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                         </td>
                         <td class="text-center p-1 align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                             <?php $checkedbox =$stylecsscreat = "";
-                            if($approvedusercriteria['permission_insert'] == '0'){
-                                $checkedbox = "checked";
-                            }elseif($application_process_pages_single['permission_insert'] == 0 && count((array)$transaction_access_permission)==0){ $checkedbox = "checked";
-}else{
+                            if ($approvedusercriteria['permission_insert'] == '0' || ($application_process_pages_single['permission_insert'] == 0 && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } else {
                                 $stylecsscreat = "pointer-events: none; opacity:0.4";
 } ?>
                                 <div class="checkbox-fade fade-in-primary m-0">
@@ -257,10 +251,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                             </td>
                             <td class="text-center p-1  align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                                 <?php $checkedbox = "";
-                                if($approvedusercriteria['permission_update'] == '0'){
-                                    $checkedbox = "checked";
-                                }elseif($application_process_pages_single['permission_update'] == 0 && count((array)$transaction_access_permission) ==0){ $checkedbox = "checked";
-} ?>
+                                if ($approvedusercriteria['permission_update'] == '0' || ($application_process_pages_single['permission_update'] == 0 && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } ?>
                                 <div class="checkbox-fade fade-in-primary m-0">
                                     <label class="form-label  m-0">
                                         <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="editcheckedbox<?php echo $userlists['id'];?>"  name="excludes[edit][<?php echo $userlists['id'];?>]" <?php echo $checkedbox; ?> >
@@ -272,10 +263,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                             </td>
                             <td class="text-center p-1 align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                                 <?php $checkedbox = "";
-                                if($approvedusercriteria['permission_delete'] == '0'){
-                                    $checkedbox = "checked";
-                                }elseif($application_process_pages_single['permission_delete'] == 0 && count((array)$transaction_access_permission) ==0){ $checkedbox = "checked";
-} ?>
+                                if ($approvedusercriteria['permission_delete'] == '0' || ($application_process_pages_single['permission_delete'] == 0 && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } ?>
                                 <div class="checkbox-fade fade-in-primary m-0">
                                     <label class="form-label  m-0">
                                         <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="deletecheckedbox<?php echo $userlists['id'];?>"  name="excludes[delete][<?php echo $userlists['id'];?>]" <?php echo $checkedbox; ?> >
@@ -287,10 +275,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                             </td>
                             <td class="text-center p-1 align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                                 <?php $checkedbox = "";
-                                if($approvedusercriteria['permission_print'] == '0'){
-                                    $checkedbox = "checked";
-                                }elseif($application_process_pages_single['permission_print'] == 0 && count((array)$transaction_access_permission) ==0){ $checkedbox = "checked";
-} ?>
+                                if ($approvedusercriteria['permission_print'] == '0' || ($application_process_pages_single['permission_print'] == 0 && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } ?>
                                 <div class="checkbox-fade fade-in-primary m-0">
                                     <label class="form-label  m-0">
                                         <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="printcheckedbox<?php echo $userlists['id'];?>"   name="excludes[print][<?php echo $userlists['id'];?>]" <?php echo $checkedbox; ?> >
@@ -302,10 +287,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                             </td>
                             <td class="text-center p-1 align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                                 <?php $checkedbox = "";
-                                if($approvedusercriteria['permission_import'] == '0'){
-                                    $checkedbox = "checked";
-                                }elseif($application_process_pages_single['permission_import'] == 0 && count((array)$transaction_access_permission) ==0){  $checkedbox = "checked";
-} ?>
+                                if ($approvedusercriteria['permission_import'] == '0' || ($application_process_pages_single['permission_import'] == 0 && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } ?>
                                 <div class="checkbox-fade fade-in-primary m-0">
                                     <label class="form-label  m-0">
                                         <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="importcheckedbox<?php echo $userlists['id'];?>"   name="excludes[import][<?php echo $userlists['id'];?>]" <?php echo $checkedbox; ?> >
@@ -317,10 +299,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                             </td>
                             <td class="text-center p-1 align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                                 <?php $checkedbox = "";
-                                if($approvedusercriteria['permission_download'] == '0'){
-                                    $checkedbox = "checked";
-                                }elseif($application_process_pages_single['permission_download'] == 0 && count((array)$transaction_access_permission) ==0){ $checkedbox = "checked";
-} ?>
+                                if ($approvedusercriteria['permission_download'] == '0' || ($application_process_pages_single['permission_download'] == 0 && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } ?>
                                 <div class="checkbox-fade fade-in-primary m-0">
                                     <label class="form-label  m-0">
                                         <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="downloadcheckedbox<?php echo $userlists['id'];?>"  name="excludes[download][<?php echo $userlists['id'];?>]" <?php echo $checkedbox; ?> >
@@ -332,10 +311,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                             </td>
                             <td class="text-center p-1 align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                                 <?php $checkedbox = "";
-                                if($approvedusercriteria['permission_approval'] == '0'){
-                                    $checkedbox = "checked";
-                                }elseif($application_process_pages_single['permission_approval'] == 0 && count((array)$transaction_access_permission) ==0){ $checkedbox = "checked";
-} ?>
+                                if ($approvedusercriteria['permission_approval'] == '0' || ($application_process_pages_single['permission_approval'] == 0 && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } ?>
                                 <div class="checkbox-fade fade-in-primary m-0">
                                     <label class="form-label  m-0">
                                         <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="approvalcheckedbox<?php echo $userlists['id'];?>"  name="excludes[approval][<?php echo $userlists['id'];?>]" <?php echo $checkedbox; ?> >
@@ -347,10 +323,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                             </td>
                             <td class="text-center p-1 align-middle allowuserrole_<?php echo $userlists['id'];?>" style="<?php echo $stylecss;?>">
                                 <?php $checkedbox = "";
-                                if($approvedusercriteria['permission_analytic'] == '0'){
-                                    $checkedbox = "checked";
-                                }elseif($application_process_pages_single['permission_download'] == 0 && count((array)$transaction_access_permission) ==0){ $checkedbox = "checked";
-} ?>
+                                if ($approvedusercriteria['permission_analytic'] == '0' || ($application_process_pages_single['permission_download'] == 0 && count((array)$transaction_access_permission) == 0)) { $checkedbox = "checked"; } ?>
                                 <div class="checkbox-fade fade-in-primary m-0">
                                     <label class="form-label  m-0">
                                         <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="analyticcheckedbox<?php echo $userlists['id'];?>"  name="excludes[analytic][<?php echo $userlists['id'];?>]" <?php echo $checkedbox; ?> >

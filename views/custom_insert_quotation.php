@@ -1,4 +1,8 @@
 <?php
+if (!defined('LOC_INDEX_OPTION')) {
+    define('LOC_INDEX_OPTION', 'location:index.php?option=');
+}
+
 $_SESSION['apply_js']['multiselest'] = "1";
 $_SESSION['apply_js']['dropzone'] = "1";
 $option = strtoupper($_GET['option']);
@@ -34,9 +38,9 @@ if($_POST['submit1'] == 'Add'){
         if ($_POST['submit_value'] == 'continue'){
                 $LASTID = json_decode($response,1);
                 $nrid = "id:".$LASTID['LASTID'];
-               header("location:index.php?option=".$option."&Rid=".deocdeId($nrid));
+               header(LOC_INDEX_OPTION.$option."&Rid=".deocdeId($nrid));
             }else{
-                header("location:index.php?option=".$list);
+                header(LOC_INDEX_OPTION.$list);
             }
     }
 }
@@ -46,7 +50,7 @@ if($_POST['submit1'] == 'Update'){
 
     if($_POST['status_values'] == ST_PURCHASE_ORDER_GENRATED){
         $retun_list = toGetpageOptionName('purchase_orders');
-        header("location:index.php?option=".$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
+        header(LOC_INDEX_OPTION.$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
     }
     if($_POST['status_values'] == ST_APPROVAL_PENDING){
         $checkurl = API."?mode=tocheckDAO&table=".$_POST['table_name']."&status=".$_POST['status_values']."&amount=".$_POST['grandtotal']."&status_old_value=".$_POST['status_old_value']."&cost_center=".$_POST['cost_center'];
@@ -57,7 +61,7 @@ if($_POST['submit1'] == 'Update'){
         $check_data = callAPI($checkurl);
         $check_data = json_decode($check_data,1);
         if(!isset($check_data['id']) || $check_data['id'] == ''){
-            header("location:index.php?option=".$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
+            header(LOC_INDEX_OPTION.$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
         }
     }
     $_POST['file_add'] = $_SESSION['file_add'][$_POST['table_name']][$_POST['hid']];
@@ -65,7 +69,7 @@ if($_POST['submit1'] == 'Update'){
     $url = API."?mode=addinvoietype&table=".$_POST['table_name']."&method=post&type=update";
     $response = file_post_contents($url, $_POST, 'update');
     if ($response) {
-        header("location:index.php?option=".$list);
+        header(LOC_INDEX_OPTION.$list);
     }
 }
 }
@@ -1171,7 +1175,7 @@ $workflowsteps = getWorkflowStatus($table_name,$rid,$table1['current_status']);
         }
         if($rtable_name =="" && $table1['current_status'] == ST_APPROVED && $table_name =='requisitions'){
             ?>
-            <div class="btn-group workflow-btn" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
+            <div class="btn-group workflow-btn" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
                 <button type="button" class="btn btn-info btn-sm waves-effect waves-light" onclick="changestatus('<?php echo $list['status']; ?>','2')"> <span class="fa fa-thumbs-up text-white"></span> <?php echo __('Generate Quotation'); ?></button>
                  <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" onclick="changestatus('<?php echo $list['status']; ?>','3')"> <span class="fa fa-thumbs-up text-white"></span> <?php echo __('Generate PO'); ?></button>
             </div>
@@ -1466,7 +1470,7 @@ $disable = ''; if(!in_array($table1['current_status'], $check_array) && $rtable_
 <?php echo $todisplaythree = todisplaythree(array('table'=>$table_name,'originator'=>$rpdata['created_by'],'encode'=>'no','id'=>$rpdata['id'],'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'yes','dis_track'=>'yes'));
 ?>
 
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="max-width: 800px;">
         <div class="modal-content" style="min-height: 50px;width: 800px;" id="popup1">
 

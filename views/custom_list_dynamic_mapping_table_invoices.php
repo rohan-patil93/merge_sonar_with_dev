@@ -205,13 +205,13 @@ function dynamicSelectDateRange(type,name,start="",end=""){
                             <span class="form-label label label-primary" style="color: <?php echo $stausresult[$ri['current_status']]['color']; ?>;    background:  <?php echo $stausresult[$ri['current_status']]['background_color']; ?>; border-color: <?php echo $stausresult[$ri['current_status']]['background_color']; ?>;"><?php echo $stausresult[$ri['current_status']]['name']; ?></span>
                           </h5>
                           <div class="card-header-right">
-                            <i class="ti-printer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" onclick="goToAnotherPageAndPrint('<?php echo $ri['id']; ?>','<?php echo $transaction_table; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                            <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" onclick="goToAnotherPageAndPrint('<?php echo $ri['id']; ?>','<?php echo $transaction_table; ?>')"><i class="ti-printer"></i></button>
 
-                             <i class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" onclick="DownloadPDF('<?php echo $ri['id']; ?>','<?php echo $transaction_table; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                             <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" onclick="DownloadPDF('<?php echo $ri['id']; ?>','<?php echo $transaction_table; ?>')"><i class="ti-cloud-down"></i></button>
 
 
                            <?php if($ri['party_email'] !=""){  ?>
-                              <i class="ti-email" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" onclick="renatalInvoiceSend('<?php echo $ri['id']; ?>','<?php echo $transaction_table; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                              <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" onclick="renatalInvoiceSend('<?php echo $ri['id']; ?>','<?php echo $transaction_table; ?>')"><i class="ti-email"></i></button>
                             <?php } ?>
                           </div>
                       </div>

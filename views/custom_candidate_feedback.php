@@ -69,8 +69,7 @@ foreach ($qustion_types as $qtype) {
               <div >
                 <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $questionid;?>">
                 <input type="hidden" name="job_feedback_setup_id<?php echo $questionid;?>" value="<?php echo $display_questions[$questionid]['job_feedback_setup_id'];?>">
-                <!-- <span class="mt-5"><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span> -->
-                <h6><?php echo $value_id . ". " . htmlspecialchars(__($display_questions[$questionid]['survey_question'] ?? '')); ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h6>
+                <h6><?php echo $value_id . ". " . htmlspecialchars(__($display_questions[$questionid]['survey_question'] ?? '')); ?> <?php if($display_questions[$questionid]['require_response']=="1") { echo "*"; } ?></h6>
                 <?php
                 $optionlist= json_decode($display_questions[$questionid]['survey_question_option'],1);
                 $option=$optionlist['0'];
@@ -102,7 +101,6 @@ foreach ($qustion_types as $qtype) {
 
                <?php }  ?>
                <div class="col-lg-12 row">
-                <!-- <textarea id="comments<?php echo $questionid;?>"  name="comments<?php echo $questionid;?>" class="form-control mb-2 col-lg-8" placeholder="Comments"><?php echo $selectedoption;?></textarea> -->
 
               </div>
              </div>

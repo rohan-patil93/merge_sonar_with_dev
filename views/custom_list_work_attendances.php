@@ -34,8 +34,8 @@ function worktymePercentage($num_amount, $num_total)
   $count2 = $count1 * 100;
   return number_format($count2, 0);
 }
-if (!function_exists('worktyme_percentage')) {
-  function worktyme_percentage($num_amount, $num_total)
+if (!function_exists('worktymePercentageCalc')) {
+  function worktymePercentageCalc($num_amount, $num_total)
   {
     return worktymePercentage($num_amount, $num_total);
   }
@@ -424,8 +424,6 @@ if ($_SESSION['insert_msg'] != "") {
                       ?>
                       <td colspan=""
                         class="position-relative LI-LO f-12 f-w-600 line-height26 empid<?php echo $keye; ?>date<?php echo $date2; ?>"
-                        role="button" tabindex="0"
-                        onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
                         onclick="edittimesheettime('<?php echo $timesheetid; ?>','<?php echo $date2; ?>','<?php echo $keye; ?>','<?php echo $workingentrys['min_working_hours_full']; ?>','<?php echo $elist['display_name']; ?>','<?php echo $valuedisplaytype; ?>','<?php echo $mnth; ?>')"
                         style="text-align: center; <?php echo $workingtypecolor; ?>">
                         <?php

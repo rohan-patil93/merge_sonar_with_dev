@@ -1,5 +1,5 @@
 
-    <div class="card card-custom gutter-b draggable" role="region" style="">
+    <section class="card card-custom gutter-b draggable" aria-label="<?= htmlspecialchars(__('Attendance Summary'), ENT_QUOTES, 'UTF-8'); ?>" style="">
         <div class="card-header">
             <div class="card-title">
                 <h3 class="card-label"><?= __('Attendance Summary'); ?></h3>
@@ -31,11 +31,11 @@
                      </div>
                   </div>
                   <div class="progress mb-4">
-                     <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">30%</div>
-                     <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100" style="width: 22%;">22%</div>
-                     <div class="progress-bar bg-success" role="progressbar" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100" style="width: 24%;">24%</div>
-                     <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100" style="width: 26%;">21%</div>
-                     <div class="progress-bar bg-info" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">10%</div>
+                     <progress class="progress-bar bg-purple" value="30" max="100" style="width: 30%;">30%</progress>
+                     <progress class="progress-bar bg-warning" value="22" max="100" style="width: 22%;">22%</progress>
+                     <progress class="progress-bar bg-success" value="24" max="100" style="width: 24%;">24%</progress>
+                     <progress class="progress-bar bg-danger" value="21" max="100" style="width: 26%;">21%</progress>
+                     <progress class="progress-bar bg-info" value="10" max="100" style="width: 10%;">10%</progress>
                   </div>
                   <div>
                      <p><i class="far fa-dot-circle text-purple mr-2"></i><?= __('Users have checked in'); ?><span class="float-right">166</span></p>
@@ -51,4 +51,4 @@
                </div>
             </div>
         </div>
-    </div>
+    </section>

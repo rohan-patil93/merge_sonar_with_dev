@@ -198,13 +198,11 @@ if ($_GET['Rid'] != "") {
                                     $url = "index.php?option=COM_INSERT_SALES_INVOICES&Rid=".deocdeId($nrid);
                                     echo "<a href='".$url."' target='_blank' class='text-primary cursor-pointer m-r-10'><i class='ti ti-eye'></i>   ".$bill['sales_invoice_transaction_number']."</a>";
                                     ?>
-                                    <i class="ti-printer m-r-10 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" onclick="goToAnotherPageAndPrint('<?php echo $bill['sales_invoice_id']; ?>','sales_invoices')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                    <button type="button" class="btn p-0 border-0 bg-transparent m-r-10 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" onclick="goToAnotherPageAndPrint('<?php echo $bill['sales_invoice_id']; ?>','sales_invoices')"><i class="ti-printer"></i></button>
 
-                                    <i class="ti-cloud-down cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" onclick="DownloadPDF('<?php echo $bill['sales_invoice_id']; ?>','sales_invoices')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                    <button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" onclick="DownloadPDF('<?php echo $bill['sales_invoice_id']; ?>','sales_invoices')"><i class="ti-cloud-down"></i></button>
 
                              <?php
-                                }else{
-
                                 }
                             ?></td>
                             </tr>

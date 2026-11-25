@@ -55,35 +55,35 @@ $_SESSION['download_data'] = [];
                     foreach ($groups as $order_id => $tableslist) { ?>
                         <tr>
                             <td>
-                                <table role="presentation">
-                                    <tr>
-                                        <td class="p-1"><?= __('Order No.'); ?></td>
-                                        <td class="p-1 text-primary cursor-pointer"
-                                            onclick="openBucketModal('<?= htmlspecialchars($tableslist[0]['sales_id']) ?>>','SO','<?= $tableslist[0]['so_no']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                <div class="d-flex flex-column gap-1">
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('Order No.'); ?></span>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-primary"
+                                            onclick="openBucketModal('<?= htmlspecialchars($tableslist[0]['sales_id']) ?>>','SO','<?= $tableslist[0]['so_no']; ?>')">
                                             <?= $tableslist[0]['so_no']; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('Date'); ?></td>
-                                        <td class="p-1"><?= fromDate($tableslist[0]['so_date']); ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('Customer'); ?></td>
-                                        <td class="p-1"><?= $tableslist[0]['party_name']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('Order Qty'); ?></td>
-                                        <td class="p-1" class="text-right"><?= customeummarmonyformate($tableslist[0]['so_qty']); ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('Order Amount'); ?></td>
-                                        <td class="p-1" class="text-right"><?= customeummarmonyformate($tableslist[0]['so_amount']); ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('Requested By'); ?></td>
-                                        <td class="p-1"><?= $_SESSION['users'][$tableslist[0]['so_requested_by']] ?? '-'; ?></td>
-                                    </tr>
-                                </table>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('Date'); ?></span>
+                                        <span><?= fromDate($tableslist[0]['so_date']); ?></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('Customer'); ?></span>
+                                        <span><?= $tableslist[0]['party_name']; ?></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('Order Qty'); ?></span>
+                                        <span class="text-right"><?= customeummarmonyformate($tableslist[0]['so_qty']); ?></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('Order Amount'); ?></span>
+                                        <span class="text-right"><?= customeummarmonyformate($tableslist[0]['so_amount']); ?></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('Requested By'); ?></span>
+                                        <span><?= $_SESSION['users'][$tableslist[0]['so_requested_by']] ?? '-'; ?></span>
+                                    </div>
+                                </div>
                             </td>
                             <td class="align-top">
                                 <table style="width: 100%;">
@@ -101,9 +101,11 @@ $_SESSION['download_data'] = [];
                                     <tbody>
                                         <?php foreach ($tableslist as $row) { ?>
                                             <tr>
-                                                <td class="text-primary cursor-pointer"
-                                                    onclick="openBucketModal('<?= htmlspecialchars($row['delivery_id']) ?>>','DO','<?= $row['do_no']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                                    <?= $row['do_no'] ?? '-'; ?>
+                                                <td class="p-1">
+                                                    <button type="button" class="btn p-0 border-0 bg-transparent text-primary"
+                                                        onclick="openBucketModal('<?= htmlspecialchars($row['delivery_id']) ?>>','DO','<?= $row['do_no']; ?>')">
+                                                        <?= $row['do_no'] ?? '-'; ?>
+                                                    </button>
                                                 </td>
                                                 <td class="p-1"><?= fromDate($row['do_date']) ?? '-'; ?></td>
                                                 <td class="p-1"><?= $row['do_party'] ?? '-'; ?></td>

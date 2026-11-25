@@ -237,7 +237,7 @@ $data = json_decode($data,1);
                                         </div>
                                         <div class="col-lg-4">
                                             <span><?= __('Description'); ?>:</span>
-                                            <textarea aria-label="<?= htmlspecialchars(__('Kt Autosize 2'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 40px;">Max 5000 characters</textarea>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 40px;">Max 5000 characters</textarea>
                                         </div>
                                         <div class="col-lg-4">
                                             <span><?= __('Notes'); ?>:</span>
@@ -298,28 +298,13 @@ $data = json_decode($data,1);
                                     <input type="hidden" name="sp" id="SPS" value="0">
 
 
-                                        <table role="presentation" class="table table-head-custom table-head-bg table-borderless table-vertical-center">
-                                            <tbody>
-
-                                                <tr style="background-color: #eee;">
-                                                    <td class="pl-2 py-4">
-                                                        <span class="text-dark-75"><?= __('Cost to Company'); ?></span>
-                                                    </td>
-                                                    <td></td>
-                                                    <td>
-                                                        <span class="text-dark-75 font-weight-bolder font-size-lg">
-                                                             <input aria-label="<?= htmlspecialchars(__('Total Month'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="total_month" class="form-control text-right" id="total_month"  value="0.00">
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="text-dark-75 font-weight-bolder font-size-lg">
-                                                            <input aria-label="<?= htmlspecialchars(__('Total Year'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="total_year" class="form-control text-right " id="total_year"  value="0.00">
-                                                        </span>
-                                                    </td>
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="d-flex align-items-center justify-content-between p-3 my-2" style="background-color: #eee;">
+                                        <span class="text-dark-75 font-weight-bolder"><?= __('Cost to Company'); ?></span>
+                                        <div class="d-flex" style="gap: 15px;">
+                                            <input aria-label="<?= htmlspecialchars(__('Total Month'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="total_month" class="form-control text-right" id="total_month" value="0.00" style="width: 150px;">
+                                            <input aria-label="<?= htmlspecialchars(__('Total Year'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="total_year" class="form-control text-right" id="total_year" value="0.00" style="width: 150px;">
+                                        </div>
+                                    </div>
                                     </div>
                                     <!--end::Table-->
                                 </div>
@@ -341,7 +326,7 @@ $data = json_decode($data,1);
             </div>
         </div>
     </div>
- <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+ <div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog " >
         <div class="modal-content" >
 
@@ -399,7 +384,7 @@ $datacat["where"] = array('is_active'=> '0');
                     <div class="row align-items-center" style="margin-top: 10px;padding: 0px 10%;" id="printarea">
 
                                 <div  class="col-lg-12" style="page-break-before: always;">
-        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
+        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;">
             <tr style="height: 50px;border: 1px solid #000;">
                 <td style="border:1px solid #000;padding: 5px;"><b><?= __('Name'); ?></b></td>
                 <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $send_data['display_name']; ?></td>

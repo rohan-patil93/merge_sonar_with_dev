@@ -1,4 +1,5 @@
 <?php
+defined('PREFIX_FILED_BRACKET') || define('PREFIX_FILED_BRACKET', 'filed[');
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -280,7 +281,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                 <tr >
                                                     <?php $fieldcnt = 1;
                                                     foreach($sub_header_name as $sub_headerres){
-                                                        $fieldname = "filed[".$paheaders['id']."][".$fieldcnt."][]";
+                                                        $fieldname = PREFIX_FILED_BRACKET.$paheaders['id']."][".$fieldcnt."][]";
                                                         $fieldvalue = $epappraisal[$paheaders['id']][$hed]['filed_'.$fieldcnt];
                                                         ?>
                                                         <td>
@@ -301,7 +302,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
 } ?>
                                                         <?php if($paheaders['sub_header_addmore'] == '0'){ //delete button visible 0 or 1 is not ?>
                                                             <td>
-                                                                <i class="fa fa-trash text-danger" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                                                <button type="button" class="btn p-0 border-0 bg-transparent text-danger" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                                             </td>
                                                         <?php } ?>
                                                     </tr>
@@ -615,7 +616,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                 <tr >
                                                     <?php $fieldcnt = 1;
                                                     foreach($sub_header_name as $sub_headerres){
-                                                        $fieldname = "filed[".$paheaders['id']."][".$fieldcnt."][]";
+                                                        $fieldname = PREFIX_FILED_BRACKET.$paheaders['id']."][".$fieldcnt."][]";
                                                         $fieldvalue = $epappraisal[$paheaders['id']][$hed]['filed_'.$fieldcnt];
                                                         ?>
                                                         <td>
@@ -636,7 +637,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
 } ?>
                                                         <?php if($paheaders['sub_header_addmore'] == '0'){ //delete button visible 0 or 1 is not ?>
                                                             <td>
-                                                                <i class="fa fa-trash text-danger" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                                                <button type="button" class="btn p-0 border-0 bg-transparent text-danger" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                                             </td>
                                                         <?php } ?>
                                                     </tr>
@@ -986,7 +987,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                 <tr >
                                                     <?php $fieldcnt = 1;
                                                     foreach($sub_header_name as $sub_headerres){
-                                                        $fieldname = "filed[".$paheaders['id']."][".$fieldcnt."][]";
+                                                        $fieldname = PREFIX_FILED_BRACKET.$paheaders['id']."][".$fieldcnt."][]";
                                                         $fieldvalue = $epappraisal[$paheaders['id']][$hed]['filed_'.$fieldcnt];
                                                         ?>
                                                         <td>
@@ -1007,7 +1008,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
 } ?>
                                                         <?php if($paheaders['sub_header_addmore'] == '0'){ //delete button visible 0 or 1 is not ?>
                                                             <td>
-                                                                <i class="fa fa-trash text-danger" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                                                <button type="button" class="btn p-0 border-0 bg-transparent text-danger" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)" aria-label="<?= htmlspecialchars(__('Delete Row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                                             </td>
                                                         <?php } ?>
                                                     </tr>

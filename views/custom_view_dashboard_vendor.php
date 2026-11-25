@@ -1,4 +1,5 @@
  <?php
+defined('SUFFIX_PLUS_INVOICES') || define('SUFFIX_PLUS_INVOICES', '+ Invoices');
  $vendordashboardurl = API."?mode=getvendordashboard&admin_type=".$_SESSION['admin_type'].".&admin_access_employee=".$_SESSION['admin_access_employee']."&vend_limit=3&vendor_id=".$_SESSION['vendor_id'];
  $vendordashboardres = callAPI($vendordashboardurl);
  $vendordashboardd = json_decode($vendordashboardres,1);
@@ -39,39 +40,39 @@
     <div class="card-block">
         <div class="width-77">
             <div class="row align-items-center">
-               <div class="d-flex align-items-center col-md" onclick="dashboardpopup('invice_cnt','Total Number Of Invoices')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+               <button type="button" class="btn p-0 border-0 bg-transparent text-start d-flex align-items-center col-md" onclick="dashboardpopup('invice_cnt','Total Number Of Invoices')">
 
                 <div class="rounded-circle bg-primary p-3 pt-3 m-r-10 userimageround">
                  <i class="ti-files f-20"></i>
              </div>
              <div class="flex">
-                <a href="#"><div class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['invice_cnt'])."+ Invoices"?></div>
+                <span class="d-block"><span class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['invice_cnt']).SUFFIX_PLUS_INVOICES?></span>
                     <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Invoices'); ?></p>
-                </a>
+                </span>
             </div>
-        </div>
-        <div class="d-flex align-items-center col-md" onclick="dashboardpopup('approve_cnt','Total Number Of Invoices Cleared')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+        </button>
+        <button type="button" class="btn p-0 border-0 bg-transparent text-start d-flex align-items-center col-md" onclick="dashboardpopup('approve_cnt','Total Number Of Invoices Cleared')">
             <div class="rounded-circle bg-primary p-3 pt-3  m-r-10 userimageround">
              <i class="ti-file f-20"></i>
          </div>
          <div class="flex">
-           <a href="#">
-            <div class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['approve_cnt'])."+ Invoices"?></div>
+           <span class="d-block">
+            <span class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['approve_cnt']).SUFFIX_PLUS_INVOICES?></span>
             <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Invoices Cleared'); ?></p>
-        </a>
+        </span>
     </div>
-</div>
-<div class="d-flex align-items-center col-md" onclick="dashboardpopup('pending_list','Total Number Of Invoices Pendding')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+</button>
+<button type="button" class="btn p-0 border-0 bg-transparent text-start d-flex align-items-center col-md" onclick="dashboardpopup('pending_list','Total Number Of Invoices Pendding')">
     <div class="rounded-circle bg-primary p-3 pt-3 m-r-10 userimageround">
         <i class="ti-file f-20"></i>
     </div>
     <div class="flex">
-       <a href="#">
-        <div class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['pending_list'])."+ Invoices"?></div>
+       <span class="d-block">
+        <span class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['pending_list']).SUFFIX_PLUS_INVOICES?></span>
         <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Invoices Pendding'); ?></p>
-    </a>
+    </span>
 </div>
-</div>
+</button>
 </div>
 </div>
 </div>

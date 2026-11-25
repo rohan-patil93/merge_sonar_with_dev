@@ -1,4 +1,5 @@
 <?php
+defined('DATE_FORMAT_YMD_HIS') || define('DATE_FORMAT_YMD_HIS', DATE_FORMAT_YMD_HIS);
 
 if(isset($_POST['save'])){
 
@@ -10,16 +11,15 @@ if(isset($_POST['save'])){
     $data['user_id'] = $_SESSION['userid'];
     $data['current_status'] = '0';
     $data['is_active'] = '0';
-    $data['status_date'] = date('Y-m-d H:i:s');
+    $data['status_date'] = date(DATE_FORMAT_YMD_HIS);
     $data['company_id'] = $_SESSION['company_id'];
-    $data['created_date'] = date('Y-m-d H:i:s');
+    $data['created_date'] = date(DATE_FORMAT_YMD_HIS);
     $data['created_by'] = $_SESSION['userid'];
     $url = API . "?mode=adddata&table=complaint_responses&method=post";
     $response = file_post_contents($url, $data, 'insert');
     $response = json_decode($response, 1);
         $last_id = $response['LASTID'];
-    if ($response["status"] == "sucess") {
-    }
+
   }
     // ===============================
     // 📂 MULTIPLE FILE UPLOAD & SAVE
@@ -55,8 +55,8 @@ if(isset($_POST['save'])){
                 'file_size_mb'            => $file_size_mb,
                 'is_active'               => '0',
                 'current_status'          => '0',
-                'status_date'             => date('Y-m-d H:i:s'),
-                'created_date'            => date('Y-m-d H:i:s'),
+                'status_date'             => date(DATE_FORMAT_YMD_HIS),
+                'created_date'            => date(DATE_FORMAT_YMD_HIS),
                 'created_by'              => $user_id
             );
             $url_attach = API . "?mode=adddata&table=" . $table_name . "&method=post";
@@ -135,8 +135,15 @@ if ($_GET['Rid']) {
             <span class="value">
               <?php
               $priority = $return['complaint_priority'];
-              $badgeClass = ($priority == 'H') ? 'danger' : (($priority == 'M') ? 'warning' : 'success');
-              $label = ($priority == 'H') ? __('High') : (($priority == 'M') ? __('Medium') : __('Low'));
+              $badgeClass = 'success';
+              $label = __('Low');
+              if ($priority == 'H') {
+                  $badgeClass = 'danger';
+                  $label = __('High');
+              } elseif ($priority == 'M') {
+                  $badgeClass = 'warning';
+                  $label = __('Medium');
+              }
               ?>
               <span class="badge bg-<?php echo $badgeClass; ?> px-3 py-1 fw-bold"><?php echo htmlspecialchars($label, ENT_QUOTES, 'UTF-8'); ?></span>
             </span>

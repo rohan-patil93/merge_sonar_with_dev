@@ -144,7 +144,6 @@ $job_posting_candidates = $result['job_posting_candidates'];
 <div class="card-body">
     <div class="row mt-3">
         <div class="col-lg-6">
-            <!-- <button type="button" class="btn btn-primary float-right mb-1" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click here to Start Screening') ?>" onclick="approvedstartScreening('6a673fcd490735e1850a9d7f')"><i class="ti-light-bulb"></i> Scre. Start</button> -->
             <div class="card">
                 <div class="card-header">
                     <h5><?= __('Screening Questions') ?></h5>
@@ -185,22 +184,18 @@ $job_posting_candidates = $result['job_posting_candidates'];
                                     if ($jpc['is_active'] == "0") {
                                         if ($jpc['screening_status'] == "N") {
                                             ?>
-                                            <span role="button" tabindex="0"
-                                                onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                                class="form-label label label-primary text-white cursor-pointer"
+                                            <button type="button" class="btn p-0 border-0 bg-transparent form-label label label-primary text-white cursor-pointer"
                                                 data-bs-toggle="tooltip" data-placement="bottom" title=""
                                                 data-bs-original-title="<?= __('Click Here to Create Manual Questions') ?>"
                                                 onclick="createManualQuestions('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')">
-                                                <i class="ti-plus"></i> <?= __('Ques.'); ?> </span>
+                                                <i class="ti-plus"></i> <?= __('Ques.'); ?> </button>
 
 
-                                            <span role="button" tabindex="0"
-                                                onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                                class="form-label label label-primary text-white cursor-pointer"
+                                            <button type="button" class="btn p-0 border-0 bg-transparent form-label label label-primary text-white cursor-pointer"
                                                 id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom"
                                                 title="" data-bs-original-title="<?= __('Click Here to Create AI Questions') ?>"
                                                 onclick="startScreening('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"><i
-                                                    class="ti-light-bulb"></i><?= __('AI Question Gen.'); ?></span>
+                                                    class="ti-light-bulb"></i><?= __('AI Question Gen.'); ?> </button>
                                             <?php
                                         } else {
                                             echo "Active";

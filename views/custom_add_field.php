@@ -202,7 +202,7 @@
     }
 </script>
 
-<div id="kt_modal_add_custom_field" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_add_custom_field" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content" style="min-height: 590px;">
             <div class="modal-header">
@@ -360,14 +360,10 @@
                                     </tr>
 
                             </table>
-                            <table role="presentation">
-                                <tr>
-                                        <td > <?= __("Total") ?></td>
-                                        <td > <input type="text" class="form-control" id="total"  name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                            </table>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto"> <?= __("Total") ?></div>
+                                <div class="col-auto"> <input type="text" class="form-control" id="total"  name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></div>
+                            </div>
                         </div>
 
                             <div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">

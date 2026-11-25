@@ -1,4 +1,14 @@
 <?php
+if (!defined('API_GET_TABLE_DETAILS')) {
+    define('API_GET_TABLE_DETAILS', '?mode=gettabledetails&table=');
+}
+if (!defined('API_GET_TABLE_DETAILS_WITH_COND')) {
+    define('API_GET_TABLE_DETAILS_WITH_COND', '?mode=gettabledetailswithconditions&table=');
+}
+if (!defined('PARAM_DATA')) {
+    define('PARAM_DATA', '&data=');
+}
+
 defined('HDR_LOCATION_OPTION') || define('HDR_LOCATION_OPTION', 'location:index.php?option=');
 defined('KEY_TABLE_NAME') || define('KEY_TABLE_NAME', 'table_name');
 defined('KEY_STATUS_VALUES') || define('KEY_STATUS_VALUES', 'status_values');
@@ -95,7 +105,7 @@ if(in_array($table_name, (array)$originator_table_withbill)){
     $table1['party_address'] = $locares['location_address'] ." ".$locares['location_city']." ".$locares['location_state']." ".$locares['location_post_code'];
     $table1['party_ship_adderss'] = $locares['location_address'] ." ".$locares['location_city']." ".$locares['location_state']." ".$locares['location_post_code'];
 } else{
-    $cusurl = API."?mode=gettabledetails&table=".TBL_VENDOR;
+    $cusurl = API.API_GET_TABLE_DETAILS.TBL_VENDOR;
     $cusresponse = callAPI($cusurl);
     $cusresponse = json_decode($cusresponse,1);
 }
@@ -115,7 +125,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $vdata1["field"] = "id,transaction_type,user_id,action_log,action_date,status_value";
         $vdata1['order'] = "id DESC";
         $vdata = urlencode(json_encode($vdata1));
-        $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata;
+        $vurl = API.API_GET_TABLE_DETAILS_WITH_COND.TBL_ACTION_LOG.PARAM_DATA.$vdata;
         $vdata_details = callAPI($vurl);
         $vdata_details = json_decode($vdata_details,1);
 
@@ -269,19 +279,19 @@ $box_url =  API."?mode=gettabledetails&table=petty_cash_boxes";
 $boxlist = callAPI($box_url);
 $boxlist = json_decode($boxlist,1);
 
-$departmentsurl = API."?mode=gettabledetails&table=".TBL_DEPARTMENTS;
+$departmentsurl = API.API_GET_TABLE_DETAILS.TBL_DEPARTMENTS;
 $departmentslist =  callAPI($departmentsurl);
 $departmentslist = json_decode($departmentslist,1);
 
 $crdata["field"] = "id,currency_list";
 $crdata = urlencode(json_encode($crdata));
-$crurl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCIES."&data=".$crdata;
+$crurl = API.API_GET_TABLE_DETAILS_WITH_COND.TBL_CURRENCIES.PARAM_DATA.$crdata;
 $cr_data = callAPI($crurl);
 $cr_data = json_decode($cr_data, 1);
 $_SESSION['application_table_name'] = $table_name;
 $_SESSION['transaction_id'] = $rid;
 $_SESSION['file_add'][$table_name][$rid]= array();
-    $costcenterurl = API."?mode=gettabledetails&table=".TBL_COST_CENTERS;
+    $costcenterurl = API.API_GET_TABLE_DETAILS.TBL_COST_CENTERS;
 
     $cost = callAPI($costcenterurl);
     $cost = json_decode($cost,1);
@@ -294,7 +304,7 @@ $_SESSION['file_add'][$table_name][$rid]= array();
     $data2["field"] = "cost_center_id";
     $data2["where"] = array('user_id'=> $coos_user_id,'is_active'=> '0');
     $costdata = urlencode(json_encode($data2));
-    $costurl = API."?mode=gettabledetailswithconditions&table=".TBL_USERS_COST_CENTERS."&data=".$costdata;
+    $costurl = API.API_GET_TABLE_DETAILS_WITH_COND.TBL_USERS_COST_CENTERS.PARAM_DATA.$costdata;
     $costdata = callAPI($costurl);
     $costress = json_decode($costdata, 1);
     foreach ($costress as  $costres) {
@@ -315,7 +325,7 @@ if($table_name == KEY_PETTY_CASH || $table_name == 'bills') {
     $petty_cash_style = "style='display:none;'";
 }
 if(in_array($table_name, (array)$stock_table)){
-    $locations_url = API."?mode=gettabledetails&table=".TBL_LOCATIONS;
+    $locations_url = API.API_GET_TABLE_DETAILS.TBL_LOCATIONS;
     $locations_data = callAPI($locations_url);
     $locations_data = json_decode($locations_data, 1);
 }

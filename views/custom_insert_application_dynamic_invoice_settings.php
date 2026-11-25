@@ -1,4 +1,8 @@
 <?php
+if (!defined('STYLE_DISPLAY_NONE_SP')) {
+    define('STYLE_DISPLAY_NONE_SP', 'display: none;');
+}
+
 defined('KEY_COMPANY_ID') || define('KEY_COMPANY_ID', 'company_id');
 defined('LBL_ENTER_TEMPLATE_NAME') || define('LBL_ENTER_TEMPLATE_NAME', 'Enter template name');
 defined('KEY_LOGO_POSITION') || define('KEY_LOGO_POSITION', 'logoPosition');
@@ -119,7 +123,7 @@ if ($userData['user_photo'] != '') {
                     <option value="custom" <?php echo !empty($logoOptions['customLogoSize']) ? ATTR_SELECTED : ''; ?>> <?= __('Custom') ?> </option>
                   </select>
                   <div id="customLogoSizeInputContainer" class="mt-2"
-                    style="<?php echo !empty($logoOptions['customLogoSize']) ? '' : 'display: none;'; ?>">
+                    style="<?php echo !empty($logoOptions['customLogoSize']) ? '' : STYLE_DISPLAY_NONE_SP; ?>">
                     <label for="customLogoSizeInput" class="form-label"><?= __('Custom Logo Size (px)') ?></label>
                     <input type="number" id="customLogoSizeInput" class="form-control" name="customLogoSize"
                       value="<?php echo htmlspecialchars($logoOptions['customLogoSize']); ?>"
@@ -1025,9 +1029,24 @@ if ($userData['user_photo'] != '') {
                     <input class="form-check-input" type="checkbox" id="showdiscount" <?php echo (isset($footerOptions['showFields']['discount']['visible']) && $footerOptions['showFields']['discount']['visible']) || (isset($footerOptions['discount']['visible']) && $footerOptions['discount']['visible']) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showdiscount"><?= __('Show Discount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading2"
-                      value="<?php echo !empty($footerOptions['showFields']['discount']['heading']) ? $footerOptions['showFields']['discount']['heading'] : (!empty($footerOptions['discount']['heading']) ? $footerOptions['discount']['heading'] : 'Discount'); ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                      value="<?php
+                      $discountHeading = 'Discount';
+                      if (!empty($footerOptions['showFields']['discount']['heading'])) {
+                          $discountHeading = $footerOptions['showFields']['discount']['heading'];
+                      } elseif (!empty($footerOptions['discount']['heading'])) {
+                          $discountHeading = $footerOptions['discount']['heading'];
+                      }
+                      echo $discountHeading;
+                    ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <select class="form-select" id="value2" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
-                      <?php $discountValue = isset($footerOptions['showFields']['discount']['value']) ? $footerOptions['showFields']['discount']['value'] : (isset($footerOptions['discount']['value']) ? $footerOptions['discount']['value'] : ''); ?>
+                      <?php
+                      $discountValue = '';
+                      if (isset($footerOptions['showFields']['discount']['value'])) {
+                          $discountValue = $footerOptions['showFields']['discount']['value'];
+                      } elseif (isset($footerOptions['discount']['value'])) {
+                          $discountValue = $footerOptions['discount']['value'];
+                      }
+                      ?>
                       <option <?php echo $discountValue === 'id' ? ATTR_SELECTED : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $discountValue === KEY_COMPANY_ID ? ATTR_SELECTED : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1684,7 +1703,7 @@ if ($userData['user_photo'] != '') {
                   ?>
 
                   <img id="logoPreview" src="<?php echo $image; ?>" alt="" style="display: block; position: absolute; max-height: <?php echo $finalSize; ?>px; left: 0; top: 0;
-                  <?php echo empty($logoOptions['showLogo']) ? 'display: none;' : ''; ?>">
+                  <?php echo empty($logoOptions['showLogo']) ? STYLE_DISPLAY_NONE_SP : ''; ?>">
                   <div class="invoice-no" style="display: block; text-align: right;">
                     <p class="invoice" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('Invoice No'); ?></span></p>
                     <p class="date" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('Date'); ?></span>
@@ -1694,7 +1713,7 @@ if ($userData['user_photo'] != '') {
                     <p class="po_date" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('P.O Date'); ?></span></p>
                     
                     <div class="bankdetails"
-                      style="<?php echo !isset($footerOptions['showBankDetails']) || !$footerOptions['showBankDetails'] ? 'display: none;' : ''; ?> margin-bottom: 10px;">
+                      style="<?php echo !isset($footerOptions['showBankDetails']) || !$footerOptions['showBankDetails'] ? STYLE_DISPLAY_NONE_SP : ''; ?> margin-bottom: 10px;">
                       <h6 style="text-decoration: underline;margin-bottom: 5px;"><?= __('Bank Details'); ?> :</h6>
                       <div
                         style="display: flex; justify-content: space-between; flex-wrap: nowrap; gap: 20px; padding: 5px; width: 100%;">

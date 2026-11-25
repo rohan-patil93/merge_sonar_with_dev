@@ -1,4 +1,8 @@
 <?php
+if (!defined('ATTR_VALUE_QUOTE')) {
+    define('ATTR_VALUE_QUOTE', ATTR_VALUE_QUOTE);
+}
+
 $_SESSION['apply_js']['multiselest'] = '1';
 $category = array('1' =>'Survey', '2'=> 'Poll');
 if($_GET['CAT']==""){
@@ -493,7 +497,7 @@ function addnewoptionrows(qid) {
                       <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo __('Add Questions'); ?></button>
                       <div class="dropdown-menu">
                         <?php  foreach ($qustion_types as $key => $value) {
-                        //$question_types[$value['genc_detail_code']]  = $value['genc_detail_code']; ?>
+                        ?>
                         <a href="#top" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo __($value['genc_detail_name']); ?>')" class="dropdown-item">  <?php echo __($value['genc_detail_name']); ?>
                         </a>
                         <?php } ?>
@@ -524,10 +528,10 @@ function addnewoptionrows(qid) {
                 $title = $value['title'];
                 $display_question .= ' <div class="mt-5" id="'.$question_id.'"> <div class="col-lg-12 table-bordered">
                 <input type="hidden" name="totalquestion" value="'.$totalquestion.'">
-                <input type="hidden" name="question_id'.$qkey.'" value="'.$question_id.'">
+                <input type="hidden" name="question_id'.$qkey.ATTR_VALUE_QUOTE.$question_id.'">
                 <input type="hidden" name="rid" value="'.$rid.'">
                 <input type="hidden" name="value_id[]" value="'.$question_id.'">
-                <input type="hidden" name="options_display_type'.$qkey.'" value="'.$value['type'].'">
+                <input type="hidden" name="options_display_type'.$qkey.ATTR_VALUE_QUOTE.$value['type'].'">
 
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
@@ -567,7 +571,7 @@ function addnewoptionrows(qid) {
                   <div class="col-lg-1"></div>
                   <div class="col-lg-8">
                   <div class="input-group input-group-button">
-                  <input type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="'.htmlspecialchars(__('Option'), ENT_QUOTES).'" value="'.$opvalue.'" aria-label="'.htmlspecialchars(__('Option'), ENT_QUOTES).'">
+                  <input type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="'.htmlspecialchars(__('Option'), ENT_QUOTES).ATTR_VALUE_QUOTE.$opvalue.'" aria-label="'.htmlspecialchars(__('Option'), ENT_QUOTES).'">
                   <span class="input-group-text addon-style">
                   <span class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__('Remove Option'), ENT_QUOTES).'"><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$qkey."'".')"></i></span>
                   </span>
@@ -587,7 +591,7 @@ function addnewoptionrows(qid) {
               if($value['type']==2)   {
                 $display_question .= ' <div class="form-group text-left mt-10">
                 <label for="survey_question_scale_'.$qkey.'">'.__('Scale from 1 to:').' <span class="text-danger">*</span></label>
-                <input type="number" id="survey_question_scale_'.$qkey.'" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value="'.$options[0].'" aria-label="'.htmlspecialchars(__('Scale Option'), ENT_QUOTES).'">
+                <input type="number" id="survey_question_scale_'.$qkey.'" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].ATTR_VALUE_QUOTE.$options[0].'" aria-label="'.htmlspecialchars(__('Scale Option'), ENT_QUOTES).'">
                 </div>';
               }
               if($value['type']==4)   {
@@ -621,7 +625,7 @@ function addnewoptionrows(qid) {
       <?php } ?>
     </div>
   </div>
-  <div id="kt_modal_KTDatatable_setup" class="modal fade" role="dialog" aria-hidden="true">
+  <div id="kt_modal_KTDatatable_setup" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" id="popup2">
       </div>

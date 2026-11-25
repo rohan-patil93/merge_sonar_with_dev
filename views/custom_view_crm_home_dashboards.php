@@ -272,16 +272,16 @@
   </div>
   <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
     <ul class="nav md-tabs infisuite_tab mb-3" id="alertTabs">
-      <li class="nav-item" role="presentation">
+      <li class="nav-item">
         <a class="nav-link f-w-600 f-12  active" id="expired-tab" data-bs-toggle="tab" href="#expired" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Expired'); ?> <span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$expired); ?></span></a>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item">
         <a class="nav-link f-w-600 f-12" id="past-due-tab" data-bs-toggle="tab" href="#past-due" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('15-Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days15); ?></span></a>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item">
         <a class="nav-link f-w-600 f-12" id="pending-returns-tab" data-bs-toggle="tab" href="#pending-returns" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('30-Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days30); ?></span></a>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item">
         <a class="nav-link f-w-600 f-12" id="days-returns-tab" data-bs-toggle="tab" href="#days-returns" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('45-Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days45); ?></span></a>
       </li>
     </ul>

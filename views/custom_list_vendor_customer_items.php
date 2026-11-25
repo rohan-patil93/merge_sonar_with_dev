@@ -68,7 +68,7 @@ foreach($all_party_table_detail as $ic){
                                 </div>
                             </div>
                             <div class="col-lg-2 d-inline-block align-middle">
-                                <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Item'), ENT_QUOTES, 'UTF-8'); ?>" onclick="selectItemsWithParty('<?php echo $itm['id']; ?>','REMOVE','<?php echo $partyitm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                <button type="button" class="btn p-0 border-0 bg-transparent text-danger f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Item'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Click To Un-Allocate Item'), ENT_QUOTES, 'UTF-8'); ?>" onclick="selectItemsWithParty('<?php echo $itm['id']; ?>','REMOVE','<?php echo $partyitm['id']; ?>')"><i class="ti-close"></i></button>
                             </div>
                         </div>
                 <?php } ?>
@@ -92,9 +92,7 @@ foreach($all_party_table_detail as $ic){
                 <?php
                 if(count((array)$all_items) != 0){
                     foreach($all_items as $itm){
-                        if(isset($all_party_item_id[$itm['id']])){
-
-                        }else{
+                        if(!isset($all_party_item_id[$itm['id']])){
                         ?>
                         <div class="row mt-3 all_item_category item_category_<?php echo $itm['category_id'];?> " >
                             <div class="col-lg-10">
@@ -115,7 +113,7 @@ foreach($all_party_table_detail as $ic){
                                 </div>
                             </div>
                             <div class="col-lg-2 d-inline-block align-middle">
-                                <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Item'), ENT_QUOTES, 'UTF-8'); ?>" onclick="selectItemsWithParty('<?php echo $itm['id']; ?>','ADD')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                <button type="button" class="btn p-0 border-0 bg-transparent text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Item'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Click To Allocate Item'), ENT_QUOTES, 'UTF-8'); ?>" onclick="selectItemsWithParty('<?php echo $itm['id']; ?>','ADD')"><i class="ti-check"></i></button>
                             </div>
                         </div>
                 <?php } ?>

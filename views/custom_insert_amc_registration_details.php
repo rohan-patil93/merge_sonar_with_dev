@@ -1,4 +1,8 @@
 <?php
+if (!defined('STYLE_DISPLAY_NONE')) {
+    define('STYLE_DISPLAY_NONE', 'display:none;');
+}
+
 $_SESSION['apply_js']['multiselest'] = 1;
 
 $isEdit = false;
@@ -58,8 +62,12 @@ $buildings = $response['buildings'];
 
 $payment_types = $services = [];
 foreach ($gc_details as $row) {
-    if ($row['genc_code'] == 'AMCPAYTYPE') $payment_types[] = $row;
-    if ($row['genc_code'] == 'AMCSERVICE') $services[] = $row;
+    if ($row['genc_code'] == 'AMCPAYTYPE') {
+        $payment_types[] = $row;
+    }
+    if ($row['genc_code'] == 'AMCSERVICE') {
+        $services[] = $row;
+    }
 }
 
 
@@ -138,7 +146,7 @@ foreach ($gc_details as $row) {
 
                     <!-- Customer -->
                     <div class="col-md-3 party-box" id="customer_box"
-                        style="<?php echo $selectedType == 'customer' ? '' : 'display:none;'; ?>">
+                        style="<?php echo $selectedType == 'customer' ? '' : STYLE_DISPLAY_NONE; ?>">
                         <div class="form-group w-full">
                             <span class="form-label d-inline-block fw-bold"><?= __('Customer') ?> <span class="text-danger">*</span></span>
                             <select name="customer_id" id="customer_id"
@@ -159,7 +167,7 @@ foreach ($gc_details as $row) {
 
                 <!-- Vendor -->
                 <div class="col-md-3 party-box" id="vendor_box"
-                    style="<?php echo $selectedType == 'vendor' ? '' : 'display:none;'; ?>">
+                    style="<?php echo $selectedType == 'vendor' ? '' : STYLE_DISPLAY_NONE; ?>">
                     <div class="form-group w-full">
                         <span class="form-label d-inline-block fw-bold"><?= __('Vendor') ?> <span class="text-danger">*</span></span>
                         <select name="vendor_id" id="vendor_id"
@@ -210,7 +218,7 @@ foreach ($gc_details as $row) {
                     </div>
 
                     <!-- Service Charge -->
-                    <div class="col-md-3" id="serviceChargeContainer" style="<?php echo ($isEdit && $editData['payment_type']=='2')?'':'display:none;'; ?>">
+                    <div class="col-md-3" id="serviceChargeContainer" style="<?php echo ($isEdit && $editData['payment_type']=='2')? '' : STYLE_DISPLAY_NONE; ?>">
                         <div class="form-group">
                             <span class="form-label d-inline-block fw-bold"><?= __('Service Charge') ?> <span class="text-danger">*</span></span>
                             <input type="number" name="service_charge" id="serviceCharge" class="form-control"

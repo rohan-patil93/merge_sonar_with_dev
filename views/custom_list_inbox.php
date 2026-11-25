@@ -123,17 +123,17 @@ $display_attributes = $approval_data['display_attributes'];
                                     <?php $menuid = 1; foreach ($category as $tablename => $transaction) {
                                             $trnsatable = $display_attributes[$tablename] !=""?$display_attributes[$tablename]:$tablename;
                                         ?>
-                                        <div class="accordion-msg main-menu-sec border-0 p-2" id="topcat_<?php echo $menuid; ?>" onclick="showSubMenu('<?php echo $menuid; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 accordion-msg main-menu-sec p-2" id="topcat_<?php echo $menuid; ?>" onclick="showSubMenu('<?php echo $menuid; ?>')">
                                             <input type="hidden" id="showtype_<?php echo $menuid; ?>" value="N">
                                             <a class="d-block" href="javascript:void(0)"><?php echo viewTitle($trnsatable); ?>
                                             <i class="ti-plus float-right mt-1 f-w-600"></i>
                                         </a>
-                                    </div>
+                                    </button>
                                     <div class="p-2 sub-menu-sec" id="showsubmienu_<?php echo $menuid; ?>">
-                                        <div class="mt-1 cursor-pointer" onclick="getLogDetails('<?php echo implode(",",(array)$transaction['inpro']); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('In-Process'); ?> <span class="float-right form-label label label-primary"><?php echo count((array)$transaction['inpro']);?></span></div>
-                                        <div class="mt-1 cursor-pointer" onclick="getLogDetails('<?php echo implode(",",(array)$transaction[ST_APPROVED]); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?> <span class="float-right form-label label label-primary"><?php echo count((array)$transaction[ST_APPROVED]);?></span></div>
-                                        <div class="mt-1 cursor-pointer" onclick="getLogDetails('<?php echo implode(",",(array)$transaction[ST_SEND_BACK]); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Send Back'); ?> <span class="float-right form-label label label-primary"><?php echo count((array)$transaction[ST_SEND_BACK]);?></span></div>
-                                        <div class="mt-1 cursor-pointer" onclick="getLogDetails('<?php echo implode(",",(array)$transaction[ST_REJECTED]); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Reject'); ?>  <span class="float-right form-label label label-primary"><?php echo count((array)$transaction[ST_REJECTED]);?></span></div>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 mt-1 cursor-pointer" onclick="getLogDetails('<?php echo implode(",",(array)$transaction['inpro']); ?>')"><?= __('In-Process'); ?> <span class="float-right form-label label label-primary"><?php echo count((array)$transaction['inpro']);?></span></button>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 mt-1 cursor-pointer" onclick="getLogDetails('<?php echo implode(",",(array)$transaction[ST_APPROVED]); ?>')"><?= __('Approved'); ?> <span class="float-right form-label label label-primary"><?php echo count((array)$transaction[ST_APPROVED]);?></span></button>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 mt-1 cursor-pointer" onclick="getLogDetails('<?php echo implode(",",(array)$transaction[ST_SEND_BACK]); ?>')"><?= __('Send Back'); ?> <span class="float-right form-label label label-primary"><?php echo count((array)$transaction[ST_SEND_BACK]);?></span></button>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 mt-1 cursor-pointer" onclick="getLogDetails('<?php echo implode(",",(array)$transaction[ST_REJECTED]); ?>')"><?= __('Reject'); ?>  <span class="float-right form-label label label-primary"><?php echo count((array)$transaction[ST_REJECTED]);?></span></button>
                                     </div>
                                     <?php $menuid++;
 } ?>

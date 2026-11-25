@@ -87,7 +87,7 @@ foreach ($account_groups as $ag) {
                                     <option value="0"><?php echo __('Select Any One'); ?></option>
                                     <?php foreach ($ag_list as $id => $group_name): ?>
                                         <option value="<?php echo $id; ?>"
-                                            <?php if ($details['account_group_id'] == $id) echo 'selected'; ?>>
+                                            <?php if ($details['account_group_id'] == $id) { echo 'selected'; } ?>>
                                             <?php echo htmlspecialchars(__($group_name ?? '')); ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -109,7 +109,7 @@ foreach ($account_groups as $ag) {
                                     <option><?php echo __('Select Any One'); ?></option>
                                     <?php foreach ($gcd_list as $genc_detail_code => $genc_detail_name): ?>
                                         <option value="<?php echo $genc_detail_code; ?>"
-                                            <?php if ($details['payble_or_reciveable'] == $genc_detail_code) echo 'selected'; ?>>
+                                            <?php if ($details['payble_or_reciveable'] == $genc_detail_code) { echo 'selected'; } ?>>
                                             <?php echo htmlspecialchars(__($genc_detail_name ?? '')); ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -152,7 +152,7 @@ foreach ($account_groups as $ag) {
                                 <select name="country_id" id="country_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" data-selected-state="<?php echo $details['state_id']; ?>" data-selected-city="<?php echo $details['city_id']; ?>" title="<?php echo __('Country Id'); ?>" aria-label="<?php echo __('Country Id'); ?>">
                                     <option value="0"><?php echo __('Select Any One'); ?></option>
                                     <?php foreach ($states_list as $id => $country_name): ?>
-                                        <option value="<?php echo $id; ?>" <?php if ($details['country_id'] == $id) echo 'selected'; ?>>
+                                        <option value="<?php echo $id; ?>" <?php if ($details['country_id'] == $id) { echo 'selected'; } ?>>
                                             <?php echo htmlspecialchars(__($country_name ?? '')); ?>
                                         </option>
                                     <?php endforeach; ?>

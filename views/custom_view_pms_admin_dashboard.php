@@ -218,7 +218,7 @@ $arslabs  = $result['arslabs'];
                                     <?php foreach($employee_goals as $eg){
                                         $empdetail = $employees[$eg['employee_id']];
                                         ?>
-                                    <tr onclick="getEmployeeGoals('<?php echo $eg['id']; ?>','<?php echo $eg['employee_id']?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                    <tr onclick="getEmployeeGoals('<?php echo $eg['id']; ?>','<?php echo $eg['employee_id']?>')">
                                         <td class="p-2 w-b-w-s">
                                             <div class="align-middle">
                                             <?php if($empdetail['image'] !=""){?>
@@ -277,7 +277,7 @@ $arslabs  = $result['arslabs'];
                 </select>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-12 col-12">
-               <a href="#!" onclick="viewAllRecord('quotations',2)" class=" b-b-primary text-primary float-right" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('View all'); ?></a>
+               <button type="button" onclick="viewAllRecord('quotations',2)" class="btn p-0 border-0 bg-transparent b-b-primary text-primary float-right"><?= __('View all'); ?></button>
            </div>
         </div>
     </div>
@@ -310,7 +310,7 @@ $arslabs  = $result['arslabs'];
                                 <div class="card-header">
                                   <h5><?= __('Appraisals Employee'); ?></h5>
                                   <div class="card-header-right">
-                                    <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                    <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                   </div>
                                 </div>
                                 <div class="card-body  custom-scroll" style="height: 250px;">
@@ -370,8 +370,8 @@ $arslabs  = $result['arslabs'];
                         </td>
                         <td class="p-2"><?php echo fromDate($pas['self_assessment_end_date']); ?></td>
                         <td class="p-2">
-                            <span class="form-label label label-sm label-primary" onclick="openPopUp('appraisal','<?php echo $pas['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <i class="ti-user f-16"></i>  &nbsp; &nbsp; <span class="f-16"><?php echo count((array)$employee_performance_appraisals[$pas['id']]); ?></span>
-                            </span>
+                            <button type="button" class="btn p-0 border-0 bg-transparent form-label label label-sm label-primary" onclick="openPopUp('appraisal','<?php echo $pas['id']; ?>')"> <i class="ti-user f-16"></i>  &nbsp; &nbsp; <span class="f-16"><?php echo count((array)$employee_performance_appraisals[$pas['id']]); ?></span>
+                            </button>
                         </td>
                     </tr>
                 <?php } ?>
@@ -410,7 +410,7 @@ $arslabs  = $result['arslabs'];
                                         <div class="card-header">
                                           <h5><?= __('Appraisals Employee'); ?></h5>
                                           <div class="card-header-right">
-                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                           </div>
                                         </div>
                                         <div class="card-body  custom-scroll" style="height: 250px;">
@@ -464,8 +464,8 @@ $arslabs  = $result['arslabs'];
                                 <td class="p-2" ><?php echo fromDate($goalres['goal_start_date']); ?></td>
                                 <td class="p-2" ><?php echo fromDate($goalres['goal_end_date']); ?></td>
                                 <td class="p-2">
-                                    <span class="form-label label label-sm label-primary" onclick="openPopUp('goals','<?php echo $goalres['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <i class="ti-user f-16"></i>  &nbsp; &nbsp; <span class="f-16"><?php echo count((array)$all_employee_goals[$goalres['id']]); ?></span>
-                                    </span>
+                                    <button type="button" class="btn p-0 border-0 bg-transparent form-label label label-sm label-primary" onclick="openPopUp('goals','<?php echo $goalres['id']; ?>')"> <i class="ti-user f-16"></i>  &nbsp; &nbsp; <span class="f-16"><?php echo count((array)$all_employee_goals[$goalres['id']]); ?></span>
+                                    </button>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -502,7 +502,7 @@ $arslabs  = $result['arslabs'];
                                         <div class="card-header">
                                           <h5><?= __('Employee FeedBack'); ?></h5>
                                           <div class="card-header-right">
-                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                           </div>
                                         </div>
                                         <div class="card-body  custom-scroll" style="height: 250px;">
@@ -534,7 +534,7 @@ $arslabs  = $result['arslabs'];
                                                         <td class="p-2  text-center">
                                                             <?php if($feeddetail['response_status']==''){ echo "Pendding";
 }else{  ?>
-                                                                <i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View FeedBack'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getEmployeeFeedbacks('<?php echo $feeddetail['id']; ?>','<?php echo $feeddetail['employee_id']?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                                                <button type="button" class="btn p-0 border-0 bg-transparent text-reset" onclick="getEmployeeFeedbacks('<?php echo $feeddetail['id']; ?>','<?php echo $feeddetail['employee_id']?>')" aria-label="<?= htmlspecialchars(__('View FeedBack'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View FeedBack'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
@@ -546,8 +546,8 @@ $arslabs  = $result['arslabs'];
                                 </div>
                                 </td>
                                 <td class="p-2">
-                                    <span class="form-label label label-sm label-primary" onclick="openPopUp('feedbacks','<?php echo $feedbackres['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <i class="ti-user f-16"></i>  &nbsp; &nbsp; <span class="f-16"><?php echo count((array)$employee_feedbacks[$feedbackres['id']]); ?></span>
-                                    </span>
+                                    <button type="button" class="btn p-0 border-0 bg-transparent form-label label label-sm label-primary" onclick="openPopUp('feedbacks','<?php echo $feedbackres['id']; ?>')"> <i class="ti-user f-16"></i>  &nbsp; &nbsp; <span class="f-16"><?php echo count((array)$employee_feedbacks[$feedbackres['id']]); ?></span>
+                                    </button>
                                 </td>
                             </tr>
                         <?php } ?>

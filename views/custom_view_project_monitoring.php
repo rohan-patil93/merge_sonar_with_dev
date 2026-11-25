@@ -3,7 +3,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 
 function csrProjectMonitoringFinancialYearStart($financialYear) {
   $matches = $matches ?? '';
-  if (preg_match('/^([0-9]{4})/', (string)$financialYear, $matches)) {
+  if (preg_match('/^(\d{4})/', (string)$financialYear, $matches)) {
     return (int)$matches[1];
   }
   return 0;
@@ -299,7 +299,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
                   <span class="f-w-600 f-14"><?php echo $progress; ?>%</span>
                 </div>
                 <div class="progress progress-sm mt-1">
-                  <div class="progress-bar <?php echo csrProjectMonitoringText($progressClass); ?>" role="progressbar" style="width: <?php echo $progress; ?>%" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar <?php echo csrProjectMonitoringText($progressClass); ?>" style="width: <?php echo $progress; ?>%" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <?php if ($trackingTotal > 0) { ?>
                 <div class="csr-project-monitoring-tracking-stats mt-3">
@@ -334,10 +334,20 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <div class="csr-project-monitoring-progress-static mb-4">
               <div class="d-flex justify-content-between">
                 <span class="f-w-600 f-14"><?= __('Progress'); ?></span>
-                <span class="f-w-600 f-14"><?php echo $projectCurrentStatus === 0 ? 'Draft' : ($projectCurrentStatus > 100 && $projectCurrentStatus < (int)ST_APPROVED ? 'In Progress' : ($projectCurrentStatus === (int)ST_REJECTED ? 'Rejected' : $progress . '%')); ?></span>
+                <?php
+                $statusText = $progress . '%';
+                if ($projectCurrentStatus === 0) {
+                    $statusText = 'Draft';
+                } elseif ($projectCurrentStatus > 100 && $projectCurrentStatus < (int)ST_APPROVED) {
+                    $statusText = 'In Progress';
+                } elseif ($projectCurrentStatus === (int)ST_REJECTED) {
+                    $statusText = 'Rejected';
+                }
+                ?>
+                <span class="f-w-600 f-14"><?php echo $statusText; ?></span>
               </div>
               <div class="progress progress-sm mt-1">
-                <div class="progress-bar <?php echo csrProjectMonitoringText($progressClass); ?>" role="progressbar" style="width: <?php echo $progress; ?>%" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar <?php echo csrProjectMonitoringText($progressClass); ?>" style="width: <?php echo $progress; ?>%" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
             <?php } ?>

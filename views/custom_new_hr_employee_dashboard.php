@@ -1,4 +1,5 @@
 <?php
+defined('DATE_FORMAT_D_M_Y') || define('DATE_FORMAT_D_M_Y', DATE_FORMAT_D_M_Y);
  $se_emp_id = $_SESSION['emp_id'];
  $se_emp_id = 1;
  $url = API."?mode=getEmployeeSelfDashboard&se_emp_id=".$se_emp_id;
@@ -109,34 +110,27 @@
           <a href="" class="text-primary f-12 f-w-600"><?= __('View All'); ?></a>
         </div>
         <div class="table-responsive mt-3 height-300">
-          <table class="table table-borderless table-sm align-middle pedding-approvals" role="presentation">
+          <div class="d-flex flex-column gap-2 pedding-approvals">
             <?php if(count((array)$data['my_leave_requests'])>0){
                 foreach ((array)$data['my_leave_requests'] as $leave) { ?>
-                  <tr>
-                    <td>
+                  <div class="d-flex align-items-center justify-content-between p-2 border-bottom">
+                    <div class="d-flex align-items-center">
                       <span class="user-icon-40 b-radius-15 bg-blue-50 f-14 f-w-600 text-center m-r-5">
                         <i class="fas fa-calendar-alt f-16 text-primary f-w-600"></i>
                       </span>
-                    </td>
-                    <td class="f-12 f-w-600"><?php echo $leave['leave_type_name']; ?>
-                      <p class="f-12 text-muted m-0"><?php echo date('d M Y', strtotime($leave['leave_from'])) ?> <?= __('to'); ?> <?php echo date('d M Y', strtotime($leave['leave_to'])) ?></p>
-                    </td>
-                    <td style="text-align: right;">
+                      <div class="f-12 f-w-600"><?php echo $leave['leave_type_name']; ?>
+                        <p class="f-12 text-muted m-0"><?php echo date(DATE_FORMAT_D_M_Y, strtotime($leave['leave_from'])) ?> <?= __('to'); ?> <?php echo date(DATE_FORMAT_D_M_Y, strtotime($leave['leave_to'])) ?></p>
+                      </div>
+                    </div>
+                    <div style="text-align: right;">
                       <span class="form-label label label-success"><?= __('Approved'); ?></span>
-                    </td>
-                  </tr>
-
+                    </div>
+                  </div>
                <?php }
-
             }else{ ?>
-
-                <tr>
-                      <td class="text-center text-muted"><?= __('No data found'); ?></td>
-                    </tr>
+                <div class="text-center text-muted p-3"><?= __('No data found'); ?></div>
            <?php } ?>
-
-
-          </table>
+          </div>
         </div>
       </div>
     </div>
@@ -324,7 +318,7 @@
               foreach ((array)$data['my_tasks_list'] as $my_tasks) { ?>
                 <tr>
               <td><?php echo ucwords(str_replace('_', ' ', $my_tasks['transaction_table'])); ?></td>
-              <td><?php echo date('d M Y', strtotime($my_tasks['request_date']));   ?></td>
+              <td><?php echo date(DATE_FORMAT_D_M_Y, strtotime($my_tasks['request_date']));   ?></td>
               <td><span class="form-label label label-warning"><?= __('Pending'); ?></span></td>
             </tr>
 
@@ -364,7 +358,7 @@
                 <h6 class="f-w-600 f-12 mb-0"><?php echo $announcement['announcement_heading']; ?></h6>
                 <span class="text-muted"><?php echo $announcement['announcement_message']; ?></span>
               </td>
-              <th scope="col"><?php echo date('d M Y', strtotime($announcement['start_date']));   ?></th>
+              <th scope="col"><?php echo date(DATE_FORMAT_D_M_Y, strtotime($announcement['start_date']));   ?></th>
             </tr>
 
              <?php } ?>
@@ -440,7 +434,12 @@
         <div class="mt-3">
           <div class="important-links">
             <?php foreach ($data['company_links'] as $company_link) {
-                $link = $company_link['process_file']!="" ? "uploads/all/".$company_link['process_file']: ($company_link['document_url']!="" ? $company_link['document_url'] : "#");
+                $link = '#';
+                if (!empty($company_link['process_file'])) {
+                    $link = 'uploads/all/' . $company_link['process_file'];
+                } elseif (!empty($company_link['document_url'])) {
+                    $link = $company_link['document_url'];
+                }
               ?>
             <div class="text-center">
               <a target="_blank" href="<?php echo $link; ?>">

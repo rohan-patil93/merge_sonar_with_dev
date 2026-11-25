@@ -82,44 +82,35 @@ function currencyFormat($number, $config)
     }
 }
 
+if (!function_exists('formatRentalInvoiceWordChunk')) {
+    function formatRentalInvoiceWordChunk($number, $counter, $words, $digits, $hasPrevious)
+    {
+        $plural = ($counter && $number > 9) ? 's' : null;
+        $hundred = ($counter == 1 && $hasPrevious) ? ' and ' : null;
+        if ($number < 21) {
+            return $words[$number] . " " . $digits[$counter] . $plural . " " . $hundred;
+        }
+        return $words[floor($number / 10) * 10]
+            . " " . $words[$number % 10] . " "
+            . $digits[$counter] . $plural . " " . $hundred;
+    }
+}
+
 function numberToWordFormate($number)
 {
-
     $no = floor($number);
     $point = round($number - $no, 2) * 100;
-    $hundred = null;
     $digits_1 = strlen($no);
     $i = 0;
     $str = array();
     $words = array(
-        '0' => '',
-        '1' => 'one',
-        '2' => 'two',
-        '3' => 'three',
-        '4' => 'four',
-        '5' => 'five',
-        '6' => 'six',
-        '7' => 'seven',
-        '8' => 'eight',
-        '9' => 'nine',
-        '10' => 'ten',
-        '11' => 'eleven',
-        '12' => 'twelve',
-        '13' => 'thirteen',
-        '14' => 'fourteen',
-        '15' => 'fifteen',
-        '16' => 'sixteen',
-        '17' => 'seventeen',
-        '18' => 'eighteen',
-        '19' => 'nineteen',
-        '20' => 'twenty',
-        '30' => 'thirty',
-        '40' => 'forty',
-        '50' => 'fifty',
-        '60' => 'sixty',
-        '70' => 'seventy',
-        '80' => 'eighty',
-        '90' => 'ninety'
+        '0' => '', '1' => 'one', '2' => 'two', '3' => 'three', '4' => 'four',
+        '5' => 'five', '6' => 'six', '7' => 'seven', '8' => 'eight', '9' => 'nine',
+        '10' => 'ten', '11' => 'eleven', '12' => 'twelve', '13' => 'thirteen',
+        '14' => 'fourteen', '15' => 'fifteen', '16' => 'sixteen', '17' => 'seventeen',
+        '18' => 'eighteen', '19' => 'nineteen', '20' => 'twenty', '30' => 'thirty',
+        '40' => 'forty', '50' => 'fifty', '60' => 'sixty', '70' => 'seventy',
+        '80' => 'eighty', '90' => 'ninety'
     );
     $digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
     while ($i < $digits_1) {
@@ -128,16 +119,12 @@ function numberToWordFormate($number)
         $no = floor($no / $divider);
         $i += ($divider == 10) ? 1 : 2;
         if ($number) {
-            $plural = (($counter = count((array) $str)) && $number > 9) ? 's' : null;
-            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
-            $str[] = ($number < 21) ? $words[$number] .
-                " " . $digits[$counter] . $plural . " " . $hundred
-                :
-                $words[floor($number / 10) * 10]
-                . " " . $words[$number % 10] . " "
-                . $digits[$counter] . $plural . " " . $hundred;
-        } else
+            $counter = count((array) $str);
+            $hasPrevious = !empty($str[0]);
+            $str[] = formatRentalInvoiceWordChunk($number, $counter, $words, $digits, $hasPrevious);
+        } else {
             $str[] = null;
+        }
     }
     $str = array_reverse((array) $str);
     $result = implode('', (array) $str);
@@ -416,25 +403,28 @@ function emptyCheck($valu)
                             </tr>
                             <tr style="border: 1px solid #cccccc;">
                                 <td colspan="3">
-                                        <table role="presentation" style="width:65%;margin:10px  10px 10px;">
+                                        <div class="table-responsive" style="width:65%;margin:10px 10px 10px;">
                                             <?php foreach ($valu['CHILD'] as $ta) { ?>
-                                                <tr style="border: 1px solid #cccccc;">
-                                                    <td
-                                                        style="padding:5px;font-size: 12px; word-break: break-word; white-space: initial;     font-weight: 100;">
+                                                <div class="d-flex align-items-center justify-content-between" style="border: 1px solid #cccccc; padding: 5px;">
+                                                    <div style="font-size: 12px; word-break: break-word; white-space: initial; font-weight: 100; flex: 2;">
                                                         <?php print_r($perentchieldary);
-                                                        echo $ta['item_name']; ?></td>
-                                                    <td style="padding:5px;font-size: 12px;">
-                                                        <?php echo emptyCheck(round($ta['item_quantity'])); ?></td>
-                                                    <td style="padding:5px;font-size: 12px;">
+                                                        echo $ta['item_name']; ?>
+                                                    </div>
+                                                    <div style="padding:5px;font-size: 12px; flex: 1;">
+                                                        <?php echo emptyCheck(round($ta['item_quantity'])); ?>
+                                                    </div>
+                                                    <div style="padding:5px;font-size: 12px; flex: 1;">
                                                         <?php echo emptyCheck($ta['purchase_uom'] != "UN" ? $ta['purchase_uom'] : "-"); ?>
-                                                    </td>
-                                                    <td style="padding:5px;text-align: right;font-size: 12px;">
-                                                        <?php echo currencyFormat($ta['item_price'], $config); ?></td>
-                                                    <td style="padding:5px;text-align:right;font-size: 12px;">
-                                                        <?php echo currencyFormat($ta['total_amount'], $config); ?></td>
-                                                </tr>
+                                                    </div>
+                                                    <div style="padding:5px;text-align: right;font-size: 12px; flex: 1;">
+                                                        <?php echo currencyFormat($ta['item_price'], $config); ?>
+                                                    </div>
+                                                    <div style="padding:5px;text-align:right;font-size: 12px; flex: 1;">
+                                                        <?php echo currencyFormat($ta['total_amount'], $config); ?>
+                                                    </div>
+                                                </div>
                                             <?php } ?>
-                                        </table>
+                                        </div>
                                 </td>
                             </tr>
                         <?php } else { ?>
@@ -579,8 +569,7 @@ function emptyCheck($valu)
                                     <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('Round Off'); ?>
                                     </th>
                                     <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php
-                                    echo $transaction['rounding_off'];
-                                    //echo round(round($transaction['total_amount'])-$transaction['total_amount'],2); ?>
+                                    echo $transaction['rounding_off']; ?>
                                     </td>
                                 </tr>
                             <?php } ?>

@@ -1,4 +1,5 @@
 <?php
+defined('PREFIX_BIRTHDAY_ON') || define('PREFIX_BIRTHDAY_ON', PREFIX_BIRTHDAY_ON);
     $data2["where"] = array('is_active'=> '0');
    $costdata = urlencode(json_encode($data2));
    $costurl = API."?mode=gettabledetailswithconditions&table=application_widgets&data=".$costdata;
@@ -137,7 +138,7 @@
       <div class="tab-content m-0 p-0">
          <div class="row">
             <div class="col-lg-4 draggable-zone">
-               <div class="card card-custom gutter-b draggable" role="region" style="">
+               <section class="card card-custom gutter-b draggable" aria-label="<?= htmlspecialchars(__('Announcements'), ENT_QUOTES, 'UTF-8'); ?>" style="">
                   <div class="card-header">
                      <div class="card-title">
                         <h3 class="card-label"><?= __('Announcements'); ?></h3>
@@ -163,7 +164,7 @@
                         </div>
                      </div>
                   </div>
-               </div>
+               </section>
             </div>
         <?php if($_SESSION['config']['kpi_mode']==1){ ?>
             <div class="col-lg-4 draggable-zone">
@@ -172,7 +173,7 @@
       <?php } ?>
       <!-- reviews starts -->
             <div class="col-lg-4 draggable-zone">
-               <div class="card card-custom gutter-b draggable" role="region" style="">
+               <section class="card card-custom gutter-b draggable" aria-label="<?= htmlspecialchars(__('Reviews'), ENT_QUOTES, 'UTF-8'); ?>" style="">
                   <div class="card-header">
                      <div class="card-title">
                         <h3 class="card-label"><?= __('Reviews'); ?>
@@ -245,11 +246,11 @@
                      </div>
                      <?php  } ?>
                   </div>
-               </div>
+               </section>
             </div>
             <!-- tasks starts -->
             <div class="col-lg-4 draggable-zone">
-               <div class="card card-custom gutter-b draggable" role="region" style="">
+               <section class="card card-custom gutter-b draggable" aria-label="<?= htmlspecialchars(__('Tasks due in next 7 days'), ENT_QUOTES, 'UTF-8'); ?>" style="">
                   <div class="card-header">
                      <div class="card-title">
                         <h3 class="card-label"><?= __('Tasks due in next 7 days'); ?>
@@ -320,12 +321,12 @@
                      </div>
                      <?php }  ?>
                   </div>
-               </div>
+               </section>
             </div>
 
 
       <div class="col-lg-4 draggable-zone">
-         <div class="card card-custom gutter-b draggable" role="region" style="">
+         <section class="card card-custom gutter-b draggable" aria-label="<?= htmlspecialchars(__('Holidays List'), ENT_QUOTES, 'UTF-8'); ?>" style="">
             <div class="card-header">
                <div class="card-title">
                   <h3 class="card-label"><?= __('Holidays List'); ?> <span class="label label-xl label-light-success label-rounded font-weight-bolder"><?php echo $total_holidays; ?></span></h3>
@@ -367,11 +368,11 @@
                </div>
                <?php  } ?>
             </div>
-         </div>
+         </section>
       </div>
       <!-- wishes starts-->
       <div class="col-lg-4 draggable-zone">
-         <div class="card card-custom gutter-b draggable" role="region" style="">
+         <section class="card card-custom gutter-b draggable" aria-label="<?= htmlspecialchars(__('Birthdays & Anniversaries'), ENT_QUOTES, 'UTF-8'); ?>" style="">
             <div class="card-header">
                <div class="card-title">
                   <h3 class="card-label">
@@ -399,8 +400,8 @@
                      $receiver_emp_id = $dob['id'];
                      $sender_emp_id = $employee_id;
                      $dob = date('d/m',strtotime($date_of_birth))."/".date('Y');
-                     $msg_title = 'Birthday on '.$dob;
-                     $disp_text = $display_name ."\n" . "Birthday on ".$date_of_birth;
+                     $msg_title = PREFIX_BIRTHDAY_ON.$dob;
+                     $disp_text = $display_name ."\n" . PREFIX_BIRTHDAY_ON.$date_of_birth;
                      ?>
                <div style="box-shadow: 0px 1px 9px #cccccc;" class="alert alert-custom alert-white fade show" role="alert">
                   <div class="alert-text">
@@ -442,8 +443,8 @@
                      $receiver_emp_id = $wed['id'];
                      $sender_emp_id = $employee_id;
                      $wed = date('d/m',strtotime($wedding_date))."/".date('Y');
-                     $msg_title = 'Birthday on '.$wed;
-                     $disp_text = $display_name ."\n" . "Birthday on ".$wedding_date;
+                     $msg_title = PREFIX_BIRTHDAY_ON.$wed;
+                     $disp_text = $display_name ."\n" . PREFIX_BIRTHDAY_ON.$wedding_date;
                      ?>
                <div style="box-shadow: 0px 1px 9px #cccccc;" class="alert alert-custom alert-white fade show" role="alert">
                   <div class="alert-text">
@@ -476,7 +477,7 @@
             <?php } ?>
          </div>
 
-         </div>
+         </section>
 
       </div>
 

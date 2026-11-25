@@ -62,7 +62,7 @@
             <span class="f-w-600 f-14">420</span>
           </div>
           <div class="progress progress-sm mt-1">
-            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
         <div class="mt-4">
@@ -71,7 +71,7 @@
             <span class="f-w-600 f-14">280</span>
           </div>
           <div class="progress progress-sm mt-1">
-            <div class="progress-bar progress-bar-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar progress-bar-success" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
         <div class="mt-4">
@@ -80,7 +80,7 @@
             <span class="f-w-600 f-14">160</span>
           </div>
           <div class="progress progress-sm mt-1">
-            <div class="progress-bar progress-bar-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar progress-bar-warning" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
         <div class="mt-4">
@@ -89,7 +89,7 @@
             <span class="f-w-600 f-14">78</span>
           </div>
           <div class="progress progress-sm mt-1">
-            <div class="progress-bar progress-bar-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar progress-bar-info" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
       </div>

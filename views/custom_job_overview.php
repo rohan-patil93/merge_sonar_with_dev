@@ -3,7 +3,7 @@
 $url = API."?mode=getjoboverview&id=".encodeId($_GET['Rid']);
 $response = callAPI($url);
 $list = json_decode($response,1);
-function cal_percentage($total, $number) {
+function calPercentage($total, $number) {
     if($total !=0 && $total!=""){
           $value = round(($number * 100) / $total, 2);
     }else{
@@ -14,6 +14,12 @@ function cal_percentage($total, $number) {
   }else{
       return $value;
   }
+}
+
+if (!function_exists('cal_percentage')) {
+    function cal_percentage($total, $number) {
+        return calPercentage($total, $number);
+    }
 }
 $color = array("bg-info","bg-primary",'bg-warning','bg-danger','bg-dark',"bg-info","bg-primary",'bg-warning',);
 ?>
@@ -74,7 +80,7 @@ $color = array("bg-info","bg-primary",'bg-warning','bg-danger','bg-dark',"bg-inf
             <span  class="col-form-label col-lg-2"><?= __('Total Candidates'); ?></span>
             <div class="col-lg-7">
                 <div class="progress" style="height: 40px;">
-                    <div class="progress-bar progress-bar-animated <?php echo $color['1'];?>" role="progressbar" style="width: <?php echo cal_percentage($list['cntcandidate'],$list['cntcandidate']); ?>%;     text-align: start;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"><p class="font-size-lg mt-4">&nbsp;&nbsp;<i class=" flaticon-users-1"></i> <?php echo $list['cntcandidate']." (".cal_percentage($list['cntcandidate'],$list['cntcandidate'])."%)"; ?> </p></div>
+                    <div class="progress-bar progress-bar-animated <?php echo $color['1'];?>" style="width: <?php echo calPercentage($list['cntcandidate'],$list['cntcandidate']); ?>%;     text-align: start;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"><p class="font-size-lg mt-4">&nbsp;&nbsp;<i class=" flaticon-users-1"></i> <?php echo $list['cntcandidate']." (".calPercentage($list['cntcandidate'],$list['cntcandidate'])."%)"; ?> </p></div>
                 </div>
             </div>
         </div>
@@ -82,8 +88,8 @@ $color = array("bg-info","bg-primary",'bg-warning','bg-danger','bg-dark',"bg-inf
             <span  class="col-form-label col-lg-2"><?= __('Short List Candidates'); ?></span>
             <div class="col-lg-7">
                 <div class="progress" style="height: 40px; ">
-                    <div class="progress-bar  progress-bar-animated <?php echo $color['2'];?>" role="progressbar" style="width: <?php echo cal_percentage($list['cntcandidate'],$list['shortlisted']); ?>%; text-align: start;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-<p class="font-size-lg mt-4">&nbsp;&nbsp;<i class=" flaticon-users-1"></i> <?php echo $list['shortlisted']." (".cal_percentage($list['cntcandidate'],$list['shortlisted'])."%)"; ?> </p>
+                    <div class="progress-bar  progress-bar-animated <?php echo $color['2'];?>" style="width: <?php echo calPercentage($list['cntcandidate'],$list['shortlisted']); ?>%; text-align: start;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+<p class="font-size-lg mt-4">&nbsp;&nbsp;<i class=" flaticon-users-1"></i> <?php echo $list['shortlisted']." (".calPercentage($list['cntcandidate'],$list['shortlisted'])."%)"; ?> </p>
 
                     </div>
                 </div>
@@ -95,8 +101,8 @@ $color = array("bg-info","bg-primary",'bg-warning','bg-danger','bg-dark',"bg-inf
             <span  class="col-form-label col-lg-2"><?php echo $lists['name']; ?></span>
             <div class="col-lg-7">
                 <div class="progress" style="height: 40px;">
-                    <div class="progress-bar  progress-bar-animated <?php  echo count((array)$list['list'])==$mm?$color['6']:$color[$colr]; ?>" role="progressbar" style="width: <?php echo cal_percentage($list['cntcandidate'],$lists['cnt']); ?>%;text-align: start;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                        <p class="font-size-lg mt-4">&nbsp;&nbsp;<i class=" flaticon-users-1"></i> <?php echo $lists['cnt']." (".cal_percentage($list['cntcandidate'],$lists['cnt'])."%)"; ?> </p>
+                    <div class="progress-bar  progress-bar-animated <?php  echo count((array)$list['list'])==$mm?$color['6']:$color[$colr]; ?>" style="width: <?php echo calPercentage($list['cntcandidate'],$lists['cnt']); ?>%;text-align: start;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                        <p class="font-size-lg mt-4">&nbsp;&nbsp;<i class=" flaticon-users-1"></i> <?php echo $lists['cnt']." (".calPercentage($list['cntcandidate'],$lists['cnt'])."%)"; ?> </p>
                     </div>
                 </div>
             </div>
@@ -108,8 +114,8 @@ $color = array("bg-info","bg-primary",'bg-warning','bg-danger','bg-dark',"bg-inf
             <span  class="col-form-label col-lg-2"><?= __('Hire Candidates'); ?></span>
             <div class="col-lg-7">
                 <div class="progress" style="height: 40px;">
-                    <div class="progress-bar  progress-bar-animated bg-success" role="progressbar" style="width: <?php echo cal_percentage($list['cntcandidate'],$list['aprovecnt']); ?>%; text-align: start;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-<p class="font-size-lg mt-4">&nbsp;&nbsp;<i class=" flaticon-users-1"></i> <?php echo $list['aprovecnt']." (".cal_percentage($list['cntcandidate'],$list['aprovecnt'])."%)"; ?> </p>
+                    <div class="progress-bar  progress-bar-animated bg-success" style="width: <?php echo calPercentage($list['cntcandidate'],$list['aprovecnt']); ?>%; text-align: start;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+<p class="font-size-lg mt-4">&nbsp;&nbsp;<i class=" flaticon-users-1"></i> <?php echo $list['aprovecnt']." (".calPercentage($list['cntcandidate'],$list['aprovecnt'])."%)"; ?> </p>
                     </div>
                 </div>
             </div>

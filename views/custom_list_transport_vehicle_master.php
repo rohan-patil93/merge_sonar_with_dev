@@ -57,20 +57,21 @@ $fuelTypes = [
 ];
 
 function getInsuranceStatus($expDate) {
-    if (empty($expDate)) { return ['status' => 'unknown', 'class' => ''];
-}
+    if (empty($expDate)) {
+        return ['status' => 'unknown', 'class' => ''];
+    }
 
     $today = new DateTime();
     $expiry = new DateTime($expDate);
     $diff = $today->diff($expiry);
 
+    $res = ['status' => 'Valid', 'class' => 'insurance-valid'];
     if ($expiry < $today) {
-        return ['status' => 'Expired', 'class' => 'insurance-expired'];
+        $res = ['status' => 'Expired', 'class' => 'insurance-expired'];
     } elseif ($diff->days <= 30) {
-        return ['status' => 'Expiring Soon', 'class' => 'insurance-expiring-soon'];
-    } else {
-        return ['status' => 'Valid', 'class' => 'insurance-valid'];
+        $res = ['status' => 'Expiring Soon', 'class' => 'insurance-expiring-soon'];
     }
+    return $res;
 }
 ?>
 
@@ -202,8 +203,8 @@ function getInsuranceStatus($expDate) {
 </div>
 
 <!-- View Vehicle Modal -->
-<div class="modal fade" id="viewVehicleModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="viewVehicleModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="ti-car"></i> <?= __('Vehicle Details'); ?></h4>
@@ -225,8 +226,8 @@ function getInsuranceStatus($expDate) {
 </div>
 
 <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteVehicleModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="deleteVehicleModal" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="ti-trash text-danger"></i> <?= __('Confirm Delete'); ?></h4>

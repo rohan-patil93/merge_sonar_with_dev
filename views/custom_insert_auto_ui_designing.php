@@ -123,7 +123,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                     <div class="card card_count deleterow<?php echo $m; ?>">
                                                         <div class="card-header" id="headingOne<?php echo $m; ?>">
                                                             <div class="card-title collapsed textboxclass<?php echo $m; ?>" data-toggle="collapse" data-target="#collapseOnee<?php echo $m; ?>">
-                                                                <i class="flaticon2-cancel-music" onclick="deleterowinputtype(<?php echo $m; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i> <?php echo $result['lable'];?>
+                                                                <button type="button" class="btn btn-link p-0 border-0" onclick="deleterowinputtype(<?php echo $m; ?>)" aria-label="<?= htmlspecialchars(__('Delete row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="flaticon2-cancel-music"></i></button> <?php echo $result['lable'];?>
                                                             </div>
                                                         </div>
                                                         <div id="collapseOnee<?php echo $m; ?>" class="collapse" data-parent="#accordionExample5">
@@ -387,7 +387,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                 <div class="card buttons_count mt-3 deletebutton<?php echo $k; ?>">
                     <div class="card-header" id="headingOnebutton<?php echo $k; ?>">
                         <div class="card-title collapsed title<?php echo $k; ?>" data-toggle="collapse" data-target="#collapseOneebutton<?php echo $k; ?>" aria-expanded="false">
-                            <i class="flaticon2-cancel-music" onclick="deletebutton(<?php echo $k; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i> <?php echo  $row['buttonname']; ?>
+                            <button type="button" class="btn btn-link p-0 border-0" onclick="deletebutton(<?php echo $k; ?>)" aria-label="<?= htmlspecialchars(__('Delete button'), ENT_QUOTES, 'UTF-8'); ?>"><i class="flaticon2-cancel-music"></i></button> <?php echo  $row['buttonname']; ?>
                         </div>
                     </div>
                     <div id="collapseOneebutton<?php echo $k; ?>" class="collapse" data-parent="#accordionExample5" style="">
@@ -677,7 +677,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 
 </form>
 </div>
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content" style="min-height: 590px;" id="popup1">
 

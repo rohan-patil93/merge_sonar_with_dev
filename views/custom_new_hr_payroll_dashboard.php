@@ -216,68 +216,63 @@
            <h3 class="f-20 f-w-600"><?= __('Pending Actions'); ?></h3>
          </div>
          <div class="table-responsive mt-1 height-360">
-           <table class="table table-borderless table-sm align-middle pedding-approvals" role="presentation">
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="fa fa-calculator f-16 text-success f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600"><?= __('Reimbursements'); ?></td>
-               <td>
-                 <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">5
-                 </span>
-               </td>
-             </tr>
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="fa fa-calculator f-16 text-danger f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600"><?= htmlspecialchars(__('Full & Final Settlements'), ENT_QUOTES, 'UTF-8'); ?></td>
-               <td>
-                 <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">3
-                 </span>
-               </td>
-             </tr>
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-yellow-50 f-14 f-w-600 text-center">
-                   <i class="fa fa-calculator f-16 text-success f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600"><?= __('Variable Pay / Bonus'); ?></td>
-               <td>
-                 <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">2
-                 </span>
-               </td>
-             </tr>
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-blue-50 f-14 f-w-600 text-center">
-                   <i class="fa fa-calculator f-16 text-primary f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600"><?= __('Payroll Approvals'); ?></td>
-               <td>
-                 <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">6
-                 </span>
-               </td>
-             </tr>
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-purple-50 f-14 f-w-600 text-center">
-                   <i class="fa fa-calculator f-16 text-purple f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600"><?= __('Loan / Advances'); ?></td>
-               <td>
-                 <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">2
-                 </span>
-               </td>
-             </tr>
-           </table>
+           <div class="pedding-approvals d-flex flex-column gap-2">
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="fa fa-calculator f-16 text-success f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600"><?= __('Reimbursements'); ?></span>
+                </div>
+                <div>
+                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">5</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="fa fa-calculator f-16 text-danger f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600"><?= htmlspecialchars(__('Full & Final Settlements'), ENT_QUOTES, 'UTF-8'); ?></span>
+                </div>
+                <div>
+                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">3</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-yellow-50 f-14 f-w-600 text-center mr-2">
+                    <i class="fa fa-calculator f-16 text-success f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600"><?= __('Variable Pay / Bonus'); ?></span>
+                </div>
+                <div>
+                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">2</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-blue-50 f-14 f-w-600 text-center mr-2">
+                    <i class="fa fa-calculator f-16 text-primary f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600"><?= __('Payroll Approvals'); ?></span>
+                </div>
+                <div>
+                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">6</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-purple-50 f-14 f-w-600 text-center mr-2">
+                    <i class="fa fa-calculator f-16 text-purple f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600"><?= __('Loan / Advances'); ?></span>
+                </div>
+                <div>
+                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">2</span>
+                </div>
+              </div>
+            </div>
          </div>
 
        </div>
@@ -454,99 +449,93 @@ $(document).ready(function() {
            <h3 class="f-20 f-w-600"><?= __('Payroll Reports'); ?></h3>
          </div>
          <div class="table-responsive mt-2 height-290">
-           <table class="table table-borderless table-sm align-middle payroll-reports mb-0" role="presentation">
-
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="far fa-file-alt f-16 text-success f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600">
-                 <a href="index.php?option=COM_VIEW_EMPLOYEE_CTC_REPORT" class="text-dark">
-                   <?= __('Employee\'s CTC Summary'); ?>
-                 </a>
-               </td>
-               <td>
-                 <a href="index.php?option=COM_VIEW_EMPLOYEE_CTC_REPORT">
-                   <i class="ti-angle-right text-dark f-w-600 f-12"></i>
-                 </a>
-               </td>
-             </tr>
-
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="far fa-file-alt f-16 text-success f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600">
-                 <a href="index.php?option=COM_VIEW_EPF_ECR_REPORT" class="text-dark">
-                   <?= __('EPF ECR Summary'); ?>
-                 </a>
-               </td>
-               <td>
-                 <a href="index.php?option=COM_VIEW_EPF_ECR_REPORT">
-                   <i class="ti-angle-right text-dark f-w-600 f-12"></i>
-                 </a>
-               </td>
-             </tr>
-
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="far fa-file-alt f-16 text-success f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600">
-                 <a href="index.php?option=COM_VIEW_EPF_SUMMARY" class="text-dark">
-                   <?= __('EPF Summary'); ?>
-                 </a>
-               </td>
-               <td>
-                 <a href="index.php?option=COM_VIEW_EPF_SUMMARY">
-                   <i class="ti-angle-right text-dark f-w-600 f-12"></i>
-                 </a>
-               </td>
-             </tr>
-
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="far fa-file-alt f-16 text-success f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600">
-                 <a href="index.php?option=COM_VIEW_ESI_SUMMARY" class="text-dark">
-                   <?= __('ESI Summary'); ?>
-                 </a>
-               </td>
-               <td>
-                 <a href="index.php?option=COM_VIEW_ESI_SUMMARY">
-                   <i class="ti-angle-right text-dark f-w-600 f-12"></i>
-                 </a>
-               </td>
-             </tr>
-
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="far fa-file-alt f-16 text-success f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12 f-w-600">
-                 <a href="index.php?option=COM_VIEW_PT_SUMMARY" class="text-dark">
-                   <?= __('Professional Tax Summary'); ?>
-                 </a>
-               </td>
-               <td>
-                 <a href="index.php?option=COM_VIEW_PT_SUMMARY">
-                   <i class="ti-angle-right text-dark f-w-600 f-12"></i>
-                 </a>
-               </td>
-             </tr>
-
-           </table>
+           <div class="payroll-reports d-flex flex-column gap-2 mb-0">
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="far fa-file-alt f-16 text-success f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600">
+                    <a href="index.php?option=COM_VIEW_EMPLOYEE_CTC_REPORT" class="text-dark">
+                      <?= __('Employee\'s CTC Summary'); ?>
+                    </a>
+                  </span>
+                </div>
+                <div>
+                  <a href="index.php?option=COM_VIEW_EMPLOYEE_CTC_REPORT">
+                    <i class="ti-angle-right text-dark f-w-600 f-12"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="far fa-file-alt f-16 text-success f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600">
+                    <a href="index.php?option=COM_VIEW_EPF_ECR_REPORT" class="text-dark">
+                      <?= __('EPF ECR Summary'); ?>
+                    </a>
+                  </span>
+                </div>
+                <div>
+                  <a href="index.php?option=COM_VIEW_EPF_ECR_REPORT">
+                    <i class="ti-angle-right text-dark f-w-600 f-12"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="far fa-file-alt f-16 text-success f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600">
+                    <a href="index.php?option=COM_VIEW_EPF_SUMMARY" class="text-dark">
+                      <?= __('EPF Summary'); ?>
+                    </a>
+                  </span>
+                </div>
+                <div>
+                  <a href="index.php?option=COM_VIEW_EPF_SUMMARY">
+                    <i class="ti-angle-right text-dark f-w-600 f-12"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="far fa-file-alt f-16 text-success f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600">
+                    <a href="index.php?option=COM_VIEW_ESI_SUMMARY" class="text-dark">
+                      <?= __('ESI Summary'); ?>
+                    </a>
+                  </span>
+                </div>
+                <div>
+                  <a href="index.php?option=COM_VIEW_ESI_SUMMARY">
+                    <i class="ti-angle-right text-dark f-w-600 f-12"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="far fa-file-alt f-16 text-success f-w-600"></i>
+                  </span>
+                  <span class="f-12 f-w-600">
+                    <a href="index.php?option=COM_VIEW_PT_SUMMARY" class="text-dark">
+                      <?= __('Professional Tax Summary'); ?>
+                    </a>
+                  </span>
+                </div>
+                <div>
+                  <a href="index.php?option=COM_VIEW_PT_SUMMARY">
+                    <i class="ti-angle-right text-dark f-w-600 f-12"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
          </div>
 
        </div>
@@ -594,44 +583,44 @@ $(document).ready(function() {
            <h3 class="f-20 f-w-600"><?= __('Important Announcements'); ?></h3>
          </div>
          <div class="table-responsive mt-3 height-250">
-           <table class="table table-borderless table-sm align-middle payroll-reports mb-0 f-12" role="presentation">
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="fa fa-exclamation-triangle f-16 text-danger f-w-600"></i>
-                 </span>
-               </td>
-               <td>
-                 <h6 class="m-0 f-14"><?= __('3 Probation confirmations pending'); ?></h6>
-                 <p class="p-0 f-12 text-muted"><?= __('Review and confirm'); ?></p>
-               </td>
-               <td class="text-primary f-w-600"><?= __('View'); ?></td>
-             </tr>
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="fa fa-user f-16 text-success f-w-600"></i>
-                 </span>
-               </td>
-               <td>
-                 <h6 class="m-0 f-14"><?= __('5 Attendance regularizations pending'); ?></h6>
-                 <p class="p-0 f-12 text-muted"><?= __('Review and approve'); ?></p>
-               </td>
-               <td class="text-primary f-w-600"><?= __('View'); ?></td>
-             </tr>
-             <tr>
-               <td>
-                 <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
-                   <i class="fa fa-exclamation-triangle f-16 text-warning f-w-600"></i>
-                 </span>
-               </td>
-               <td class="f-12">
-                 <h6 class="m-0 f-14"><?= __('2 Documents expiring this month'); ?></h6>
-                 <p class="p-0 f-12 text-muted"><?= __('Take necessary action'); ?></p>
-               </td>
-               <td class="text-primary f-w-600"><?= __('View'); ?></td>
-             </tr>
-           </table>
+           <div class="payroll-reports d-flex flex-column gap-2 mb-0 f-12">
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="fa fa-exclamation-triangle f-16 text-danger f-w-600"></i>
+                  </span>
+                  <div>
+                    <h6 class="m-0 f-14"><?= __('3 Probation confirmations pending'); ?></h6>
+                    <p class="p-0 f-12 text-muted"><?= __('Review and confirm'); ?></p>
+                  </div>
+                </div>
+                <div class="text-primary f-w-600"><?= __('View'); ?></div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="fa fa-user f-16 text-success f-w-600"></i>
+                  </span>
+                  <div>
+                    <h6 class="m-0 f-14"><?= __('5 Attendance regularizations pending'); ?></h6>
+                    <p class="p-0 f-12 text-muted"><?= __('Review and approve'); ?></p>
+                  </div>
+                </div>
+                <div class="text-primary f-w-600"><?= __('View'); ?></div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between py-1">
+                <div class="d-flex align-items-center">
+                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center mr-2">
+                    <i class="fa fa-exclamation-triangle f-16 text-warning f-w-600"></i>
+                  </span>
+                  <div>
+                    <h6 class="m-0 f-14"><?= __('2 Documents expiring this month'); ?></h6>
+                    <p class="p-0 f-12 text-muted"><?= __('Take necessary action'); ?></p>
+                  </div>
+                </div>
+                <div class="text-primary f-w-600"><?= __('View'); ?></div>
+              </div>
+            </div>
          </div>
 
        </div>

@@ -288,7 +288,6 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
                                     $Notification_DateTime = fromDate($holiday['holiday_date']);
                                     ?>
                                     <div class="align-middle m-b-10" style="border-bottom:1px dashed #cccccc;">
-                                        <!-- <span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($Notification_Message); ?></span> -->
                                         <div class="d-inline-block">
                                             <a href="#!"><span><?php echo $Notification_Message; ?></span></a>
                                             <p class="text-muted m-b-0"><?php echo $Notification_DateTime; ?></p>
@@ -307,20 +306,16 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
                             </div>
                             <div class="card-block custom-scroll" style=" height: 300px;">
                                 <?php if(count((array)$approved_job_candidate_interview_schedules) !=0){ ?>
-                                <table role="presentation" class="table table-hover m-b-0" style="font-size:13px;">
-                                    <body>
-                                        <?php foreach($approved_job_candidate_interview_schedules as $jcis){ ?>
-                                        <tr>
-                                            <td class="w-b-w-s p-2">
+                                <div class="list-group list-group-flush m-b-0" style="font-size:13px;">
+<?php foreach($approved_job_candidate_interview_schedules as $jcis){ ?>
+                                        <div class="list-group-item list-group-item-action w-b-w-s p-2 border-0">
                                                 <a href="index.php?option=COM_JOB_CANDIDATE_POPUP&job_post_can_id=<?php echo $jcis['job_posing_candidate_id']; ?>">
                                                     <span class="d-block"><i class="ti-user"></i> <?php echo $jcis['candidate_name']; ?></span>
                                                     <span class="d-block"><i class="ti-alarm-clock"></i> <?php echo date('d-m-Y H:i A',strtotime($jcis['inerview_date_time']));?></span>
                                                 </a>
-                                            </td>
-                                        </tr>
+                                            </div>
                                     <?php } ?>
-                                    </body>
-                                </table>
+</div>
                             <?php  }else{  ?>
                                     <div class="card-px text-center py-20 m-t-30">
                                         <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Schedule Interview'); ?> </p>
@@ -338,20 +333,16 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
                             </div>
                             <div class="card-block custom-scroll" style=" height: 300px;">
                                 <?php if(count((array)$job_candidate_interview_schedules) !=0){ ?>
-                                <table role="presentation" class="table table-hover m-b-0" style="font-size:13px;">
-                                    <body>
-                                        <?php foreach($job_candidate_interview_schedules as $jcis){ ?>
-                                        <tr>
-                                            <td class="w-b-w-s p-2">
+                                <div class="list-group list-group-flush m-b-0" style="font-size:13px;">
+<?php foreach($job_candidate_interview_schedules as $jcis){ ?>
+                                        <div class="list-group-item list-group-item-action w-b-w-s p-2 border-0">
                                                 <a href="index.php?option=COM_JOB_CANDIDATE_POPUP&job_post_can_id=<?php echo $jcis['job_posing_candidate_id']; ?>">
                                                     <span class="d-block"><i class="ti-user"></i> <?php echo $jcis['candidate_name']; ?></span>
                                                     <span class="d-block"><i class="ti-alarm-clock"></i> <?php echo date('d-m-Y H:i A',strtotime($jcis['inerview_date_time']));?></span>
                                                 </a>
-                                            </td>
-                                        </tr>
+                                            </div>
                                     <?php } ?>
-                                    </body>
-                                </table>
+</div>
                             <?php  }else{  ?>
                                     <div class="card-px text-center py-20 m-t-30">
                                         <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Schedule Interview'); ?> </p>
@@ -525,7 +516,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
                                                                     </td>
                                                                     <td class="text-center">
                                                                         <div class="btn-group">
-                                                                            <span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Displaystausdrop'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="cursor-pointer" onclick="displaystausdrop(<?php echo $tabval['candidate_id']; ?>,<?php echo "'candidates'"; ?>,<?php echo $tabval['current_status']; ?>,'tab_<?php echo $k;?>')" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > <i class="ti-target"></i> </span>
+                                                                            <button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer" aria-label="<?= htmlspecialchars(__('Displaystausdrop'), ENT_QUOTES, 'UTF-8'); ?>" onclick="displaystausdrop(<?php echo $tabval['candidate_id']; ?>,<?php echo "'candidates'"; ?>,<?php echo $tabval['current_status']; ?>,'tab_<?php echo $k;?>')" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-target"></i></button>
                                                                             <div class="dropdown-menu" id="dropdownlist_tab_<?php echo $k."_".$tabval['candidate_id']; ?>">
                                                                             </div>
                                                                         </div>
@@ -710,7 +701,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 
                                                     <div class="col-lg-3 text-right">
                                                         <div class="btn-group">
-                                                            <span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Displaystausdrop'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="displaystausdrop(<?php echo $jobpostings['id']; ?>,<?php echo "'job_postings'"; ?>,<?php echo $jobpostings['current_status']; ?>,'act')" class="btn " style="color: <?php echo "#". $nmm['color']; ?>;    background:  <?php echo "#".strval($nmm['background_color'] ); ?>; border-color: <?php echo "#".strval($nmm['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="ti-target"></i> </span>
+                                                            <button type="button" class="btn" aria-label="<?= htmlspecialchars(__('Displaystausdrop'), ENT_QUOTES, 'UTF-8'); ?>" onclick="displaystausdrop(<?php echo $jobpostings['id']; ?>,<?php echo "'job_postings'"; ?>,<?php echo $jobpostings['current_status']; ?>,'act')" style="color: <?php echo "#". $nmm['color']; ?>;    background:  <?php echo "#".strval($nmm['background_color'] ); ?>; border-color: <?php echo "#".strval($nmm['background_color']); ?>;" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-target"></i></button>
                                                             <div class="dropdown-menu" id="dropdownlist_act_<?php echo $jobpostings['id']; ?>">
                                                             </div>
                                                         </div>

@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_MDY_HIS_A')) {
+    define('DATE_FORMAT_MDY_HIS_A', 'm/d/Y h:i:s a');
+}
+
 $timeprint = '0';
 $maxtimeshow = 40;
 $_SESSION['apply_js']['calender'] = '1';
@@ -96,7 +100,7 @@ if(isset($_POST['save'])){
 //leave policy
 
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "gettocheckleavetypecriteria - ".date('m/d/Y h:i:s a')."</br>";
+    echo "gettocheckleavetypecriteria - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 
 $emp_id = $_SESSION['emp_id'];
@@ -106,7 +110,7 @@ $leavecriterialistres = json_decode($leavecriterialistres,1);
 $leavetype_detrails  = $leavecriterialistres['leavetype_detrails'];
 $buddy_details  = $leavecriterialistres['buddy_details'];
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "gettabledetailswithconditions&table=employee_leaves - ".date('m/d/Y h:i:s a')."</br>";
+    echo "gettabledetailswithconditions&table=employee_leaves - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $rid =  encodeId($_GET['Rid']);
 $rid = explode(":",$rid);
@@ -121,7 +125,7 @@ if($Rid!=""){
     $employee_leaves = $employee_leaves[0];
 }
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "gettabledetailswithconditions&table=employees- ".date('m/d/Y h:i:s a')."</br>";
+    echo "gettabledetailswithconditions&table=employees- ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $vdata1["where"] = array('is_active'=> 0);
 $vdata1["field"] = "id,image,display_name";
@@ -133,7 +137,7 @@ foreach ($emplos as  $value) {
     $empdata[$value['id']] =$value;
 }
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "tosearchempleavesbydate - ".date('m/d/Y h:i:s a')."</br>";
+    echo "tosearchempleavesbydate - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $leavedate = date('Y-m-d');
 $otstdate = date('Y-m-d', strtotime('-90 day', strtotime($leavedate)));
@@ -154,11 +158,11 @@ foreach($otheremp as $loopdetails){
     }
 }
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "status start  - ".date('m/d/Y h:i:s a')."</br>";
+    echo "status start  - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 $stausresult = ViewStatusData();
 if($timeprint == '1' && $maxtimeshow >= '1'){
-    echo "status end - ".date('m/d/Y h:i:s a')."</br>";
+    echo "status end - ".date(DATE_FORMAT_MDY_HIS_A)."</br>";
 }
 ?>
 <script type="text/javascript">
@@ -403,8 +407,7 @@ function submitEmployeeLeave(){
                                         </div>
                                     </div>
                                     <?php
-                                    if($employee_leaves['current_status'] ==ST_DRAFT || $employee_leaves['current_status'] ==ST_ACTIVE || $employee_leaves['current_status'] ==ST_SEND_BACK || $employee_leaves['current_status'] ==ST_CALLBACK || $employee_leaves['current_status']==""){
-}else{
+                                    if (!($employee_leaves['current_status'] == ST_DRAFT || $employee_leaves['current_status'] == ST_ACTIVE || $employee_leaves['current_status'] == ST_SEND_BACK || $employee_leaves['current_status'] == ST_CALLBACK || $employee_leaves['current_status'] == "")) {
                                         $disbalediv = 'style="pointer-events: none; opacity: 0.8;"';
                                     }  ?>
                                     <div class="row">
@@ -496,9 +499,7 @@ function submitEmployeeLeave(){
                                                             <input type="hidden" name="save" value="Add" />
 
                                                             ?>
-                                                            <button  type="button" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php if($employee_leaves['employee_id'] == $_SESSION['emp_id'] && ($employee_leaves['current_status'] == ST_ACTIVE || $employee_leaves['current_status'] ==ST_SEND_BACK) || $employee_leaves['current_status'] ==""){
-}else{ echo __('disabled');
-} ?>  name="submit_value" value="exit" onclick="submitEmployeeLeave()"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+                                                            <button  type="button" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php if (!($employee_leaves['employee_id'] == $_SESSION['emp_id'] && ($employee_leaves['current_status'] == ST_ACTIVE || $employee_leaves['current_status'] == ST_SEND_BACK) || $employee_leaves['current_status'] == "")) { echo __('disabled'); } ?>  name="submit_value" value="exit" onclick="submitEmployeeLeave()"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
                                                         </div>
                                                     </div>
                                                 </div>

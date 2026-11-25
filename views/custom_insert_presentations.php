@@ -273,7 +273,7 @@ if(isset($_GET['PID'] )) {
                         </div>
                     </div>
                     <!--end::Card-->
-                    <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+                    <div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
                         <div class="modal-dialog " >
                             <div class="modal-content"  id="popup2">
                                 <div class="modal-header">
@@ -311,7 +311,7 @@ if(isset($_GET['PID'] )) {
                     </div>
                 </div>
 
-                <div id="kt_modal_KTDatatable_remote2" class="modal fade" role="dialog" aria-hidden="true">
+                <div id="kt_modal_KTDatatable_remote2" class="modal fade" aria-hidden="true">
                     <div class="modal-dialog " >
                         <div class="modal-content"  id="popup3">
                             <div class="modal-header">
@@ -356,7 +356,7 @@ if(isset($_GET['PID'] )) {
             </div>
         </div>
 
-        <div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+        <div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
             <div class="modal-dialog modal-xl" >
                 <div class="modal-content"  id="popup24">
 

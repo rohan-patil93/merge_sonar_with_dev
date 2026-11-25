@@ -1,4 +1,7 @@
 <?php
+if (!defined('DATE_FORMAT_DMY')) {
+    define('DATE_FORMAT_DMY', 'd M Y');
+}
 if ($_GET['print'] == "Y") {
     include_once '../includes/session.php';
     include_once '../dbconfig.php';
@@ -138,12 +141,23 @@ function currencyFormat($number, $config)
         }
     }
 }
+function formatNumberChunkWords($number, $counter, $words, $digits, $hasLeadingChunk)
+{
+    $plural = ($counter > 0 && $number > 9) ? 's' : null;
+    $hundred = ($counter == 1 && $hasLeadingChunk) ? ' and ' : null;
+    if ($number < 21) {
+        return $words[$number] . " " . $digits[$counter] . $plural . " " . $hundred;
+    }
+    return $words[floor($number / 10) * 10]
+        . " " . $words[$number % 10] . " "
+        . $digits[$counter] . $plural . " " . $hundred;
+}
+
 function numberToWordFormate($number)
 {
 
     $no = floor($number ?? 0);
     $point = (int) round((($number ?? 0) - $no) * 100);
-    $hundred = null;
     $digits_1 = strlen($no);
     $i = 0;
     $str = array();
@@ -184,14 +198,9 @@ function numberToWordFormate($number)
         $no = floor($no / $divider);
         $i += ($divider == 10) ? 1 : 2;
         if ($number) {
-            $plural = (($counter = count((array) $str)) && $number > 9) ? 's' : null;
-            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
-            $str[] = ($number < 21) ? $words[$number] .
-                " " . $digits[$counter] . $plural . " " . $hundred
-                :
-                $words[floor($number / 10) * 10]
-                . " " . $words[$number % 10] . " "
-                . $digits[$counter] . $plural . " " . $hundred;
+            $counter = count((array) $str);
+            $hasLeading = !empty($str[0]);
+            $str[] = formatNumberChunkWords($number, $counter, $words, $digits, $hasLeading);
         } else {
             $str[] = null;
         }
@@ -367,13 +376,13 @@ if ($party_table == "customers" || $party_table = "") {
                             <?php echo $invoicedatelable; ?>:
                         </th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;">
-                            <?php echo date("d M Y", strtotime($transaction['transaction_date'])); ?>
+                            <?php echo date(DATE_FORMAT_DMY, strtotime($transaction['transaction_date'])); ?>
                         </td>
                     </tr>
                     <tr>
                         <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Due Date'); ?>:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;">
-                            <?php echo date("d M Y", strtotime($transaction['due_date'])); ?>
+                            <?php echo date(DATE_FORMAT_DMY, strtotime($transaction['due_date'])); ?>
                         </td>
                     </tr>
                     <tr>
@@ -395,7 +404,7 @@ if ($party_table == "customers" || $party_table = "") {
                         </td>
                     </tr>
                     <?php if ($transaction['ref_no'] != "" || $transaction['ref_date'] != "") {
-                        $transaction['ref_date'] = ($transaction['ref_date'] != '0000-00-00' && $transaction['ref_date'] != '1970-01-01') ? date("d M Y", strtotime($transaction['ref_date'])) : "";
+                        $transaction['ref_date'] = ($transaction['ref_date'] != '0000-00-00' && $transaction['ref_date'] != '1970-01-01') ? date(DATE_FORMAT_DMY, strtotime($transaction['ref_date'])) : "";
                         ?>
                         <tr>
                             <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">
@@ -407,7 +416,7 @@ if ($party_table == "customers" || $party_table = "") {
                         </tr>
                     <?php }
                     if ($transaction['doc_ref_no'] != "" || $transaction['doc_ref_date'] != "") {
-                        $transaction['doc_ref_date'] = ($transaction['doc_ref_date'] != '0000-00-00' && $transaction['doc_ref_date'] != '1970-01-01') ? date("d M Y", strtotime($transaction['doc_ref_date'])) : "";
+                        $transaction['doc_ref_date'] = ($transaction['doc_ref_date'] != '0000-00-00' && $transaction['doc_ref_date'] != '1970-01-01') ? date(DATE_FORMAT_DMY, strtotime($transaction['doc_ref_date'])) : "";
                         ?>
                         <tr>
                             <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Doc Ref No./Date'); ?>:
@@ -464,10 +473,9 @@ if ($party_table == "customers" || $party_table = "") {
                 </div>
             </div>
 
-            <table role="presentation" style="width:100%;margin-top: 5px;">
-                <tr>
-                    <td class="" style="width:50%;">
-                        <div class=""
+            <div style="display: flex; width: 100%; margin-top: 5px;">
+                <div style="width: 50%;">
+                    <div class=""
                             style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <span
                                 style="color: #333333;font-size: 12px;font-weight: 500;"><?php echo $billedtolable; ?></span>
@@ -490,10 +498,9 @@ if ($party_table == "customers" || $party_table = "") {
                                 </tr>
                             </table>
                         </div>
-                    </td>
-
-                    <td class="" style="width:50%;">
-                        <div class=""
+                </div>
+                <div style="width: 50%;">
+                    <div class=""
                             style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <span
                                 style="color: #333333;font-size: 12px;font-weight: 500;"><?php echo $shippedtolable; ?></span>
@@ -517,9 +524,8 @@ if ($party_table == "customers" || $party_table = "") {
                                 </tr>
                             </table>
                         </div>
-                    </td>
-                <tr>
-            </table>
+                </div>
+            </div>
             <table style="width:99%;margin:10px 0 0 0;">
                 <tr style="background: #eeeeee;">
                     <th scope="col" style="padding:5px;text-align: left;">#</th>
@@ -589,11 +595,9 @@ if ($party_table == "customers" || $party_table = "") {
                     <?php $seq++;
                 } ?>
             </table>
-            <table role="presentation" style="width:99%;margin-top:5px;">
-                <tr>
-                    <td style="width:60%;vertical-align: top;">
-
-                        <div class=""
+            <div style="display: flex; width: 99%; margin-top: 5px; align-items: flex-start;">
+                <div style="width: 60%; vertical-align: top;">
+                    <div class=""
                             style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <h3 style="font-size: 12px;color:#333333;margin: 0; white-space: normal;"><?= htmlspecialchars(__('Bank & UPI Detail'), ENT_QUOTES, 'UTF-8'); ?>
                             </h3>
@@ -664,10 +668,9 @@ if ($party_table == "customers" || $party_table = "") {
                                 </table>
                             <?php } ?>
                         </div>
-
-                    </td>
-                    <td style="width:40%;vertical-align: top;">
-                        <?php if ($amountpartshowornot == 'Y') { ?>
+                </div>
+                <div style="width: 40%; vertical-align: top;">
+                    <?php if ($amountpartshowornot == 'Y') { ?>
                             <table style="width: 100%; margin:10px 0 0 0;">
                                 <tr>
                                     <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('Sub Total'); ?>
@@ -824,13 +827,13 @@ if ($party_table == "customers" || $party_table = "") {
                                                     foreach ((array) $payment_term_history as $pth) { ?>
                                                         <tr>
                                                             <td class="p-2">
-                                                                <?php echo date("d M Y", strtotime($pth['due_date'])); ?>
+                                                                <?php echo date(DATE_FORMAT_DMY, strtotime($pth['due_date'])); ?>
                                                             </td>
                                                             <td class="p-2 text-right">
                                                                 <?php echo customeummarmonyformate($pth['amount']); ?>
                                                                 <?php if ($pth['extra_date'] != "" && $pth['extra_amt'] != "") { ?>
                                                                     <span class='d-block f-10 f-w-600'><?= __('Before Date'); ?>
-                                                                        <?php echo date("d M Y", strtotime($pth['extra_date'])) . " (" . customeummarmonyformate($pth['extra_amt']) . ")"; ?></span> <?php
+                                                                        <?php echo date(DATE_FORMAT_DMY, strtotime($pth['extra_date'])) . " (" . customeummarmonyformate($pth['extra_amt']) . ")"; ?></span> <?php
                                                                 } ?>
                                                             </td>
                                                         </tr>
@@ -893,9 +896,8 @@ if ($party_table == "customers" || $party_table = "") {
                 <tr>
                     <td colspan="2">
                         <span style="float:inline-end;"><?= htmlspecialchars(__('E. & O.E.'), ENT_QUOTES, 'UTF-8'); ?></span>
-                    </td>
-                </tr>
-            </table>
+                </div>
+            </div>
         </div>
         <div>
             <?php

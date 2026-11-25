@@ -228,13 +228,13 @@ function addMorefloorSpaces(){
                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="y_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['y_size']; ?>" readonly>
                 </div>
                 <div class="col-lg-2">
-                 <span class="all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="lockFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $cabin['id']!=""?"style='display:none'":""; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Save') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-save"></i> <?= __('Save') ?></span>
+                 <button type="button" class="btn p-0 border-0 bg-transparent all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="lockFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $cabin['id']!=""?"style='display:none'":""; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Save') ?>"><i class="ti-save"></i> <?= __('Save') ?></button>
 
-                <span class="all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $cabin['id']!=""?"":"style='display:none'"; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Edit') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-edit"></i> <?= __('Edit') ?></span>
+                <button type="button" class="btn p-0 border-0 bg-transparent all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $cabin['id']!=""?"":"style='display:none'"; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Edit') ?>"><i class="fa fa-edit"></i> <?= __('Edit') ?></button>
 
                 <span id="allocateequipment_btn_<?php echo $cabincnt; ?>">
                     <?php if($cabin['id']!=""){ ?>
-                        <span class="cursor-pointer m-l-20 text-danger" onclick="removeBuildingFloorSpace('<?php echo $cabin['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash"></i> <?= __('Remove') ?></span>
+                        <button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer m-l-20 text-danger" onclick="removeBuildingFloorSpace('<?php echo $cabin['id']; ?>')"><i class="fa fa-trash"></i> <?= __('Remove') ?></button>
                     <?php } ?>
                 </span>
                 </div>

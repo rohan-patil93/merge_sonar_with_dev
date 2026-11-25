@@ -195,7 +195,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
                                 <span class="fa fa-thumbs-up text-white"></span> &nbsp; <?= __('Submit For Approval'); ?>
                             </button>
                         </div>
-                        <div class="btn-group workflow-btn" id="status_procee_id" <?php if((count((array)$aboveactive)>0 && (count((array)$listactive)==0 || ($data['all_data']['work_days'] != ($data['all_data']['present_days']+$data['all_data']['absent_day']+$data['all_data']['leave_days']))))){ ?> style="" <?php
+                        <div class="btn-group workflow-btn" id="status_procee_id" <?php if (count((array)$aboveactive) > 0 && (count((array)$listactive) == 0 || ($data['all_data']['work_days'] != ($data['all_data']['present_days'] + $data['all_data']['absent_day'] + $data['all_data']['leave_days'])))) { ?> style="" <?php
 }else{ ?> style="display:none;"  <?php
 } ?>  >
 
@@ -300,17 +300,17 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
                                     </div>
                                     <?php if( ($ccww=="" || ($ccedit==1 && $ccww !="" && $viewstatus !=1 ))&& $ccww!='o' ){ ?>
                                         <div class="d-block">
-                                            <span class="form-label badge badge-md cursor-pointer badge-hover" style="background-color:#2a9d8f;" <?php if($checkcurrent_status !=1){ ?> onclick="attendanceupload('p','<?php echo $predate; ?>',<?php echo $num; ?>,'Present')" <?php
+                                            <button type="button" class="btn p-0 border-0 badge badge-md cursor-pointer badge-hover" style="background-color:#2a9d8f;" <?php if($checkcurrent_status !=1){ ?> onclick="attendanceupload('p','<?php echo $predate; ?>',<?php echo $num; ?>,'Present')" <?php
 }else{ ?> onclick="alradysubmitedmanager()" <?php
-} ?>  role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">P</span>
-                                            <span class="form-label badge badge-md cursor-pointer badge-hover" style="background-color:#d62828" <?php if($checkcurrent_status !=1){ ?>  onclick="attendanceupload('a','<?php echo $predate; ?>',<?php echo $num; ?>,'Absent')"<?php
+} ?>>P</button>
+                                            <button type="button" class="btn p-0 border-0 badge badge-md cursor-pointer badge-hover" style="background-color:#d62828" <?php if($checkcurrent_status !=1){ ?>  onclick="attendanceupload('a','<?php echo $predate; ?>',<?php echo $num; ?>,'Absent')"<?php
 }else{ ?> onclick="alradysubmitedmanager()" <?php
-} ?> role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">A</span>
+} ?>>A</button>
                                         </div>
                                         <div class="d-block">
-                                            <span class="form-label badge badge-md cursor-pointer badge-hover mb-0" style="background-color:#e76f51" <?php if($checkcurrent_status !=1){ ?>  onclick="attendanceupload('z','<?php echo $predate; ?>',<?php echo $num; ?>,'Half Day')"<?php
+                                            <button type="button" class="btn p-0 border-0 badge badge-md cursor-pointer badge-hover mb-0" style="background-color:#e76f51" <?php if($checkcurrent_status !=1){ ?>  onclick="attendanceupload('z','<?php echo $predate; ?>',<?php echo $num; ?>,'Half Day')"<?php
 }else{ ?> onclick="alradysubmitedmanager()" <?php
-} ?> role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Z</span>
+} ?>>Z</button>
                                             <span class="form-label badge badge-md  badge-hover mb-0" style="background-color:#e9c46a">L</span>
                                         </div>
                                     <?php } ?>

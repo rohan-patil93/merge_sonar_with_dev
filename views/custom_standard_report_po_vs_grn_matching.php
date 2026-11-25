@@ -103,33 +103,35 @@ $_SESSION['download_data'] = [];
                         <tr>
                             <!-- Left Column: PO Header -->
                             <td>
-                                <table role="presentation">
-                                    <tr>
-                                        <td class="p-1"><?= __('PO No.'); ?></td>
-                                        <td class="p-1 cursor-pointer text-primary"
-                                        onclick="openBucketModal('<?= htmlspecialchars($tableslist[0]['purchase_id']) ?>>','PO','<?php echo $tableslist[0]['po_no']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $tableslist[0]['po_no']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('PO Date'); ?></td>
-                                        <td class="p-1"><?php echo fromDate($tableslist[0]['po_date']); ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('Vendor'); ?></td>
-                                        <td class="p-1"><?php echo $tableslist[0]['party_name']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('PO Qty'); ?></td>
-                                        <td class="p-1 text-right"><?php echo customeummarmonyformate($tableslist[0]['po_qty']); ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('PO Amount'); ?></td>
-                                        <td class="p-1 text-right"><?php echo customeummarmonyformate($tableslist[0]['po_amount']); ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-1"><?= __('Requested By'); ?></td>
-                                        <td class="p-1"><?php echo $_SESSION['users'][$tableslist[0]['po_requested']] ?? '-'; ?></td>
-                                    </tr>
-                                </table>
+                                <div class="d-flex flex-column gap-1">
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('PO No.'); ?></span>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent text-primary"
+                                            onclick="openBucketModal('<?= htmlspecialchars($tableslist[0]['purchase_id']) ?>>','PO','<?php echo $tableslist[0]['po_no']; ?>')">
+                                            <?php echo $tableslist[0]['po_no']; ?>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('PO Date'); ?></span>
+                                        <span><?php echo fromDate($tableslist[0]['po_date']); ?></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('Vendor'); ?></span>
+                                        <span><?php echo $tableslist[0]['party_name']; ?></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('PO Qty'); ?></span>
+                                        <span class="text-right"><?php echo customeummarmonyformate($tableslist[0]['po_qty']); ?></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('PO Amount'); ?></span>
+                                        <span class="text-right"><?php echo customeummarmonyformate($tableslist[0]['po_amount']); ?></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <span><?= __('Requested By'); ?></span>
+                                        <span><?php echo $_SESSION['users'][$tableslist[0]['po_requested']] ?? '-'; ?></span>
+                                    </div>
+                                </div>
                             </td>
 
 
@@ -149,7 +151,12 @@ $_SESSION['download_data'] = [];
                                     <tbody>
                                         <?php foreach ($tableslist as $row) { ?>
                                             <tr>
-                                                <td class="p-1 cursor-pointer text-primary" onclick="openBucketModal('<?= htmlspecialchars($row['goods_id']) ?>','GRN', '<?php echo $row['grn_no']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $row['grn_no'] ?? "-"; ?></td>
+                                                <td class="p-1">
+                                                    <button type="button" class="btn p-0 border-0 bg-transparent text-primary"
+                                                        onclick="openBucketModal('<?= htmlspecialchars($row['goods_id']) ?>','GRN', '<?php echo $row['grn_no']; ?>')">
+                                                        <?php echo $row['grn_no'] ?? "-"; ?>
+                                                    </button>
+                                                </td>
                                                 <td class="p-1"><?php echo fromDate($row['grn_date']) ?? "-"; ?></td>
                                                 <td class="p-1"><?php echo $row['grn_party'] ?? "-"; ?></td>
                                                 <td class="text-right p-1"><?php echo customeummarmonyformate($row['grn_qty']); ?></td>

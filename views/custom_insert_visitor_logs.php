@@ -1,14 +1,15 @@
 <?php
 defined('DIR_UPLOADS_VISITORS') || define('DIR_UPLOADS_VISITORS', 'uploads/visitors/');
 defined('HTML_DATA_ICON') || define('HTML_DATA_ICON', '" data-icon="');
-defined('TITLE_VISITOR_PASS') || define('TITLE_VISITOR_PASS', TITLE_VISITOR_PASS);
+defined('TITLE_VISITOR_PASS') || define('TITLE_VISITOR_PASS', 'VISITOR PASS');
 if (!function_exists('getBarcodeSVG')) {
     function getBarcodeSVG($text)
     {
         $text = strtoupper(trim($text));
         $text = preg_replace('/[^0-9A-Z\-\.\ \$\/\+\%]/', '', $text);
-        if ($text === '')
+        if ($text === '') {
             return '';
+        }
 
         $fullText = '*' . $text . '*';
 
@@ -69,8 +70,9 @@ if (!function_exists('getBarcodeSVG')) {
         for ($i = 0; $i < strlen($fullText); $i++) {
             $char = $fullText[$i];
             $pattern = $code39[$char] ?? null;
-            if ($pattern === null)
+            if ($pattern === null) {
                 continue;
+            }
 
             for ($j = 0; $j < 9; $j++) {
                 $isBar = ($j % 2 === 0);
@@ -132,7 +134,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'insert' && isset($_POST['vi
         if (isset($parts[1])) {
             $decodedData = base64_decode($parts[1]);
             $newImageName = 'webcam_' . time() . '_' . uniqid() . '.jpg';
-            $targetDir = 'uploads/visitors/';
+            $targetDir = DIR_UPLOADS_VISITORS;
             if (!is_dir($targetDir)) {
                 mkdir($targetDir, 0777, true);
             }
@@ -168,7 +170,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'insert' && isset($_POST['vi
                 if ($_FILES['vendor_supplier_proof_document_file']['error'][$idx] === UPLOAD_ERR_OK) {
                     $ext = pathinfo($fname, PATHINFO_EXTENSION);
                     $newfilename = 'proof_' . time() . '_' . uniqid() . '.' . $ext;
-                    $path = 'uploads/visitors/';
+                    $path = DIR_UPLOADS_VISITORS;
                     if (!is_dir($path)) {
                         mkdir($path, 0777, true);
                     }
@@ -674,7 +676,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                             foreach ($id_card_types_res as $value) {
                                                                 $sel = (!empty($return['idcard_type']) && $return['idcard_type'] == $value['genc_detail_code']) ? 'selected' : '';
                                                                 $icon = !empty($value['option_icon']) ? htmlspecialchars($value['option_icon']) : '';
-                                                                echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
+                                                                echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
                                                             }
                                                         } ?>
                                                     </select>
@@ -719,7 +721,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                              foreach ($expected_duration_res as $value) {
                                                                  $sel = (!empty($return['expected_duration']) && $return['expected_duration'] == $value['genc_detail_code']) ? 'selected' : '';
                                                                  $icon = !empty($value['option_icon']) ? htmlspecialchars($value['option_icon']) : '';
-                                                                 echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
+                                                                 echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
                                                              }
                                                          } else {
                                                             ?>
@@ -747,7 +749,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                             foreach ($vehicle_type_res as $value) {
                                                                 $sel = ((string)($return['vehicle_type'] ?? '') === (string)$value['genc_detail_code']) ? 'selected' : '';
                                                                 $icon = !empty($value['option_icon']) ? htmlspecialchars($value['option_icon']) : '';
-                                                                echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
+                                                                echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
                                                             }
                                                         } else {
                                                             ?>
@@ -785,7 +787,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                         foreach ($delivery_company_res as $e) {
                                                             $sel = (!empty($return['delivery_company_person']) && $return['delivery_company_person'] == $e['genc_detail_code']) ? 'selected' : '';
                                                             $icon = !empty($e['option_icon']) ? htmlspecialchars($e['option_icon']) : '';
-                                                            echo '<option value="' . htmlspecialchars($e['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($e['genc_detail_name']) . '</option>';
+                                                            echo '<option value="' . htmlspecialchars($e['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($e['genc_detail_name']) . '</option>';
                                                         }
                                                     } ?>
                                                     <option value="__new__">+ <?= __('Add New Company'); ?></option>
@@ -833,7 +835,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                         foreach ($delivery_type_res as $value) {
                                                             $sel = ((string)($return['delivery_type'] ?? '') === (string)$value['genc_detail_code']) ? 'selected' : '';
                                                             $icon = !empty($value['option_icon']) ? htmlspecialchars($value['option_icon']) : '';
-                                                            echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
+                                                            echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
                                                         }
                                                     } else {
                                                         ?>
@@ -914,7 +916,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                         foreach ($service_company_res as $e) {
                                                             $sel = (!empty($return['service_company']) && $return['service_company'] == $e['genc_detail_code']) ? 'selected' : '';
                                                             $icon = !empty($e['option_icon']) ? htmlspecialchars($e['option_icon']) : '';
-                                                            echo '<option value="' . htmlspecialchars($e['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($e['genc_detail_name']) . '</option>';
+                                                            echo '<option value="' . htmlspecialchars($e['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($e['genc_detail_name']) . '</option>';
                                                         }
                                                     } ?>
                                                     <option value="__new__">+ <?= __('Add New Company'); ?></option>
@@ -986,7 +988,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                             foreach ($id_card_types_res as $v) {
                                                                 $sel = (!empty($return['idcard_type_service']) && $return['idcard_type_service'] == $v['genc_detail_code']) ? 'selected' : '';
                                                                 $icon = !empty($v['option_icon']) ? htmlspecialchars($v['option_icon']) : '';
-                                                                echo '<option value="' . htmlspecialchars($v['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($v['genc_detail_name']) . '</option>';
+                                                                echo '<option value="' . htmlspecialchars($v['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($v['genc_detail_name']) . '</option>';
                                                             }
                                                         } ?>
                                                     </select>
@@ -1012,7 +1014,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                             foreach ($service_classification_res as $value) {
                                                                 $sel = ((string)($return['service_classification'] ?? '') === (string)$value['genc_detail_code']) ? 'selected' : '';
                                                                 $icon = !empty($value['option_icon']) ? htmlspecialchars($value['option_icon']) : '';
-                                                                echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
+                                                                echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
                                                             }
                                                         } else {
                                                             ?>
@@ -1297,7 +1299,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                          foreach ($id_card_types_res as $value) {
                                                              $sel = (!empty($return['doctor_idcard_type']) && $return['doctor_idcard_type'] == $value['genc_detail_code']) ? 'selected' : '';
                                                              $icon = !empty($value['option_icon']) ? htmlspecialchars($value['option_icon']) : '';
-                                                             echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
+                                                             echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
                                                          }
                                                      } ?>
                                                 </select>
@@ -1375,7 +1377,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                         foreach ($vendor_supplier_entry_type_res as $value) {
                                                             $sel = ((string)($return['vendor_supplier_entry_type'] ?? '') === (string)$value['genc_detail_code']) ? 'selected' : '';
                                                             $icon = !empty($value['option_icon']) ? htmlspecialchars($value['option_icon']) : '';
-                                                            echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . '" data-icon="' . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
+                                                            echo '<option value="' . htmlspecialchars($value['genc_detail_code']) . HTML_DATA_ICON . $icon . '" ' . $sel . '>' . htmlspecialchars($value['genc_detail_name']) . '</option>';
                                                         }
                                                     } else {
                                                         ?>
@@ -1614,7 +1616,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     <input type="hidden" name="existing_vendor_supplier_document_file"
                                                         value="<?php echo htmlspecialchars($return['vendor_supplier_document_file']); ?>">
                                                     <div class="small mt-1"><a
-                                                            href="uploads/visitors/<?php echo htmlspecialchars($return['vendor_supplier_document_file']); ?>"
+                                                            href="<?php echo DIR_UPLOADS_VISITORS . htmlspecialchars($return['vendor_supplier_document_file']); ?>"
                                                             target="_blank"><i class="fa fa-eye me-1"></i><?= __('View Document'); ?></a>
                                                     </div>
                                                 <?php endif; ?>
@@ -1674,7 +1676,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                         name="existing_vendor_supplier_proof_document_file[]"
                                                         value="<?php echo htmlspecialchars($pfile); ?>">
                                                     <div class="small mt-1"><a
-                                                            href="uploads/visitors/<?php echo htmlspecialchars($pfile); ?>"
+                                                            href="<?php echo DIR_UPLOADS_VISITORS . htmlspecialchars($pfile); ?>"
                                                             target="_blank"><i class="fa fa-eye me-1"></i><?= __('View Proof'); ?></a>
                                                     </div>
                                                 <?php endif; ?>
@@ -1924,7 +1926,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             class="photo-preview-container <?php echo !empty($return['image_path']) ? 'd-flex' : 'd-none'; ?>">
                                             <div class="photo-preview-frame">
                                                 <img id="personPreviewInline"
-                                                    src="<?php echo !empty($return['image_path']) ? 'uploads/visitors/' . htmlspecialchars($return['image_path']) : ''; ?>"
+                                                    src="<?php echo !empty($return['image_path']) ? DIR_UPLOADS_VISITORS . htmlspecialchars($return['image_path']) : ''; ?>"
                                                     alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     class="<?php echo empty($return['image_path']) ? 'd-none' : ''; ?>">
                                             </div>
@@ -2013,17 +2015,17 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     </div>
                                     <?php
                                     $titleText = TITLE_VISITOR_PASS;
-                                    if ($type === 'delivery')
+                                    if ($type === 'delivery') {
                                         $titleText = 'DELIVERY PASS';
-                                    elseif ($type === 'service')
+                                    } elseif ($type === 'service') {
                                         $titleText = 'SERVICE PASS';
-                                    elseif ($type === 'employee')
+                                    } elseif ($type === 'employee') {
                                         $titleText = 'EMPLOYEE PASS';
-                                    elseif ($type === 'doctor')
+                                    } elseif ($type === 'doctor') {
                                         $titleText = 'DOCTOR PASS';
-                                    elseif ($type === 'vendor_supplier')
+                                    } elseif ($type === 'vendor_supplier') {
                                         $titleText = 'VENDOR/SUPPLIER PASS';
-                                    elseif ($type === 'others') {
+                                    } elseif ($type === 'others') {
                                         $specify = trim($return['visit_type_other'] ?? '');
                                         $titleText = $specify ? strtoupper($specify) . ' PASS' : TITLE_VISITOR_PASS;
                                     }
@@ -2035,7 +2037,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                 <div class="badge-card-body">
                                     <div class="badge-photo-area">
                                         <img alt="" id="badgePreviewPhoto"
-                                            src="<?php echo !empty($return['image_path']) ? 'uploads/visitors/' . htmlspecialchars($return['image_path']) : ''; ?>"
+                                            src="<?php echo !empty($return['image_path']) ? DIR_UPLOADS_VISITORS . htmlspecialchars($return['image_path']) : ''; ?>"
                                             class="<?php echo empty($return['image_path']) ? 'd-none' : ''; ?>">
                                         <div
                                             class="badge-photo-placeholder <?php echo !empty($return['image_path']) ? 'd-none' : ''; ?>">
@@ -2297,6 +2299,9 @@ if ($printMode && $printRid) {
                 }
             }
             break;
+        default:
+            // Default visitor log display values already initialized
+            break;
     }
 
     // Get gate name
@@ -2322,8 +2327,9 @@ if ($printMode && $printRid) {
             }
         }
     }
-    if ($prType === 'employee' && empty($pr['emp_temp_enable']))
+    if ($prType === 'employee' && empty($pr['emp_temp_enable'])) {
         $prHostName = 'Self Check-in';
+    }
 
     $prInTime = $pr['in_datetime'] ?? date('d M Y H:i');
     $prImage = $pr['image_path'] ?? '';
@@ -2366,7 +2372,7 @@ if ($printMode && $printRid) {
                     <div class="print-badge-body">
                         <div class="print-badge-photo-area">
                             <?php if (!empty($prImage)): ?>
-                                <img src="uploads/visitors/<?= htmlspecialchars($prImage) ?>" alt="<?= htmlspecialchars(__('Visitor'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <img src="<?= DIR_UPLOADS_VISITORS . htmlspecialchars($prImage) ?>" alt="<?= htmlspecialchars(__('Visitor'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php else: ?>
                                 <div class="print-badge-photo-placeholder">
                                     <i class="fa fa-user"></i>
@@ -2374,8 +2380,16 @@ if ($printMode && $printRid) {
                             <?php endif; ?>
                         </div>
                         <div class="print-badge-name"><?= htmlspecialchars($prName ?: 'Visitor') ?></div>
+                        <?php
+                        $badgeTypeText = 'Visitor';
+                        if ($prType === 'vendor_supplier') {
+                            $badgeTypeText = 'Vendor/Supplier';
+                        } elseif (!empty($prType)) {
+                            $badgeTypeText = $prType;
+                        }
+                        ?>
                         <div class="print-badge-type-pill" style="background-color: <?= $accent['pill'] ?>;">
-                            <?= strtoupper($prType === 'vendor_supplier' ? 'Vendor/Supplier' : ($prType ?: 'Visitor')) ?>
+                            <?= strtoupper($badgeTypeText) ?>
                         </div>
                         <div class="print-badge-info-grid">
                             <div class="print-badge-info-item">
@@ -2495,8 +2509,9 @@ if (!empty($service_company_res)) {
     foreach ($service_company_res as $val) {
         $code = is_array($val) ? ($val['genc_detail_code'] ?? '') : ($val->genc_detail_code ?? '');
         $name = is_array($val) ? ($val['genc_detail_name'] ?? '') : ($val->genc_detail_name ?? '');
-        if ($code !== '')
+        if ($code !== '') {
             $service_company_map[$code] = $name;
+        }
     }
 }
 $delivery_company_map = [];
@@ -2504,8 +2519,9 @@ if (!empty($delivery_company_res)) {
     foreach ($delivery_company_res as $val) {
         $code = is_array($val) ? ($val['genc_detail_code'] ?? '') : ($val->genc_detail_code ?? '');
         $name = is_array($val) ? ($val['genc_detail_name'] ?? '') : ($val->genc_detail_name ?? '');
-        if ($code !== '')
+        if ($code !== '') {
             $delivery_company_map[$code] = $name;
+        }
     }
 }
 ?>

@@ -215,6 +215,30 @@ function resolveContractCreateRoleAccess()
  * Load user-assigned contract types via single API (label/code/class).
  * Shape keeps can_standard / can_amc / show_toggle for existing submit guards.
  */
+function normalizeContractTypeRows($types, &$access)
+{
+    $normalized = array();
+    foreach ((array) $types as $typeRow) {
+        $rowArr = is_array($typeRow) ? $typeRow : json_decode(json_encode($typeRow), true);
+        $code = trim((string) ($rowArr['code'] ?? ''));
+        if ($code == '') {
+            continue;
+        }
+        $normalized[] = array(
+            'label' => (string) ($rowArr['label'] ?? ''),
+            'code' => $code,
+            'class' => (string) ($rowArr['class'] ?? ''),
+        );
+        if ($code == 'standard') {
+            $access['can_standard'] = true;
+        }
+        if ($code == 'amc') {
+            $access['can_amc'] = true;
+        }
+    }
+    return $normalized;
+}
+
 function resolveUserContractTypeAccessFromApi()
 {
     $access = array(
@@ -226,33 +250,9 @@ function resolveUserContractTypeAccessFromApi()
 
     $url = API . "?mode=getusercontracttypelist&method=get";
     $res = json_decode(callAPI($url), true);
-    $types = array();
-    if (is_array($res) && isset($res['types']) && is_array($res['types'])) {
-        $types = $res['types'];
-    }
+    $types = (is_array($res) && isset($res['types']) && is_array($res['types'])) ? $res['types'] : array();
 
-    $normalized = array();
-    if (count((array) $types) > 0) {
-        foreach ($types as $typeRow) {
-            $rowArr = is_array($typeRow) ? $typeRow : json_decode(json_encode($typeRow), true);
-            $code = trim((string) ($rowArr['code'] ?? ''));
-            if ($code == '') {
-                continue;
-            }
-            $normalized[] = array(
-                'label' => (string) ($rowArr['label'] ?? ''),
-                'code' => $code,
-                'class' => (string) ($rowArr['class'] ?? ''),
-            );
-            if ($code == 'standard') {
-                $access['can_standard'] = true;
-            }
-            if ($code == 'amc') {
-                $access['can_amc'] = true;
-            }
-        }
-    }
-
+    $normalized = normalizeContractTypeRows($types, $access);
     $access['types'] = $normalized;
     $access['show_toggle'] = (count((array) $normalized) > 1);
 
@@ -274,7 +274,7 @@ if ($is_edit_mode) {
     } else {
         $associatedContracts = [];
     }
-    loadContractDataFallback($contract_id, $data);
+    loadContractDataFallback($data);
 }
 
 $contract_is_approved = $is_edit_mode && isContractApproved($formData);
@@ -352,7 +352,7 @@ if (count((array) $amc_gc_details) > 0) {
     }
 }
 $amc_service_frequencies = merge_amc_service_frequency_options($amc_service_frequencies_raw);
-function loadContractDataFallback($id, $data)
+function loadContractDataFallback($data = [])
 {
     global $formData, $documentDetails, $permissionDetails, $workflow, $originator;
 
@@ -669,6 +669,19 @@ function resolveNormalizedServiceDates($start, $end, $contractStartYmd, $contrac
     return array($startVal, $endVal);
 }
 
+function fallbackNormalizedDate($dateVal, $fallbackPrimary, $fallbackSecondary)
+{
+    if ($dateVal === '' || $dateVal === DATE_EPOCH) {
+        if ($fallbackPrimary !== '') {
+            return $fallbackPrimary;
+        }
+        if ($fallbackSecondary !== '') {
+            return $fallbackSecondary;
+        }
+    }
+    return $dateVal;
+}
+
 function normalizeAmcAssetsForLocation($locIdx, $locStart, $locEnd, $contractStartYmd, $contractEndYmd, $forceAlign)
 {
     if (!isset($_POST['amc_asset'][$locIdx]) || !is_array($_POST['amc_asset'][$locIdx])) {
@@ -682,20 +695,10 @@ function normalizeAmcAssetsForLocation($locIdx, $locStart, $locEnd, $contractSta
             $assetStart = $locStart;
             $assetEnd = $locEnd;
         } else {
-            $assetStart = dateconvertdbformat(trim((string) ($assetRow['service_start_date'] ?? '')));
-            $assetEnd = dateconvertdbformat(trim((string) ($assetRow['service_end_date'] ?? '')));
-            if (($assetStart == '' || $assetStart == DATE_EPOCH) && $locStart != '') {
-                $assetStart = $locStart;
-            }
-            if (($assetEnd == '' || $assetEnd == DATE_EPOCH) && $locEnd != '') {
-                $assetEnd = $locEnd;
-            }
-            if (($assetStart == '' || $assetStart == DATE_EPOCH) && $contractStartYmd != '') {
-                $assetStart = $contractStartYmd;
-            }
-            if (($assetEnd == '' || $assetEnd == DATE_EPOCH) && $contractEndYmd != '') {
-                $assetEnd = $contractEndYmd;
-            }
+            $rawStart = dateconvertdbformat(trim((string) ($assetRow['service_start_date'] ?? '')));
+            $rawEnd = dateconvertdbformat(trim((string) ($assetRow['service_end_date'] ?? '')));
+            $assetStart = fallbackNormalizedDate($rawStart, $locStart, $contractStartYmd);
+            $assetEnd = fallbackNormalizedDate($rawEnd, $locEnd, $contractEndYmd);
         }
         $_POST['amc_asset'][$locIdx][$assetIdx]['service_start_date'] = $assetStart;
         $_POST['amc_asset'][$locIdx][$assetIdx]['service_end_date'] = $assetEnd;
@@ -751,6 +754,26 @@ function validateUnifiedContractBasics(&$notification)
     return $isValid;
 }
 
+function uploadSingleContractAdditionalFile($i, $prefix, $uploadDir, $allowedTypes, $maxSize)
+{
+    if ($_FILES['additional_document_file']['error'][$i] !== UPLOAD_ERR_OK) {
+        return;
+    }
+    $fileName = $_FILES['additional_document_file']['name'][$i];
+    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    if (in_array($fileExt, (array) $allowedTypes) && $_FILES['additional_document_file']['size'][$i] <= $maxSize) {
+        $newFileName = time() . "_" . $prefix . $i . "_" . basename($fileName);
+        $filePath = $uploadDir . $newFileName;
+
+        if (move_uploaded_file($_FILES['additional_document_file']['tmp_name'][$i], $filePath)) {
+            $currentFiles = $_POST['all_additional_documents'] ?? '';
+            $currentFiles = !empty($currentFiles) ? $currentFiles . ',' . $newFileName : $newFileName;
+            $_POST['all_additional_documents'] = $currentFiles;
+        }
+    }
+}
+
 function uploadContractAdditionalFiles($prefix = 'renewal_')
 {
     if (isset($_FILES['additional_document_file']) && is_array($_FILES['additional_document_file']['name'])) {
@@ -764,21 +787,7 @@ function uploadContractAdditionalFiles($prefix = 'renewal_')
 
         $fileCount = count($_FILES['additional_document_file']['name']);
         for ($i = 0; $i < $fileCount; $i++) {
-            if ($_FILES['additional_document_file']['error'][$i] === UPLOAD_ERR_OK) {
-                $fileName = $_FILES['additional_document_file']['name'][$i];
-                $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-                if (in_array($fileExt, (array) $allowedTypes) && $_FILES['additional_document_file']['size'][$i] <= $maxSize) {
-                    $newFileName = time() . "_" . $prefix . $i . "_" . basename($fileName);
-                    $filePath = $uploadDir . $newFileName;
-
-                    if (move_uploaded_file($_FILES['additional_document_file']['tmp_name'][$i], $filePath)) {
-                        $currentFiles = $_POST['all_additional_documents'] ?? '';
-                        $currentFiles = !empty($currentFiles) ? $currentFiles . ',' . $newFileName : $newFileName;
-                        $_POST['all_additional_documents'] = $currentFiles;
-                    }
-                }
-            }
+            uploadSingleContractAdditionalFile($i, $prefix, $uploadDir, $allowedTypes, $maxSize);
         }
     }
     return $_POST['all_additional_documents'] ?? '';
@@ -1121,26 +1130,10 @@ function buildAmcMilestonesForPost($startYmd, $endYmd)
     return collectMilestonesFromPost();
 }
 
-function processAmcSaveResponse($response, $editContractId, &$notification)
+function isAmcSaveSuccessful($result, $editContractId, $response)
 {
-    $result = json_decode($response, true);
-    echo "<pre>";
-    print_r($result);
-    echo "</pre>";
-    $jsonOk = is_array($result);
-    if (!$jsonOk && preg_match('/\{.*\}/s', (string) $response, $jsonMatch)) {
-        $result = json_decode($jsonMatch[0], true);
-        $jsonOk = is_array($result);
-    }
-    if (!$jsonOk) {
-        $result = array();
-    }
-
     $contractResult = $result['contract_result'] ?? array();
     $amcResult = $result['amc_contract_result'] ?? array();
-    $scheduleCount = (int) ($amcResult['schedule_count'] ?? 0);
-    $assetCount = count((array) ($amcResult['assets'] ?? array()));
-    $scheduleErrors = $amcResult['schedule_errors'] ?? array();
     $insertOk = (int) ($contractResult['LASTID'] ?? 0) > 0;
     $updateOk = $editContractId != '' && in_array(strtolower($contractResult['status'] ?? ''), array('sucess', 'success'));
     $amcSaveOk = !empty($amcResult['details']) && in_array($amcResult['details']['status'] ?? '', array('sucess', 'success'));
@@ -1148,38 +1141,78 @@ function processAmcSaveResponse($response, $editContractId, &$notification)
     if (!$saveOk && $editContractId != '' && (preg_match('/"(sucess|success)"/i', $response) || count((array) ($amcResult['assets'] ?? array())) > 0)) {
         $saveOk = true;
     }
+    return $saveOk;
+}
 
-    if ($saveOk) {
-        $_SESSION['insert_msg'] = 3000;
-        if ($assetCount > 0 && $scheduleCount == 0) {
-            $warnMsg = 'Contract saved but service schedule was not generated. Check location/asset service dates.';
-            if (count((array) $scheduleErrors) > 0) {
-                $warnMsg .= ' ' . implode(' ', array_slice((array) $scheduleErrors, 0, 2));
-            }
-            $_SESSION['amc_schedule_warning'] = $warnMsg;
+function parseAmcApiResponsePayload($response)
+{
+    $result = json_decode($response, true);
+    $jsonOk = is_array($result);
+    if (!$jsonOk && preg_match('/\{.*\}/s', (string) $response, $jsonMatch)) {
+        $result = json_decode($jsonMatch[0], true);
+        $jsonOk = is_array($result);
+    }
+    return array($jsonOk ? $result : array(), $jsonOk);
+}
+
+function getAmcSaveFailureMessage($response, $jsonOk, $result)
+{
+    $contractResult = $result['contract_result'] ?? array();
+    $amcResult = $result['amc_contract_result'] ?? array();
+
+    if (!$jsonOk && trim((string) $response) != '') {
+        error_log('AMC API invalid JSON: ' . substr((string) $response, 0, 500));
+        return 'Unexpected API response. Please try again.';
+    }
+    if (trim((string) $response) == '') {
+        return 'Empty API response from server.';
+    }
+    if (!empty($amcResult['message'])) {
+        return $amcResult['message'];
+    }
+    if (!empty($contractResult['message'])) {
+        return $contractResult['message'];
+    }
+    if (!empty($_SESSION['error_message'][3001])) {
+        return $_SESSION['error_message'][3001];
+    }
+    return 'Failed to save AMC contract.';
+}
+
+function handleAmcSaveSuccessRedirect($amcResult)
+{
+    $scheduleCount = (int) ($amcResult['schedule_count'] ?? 0);
+    $assetCount = count((array) ($amcResult['assets'] ?? array()));
+    $scheduleErrors = $amcResult['schedule_errors'] ?? array();
+
+    $_SESSION['insert_msg'] = 3000;
+    if ($assetCount > 0 && $scheduleCount == 0) {
+        $warnMsg = 'Contract saved but service schedule was not generated. Check location/asset service dates.';
+        if (count((array) $scheduleErrors) > 0) {
+            $warnMsg .= ' ' . implode(' ', array_slice((array) $scheduleErrors, 0, 2));
         }
-        if (!headers_sent()) {
-            header(HEADER_REDIRECT_CONTRACTS);
-            exit;
-        }
-        echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=index.php?option=COM_LIST_CONTRACTS"><script>window.location.replace("index.php?option=COM_LIST_CONTRACTS");</script></head><body></body></html>';
+        $_SESSION['amc_schedule_warning'] = $warnMsg;
+    }
+    if (!headers_sent()) {
+        header(HEADER_REDIRECT_CONTRACTS);
         exit;
     }
+    echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=index.php?option=COM_LIST_CONTRACTS"><script>window.location.replace("index.php?option=COM_LIST_CONTRACTS");</script></head><body></body></html>';
+    exit;
+}
 
-    $failMsg = 'Failed to save AMC contract.';
-    if (!$jsonOk && trim((string) $response) != '') {
-        $failMsg = 'Unexpected API response. Please try again.';
-        error_log('AMC API invalid JSON: ' . substr((string) $response, 0, 500));
-    } elseif (trim((string) $response) == '') {
-        $failMsg = 'Empty API response from server.';
-    } elseif (!empty($amcResult['message'])) {
-        $failMsg = $amcResult['message'];
-    } elseif (!empty($contractResult['message'])) {
-        $failMsg = $contractResult['message'];
-    } elseif (!empty($_SESSION['error_message'][3001])) {
-        $failMsg = $_SESSION['error_message'][3001];
+function processAmcSaveResponse($response, $editContractId, &$notification)
+{
+    list($result, $jsonOk) = parseAmcApiResponsePayload($response);
+    echo "<pre>";
+    print_r($result);
+    echo "</pre>";
+
+    if (isAmcSaveSuccessful($result, $editContractId, $response)) {
+        handleAmcSaveSuccessRedirect($result['amc_contract_result'] ?? array());
     }
-    $notification = ['message' => $failMsg, 'type' => 'danger'];
+
+    $notification = ['message' => getAmcSaveFailureMessage($response, $jsonOk, $result), 'type' => 'danger'];
 }
 
 function processAmcRenewalResponse($response, &$notification)
@@ -1224,6 +1257,23 @@ function processAmcRenewalResponse($response, &$notification)
     $notification = ['message' => $failMsg, 'type' => 'danger'];
 }
 
+function validateAmcContractSubmissionPreconditions($isRenewFlow, $saveContractId, $formData, $company_id, $contractRoleAccess, &$notification)
+{
+    if ($isRenewFlow && $saveContractId == '') {
+        $notification = ['message' => 'Invalid contract for renewal.', 'type' => 'danger'];
+        return false;
+    }
+    if (!verifyContractLockStatus($saveContractId, $formData, $company_id, $notification)) {
+        return false;
+    }
+    $canCreateAmc = $isRenewFlow || $saveContractId != '' || !empty($contractRoleAccess['can_amc']);
+    if (!$canCreateAmc) {
+        $notification = array('message' => 'You are not allowed to create an AMC contract.', 'type' => 'danger');
+        return false;
+    }
+    return true;
+}
+
 function handleAmcContractSubmission($isRenewFlow = false)
 {
     global $formData, $permissionDetails, $workflow, $documentDetails, $versionId, $contract_id;
@@ -1233,16 +1283,7 @@ function handleAmcContractSubmission($isRenewFlow = false)
     if ($saveContractId == '' && !empty($contract_id)) {
         $saveContractId = (string) $contract_id;
     }
-    if ($isRenewFlow && $saveContractId == '') {
-        $notification = ['message' => 'Invalid contract for renewal.', 'type' => 'danger'];
-        return;
-    }
-    if (!verifyContractLockStatus($saveContractId, $formData, $company_id, $notification)) {
-        return;
-    }
-    $canCreateAmc = $isRenewFlow || $saveContractId != '' || !empty($contractRoleAccess['can_amc']);
-    if (!$canCreateAmc) {
-        $notification = array('message' => 'You are not allowed to create an AMC contract.', 'type' => 'danger');
+    if (!validateAmcContractSubmissionPreconditions($isRenewFlow, $saveContractId, $formData, $company_id, $contractRoleAccess, $notification)) {
         return;
     }
     $contractDates = validateUnifiedContractBasics($notification) ? parseUnifiedContractDates($notification) : false;
@@ -1306,6 +1347,21 @@ function handleAmcContractSubmission($isRenewFlow = false)
         $notification = ['message' => 'An error occurred while submitting the AMC contract!', 'type' => 'danger'];
     }
 }
+
+function validateAmcContractRenewalPreconditions($formData, &$notification)
+{
+    $renewPartyId = renewPostValue('party_id', $formData);
+    $renewPartyType = renewPostValue('party_type', $formData);
+    $isInhouseRenew = ($renewPartyType == 'inhouse') || (($_POST['amc_service_mode'] ?? '') == 'inhouse');
+    if (!validateUnifiedContractBasics($notification) || (!$isInhouseRenew && empty($renewPartyId))) {
+        if (!$isInhouseRenew && empty($renewPartyId) && empty($notification['message'])) {
+            $notification = ['message' => 'Party is required.', 'type' => 'danger'];
+        }
+        return false;
+    }
+    return true;
+}
+
 function handleAmcContractRenewal()
 {
     global $formData, $contract_id, $versionId;
@@ -1316,13 +1372,7 @@ function handleAmcContractRenewal()
         $notification = ['message' => $msg, 'type' => 'danger'];
         return;
     }
-    $renewPartyId = renewPostValue('party_id', $formData);
-    $renewPartyType = renewPostValue('party_type', $formData);
-    $isInhouseRenew = ($renewPartyType == 'inhouse') || (($_POST['amc_service_mode'] ?? '') == 'inhouse');
-    if (!validateUnifiedContractBasics($notification) || (!$isInhouseRenew && empty($renewPartyId))) {
-        if (!$isInhouseRenew && empty($renewPartyId) && empty($notification['message'])) {
-            $notification = ['message' => 'Party is required.', 'type' => 'danger'];
-        }
+    if (!validateAmcContractRenewalPreconditions($formData, $notification)) {
         return;
     }
 
@@ -1345,9 +1395,9 @@ function handleAmcContractRenewal()
         'invoice_number' => renewPostValue('invoice_number', $formData), 'rt_number' => renewPostValue('rt_number', $formData),
         'business_code' => renewPostValue('business_code', $formData), 'parent_contract_id' => renewPostValue('parent_contract_id', $formData),
         'contract_payment_terms' => renewPostValue('contract_payment_terms', $formData), 'locations' => $locationIds,
-        'typeofaggrements' => renewPostValue('typeofaggrements', $formData), 'party_type' => $renewPartyType,
+        'typeofaggrements' => renewPostValue('typeofaggrements', $formData), 'party_type' => $renewPartyType ?? renewPostValue('party_type', $formData),
         'contract_owner_name' => renewPostValue('contract_owner_name', $formData), 'contract_owner_email' => renewPostValue('contract_owner_email', $formData),
-        'contract_owner_number' => renewPostValue('contract_owner_number', $formData), 'party_id' => $renewPartyId,
+        'contract_owner_number' => renewPostValue('contract_owner_number', $formData), 'party_id' => $renewPartyId ?? renewPostValue('party_id', $formData),
         'department_id' => renewPostValue('department_id', $formData), 'type_of_contract_id' => renewPostValue('type_of_contract_id', $formData),
         'start_date' => $startYmd, 'end_date' => $endYmd, 'renewal_frequency' => renewPostValue('renewal_frequency', $formData, 'quarterly'),
         'contract_amount' => renewPostValue('contract_amount', $formData), 'description' => renewPostValue('description', $formData),
@@ -1380,33 +1430,51 @@ function handleAmcContractRenewal()
         $notification = ['message' => 'An error occurred while renewing the AMC contract!', 'type' => 'danger'];
     }
 }
-function processSingleDocumentUpload($documentId, $fileData, $i, $uploadDir, &$notification)
+
+function validateSingleDocumentUploadFile($fileName, $fileSize, &$notification)
 {
     $allowedTypes = ['pdf', 'xls', 'xlsx'];
     $maxSize = 10 * 1024 * 1024;
-    $fileName = $fileData['name'][$i];
-    if (empty($fileName)) {
-        return true;
-    }
     $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     if (!in_array($fileExt, $allowedTypes)) {
         $notification = ['message' => 'Only PDF or Excel files allowed!', 'type' => 'danger'];
         return false;
     }
-    if ($fileData['size'][$i] > $maxSize) {
+    if ($fileSize > $maxSize) {
         $notification = ['message' => 'Each file must be 10 MB or smaller!', 'type' => 'danger'];
         return false;
     }
-    $newFileName = time() . "_doc{$documentId}_" . $i . "_" . basename($fileName);
-    if (!move_uploaded_file($fileData['tmp_name'][$i], $uploadDir . $newFileName)) {
-        $notification = ['message' => "Failed to move file: $fileName", 'type' => 'danger'];
+    return true;
+}
+
+function appendUploadedDocumentToHiddenField($hiddenKey, $newFileName, $originalFileName)
+{
+    $currentDocs = [];
+    if (isset($_POST[$hiddenKey])) {
+        $decoded = json_decode($_POST[$hiddenKey], true);
+        $currentDocs = is_array($decoded) ? $decoded : [];
+    }
+    $currentDocs[] = ['id' => '', 'file_name' => $newFileName, 'comments' => $originalFileName, 'is_new' => true];
+    $_POST[$hiddenKey] = json_encode($currentDocs);
+}
+
+function processSingleDocumentUpload($documentId, $fileData, $i, $uploadDir, &$notification)
+{
+    $fileName = $fileData['name'][$i];
+    if (empty($fileName)) {
+        return true;
+    }
+    if (!validateSingleDocumentUploadFile($fileName, $fileData['size'][$i], $notification)) {
         return false;
     }
-    $hiddenKey = "all_documents_{$documentId}";
-    $currentDocs = isset($_POST[$hiddenKey]) ? (json_decode($_POST[$hiddenKey], true) ?: []) : [];
-    $currentDocs[] = ['id' => '', 'file_name' => $newFileName, 'comments' => $fileName, 'is_new' => true];
-    $_POST[$hiddenKey] = json_encode($currentDocs);
-    return true;
+    $newFileName = time() . "_doc{$documentId}_" . $i . "_" . basename($fileName);
+    $moved = move_uploaded_file($fileData['tmp_name'][$i], $uploadDir . $newFileName);
+    if (!$moved) {
+        $notification = ['message' => "Failed to move file: $fileName", 'type' => 'danger'];
+    } else {
+        appendUploadedDocumentToHiddenField("all_documents_{$documentId}", $newFileName, $fileName);
+    }
+    return $moved;
 }
 
 function processUploadedContractDocuments($uploadDir, &$notification)
@@ -1425,22 +1493,9 @@ function processUploadedContractDocuments($uploadDir, &$notification)
     return true;
 }
 
-function handleDocumentSubmission()
+function collectContractDocumentsFromPost(&$processedDocumentTypes)
 {
-    global $documentDetails, $permissionDetails, $workflow, $formData, $versionId, $contract_id;
-    global $company_id, $data_name, $user_id, $module_id, $notification;
-
-    $uploadDir = DIR_UPLOADS_CONTRACTS;
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
     $documentsForJSON = [];
-    $processedDocumentTypes = [];
-
-    if (!processUploadedContractDocuments($uploadDir, $notification)) {
-        return;
-    }
-
     foreach ($_POST as $key => $value) {
         if (strpos($key, 'all_documents_') === 0) {
             $documentId = str_replace('all_documents_', '', $key);
@@ -1462,6 +1517,25 @@ function handleDocumentSubmission()
             }
         }
     }
+    return $documentsForJSON;
+}
+
+function handleDocumentSubmission()
+{
+    global $documentDetails, $permissionDetails, $workflow, $formData, $versionId, $contract_id;
+    global $company_id, $data_name, $user_id, $module_id, $notification;
+
+    $uploadDir = DIR_UPLOADS_CONTRACTS;
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+    $processedDocumentTypes = [];
+
+    if (!processUploadedContractDocuments($uploadDir, $notification)) {
+        return;
+    }
+
+    $documentsForJSON = collectContractDocumentsFromPost($processedDocumentTypes);
 
     $postData = [
         'user_id' => $user_id,

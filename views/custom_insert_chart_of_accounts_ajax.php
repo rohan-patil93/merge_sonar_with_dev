@@ -33,17 +33,17 @@ $account_groups = $result['account_groups'];
 <div >
   <?php
     if($chartofaccountssingle['lock_and_unlock_status'] =="" || $chartofaccountssingle['lock_and_unlock_status'] =="N"){  ?>
-      <span class="pcoded-badge label label-danger  cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="clickChartOfAccountLockAndUnlock('Y','<?php echo $chartofaccountssingle['id']; ?>')"><i class="ti-lock"></i> <?= __('Click To lock') ?></span>
+      <button type="button" class="btn p-0 border-0 bg-transparent pcoded-badge label label-danger cursor-pointer" onclick="clickChartOfAccountLockAndUnlock('Y','<?php echo $chartofaccountssingle['id']; ?>')"><i class="ti-lock"></i> <?= __('Click To lock') ?></button>
   <?php }else{  $evendisable = 'event_disabled';
         if($chartofaccountssingle['lock_and_unlock_user_id'] == $_SESSION['userid']){
    ?>
-      <span class="pcoded-badge label label-primary  cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="clickChartOfAccountLockAndUnlock('N','<?php echo $chartofaccountssingle['id']; ?>')"><i class="ti-unlock"></i> <?= __('Click To Unlock') ?></span>
+      <button type="button" class="btn p-0 border-0 bg-transparent pcoded-badge label label-primary cursor-pointer" onclick="clickChartOfAccountLockAndUnlock('N','<?php echo $chartofaccountssingle['id']; ?>')"><i class="ti-unlock"></i> <?= __('Click To Unlock') ?></button>
   <?php }else{ echo "<span class='text-danger'>".__('Chart Of Account is locked.')." ".$_SESSION['error_message']['9002']."</span>";
   }
   } ?>
 </div>
 <?php } ?>
-<form id="financereportgrpfrom" class="<?php echo $evendisable; ?>"> <!-- style="position: sticky;top: 10px;" -->
+<form id="financereportgrpfrom" class="<?php echo $evendisable; ?>">
   <div class="card p-2">
     <div class="row">
       <div class="form-group col-lg-6">

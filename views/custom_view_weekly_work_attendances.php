@@ -1,4 +1,14 @@
 <?php
+if (!defined('DATE_FORMAT_DMY')) {
+    define('DATE_FORMAT_DMY', 'd M Y');
+}
+if (!defined('LABEL_PRESENT_8H')) {
+    define('LABEL_PRESENT_8H', 'Present (8h)');
+}
+if (!defined('LABEL_HALFDAY_4H')) {
+    define('LABEL_HALFDAY_4H', 'Half Day (4h)');
+}
+
 $_SESSION['apply_js']['multiselest'] = "1";
 
 $table_name = 'project_timesheets';
@@ -339,7 +349,7 @@ $sprogress = $statusprogress['full'] ?? array();
             <div class="col-lg-3 col-md-6 text-center text-md-start">
                 <span class="badge bg-light text-dark border p-2 f-14">
                     <i class="ti-calendar text-primary" aria-hidden="true"></i>
-                    <b><?php echo date('d M Y', strtotime($start_date)); ?></b> &ndash; <b><?php echo date('d M Y', strtotime($end_date)); ?></b>
+                    <b><?php echo date(DATE_FORMAT_DMY, strtotime($start_date)); ?></b> &ndash; <b><?php echo date(DATE_FORMAT_DMY, strtotime($end_date)); ?></b>
                 </span>
             </div>
 
@@ -389,7 +399,7 @@ $sprogress = $statusprogress['full'] ?? array();
                 <div class="table-responsive week_table shadow-sm rounded">
                     <table class="table table-bordered mb-0">
                         <thead>
-                            <tr bgcolor="#1b1b1b">
+                            <tr style="background-color: #1b1b1b;">
                                 <?php
                                 for($i = 0; $i < 7; $i++){
                                     $col_date = date('Y-m-d', strtotime("+$i days", strtotime($start_date)));
@@ -445,10 +455,10 @@ $sprogress = $statusprogress['full'] ?? array();
                                         $bhrs = floatval($entry['billable_hrs'] ?? 0);
                                         if($bhrs == 8){
                                             $ccww = "p";
-                                            $view_data = "Present (8h)";
+                                            $view_data = LABEL_PRESENT_8H;
                                         } elseif($bhrs == 4){
                                             $ccww = "z";
-                                            $view_data = "Half Day (4h)";
+                                            $view_data = LABEL_HALFDAY_4H;
                                         } else {
                                             $ccww = "a";
                                             $view_data = "Absent";
@@ -498,7 +508,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                                 <button type="button" class="badge badge-hover" style="background-color:#d62828;" title="<?= htmlspecialchars(__('Mark Absent'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Mark Absent'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('a','<?php echo $predate; ?>',<?php echo $num; ?>,'Absent')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>A</button>
                                                 <?php if($ccedit == 0){ ?>
-                                                    <button type="button" class="badge badge-hover" id="btn_leave_<?php echo $num; ?>" style="background-color:#e9c46a; color:#fff;" title="<?= htmlspecialchars(__('Apply Leave for'), ENT_QUOTES, 'UTF-8'); ?> <?php echo date('d M Y', strtotime($predate)); ?>" aria-label="<?= htmlspecialchars(__('Apply Leave for'), ENT_QUOTES, 'UTF-8'); ?> <?php echo date('d M Y', strtotime($predate)); ?>"
+                                                    <button type="button" class="badge badge-hover" id="btn_leave_<?php echo $num; ?>" style="background-color:#e9c46a; color:#fff;" title="<?= htmlspecialchars(__('Apply Leave for'), ENT_QUOTES, 'UTF-8'); ?> <?php echo date(DATE_FORMAT_DMY, strtotime($predate)); ?>" aria-label="<?= htmlspecialchars(__('Apply Leave for'), ENT_QUOTES, 'UTF-8'); ?> <?php echo date(DATE_FORMAT_DMY, strtotime($predate)); ?>"
                                                         onclick="directApplyLeave('<?php echo $predate; ?>', <?php echo $num; ?>)">L</button>
                                                 <?php } ?>
                                             </div>
@@ -565,8 +575,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <small class="f-w-600">
                                         <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
-                                        $halfOrAbsent = ($hrs == 4) ? 'Half Day (4h)' : 'Absent';
-                                                            echo ($hrs == 8) ? 'Present (8h)' : $halfOrAbsent;
+                                        $halfOrAbsent = ($hrs == 4) ? LABEL_HALFDAY_4H : 'Absent';
+                                                            echo ($hrs == 8) ? LABEL_PRESENT_8H : $halfOrAbsent;
                                         ?>
                                     </small>
                                 </div>
@@ -603,8 +613,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <small class="f-w-600">
                                         <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
-                                        $halfOrAbsent = ($hrs == 4) ? 'Half Day (4h)' : 'Absent';
-                                                            echo ($hrs == 8) ? 'Present (8h)' : $halfOrAbsent;
+                                        $halfOrAbsent = ($hrs == 4) ? LABEL_HALFDAY_4H : 'Absent';
+                                                            echo ($hrs == 8) ? LABEL_PRESENT_8H : $halfOrAbsent;
                                         ?>
                                     </small>
                                 </div>
@@ -640,8 +650,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <small class="f-w-600">
                                         <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
-                                        $halfOrAbsent = ($hrs == 4) ? 'Half Day (4h)' : 'Absent';
-                                                            echo ($hrs == 8) ? 'Present (8h)' : $halfOrAbsent;
+                                        $halfOrAbsent = ($hrs == 4) ? LABEL_HALFDAY_4H : 'Absent';
+                                                            echo ($hrs == 8) ? LABEL_PRESENT_8H : $halfOrAbsent;
                                         ?>
                                     </small>
                                 </div>

@@ -1,4 +1,14 @@
 <?php
+if (!defined('PARAM_USER_ID')) {
+    define('PARAM_USER_ID', '&user_id=');
+}
+if (!defined('LOC_INDEX_OPTION')) {
+    define('LOC_INDEX_OPTION', 'location:index.php?option=');
+}
+if (!defined('PARAM_DATE')) {
+    define('PARAM_DATE', '&date=');
+}
+
 $_SESSION['apply_js']['multiselest'] = 1;
 
 $fwdpPageOption = 'COM_INSERT_FIELD_WORK_DAILY_PLANS_NEW';
@@ -20,7 +30,7 @@ if (isset($_POST['submit'])) {
             $data = $_POST;
             $res = insertData($table_name, $data);
             if ($res) {
-                header("location:index.php?option=" . $fwdpPageOption . "&user_id=" . $_POST['user_id'] . "&date=" . $_POST['plan_date'] . "&error=9999");
+                header(LOC_INDEX_OPTION . $fwdpPageOption . PARAM_USER_ID . $_POST['user_id'] . PARAM_DATE . $_POST['plan_date'] . "&error=9999");
             }
         } else {
             unset($_POST['user_field_work_type'], $_POST['plan_date']);
@@ -28,7 +38,7 @@ if (isset($_POST['submit'])) {
             $data = $_POST;
             $res = insertUserFieldData($table_name, $data);
             if ($res) {
-                header("location:index.php?option=" . $fwdpPageOption . "&user_id=" . $_POST['user_id'] . "&date=" . $_POST['work_from_date'] . "&error=9999");
+                header(LOC_INDEX_OPTION . $fwdpPageOption . PARAM_USER_ID . $_POST['user_id'] . PARAM_DATE . $_POST['work_from_date'] . "&error=9999");
             }
         }
     }
@@ -39,7 +49,7 @@ if (isset($_POST['submit'])) {
             $table_name = 'field_work_daily_plans';
             $rid = $_POST['rid'];
             $date = $_POST['date'];
-            $url = API . "?mode=updateFieldWorkDailyPlans&method=get&rid=" . $rid . "&date=" . $date . "&table=" . $table_name;
+            $url = API . "?mode=updateFieldWorkDailyPlans&method=get&rid=" . $rid . PARAM_DATE . $date . "&table=" . $table_name;
             $result = callAPI($url);
             $result = json_decode($result, 1);
 
@@ -48,7 +58,7 @@ if (isset($_POST['submit'])) {
                 $data = $_POST;
                 $res = insertData($table_name, $data);
                 if ($res) {
-                    header("location:index.php?option=" . $fwdpPageOption . "&user_id=" . $_POST['user_id'] . "&date=" . $_POST['plan_date'] . "&error=9998");
+                    header(LOC_INDEX_OPTION . $fwdpPageOption . PARAM_USER_ID . $_POST['user_id'] . PARAM_DATE . $_POST['plan_date'] . "&error=9998");
                 }
             }
         } else {
@@ -63,7 +73,7 @@ if (isset($_POST['submit'])) {
                 $data = $_POST;
                 $res = insertUserFieldData($table_name, $data);
                 if ($res) {
-                    header("location:index.php?option=" . $fwdpPageOption . "&user_id=" . $_POST['user_id'] . "&date=" . $_POST['work_from_date'] . "&error=9998");
+                    header(LOC_INDEX_OPTION . $fwdpPageOption . PARAM_USER_ID . $_POST['user_id'] . PARAM_DATE . $_POST['work_from_date'] . "&error=9998");
                 }
             }
         }

@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_M_D_Y')) {
+    define('DATE_FORMAT_M_D_Y', 'M d, Y');
+}
+
 $rid =  encodeId($_REQUEST['Rid']);
 $rid = urldecode($rid);
 $cand = explode(':', $rid);
@@ -463,7 +467,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                                         <a href="#" class="text-dark text-hover-primary f-w-700 font-weight-bold font-size-h4 mb-3">
                                                                             <?= __('Offer Letter Validity'); ?>
                                                                         </a>
-                                                                        <div class="text-dark-75"><?php echo date('M d, Y',strtotime($data['offer_validity'])); ?></div>
+                                                                        <div class="text-dark-75"><?php echo date(DATE_FORMAT_M_D_Y,strtotime($data['offer_validity'])); ?></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-flex align-items-center p-3">
@@ -473,7 +477,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                                     <div class=" flex-column">
                                                                         <a href="#" class="text-dark text-hover-primary f-w-700 font-weight-bold font-size-h4 mb-3"><?= __('Join Date'); ?>
                                                                         </a>
-                                                                        <div class="text-dark-75"><?= __('On or before'); ?> <?php echo date('M d, Y',strtotime($data['reporting_date'])); ?></div>
+                                                                        <div class="text-dark-75"><?= __('On or before'); ?> <?php echo date(DATE_FORMAT_M_D_Y,strtotime($data['reporting_date'])); ?></div>
                                                                     </div>
                                                                 </div>
                                                                 <?php if($candiddata['current_status']==ST_LOIACCEPTED || $candiddata['current_status']==ST_LOIREJECTED){ ?>
@@ -495,7 +499,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
 }elseif($candiddata['current_status']== ST_LOIREJECTED){  echo __('Offer Decline');
 }?>
                                                                         </a>
-                                                                        <div class="text-dark-75"><?php echo date('M d, Y',strtotime($candhistrydata['status_date'])); ?></div>
+                                                                        <div class="text-dark-75"><?php echo date(DATE_FORMAT_M_D_Y,strtotime($candhistrydata['status_date'])); ?></div>
                                                                     </div>
                                                                 </div>
                                                             <?php } ?>
@@ -553,14 +557,14 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
         </div>
     </div>
 </div>
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog"  tabindex="-1" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content"  id="popup2">
 
         </div>
     </div>
 </div>
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-lg" >
         <div class="modal-content"  id="popup1">
         </div>

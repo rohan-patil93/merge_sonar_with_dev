@@ -1,4 +1,11 @@
 <?php
+if (!defined('YEAR_PREFIX_2022')) {
+    define('YEAR_PREFIX_2022', '2022-');
+}
+if (!defined('INTERVAL_PLUS_ONE_DAY')) {
+    define('INTERVAL_PLUS_ONE_DAY', '+1 day');
+}
+
 $_SESSION['apply_js']['vms_employee_dashbard']=1;
 
 $details = array();
@@ -263,7 +270,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                         <?php
                                              $base_total = $base_total+$cquqr[$utr];
                                             $total_cc = $total_cc+$acmh;
-                                           $dataatt1[] = date('F',strtotime("2022-".$utr."-01")).":".($cquqr[$utr]!="" ? $cquqr[$utr]:0);
+                                           $dataatt1[] = date('F',strtotime(YEAR_PREFIX_2022.$utr."-01")).":".($cquqr[$utr]!="" ? $cquqr[$utr]:0);
                                         } ?>
                                     </div>
                                     <div class="col-lg-7">
@@ -330,7 +337,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                                     </button>
                                                 </div>
                                                 <div class="col-lg-5">
-                                                    <h6 class="f-w-600"><?php echo date('F',strtotime("2022-".$utr."-01")); ?></h6>
+                                                    <h6 class="f-w-600"><?php echo date('F',strtotime(YEAR_PREFIX_2022.$utr."-01")); ?></h6>
                                                     <span class="text-muted f-w-600 f-12"></span>
                                                 </div>
                                                 <div class="col-lg-5 text-right">
@@ -342,7 +349,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                             </div>
                                         </div>
                                         <?php
-                                            $graps[] =  date('F',strtotime("2022-".$utr."-01"));
+                                            $graps[] =  date('F',strtotime(YEAR_PREFIX_2022.$utr."-01"));
                                             $graps[] =  $cquqr[$utr]!=""?$cquqr[$utr]:0;
                                             $dataatt2[] =  implode(':',$graps);
                                             $base_total = $base_total+$cquqr[$utr];
@@ -396,14 +403,14 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
 
                             <?php if(count((array)$details['create'])>0){
                                 foreach((array)$details['create'] as $submited){ ?>
-                                  <div class="row mt-3 pb-3 cursor-pointer" onclick="toredriacte('index.php?option=COM_INSERT_PROJECT_TIMESHEETS&CHANGE_DATE=<?php echo $submited['lastofweek']; ?>&EMP=<?php echo $_SESSION['emp_id']?>')" style="border-bottom:1px dashed #cccccc;" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                  <div class="row mt-3 pb-3 cursor-pointer" onclick="toredriacte('index.php?option=COM_INSERT_PROJECT_TIMESHEETS&CHANGE_DATE=<?php echo $submited['lastofweek']; ?>&EMP=<?php echo $_SESSION['emp_id']?>')" style="border-bottom:1px dashed #cccccc;">
                                        <div class="col-lg-3">
                                     <button data-bs-toggle="tooltip" data-placement="bottom" title="&nbsp;&nbsp;<?php echo htmlspecialchars(__($sprogress[$submited['current_status']]['name']), ENT_QUOTES, 'UTF-8'); ?>&nbsp;&nbsp;" class="waves-effect waves-light btn-primary p-l-15 p-r-15 p-t-10 p-b-10 b-radius-5 border-0" style="background-color: <?php echo "#".$_SESSION['status'][$submited['current_status']]['background_color']; ?>"><i class="ti-calendar f-w-600"></i></button>
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <h6 class="f-w-600"><?php echo date('F', strtotime($submited['lastofweek'])); ?></h6>
                                     <span class="text-muted f-12">
-                                    <?php echo fromDate(date('Y-m-d',strtotime("+1 day",strtotime($submited['startofweek']))))." - ".fromDate(date('Y-m-d',strtotime("+1 day",strtotime($submited['lastofweek'])))); ?>
+                                    <?php echo fromDate(date('Y-m-d',strtotime(INTERVAL_PLUS_ONE_DAY,strtotime($submited['startofweek']))))." - ".fromDate(date('Y-m-d',strtotime(INTERVAL_PLUS_ONE_DAY,strtotime($submited['lastofweek'])))); ?>
 
                                     </span>
                                 </div>
@@ -430,14 +437,14 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                             <?php
                                 if(count((array)$details['submited'])>0){
                             foreach((array)$details['submited'] as $submited){ ?>
-                            <div class="row mt-3 pb-3 cursor-pointer"  onclick="toredriacte('index.php?option=COM_INSERT_PROJECT_TIMESHEETS&CHANGE_DATE=<?php echo $submited['lastofweek']; ?>&EMP=<?php echo $_SESSION['emp_id']?>')" style="border-bottom:1px dashed #cccccc;" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <div class="row mt-3 pb-3 cursor-pointer"  onclick="toredriacte('index.php?option=COM_INSERT_PROJECT_TIMESHEETS&CHANGE_DATE=<?php echo $submited['lastofweek']; ?>&EMP=<?php echo $_SESSION['emp_id']?>')" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-lg-3">
                                     <button data-bs-toggle="tooltip" data-placement="bottom" title="&nbsp;&nbsp;<?php echo htmlspecialchars(__($sprogress[$submited['current_status']]['name']), ENT_QUOTES, 'UTF-8'); ?>&nbsp;&nbsp;" class="waves-effect waves-light btn-primary p-l-15 p-r-15 p-t-10 p-b-10 b-radius-5 border-0" style="background-color: <?php echo "#".$_SESSION['status'][$submited['current_status']]['background_color']; ?>"><i class="ti-calendar f-w-600"></i></button>
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <h6 class="f-w-600"><?php echo date('F', strtotime($submited['timesheet_date'])); ?></h6>
                                     <span class="text-muted f-12">
-                                    <?php echo fromDate(date('Y-m-d',strtotime("+1 day",strtotime($submited['startofweek']))))." - ".fromDate(date('Y-m-d',strtotime("+1 day",strtotime($submited['lastofweek'])))); ?>
+                                    <?php echo fromDate(date('Y-m-d',strtotime(INTERVAL_PLUS_ONE_DAY,strtotime($submited['startofweek']))))." - ".fromDate(date('Y-m-d',strtotime(INTERVAL_PLUS_ONE_DAY,strtotime($submited['lastofweek'])))); ?>
                                 </span>
                                 </div>
                                 <div class="col-lg-3 text-right">

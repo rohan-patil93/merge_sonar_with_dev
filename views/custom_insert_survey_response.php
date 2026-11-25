@@ -287,7 +287,7 @@ function submitsurvey(){
               <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $display_questions[$questionid]['queid'];?>">
 
               <span><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span>
-              <h4><?php echo $display_questions[$questionid]['survey_question']; ?> <?php if($display_questions[$questionid]['require_response']=="0") echo "*"; ?></h4>
+              <h4><?php echo $display_questions[$questionid]['survey_question']; ?> <?php if ($display_questions[$questionid]['require_response'] == "0") { echo "*"; } ?></h4>
               <?php
               if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){
                 $optionlist= json_decode($display_questions[$questionid]['survey_question_option'],1);
@@ -299,7 +299,7 @@ function submitsurvey(){
                   }
                   ?>
                   <b> <div class="<?php echo $option_cat;?>-group required">
-                    <input aria-label="<?= htmlspecialchars(__('Response option'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
+                    <input aria-label="<?= htmlspecialchars(__('Response option'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if ($display_questions[$questionid]['require_response'] == "0") { echo __('required'); } ?> <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
                     <label for="q1"><?php echo $option; ?> </label> </div>
                   </b>
                 <?php }
@@ -308,14 +308,14 @@ function submitsurvey(){
                 ?>
 
                 <span class="mt-10 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Scale from 1 to:'); ?> <?php echo $option;?></span>
-                <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>">
+                <input type="number" <?php if ($display_questions[$questionid]['require_response'] == "0") { echo __('required'); } ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>">
                 <?php
               }
               elseif($display_questions[$questionid]['options_display_type']==4){
                 $selectedoption =json_decode($markedanswer[$display_questions[$questionid]['queid']],1)[0];
 
                 ?>
-                <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $selectedoption;?></textarea>
+                <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if ($display_questions[$questionid]['require_response'] == "0") { echo __('required'); } ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $selectedoption;?></textarea>
                 <?php
               }
 

@@ -202,33 +202,33 @@ foreach($employees as $emplist){
 
                     <div class="col-xl-4 col-md-6 ">
                         <input type="hidden" id="view_total_emp" value="<?php echo urlencode(json_encode($totalempids)); ?>">
-                        <div class="card social-card cursor-pointer" onclick="moreemployees('view_total_emp')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 card social-card cursor-pointer" onclick="moreemployees('view_total_emp')">
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo count((array)$allocatedTaskemployees)+count((array)$unallocatedTaskemployees); ?></h3>
                                 <p><?= __('Total Employees'); ?></p>
                             </div>
-                        </div>
+                        </button>
                     </div>
                     <div class="col-xl-4 col-md-6">
                         <input type="hidden" id="inform_total_emp" value="<?php echo urlencode(json_encode($informedtotalempids)); ?>">
-                        <div class="card social-card cursor-pointer" onclick="moreemployees('inform_total_emp')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 card social-card cursor-pointer" onclick="moreemployees('inform_total_emp')">
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo count((array)$allocatedTaskemployees); ?></h3>
                                 <p><?= __('Informed Employees'); ?></p>
                             </div>
-                        </div>
+                        </button>
                     </div>
                     <div class="col-xl-4 col-md-6">
                         <input type="hidden" id="yetinform_total_emp" value="<?php echo urlencode(json_encode($yettoinformedtotalempids)); ?>">
-                        <div class="card social-card cursor-pointer" onclick="moreemployees('yetinform_total_emp')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 card social-card cursor-pointer" onclick="moreemployees('yetinform_total_emp')">
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo count((array)$unallocatedTaskemployees); ?></h3>
                                 <p><?= __('Yet To Inform'); ?></p>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
 
@@ -421,7 +421,7 @@ foreach($employees as $emplist){
                                 ?>
                                 <tr class="showallemp <?php echo $dynclass; ?>">
                                     <td>
-                                        <div class="checkbox-fade fade-in-primary m-0" role="group" onchange="assigneTaskChecked()">
+                                        <div class="checkbox-fade fade-in-primary m-0" onchange="assigneTaskChecked()">
                                             <label class="form-label text-auto-hight line-height24 m-0" >
                                                 <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $onboard_emp['id']; ?>" class="check_emp_id" >
                                                 <span class="cr float-left m-0">

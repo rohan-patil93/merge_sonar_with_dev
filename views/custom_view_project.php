@@ -21,8 +21,6 @@ if (isset($_POST['submit'])) {
     $_POST['updated_by'] = $_SESSION['userid'];
     $url = API . "?mode=updaterowtabledata&rid=" . $hid . "&table=projects&method=post";
     $response = file_post_contents($url, $_POST, 'update');
-    if ($response) {
-    }
     if ($old_assinger_id != $_POST['assinger_id']) {
         $url = API . "?mode=tochangeprojectowner&old_assinger_id=" . $old_assinger_id . "&assinger_id=" . $_POST['assinger_id'] . "&rid=" . $hid;
         $respons = callAPI($url);
@@ -995,11 +993,11 @@ foreach ($data['project_teams'] as $pteam) {
                             <?php $m = 1;
                             foreach ($data['project_types'] as $project_type) { ?>
                                 <input type="hidden" name="project_type" id="project_type" value="<?php echo $typeval; ?>">
-                                <div class="personal-pro mt-5 close counttype <?php if ($typeval == $project_type['id']) {
+                                <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100 personal-pro mt-5 close counttype <?php if ($typeval == $project_type['id']) {
                                     echo "bg-pop-active";
                                 } else {
                                     echo "bg-pop-white";
-                                } ?> " id="changeprojecttype_<?php echo $project_type['id']; ?>" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="changeprojecttype(<?php echo $project_type['id']; ?>)">
+                                } ?> " id="changeprojecttype_<?php echo $project_type['id']; ?>" onclick="changeprojecttype(<?php echo $project_type['id']; ?>)">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-1 col-sm-1 col-2">
                                             <div class="d-inline-block">
@@ -1019,7 +1017,7 @@ foreach ($data['project_teams'] as $pteam) {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </button>
                                 <?php $m++;
                             } ?>
                             <button type="button" class="btn btn-primary mt-5 float-right"
@@ -1226,9 +1224,7 @@ foreach ($data['project_teams'] as $pteam) {
                             <?php $m = 1;
                             if (count((array) $data['project_phases']) > 0) {
                                 foreach ((array) $data['project_phases'] as $project_phase) { ?>
-                                    <div class="p-2 mt-1 cursor-pointer" style="background-color: #977373;color:#FFFFFF;"
-                                        role="button" tabindex="0"
-                                        onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+                                    <button type="button" class="btn p-2 mt-1 border-0 text-start w-100 cursor-pointer d-flex align-items-center justify-content-between" style="background-color: #977373;color:#FFFFFF;"
                                         onclick="showphase(<?php echo $project_phase['id']; ?>)">
                                         <div class="float-left">
                                             <h6><?php echo $project_phase['project_phase_name']; ?> </h6>
@@ -1238,20 +1234,18 @@ foreach ($data['project_teams'] as $pteam) {
                                                 style="background-color: #FFFFFF;color:#977373;"><?php echo count((array) $emp_phaase_tasks[$project_phase['id']]); ?>
                                             </span>
                                         </div>
-                                    </div>
+                                    </button>
                                     <input type="hidden" name="" value="0"
                                         id="phasedis_<?php echo $project_phase['id']; ?>">
                                     <div class="p-10" style="background-color: #FFFFFF; display: none;"
                                         id="filephase_<?php echo $project_phase['id']; ?>">
                                         <?php foreach ($emp_phaase_tasks[$project_phase['id']] as $phtas) { ?>
-                                            <div class="p-1 mt-1 cursor-pointer " style="background-color: #f1eaea;"
-                                                role="button" tabindex="0"
-                                                onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+                                            <button type="button" class="btn p-1 mt-1 border-0 text-start w-100 cursor-pointer " style="background-color: #f1eaea;"
                                                 onclick="showptaskwise(<?php echo $phtas; ?>)">
                                                 <?php echo $list_tasks[$phtas]['task_name'] . $phtas; ?> &nbsp; &nbsp; &nbsp;
                                                 <span class="label label-md label-info"
                                                     style=""><?php echo count((array) $task_attachment[$phtas]); ?> </span>
-                                            </div>
+                                            </button>
                                             <input type="hidden" name="" value="0" id="filetaskdis_<?php echo $phtas; ?>">
                                                     <?php if (count((array) $task_attachment[$phtas]) > 0) { ?>
                                                         <div class="row col-lg-12 p-2 cursor-pointer" style="display: none;"

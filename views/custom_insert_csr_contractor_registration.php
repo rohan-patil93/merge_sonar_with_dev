@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+}
+
 // Handle POST request
 
 if ($_POST['submit']) {
@@ -8,9 +12,9 @@ if ($_POST['submit']) {
         unset($_POST['submit']);
         $_POST['current_status'] = '0';
         $_POST['is_active'] = '0';
-        $_POST['status_date'] = date('Y-m-d H:i:s');
+        $_POST['status_date'] = date(DATE_FORMAT_YMD_HIS);
         $_POST['company_id'] = $_SESSION['company_id'];
-        $_POST['created_date'] = date('Y-m-d H:i:s');
+        $_POST['created_date'] = date(DATE_FORMAT_YMD_HIS);
         $_POST['created_by'] = $_SESSION['userid'];
         $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
         $response = file_post_contents($url, $_POST, 'insert');
@@ -27,7 +31,7 @@ if ($_POST['submit']) {
         unset($_POST['submit']);
         $rid = $_POST['rid'];
         unset($_POST['rid']);
-        $_POST['updated_date'] = date('Y-m-d H:i:s');
+        $_POST['updated_date'] = date(DATE_FORMAT_YMD_HIS);
         $_POST['updated_by'] = $_SESSION['userid'];
         $url = API . "?mode=updaterowbasepimarydata&rid=" . $rid . "&table=" . $table_name . "&method=post";
         $response = file_post_contents($url, $_POST, 'update');
@@ -41,11 +45,55 @@ if ($_POST['submit']) {
     }
 }
 
+if (!function_exists('uploadCsrSingleFileAttachment')) {
+    function uploadCsrSingleFileAttachment($fileArray, $index, $fileName, $table_name, $transaction_id)
+    {
+        if ($fileArray['error'][$index] == UPLOAD_ERR_NO_FILE) {
+            return null;
+        }
+
+        $actualFileName = $fileName;
+        $temp = explode(".", $actualFileName);
+        $randomNumber = random_int(10000, 99999);
+        $microtime = microtime(true);
+        $dateTime = date('Ymd_His', (int)$microtime) . sprintf('%03d', ($microtime - floor($microtime)) * 1000);
+        $uniqueFilename = "file_{$randomNumber}_{$dateTime}." . end($temp);
+
+        $fileSizeBytes = $fileArray['size'][$index];
+        $fileSizeMB = round($fileSizeBytes / (1024 * 1024), 2);
+
+        $destinationPath = "uploads/csr/" . $uniqueFilename;
+        if (!is_dir('uploads/csr')) {
+            mkdir('uploads/csr', 0777, true);
+        }
+
+        if (move_uploaded_file($fileArray['tmp_name'][$index], $destinationPath)) {
+            $data = [
+                'file_name' => $uniqueFilename,
+                'actual_file_name' => $actualFileName,
+                'file_size_mb' => $fileSizeMB,
+                'application_table_name' => $table_name,
+                'transaction_id' => $transaction_id,
+                'is_active' => '0',
+                'status_date' => date('Y-m-d'),
+                'created_date' => date(DATE_FORMAT_YMD_HIS),
+                'created_by' => $_SESSION['userid'],
+                'company_id' => $_SESSION['company_id']
+            ];
+
+            $url = API . "?mode=adddata&table=application_attachments&method=post";
+            return file_post_contents($url, $data, 'insert');
+        }
+
+        return null;
+    }
+}
+
 function fileUploading($files, $transaction_id, $table_name)
 {
     $uploadedFiles = [];
 
-    foreach ($files as $key => $fileArray) {
+    foreach ($files as $fileArray) {
         if (!is_array($fileArray['name'])) {
             $fileArray['name'] = [$fileArray['name']];
             $fileArray['type'] = [$fileArray['type']];
@@ -54,49 +102,10 @@ function fileUploading($files, $transaction_id, $table_name)
             $fileArray['size'] = [$fileArray['size']];
         }
 
-        // Process each file in the array
         foreach ($fileArray['name'] as $index => $fileName) {
-
-            if ($fileArray['error'][$index] != UPLOAD_ERR_NO_FILE) {
-                // Extract file details
-                $actualFileName = $fileName;
-                $temp = explode(".", $actualFileName);
-                $randomNumber = random_int(10000, 99999);
-                $microtime = microtime(true);
-                $dateTime = date('Ymd_His', (int)$microtime) . sprintf('%03d', ($microtime - floor($microtime)) * 1000);
-                $uniqueFilename = "file_{$randomNumber
-}_{$dateTime
-}." . end($temp);
-
-                $fileSizeBytes = $fileArray['size'][$index];
-                $fileSizeMB = round($fileSizeBytes / (1024 * 1024), 2);
-
-                // Prepare upload directory
-                $destinationPath = "uploads/csr/" . $uniqueFilename;
-                // Ensure the directory exists
-                if (!is_dir('uploads/csr')) {
-                    mkdir('uploads/csr', 0777, true);
-                }
-
-                // Move uploaded file
-                if (move_uploaded_file($fileArray['tmp_name'][$index], $destinationPath)) {
-                    $data = [
-                        'file_name' => $uniqueFilename,
-                        'actual_file_name' => $actualFileName,
-                        'file_size_mb' => $fileSizeMB,
-                        'application_table_name' => $table_name,
-                        'transaction_id' => $transaction_id,
-                        'is_active' => '0',
-                        'status_date' => date('Y-m-d'),
-                        'created_date' => date('Y-m-d H:i:s'),
-                        'created_by' => $_SESSION['userid'],
-                        'company_id' => $_SESSION['company_id']
-                    ];
-
-                    $url = API . "?mode=adddata&table=application_attachments&method=post";
-                    $file_res = file_post_contents($url, $data, 'insert');
-                    $uploadedFiles[] = $file_res;
-                }
+            $file_res = uploadCsrSingleFileAttachment($fileArray, $index, $fileName, $table_name, $transaction_id);
+            if ($file_res !== null) {
+                $uploadedFiles[] = $file_res;
             }
         }
     }

@@ -1,4 +1,5 @@
 <?php
+defined('EMAIL_PREVIEW_TIME_FORMAT') || define('EMAIL_PREVIEW_TIME_FORMAT', 'h : i A');
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -13,14 +14,14 @@ $inputFildsArray =array();
 foreach($jsondecode as $result){
     $inputFildsArray["{[".$result['application_table_name'].".".$result['fields']."]}"] = ucwords($result['preview_value']);
 }
-function replacestringwithpreview($data,$val){
-    $values = urldecode($val);
-    $str = "";
-    foreach($data as $key => $value){
-        $repl =  str_replace($key, $value, $values);
-        $values = $repl;
+if (!function_exists('replacestringwithpreview')) {
+    function replacestringwithpreview($data,$val){
+        $values = urldecode((string)$val);
+        foreach((array)$data as $key => $value){
+            $values = str_replace($key, $value, $values);
+        }
+        return $values;
     }
-    return $values;
 }
 ?>
 <div class="modal-header">
@@ -35,67 +36,43 @@ function replacestringwithpreview($data,$val){
     <div class="card">
         <div class="card-header">
             <h5><?php echo replacestringwithpreview($inputFildsArray, $emailSubject); ?></h5>
-            <h6 class="float-end"><?php echo date("h : i A"); ?></h6>
+            <h6 class="float-end"><?php echo date(EMAIL_PREVIEW_TIME_FORMAT); ?></h6>
         </div>
     </div>
-<div class="" style="  width: 100%;">
-<table role="presentation" style="padding: 20px; background-color: #f5f5f5; width: 100%; display: inline-block; border-collapse: collapse;">
-        <tr>
-        <td style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424;padding:15px 0px;">
-        <img class="fix" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
-        </td>
-        </tr>
-        <tr>
-        <td>
-        <table role="presentation" style="padding: 10px; background-color: #FFFFFF; width: 100%; display: inline-block; border-collapse: collapse;">
-        <tr>
-        <td style="padding-left:32px; padding-top:20px; font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424" >
-        <?php  echo replacestringwithpreview($inputFildsArray, $emailHeader);?>
-        </td>
-        </tr>
-        <tr>
-        <td style="padding-left:33px; font-size:18px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-        <?php  echo replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
-        </td>
-        </tr>
-        <tr>
-        <td style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-        <div  style=" width: 100% !important; word-break: break-word;white-space: initial;"><?php echo replacestringwithpreview($inputFildsArray, $emailContent1);?> </div>
-
-        </td>
-        </tr>
-
-        <tr>
-        <td style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;"><div  style=" width: 100% !important; word-break: break-word;white-space: initial;">
-        <?php echo  replacestringwithpreview($inputFildsArray, $emailContent2);?>
+<div class="" style="width: 100%;">
+    <div style="padding: 20px; background-color: #f5f5f5; width: 100%; box-sizing: border-box;">
+        <div style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424; padding:15px 0px;">
+            <img class="fix" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
+        </div>
+        <div style="padding: 10px; background-color: #FFFFFF; width: 100%; box-sizing: border-box;">
+            <div style="padding-left:32px; padding-top:20px; font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424;">
+                <?php echo replacestringwithpreview($inputFildsArray, $emailHeader);?>
             </div>
-        </td>
-        </tr>
-        <tr>
-        <td style="padding:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-        <button type="button" style="background-color: #00abfb; border-radius: 0.25rem; text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px; height: 45px; color: #FFFFFF; border: 1px solid transparent;"><span style="text-decoration: none; color: #FFF;"><?php echo replacestringwithpreview($inputFildsArray, $buttonLabel); ?></span></button>
-        </td>
-        </tr>
-        <tr>
-        <td style="padding:10px 33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-        <?= __('Button not working? Try pasting this URL into your browser') ?>
-
-        </td>
-        </tr>
-        <tr>
-        <td style="padding:3px 33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-
-        </td>
-        </tr>
-        </table>
-        </td>
-        </tr>
-        <tr>
-        <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;"><?php echo replacestringwithpreview($inputFildsArray, $emailFooter);?>
-        </td>
-        </tr>
-        </table>
+            <div style="padding-left:33px; font-size:18px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+                <?php echo replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
+            </div>
+            <div style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+                <div style="width: 100% !important; word-break: break-word; white-space: initial;"><?php echo replacestringwithpreview($inputFildsArray, $emailContent1);?></div>
+            </div>
+            <div style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+                <div style="width: 100% !important; word-break: break-word; white-space: initial;">
+                    <?php echo replacestringwithpreview($inputFildsArray, $emailContent2);?>
+                </div>
+            </div>
+            <div style="padding:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+                <button type="button" style="background-color: #00abfb; border-radius: 0.25rem; text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px; height: 45px; color: #FFFFFF; border: 1px solid transparent;"><span style="text-decoration: none; color: #FFF;"><?php echo replacestringwithpreview($inputFildsArray, $buttonLabel); ?></span></button>
+            </div>
+            <div style="padding:10px 33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+                <?= __('Button not working? Try pasting this URL into your browser') ?>
+            </div>
+            <div style="padding:3px 33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+            </div>
+        </div>
+        <div style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+            <?php echo replacestringwithpreview($inputFildsArray, $emailFooter);?>
+        </div>
     </div>
+</div>
 
 <?php } elseif ($templateId === 1) { ?>
 <style>
@@ -145,156 +122,92 @@ function replacestringwithpreview($data,$val){
     <div class="card">
         <div class="card-header">
             <h5><?php echo replacestringwithpreview($inputFildsArray, $emailSubject); ?></h5>
-            <h6 class="float-end"><?php echo date("h : i A"); ?></h6>
+            <h6 class="float-end"><?php echo date(EMAIL_PREVIEW_TIME_FORMAT); ?></h6>
         </div>
     </div>
 
-    <table role="presentation" style="width: 100%; background-color: #f6f8f1; border-collapse: collapse;">
-                <tr>
-                <td>
-                <!--[if (gte mso 9)|(IE)]>
-                <table role="presentation" style="width: 600px; margin-left: auto; margin-right: auto; border-collapse: collapse;">
-                <tr>
-                <td>
-                <![endif]-->
-                <table role="presentation" class="content" style="background-color: #ffffff; margin-left: auto; margin-right: auto; border-collapse: collapse;">
-                <tr>
-                <td class="header" style="background-color: #f0f0f0;">
-                <table role="presentation" style="width: 70px; border-collapse: collapse;">
-                <tr>
-                <td style="height: 70px; padding: 15px 0;">
-                <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" /><br>
-<?= htmlspecialchars($companyName, ENT_QUOTES, 'UTF-8'); ?>
-            </td>
-                </tr>
-                </table>
-
-                </td>
-                </tr>
-                <tr>
-                <td class="innerpadding borderbottom">
-                <table role="presentation" style="width: 100%; border-collapse: collapse;">
-                <tr>
-                <td class="h2">
-                <?php echo  replacestringwithpreview($inputFildsArray, $emailHeader);?>
-
-                </td>
-                </tr>
-                <tr>
-                <td class="bodycopy">
-
-                <?php echo  replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
-                </td>
-                </tr>
-                </table>
-                </td>
-                </tr>
-                <tr>
-                <td class="innerpadding borderbottom">
-                <table role="presentation" style="width: 100%; border-collapse: collapse;">
-                <tr>
-                <td class="h2">
-                <?php echo  replacestringwithpreview($inputFildsArray, $emailAddressed);?>
-                </td>
-                </tr>
-                <tr>
-                <td class="bodycopy"><div  style=" width: 100% !important; word-break: break-word;white-space: initial;">
-                <?php echo  replacestringwithpreview($inputFildsArray, $emailContent1);?></div>
-                </td>
-                </tr>
-                <td class="bodycopy"><div  style=" width: 100% !important; word-break: break-word;white-space: initial;">
-                <?php echo  replacestringwithpreview($inputFildsArray, $emailContent2);?></div>
-                </td>
-                </tr>
-                <tr>
-                <td style="padding: 20px 0 0 0;">
-                <table role="presentation">
-                <tr>
-                <td>
-                <a class="buttonwrapper button" target="_blank" rel="noopener noreferrer" href="#"><?= __('View Order') ?></a>
-                </td>
-                </tr>
-                </table>
-                </td>
-                </tr>
-                </table>
-                </td>
-                </tr>
-
-                </table>
-
-                </td>
-                </tr>
-                <tr>
-                <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+    <div style="width: 100%; background-color: #f6f8f1; box-sizing: border-box;">
+        <div class="content" style="background-color: #ffffff; margin-left: auto; margin-right: auto; box-sizing: border-box;">
+            <div class="header" style="background-color: #f0f0f0;">
+                <div style="width: 70px;">
+                    <div style="height: 70px; padding: 15px 0;">
+                        <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" /><br>
+                        <?= htmlspecialchars($companyName, ENT_QUOTES, 'UTF-8'); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="innerpadding borderbottom">
+                <div style="width: 100%;">
+                    <div class="h2">
+                        <?php echo replacestringwithpreview($inputFildsArray, $emailHeader);?>
+                    </div>
+                    <div class="bodycopy">
+                        <?php echo replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
+                    </div>
+                </div>
+            </div>
+            <div class="innerpadding borderbottom">
+                <div style="width: 100%;">
+                    <div class="h2">
+                        <?php echo replacestringwithpreview($inputFildsArray, $emailAddressed);?>
+                    </div>
+                    <div class="bodycopy">
+                        <div style="width: 100% !important; word-break: break-word; white-space: initial;">
+                            <?php echo replacestringwithpreview($inputFildsArray, $emailContent1);?>
+                        </div>
+                    </div>
+                    <div class="bodycopy">
+                        <div style="width: 100% !important; word-break: break-word; white-space: initial;">
+                            <?php echo replacestringwithpreview($inputFildsArray, $emailContent2);?>
+                        </div>
+                    </div>
+                    <div style="padding: 20px 0 0 0;">
+                        <div>
+                            <a class="buttonwrapper button" target="_blank" rel="noopener noreferrer" href="#"><?= __('View Order') ?></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
                 <?php echo replacestringwithpreview($inputFildsArray, $emailFooter);?>
-
-                </td>
-                </tr>
-                </table>
+            </div>
         </div>
+    </div>
+</div>
 <?php } elseif ($templateId === 3) { ?>
 <div class="card">
-        <div class="card-header">
-            <h5><?php echo replacestringwithpreview($inputFildsArray, $emailSubject); ?></h5>
-            <h6 class="float-end"><?php echo date("h : i A"); ?></h6>
+    <div class="card-header">
+        <h5><?php echo replacestringwithpreview($inputFildsArray, $emailSubject); ?></h5>
+        <h6 class="float-end"><?php echo date(EMAIL_PREVIEW_TIME_FORMAT); ?></h6>
+    </div>
+</div>
+<div style="width: 70%; padding: 20px; background-color: #f5f5f5; margin-left: auto; margin-right: auto; box-sizing: border-box;">
+    <div style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424; padding:15px 0px;">
+        <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
+    </div>
+    <div style="width: 100%; padding: 10px; background-color: #FFFFFF; box-sizing: border-box;">
+        <div style="padding-left:32px; padding-top:20px; font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424;">
+            <?php echo replacestringwithpreview($inputFildsArray, $emailHeader);?>
+        </div>
+        <div style="padding-left:33px; font-size:18px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+            <?php echo replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
+        </div>
+        <div style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+            <div style="width: 100% !important; word-break: break-word; white-space: initial;"><?php echo replacestringwithpreview($inputFildsArray, $emailContent1);?></div>
+        </div>
+        <div>
+            &nbsp;
+        </div>
+        <div style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+            <div style="width: 100% !important; word-break: break-word; white-space: initial;">
+                <?php echo replacestringwithpreview($inputFildsArray, $emailContent2);?>
+            </div>
         </div>
     </div>
-    <table role="presentation" style="width: 70%; padding: 20px; background-color: #f5f5f5; margin-left: auto; margin-right: auto; border-collapse: collapse;">
-        <tr>
-        <td style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424; padding:15px 0px;">
-        <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
-
-        </td>
-        </tr>
-        <tr>
-        <td>
-        <table role="presentation" style="width: 100%; padding: 10px; background-color: #FFFFFF; border-collapse: collapse;">
-        <tr>
-        <td style="padding-left:32px; padding-top:20px; font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424" >
-                <?php echo  replacestringwithpreview($inputFildsArray, $emailHeader);?>
-
-        </td>
-        </tr>
-        <tr>
-        <td style="padding-left:33px; font-size:18px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-
-            <?php echo  replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
-
-        </td>
-        </tr>
-        <tr>
-        <td style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-        <div  style=" width: 100% !important; word-break: break-word;white-space: initial;"><?php echo  replacestringwithpreview($inputFildsArray, $emailContent1);?> </div>
-
-        </td>
-        </tr>
-        <tr>
-        <td>
-        &nbsp;
-        </td>
-        </tr>
-        <tr>
-        <td style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-            <div  style=" width: 100% !important; word-break: break-word;white-space: initial;">
-        <?php echo  replacestringwithpreview($inputFildsArray, $emailContent2);?></div>
-
-        </td>
-        </tr>
-
-
-        </table>
-
-        </td>
-        </tr>
-        <tr>
-        <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-
-        <?php echo  replacestringwithpreview($inputFildsArray, $emailFooter);?>
-
-        </td>
-        </tr>
-        </table>
+    <div style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+        <?php echo replacestringwithpreview($inputFildsArray, $emailFooter);?>
+    </div>
+</div>
 
 <?php } ?>
 </div>

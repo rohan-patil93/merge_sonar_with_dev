@@ -1,4 +1,5 @@
  <?php
+defined('PREFIX_BIRTHDAY_ON') || define('PREFIX_BIRTHDAY_ON', PREFIX_BIRTHDAY_ON);
  $_SESSION['apply_js']['todo'] = '1';
  $data2["where"] = array('is_active'=> '0');
  $costdata = urlencode(json_encode($data2));
@@ -383,7 +384,7 @@
                         <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
                         <?php } ?>
                         <div class="d-inline-block">
-                            <a class="f-15 f-w-600 mb-1 text-uppercase" href=""><span onclick="showrecognitioncard('<?php echo $recognitions['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $data['recognition_badges'][$recognitions['badge_id']]['badge_name']; ?></span></a>
+                            <button type="button" class="btn p-0 border-0 bg-transparent f-15 f-w-600 mb-1 text-uppercase text-primary" onclick="showrecognitioncard('<?php echo $recognitions['id']; ?>')"><?php echo $data['recognition_badges'][$recognitions['badge_id']]['badge_name']; ?></button>
                             <p class="text-muted m-b-0 f-13"><?php echo fromDate($recognitions['created_date']); ?></p>
                         </div>
                     </div>
@@ -481,17 +482,17 @@
                     $receiver_emp_id = $dob['id'];
                     $sender_emp_id = $employee_id;
                     $dob = date('dS M',strtotime($date_of_birth));
-                    $msg_title = 'Birthday on '.$dob;
-                    $disp_text = $display_name ."\n" . "Birthday on ".$date_of_birth;
+                    $msg_title = PREFIX_BIRTHDAY_ON.$dob;
+                    $disp_text = $display_name ."\n" . PREFIX_BIRTHDAY_ON.$date_of_birth;
                     ?>
                     <div class="align-middle m-b-25">
-                        <div class="d-inline-block" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                        <button type="button" class="btn p-0 border-0 bg-transparent d-inline-block text-start" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" aria-label="<?= htmlspecialchars(__('Send wishes'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php if($display_photo) {?>
                                 <img src="uploads/all/<?php echo $display_photo; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
                                 <span class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-10 text-center"><?php echo initials($display_name); ?></span>
                             <?php } ?>
-                        </div>
+                        </button>
                         <div class="d-inline-block width73">
                             <a href="#!" class="text-danger text-capitalize"><h6 class="f-15 mb-1 text-uppercase f-w-600"><i class="fa fa-birthday-cake float-right text-primary"></i> <?php echo $display_name; ?></h6></a>
                             <p class="text-muted m-b-0 f-13"><?php echo $msg_title; ?></p>
@@ -506,16 +507,16 @@
                     $sender_emp_id = $employee_id;
                     $wed = date('d/m',strtotime($wedding_date))."/".date('y');
                     $msg_title = 'Anniversary on '.$wed;
-                    $disp_text = $display_name ."\n" . "Birthday on ".$wedding_date;
+                    $disp_text = $display_name ."\n" . PREFIX_BIRTHDAY_ON.$wedding_date;
                     ?>
                     <div class="align-middle m-b-35">
-                        <div class="d-inline-block" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                        <button type="button" class="btn p-0 border-0 bg-transparent d-inline-block text-start" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" aria-label="<?= htmlspecialchars(__('Send wishes'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php if($display_photo) {?>
                                 <img src="uploads/all/<?php echo $display_photo; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
                                 <span class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($display_name); ?></span>
                             <?php } ?>
-                        </div>
+                        </button>
 
                         <div class="d-inline-block width73">
                             <a href="#!" class="text-danger text-capitalize"><h6 class="f-15 mb-1 text-uppercase f-w-600">  <i class="ti-gift float-right text-primary"></i>   <?php echo $display_name; ?></h6></a>
@@ -803,7 +804,7 @@
                </div>
 
 
-<div id="kt_modal_KTDatatable_remote1 " class="modal fade updaterolemodal" role="dialog" >
+<div id="kt_modal_KTDatatable_remote1 " class="modal fade updaterolemodal" >
     <div class="modal-dialog  " id="modalsize">
         <div class="modal-content "  id="popup5">
 
