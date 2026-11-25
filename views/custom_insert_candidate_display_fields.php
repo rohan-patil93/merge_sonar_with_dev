@@ -1,4 +1,8 @@
 ﻿<?php
+if (!defined('STR_SUFFIX_LABEL')) {
+    define('STR_SUFFIX_LABEL', '-label');
+}
+
 defined('KEY_ERROR_NO') || define('KEY_ERROR_NO', KEY_ERROR_NO);
 defined('LBL_NO_ACCESS') || define('LBL_NO_ACCESS', LBL_NO_ACCESS);
 defined('LBL_VIEW_ONLY') || define('LBL_VIEW_ONLY', LBL_VIEW_ONLY);
@@ -59,11 +63,11 @@ $Rid = $candidate_display_fields['id'];
 <script type="text/javascript">
   function accessDashSetting(fieldgrpname,seq,type){
       if(type == "access"){
-          $("#dash-"+fieldgrpname+"-"+seq+"-label").html("<i class='ti-unlock'></i> <?= __('Access') ?>");
+          $("#dash-"+fieldgrpname+"-"+seq+STR_SUFFIX_LABEL).html("<i class='ti-unlock'></i> <?= __('Access') ?>");
           $("#dash-hidden-"+fieldgrpname+"-"+seq).val('Y');
 
       }else{
-          $("#dash-"+fieldgrpname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> <?= __(LBL_NO_ACCESS) ?>");
+          $("#dash-"+fieldgrpname+"-"+seq+STR_SUFFIX_LABEL).html("<i class='ti-lock text-danger'></i> <?= __(LBL_NO_ACCESS) ?>");
           $("#dash-hidden-"+fieldgrpname+"-"+seq).val('N');
       }
       $(".dash-"+fieldgrpname+"-"+seq).hide();
@@ -78,36 +82,36 @@ $Rid = $candidate_display_fields['id'];
       $("#fieldgrpaccess-hidden-"+fieldgrpname).val(type);
       $(".fieldgrpaccess-hidden-"+fieldgrpname).val(type);
       if(type == "NA"){
-        $(".form-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> <?= __(LBL_NO_ACCESS) ?>");
-        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> <?= __(LBL_NO_ACCESS) ?>");
+        $(".form-"+fieldgrpname+STR_SUFFIX_LABEL).html("<i class='ti-lock text-danger'></i> <?= __(LBL_NO_ACCESS) ?>");
+        $(".allformfield-"+fieldgrpname+STR_SUFFIX_LABEL).html("<i class='ti-lock text-danger'></i> <?= __(LBL_NO_ACCESS) ?>");
 
         $("#field_noaccess-"+fieldgrpname).addClass("text-warning");
 
       }else if(type == "E"){
-        $(".form-"+fieldgrpname+"-label").html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
-        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
+        $(".form-"+fieldgrpname+STR_SUFFIX_LABEL).html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
+        $(".allformfield-"+fieldgrpname+STR_SUFFIX_LABEL).html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
         $("#field_edit-"+fieldgrpname).addClass("text-warning");
       }else{
-        $(".form-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> <?= __(LBL_VIEW_ONLY) ?>");
-        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> <?= __(LBL_VIEW_ONLY) ?>");
+        $(".form-"+fieldgrpname+STR_SUFFIX_LABEL).html("<i class='ti-eye'></i> <?= __(LBL_VIEW_ONLY) ?>");
+        $(".allformfield-"+fieldgrpname+STR_SUFFIX_LABEL).html("<i class='ti-eye'></i> <?= __(LBL_VIEW_ONLY) ?>");
         $("#field_viewonly-"+fieldgrpname).addClass("text-warning");
       }
   }
   function accessFormfieldSetting(fieldname,fieldgrpname,seq,type,value){
       $(".emptyfield-"+fieldname+"-"+seq).removeClass("text-warning");
       $(".empty-"+fieldgrpname).removeClass("text-warning");
-      $(".form-"+fieldgrpname+"-label").html("<?= __('Access Varies') ?>");
+      $(".form-"+fieldgrpname+STR_SUFFIX_LABEL).html("<?= __('Access Varies') ?>");
       $("#fieldaccess-hidden-"+fieldname+"-"+seq).val(type);
 
        $("#fieldgrpaccess-hidden-"+fieldgrpname).val(0);
       if(type == "NA"){
-        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> <?= __(LBL_NO_ACCESS) ?>");
+        $("#formfield-"+fieldname+"-"+seq+STR_SUFFIX_LABEL).html("<i class='ti-lock text-danger'></i> <?= __(LBL_NO_ACCESS) ?>");
         $("#field_noaccess-"+fieldname+"-"+seq).addClass("text-warning");
       }else if(type == "E"){
-        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
+        $("#formfield-"+fieldname+"-"+seq+STR_SUFFIX_LABEL).html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
         $("#field_edit-"+fieldname+"-"+seq).addClass("text-warning");
       }else{
-        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-eye'></i> <?= __(LBL_VIEW_ONLY) ?>");
+        $("#formfield-"+fieldname+"-"+seq+STR_SUFFIX_LABEL).html("<i class='ti-eye'></i> <?= __(LBL_VIEW_ONLY) ?>");
         $("#field_viewonly-"+fieldname+"-"+seq).addClass("text-warning");
       }
 
@@ -178,7 +182,7 @@ $Rid = $candidate_display_fields['id'];
                                   <h5> <?php echo htmlspecialchars(__(ucwords(str_replace("_"," ",$headingkey)))); ?></h5>
                       </div>
                       <div class="col-lg-4">
-                         <span class="form-<?php echo $headingkey."-label"; ?>"><?php echo $candfieldgrpaccesslabel;?></span>
+                         <span class="form-<?php echo $headingkey.STR_SUFFIX_LABEL; ?>"><?php echo $candfieldgrpaccesslabel;?></span>
                       </div>
                       <div class="col-lg-3 text-right">
                           <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][access]" id="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" value="<?php echo $candfieldgrpaccess; ?>">
@@ -209,7 +213,7 @@ $Rid = $candidate_display_fields['id'];
                                           <th scope="col">
                                             <h6 class="mb-0 f-14"><?php echo ucwords(str_replace("_"," ",$profilereadines)); ?></h6>
                                           </th>
-                                  <th scope="col" class="allformfield-<?php echo $headingkey."-label"; ?>" id="formfield-<?php echo $profilereadines."-".$mm."-label"; ?>" ><?php echo htmlspecialchars(__($candfieldgrpaccesslabel ?? '')); ?>
+                                  <th scope="col" class="allformfield-<?php echo $headingkey.STR_SUFFIX_LABEL; ?>" id="formfield-<?php echo $profilereadines."-".$mm.STR_SUFFIX_LABEL; ?>" ><?php echo htmlspecialchars(__($candfieldgrpaccesslabel ?? '')); ?>
                                   </th>
                                           <th scope="col" class="text-right">
                                   <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][field][<?php echo $profilereadines; ?>]" class="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" id="fieldaccess-hidden-<?php echo $profilereadines."-".$mm; ?>" value="<?php echo $candfieldgrpaccess; ?>">

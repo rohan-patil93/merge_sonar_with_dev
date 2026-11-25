@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+}
+
 if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
         $ext=explode(".",$_FILES["data"]['name']);
         $file_name = $ext[0];
@@ -20,13 +24,13 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
         $data['company_id'] = $_SESSION['company_id'];
         $data['file_name'] = $file_insert_name;
         $data['application_table_name'] = $_POST['table'];
-        $data['receive_date'] = date("Y-m-d H:i:s");
-        $data['read_date'] =date("Y-m-d H:i:s");
+        $data['receive_date'] = date(DATE_FORMAT_YMD_HIS);
+        $data['read_date'] =date(DATE_FORMAT_YMD_HIS);
         $data['content'] = $content;
         $data['current_status'] = $_POST['Current_Status'];
-        $data['status_date'] = date("Y-m-d H:i:s");
-        $data['created_date'] = date("Y-m-d H:i:s");
-        $data['from_date'] = date("Y-m-d H:i:s");
+        $data['status_date'] = date(DATE_FORMAT_YMD_HIS);
+        $data['created_date'] = date(DATE_FORMAT_YMD_HIS);
+        $data['from_date'] = date(DATE_FORMAT_YMD_HIS);
         $data['created_by'] = $_SESSION['userid'];
         $data['is_active'] ='0';
         $url="";

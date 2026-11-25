@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_TASK_PREFIX')) {
+    define('STR_TASK_PREFIX', 'Task : ');
+}
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -156,7 +159,7 @@ $status_progress = $result['status_progress'];
                                         <?php if(count((array)$self_yet_to_start_tab) != 0){
                                         foreach($self_yet_to_start_tab as $tasks_category_id=>$tas_res){ ?>
                                           <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $tasks_categories[$tasks_category_id]['category_name'];?>
-                                          <span class="form-label label label-md label-info float-right"><?php echo "Task : ".count((array)$tas_res); ?></span>
+                                          <span class="form-label label label-md label-info float-right"><?php echo STR_TASK_PREFIX.count((array)$tas_res); ?></span>
                                         </a>
                                         <div class="accordion-desc">
                                             <table class="table table-hover">
@@ -206,7 +209,7 @@ $status_progress = $result['status_progress'];
                                         <?php if(count((array)$self_in_progress_tab) != 0){
                                         foreach($self_in_progress_tab as $tasks_category_id=>$tas_res){ ?>
                                           <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $tasks_categories[$tasks_category_id]['category_name'];?>
-                                          <span class="form-label label label-md label-info float-right"><?php echo "Task : ".count((array)$tas_res); ?></span>
+                                          <span class="form-label label label-md label-info float-right"><?php echo STR_TASK_PREFIX.count((array)$tas_res); ?></span>
                                         </a>
                                         <div class="accordion-desc">
                                             <table class="table table-hover">
@@ -258,7 +261,7 @@ $status_progress = $result['status_progress'];
                                         <?php if(count((array)$self_approved_tab) != 0){
                                         foreach($self_approved_tab as $tasks_category_id=>$tas_res){ ?>
                                           <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $tasks_categories[$tasks_category_id]['category_name'];?>
-                                          <span class="form-label label label-md label-info float-right"><?php echo "Task : ".count((array)$tas_res); ?></span>
+                                          <span class="form-label label label-md label-info float-right"><?php echo STR_TASK_PREFIX.count((array)$tas_res); ?></span>
                                         </a>
                                         <div class="accordion-desc">
                                             <table class="table table-hover">
@@ -330,7 +333,7 @@ $status_progress = $result['status_progress'];
                                         <?php if(count((array)$action_pendding_tab) != 0){
                                         foreach($action_pendding_tab as $tasks_category_id=>$tas_res){ ?>
                                           <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $tasks_categories[$tasks_category_id]['category_name'];?>
-                                          <span class="form-label label label-md label-info float-right"><?php echo "Task : ".count((array)$tas_res); ?></span>
+                                          <span class="form-label label label-md label-info float-right"><?php echo STR_TASK_PREFIX.count((array)$tas_res); ?></span>
                                         </a>
                                         <div class="accordion-desc">
                                             <table class="table table-hover">
@@ -382,7 +385,7 @@ $status_progress = $result['status_progress'];
                                         <?php if(count((array)$action_approved_tab) != 0){
                                         foreach($action_approved_tab as $tasks_category_id=>$tas_res){ ?>
                                           <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $tasks_categories[$tasks_category_id]['category_name'];?>
-                                          <span class="form-label label label-md label-info float-right"><?php echo "Task : ".count((array)$tas_res); ?></span>
+                                          <span class="form-label label label-md label-info float-right"><?php echo STR_TASK_PREFIX.count((array)$tas_res); ?></span>
                                         </a>
                                         <div class="accordion-desc">
                                             <table class="table table-hover">

@@ -312,7 +312,7 @@ $departments = $result['departments'];
                         <input aria-label="<?php echo __('Credit Amount[]'); ?>" type="text" name="credit_amount[]" onblur="checkdebitandcredit()" value="<?php echo $tab2['credit_amount']; ?>"  class="form-control text-right all_credit" id="credit_<?php echo $i; ?>">
                     </td>
                     <td class="p-2">
-                        <i class="ti-trash"  onclick="deletRow('jvrow_<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                        <button type="button" class="btn btn-link p-0 border-0" onclick="deletRow('jvrow_<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"><i class="ti-trash"></i></button>
                     </td>
                 </tr>
                 <?php $i++;

@@ -1,4 +1,8 @@
 <?php
+if (!defined('DIR_VIEWS')) {
+    define('DIR_VIEWS', 'views/');
+}
+
 $_SESSION['apply_js']['multiselest'] = "1";
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
@@ -254,8 +258,8 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
                     <div class="col-lg-4" id="insertform" >
                     <?php
                         $pageurl = 'custom_insert_chart_of_accounts_ajax.php';
-                         if(file_exists("views/".$pageurl)){
-                             include_once "views/".$pageurl;
+                         if(file_exists(DIR_VIEWS.$pageurl)){
+                             include_once DIR_VIEWS.$pageurl;
                          }else{
                              include_once $pageurl;
                          }
@@ -264,8 +268,8 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
                     <div class="col-lg-8" id="viewtable">
                     <?php
                         $pageurl = 'custom_insert_chart_of_accounts_table.php';
-                        if(file_exists("views/".$pageurl)){
-                            include_once "views/".$pageurl;
+                        if(file_exists(DIR_VIEWS.$pageurl)){
+                            include_once DIR_VIEWS.$pageurl;
                         }else{
                             include_once $pageurl;
                         }

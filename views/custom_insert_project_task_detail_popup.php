@@ -620,9 +620,9 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
           <!----------------- DESCRPTION --------------------------->
           <div class="mt-4">
             <h6><i></i> <?php echo __('Description'); ?></h6>
-            <div id="hidedescription" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="viewdescrption()">
+            <button type="button" class="btn btn-link text-start text-dark p-0 border-0 w-100" id="hidedescription" onclick="viewdescrption()">
               <?php echo $task['description']!="" ? $task['description'] : "Add a more detailed description…"; ?>
-            </div>
+            </button>
             <div class="m-l-40 mt-4" id="description" style="display:none;">
               <textarea aria-label="<?php echo __('Text area'); ?>" class="w-100 mb-2 text-start toptextarea" onblur="updatedetail('description', <?php echo $task_id; ?> ,this.value)" placeholder=""><?php echo $task['description']; ?></textarea>
             </div>

@@ -215,15 +215,15 @@ function viewexemption(){
                 </div>
             </div>
             <div>
-                <div class="row col-lg-8 p-2 text-white" onclick="viewexemption()" style="background-color: #4099ff;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                <button type="button" class="btn btn-link text-white text-decoration-none row col-lg-8 p-2 text-start" onclick="viewexemption()" style="background-color: #4099ff;">
                     <div class="col-lg-11">
                         <?php echo __('Professional Tax Exemptions'); ?>
                     </div>
                     <div class=" col-lg-1 text-right f-w-600 f-16 cursor-pointer"  id="exemptionicon">
                         +
                     </div>
-                    <input type="hidden" name="" id="viewexem" value="0">
-                </div>
+                </button>
+                <input type="hidden" name="" id="viewexem" value="0">
             </div>
             <div style="display: none;" id="exemid">
             <?php if(count((array)$exdatas)>0){

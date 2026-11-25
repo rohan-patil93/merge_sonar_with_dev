@@ -27,7 +27,7 @@ $sub_header_name = json_decode($paheaders['sub_header_name'],1);
     } ?>
     <?php if($paheaders['sub_header_addmore'] == '0'){ //delete button visible 0 or 1 is not ?>
         <td>
-                <i class="fa fa-trash text-danger" onclick="appraiserDeleteRow(<?php echo $header_id.$hedcnt; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <button type="button" class="btn btn-link p-0 border-0" onclick="appraiserDeleteRow(<?php echo $header_id.$hedcnt; ?>)" aria-label="<?php echo __('Delete'); ?>"><i class="fa fa-trash text-danger"></i></button>
 
         </td>
     <?php } ?>

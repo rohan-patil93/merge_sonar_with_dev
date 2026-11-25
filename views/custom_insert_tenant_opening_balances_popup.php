@@ -195,7 +195,7 @@ function calculateRent(rowid){
                         <textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="comment[1]" class="form-control " id="comment"></textarea>
                     </th>
                     <th scope="col" class="p-1 text-center">
-                        <i role="button" tabindex="0" aria-label="<?php echo __('Removed'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger mr-5" onclick="deletRow('removerow_1')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>"></i>
+                        <button type="button" class="btn btn-link p-0 border-0 mr-5" aria-label="<?php echo __('Removed'); ?>" onclick="deletRow('removerow_1')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>"><i class="ti-trash text-danger"></i></button>
                     </th>
                 </tr>
             </tbody>

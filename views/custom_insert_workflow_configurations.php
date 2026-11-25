@@ -126,16 +126,15 @@ function subProcessType($val){
         'access_levels' => ['application_roles', 'name'],
         'individual_employee_role' => ['employment_roles', 'role_name'],
     ];
+    $result = [];
     if(isset($tableMap[$val])){
-        return getWorkflowTableOptions($tableMap[$val][0], $tableMap[$val][1]);
+        $result = getWorkflowTableOptions($tableMap[$val][0], $tableMap[$val][1]);
+    } elseif($val == 'role_levels' || $val == 'user_hierarchical'){
+        $result = getWorkflowGencOptions("HIERARCHICALLEVEL");
+    } elseif($val == 'buddy'){
+        $result = getWorkflowGencOptions("EMPLOYEEBUDDIES");
     }
-    if($val == 'role_levels' || $val == 'user_hierarchical'){
-        return getWorkflowGencOptions("HIERARCHICALLEVEL");
-    }
-    if($val == 'buddy'){
-        return getWorkflowGencOptions("EMPLOYEEBUDDIES");
-    }
-    return [];
+    return $result;
 }
 $stausresult = ViewStatusData();
 ?>

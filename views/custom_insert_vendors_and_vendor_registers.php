@@ -373,7 +373,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                 <i class="ti-email f-14 text-primary"></i>&nbsp;<?php echo $vendordetail['email']; ?></a>
                         <?php }
                         if ($vendordetail['phone'] != "") {  ?>
-                            <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5">
+                            <a href="tel:<?php echo $vendordetail['phone']; ?>" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5">
                                 <i class="fa fa-phone f-14 text-primary"></i>&nbsp;<?php echo DynamicPhoneNumberFormt($vendordetail['phone']); ?></a>
                         <?php }  ?>
                         <?php if ($vendordetail['billing_address'] != "") { ?>

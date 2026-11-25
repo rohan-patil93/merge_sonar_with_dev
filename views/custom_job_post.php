@@ -525,7 +525,7 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                   <?php $ij=1; if(isset($jobpostlist['question'])){ $question = json_decode($jobpostlist['question'],1); foreach($question as $question){ ?>
                  <div class="row rows<?php echo $ij; ?>">
 
-                  <input aria-label="<?= htmlspecialchars(__('Question'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control mt-2 col-lg-10" type="text" name="question[]" value="<?php echo $question; ?>" placeholder="<?= htmlspecialchars(__('Eg. Tell me about yourself'), ENT_QUOTES, 'UTF-8'); ?>"><i title="<?= htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>>)" class="text-dark-50 flaticon-delete col-lg-2 mt-4" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                  <input aria-label="<?= htmlspecialchars(__('Question'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control mt-2 col-lg-10" type="text" name="question[]" value="<?php echo $question; ?>" placeholder="<?= htmlspecialchars(__('Eg. Tell me about yourself'), ENT_QUOTES, 'UTF-8'); ?>"><button type="button" class="btn p-0 border-0 bg-transparent text-dark-50 flaticon-delete col-lg-2 mt-4" title="<?= htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" aria-label="<?= htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
                     </div>     <?php $ij++;
 }

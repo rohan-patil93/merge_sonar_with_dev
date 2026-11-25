@@ -1,4 +1,8 @@
 <?php
+if (!defined('DIR_UPLOADS_CSR')) {
+    define('DIR_UPLOADS_CSR', DIR_UPLOADS_CSR);
+}
+
 $_SESSION['apply_js']['multiselest'] = 1;
 
 function csrProjectDocText($value)
@@ -56,8 +60,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'update_document') {
         $tmpName = $uploadedFile['tmp_name'] ?? '';
         $actualFileName = $uploadedFile['name'] ?? '';
         if ($fileError == UPLOAD_ERR_OK && $tmpName != '') {
-            if (!is_dir('uploads/csr')) {
-                mkdir('uploads/csr', 0777, true);
+            if (!is_dir(DIR_UPLOADS_CSR)) {
+                mkdir(DIR_UPLOADS_CSR, 0777, true);
             }
             $ext = pathinfo($actualFileName, PATHINFO_EXTENSION);
             $randomNumber = random_int(10000, 99999);
@@ -98,8 +102,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'save_documents') {
     if ($selectedProposalId <= 0) {
         $errorMessage = __('Please select approved CSR project.');
     } else {
-        if (!is_dir('uploads/csr')) {
-            mkdir('uploads/csr', 0777, true);
+        if (!is_dir(DIR_UPLOADS_CSR)) {
+            mkdir(DIR_UPLOADS_CSR, 0777, true);
         }
 
         if (count((array)$documentNames) > 0) {

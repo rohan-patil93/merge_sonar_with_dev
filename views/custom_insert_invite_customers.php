@@ -228,7 +228,7 @@ function removeOrganizationSetup(idd){
                     </select>
                 </div>
                 <div class="col-lg-1 p-t-10">
-                  <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="removeorganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                  <button type="button" class="btn btn-link p-0 border-0 text-danger" onclick="removeorganizationSetup('<?php echo $rowid; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" aria-label="<?= __('Remove') ?>"><i class="ti-trash"></i></button>
                 </div>
               </div>
               <?php $im++;

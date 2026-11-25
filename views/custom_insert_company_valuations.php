@@ -641,9 +641,9 @@ function calculateDistributionQTY(){
     } ?>
     <div class="form-group col-lg-1 p-t-15 text-center" <?php echo $antcss; ?>>
         <input type="hidden" name="dilution_seq[]" value="<?php echo $values['id']; ?>">
-        <span onclick="dilutionCheck('<?php echo $values['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-          <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="js-primary-sm" type="checkbox" name="dilution[<?php echo $values['id']; ?>]" <?php echo ($dilution=='0')?"checked":"";?> value="0"  id="dilution_<?php echo $values['id']; ?>">
-      </span>
+        <label class="form-check-label mb-0 cursor-pointer">
+          <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="js-primary-sm" type="checkbox" name="dilution[<?php echo $values['id']; ?>]" <?php echo ($dilution=='0')?"checked":"";?> value="0" id="dilution_<?php echo $values['id']; ?>" onclick="dilutionCheck('<?php echo $values['id']; ?>')">
+        </label>
   </div>
   <div class="form-group col-lg-1 p-t-15 text-center" <?php echo $antinfocss; ?>>
      <i class="fa fa-info-circle f-22" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('ESOP Not Allowed Anti Dilution') ?>" ></i>

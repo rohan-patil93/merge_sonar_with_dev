@@ -31,9 +31,7 @@ $display_answer = json_decode($employee_feedbacks['display_answer'],1);
     <h5 class="modal-title"><?= __('Feed Back Respons') ?></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
-<div class="modal-body" <?php if($_POST['emp_id'] == $_SESSION['emp_id']){
-}else{ ?>style="pointer-events: none; opacity: 0.7;" <?php
-} ?>>
+<div class="modal-body" <?php if($_POST['emp_id'] != $_SESSION['emp_id']){ ?>style="pointer-events: none; opacity: 0.7;" <?php } ?>>
     <form id="feedback_form">
         <input type="hidden" name="rid" value="<?php echo $rid; ?>">
         <input type="hidden" name="answer_type" value="<?php echo $employee_feedbacks['answer_type']; ?>">

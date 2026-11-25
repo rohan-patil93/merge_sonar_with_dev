@@ -6,9 +6,7 @@ if($_POST['submit'] == 'Add'){
         header("location:index.php?option=com_view_email");
     }
 }
-if($_POST['submit'] == 'Update'){
 
-}
 $table1 = array('');
 $table2 = array(array('item_id'=>''));
 if($_GET['pr_id']){

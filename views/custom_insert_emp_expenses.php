@@ -501,9 +501,9 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                           <?php
                                           $sub_details['expense_type'] = (isset($sub_details['expense_type']) && $sub_details['expense_type'] != "") ? $sub_details['expense_type'] : '0';
                                           foreach($expense_typelist as $expense_typelkey => $expense_typel){ ?>
-                                            <div class="radio radio-outline radio-inline" onclick="checkFuntion('<?php echo $seqs; ?>')">
+                                            <div class="radio radio-outline radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  <?php echo ($sub_details['expense_type']==$expense_typelkey)?"checked":""; ?> name="expense_type_<?php echo $seqs; ?>" id="gender-1_2" value="<?php echo $expense_typelkey; ?>" >
+                                                    <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  <?php echo ($sub_details['expense_type']==$expense_typelkey)?"checked":""; ?> name="expense_type_<?php echo $seqs; ?>" id="gender-1_2" value="<?php echo $expense_typelkey; ?>" onclick="checkFuntion('<?php echo $seqs; ?>')">
                                                     <i class="helper"></i><?php echo $expense_typel; ?>
                                                 </label>
                                             </div>

@@ -1,4 +1,7 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', DATE_FORMAT_YMD_HIS);
+}
 $_SESSION['apply_js']['multiselest'] = 1;
 if ($_POST['submit'] == 'save_status') {
   $rid = $_POST['work_order_id'];
@@ -10,7 +13,7 @@ if ($_POST['submit'] == 'save_status') {
     $_POST['work_log_status'] = '199';
   }
   unset($_POST['action'], $_POST['submit'], $_POST['work_order_id']);
-  $_POST['updated_date'] = date('Y-m-d H:i:s');
+  $_POST['updated_date'] = date(DATE_FORMAT_YMD_HIS);
   $_POST['updated_by'] = $_SESSION['userid'];
   $url = API . "?mode=updaterowtabledata&rid=" . $rid . "&table=manufacturing_work_orders&method=post";
   $response = file_post_contents($url, $_POST, 'update');
@@ -22,7 +25,7 @@ if ($_POST['save'] == 'save_logs') {
   $softDeleteData = array(
     'is_active' => 1,
     'updated_by' => $_SESSION['userid'],
-    'updated_date' => date('Y-m-d H:i:s')
+    'updated_date' => date(DATE_FORMAT_YMD_HIS)
   );
   $url = API . "?mode=updaterowtabledata&table=manufacturing_work_order_logs&method=post&rid={$work_order_id
 }&fid=work_order_id";
@@ -40,7 +43,7 @@ if ($_POST['save'] == 'save_logs') {
       );
       $completed_qty += $row['log_qty'] ?? 0;
       if ($id != '' && $id > 0) {
-        $data['updated_date'] = date('Y-m-d H:i:s');
+        $data['updated_date'] = date(DATE_FORMAT_YMD_HIS);
         $data['updated_by'] = $_SESSION['userid'];
         $data['is_active'] = '0';
         $url = API . "?mode=updaterowtabledata&rid={$id
@@ -50,9 +53,9 @@ if ($_POST['save'] == 'save_logs') {
       } else {
         $data['current_status'] = '0';
         $data['is_active'] = '0';
-        $data['status_date'] = date('Y-m-d H:i:s');
+        $data['status_date'] = date(DATE_FORMAT_YMD_HIS);
         $data['company_id'] = $_SESSION['company_id'];
-        $data['created_date'] = date('Y-m-d H:i:s');
+        $data['created_date'] = date(DATE_FORMAT_YMD_HIS);
         $data['created_by'] = $_SESSION['userid'];
         $url = API . "?mode=adddata&table=manufacturing_work_order_logs&method=post";
         $response = file_post_contents($url, $data, 'insert');
@@ -63,7 +66,7 @@ if ($_POST['save'] == 'save_logs') {
   $completed_array = array(
     'completed_qty' => $completed_qty,
     'updated_by' =>  $_SESSION['userid'],
-    'updated_date' => date('Y-m-d H:i:s'),
+    'updated_date' => date(DATE_FORMAT_YMD_HIS),
   );
 
   $url = API . "?mode=updaterowtabledata&rid=".$work_order_id."&table=manufacturing_work_orders&method=post";

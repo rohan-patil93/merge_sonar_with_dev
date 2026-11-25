@@ -1,4 +1,7 @@
 <?php
+if (!defined('URL_GET_TABLE_DETAILS')) {
+    define('URL_GET_TABLE_DETAILS', '?mode=gettabledetails&table=');
+}
 if (isset($_POST['submit']) && $_POST['submit'] == 'search') {
         $array =  array('category_id', 'vendor_id', 'cost_center_id', 'location_id');
         foreach ($array as  $value) {
@@ -13,13 +16,13 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'search') {
         $data = json_decode($response,1);
 
     }
-$tablecat = API."?mode=gettabledetails&table=".TBL_ITEM_CATEGORIES;
+$tablecat = API.URL_GET_TABLE_DETAILS.TBL_ITEM_CATEGORIES;
 $rescat = callAPI($tablecat);
 $datacat = json_decode($rescat,1);
-$tablecost = API."?mode=gettabledetails&table=".TBL_COST_CENTERS;
+$tablecost = API.URL_GET_TABLE_DETAILS.TBL_COST_CENTERS;
 $rescost = callAPI($tablecost);
 $datacost = json_decode($rescost,1);
-$tablelocation = API."?mode=gettabledetails&table=".TBL_LOCATIONS;
+$tablelocation = API.URL_GET_TABLE_DETAILS.TBL_LOCATIONS;
 $reslocation = callAPI($tablelocation);
 $datalocation = json_decode($reslocation,1);
 

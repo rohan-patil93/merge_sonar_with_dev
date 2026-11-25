@@ -67,9 +67,7 @@ function h($s)
 <?php
         $workflowsteps = getWorkflowStatus('trips',$rid,$trip_res['current_status']);
         $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,ST_CALLBACK,'');
-        if(in_array($trip_res['current_status'], (array)$check_array)){
-
-        }else{
+        if(!in_array($trip_res['current_status'], (array)$check_array)){
             $disable = "disabled";
             $formdisable = "event_disabled";
         }

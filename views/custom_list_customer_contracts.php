@@ -116,7 +116,7 @@ $inactive_count = $result['inactive_count'] ?? 0;
 
                         <tbody>
 
-                            <?php party_contracts_render_rows($active_contracts); ?>
+                            <?php partyContractsRenderRows($active_contracts); ?>
 
                         </tbody>
 
@@ -170,7 +170,7 @@ $inactive_count = $result['inactive_count'] ?? 0;
 
                         <tbody>
 
-                            <?php party_contracts_render_rows($inactive_contracts); ?>
+                            <?php partyContractsRenderRows($inactive_contracts); ?>
 
                         </tbody>
 

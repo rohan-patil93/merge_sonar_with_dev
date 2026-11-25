@@ -63,8 +63,6 @@ $customers= $result['customers'];
 $reconciliations = $result['reconciliations'];
 if($reconciliations['reconciliation_type'] == "BTG"){
         $rts = "display:none";
-}elseif($reconciliations['reconciliation_type'] == "RTS"){
-
 }elseif($reconciliations['reconciliation_type'] == "RTM"){
     $counterpartentry = "display:none";
 }

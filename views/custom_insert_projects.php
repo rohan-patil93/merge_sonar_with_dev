@@ -1,11 +1,13 @@
 <?php
-
-    if(isset($_POST['submit'])){
+if (!defined('URL_ADD_UPDATE_PROJECT')) {
+    define('URL_ADD_UPDATE_PROJECT', '?mode=addupdateproject&method=post');
+}
+if(isset($_POST['submit'])){
         $_POST['company_id'] = $_SESSION['company_id'];
         if($_POST['submit'] == 'Add'){
             $_POST['created_by'] = $_SESSION['userid'];
             $_POST['created_date'] = nowDate();
-            $url = API."?mode=addupdateproject&method=post";
+            $url = API.URL_ADD_UPDATE_PROJECT;
             $response = file_post_contents($url, $_POST, 'insert');
              if ($response) {
                 header("location:index.php?option=".$_GET['option']."&role=".$_GET['role']."&version=".$_GET['version']);
@@ -14,7 +16,7 @@
         if($_POST['submit'] == 'Add'){
             $_POST['created_by'] = $_SESSION['userid'];
             $_POST['created_date'] = nowDate();
-            $url = API."?mode=addupdateproject&method=post";
+            $url = API.URL_ADD_UPDATE_PROJECT;
             $response = file_post_contents($url, $_POST, 'insert');
              if ($response) {
                 header("location:index.php?option=COM_LIST_PROJECTS");
@@ -23,7 +25,7 @@
         if($_POST['submit'] == 'Update'){
             $_POST['created_by'] = $_SESSION['userid'];
             $_POST['created_date'] = nowDate();
-            $url = API."?mode=addupdateproject&method=post";
+            $url = API.URL_ADD_UPDATE_PROJECT;
             $response = file_post_contents($url, $_POST, 'insert');
              if ($response) {
                 header("location:index.php?option=COM_LIST_PROJECTS");

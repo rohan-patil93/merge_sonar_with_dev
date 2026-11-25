@@ -123,7 +123,7 @@ $frequencyllist = $kipandkradetails['task_frequency_list'];
                         <td>
                             <input type="hidden" value="<?php echo $td['id']; ?>" id="kpi_task_id_<?php echo $count; ?>" >
                             <input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
-                            <i class="fa fa-trash text-danger" id="<?php echo $count; ?>"  onclick="deletestatickRows(<?php echo $count; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <button type="button" class="btn btn-link p-0 border-0" onclick="deletestatickRows(<?php echo $count; ?>)" aria-label="<?php echo __('Delete'); ?>"><i class="fa fa-trash text-danger" id="<?php echo $count; ?>"></i></button>
 
                         </td>
                         <td>

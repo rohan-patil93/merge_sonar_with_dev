@@ -1088,7 +1088,9 @@ foreach ($emptypes_details as $emptypes) {
 
                   </tr>
                   <?php if(count((array)$exp_details)=='0'){ $exp_details = array('company_name'=>"");
-} $k=1; if(count((array)$exp_details)>0){
+}
+$k=1;
+if(count((array)$exp_details)>0){
                    foreach ($exp_details as $expe){
 
                     ?>

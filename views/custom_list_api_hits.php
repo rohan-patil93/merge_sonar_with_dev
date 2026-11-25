@@ -79,7 +79,7 @@ $api_masters = $result['api_masters'];
                                         <span class="d-block"><?php echo $apim['api_service_provider']." (".$apim['api_name'].")"; ?></span>
                                         <div class="text-right">
                                             <div class="position-relative d-inline-block">
-                                                <i class="ti ti-timer icon-dark cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Get API History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getAPIHitsList(<?php echo $apim['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                                <button type="button" class="btn btn-link p-0 border-0 ti ti-timer icon-dark cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Get API History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getAPIHitsList(<?php echo $apim['id']; ?>)" aria-label="<?= htmlspecialchars(__('Get API History'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                                               </div>
 
                                         </div>

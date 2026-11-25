@@ -147,8 +147,7 @@ function getnamelist(emplist){
     </div>
     <div class="col-md-9">
         <div id="newhpirowtagging" >
-            <?php if(isset($_POST['locatdepdesignatio'])){
-}else{
+            <?php if(!isset($_POST['locatdepdesignatio'])){
                 $url22 = API."?mode=getorganizationgoalsdetails&kra_list=Y&kpaidlist=".implode(',',(array)$krakpiid);
                 $response22 = callAPI($url22);
                 $kipandkradetails22 = json_decode($response22,1);

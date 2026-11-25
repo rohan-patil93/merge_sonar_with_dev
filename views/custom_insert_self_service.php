@@ -29,7 +29,7 @@
 
     </div>
     <div class="col-lg-4 draggable-zone">
-                            <div class="card card-custom gutter-b draggable" role="region" style="">
+                            <section class="card card-custom gutter-b draggable" style="">
                                 <div class="card-header">
                                     <div class="card-title">
                                         <h3 class="card-label"><?php echo __('Attendance Summary'); ?></h3>
@@ -80,7 +80,7 @@
                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
                         </div>
     <div class="col-lg-4 draggable-zone">
         <?php include_once 'dash_borad_leaves.php'; ?>

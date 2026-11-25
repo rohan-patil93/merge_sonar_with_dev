@@ -105,7 +105,7 @@ else {
                             <textarea aria-label="<?php echo __('Text area'); ?>"  id="description_<?php echo $seq; ?>" name="description[]" class="form-control" autocomplete="off"><?php echo $swoi['description']; ?></textarea>
                         </th>
                         <th scope="col" class="p-1">
-                            <i class="ti-trash cursor-pointer" onclick="removerows('remove_row_<?php echo $seq; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                            <button type="button" class="btn btn-link p-0 border-0" onclick="removerows('remove_row_<?php echo $seq; ?>')" aria-label="<?php echo __('Remove'); ?>"><i class="ti-trash cursor-pointer"></i></button>
                         </th>
                     </tr>
                     <?php $seq++;

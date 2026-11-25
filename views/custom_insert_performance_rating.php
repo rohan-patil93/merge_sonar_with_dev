@@ -308,7 +308,7 @@ foreach ($defalut_fields as $dfield) {
 
 <script src="assets/js/pages/features/charts/apexcharts.js"></script>
 
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable"  >
         <div class="modal-content"  id="popup2">
 

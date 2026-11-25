@@ -1,4 +1,8 @@
 <?php
+if (!defined('HTML_NO_RECORDS_CLOSE')) {
+    define('HTML_NO_RECORDS_CLOSE', HTML_NO_RECORDS_CLOSE);
+}
+
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -261,7 +265,7 @@ if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?__('Billabl
                                 <?php }
 }
 if($exper=="0"){
-                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Experience Details') . "</h4></td</tr>";
+                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Experience Details') . HTML_NO_RECORDS_CLOSE;
                                     } ?>
                             </tbody>
                         </table>
@@ -297,7 +301,7 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                                 <?php }
 }
 if($qualifi=="0"){
-                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Qualification Details') . "</h4></td</tr>";
+                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Qualification Details') . HTML_NO_RECORDS_CLOSE;
                                     } ?>
                             </tbody>
                         </table>
@@ -327,7 +331,7 @@ if($qualifi=="0"){
                                 <?php }
 }
 if($depend=="0"){
-                                        echo "<tr><td colspan='3' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Dependents Details') . "</h4></td</tr>";
+                                        echo "<tr><td colspan='3' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Dependents Details') . HTML_NO_RECORDS_CLOSE;
                                     } ?>
 
                             </tbody>
@@ -360,7 +364,7 @@ if($depend=="0"){
                                     <?php } ?>
                                     <?php }
                                     if($emrg=="0"){
-                                        echo "<tr><td colspan='4' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Emergency Contact') . "</h4></td</tr>";
+                                        echo "<tr><td colspan='4' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Emergency Contact') . HTML_NO_RECORDS_CLOSE;
                                     }
 
                                      ?>

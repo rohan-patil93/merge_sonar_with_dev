@@ -130,7 +130,7 @@ function closedPopupcompliance22(){
                                 </div>
                             </th>
                             <th scope="col" style="text-align: right;">
-                                <i class="fa fa-eye" onclick="showEmailConten('<?php echo $email_log['id']; ?>','<?php echo $email_log['content']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="showEmailConten('<?php echo $email_log['id']; ?>','<?php echo $email_log['content']; ?>')" aria-label="<?= __('View Email Content') ?>"><i class="fa fa-eye"></i></button>
 
 
                                     <div class="custom-popup-open custom-popup-slide-showemailcontent-<?php echo $email_log['id']; ?> text-start" style="display: none;left: 18px;top: 55px; overflow: scroll;">

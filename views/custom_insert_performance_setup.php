@@ -1,4 +1,7 @@
 <?php
+if (!defined('URL_PERF_SETUP_QUESTIONS')) {
+    define('URL_PERF_SETUP_QUESTIONS', '?mode=insertandupdateperformancesetupquestions&method=post');
+}
 if(isset($_POST['submit'])){
     $data = array();
     if($_POST['submit']=='addpeople'){
@@ -53,15 +56,15 @@ if(isset($_POST['submit'])){
         $response = file_post_contents($url, $data, 'update');
     }
     if($_POST['submit']=='saveemployeeassessment'){
-        $url = API."?mode=insertandupdateperformancesetupquestions&method=post";
+        $url = API.URL_PERF_SETUP_QUESTIONS;
         $response = file_post_contents($url, $_POST, 'update');
     }
     if($_POST['submit']=='savemanagementassessment'){
-        $url = API."?mode=insertandupdateperformancesetupquestions&method=post";
+        $url = API.URL_PERF_SETUP_QUESTIONS;
         $response = file_post_contents($url, $_POST, 'update');
     }
     if($_POST['submit']=='savemanagertoassessment'){
-        $url = API."?mode=insertandupdateperformancesetupquestions&method=post";
+        $url = API.URL_PERF_SETUP_QUESTIONS;
         $response = file_post_contents($url, $_POST, 'update');
     }
 

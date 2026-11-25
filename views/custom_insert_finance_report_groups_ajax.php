@@ -72,7 +72,7 @@ if(isset($_POST['id']) && $_POST['id'] !=""){
           <div class="card-header">
             <h5><?php echo __('Chart Of Account'); ?></h5>
             <div class="card-header-right">
-              <i class="ti-close" onclick="closedPopup('checklistuser-<?php echo $compliancelist['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+              <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="closedPopup('checklistuser-<?php echo $compliancelist['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Closed') ?>" aria-label="<?= __('Closed') ?>"><i class="ti-close"></i></button>
             </div>
           </div>
           <div class="card-body">

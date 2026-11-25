@@ -561,7 +561,7 @@ $stausresult = ViewStatusData();
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <!-- <div class="form-group col-lg-3 w-full">
+                                <div class="form-group col-lg-12">
                                     <span class="form-label d-inline-block fw-bold"><?= __('Process Name'); ?></span>
                                     <select class="form-select js-example-basic-single process_name" name="process_name"
                                         id="process_name" onchange="selectProcessName(this.value)"

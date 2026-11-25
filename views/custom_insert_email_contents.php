@@ -310,7 +310,7 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
 
    </div>
 
-   <div id="email_previews_modal" class="modal fade" role="dialog" aria-hidden="true">
+   <div id="email_previews_modal" class="modal fade" aria-hidden="true">
        <div class="modal-dialog modal-lg " >
            <div class="modal-content"  id="email_previews_modal_view">
 

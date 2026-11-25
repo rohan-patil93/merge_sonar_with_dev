@@ -155,7 +155,8 @@ function renderEmployeeCtcTable($report_list, $unique, $banks, $teremp) {
                             renderEmployeeCtcComponentCell($names1, $report_list[$key], $viewlist);
                         } ?>
                     </tr>
-                <?php $i++; } ?>
+                <?php $i++;
+} ?>
             <?php }else{ ?>
                 <tr><td colspan="16" class="text-center"><h4 class="mt-4"><i class="fa fa-warning"></i> <?= __('No Employee CTC Details'); ?></h4></td></tr>
             <?php } ?>
@@ -165,11 +166,7 @@ function renderEmployeeCtcTable($report_list, $unique, $banks, $teremp) {
     <?php
 }
 
-if(!function_exists('render_employee_ctc_table')){
-    function render_employee_ctc_table($report_list, $unique, $banks, $teremp){
-        renderEmployeeCtcTable($report_list, $unique, $banks, $teremp);
-    }
-}
+
 
 ?>
 <div class="page-body">

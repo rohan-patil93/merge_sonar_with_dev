@@ -69,7 +69,7 @@ $api_code = $api_masters['api_code'];
             </td>
             <td class="p-2 text-center">
                 <?php if($apihit['response_status'] =="200"){ ?>
-                <i class="ti-server cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Sync API Response to Database'), ENT_QUOTES, 'UTF-8'); ?>" onclick="syncAPIResponse('<?php echo $apihit['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <button type="button" class="btn btn-link p-0 border-0 ti-server cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Sync API Response to Database'), ENT_QUOTES, 'UTF-8'); ?>" onclick="syncAPIResponse('<?php echo $apihit['id']; ?>')" aria-label="<?= htmlspecialchars(__('Sync API Response to Database'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                 <?php } ?>
             </td>
         </tr>

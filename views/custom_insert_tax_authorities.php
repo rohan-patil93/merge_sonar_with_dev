@@ -294,7 +294,7 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
                                     <div class="col-lg-4">
                                         <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right distributionI_<?php echo $taseq; ?>" name="tax_rate_split[<?php echo $taseq; ?>][]" value="<?php echo $di['tax_rate']; ?>" onblur="calculateTotal('I_<?php echo $taseq; ?>')">
                                     </div>
-                                    <div class="form-group col-lg-1"><i class="ti-trash"  onclick="deletRow('I_<?php echo $mk; ?>_<?php echo $taseq; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i> </div>
+                                    <div class="form-group col-lg-1"><button type="button" class="btn btn-link p-0 border-0" onclick="deletRow('I_<?php echo $mk; ?>_<?php echo $taseq; ?>')" aria-label="<?php echo __('Remove'); ?>"><i class="ti-trash"></i></button> </div>
                                 </div>
                             <?php $mk++;
 } ?>

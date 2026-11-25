@@ -50,12 +50,7 @@ if (!function_exists('partyContractsRenderRow')) {
     }
 }
 
-if (!function_exists('party_contracts_render_row')) {
-    function party_contracts_render_row($index, $row)
-    {
-        partyContractsRenderRow($index, $row);
-    }
-}
+
 
 if (!function_exists('partyContractsRenderRows')) {
     function partyContractsRenderRows($contracts)
@@ -75,9 +70,4 @@ if (!function_exists('partyContractsRenderRows')) {
     }
 }
 
-if (!function_exists('party_contracts_render_rows')) {
-    function party_contracts_render_rows($contracts)
-    {
-        partyContractsRenderRows($contracts);
-    }
-}
+

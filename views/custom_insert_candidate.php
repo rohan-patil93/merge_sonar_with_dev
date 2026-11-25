@@ -550,7 +550,6 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                             include_once "includes/controller.php";
                             $dispage = str_replace("views/", '', $disptemp);
                             include_once $dispage;
-                        }else{
                         }
                         ?>
                     </div>

@@ -18,9 +18,7 @@ if($_POST['submit'] == 'Add'){
         echo $url; exit;
 
     }
-    if($_POST['submit'] == 'Update'){
 
-    }
 $cusurl = API."?mode=gettabledetails&table=".TPREFIX.TBL_CUSTOMERS;
 $cusresponse = file_get_contents($cusurl, false, $context);
 $cusresponse = json_decode($cusresponse,1);

@@ -211,7 +211,15 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
                         </div>
                         <div class="form-group col-lg-4">
                             <span class="form-label"><?php echo __('UOM'); ?></span>
-                            <input aria-label="<?php echo __('Product Uom Display'); ?>" type="text" class="form-control" id="product_uom_display" value="<?php echo isset($work_order_details['product_uom_name']) && $work_order_details['product_uom_name'] != '' ? $work_order_details['product_uom_name'] : (isset($work_order_details['product_uom']) ? $work_order_details['product_uom'] : ''); ?>" readonly>
+                            <?php
+                            $productUomDisplayVal = '';
+                            if (!empty($work_order_details['product_uom_name'])) {
+                                $productUomDisplayVal = $work_order_details['product_uom_name'];
+                            } elseif (isset($work_order_details['product_uom'])) {
+                                $productUomDisplayVal = $work_order_details['product_uom'];
+                            }
+                            ?>
+                            <input aria-label="<?php echo __('Product Uom Display'); ?>" type="text" class="form-control" id="product_uom_display" value="<?php echo $productUomDisplayVal; ?>" readonly>
                         </div>
                     </div>
 

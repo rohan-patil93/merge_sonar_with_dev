@@ -90,7 +90,7 @@ $vdata1["where"] = array('assessment_id'=> $appraisal_id,'is_active'=>'0');
                     <div class="float-left ml-2 mt-4"> <?php echo $m; ?>.</div>
                     <div class="float-left ml-2 col-lg-11"> <textarea aria-label="<?php echo __('Text area'); ?>" class="form-control" name="questions[<?php echo $m; ?>]" placeholder="<?php echo __('Question'); ?>"><?php echo $empques['assessment_question']; ?></textarea> </div>
 
-                    <div class="float-left  cursor-pointer text-danger"  onclick="removeddsemps('qp<?php echo $m; ?>','Question')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash"></i></div>
+                    <button type="button" class="btn btn-link p-0 border-0 float-left cursor-pointer text-danger" onclick="removeddsemps('qp<?php echo $m; ?>','Question')" aria-label="<?php echo __('Remove'); ?>"><i class="fa fa-trash"></i></button>
                     <div class="checkbox-fade fade-in-primary m-l-30 mt-2"> <label class="form-label"><input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  name="display_remarks[<?php echo $m; ?>]" value="Y" <?php echo $empques['display_remark']=='Y'?'checked':''; ?>><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo __('Display Remark'); ?></span></label></div>
                 </div>
                 <div class="ml-15 col-lg-12" id="q<?php echo $m; ?>">

@@ -260,7 +260,7 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
                             $historyTotalAmount = floatval($transfer['total_amount'] ?? 0);
                           }
                         ?>
-                          <tr class="text-center table-secondary history-transfer-row" data-bs-toggle="collapse" data-bs-target="#<?php echo $historyRowId; ?>" aria-expanded="false" aria-controls="<?php echo $historyRowId; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                          <tr class="text-center table-secondary history-transfer-row cursor-pointer" data-bs-toggle="collapse" data-bs-target="#<?php echo $historyRowId; ?>" aria-expanded="false" aria-controls="<?php echo $historyRowId; ?>">
                             <td><i class="ti ti-arrow-down me-1"></i><?php echo $historyIndex; ?></td>
                             <td class="text-start fw-semibold text-dark"><?php echo htmlspecialchars($transfer['transaction_number'] ?? ''); ?></td>
                             <td><?php echo htmlspecialchars(fromDate($transfer['transaction_date'] ?? '')); ?></td>

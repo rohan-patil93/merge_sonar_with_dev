@@ -16,11 +16,7 @@ function calPercentage($total, $number) {
   }
 }
 
-if (!function_exists('cal_percentage')) {
-    function cal_percentage($total, $number) {
-        return calPercentage($total, $number);
-    }
-}
+
 $color = array("bg-info","bg-primary",'bg-warning','bg-danger','bg-dark',"bg-info","bg-primary",'bg-warning',);
 ?>
 

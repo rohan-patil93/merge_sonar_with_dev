@@ -41,7 +41,7 @@ $hasFmDashboard = !empty($data['fm_has_access']);
                         <th scope="col">#</th><th scope="col"><?= __('Contract'); ?></th><th scope="col"><?= __('Txn'); ?></th><th scope="col"><?= __('AMC?'); ?></th><th scope="col"><?= __('Next'); ?></th><th scope="col"><?= __('Overdue'); ?></th><th scope="col"><?= __('Last Done'); ?></th><th scope="col"><?= __('Pending'); ?></th><th scope="col"><?= __('Start'); ?></th><th scope="col"><?= __('End'); ?></th><th scope="col"><?= __('Status'); ?></th><th scope="col"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
-                <tbody><?php party_contracts_render_rows($receive['active_contracts'] ?? array()); ?></tbody>
+                <tbody><?php partyContractsRenderRows($receive['active_contracts'] ?? array()); ?></tbody>
             </table>
         </div>
     </div>
@@ -57,7 +57,7 @@ $hasFmDashboard = !empty($data['fm_has_access']);
                         <th scope="col">#</th><th scope="col"><?= __('Contract'); ?></th><th scope="col"><?= __('Txn'); ?></th><th scope="col"><?= __('AMC?'); ?></th><th scope="col"><?= __('Next'); ?></th><th scope="col"><?= __('Overdue'); ?></th><th scope="col"><?= __('Last Done'); ?></th><th scope="col"><?= __('Pending'); ?></th><th scope="col"><?= __('Start'); ?></th><th scope="col"><?= __('End'); ?></th><th scope="col"><?= __('Status'); ?></th><th scope="col"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
-                <tbody><?php party_contracts_render_rows($provide['active_contracts'] ?? array()); ?></tbody>
+                <tbody><?php partyContractsRenderRows($provide['active_contracts'] ?? array()); ?></tbody>
             </table>
         </div>
     </div>

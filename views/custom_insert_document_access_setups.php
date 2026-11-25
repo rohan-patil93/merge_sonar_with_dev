@@ -17,8 +17,7 @@ if(isset($_POST['submit']))
             $error_message = $response['message'];
         }
     }else{
-        if($_POST['rid'] == ''){
-        }else{
+        if($_POST['rid'] != ''){
         ?>
         <script type="text/javascript">
           document.onreadystatechange = function () {

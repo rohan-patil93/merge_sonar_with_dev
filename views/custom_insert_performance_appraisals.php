@@ -1,5 +1,7 @@
-
 <?php
+if (!defined('STYLE_POINTER_OPACITY_6')) {
+    define('STYLE_POINTER_OPACITY_6', STYLE_POINTER_OPACITY_6);
+}
 if(isset($_POST['performanace_appraiser_sbt'])){
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['user_id'] = $_SESSION['userid'];
@@ -71,22 +73,22 @@ $stausresult = ViewStatusData();
 if($performance_setup['publish']=='Y'){
     if($buddy_details['hr_connect'] == $_SESSION['userid']){
         if($pepah_res['current_status'] != ST_APPROVED2){
-            $updatebtndisable = 'style="pointer-events: none; opacity: 0.6;"';
+            $updatebtndisable = STYLE_POINTER_OPACITY_6;
         }
         $loginuser_type = "HOD"; //EMP,RO,HOD
     }elseif($buddy_details['report_to'] == $_SESSION['userid']){
         $loginuser_type = "RO"; //EMP,RO,HOD
         if($pepah_res['current_status'] != ST_APPROVED1){
-            $updatebtndisable = 'style="pointer-events: none; opacity: 0.6;"';
+            $updatebtndisable = STYLE_POINTER_OPACITY_6;
         }
     }elseif($employees['user_id'] == $_SESSION['userid'] || $_SESSION['admin_type'] == '1'){
         $loginuser_type = "EMP"; //EMP,RO,HOD
         if($pepah_res['current_status'] != ST_DRAFT && $pepah_res['current_status'] != ST_ACTIVE && $pepah_res['current_status'] != ST_SEND_BACK && $pepah_res['current_status'] != ST_CALLBACK){
-            $updatebtndisable = 'style="pointer-events: none; opacity: 0.6;"';
+            $updatebtndisable = STYLE_POINTER_OPACITY_6;
         }
     }
 }else{
-     $updatebtndisable = 'style="pointer-events: none; opacity: 0.6;"';
+     $updatebtndisable = STYLE_POINTER_OPACITY_6;
 }
 
 ?>
@@ -532,7 +534,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
 
                         <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('Employee Use Only'); ?></a>
                         <div class="accordion-desc">
-                            <div class="table-responsive" <?php echo $loginuser_type!='EMP'?'style="pointer-events: none; opacity: 0.6;"':''; ?>>
+                            <div class="table-responsive" <?php echo $loginuser_type!='EMP'?STYLE_POINTER_OPACITY_6:''; ?>>
                                 <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                     <thead>
                                         <tr>
@@ -587,7 +589,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
                         </div>
                         <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('RO Use Only'); ?></a>
                         <div class="accordion-desc">
-                            <div class="table-responsive"  <?php echo $loginuser_type!='RO'?'style="pointer-events: none; opacity: 0.6;"':''; ?>>
+                            <div class="table-responsive"  <?php echo $loginuser_type!='RO'?STYLE_POINTER_OPACITY_6:''; ?>>
                                 <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                     <tbody>
                                         <thead>
@@ -641,7 +643,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
 
                             <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('HOD Use Only'); ?></a>
                             <div class="accordion-desc">
-                                <div class="table-responsive"  <?php echo $loginuser_type!='HOD'?'style="pointer-events: none; opacity: 0.6;"':''; ?>>
+                                <div class="table-responsive"  <?php echo $loginuser_type!='HOD'?STYLE_POINTER_OPACITY_6:''; ?>>
                                     <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                         <thead>
                                         <tr>

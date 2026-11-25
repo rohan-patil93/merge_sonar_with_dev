@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_SUFFIX_LABEL')) {
+    define('STR_SUFFIX_LABEL', '-label');
+}
 $rid =  encodeId($_GET['Rid']);
 $cand = explode(':', $rid);
 $Rid = $cand['1'];
@@ -171,7 +174,7 @@ $Rid = $vendor_display_fields['id'];
                    <h5> <?php echo ucwords(str_replace("_"," ",$headingkey)); ?></h5>
                  </div>
                  <div class="col-lg-4">
-                   <span class="form-<?php echo $headingkey."-label"; ?>"><?php echo $candfieldgrpaccesslabel;?></span>
+                   <span class="form-<?php echo $headingkey.STR_SUFFIX_LABEL; ?>"><?php echo $candfieldgrpaccesslabel;?></span>
                  </div>
                  <div class="col-lg-3 text-right <?php echo $headingkey == 'business_information'?"custom_readonly":""; ?>">
                   <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][access]" id="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" value="<?php echo $candfieldgrpaccess; ?>">
@@ -202,7 +205,7 @@ $Rid = $vendor_display_fields['id'];
                   <th scope="col" class="w-b-w-s">
                     <h6 class="mb-0 f-14"><?php echo ucwords(str_replace("_"," ",$profilereadines)); ?></h6>
                   </th>
-                  <th scope="col" class="allformfield-<?php echo $headingkey."-label"; ?>" id="formfield-<?php echo $profilereadines."-".$mm."-label"; ?>" ><?php echo $candfieldgrpaccesslabel; ?>
+                  <th scope="col" class="allformfield-<?php echo $headingkey.STR_SUFFIX_LABEL; ?>" id="formfield-<?php echo $profilereadines."-".$mm.STR_SUFFIX_LABEL; ?>" ><?php echo $candfieldgrpaccesslabel; ?>
                 </th>
 
                 <th scope="col" class="text-right">

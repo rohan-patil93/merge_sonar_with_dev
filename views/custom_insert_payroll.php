@@ -1,6 +1,8 @@
 <?php
-
-    if( $_GET["PAY_MONTH"] == ''){
+if (!defined('URL_PARAM_PAY_MONTH')) {
+    define('URL_PARAM_PAY_MONTH', '&pay_month=');
+}
+if( $_GET["PAY_MONTH"] == ''){
         $_GET["PAY_MONTH"] = date('n');
         $_GET["PAY_YEAR"] = date('Y');
     }
@@ -8,11 +10,11 @@
     $array = array(array('id'=>1,'name'=>'New Joinees','page'=>'custom_insert_payroll_addition.php'),array('id'=>2,'name'=>'Separation','page'=>'custom_insert_payroll_separation.php'),array('id'=>3,'name'=>'Employees to be excluded','page'=>'custom_insert_payroll_exclusion.php'),array('id'=>4,'name'=>'Settlements','page'=>'custom_insert_payroll_settlements.php'),array('id'=>7,'name'=>'Salary Revisions','page'=>'custom_insert_payroll_salary_revisions.php'),array('id'=>8,'name'=>'Update Onetime Earnings','page'=>'custom_insert_payroll_updateonetime_earnings.php'),array('id'=>8,'name'=>'Update Onetime Deductions','page'=>'custom_insert_payroll_updateonetime_deductions.php'),array('id'=>9,'name'=>'Hold Salary','page'=>'custom_insert_payroll_hold_salaray.php'));
     $process = $_GET['payroll']=='process' ? 'process' : '';
     if( $_GET["REG"] == 'R'){
-        $payroll = API."?mode=regenratepayrolldetails&pay_year=".$_GET["PAY_YEAR"]."&pay_month=". $_GET["PAY_MONTH"]."&payroll=".$process;
+        $payroll = API."?mode=regenratepayrolldetails&pay_year=".$_GET["PAY_YEAR"].URL_PARAM_PAY_MONTH. $_GET["PAY_MONTH"]."&payroll=".$process;
         $cusresponse = callAPI($payroll);
         header("location:index.php?option=COM_INSERT_PAYROLL_STEPS&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH']); exit;
     }
-    $payroll = API."?mode=payrolldetails&pay_year=".$_GET["PAY_YEAR"]."&pay_month=". $_GET["PAY_MONTH"]."&payroll=".$process;
+    $payroll = API."?mode=payrolldetails&pay_year=".$_GET["PAY_YEAR"].URL_PARAM_PAY_MONTH. $_GET["PAY_MONTH"]."&payroll=".$process;
     $cusresponse = callAPI($payroll);
     $data = json_decode($cusresponse,1);
     $payroll_data = $data['payroll'];
@@ -112,7 +114,7 @@
                             <span class="font-weight-bold float-right"><?php echo $payroll_data['work_days'];  ?></span>
                 <hr>
                             <span class="font-weight-bold"><?php echo __('Salary Statements'); ?></span>
-                            <span class="font-weight-bold float-right"><a href="csv_bank_payment_download.php?pay_year=<?php echo $_GET['PAY_YEAR']."&pay_month=".$_GET['PAY_MONTH']; ?>" target="_blank" class="btn btn-success"><?php echo __('Download'); ?></a></span>
+                            <span class="font-weight-bold float-right"><a href="csv_bank_payment_download.php?pay_year=<?php echo $_GET['PAY_YEAR'].URL_PARAM_PAY_MONTH.$_GET['PAY_MONTH']; ?>" target="_blank" class="btn btn-success"><?php echo __('Download'); ?></a></span>
                         </div>
                         <div class="col-md-4">
                             <hr>

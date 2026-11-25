@@ -727,40 +727,53 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="col-md-12">
 
                                 <?php
-                                function headerFields($seq, $headers, $id = "") {
-                                    $hedding = ($id == "") ? 1 : $headers['orderhedding'];
-                                    $logo = ($id == "") ? 3 : $headers['orderlogo'];
-                                    $addres = ($id == "") ? 6 : $headers['addresorder'];
+                                function printDesignGetHeadingHtml($seq, $headers) {
+                                    $position = $headers['heddingposition'] ?? "";
+                                    $display = ($headers['heddingdislay'] ?? '') == 1 ? "display:none" : "";
+                                    return '<div class="col-lg-4 box ' . $position . '" draggable="true" data-id="' . $seq . '" >
+                                    <div class="" id="heading_div_id" data-order="header_order_position" style="' . $display . '">
+                                    <h1 class="display-4 font-weight-boldest mb-10">' . __('INVOICE') . '</h1>
+                                    </div>
+                                    </div>';
+                                }
 
-                                    $result = '<div class="col-lg-4  box" draggable="true" data-id="' . $seq . '" ></div>';
+                                function printDesignGetAddressHtml($seq, $headers) {
+                                    $po = $headers['addressposition'] ?? "";
+                                    $display = ($headers['addressdislay'] ?? '') == 1 ? "display:none" : "";
+                                    return '<div class="col-lg-4 ' . $po . ' box" draggable="true" data-id="' . $seq . '" >
+                                    <div id="address_div_id" data-order="header_order_address" style="' . $display . '" >
+                                    <span class="d-flex flex-column align-items-md-end opacity-70">
+                                    <span>' . __('Cecilia Chapman, 711-2880 Nulla St, Mankato Mississippi 96522') . '</span>
+                                    </span>
+                                    </div>
+                                    </div>';
+                                }
+
+                                function printDesignGetLogoHtml($seq, $headers) {
+                                    $co = $headers['logoposition'] ?? "text-right";
+                                    $display = ($headers['logodislay'] ?? '') == 1 ? "display:none" : "";
+                                    return '<div draggable="true" class="col-lg-4 box" data-id="' . $seq . '" >
+                                    <div class="align-items-md-end px-0 ' . $co . '" id="logo_div_id" data-order="header_order_logo" style="' . $display . '">
+                                    <img src="assets/media/logos/logo-dark.png" alt="' . htmlspecialchars(__('Logo'), ENT_QUOTES) . '" />
+                                    </div>
+                                    </div>';
+                                }
+
+                                function headerFields($seq, $headers, $id = "") {
+                                    $hedding = ($id == "") ? 1 : ($headers['orderhedding'] ?? 1);
+                                    $logo = ($id == "") ? 3 : ($headers['orderlogo'] ?? 3);
+                                    $addres = ($id == "") ? 6 : ($headers['addresorder'] ?? 6);
+
                                     if ($seq == $hedding) {
-                                        $position = isset($headers['heddingposition']) ? $headers['heddingposition'] : "";
-                                        $display = ($headers['heddingdislay'] ?? '') == 1 ? "display:none" : "";
-                                        $result = '<div class="col-lg-4 box ' . $position . '" draggable="true" data-id="' . $seq . '" >
-                                        <div class="" id="heading_div_id" data-order="header_order_position" style="' . $display . '">
-                                        <h1 class="display-4 font-weight-boldest mb-10">' . __('INVOICE') . '</h1>
-                                        </div>
-                                        </div>';
-                                    } elseif ($seq == $addres) {
-                                        $po = isset($headers['addressposition']) ? $headers['addressposition'] : "";
-                                        $display = ($headers['addressdislay'] ?? '') == 1 ? "display:none" : "";
-                                        $result = '<div class="col-lg-4 ' . $po . ' box" draggable="true" data-id="' . $seq . '" >
-                                        <div id="address_div_id" data-order="header_order_address" style="' . $display . '" >
-                                        <span class="d-flex flex-column align-items-md-end opacity-70">
-                                        <span>' . __('Cecilia Chapman, 711-2880 Nulla St, Mankato Mississippi 96522') . '</span>
-                                        </span>
-                                        </div>
-                                        </div>';
-                                    } elseif ($seq == $logo) {
-                                        $co = isset($headers['logoposition']) ? $headers['logoposition'] : "text-right";
-                                        $display = ($headers['logodislay'] ?? '') == 1 ? "display:none" : "";
-                                        $result = '<div draggable="true" class="col-lg-4 box" data-id="' . $seq . '" >
-                                        <div class="align-items-md-end px-0 ' . $co . '" id="logo_div_id" data-order="header_order_logo" style="' . $display . '">
-                                        <img src="assets/media/logos/logo-dark.png" alt="' . htmlspecialchars(__('Logo'), ENT_QUOTES) . '" />
-                                        </div>
-                                        </div>';
+                                        return printDesignGetHeadingHtml($seq, $headers);
                                     }
-                                    return $result;
+                                    if ($seq == $addres) {
+                                        return printDesignGetAddressHtml($seq, $headers);
+                                    }
+                                    if ($seq == $logo) {
+                                        return printDesignGetLogoHtml($seq, $headers);
+                                    }
+                                    return '<div class="col-lg-4  box" draggable="true" data-id="' . $seq . '" ></div>';
                                 }
                                 ?>
 

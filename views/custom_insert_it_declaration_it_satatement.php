@@ -1,4 +1,8 @@
         <?php
+if (!defined('STR_PLUS_ONE_MONTH')) {
+    define('STR_PLUS_ONE_MONTH', '+1 month');
+}
+
         $com_ear = $saldata['components'];
         $house_rent = $saldata['house_rent'];
         $tax80c = $saldata['tax80c'];
@@ -66,7 +70,7 @@
                         <th scope="col"> <?php echo date('M Y', $start); ?> </th>
 
 
-                  <?php  $start = strtotime("+1 month", $start);
+                  <?php  $start = strtotime(STR_PLUS_ONE_MONTH, $start);
 }?>
                     </tr>
 
@@ -123,7 +127,7 @@
                         <th scope="col"> <?php echo date('M Y', $start); ?> </th>
 
 
-                  <?php  $start = strtotime("+1 month", $start);
+                  <?php  $start = strtotime(STR_PLUS_ONE_MONTH, $start);
 }?>
                     </tr>
 
@@ -179,7 +183,7 @@
                         <th scope="col"> <?php echo date('M Y', $start); ?> </th>
 
 
-                  <?php  $start = strtotime("+1 month", $start);
+                  <?php  $start = strtotime(STR_PLUS_ONE_MONTH, $start);
 }?>
                     </tr>
 
@@ -303,7 +307,7 @@
                       <td><?php echo $ch1_ex_rent; ?> </td>
                       <td><?php echo $ex_rent; ?></td>
                     </tr>
-                  <?php  $start = strtotime("+1 month", $start);
+                  <?php  $start = strtotime(STR_PLUS_ONE_MONTH, $start);
 } ?>
                  <tr class="">
                   <td colspan="2"><?php echo __('Total'); ?></td>

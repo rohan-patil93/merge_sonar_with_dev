@@ -1,4 +1,8 @@
   <?php
+if (!defined('DIR_VIEWS')) {
+    define('DIR_VIEWS', 'views/');
+}
+
 $_SESSION['apply_js']['tag'] = 1;
 $_SESSION['apply_js']['todo'] = "1";
 $rid =  encodeId($_REQUEST['Rid']);
@@ -721,7 +725,7 @@ function assignedCandidateFiletr(cand_id){
                     if(file_exists($pageurl)){
                       include_once $pageurl;
                     }else{
-                      include_once "views/".$pageurl;
+                      include_once DIR_VIEWS.$pageurl;
                      } ?>
           </div>
         <?php } ?>
@@ -905,7 +909,7 @@ function assignedCandidateFiletr(cand_id){
                     if(file_exists($pageurl)){
                       include_once $pageurl;
                     }else{
-                      include_once "views/".$pageurl;
+                      include_once DIR_VIEWS.$pageurl;
                     } ?>
           </div>
         <?php } ?>
@@ -1064,7 +1068,7 @@ function assignedCandidateFiletr(cand_id){
                     if(file_exists($pageurl)){
                       include_once $pageurl;
                     }else{
-                      include_once "views/".$pageurl;
+                      include_once DIR_VIEWS.$pageurl;
                     }
               ?>
           </div>
@@ -1096,7 +1100,7 @@ function assignedCandidateFiletr(cand_id){
                     if(file_exists($pageurl)){
                       include_once $pageurl;
                     }else{
-                      include_once "views/".$pageurl;
+                      include_once DIR_VIEWS.$pageurl;
                     } ?>
           </div>
         </div>
@@ -1129,7 +1133,7 @@ function assignedCandidateFiletr(cand_id){
                     if(file_exists($pageurl)){
                       include_once $pageurl;
                     }else{
-                      include_once "views/".$pageurl;
+                      include_once DIR_VIEWS.$pageurl;
                     } ?>
           </div>
         </div>
@@ -1198,7 +1202,7 @@ function assignedCandidateFiletr(cand_id){
                     if(file_exists($pageurl)){
                       include_once $pageurl;
                     }else{
-                      include_once "views/".$pageurl;
+                      include_once DIR_VIEWS.$pageurl;
                     } ?>
      </div>
   </div>

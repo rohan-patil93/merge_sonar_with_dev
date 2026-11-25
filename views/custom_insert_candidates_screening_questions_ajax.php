@@ -49,7 +49,7 @@ if($gettype =="QuestionsAnswers"){
                     <input aria-label="<?= htmlspecialchars(__('Screening question'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="screening_question[]" value="<?php echo $que['question']; ?>" placeholder="<?= __('Eg. Tell me about yourself') ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i role="button" tabindex="0" aria-label="<?= __('Delete Question') ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" title="<?= __('Delete Question') ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i>
+                    <button type="button" class="btn btn-link p-0 border-0 text-danger cursor-pointer" aria-label="<?= __('Delete Question') ?>" title="<?= __('Delete Question') ?>" onclick="deleteQuestion(<?php echo $ij; ?>)"><i class="fa fa-trash text-danger"></i></button>
                 </div>
             </div>
         <?php $seq++;

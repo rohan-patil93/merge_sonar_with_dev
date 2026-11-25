@@ -197,7 +197,7 @@ $locations = $result['locations'];
                 <?php } ?>
             </div>
             <div class="form-group col-lg-1 text-center">
-                <i class="fa fa-trash text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" onclick="removeBuildingFloorPlans('floor_row_id_<?php echo $mk; ?>','<?php echo $bf['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                <button type="button" class="btn btn-link p-0 border-0 text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" onclick="removeBuildingFloorPlans('floor_row_id_<?php echo $mk; ?>','<?php echo $bf['id']; ?>')" aria-label="<?= __('Remove') ?>"><i class="fa fa-trash"></i></button>
             </div>
         </div>
         <?php $mk++;

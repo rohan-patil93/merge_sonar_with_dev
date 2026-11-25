@@ -99,7 +99,7 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
                 <div class="card-header">
                     <h5><?php echo __('Questions'); ?></h5>
                     <div class="card-header-right">
-                        <i class="ti-trash text-danger"  onclick="deletQuestion('<?php echo $paqseq; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                        <button type="button" class="btn btn-link p-0 border-0" onclick="deletQuestion('<?php echo $paqseq; ?>','<?php echo $i; ?>')" aria-label="<?php echo __('Remove'); ?>"><i class="ti-trash text-danger"></i></button>
                     </div>
                 </div>
                 <input type="hidden" name="performance_appraisal_question_id[<?php echo $paqseq; ?>]" value="<?php echo $paq['id']; ?>">

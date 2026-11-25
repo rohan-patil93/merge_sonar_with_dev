@@ -37,10 +37,10 @@
                             <?php echo fromDate($dd['settle_on']); ?>
                         </td>
                         <td>
-                            <span onclick="holdpayroll_exclusions1(<?php echo $dd['emp_id'].",8"; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            <input aria-label="<?php echo __('Hold Salary'); ?>" class="js-primary-sm" type="checkbox" name="hold_salary" <?php if(in_array($dd['emp_id'], (array)$hold_emps)){  echo __('checked');
+                            <label class="cursor-pointer mb-0">
+                            <input aria-label="<?php echo __('Hold Salary'); ?>" class="js-primary-sm cursor-pointer" type="checkbox" name="hold_salary" onclick="holdpayroll_exclusions1(<?php echo $dd['emp_id'].",8"; ?>)" <?php if(in_array($dd['emp_id'], (array)$hold_emps)){  echo __('checked');
 } ?>   value="0"  id="dilution_<?php echo $values['id']; ?>"  >
-                            </span>
+                            </label>
                         </td>
                     </tr>
                     <?php $mnm++;

@@ -340,7 +340,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                                     </td>
                                                     <td>
                                                         <input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
-                                                        <div  id="<?php echo $count; ?>" class="close" onclick="deletestatickRows(this.id)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-trash"></i></div>
+                                                        <button type="button" id="<?php echo $count; ?>" class="btn btn-link p-0 border-0 close" onclick="deletestatickRows(this.id)" aria-label="<?= __('Delete row') ?>"><i class="ti-trash"></i></button>
 
                                                     </td>
                                                 </tr>

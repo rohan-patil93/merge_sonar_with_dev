@@ -71,11 +71,9 @@ if (isset($postedTypeIds)) {
 
 $selectedUserId = (string) ($editData['user_id'] ?? '');
 $selectedTypeIds = array();
-if (isset($editData['type_ids']) && is_array($editData['type_ids'])) {
-    if (count((array) $editData['type_ids']) > 0) {
-        foreach ($editData['type_ids'] as $tid) {
-            $selectedTypeIds[] = (string) $tid;
-        }
+if (isset($editData['type_ids']) && is_array($editData['type_ids']) && count((array) $editData['type_ids']) > 0) {
+    foreach ($editData['type_ids'] as $tid) {
+        $selectedTypeIds[] = (string) $tid;
     }
 }
 $isEdit = ($rid != '' && $rid != '0');

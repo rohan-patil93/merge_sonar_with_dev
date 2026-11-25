@@ -66,6 +66,58 @@ if (($_SESSION['amc_schedule_warning'] ?? '') != '') {
         </div>
         <div class="tab-content tabs card-block mt-2">
             <?php
+            if (!function_exists('amcContractsGetPartyDisplay')) {
+                function amcContractsGetPartyDisplay($row) {
+                    $partyType = ucfirst($row['party_type'] ?? '');
+                    $partyName = $row['party_name'] ?? '';
+                    $partyLabel = $partyType;
+                    if ($partyName !== '') {
+                        $partyLabel .= ': ' . $partyName;
+                    }
+                    $partyDisplay = trim($partyLabel);
+                    return ($partyDisplay !== '') ? $partyDisplay : '-';
+                }
+            }
+
+            if (!function_exists('amcContractsRenderSingleRow')) {
+                function amcContractsRenderSingleRow($row, $i) {
+                    if (is_object($row)) {
+                        $row = json_decode(json_encode($row), true);
+                    }
+                    $isAmc = ($row['is_amc_contract'] ?? 'N') === 'Y';
+                    $startDate = !empty($row['start_date']) ? fromDate($row['start_date']) : '-';
+                    $endDate = !empty($row['end_date']) ? fromDate($row['end_date']) : '-';
+                    $amount = (isset($row['contract_amount']) && $row['contract_amount'] !== '') ? htmlspecialchars($row['contract_amount']) : '-';
+                    $status = htmlspecialchars(contractCurrentStatusLabel($row['current_status'] ?? 0, $row['cancel_status'] ?? 'N'));
+                    $partyDisplay = amcContractsGetPartyDisplay($row);
+                    $editUrl = "index.php?option=COM_INSERT_AMC_CONTRACT&Rid=" . deocdeId('id:' . $row['id']);
+                    ?>
+                    <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo htmlspecialchars($row['contract_name'] ?? '-'); ?></td>
+                        <td><?php echo htmlspecialchars($row['transaction_no'] ?? '-'); ?></td>
+                        <td>
+                            <?php if ($isAmc) { ?>
+                                <span class="badge bg-info"><?= __('AMC'); ?></span>
+                            <?php } else { ?>
+                                <span class="badge bg-secondary"><?= __('Standard'); ?></span>
+                            <?php } ?>
+                        </td>
+                        <td><?php echo htmlspecialchars($partyDisplay); ?></td>
+                        <td><?php echo $startDate; ?></td>
+                        <td><?php echo $endDate; ?></td>
+                        <td><?php echo $amount; ?></td>
+                        <td><?php echo $status; ?></td>
+                        <td>
+                            <a href="<?php echo $editUrl; ?>" title="<?= htmlspecialchars(__('Open Contract'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <i class="fa fa-edit btn-warning p-2 b-radius-5"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }
+
             $renderTable = function ($rows, $emptyMsg) {
                 ?>
                 <div class="table-responsive">
@@ -88,48 +140,8 @@ if (($_SESSION['amc_schedule_warning'] ?? '') != '') {
                             <?php if (count((array) $rows) > 0) {
                                 $i = 1;
                                 foreach ($rows as $row) {
-                                    if (is_object($row)) {
-                                        $row = json_decode(json_encode($row), true);
-                                    }
-                                    $isAmc = ($row['is_amc_contract'] ?? 'N') === 'Y';
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $i++; ?></td>
-                                        <td><?php echo htmlspecialchars($row['contract_name'] ?? '-'); ?></td>
-                                        <td><?php echo htmlspecialchars($row['transaction_no'] ?? '-'); ?></td>
-                                        <td>
-                                            <?php if ($isAmc) { ?>
-                                                <span class="badge bg-info"><?= __('AMC'); ?></span>
-                                            <?php } else { ?>
-                                                <span class="badge bg-secondary"><?= __('Standard'); ?></span>
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            $partyType = ucfirst($row['party_type'] ?? '');
-                                            $partyName = $row['party_name'] ?? '';
-                                            $partyLabel = $partyType;
-                                            if ($partyName !== '') {
-                                                $partyLabel .= ': ' . $partyName;
-                                            }
-                                            $partyDisplay = trim($partyLabel);
-                                            if ($partyDisplay === '') {
-                                                $partyDisplay = '-';
-                                            }
-                                            echo htmlspecialchars($partyDisplay);
-                                            ?>
-                                        </td>
-                                        <td><?php echo !empty($row['start_date']) ? fromDate($row['start_date']) : '-'; ?></td>
-                                        <td><?php echo !empty($row['end_date']) ? fromDate($row['end_date']) : '-'; ?></td>
-                                        <td><?php echo isset($row['contract_amount']) && $row['contract_amount'] !== '' ? htmlspecialchars($row['contract_amount']) : '-'; ?></td>
-                                        <td><?php echo htmlspecialchars(contractCurrentStatusLabel($row['current_status'] ?? 0, $row['cancel_status'] ?? 'N')); ?></td>
-                                        <td>
-                                            <a href="index.php?option=COM_INSERT_AMC_CONTRACT&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('Open Contract'), ENT_QUOTES, 'UTF-8'); ?>">
-                                                <i class="fa fa-edit btn-warning p-2 b-radius-5"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php }
+                                    amcContractsRenderSingleRow($row, $i++);
+                                }
                             } else { ?>
                                 <tr>
                                     <td colspan="10" class="text-center text-muted py-4"><?php echo htmlspecialchars($emptyMsg); ?></td>

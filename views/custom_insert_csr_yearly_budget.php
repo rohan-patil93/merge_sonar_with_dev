@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', DATE_FORMAT_YMD_HIS);
+}
+
 
 // Initialize variables
 
@@ -10,9 +14,9 @@ if ($_POST['submit']) {
 
         $_POST['current_status'] = '0';
         $_POST['is_active'] = '0';
-        $_POST['status_date'] = date('Y-m-d H:i:s');
+        $_POST['status_date'] = date(DATE_FORMAT_YMD_HIS);
         $_POST['company_id'] = $_SESSION['company_id'];
-        $_POST['created_date'] = date('Y-m-d H:i:s');
+        $_POST['created_date'] = date(DATE_FORMAT_YMD_HIS);
         $_POST['created_by'] = $_SESSION['userid'];
         $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
         $response = file_post_contents($url, $_POST, 'insert');
@@ -22,7 +26,7 @@ if ($_POST['submit']) {
         unset($_POST['submit']);
         $rid = $_POST['rid'];
         unset($_POST['rid']);
-        $_POST['updated_date'] = date('Y-m-d H:i:s');
+        $_POST['updated_date'] = date(DATE_FORMAT_YMD_HIS);
         $_POST['updated_by'] = $_SESSION['userid'];
         $url = API . "?mode=updaterowbasepimarydata&rid=" . $rid . "&table=" . $table_name . "&method=post";
         $response = file_post_contents($url, $_POST, 'update');

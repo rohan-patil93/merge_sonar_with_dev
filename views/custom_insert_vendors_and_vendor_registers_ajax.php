@@ -267,7 +267,6 @@ $locations = $result['locations'];
                                                 <div class="col-md-12">
                                                     <div class="progress progress-xs">
                                                         <div class="progress-bar progress-bar-<?php echo round($percentage) >= 50 ? "success" : "danger"; ?>"
-                                                            role="progressbar"
                                                             style="width:  <?php echo round($percentage); ?>%;"
                                                             aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>

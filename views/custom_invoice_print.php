@@ -1,4 +1,8 @@
-<?php $config = $_SESSION['config'];
+<?php
+if (!defined('DATE_FORMAT_MDY')) {
+    define('DATE_FORMAT_MDY', 'M d, Y');
+}
+$config = $_SESSION['config'];
 $rpurl = API."?mode=getPurchaseRequisitionsData&pr_id=1";
 $rp_data = callAPI($rpurl);
 $rpres = json_decode($rp_data, 1);
@@ -51,7 +55,7 @@ foreach ($itemcatres as $item) {
                         <div class="kt-invoice__items">
                             <div class="kt-invoice__item">
                                 <span class="kt-invoice__subtitle"><?= __('DATE'); ?></span>
-                                <span class="kt-invoice__text"> <?php echo date("M d, Y", strtotime($data['pr_date'])); ?></span>
+                                <span class="kt-invoice__text"> <?php echo date(DATE_FORMAT_MDY, strtotime($data['pr_date'])); ?></span>
                             </div>
                             <div class="kt-invoice__item">
                                 <span class="kt-invoice__subtitle"><?= __('Requisition NO.'); ?></span>
@@ -124,11 +128,11 @@ foreach ($itemcatres as $item) {
                                                     <div class="kt-invoice__title"><?= __('Approves'); ?></div>
                                                     <div class="kt-invoice__item">
                                                         <span class="kt-invoice__label"><?= __('Approve 1'); ?>:</span>
-                                                        <span class="kt-invoice__value"> <?php echo "Ravi/".date("M d, Y", strtotime($data['pr_date'])); ?></span></span>
+                                                        <span class="kt-invoice__value"> <?php echo "Ravi/".date(DATE_FORMAT_MDY, strtotime($data['pr_date'])); ?></span></span>
                                                     </div>
                                                     <div class="kt-invoice__item">
                                                         <span class="kt-invoice__label"><?= __('Approve 2'); ?>:</span>
-                                                        <span class="kt-invoice__value"><?php echo "Shankar/".date("M d, Y", strtotime($data['pr_date'])); ?></span></span>
+                                                        <span class="kt-invoice__value"><?php echo "Shankar/".date(DATE_FORMAT_MDY, strtotime($data['pr_date'])); ?></span></span>
                                                     </div>
 
                                                 </div>

@@ -995,7 +995,7 @@ if($employee_performance_appraisals['id'] !=""){
                                 <tbody>
                                     <?php $efseq = 1; foreach($employee_feedbacks as $ef){
                                         ?>
-                                        <tr role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')">
+                                        <tr class="cursor-pointer" onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')">
                                             <td class="p-2" style="width: 10%;"><i class="fa fa-edit"></i> <?php echo $efseq; ?></td>
                                             <td class="p-2 w-b-w-s" style="width: 70%;">
                                                 <?php echo __($ef['question'] ?? ''); ?>

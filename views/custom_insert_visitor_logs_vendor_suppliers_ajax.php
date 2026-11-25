@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_ATTR_VAL_OPEN')) {
+    define('STR_ATTR_VAL_OPEN', ' . STR_ATTR_VAL_OPEN . ');
+}
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -62,16 +65,16 @@ if(count((array)$transaction_items) > 0){
                         <select aria-label="Item [" class="form-select js-example-basic-single js-ref-item" name="item_id[' . $idx . ']" id="item_id_' . $idx . '">
                             ' . $rowOptions . '
                         </select>
-                        <input type="hidden" name="item_name[' . $idx . ']" value="' . htmlspecialchars($row['item_name'] ?? '') . '">
+                        <input type="hidden" name="item_name[' . $idx . ' . STR_ATTR_VAL_OPEN . ' . htmlspecialchars($row['item_name'] ?? '') . '">
                     </td>
                     <td class="p-1">
-                        <input aria-label="Description[" class="form-control" type="text" name="description[' . $idx . ']" value="' . $desc . '">
+                        <input aria-label="Description[" class="form-control" type="text" name="description[' . $idx . ' . STR_ATTR_VAL_OPEN . ' . $desc . '">
                     </td>
                     <td class="p-1">
-                        <input aria-label="Qty[" class="form-control text-right" type="number" step="0.01" name="qty[' . $idx . ']" value="' . $qty . '" readonly>
+                        <input aria-label="Qty[" class="form-control text-right" type="number" step="0.01" name="qty[' . $idx . ' . STR_ATTR_VAL_OPEN . ' . $qty . '" readonly>
                     </td>
                     <td class="p-1">
-                        <input aria-label="Received Qty[" class="form-control text-right" type="number" step="0.01" name="received_qty[' . $idx . ']" value="' . $qty . '">
+                        <input aria-label="Received Qty[" class="form-control text-right" type="number" step="0.01" name="received_qty[' . $idx . ' . STR_ATTR_VAL_OPEN . ' . $qty . '">
                     </td>
                     <td class="p-1">
                         <select aria-label="Purchase Uom[" class="form-select" name="purchase_uom[' . $idx . ']">

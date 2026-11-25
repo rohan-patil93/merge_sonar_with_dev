@@ -1,4 +1,7 @@
 <?php
+if (!defined('URL_PARAM_RID')) {
+    define('URL_PARAM_RID', '&Rid=');
+}
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -86,10 +89,10 @@ $get_option = $_POST['get_option'];
 
                         $rid = $row['id'];
                         $send = "id:".$rid;
-                        $view =  "index.php?option=".$pr_data['option_url']."&table=".$table_name ."&Rid=".$rid ;
-                        $only_view =  "index.php?option=".$viewpageotion."&Rid=".deocdeId($send);
+                        $view =  "index.php?option=".$pr_data['option_url']."&table=".$table_name .URL_PARAM_RID.$rid ;
+                        $only_view =  "index.php?option=".$viewpageotion.URL_PARAM_RID.deocdeId($send);
                         if($table_name=='goods_receipt_notes' && $_POST['get_option']=='COM_LIST_QUALITY_CHECK_FORM_GRN'){
-                            $view =  "index.php?option=CUSTOM_INSERT_APPLICATION_TABLE_QUALITY_CHECK&table=".$table_name ."&Rid=".$rid ;
+                            $view =  "index.php?option=CUSTOM_INSERT_APPLICATION_TABLE_QUALITY_CHECK&table=".$table_name .URL_PARAM_RID.$rid ;
                         }
 
                         ?>

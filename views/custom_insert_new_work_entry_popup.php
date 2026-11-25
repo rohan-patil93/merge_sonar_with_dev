@@ -24,7 +24,7 @@ $shift = $alldetails['shift'];
 $status = $_POST['status'] ?? '';
 $isPresent = ($status === 'P');
 $isAbsent  = ($status === 'A');
-$isLeave   = (strpos($status, 'Leave') != false);
+$isLeave   = (strpos($status, 'Leave') !== false);
 
 $tsDate = $_POST['timesheet_date'] ?? '';
 $clockIn = $attendance['clock_in'];

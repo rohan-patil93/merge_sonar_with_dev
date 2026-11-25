@@ -1,4 +1,8 @@
 <?php
+if (!defined('ATTR_DISABLED_TRUE')) {
+    define('ATTR_DISABLED_TRUE', ATTR_DISABLED_TRUE);
+}
+
    if($_GET['Rid']!=""){
       $idvalue = explode(':',encodeId($_GET['Rid']));
       $employee_id = $idvalue['1'];
@@ -586,7 +590,7 @@
                                     <span class="col-form-label"><?php echo __('Department'); ?>
                                     <?php if($text_color_dep!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['department_name']==''?__('No Data'):$empdata['department_name'] ;?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['DEPARTMENT']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_dep; ?>" name="department_id">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['DEPARTMENT']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg  <?php echo $text_color_dep; ?>" name="department_id">
                                        <?php foreach ($dept_details as $departments) {
                                           ?>
                                        <option <?php if($data['department_id'] == $departments['id']){ ?>selected <?php
@@ -607,7 +611,7 @@
                                  <div  class="mt-2" style="display: <?php echo $display_div_ver; ?>" >
                                     <span class="col-form-label"><?php echo __('Vertical'); ?>  <?php if($text_color_ver!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['vertical_name']==''?__('No Data'):$empdata['vertical_name'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['VERTICAL']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_ver; ?>" name="vertical_id">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['VERTICAL']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg  <?php echo $text_color_ver; ?>" name="vertical_id">
                                        <?php foreach ($verticals_details as $verticals) {
                                           if($empdata['vertical_id'] == $verticals['id']) {
                                              $empdata['vertical_name'] = $verticals['vertical_name'];
@@ -636,7 +640,7 @@
                                  <div  class="mt-2" style="display: <?php echo $display_div_rto; ?>" >
                                     <span class="col-form-label"><?php echo __('Repoting to'); ?>  <?php if($text_color_rto!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['display_name']==''?__('No Data'):$empdata['display_name'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['REPOTING_TO']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_rto; ?>" name="reporting_manager_id">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['REPOTING_TO']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg  <?php echo $text_color_rto; ?>" name="reporting_manager_id">
                                        <?php foreach ($application_users_details as $application_users) {
                                           if($empdata['reporting_manager_id'] == $application_users['id']) {
                                              $empdata['display_name'] = $application_users['display_name'];
@@ -682,7 +686,7 @@
                                        <div data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['designation_name']==''?__('No Data'):$empdata['designation_name'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </div>
                                        <?php } ?>
                                     </span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['DESIGNATION']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_des; ?>" name="designation_id">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['DESIGNATION']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg  <?php echo $text_color_des; ?>" name="designation_id">
                                        <?php foreach ($designations_details as $desigs) {
                                           if($empdata['designation_id'] == $desigs['id']) {
                                              $empdata['designation_name'] = $desigs['designation_name'];
@@ -701,7 +705,7 @@
                                  <div  class="mt-2" style="display: <?php echo $display_div_role; ?>" >
                                     <span class="col-form-label"><?php echo __('Role'); ?>  <?php if($text_color_role!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['role_name']==''?__('No Data'):$empdata['role_name'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['ROLE']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_role; ?>" name="role_id">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['ROLE']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg  <?php echo $text_color_role; ?>" name="role_id">
                                        <?php foreach ($employment_roles_details as $employment_roles) {
                                           if($empdata['role_id'] == $employment_roles['id']) {
                                              $empdata['role_name'] = $employment_roles['role_name'];
@@ -735,7 +739,7 @@
 } ?></span>
                                     <div class="input-group date">
                                        <?php $date_pic = fromDate($data['joining_date']); ?>
-                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['DATE_OF_JOINING']['readonly']!=0?'disabled="true"':'';?> type="text" class="form-control form-control-lg  <?php echo $text_color_dj; ?>"  value="<?php echo $date_pic; ?>"  name="joining_date"  id="kt_datepicker_32" />
+                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['DATE_OF_JOINING']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> type="text" class="form-control form-control-lg  <?php echo $text_color_dj; ?>"  value="<?php echo $date_pic; ?>"  name="joining_date"  id="kt_datepicker_32" />
                                        <div class="input-group-append">
                                           <span class="input-group-text">
                                           <i class="la la-calendar"></i>
@@ -802,7 +806,7 @@
                                  <div  class="mt-2" style="display: <?php echo $display_div_bd; ?>">
                                     <span class="col-form-label"><?php echo __('Band'); ?>  <?php if($text_color_bd!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['band_name']==''?__('No Data'):$empdata['band_name'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['BAND']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_bd; ?>" name="band_id">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['BAND']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg  <?php echo $text_color_bd; ?>" name="band_id">
                                        <?php foreach ($employment_bands_details as $employment_bands) {
                                           if($empdata['band_id'] == $employment_bands['id']) {
                                              $empdata['band_name'] = $employment_bands['band_name'];
@@ -821,7 +825,7 @@
                                     <span class="col-form-label"><?php echo __('Level'); ?>
                                     <?php if($text_color_lv!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['levels_name']==''?__('No Data'):$empdata['levels_name'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['LEVEL']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_lv; ?>" name="level_id">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['LEVEL']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg  <?php echo $text_color_lv; ?>" name="level_id">
                                        <?php foreach ($emplevels_details as $employment_levels) {
                                           if($empdata['level_id'] == $employment_levels['id']) {
                                              $empdata['levels_name'] = $employment_levels['levels_name'];
@@ -850,7 +854,7 @@
                                     <span class="col-form-label"><?php echo __('Work Location'); ?>                        <?php if($text_color_loc!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['location_name']==''?__('No Data'):$empdata['location_name'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?>
                                     </span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['WORK_LOCATION']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg"  <?php echo $text_color_loc; ?>" name="location_id">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['WORK_LOCATION']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg"  <?php echo $text_color_loc; ?>" name="location_id">
                                        <?php foreach ($locations_details as $locations) {
                                           if($empdata['location_id'] == $locations['location_id']) {
                                              $empdata['location_name'] = $locations['location_name'];
@@ -884,7 +888,7 @@
                                           foreach ($emptypes_details as $emptypes) {
                                             ?>
                                        <label class="radio radio-solid <?php echo $text_color_ety; ?>">
-                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['EMPLOYEMENT_TYPE']['readonly']!=0?'disabled="true"':'';?> type="radio" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php
+                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['EMPLOYEMENT_TYPE']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> type="radio" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php
 } ?> value="<?php echo __($emptypes['genc_detail_name']);?>"/>
                                        <span></span>
                                        <?php echo __($emptypes['genc_detail_name']);?>
@@ -952,7 +956,7 @@
 } ?></span>
                                     <div class="input-group date">
                                        <?php $date_pic1 = fromDate($data['date_of_birth']); ?>
-                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['DATE_OF_BIRTH']['readonly']!=0?'disabled="true"':'';?> type="text" class="form-control form-control-lg  <?php echo $text_color_bir; ?>"  value="<?php echo  fromDate($date_pic1); ?>"  name="date_of_birth"  id="kt_datepicker_dob" />
+                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['DATE_OF_BIRTH']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> type="text" class="form-control form-control-lg  <?php echo $text_color_bir; ?>"  value="<?php echo  fromDate($date_pic1); ?>"  name="date_of_birth"  id="kt_datepicker_dob" />
                                        <div class="input-group-append">
                                           <span class="input-group-text">
                                           <i class="la la-calendar"></i>
@@ -1003,7 +1007,7 @@
                                           foreach ($gender_details as $gender_data) {
                                             ?>
                                        <label class="radio radio-solid <?php echo $text_color_gen; ?>">
-                                       <input aria-label="<?php echo __('Input field'); ?>"  <?php echo $field_set['GENDER']['readonly']!=0?'disabled="true"':'';?> type="radio" name="gender" <?php if($data['gender'] == $gender_data['genc_detail_code']) {?>  checked="checked" <?php
+                                       <input aria-label="<?php echo __('Input field'); ?>"  <?php echo $field_set['GENDER']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> type="radio" name="gender" <?php if($data['gender'] == $gender_data['genc_detail_code']) {?>  checked="checked" <?php
 } ?> value="<?php echo $gender_data['genc_detail_code'];?>"/>
                                        <span></span>
                                        <?php echo __($gender_data['genc_detail_name']); ?>
@@ -1029,7 +1033,7 @@
                                           foreach ($marital_status_details as $marital_stat) {
                                             ?>
                                        <label   class="radio radio-solid <?php echo $text_color_ma; ?>">
-                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['MARITAL_STATUS']['readonly']!=0?'disabled="true"':'';?>  onclick="showmarriagedate(this.value);" type="radio" name="marital_status" <?php if($data['marital_status'] == $marital_stat['genc_detail_name']) {?> checked="checked" <?php
+                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['MARITAL_STATUS']['readonly']!=0?ATTR_DISABLED_TRUE:'';?>  onclick="showmarriagedate(this.value);" type="radio" name="marital_status" <?php if($data['marital_status'] == $marital_stat['genc_detail_name']) {?> checked="checked" <?php
 } ?> value="<?php echo $marital_stat['genc_detail_code']; ?>" onkeydown="" />
                                        <span></span>
                                        <?php echo __($marital_stat['genc_detail_name']); ?>
@@ -1053,7 +1057,7 @@
 } ?></span>
                                     <div class="input-group date">
                                        <?php $date_pic1 = fromDate($data['wedding_date']); ?>
-                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['MARRIGE_DATE']['readonly']!=0?'disabled="true"':'';?> type="text" id="kt_datepicker_wedding" class="form-control form-control-lg  <?php echo $text_color_ms; ?>" placeholder="<?php echo __('Marrige Date'); ?>" name="wedding_date" value="<?php echo  $date_pic1; ?>"/>
+                                       <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['MARRIGE_DATE']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> type="text" id="kt_datepicker_wedding" class="form-control form-control-lg  <?php echo $text_color_ms; ?>" placeholder="<?php echo __('Marrige Date'); ?>" name="wedding_date" value="<?php echo  $date_pic1; ?>"/>
                                        <div class="input-group-append">
                                           <span class="input-group-text">
                                           <i class="la la-calendar"></i>
@@ -1067,7 +1071,7 @@
                                     <span class="col-form-label"><?php echo __('Blood Group'); ?>  <?php if($text_color_bg!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['blood_group']==''?__('No Data'):$empdata['blood_group'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?>
                                     </span>
-                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['BLOOD_GROUP']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_bg; ?>" name="blood_group">
+                                    <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['BLOOD_GROUP']['readonly']!=0?ATTR_DISABLED_TRUE:'';?> class ="form-control form-control-lg  <?php echo $text_color_bg; ?>" name="blood_group">
                                        <?php foreach ($blood_groups_details as $blood_groups) {
                                           if($empdata['blood_group'] == $blood_groups['genc_detail_name']) {
                                              $empdata['blood_group'] = $blood_groups['genc_detail_name'];

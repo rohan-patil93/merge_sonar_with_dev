@@ -1,4 +1,7 @@
 <?php
+if (!defined('STYLE_POINTER_OPACITY_7')) {
+    define('STYLE_POINTER_OPACITY_7', STYLE_POINTER_OPACITY_7);
+}
 $_SESSION['apply_js']['multiselest'] = 1;
 if(isset($_POST['submitperformance_appraisal_setups'])){
     $_POST['company_id'] = $_SESSION['company_id'];
@@ -260,7 +263,7 @@ function getPreviewAppraisal(appraisal_id){
                         <h5><?php echo __('Performance Appraisal Setups'); ?></h5>
                         <div class="card-header-right"></div>
                     </div>
-                    <div class="card-body"  <?php echo $pas['publish']=='Y'?'style="pointer-events: none; opacity: 0.7;"':''; ?>>
+                    <div class="card-body"  <?php echo $pas['publish']=='Y'?STYLE_POINTER_OPACITY_7:''; ?>>
 
                         <form method="post" enctype="multipart/form-data">
                             <div class="row">
@@ -412,7 +415,7 @@ function getPreviewAppraisal(appraisal_id){
                                 <a class="nav-link" data-bs-toggle="tab" href="#setgoal" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Allocate KRA Target'); ?></a>
                             </li>
                         </ul>
-                        <div class="tab-content"  <?php echo $pas['publish']=='Y'?'style="pointer-events: none; opacity: 0.7;"':''; ?>>
+                        <div class="tab-content"  <?php echo $pas['publish']=='Y'?STYLE_POINTER_OPACITY_7:''; ?>>
                             <div class="tab-pane <?php echo ($_POST['child_tab'] == "kra" || $_POST['child_tab'] =="")?"active":""; ?>" id="setkra" role="tabpanel">
                                 <?php include_once 'views/custom_insert_kpi_and_kra.php'; ?>
                             </div>
@@ -427,10 +430,10 @@ function getPreviewAppraisal(appraisal_id){
                 </div>
             </div>
 
-            <div class="tab-pane <?php echo $_POST['parent_tab'] == "otherquestion"?"active":""; ?>" id="otherquestion" role="tabpanel"  <?php echo $pas['publish']=='Y'?'style="pointer-events: none; opacity: 0.7;"':''; ?>>
+            <div class="tab-pane <?php echo $_POST['parent_tab'] == "otherquestion"?"active":""; ?>" id="otherquestion" role="tabpanel"  <?php echo $pas['publish']=='Y'?STYLE_POINTER_OPACITY_7:''; ?>>
                 <?php include_once 'views/custom_insert_performance_appraisal_questions.php'; ?>
             </div>
-            <div class="tab-pane" id="otheractivity" role="tabpanel"  <?php echo $pas['publish']=='Y'?'style="pointer-events: none; opacity: 0.7;"':''; ?>>
+            <div class="tab-pane" id="otheractivity" role="tabpanel"  <?php echo $pas['publish']=='Y'?STYLE_POINTER_OPACITY_7:''; ?>>
                 <?php include_once 'views/custom_insert_performance_appraisal_headers.php'; ?>
             </div>
             <div class="tab-pane" id="preview_appraisal" role="tabpanel">

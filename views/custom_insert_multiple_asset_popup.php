@@ -119,7 +119,7 @@ table#example-1 tr td select.form-control{-webkit-appearance: auto;
             <?php $mm=1; foreach($list_assets as $list_asset){ ?>
               <input type="hidden" name="asset_id[]" value="<?php echo $list_asset['id']; ?>">
               <tr>
-                <td scope="row"><?php echo $mm; ?></td>
+                <td><?php echo $mm; ?></td>
                 <td class="tabledit-view-mode  w-b-w-s" style="pointer-events: none; display: none"><span class="tabledit-span"><?php echo $list_asset['asset_code']; ?></span>
                   <input aria-label="<?php echo __('Gdfgff[]'); ?>" class="tabledit-input form-control input-sm" type="text" name="gdfgff[]" value="<?php echo $list_asset['asset_code']; ?>" style="display:none;">
                 </td>

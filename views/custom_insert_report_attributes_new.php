@@ -511,7 +511,7 @@ function sessionModal(){
                                                 <tbody class="wherecondition">
                                                     <?php $whmax = 0; foreach($cont['wherefield'] as $key=>$keys){ ?>
                                                         <tr class="wharerow<?php echo $whmax; ?> allremove">
-                                                            <td><i class="fa fa-trash" onclick="deletewhererow('<?php echo $whmax; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></td>
+                                                            <td><button type="button" class="btn btn-link p-0 border-0" onclick="deletewhererow('<?php echo $whmax; ?>')" aria-label="<?php echo __('Delete'); ?>"><i class="fa fa-trash"></i></button></td>
 
                                                             <td class="w-full"><select aria-label="<?php echo __('Wherefield[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single wherefield"  onchange="buildQuery()" name="wherefield[]">
                                                                 <?php foreach($allfiledsarray as $opt){ ?>

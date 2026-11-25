@@ -105,7 +105,7 @@ function questionsubmit(){
             <div class="input-group input-icon-right">
                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control display-inline width1 crow" name="question_option[3][<?php echo $kkey; ?>]"  value="<?php echo $op; ?>" placeholder="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>">
                 <span class="input-group-text addon-style">
-                    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid<?php echo $kkey; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>    </span>
+                    <span class=""><button type="button" class="btn btn-link p-0 border-0" onclick="deloptionrows('s1rowid<?php echo $kkey; ?>')" aria-label="<?php echo __('Delete'); ?>"><i class="fa fa-trash"></i></button></span>
                 </span>
             </div>
         </div>
