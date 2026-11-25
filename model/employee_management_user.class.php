@@ -78,16 +78,17 @@ class EmployeeManagementUserClass extends userClass
 
     private function resolveTaskApprovalId($tasks, $connectdetails)
     {
+        $approvalId = $connectdetails['hr_connect'] ?? '';
         if ($tasks->approval_type == 'AB') {
-            return $connectdetails['admin_connect'];
+            $approvalId = $connectdetails['admin_connect'];
         } elseif ($tasks->approval_type == 'FB') {
-            return $connectdetails['finance_connect'];
+            $approvalId = $connectdetails['finance_connect'];
         } elseif ($tasks->approval_type == 'PB') {
-            return $connectdetails['project_connect'];
+            $approvalId = $connectdetails['project_connect'];
         } elseif ($tasks->approval_type == 'OB') {
-            return $tasks->approval_other_id ?? "";
+            $approvalId = $tasks->approval_other_id ?? "";
         }
-        return $connectdetails['hr_connect'];
+        return $approvalId;
     }
 
     private function assignEmployeeTasks($get, $startdate, $finance_tax_year)

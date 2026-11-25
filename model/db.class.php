@@ -128,22 +128,24 @@ trait ConfigQueryTrait
         return [$table, $where];
     }
 
+    private function fetchAuditRemarks($type, $table, &$id, $where): string
+    {
+        $query1 = ($type == "INSERT")
+            ? DbConstants::SELECT_STAR_FROM . $table . " WHERE id ='" . $id . "'"
+            : DbConstants::SELECT_STAR_FROM . $table . " " . (str_contains($where, 'WHERE') ? $where : ("WHERE " . $where));
+        $exicutesql = mysqli_query($this->con, $query1);
+        $valuessql = mysqli_fetch_object($exicutesql);
+        if ($id == '' && !empty($valuessql->id)) {
+            $id = $valuessql->id;
+        }
+        return urlencode(json_encode($valuessql));
+    }
+
     public function insertAuditTrail($type, $table, $id, $where, $query, $lastid = "")
     {
         $remarks = "";
         if ($type == "INSERT" || $type == "UPDATE") {
-            if ($type == "INSERT") {
-                $query1 = DbConstants::SELECT_STAR_FROM . $table . " WHERE id ='" . $id . "'";
-            } else {
-                $wherePart = str_contains($where, 'WHERE') ? $where : ("WHERE " . $where);
-                $query1 = DbConstants::SELECT_STAR_FROM . $table . " " . $wherePart;
-            }
-            $exicutesql = mysqli_query($this->con, $query1);
-            $valuessql = mysqli_fetch_object($exicutesql);
-            if ($id == '' && !empty($valuessql->id)) {
-                $id = $valuessql->id;
-            }
-            $remarks = urlencode(json_encode($valuessql));
+            $remarks = $this->fetchAuditRemarks($type, $table, $id, $where);
         } elseif ($type == "SELECT") {
             list($table, $where) = $this->resolveAuditTrailTableAndWhere($query);
         }
@@ -283,10 +285,7 @@ trait ConfigQueryTrait
         if (!is_null($values)) {
             $values = mysqli_real_escape_string($this->con, (string) $values);
         }
-        if (is_numeric($values)) {
-            if ($values[0] == 0) {
-                return "'" . $values . "'";
-            }
+        if (is_numeric($values) && $values[0] != '0') {
             return (string) $values;
         }
         if (is_null($values) || $values == "") {
@@ -519,31 +518,43 @@ trait ConfigUtilityTrait
     private function loadSourceImage(string $target_path, string $extension)
     {
         $ext = strtolower($extension);
-        if ($ext === 'jpg' || $ext === 'jpeg') {
-            return imagecreatefromjpeg($target_path);
+        switch ($ext) {
+            case 'jpg':
+            case 'jpeg':
+                $img = imagecreatefromjpeg($target_path);
+                break;
+            case 'gif':
+                $img = imagecreatefromgif($target_path);
+                break;
+            case 'png':
+                $img = imagecreatefrompng($target_path);
+                break;
+            default:
+                $img = null;
+                break;
         }
-        if ($ext === 'gif') {
-            return imagecreatefromgif($target_path);
-        }
-        if ($ext === 'png') {
-            return imagecreatefrompng($target_path);
-        }
-        return null;
+        return $img;
     }
 
     private function saveDestinationImage($dst_img, string $filepath, string $extension)
     {
         $ext = strtolower($extension);
-        if ($ext === 'jpg' || $ext === 'jpeg') {
-            return imagejpeg($dst_img, $filepath, 90);
+        switch ($ext) {
+            case 'jpg':
+            case 'jpeg':
+                $saved = imagejpeg($dst_img, $filepath, 90);
+                break;
+            case 'gif':
+                $saved = imagegif($dst_img, $filepath, 90);
+                break;
+            case 'png':
+                $saved = imagepng($dst_img, $filepath, 1);
+                break;
+            default:
+                $saved = false;
+                break;
         }
-        if ($ext === 'gif') {
-            return imagegif($dst_img, $filepath, 90);
-        }
-        if ($ext === 'png') {
-            return imagepng($dst_img, $filepath, 1);
-        }
-        return false;
+        return $saved;
     }
 
     public function createImageByoriginal($srcpath, $dir, $width, $height)

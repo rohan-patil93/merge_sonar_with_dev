@@ -943,8 +943,66 @@ class AmcAccountDetailsClass extends userClass implements AmcAccountConstants {
 
     return $return;
   }
+  private function saveAmcDynamicFields($companyId, $registrationId, $post, $userId) {
+    global $callConfig;
+    if (empty($post['dynamic_field']) || !is_array($post['dynamic_field'])) {
+      return null;
+    }
+    foreach ($post['dynamic_field'] as $fieldKey => $fieldValue) {
+      $serviceInsertary = array(
+        'company_id' => $companyId,
+        'registration_id' => $registrationId,
+        'service_key' => $fieldKey,
+        'service_value' => $fieldValue,
+        'service_on' => $post['service_on'] ?? null,
+        'created_by' => $userId,
+        'created_date' => date(self::DATE_FORMAT_HIS)
+      );
+      if (!$callConfig->insertRecord('amc_registration_services', $serviceInsertary)) {
+        return self::ERR_INSERTING_DYNAMIC_SERVICE_FIELDS;
+      }
+    }
+    return null;
+  }
+
+  private function saveAmcChecklist($companyId, $registrationId, $post, $userId, $isUpdate = false) {
+    global $callConfig;
+    if (!isset($post['check_list']) || $post['check_list'] != 'on' || empty($post['checklist_items'])) {
+      return null;
+    }
+    foreach ($post['checklist_items'] as $i => $fieldValue) {
+      if ($isUpdate && isset($post['existing_checklist_ids'][$i]) && $post['existing_checklist_ids'][$i] != '') {
+        $check_id = $post['existing_checklist_ids'][$i];
+        $update_check_array = array(
+          'check_name' => $fieldValue,
+          'is_active' => '0',
+          'updated_by' => $userId,
+          'updated_date' => date(self::DATE_FORMAT_HIS)
+        );
+        $callConfig->updateRecord('application_check_lists', $update_check_array, 'id', $check_id);
+      } else {
+        $check_array = array(
+          'company_id' => $companyId,
+          'transaction_id' => $registrationId,
+          'application_tablename' => 'amc_registration_details',
+          'check_name' => $fieldValue,
+          'current_status' => '0',
+          'is_active' => '0',
+          'created_by' => $userId,
+          'created_date' => date(self::DATE_FORMAT_HIS)
+        );
+        $checkRes = $callConfig->insertRecord('application_check_lists', $check_array);
+        if (!$isUpdate && !$checkRes) {
+          return self::ERR_INSERTING_DYNAMIC_SERVICE_FIELDS;
+        }
+      }
+    }
+    return null;
+  }
+
   public function insertAmcRegistrationDetails($get, $post){
     global $callConfig;
+    $return = array();
     $insertary = array(
       'company_id' => $get['company_id'],
       'amc_name' => $post['amc_name'],
@@ -964,75 +1022,31 @@ class AmcAccountDetailsClass extends userClass implements AmcAccountConstants {
       'check_list' => $post['check_list'] ?? 'off',
       'party_type' => $post['party_type'],
       'vendor_id' => $post['vendor_id']
-
     );
 
     if (isset($post['record_id']) && $post['record_id'] != '') {
       $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
       $insertary['updated_by'] = $get['user_id'];
-      $res = $callConfig->updateRecord('amc_registration_details', $insertary, 'id', $post['record_id']);
-      $return['res'] = $res;
+      $return['res'] = $callConfig->updateRecord('amc_registration_details', $insertary, 'id', $post['record_id']);
 
       $delte_array = array(
         'is_active' => '1',
         'service_on' => 'NULL',
         'updated_by' => $get['user_id']
       );
-      $delete_res = $callConfig->updateRecord('amc_registration_services', $delte_array, 'registration_id', $post['record_id']);
-      $return['delete_res'] = $delete_res;
-      if ($delete_res) {
-        $dynamicFields = $post['dynamic_field'];
-        foreach ($dynamicFields as $fieldKey => $fieldValue) {
-          $serviceInsertary = array(
-            'company_id' => $get['company_id'],
-            'registration_id' =>  $post['record_id'],
-            'service_key' => $fieldKey,
-            'service_value' => $fieldValue,
-            'created_by' => $post['user_id'],
-            'created_date' => date(self::DATE_FORMAT_HIS)
-          );
-          $dynamicRes = $callConfig->insertRecord('amc_registration_services', $serviceInsertary);
-
-          if (!$dynamicRes) {
-            $return['error'] = self::ERR_INSERTING_DYNAMIC_SERVICE_FIELDS;
-            break;
-          }
+      $return['delete_res'] = $callConfig->updateRecord('amc_registration_services', $delte_array, 'registration_id', $post['record_id']);
+      if ($return['delete_res']) {
+        $err = $this->saveAmcDynamicFields($get['company_id'], $post['record_id'], $post, $post['user_id']);
+        if ($err) {
+          $return['error'] = $err;
         }
       }
 
       $update_date = date(self::DATE_FORMAT_HIS);
-      $query = "UPDATE  application_check_lists SET is_active = NULL, updated_by={$get['user_id']}, updated_date = '{$update_date}'  WHERE transaction_id = '" . $post['record_id'] . "' AND application_tablename='amc_registration_details' AND company_id={$get['company_id']} AND is_active = 0";
+      $query = "UPDATE application_check_lists SET is_active = NULL, updated_by={$get['user_id']}, updated_date = '{$update_date}' WHERE transaction_id = '" . $post['record_id'] . "' AND application_tablename='amc_registration_details' AND company_id={$get['company_id']} AND is_active = 0";
       $callConfig->executeQuery($query);
 
-      if(isset($post['check_list']) && $post['check_list'] == 'on'){
-          $checklist_items = $post['checklist_items'];
-          foreach ($checklist_items as $i => $fieldValue) {
-            if(isset($post['existing_checklist_ids'][$i]) && $post['existing_checklist_ids'][$i] !=''){
-              $check_id = $post['existing_checklist_ids'][$i];
-              $update_check_array = array(
-                'check_name' => $fieldValue,
-                'is_active' => '0',
-                'updated_by' => $get['user_id'],
-                'updated_date' => date(self::DATE_FORMAT_HIS)
-              );
-              $callConfig->updateRecord('application_check_lists', $update_check_array, 'id', $check_id);
-            }else{
-              // Insert new checklist item
-              $check_array = array(
-                'company_id' => $get['company_id'],
-                'transaction_id' => $post['record_id'],
-                'application_tablename' => 'amc_registration_details',
-                'check_name' => $fieldValue,
-                'current_status' => '0',
-                'is_active' => '0',
-                'created_by' => $get['user_id'],
-                'created_date' => date(self::DATE_FORMAT_HIS)
-              );
-              $callConfig->insertRecord('application_check_lists', $check_array);
-            }
-          }
-        }
-
+      $this->saveAmcChecklist($get['company_id'], $post['record_id'], $post, $get['user_id'], true);
     } else {
       $insertary['is_active'] = 0;
       $insertary['current_status'] = 0;
@@ -1040,49 +1054,16 @@ class AmcAccountDetailsClass extends userClass implements AmcAccountConstants {
       $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
       $res = $callConfig->insertRecord('amc_registration_details', $insertary);
       $return['res'] = $res;
-      $last_rec_id = $res['LASTID'];
+      $last_rec_id = $res['LASTID'] ?? null;
 
       if ($last_rec_id) {
-        $dynamicFields = $post['dynamic_field'];
-        foreach ($dynamicFields as $fieldKey => $fieldValue) {
-          $serviceInsertary = array(
-            'company_id' => $get['company_id'],
-            'registration_id' => $last_rec_id,
-            'service_key' => $fieldKey,
-            'service_value' => $fieldValue,
-            'service_on' => $post['service_on'],
-            'created_by' => $get['user_id'],
-            'created_date' => date(self::DATE_FORMAT_HIS)
-          );
-
-          $dynamicRes = $callConfig->insertRecord('amc_registration_services', $serviceInsertary);
-
-          if (!$dynamicRes) {
-            $return['error'] = self::ERR_INSERTING_DYNAMIC_SERVICE_FIELDS;
-            break;
-          }
+        $err = $this->saveAmcDynamicFields($get['company_id'], $last_rec_id, $post, $get['user_id']);
+        if ($err) {
+          $return['error'] = $err;
         }
-        if(isset($post['check_list']) && $post['check_list'] == 'on'){
-          $checklist_items = $post['checklist_items'];
-          foreach ($checklist_items as  $fieldValue) {
-            $check_array = array(
-              'company_id' => $get['company_id'],
-              'transaction_id' => $last_rec_id,
-              'application_tablename' => 'amc_registration_details',
-              'check_name' => $fieldValue,
-              'current_status' => '0',
-              'is_active' => '0',
-              'created_by' => $get['user_id'],
-              'created_date' => date(self::DATE_FORMAT_HIS)
-            );
-
-            $checkRes = $callConfig->insertRecord('application_check_lists', $check_array);
-
-            if (!$checkRes) {
-              $return['check_error'] = self::ERR_INSERTING_DYNAMIC_SERVICE_FIELDS;
-              break;
-            }
-          }
+        $checkErr = $this->saveAmcChecklist($get['company_id'], $last_rec_id, $post, $get['user_id'], false);
+        if ($checkErr) {
+          $return['check_error'] = $checkErr;
         }
       }
       $return['last_rec_id'] = $last_rec_id;
@@ -1134,36 +1115,51 @@ class AmcAccountDetailsClass extends userClass implements AmcAccountConstants {
   }
 
 
+  private function processDailySchedule($noOfServices, $serviceDetails, $baseValues, $currentDate, &$return) {
+      global $callConfig;
+      for ($i = 1; $i <= $noOfServices; $i++) {
+          $serviceTime = $serviceDetails[$i];
+          $serviceDate = date('Y-m-d', strtotime($currentDate)) . " $serviceTime";
+          $values = array_merge($baseValues, ['service_date' => $serviceDate]);
+          $return['dynamicRes'][$i] = $callConfig->insertRecord('amc_service_schedules', $values);
+      }
+  }
+
+  private function processWeeklySchedule($noOfServices, $serviceDetails, $baseValues, $currentDate, $endDate, &$return) {
+      global $callConfig;
+      for ($i = 1; $i <= $noOfServices; $i++) {
+          $serviceDay = $serviceDetails[$i];
+          $serviceDate = date('Y-m-d', strtotime("next $serviceDay", strtotime($currentDate)));
+          if (strtotime($serviceDate) > strtotime($endDate)) {
+              break;
+          }
+          $values = array_merge($baseValues, ['service_date' => $serviceDate]);
+          $callConfig->insertRecord('amc_service_schedules', $values);
+          $return['dynamicRes'][$serviceDay][$i] = $serviceDate;
+      }
+  }
+
+  private function processMonthlySchedule($noOfServices, $serviceDetails, $baseValues, $currentDate, &$return) {
+      global $callConfig;
+      for ($i = 1; $i <= $noOfServices; $i++) {
+          $serviceDay = $serviceDetails[$i];
+          $serviceDay = $serviceDay < '10' ? '0' . $serviceDay : $serviceDay;
+          $serviceDate = date('Y-m-' . $serviceDay, strtotime($currentDate));
+          $values = array_merge($baseValues, ['service_date' => $serviceDate]);
+          $return['dynamicRes'][$i] = $callConfig->insertRecord('amc_service_schedules', $values);
+      }
+  }
+
   private function processScheduleInterval($serviceOn, &$currentDate, $endDate, $noOfServices, $serviceDetails, $baseValues, &$return) {
       global $callConfig;
       if ($serviceOn == '1') {
-          for ($i = 1; $i <= $noOfServices; $i++) {
-              $serviceTime = $serviceDetails[$i];
-              $serviceDate = date('Y-m-d', strtotime($currentDate)) . " $serviceTime";
-              $values = array_merge($baseValues, ['service_date' => $serviceDate]);
-              $return['dynamicRes'][$i] = $callConfig->insertRecord('amc_service_schedules', $values);
-          }
+          $this->processDailySchedule($noOfServices, $serviceDetails, $baseValues, $currentDate, $return);
           $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
       } elseif ($serviceOn == '2') {
-          for ($i = 1; $i <= $noOfServices; $i++) {
-              $serviceDay = $serviceDetails[$i];
-              $serviceDate = date('Y-m-d', strtotime("next $serviceDay", strtotime($currentDate)));
-              if (strtotime($serviceDate) > strtotime($endDate)) {
-                  break;
-              }
-              $values = array_merge($baseValues, ['service_date' => $serviceDate]);
-              $callConfig->insertRecord('amc_service_schedules', $values);
-              $return['dynamicRes'][$serviceDay][$i] = $serviceDate;
-          }
+          $this->processWeeklySchedule($noOfServices, $serviceDetails, $baseValues, $currentDate, $endDate, $return);
           $currentDate = date('Y-m-d', strtotime($currentDate . ' +7 days'));
       } elseif ($serviceOn == '3') {
-          for ($i = 1; $i <= $noOfServices; $i++) {
-              $serviceDay = $serviceDetails[$i];
-              $serviceDay = $serviceDay < '10' ? '0' . $serviceDay : $serviceDay;
-              $serviceDate = date('Y-m-' . $serviceDay, strtotime($currentDate));
-              $values = array_merge($baseValues, ['service_date' => $serviceDate]);
-              $return['dynamicRes'][$i] = $callConfig->insertRecord('amc_service_schedules', $values);
-          }
+          $this->processMonthlySchedule($noOfServices, $serviceDetails, $baseValues, $currentDate, $return);
           $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 month'));
       } elseif ($serviceOn == '4') {
           for ($i = 1; $i <= $noOfServices; $i++) {

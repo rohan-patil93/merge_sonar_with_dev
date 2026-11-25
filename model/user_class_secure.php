@@ -94,7 +94,7 @@ class UserClassSecure {
         $httpshttp = isset($_SERVER['HTTPS']) ? 'https' : 'http';
         return $httpshttp."://".str_replace($subdomain,$data->domain_name,$host);
     }
-    private function loadLoginConfigAndRoles($get, $userrow)
+    private function loadLoginConfigAndRoles($get)
     {
         global $callConfig;
         $return = array();
@@ -117,7 +117,7 @@ class UserClassSecure {
         return $return;
     }
 
-    private function loadLoginModulesAndMenu($get, $userrow2, &$return)
+    private function loadLoginModulesAndMenu($userrow2, &$return)
     {
         global $callConfig;
         $whrs = "company_id = ? AND is_active = 0 ";
@@ -178,7 +178,7 @@ class UserClassSecure {
         }
 
         // Config & Currency
-        $cfg = $this->loadLoginConfigAndRoles($get, $userrow);
+        $cfg = $this->loadLoginConfigAndRoles($get);
         foreach ($cfg as $k => $v) {
             $return[$k] = $v;
         }
@@ -210,7 +210,7 @@ class UserClassSecure {
         $return['application_pages'] = $callConfig->getAllRowsNew($callConfig->selectQuery('application_pages', '*', $whrs, '', '', ''));
 
         // Modules & Menu
-        $this->loadLoginModulesAndMenu($get, $userrow2, $return);
+        $this->loadLoginModulesAndMenu($userrow2, $return);
 
         // Status & Companies
         $status = array();

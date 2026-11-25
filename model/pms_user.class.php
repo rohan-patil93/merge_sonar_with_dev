@@ -30,6 +30,8 @@ interface PmsConstants
     public const SELECT_RATING_SLABS = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '";
     public const AND_EG_IS_ACTIVE_0 = "' AND eg.is_active = 0 ";
     public const SELECT_EMPLOYEE_GOALS = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '";
+    public const AND_PREFIX = ' AND ';
+    public const IN_OPEN = ' IN (';
 }
 trait PmsAppraisalSetupTrait
 {
@@ -75,22 +77,29 @@ trait PmsAppraisalSetupTrait
         return $returnarray;
     }
 
+    private function parseFilterParams($filterres)
+    {
+        $conds = array();
+        if (!empty($filterres->id) || !empty($filterres->content)) {
+            $parts = explode('&', $filterres->filter_condition ?? '');
+            foreach ($parts as $part) {
+                $fn = explode('=', $part);
+                $key = $fn[0] ?? '';
+                if ($key !== '' && $key !== 'check' && $key !== 'table') {
+                    $conds[$key] = $fn[1] ?? '';
+                }
+            }
+        }
+        return $conds;
+    }
+
     private function buildAppraisalFilterCondition($filterres)
     {
         $condition = "";
-        if (!empty($filterres->id) || !empty($filterres->content)) {
-            $show_filter_cond = explode('&', $filterres->filter_condition ?? '');
-            $show_filter_condion = array();
-            foreach ($show_filter_cond as $show_filter_co) {
-                $fieldname = explode("=", $show_filter_co);
-                if (($fieldname[0] ?? '') != "check" && ($fieldname[0] ?? '') != "table") {
-                    $show_filter_condion[$fieldname[0]] = $fieldname[1] ?? '';
-                }
-            }
-            foreach ($show_filter_condion as $keys => $vale) {
-                if ($vale != "") {
-                    $condition .= ' AND ' . $keys . '  IN (' . $vale . ')';
-                }
+        $params = $this->parseFilterParams($filterres);
+        foreach ($params as $key => $val) {
+            if ($val != "") {
+                $condition .= PmsConstants::AND_PREFIX . $key . PmsConstants::IN_OPEN . $val . ')';
             }
         }
         return $condition;
@@ -658,24 +667,21 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
         $dipartcondition = "";
         $locationcondition = "";
         $designationcondition = "";
-        if (!empty($filterres->id) || !empty($filterres->content)) {
-            $show_filter_cond = explode('&', $filterres->filter_condition ?? '');
-            $show_filter_condion = array();
-            foreach ($show_filter_cond as $show_filter_co) {
-                $fieldname = explode("=", $show_filter_co);
-                if (($fieldname[0] ?? '') != "check" && ($fieldname[0] ?? '') != "table") {
-                    $show_filter_condion[$fieldname[0]] = $fieldname[1] ?? '';
-                }
-            }
-            foreach ($show_filter_condion as $keys => $vale) {
-                if ($vale != "") {
-                    if ($keys == 'department_id') {
-                        $dipartcondition .= ' AND ' . $deptCol . ' IN (' . $vale . ')';
-                    } elseif ($keys == 'location_id') {
-                        $locationcondition .= ' AND ' . $locCol . ' IN (' . $vale . ')';
-                    } elseif ($keys == 'designation_id') {
-                        $designationcondition .= ' AND ' . $desigCol . ' IN (' . $vale . ')';
-                    }
+        $params = $this->parseFilterParams($filterres);
+        $colMap = array(
+            'department_id' => $deptCol,
+            'location_id' => $locCol,
+            'designation_id' => $desigCol,
+        );
+        foreach ($params as $key => $val) {
+            if ($val != "" && isset($colMap[$key])) {
+                $clause = PmsConstants::AND_PREFIX . $colMap[$key] . PmsConstants::IN_OPEN . $val . ')';
+                if ($key == 'department_id') {
+                    $dipartcondition .= $clause;
+                } elseif ($key == 'location_id') {
+                    $locationcondition .= $clause;
+                } else {
+                    $designationcondition .= $clause;
                 }
             }
         }

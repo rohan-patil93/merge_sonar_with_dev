@@ -1377,7 +1377,6 @@ function viewApprovalAllUsers(id= ""){
                     ?>
                 <?php }  ?>
                  &nbsp;  &nbsp;
-                    <!-- <input type="hidden" name="status_values" id="status_values" value="<?php ?>"> -->
                 <input type="hidden" name="status_values" id="status_values" value="<?php echo  ($table1['current_status']!="" && $rtable_name =="")?$table1['current_status']:ST_DRAFT; ?>">
                 <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
                 </div>

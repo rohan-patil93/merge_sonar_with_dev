@@ -189,24 +189,23 @@ trait PurchasingSubcontractReceiptTrait
         }
 
         $work_order_details = $this->getSubcontractReceiptWorkOrderDetails($get['company_id'], $work_order_id, '');
-        if (count((array) $work_order_details) == 0) {
-            return array('status' => 'fail', 'parent_insert_update' => array('status' => 'fail', 'error_no' => '404', 'message' => self::MSG_WORK_ORDER_NOT_FOUND));
-        }
-
         $metrics = $this->getSubcontractWorkOrderReceiptMetrics($get['company_id'], $work_order_id, '');
         $total_received_qty = isset($metrics['total_received_qty']) ? (float) $metrics['total_received_qty'] : 0;
         $work_order_item_qty = isset($work_order_details->work_order_item_qty) ? (float) $work_order_details->work_order_item_qty : 0;
         $allowed_pending_qty = max(0, $work_order_item_qty - $total_received_qty);
 
-        if ($received_qty > $allowed_pending_qty) {
-            return array('status' => 'fail', 'parent_insert_update' => array('status' => 'fail', 'error_no' => '400', 'message' => 'Received qty cannot be greater than pending receipt qty'));
+        if (empty($work_order_details)) {
+            $result = array('status' => 'fail', 'parent_insert_update' => array('status' => 'fail', 'error_no' => '404', 'message' => self::MSG_WORK_ORDER_NOT_FOUND));
+        } elseif ($received_qty > $allowed_pending_qty) {
+            $result = array('status' => 'fail', 'parent_insert_update' => array('status' => 'fail', 'error_no' => '400', 'message' => 'Received qty cannot be greater than pending receipt qty'));
+        } else {
+            $result = array(
+                'status' => 'success',
+                'work_order_details' => $work_order_details,
+                'total_received_qty' => $total_received_qty
+            );
         }
-
-        return array(
-            'status' => 'success',
-            'work_order_details' => $work_order_details,
-            'total_received_qty' => $total_received_qty
-        );
+        return $result;
     }
 
     private function prepareReceiptHeaderData(array $post, array $get, $work_order_details, float $received_qty, float $total_received_qty): array
@@ -397,23 +396,22 @@ trait PurchasingSubcontractReceiptTrait
             $insert_res = $callConfig->insertRecord('subcontract_work_order_receipts', $headerData['postdata']);
             $rid = isset($insert_res['LASTID']) ? $insert_res['LASTID'] : 0;
             if ($rid == 0) {
-                return array('parent_insert_update' => array('status' => 'fail', 'error_no' => '500', 'message' => 'Unable to save receipt'));
+                $return['parent_insert_update'] = array('status' => 'fail', 'error_no' => '500', 'message' => 'Unable to save receipt');
+            } else {
+                $itemRes = $this->saveReceiptItemAndTaxes($rid, $work_order_details, $post, $get, $received_qty, $headerData);
+                if (($itemRes['status'] ?? '') !== 'success') {
+                    $return['parent_insert_update'] = $itemRes;
+                } else {
+                    if ($headerData['pending_qty'] <= 0) {
+                        $callConfig->updateRecord('subcontract_work_orders', array('work_order_closed' => 'Y'), 'id', $work_order_details->id);
+                    }
+                    $return['parent_insert_update'] = array(
+                        'status' => 'success',
+                        'LASTID' => $rid,
+                        'message' => 'Receipt saved successfully'
+                    );
+                }
             }
-
-            $itemRes = $this->saveReceiptItemAndTaxes($rid, $work_order_details, $post, $get, $received_qty, $headerData);
-            if (($itemRes['status'] ?? '') !== 'success') {
-                return array('parent_insert_update' => $itemRes);
-            }
-
-            if ($headerData['pending_qty'] <= 0) {
-                $callConfig->updateRecord('subcontract_work_orders', array('work_order_closed' => 'Y'), 'id', $work_order_details->id);
-            }
-
-            $return['parent_insert_update'] = array(
-                'status' => 'success',
-                'LASTID' => $rid,
-                'message' => 'Receipt saved successfully'
-            );
         } catch (Exception $e) {
             $return['parent_insert_update'] = array(
                 'status' => 'fail',
@@ -425,48 +423,48 @@ trait PurchasingSubcontractReceiptTrait
         return $return;
     }
 
-    private function formatReceiptHistoryRow($row, $company_id): array
+    private function fetchTaxSplitDetails($row, $company_id): array
     {
         global $callConfig;
-
-        $tax_split_details = array();
-        if (isset($row->total_tax_split_details) && $row->total_tax_split_details != '') {
+        if (!empty($row->total_tax_split_details)) {
             $decoded = json_decode($row->total_tax_split_details, true);
             if (is_array($decoded)) {
-                $tax_split_details = $decoded;
+                return $decoded;
             }
         }
-
-        if (empty($tax_split_details)) {
-            $tax_sql = "SELECT tax_name, tax_value as tax_percentage, tax_amount
-                        FROM subcontract_work_order_receipt_item_taxes
-                        WHERE company_id = '" . $company_id . "'
-                        AND transaction_id = '" . $row->id . "'
-                        AND is_active = 0
-                        ORDER BY id ASC";
-            $tax_rows = $callConfig->getAllRows($tax_sql);
-            foreach ((array) $tax_rows as $tax_row) {
-                $tax_split_details[] = array(
-                    'tax_name' => isset($tax_row->tax_name) ? $tax_row->tax_name : '',
-                    'tax_percentage' => isset($tax_row->tax_percentage) ? (float) $tax_row->tax_percentage : 0,
-                    'tax_amount' => isset($tax_row->tax_amount) ? (float) $tax_row->tax_amount : 0
-                );
-            }
+        $tax_sql = "SELECT tax_name, tax_value as tax_percentage, tax_amount
+                    FROM subcontract_work_order_receipt_item_taxes
+                    WHERE company_id = '" . $company_id . "'
+                    AND transaction_id = '" . $row->id . "'
+                    AND is_active = 0
+                    ORDER BY id ASC";
+        $tax_rows = $callConfig->getAllRows($tax_sql);
+        $tax_split_details = array();
+        foreach ((array) $tax_rows as $tax_row) {
+            $tax_split_details[] = array(
+                'tax_name' => $tax_row->tax_name ?? '',
+                'tax_percentage' => (float) ($tax_row->tax_percentage ?? 0),
+                'tax_amount' => (float) ($tax_row->tax_amount ?? 0)
+            );
         }
+        return $tax_split_details;
+    }
 
+    private function formatReceiptHistoryRow($row, $company_id): array
+    {
         return array(
             'id' => $row->id,
             'transaction_number' => $row->transaction_number,
             'transaction_date' => $row->transaction_date,
-            'received_qty' => isset($row->received_qty) ? (float) $row->received_qty : 0,
-            'pending_qty' => isset($row->pending_qty) ? (float) $row->pending_qty : 0,
-            'amount' => isset($row->amount) ? (float) $row->amount : 0,
-            'tax_amount' => isset($row->tax_amount) ? (float) $row->tax_amount : 0,
-            'total_amount' => isset($row->total_amount) ? (float) $row->total_amount : 0,
-            'tax_type' => isset($row->tax_type) ? $row->tax_type : '',
-            'tax_split_details' => $tax_split_details,
-            'notes' => isset($row->notes) ? $row->notes : '',
-            'created_date' => isset($row->created_date) ? $row->created_date : ''
+            'received_qty' => (float) ($row->received_qty ?? 0),
+            'pending_qty' => (float) ($row->pending_qty ?? 0),
+            'amount' => (float) ($row->amount ?? 0),
+            'tax_amount' => (float) ($row->tax_amount ?? 0),
+            'total_amount' => (float) ($row->total_amount ?? 0),
+            'tax_type' => $row->tax_type ?? '',
+            'tax_split_details' => $this->fetchTaxSplitDetails($row, $company_id),
+            'notes' => $row->notes ?? '',
+            'created_date' => $row->created_date ?? ''
         );
     }
 
@@ -811,12 +809,8 @@ class PurchasingUserClass extends userClass implements PurchasingConstants
                        AND is_active = 0";
         $parent_record = $callConfig->getRow($parent_sql);
 
-        if (!$parent_record) {
-            return array('status' => 'error', 'message' => 'Work order not found');
-        }
-
         $child_items = array();
-        if (count($child_ids) > 0) {
+        if (!empty($child_ids)) {
             $child_ids_str = "'" . implode("','", $child_ids) . "'";
             $child_sql = "SELECT * FROM subcontract_work_order_items
                           WHERE id IN ($child_ids_str)
@@ -826,15 +820,18 @@ class PurchasingUserClass extends userClass implements PurchasingConstants
             $child_items = $callConfig->getAllRows($child_sql);
         }
 
-        if (count($child_items) === 0) {
-            return array('status' => 'error', 'message' => 'No items selected for issue');
+        if (!$parent_record) {
+            $result = array('status' => 'error', 'message' => 'Work order not found');
+        } elseif (empty($child_items)) {
+            $result = array('status' => 'error', 'message' => 'No items selected for issue');
+        } else {
+            $result = array(
+                'status' => 'success',
+                'parent_record' => $parent_record,
+                'child_items' => $child_items
+            );
         }
-
-        return array(
-            'status' => 'success',
-            'parent_record' => $parent_record,
-            'child_items' => $child_items
-        );
+        return $result;
     }
 
     private function createSubcontractIssueParent($parent_record, $rid, array $get)

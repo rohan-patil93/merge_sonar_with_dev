@@ -184,7 +184,7 @@ class VmsDocumentClass extends userClass
         if ($documentName == '') {
             return 'Document name is required';
         }
-        if (count($validFiles) == 0) {
+        if (empty($validFiles)) {
             return 'At least one valid file is required';
         }
 
@@ -193,11 +193,39 @@ class VmsDocumentClass extends userClass
             AND is_active = 0
             LIMIT 1";
         $typeRow = $callConfig->getRow($typeCheckQuery);
-        if (empty($typeRow)) {
-            return 'Invalid document type';
+        return empty($typeRow) ? 'Invalid document type' : null;
+    }
+
+    private function updateParentDoc(int $rid, int $companyId, string $userId, int $documentTypeId, string $documentName, string $now): array
+    {
+        global $callConfig;
+        $checkQuery = "SELECT id FROM " . TBL_DOCUMENT_MANAGEMENT . "
+            WHERE id = '" . $rid . self::AND_COMPANY_ID . $companyId . "'
+            AND is_active = 0
+            LIMIT 1";
+        $existingRow = $callConfig->getRow($checkQuery);
+        if (empty($existingRow)) {
+            return array('status' => 'error', 'message' => 'Document record not found');
         }
 
-        return null;
+        $updateData = array(
+            'document_type_id' => $documentTypeId,
+            'document_name' => $documentName,
+            'updated_by' => $userId != '' ? $userId : null,
+            'updated_date' => $now
+        );
+        $updateRes = $callConfig->updateRecord(TBL_DOCUMENT_MANAGEMENT, $updateData, 'id', $rid);
+        if (!$updateRes) {
+            return array('status' => 'error', 'message' => 'Unable to update document');
+        }
+
+        $inactiveQuery = "UPDATE " . TBL_DOCUMENT_MANAGEMENT_FILES . "
+            SET is_active = NULL, updated_by = '" . $userId . "', updated_date = '" . $now . "'
+            WHERE document_management_id = '" . $rid . "'
+            AND company_id = '" . $companyId . "' AND is_active = 0";
+        $callConfig->executeQuery($inactiveQuery);
+
+        return array('status' => 'sucess', 'rid' => $rid);
     }
 
     private function persistParentDoc(int $rid, int $companyId, string $userId, int $documentTypeId, string $documentName, string $now): array
@@ -205,33 +233,7 @@ class VmsDocumentClass extends userClass
         global $callConfig;
 
         if ($rid > 0) {
-            $checkQuery = "SELECT id FROM " . TBL_DOCUMENT_MANAGEMENT . "
-                WHERE id = '" . $rid . self::AND_COMPANY_ID . $companyId . "'
-                AND is_active = 0
-                LIMIT 1";
-            $existingRow = $callConfig->getRow($checkQuery);
-            if (empty($existingRow)) {
-                return array('status' => 'error', 'message' => 'Document record not found');
-            }
-
-            $updateData = array(
-                'document_type_id' => $documentTypeId,
-                'document_name' => $documentName,
-                'updated_by' => $userId != '' ? $userId : null,
-                'updated_date' => $now
-            );
-            $updateRes = $callConfig->updateRecord(TBL_DOCUMENT_MANAGEMENT, $updateData, 'id', $rid);
-            if (!$updateRes) {
-                return array('status' => 'error', 'message' => 'Unable to update document');
-            }
-
-            $inactiveQuery = "UPDATE " . TBL_DOCUMENT_MANAGEMENT_FILES . "
-                SET is_active = NULL, updated_by = '" . $userId . "', updated_date = '" . $now . "'
-                WHERE document_management_id = '" . $rid . "'
-                AND company_id = '" . $companyId . "' AND is_active = 0";
-            $callConfig->executeQuery($inactiveQuery);
-
-            return array('status' => 'sucess', 'rid' => $rid);
+            return $this->updateParentDoc($rid, $companyId, $userId, $documentTypeId, $documentName, $now);
         }
 
         $insertData = array(

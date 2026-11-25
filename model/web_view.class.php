@@ -9,6 +9,270 @@ interface WebViewConstants
     public const SQL_AND_TRANSACTION_TABLE_EQ = "' AND transaction_table = '";
 }
 
+trait WebViewDiscussionTrait
+{
+    private function collectWorkflowDiscussionUsers(&$users, $company_id, $transaction_table, $transactionres, $include_roles)
+    {
+        $wfget = array(
+            'company_id' => $company_id,
+            'transaction_table' => $transaction_table,
+            'transaction_no' => $transactionres->id,
+            'current_status' => $transactionres->current_status
+        );
+        $wfres = $this->getDynamicWorkFlowSteps($wfget);
+        if (!empty($wfres['transaction_owner_id'])) {
+            $users[$wfres['transaction_owner_id']] = 1;
+        }
+        if ($include_roles && !empty($wfres['application_user_module_roles'])) {
+            foreach ((array) $wfres['application_user_module_roles'] as $role_user_id => $role_name) {
+                $users[$role_user_id] = 1;
+            }
+        }
+    }
+
+    private function collectLogAndEmployeeDiscussionUsers(&$users, $company_id, $transaction_table, $transaction_id, $employee_id)
+    {
+        global $callConfig;
+        $talsql = "SELECT user_id, assigner_user_id FROM transaction_approval_logs WHERE company_id = '" . $company_id . self::SQL_AND_TRANSACTION_TABLE_EQ . $transaction_table . self::SQL_AND_TRANSACTION_ID_EQ . $transaction_id . "'";
+        $talres = $callConfig->getAllRows($talsql);
+        foreach ((array) $talres as $talrow) {
+            if (!empty($talrow->user_id)) {
+                $users[$talrow->user_id] = 1;
+            }
+            if (!empty($talrow->assigner_user_id)) {
+                $users[$talrow->assigner_user_id] = 1;
+            }
+        }
+
+        if (!empty($employee_id)) {
+            $empsql = "SELECT user_id FROM employees WHERE company_id = '" . $company_id . self::SQL_AND_ID_EQ . $employee_id . "'" . self::SQL_AND_IS_ACTIVE_0;
+            $empres = $callConfig->getRow($empsql);
+            if (!empty($empres->user_id)) {
+                $users[$empres->user_id] = 1;
+            }
+        }
+    }
+
+    private function collectApprovalDiscussionUsers($company_id, $transaction_table, $transaction_id, $include_roles = false)
+    {
+        global $callConfig;
+        $users = array();
+        if ($company_id == '' || $transaction_table == '' || $transaction_id == '') {
+            return $users;
+        }
+
+        $transactionsql = "SELECT * FROM " . $transaction_table . " WHERE company_id = '" . $company_id . self::SQL_AND_ID_EQ . $transaction_id . "'" . self::SQL_AND_IS_ACTIVE_0;
+        $transactionres = $callConfig->getRow($transactionsql);
+        if (!$transactionres || empty($transactionres->id)) {
+            return $users;
+        }
+
+        if (!empty($transactionres->created_by)) {
+            $users[$transactionres->created_by] = 1;
+        }
+        if (!empty($transactionres->originator)) {
+            $users[$transactionres->originator] = 1;
+        }
+        if (!empty($transactionres->user_id)) {
+            $users[$transactionres->user_id] = 1;
+        }
+
+        $this->collectWorkflowDiscussionUsers($users, $company_id, $transaction_table, $transactionres, $include_roles);
+        $this->collectLogAndEmployeeDiscussionUsers($users, $company_id, $transaction_table, $transaction_id, $transactionres->employee_id ?? null);
+
+        $msgsql = "SELECT DISTINCT created_by FROM approval_discussion_messages WHERE company_id = '" . $company_id . self::SQL_AND_TRANSACTION_TABLE_EQ . $transaction_table . self::SQL_AND_TRANSACTION_ID_EQ . $transaction_id . "'" . self::SQL_AND_IS_ACTIVE_0;
+        $msgres = $callConfig->getAllRows($msgsql);
+        foreach ((array) $msgres as $msgrow) {
+            if (!empty($msgrow->created_by)) {
+                $users[$msgrow->created_by] = 1;
+            }
+        }
+
+        return $users;
+    }
+
+    public function canAccessApprovalDiscussion($get)
+    {
+        $return = array('can_view' => false, 'can_post' => false);
+        $company_id = $get['company_id'] ?? '';
+        $user_id = $get['user_id'] ?? '';
+        $transaction_table = $get['transaction_table'] ?? '';
+        $transaction_id = $get['transaction_id'] ?? '';
+
+        $allowed_users = $this->collectApprovalDiscussionUsers($company_id, $transaction_table, $transaction_id, true);
+        if (isset($allowed_users[$user_id])) {
+            $return['can_view'] = true;
+            $return['can_post'] = true;
+        }
+        return $return;
+    }
+
+    public function getApprovalDiscussionMessages($get){
+        global $callConfig;
+        $return = array('status' => 'success', 'can_view' => false, 'can_post' => false, 'messages' => array());
+
+        $access = $this->canAccessApprovalDiscussion($get);
+        $return['can_view'] = $access['can_view'];
+        $return['can_post'] = $access['can_post'];
+        if (!$access['can_view']) {
+            $return['status'] = 'error';
+            return $return;
+        }
+
+        $company_id = $get['company_id'];
+        $user_id = $get['user_id'];
+        $transaction_table = $get['transaction_table'];
+        $transaction_id = $get['transaction_id'];
+
+        $sql = "SELECT adm.id, adm.message_text, adm.created_date, adm.created_by, au.display_name AS sender_name
+            FROM approval_discussion_messages adm
+            LEFT JOIN application_users au ON au.id = adm.created_by AND au.company_id = adm.company_id AND au.is_active = 0
+            WHERE adm.company_id = '".$company_id."'
+            AND adm.transaction_table = '".$transaction_table."'
+            AND adm.transaction_id = '".$transaction_id."'
+            AND adm.is_active = 0";
+        if ($get['last_message_id'] != '') {
+            $sql .= " AND adm.id > '".$get['last_message_id']."'";
+        }
+        $sql .= " ORDER BY adm.id ASC";
+
+        $rows = $callConfig->getAllRows($sql);
+        $messages = array();
+        if (count((array)$rows) > 0) {
+            foreach ($rows as $row) {
+                $messages[] = array(
+                    'id' => $row->id,
+                    'message_text' => $row->message_text,
+                    'created_date' => $row->created_date,
+                    'created_by' => $row->created_by,
+                    'sender_name' => $row->sender_name != '' ? $row->sender_name : 'User',
+                    'is_current_user' => ($row->created_by == $user_id) ? 1 : 0
+                );
+            }
+        }
+        $return['messages'] = $messages;
+        return $return;
+    }
+
+    private function validateDiscussionPost($access, $message_text)
+    {
+        if (!$access['can_post']) {
+            return 'You are not authorized to post in this discussion.';
+        }
+        if ($message_text == '') {
+            return 'Message cannot be empty.';
+        }
+        if (strlen($message_text) > 2000) {
+            return 'Message is too long (max 2000 characters).';
+        }
+        return null;
+    }
+
+    private function insertDiscussionMessageRecord($post, $message_text)
+    {
+        global $callConfig;
+        $insert_array = array(
+            'company_id' => $post['company_id'],
+            'module_id' => ($post['module_id'] != '') ? $post['module_id'] : null,
+            'transaction_table' => $post['transaction_table'],
+            'transaction_id' => $post['transaction_id'],
+            'message_text' => $message_text,
+            'is_active' => 0,
+            'created_by' => $post['user_id'],
+            'created_date' => date(self::DATE_FORMAT_HIS)
+        );
+        $res = $callConfig->insertRecord('approval_discussion_messages', $insert_array);
+        if ($res['status'] != 'sucess') {
+            return array('status' => 'error', 'message' => 'Failed to save message.');
+        }
+
+        $last_id = $res['LASTID'];
+        $usersql = "SELECT display_name FROM application_users WHERE id = '" . $post['user_id'] . "' AND company_id = '" . $post['company_id'] . "'" . self::SQL_AND_IS_ACTIVE_0;
+        $userres = $callConfig->getRow($usersql);
+        $sender_name = !empty($userres->display_name) ? $userres->display_name : 'User';
+
+        $push_sent = $this->sendApprovalDiscussionMobilePush($post, $sender_name, $message_text);
+        return array(
+            'status' => 'success',
+            'message' => 'Message sent.',
+            'push_sent' => $push_sent,
+            'data' => array(
+                'id' => $last_id,
+                'message_text' => $message_text,
+                'created_date' => $insert_array['created_date'],
+                'created_by' => $post['user_id'],
+                'sender_name' => $sender_name,
+                'is_current_user' => 1
+            )
+        );
+    }
+
+    public function postApprovalDiscussionMessage($post)
+    {
+        $post['user_id'] = ($post['user_id'] != '') ? $post['user_id'] : ($_GET['user_id'] ?? '');
+        $post['company_id'] = ($post['company_id'] != '') ? $post['company_id'] : ($_GET['company_id'] ?? '');
+        if (($post['module_id'] ?? '') == '' && ($_GET['module_id'] ?? '') != '') {
+            $post['module_id'] = $_GET['module_id'];
+        }
+
+        $access = $this->canAccessApprovalDiscussion($post);
+        $message_text = trim($post['message_text'] ?? '');
+        $valError = $this->validateDiscussionPost($access, $message_text);
+        if ($valError !== null) {
+            return array('status' => 'error', 'message' => $valError);
+        }
+
+        return $this->insertDiscussionMessageRecord($post, $message_text);
+    }
+
+    public function getApprovalDiscussionNotifyUsers($get)
+    {
+        $company_id = $get['company_id'] ?? '';
+        $transaction_table = $get['transaction_table'] ?? '';
+        $transaction_id = $get['transaction_id'] ?? '';
+        return $this->collectApprovalDiscussionUsers($company_id, $transaction_table, $transaction_id, false);
+    }
+
+    public function sendApprovalDiscussionMobilePush($post, $sender_name, $message_text){
+        $push_sent = 0;
+        $push_messages = array();
+        $return = array();
+        $recipients = $this->getApprovalDiscussionNotifyUsers($post);
+        if (isset($recipients[$post['user_id']])) {
+            unset($recipients[$post['user_id']]);
+        }
+
+        if (count((array)$recipients) == 0) {
+            return $push_sent;
+        }
+
+        include_once "model/mobile_user.class.php";
+        $mobObj = new mobileUserClass();
+
+        $title = 'Approval Discussion';
+        $body = $sender_name . ': ' . $message_text;
+        if (strlen($body) > 120) {
+            $body = substr($body, 0, 117) . '...';
+        }
+
+        if (count((array)$recipients) > 0) {
+            foreach ($recipients as $recipient_id => $recipient_flag) {
+                $push_messages[] = $mobObj->tocallmobilenotificationmob(array(
+                    'company_id' => $post['company_id'],
+                    'user_id' => $recipient_id,
+                    'title' => $title,
+                    'message' => $body
+                ));
+                $push_sent++;
+            }
+        }
+        $return['push_messages'] = $push_messages;
+        $return['push_sent'] = $push_sent;
+
+        return $return;
+    }
+}
+
 class WebViewClass extends userClass implements WebViewConstants
 {
 
@@ -508,240 +772,7 @@ class WebViewClass extends userClass implements WebViewConstants
 
         return $return;
     }
-    private function collectApprovalDiscussionUsers($company_id, $transaction_table, $transaction_id, $include_roles = false)
-    {
-        global $callConfig;
-        $users = array();
-        if ($company_id == '' || $transaction_table == '' || $transaction_id == '') {
-            return $users;
-        }
+    use WebViewDiscussionTrait;
 
-        $transactionsql = "SELECT * FROM " . $transaction_table . " WHERE company_id = '" . $company_id . self::SQL_AND_ID_EQ . $transaction_id . "'" . self::SQL_AND_IS_ACTIVE_0;
-        $transactionres = $callConfig->getRow($transactionsql);
-        if (!$transactionres || empty($transactionres->id)) {
-            return $users;
-        }
-
-        if (!empty($transactionres->created_by)) {
-            $users[$transactionres->created_by] = 1;
-        }
-        if (!empty($transactionres->originator)) {
-            $users[$transactionres->originator] = 1;
-        }
-        if (!empty($transactionres->user_id)) {
-            $users[$transactionres->user_id] = 1;
-        }
-
-        $wfget = array(
-            'company_id' => $company_id,
-            'transaction_table' => $transaction_table,
-            'transaction_no' => $transaction_id,
-            'current_status' => $transactionres->current_status
-        );
-        $wfres = $this->getDynamicWorkFlowSteps($wfget);
-        if (!empty($wfres['transaction_owner_id'])) {
-            $users[$wfres['transaction_owner_id']] = 1;
-        }
-        if ($include_roles && !empty($wfres['application_user_module_roles'])) {
-            foreach ((array) $wfres['application_user_module_roles'] as $role_user_id => $role_name) {
-                $users[$role_user_id] = 1;
-            }
-        }
-
-        $talsql = "SELECT user_id, assigner_user_id FROM transaction_approval_logs WHERE company_id = '" . $company_id . self::SQL_AND_TRANSACTION_TABLE_EQ . $transaction_table . self::SQL_AND_TRANSACTION_ID_EQ . $transaction_id . "'";
-        $talres = $callConfig->getAllRows($talsql);
-        foreach ((array) $talres as $talrow) {
-            if (!empty($talrow->user_id)) {
-                $users[$talrow->user_id] = 1;
-            }
-            if (!empty($talrow->assigner_user_id)) {
-                $users[$talrow->assigner_user_id] = 1;
-            }
-        }
-
-        if (!empty($transactionres->employee_id)) {
-            $empsql = "SELECT user_id FROM employees WHERE company_id = '" . $company_id . self::SQL_AND_ID_EQ . $transactionres->employee_id . "'" . self::SQL_AND_IS_ACTIVE_0;
-            $empres = $callConfig->getRow($empsql);
-            if (!empty($empres->user_id)) {
-                $users[$empres->user_id] = 1;
-            }
-        }
-
-        $msgsql = "SELECT DISTINCT created_by FROM approval_discussion_messages WHERE company_id = '" . $company_id . self::SQL_AND_TRANSACTION_TABLE_EQ . $transaction_table . self::SQL_AND_TRANSACTION_ID_EQ . $transaction_id . "'" . self::SQL_AND_IS_ACTIVE_0;
-        $msgres = $callConfig->getAllRows($msgsql);
-        foreach ((array) $msgres as $msgrow) {
-            if (!empty($msgrow->created_by)) {
-                $users[$msgrow->created_by] = 1;
-            }
-        }
-
-        return $users;
-    }
-
-    public function canAccessApprovalDiscussion($get)
-    {
-        $return = array('can_view' => false, 'can_post' => false);
-        $company_id = $get['company_id'] ?? '';
-        $user_id = $get['user_id'] ?? '';
-        $transaction_table = $get['transaction_table'] ?? '';
-        $transaction_id = $get['transaction_id'] ?? '';
-
-        $allowed_users = $this->collectApprovalDiscussionUsers($company_id, $transaction_table, $transaction_id, true);
-        if (isset($allowed_users[$user_id])) {
-            $return['can_view'] = true;
-            $return['can_post'] = true;
-        }
-        return $return;
-    }
-
-    public function getApprovalDiscussionMessages($get){
-        global $callConfig;
-        $return = array('status' => 'success', 'can_view' => false, 'can_post' => false, 'messages' => array());
-
-        $access = $this->canAccessApprovalDiscussion($get);
-        $return['can_view'] = $access['can_view'];
-        $return['can_post'] = $access['can_post'];
-        if (!$access['can_view']) {
-            $return['status'] = 'error';
-            return $return;
-        }
-
-        $company_id = $get['company_id'];
-        $user_id = $get['user_id'];
-        $transaction_table = $get['transaction_table'];
-        $transaction_id = $get['transaction_id'];
-
-        $sql = "SELECT adm.id, adm.message_text, adm.created_date, adm.created_by, au.display_name AS sender_name
-            FROM approval_discussion_messages adm
-            LEFT JOIN application_users au ON au.id = adm.created_by AND au.company_id = adm.company_id AND au.is_active = 0
-            WHERE adm.company_id = '".$company_id."'
-            AND adm.transaction_table = '".$transaction_table."'
-            AND adm.transaction_id = '".$transaction_id."'
-            AND adm.is_active = 0";
-        if ($get['last_message_id'] != '') {
-            $sql .= " AND adm.id > '".$get['last_message_id']."'";
-        }
-        $sql .= " ORDER BY adm.id ASC";
-
-        $rows = $callConfig->getAllRows($sql);
-        $messages = array();
-        if (count((array)$rows) > 0) {
-            foreach ($rows as $row) {
-                $messages[] = array(
-                    'id' => $row->id,
-                    'message_text' => $row->message_text,
-                    'created_date' => $row->created_date,
-                    'created_by' => $row->created_by,
-                    'sender_name' => $row->sender_name != '' ? $row->sender_name : 'User',
-                    'is_current_user' => ($row->created_by == $user_id) ? 1 : 0
-                );
-            }
-        }
-        $return['messages'] = $messages;
-        return $return;
-    }
-
-    public function postApprovalDiscussionMessage($post)
-    {
-        global $callConfig;
-        $return = array('status' => 'error', 'message' => 'Unable to send message.');
-
-        $post['user_id'] = ($post['user_id'] != '') ? $post['user_id'] : ($_GET['user_id'] ?? '');
-        $post['company_id'] = ($post['company_id'] != '') ? $post['company_id'] : ($_GET['company_id'] ?? '');
-        if (($post['module_id'] ?? '') == '' && ($_GET['module_id'] ?? '') != '') {
-            $post['module_id'] = $_GET['module_id'];
-        }
-
-        $access = $this->canAccessApprovalDiscussion($post);
-        $message_text = trim($post['message_text'] ?? '');
-
-        if (!$access['can_post']) {
-            $return['message'] = 'You are not authorized to post in this discussion.';
-        } elseif ($message_text == '') {
-            $return['message'] = 'Message cannot be empty.';
-        } elseif (strlen($message_text) > 2000) {
-            $return['message'] = 'Message is too long (max 2000 characters).';
-        } else {
-            $insert_array = array(
-                'company_id' => $post['company_id'],
-                'module_id' => ($post['module_id'] != '') ? $post['module_id'] : null,
-                'transaction_table' => $post['transaction_table'],
-                'transaction_id' => $post['transaction_id'],
-                'message_text' => $message_text,
-                'is_active' => 0,
-                'created_by' => $post['user_id'],
-                'created_date' => date(self::DATE_FORMAT_HIS)
-            );
-            $res = $callConfig->insertRecord('approval_discussion_messages', $insert_array);
-            if ($res['status'] != 'sucess') {
-                $return['message'] = 'Failed to save message.';
-            } else {
-                $last_id = $res['LASTID'];
-                $usersql = "SELECT display_name FROM application_users WHERE id = '" . $post['user_id'] . "' AND company_id = '" . $post['company_id'] . "'" . self::SQL_AND_IS_ACTIVE_0;
-                $userres = $callConfig->getRow($usersql);
-                $sender_name = !empty($userres->display_name) ? $userres->display_name : 'User';
-
-                $return['push_sent'] = $this->sendApprovalDiscussionMobilePush($post, $sender_name, $message_text);
-                $return['status'] = 'success';
-                $return['message'] = 'Message sent.';
-                $return['data'] = array(
-                    'id' => $last_id,
-                    'message_text' => $message_text,
-                    'created_date' => $insert_array['created_date'],
-                    'created_by' => $post['user_id'],
-                    'sender_name' => $sender_name,
-                    'is_current_user' => 1
-                );
-            }
-        }
-        return $return;
-    }
-
-    public function getApprovalDiscussionNotifyUsers($get)
-    {
-        $company_id = $get['company_id'] ?? '';
-        $transaction_table = $get['transaction_table'] ?? '';
-        $transaction_id = $get['transaction_id'] ?? '';
-        return $this->collectApprovalDiscussionUsers($company_id, $transaction_table, $transaction_id, false);
-    }
-
-    public function sendApprovalDiscussionMobilePush($post, $sender_name, $message_text){
-        $push_sent = 0;
-        $push_messages = array();
-        $return = array();
-        $recipients = $this->getApprovalDiscussionNotifyUsers($post);
-        if (isset($recipients[$post['user_id']])) {
-            unset($recipients[$post['user_id']]);
-        }
-
-        if (count((array)$recipients) == 0) {
-            return $push_sent;
-        }
-
-        include_once "model/mobile_user.class.php";
-        $mobObj = new mobileUserClass();
-
-        $title = 'Approval Discussion';
-        $body = $sender_name . ': ' . $message_text;
-        if (strlen($body) > 120) {
-            $body = substr($body, 0, 117) . '...';
-        }
-
-        if (count((array)$recipients) > 0) {
-            foreach ($recipients as $recipient_id => $recipient_flag) {
-                $push_messages[] = $mobObj->tocallmobilenotificationmob(array(
-                    'company_id' => $post['company_id'],
-                    'user_id' => $recipient_id,
-                    'title' => $title,
-                    'message' => $body
-                ));
-                $push_sent++;
-            }
-        }
-        $return['push_messages'] = $push_messages;
-        $return['push_sent'] = $push_sent;
-
-        return $return;
-    }
 
 }
