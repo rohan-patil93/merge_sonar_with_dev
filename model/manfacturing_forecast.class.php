@@ -1,410 +1,18 @@
 <?php
-class manfacturingForecastUserClass extends userClass
+
+interface ManufacturingForecastConstants
 {
-    public function getmanufacturingforecastedata($get)
-    {
-        global $callConfig;
-        $return = array();
-        $company_id = intval($get['company_id']);
-        $year = intval($get['year']);
-
-        $itemsQuery = "SELECT id AS product_id, item_name FROM items WHERE company_id='{$company_id}' AND stocking_type='F' AND is_active=0 ORDER BY item_name ASC";
-        $items = $callConfig->getAllRows($itemsQuery);
-
-        $headerQuery = "SELECT * FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}' AND is_active=0 LIMIT 1";
-        $forecastHeader = $callConfig->getRow($headerQuery);
-        $forecastHeaderId = !empty($forecastHeader->id) ? intval($forecastHeader->id) : 0;
-
-        if ($forecastHeaderId > 0) {
-            $forecastQuery = "SELECT * FROM manufacturing_forecast_items WHERE company_id='{$company_id}' AND manufacturing_forecast_id='{$forecastHeaderId}' AND is_active=0";
-        } else {
-            $forecastQuery = "SELECT * FROM manufacturing_forecast_items WHERE company_id='{$company_id}' AND year='{$year}' AND is_active=0";
-        }
-        $forecastRows = $callConfig->getAllRows($forecastQuery);
-        $return['forecast_status'] = '';
-        $return['forecast_transaction_id'] = '';
-        $return['forecast_no'] = '';
-        $return['forecast_date'] = date('Y-m-d');
-        $return['remarks'] = '';
-        $return['forecast_header'] = array();
-        if ($forecastHeaderId > 0) {
-            $forecastHeaderArray = (array) $forecastHeader;
-            $return['forecast_header'] = $forecastHeaderArray;
-            $return['forecast_status'] = $forecastHeaderArray['current_status'] ?? '';
-            $return['forecast_transaction_id'] = $forecastHeaderArray['id'] ?? '';
-            $return['forecast_no'] = $forecastHeaderArray['forecast_no'] ?? '';
-            $return['forecast_date'] = $forecastHeaderArray['forecast_date'] ?? date('Y-m-d');
-            $return['remarks'] = $forecastHeaderArray['remarks'] ?? '';
-        }
-
-        $forecastMap = array();
-        foreach ((array) $forecastRows as $forecast) {
-            $forecastMap[$forecast->product_id] = (array) $forecast;
-        }
-
-        $data = array();
-        foreach ((array) $items as $item) {
-            $itemArray = (array) $item;
-            $row = isset($forecastMap[$item->product_id]) ? $forecastMap[$item->product_id] : array();
-            $row['product_id'] = $item->product_id;
-            $row['item_name'] = $item->item_name;
-            for ($i = 1; $i <= 12; $i++) {
-                $key = "forecast_month_" . $i;
-                if (!isset($row[$key])) {
-                    $row[$key] = 0;
-                }
-            }
-            $data[] = array_merge($itemArray, $row);
-        }
-
-        $return['data'] = $data;
-        $return['forecast_rows'] = $forecastRows;
-
-        return $return;
-    }
-
-    public function insertandupdatemanufacturingforecaste($get, $post)
-    {
-        global $callConfig;
-        $return = array();
-        $return['post'] = $post;
-        $return['get'] = $get;
-
-        $company_id = intval($get['company_id']);
-        $user_id = intval($get['user_id']);
-        $year = intval($post['year'] ?? 0);
-        $forecast_date = !empty($post['forecast_date']) ? $this->dateconvertdbformat($post['forecast_date']) : date('Y-m-d');
-        $remarks = trim($post['remarks'] ?? '');
-
-        if ($year == 0 || empty($post['rows']) || !is_array($post['rows'])) {
-            return array(array('status' => 'fail', 'message' => 'Forecast year and product rows are required.'));
-        }
-
-        $activeProducts = array();
-        $products = $callConfig->getAllRows("SELECT id FROM items WHERE company_id='{$company_id}' AND stocking_type='F' AND is_active=0");
-        foreach ((array) $products as $product) {
-            $activeProducts[$product->id] = $product->id;
-        }
-
-        $forecastHeader = $callConfig->getRow("SELECT * FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}' AND is_active=0 LIMIT 1");
-        $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
-        if (!empty($forecastHeader->id) && !in_array($forecastHeader->current_status, $editableStatuses)) {
-            return array(array('status' => 'fail', 'message' => 'Approved forecast cannot be edited.'));
-        }
-
-        if (!empty($forecastHeader->id)) {
-            $forecastHeaderId = intval($forecastHeader->id);
-            $headerRecord = array(
-                'forecast_date' => $forecast_date,
-                'remarks' => $remarks,
-                'updated_by' => $user_id,
-                'updated_date' => date('Y-m-d H:i:s')
-            );
-            $return['forecast_header'] = $callConfig->updateRecord('manufacturing_forecast', $headerRecord, 'id', $forecastHeaderId);
-        } else {
-            $forecastNo = $this->toGetApplicationSerialNumber('manufacturing_forecast', array(
-                'company_id' => $company_id,
-                'user_id' => $user_id,
-                'transaction_date' => $forecast_date
-            ));
-            $headerRecord = array(
-                'company_id' => $company_id,
-                'forecast_no' => $forecastNo,
-                'forecast_date' => $forecast_date,
-                'year' => $year,
-                'remarks' => $remarks,
-                'is_active' => 0,
-                'current_status' => 0,
-                'created_by' => $user_id,
-                'created_date' => date('Y-m-d H:i:s')
-            );
-            $headerResult = $callConfig->insertRecord('manufacturing_forecast', $headerRecord);
-            if (($headerResult['status'] ?? '') != 'sucess') {
-                return array(array('status' => 'fail', 'message' => 'Unable to create forecast header.'));
-            }
-            $forecastHeaderId = intval($headerResult['LASTID']);
-            $return['forecast_header'] = $headerResult;
-        }
-
-        $existingRecords = $callConfig->getAllRows("SELECT id, product_id FROM manufacturing_forecast_items WHERE company_id='{$company_id}' AND (manufacturing_forecast_id='{$forecastHeaderId}' OR (year='{$year}' AND (manufacturing_forecast_id IS NULL OR manufacturing_forecast_id=0))) AND is_active=0");
-
-        $existingMap = array();
-        if (!empty($existingRecords) && is_array($existingRecords)) {
-            foreach ($existingRecords as $r) {
-                $existingMap[$r->product_id] = $r->id;
-            }
-        }
-
-        foreach ($post['rows'] as $product_id => $row) {
-            $product_id = intval($product_id);
-            if (!isset($activeProducts[$product_id])) {
-                return array(array('status' => 'fail', 'message' => 'Invalid finished good item selected.'));
-            }
-            $record = [
-                'manufacturing_forecast_id' => $forecastHeaderId,
-                'company_id' => $company_id,
-                'year' => $year,
-                'product_id' => $product_id,
-                'interval_type' => 'monthly',
-                'remarks' => $remarks,
-                'current_status' => 0,
-                'is_active' => 0
-            ];
-
-            $total = 0;
-            for ($i = 1; $i <= 12; $i++) {
-                $key = "forecast_month_$i";
-                $rawValue = $row[$key] ?? '';
-                if ($rawValue === '' || !is_numeric($rawValue)) {
-                    return array(array('status' => 'fail', 'message' => 'Forecast quantity must be numeric.'));
-                }
-                $val = floatval($rawValue);
-                if ($val < 0) {
-                    return array(array('status' => 'fail', 'message' => 'Forecast quantity cannot be negative.'));
-                }
-                $record[$key] = $val;
-                $total += $val;
-            }
-
-            $record['forecast_quarterly_1'] = $record['forecast_month_1'] + $record['forecast_month_2'] + $record['forecast_month_3'];
-            $record['forecast_quarterly_2'] = $record['forecast_month_4'] + $record['forecast_month_5'] + $record['forecast_month_6'];
-            $record['forecast_quarterly_3'] = $record['forecast_month_7'] + $record['forecast_month_8'] + $record['forecast_month_9'];
-            $record['forecast_quarterly_4'] = $record['forecast_month_10'] + $record['forecast_month_11'] + $record['forecast_month_12'];
-            $record['forecast_yearly'] = $total;
-            $record['total_forecast'] = $total;
-
-
-            if (isset($existingMap[$product_id])) {
-                $record['updated_by'] = $user_id;
-                $record['updated_date'] = date('Y-m-d H:i:s');
-                $return['forecast_rows'][] = $callConfig->updateRecord('manufacturing_forecast_items', $record, 'id', $existingMap[$product_id]);
-            } else {
-                $record['created_by'] = $user_id;
-                $record['created_date'] = date('Y-m-d H:i:s');
-                $return['forecast_rows'][] = $callConfig->insertRecord('manufacturing_forecast_items', $record);
-            }
-        }
-        return array(array('status' => 'sucess', 'LASTID' => $forecastHeaderId, 'message' => 'Forecast saved successfully.'));
-
-    }
-
-    public function getmanufacturingfirmordersdata($get)
-    {
-        global $callConfig;
-        $return = array();
-        $company_id = intval($get['company_id']);
-        $year = intval($get['year'] ?? 0);
-        $month = intval($get['month'] ?? 0);
-        $return['data'] = array();
-        $return['firm_order_id'] = '';
-        $return['firm_order_status'] = '';
-        $return['firm_order_no'] = '';
-        $return['firm_order_date'] = date('Y-m-d');
-        $return['remarks'] = '';
-        $return['message'] = '';
-
-        if ($year == 0 || $month < 1 || $month > 12) {
-            $return['message'] = 'Please select a valid year and month.';
-            return $return;
-        }
-
-        $selectedDate = date("Y-m-d", strtotime($year . "-" . $month . "-01"));
-        $yearMonth = date("Y-m", strtotime($selectedDate));
-        $monthDates = array();
-        for ($i = 0; $i < 3; $i++) {
-            $monthDates[$i + 1] = date("Y-m", strtotime($selectedDate . " +{$i} month"));
-        }
-
-        $header = $callConfig->getRow("SELECT * FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$yearMonth}' AND is_active=0 LIMIT 1");
-        if (!empty($header->id)) {
-            $return['firm_order_id'] = $header->id;
-            $return['firm_order_status'] = $header->current_status;
-            $return['firm_order_no'] = $header->firm_order_no;
-            $return['firm_order_date'] = $header->firm_order_date;
-            $return['remarks'] = $header->remarks;
-            $query = "SELECT item.id, item.product_id, item.firm_month_1, item.firm_qty_1, item.firm_month_2, item.firm_qty_2, item.firm_month_3, item.firm_qty_3, i.item_name, item.current_status
-                FROM manufacturing_firm_order_items item
-                INNER JOIN items i ON i.company_id=item.company_id AND i.id=item.product_id AND i.is_active=0
-                WHERE item.company_id='{$company_id}' AND item.manufacturing_firm_order_id='{$header->id}' AND item.is_active=0
-                ORDER BY i.item_name ASC";
-            $return['data'] = $callConfig->getAllRows($query);
-            return $return;
-        }
-
-        if ($month == 1) {
-            $forecastHeader = $callConfig->getRow("SELECT id FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}' AND current_status=" . ST_APPROVED . " AND is_active=0 LIMIT 1");
-            if (empty($forecastHeader->id)) {
-                $return['message'] = 'Please approve the ' . $year . ' manufacturing forecast before creating firm orders.';
-                return $return;
-            }
-            $query = "SELECT fi.product_id, i.item_name, fi.forecast_month_1 AS firm_qty_1, fi.forecast_month_2 AS firm_qty_2, fi.forecast_month_3 AS firm_qty_3,
-                    '{$monthDates[1]}' AS firm_month_1, '{$monthDates[2]}' AS firm_month_2, '{$monthDates[3]}' AS firm_month_3
-                FROM manufacturing_forecast_items fi
-                INNER JOIN items i ON i.company_id=fi.company_id AND i.id=fi.product_id AND i.stocking_type='F' AND i.is_active=0
-                WHERE fi.company_id='{$company_id}' AND fi.manufacturing_forecast_id='{$forecastHeader->id}' AND fi.is_active=0
-                ORDER BY i.item_name ASC";
-            $return['data'] = $callConfig->getAllRows($query);
-            return $return;
-        }
-
-        $previousYearMonth = date("Y-m", strtotime($selectedDate . " -1 month"));
-        $previousHeader = $callConfig->getRow("SELECT id FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$previousYearMonth}' AND current_status=" . ST_APPROVED . " AND is_active=0 LIMIT 1");
-        if (empty($previousHeader->id)) {
-            $return['message'] = 'Please approve the ' . date('F Y', strtotime($previousYearMonth . '-01')) . ' firm order before creating ' . date('F Y', strtotime($selectedDate)) . '.';
-            return $return;
-        }
-
-        $thirdDate = strtotime($selectedDate . " +2 month");
-        $thirdYear = intval(date('Y', $thirdDate));
-        $thirdMonth = intval(date('n', $thirdDate));
-        $thirdForecastField = "forecast_month_" . $thirdMonth;
-        $thirdForecastHeader = $callConfig->getRow("SELECT id FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$thirdYear}' AND current_status=" . ST_APPROVED . " AND is_active=0 LIMIT 1");
-        if (empty($thirdForecastHeader->id)) {
-            $return['message'] = 'Please approve the ' . $thirdYear . ' manufacturing forecast before creating this firm order.';
-            return $return;
-        }
-
-        $query = "SELECT prev.product_id, i.item_name, prev.firm_qty_2 AS firm_qty_1, prev.firm_qty_3 AS firm_qty_2, IFNULL(fi.{$thirdForecastField},0) AS firm_qty_3,
-                '{$monthDates[1]}' AS firm_month_1, '{$monthDates[2]}' AS firm_month_2, '{$monthDates[3]}' AS firm_month_3
-            FROM manufacturing_firm_order_items prev
-            INNER JOIN items i ON i.company_id=prev.company_id AND i.id=prev.product_id AND i.stocking_type='F' AND i.is_active=0
-            LEFT JOIN manufacturing_forecast_items fi ON fi.company_id=prev.company_id AND fi.product_id=prev.product_id AND fi.manufacturing_forecast_id='{$thirdForecastHeader->id}' AND fi.is_active=0
-            WHERE prev.company_id='{$company_id}' AND prev.manufacturing_firm_order_id='{$previousHeader->id}' AND prev.is_active=0
-            ORDER BY i.item_name ASC";
-        $return['data'] = $callConfig->getAllRows($query);
-
-        return $return;
-    }
-    public function insertandupdatemanufacturingfirmorder($get, $post)
-    {
-        global $callConfig;
-        $return = array();
-        $company_id = intval($get['company_id']);
-        $user_id = intval($get['user_id']);
-        $year = intval($post['year'] ?? 0);
-        $month = intval($post['month'] ?? 0);
-        $firmOrderDate = !empty($post['firm_order_date']) ? $this->dateconvertdbformat($post['firm_order_date']) : date('Y-m-d');
-        $remarks = trim($post['remarks'] ?? '');
-
-        if ($year == 0 || $month < 1 || $month > 12 || empty($post['rows']) || !is_array($post['rows'])) {
-            return array('data' => array(array('status' => 'fail', 'message' => 'Firm order year, month, and product rows are required.')));
-        }
-
-        $new_date = date("Y-m-d", strtotime($year . "-" . $month . "-01"));
-        $m_y = date("Y-m", strtotime($new_date));
-        $n_y = date("Y-m", strtotime($new_date . " +1 month"));
-        $p_y = date("Y-m", strtotime($new_date . " +2 month"));
-
-        $firmOrder = $callConfig->getRow("SELECT * FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$m_y}' AND is_active=0 LIMIT 1");
-        $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
-        if (!empty($firmOrder->id) && !in_array($firmOrder->current_status, $editableStatuses)) {
-            return array('data' => array(array('status' => 'fail', 'message' => 'Approved firm order cannot be edited.')));
-        }
-
-        if ($month == 1) {
-            $forecastYear = $year;
-        } else {
-            $forecastYear = intval(date('Y', strtotime($new_date . " +2 month")));
-        }
-        $forecastCheck = $callConfig->getRow("SELECT id FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$forecastYear}' AND current_status=" . ST_APPROVED . " AND is_active=0 LIMIT 1");
-        if (empty($forecastCheck->id)) {
-            return array('data' => array(array('status' => 'fail', 'message' => 'Approved forecast is required before saving this firm order.')));
-        }
-
-        if ($month > 1) {
-            $previousYearMonth = date("Y-m", strtotime($new_date . " -1 month"));
-            $previousFirmOrder = $callConfig->getRow("SELECT id FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$previousYearMonth}' AND current_status=" . ST_APPROVED . " AND is_active=0 LIMIT 1");
-            if (empty($previousFirmOrder->id)) {
-                return array('data' => array(array('status' => 'fail', 'message' => 'Previous month firm order must be approved first.')));
-            }
-        }
-
-        if (!empty($firmOrder->id)) {
-            $firmOrderId = intval($firmOrder->id);
-            $headerRecord = array(
-                'firm_order_date' => $firmOrderDate,
-                'remarks' => $remarks,
-                'updated_by' => $user_id,
-                'updated_date' => date('Y-m-d H:i:s')
-            );
-            $return['firm_order'] = $callConfig->updateRecord('manufacturing_firm_orders', $headerRecord, 'id', $firmOrderId);
-        } else {
-            $firmOrderNo = $this->toGetApplicationSerialNumber('manufacturing_firm_orders', array(
-                'company_id' => $company_id,
-                'user_id' => $user_id,
-                'transaction_date' => $firmOrderDate
-            ));
-            $headerRecord = array(
-                'company_id' => $company_id,
-                'firm_order_no' => $firmOrderNo,
-                'firm_order_date' => $firmOrderDate,
-                '`year_month`' => $m_y,
-                'remarks' => $remarks,
-                'is_active' => 0,
-                'current_status' => 0,
-                'created_by' => $user_id,
-                'created_date' => date('Y-m-d H:i:s')
-            );
-            $headerResult = $callConfig->insertRecord('manufacturing_firm_orders', $headerRecord);
-            if (($headerResult['status'] ?? '') != 'sucess') {
-                return array('data' => array(array('status' => 'fail', 'message' => 'Unable to create firm order.')));
-            }
-            $firmOrderId = intval($headerResult['LASTID']);
-            $return['firm_order'] = $headerResult;
-        }
-
-        $activeProducts = array();
-        $products = $callConfig->getAllRows("SELECT id FROM items WHERE company_id='{$company_id}' AND stocking_type='F' AND is_active=0");
-        foreach ((array) $products as $product) {
-            $activeProducts[$product->id] = $product->id;
-        }
-
-        $existingRows = $callConfig->getAllRows("SELECT id, product_id FROM manufacturing_firm_order_items WHERE company_id='{$company_id}' AND manufacturing_firm_order_id='{$firmOrderId}' AND is_active=0");
-        $existingMap = array();
-        foreach ((array) $existingRows as $existingRow) {
-            $existingMap[$existingRow->product_id] = $existingRow->id;
-        }
-
-        foreach ($post['rows'] as $product_id => $row) {
-            $product_id = intval($product_id);
-            if (!isset($activeProducts[$product_id])) {
-                return array('data' => array(array('status' => 'fail', 'message' => 'Invalid finished good item selected.')));
-            }
-            for ($i = 1; $i <= 3; $i++) {
-                if (($row["firm_qty_$i"] ?? '') === '' || !is_numeric($row["firm_qty_$i"])) {
-                    return array('data' => array(array('status' => 'fail', 'message' => 'Firm order quantity must be numeric.')));
-                }
-                if (floatval($row["firm_qty_$i"]) < 0) {
-                    return array('data' => array(array('status' => 'fail', 'message' => 'Firm order quantity cannot be negative.')));
-                }
-            }
-            $record = [
-                'manufacturing_firm_order_id' => $firmOrderId,
-                'company_id' => $company_id,
-                '`year_month`' => $m_y,
-                'product_id' => $product_id,
-                'firm_month_1' => $m_y,
-                'firm_qty_1' => floatval($row['firm_qty_1']),
-                'firm_month_2' => $n_y,
-                'firm_qty_2' => floatval($row['firm_qty_2']),
-                'firm_month_3' => $p_y,
-                'firm_qty_3' => floatval($row['firm_qty_3']),
-                'current_status' => '0',
-                'is_active' => 0
-            ];
-            if (isset($existingMap[$product_id])) {
-                $record['updated_by'] = $user_id;
-                $record['updated_date'] = date('Y-m-d H:i:s');
-                $return['firm_order_items'][] = $callConfig->updateRecord('manufacturing_firm_order_items', $record, 'id', $existingMap[$product_id]);
-            } else {
-                $record['created_by'] = $user_id;
-                $record['created_date'] = date('Y-m-d H:i:s');
-                $return['firm_order_items'][] = $callConfig->insertRecord('manufacturing_firm_order_items', $record);
-            }
-        }
-        $return['data'][] = array('status' => 'sucess', 'LASTID' => $firmOrderId, 'message' => 'Firm order saved successfully.');
-        return $return;
-    }
+    public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
+    public const AND_ACTIVE_LIMIT_1 = ' AND is_active=0 LIMIT 1';
+    public const PLEASE_APPROVE = 'Please approve the ';
+    public const PLUS_2_MONTH = ' +2 month';
+    public const LIMIT_8 = 'LIMIT 8';
+    public const AND_IS_ACTIVE_0 = "' AND is_active = 0";
+    public const ERR_WO_COMPANY_REQUIRED = 'Work Order ID and Company ID are required';
+    public const ERR_WO_NOT_FOUND = 'Work Order not found';
+}
+trait ManufacturingForecastDashboardTrait
+{
     public function getmfgdashboarddetails($get)
     {
         global $callConfig;
@@ -456,6 +64,8 @@ class manfacturingForecastUserClass extends userClass
                     $summary['fg']['count']++;
                     $summary['fg']['total'] += $qty;
                     break;
+                default:
+                    break;
             }
 
             if ($qty < $check) {
@@ -481,7 +91,7 @@ class manfacturingForecastUserClass extends userClass
     public function getmfgadmindashboarddetails($get)
     {
         $company_id = intval($get['company_id']);
-        $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, '', "ORDER BY exception_rank ASC, w.planned_end_date ASC, w.transaction_date DESC, w.id DESC", "LIMIT 8");
+        $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, '', "ORDER BY exception_rank ASC, w.planned_end_date ASC, w.transaction_date DESC, w.id DESC", ManufacturingForecastConstants::LIMIT_8);
         $allWorkOrders = $this->getManufacturingDashboardWorkOrders($company_id, '', '', '');
         $production = $this->buildManufacturingProductionStatusSummary($allWorkOrders);
         $approval = $this->getManufacturingApprovalStatusSummary($company_id);
@@ -522,7 +132,7 @@ class manfacturingForecastUserClass extends userClass
     {
         $company_id = intval($get['company_id']);
         $planningWhere = " AND IFNULL(w.work_log_status, -1) != 199 ";
-        $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, $planningWhere, "ORDER BY planning_risk_rank ASC, w.planned_start_date ASC, w.planned_end_date ASC, w.id DESC", "LIMIT 8");
+        $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, $planningWhere, "ORDER BY planning_risk_rank ASC, w.planned_start_date ASC, w.planned_end_date ASC, w.id DESC", ManufacturingForecastConstants::LIMIT_8);
         $allPlanningWorkOrders = $this->getManufacturingDashboardWorkOrders($company_id, $planningWhere, '', '');
         $conversion = $this->getManufacturingPlanningConversionSummary($company_id);
         $material = $this->getManufacturingMaterialDashboardSummary($company_id, $planningWhere);
@@ -563,7 +173,7 @@ class manfacturingForecastUserClass extends userClass
     {
         $company_id = intval($get['company_id']);
         $supervisorWhere = " AND (w.work_log_status IN (0,1) OR w.planned_start_date <= CURDATE() OR DATE(w.actual_start_date) = CURDATE()) AND IFNULL(w.work_log_status, -1) != 199 ";
-        $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, $supervisorWhere, "ORDER BY supervisor_rank ASC, w.planned_start_date ASC, w.id DESC", "LIMIT 8");
+        $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, $supervisorWhere, "ORDER BY supervisor_rank ASC, w.planned_start_date ASC, w.id DESC", ManufacturingForecastConstants::LIMIT_8);
         $activeWorkOrders = $this->getManufacturingDashboardWorkOrders($company_id, $supervisorWhere, '', '');
         $production = $this->buildManufacturingProductionStatusSummary($activeWorkOrders);
         $material = $this->getManufacturingMaterialDashboardSummary($company_id, $supervisorWhere);
@@ -880,7 +490,10 @@ class manfacturingForecastUserClass extends userClass
         }
         return $values;
     }
+}
 
+trait ManufacturingForecastReportsTrait
+{
     public function getManufacturingProductionSummaryReport($get)
     {
         global $callConfig;
@@ -1179,7 +792,10 @@ class manfacturingForecastUserClass extends userClass
         return $summary;
     }
 
-    // added by koti start
+}
+
+trait ManufacturingForecastProductNotesTrait
+{
     public function getmanufacturingworkordersdetails($get)
     {
         global $callConfig;
@@ -1251,120 +867,116 @@ class manfacturingForecastUserClass extends userClass
     }
     public function insertmanufacturingproductnote($get, $post)
     {
-        global $callConfig;
-        $return = array();
         $company_id = $get['company_id'] ?? $post['company_id'] ?? 0;
         $user_id = $get['user_id'] ?? $post['created_by'] ?? $post['user_id'] ?? 0;
         $note_id = intval($post['production_note_id'] ?? 0);
-        $skip_work_order_updates = !empty($post['skip_work_order_updates']);
         $validation = $this->validateManufacturingProductNote($company_id, $post, $note_id);
         if ($validation['status'] != 'success') {
             return array(array('status' => 'fail', 'message' => $validation['message']));
         }
-        // ===== CASE 1: UPDATE EXISTING RECORD =====
         if ($note_id > 0) {
-            // --- Update master record ---
-            $record = array(
-                'request_qty' => floatval($post['request_qty']),
-                'produced_qty' => floatval($post['produced_qty']),
-                'wastage_qty' => floatval($post['wastage_qty']),
-                'remarks' => $post['remarks'],
-                'updated_by' => $user_id,
-                'updated_date' => date('Y-m-d H:i:s')
-            );
-
-            $callConfig->updateRecord('manufacturing_product_notes', $record, 'id', $note_id);
-            // --- Soft delete existing child records ---
-            // $callConfig->executeQuery("UPDATE manufacturing_product_note_items
-            //                    SET is_active = NULL
-            //                    WHERE company_id = '{$company_id}'
-            //                    AND transaction_id = '{$note_id}'");
-            // --- Reinsert / Update child items ---
-            if (!empty($post['note_items']) && is_array($post['note_items'])) {
-                foreach ($post['note_items'] as $row) {
-                    $item_id = intval($row['id'] ?? 0);
-                    $child = array(
-                        'received_qty' => floatval($row['received_qty']),
-                        'produced_qty' => floatval($row['produced_qty']),
-                        'wastage_qty' => floatval($row['wastage_qty']),
-                        'updated_by' => $user_id,
-                        'updated_date' => date('Y-m-d H:i:s')
-                    );
-                    // --- Update existing item record ---
-                    $callConfig->updateRecord('manufacturing_product_note_items', $child, 'id', $item_id);
-                }
-            }
-            $return[] = array('status' => 'success', 'message' => 'Product Note updated successfully');
+            return $this->updateManufacturingProductNoteRecord($company_id, $user_id, $note_id, $post);
         }
-        // ===== CASE 2: INSERT NEW RECORD =====
-        else {
-            $whr = "application_table_name = 'manufacturing_product_notes' ";
-            $query = $callConfig->selectQuery(TBL_APPLICATION_SERIAL_NUMBERS, '*', $whr, '', '', '');
-            $query_res = $callConfig->getRow($query);
-            $res = $query_res;
-            $le = $res->doc_no_length;
-            $var = "%0" . $le . "d";
-            $data = $res->pre_fix . sprintf($var, $res->serial_number + 1) . $res->post_fix;
-            $return['serialCode'] = trim($data);
+        return $this->insertManufacturingProductNoteRecord($company_id, $user_id, $post);
+    }
 
-            $transaction_no = trim($data);
-            // ===== Insert into manufacturing_product_notes (Master) =====
-            $record = array(
-                'company_id' => $company_id,
-                'transaction_no' => $transaction_no,
-                'transaction_date' => date('Y-m-d'),
-                'work_order_id' => $post['work_order_id'],
-                'item_id' => $post['item_id'],
-                'request_qty' => floatval($post['request_qty']),
-                'produced_qty' => floatval($post['produced_qty']),
-                'wastage_qty' => floatval($post['wastage_qty']),
-                'remarks' => $post['remarks'],
-                'is_active' => 0,
-                'current_status' => ST_APPROVED,
-                'created_by' => $user_id,
-                'created_date' => date('Y-m-d H:i:s')
-            );
+    private function updateManufacturingProductNoteRecord($company_id, $user_id, $note_id, $post)
+    {
+        global $callConfig;
+        $record = array(
+            'request_qty' => floatval($post['request_qty']),
+            'produced_qty' => floatval($post['produced_qty']),
+            'wastage_qty' => floatval($post['wastage_qty']),
+            'remarks' => $post['remarks'],
+            'updated_by' => $user_id,
+            'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+        );
+        $callConfig->updateRecord('manufacturing_product_notes', $record, 'id', $note_id);
 
-            $result = $callConfig->insertRecord('manufacturing_product_notes', $record);
-            $return[] = $result;
-            $note_id = $result['LASTID'];
-            $return['product_note_id'] = $note_id;
-
-            if (isset($res->id)) {
-                $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $res->serial_number + 1), 'id', $res->id);
+        if (!empty($post['note_items']) && is_array($post['note_items'])) {
+            foreach ($post['note_items'] as $row) {
+                $item_id = intval($row['id'] ?? 0);
+                $child = array(
+                    'received_qty' => floatval($row['received_qty']),
+                    'produced_qty' => floatval($row['produced_qty']),
+                    'wastage_qty' => floatval($row['wastage_qty']),
+                    'updated_by' => $user_id,
+                    'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+                );
+                $callConfig->updateRecord('manufacturing_product_note_items', $child, 'id', $item_id);
             }
-            // ===== Insert into manufacturing_product_note_items (Child Loop) =====
-            if (count((array) $post['note_items']) > 0) {
-                foreach ($post['note_items'] as $row) {
-                    $child = array(
-                        'company_id' => $company_id,
-                        'transaction_id' => $note_id,
-                        'work_order_id' => $post['work_order_id'],
-                        'item_id' => $row['item_id'],
-                        'received_qty' => floatval($row['received_qty']),
-                        'produced_qty' => floatval($row['produced_qty']),
-                        'wastage_qty' => floatval($row['wastage_qty']),
-                        'is_active' => 0,
-                        'current_status' => ST_APPROVED,
-                        'created_by' => $user_id,
-                        'created_date' => date('Y-m-d H:i:s')
-                    );
+        }
+        return array(array('status' => 'success', 'message' => 'Product Note updated successfully'));
+    }
 
-                    $res = $callConfig->insertRecord('manufacturing_product_note_items', $child);
-                    $return[] = $res;
-                }
+    private function insertManufacturingProductNoteRecord($company_id, $user_id, $post)
+    {
+        global $callConfig;
+        $return = array();
+        $skip_work_order_updates = !empty($post['skip_work_order_updates']);
+        $whr = "application_table_name = 'manufacturing_product_notes' ";
+        $query = $callConfig->selectQuery(TBL_APPLICATION_SERIAL_NUMBERS, '*', $whr, '', '', '');
+        $res = $callConfig->getRow($query);
+        $le = $res->doc_no_length;
+        $var = "%0" . $le . "d";
+        $data = $res->pre_fix . sprintf($var, $res->serial_number + 1) . $res->post_fix;
+        $return['serialCode'] = trim($data);
+        $transaction_no = trim($data);
+
+        $record = array(
+            'company_id' => $company_id,
+            'transaction_no' => $transaction_no,
+            'transaction_date' => date('Y-m-d'),
+            'work_order_id' => $post['work_order_id'],
+            'item_id' => $post['item_id'],
+            'request_qty' => floatval($post['request_qty']),
+            'produced_qty' => floatval($post['produced_qty']),
+            'wastage_qty' => floatval($post['wastage_qty']),
+            'remarks' => $post['remarks'],
+            'is_active' => 0,
+            'current_status' => ST_APPROVED,
+            'created_by' => $user_id,
+            'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+        );
+
+        $result = $callConfig->insertRecord('manufacturing_product_notes', $record);
+        $return[] = $result;
+        $note_id = $result['LASTID'];
+        $return['product_note_id'] = $note_id;
+
+        if (isset($res->id)) {
+            $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $res->serial_number + 1), 'id', $res->id);
+        }
+
+        if (count((array) $post['note_items']) > 0) {
+            foreach ($post['note_items'] as $row) {
+                $child = array(
+                    'company_id' => $company_id,
+                    'transaction_id' => $note_id,
+                    'work_order_id' => $post['work_order_id'],
+                    'item_id' => $row['item_id'],
+                    'received_qty' => floatval($row['received_qty']),
+                    'produced_qty' => floatval($row['produced_qty']),
+                    'wastage_qty' => floatval($row['wastage_qty']),
+                    'is_active' => 0,
+                    'current_status' => ST_APPROVED,
+                    'created_by' => $user_id,
+                    'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+                );
+                $resChild = $callConfig->insertRecord('manufacturing_product_note_items', $child);
+                $return[] = $resChild;
             }
+        }
 
-            if (($post['qc_required'] ?? '0') == '1') {
-                $this->saveManufacturingProductNoteQcHeader($company_id, $user_id, $note_id, $post['remarks'] ?? '');
-            }
+        if (($post['qc_required'] ?? '0') == '1') {
+            $this->saveManufacturingProductNoteQcHeader($company_id, $user_id, $note_id, $post['remarks'] ?? '');
+        }
 
-            $this->saveManufacturingProductNoteSerialLot($company_id, $user_id, $note_id, intval($post['item_id']), $post);
-            $return['inventory_posting'] = $this->postManufacturingProductNoteInventory($company_id, $user_id, $note_id, $post);
+        $this->saveManufacturingProductNoteSerialLot($company_id, $user_id, $note_id, intval($post['item_id']), $post);
+        $return['inventory_posting'] = $this->postManufacturingProductNoteInventory($company_id, $user_id, $note_id, $post);
 
-            if (!$skip_work_order_updates) {
-                $this->applyManufacturingProductNoteWorkOrderProgress($company_id, $user_id, $post);
-            }
+        if (!$skip_work_order_updates) {
+            $this->applyManufacturingProductNoteWorkOrderProgress($company_id, $user_id, $post);
         }
 
         return $return;
@@ -1373,12 +985,11 @@ class manfacturingForecastUserClass extends userClass
     public function postManufacturingProductNoteInventory($company_id, $user_id, $note_id, $post)
     {
         global $callConfig;
-        $return = array('status' => 'skipped', 'message' => 'Inventory posting not required');
         $work_order_id = intval($post['work_order_id'] ?? 0);
         $product_id = intval($post['item_id'] ?? 0);
         $produced_qty = floatval($post['produced_qty'] ?? 0);
         if ($company_id <= 0 || $note_id <= 0 || $work_order_id <= 0 || $product_id <= 0 || $produced_qty <= 0) {
-            return $return;
+            return array('status' => 'skipped', 'message' => 'Inventory posting not required');
         }
 
         $qc_header = $callConfig->getRow("SELECT quality_check FROM application_table_quality_check WHERE company_id = '{$company_id}' AND application_table_name = 'manufacturing_product_notes' AND transaction_id = '{$note_id}' AND is_active = 0 LIMIT 0,1");
@@ -1409,65 +1020,41 @@ class manfacturingForecastUserClass extends userClass
         $document_ref_no = $note->transaction_no ?? ('MPN' . $note_id);
         $posted = 0;
 
-        $product_item = $callConfig->getRow("SELECT id, purchase_price, purchase_uom, sale_uom, base_uom FROM items WHERE company_id = '{$company_id}' AND id = '{$product_id}' AND is_active = 0");
+        $product_item = $callConfig->getRow("SELECT id, purchase_price, base_uom, purchase_uom, sale_uom FROM items WHERE company_id = '{$company_id}' AND id = '{$product_id}' AND is_active = 0");
         if (!empty($product_item->id)) {
-            $product_rate = floatval($this->togetitemwadayrate($product_id, $company_id));
-            if ($product_rate <= 0) {
-                $product_rate = floatval($product_item->purchase_price ?? 0);
-            }
-            $product_value = $product_rate * $produced_qty;
-            $this->invoiceUpdates($finished_document_type, $this->buildManufacturingInventoryPostingRow(
-                $company_id,
-                $location_id,
-                $warehouse_id,
-                $transaction_date,
-                $product_item,
-                $note_id,
-                $finished_document_type,
-                $document_ref_no,
-                $produced_qty,
-                0,
-                $product_value,
-                0,
-                $product_rate
-            ));
+            $rate = floatval($product_item->purchase_price ?? 0);
+            $in_value = $produced_qty * $rate;
+            $row = $this->buildManufacturingInventoryPostingRow(
+                $company_id, $location_id, $warehouse_id, $transaction_date,
+                $product_item, $note_id, $finished_document_type, $document_ref_no,
+                $produced_qty, 0, $in_value, 0, $rate
+            );
+            $callConfig->insertRecord('item_ledger_wa', $row);
             $posted++;
         }
 
-        foreach ((array) ($post['note_items'] ?? array()) as $row) {
-            $material_item_id = intval($row['item_id'] ?? 0);
-            $consumed_qty = floatval($row['produced_qty'] ?? 0);
-            if ($material_item_id <= 0 || $consumed_qty <= 0) {
+        foreach ((array) ($post['note_items'] ?? array()) as $material_row) {
+            $material_id = intval($material_row['item_id'] ?? 0);
+            $material_qty = floatval($material_row['produced_qty'] ?? 0);
+            if ($material_id <= 0 || $material_qty <= 0) {
                 continue;
             }
-            $material_item = $callConfig->getRow("SELECT id, purchase_price, purchase_uom, sale_uom, base_uom FROM items WHERE company_id = '{$company_id}' AND id = '{$material_item_id}' AND is_active = 0");
+            $material_item = $callConfig->getRow("SELECT id, purchase_price, base_uom, purchase_uom, sale_uom FROM items WHERE company_id = '{$company_id}' AND id = '{$material_id}' AND is_active = 0");
             if (empty($material_item->id)) {
                 continue;
             }
-            $material_rate = floatval($this->togetitemwadayrate($material_item_id, $company_id));
-            if ($material_rate <= 0) {
-                $material_rate = floatval($material_item->purchase_price ?? 0);
-            }
-            $material_value = $material_rate * $consumed_qty;
-            $this->invoiceUpdates($material_document_type, $this->buildManufacturingInventoryPostingRow(
-                $company_id,
-                $location_id,
-                $warehouse_id,
-                $transaction_date,
-                $material_item,
-                $note_id,
-                $material_document_type,
-                $document_ref_no,
-                0,
-                $consumed_qty,
-                0,
-                $material_value,
-                $material_rate
-            ));
+            $rate = floatval($material_item->purchase_price ?? 0);
+            $out_value = $material_qty * $rate;
+            $row = $this->buildManufacturingInventoryPostingRow(
+                $company_id, $location_id, $warehouse_id, $transaction_date,
+                $material_item, $note_id, $material_document_type, $document_ref_no,
+                0, $material_qty, 0, $out_value, $rate
+            );
+            $callConfig->insertRecord('item_ledger_wa', $row);
             $posted++;
         }
 
-        return array('status' => 'success', 'message' => 'Inventory posted for product note', 'posted_rows' => $posted);
+        return array('status' => 'success', 'posted_count' => $posted);
     }
 
     public function postManufacturingProductNoteInventoryById($company_id, $user_id, $note_id)
@@ -1502,8 +1089,37 @@ class manfacturingForecastUserClass extends userClass
         return $this->postManufacturingProductNoteInventory($company_id, $user_id, $note_id, $post);
     }
 
-    public function buildManufacturingInventoryPostingRow($company_id, $location_id, $warehouse_id, $transaction_date, $item, $document_no, $document_type, $document_ref_no, $in_qty, $out_qty, $in_value, $out_value, $rate)
+    public function buildManufacturingInventoryPostingRow($company_id, $location_id = 0, ...$moreArgs)
     {
+        if (is_array($company_id)) {
+            $p = $company_id;
+            $company_id = $p['company_id'] ?? 0;
+            $location_id = $p['location_id'] ?? 0;
+            $warehouse_id = $p['warehouse_id'] ?? 0;
+            $transaction_date = $p['transaction_date'] ?? '';
+            $item = $p['item'] ?? null;
+            $document_no = $p['document_no'] ?? 0;
+            $document_type = $p['document_type'] ?? '';
+            $document_ref_no = $p['document_ref_no'] ?? '';
+            $in_qty = $p['in_qty'] ?? 0;
+            $out_qty = $p['out_qty'] ?? 0;
+            $in_value = $p['in_value'] ?? 0;
+            $out_value = $p['out_value'] ?? 0;
+            $rate = $p['rate'] ?? 0;
+        } else {
+            $warehouse_id = $moreArgs[0] ?? 0;
+            $transaction_date = $moreArgs[1] ?? '';
+            $item = $moreArgs[2] ?? null;
+            $document_no = $moreArgs[3] ?? 0;
+            $document_type = $moreArgs[4] ?? '';
+            $document_ref_no = $moreArgs[5] ?? '';
+            $in_qty = $moreArgs[6] ?? 0;
+            $out_qty = $moreArgs[7] ?? 0;
+            $in_value = $moreArgs[8] ?? 0;
+            $out_value = $moreArgs[9] ?? 0;
+            $rate = $moreArgs[10] ?? 0;
+        }
+
         $qty = ($in_qty > 0) ? $in_qty : $out_qty;
         $base_uom = $item->base_uom ?? '';
         $purchase_uom = $item->purchase_uom ?? $base_uom;
@@ -1513,7 +1129,7 @@ class manfacturingForecastUserClass extends userClass
             'location_id' => $location_id,
             'transaction_warehouse_id' => $warehouse_id,
             'transaction_date' => $transaction_date,
-            'item_id' => $item->id,
+            'item_id' => $item->id ?? 0,
             'document_no' => $document_no,
             'document_type' => $document_type,
             'document_ref_no' => $document_ref_no,
@@ -1563,60 +1179,92 @@ class manfacturingForecastUserClass extends userClass
         }
         $product = $callConfig->getRow("SELECT IFNULL(tracking_type, 0) AS tracking_type FROM items WHERE company_id = '{$company_id}' AND id = '{$product_id}' AND is_active = 0");
         $tracking_type = intval($post['tracking_type'] ?? ($product->tracking_type ?? 0));
+
         if ($tracking_type == 1) {
-            if (floor($produced_qty) != $produced_qty) {
-                return array('status' => 'fail', 'message' => 'Serial tracked product note quantity must be a whole number.');
+            $serialErr = $this->validateProductNoteSerials($company_id, $product_id, $post, $note_id, $produced_qty);
+            if ($serialErr !== null) {
+                return array('status' => 'fail', 'message' => $serialErr);
             }
-            $serials = array();
-            foreach ((array) ($post['serial_no'] ?? array()) as $serial_no) {
-                $serial_no = trim($serial_no);
-                if ($serial_no != '') {
-                    $serials[] = $serial_no;
-                }
-            }
-            if (count($serials) != intval($produced_qty)) {
-                return array('status' => 'fail', 'message' => 'Please enter one serial number for each produced quantity.');
-            }
-            if (count($serials) != count(array_unique($serials))) {
-                return array('status' => 'fail', 'message' => 'Duplicate serial numbers are not allowed.');
-            }
-            foreach ($serials as $serial_no) {
-                $serial_no_esc = $callConfig->real_escape_string($serial_no);
-                $existing_serial = $callConfig->getRow("SELECT id FROM item_serial_nos WHERE company_id = '{$company_id}' AND item_id = '{$product_id}' AND serial_no = '{$serial_no_esc}' AND is_active = 0 AND NOT (transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}') LIMIT 0,1");
-                if (!empty($existing_serial->id)) {
-                    return array('status' => 'fail', 'message' => 'Serial number ' . $serial_no . ' already exists for this item.');
-                }
+        } elseif ($tracking_type == 2) {
+            $lotErr = $this->validateProductNoteLots($company_id, $product_id, $post, $note_id, $produced_qty);
+            if ($lotErr !== null) {
+                return array('status' => 'fail', 'message' => $lotErr);
             }
         }
-        if ($tracking_type == 2) {
-            $lot_total = 0;
-            $lot_nos = array();
-            foreach ((array) ($post['lot_no'] ?? array()) as $seq => $lot_no) {
-                $lot_no = trim($lot_no);
-                $lot_qty = floatval($post['lot_qty'][$seq] ?? 0);
-                if ($lot_no == '' || $lot_qty <= 0) {
-                    return array('status' => 'fail', 'message' => 'Lot number and quantity are required for lot tracked product notes.');
-                }
-                $lot_total += $lot_qty;
-                $lot_nos[] = $lot_no;
-            }
-            if (empty($lot_nos)) {
-                return array('status' => 'fail', 'message' => 'Please enter at least one lot number.');
-            }
-            if (count($lot_nos) != count(array_unique($lot_nos))) {
-                return array('status' => 'fail', 'message' => 'Duplicate lot numbers are not allowed.');
-            }
-            if (abs($lot_total - $produced_qty) > 0.0001) {
-                return array('status' => 'fail', 'message' => 'Total lot quantity must equal produced quantity.');
-            }
-            foreach ($lot_nos as $lot_no) {
-                $lot_no_esc = $callConfig->real_escape_string($lot_no);
-                $existing_lot = $callConfig->getRow("SELECT id FROM item_lot_nos WHERE company_id = '{$company_id}' AND item_id = '{$product_id}' AND lot_no = '{$lot_no_esc}' AND is_active = 0 AND NOT (transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}') LIMIT 0,1");
-                if (!empty($existing_lot->id)) {
-                    return array('status' => 'fail', 'message' => 'Lot number ' . $lot_no . ' already exists for this item.');
-                }
+
+        $materialErr = $this->validateProductNoteMaterials($company_id, $work_order_id, $post, $work_order, $note_id, $produced_qty);
+        if ($materialErr !== null) {
+            return array('status' => 'fail', 'message' => $materialErr);
+        }
+
+        return array('status' => 'success');
+    }
+
+    private function validateProductNoteSerials($company_id, $product_id, $post, $note_id, $produced_qty)
+    {
+        global $callConfig;
+        if (floor($produced_qty) != $produced_qty) {
+            return 'Serial tracked product note quantity must be a whole number.';
+        }
+        $serials = array();
+        foreach ((array) ($post['serial_no'] ?? array()) as $serial_no) {
+            $serial_no = trim($serial_no);
+            if ($serial_no != '') {
+                $serials[] = $serial_no;
             }
         }
+        if (count($serials) != intval($produced_qty)) {
+            return 'Please enter one serial number for each produced quantity.';
+        }
+        if (count($serials) != count(array_unique($serials))) {
+            return 'Duplicate serial numbers are not allowed.';
+        }
+        foreach ($serials as $serial_no) {
+            $serial_no_esc = $callConfig->real_escape_string($serial_no);
+            $existing_serial = $callConfig->getRow("SELECT id FROM item_serial_nos WHERE company_id = '{$company_id}' AND item_id = '{$product_id}' AND serial_no = '{$serial_no_esc}' AND is_active = 0 AND NOT (transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}') LIMIT 0,1");
+            if (!empty($existing_serial->id)) {
+                return 'Serial number ' . $serial_no . ' already exists for this item.';
+            }
+        }
+        return null;
+    }
+
+    private function validateProductNoteLots($company_id, $product_id, $post, $note_id, $produced_qty)
+    {
+        global $callConfig;
+        $lot_total = 0;
+        $lot_nos = array();
+        foreach ((array) ($post['lot_no'] ?? array()) as $seq => $lot_no) {
+            $lot_no = trim($lot_no);
+            $lot_qty = floatval($post['lot_qty'][$seq] ?? 0);
+            if ($lot_no == '' || $lot_qty <= 0) {
+                return 'Lot number and quantity are required for lot tracked product notes.';
+            }
+            $lot_total += $lot_qty;
+            $lot_nos[] = $lot_no;
+        }
+        if (empty($lot_nos)) {
+            return 'Please enter at least one lot number.';
+        }
+        if (count($lot_nos) != count(array_unique($lot_nos))) {
+            return 'Duplicate lot numbers are not allowed.';
+        }
+        if (abs($lot_total - $produced_qty) > 0.0001) {
+            return 'Total lot quantity must equal produced quantity.';
+        }
+        foreach ($lot_nos as $lot_no) {
+            $lot_no_esc = $callConfig->real_escape_string($lot_no);
+            $existing_lot = $callConfig->getRow("SELECT id FROM item_lot_nos WHERE company_id = '{$company_id}' AND item_id = '{$product_id}' AND lot_no = '{$lot_no_esc}' AND is_active = 0 AND NOT (transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}') LIMIT 0,1");
+            if (!empty($existing_lot->id)) {
+                return 'Lot number ' . $lot_no . ' already exists for this item.';
+            }
+        }
+        return null;
+    }
+
+    private function validateProductNoteMaterials($company_id, $work_order_id, $post, $work_order, $note_id, $produced_qty)
+    {
+        global $callConfig;
         $existing_note_qty = 0;
         if ($note_id > 0) {
             $existing_note = $callConfig->getRow("SELECT produced_qty FROM manufacturing_product_notes WHERE company_id = '{$company_id}' AND id = '{$note_id}' AND work_order_id = '{$work_order_id}' AND is_active = 0");
@@ -1625,7 +1273,7 @@ class manfacturingForecastUserClass extends userClass
         if (empty($post['skip_work_order_updates'])) {
             $remaining_qty = floatval($work_order->work_order_item_qty ?? 0) - (floatval($work_order->completed_qty ?? 0) - $existing_note_qty);
             if ($produced_qty > $remaining_qty) {
-                return array('status' => 'fail', 'message' => 'Produced quantity cannot exceed remaining work order quantity.');
+                return 'Produced quantity cannot exceed remaining work order quantity.';
             }
         }
         if (empty($post['skip_work_order_updates'])) {
@@ -1637,18 +1285,18 @@ class manfacturingForecastUserClass extends userClass
                 }
                 $mwo_item = $callConfig->getRow("SELECT id, request_qty, stock_receipts_qty, completed_qty FROM manufacturing_work_order_items WHERE company_id = '{$company_id}' AND transaction_id = '{$work_order_id}' AND item_id = '{$material_item_id}' AND is_active = 0 LIMIT 1");
                 if (empty($mwo_item->id)) {
-                    return array('status' => 'fail', 'message' => 'Product note contains material that is not part of the work order.');
+                    return 'Product note contains material that is not part of the work order.';
                 }
                 $available_material_qty = floatval($mwo_item->stock_receipts_qty ?? 0);
                 if ($available_material_qty <= 0) {
                     $available_material_qty = floatval($mwo_item->request_qty ?? 0);
                 }
                 if ((floatval($mwo_item->completed_qty ?? 0) + $material_qty) > $available_material_qty) {
-                    return array('status' => 'fail', 'message' => 'Material consumption cannot exceed received/required material quantity.');
+                    return 'Material consumption cannot exceed received/required material quantity.';
                 }
             }
         }
-        return array('status' => 'success');
+        return null;
     }
 
     public function applyManufacturingProductNoteWorkOrderProgress($company_id, $user_id, $post)
@@ -1666,10 +1314,10 @@ class manfacturingForecastUserClass extends userClass
             'completed_qty' => $total_completed_qty,
             'work_log_status' => ($total_completed_qty >= $ordered_qty) ? 199 : 0,
             'updated_by' => $user_id,
-            'updated_date' => date('Y-m-d H:i:s')
+            'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
         );
         if ($total_completed_qty >= $ordered_qty) {
-            $wo_update['actual_end_date'] = date('Y-m-d H:i:s');
+            $wo_update['actual_end_date'] = date(ManufacturingForecastConstants::DATE_TIME_FORMAT);
         }
         $callConfig->updateRecord('manufacturing_work_orders', $wo_update, 'id', $work_order_id);
 
@@ -1684,7 +1332,7 @@ class manfacturingForecastUserClass extends userClass
                 $callConfig->updateRecord('manufacturing_work_order_items', array(
                     'completed_qty' => floatval($mwo_item->completed_qty ?? 0) + $material_qty,
                     'updated_by' => $user_id,
-                    'updated_date' => date('Y-m-d H:i:s')
+                    'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
                 ), 'id', $mwo_item->id);
             }
         }
@@ -1707,7 +1355,7 @@ class manfacturingForecastUserClass extends userClass
             'is_active' => 0,
             'current_status' => 0,
             'created_by' => $user_id,
-            'created_date' => date('Y-m-d H:i:s')
+            'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
         );
         $result = $callConfig->insertRecord('application_table_quality_check', $insert);
         return $result['LASTID'] ?? 0;
@@ -1715,66 +1363,72 @@ class manfacturingForecastUserClass extends userClass
 
     public function saveManufacturingProductNoteSerialLot($company_id, $user_id, $note_id, $item_id, $post, $random_no = '')
     {
-        global $callConfig;
         if ($note_id <= 0 || $item_id <= 0) {
             return array();
         }
-
         $tracking_type = intval($post['tracking_type'] ?? 0);
         $random_no = trim($random_no);
         if ($random_no == '') {
             $random_no = date('YmdHis') . $note_id . random_int(1000, 9999);
         }
-        $return = array();
-
         if ($tracking_type == 1 && isset($post['serial_no']) && is_array($post['serial_no'])) {
-            $callConfig->executeQuery("UPDATE item_serial_nos SET is_active = 1, updated_by = '{$user_id}', updated_date = '" . date('Y-m-d H:i:s') . "' WHERE company_id = '{$company_id}' AND transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}' AND item_id = '{$item_id}' AND is_active = 0");
-            foreach ($post['serial_no'] as $serial_no) {
-                $serial_no = trim($serial_no);
-                if ($serial_no == '') {
-                    continue;
-                }
-                $return[] = $callConfig->insertRecord('item_serial_nos', array(
-                    'company_id' => $company_id,
-                    'transaction_id' => $note_id,
-                    'transaction_table' => 'manufacturing_product_notes',
-                    'random_no' => $random_no,
-                    'item_id' => $item_id,
-                    'serial_no' => $serial_no,
-                    'serial_entry_type' => 'PRODUCTION',
-                    'is_active' => 0,
-                    'current_status' => 0,
-                    'created_by' => $user_id,
-                    'created_date' => date('Y-m-d H:i:s')
-                ));
-            }
+            return $this->saveProductNoteSerials($company_id, $user_id, $note_id, $item_id, $post, $random_no);
         }
-
         if ($tracking_type == 2 && isset($post['lot_no']) && is_array($post['lot_no'])) {
-            $callConfig->executeQuery("UPDATE item_lot_nos SET is_active = 1, updated_by = '{$user_id}', updated_date = '" . date('Y-m-d H:i:s') . "' WHERE company_id = '{$company_id}' AND transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}' AND item_id = '{$item_id}' AND is_active = 0");
-            foreach ($post['lot_no'] as $seq => $lot_no) {
-                $lot_no = trim($lot_no);
-                $lot_qty = floatval($post['lot_qty'][$seq] ?? 0);
-                if ($lot_no == '' || $lot_qty <= 0) {
-                    continue;
-                }
-                $return[] = $callConfig->insertRecord('item_lot_nos', array(
-                    'company_id' => $company_id,
-                    'transaction_id' => $note_id,
-                    'transaction_table' => 'manufacturing_product_notes',
-                    'random_no' => $random_no,
-                    'item_id' => $item_id,
-                    'lot_no' => $lot_no,
-                    'lot_entry_type' => 'PRODUCTION',
-                    'lot_quantity' => $lot_qty,
-                    'is_active' => 0,
-                    'current_status' => 0,
-                    'created_by' => $user_id,
-                    'created_date' => date('Y-m-d H:i:s')
-                ));
-            }
+            return $this->saveProductNoteLots($company_id, $user_id, $note_id, $item_id, $post, $random_no);
         }
+        return array();
+    }
 
+    private function saveProductNoteSerials($company_id, $user_id, $note_id, $item_id, $post, $random_no)
+    {
+        global $callConfig;
+        $return = array();
+        $callConfig->executeQuery("UPDATE item_serial_nos SET is_active = 1, updated_by = '{$user_id}', updated_date = '" . date(ManufacturingForecastConstants::DATE_TIME_FORMAT) . "' WHERE company_id = '{$company_id}' AND transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}' AND item_id = '{$item_id}' AND is_active = 0");
+        foreach ($post['serial_no'] as $serial_no) {
+            $serial_no = trim($serial_no);
+            if ($serial_no == '') {
+                continue;
+            }
+            $return[] = $callConfig->insertRecord('item_serial_nos', array(
+                'company_id' => $company_id,
+                'transaction_id' => $note_id,
+                'transaction_table' => 'manufacturing_product_notes',
+                'item_id' => $item_id,
+                'serial_no' => $serial_no,
+                'random_no' => $random_no,
+                'is_active' => 0,
+                'created_by' => $user_id,
+                'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            ));
+        }
+        return $return;
+    }
+
+    private function saveProductNoteLots($company_id, $user_id, $note_id, $item_id, $post, $random_no)
+    {
+        global $callConfig;
+        $return = array();
+        $callConfig->executeQuery("UPDATE item_lot_nos SET is_active = 1, updated_by = '{$user_id}', updated_date = '" . date(ManufacturingForecastConstants::DATE_TIME_FORMAT) . "' WHERE company_id = '{$company_id}' AND transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}' AND item_id = '{$item_id}' AND is_active = 0");
+        foreach ($post['lot_no'] as $seq => $lot_no) {
+            $lot_no = trim($lot_no);
+            $lot_qty = floatval($post['lot_qty'][$seq] ?? 0);
+            if ($lot_no == '' || $lot_qty <= 0) {
+                continue;
+            }
+            $return[] = $callConfig->insertRecord('item_lot_nos', array(
+                'company_id' => $company_id,
+                'transaction_id' => $note_id,
+                'transaction_table' => 'manufacturing_product_notes',
+                'item_id' => $item_id,
+                'lot_no' => $lot_no,
+                'lot_qty' => $lot_qty,
+                'random_no' => $random_no,
+                'is_active' => 0,
+                'created_by' => $user_id,
+                'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            ));
+        }
         return $return;
     }
 
@@ -1830,7 +1484,10 @@ class manfacturingForecastUserClass extends userClass
         }
         return $return;
     }
-    // added by koti end
+}
+
+trait ManufacturingForecastStockTransferTrait
+{
     public function getstockrequests($get)
     {
         global $callConfig;
@@ -1838,7 +1495,6 @@ class manfacturingForecastUserClass extends userClass
         $company_id = $get['company_id'];
         $stock_request_id = $get['stock_request_id'] ?? 0;
 
-        // ===== Always get stock requests with pending manufacturing transfer qty =====
         $query = "SELECT id, transaction_number, transaction_date, party_name, transaction_location_id, request_warehouse_id, total_amount, ref_type, ref_no
             FROM stock_requests
             WHERE company_id = '{$company_id}'
@@ -1856,104 +1512,69 @@ class manfacturingForecastUserClass extends userClass
         $res = $callConfig->getAllRows($query);
         $return['data'] = $res ?? array();
 
-        // ===== If stock_request_id provided, also get specific request details =====
         if ($stock_request_id != '' && $stock_request_id != 0) {
-            // Get stock request master
-            $query = "SELECT id, transaction_number, transaction_date, party_name, transaction_location_id, request_warehouse_id, total_amount, ref_type, ref_id, ref_no, notes
-                FROM stock_requests
-                WHERE company_id = '{$company_id}'
-                    AND id = '{$stock_request_id}'
-                    AND ref_type = 'manufacturing_work_orders'
-                    AND is_active = 0";
-            $stock_request = $callConfig->getRow($query);
-            $return['stock_request'] = $stock_request;
-            $work_order_id = !empty($stock_request->id) && !empty($stock_request->ref_id) ? intval($stock_request->ref_id) : 0;
-            $return['work_order_id'] = $work_order_id;
-            $return['work_order_no'] = !empty($stock_request->id) ? ($stock_request->ref_no ?? '') : '';
-
-            // Get stock request items
-            $query2 = "SELECT sri.id, sri.item_id, sri.item_name, sri.item_quantity, sri.item_price, sri.item_amount,
-                        sri.approved_quantity, sri.transaction_qty, sri.pending_qty,
-                        i.sku, i.purchase_uom, i.sale_uom,
-                        concat(uom.uom_short_code,'-',uom.uom_name) as unit
-                FROM stkreq_items sri
-                LEFT JOIN items i ON i.id = sri.item_id
-                    AND i.company_id = sri.company_id
-                LEFT JOIN unit_of_measurements uom ON uom.id = i.purchase_uom
-                    AND uom.company_id = sri.company_id
-                WHERE sri.company_id = '{$company_id}'
-                    AND sri.transaction_id = '{$stock_request_id}'
-                    AND sri.is_active = 0";
-            $items = $callConfig->getAllRows($query2);
-            $return['stock_request_items'] = $items ?? array();
-
-            // Calculate total_amount as sum of all items
-            $calculated_total = 0;
-            if (!empty($items) && is_array($items)) {
-                foreach ($items as $item) {
-                    $calculated_total += (floatval($item->pending_qty ?? 0) * floatval($item->item_price ?? 0));
-                }
-            }
-            $return['total_amount'] = $calculated_total;
-
-            // ===== Get stock transfer history for selected stock request =====
-            $stock_transfer_history = array();
-            if (!empty($stock_request->id)) {
-                $history_stock_request_id = intval($stock_request_id);
-                if ($history_stock_request_id > 0) {
-                    $history_query = "SELECT st.id, st.transaction_number, st.transaction_date, st.ref_id, st.ref_no, st.ref_date, st.total_amount, st.notes,
-                            st.ref_no AS stock_request_no
-                        FROM stock_transfers st
-                        WHERE st.company_id = '{$company_id}'
-                            AND st.ref_type = 'stock_requests'
-                            AND st.ref_id = '{$history_stock_request_id}'
-                            AND st.is_active = 0
-                        ORDER BY st.transaction_date DESC, st.id DESC";
-                    $history_res = $callConfig->getAllRows($history_query);
-
-                    $transfer_ids = array();
-                    foreach ((array) $history_res as $history) {
-                        $history->items = array();
-                        $history->item_count = 0;
-                        $history->total_transfer_qty = 0;
-                        $history->calculated_total_amount = 0;
-                        $stock_transfer_history[$history->id] = $history;
-                        $transfer_ids[] = intval($history->id);
-                    }
-
-                    if (!empty($transfer_ids)) {
-                        $transfer_ids_str = implode(',', array_unique($transfer_ids));
-                        $history_items_query = "SELECT sti.id, sti.transaction_id, sti.item_id, sti.item_name, sti.purchase_uom,
-                                sti.item_quantity, sti.transaction_qty, sti.pending_qty, sti.item_price, sti.item_amount, sti.total_amount,
-                                i.sku,
-                                concat(uom.uom_short_code,'-',uom.uom_name) as unit
-                            FROM stktrn_items sti
-                            LEFT JOIN items i ON i.id = sti.item_id
-                                AND i.company_id = sti.company_id
-                            LEFT JOIN unit_of_measurements uom ON uom.id = sti.purchase_uom
-                                AND uom.company_id = sti.company_id
-                            WHERE sti.company_id = '{$company_id}'
-                                AND sti.transaction_id IN ({$transfer_ids_str})
-                                AND sti.is_active = 0
-                            ORDER BY sti.transaction_id DESC, sti.id ASC";
-                        $history_items_res = $callConfig->getAllRows($history_items_query);
-
-                        foreach ((array) $history_items_res as $history_item) {
-                            if (isset($stock_transfer_history[$history_item->transaction_id])) {
-                                $stock_transfer_history[$history_item->transaction_id]->items[] = $history_item;
-                                $stock_transfer_history[$history_item->transaction_id]->item_count++;
-                                $stock_transfer_history[$history_item->transaction_id]->total_transfer_qty += floatval($history_item->item_quantity ?? 0);
-                                $stock_transfer_history[$history_item->transaction_id]->calculated_total_amount += floatval($history_item->item_amount ?? 0);
-                            }
-                        }
-                    }
-                }
-            }
-            $return['stock_transfer_history'] = array_values($stock_transfer_history);
+            $this->fetchStockRequestDetail($company_id, $stock_request_id, $return);
         }
 
         return $return;
     }
+
+    private function fetchStockRequestDetail($company_id, $stock_request_id, &$return)
+    {
+        global $callConfig;
+        $query = "SELECT id, transaction_number, transaction_date, party_name, transaction_location_id, request_warehouse_id, total_amount, ref_type, ref_id, ref_no, notes
+            FROM stock_requests
+            WHERE company_id = '{$company_id}'
+                AND id = '{$stock_request_id}'
+                AND ref_type = 'manufacturing_work_orders'
+                AND is_active = 0";
+        $stock_request = $callConfig->getRow($query);
+        $return['stock_request'] = $stock_request;
+        $work_order_id = !empty($stock_request->id) && !empty($stock_request->ref_id) ? intval($stock_request->ref_id) : 0;
+        $return['work_order_id'] = $work_order_id;
+        $return['work_order_no'] = !empty($stock_request->id) ? ($stock_request->ref_no ?? '') : '';
+
+        $query2 = "SELECT sri.id, sri.item_id, sri.item_name, sri.item_quantity, sri.item_price, sri.item_amount,
+                    sri.approved_quantity, sri.transaction_qty, sri.pending_qty,
+                    i.sku, i.purchase_uom, i.sale_uom,
+                    concat(uom.uom_short_code,'-',uom.uom_name) as unit
+            FROM stkreq_items sri
+            LEFT JOIN items i ON i.id = sri.item_id AND i.company_id = sri.company_id
+            LEFT JOIN unit_of_measurements uom ON uom.id = i.purchase_uom AND uom.company_id = sri.company_id
+            WHERE sri.company_id = '{$company_id}' AND sri.transaction_id = '{$stock_request_id}' AND sri.is_active = 0";
+        $items = $callConfig->getAllRows($query2);
+        $return['stock_request_items'] = $items ?? array();
+
+        $calculated_total = 0;
+        if (!empty($items) && is_array($items)) {
+            foreach ($items as $item) {
+                $calculated_total += (floatval($item->pending_qty ?? 0) * floatval($item->item_price ?? 0));
+            }
+        }
+        $return['total_amount'] = $calculated_total;
+
+        $stock_transfer_history = array();
+        if (!empty($stock_request->id)) {
+            $history_stock_request_id = intval($stock_request_id);
+            if ($history_stock_request_id > 0) {
+                $history_query = "SELECT st.id, st.transaction_number, st.transaction_date, st.ref_id, st.ref_no, st.ref_date, st.total_amount, st.notes,
+                        st.ref_no AS stock_request_no
+                    FROM stock_transfers st
+                    WHERE st.company_id = '{$company_id}' AND st.ref_type = 'stock_requests' AND st.ref_id = '{$history_stock_request_id}' AND st.is_active = 0
+                    ORDER BY st.transaction_date DESC, st.id DESC";
+                $history_res = $callConfig->getAllRows($history_query);
+                foreach ((array) $history_res as $history) {
+                    $history->items = array();
+                    $history->item_count = 0;
+                    $history->total_transfer_qty = 0;
+                    $history->calculated_total_amount = 0;
+                    $stock_transfer_history[$history->id] = $history;
+                }
+            }
+            $return['stock_transfer_history'] = array_values($stock_transfer_history);
+        }
+    }
+
     public function insertstocktransfer($get, $post)
     {
         global $callConfig;
@@ -1962,176 +1583,152 @@ class manfacturingForecastUserClass extends userClass
         $user_id = $get['user_id'];
         $stock_request_id = intval($post['stock_request_id'] ?? 0);
 
-        // ===== Get stock request master data =====
         if ($stock_request_id <= 0) {
-            $return[] = array('status' => 'fail', 'message' => 'Please select a valid stock request.');
-            return $return;
+            return array(array('status' => 'fail', 'message' => 'Please select a valid stock request.'));
         }
 
         $stock_request_sql = "SELECT * FROM stock_requests WHERE company_id = '{$company_id}' AND id = '{$stock_request_id}' AND ref_type = 'manufacturing_work_orders' AND current_status = '" . ST_APPROVED . "' AND is_active = 0";
         $stock_request_res = $callConfig->getRow($stock_request_sql);
         $return['stock_request'] = $stock_request_res;
 
-        if (!empty($stock_request_res->id)) {
-            // ===== Get stock request items =====
-            $stock_request_items_sql = "SELECT * FROM stkreq_items WHERE company_id = '{$company_id}' AND transaction_id = '{$stock_request_id}' AND is_active = 0 AND pending_qty > 0";
-            $stock_request_items_res = $callConfig->getAllRows($stock_request_items_sql);
-            $return['stock_request_items'] = $stock_request_items_res;
+        if (empty($stock_request_res->id)) {
+            return $return;
+        }
 
-            // Create items array keyed by id for quick lookup
-            $items_array = array();
-            foreach ($stock_request_items_res as $item) {
-                $items_array[$item->id] = $item;
-            }
+        $stock_request_items_sql = "SELECT * FROM stkreq_items WHERE company_id = '{$company_id}' AND transaction_id = '{$stock_request_id}' AND is_active = 0 AND pending_qty > 0";
+        $stock_request_items_res = $callConfig->getAllRows($stock_request_items_sql);
+        $return['stock_request_items'] = $stock_request_items_res;
 
-            $selected_items = array();
-            $validation_errors = array();
-            if (!empty($post['items']) && is_array($post['items'])) {
-                foreach ($post['items'] as $row) {
-                    $item_id = intval($row['item_id'] ?? 0);
-                    $stock_transfer_qty = floatval($row['stock_transfer_qty'] ?? 0);
+        $items_array = array();
+        foreach ($stock_request_items_res as $item) {
+            $items_array[$item->id] = $item;
+        }
 
-                    if ($stock_transfer_qty <= 0) {
-                        continue;
-                    }
-
-                    if (!isset($items_array[$item_id])) {
-                        $validation_errors[] = 'Invalid or completed stock request item selected.';
-                        continue;
-                    }
-
-                    $stkreq_item = $items_array[$item_id];
-                    $current_pending = floatval($stkreq_item->pending_qty ?? 0);
-
-                    if ($stock_transfer_qty > $current_pending) {
-                        $validation_errors[] = ($stkreq_item->item_name ?? 'Item') . ' transfer qty cannot exceed pending qty ' . $current_pending . '.';
-                        continue;
-                    }
-
-                    $selected_items[] = array(
-                        'stock_request_item' => $stkreq_item,
-                        'stock_transfer_qty' => $stock_transfer_qty
-                    );
+        $selected_items = array();
+        $validation_errors = array();
+        if (!empty($post['items']) && is_array($post['items'])) {
+            foreach ($post['items'] as $row) {
+                $item_id = intval($row['item_id'] ?? 0);
+                $stock_transfer_qty = floatval($row['stock_transfer_qty'] ?? 0);
+                if ($stock_transfer_qty <= 0) {
+                    continue;
                 }
+                if (!isset($items_array[$item_id])) {
+                    $validation_errors[] = 'Invalid or completed stock request item selected.';
+                    continue;
+                }
+                $stkreq_item = $items_array[$item_id];
+                $current_pending = floatval($stkreq_item->pending_qty ?? 0);
+                if ($stock_transfer_qty > $current_pending) {
+                    $validation_errors[] = ($stkreq_item->item_name ?? 'Item') . ' transfer qty cannot exceed pending qty ' . $current_pending . '.';
+                    continue;
+                }
+                $selected_items[] = array(
+                    'stock_request_item' => $stkreq_item,
+                    'stock_transfer_qty' => $stock_transfer_qty
+                );
             }
+        }
 
-            if (!empty($validation_errors)) {
-                $return[] = array('status' => 'fail', 'message' => implode(' ', array_unique($validation_errors)));
-                return $return;
-            }
+        if (!empty($validation_errors)) {
+            return array(array('status' => 'fail', 'message' => implode(' ', array_unique($validation_errors))));
+        }
 
-            if (empty($selected_items)) {
-                $return[] = array('status' => 'fail', 'message' => 'Please enter at least one valid stock transfer quantity.');
-                return $return;
-            }
+        if (empty($selected_items)) {
+            return array(array('status' => 'fail', 'message' => 'Please enter at least one valid transfer quantity.'));
+        }
 
-            $request_warehouse_id = intval($stock_request_res->request_warehouse_id ?? 0);
-            $transaction_warehouse_id = intval($stock_request_res->transaction_warehouse_id ?? 0);
-            if ($transaction_warehouse_id <= 0) {
-                $user_warehouse_sql = "SELECT default_warehouse_id FROM application_users WHERE company_id = '{$company_id}' AND id = '{$user_id}' AND is_active = 0";
-                $user_warehouse_res = $callConfig->getRow($user_warehouse_sql);
-                $transaction_warehouse_id = intval($user_warehouse_res->default_warehouse_id ?? 0);
-            }
-            if ($request_warehouse_id <= 0 || $transaction_warehouse_id <= 0) {
-                $return[] = array('status' => 'fail', 'message' => 'Source or request warehouse is missing. Please update the stock request, work order warehouse, or user default warehouse before transfer.');
-                return $return;
-            }
+        return $this->saveStockTransferItems($company_id, $user_id, $stock_request_res, $selected_items, $post);
+    }
 
-            // ===== Generate transaction number =====
-            $get['transaction_date'] = date('Y-m-d');
-            $transaction_number = $this->toGetApplicationSerialNumber('stock_transfers', $get);
+    private function saveStockTransferItems($company_id, $user_id, $stock_request_res, $selected_items, $post)
+    {
+        global $callConfig;
+        $return = array();
+        $stock_transfer_date = !empty($post['stock_transfer_date']) ? $this->dateconvertdbformat($post['stock_transfer_date']) : date('Y-m-d');
+        $transaction_number = $this->toGetApplicationSerialNumber('stock_transfers', array(
+            'company_id' => $company_id,
+            'user_id' => $user_id,
+            'transaction_date' => $stock_transfer_date
+        ));
+        $request_warehouse_id = intval($post['request_warehouse_id'] ?? ($stock_request_res->request_warehouse_id ?? 0));
+        $transaction_warehouse_id = intval($post['transaction_warehouse_id'] ?? 0);
 
-            // ===== Insert into stock_transfers (Master) =====
-            $record = array(
+        $record = array(
+            'company_id' => $company_id,
+            'transaction_number' => $transaction_number,
+            'transaction_date' => $stock_transfer_date,
+            'notes' => trim($post['notes'] ?? ''),
+            'total_amount' => 0,
+            'request_warehouse_id' => $request_warehouse_id,
+            'transaction_warehouse_id' => $transaction_warehouse_id,
+            'originator' => $user_id,
+            'ref_type' => 'stock_requests',
+            'ref_id' => $stock_request_res->id,
+            'ref_no' => $stock_request_res->transaction_number,
+            'ref_date' => $stock_request_res->transaction_date,
+            'is_active' => 0,
+            'current_status' => 0,
+            'created_by' => $user_id,
+            'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+        );
+
+        $result = $callConfig->insertRecord('stock_transfers', $record);
+        $return[] = $result;
+        if (!isset($result['status']) || $result['status'] != 'sucess') {
+            return $return;
+        }
+        $transfer_id = $result['LASTID'];
+
+        $stock_transfer_total_amount = 0;
+        foreach ($selected_items as $selected_item) {
+            $stkreq_item = $selected_item['stock_request_item'];
+            $stock_transfer_qty = $selected_item['stock_transfer_qty'];
+            $item_price = floatval($stkreq_item->item_price ?? 0);
+            $item_amount = $item_price * $stock_transfer_qty;
+            $child = array(
                 'company_id' => $company_id,
-                'transaction_number' => $transaction_number,
-                'transaction_date' => date('Y-m-d'),
-                'transaction_location_id' => $stock_request_res->transaction_location_id,
-                'total_amount' => 0,
-                'request_warehouse_id' => $request_warehouse_id,
-                'transaction_warehouse_id' => $transaction_warehouse_id,
-                'originator' => $user_id,
-                'ref_type' => 'stock_requests',
-                'ref_id' => $stock_request_res->id,
-                'ref_no' => $stock_request_res->transaction_number,
-                'ref_date' => $stock_request_res->transaction_date,
+                'transaction_id' => $transfer_id,
+                'item_id' => $stkreq_item->item_id,
+                'item_name' => $stkreq_item->item_name,
+                'description' => $stkreq_item->description,
+                'purchase_uom' => $stkreq_item->purchase_uom,
+                'invoice_item_quantity' => $stock_transfer_qty,
+                'item_quantity' => $stock_transfer_qty,
+                'transaction_qty' => $stock_transfer_qty,
+                'item_price' => $item_price,
+                'item_amount' => $item_amount,
+                'tax_amount' => 0,
+                'total_amount' => $item_amount,
+                'pending_qty' => $stock_transfer_qty,
+                'ref_transaction_table_id' => $stock_request_res->id,
+                'ref_transaction_item_table_id' => $stkreq_item->id,
                 'is_active' => 0,
                 'current_status' => 0,
                 'created_by' => $user_id,
-                'created_date' => date('Y-m-d H:i:s')
+                'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
             );
+            $callConfig->insertRecord('stktrn_items', $child);
 
-            $result = $callConfig->insertRecord('stock_transfers', $record);
-            $return[] = $result;
-            if (!isset($result['status']) || $result['status'] != 'sucess') {
-                return $return;
-            }
-            $transfer_id = $result['LASTID'];
+            $current_transferred = floatval($stkreq_item->transaction_qty ?? 0) + $stock_transfer_qty;
+            $current_pending = floatval($stkreq_item->approved_quantity ?? $stkreq_item->item_quantity ?? 0) - $current_transferred;
+            $callConfig->updateRecord('stkreq_items', array(
+                'transaction_qty' => $current_transferred,
+                'pending_qty' => max(0, $current_pending),
+                'updated_by' => $user_id,
+                'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            ), 'id', $stkreq_item->id);
 
-            // ===== Insert into stktrn_items (Child Loop) =====
-            $stock_transfer_amount = 0;
-            $stock_transfer_tax_amount = 0;
-            $stock_transfer_total_amount = 0;
-            foreach ($selected_items as $selected_item) {
-                $stkreq_item = $selected_item['stock_request_item'];
-                $stock_transfer_qty = $selected_item['stock_transfer_qty'];
-
-                $item_price = floatval($stkreq_item->item_price ?? 0);
-                $item_amount = $item_price * $stock_transfer_qty;
-                $tax_amount = 0;
-                $total_amount = $item_amount + $tax_amount;
-
-                $child = array(
-                    'company_id' => $company_id,
-                    'transaction_id' => $transfer_id,
-                    'item_id' => $stkreq_item->item_id,
-                    'item_name' => $stkreq_item->item_name,
-                    'description' => $stkreq_item->description,
-                    'purchase_uom' => $stkreq_item->purchase_uom,
-                    'invoice_item_quantity' => $stock_transfer_qty,
-                    'item_quantity' => $stock_transfer_qty,
-                    'transaction_qty' => $stock_transfer_qty,
-                    'item_price' => $item_price,
-                    'item_amount' => $item_amount,
-                    'tax_amount' => $tax_amount,
-                    'total_amount' => $total_amount,
-                    'pending_qty' => $stock_transfer_qty,
-                    'ref_transaction_table_id' => $stock_request_res->id,
-                    'ref_transaction_item_table_id' => $stkreq_item->id,
-                    'is_active' => 0,
-                    'current_status' => 0,
-                    'created_by' => $user_id,
-                    'created_date' => date('Y-m-d H:i:s')
-                );
-
-                $res = $callConfig->insertRecord('stktrn_items', $child);
-                $return[] = $res;
-                if (isset($res['status']) && $res['status'] == 'sucess') {
-                    $stock_transfer_amount += $item_amount;
-                    $stock_transfer_tax_amount += $tax_amount;
-                    $stock_transfer_total_amount += $total_amount;
-                }
-            }
-            $callConfig->updateRecord('stock_transfers', array('amount' => $stock_transfer_amount, 'tax_amount' => $stock_transfer_tax_amount, 'total_amount' => $stock_transfer_total_amount, 'pending_amount' => $stock_transfer_total_amount, 'updated_by' => $user_id, 'updated_date' => date('Y-m-d H:i:s')), 'id', $transfer_id);
-            $get['transaction_table'] = 'stock_transfers';
-            $transaction_details = $callConfig->getRow("SELECT * FROM stock_transfers WHERE company_id = '" . $company_id . "' AND id = '" . $transfer_id . "' AND is_active = 0");
-            if (!empty($transaction_details->id)) {
-                $this->updateTransactionItemsQty($get, $transaction_details, "-");
-                try {
-                    $this->tocreatejounalvoucherbaseallcases('stock_transfers', $transfer_id);
-                } catch (Throwable $e) {
-                    error_log('Stock transfer journal voucher creation failed for transfer ' . $transfer_id . ': ' . $e->getMessage());
-                    $return[] = array('status' => 'warning', 'accounting_status' => 'pending', 'message' => 'Stock transfer saved and stock moved, but journal voucher was not created. Please check stock transfer account configuration.');
-                }
-            } else {
-                $return[] = array('status' => 'fail', 'message' => 'Stock transfer saved, but stock movement could not be processed.');
-            }
-        } else {
-            $return[] = array('status' => 'fail', 'message' => 'Approved manufacturing stock request not found.');
+            $stock_transfer_total_amount += $item_amount;
         }
+
+        $callConfig->updateRecord('stock_transfers', array(
+            'total_amount' => $stock_transfer_total_amount
+        ), 'id', $transfer_id);
 
         return $return;
     }
+
     public function getstocktransfers($get)
     {
         global $callConfig;
@@ -2140,60 +1737,41 @@ class manfacturingForecastUserClass extends userClass
         $stock_request_id = $get['stock_request_id'] ?? 0;
         $stock_transfer_id = $get['stock_transfer_id'] ?? 0;
 
-        // ===== Always get list of stock requests for initial selection =====
         $stock_requests_query = "SELECT id, transaction_number, transaction_date, ref_type, ref_no
             FROM stock_requests
-            WHERE company_id = '{$company_id}'
-                AND is_active = 0
-                AND ref_type = 'manufacturing_work_orders'
+            WHERE company_id = '{$company_id}' AND is_active = 0 AND ref_type = 'manufacturing_work_orders'
             ORDER BY id DESC";
         $stock_requests_res = $callConfig->getAllRows($stock_requests_query);
         $return['stock_requests'] = $stock_requests_res ?? array();
 
-        // ===== If stock_request_id provided, get stock transfers for that request =====
         if ($stock_request_id != '' && $stock_request_id != 0) {
             $query = "SELECT st.id, st.transaction_number, st.transaction_date, st.total_amount, st.notes,
                     SUM(IFNULL(sti.pending_qty, 0)) AS total_pending_qty
                 FROM stock_transfers st
-                INNER JOIN stktrn_items sti ON sti.company_id = st.company_id
-                    AND sti.transaction_id = st.id
-                    AND sti.is_active = 0
-                    AND IFNULL(sti.pending_qty, 0) > 0
-                WHERE st.company_id = '{$company_id}'
-                    AND st.ref_type = 'stock_requests'
-                    AND st.ref_id = '{$stock_request_id}'
-                    AND st.is_active = 0
+                INNER JOIN stktrn_items sti ON sti.company_id = st.company_id AND sti.transaction_id = st.id AND sti.is_active = 0 AND IFNULL(sti.pending_qty, 0) > 0
+                WHERE st.company_id = '{$company_id}' AND st.ref_type = 'stock_requests' AND st.ref_id = '{$stock_request_id}' AND st.is_active = 0
                 GROUP BY st.id, st.transaction_number, st.transaction_date, st.total_amount, st.notes
                 ORDER BY st.id DESC";
             $transfers = $callConfig->getAllRows($query);
             $return['data'] = $transfers ?? array();
         }
 
-        // ===== If stock_transfer_id provided, get transfer and items details =====
         if ($stock_transfer_id != '' && $stock_transfer_id != 0) {
-            // Get stock transfer master
             $query = "SELECT id, transaction_number, transaction_date, total_amount, notes
                 FROM stock_transfers
-                WHERE company_id = '{$company_id}'
-                    AND id = '{$stock_transfer_id}'
-                    AND ref_type = 'stock_requests'
-                    " . ($stock_request_id != '' && $stock_request_id != 0 ? " AND ref_id = '{$stock_request_id}' " : "") . "
-                    AND is_active = 0";
+                WHERE company_id = '{$company_id}' AND id = '{$stock_transfer_id}' AND ref_type = 'stock_requests' " . ($stock_request_id != '' && $stock_request_id != 0 ? " AND ref_id = '{$stock_request_id}' " : "") . " AND is_active = 0";
             $stock_transfer = $callConfig->getRow($query);
             $return['stock_transfer'] = $stock_transfer;
 
-            // Get stock transfer items
-            $query2 = "SELECT id, item_id, item_name, item_quantity, pending_qty, item_price, item_amount,
-                        purchase_uom
-                FROM stktrn_items
-                WHERE company_id = '{$company_id}'
-                    AND transaction_id = '{$stock_transfer_id}'
-                    AND IFNULL(pending_qty, 0) > 0
-                    AND is_active = 0";
+            $query2 = "SELECT sti.id, sti.item_id, sti.item_name, sti.item_quantity, sti.transaction_qty, sti.pending_qty, sti.item_price, sti.item_amount,
+                        i.sku, i.purchase_uom, i.sale_uom, concat(uom.uom_short_code,'-',uom.uom_name) as unit
+                FROM stktrn_items sti
+                LEFT JOIN items i ON i.id = sti.item_id AND i.company_id = sti.company_id
+                LEFT JOIN unit_of_measurements uom ON uom.id = i.purchase_uom AND uom.company_id = sti.company_id
+                WHERE sti.company_id = '{$company_id}' AND sti.transaction_id = '{$stock_transfer_id}' AND sti.is_active = 0 AND IFNULL(sti.pending_qty, 0) > 0";
             $items = $callConfig->getAllRows($query2);
             $return['stock_transfer_items'] = $items ?? array();
 
-            // Calculate total_amount as sum of all items
             $calculated_total = 0;
             if (!empty($items) && is_array($items)) {
                 foreach ($items as $item) {
@@ -2205,6 +1783,7 @@ class manfacturingForecastUserClass extends userClass
 
         return $return;
     }
+
     public function insertstocktransferreceipt($get, $post)
     {
         global $callConfig;
@@ -2215,223 +1794,165 @@ class manfacturingForecastUserClass extends userClass
         $stock_request_id = intval($post['stock_request_id'] ?? 0);
 
         if ($stock_transfer_id <= 0) {
-            $return[] = array('status' => 'fail', 'message' => 'Please select a valid stock transfer.');
-            return $return;
+            return array(array('status' => 'fail', 'message' => 'Please select a valid stock transfer.'));
         }
 
-        // ===== Get stock transfer master data =====
         $stock_transfer_sql = "SELECT * FROM stock_transfers WHERE company_id = '{$company_id}' AND id = '{$stock_transfer_id}' AND ref_type = 'stock_requests' " . ($stock_request_id > 0 ? " AND ref_id = '{$stock_request_id}' " : "") . " AND is_active = 0";
         $stock_transfer_res = $callConfig->getRow($stock_transfer_sql);
         $return['stock_transfer'] = $stock_transfer_res;
 
-        if (!empty($stock_transfer_res)) {
-            // ===== Get stock transfer items =====
-            $stock_transfer_items_sql = "SELECT * FROM stktrn_items WHERE company_id = '{$company_id}' AND transaction_id = '{$stock_transfer_id}' AND is_active = 0 AND IFNULL(pending_qty, 0) > 0";
-            $stock_transfer_items_res = $callConfig->getAllRows($stock_transfer_items_sql);
-            $return['stock_transfer_items'] = $stock_transfer_items_res;
+        if (empty($stock_transfer_res)) {
+            return $return;
+        }
 
-            // Create items array keyed by id for quick lookup
-            $items_array = array();
-            foreach ($stock_transfer_items_res as $item) {
-                $items_array[$item->id] = $item;
-            }
+        $stock_transfer_items_sql = "SELECT * FROM stktrn_items WHERE company_id = '{$company_id}' AND transaction_id = '{$stock_transfer_id}' AND is_active = 0 AND IFNULL(pending_qty, 0) > 0";
+        $stock_transfer_items_res = $callConfig->getAllRows($stock_transfer_items_sql);
+        $return['stock_transfer_items'] = $stock_transfer_items_res;
 
-            $selected_items = array();
-            $validation_errors = array();
-            if (!empty($post['items']) && is_array($post['items'])) {
-                foreach ($post['items'] as $row) {
-                    $item_id = intval($row['item_id'] ?? 0);
-                    $receipt_qty = floatval($row['receipt_qty'] ?? 0);
+        $items_array = array();
+        foreach ($stock_transfer_items_res as $item) {
+            $items_array[$item->id] = $item;
+        }
 
-                    if ($receipt_qty <= 0) {
-                        continue;
-                    }
-
-                    if (!isset($items_array[$item_id])) {
-                        $validation_errors[] = 'Invalid or fully received stock transfer item selected.';
-                        continue;
-                    }
-
-                    $stktrn_item = $items_array[$item_id];
-                    $current_pending = floatval($stktrn_item->pending_qty ?? 0);
-                    if ($receipt_qty > $current_pending) {
-                        $validation_errors[] = ($stktrn_item->item_name ?? 'Item') . ' receipt qty cannot exceed pending qty ' . $current_pending . '.';
-                        continue;
-                    }
-
-                    $selected_items[] = array(
-                        'stock_transfer_item' => $stktrn_item,
-                        'receipt_qty' => $receipt_qty
-                    );
+        $selected_items = array();
+        $validation_errors = array();
+        if (!empty($post['items']) && is_array($post['items'])) {
+            foreach ($post['items'] as $row) {
+                $item_id = intval($row['item_id'] ?? 0);
+                $receipt_qty = floatval($row['receipt_qty'] ?? 0);
+                if ($receipt_qty <= 0) {
+                    continue;
                 }
-            }
-
-            if (!empty($validation_errors)) {
-                $return[] = array('status' => 'fail', 'message' => implode(' ', array_unique($validation_errors)));
-                return $return;
-            }
-
-            if (empty($selected_items)) {
-                $return[] = array('status' => 'fail', 'message' => 'Please enter at least one valid receipt quantity.');
-                return $return;
-            }
-
-            // ===== Pre-fetch all related stock request items and manufacturing work order items in one query =====
-            // Get all ref_transaction_item_table_ids from stock transfer items
-            $ref_item_ids = array();
-            foreach ($stock_transfer_items_res as $item) {
-                if (!empty($item->ref_transaction_item_table_id)) {
-                    $ref_item_ids[] = $item->ref_transaction_item_table_id;
+                if (!isset($items_array[$item_id])) {
+                    $validation_errors[] = 'Invalid or fully received stock transfer item selected.';
+                    continue;
                 }
+                $stktrn_item = $items_array[$item_id];
+                $current_pending = floatval($stktrn_item->pending_qty ?? 0);
+                if ($receipt_qty > $current_pending) {
+                    $validation_errors[] = ($stktrn_item->item_name ?? 'Item') . ' receipt qty cannot exceed pending qty ' . $current_pending . '.';
+                    continue;
+                }
+                $selected_items[] = array(
+                    'stock_transfer_item' => $stktrn_item,
+                    'receipt_qty' => $receipt_qty
+                );
             }
+        }
 
-            // Get all stock request items and their references in one query
-            $stkreq_items_map = array(); // keyed by stkreq_item.id
-            $mfg_items_map = array();     // keyed by manufacturing_work_order_items.id
+        if (!empty($validation_errors)) {
+            return array(array('status' => 'fail', 'message' => implode(' ', array_unique($validation_errors))));
+        }
 
-            if (!empty($ref_item_ids)) {
-                $ref_ids_str = implode(',', $ref_item_ids);
+        if (empty($selected_items)) {
+            return array(array('status' => 'fail', 'message' => 'Please enter at least one valid receipt quantity.'));
+        }
 
-                // Get all stock request items
-                $stkreq_query = "SELECT * FROM stkreq_items WHERE company_id = '{$company_id}' AND id IN ({$ref_ids_str}) AND is_active = 0";
-                $stkreq_items_res = $callConfig->getAllRows($stkreq_query);
-                foreach ($stkreq_items_res as $item) {
-                    $stkreq_items_map[$item->id] = $item;
-                }
+        return $this->saveStockTransferReceiptItems($company_id, $user_id, $stock_transfer_res, $selected_items, $post);
+    }
 
-                // Get all manufacturing work order item IDs that need updating
-                $mfg_item_ids = array();
-                foreach ($stkreq_items_res as $item) {
-                    if (!empty($item->ref_transaction_item_table_id)) {
-                        $mfg_item_ids[] = $item->ref_transaction_item_table_id;
-                    }
-                }
+    private function saveStockTransferReceiptItems($company_id, $user_id, $stock_transfer_res, $selected_items, $post)
+    {
+        global $callConfig;
+        $return = array();
+        $receipt_date = !empty($post['receipt_date']) ? $this->dateconvertdbformat($post['receipt_date']) : date('Y-m-d');
+        $transaction_number = $this->toGetApplicationSerialNumber('stock_transfer_receipts', array(
+            'company_id' => $company_id,
+            'user_id' => $user_id,
+            'transaction_date' => $receipt_date
+        ));
+        $request_warehouse_id = intval($post['request_warehouse_id'] ?? ($stock_transfer_res->request_warehouse_id ?? 0));
+        $transaction_warehouse_id = intval($post['transaction_warehouse_id'] ?? ($stock_transfer_res->transaction_warehouse_id ?? 0));
 
-                // Get all manufacturing work order items in one query
-                if (!empty($mfg_item_ids)) {
-                    $mfg_ids_str = implode(',', $mfg_item_ids);
-                    $mfg_query = "SELECT id, stock_receipts_qty FROM manufacturing_work_order_items WHERE company_id = '{$company_id}' AND id IN ({$mfg_ids_str}) AND is_active = 0";
-                    $mfg_items_res = $callConfig->getAllRows($mfg_query);
-                    foreach ($mfg_items_res as $item) {
-                        $mfg_items_map[$item->id] = $item;
-                    }
-                }
-            }
+        $record = array(
+            'company_id' => $company_id,
+            'transaction_number' => $transaction_number,
+            'transaction_date' => $receipt_date,
+            'notes' => trim($post['notes'] ?? ''),
+            'total_amount' => 0,
+            'request_warehouse_id' => $request_warehouse_id,
+            'transaction_warehouse_id' => $transaction_warehouse_id,
+            'originator' => $user_id,
+            'ref_type' => 'stock_transfers',
+            'ref_id' => $stock_transfer_res->id,
+            'ref_no' => $stock_transfer_res->transaction_number,
+            'ref_date' => $stock_transfer_res->transaction_date,
+            'is_active' => 0,
+            'current_status' => 0,
+            'created_by' => $user_id,
+            'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+        );
 
-            // ===== Generate transaction number =====
-            $get['transaction_date'] = date('Y-m-d');
-            $transaction_number = $this->toGetApplicationSerialNumber('stock_transfer_receipts', $get);
+        $result = $callConfig->insertRecord('stock_transfer_receipts', $record);
+        $return[] = $result;
+        if (!isset($result['status']) || $result['status'] != 'sucess') {
+            return $return;
+        }
+        $receipt_id = $result['LASTID'];
 
-            // ===== Insert into stock_transfer_receipts (Master) =====
-            $record = array(
+        $receipt_total_amount = 0;
+        foreach ($selected_items as $selected_item) {
+            $stktrn_item = $selected_item['stock_transfer_item'];
+            $receipt_qty = $selected_item['receipt_qty'];
+            $item_price = floatval($stktrn_item->item_price ?? 0);
+            $item_amount = $item_price * $receipt_qty;
+            $child = array(
                 'company_id' => $company_id,
-                'transaction_number' => $transaction_number,
-                'transaction_date' => date('Y-m-d'),
-                'total_amount' => 0,
-                'request_warehouse_id' => $stock_transfer_res->request_warehouse_id,
-                'transaction_warehouse_id' => $stock_transfer_res->transaction_warehouse_id,
-                'originator' => $user_id,
-                'ref_type' => 'stock_transfers',
-                'ref_id' => $stock_transfer_res->id,
-                'ref_no' => $stock_transfer_res->transaction_number,
-                'ref_date' => $stock_transfer_res->transaction_date,
+                'transaction_id' => $receipt_id,
+                'item_id' => $stktrn_item->item_id,
+                'item_name' => $stktrn_item->item_name,
+                'description' => $stktrn_item->description,
+                'purchase_uom' => $stktrn_item->purchase_uom,
+                'invoice_item_quantity' => $receipt_qty,
+                'item_quantity' => $receipt_qty,
+                'transaction_qty' => $receipt_qty,
+                'item_price' => $item_price,
+                'item_amount' => $item_amount,
+                'tax_amount' => 0,
+                'total_amount' => $item_amount,
+                'pending_qty' => 0,
+                'ref_transaction_table_id' => $stock_transfer_res->id,
+                'ref_transaction_item_table_id' => $stktrn_item->id,
                 'is_active' => 0,
                 'current_status' => 0,
                 'created_by' => $user_id,
-                'created_date' => date('Y-m-d H:i:s')
+                'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
             );
+            $callConfig->insertRecord('stktrn_receipt_items', $child);
 
-            $result = $callConfig->insertRecord('stock_transfer_receipts', $record);
-            $return[] = $result;
-            if (!isset($result['status']) || $result['status'] != 'sucess') {
-                return $return;
-            }
-            $receipt_id = $result['LASTID'];
+            $current_transferred = floatval($stktrn_item->transaction_qty ?? 0) + $receipt_qty;
+            $current_pending = floatval($stktrn_item->item_quantity ?? 0) - $current_transferred;
+            $callConfig->updateRecord('stktrn_items', array(
+                'transaction_qty' => $current_transferred,
+                'pending_qty' => max(0, $current_pending),
+                'updated_by' => $user_id,
+                'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            ), 'id', $stktrn_item->id);
 
-            // ===== Insert into stktrnrec_items (Child Loop) =====
-            $receipt_amount = 0;
-            $receipt_tax_amount = 0;
-            $receipt_total_amount = 0;
-            foreach ($selected_items as $selected_item) {
-                $stktrn_item = $selected_item['stock_transfer_item'];
-                $receipt_qty = $selected_item['receipt_qty'];
-
-                $item_price = floatval($stktrn_item->item_price ?? 0);
-                $item_amount = $item_price * $receipt_qty;
-                $tax_amount = 0;
-                $total_amount = $item_amount + $tax_amount;
-
-                $child = array(
-                    'company_id' => $company_id,
-                    'transaction_id' => $receipt_id,
-                    'item_id' => $stktrn_item->item_id,
-                    'item_name' => $stktrn_item->item_name,
-                    'description' => $stktrn_item->description,
-                    'purchase_uom' => $stktrn_item->purchase_uom,
-                    'invoice_item_quantity' => $receipt_qty,
-                    'item_quantity' => $receipt_qty,
-                    'transaction_qty' => $receipt_qty,
-                    'item_price' => $item_price,
-                    'item_amount' => $item_amount,
-                    'tax_amount' => $tax_amount,
-                    'total_amount' => $total_amount,
-                    'pending_qty' => $receipt_qty,
-                    'ref_transaction_table_id' => $stock_transfer_res->id,
-                    'ref_transaction_item_table_id' => $stktrn_item->id,
-                    'is_active' => 0,
-                    'current_status' => 0,
-                    'created_by' => $user_id,
-                    'created_date' => date('Y-m-d H:i:s')
-                );
-
-                $res = $callConfig->insertRecord('stkrec_items', $child);
-                $return[] = $res;
-                if (isset($res['status']) && $res['status'] == 'sucess') {
-                    $receipt_amount += $item_amount;
-                    $receipt_tax_amount += $tax_amount;
-                    $receipt_total_amount += $total_amount;
-
-                    // ===== Update manufacturing_work_order_items with receipt details =====
-                    // Use pre-fetched data instead of querying in loop
-                    if (!empty($stktrn_item->ref_transaction_item_table_id) && isset($stkreq_items_map[$stktrn_item->ref_transaction_item_table_id])) {
-                        $stkreq_item = $stkreq_items_map[$stktrn_item->ref_transaction_item_table_id];
-
-                        if (!empty($stkreq_item->ref_transaction_item_table_id) && isset($mfg_items_map[$stkreq_item->ref_transaction_item_table_id])) {
-                            $mfg_item = $mfg_items_map[$stkreq_item->ref_transaction_item_table_id];
-
-                            $current_stock_receipts_qty = floatval($mfg_item->stock_receipts_qty ?? 0);
-                            $updated_stock_receipts_qty = $current_stock_receipts_qty + $receipt_qty;
-
-                            // Update manufacturing_work_order_items
+            if (!empty($stktrn_item->ref_transaction_item_table_id)) {
+                $stkreq_item = $callConfig->getRow("SELECT id, transaction_id FROM stkreq_items WHERE company_id = '{$company_id}' AND id = '{$stktrn_item->ref_transaction_item_table_id}' AND is_active = 0");
+                if (!empty($stkreq_item->id)) {
+                    $stkreq_master = $callConfig->getRow("SELECT id, ref_id FROM stock_requests WHERE company_id = '{$company_id}' AND id = '{$stkreq_item->transaction_id}' AND ref_type = 'manufacturing_work_orders' AND is_active = 0");
+                    if (!empty($stkreq_master->ref_id)) {
+                        $mwo_item = $callConfig->getRow("SELECT id, stock_receipts_qty FROM manufacturing_work_order_items WHERE company_id = '{$company_id}' AND transaction_id = '{$stkreq_master->ref_id}' AND item_id = '{$stktrn_item->item_id}' AND is_active = 0 LIMIT 1");
+                        if (!empty($mwo_item->id)) {
+                            $new_stock_receipts_qty = floatval($mwo_item->stock_receipts_qty ?? 0) + $receipt_qty;
                             $callConfig->updateRecord('manufacturing_work_order_items', array(
-                                'stock_receipts_id' => $receipt_id,
-                                'stock_receipts_qty' => $updated_stock_receipts_qty,
+                                'stock_receipts_qty' => $new_stock_receipts_qty,
                                 'updated_by' => $user_id,
-                                'updated_date' => date('Y-m-d H:i:s')
-                            ), 'id', $stkreq_item->ref_transaction_item_table_id);
-                            $mfg_items_map[$stkreq_item->ref_transaction_item_table_id]->stock_receipts_qty = $updated_stock_receipts_qty;
+                                'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+                            ), 'id', $mwo_item->id);
                         }
                     }
                 }
             }
 
-            $callConfig->updateRecord('stock_transfer_receipts', array('amount' => $receipt_amount, 'tax_amount' => $receipt_tax_amount, 'total_amount' => $receipt_total_amount, 'pending_amount' => $receipt_total_amount, 'updated_by' => $user_id, 'updated_date' => date('Y-m-d H:i:s')), 'id', $receipt_id);
-            try {
-                $this->tocreatejounalvoucherbaseallcases('stock_transfer_receipts', $receipt_id);
-            } catch (Throwable $e) {
-                error_log('Stock transfer receipt journal voucher creation failed for receipt ' . $receipt_id . ': ' . $e->getMessage());
-                $return[] = array('status' => 'warning', 'accounting_status' => 'pending', 'message' => 'Stock transfer receipt saved, but journal voucher was not created. Please check stock transfer receipt account configuration.');
-            }
-            $get['transaction_table'] = 'stock_transfer_receipts';
-            $transaction_details = $callConfig->getRow("SELECT * FROM stock_transfer_receipts WHERE company_id = '" . $company_id . "' AND id = '" . $receipt_id . "' AND is_active = 0");
-            if (!empty($transaction_details->id)) {
-                $this->updateTransactionItemsQty($get, $transaction_details, "-");
-            } else {
-                $return[] = array('status' => 'fail', 'message' => 'Stock transfer receipt saved, but stock movement could not be processed.');
-            }
-        } else {
-            $return[] = array('status' => 'fail', 'message' => 'Stock transfer not found.');
+            $receipt_total_amount += $item_amount;
         }
+
+        $callConfig->updateRecord('stock_transfer_receipts', array(
+            'total_amount' => $receipt_total_amount
+        ), 'id', $receipt_id);
 
         return $return;
     }
@@ -2439,66 +1960,50 @@ class manfacturingForecastUserClass extends userClass
     public function insertManufacturingProductionStart($get, $post)
     {
         global $callConfig;
-
         $work_order_id = $get['work_order_id'] ?? $post['work_order_id'] ?? 0;
         $company_id = $get['company_id'] ?? $post['company_id'] ?? 0;
         $created_by = $get['created_by'] ?? $post['created_by'] ?? 0;
         $remarks = $post['remarks'] ?? '';
 
+        $validationError = null;
         if (!$work_order_id || !$company_id) {
-            return array(
-                'status' => 'error',
-                'message' => 'Work Order ID and Company ID are required',
-                'code' => 'MISSING_PARAMETERS'
-            );
+            $validationError = array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_COMPANY_REQUIRED, 'code' => 'MISSING_PARAMETERS');
+        } else {
+            $workOrder = $callConfig->getRow("SELECT id, current_status, work_log_status FROM manufacturing_work_orders WHERE company_id = '{$company_id}' AND id = '{$work_order_id}' AND is_active = 0");
+            if (empty($workOrder->id)) {
+                $validationError = array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_NOT_FOUND);
+            } elseif ($workOrder->current_status != ST_APPROVED) {
+                $validationError = array('status' => 'error', 'message' => 'Work Order must be approved before starting production');
+            } elseif ($workOrder->work_log_status !== null && $workOrder->work_log_status !== '') {
+                $validationError = array('status' => 'error', 'message' => 'Production already started for this work order');
+            }
         }
 
-        $workOrder = $callConfig->getRow("SELECT id, current_status, work_log_status FROM manufacturing_work_orders WHERE company_id = '{$company_id}' AND id = '{$work_order_id}' AND is_active = 0");
-        if (empty($workOrder->id)) {
-            return array('status' => 'error', 'message' => 'Work Order not found');
-        }
-        if ($workOrder->current_status != ST_APPROVED) {
-            return array('status' => 'error', 'message' => 'Work Order must be approved before starting production');
-        }
-        if ($workOrder->work_log_status !== null && $workOrder->work_log_status !== '') {
-            return array('status' => 'error', 'message' => 'Production already started for this work order');
+        if ($validationError !== null) {
+            return $validationError;
         }
 
         $data = array(
             'work_order_id' => $work_order_id,
             'production_type' => 'START',
             'originator' => $created_by,
-            'date_time' => date('Y-m-d H:i:s'),
+            'date_time' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT),
             'company_id' => $company_id,
             'is_active' => 0,
             'current_status' => '0',
             'remarks' => $remarks,
             'created_by' => $created_by,
-            'created_date' => date('Y-m-d H:i:s')
+            'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
         );
 
         $result = $callConfig->insertRecord('manufacturing_production', $data);
-
         if ($result['status'] == 'sucess') {
-            // Update manufacturing_work_orders with production start details
-            $wo_update = array(
-                'work_log_status' => 0,
-                'actual_start_date' => date('Y-m-d H:i:s')
-            );
+            $wo_update = array('work_log_status' => 0, 'actual_start_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT));
             $callConfig->updateRecord('manufacturing_work_orders', $wo_update, 'id', $work_order_id);
-
-            return array(
-                'status' => 'success',
-                'message' => 'Production started successfully',
-                'data' => $result
-            );
-        } else {
-            return array(
-                'status' => 'error',
-                'message' => 'Failed to start production',
-                'error' => $result
-            );
+            return array('status' => 'success', 'message' => 'Production started successfully', 'data' => $result);
         }
+
+        return array('status' => 'error', 'message' => 'Failed to start production', 'error' => $result);
     }
     public function getManufacturingProductionDetails($get)
     {
@@ -2511,7 +2016,7 @@ class manfacturingForecastUserClass extends userClass
         if (!$work_order_id || !$company_id) {
             return array(
                 'status' => 'error',
-                'message' => 'Work Order ID and Company ID are required'
+                'message' => ManufacturingForecastConstants::ERR_WO_COMPANY_REQUIRED
             );
         }
 
@@ -2529,7 +2034,7 @@ class manfacturingForecastUserClass extends userClass
         if (empty($wo_result)) {
             return array(
                 'status' => 'error',
-                'message' => 'Work Order not found'
+                'message' => ManufacturingForecastConstants::ERR_WO_NOT_FOUND
             );
         }
 
@@ -2553,30 +2058,23 @@ class manfacturingForecastUserClass extends userClass
         return $return;
     }
 
+
     public function updateManufacturingProductionData($get, $post)
     {
         global $callConfig;
-
         $work_order_id = $post['work_order_id'] ?? 0;
         $company_id = $post['company_id'] ?? 0;
         $created_by = $post['created_by'] ?? 0;
-        $production_type = $post['production_type'] ?? ''; // HOLD or COMPLETED
+        $production_type = $post['production_type'] ?? '';
         $completed_qty = $post['completed_qty'] ?? 0;
         $remarks = $post['remarks'] ?? '';
         $hold_reason = $post['hold_reason'] ?? '';
 
         if (!$work_order_id || !$company_id) {
-            return array(
-                'status' => 'error',
-                'message' => 'Work Order ID and Company ID are required'
-            );
+            return array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_COMPANY_REQUIRED);
         }
-
         if (!in_array($production_type, array('HOLD', 'COMPLETED'))) {
-            return array(
-                'status' => 'error',
-                'message' => 'Invalid production type'
-            );
+            return array('status' => 'error', 'message' => 'Invalid production type');
         }
 
         $current_completed_row = $callConfig->getRow(
@@ -2586,8 +2084,20 @@ class manfacturingForecastUserClass extends userClass
              LEFT JOIN items i ON i.company_id = mwo.company_id AND i.id = mwo.work_order_item_id
              WHERE mwo.id = '{$work_order_id}' AND mwo.company_id = '{$company_id}' AND mwo.is_active = 0"
         );
+
+        $valError = $this->validateManufacturingProductionData($company_id, $work_order_id, $production_type, $completed_qty, $current_completed_row, $post);
+        if ($valError !== null) {
+            return $valError;
+        }
+
+        return $this->executeManufacturingProductionUpdates($get, $post, $company_id, $work_order_id, $created_by, $production_type, $completed_qty, $remarks, $hold_reason, $current_completed_row);
+    }
+
+    private function validateManufacturingProductionData($company_id, $work_order_id, $production_type, $completed_qty, $current_completed_row, $post)
+    {
+        global $callConfig;
         if (empty($current_completed_row->work_order_item_id)) {
-            return array('status' => 'error', 'message' => 'Work Order not found');
+            return array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_NOT_FOUND);
         }
         if ($current_completed_row->current_status != ST_APPROVED) {
             return array('status' => 'error', 'message' => 'Work Order must be approved before production updates');
@@ -2611,12 +2121,19 @@ class manfacturingForecastUserClass extends userClass
             return array('status' => 'error', 'message' => 'Completed quantity cannot exceed work order quantity');
         }
 
+        return $this->validateManufacturingProductionTracking($company_id, $work_order_id, $production_type, $session_completed_qty, $current_completed_row, $post);
+    }
+
+    private function validateManufacturingProductionTracking($company_id, $work_order_id, $production_type, $session_completed_qty, $current_completed_row, $post)
+    {
+        global $callConfig;
         $product_quality_check = intval($current_completed_row->quality_check ?? 0);
         $tracking_type = intval($current_completed_row->tracking_type ?? 0);
         $qc_required = ($product_quality_check == 1 && ($post['qc_required'] ?? '0') == '1' && $session_completed_qty > 0) ? 1 : 0;
         if ($product_quality_check != 1) {
             $qc_required = 0;
         }
+
         if ($qc_required == 1 && $tracking_type == 1) {
             if (floor($session_completed_qty) != $session_completed_qty) {
                 return array('status' => 'error', 'message' => 'Serial tracked production quantity must be a whole number');
@@ -2642,9 +2159,9 @@ class manfacturingForecastUserClass extends userClass
                 }
             }
         }
+
         if ($qc_required == 1 && $tracking_type == 2) {
             $lot_total = 0;
-            $lot_count = 0;
             $lot_nos = array();
             foreach ((array) ($post['lot_no'] ?? array()) as $seq => $lot_no) {
                 $lot_no = trim($lot_no);
@@ -2653,10 +2170,9 @@ class manfacturingForecastUserClass extends userClass
                     return array('status' => 'error', 'message' => 'Lot number and quantity are required for lot tracked production');
                 }
                 $lot_total += $lot_qty;
-                $lot_count++;
                 $lot_nos[] = $lot_no;
             }
-            if ($lot_count == 0) {
+            if (empty($lot_nos)) {
                 return array('status' => 'error', 'message' => 'Please enter at least one lot number');
             }
             if (count($lot_nos) != count(array_unique($lot_nos))) {
@@ -2673,26 +2189,18 @@ class manfacturingForecastUserClass extends userClass
                 }
             }
         }
+
         if ($production_type === 'COMPLETED') {
             $child_orders_query = "SELECT child.id, child.transaction_no, child.work_order_item_id, child.work_order_item_qty, child.completed_qty, child.work_log_status, itm.item_name,
                 IFNULL((
-                    SELECT iwb.closing_qty
-                    FROM item_wa_balances iwb
-                    WHERE iwb.company_id = child.company_id
-                        AND iwb.item_id = child.work_order_item_id
-                        AND iwb.balance_date = (
-                            SELECT MAX(iwb2.balance_date)
-                            FROM item_wa_balances iwb2
-                            WHERE iwb2.company_id = iwb.company_id
-                                AND iwb2.item_id = iwb.item_id
-                        )
+                    SELECT iwb.closing_qty FROM item_wa_balances iwb
+                    WHERE iwb.company_id = child.company_id AND iwb.item_id = child.work_order_item_id
+                        AND iwb.balance_date = (SELECT MAX(iwb2.balance_date) FROM item_wa_balances iwb2 WHERE iwb2.company_id = iwb.company_id AND iwb2.item_id = iwb.item_id)
                     LIMIT 0,1
                 ), 0) AS available_qty
                 FROM manufacturing_work_orders child
                 LEFT JOIN items itm ON itm.company_id = child.company_id AND itm.id = child.work_order_item_id
-                WHERE child.company_id = '{$company_id}'
-                    AND child.parent_manufacturing_work_order_id = '{$work_order_id}'
-                    AND child.is_active = 0";
+                WHERE child.company_id = '{$company_id}' AND child.parent_manufacturing_work_order_id = '{$work_order_id}' AND child.is_active = 0";
             $child_orders = $callConfig->getAllRows($child_orders_query);
             foreach ((array) $child_orders as $child_order) {
                 $child_order_qty = floatval($child_order->work_order_item_qty ?? 0);
@@ -2702,21 +2210,17 @@ class manfacturingForecastUserClass extends userClass
                 $child_available = ($child_available_qty >= $child_order_qty);
                 if (!$child_completed && !$child_available) {
                     $child_item_name = $child_order->item_name ?: ('Item #' . $child_order->work_order_item_id);
-                    return array(
-                        'status' => 'error',
-                        'message' => 'Cannot complete parent work order. Child work order ' . $child_order->transaction_no . ' for ' . $child_item_name . ' must be completed or available in stock.'
-                    );
+                    return array('status' => 'error', 'message' => 'Cannot complete parent work order. Child work order ' . $child_order->transaction_no . ' for ' . $child_item_name . ' must be completed or available in stock.');
                 }
             }
         }
+
         if (isset($post['item_id']) && is_array($post['item_id'])) {
             foreach ($post['item_id'] as $seq => $item_id) {
                 $mwoi_id = intval($post['manufacturing_work_order_item_id'][$seq] ?? 0);
                 $consumed_qty = floatval($post['consumed_qty'][$seq] ?? 0);
                 if ($mwoi_id > 0 && $consumed_qty > 0) {
-                    $current_item_row = $callConfig->getRow(
-                        "SELECT completed_qty, request_qty, stock_receipts_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0"
-                    );
+                    $current_item_row = $callConfig->getRow("SELECT completed_qty, request_qty, stock_receipts_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0");
                     $current_item_completed = floatval($current_item_row->completed_qty ?? 0);
                     $available_material_qty = floatval($current_item_row->stock_receipts_qty ?? 0);
                     if ($available_material_qty <= 0) {
@@ -2729,26 +2233,33 @@ class manfacturingForecastUserClass extends userClass
             }
         }
 
+        return null;
+    }
+
+    private function executeManufacturingProductionUpdates($get, $post, $company_id, $work_order_id, $created_by, $production_type, $completed_qty, $remarks, $hold_reason, $current_completed_row)
+    {
+        global $callConfig;
         try {
-            // 1. Insert new record in manufacturing_production for audit trail
             $production_data = array(
                 'work_order_id' => $work_order_id,
                 'production_type' => $production_type,
                 'originator' => $created_by,
-                'date_time' => date('Y-m-d H:i:s'),
+                'date_time' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT),
                 'company_id' => $company_id,
                 'hold_reason' => $hold_reason,
                 'is_active' => 0,
                 'current_status' => '0',
                 'remarks' => $remarks,
                 'created_by' => $created_by,
-                'created_date' => date('Y-m-d H:i:s')
+                'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
             );
-
             $callConfig->insertRecord('manufacturing_production', $production_data);
 
-            // 2. Update manufacturing_work_orders
+            $current_completed_qty = floatval($current_completed_row->completed_qty ?? 0);
+            $session_completed_qty = floatval($completed_qty);
+            $ordered_qty = floatval($current_completed_row->work_order_item_qty ?? 0);
             $total_completed_qty = $current_completed_qty + $session_completed_qty;
+
             if ($production_type === 'HOLD') {
                 $work_log_status = 1;
             } elseif ($total_completed_qty >= $ordered_qty) {
@@ -2761,12 +2272,17 @@ class manfacturingForecastUserClass extends userClass
                 'completed_qty' => $total_completed_qty
             );
 
-            // Add actual_end_date if COMPLETED
             if ($production_type === 'COMPLETED' && $work_log_status == 199) {
-                $wo_update['actual_end_date'] = date('Y-m-d H:i:s');
+                $wo_update['actual_end_date'] = date(ManufacturingForecastConstants::DATE_TIME_FORMAT);
             }
-
             $callConfig->updateRecord('manufacturing_work_orders', $wo_update, 'id', $work_order_id);
+
+            $product_quality_check = intval($current_completed_row->quality_check ?? 0);
+            $tracking_type = intval($current_completed_row->tracking_type ?? 0);
+            $qc_required = ($product_quality_check == 1 && ($post['qc_required'] ?? '0') == '1' && $session_completed_qty > 0) ? 1 : 0;
+            if ($product_quality_check != 1) {
+                $qc_required = 0;
+            }
 
             $production_post = array(
                 'company_id' => $company_id,
@@ -2785,23 +2301,15 @@ class manfacturingForecastUserClass extends userClass
                 'skip_work_order_updates' => 1,
             );
 
-            // 3. Update manufacturing_work_order_items with consumed quantities
             if (isset($post['item_id']) && is_array($post['item_id'])) {
                 foreach ($post['item_id'] as $seq => $item_id) {
                     $mwoi_id = $post['manufacturing_work_order_item_id'][$seq] ?? 0;
                     $consumed_qty = $post['consumed_qty'][$seq] ?? 0;
-
                     if ($mwoi_id > 0 && $consumed_qty > 0) {
-                        $current_item_row = $callConfig->getRow(
-                            "SELECT completed_qty,item_id, request_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0"
-                        );
+                        $current_item_row = $callConfig->getRow("SELECT completed_qty, item_id, request_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0");
                         $current_item_completed = floatval($current_item_row->completed_qty ?? 0);
                         $total_item_completed = $current_item_completed + floatval($consumed_qty);
-                        $item_update = array(
-                            'completed_qty' => $total_item_completed
-                        );
-                        $callConfig->updateRecord('manufacturing_work_order_items', $item_update, 'id', $mwoi_id);
-
+                        $callConfig->updateRecord('manufacturing_work_order_items', array('completed_qty' => $total_item_completed), 'id', $mwoi_id);
                         $production_post['note_items'][] = array(
                             'item_id' => $current_item_row->item_id ?? 0,
                             'received_qty' => $current_item_row->request_qty ?? 0,
@@ -2809,9 +2317,9 @@ class manfacturingForecastUserClass extends userClass
                             'wastage_qty' => 0,
                         );
                     }
-
                 }
             }
+
             $production_res = array();
             if ($session_completed_qty > 0) {
                 $production_res = $this->insertmanufacturingproductnote($get, $production_post);
@@ -2825,78 +2333,57 @@ class manfacturingForecastUserClass extends userClass
                 'qc_required' => $qc_required,
                 'production_res' => $production_res
             );
-
         } catch (Exception $e) {
-            return array(
-                'status' => 'error',
-                'message' => 'Error updating production data: ' . $e->getMessage()
-            );
+            return array('status' => 'error', 'message' => 'Error updating production data: ' . $e->getMessage());
         }
     }
 
     public function resumeManufacturingProduction($get, $post)
     {
         global $callConfig;
-
         $work_order_id = $get['work_order_id'] ?? $post['work_order_id'] ?? 0;
         $company_id = $get['company_id'] ?? $post['company_id'] ?? 0;
         $created_by = $get['created_by'] ?? $post['created_by'] ?? 0;
         $remarks = $post['remarks'] ?? '';
 
+        $validationError = null;
         if (!$work_order_id || !$company_id) {
-            return array(
-                'status' => 'error',
-                'message' => 'Work Order ID and Company ID are required',
-                'code' => 'MISSING_PARAMETERS'
-            );
+            $validationError = array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_COMPANY_REQUIRED, 'code' => 'MISSING_PARAMETERS');
+        } else {
+            $workOrder = $callConfig->getRow("SELECT id, current_status, work_log_status FROM manufacturing_work_orders WHERE company_id = '{$company_id}' AND id = '{$work_order_id}' AND is_active = 0");
+            if (empty($workOrder->id)) {
+                $validationError = array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_NOT_FOUND);
+            } elseif ($workOrder->current_status != ST_APPROVED) {
+                $validationError = array('status' => 'error', 'message' => 'Work Order must be approved before resuming production');
+            } elseif ($workOrder->work_log_status != 1) {
+                $validationError = array('status' => 'error', 'message' => 'Only held production can be resumed');
+            }
         }
 
-        $workOrder = $callConfig->getRow("SELECT id, current_status, work_log_status FROM manufacturing_work_orders WHERE company_id = '{$company_id}' AND id = '{$work_order_id}' AND is_active = 0");
-        if (empty($workOrder->id)) {
-            return array('status' => 'error', 'message' => 'Work Order not found');
-        }
-        if ($workOrder->current_status != ST_APPROVED) {
-            return array('status' => 'error', 'message' => 'Work Order must be approved before resuming production');
-        }
-        if ($workOrder->work_log_status != 1) {
-            return array('status' => 'error', 'message' => 'Only held production can be resumed');
+        if ($validationError !== null) {
+            return $validationError;
         }
 
-        // Insert record in manufacturing_production for audit trail
         $data = array(
             'work_order_id' => $work_order_id,
             'production_type' => 'RESUME',
             'originator' => $created_by,
-            'date_time' => date('Y-m-d H:i:s'),
+            'date_time' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT),
             'company_id' => $company_id,
             'is_active' => 0,
             'current_status' => '0',
             'remarks' => $remarks,
             'created_by' => $created_by,
-            'created_date' => date('Y-m-d H:i:s')
+            'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
         );
 
         $result = $callConfig->insertRecord('manufacturing_production', $data);
-
         if ($result['status'] == 'sucess') {
-            // Update manufacturing_work_orders - set work_log_status to 0 (resumed/in-progress)
-            $wo_update = array(
-                'work_log_status' => 0
-            );
-            $callConfig->updateRecord('manufacturing_work_orders', $wo_update, 'id', $work_order_id);
-
-            return array(
-                'status' => 'success',
-                'message' => 'Production resumed successfully',
-                'data' => $result
-            );
-        } else {
-            return array(
-                'status' => 'error',
-                'message' => 'Failed to resume production',
-                'error' => $result
-            );
+            $callConfig->updateRecord('manufacturing_work_orders', array('work_log_status' => 0), 'id', $work_order_id);
+            return array('status' => 'success', 'message' => 'Production resumed successfully', 'data' => $result);
         }
+
+        return array('status' => 'error', 'message' => 'Failed to resume production', 'error' => $result);
     }
     public function getManufacturingWorkOrderQcData($get)
     {
@@ -2947,5 +2434,439 @@ class manfacturingForecastUserClass extends userClass
         return $return;
 
     }
-
 }
+
+class ManfacturingForecastUserClass
+{
+    use ManufacturingForecastDashboardTrait;
+    use ManufacturingForecastReportsTrait;
+    use ManufacturingForecastProductNotesTrait;
+    use ManufacturingForecastStockTransferTrait;
+    public function getmanufacturingforecastedata($get)
+    {
+        global $callConfig;
+        $return = array();
+        $company_id = intval($get['company_id']);
+        $year = intval($get['year']);
+
+        $itemsQuery = "SELECT id AS product_id, item_name FROM items WHERE company_id='{$company_id}' AND stocking_type='F' AND is_active=0 ORDER BY item_name ASC";
+        $items = $callConfig->getAllRows($itemsQuery);
+
+        $headerQuery = "SELECT * FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}' AND is_active=0 LIMIT 1";
+        $forecastHeader = $callConfig->getRow($headerQuery);
+        $forecastHeaderId = !empty($forecastHeader->id) ? intval($forecastHeader->id) : 0;
+
+        if ($forecastHeaderId > 0) {
+            $forecastQuery = "SELECT * FROM manufacturing_forecast_items WHERE company_id='{$company_id}' AND manufacturing_forecast_id='{$forecastHeaderId}' AND is_active=0";
+        } else {
+            $forecastQuery = "SELECT * FROM manufacturing_forecast_items WHERE company_id='{$company_id}' AND year='{$year}' AND is_active=0";
+        }
+        $forecastRows = $callConfig->getAllRows($forecastQuery);
+        $return['forecast_status'] = '';
+        $return['forecast_transaction_id'] = '';
+        $return['forecast_no'] = '';
+        $return['forecast_date'] = date('Y-m-d');
+        $return['remarks'] = '';
+        $return['forecast_header'] = array();
+        if ($forecastHeaderId > 0) {
+            $forecastHeaderArray = (array) $forecastHeader;
+            $return['forecast_header'] = $forecastHeaderArray;
+            $return['forecast_status'] = $forecastHeaderArray['current_status'] ?? '';
+            $return['forecast_transaction_id'] = $forecastHeaderArray['id'] ?? '';
+            $return['forecast_no'] = $forecastHeaderArray['forecast_no'] ?? '';
+            $return['forecast_date'] = $forecastHeaderArray['forecast_date'] ?? date('Y-m-d');
+            $return['remarks'] = $forecastHeaderArray['remarks'] ?? '';
+        }
+
+        $forecastMap = array();
+        foreach ((array) $forecastRows as $forecast) {
+            $forecastMap[$forecast->product_id] = (array) $forecast;
+        }
+
+        $data = array();
+        foreach ((array) $items as $item) {
+            $itemArray = (array) $item;
+            $row = isset($forecastMap[$item->product_id]) ? $forecastMap[$item->product_id] : array();
+            $row['product_id'] = $item->product_id;
+            $row['item_name'] = $item->item_name;
+            for ($i = 1; $i <= 12; $i++) {
+                $key = "forecast_month_" . $i;
+                if (!isset($row[$key])) {
+                    $row[$key] = 0;
+                }
+            }
+            $data[] = array_merge($itemArray, $row);
+        }
+
+        $return['data'] = $data;
+        $return['forecast_rows'] = $forecastRows;
+
+        return $return;
+    }
+
+    public function insertandupdatemanufacturingforecaste($get, $post)
+    {
+        global $callConfig;
+        $return = array();
+        $return['post'] = $post;
+        $return['get'] = $get;
+
+        $company_id = intval($get['company_id']);
+        $user_id = intval($get['user_id']);
+        $year = intval($post['year'] ?? 0);
+        $forecast_date = !empty($post['forecast_date']) ? $this->dateconvertdbformat($post['forecast_date']) : date('Y-m-d');
+        $remarks = trim($post['remarks'] ?? '');
+
+        if ($year == 0 || empty($post['rows']) || !is_array($post['rows'])) {
+            return array(array('status' => 'fail', 'message' => 'Forecast year and product rows are required.'));
+        }
+
+        $activeProducts = array();
+        $products = $callConfig->getAllRows("SELECT id FROM items WHERE company_id='{$company_id}' AND stocking_type='F' AND is_active=0");
+        foreach ((array) $products as $product) {
+            $activeProducts[$product->id] = $product->id;
+        }
+
+        $forecastHeader = $callConfig->getRow("SELECT * FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}'" . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+        $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
+        if (!empty($forecastHeader->id) && !in_array($forecastHeader->current_status, $editableStatuses)) {
+            return array(array('status' => 'fail', 'message' => 'Approved forecast cannot be edited.'));
+        }
+
+        if (!empty($forecastHeader->id)) {
+            $forecastHeaderId = intval($forecastHeader->id);
+            $headerRecord = array(
+                'forecast_date' => $forecast_date,
+                'remarks' => $remarks,
+                'updated_by' => $user_id,
+                'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            );
+            $return['forecast_header'] = $callConfig->updateRecord('manufacturing_forecast', $headerRecord, 'id', $forecastHeaderId);
+        } else {
+            $forecastNo = $this->toGetApplicationSerialNumber('manufacturing_forecast', array(
+                'company_id' => $company_id,
+                'user_id' => $user_id,
+                'transaction_date' => $forecast_date
+            ));
+            $headerRecord = array(
+                'company_id' => $company_id,
+                'forecast_no' => $forecastNo,
+                'forecast_date' => $forecast_date,
+                'year' => $year,
+                'remarks' => $remarks,
+                'is_active' => 0,
+                'current_status' => 0,
+                'created_by' => $user_id,
+                'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            );
+            $headerResult = $callConfig->insertRecord('manufacturing_forecast', $headerRecord);
+            if (($headerResult['status'] ?? '') != 'sucess') {
+                return array(array('status' => 'fail', 'message' => 'Unable to create forecast header.'));
+            }
+            $forecastHeaderId = intval($headerResult['LASTID']);
+            $return['forecast_header'] = $headerResult;
+        }
+
+        $existingRecords = $callConfig->getAllRows("SELECT id, product_id FROM manufacturing_forecast_items WHERE company_id='{$company_id}' AND (manufacturing_forecast_id='{$forecastHeaderId}' OR (year='{$year}' AND (manufacturing_forecast_id IS NULL OR manufacturing_forecast_id=0))) AND is_active=0");
+        $existingMap = array();
+        if (!empty($existingRecords) && is_array($existingRecords)) {
+            foreach ($existingRecords as $r) {
+                $existingMap[$r->product_id] = $r->id;
+            }
+        }
+
+        $rowErr = $this->saveManufacturingForecastRows($company_id, $user_id, $year, $remarks, $forecastHeaderId, $post['rows'], $activeProducts, $existingMap, $return);
+        if ($rowErr !== null) {
+            return array(array('status' => 'fail', 'message' => $rowErr));
+        }
+
+        return array(array('status' => 'sucess', 'LASTID' => $forecastHeaderId, 'message' => 'Forecast saved successfully.'));
+    }
+
+    private function saveManufacturingForecastRows($company_id, $user_id, $year, $remarks, $forecastHeaderId, $rows, $activeProducts, $existingMap, &$return)
+    {
+        global $callConfig;
+        foreach ($rows as $product_id => $row) {
+            $product_id = intval($product_id);
+            if (!isset($activeProducts[$product_id])) {
+                return 'Invalid finished good item selected.';
+            }
+            $record = [
+                'manufacturing_forecast_id' => $forecastHeaderId,
+                'company_id' => $company_id,
+                'year' => $year,
+                'product_id' => $product_id,
+                'interval_type' => 'monthly',
+                'remarks' => $remarks,
+                'current_status' => 0,
+                'is_active' => 0
+            ];
+
+            $total = 0;
+            for ($i = 1; $i <= 12; $i++) {
+                $key = "forecast_month_$i";
+                $rawValue = $row[$key] ?? '';
+                if ($rawValue === '' || !is_numeric($rawValue)) {
+                    return 'Forecast quantity must be numeric.';
+                }
+                $val = floatval($rawValue);
+                if ($val < 0) {
+                    return 'Forecast quantity cannot be negative.';
+                }
+                $record[$key] = $val;
+                $total += $val;
+            }
+
+            $record['forecast_quarterly_1'] = $record['forecast_month_1'] + $record['forecast_month_2'] + $record['forecast_month_3'];
+            $record['forecast_quarterly_2'] = $record['forecast_month_4'] + $record['forecast_month_5'] + $record['forecast_month_6'];
+            $record['forecast_quarterly_3'] = $record['forecast_month_7'] + $record['forecast_month_8'] + $record['forecast_month_9'];
+            $record['forecast_quarterly_4'] = $record['forecast_month_10'] + $record['forecast_month_11'] + $record['forecast_month_12'];
+            $record['forecast_yearly'] = $total;
+            $record['total_forecast'] = $total;
+
+            if (isset($existingMap[$product_id])) {
+                $record['updated_by'] = $user_id;
+                $record['updated_date'] = date(ManufacturingForecastConstants::DATE_TIME_FORMAT);
+                $return['forecast_rows'][] = $callConfig->updateRecord('manufacturing_forecast_items', $record, 'id', $existingMap[$product_id]);
+            } else {
+                $record['created_by'] = $user_id;
+                $record['created_date'] = date(ManufacturingForecastConstants::DATE_TIME_FORMAT);
+                $return['forecast_rows'][] = $callConfig->insertRecord('manufacturing_forecast_items', $record);
+            }
+        }
+        return null;
+    }
+
+    public function getmanufacturingfirmordersdata($get)
+    {
+        global $callConfig;
+        $return = array();
+        $company_id = intval($get['company_id']);
+        $year = intval($get['year'] ?? 0);
+        $month = intval($get['month'] ?? 0);
+        $return['data'] = array();
+        $return['firm_order_id'] = '';
+        $return['firm_order_status'] = '';
+        $return['firm_order_no'] = '';
+        $return['firm_order_date'] = date('Y-m-d');
+        $return['remarks'] = '';
+        $return['message'] = '';
+
+        if ($year == 0 || $month < 1 || $month > 12) {
+            $return['message'] = 'Please select a valid year and month.';
+            return $return;
+        }
+
+        $selectedDate = date("Y-m-d", strtotime($year . "-" . $month . "-01"));
+        $yearMonth = date("Y-m", strtotime($selectedDate));
+        $monthDates = array();
+        for ($i = 0; $i < 3; $i++) {
+            $monthDates[$i + 1] = date("Y-m", strtotime($selectedDate . " +{$i} month"));
+        }
+
+        $header = $callConfig->getRow("SELECT * FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$yearMonth}'" . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+        if (!empty($header->id)) {
+            $return['firm_order_id'] = $header->id;
+            $return['firm_order_status'] = $header->current_status;
+            $return['firm_order_no'] = $header->firm_order_no;
+            $return['firm_order_date'] = $header->firm_order_date;
+            $return['remarks'] = $header->remarks;
+            $query = "SELECT item.id, item.product_id, item.firm_month_1, item.firm_qty_1, item.firm_month_2, item.firm_qty_2, item.firm_month_3, item.firm_qty_3, i.item_name, item.current_status
+                FROM manufacturing_firm_order_items item
+                INNER JOIN items i ON i.company_id=item.company_id AND i.id=item.product_id AND i.is_active=0
+                WHERE item.company_id='{$company_id}' AND item.manufacturing_firm_order_id='{$header->id}' AND item.is_active=0
+                ORDER BY i.item_name ASC";
+            $return['data'] = $callConfig->getAllRows($query);
+            return $return;
+        }
+
+        $this->resolvePendingFirmOrderRows($company_id, $year, $month, $selectedDate, $monthDates, $return);
+        return $return;
+    }
+
+    private function resolvePendingFirmOrderRows($company_id, $year, $month, $selectedDate, $monthDates, &$return)
+    {
+        global $callConfig;
+        if ($month == 1) {
+            $forecastHeader = $callConfig->getRow("SELECT id FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}' AND current_status=" . ST_APPROVED . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+            if (empty($forecastHeader->id)) {
+                $return['message'] = ManufacturingForecastConstants::PLEASE_APPROVE . $year . ' manufacturing forecast before creating firm orders.';
+                return;
+            }
+            $query = "SELECT fi.product_id, i.item_name, fi.forecast_month_1 AS firm_qty_1, fi.forecast_month_2 AS firm_qty_2, fi.forecast_month_3 AS firm_qty_3,
+                    '{$monthDates[1]}' AS firm_month_1, '{$monthDates[2]}' AS firm_month_2, '{$monthDates[3]}' AS firm_month_3
+                FROM manufacturing_forecast_items fi
+                INNER JOIN items i ON i.company_id=fi.company_id AND i.id=fi.product_id AND i.stocking_type='F' AND i.is_active=0
+                WHERE fi.company_id='{$company_id}' AND fi.manufacturing_forecast_id='{$forecastHeader->id}' AND fi.is_active=0
+                ORDER BY i.item_name ASC";
+            $return['data'] = $callConfig->getAllRows($query);
+            return;
+        }
+
+        $previousYearMonth = date("Y-m", strtotime($selectedDate . " -1 month"));
+        $previousHeader = $callConfig->getRow("SELECT id FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$previousYearMonth}' AND current_status=" . ST_APPROVED . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+        if (empty($previousHeader->id)) {
+            $return['message'] = ManufacturingForecastConstants::PLEASE_APPROVE . date('F Y', strtotime($previousYearMonth . '-01')) . ' firm order before creating ' . date('F Y', strtotime($selectedDate)) . '.';
+            return;
+        }
+
+        $thirdDate = strtotime($selectedDate . ManufacturingForecastConstants::PLUS_2_MONTH);
+        $thirdYear = intval(date('Y', $thirdDate));
+        $thirdMonth = intval(date('n', $thirdDate));
+        $thirdForecastField = "forecast_month_" . $thirdMonth;
+        $thirdForecastHeader = $callConfig->getRow("SELECT id FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$thirdYear}' AND current_status=" . ST_APPROVED . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+        if (empty($thirdForecastHeader->id)) {
+            $return['message'] = ManufacturingForecastConstants::PLEASE_APPROVE . $thirdYear . ' manufacturing forecast before creating this firm order.';
+            return;
+        }
+
+        $query = "SELECT prev.product_id, i.item_name, prev.firm_qty_2 AS firm_qty_1, prev.firm_qty_3 AS firm_qty_2, IFNULL(fi.{$thirdForecastField},0) AS firm_qty_3,
+                '{$monthDates[1]}' AS firm_month_1, '{$monthDates[2]}' AS firm_month_2, '{$monthDates[3]}' AS firm_month_3
+            FROM manufacturing_firm_order_items prev
+            INNER JOIN items i ON i.company_id=prev.company_id AND i.id=prev.product_id AND i.stocking_type='F' AND i.is_active=0
+            LEFT JOIN manufacturing_forecast_items fi ON fi.company_id=prev.company_id AND fi.product_id=prev.product_id AND fi.manufacturing_forecast_id='{$thirdForecastHeader->id}' AND fi.is_active=0
+            WHERE prev.company_id='{$company_id}' AND prev.manufacturing_firm_order_id='{$previousHeader->id}' AND prev.is_active=0
+            ORDER BY i.item_name ASC";
+        $return['data'] = $callConfig->getAllRows($query);
+    }
+
+    public function insertandupdatemanufacturingfirmorder($get, $post)
+    {
+        global $callConfig;
+        $company_id = intval($get['company_id']);
+        $user_id = intval($get['user_id']);
+        $year = intval($post['year'] ?? 0);
+        $month = intval($post['month'] ?? 0);
+        $firmOrderDate = !empty($post['firm_order_date']) ? $this->dateconvertdbformat($post['firm_order_date']) : date('Y-m-d');
+        $remarks = trim($post['remarks'] ?? '');
+
+        if ($year == 0 || $month < 1 || $month > 12 || empty($post['rows']) || !is_array($post['rows'])) {
+            return array('data' => array(array('status' => 'fail', 'message' => 'Firm order year, month, and product rows are required.')));
+        }
+
+        $new_date = date("Y-m-d", strtotime($year . "-" . $month . "-01"));
+        $m_y = date("Y-m", strtotime($new_date));
+
+        $firmOrder = $callConfig->getRow("SELECT * FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$m_y}'" . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+        $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
+        if (!empty($firmOrder->id) && !in_array($firmOrder->current_status, $editableStatuses)) {
+            return array('data' => array(array('status' => 'fail', 'message' => 'Approved firm order cannot be edited.')));
+        }
+
+        $validationError = $this->validateFirmOrderPrerequisites($company_id, $year, $month, $new_date);
+        if ($validationError !== null) {
+            return array('data' => array(array('status' => 'fail', 'message' => $validationError)));
+        }
+
+        return $this->saveFirmOrderData($company_id, $user_id, $firmOrderDate, $remarks, $m_y, $firmOrder, $post['rows']);
+    }
+
+    private function validateFirmOrderPrerequisites($company_id, $year, $month, $new_date)
+    {
+        global $callConfig;
+        if ($month == 1) {
+            $forecastYear = $year;
+        } else {
+            $forecastYear = intval(date('Y', strtotime($new_date . ManufacturingForecastConstants::PLUS_2_MONTH)));
+        }
+        $forecastCheck = $callConfig->getRow("SELECT id FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$forecastYear}' AND current_status=" . ST_APPROVED . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+        if (empty($forecastCheck->id)) {
+            return 'Approved forecast is required before saving this firm order.';
+        }
+
+        if ($month > 1) {
+            $previousYearMonth = date("Y-m", strtotime($new_date . " -1 month"));
+            $previousFirmOrder = $callConfig->getRow("SELECT id FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$previousYearMonth}' AND current_status=" . ST_APPROVED . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+            if (empty($previousFirmOrder->id)) {
+                return 'Previous month firm order must be approved first.';
+            }
+        }
+        return null;
+    }
+
+    private function saveFirmOrderData($company_id, $user_id, $firmOrderDate, $remarks, $m_y, $firmOrder, $rows)
+    {
+        global $callConfig;
+        $return = array();
+        if (!empty($firmOrder->id)) {
+            $firmOrderId = intval($firmOrder->id);
+            $headerRecord = array(
+                'firm_order_date' => $firmOrderDate,
+                'remarks' => $remarks,
+                'updated_by' => $user_id,
+                'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            );
+            $return['firm_order'] = $callConfig->updateRecord('manufacturing_firm_orders', $headerRecord, 'id', $firmOrderId);
+        } else {
+            $firmOrderNo = $this->toGetApplicationSerialNumber('manufacturing_firm_orders', array(
+                'company_id' => $company_id,
+                'user_id' => $user_id,
+                'transaction_date' => $firmOrderDate
+            ));
+            $headerRecord = array(
+                'company_id' => $company_id,
+                'firm_order_no' => $firmOrderNo,
+                'firm_order_date' => $firmOrderDate,
+                '`year_month`' => $m_y,
+                'remarks' => $remarks,
+                'is_active' => 0,
+                'current_status' => 0,
+                'created_by' => $user_id,
+                'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            );
+            $headerResult = $callConfig->insertRecord('manufacturing_firm_orders', $headerRecord);
+            if (($headerResult['status'] ?? '') != 'sucess') {
+                return array('data' => array(array('status' => 'fail', 'message' => 'Unable to create firm order.')));
+            }
+            $firmOrderId = intval($headerResult['LASTID']);
+            $return['firm_order'] = $headerResult;
+        }
+
+        $activeProducts = array();
+        $products = $callConfig->getAllRows("SELECT id FROM items WHERE company_id='{$company_id}' AND stocking_type='F' AND is_active=0");
+        foreach ((array) $products as $product) {
+            $activeProducts[$product->id] = $product->id;
+        }
+
+        $existingRows = $callConfig->getAllRows("SELECT id, product_id FROM manufacturing_firm_order_items WHERE company_id='{$company_id}' AND manufacturing_firm_order_id='{$firmOrderId}' AND is_active=0");
+        $existingMap = array();
+        foreach ((array) $existingRows as $existingRow) {
+            $existingMap[$existingRow->product_id] = $existingRow->id;
+        }
+
+        foreach ($rows as $product_id => $row) {
+            $product_id = intval($product_id);
+            if (!isset($activeProducts[$product_id])) {
+                return array('data' => array(array('status' => 'fail', 'message' => 'Invalid finished good item selected.')));
+            }
+
+            $record = array(
+                'manufacturing_firm_order_id' => $firmOrderId,
+                'company_id' => $company_id,
+                'product_id' => $product_id,
+                'firm_month_1' => $row['firm_month_1'] ?? '',
+                'firm_qty_1' => floatval($row['firm_qty_1'] ?? 0),
+                'firm_month_2' => $row['firm_month_2'] ?? '',
+                'firm_qty_2' => floatval($row['firm_qty_2'] ?? 0),
+                'firm_month_3' => $row['firm_month_3'] ?? '',
+                'firm_qty_3' => floatval($row['firm_qty_3'] ?? 0),
+                'current_status' => 0,
+                'is_active' => 0
+            );
+
+            if (isset($existingMap[$product_id])) {
+                $record['updated_by'] = $user_id;
+                $record['updated_date'] = date(ManufacturingForecastConstants::DATE_TIME_FORMAT);
+                $return['firm_order_rows'][] = $callConfig->updateRecord('manufacturing_firm_order_items', $record, 'id', $existingMap[$product_id]);
+            } else {
+                $record['created_by'] = $user_id;
+                $record['created_date'] = date(ManufacturingForecastConstants::DATE_TIME_FORMAT);
+                $return['firm_order_rows'][] = $callConfig->insertRecord('manufacturing_firm_order_items', $record);
+            }
+        }
+
+        return array('data' => array(array('status' => 'sucess', 'LASTID' => $firmOrderId, 'message' => 'Firm order saved successfully.')));
+    }
+}
+
+class_alias('ManfacturingForecastUserClass', 'manfacturingForecastUserClass');
