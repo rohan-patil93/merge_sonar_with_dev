@@ -501,7 +501,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                           <?php
                                           $sub_details['expense_type'] = (isset($sub_details['expense_type']) && $sub_details['expense_type'] != "") ? $sub_details['expense_type'] : '0';
                                           foreach($expense_typelist as $expense_typelkey => $expense_typel){ ?>
-                                            <div class="radio radio-outline radio-inline" onclick="checkFuntion('<?php echo $seqs; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <div class="radio radio-outline radio-inline" onclick="checkFuntion('<?php echo $seqs; ?>')">
                                                 <label class="form-label">
                                                     <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  <?php echo ($sub_details['expense_type']==$expense_typelkey)?"checked":""; ?> name="expense_type_<?php echo $seqs; ?>" id="gender-1_2" value="<?php echo $expense_typelkey; ?>" >
                                                     <i class="helper"></i><?php echo $expense_typel; ?>
@@ -640,7 +640,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     </div>
                                 </td>
                                 <td style="text-align: right;">
-                                    <i class="fa fa-trash text-danger" onclick="deleteExpenseRow('<?php echo $seqs; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn p-0 border-0 bg-transparent text-danger" onclick="deleteExpenseRow('<?php echo $seqs; ?>')" aria-label="<?= htmlspecialchars(__('Delete expense row'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                             <?php $seqs++;

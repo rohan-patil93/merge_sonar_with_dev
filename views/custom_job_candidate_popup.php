@@ -562,10 +562,8 @@ foreach($feedbackreportresult as $feedbackreportresult){  ?>
                   <b>
                     <?php
                     $mval = $i=$i-1;
-                    if($mval != 0 && $mval != ''){
-                      if(isset($userlistss['created_by'])){
+                    if($mval != 0 && $mval != '' && isset($userlistss['created_by'])){
                         $chk_total= ($total_show[$userlistss['created_by']])/($mval);
-                      }
                     }
                     echo number_format($chk_total,1);
                     ?>
@@ -712,8 +710,7 @@ foreach($feedbackreportresult as $feedbackreportresult){  ?>
                  foreach($schedullist as $schedullist){
                     $value = filterArrayValue($spdata,"id",$schedullist['job_selection_step_id']);
                     $feedback_disabled = "";
-                    if($schedullist['assign_id'] == $_SESSION['userid']){
-}else{
+                    if($schedullist['assign_id'] != $_SESSION['userid']){
                         $feedback_disabled = "event_disabled";
                     }
 

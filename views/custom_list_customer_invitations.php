@@ -222,7 +222,7 @@ function listUserType(){
                   <div class="row m-b-10 align-items-center ">
                     <div class="col-auto col-lg-10">
                       <div class="align-middle">
-                        <!-- <span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-14 text-center bg-white text-mute"><?php echo initials($vendorslist['display_name']); ?></span> -->
+                        
 
                        <?php if($applicationuser['user_photo'] != "" && $applicationuser['user_activated'] == "Y"){ ?>
     <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
@@ -247,7 +247,7 @@ function listUserType(){
                 <span class="col-lg-9 f-12"> <?php echo $vendorslist['user_mobile']!=""?$vendorslist['user_mobile']:"-"; ?> </span>
               </div>
               <?php if($tven == '0'){ ?>
-              <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Re-Invite User'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-share float-right position-absolute text-white" data-bs-toggle="tooltip" data-placement="bottom" title="" onclick="resendrequest('<?php echo $vendorslist['user_id']; ?>')" data-bs-original-title="<?= htmlspecialchars(__('Re-Invite User'), ENT_QUOTES, 'UTF-8'); ?>" style="right: 70px;top: 10px;"></i>
+              <button type="button" class="btn btn-link p-0 border-0 float-right position-absolute text-white" data-bs-toggle="tooltip" data-placement="bottom" title="" onclick="resendrequest('<?php echo $vendorslist['user_id']; ?>')" data-bs-original-title="<?= htmlspecialchars(__('Re-Invite User'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Re-Invite User'), ENT_QUOTES, 'UTF-8'); ?>" style="right: 70px;top: 10px;"><i class="ti-share"></i></button>
             <?php } ?>
             </div>
           </div>

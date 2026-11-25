@@ -1,7 +1,14 @@
 <?php
+if (!defined('LOC_ERR_4003')) {
+    define('LOC_ERR_4003', 'location:index.php?option=COM_INSERT_EDI_READe&err=4003');
+}
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+}
+
 if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
     if (!isset($_FILES['data']) || $_FILES['data']['error'] !== UPLOAD_ERR_OK || empty($_FILES['data']['tmp_name'])) {
-        header("location:index.php?option=COM_INSERT_EDI_READe&err=4003");
+        header(LOC_ERR_4003);
         exit;
     }
 
@@ -14,7 +21,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
 
     $resdata = json_decode($resresponse, 1);
     if (empty($resdata) || empty($resdata['id']) || $resresponse === null) {
-        header("location:index.php?option=COM_INSERT_EDI_READe&err=4003");
+        header(LOC_ERR_4003);
         exit;
     }
 
@@ -28,7 +35,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
     $file_path = $target_dir . '/file_' . time() . uniqid() . '.' . $file_ext;
 
     if (!move_uploaded_file($_FILES["data"]["tmp_name"], $file_path)) {
-        header("location:index.php?option=COM_INSERT_EDI_READe&err=4003");
+        header(LOC_ERR_4003);
         exit;
     }
 
@@ -73,13 +80,13 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
 
     $data = array();
     $data['file_name'] = $file_path;
-    $data['receive_date'] = date("Y-m-d H:i:s");
-    $data['read_date'] = date("Y-m-d H:i:s");
+    $data['receive_date'] = date(DATE_FORMAT_YMD_HIS);
+    $data['read_date'] = date(DATE_FORMAT_YMD_HIS);
     $data['content'] = $content;
     $data['current_status'] = isset($_POST['Current_Status']) ? $_POST['Current_Status'] : '0';
-    $data['status_date'] = date("Y-m-d H:i:s");
-    $data['created_date'] = date("Y-m-d H:i:s");
-    $data['from_date'] = date("Y-m-d H:i:s");
+    $data['status_date'] = date(DATE_FORMAT_YMD_HIS);
+    $data['created_date'] = date(DATE_FORMAT_YMD_HIS);
+    $data['from_date'] = date(DATE_FORMAT_YMD_HIS);
     $data['created_by'] = isset($_SESSION['userid']) ? $_SESSION['userid'] : '';
     $data['is_active'] = '0';
 

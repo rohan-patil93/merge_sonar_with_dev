@@ -30,7 +30,7 @@ if(count((array)$rows) > 0) {
 ?>
 <div class="table-responsive survey_dashboard">
     <table class="table table-bordered table-sm">
-        <tr bgcolor="#eeeeee">
+        <tr style="background-color: #eeeeee;">
             <th scope="col"><?php echo $display_tag; ?> <?= __('Name') ?></th>
             <th scope="col"><?= __('Category') ?></th>
             <th scope="col"><?= __('Start Date') ?></th>
@@ -79,17 +79,7 @@ if(count((array)$rows) > 0) {
                     <i class="fa fa-play m-r-5"></i> <?php echo htmlspecialchars(__($surveyRow['action_label'])); ?>
                 </a>
                 <?php } ?>
-                <?php /*
-                $curStatus = $surveyRow['current_status'] != "" ? $surveyRow['current_status'] : ST_ACTIVE;
-                if($curStatus == ST_ACTIVE) { ?>
-                <a href="<?php echo $responseUrl; ?>" class="btn btn-sm btn-outline-primary f-w-600 f-12 text-primary p-2 b-radius-5 mb-1">
-                    <i class="fa fa-edit m-r-5"></i> Edit
-                </a>
-                <?php } else { ?>
-                <a href="<?php echo $resultUrl; ?>" class="btn btn-sm btn-outline-primary f-w-600 f-12 text-primary p-2 b-radius-5 mb-1">
-                    <i class="fa fa-eye m-r-5"></i> View
-                </a>
-                <?php }  */?>
+
             </td>
         </tr>
         <?php } ?>

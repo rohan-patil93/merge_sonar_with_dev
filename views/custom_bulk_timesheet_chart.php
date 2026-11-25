@@ -23,27 +23,9 @@ foreach($vendor_charts as $vendor_chart){
     </div>
     <div class="card-body">
         <!--begin::Chart-->
-        <!-- <input type="hidden" id="monthdata" value="<?php ?>">
-        <input type="hidden" id="estimationdata" value="<?php ?>">
-        <input type="hidden" id="actualdata" value="<?php ?>">
-        <div id="chart_3"></div> -->
+
         <!--end::Chart-->
-        <!-- <?php foreach($vendor_charts as $vendor_chart){ ?>
-        <div class="d-flex align-items-center mb-10">
-            <div class="symbol symbol-40 symbol-light-success mr-5">
-                <span class="symbol-label">
-                    <img src="assets/media/svg/avatars/009-boy-4.svg" class="h-75 align-self-end" alt="" />
-                </span>
-            </div>
-            <div class="d-flex flex-column flex-grow-1 font-weight-bold">
-                <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg"><?php echo $vendor_chart['display_name']; ?></a>
-                <span class="text-dark">Budget Amount:
-                <span class="text-muted"><?php echo $vendor_chart['esign_approved_amount']; ?></span> </span>
-                <span class="text-dark">Approved Amount:
-                <span class="text-muted"><?php echo $vendor_chart['bill_amount']; ?></span></span>
-            </div>
-        </div>
-        <?php } ?> -->
+
         <div class="table-responsive">
             <table class="table table-hover m-b-0">
                 <thead>

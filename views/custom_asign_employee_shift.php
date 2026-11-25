@@ -175,13 +175,12 @@ $designations = json_decode($designations,1);
                                     </label>
                                 </div>
                             </td>
-                            <!-- <td><?php echo $empp['emp_code']; ?></td> -->
                             <td><?php echo $empp['emp_code']; ?></td>
                             <td><?php echo $empp['display_name']; ?></td>
                             <td><?php echo $empp['email_id']; ?></td>
                             <td><?php echo $empp['phone']; ?></td>
                             <td><?php echo $empp['date_of_birth']; ?></td>
-                            <td nowrap="nowrap"></td>
+                            <td style="white-space: nowrap;"></td>
                         </tr>
                     <?php } ?>
                     </tbody>

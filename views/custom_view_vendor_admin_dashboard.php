@@ -73,7 +73,7 @@ $stausresult = ViewStatusData();
                         </div>
                         <div class="col-md-12">
                           <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo $totaltaskper; ?>%;" aria-valuenow="<?php echo $totaltaskper; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-success" style="width:<?php echo $totaltaskper; ?>%;" aria-valuenow="<?php echo $totaltaskper; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                     </div>
@@ -282,10 +282,10 @@ $stausresult = ViewStatusData();
             <div class="col-lg-8">
                 <ul class="nav md-tabs infisuite_tab mb-2">
 
-                    <li class="nav-item" role="presentation">
+                    <li class="nav-item">
                         <a class="nav-link f-w-600 f-12 active"  data-clone="quotations" data-bs-toggle="tab" href="#vendor-tab" role="tab" aria-selected="false" tabindex="-1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Vendors'); ?> &nbsp; <span class="form-label label label-md label-success float-right"><?php echo $result['total_vendors']!=""?$result['total_vendors']:"0"; ?> </span></a>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li class="nav-item">
                         <a class="nav-link f-w-600 f-12 masmVerificationTab"  data-bs-toggle="tab" href="#masm-verification-tab" role="tab" aria-selected="false" tabindex="-1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending MSME Req'); ?> &nbsp; <span class="form-label label label-md label-success float-right"><?php echo count((array)$msme_confirmation_logs); ?> </span></a>
                     </li>
                 </ul>

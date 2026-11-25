@@ -129,9 +129,9 @@ foreach ($_SESSION['employee'] as  $value) {
         <div class="">
             <div class="">
                 <div class="card d-flex flex-wrap flex-sm-nowrap p-10 mb-1 pt-4 pb-4 mt-3 c-p-0">
-                    <div class="profile-open" onClick="divFunction()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                    <button type="button" class="profile-open border-0 bg-transparent p-0" onClick="divFunction()" aria-label="<?= htmlspecialchars(__('Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                         <i class="ti-user"></i>
-                    </div>
+                    </button>
                     <div class="profile-close">
                         <div class="row col-lg-12">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12 p-r-10 d-r-n" style="border-right: 3px dashed #ccc;">
@@ -165,7 +165,7 @@ foreach ($_SESSION['employee'] as  $value) {
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="progress progress-xs">
-                                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:  <?php echo $pp; ?>%;" aria-valuenow="<?php echo $pp; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar progress-bar-success" style="width:  <?php echo $pp; ?>%;" aria-valuenow="<?php echo $pp; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                             </div>
 
@@ -331,9 +331,9 @@ if($_SESSION['employee']['gender']!=""){?>
                 <!-------------- LEFT MENU------------->
 
 <div class="col-lg-12">
-    <div class="open_basic_info_other" onClick="div2Function()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+    <button type="button" class="open_basic_info_other border-0 bg-transparent p-0" onClick="div2Function()" aria-label="<?= htmlspecialchars(__('Menu'), ENT_QUOTES, 'UTF-8'); ?>">
         <i class="ti-menu"></i>
-    </div>
+    </button>
     <div class="card mb-xl-10 c-m-0">
         <div class="card-body mrgn-card">
         <?php if (count((array)$saidnav) >0 ){ ?>

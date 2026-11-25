@@ -82,8 +82,8 @@ $user_data = json_decode($user_details, 1);
     </div>
 </div>
 
-<div class="modal fade" id="failedLoginDetailModal" tabindex="-1" role="dialog" aria-labelledby="failedLoginDetailModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="failedLoginDetailModal" tabindex="-1" aria-labelledby="failedLoginDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="failedLoginDetailModalLabel"><?= __('Failed Login Attempt Details'); ?></h5>

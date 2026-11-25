@@ -89,7 +89,7 @@ if($_POST['work_level_type'] =="custom_process"){
                         foreach($sublist as $keyk=>$aray){  ?>
                             <option value='<?php echo $keyk; ?>'   <?php echo $approvalprocess['sub_approve_type']==$keyk?"selected":""; ?>><?php echo $aray; ?></option>";
 
-                        <?php	}
+                        <?php    }
                         } ?>
                     </select>
                 </div>
@@ -101,7 +101,7 @@ if($_POST['work_level_type'] =="custom_process"){
                         if(count((array)$fieldlist) > 0){
                         foreach($fieldlist as $fieldkey=>$fieldlabel){  ?>
                             <option value='<?php echo $fieldkey; ?>' <?php echo $approvalprocess['sub_approve_field']==$fieldkey?"selected":""; ?>><?php echo $fieldlabel; ?></option>
-                        <?php	}
+                        <?php    }
                         } ?>
                     </select>
                 </div>
@@ -208,12 +208,12 @@ if($_POST['work_level_type'] =="custom_process"){
                     <input type="hidden" name="workflow_level_seq[]" value="<?php echo $i; ?>">
                     <input type="hidden" name="workflow_level_status[<?php echo $i; ?>]" value="<?php echo $statusinc; ?>">
                     <input type="hidden" name="approval_type[<?php echo $i; ?>]" value="<?php echo $_POST['work_level_type']; ?>">
-                    <!-- <input type="hidden" name="updatebtn[<?php echo $i; ?>]" value="1"> -->
+                    
                 </div>
             </div>
         </div>
 
-    <?php	}
+    <?php    }
     echo "</div>";
     }
    ?>

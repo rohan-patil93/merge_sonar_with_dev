@@ -1,4 +1,6 @@
 <?php
+defined('PARAM_DATA') || define('PARAM_DATA', '&data=');
+
 $transaction_date_check = $_GET['TD'] !=""?$_GET['TD']:date('Y-m-d');
 $pageurl = API."?mode=gettopupdetails&transaction_table=".$table_name."&transaction_date_check=".$transaction_date_check;
 $apicall = callAPI($pageurl);
@@ -80,7 +82,7 @@ $role = $table1;
 
 if(isset($retivearray) && count($retivearray)){
     $data12 = urlencode(json_encode($retivearray));
-    $url123 = API."?mode=togetdyanamicselectdatatablename&table_name=".$table_name."&data=".$data12;
+    $url123 = API."?mode=togetdyanamicselectdatatablename&table_name=".$table_name.PARAM_DATA.$data12;
     $retivefiledtabledata = callAPI($url123);
     $fieldtables = json_decode($retivefiledtabledata,1);
 }
@@ -89,7 +91,7 @@ if(isset($field_result['ref_type']) && ($table_name =="requisitions" || $table_n
     $wh12["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'current_status'=>ST_APPROVED);
     $wh12['field'] = "id,transaction_number";
     $data12 = urlencode(json_encode($wh12));
-    $url12 = API."?mode=gettabledetailswithconditions&table=".$table1['ref_type']."&data=".$data12;
+    $url12 = API."?mode=gettabledetailswithconditions&table=".$table1['ref_type'].PARAM_DATA.$data12;
     $data_details12 = callAPI($url12);
     $jsonres = json_decode($data_details12,1);
     foreach ($jsonres as $jvalue) {
@@ -101,7 +103,7 @@ if($table1['ref_type'] != "" && $table1['ref_type'] == "subcontract_work_order_r
     $wh12["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'current_status'=>ST_APPROVED);
     $wh12['field'] = "id,transaction_number";
     $data12 = urlencode(json_encode($wh12));
-    $url12 = API."?mode=gettabledetailswithconditions&table=".$table1['ref_type']."&data=".$data12;
+    $url12 = API."?mode=gettabledetailswithconditions&table=".$table1['ref_type'].PARAM_DATA.$data12;
     $data_details12 = callAPI($url12);
     $jsonres = json_decode($data_details12,1);
     foreach ($jsonres as $jvalue) {
@@ -789,10 +791,8 @@ if($fullvalue['type'] == 'serial_no'){
                                      if($key == 'opex_cpex' && $doc_access_setups_user['opex_cpex'] !="" && $doc_access_setups_user['opex_cpex'] != $selectkey){
                                          $disabled = "disabled";
                                      }else{
-                                         if($role[$key] == ""){
+                                         if($role[$key] == "" || $selectkey == $role[$key]){
                                              $checkedbn = "checked";
-                                         }elseif($selectkey == $role[$key]){
-                                              $checkedbn = "checked";
                                          }
                                      }
                                  }else{

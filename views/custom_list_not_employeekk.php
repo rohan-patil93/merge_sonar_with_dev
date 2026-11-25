@@ -24,6 +24,9 @@
                                 <a href="#" class="profile-image">
 
                                    <?php
+defined('INC_CONTROLLER') || define('INC_CONTROLLER', 'includes/controller.php');
+defined('DIR_VIEWS') || define('DIR_VIEWS', 'views/');
+
                                    $dis_name = $_SESSION['employee']['display_name']!=""?$_SESSION['employee']['display_name']:$_SESSION['display_name'];
                                    if($_SESSION['employee']['image']!=""){ ?>
                                      <img src="<?php echo "uploads/all/".$_SESSION['employee']['image']; ?>" class=" img-120 user-img b-radius-10" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -89,8 +92,8 @@
                     $option_url = $tabledata['insert_page_name'];
                     $_GET['option'] =  $tabledata['insert_page_name'];
                     $_GET['Rid'] = deocdeId("id:".$_SESSION['userid']);
-                    include_once "includes/controller.php";
-                    $dispage = str_replace("views/", '', $disptemp);
+                    include_once INC_CONTROLLER;
+                    $dispage = str_replace(DIR_VIEWS, '', $disptemp);
                     include_once $dispage;
                     ?>
 
@@ -107,8 +110,8 @@
             $option_url = $tabledata['insert_page_name'];
             $_GET['option'] =  $tabledata['insert_page_name'];
             $_GET['Rid'] = deocdeId("id:".$_SESSION['userid']);
-            include_once "includes/controller.php";
-            $dispage = str_replace("views/", '', $disptemp);
+            include_once INC_CONTROLLER;
+            $dispage = str_replace(DIR_VIEWS, '', $disptemp);
             include_once $dispage;
             ?>
         </div>
@@ -121,8 +124,8 @@
             $option_url = $tabledata['insert_page_name'];
             $_GET['option'] =  $tabledata['insert_page_name'];
             $_GET['Rid'] = deocdeId("id:".$_SESSION['userid']);
-            include_once "includes/controller.php";
-            $dispage = str_replace("views/", '', $disptemp);
+            include_once INC_CONTROLLER;
+            $dispage = str_replace(DIR_VIEWS, '', $disptemp);
             include_once $dispage;
             ?>
         </div>

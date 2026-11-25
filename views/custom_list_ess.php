@@ -135,7 +135,7 @@ foreach($process_doc as $list_doc){
                                                 $purl = "process_button".$i."_url";
                                                 if($list[$plab]!=""){
                                                     if($list[$purl]==""){ ?>
-                                                        <div class="m-t-10" role="group">
+                                                        <div class="m-t-10">
                                                             <button id="btnGroupDrop1" type="button" class="btn btn-success font-weight-bold dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <?php echo $list[$plab]; ?>
                                                             </button>
@@ -170,7 +170,7 @@ foreach($process_doc as $list_doc){
         </div>
     </div>
 </div>
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content"  id="popup2">
 

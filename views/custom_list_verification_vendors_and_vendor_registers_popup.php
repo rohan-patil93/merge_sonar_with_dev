@@ -1,4 +1,6 @@
 ﻿<?php
+defined('DATE_FORMAT_DMY_HI_A') || define('DATE_FORMAT_DMY_HI_A', DATE_FORMAT_DMY_HI_A);
+
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -134,7 +136,7 @@ $company_name = $record['company'] ?? $record['display_name'] ?? 'Unknown Compan
                             </h5>
                             <p class="mb-0">
                                 <?= __('This'); ?> <?= strtolower($config['title']); ?> <?= __('was successfully verified on'); ?>
-                                <?= date('d M Y, h:i A', strtotime($current_verification['verification_datetime'])); ?>
+                                <?= date(DATE_FORMAT_DMY_HI_A, strtotime($current_verification['verification_datetime'])); ?>
                             </p>
                         </div>
                         <div class="col-auto">
@@ -161,20 +163,10 @@ $company_name = $record['company'] ?? $record['display_name'] ?? 'Unknown Compan
                             if (isset($current_verification['verification_datetime']) && !empty($current_verification['verification_datetime'])) { ?>
                                 <div class="col-md-6 mb-3">
                                     <span class="form-label fw-bold"><?= __('Verification Date'); ?></span>
-                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars(date('d M Y, h:i A', strtotime($current_verification['verification_datetime']))); ?>" readonly>
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars(date(DATE_FORMAT_DMY_HI_A, strtotime($current_verification['verification_datetime']))); ?>" readonly>
                                 </div>
                             <?php }  ?>
                             <?php
-                        } elseif ($verification_type == 'gst') {
-                            foreach ($config['fields'] as $field_name => $field_config) {
-                                $current_value = isset($record[$field_name]) ? $record[$field_name] : '';
-                                if (!empty($current_value)) { ?>
-                                    <div class="col-md-4 mb-3">
-                                        <span class="form-label fw-bold"><?= htmlspecialchars($field_config['label']); ?></span>
-                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars($current_value); ?>" readonly>
-                                    </div>
-                                <?php }
-                            }
                         } else {
                             foreach ($config['fields'] as $field_name => $field_config) {
                                 $current_value = isset($record[$field_name]) ? $record[$field_name] : '';
@@ -837,7 +829,7 @@ $company_name = $record['company'] ?? $record['display_name'] ?? 'Unknown Compan
                                     <div class="col-md-6 mb-3">
                                         <span class="form-label fw-bold"><?= __('Verification Date'); ?></span>
                                         <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"
-                                               value="<?= date('d M Y, h:i A', strtotime($current_verification['verification_datetime'])); ?>"
+                                               value="<?= date(DATE_FORMAT_DMY_HI_A, strtotime($current_verification['verification_datetime'])); ?>"
                                                readonly>
                                     </div>
                                 <?php } ?>

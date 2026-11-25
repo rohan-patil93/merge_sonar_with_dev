@@ -20,7 +20,12 @@ if (!empty($_GET['from_date']) && !empty($_GET['to_date']) && count((array)$repo
         $row = is_array($row) ? $row : (array) $row;
         $assetItem = ($row['complaint_type'] == 'Item') ? ($row['item_name'] ?? '') : trim(($row['asset_code'] ?? '') . ' ' . ($row['asset_description'] ?? ''));
         $st = (int) ($row['current_status'] ?? 0);
-        $stLabel = ($st == 0) ? 'Active' : (($st >= 199) ? 'Completed' : 'In Progress');
+        $stLabel = 'In Progress';
+        if ($st == 0) {
+            $stLabel = 'Active';
+        } elseif ($st >= 199) {
+            $stLabel = 'Completed';
+        }
         $csvRows[] = array(
             'Request No' => $row['transaction_no'] ?? '',
             'Date' => !empty($row['transaction_date']) ? date('d-M-Y', strtotime($row['transaction_date'])) : '',
@@ -46,13 +51,15 @@ if (!empty($_GET['from_date']) && !empty($_GET['to_date']) && count((array)$repo
 
 function statusBadge($s)
 {
-    if ($s == 0) { return '<span class="badge bg-primary">'.__('Active').'</span>';
-}
-    if ($s > 0 && $s < 199) { return '<span class="badge bg-warning">'.__('In Progress').'</span>';
-}
-    if ($s == 199) { return '<span class="badge bg-success">'.__('Completed').'</span>';
-}
-    return '<span class="badge bg-secondary">'.__('Unknown').'</span>';
+    $badge = '<span class="badge bg-secondary">'.__('Unknown').'</span>';
+    if ($s == 0) {
+        $badge = '<span class="badge bg-primary">'.__('Active').'</span>';
+    } elseif ($s > 0 && $s < 199) {
+        $badge = '<span class="badge bg-warning">'.__('In Progress').'</span>';
+    } elseif ($s == 199) {
+        $badge = '<span class="badge bg-success">'.__('Completed').'</span>';
+    }
+    return $badge;
 }
 ?>
 <div class="page-body">

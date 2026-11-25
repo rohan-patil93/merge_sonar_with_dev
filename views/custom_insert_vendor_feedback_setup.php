@@ -414,7 +414,7 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                                             <h6 class="f-w-600"><?php echo $val['question']; ?></h6>
                                         </div>
                                         <div class="col-lg-1 text-end" >
-                                            <i class="ti-pencil-alt cursor-pointer" onclick="addQuestion(<?php echo $cat['id'].",".$que_id.",".$que_id; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="addQuestion(<?php echo $cat['id'].",".$que_id.",".$que_id; ?>)" aria-label="<?= htmlspecialchars(__('Edit Question'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil-alt"></i></button>
                                         </div>
                                         <div class="col-lg-12">
                                             <?php
@@ -467,7 +467,7 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
         </div>
 </form>
 
-<div id="kt_modal_KTDatatable_setup" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_setup" class="modal fade" aria-hidden="true">
    <div class="modal-dialog  modal-xl" >
     <div class="modal-content"  id="popup2">
     </div>

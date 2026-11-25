@@ -1,4 +1,6 @@
 <?php
+defined('STYLE_DISPLAY_NONE') || define('STYLE_DISPLAY_NONE', STYLE_DISPLAY_NONE);
+
 
 $vendor_id          = $_POST['vendor_id']          ?? ($vendor_id          ?? '');
 $transaction_table  = $_POST['transaction_table']  ?? ($transaction_table  ?? 'vendors');
@@ -254,7 +256,7 @@ function getmSMENumber(){
                                     </div>
                                     <div class="col-md-12">
                                       <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-<?php echo round($percentage)>=50?"success":"danger"; ?>" role="progressbar" style="width:  <?php echo round($percentage); ?>%;" aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-<?php echo round($percentage)>=50?"success":"danger"; ?>" style="width:  <?php echo round($percentage); ?>%;" aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                       </div>
                                     </div>
                                   </div>
@@ -1528,7 +1530,7 @@ if ($isAdd) : ?>
                         </div>
                     </div>
                    </div>
-                   <div class="associated_team form-group mt-2" <?php echo $vendor_questions['radio_associate'] =="Y"?"":"style='display: none'"; ?> >
+                   <div class="associated_team form-group mt-2" <?php echo $vendor_questions['radio_associate'] =="Y"?"":STYLE_DISPLAY_NONE; ?> >
                     <span class="form-label">Please provide details</span>
                     <textarea aria-label="<?= htmlspecialchars(__('Vendor Questions[associated Team Detail]'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="vendor_questions[associated_team_detail]" class="form-control"><?php echo $vendor_questions['associated_team_detail']; ?></textarea>
                 </div>
@@ -1549,7 +1551,7 @@ if ($isAdd) : ?>
                         </div>
                     </div>
                    </div>
-                   <div class="vrq_extra mt-2" <?php echo $vendor_questions['quality_system'] =="Y"?"":"style='display: none'"; ?>>
+                   <div class="vrq_extra mt-2" <?php echo $vendor_questions['quality_system'] =="Y"?"":STYLE_DISPLAY_NONE; ?>>
                        <div class="row">
                            <div class="form-group col-lg-1">
                                <span class="form-label">1</span>
@@ -1695,7 +1697,7 @@ if ($isAdd) : ?>
                         </div>
                     </div>
                    </div>
-                   <div class="m-l-20 work_manufacturer_facility supplychainresponsibility_4 mt-2" <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":"style='display: none'"; ?>>
+                   <div class="m-l-20 work_manufacturer_facility supplychainresponsibility_4 mt-2" <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":STYLE_DISPLAY_NONE; ?>>
                        <div class="row">
                         <h6>a) Do all hourly workers work less than 60 hours per week?</h6>
                         <div class="form-radio">
@@ -1748,7 +1750,7 @@ if ($isAdd) : ?>
                         </div>
                        </div>
                    </div>
-                   <div class="row supplychainresponsibility_5 mt-2" <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="")?"":"style='display: none'"; ?>>
+                   <div class="row supplychainresponsibility_5 mt-2" <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="")?"":STYLE_DISPLAY_NONE; ?>>
                     <h6>5) Do You retain or hold your employees original passport or other original personal identification documents?</h6>
                     <div class="form-radio">
                         <div class="radio radio-inline">
@@ -1765,7 +1767,7 @@ if ($isAdd) : ?>
                         </div>
                     </div>
                    </div>
-                   <div class="m-l-20 hold_original_passport supplychainresponsibility_5 mt-2" <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="" && $vendor_questions['supply_Chain_responsibility'][5] =="Y")?"":"style='display: none'"; ?> >
+                   <div class="m-l-20 hold_original_passport supplychainresponsibility_5 mt-2" <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="" && $vendor_questions['supply_Chain_responsibility'][5] =="Y")?"":STYLE_DISPLAY_NONE; ?> >
                        <div class="row">
                         <h6>a) Do you return original passport or other original personal identification documents upon the employee's request?</h6>
                         <div class="form-radio">
@@ -1801,7 +1803,7 @@ if ($isAdd) : ?>
                         </div>
                     </div>
                    </div>
-                   <div class="row supplychainresponsibility_7 mt-2" <?php echo $vendor_questions['supply_Chain_responsibility'][3] =="N"?"":"style='display: none'"; ?>>
+                   <div class="row supplychainresponsibility_7 mt-2" <?php echo $vendor_questions['supply_Chain_responsibility'][3] =="N"?"":STYLE_DISPLAY_NONE; ?>>
                     <h6>7) Is your company (or your sub-contractor) in Xinjiang Uygur Autonomous Regision (XUAR)</h6>
                     <div class="form-radio">
                         <div class="radio radio-inline">
@@ -2433,7 +2435,7 @@ if($fieldaccesright['field']['vendor_po_notes']!="NA"){ ?>
                         <h6>A) Previously have you or any of your subsidiaries ever associated with <?php echo ucwords($_SESSION['config']['name']); ?> (USA or any other region)?</h6>
                         <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['radio_associate']); ?></span>
                        </div>
-                       <div class="associated_team form-group mt-3" <?php echo $vendor_questions['radio_associate'] =="Y"?"":"style='display: none'"; ?> >
+                       <div class="associated_team form-group mt-3" <?php echo $vendor_questions['radio_associate'] =="Y"?"":STYLE_DISPLAY_NONE; ?> >
                          <h6>a) Please provide details </h6>
                          <span> <span class="f-w-700">Answer :</span> <?php echo $vendor_questions['associated_team_detail']; ?></span>
                     </div>
@@ -2441,7 +2443,7 @@ if($fieldaccesright['field']['vendor_po_notes']!="NA"){ ?>
                         <h6>B) Does your company has a quality system ?(If Answer is Yes Then attachs the Quality Certificates)</h6>
                         <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['quality_system']); ?></span>
                        </div>
-                       <div class="vrq_extra" <?php echo $vendor_questions['quality_system'] =="Y"?"":"style='display: none'"; ?>>
+                       <div class="vrq_extra" <?php echo $vendor_questions['quality_system'] =="Y"?"":STYLE_DISPLAY_NONE; ?>>
                            <div class="row mt-3">
                                <div class="form-group col-lg-1">
                                    <span class="form-label">1</span>
@@ -2525,7 +2527,7 @@ if($fieldaccesright['field']['vendor_po_notes']!="NA"){ ?>
                         <h6>4) Do you have hourly employees that works at manufacturer facility? For the purpose of this form, hourly employees are employees that are subject to local laws governing overtime pay or subject to hourly increased or decreased in compensation based on volume of product if Yes (Please answer a, b and c, if No then skip to Question no 5)</h6>
                          <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4']); ?></span>
                        </div>
-                       <div class="m-l-20 work_manufacturer_facility supplychainresponsibility_4 mt-3" <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":"style='display: none'"; ?>>
+                       <div class="m-l-20 work_manufacturer_facility supplychainresponsibility_4 mt-3" <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":STYLE_DISPLAY_NONE; ?>>
                            <div class="row mt-3">
                             <h6>a) Do all hourly workers work less than 60 hours per week?</h6>
                             <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_a']); ?></span>
@@ -2539,11 +2541,11 @@ if($fieldaccesright['field']['vendor_po_notes']!="NA"){ ?>
                             <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_c']); ?></span>
                            </div>
                        </div>
-                       <div class="row supplychainresponsibility_5 mt-3" <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="")?"":"style='display: none'"; ?>>
+                       <div class="row supplychainresponsibility_5 mt-3" <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="")?"":STYLE_DISPLAY_NONE; ?>>
                         <h6>5) Do You retain or hold your employees original passport or other original personal identification documents?</h6>
                          <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5']); ?></span>
                        </div>
-                       <div class="m-l-20 hold_original_passport supplychainresponsibility_5 mt-3" <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="" && $vendor_questions['supply_Chain_responsibility'][5] =="Y")?"":"style='display: none'"; ?>>
+                       <div class="m-l-20 hold_original_passport supplychainresponsibility_5 mt-3" <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="" && $vendor_questions['supply_Chain_responsibility'][5] =="Y")?"":STYLE_DISPLAY_NONE; ?>>
                            <div class="row">
                             <h6>a) Do you return original passport or other original personal identification documents upon the employee's request?</h6>
                              <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5_a']); ?></span>
@@ -2553,7 +2555,7 @@ if($fieldaccesright['field']['vendor_po_notes']!="NA"){ ?>
                         <h6>6) Do any employee have to reimburse recruitment fee to your company?</h6>
                          <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['6']); ?></span>
                        </div>
-                       <div class="row supplychainresponsibility_7 mt-3" <?php echo $vendor_questions['supply_Chain_responsibility'][3] =="N"?"":"style='display: none'"; ?>>
+                       <div class="row supplychainresponsibility_7 mt-3" <?php echo $vendor_questions['supply_Chain_responsibility'][3] =="N"?"":STYLE_DISPLAY_NONE; ?>>
                         <h6>7) Is your company (or your sub-contractor) in Xinjiang Uygur Autonomous Regision (XUAR)</h6>
                          <span> <span class="f-w-700">Answer :</span> <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['7']); ?></span>
                        </div>

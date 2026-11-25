@@ -10,7 +10,7 @@ foreach ($data_doc[$process_title['process_id']] as $list) {
 } ?>
 <div class="ess-related">
     <?php if(empty($process_button1_url)) { ?>
-        <div class="" role="group">
+        <div class="">
             <button id="btnGroupDrop1" type="button" class="btn btn-success font-weight-bold dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?php echo $process_button1_label ?>
             </button>
@@ -32,7 +32,7 @@ foreach ($data_doc[$process_title['process_id']] as $list) {
     <button type="button" class="btn btn-info"><?php echo $process_button3_label ?></button>
     <br /><br />
     <?php if(empty($process_button4_url)) { ?>
-    <div class="" role="group">
+    <div class="">
         <button id="btnGroupDrop1_2" type="button" class="btn btn-success font-weight-bold dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php echo $process_button4_label ?>
         </button>

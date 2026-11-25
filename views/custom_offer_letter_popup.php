@@ -67,7 +67,7 @@ $datacat["where"] = array('is_active'=> '0');
                                 <div  class="col-lg-12" style="page-break-before: always;">
                                 <strong style="font-size: 18px; color: #000;  border-bottom: 2px solid #000; padding-bottom: 5px;">
                                 <?= __('COST TO COMPANY CALCULATIONS w.e.f November 11, 2020'); ?></strong>
-        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
+        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;">
             <tr style="height: 50px;border: 1px solid #000;">
                 <td style="border:1px solid #000;padding: 5px;"><b><?= __('Name'); ?></b></td>
                 <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $send_data['display_name']; ?></td>

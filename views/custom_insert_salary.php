@@ -689,7 +689,8 @@ $sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_
                                                                 <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"
                                                                     <?php if (in_array($addsaldata, (array) $checkdata)) {
                                                                         echo __('checked ');
-                                                                    } ?>             <?php if (in_array($addsaldata, (array) $mandatroy)) {
+                                                                    } ?>
+                                                                    <?php if (in_array($addsaldata, (array) $mandatroy)) {
                                                                                       echo __('disabled');
                                                                                   } ?>
                                                                     name="Checkboxes1"

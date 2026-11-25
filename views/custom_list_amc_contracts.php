@@ -108,7 +108,15 @@ if (($_SESSION['amc_schedule_warning'] ?? '') != '') {
                                             <?php
                                             $partyType = ucfirst($row['party_type'] ?? '');
                                             $partyName = $row['party_name'] ?? '';
-                                            echo htmlspecialchars(trim($partyType . ($partyName ? ': ' . $partyName : '')) ?: '-');
+                                            $partyLabel = $partyType;
+                                            if ($partyName !== '') {
+                                                $partyLabel .= ': ' . $partyName;
+                                            }
+                                            $partyDisplay = trim($partyLabel);
+                                            if ($partyDisplay === '') {
+                                                $partyDisplay = '-';
+                                            }
+                                            echo htmlspecialchars($partyDisplay);
                                             ?>
                                         </td>
                                         <td><?php echo !empty($row['start_date']) ? fromDate($row['start_date']) : '-'; ?></td>

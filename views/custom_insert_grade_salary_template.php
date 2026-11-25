@@ -295,7 +295,7 @@ function changesalarytype(val){
                 <div class="row align-items-center" style="margin-top: 10px;padding: 0px 10%;" id="printarea">
 
                     <div  class="col-lg-12" style="page-break-before: always;">
-                        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
+                        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;">
                             <tr style="height: 50px;border: 1px solid #000;">
                                 <td style="border:1px solid #000;padding: 5px;"><b><?php echo __('Name'); ?></b></td>
                                 <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $empdata[$salarydata['employee_id']]; ?></td>

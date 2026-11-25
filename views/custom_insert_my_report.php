@@ -1,4 +1,7 @@
 <?php
+defined('INDEX_OPTION') || define('INDEX_OPTION', 'index.php?option=');
+defined('PARAM_RID') || define('PARAM_RID', '&Rid=');
+
 $rid = encodeId($_GET['Rid']);
 $reporturl = API."?mode=singlerowtabledata&rid=".$rid."&table=my_reports";
 $report_lists = callAPI($reporturl);
@@ -168,12 +171,12 @@ $stausresult = ViewStatusData();
                                                 <td>
                                                     <?php
 
-                                                    $edit = $edit_permission == 1 ? "index.php?option=".$insert."&Rid=".$rid : "javascript:showpermission()";
-                                                    $link_copy = $insert_permission == 1 ? "index.php?option=".$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
-                                                    $edit =  "index.php?option=".$insert."&Rid=".$rid;
-                                                    $link_copy =  "index.php?option=".$insert."&copy=1&Rid=".$rid;
+                                                    $edit = $edit_permission == 1 ? INDEX_OPTION.$insert.PARAM_RID.$rid : "javascript:showpermission()";
+                                                    $link_copy = $insert_permission == 1 ? INDEX_OPTION.$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
+                                                    $edit =  INDEX_OPTION.$insert.PARAM_RID.$rid;
+                                                    $link_copy =  INDEX_OPTION.$insert."&copy=1&Rid=".$rid;
 
-                                                    $view =  "index.php?option=".$view_page."&Rid=".$rid
+                                                    $view =  INDEX_OPTION.$view_page.PARAM_RID.$rid
                                                     ?>
 
                                                     <div style="float: left;">

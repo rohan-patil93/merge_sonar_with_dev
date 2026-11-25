@@ -57,7 +57,7 @@ function replayMessageRemoved(){
                                       <div class="row m-b-20 send-chat">
                                          <div class="col">
                                             <div class="msg">
-                                               <i class="fa fa-reply float-left cursor-pointer" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?php echo __('Replay'); ?>" onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                               <button type="button" class="btn btn-link p-0 border-0 text-reset float-left cursor-pointer" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?php echo __('Replay'); ?>" onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" aria-label="<?php echo __('Replay'); ?>"><i class="fa fa-reply"></i></button>
                                                <span class="float-right"></span>
                                                <p class="m-b-0"><?php echo $messgae." ".$datares['description']; ?></p>
                                                <?php
@@ -92,7 +92,7 @@ function replayMessageRemoved(){
                                        </div>
                                        <div class="col">
                                           <div class="msg">
-                                             <i class="fa fa-reply float-right cursor-pointer" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?php echo __('Replay'); ?>" onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                             <button type="button" class="btn btn-link p-0 border-0 text-reset float-right cursor-pointer" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?php echo __('Replay'); ?>" onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" aria-label="<?php echo __('Replay'); ?>"><i class="fa fa-reply"></i></button>
                                              <p class="m-b-0"><?php echo $messgae." ".$datares['description']; ?></p>
                                              <?php echo $replay_msg;
                                              if(count((array)$tasklist['logs']['attachment'][$ky])!='0'){ ?>

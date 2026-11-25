@@ -250,9 +250,9 @@ if($_POST['editsubmit'] == "edit"){ ?>
               <span><i class="fa fa-download"></i></span>
               </a>
             <?php } ?>
-            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Remove') ?>" onclick="removedRow('removedworkexperiance<?php echo $mm; ?>')"  role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+            <button type="button" class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Remove') ?>" aria-label="<?= __('Remove') ?>" onclick="removedRow('removedworkexperiance<?php echo $mm; ?>')">
               <i class="ti-trash"></i>
-            </span>
+            </button>
 
           </div>
 
@@ -355,9 +355,9 @@ if($_POST['editsubmit'] == "edit"){ ?>
               </a>
             <?php } ?>
 
-            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Remove') ?>" onclick="removedRow('removeeducation<?php echo $kk; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+            <button type="button" class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Remove') ?>" aria-label="<?= __('Remove') ?>" onclick="removedRow('removeeducation<?php echo $kk; ?>')">
                <i class="ti-trash"></i>
-            </span>
+            </button>
           </div>
 
         </td>

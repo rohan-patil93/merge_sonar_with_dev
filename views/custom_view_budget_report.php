@@ -79,9 +79,9 @@ if(isset($_POST['applyform'])) {
     }
     if(count((array)$maingra)<12){
         $maingra['months'] = array();
-        for($i=$mon_key;$i<$mon_key+12;$i++){
-            $i = $i>12 ? $i-12 :$i;
-            $maingra['months'][] = date("M",strtotime('2021-'.$i));
+        for ($i = $mon_key; $i < $mon_key + 12; $i++) {
+            $monthNum = $i > 12 ? $i - 12 : $i;
+            $maingra['months'][] = date("M", strtotime('2021-' . $monthNum));
         }
     }
     if(count((array)$maingra['months']) != 0 ){
@@ -193,7 +193,7 @@ foreach($mcats as $mm=>$mtatss){
                                     <div class="d-flex mt-10">
                                         <span class="font-weight-bold mr-4"><?= __('Total Budget'); ?> </span>
                                         <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-30px w-xl-70px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-primary" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <span class="font-weight-bolder text-dark ml-4"><?php echo number_format($totalbudget,2);?></span>
                                     </div>

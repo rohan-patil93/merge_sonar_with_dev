@@ -139,7 +139,7 @@ if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disab
 
                                     <button class="btn btn-primary btn-sm btn-pd" style="color: <?php echo "#".$stausresult[$res['current_status']]['color']; ?>;    background:  <?php echo "#".strval( $stausresult[$res['current_status']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$res['current_status']]['background_color']); ?>;" type="button"><?php echo  $stausresult[$res['current_status']]['name']; ?> </button>
                                 </td>
-                                <td nowrap="nowrap" style="display: flex;">
+                                <td style="white-space: nowrap; display: flex;">
                                     <div class="dropdown dropdown-inline d-inline-block">
                                         <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-bs-toggle="dropdown" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                             <i class="fa fa-star"></i>
@@ -151,20 +151,15 @@ if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disab
                                             <li class="nav-item" style="margin-left:30px">
                                                 <?php $rate= $res['ratting'];
                                                 for ($i=1; $i < 6 ; $i++) {
-                                                    if($rate >= $i){ ?>
-                                                        <button type="button" class="bg-transparent border-0 p-0" onclick="updatepostcandidate(<?php echo $i; ?>,<?php echo $res['id']; ?>,'ratting')">
-                                                            <i class="fa fa-star  text-warning mt-3"></i>
-                                                        </button>
-                                                    <?php }elseif ($rate >=($i-0.5)) { ?>
+                                                    if ($rate >= ($i - 0.5) && $rate < $i) { ?>
                                                         <button type="button" class="bg-transparent border-0 p-0" onclick="updatepostcandidate(<?php echo $i; ?>,<?php echo $res['id']; ?>,'ratting')">
                                                             <i class="fa fa-star-half-alt  text-warning mt-3"></i>
                                                         </button>
-                                                    <?php }else{?>
+                                                    <?php } else { ?>
                                                         <button type="button" class="bg-transparent border-0 p-0" onclick="updatepostcandidate(<?php echo $i; ?>,<?php echo $res['id']; ?>,'ratting')">
                                                             <i class="fa fa-star  text-warning mt-3"></i>
                                                         </button>
                                                     <?php }
-
                                                 } ?>
                                             </li>
                                         </ul>

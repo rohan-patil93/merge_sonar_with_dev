@@ -360,8 +360,7 @@ if(count((array)$credit_notes) != 0){ ?>
 
         <?php
             $visibledfields = array(ST_DRAFT,ST_ACTIVE,ST_CALLBACK,ST_SEND_BACK);
-            if(in_array($note_type_res['current_status'], (array)$visibledfields) && $note_type_res['created_by'] ==$_SESSION['userid'] || $note_type_res['created_by'] ==""){
-            }else{
+            if (!(in_array($note_type_res['current_status'], (array)$visibledfields) && $note_type_res['created_by'] == $_SESSION['userid'] || $note_type_res['created_by'] == "")) {
                 $dyncss = "pointer-events: none; opacity: 0.7;";
             }
 
@@ -435,7 +434,7 @@ if(count((array)$credit_notes) != 0){ ?>
                         <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="description[]" ><?php echo $dcn['description']; ?></textarea>
                     </div>
                      <div class="form-group col-lg-1 text-center">
-                        <i class="ti-trash"  onclick="deletRow('<?php echo $mk; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                        <button type="button" class="btn p-0 border-0 bg-transparent text-danger" onclick="deletRow('<?php echo $mk; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" aria-label="<?= __('Remove') ?>"><i class="ti-trash"></i></button>
                       </div>
                 </div>
                 <?php $mk++;

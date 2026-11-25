@@ -440,7 +440,7 @@ elem.forEach(function(html) {
                                             <?php foreach ($showtables1 as $key => $data) {  ?>
                                                 <option   value = <?php echo $data ?> <?php if($table_name_field == $data){ echo "selected";
                                                 } ?>   > <?php echo ucwords(str_replace('_',' ',$data)); ?> </option>
-                                            <?php	} ?>
+                                            <?php    } ?>
                                         </select>
                                     </div>
                                     <div class="col-lg-2 w-full">
@@ -567,8 +567,10 @@ elem.forEach(function(html) {
                                                         <td>
                                                             <select class="form-control form-select js-example-basic-single" id="comparator_<?php echo $count; ?>" name= "comparator[]" aria-label="<?= htmlspecialchars(__('Comparator'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 <?php foreach ($comparator_array as $dd) {  ?>
-                                                                    <option  <?php if($td['drop_condition'] == $dd){ echo "selected";
-                                                                    } ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?>
+                                                                    <option <?php if ($td['drop_condition'] == $dd) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?> value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?>
                                                                 </select>
                                                             </td>
                                                             <td>

@@ -1,4 +1,7 @@
 <?php
+defined('ZERO_DATE') || define('ZERO_DATE', ZERO_DATE);
+defined('ZERO_DATETIME') || define('ZERO_DATETIME', ZERO_DATETIME);
+
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -54,12 +57,12 @@ if(count((array)$rows) > 0){
                     $security_sign = isset($row['security_sign']) ? $row['security_sign'] : '';
                     $remarks = isset($row['remarks']) ? $row['remarks'] : '';
 
-                    $visit_date_display = ($visit_date != '' && $visit_date != '0000-00-00') ? fromDate($visit_date) : '-';
-                    $in_display = ($in_time != '' && $in_time != '0000-00-00 00:00:00') ? formatAmcScheduleDateTime($in_time) : '-';
-                    $out_display = ($out_time != '' && $out_time != '0000-00-00 00:00:00') ? formatAmcScheduleDateTime($out_time) : '-';
-                    $access_enable_display = ($access_enable_date != '' && $access_enable_date != '0000-00-00' && $access_enable_date != '0000-00-00 00:00:00') ? fromDate($access_enable_date) : '';
-                    $access_disable_display = ($access_disable_date != '' && $access_disable_date != '0000-00-00' && $access_disable_date != '0000-00-00 00:00:00') ? fromDate($access_disable_date) : '';
-                    $card_sub_display = ($card_submitted_date != '' && $card_submitted_date != '0000-00-00 00:00:00') ? formatAmcScheduleDateTime($card_submitted_date) : '-';
+                    $visit_date_display = ($visit_date != '' && $visit_date != ZERO_DATE) ? fromDate($visit_date) : '-';
+                    $in_display = ($in_time != '' && $in_time != ZERO_DATETIME) ? formatAmcScheduleDateTime($in_time) : '-';
+                    $out_display = ($out_time != '' && $out_time != ZERO_DATETIME) ? formatAmcScheduleDateTime($out_time) : '-';
+                    $access_enable_display = ($access_enable_date != '' && $access_enable_date != ZERO_DATE && $access_enable_date != ZERO_DATETIME) ? fromDate($access_enable_date) : '';
+                    $access_disable_display = ($access_disable_date != '' && $access_disable_date != ZERO_DATE && $access_disable_date != ZERO_DATETIME) ? fromDate($access_disable_date) : '';
+                    $card_sub_display = ($card_submitted_date != '' && $card_submitted_date != ZERO_DATETIME) ? formatAmcScheduleDateTime($card_submitted_date) : '-';
 
                     $cssdata[] = array(
                         'Sl. No.' => $i,

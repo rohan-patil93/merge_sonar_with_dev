@@ -1,4 +1,14 @@
 <?php
+if (!defined('MSG_PROJECT_DATES_SAVED')) {
+    define('MSG_PROJECT_DATES_SAVED', MSG_PROJECT_DATES_SAVED);
+}
+if (!defined('LOC_CSR_TRACKING_RID')) {
+    define('LOC_CSR_TRACKING_RID', 'location:index.php?option=COM_VIEW_CSR_TRACKING&Rid=');
+}
+if (!defined('MSG_TRACKING_DETAILS_SAVED')) {
+    define('MSG_TRACKING_DETAILS_SAVED', MSG_TRACKING_DETAILS_SAVED);
+}
+
 if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
   include_once '../includes/session.php';
   include_once '../dbconfig.php';
@@ -91,15 +101,15 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
       $apiResponseRaw = file_post_contents($saveUrl, $savePost, 'update');
       $apiResponse = csrTrackingViewParseApiResponse($apiResponseRaw);
       if (csrTrackingViewIsApiSuccess($apiResponse)) {
-        csrTrackingViewSetFlash('success', csrTrackingViewApiMessage($apiResponse, $apiResponseRaw, 'Project dates saved successfully.', 'Project dates saved successfully.'));
+        csrTrackingViewSetFlash('success', csrTrackingViewApiMessage($apiResponse, $apiResponseRaw, MSG_PROJECT_DATES_SAVED, MSG_PROJECT_DATES_SAVED));
       } else {
-        csrTrackingViewSetFlash('error', csrTrackingViewApiMessage($apiResponse, $apiResponseRaw, 'Project dates saved successfully.', 'Failed to save project dates.'));
+        csrTrackingViewSetFlash('error', csrTrackingViewApiMessage($apiResponse, $apiResponseRaw, MSG_PROJECT_DATES_SAVED, 'Failed to save project dates.'));
       }
-      header("location:index.php?option=COM_VIEW_CSR_TRACKING&Rid=" . urlencode($encodedRid));
+      header(LOC_CSR_TRACKING_RID . urlencode($encodedRid));
       exit;
     } else {
       csrTrackingViewSetFlash('error', 'Invalid project details.');
-      header("location:index.php?option=COM_VIEW_CSR_TRACKING&Rid=" . urlencode($encodedRid));
+      header(LOC_CSR_TRACKING_RID . urlencode($encodedRid));
       exit;
     }
   }
@@ -117,15 +127,15 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
       $apiResponseRaw = file_post_contents($saveUrl, $savePost, 'update');
       $apiResponse = csrTrackingViewParseApiResponse($apiResponseRaw);
       if (csrTrackingViewIsApiSuccess($apiResponse)) {
-        csrTrackingViewSetFlash('success', csrTrackingViewApiMessage($apiResponse, $apiResponseRaw, 'Tracking details saved successfully.', 'Tracking details saved successfully.'));
+        csrTrackingViewSetFlash('success', csrTrackingViewApiMessage($apiResponse, $apiResponseRaw, MSG_TRACKING_DETAILS_SAVED, MSG_TRACKING_DETAILS_SAVED));
       } else {
-        csrTrackingViewSetFlash('error', csrTrackingViewApiMessage($apiResponse, $apiResponseRaw, 'Tracking details saved successfully.', 'Failed to save tracking details.'));
+        csrTrackingViewSetFlash('error', csrTrackingViewApiMessage($apiResponse, $apiResponseRaw, MSG_TRACKING_DETAILS_SAVED, 'Failed to save tracking details.'));
       }
-      header("location:index.php?option=COM_VIEW_CSR_TRACKING&Rid=" . urlencode($encodedRid));
+      header(LOC_CSR_TRACKING_RID . urlencode($encodedRid));
       exit;
     } else {
       csrTrackingViewSetFlash('error', 'Invalid project details.');
-      header("location:index.php?option=COM_VIEW_CSR_TRACKING&Rid=" . urlencode($encodedRid));
+      header(LOC_CSR_TRACKING_RID . urlencode($encodedRid));
       exit;
     }
   }

@@ -5,8 +5,8 @@ $respexpuryurl = API."?mode=getcheckexpirydetails&adminrole=".$_SESSION['admin_t
       $respexpurydatas = json_decode($respexpurydata,1);
     if($respexpurydatas['cnt']!=0){
 ?>
-  <div class="modal fade" id="expiryalertpopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-    <div class="modal-dialog expirylist_popup" role="document">
+  <div class="modal fade" id="expiryalertpopup" tabindex="-1" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog expirylist_popup">
       <div class="modal-content">
         <div class="modal-header">
             <h8 class="modal-title text-white"> <?= __('Expiry Alert ss'); ?> </h8>

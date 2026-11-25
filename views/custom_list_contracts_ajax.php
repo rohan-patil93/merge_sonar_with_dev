@@ -115,7 +115,8 @@ if(count((array)($contracts)) != 0){  ?>
                     $parentLabel = $parentRow['contract_name'];
                 }
             }
-            $renewalColumnText = $isRenewal ? ('Renewal' . ($parentLabel != '-' ? ' - ' . $parentLabel : '')) : 'New';
+            $parentSuffix = ($parentLabel != '-') ? (' - ' . $parentLabel) : '';
+            $renewalColumnText = $isRenewal ? ('Renewal' . $parentSuffix) : 'New';
 
              $locationsid = json_decode($contra['locations'] ,1);
              $locationnames = "";
@@ -130,6 +131,12 @@ if(count((array)($contracts)) != 0){  ?>
 }
             $servicesnames = rtrim($servicesnames, ", ");
 
+            $contractStatusText = "Active";
+            if ($cancel_status) {
+                $contractStatusText = "Cancelled";
+            } elseif ($contra['end_date'] && new DateTime($contra['end_date']) < $contracttodaydate) {
+                $contractStatusText = "Expired";
+            }
             if (!$is_pdf) {
              $cssdata[] = array("Sr. No."=>$sq, "Contract No"=>emptytextdashShow($contra['transaction_no']),
                 "Contract Name"=>emptytextdashShow($contra['contract_name']),
@@ -142,7 +149,7 @@ if(count((array)($contracts)) != 0){  ?>
                 "Department"=>emptytextdashShow($departments[$contra['department_id']]['department_name']),
                 "Contract Category"=>emptytextdashShow($contract_types[$contra['type_of_contract_id']]['genc_detail_name']),
                 "Payment Terms"=>emptytextdashShow($payment_terms[$contra['contract_payment_terms']]['payment_term_name']),
-                "Contract Status"=> $cancel_status ? "Cancelled" : (($contra['end_date'] && new DateTime($contra['end_date']) < $contracttodaydate) ? "Expired" : "Active"));
+                "Contract Status"=> $contractStatusText);
             }
 
          ?>

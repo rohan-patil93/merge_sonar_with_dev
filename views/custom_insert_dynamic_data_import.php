@@ -1,14 +1,17 @@
 <?php
+if (!defined('PARAM_FILE_NAME')) {
+    define('PARAM_FILE_NAME', '&file_name=');
+}
+
 $sumbit_val =0;
 if(isset($_POST['submit_value'])){
-    $url = API."?mode=toimportthedataintotables&table=".$_GET['table']."&file_name=".$_POST['file_name'];
+    $url = API."?mode=toimportthedataintotables&table=".$_GET['table'].PARAM_FILE_NAME.$_POST['file_name'];
     $response = callAPI($url);
-    if($response){
-    }
+
     $sumbit_val =1;
 }
 if($_GET['type'] == 'SAL'){
-    $url = API."?mode=toimportthedataintotablesemployeessalary&table=".$_GET['table']."&file_name=".$_GET['file_name'];
+    $url = API."?mode=toimportthedataintotablesemployeessalary&table=".$_GET['table'].PARAM_FILE_NAME.$_GET['file_name'];
     $_GET['table'] = 'Salaries';
     $response = callAPI($url);
     $sumbit_val =1;
@@ -73,7 +76,7 @@ if($_GET['type'] == 'SAL'){
             </div>
             <?php } ?>
             <?php if($sumbit_val == 1){
-                $url = API."?mode=togetimplodesdetailsount&table=".$_GET['table']."&file_name=".$_GET['file_name'];
+                $url = API."?mode=togetimplodesdetailsount&table=".$_GET['table'].PARAM_FILE_NAME.$_GET['file_name'];
                 $data_details = callAPI($url);
                 $data = json_decode($data_details,1);
             ?>

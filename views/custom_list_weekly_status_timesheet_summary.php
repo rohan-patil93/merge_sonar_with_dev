@@ -142,10 +142,9 @@ foreach((array)$result as $key=>$ressum){
                         <div class="form-group">
                             <?php if($_SESSION['admin_type'] =='1'){ ?>
                             <span class="f-w-700 mb-1">Approving Manager</span>
-                            <select aria-label="Reproting Manager" class="form-select js-example-basic-single p-2" name="reproting_manager">
+                            <select aria-label="Approving Manager" class="form-select js-example-basic-single p-2" name="reproting_manager">
                                 <option value="0">All</option>
-                                foreach((array)$_SESSION['users'] as $key=>$reporting_tolists){
-                                ?>
+                                <?php foreach((array)$_SESSION['users'] as $key=>$reporting_tolists){ ?>
                                     <option value="<?php echo $key; ?>" <?php echo $reproting_manager==$key?"selected":"";?>><?php echo $reporting_tolists; ?></option>
                                 <?php }?>
                             </select>
@@ -260,7 +259,7 @@ foreach((array)$result as $key=>$ressum){
                     <tr class="main">
                         <td>
 
-                            <i class="ti-angle-double-down" onclick="opensubtable(<?php echo $key5; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="opensubtable(<?php echo $key5; ?>)" aria-label="<?= htmlspecialchars(__('Toggle details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-angle-double-down"></i></button>
                             <input type="hidden" id="showhide<?php echo $key5; ?>" value="0">
                         </td>
 

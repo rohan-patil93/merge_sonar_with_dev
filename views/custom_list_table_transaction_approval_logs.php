@@ -1,4 +1,6 @@
  <?php
+defined('INDEX_OPTION') || define('INDEX_OPTION', 'index.php?option=');
+
 if($_POST['option']!=""){
   $_GET['option'] = $_POST['option'];
   include_once '../includes/session.php';
@@ -277,10 +279,10 @@ $stausresult = ViewStatusData();
                         <?php }?>
                         <td>
                           <?php
-                             $edit = $edit_permission == 1 ? "index.php?option=".$insert."&Rid=".$rid : "javascript:showpermission()";
-                            $link_copy = $insert_permission == 1 ? "index.php?option=".$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
-                            $edit =  "index.php?option=".$insert."&Rid=".$rid;
-                            $link_copy =  "index.php?option=".$insert."&copy=1&Rid=".$rid;
+                             $edit = $edit_permission == 1 ? INDEX_OPTION.$insert."&Rid=".$rid : "javascript:showpermission()";
+                            $link_copy = $insert_permission == 1 ? INDEX_OPTION.$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
+                            $edit =  INDEX_OPTION.$insert."&Rid=".$rid;
+                            $link_copy =  INDEX_OPTION.$insert."&copy=1&Rid=".$rid;
 
                             $view =  "index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=2021-2022&version_no=0";
                           ?>
@@ -314,7 +316,7 @@ $stausresult = ViewStatusData();
   </div>
 </div>
 </div>
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content"  id="popup2">
 

@@ -90,47 +90,34 @@ foreach($parentcoa as $pcoa1){
 }
 
 
-function getbredcrump($parentcoa,$parentchildacount,$parent_account_code){
-    $retuenlist = array();
-    foreach($parentcoa as $pcoa1){
-        $retuenlist[1]['account_code'] = $pcoa1['account_code'];
-        $retuenlist[1]['account_name'] = $pcoa1['account_name'];
-        $retuenlist[2] = $retuenlist[3] = $retuenlist[4]= $retuenlist[5] =array();
-        if($parent_account_code == $pcoa1['account_code']){
-            return $retuenlist;
+function findBreadcrumbPath($nodes, $parentchildacount, $targetCode, $path = array(), $level = 1) {
+    if ($level > 5 || empty($nodes)) {
+        return null;
+    }
+    foreach ($nodes as $node) {
+        $currentPath = $path;
+        $currentPath[$level] = array(
+            'account_code' => $node['account_code'],
+            'account_name' => $node['account_name']
+        );
+        if ($node['account_code'] == $targetCode) {
+            for ($k = $level + 1; $k <= 5; $k++) {
+                $currentPath[$k] = array();
+            }
+            return $currentPath;
         }
-        foreach($parentchildacount[$pcoa1['account_code']] as $pcoa2){
-            $retuenlist[2]['account_code'] = $pcoa2['account_code'];
-            $retuenlist[2]['account_name'] = $pcoa2['account_name'];
-            $retuenlist[3] = $retuenlist[4]= $retuenlist[5] =array();
-            if($parent_account_code == $pcoa2['account_code']){
-                return $retuenlist;
-            }
-            foreach($parentchildacount[$pcoa2['account_code']] as $pcoa3){
-                $retuenlist[3]['account_code'] = $pcoa3['account_code'];
-                $retuenlist[3]['account_name'] = $pcoa3['account_name'];
-                $retuenlist[4]= $retuenlist[5] =array();
-                if($parent_account_code == $pcoa3['account_code']){
-                    return $retuenlist;
-                }
-                foreach($parentchildacount[$pcoa3['account_code']] as $pcoa4){
-                    $retuenlist[4]['account_code'] = $pcoa4['account_code'];
-                    $retuenlist[4]['account_name'] = $pcoa4['account_name'];
-                    $retuenlist[5] =array();
-                    if($parent_account_code == $pcoa4['account_code']){
-                        return $retuenlist;
-                    }
-                    foreach($parentchildacount[$pcoa4['account_code']] as $pcoa5){
-                        $retuenlist[5]['account_code'] = $pcoa5['account_code'];
-                        $retuenlist[5]['account_name'] = $pcoa5['account_name'];
-                        if($parent_account_code == $pcoa5['account_code']){
-                            return $retuenlist;
-                        }
-                    }
-                }
-            }
+        $children = $parentchildacount[$node['account_code']] ?? array();
+        $found = findBreadcrumbPath($children, $parentchildacount, $targetCode, $currentPath, $level + 1);
+        if ($found !== null) {
+            return $found;
         }
     }
+    return null;
+}
+
+function getbredcrump($parentcoa, $parentchildacount, $parent_account_code) {
+    $result = findBreadcrumbPath($parentcoa, $parentchildacount, $parent_account_code);
+    return $result ?? array();
 }
 if($parent_account_code != '0'){
     $getbredcrump = getbredcrump($parentcoa,$parentchildacount,$parent_account_code);
@@ -201,7 +188,7 @@ if(count((array)$getbredcrump) != 0){
              }
          ?>
         <tr>
-            <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><span class="<?php echo $textclasss; ?> cursor-pointer mb-0" onclick="<?php echo $onckiclfun; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $trialbal['account_code']; ?> <?php echo $icons; ?></span></td>
+            <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><button type="button" class="btn btn-link p-0 border-0 text-reset <?php echo $textclasss; ?> cursor-pointer mb-0" onclick="<?php echo $onckiclfun; ?>"><?php echo $trialbal['account_code']; ?> <?php echo $icons; ?></button></td>
             <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><?php echo $trialbal['account_name']; ?></td>
             <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;" class="<?php echo ($accountdebitamount < 0)?"text-danger":""; ?>"><?php
             echo ($accountdebitamount!="" && $accountdebitamount!="0")?accountingAmontFormat($accountdebitamount):"-"; ?></td>

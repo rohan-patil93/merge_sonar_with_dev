@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+}
+
 $_SESSION['apply_js']['multiselest'] = 1;
 if(isset($_POST['submit'])){
     $table_name = 'complaints';
@@ -10,10 +14,10 @@ if(isset($_POST['submit'])){
         $data['item_id'] = '';
         $data['current_status'] = '0';
         $data['is_active'] = '0';
-        $data['status_date'] = date('Y-m-d H:i:s');
+        $data['status_date'] = date(DATE_FORMAT_YMD_HIS);
         $data['company_id'] = $_SESSION['company_id'];
         $data['source_type'] = !empty($data['source_type']) ? $data['source_type'] : 'adhoc';
-        $data['created_date'] = date('Y-m-d H:i:s');
+        $data['created_date'] = date(DATE_FORMAT_YMD_HIS);
         $data['created_by'] = $_SESSION['userid'];
         $data['transaction_no'] = dyanamicserialnumber($table_name);
         $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
@@ -28,7 +32,7 @@ if(isset($_POST['submit'])){
         unset($_POST['rid']);
         $_POST['complaint_type'] = 'Asset';
         $_POST['item_id'] = '';
-        $_POST['updated_date'] = date('Y-m-d H:i:s');
+        $_POST['updated_date'] = date(DATE_FORMAT_YMD_HIS);
         $_POST['updated_by'] = $_SESSION['userid'];
         $url = API . "?mode=updaterowtabledata&rid=" . $rid . "&table=" . $table_name . "&method=post&fid=id";
         $response = file_post_contents($url, $_POST, 'update');
@@ -44,7 +48,9 @@ if(isset($_POST['submit'])){
         $upload_path = 'all';
 
         foreach ($_FILES['complaint_images']['name'] as $key => $original_name) {
-            if (empty($original_name)) continue;
+            if (empty($original_name)) {
+                continue;
+            }
             $_FILES['single_file']['name'] = $_FILES['complaint_images']['name'][$key];
             $_FILES['single_file']['type'] = $_FILES['complaint_images']['type'][$key];
             $_FILES['single_file']['tmp_name'] = $_FILES['complaint_images']['tmp_name'][$key];
@@ -63,8 +69,8 @@ if(isset($_POST['submit'])){
                 'file_size_mb'            => $file_size_mb,
                 'is_active'               => '0',
                 'current_status'          => '0',
-                'status_date'             => date('Y-m-d H:i:s'),
-                'created_date'            => date('Y-m-d H:i:s'),
+                'status_date'             => date(DATE_FORMAT_YMD_HIS),
+                'created_date'            => date(DATE_FORMAT_YMD_HIS),
                 'created_by'              => $user_id
             );
             $url_attach = API . "?mode=adddata&table=" . $table_name . "&method=post";

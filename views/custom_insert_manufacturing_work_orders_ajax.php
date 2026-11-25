@@ -149,7 +149,7 @@ $workorderitemqty = ($work_order_item_qty/$manufacturing_boms_qty);
                             <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right" id="bom_qty_<?php echo $seq; ?>" name="bom_qty[]" value="<?php echo $rid!=""?$mbomi['bom_qty']:$mbomi['quantity']; ?>" readonly>
                         </th>
                         <th scope="col" class="p-1">
-                            <i class="ti-trash" onclick="removerows('remove_row_<?php echo $seq; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="removerows('remove_row_<?php echo $seq; ?>')" aria-label="<?= htmlspecialchars(__('Delete'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash"></i></button>
                         </th>
                     </tr>
                     <?php $seq++;
@@ -211,7 +211,7 @@ $workorderitemqty = ($work_order_item_qty/$manufacturing_boms_qty);
                             <textarea aria-label="<?php echo __('Operation Note[]'); ?>"   class="form-control" name="operation_note[]" id="operation_note_<?php echo $seqq; ?>" autocomplete="off"><?php echo $tab2['description']; ?><?php echo $mbomi['operation_note']; ?></textarea>
                         </td>
                         <th scope="col" class="p-1">
-                            <i class="ti-trash" onclick="removerows('remove_rows_<?php echo $seqq; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="removerows('remove_rows_<?php echo $seqq; ?>')" aria-label="<?= htmlspecialchars(__('Delete'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash"></i></button>
                         </th>
                     </tr>
                 <?php $seqq++;

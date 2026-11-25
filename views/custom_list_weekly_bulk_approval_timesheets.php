@@ -493,8 +493,8 @@ function select_all_approval(){
                             <div class="btn-group" id="status_dropdown" style="display:none;">
                                 <button class="btn btn-primary dropdown-toggle font-size-sm" style="color: <?php echo "#".$stausresult['8']['color']; ?>;    background:  <?php echo "#".strval($stausresult['8']['background_color']); ?>; border-color: <?php echo "#".strval($stausresult['8']['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $statu_progress['8']['name']; ?> </button>
                                 <div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
-                                    <div class="dropdown-item cursor-pointer" onclick="statuspopup('10','2')" name="status" id="status" value="10" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo $statu_progress['10']['action_label']; ?>  </div>
-                                    <div class="dropdown-item cursor-pointer" onclick="statuspopup('20','2')" name="status" id="status_2" value="20" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo $statu_progress['20']['action_label']; ?>  </div>
+                                    <button type="button" class="dropdown-item cursor-pointer" onclick="statuspopup('10','2')" name="status" id="status" value="10"><?php echo $statu_progress['10']['action_label']; ?>  </button>
+                                    <button type="button" class="dropdown-item cursor-pointer" onclick="statuspopup('20','2')" name="status" id="status_2" value="20"><?php echo $statu_progress['20']['action_label']; ?>  </button>
                                 </div>
                             </div>
                         </div>

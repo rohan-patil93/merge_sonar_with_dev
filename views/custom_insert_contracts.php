@@ -1160,23 +1160,20 @@ function getAmcSaveFailureMessage($response, $jsonOk, $result)
     $contractResult = $result['contract_result'] ?? array();
     $amcResult = $result['amc_contract_result'] ?? array();
 
+    $message = 'Failed to save AMC contract.';
     if (!$jsonOk && trim((string) $response) != '') {
         error_log('AMC API invalid JSON: ' . substr((string) $response, 0, 500));
-        return 'Unexpected API response. Please try again.';
+        $message = 'Unexpected API response. Please try again.';
+    } elseif (trim((string) $response) == '') {
+        $message = 'Empty API response from server.';
+    } elseif (!empty($amcResult['message'])) {
+        $message = $amcResult['message'];
+    } elseif (!empty($contractResult['message'])) {
+        $message = $contractResult['message'];
+    } elseif (!empty($_SESSION['error_message'][3001])) {
+        $message = $_SESSION['error_message'][3001];
     }
-    if (trim((string) $response) == '') {
-        return 'Empty API response from server.';
-    }
-    if (!empty($amcResult['message'])) {
-        return $amcResult['message'];
-    }
-    if (!empty($contractResult['message'])) {
-        return $contractResult['message'];
-    }
-    if (!empty($_SESSION['error_message'][3001])) {
-        return $_SESSION['error_message'][3001];
-    }
-    return 'Failed to save AMC contract.';
+    return $message;
 }
 
 function handleAmcSaveSuccessRedirect($amcResult)
@@ -1259,19 +1256,20 @@ function processAmcRenewalResponse($response, &$notification)
 
 function validateAmcContractSubmissionPreconditions($isRenewFlow, $saveContractId, $formData, $company_id, $contractRoleAccess, &$notification)
 {
+    $valid = true;
     if ($isRenewFlow && $saveContractId == '') {
         $notification = ['message' => 'Invalid contract for renewal.', 'type' => 'danger'];
-        return false;
+        $valid = false;
+    } elseif (!verifyContractLockStatus($saveContractId, $formData, $company_id, $notification)) {
+        $valid = false;
+    } else {
+        $canCreateAmc = $isRenewFlow || $saveContractId != '' || !empty($contractRoleAccess['can_amc']);
+        if (!$canCreateAmc) {
+            $notification = array('message' => 'You are not allowed to create an AMC contract.', 'type' => 'danger');
+            $valid = false;
+        }
     }
-    if (!verifyContractLockStatus($saveContractId, $formData, $company_id, $notification)) {
-        return false;
-    }
-    $canCreateAmc = $isRenewFlow || $saveContractId != '' || !empty($contractRoleAccess['can_amc']);
-    if (!$canCreateAmc) {
-        $notification = array('message' => 'You are not allowed to create an AMC contract.', 'type' => 'danger');
-        return false;
-    }
-    return true;
+    return $valid;
 }
 
 function handleAmcContractSubmission($isRenewFlow = false)
@@ -1493,6 +1491,24 @@ function processUploadedContractDocuments($uploadDir, &$notification)
     return true;
 }
 
+function parseContractDocumentEntries($documentId, $rawJson)
+{
+    $parsed = [];
+    $allDocs = json_decode($rawJson, true);
+    if (is_array($allDocs)) {
+        foreach ($allDocs as $doc) {
+            $parsed[] = [
+                'document_list_id' => $documentId,
+                'comments' => $doc['comments'] ?? $doc['file_name'] ?? '',
+                'Rid' => $doc['id'] ?? '',
+                'file_name' => $doc['file_name'],
+                'action' => !empty($doc['id']) && !isset($doc['is_new']) ? 'keep_existing' : 'new_upload'
+            ];
+        }
+    }
+    return $parsed;
+}
+
 function collectContractDocumentsFromPost(&$processedDocumentTypes)
 {
     $documentsForJSON = [];
@@ -1500,20 +1516,9 @@ function collectContractDocumentsFromPost(&$processedDocumentTypes)
         if (strpos($key, 'all_documents_') === 0) {
             $documentId = str_replace('all_documents_', '', $key);
             $processedDocumentTypes[] = $documentId;
-
-            // Get all documents for this document type from hidden input
-            $allDocs = json_decode($value, true);
-            if (is_array($allDocs)) {
-                foreach ($allDocs as $doc) {
-                    // Skip files that were marked as deleted (they won't be in the hidden input)
-                    $documentsForJSON[] = [
-                        'document_list_id' => $documentId,
-                        'comments' => $doc['comments'] ?? $doc['file_name'] ?? '',
-                        'Rid' => $doc['id'] ?? '',
-                        'file_name' => $doc['file_name'],
-                        'action' => !empty($doc['id']) && !isset($doc['is_new']) ? 'keep_existing' : 'new_upload'
-                    ];
-                }
+            $docEntries = parseContractDocumentEntries($documentId, $value);
+            foreach ($docEntries as $entry) {
+                $documentsForJSON[] = $entry;
             }
         }
     }

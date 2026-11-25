@@ -96,7 +96,7 @@ function printDiv(divName) {
                             <!--end: Invoice header-->
                             <!--begin: Invoice body-->
                             <div class="border-bottom pb-10">
-                                <table role="presentation" class="table table-responsive" style="width: 100%;">
+                                <table class="table table-responsive" style="width: 100%;">
                                     <tr>
                                         <td>
                                             <div class="col-md-12 py-md-10 pr-md-10">

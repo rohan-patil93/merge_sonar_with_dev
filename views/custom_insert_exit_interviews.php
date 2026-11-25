@@ -1,4 +1,6 @@
    <?php
+defined('ATTR_INPUT_VALUE') || define('ATTR_INPUT_VALUE', '" value="');
+
 //id:3 => YVdRNk13PT0=
 
 $category = array('1' =>'Survey', '2'=> 'Poll');
@@ -313,10 +315,10 @@ function getnamelist(){
             $rid = $value['rid'];
             $display_question = '';
             $display_question .= ' <div class="mt-5" id="'.$qkey.'"> <div class="col-lg-12 table-bordered">
-            <input type="hidden" name="question_id'.$qkey.'" value="'.$question_id.'">
+            <input type="hidden" name="question_id'.$qkey.ATTR_INPUT_VALUE.$question_id.'">
             <input type="hidden" name="rid" value="'.$rid.'">
-            <input type="hidden" name="value_id[]" value="'.$question_id.'">
-            <input type="hidden" name="options_display_type'.$qkey.'" value="'.$value['type'].'">
+            <input type="hidden" name="value_id[]'.ATTR_INPUT_VALUE.$question_id.'">
+            <input type="hidden" name="options_display_type'.$qkey.ATTR_INPUT_VALUE.$value['type'].'">
 
             <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
@@ -396,7 +398,7 @@ function getnamelist(){
 </div>
 
 
-<div id="kt_modal_KTDatatable_setup" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_setup" class="modal fade" aria-hidden="true">
    <div class="modal-dialog  modal-lg" >
       <div class="modal-content"  id="popup2">
       </div>

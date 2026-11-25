@@ -328,8 +328,7 @@ function calculateStockValue(){
                 </div>
             </div>
             <div class="card-body" <?php $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,ST_CALLBACK,' ');
-        if((in_array($esop_allocations['current_status'], (array)$check_array) && $esop_allocations['esop_connect'] ==$_SESSION['userid']) || $esop_allocations['current_status'] ==""){
-}else{ ?> style="pointer-events: none; opacity: 0.6;" <?php
+        if(!((in_array($esop_allocations['current_status'], (array)$check_array) && $esop_allocations['esop_connect'] ==$_SESSION['userid']) || $esop_allocations['current_status'] =="")){ ?> style="pointer-events: none; opacity: 0.6;" <?php
 } ?>>
                 <div class="row">
                 <div class="form-group col-lg-12">
@@ -464,7 +463,7 @@ function calculateStockValue(){
                                     <div class="form-group col-lg-4">
                                        <input aria-label="<?php echo __('Till Date[]'); ?>" type="text" class="form-control datepicker vesategetilldate_1" name="till_date[]" value="<?php echo fromDate($vd['till_date']); ?>" required >
                                     </div>
-                                    <div class="form-group col-lg-1"><i class="ti-trash"  onclick="deletRowVestage('<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i> </div>
+                                    <div class="form-group col-lg-1"><button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="deletRowVestage('<?php echo $i; ?>')" aria-label="<?= htmlspecialchars(__('Delete'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash"></i></button></div>
                                 </div>
                             <?php  $i++;
 } ?>

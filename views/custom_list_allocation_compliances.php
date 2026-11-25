@@ -106,8 +106,8 @@ function setcompliance(){
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modal_allocation_complince" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="modal_allocation_complince" data-backdrop="static" tabindex="-1" aria-labelledby="staticBackdrop" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title modallabel" id="exampleModalLabel"><?= __('Task Allocation Period'); ?></h5>

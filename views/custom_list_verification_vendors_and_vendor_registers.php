@@ -1,4 +1,6 @@
 <?php
+defined('DATE_FORMAT_DMY_HI') || define('DATE_FORMAT_DMY_HI', DATE_FORMAT_DMY_HI);
+
 $_SESSION['apply_js']['multiselest'] = 1;
 $result = array('data' => []);
 $selected_type = '';
@@ -68,7 +70,12 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                   if (isset($row['vendor_verifications']) && !empty($row['vendor_verifications'])) {
                     $vendor_verifications = json_decode($row['vendor_verifications'], true);
                   }
-                  $company_name = isset($row['company']) ? $row['company'] : (isset($row['display_name']) ? $row['display_name'] : 'N/A');
+                  $company_name = 'N/A';
+                  if (isset($row['company'])) {
+                      $company_name = $row['company'];
+                  } elseif (isset($row['display_name'])) {
+                      $company_name = $row['display_name'];
+                  }
                   $email = isset($row['email']) ? $row['email'] : 'N/A';
                   $pan_value = isset($row['pan_no']) ? $row['pan_no'] : '';
                   $gst_value = isset($row['gstin']) ? $row['gstin'] : '';
@@ -95,7 +102,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                             <div><?= htmlspecialchars($pan_value); ?></div>
                             <?php if (isset($vendor_verifications['PAN']['verification_datetime'])) { ?>
                               <small class="text-muted"><?= __('Verified'); ?>:
-                                <?= date('d-m-Y H:i', strtotime($vendor_verifications['PAN']['verification_datetime'])); ?></small>
+                                <?= date(DATE_FORMAT_DMY_HI, strtotime($vendor_verifications['PAN']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
                           <div>
@@ -124,7 +131,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                             <div><?= htmlspecialchars($gst_value); ?></div>
                             <?php if (isset($vendor_verifications['GSTIN']['verification_datetime'])) { ?>
                               <small class="text-muted"><?= __('Verified'); ?>:
-                                <?= date('d-m-Y H:i', strtotime($vendor_verifications['GSTIN']['verification_datetime'])); ?></small>
+                                <?= date(DATE_FORMAT_DMY_HI, strtotime($vendor_verifications['GSTIN']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
                           <div>
@@ -156,7 +163,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                             <?php } ?>
                             <?php if (isset($vendor_verifications['BANK']['verification_datetime'])) { ?>
                               <small class="text-muted"><?= __('Verified'); ?>:
-                                <?= date('d-m-Y H:i', strtotime($vendor_verifications['BANK']['verification_datetime'])); ?></small>
+                                <?= date(DATE_FORMAT_DMY_HI, strtotime($vendor_verifications['BANK']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
                           <div>
@@ -184,7 +191,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                             <div><?= htmlspecialchars($tan_value); ?></div>
                             <?php if (isset($vendor_verifications['TAN']['verification_datetime'])) { ?>
                               <small class="text-muted"><?= __('Verified'); ?>:
-                                <?= date('d-m-Y H:i', strtotime($vendor_verifications['TAN']['verification_datetime'])); ?></small>
+                                <?= date(DATE_FORMAT_DMY_HI, strtotime($vendor_verifications['TAN']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
                           <div>
@@ -212,7 +219,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                             <div><?= htmlspecialchars($msme_value); ?></div>
                             <?php if (isset($vendor_verifications['MSME']['verification_datetime'])) { ?>
                               <small class="text-muted"><?= __('Verified'); ?>:
-                                <?= date('d-m-Y H:i', strtotime($vendor_verifications['MSME']['verification_datetime'])); ?></small>
+                                <?= date(DATE_FORMAT_DMY_HI, strtotime($vendor_verifications['MSME']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
                           <div>

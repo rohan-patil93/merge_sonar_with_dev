@@ -1,4 +1,5 @@
 <?php
+defined('LABEL_WORK_ORDER') || define('LABEL_WORK_ORDER', 'Work order');
 unset($_SESSION['apply_js']['MANUFACTURING1_DASHBOARD']);
 
 $url = API . "?mode=getmfgadmindashboarddetails";
@@ -35,13 +36,13 @@ if (!function_exists('mfgAdminDashboardDate')) {
 $alerts = array();
 foreach ((array)$workOrders as $wo) {
     if (!empty($wo['is_delayed'])) {
-        $alerts[] = htmlspecialchars(($wo['transaction_no'] ?? 'Work order') . ' delayed, ETA ' . mfgAdminDashboardDate($wo['planned_end_date'] ?? ''));
+        $alerts[] = htmlspecialchars(($wo['transaction_no'] ?? LABEL_WORK_ORDER) . ' delayed, ETA ' . mfgAdminDashboardDate($wo['planned_end_date'] ?? ''));
     } elseif ((float)($wo['material_shortage_qty'] ?? 0) > 0) {
-        $alerts[] = htmlspecialchars(($wo['transaction_no'] ?? 'Work order') . ' material shortage: ' . mfgAdminDashboardValue($wo['material_shortage_qty'] ?? 0));
+        $alerts[] = htmlspecialchars(($wo['transaction_no'] ?? LABEL_WORK_ORDER) . ' material shortage: ' . mfgAdminDashboardValue($wo['material_shortage_qty'] ?? 0));
     } elseif (($wo['production_status_name'] ?? '') == 'Hold') {
-        $alerts[] = htmlspecialchars(($wo['transaction_no'] ?? 'Work order') . ' production on hold');
+        $alerts[] = htmlspecialchars(($wo['transaction_no'] ?? LABEL_WORK_ORDER) . ' production on hold');
     } elseif (($wo['approval_status_value'] ?? '') != ST_APPROVED) {
-        $alerts[] = htmlspecialchars(($wo['transaction_no'] ?? 'Work order') . ' approval pending: ' . ($wo['approval_status_name'] ?? 'Not Updated'));
+        $alerts[] = htmlspecialchars(($wo['transaction_no'] ?? LABEL_WORK_ORDER) . ' approval pending: ' . ($wo['approval_status_name'] ?? 'Not Updated'));
     }
 }
 if (empty($alerts)) {
@@ -296,8 +297,8 @@ if (empty($alerts)) {
   </div>
 </div>
 
-<div class="modal fade" id="order-number" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="order-number" tabindex="-1">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title"><?= __('Work Order Details'); ?></h4>

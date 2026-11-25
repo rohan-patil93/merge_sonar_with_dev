@@ -147,7 +147,7 @@ function updateTaskStatus(task_id,status){
                                 <tr>
                                  <td style="width: 90%;">
                                   <div class="to-do-list">
-                                    <div class="checkbox-fade fade-in-primary" role="group" onchange="getTaskCheckList('<?php echo $tas['id']; ?>','<?php echo $keyval; ?>','<?php echo $employee_id; ?>')">
+                                    <div class="checkbox-fade fade-in-primary" onchange="getTaskCheckList('<?php echo $tas['id']; ?>','<?php echo $keyval; ?>','<?php echo $employee_id; ?>')">
                                       <label class="form-label check-task <?php echo $classcheck; ?> campliancecros_<?php echo $tas['id']."_".$keyval; ?>">
                                         <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="" <?php echo $checkboxcl; ?>  class="checkcheckboxcopliance_<?php echo $tas['id']."_".$keyval; ?>" >
                                         <span class="cr">
@@ -277,7 +277,7 @@ if($tas['link_page'] == '0'){ ?>
                                 <tr>
                                  <td style="width: 90%;">
                                   <div class="to-do-list">
-                                    <div class="checkbox-fade fade-in-primary" role="group" onchange="getTaskCheckList('<?php echo $tas['id']; ?>','<?php echo $keyval; ?>','<?php echo $employee_id; ?>')">
+                                    <div class="checkbox-fade fade-in-primary" onchange="getTaskCheckList('<?php echo $tas['id']; ?>','<?php echo $keyval; ?>','<?php echo $employee_id; ?>')">
                                       <label class="form-label check-task <?php echo $classcheck; ?> campliancecros_<?php echo $tas['id']."_".$keyval; ?>">
                                         <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="" <?php echo $checkboxcl; ?>  class="checkcheckboxcopliance_<?php echo $tas['id']."_".$keyval; ?>" >
                                         <span class="cr">

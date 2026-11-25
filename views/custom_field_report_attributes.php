@@ -93,7 +93,7 @@ $res_data = json_decode($res_data, 1);
                                    <option> <?php echo __('Select Any One'); ?></option>
                                            <?php foreach ($res_data as $key => $ress) {  ?>
                                                <option  <?php if($ress['id'] == $report_id){ ?> selected  <?php } ?> value = <?php echo $ress['id']; ?>   > <?php echo htmlspecialchars(__(ucwords(str_replace('_',' ',$ress['report_name'] ?? '')))); ?> </option>
-                                       <?php	} ?>
+                                       <?php    } ?>
 
 
                                 </select>
@@ -209,7 +209,7 @@ $res_data = json_decode($res_data, 1);
             <!--begin::Portlet-->
             </div>
         </div>
-        <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+        <div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content" style="min-height: 590px;" id="popup1">
 

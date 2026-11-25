@@ -341,7 +341,7 @@
 
                                 <?php include_once 'views/custom_list_purchase_invoices_table.php'; ?>
                             </div>
-                            <?php if(1==2){ ?>
+                            <?php $showExpensesTable = false; if ($showExpensesTable) { ?>
                              <div class="col-xl-12 col-md-12" >
                                 <div class="card table-card">
                                    <div class="card-header">

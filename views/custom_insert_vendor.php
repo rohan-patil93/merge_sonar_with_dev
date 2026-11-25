@@ -124,7 +124,7 @@ $i++;
                                                             <span class="fw-bolder f-12"><?php echo $pp; ?>%</span>
                                                         </div>
                                                         <div class="progress progress-xs" style="width:200px;">
-                                                            <div class="bg-success rounded h-5px" role="progressbar" style="width: <?php echo $pp; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            <div class="bg-success rounded h-5px" style="width: <?php echo $pp; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -187,7 +187,7 @@ $i++;
 
     </div>
 </div>
-<div id="kt_modal_KTDatatable_remote123" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote123" class="modal fade" aria-hidden="true">
     <div class="modal-dialog " >
         <div class="modal-content"  id="popup123">
         </div>

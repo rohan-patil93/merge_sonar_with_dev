@@ -185,8 +185,6 @@ function getDepreciationMethod(){
     var purchase_date = $("#purchase_date").val();
     if(capitalization_date =="" || capitalization_date =="0"){
         $("#capitalization_date").val(purchase_date);
-        //swal("<?php// echo ucwords($_SESSION['config']['name']); ?>", "Please Select Capitalization Date ", "error");
-        //return;
     }
     var depreciation_method = $("#depreciation_method").val();
     var duration = $("#duration").val();
@@ -451,10 +449,6 @@ function getDepreciationMethod(){
                 <a class="accordion-msg b-none waves-effect waves-light bg-gray"><?= __('Finanacial information'); ?></a>
                 <div class="accordion-desc">
                     <div class="row">
-                           <!-- <div class="form-group col-lg-6">
-                            <label class="form-label"><?= __('Capitalization Price') ?></label>
-                            <input class="form-control text-right"  type="text"  id="capitalization_price" name="capitalization_price"  value="<?php ?>" onblur="returnDepreciation()" aria-label="Capitalization Price">
-                        </div> -->
                         <div class="form-group col-lg-6">
                             <span class="form-label d-inline-block fw-bold"><?= __('Capitalization Date') ?></span>
                             <input class="form-control datepicker"  type="text"  id="capitalization_date" name="capitalization_date"  value="<?php echo $assetsdeatil['capitalization_date'] !=""?fromDate($assetsdeatil['capitalization_date']):""; ?>"  onchange="returnDepreciation()" aria-label="<?= htmlspecialchars(__('Capitalization Date'), ENT_QUOTES, 'UTF-8'); ?>">

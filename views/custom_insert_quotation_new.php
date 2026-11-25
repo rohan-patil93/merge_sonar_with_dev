@@ -1,7 +1,10 @@
 <?php
+defined('DATE_FORMAT_MDY_HIS_A') || define('DATE_FORMAT_MDY_HIS_A', DATE_FORMAT_MDY_HIS_A);
+defined('STR_DATE_TIME_PREFIX') || define('STR_DATE_TIME_PREFIX', ' Date Time : ');
+
 $checktimeprint = 0;
 if ($checktimeprint > 0) {
-    echo "Check Step - " . $checktimeprint . " Date Time : " . date('m/d/Y h:i:s a') . "</br>";
+    echo "Check Step - " . $checktimeprint . STR_DATE_TIME_PREFIX . date(DATE_FORMAT_MDY_HIS_A) . "</br>";
     $checktimeprint++;
 }
 $_SESSION[KEY_APPLY_JS]['multiselest'] = "1";
@@ -541,7 +544,7 @@ if ($table_name != '' && $rtable_name == 'purchase_orders' && $table_name != 'pu
     $chkres = json_decode($checkresponse, 1);
 }
 if ($checktimeprint > 0) {
-    echo "DATA Retervied Check Step - " . $checktimeprint . " Date Time : " . date('m/d/Y h:i:s a') . "</br>";
+    echo "DATA Retervied Check Step - " . $checktimeprint . STR_DATE_TIME_PREFIX . date(DATE_FORMAT_MDY_HIS_A) . "</br>";
     $checktimeprint++;
 }
 $tax_authorities_rates_split = $rpres['tax_authorities_rates_split'];
@@ -2381,7 +2384,7 @@ if ($qoriginatorCurrencyId != '' && $qoriginatorCurrencyId != '0' && $qcurrencyI
 </script>
 <?php
 if ($checktimeprint > 0) {
-    echo "Scrpit Done Check Step - " . $checktimeprint . " Date Time : " . date('m/d/Y h:i:s a') . "</br>";
+    echo "Scrpit Done Check Step - " . $checktimeprint . STR_DATE_TIME_PREFIX . date(DATE_FORMAT_MDY_HIS_A) . "</br>";
     $checktimeprint++;
 }
 ?>
@@ -2650,7 +2653,7 @@ if ($checktimeprint > 0) {
                                         ?>
                                         <?php
                                         if ($checktimeprint > 0) {
-                                            echo "Top fileds Done Check Step - " . $checktimeprint . " Date Time : " . date('m/d/Y h:i:s a') . "</br>";
+                                            echo "Top fileds Done Check Step - " . $checktimeprint . STR_DATE_TIME_PREFIX . date(DATE_FORMAT_MDY_HIS_A) . "</br>";
                                             $checktimeprint++;
                                         }
                                         ?>
@@ -3557,7 +3560,7 @@ if ($checktimeprint > 0) {
                             </div>
                             <?php
                             if ($checktimeprint > 0) {
-                                echo "Grand fileds Done Check Step - " . $checktimeprint . " Date Time : " . date('m/d/Y h:i:s a') . "</br>";
+                                echo "Grand fileds Done Check Step - " . $checktimeprint . STR_DATE_TIME_PREFIX . date(DATE_FORMAT_MDY_HIS_A) . "</br>";
                                 $checktimeprint++;
                             }
                             ?>
@@ -3626,7 +3629,7 @@ if ($checktimeprint > 0) {
         </div>
         <?php
         if ($checktimeprint > 0) {
-            echo "Before timelines Check Step - " . $checktimeprint . " Date Time : " . date('m/d/Y h:i:s a') . "</br>";
+            echo "Before timelines Check Step - " . $checktimeprint . STR_DATE_TIME_PREFIX . date(DATE_FORMAT_MDY_HIS_A) . "</br>";
             $checktimeprint++;
         }
         ?>

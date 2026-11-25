@@ -34,7 +34,7 @@
 
 <style>#printableArea table td, #printableArea table th { padding: 9px; }</style>
 <div class="" id="printableArea">
-    <table role="presentation" style="width:100%; border-collapse:collapse; margin:0 auto; font-size:14px; border: 1px solid #cccccc; background: #ffffff;">
+    <table style="width:100%; border-collapse:collapse; margin:0 auto; font-size:14px; border: 1px solid #cccccc; background: #ffffff;">
         <tr>
             <td colspan="7" style="font-size:24px;font-family:'Tahoma';font-weight:500;text-transform:capitalize;">
                 <img src="assets/images/logo.png" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">

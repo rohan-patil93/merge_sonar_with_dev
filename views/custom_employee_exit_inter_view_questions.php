@@ -74,8 +74,7 @@ function formsubmit(){
         <div class="col-lg-12 mb-3" id="disdiv<?php echo $questionid;?>" <?php echo $addcss;?>>
           <div >
             <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $questionid;?>">
-            <!-- <span class="mt-5"><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span> -->
-            <h6><?php echo $value_id.". ".__($display_questions[$questionid]['survey_question']); ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h6>
+            <h6><?php echo $value_id.". ".__($display_questions[$questionid]['survey_question']); ?> <?php if($display_questions[$questionid]['require_response']=="1") { echo "*"; } ?></h6>
             <?php
             if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){
               $optionlist= json_decode($display_questions[$questionid]['survey_question_option'],1);

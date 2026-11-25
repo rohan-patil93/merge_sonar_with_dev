@@ -1,4 +1,7 @@
 <?php
+defined('PARAM_PAY_MONTH') || define('PARAM_PAY_MONTH', '&pay_month=');
+defined('PARAM_PPJ') || define('PARAM_PPJ', '&PPJ=');
+
     if( $_GET["PAY_MONTH"] == ''){
         $_GET["PAY_MONTH"] = date('n');
         $_GET["PAY_YEAR"] = date('Y');
@@ -14,11 +17,11 @@ array('id'=>7,'name'=>'Update Onetime Deductions','page'=>'custom_insert_payroll
 array('id'=>8,'name'=>'Hold Salary','page'=>'custom_insert_payroll_hold_salaray.php'));
     $process = $_GET['payroll']=='process' ? 'process' : '';
     if( $_GET["REG"] == 'R'){
-       $payroll = API."?mode=payareapayrolldetails&pay_year=".$_GET["PAY_YEAR"]."&pay_month=".$_GET["PAY_MONTH"]."&PPJ=".$_GET["PPJ"]."&payroll=".$process;
+       $payroll = API."?mode=payareapayrolldetails&pay_year=".$_GET["PAY_YEAR"].PARAM_PAY_MONTH.$_GET["PAY_MONTH"].PARAM_PPJ.$_GET["PPJ"]."&payroll=".$process;
         $cusresponse = callAPI($payroll);
-        header("location:index.php?option=COM_INSERT_PAYAREA_PAYROLL&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH']."&PPJ=".$_GET["PPJ"]); exit;
+        header("location:index.php?option=COM_INSERT_PAYAREA_PAYROLL&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH'].PARAM_PPJ.$_GET["PPJ"]); exit;
     }
-    $payroll = API."?mode=listoutpayareapayrolldetails&pay_year=".$_GET["PAY_YEAR"]."&pay_month=". $_GET["PAY_MONTH"]."&PPJ=".$_GET["PPJ"]."&payroll=".$process;
+    $payroll = API."?mode=listoutpayareapayrolldetails&pay_year=".$_GET["PAY_YEAR"].PARAM_PAY_MONTH. $_GET["PAY_MONTH"].PARAM_PPJ.$_GET["PPJ"]."&payroll=".$process;
     $cusresponse = callAPI($payroll);
     $datas = json_decode($cusresponse,1);
 
@@ -118,7 +121,7 @@ array('id'=>8,'name'=>'Hold Salary','page'=>'custom_insert_payroll_hold_salaray.
                                 <span class="font-weight-bold float-right"><?php echo $payroll_data['work_days'];  ?></span>
                                   <hr>
                                 <span class="font-weight-bold"><?php echo __('Salary Statements'); ?></span>
-                                <span class="font-weight-bold float-right"><a href="csv_bank_payment_download_7.php?pay_year=<?php echo $_GET['PAY_YEAR']."&pay_month=".$_GET['PAY_MONTH']; ?>&pay_area_id=<?php echo $_GET['PPJ']; ?>" target="_blank" class="btn btn-success"><?php echo __('Download'); ?></a></span>
+                                <span class="font-weight-bold float-right"><a href="csv_bank_payment_download_7.php?pay_year=<?php echo $_GET['PAY_YEAR'].PARAM_PAY_MONTH.$_GET['PAY_MONTH']; ?>&pay_area_id=<?php echo $_GET['PPJ']; ?>" target="_blank" class="btn btn-success"><?php echo __('Download'); ?></a></span>
                             </div>
                             <div class="col-md-4">
                                 <hr>

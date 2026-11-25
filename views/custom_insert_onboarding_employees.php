@@ -1362,7 +1362,8 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                                             onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']); ?>')"
                                                             value="1" />&nbsp;&nbsp;<span style="font-size: 12px; <?php if ($team['on_off_site'] == 1) {
                                                                 echo __('color: red');
-                                                            } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?> d-inline-block fw-bold"><?php if ($team['on_off_site'] == 1) {
+                                                            } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?> d-inline-block fw-bold">
+                                                            <?php if ($team['on_off_site'] == 1) {
                                                                      echo __('Off-Site');
                                                                  } else {
                                                                      echo __('On-Site');
@@ -1382,7 +1383,8 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                                             value="1" />&nbsp;&nbsp;
                                                         <label style="font-size: 12px; <?php if ($team['billable'] == '1') {
                                                             echo __('color: red');
-                                                        } ?>" class="col-form-label billable_lable<?php echo $team['id']; ?>"> <?php if ($team['billable'] == '1') {
+                                                        } ?>" class="col-form-label billable_lable<?php echo $team['id']; ?>">
+                                                        <?php if ($team['billable'] == '1') {
                                                                 echo __('Non Billable');
                                                             } else {
                                                                 echo __('Billable');

@@ -61,7 +61,7 @@ function(isConfirm) {
                     <div class="float-left ml-2 mt-4"> <?php echo $m; ?>.</div>
                     <div class="float-left ml-2 col-lg-11"> <textarea aria-label="<?php echo __('Text area'); ?>" class="form-control" name="questions[<?php echo $m; ?>]" placeholder="<?php echo __('Question'); ?>"><?php echo $empques['assessment_question']; ?></textarea>
                     </div>
-                    <div class="float-left  cursor-pointer text-danger"  onclick="removedds('delque_<?php echo  $m; ?>','Question')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash"></i></div>
+                    <button type="button" class="btn btn-link p-0 border-0 text-danger float-left cursor-pointer" onclick="removedds('delque_<?php echo $m; ?>','Question')" aria-label="<?= htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
 
                 </div>
 
@@ -75,7 +75,7 @@ function(isConfirm) {
                         <div class="float-left ml-2 col-lg-10">
                             <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" name="emp_question_<?php echo $m; ?>[]" placeholder="<?php echo __('Option'); ?>" value="<?php echo $option; ?>">
                         </div>
-                        <div class="float-left cursor-pointer text-danger" onclick="removedds('<?php echo 'qpmf1_'.$m.$n; ?>','Option')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash"></i></div>
+                        <button type="button" class="btn btn-link p-0 border-0 text-danger float-left cursor-pointer" onclick="removedds('<?php echo 'qpmf1_'.$m.$n; ?>','Option')" aria-label="<?= htmlspecialchars(__('Delete Option'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                     </div>
                     <?php $n++;
 } ?>

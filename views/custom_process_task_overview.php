@@ -23,7 +23,7 @@ foreach($tasklist as $row){
         $cntinproress = $cntinproress+1;
     }
 }
-function cal_percentage($num_amount, $num_total) {
+function calPercentage($num_amount, $num_total) {
     $count = 0;
     if($num_amount != "" && $num_amount != 0 && $num_total != "" && $num_total != 0){
       $count1 = $num_amount / $num_total;
@@ -147,7 +147,7 @@ foreach($proceslist as $tasks){
         $tskcomplate++;
     }
 }
-$percentage = cal_percentage($tskcomplate,$totaltask);
+$percentage = calPercentage($tskcomplate,$totaltask);
 ?>
 
     <div class="d-flex flex-column w-100 mr-2">
@@ -156,7 +156,7 @@ $percentage = cal_percentage($tskcomplate,$totaltask);
                 <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
             </div>
             <div class="progress progress-xs w-100">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $percentage!="nan"?$percentage:"0"; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-danger" style="width: <?php echo $percentage!="nan"?$percentage:"0"; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
 </td>

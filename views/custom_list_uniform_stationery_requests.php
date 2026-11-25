@@ -67,12 +67,10 @@ $rows = $data['requests'] ?? [];
 
                             <td class="action-icons">
                                 <!-- Edit / View -->
-                                <i class="fa fa-eye text-primary"
-                                   onclick="viewRequest('<?= deocdeId('id:'.$r['id']) ?>>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                <button type="button" class="btn btn-link p-0 border-0 text-primary" onclick="viewRequest('<?= deocdeId('id:'.$r['id']) ?>>')" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></button>
 
                                 <!-- Delete -->
-                                <i class="fa fa-trash text-danger"
-                                   onclick="deleteRequest(<?= $r['id'] ?>>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                <button type="button" class="btn btn-link p-0 border-0 text-danger" onclick="deleteRequest(<?= $r['id'] ?>>)" aria-label="<?= htmlspecialchars(__('Delete'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
 

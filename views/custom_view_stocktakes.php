@@ -309,27 +309,27 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
                             <div class="form-group col-lg-6">
 
                                 <div class="form-radio mt-4">
-                                    <div class="radio radio-inline" onclick="stocktakeFilter()">
+                                    <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" checked="checked" value="all">
+                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" checked="checked" value="all" onchange="stocktakeFilter()">
                                             <i class="helper"></i><?= __('Show All'); ?>
                                         </label>
                                     </div>
-                                    <div class="radio radio-inline" onclick="stocktakeFilter()">
+                                    <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_add">
+                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_add" onchange="stocktakeFilter()">
                                             <i class="helper"></i><?= __('Positive Variance'); ?>
                                         </label>
                                     </div>
-                                    <div class="radio radio-inline" onclick="stocktakeFilter()">
+                                    <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_sub">
+                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_sub" onchange="stocktakeFilter()">
                                             <i class="helper"></i><?= __('Negative Variance'); ?>
                                         </label>
                                     </div>
-                                    <div class="radio radio-inline" onclick="stocktakeFilter()">
+                                    <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_zero">
+                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_zero" onchange="stocktakeFilter()">
                                             <i class="helper"></i><?= __('No Variance'); ?>
                                         </label>
                                     </div>

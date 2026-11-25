@@ -301,7 +301,7 @@ function statuspopup(status,id){
                                                     $badgesdetail = $badges[$detailvalue['badge_id']];
 
                                                     ?>
-                                                    <tr onclick="showrecognitioncard('<?php echo $detailvalue['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click To Veiw Bandage') ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                                    <tr onclick="showrecognitioncard('<?php echo $detailvalue['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click To Veiw Bandage') ?>">
                                                         <td class="p-2  pt-3"> <?php echo $serialno; ?> </td>
                                                         <?php if($tabindex == '0' || $tabindex == '2'){ ?>
                                                         <td class="p-2">
@@ -367,7 +367,7 @@ function statuspopup(status,id){
     </div>
 </div>
 
-<div id="kt_modal_KTDatatable_remote1 " class="modal fade updaterolemodal" role="dialog" >
+<div id="kt_modal_KTDatatable_remote1 " class="modal fade updaterolemodal" >
     <div class="modal-dialog  " id="modalsize">
         <div class="modal-content "  id="popup5">
 

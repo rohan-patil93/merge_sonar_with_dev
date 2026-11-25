@@ -187,7 +187,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     <h3 class="f-16 f-w-600 m-l-10 m-b-15"><?php echo $pci['description']; ?></h3>
                                 </div>
                                 <div class="col-lg-3 pt-2">
-                                    <i class="ti-share text-primary cursor-pointer" id="pettycashitemaddcartbtn_<?php echo $pci['id']; ?>" data-bs-toggle="tooltip" data-bs-original-title="<?php echo __('Add Bill'); ?>"  onclick="addItemCart(<?php echo $pci['id']; ?>,'<?php echo $pci['item_name']; ?>','<?php echo $pci['description']; ?>')" <?php echo isset($pcitemid[$pci['id']])?"style='display: none'":""; ?> tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn btn-link p-0 border-0 text-primary cursor-pointer" id="pettycashitemaddcartbtn_<?php echo $pci['id']; ?>" data-bs-toggle="tooltip" data-bs-original-title="<?php echo __('Add Bill'); ?>" onclick="addItemCart(<?php echo $pci['id']; ?>,'<?php echo $pci['item_name']; ?>','<?php echo $pci['description']; ?>')" <?php echo isset($pcitemid[$pci['id']])?"style='display: none'":""; ?> aria-label="<?php echo __('Add Bill'); ?>"><i class="ti-share"></i></button>
                                     <i class="ti-check" id="checkpettycashitemaddcartbtn_<?php echo $pci['id']; ?>" <?php echo isset($pcitemid[$pci['id']])?"":"style='display: none'"; ?>></i>
                                 </div>
                             </div>
@@ -243,7 +243,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                          <input type="hidden" class="form-control" name="pc_item_id[<?php echo $pcitem['item_id']; ?>]" value="<?php echo $pcitem['id']; ?>">
                                     </div>
                                     <div class="col-lg-1">
-                                        <i class="ti-trash text-danger cursor-pointer" data-bs-toggle="tooltip"  data-placement="bottom" data-bs-original-title="<?php echo __('Remove Cart'); ?>" onclick="remvePettyCashItem(<?php echo $pcitem['item_id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Remove Cart'); ?>" onclick="remvePettyCashItem(<?php echo $pcitem['item_id']; ?>)" aria-label="<?php echo __('Remove Cart'); ?>"><i class="ti-trash"></i></button>
                                     </div>
                                 </div>
 

@@ -226,13 +226,13 @@ function matchingResult($post,$candidate){
    <div class="col-lg-12 text-center">
 
 
-      <div class="position-relative d-inline-block job cursor-pointer " onclick="appliedvendorfeedback('<?php echo $candidate['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Provide Feedback'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+      <button type="button" class="position-relative d-inline-block job cursor-pointer btn p-0 border-0 bg-transparent" onclick="appliedvendorfeedback('<?php echo $candidate['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Provide Feedback'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Provide Feedback'), ENT_QUOTES, 'UTF-8'); ?>">
         <i class="fa fa-edit m-l-15 f-16 text-danger"></i>
         <span class="badge bg-c-red"></span>
-      </div>
+      </button>
       <div class="position-relative d-inline-block">
        <?php $emailcnt = $email_logs[$candidate['email_id']][17]; echo ($emailcnt !='0' && $emailcnt !='')?"<i class='fa fa-check text-info position-absolute mt-4 m-l-20 f-10'></i>":""; ?>
-      <i class="fa fa-history m-l-15 text-danger f-16 cursor-pointer"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Feedback History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="vendorhistories('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','17')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+      <button type="button" class="btn btn-link p-0 border-0 text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Feedback History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="vendorhistories('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','17')" aria-label="<?= htmlspecialchars(__('View Feedback History'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-history m-l-15 text-danger f-16"></i></button>
     </div>
 
   </div>

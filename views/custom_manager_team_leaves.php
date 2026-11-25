@@ -32,16 +32,18 @@ function mlFormatDate($value) {
 }
 
 function mlStatusBadge($status) {
+    $badge = '<span class="badge badge-secondary">'.__('Unknown').'</span>';
     $s = (string)$status;
-    if ($s === '0')   { return '<span class="badge badge-warning">'.__('Pending').'</span>';
-}
-    if ($s === '199') { return '<span class="badge badge-success">'.__('Approved').'</span>';
-}
-    if ($s === '30' || $s === '20' || $s === '201') { return '<span class="badge badge-danger">'.__('Rejected').'</span>';
-}
-    if ($s === '40') { return '<span class="badge badge-secondary">'.__('Cancelled').'</span>';
-}
-    return '<span class="badge badge-secondary">'.__('Unknown').'</span>';
+    if ($s === '0') {
+        $badge = '<span class="badge badge-warning">'.__('Pending').'</span>';
+    } elseif ($s === '199') {
+        $badge = '<span class="badge badge-success">'.__('Approved').'</span>';
+    } elseif ($s === '30' || $s === '20' || $s === '201') {
+        $badge = '<span class="badge badge-danger">'.__('Rejected').'</span>';
+    } elseif ($s === '40') {
+        $badge = '<span class="badge badge-secondary">'.__('Cancelled').'</span>';
+    }
+    return $badge;
 }
 ?>
 
@@ -118,9 +120,12 @@ function mlStatusBadge($status) {
                                     $r_days      = isset($row['leave_days'])       ? $row['leave_days']       : '-';
                                     $r_appdate   = isset($row['application_date']) ? $row['application_date'] : '';
                                     $r_status    = isset($row['current_status'])   ? $row['current_status']   : '';
-                                    $r_narrative = isset($row['special_request']) && $row['special_request'] !== ''
-                                                    ? $row['special_request']
-                                                    : (isset($row['details']) ? $row['details'] : '-');
+                                    $r_narrative = '-';
+                                    if (isset($row['special_request']) && $row['special_request'] !== '') {
+                                        $r_narrative = $row['special_request'];
+                                    } elseif (isset($row['details'])) {
+                                        $r_narrative = $row['details'];
+                                    }
                                     $r_search    = strtolower($r_name . ' ' . $r_code . ' ' . $r_type . ' ' . $r_narrative);
                                     $r_chip_style = $r_color ? ' style="background:' . htmlspecialchars($r_color, ENT_QUOTES, 'UTF-8') . ';color:#fff;"' : '';
                                 ?>

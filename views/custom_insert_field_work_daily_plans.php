@@ -1,4 +1,7 @@
 <?php
+defined('PARAM_DATE') || define('PARAM_DATE', '&date=');
+defined('LOC_FIELD_WORK_DAILY_PLANS_USER') || define('LOC_FIELD_WORK_DAILY_PLANS_USER', 'location:index.php?option=COM_INSERT_FIELD_WORK_DAILY_PLANS&user_id=');
+
 $_SESSION['apply_js']['multiselest'] = 1;
 
 $admin_type = 1;
@@ -18,7 +21,7 @@ if (isset($_POST['submit'])) {
             $data = $_POST;
             $res =  insertData($table_name, $data);
             if ($res) {
-                header("location:index.php?option=COM_INSERT_FIELD_WORK_DAILY_PLANS&user_id=".$_POST['user_id']."&date=".$_POST['plan_date']."&error=9999");
+                header(LOC_FIELD_WORK_DAILY_PLANS_USER.$_POST['user_id'].PARAM_DATE.$_POST['plan_date']."&error=9999");
             }
         } else {
             unset($_POST['user_field_work_type'], $_POST['plan_date']);
@@ -26,7 +29,7 @@ if (isset($_POST['submit'])) {
             $data = $_POST;
             $res =  insertUserFieldData($table_name, $data);
             if ($res) {
-                header("location:index.php?option=COM_INSERT_FIELD_WORK_DAILY_PLANS&user_id=".$_POST['user_id']."&date=".$_POST['work_from_date']."&error=9999");
+                header(LOC_FIELD_WORK_DAILY_PLANS_USER.$_POST['user_id'].PARAM_DATE.$_POST['work_from_date']."&error=9999");
             }
         }
     }
@@ -37,7 +40,7 @@ if (isset($_POST['submit'])) {
             $table_name = 'field_work_daily_plans';
             $rid = $_POST['rid'];
             $date = $_POST['date'];
-            $url = API . "?mode=updateFieldWorkDailyPlans&method=get&rid=" . $rid . "&date=" . $date . "&table=" . $table_name;
+            $url = API . "?mode=updateFieldWorkDailyPlans&method=get&rid=" . $rid . PARAM_DATE . $date . "&table=" . $table_name;
             $result = callAPI($url);
             $result = json_decode($result, 1);
 
@@ -46,7 +49,7 @@ if (isset($_POST['submit'])) {
                 $data = $_POST;
                 $res =  insertData($table_name, $data);
                 if ($res) {
-                    header("location:index.php?option=COM_INSERT_FIELD_WORK_DAILY_PLANS&user_id=".$_POST['user_id']."&date=".$_POST['plan_date']."&error=9998");
+                    header(LOC_FIELD_WORK_DAILY_PLANS_USER.$_POST['user_id'].PARAM_DATE.$_POST['plan_date']."&error=9998");
                 }
             }
         } else {
@@ -61,7 +64,7 @@ if (isset($_POST['submit'])) {
                 $data = $_POST;
                 $res =  insertUserFieldData($table_name, $data);
                 if ($res) {
-                    header("location:index.php?option=COM_INSERT_FIELD_WORK_DAILY_PLANS&user_id=".$_POST['user_id']."&date=".$_POST['work_from_date']."&error=9998");
+                    header(LOC_FIELD_WORK_DAILY_PLANS_USER.$_POST['user_id'].PARAM_DATE.$_POST['work_from_date']."&error=9998");
                 }
             }
         }

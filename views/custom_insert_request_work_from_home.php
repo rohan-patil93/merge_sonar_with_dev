@@ -1,4 +1,6 @@
 <?php
+defined('DATE_FORMAT_YMD_HIS') || define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+
 $timeprint = '0';
 $maxtimeshow = 40;
 $_SESSION['apply_js']['calender'] = '1';
@@ -19,8 +21,8 @@ if (isset($_POST['submit']) && $_POST['submit']=='Add') {
 
         if($_POST['rid']==''){
             $data['company_id'] = $_SESSION['company_id'];
-            $data['status_date'] = date('Y-m-d H:i:s');
-            $data['created_date'] = date('Y-m-d H:i:s');
+            $data['status_date'] = date(DATE_FORMAT_YMD_HIS);
+            $data['created_date'] = date(DATE_FORMAT_YMD_HIS);
             $data['created_by'] = $_SESSION['userid'];
             $data['current_status'] = 0;
             $data['is_active'] = 0;
@@ -28,7 +30,7 @@ if (isset($_POST['submit']) && $_POST['submit']=='Add') {
             $response = file_post_contents($url, $data, 'insert');
             header("location:index.php?option=COM_INSERT_REQUEST_WORK_FROM_HOME");
         }else{
-            $data['updated_date'] = date('Y-m-d H:i:s');
+            $data['updated_date'] = date(DATE_FORMAT_YMD_HIS);
             $data['updated_by'] = $_SESSION['userid'];
             $url = API."?mode=updaterowtabledata&rid=".$_POST['rid']."&table=".$table_name."&method=post";
             $response = file_post_contents($url, $data, 'update');
@@ -324,9 +326,7 @@ function validateForm() {
                                     <div class="col-lg-6">
                                         <input type="hidden" name="emp_id" value="<?php echo $_SESSION['emp_id']; ?>" />
                                         <input type="hidden" name="submit" value="Add" />
-                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php if($employee_leaves['current_status'] == ST_ACTIVE || $employee_leaves['current_status'] ==ST_SEND_BACK || $employee_leaves['current_status'] ==""){
-}else{ echo __('disabled');
-} ?>  name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php if(!($employee_leaves['current_status'] == ST_ACTIVE || $employee_leaves['current_status'] == ST_SEND_BACK || $employee_leaves['current_status'] == "")){ echo __('disabled'); } ?> name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
                                     </div>
                                 </div>
                             </div>

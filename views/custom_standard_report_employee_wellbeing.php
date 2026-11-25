@@ -204,12 +204,12 @@ $count_emp_res = count((array)$resemp);
             <span class="f-12">Response Rate: <?php  $ppr = ($count_emp !="" && $count_emp !=0)?round(($count_emp_res/$count_emp)*100):0; echo $ppr; ?>%</span>
             <span class="float-end f-12"><?php echo $count_emp_res; ?>/<?php echo ($count_emp !="" && $count_emp !=0)?$count_emp:0; ?> Employees</span>
             <div class="progress">
-              <div class="progress-bar mb-5" role="progressbar" style="width: <?php echo $ppr; ?>%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar mb-5" style="width: <?php echo $ppr; ?>%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <?php $k=0;
             $lcolor = array('d70206','f05b4f','f4c63d','d17905'); $mn=5;
             foreach($questopic as $quekey=>$quec){ ?>
-            <div class="align-middle m-b-25 mt-4 row" onclick="displatraito(<?php echo $quekey; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+            <div class="align-middle m-b-25 mt-4 row" onclick="displatraito(<?php echo $quekey; ?>)">
               <div class="col-lg-3 text-center m-t-10"><span class="img-radius p-2" style="background-color: <?php echo "#".$lcolor[$k]; ?>;" ><?php echo $mn = $mn-0.3; ?></span></div>
               <div class="col-lg-9 p-0">
                 <div class="d-inline-block align-middle">
@@ -226,7 +226,7 @@ $count_emp_res = count((array)$resemp);
                       <?php echo $surveykey; ?>
                   </div>
                   <div class="progress col-lg-8">
-                  <div class="progress-bar mb-5" role="progressbar" style="width: 55%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar mb-5" style="width: 55%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
             <?php } ?>
@@ -316,7 +316,7 @@ $count_emp_res = count((array)$resemp);
                 <td><?php echo $keygage; ?></td>
                 <td>3/3 100%</td>
                 <?php foreach($questopic as $keyid=>$quec){  ?>
-                <td class="bg-success" style="background-color: <?php echo; text-align: center;"#".$colors[round((6-$sgage[$keyid]))]." !important"; ?> "><?php echo round((6-$sgage[$keyid]) ,1); ?></td>
+                <td class="bg-success" style="text-align: center; background-color: <?php echo "#".$colors[round((6-$sgage[$keyid]))]." !important"; ?> "><?php echo round((6-$sgage[$keyid]) ,1); ?></td>
                 <?php } ?>
 
               </tr>

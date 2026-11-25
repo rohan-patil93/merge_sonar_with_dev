@@ -201,7 +201,7 @@ $arslabs  = $result['arslabs'];
                         <tbody>
                             <?php foreach($employee_goals as $eg){
                                 ?>
-                                <tr class="cursor-pointer" onclick="getEmployeeGoals('<?php echo $eg['id']; ?>','<?php echo $eg['employee_id']?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                <tr class="cursor-pointer" onclick="getEmployeeGoals('<?php echo $eg['id']; ?>','<?php echo $eg['employee_id']?>')">
                                     <td class="p-2 w-b-w-s">
                                         <i class="fa fa-edit"></i>
                                         <?php echo $eg['goal_name']; ?>
@@ -250,7 +250,7 @@ $arslabs  = $result['arslabs'];
                         <tbody>
                             <?php $efseq = 1; foreach($employee_feedbacks as $ef){
                                 ?>
-                                <tr onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                <tr onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')">
                                     <td class="p-2"><i class="fa fa-edit"></i> <?php echo $efseq; ?></td>
                                     <td class="p-2 w-b-w-s">
                                         <?php echo $ef['question']; ?>
@@ -258,7 +258,7 @@ $arslabs  = $result['arslabs'];
                                     <td class="p-2  text-center">
                                         <?php if($ef['response_status']==''){ echo "Pendding";
 }else{  ?>
-                                            <i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View FeedBack'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                            <button type="button" class="btn btn-link p-0 border-0 text-reset" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View FeedBack'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')" aria-label="<?= htmlspecialchars(__('View FeedBack'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye f-16"></i></button>
                                         <?php } ?>
                                     </td>
                                 </tr>

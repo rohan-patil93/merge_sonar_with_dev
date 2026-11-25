@@ -107,11 +107,8 @@ $_SESSION['insert_msg'] ="";
 
 
                                 $error = "";
-                                if($itemfieldlist[$seqkey] == ""){
-                                }elseif($itemsdetail[$itemfieldlist[$seqkey]] == $importda){
-                                }else{
+                                if ($itemfieldlist[$seqkey] != "" && $itemsdetail[$itemfieldlist[$seqkey]] != $importda) {
                                     $error = __('bg-danger');
-
                                 }
                                 ?>
                             <th scope="col" class="p-2 <?php echo $error; ?>"><?php echo $importda; ?></th>

@@ -58,7 +58,7 @@
 
                                             <td rowspan="1"></td>
                                             <td rowspan="1" style="padding: 0;">
-                                                <table role="presentation" style="width: 100%;">
+                                                <table style="width: 100%;">
                                                     <tr style="text-align: center;">
                                                         <?php foreach ($header as  $head) {
                                                             $array_sum[] = $sum_arry[$head['id']];

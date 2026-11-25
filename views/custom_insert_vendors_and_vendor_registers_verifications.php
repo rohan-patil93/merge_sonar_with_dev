@@ -1,4 +1,6 @@
 <?php
+defined('DATE_FORMAT_DMY_HI_A') || define('DATE_FORMAT_DMY_HI_A', DATE_FORMAT_DMY_HI_A);
+
 if ($_POST['ajaxcall'] == "Y") {
     include_once '../includes/session.php';
     include_once '../dbconfig.php';
@@ -7,14 +9,15 @@ if ($_POST['ajaxcall'] == "Y") {
 
 function showNotificationIcon($status)
 {
+    $icon = '<i class="fa fa-clock-o text-muted"></i>';
     if ($status == 'verified') {
-        return '<i class="fa fa-check text-success"></i>';
+        $icon = '<i class="fa fa-check text-success"></i>';
     } elseif ($status == 'error') {
-        return '<i class="fa fa-times text-danger"></i>';
+        $icon = '<i class="fa fa-times text-danger"></i>';
     } elseif ($status == 'warning') {
-        return '<i class="fa fa-exclamation-triangle text-warning"></i>';
+        $icon = '<i class="fa fa-exclamation-triangle text-warning"></i>';
     }
-    return '<i class="fa fa-clock-o text-muted"></i>';
+    return $icon;
 }
 
 $visible_document_verifications = ['PAN', 'GSTIN', 'BANK', 'MSME', 'TAN'];
@@ -132,7 +135,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> <?= __('PAN Card Verification - Completed'); ?></h3>
                         <p class="text-success"><?= __('Your PAN has been successfully verified on'); ?>
-                            <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['PAN']['verification_datetime'])); ?>
+                            <?php echo date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['PAN']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
                         <h3><i class="fa fa-id-card text-primary"></i> <?= __('PAN Card Verification'); ?> <?php echo in_array('PAN', $required_document_verifications) ? '<span class="text-danger">*</span>' : ''; ?></h3>
@@ -306,7 +309,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> <?= __('GST Number Verification - Completed'); ?></h3>
                         <p class="text-success"><?= __('Your GST has been successfully verified on'); ?>
-                            <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['GSTIN']['verification_datetime'])); ?>
+                            <?php echo date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['GSTIN']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
                         <h3><i class="fa fa-building text-primary"></i> <?= __('GST Number Verification'); ?> <?php echo in_array('GSTIN', $required_document_verifications) ? '<span class="text-danger">*</span>' : ''; ?></h3>
@@ -329,7 +332,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('Verification Date'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['GSTIN']['verification_datetime'])
-                                        ? date('d M Y, h:i A', strtotime($vendor_verifications['GSTIN']['verification_datetime']))
+                                        ? date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['GSTIN']['verification_datetime']))
                                         : ''; ?>" readonly tabindex="-1">
                                 </div>
 
@@ -486,7 +489,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> <?= __('Bank Account Verification - Completed'); ?></h3>
                         <p class="text-success"><?= __('Your Bank Account has been successfully verified on'); ?>
-                            <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['BANK']['verification_datetime'])); ?>
+                            <?php echo date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['BANK']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
                         <h3><i class="fa fa-university text-primary"></i> <?= __('Bank Account Verification'); ?> <?php echo in_array('BANK', $required_document_verifications) ? '<span class="text-danger">*</span>' : ''; ?></h3>
@@ -541,7 +544,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('Verification Date'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['BANK']['verification_datetime'])
-                                        ? date('d M Y, h:i A', strtotime($vendor_verifications['BANK']['verification_datetime']))
+                                        ? date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['BANK']['verification_datetime']))
                                         : ''; ?>" readonly tabindex="-1">
                                 </div>
 
@@ -706,7 +709,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> <?= __('MSME/Udyam Registration Verification - Completed'); ?></h3>
                         <p class="text-success"><?= __('Your MSME has been successfully verified on'); ?>
-                            <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['MSME']['verification_datetime'])); ?>
+                            <?php echo date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['MSME']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
                         <h3><i class="fa fa-check text-primary"></i> <?= __('MSME/Udyam Registration Verification'); ?> <?php echo in_array('MSME', $required_document_verifications) ? '<span class="text-danger">*</span>' : ''; ?></h3>
@@ -729,7 +732,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('Verification Date'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['MSME']['verification_datetime'])
-                                        ? date('d M Y, h:i A', strtotime($vendor_verifications['MSME']['verification_datetime']))
+                                        ? date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['MSME']['verification_datetime']))
                                         : ''; ?>" readonly tabindex="-1">
                                 </div>
 
@@ -887,7 +890,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> <?= __('TAN Number Verification - Completed'); ?></h3>
                         <p class="text-success"><?= __('Your TAN has been successfully verified on'); ?>
-                            <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['TAN']['verification_datetime'])); ?>
+                            <?php echo date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['TAN']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
                         <h3><i class="fa fa-file-text text-primary"></i> <?= __('TAN Number Verification'); ?> <?php echo in_array('TAN', $required_document_verifications) ? '<span class="text-danger">*</span>' : ''; ?></h3>
@@ -910,7 +913,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('Verification Date'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['TAN']['verification_datetime'])
-                                        ? date('d M Y, h:i A', strtotime($vendor_verifications['TAN']['verification_datetime']))
+                                        ? date(DATE_FORMAT_DMY_HI_A, strtotime($vendor_verifications['TAN']['verification_datetime']))
                                         : ''; ?>" readonly tabindex="-1">
                                 </div>
 

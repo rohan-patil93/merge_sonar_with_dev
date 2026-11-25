@@ -310,8 +310,8 @@ function getOldKRA(id){
         <div class="col-lg-6 col-md-12 col-sm-12 col-12">
             <div class="card removebg" id="deletekra_<?php echo $kralist['id']; ?>">
                 <div class="card-header">
-                    <h5><span id="text_kra_name_<?php echo $kralist['id']; ?>" class="float-left"><?php echo $kralist['area_name']; ?>  </span>  <i class="ti-pencil cursor-pointer float-left mt-1 m-l-10" onclick="editKRA('<?php echo $kralist['id']; ?>')", tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></h5>
-                    <i class="fa fa-trash text-danger float-right mt-1 m-l-10 cursor-pointer" onclick="removekra(<?php echo $kralist['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                    <h5><span id="text_kra_name_<?php echo $kralist['id']; ?>" class="float-left"><?php echo $kralist['area_name']; ?>  </span>  <button type="button" class="btn btn-link p-0 border-0 text-reset float-left mt-1 m-l-10 cursor-pointer" onclick="editKRA('<?php echo $kralist['id']; ?>')" aria-label="<?= htmlspecialchars(__('Edit KRA'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil"></i></button></h5>
+                    <button type="button" class="btn btn-link p-0 border-0 text-reset float-right mt-1 m-l-10 cursor-pointer" onclick="removekra(<?php echo $kralist['id']; ?>)" aria-label="<?= htmlspecialchars(__('Delete KRA'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-trash text-danger"></i></button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

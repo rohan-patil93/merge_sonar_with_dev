@@ -352,8 +352,8 @@ $statistics = [
 </div>
 
 <!-- Print Receipt Modal -->
-<div class="modal fade" id="printReceiptModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="printReceiptModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="ti-printer"></i> <?= __('Fuel Receipt'); ?></h4>

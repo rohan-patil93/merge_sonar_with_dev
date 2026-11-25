@@ -216,7 +216,7 @@ if($survey_data['options_display_type']=="1") {
                         <div class="col-lg-1"></div>
                         <div class="col-lg-11">
                             <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo $options;?>" name="survey_question_option<?php echo $rowid_question; ?>[]" placeholder="<?php echo __('Option'); ?>">
-                            <i class="flaticon-delete btn-primary" onclick="deloptionrows('<?php echo $rowid;?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <button type="button" class="btn btn-primary btn-sm p-1" onclick="deloptionrows('<?php echo $rowid;?>')" aria-label="<?= htmlspecialchars(__('Delete Option'), ENT_QUOTES, 'UTF-8'); ?>"><i class="flaticon-delete"></i></button>
                         </div>
                     </div>
                 </div>
@@ -315,7 +315,7 @@ if($survey_data['options_display_type']=="3") {
                         <div class="col-lg-1"></div>
                         <div class="col-lg-11">
                             <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo $options;?>" name="survey_question_option<?php echo $rowid_question; ?>[]" placeholder="<?php echo __('Option'); ?>">
-                            <i class="flaticon-delete btn-primary" onclick="deloptionrows('<?php echo $rowid;?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <button type="button" class="btn btn-primary btn-sm p-1" onclick="deloptionrows('<?php echo $rowid;?>')" aria-label="<?= htmlspecialchars(__('Delete Option'), ENT_QUOTES, 'UTF-8'); ?>"><i class="flaticon-delete"></i></button>
                         </div>
                     </div>
                 </div>

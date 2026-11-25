@@ -1,4 +1,8 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+}
+
 $_SESSION['apply_js']['multiselest'] = 1;
 
 $table_name = 'csr_impact_snapshot';
@@ -13,7 +17,7 @@ function csrImpactSnapshotValue($row, $key) {
 
 function csrImpactSnapshotFinancialYearStart($financialYear) {
     $matches = $matches ?? '';
-    if (preg_match('/^([0-9]{4})/', (string)$financialYear, $matches)) {
+    if (preg_match('/^(\d{4})/', (string)$financialYear, $matches)) {
         return (int)$matches[1];
     }
     return 0;
@@ -42,9 +46,9 @@ if (isset($_POST['submit']) && !$isViewMode) {
         unset($postData['rid']);
         $postData['current_status'] = '0';
         $postData['is_active'] = '0';
-        $postData['status_date'] = date('Y-m-d H:i:s');
+        $postData['status_date'] = date(DATE_FORMAT_YMD_HIS);
         $postData['company_id'] = $_SESSION['company_id'];
-        $postData['created_date'] = date('Y-m-d H:i:s');
+        $postData['created_date'] = date(DATE_FORMAT_YMD_HIS);
         $postData['created_by'] = $_SESSION['userid'];
         $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
         file_post_contents($url, $postData, 'insert');
@@ -55,7 +59,7 @@ if (isset($_POST['submit']) && !$isViewMode) {
     if ($submitType == 'update') {
         $rid = $postData['rid'];
         unset($postData['rid']);
-        $postData['updated_date'] = date('Y-m-d H:i:s');
+        $postData['updated_date'] = date(DATE_FORMAT_YMD_HIS);
         $postData['updated_by'] = $_SESSION['userid'];
         $url = API . "?mode=updaterowtabledata&rid=" . $rid . "&table=" . $table_name . "&method=post";
         file_post_contents($url, $postData, 'update');

@@ -33,7 +33,7 @@ $typeIcons = [
     'others' => 'fa-ellipsis-h'
 ];
 
-function render_type_tile($key, $stats, $icons, $periodKey, $location_id)
+function renderTypeTile($key, $stats, $icons, $periodKey, $location_id)
 {
     $label = ($key === 'vendor_supplier') ? 'Vendor/Supplier' : ucfirst($key);
     $icon = $icons[$key] ?? 'fa-circle-o';
@@ -76,8 +76,10 @@ function render_type_tile($key, $stats, $icons, $periodKey, $location_id)
     return ob_get_clean();
 }
 
-function render_period_block($title, $bigNumber, $bucket, $typesOrder, $icons, $borderClass, $periodKey, $location_id)
+function renderPeriodBlock($title, $bigNumber, $bucket, $config, $borderClass, $periodKey, $location_id)
 {
+    $typesOrder = $config['typesOrder'] ?? $config[0] ?? [];
+    $icons = $config['icons'] ?? $config[1] ?? [];
     ob_start();
     ?>
     <div class="card mb-3 period-analytics-card">
@@ -110,7 +112,7 @@ function render_period_block($title, $bigNumber, $bucket, $typesOrder, $icons, $
                     <div class="row g-2">
                         <?php foreach ($typesOrder as $t) {
                             $stats = $bucket[$t] ?? ['total' => 0, 'in_only' => 0, 'out' => 0];
-                            echo render_type_tile($t, $stats, $icons, $periodKey, $location_id);
+                            echo renderTypeTile($t, $stats, $icons, $periodKey, $location_id);
                         } ?>
                     </div>
                 </div>
@@ -399,10 +401,11 @@ if (isset($by['TODAY'])) {
     <!-- Period Summary Rows -->
     <div class="col-12 mb-3">
         <?php
-        echo render_period_block('Today Visitors', $today_visitors, $by['TODAY'] ?? [], $typesOrder, $typeIcons, 'border-danger', 'TODAY', $location_id);
-        echo render_period_block('Yesterday Visitors', $yesterday_visitors, $by['YESTERDAY'] ?? [], $typesOrder, $typeIcons, 'border-primary', 'YESTERDAY', $location_id);
-        echo render_period_block('Last 7 Days Visitors', $last_7days_visitors, $by['LAST7DAYS'] ?? [], $typesOrder, $typeIcons, 'border-success', 'LAST7DAYS', $location_id);
-        echo render_period_block('Total Visitors', $total_visitors, $by['ALL'] ?? [], $typesOrder, $typeIcons, 'border-warning', 'ALL', $location_id);
+        $renderConfig = ['typesOrder' => $typesOrder, 'icons' => $typeIcons];
+        echo renderPeriodBlock('Today Visitors', $today_visitors, $by['TODAY'] ?? [], $renderConfig, 'border-danger', 'TODAY', $location_id);
+        echo renderPeriodBlock('Yesterday Visitors', $yesterday_visitors, $by['YESTERDAY'] ?? [], $renderConfig, 'border-primary', 'YESTERDAY', $location_id);
+        echo renderPeriodBlock('Last 7 Days Visitors', $last_7days_visitors, $by['LAST7DAYS'] ?? [], $renderConfig, 'border-success', 'LAST7DAYS', $location_id);
+        echo renderPeriodBlock('Total Visitors', $total_visitors, $by['ALL'] ?? [], $renderConfig, 'border-warning', 'ALL', $location_id);
         ?>
     </div>
 </div>

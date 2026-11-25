@@ -107,11 +107,22 @@ function currencyFormat($number,$config){
         }
     }
 }
+function formatChunkWords($number, $counter, $hasFirstStr, $words, $digits) {
+    if (!$number) {
+        return null;
+    }
+    $plural = ($counter > 0 && $number > 9) ? 's' : null;
+    $hundred = ($counter == 1 && $hasFirstStr) ? ' and ' : null;
+    if ($number < 21) {
+        return $words[$number] . " " . $digits[$counter] . $plural . " " . $hundred;
+    }
+    return $words[floor($number / 10) * 10] . " " . $words[$number % 10] . " " . $digits[$counter] . $plural . " " . $hundred;
+}
+
 function numberToWordFormate($number){
 
     $no = floor($number ?? 0);
     $point = (int) round((($number ?? 0) - $no) * 100);
-    $hundred = null;
     $digits_1 = strlen($no);
     $i = 0;
     $str = array();
@@ -128,19 +139,10 @@ function numberToWordFormate($number){
     $digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
     while ($i < $digits_1) {
         $divider = ($i == 2) ? 10 : 100;
-        $number = floor($no % $divider);
+        $chunk = floor($no % $divider);
         $no = floor($no / $divider);
         $i += ($divider == 10) ? 1 : 2;
-        if ($number) {
-            $plural = (($counter = count((array)$str)) && $number > 9) ? 's' : null;
-            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
-            $str [] = ($number < 21) ? $words[$number] .
-            " " . $digits[$counter] . $plural . " " . $hundred
-            :
-            $words[floor($number / 10) * 10]
-            . " " . $words[$number % 10] . " "
-            . $digits[$counter] . $plural . " " . $hundred;
-        } else $str[] = null;
+        $str[] = formatChunkWords($chunk, count((array)$str), !empty($str[0]), $words, $digits);
     }
     $str = array_reverse((array)$str);
     $result = implode('', (array)$str);

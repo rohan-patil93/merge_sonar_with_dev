@@ -15,7 +15,7 @@
                 <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo round($dashboard2_list['active']/100000,2); ?> </span><?= __('Lac'); ?></div>
                 <div class="progress progress-xs mt-7 bg-success-o-60">
                     <?php $pr1 = ($dashboard2_list['active']/$dashboard2_list['budget'])*100; ?>
-                    <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $pr1; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success" style="width: <?php echo $pr1; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
             <!--end:: Body-->
@@ -32,7 +32,7 @@
                                                 <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo round($dashboard2_list['approve']/100000,2); ?></span><?= __('Lac'); ?></div>
                                                 <div class="progress progress-xs mt-7 bg-dark-o-90">
                                                     <?php $pr2 = ($dashboard2_list['approve']/$dashboard2_list['budget'])*100; ?>
-                                                    <div class="progress-bar bg-dark" role="progressbar" style="width: <?php echo $pr2; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-dark" style="width: <?php echo $pr2; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                             </div>
                                             <!--end::Body-->
@@ -173,7 +173,7 @@
                                                                                     <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
-                                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-danger" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>

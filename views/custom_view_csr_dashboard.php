@@ -3,7 +3,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 
 function csrDashboardFinancialYearStart($financialYear) {
     $matches = $matches ?? '';
-  if (preg_match('/^([0-9]{4})/', (string)$financialYear, $matches)) {
+  if (preg_match('/^(\d{4})/', (string)$financialYear, $matches)) {
     return (int)$matches[1];
   }
   return 0;
@@ -312,7 +312,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
               <td>
                 <?php echo $progress; ?>%
                 <div class="progress progress-xs">
-                  <div class="progress-bar progress-bar-primary csr-progress-bar" role="progressbar" data-progress="<?php echo $progress; ?>" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar progress-bar-primary csr-progress-bar" data-progress="<?php echo $progress; ?>" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </td>
             </tr>
@@ -325,7 +325,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
             <td>
               <?php echo $totalProgress; ?>%
               <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-primary csr-progress-bar" role="progressbar" data-progress="<?php echo $totalProgress; ?>" aria-valuenow="<?php echo $totalProgress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-primary csr-progress-bar" data-progress="<?php echo $totalProgress; ?>" aria-valuenow="<?php echo $totalProgress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </td>
           </tr>

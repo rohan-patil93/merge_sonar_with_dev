@@ -60,7 +60,7 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
                     ?>
                     <tr class="main">
                         <td class="cursor-pointer">
-                            <i class="ti-angle-double-down" onclick="opensubtable('<?php echo $trans_id; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="opensubtable('<?php echo $trans_id; ?>')" aria-label="<?= htmlspecialchars(__('Toggle details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-angle-double-down"></i></button>
                             <input type="hidden" class="showclassval" id="showhide<?php echo $trans_id; ?>" value="0">
                         </td>
                         <td><?php echo $tableslist['VOUCHERNUMBER']; ?></td>
@@ -120,7 +120,7 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
                     ?>
                     <tr class="main">
                         <td class="cursor-pointer">
-                            <i class="ti-angle-double-down" onclick="opensubtable('<?php echo $trans_id; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="opensubtable('<?php echo $trans_id; ?>')" aria-label="<?= htmlspecialchars(__('Toggle details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-angle-double-down"></i></button>
                             <input type="hidden" class="showclassval" id="showhide<?php echo $trans_id; ?>" value="0">
                         </td>
                         <td><?php echo $tableslist['VOUCHERNUMBER']; ?></td>
