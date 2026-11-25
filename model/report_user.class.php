@@ -22,7 +22,7 @@ interface ReportConstants {
     public const SQL_CLOSE_PAREN_2 = "%')) ";
 }
 
-trait ReportGateCourierTrait {
+trait ReportCouriersTrait {
     public function getCourierReportFilterLookups($get){
         global $callConfig;
         $return = array();
@@ -34,97 +34,112 @@ trait ReportGateCourierTrait {
             return $return;
         }
 
-        $locations_sql = "SELECT id, location_name FROM locations" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY location_name ASC";
-        $locations_res = $callConfig->getAllRows($locations_sql);
-        if(count((array)$locations_res) > 0){
-            foreach($locations_res as $loc_row){
-                $return['locations'][] = $loc_row;
-            }
-        }
+        $locsql = "SELECT id, location_name FROM locations" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY location_name ASC";
+        $locres = $callConfig->getAllRows($locsql);
+        $return['locations'] = $locres;
 
-        $employees_sql = "SELECT id, display_name, emp_code FROM employees" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY display_name ASC";
-        $employees_res = $callConfig->getAllRows($employees_sql);
-        if(count((array)$employees_res) > 0){
-            foreach($employees_res as $emp_row){
-                $return['employees'][] = $emp_row;
-            }
-        }
+        $empsql = "SELECT id, display_name, emp_code FROM employees" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY display_name ASC";
+        $empres = $callConfig->getAllRows($empsql);
+        $return['employees'] = $empres;
 
-        $status_sql = "SELECT id, name, status FROM status_progress" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . "' AND table_name = 'couriers'" . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY status ASC";
-        $status_res = $callConfig->getAllRows($status_sql);
-        if(count((array)$status_res) > 0){
-            foreach($status_res as $status_row){
-                $return['statuses'][] = $status_row;
-            }
+        $query = "SELECT genc_detail_code, genc_detail_name FROM general_code_details" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . "' AND genc_code='COURIER_STATUS' AND is_active =0";
+        $data = $callConfig->getAllRows($query);
+        $res = array();
+        foreach($data as $row){
+            $res[$row->genc_detail_code] = $row->genc_detail_name;
         }
+        $return['statuses'] = $res;
 
         return $return;
     }
 
-    public function buildCouriersReportWhere($get, $courier_type){
+    public function buildCouriersReportWhere($get, $type){
         $company_id = isset($get['company_id']) ? $get['company_id'] : '';
         $from_date = isset($get['from_date']) ? $get['from_date'] : '';
         $to_date = isset($get['to_date']) ? $get['to_date'] : '';
-        $where = " company_id = '".$company_id."' AND is_active = 0 AND courier_type = '".$courier_type."' AND courier_date >= '".$from_date."' AND courier_date <= '".$to_date."' ";
+        $where = " company_id = '".$company_id."' AND is_active = 0 AND courier_type = '".$type."' AND courier_date >= '".$from_date."' AND courier_date <= '".$to_date."' ";
 
-        $location_id = isset($get['location_id']) ? $get['location_id'] : '';
-        if($location_id != ''){
-            $where .= " AND location_id = '".$location_id."' ";
+        if(!empty($get['location_id'])){
+            $where .= " AND location_id = '".$get['location_id']."' ";
         }
-
-        $tracking_no = isset($get['tracking_no']) ? trim($get['tracking_no']) : '';
-        if($tracking_no != ''){
-            $where .= " AND courier_ref_no LIKE '%".addslashes($tracking_no)."%' ";
+        if(!empty($get['employee_id'])){
+            $where .= " AND requested_by = '".$get['employee_id']."' ";
         }
-
-        $courier_company = isset($get['courier_company']) ? trim($get['courier_company']) : '';
-        if($courier_company != ''){
-            $where .= " AND courier_company LIKE '%".addslashes($courier_company)."%' ";
+        if(!empty($get['status_id'])){
+            $where .= " AND current_status = '".$get['status_id']."' ";
         }
-
-        $received_by = isset($get['received_by']) ? $get['received_by'] : '';
-        if($received_by != ''){
-            $where .= " AND requested_by = '".$received_by."' ";
+        $search = isset($get['search']) ? trim($get['search']) : '';
+        if($search != ''){
+            $search_esc = addslashes($search);
+            $where .= " AND (
+                courier_name LIKE '%".$search_esc."%'
+                OR courier_ref_no LIKE '%".$search_esc."%'
+                OR from_detail LIKE '%".$search_esc."%'
+                OR to_detail LIKE '%".$search_esc."%'
+                OR description LIKE '%".$search_esc."%'
+                OR remarks LIKE '%".$search_esc."%'
+            ) ";
         }
-
-        $taken_by = isset($get['taken_by']) ? trim($get['taken_by']) : '';
-        if($taken_by != ''){
-            $where .= " AND courier_name LIKE '%".addslashes($taken_by)."%' ";
-        }
-
-        $current_status = isset($get['current_status']) ? $get['current_status'] : '';
-        if($current_status != ''){
-            $where .= " AND current_status = '".$current_status."' ";
-        }
-
         return $where;
     }
 
-    public function getCouriersEmployeeNameMap($company_id, $ids){
+    public function getCouriersEmployeeNameMap($company_id, $req_ids){
         global $callConfig;
         $map = array();
-        if(count((array)$ids) == 0){
+        if(count((array)$req_ids) == 0){
             return $map;
         }
         $clean_ids = array();
-        foreach($ids as $id_val){
-            if($id_val != '' && $id_val != 0){
-                $clean_ids[] = (int)$id_val;
+        foreach($req_ids as $id){
+            $id = trim($id);
+            if($id != ''){
+                $clean_ids[] = "'".addslashes($id)."'";
             }
         }
-        if(count((array)$clean_ids) == 0){
+        $clean_ids = array_unique($clean_ids);
+        if(count($clean_ids) == 0){
             return $map;
         }
-        $sql = "SELECT id, display_name FROM employees" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . "' AND id IN (".implode(',', $clean_ids).")";
+        $sql = "SELECT id, display_name FROM employees" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . "' AND id IN (".implode(',', $clean_ids).")" . ReportConstants::SQL_AND_IS_ACTIVE_0;
         $res = $callConfig->getAllRows($sql);
         if(count((array)$res) > 0){
-            foreach($res as $emp_row){
-                $eid = is_array($emp_row) ? $emp_row['id'] : $emp_row->id;
-                $ename = is_array($emp_row) ? $emp_row['display_name'] : $emp_row->display_name;
-                $map[$eid] = $ename;
+            foreach($res as $r){
+                $row = is_array($r) ? $r : (array)$r;
+                $map[$row['id']] = $row['display_name'];
             }
         }
         return $map;
+    }
+
+    private function collectCourierRequestedByIds(array $rows): array {
+        $req_ids = array();
+        foreach($rows as $row){
+            $r = is_array($row) ? $row : (array)$row;
+            if(!empty($r['requested_by'])){
+                $req_ids[] = $r['requested_by'];
+            }
+        }
+        return $req_ids;
+    }
+
+    private function formatInwardCourierRow(array $r, array $emp_map): array {
+        $received_by_id = $r['requested_by'] ?? '';
+        return array(
+            'coming_date' => $r['courier_date'] ?? '',
+            'coming_time' => $r['courier_time'] ?? '',
+            'tracking_no' => $r['courier_ref_no'] ?? '',
+            'vehicle_no' => '',
+            'coming_from' => $r['from_detail'] ?? '',
+            'to_address' => $r['to_detail'] ?? '',
+            'description' => $r['description'] ?? '',
+            'qty' => $r['courier_qty'] ?? '',
+            'brought_by_name' => $r['courier_name'] ?? '',
+            'received_by_name' => $emp_map[$received_by_id] ?? '',
+            'received_date' => $r['courier_date'] ?? '',
+            'received_time' => $r['courier_time'] ?? '',
+            'security_sign' => '',
+            'remarks' => $r['remarks'] ?? ''
+        );
     }
 
     public function getInwardCouriersReport($get){
@@ -132,14 +147,13 @@ trait ReportGateCourierTrait {
         $return = $this->getCourierReportFilterLookups($get);
         $return['rows'] = array();
 
-        $filters_only = isset($get['filters_only']) ? $get['filters_only'] : '';
-        if($filters_only == 'Y'){
+        if(($get['filters_only'] ?? '') == 'Y'){
             return $return;
         }
 
-        $from_date = isset($get['from_date']) ? $get['from_date'] : '';
-        $to_date = isset($get['to_date']) ? $get['to_date'] : '';
-        $company_id = isset($get['company_id']) ? $get['company_id'] : '';
+        $from_date = $get['from_date'] ?? '';
+        $to_date = $get['to_date'] ?? '';
+        $company_id = $get['company_id'] ?? '';
         if($company_id == '' || $from_date == '' || $to_date == ''){
             return $return;
         }
@@ -148,40 +162,31 @@ trait ReportGateCourierTrait {
         $sql = "SELECT * FROM couriers WHERE ".$where." ORDER BY courier_date DESC, id DESC";
         $return['sql'] = $sql;
         $rows = $callConfig->getAllRows($sql);
-        $req_ids = array();
-        if(count((array)$rows) > 0){
-            foreach($rows as $row){
-                $r = is_array($row) ? $row : (array)$row;
-                if(isset($r['requested_by']) && $r['requested_by'] != ''){
-                    $req_ids[] = $r['requested_by'];
-                }
-            }
-        }
+        $req_ids = $this->collectCourierRequestedByIds((array)$rows);
         $emp_map = $this->getCouriersEmployeeNameMap($company_id, $req_ids);
 
-        if(count((array)$rows) > 0){
-            foreach($rows as $row){
-                $r = is_array($row) ? $row : (array)$row;
-                $received_by_id = isset($r['requested_by']) ? $r['requested_by'] : '';
-                $return['rows'][] = array(
-                    'coming_date' => isset($r['courier_date']) ? $r['courier_date'] : '',
-                    'coming_time' => isset($r['courier_time']) ? $r['courier_time'] : '',
-                    'tracking_no' => isset($r['courier_ref_no']) ? $r['courier_ref_no'] : '',
-                    'vehicle_no' => '',
-                    'coming_from' => isset($r['from_detail']) ? $r['from_detail'] : '',
-                    'to_address' => isset($r['to_detail']) ? $r['to_detail'] : '',
-                    'description' => isset($r['description']) ? $r['description'] : '',
-                    'qty' => isset($r['courier_qty']) ? $r['courier_qty'] : '',
-                    'brought_by_name' => isset($r['courier_name']) ? $r['courier_name'] : '',
-                    'received_by_name' => (isset($emp_map[$received_by_id]) ? $emp_map[$received_by_id] : ''),
-                    'received_date' => isset($r['courier_date']) ? $r['courier_date'] : '',
-                    'received_time' => isset($r['courier_time']) ? $r['courier_time'] : '',
-                    'security_sign' => '',
-                    'remarks' => isset($r['remarks']) ? $r['remarks'] : ''
-                );
-            }
+        foreach((array)$rows as $row){
+            $return['rows'][] = $this->formatInwardCourierRow((array)$row, $emp_map);
         }
         return $return;
+    }
+
+    private function formatOutwardCourierRow(array $r): array {
+        return array(
+            'courier_date' => $r['courier_date'] ?? '',
+            'to_address' => $r['to_detail'] ?? '',
+            'from_address' => $r['from_detail'] ?? '',
+            'tracking_no' => $r['courier_ref_no'] ?? '',
+            'vehicle_no' => '',
+            'description' => $r['description'] ?? '',
+            'qty' => $r['courier_qty'] ?? '',
+            'taken_by_name' => $r['courier_name'] ?? '',
+            'taken_by_date' => $r['courier_date'] ?? '',
+            'taken_by_time' => $r['courier_time'] ?? '',
+            'taken_by_contact' => $r['courier_mobile'] ?? '',
+            'security_sign' => '',
+            'remarks' => $r['remarks'] ?? ''
+        );
     }
 
     public function getOutwardCouriersReport($get){
@@ -189,14 +194,13 @@ trait ReportGateCourierTrait {
         $return = $this->getCourierReportFilterLookups($get);
         $return['rows'] = array();
 
-        $filters_only = isset($get['filters_only']) ? $get['filters_only'] : '';
-        if($filters_only == 'Y'){
+        if(($get['filters_only'] ?? '') == 'Y'){
             return $return;
         }
 
-        $from_date = isset($get['from_date']) ? $get['from_date'] : '';
-        $to_date = isset($get['to_date']) ? $get['to_date'] : '';
-        $company_id = isset($get['company_id']) ? $get['company_id'] : '';
+        $from_date = $get['from_date'] ?? '';
+        $to_date = $get['to_date'] ?? '';
+        $company_id = $get['company_id'] ?? '';
         if($company_id == '' || $from_date == '' || $to_date == ''){
             return $return;
         }
@@ -206,29 +210,14 @@ trait ReportGateCourierTrait {
         $return['sql'] = $sql;
         $rows = $callConfig->getAllRows($sql);
 
-        if(count((array)$rows) > 0){
-            foreach($rows as $row){
-                $r = is_array($row) ? $row : (array)$row;
-                $return['rows'][] = array(
-                    'courier_date' => isset($r['courier_date']) ? $r['courier_date'] : '',
-                    'to_address' => isset($r['to_detail']) ? $r['to_detail'] : '',
-                    'from_address' => isset($r['from_detail']) ? $r['from_detail'] : '',
-                    'tracking_no' => isset($r['courier_ref_no']) ? $r['courier_ref_no'] : '',
-                    'vehicle_no' => '',
-                    'description' => isset($r['description']) ? $r['description'] : '',
-                    'qty' => isset($r['courier_qty']) ? $r['courier_qty'] : '',
-                    'taken_by_name' => isset($r['courier_name']) ? $r['courier_name'] : '',
-                    'taken_by_date' => isset($r['courier_date']) ? $r['courier_date'] : '',
-                    'taken_by_time' => isset($r['courier_time']) ? $r['courier_time'] : '',
-                    'taken_by_contact' => isset($r['courier_mobile']) ? $r['courier_mobile'] : '',
-                    'security_sign' => '',
-                    'remarks' => isset($r['remarks']) ? $r['remarks'] : ''
-                );
-            }
+        foreach((array)$rows as $row){
+            $return['rows'][] = $this->formatOutwardCourierRow((array)$row);
         }
         return $return;
     }
+}
 
+trait ReportGateVisitorsTrait {
     public function getGateReportFilterLookups($get){
         global $callConfig;
         $return = array();
@@ -240,29 +229,17 @@ trait ReportGateCourierTrait {
             return $return;
         }
 
-        $locations_sql = "SELECT id, location_name FROM locations" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY location_name ASC";
-        $locations_res = $callConfig->getAllRows($locations_sql);
-        if(count((array)$locations_res) > 0){
-            foreach($locations_res as $loc_row){
-                $return['locations'][] = $loc_row;
-            }
-        }
+        $locsql = "SELECT id, location_name FROM locations" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY location_name ASC";
+        $locres = $callConfig->getAllRows($locsql);
+        $return['locations'] = $locres;
 
-        $employees_sql = "SELECT id, display_name, emp_code FROM employees" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY display_name ASC";
-        $employees_res = $callConfig->getAllRows($employees_sql);
-        if(count((array)$employees_res) > 0){
-            foreach($employees_res as $emp_row){
-                $return['employees'][] = $emp_row;
-            }
-        }
+        $empsql = "SELECT id, display_name, emp_code FROM employees" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY display_name ASC";
+        $empres = $callConfig->getAllRows($empsql);
+        $return['employees'] = $empres;
 
-        $departments_sql = "SELECT id, department_name FROM departments" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY department_name ASC";
-        $departments_res = $callConfig->getAllRows($departments_sql);
-        if(count((array)$departments_res) > 0){
-            foreach($departments_res as $dept_row){
-                $return['departments'][] = $dept_row;
-            }
-        }
+        $deptsql = "SELECT id, department_name FROM departments" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0 . " ORDER BY department_name ASC";
+        $deptres = $callConfig->getAllRows($deptsql);
+        $return['departments'] = $deptres;
 
         return $return;
     }
@@ -270,13 +247,12 @@ trait ReportGateCourierTrait {
     public function getGateReportEmployeeMap($company_id){
         global $callConfig;
         $map = array();
-        $employees_sql = "SELECT id, display_name, emp_code, user_id FROM employees" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . "'";
-        $employees_res = $callConfig->getAllRows($employees_sql);
-        if(count((array)$employees_res) > 0){
-            foreach($employees_res as $emp_row){
-                $eid = is_array($emp_row) ? $emp_row['id'] : $emp_row->id;
-                $ename = is_array($emp_row) ? $emp_row['display_name'] : $emp_row->display_name;
-                $map[$eid] = $ename;
+        $sql = "SELECT id, display_name FROM employees" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0;
+        $res = $callConfig->getAllRows($sql);
+        if(count((array)$res) > 0){
+            foreach($res as $r){
+                $row = is_array($r) ? $r : (array)$r;
+                $map[$row['id']] = $row['display_name'];
             }
         }
         return $map;
@@ -285,58 +261,69 @@ trait ReportGateCourierTrait {
     public function getGateReportUserMap($company_id){
         global $callConfig;
         $map = array();
-        $users_sql = "SELECT id, display_name FROM application_users" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . "'";
-        $users_res = $callConfig->getAllRows($users_sql);
-        if(count((array)$users_res) > 0){
-            foreach($users_res as $user_row){
-                $uid = is_array($user_row) ? $user_row['id'] : $user_row->id;
-                $uname = is_array($user_row) ? $user_row['display_name'] : $user_row->display_name;
-                $map[$uid] = $uname;
+        $sql = "SELECT id, display_name FROM application_users" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . ReportConstants::SQL_AND_IS_ACTIVE_0;
+        $res = $callConfig->getAllRows($sql);
+        if(count((array)$res) > 0){
+            foreach($res as $r){
+                $row = is_array($r) ? $r : (array)$r;
+                $map[$row['id']] = $row['display_name'];
             }
         }
         return $map;
     }
 
     public function resolveGateReportPersonName($id, $emp_map, $user_map){
-        $name = '';
-        if (!empty($id)) {
-            if (!empty($emp_map[$id])) {
-                $name = $emp_map[$id];
-            } elseif (!empty($user_map[$id])) {
-                $name = $user_map[$id];
-            }
+        if(isset($emp_map[$id]) && $emp_map[$id] != ''){
+            return $emp_map[$id];
         }
-        return $name;
+        if(isset($user_map[$id]) && $user_map[$id] != ''){
+            return $user_map[$id];
+        }
+        return '';
     }
 
-    private function buildVisitorSearchCondition($visit_type, $search_esc) {
-        $c1 = ReportConstants::SQL_VISITOR_IDCARD_LIKE . $search_esc;
+    private function buildVisitorSearchCondition($visit_type, $search_esc): string {
+        $c1 = ReportConstants::SQL_VISITOR_IDCARD_LIKE . $search_esc . "'";
         $c2 = ReportConstants::SQL_VISITOR_BADGE_LIKE . $search_esc . ReportConstants::SQL_CLOSE_PAREN_2;
         if($visit_type == 'vendor_supplier'){
-            return " AND (vl.vendor_supplier_driver_name LIKE '%".$search_esc."%' OR vl.vendor_supplier_driver_mobile LIKE '%".$search_esc."%' OR vl.vendor_supplier_vehicle_number LIKE '%".$search_esc."%' OR vl.name LIKE '%".$search_esc."%' OR vl.phone LIKE '%".$search_esc."%'" . $c1 . $c2;
-        }
-        if($visit_type == 'employee'){
-            return " AND (vl.employee_name LIKE '%".$search_esc."%' OR vl.emp_temp_name LIKE '%".$search_esc."%' OR vl.employee_code LIKE '%".$search_esc."%'" . $c1 . $c2;
+            $c1 = "%' OR vl.vendor_supplier_driver_name LIKE '%".$search_esc."%' OR vl.vendor_supplier_driver_mobile LIKE '%".$search_esc."%' OR vl.vendor_supplier_proof_document_no LIKE '%".$search_esc."'";
+        }elseif($visit_type == 'employee'){
+            $c1 = "%' OR vl.employee_code LIKE '%".$search_esc."%' OR vl.employee_name LIKE '%".$search_esc."%' OR vl.emp_temp_name LIKE '%".$search_esc."'";
         }
         return " AND (vl.name LIKE '%".$search_esc."%' OR vl.phone LIKE '%".$search_esc."%'" . $c1 . $c2;
     }
 
+    private function buildMovementCondition($movement): string {
+        if($movement == 'inside'){
+            return " AND (vl.out_datetime IS NULL OR vl.out_datetime = '' OR vl.out_datetime = '0000-00-00 00:00:00') ";
+        }
+        if($movement == 'exited'){
+            return " AND vl.out_datetime IS NOT NULL AND vl.out_datetime != '' AND vl.out_datetime != '0000-00-00 00:00:00' ";
+        }
+        return "";
+    }
+
+    private function buildCardReturnCondition($card_return): string {
+        if($card_return == 'returned'){
+            return " AND EXISTS (SELECT 1 FROM visitor_badges vb2 WHERE vb2.visitor_log_id = vl.id AND vb2.company_id = vl.company_id AND vb2.returned_at IS NOT NULL AND vb2.returned_at != '' AND vb2.returned_at != '0000-00-00 00:00:00') ";
+        }
+        if($card_return == 'not_returned'){
+            return " AND NOT EXISTS (SELECT 1 FROM visitor_badges vb2 WHERE vb2.visitor_log_id = vl.id AND vb2.company_id = vl.company_id AND vb2.returned_at IS NOT NULL AND vb2.returned_at != '' AND vb2.returned_at != '0000-00-00 00:00:00') ";
+        }
+        return "";
+    }
+
     public function buildVisitorMovementsWhere($get, $visit_type){
-        $company_id = isset($get['company_id']) ? $get['company_id'] : '';
-        $from_date = isset($get['from_date']) ? $get['from_date'] : '';
-        $to_date = isset($get['to_date']) ? $get['to_date'] : '';
+        $company_id = $get['company_id'] ?? '';
+        $from_date = $get['from_date'] ?? '';
+        $to_date = $get['to_date'] ?? '';
         $where = " vl.company_id = '".$company_id."' AND vl.is_active = 0 AND vl.visit_type = '".$visit_type."' AND DATE(vl.in_datetime) >= '".$from_date."' AND DATE(vl.in_datetime) <= '".$to_date."' ";
 
         if(!empty($get['location_id'])){
             $where .= " AND vl.location_id = '".$get['location_id']."' ";
         }
 
-        $movement = isset($get['movement']) ? $get['movement'] : '';
-        if($movement == 'inside'){
-            $where .= " AND (vl.out_datetime IS NULL OR vl.out_datetime = '' OR vl.out_datetime = '0000-00-00 00:00:00') ";
-        }elseif($movement == 'exited'){
-            $where .= " AND vl.out_datetime IS NOT NULL AND vl.out_datetime != '' AND vl.out_datetime != '0000-00-00 00:00:00' ";
-        }
+        $where .= $this->buildMovementCondition($get['movement'] ?? '');
 
         if(!empty($get['whom_to_meet'])){
             $where .= " AND vl.whom_to_meet = '".$get['whom_to_meet']."' ";
@@ -355,12 +342,7 @@ trait ReportGateCourierTrait {
             $where .= " AND vl.emp_temp_reason = '".$get['temp_reason']."' ";
         }
 
-        $card_return = isset($get['card_return']) ? $get['card_return'] : '';
-        if($card_return == 'returned'){
-            $where .= " AND EXISTS (SELECT 1 FROM visitor_badges vb2 WHERE vb2.visitor_log_id = vl.id AND vb2.company_id = vl.company_id AND vb2.returned_at IS NOT NULL AND vb2.returned_at != '' AND vb2.returned_at != '0000-00-00 00:00:00') ";
-        }elseif($card_return == 'not_returned'){
-            $where .= " AND NOT EXISTS (SELECT 1 FROM visitor_badges vb2 WHERE vb2.visitor_log_id = vl.id AND vb2.company_id = vl.company_id AND vb2.returned_at IS NOT NULL AND vb2.returned_at != '' AND vb2.returned_at != '0000-00-00 00:00:00') ";
-        }
+        $where .= $this->buildCardReturnCondition($get['card_return'] ?? '');
 
         $search = isset($get['search']) ? trim($get['search']) : '';
         if($search != ''){
@@ -370,37 +352,46 @@ trait ReportGateCourierTrait {
         return $where;
     }
 
+    private function resolveVisitorComingFrom(array $r): string {
+        if(!empty($r['company_name'])){
+            return $r['company_name'];
+        }
+        if(!empty($r['address'])){
+            return $r['address'];
+        }
+        return '';
+    }
+
+    private function resolveVisitorCardNo(array $r): string {
+        if(!empty($r['visitor_idcard_no'])){
+            return $r['visitor_idcard_no'];
+        }
+        if(!empty($r['badge_code'])){
+            return $r['badge_code'];
+        }
+        return '';
+    }
+
     private function formatVisitorMovementRow($r, $emp_map, $user_map) {
-        $whom_id = isset($r['whom_to_meet']) ? $r['whom_to_meet'] : '';
-        $sec_id = isset($r['in_security_id']) ? $r['in_security_id'] : '';
-        $purpose = isset($r['purpose']) ? $r['purpose'] : '';
-        if($purpose == 'others' && isset($r['purpose_other']) && $r['purpose_other'] != ''){
+        $whom_id = $r['whom_to_meet'] ?? '';
+        $sec_id = $r['in_security_id'] ?? '';
+        $purpose = $r['purpose'] ?? '';
+        if($purpose == 'others' && !empty($r['purpose_other'])){
             $purpose = $r['purpose_other'];
         }
-        $coming_from = '';
-        if(isset($r['company_name']) && $r['company_name'] != ''){
-            $coming_from = $r['company_name'];
-        }elseif(isset($r['address']) && $r['address'] != ''){
-            $coming_from = $r['address'];
-        }
-        $card_no = '';
-        if(isset($r['visitor_idcard_no']) && $r['visitor_idcard_no'] != ''){
-            $card_no = $r['visitor_idcard_no'];
-        }elseif(isset($r['badge_code']) && $r['badge_code'] != ''){
-            $card_no = $r['badge_code'];
-        }
+
         return array(
-            'name' => isset($r['name']) ? $r['name'] : '',
-            'contact_no' => isset($r['phone']) ? $r['phone'] : '',
-            'government_id' => isset($r['idcard_number']) ? $r['idcard_number'] : '',
-            'coming_from' => $coming_from,
+            'name' => $r['name'] ?? '',
+            'contact_no' => $r['phone'] ?? '',
+            'government_id' => $r['idcard_number'] ?? '',
+            'coming_from' => $this->resolveVisitorComingFrom((array)$r),
             'purpose' => $purpose,
-            'whom_to_meet' => isset($emp_map[$whom_id]) ? $emp_map[$whom_id] : '',
-            'card_no' => $card_no,
-            'in_time' => isset($r['in_datetime']) ? $r['in_datetime'] : '',
-            'out_time' => isset($r['out_datetime']) ? $r['out_datetime'] : '',
-            'security_sign' => isset($user_map[$sec_id]) ? $user_map[$sec_id] : '',
-            'remarks' => isset($r['remarks']) ? $r['remarks'] : ''
+            'whom_to_meet' => $emp_map[$whom_id] ?? '',
+            'card_no' => $this->resolveVisitorCardNo((array)$r),
+            'in_time' => $r['in_datetime'] ?? '',
+            'out_time' => $r['out_datetime'] ?? '',
+            'security_sign' => $user_map[$sec_id] ?? '',
+            'remarks' => $r['remarks'] ?? ''
         );
     }
 
@@ -409,22 +400,20 @@ trait ReportGateCourierTrait {
         $return = $this->getGateReportFilterLookups($get);
         $return['rows'] = array();
 
-        $filters_only = isset($get['filters_only']) ? $get['filters_only'] : '';
-        if($filters_only == 'Y'){
+        if(($get['filters_only'] ?? '') == 'Y'){
             return $return;
         }
 
-        $from_date = isset($get['from_date']) ? $get['from_date'] : '';
-        $to_date = isset($get['to_date']) ? $get['to_date'] : '';
-        $company_id = isset($get['company_id']) ? $get['company_id'] : '';
+        $from_date = $get['from_date'] ?? '';
+        $to_date = $get['to_date'] ?? '';
+        $company_id = $get['company_id'] ?? '';
         if($company_id == '' || $from_date == '' || $to_date == ''){
             return $return;
         }
 
         $where = $this->buildVisitorMovementsWhere($get, 'visitor');
         $sql = "SELECT vl.*,
-            (SELECT vb.full_code FROM visitor_badges vb WHERE vb.visitor_log_id = vl.id AND vb.company_id = vl.company_id ORDER BY vb.id DESC LIMIT 1) AS badge_code,
-            (SELECT vb.returned_at FROM visitor_badges vb WHERE vb.visitor_log_id = vl.id AND vb.company_id = vl.company_id ORDER BY vb.id DESC LIMIT 1) AS badge_returned_at
+            (SELECT vb.full_code FROM visitor_badges vb WHERE vb.visitor_log_id = vl.id AND vb.company_id = vl.company_id ORDER BY vb.id DESC LIMIT 1) AS badge_code
             FROM visitor_logs vl
             WHERE ".$where . ReportConstants::SQL_VISITOR_ORDER_BY_IN;
         $return['sql'] = $sql;
@@ -442,29 +431,49 @@ trait ReportGateCourierTrait {
     }
 
     private function formatVendorMovementRow($r, $emp_map, $user_map, $vendors) {
-        $whom_id = isset($r['whom_to_meet']) ? $r['whom_to_meet'] : '';
-        $sec_id = isset($r['in_security_id']) ? $r['in_security_id'] : '';
-        $name = !empty($r['vendor_supplier_driver_name']) ? $r['vendor_supplier_driver_name'] : (!empty($r['name']) ? $r['name'] : '');
-        $contact = !empty($r['vendor_supplier_driver_mobile']) ? $r['vendor_supplier_driver_mobile'] : (!empty($r['phone']) ? $r['phone'] : '');
-        $coming_from = (!empty($r['vendor_supplier_vendor_id']) && isset($vendors[$r['vendor_supplier_vendor_id']])) ? $vendors[$r['vendor_supplier_vendor_id']] : '';
+        $whom_id = $r['whom_to_meet'] ?? '';
+        $sec_id = $r['in_security_id'] ?? '';
+        $name = '';
+        if(!empty($r['vendor_supplier_driver_name'])){
+            $name = $r['vendor_supplier_driver_name'];
+        } elseif(!empty($r['name'])){
+            $name = $r['name'];
+        }
 
-        $card_no = !empty($r['visitor_idcard_no']) ? $r['visitor_idcard_no'] : (!empty($r['badge_code']) ? $r['badge_code'] : '');
-        $gov_id = isset($r['vendor_supplier_proof_document_no']) ? $r['vendor_supplier_proof_document_no'] : '';
+        $contact = '';
+        if(!empty($r['vendor_supplier_driver_mobile'])){
+            $contact = $r['vendor_supplier_driver_mobile'];
+        } elseif(!empty($r['phone'])){
+            $contact = $r['phone'];
+        }
+
+        $vendor_id = $r['vendor_supplier_vendor_id'] ?? '';
+        $coming_from = (!empty($vendor_id) && isset($vendors[$vendor_id])) ? $vendors[$vendor_id] : '';
+
+        $card_no = '';
+        if(!empty($r['visitor_idcard_no'])){
+            $card_no = $r['visitor_idcard_no'];
+        } elseif(!empty($r['badge_code'])){
+            $card_no = $r['badge_code'];
+        }
+
+        $gov_id = $r['vendor_supplier_proof_document_no'] ?? '';
         if(is_array($gov_id) || $gov_id == 'Array'){
             $gov_id = '';
         }
+
         return array(
             'name' => $name,
             'contact_no' => $contact,
             'government_id' => $gov_id,
             'coming_from' => $coming_from,
-            'purpose' => isset($r['vendor_supplier_purpose']) ? $r['vendor_supplier_purpose'] : '',
-            'whom_to_meet' => isset($emp_map[$whom_id]) ? $emp_map[$whom_id] : '',
+            'purpose' => $r['vendor_supplier_purpose'] ?? '',
+            'whom_to_meet' => $emp_map[$whom_id] ?? '',
             'card_no' => $card_no,
-            'in_time' => isset($r['in_datetime']) ? $r['in_datetime'] : '',
-            'out_time' => isset($r['out_datetime']) ? $r['out_datetime'] : '',
-            'security_sign' => isset($user_map[$sec_id]) ? $user_map[$sec_id] : '',
-            'remarks' => isset($r['remarks']) ? $r['remarks'] : ''
+            'in_time' => $r['in_datetime'] ?? '',
+            'out_time' => $r['out_datetime'] ?? '',
+            'security_sign' => $user_map[$sec_id] ?? '',
+            'remarks' => $r['remarks'] ?? ''
         );
     }
 
@@ -473,14 +482,13 @@ trait ReportGateCourierTrait {
         $return = $this->getGateReportFilterLookups($get);
         $return['rows'] = array();
 
-        $filters_only = isset($get['filters_only']) ? $get['filters_only'] : '';
-        if($filters_only == 'Y'){
+        if(($get['filters_only'] ?? '') == 'Y'){
             return $return;
         }
 
-        $from_date = isset($get['from_date']) ? $get['from_date'] : '';
-        $to_date = isset($get['to_date']) ? $get['to_date'] : '';
-        $company_id = isset($get['company_id']) ? $get['company_id'] : '';
+        $from_date = $get['from_date'] ?? '';
+        $to_date = $get['to_date'] ?? '';
+        $company_id = $get['company_id'] ?? '';
         if($company_id == '' || $from_date == '' || $to_date == ''){
             return $return;
         }
@@ -511,19 +519,56 @@ trait ReportGateCourierTrait {
         return $return;
     }
 
+    private function formatEmployeeTempIdRow(array $r, array $user_map): array {
+        $sec_id = $r['in_security_id'] ?? '';
+        $name = '';
+        if(!empty($r['employee_name'])){
+            $name = $r['employee_name'];
+        } elseif(!empty($r['emp_temp_name'])){
+            $name = $r['emp_temp_name'];
+        } elseif(!empty($r['name'])){
+            $name = $r['name'];
+        }
+
+        $card_no = '';
+        if(!empty($r['badge_code'])){
+            $card_no = $r['badge_code'];
+        } elseif(!empty($r['visitor_idcard_no'])){
+            $card_no = $r['visitor_idcard_no'];
+        }
+
+        $in_dt = $r['in_datetime'] ?? '';
+        $visit_date = ($in_dt != '' && $in_dt != '0000-00-00 00:00:00') ? date('Y-m-d', strtotime($in_dt)) : '';
+        $card_submitted = (!empty($r['badge_returned_at']) && $r['badge_returned_at'] != '0000-00-00 00:00:00') ? $r['badge_returned_at'] : '';
+
+        return array(
+            'visit_date' => $visit_date,
+            'id_no' => $r['employee_code'] ?? '',
+            'name' => $name,
+            'card_no' => $card_no,
+            'access_no' => '',
+            'in_time' => $in_dt,
+            'access_enable_date' => '',
+            'out_time' => $r['out_datetime'] ?? '',
+            'access_disable_date' => '',
+            'card_submitted_date' => $card_submitted,
+            'security_sign' => $this->resolveGateReportPersonName($sec_id, array(), $user_map),
+            'remarks' => $r['remarks'] ?? ''
+        );
+    }
+
     public function getEmployeeTempIdReport($get){
         global $callConfig;
         $return = $this->getGateReportFilterLookups($get);
         $return['rows'] = array();
 
-        $filters_only = isset($get['filters_only']) ? $get['filters_only'] : '';
-        if($filters_only == 'Y'){
+        if(($get['filters_only'] ?? '') == 'Y'){
             return $return;
         }
 
-        $from_date = isset($get['from_date']) ? $get['from_date'] : '';
-        $to_date = isset($get['to_date']) ? $get['to_date'] : '';
-        $company_id = isset($get['company_id']) ? $get['company_id'] : '';
+        $from_date = $get['from_date'] ?? '';
+        $to_date = $get['to_date'] ?? '';
+        $company_id = $get['company_id'] ?? '';
         if($company_id == '' || $from_date == '' || $to_date == ''){
             return $return;
         }
@@ -539,67 +584,54 @@ trait ReportGateCourierTrait {
         $rows = $callConfig->getAllRows($sql);
         $user_map = $this->getGateReportUserMap($company_id);
 
-        if(count((array)$rows) > 0){
-            foreach($rows as $row){
-                $r = is_array($row) ? $row : (array)$row;
-                $sec_id = isset($r['in_security_id']) ? $r['in_security_id'] : '';
-                $name = !empty($r['employee_name']) ? $r['employee_name'] : (!empty($r['emp_temp_name']) ? $r['emp_temp_name'] : (!empty($r['name']) ? $r['name'] : ''));
-                $card_no = !empty($r['badge_code']) ? $r['badge_code'] : (!empty($r['visitor_idcard_no']) ? $r['visitor_idcard_no'] : '');
-                $in_dt = isset($r['in_datetime']) ? $r['in_datetime'] : '';
-                $visit_date = ($in_dt != '' && $in_dt != '0000-00-00 00:00:00') ? date('Y-m-d', strtotime($in_dt)) : '';
-                $card_submitted = (!empty($r['badge_returned_at']) && $r['badge_returned_at'] != '0000-00-00 00:00:00') ? $r['badge_returned_at'] : '';
-
-                $return['rows'][] = array(
-                    'visit_date' => $visit_date,
-                    'id_no' => isset($r['employee_code']) ? $r['employee_code'] : '',
-                    'name' => $name,
-                    'card_no' => $card_no,
-                    'access_no' => '',
-                    'in_time' => $in_dt,
-                    'access_enable_date' => '',
-                    'out_time' => isset($r['out_datetime']) ? $r['out_datetime'] : '',
-                    'access_disable_date' => '',
-                    'card_submitted_date' => $card_submitted,
-                    'security_sign' => $this->resolveGateReportPersonName($sec_id, array(), $user_map),
-                    'remarks' => isset($r['remarks']) ? $r['remarks'] : ''
-                );
-            }
+        foreach((array)$rows as $row){
+            $return['rows'][] = $this->formatEmployeeTempIdRow((array)$row, $user_map);
         }
         return $return;
     }
 }
 
-class ReportUserClass extends userClass {
-    use ReportGateCourierTrait;
+trait ReportGateCourierTrait {
+    use ReportCouriersTrait;
+    use ReportGateVisitorsTrait;
+}
 
-    public function getDynamicDownloadPDFInvoices($get){
+class ReportUserClass extends userClass {
+    use ReportCouriersTrait;
+    use ReportGateVisitorsTrait;
+
+    public function getDynamicDownloadPDFInvoices($get) {
         global $callConfig;
         $return = array();
-        $condition = "";
-        $transaction_table = $get['transaction_table'];
-        if($get['from_date'] !="" && $get['to_date'] !=""){
-            $condition .= " AND transaction_date >= '".$this->dateconvertdbformat($get['from_date'])."'  AND transaction_date <= '".$this->dateconvertdbformat($get['to_date'])."'";
-        }
-        if(!empty($get['party_id'])){
-            $condition .= " AND party_id IN(".implode(',', (array)json_decode($get['party_id'],1)).")";
-        }
-        $transactionssql = "SELECT * FROM ".$transaction_table . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . "' AND is_active =0".$condition;
-        $transactionsres=$callConfig->getAllRows($transactionssql);
+        $return['get'] = $get;
+        $query = ReportConstants::SQL_SELECT_DMT . $get['company_id'] . "' AND is_active = 0";
+        $dmts = $callConfig->getAllRows($query);
+        $return['dynamic_mapping_tables'] = $dmts;
 
-        $return['transactions'] = $transactionsres;
-        $return['transactionssql'] = $transactionssql;
+        if (!empty($get['from_date']) && !empty($get['to_date']) && !empty($get['table'])) {
+            $dmtsql = ReportConstants::SQL_SELECT_DMT . $get['company_id'] . ReportConstants::SQL_AND_APP_TABLE . $get['table'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
+            $dmtres = $callConfig->getRow($dmtsql);
+            $return['table_details'] = $dmtres;
 
-        $display_attribute_typessql = "SELECT content FROM display_attribute_types" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_APP_TABLE . $transaction_table."' AND field_name = 'party_id'";
-        $parttable_name = $callConfig->getRow($display_attribute_typessql);
-        $qquery = urldecode($parttable_name->content);
-        $explosql = explode("FROM", $qquery);
-        if(isset($explosql[1])){
-            $explosql = explode(" ", trim($explosql[1]));
+            $listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.originator, transa.party_id, transa.party_name, transa.party_phone, transa.party_address, transa.ref_id, transa.amount, transa.discount_amount, transa.tax_amount, transa.total_amount, transa.additional_charges, transa.type, transa.current_status FROM " . $dmtres->application_table_name . ReportConstants::SQL_TRANSA_WHERE_CO . $get['company_id'] . ReportConstants::SQL_AND_TRANSA_IS_ACTIVE . ReportConstants::SQL_AND_TRANSA_TX_DATE . $this->dateconvertdbformat($get['from_date']) . ReportConstants::SQL_AND_QUOTE . $this->dateconvertdbformat($get['to_date']) . "'" . ReportConstants::SQL_ORDER_BY_TX;
+            $listres = $callConfig->getAllRows($listsql);
+            $return['listres'] = $listsql;
+
+            $list = array();
+            foreach ($listres as $listre) {
+                $itemsql = "SELECT id as item_row_id, item_id, account_code, item_name, description, item_quantity, purchase_uom, item_price, pending_qty, item_amount, tax_amount, discount_amount, total_amount FROM " . $dmtres->item_table . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_TX_ID . $listre->id . ReportConstants::SQL_AND_IS_ACTIVE_0;
+                $itemres = $callConfig->getAllRows($itemsql);
+                $listre->items = array();
+                foreach ($itemres as $item) {
+                    $taxsql = ReportConstants::SQL_SELECT_TAX_NAME_AMOUNT . $dmtres->tax_table . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_TX_ID . $listre->id . ReportConstants::SQL_AND_TX_ITEM_ID . $item->item_row_id . ReportConstants::SQL_AND_IS_ACTIVE_0;
+                    $taxres = $callConfig->getAllRows($taxsql);
+                    $item->tax = $taxres;
+                    $listre->items[] = $item;
+                }
+                $list[] = $listre;
+            }
+            $return['transaction_list'] = $list;
         }
-        $partytable = trim($explosql[0]);
-        $partysql = "SELECT id, company, display_name FROM ".$partytable . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
-        $partyres = $callConfig->getAllRows($partysql);
-        $return['party'] = $partyres;
         return $return;
     }
 
@@ -607,84 +639,84 @@ class ReportUserClass extends userClass {
         global $callConfig;
         $return = array();
         $return['get'] = $get;
-        $company_id = $get['company_id'];
-        $whr = "";
-        if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $from = $get['from_date'];
-            $to   = $get['to_date'];
-            $whr .= " AND am.transaction_date BETWEEN '".$from . ReportConstants::SQL_AND_QUOTE . $to."' ";
+        $condition = "";
+        if (!empty($get['ref_id'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA_REF_ID . $get['ref_id'] . "'";
         }
-        $listsql = "SELECT CONCAT('AMND-', am.transaction_number) AS transaction_number, am.transaction_date, am.ref_type, am.ref_no FROM amendments am" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . "' AND am.is_active = 0 $whr ORDER BY am.transaction_date DESC ";
-        $rows = $callConfig->getAllRows($listsql);
-        $return['amended_orders_list'] = $rows;
-        $return['sql'] = $listsql;
-
+        if (!empty($get['ref_type'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA_REF_TYPE . $get['ref_type'] . "'";
+        }
+        $sql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.originator, transa.party_id, transa.party_name, transa.party_phone, transa.party_address, transa.ref_id, transa.amount, transa.discount_amount, transa.tax_amount, transa.total_amount, transa.additional_charges, transa.type, transa.current_status FROM " . $get['table'] . ReportConstants::SQL_TRANSA_WHERE_CO . $get['company_id'] . ReportConstants::SQL_AND_TRANSA_IS_ACTIVE . $condition . ReportConstants::SQL_ORDER_BY_TX;
+        $res = $callConfig->getAllRows($sql);
+        $return['sql'] = $sql;
+        $return['res'] = $res;
         return $return;
     }
 
     private function buildSalesFilterCondition($get) {
-        $originator = $get['fieldaccess'] != "" ? "party_id" : "originator";
-        $checkuserid = $get['fieldaccess'] != "" ? $get['vendor_id'] : $get['user_id'];
-
         $condition = "";
-        if ($get['admin_type'] != 1) {
-            $condition = ReportConstants::SQL_AND_TRANSA . $originator . " = '" . $checkuserid . "'";
-        }
-
-        if ($get['refrance_res'] == "Y") {
-            $condition .= ReportConstants::SQL_AND_TRANSA_REF_TYPE . $get['ref_table'] . ReportConstants::SQL_AND_TRANSA_REF_ID . $get['ref_id'] . "'";
-        }
-
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $condition .= ReportConstants::SQL_AND_TRANSA_TX_DATE . $get['from_date'] . ReportConstants::SQL_AND_QUOTE . $get['to_date'] . "'";
+            $condition .= ReportConstants::SQL_AND_TRANSA_TX_DATE . $this->dateconvertdbformat($get['from_date']) . ReportConstants::SQL_AND_QUOTE . $this->dateconvertdbformat($get['to_date']) . "'";
         }
-
-        if (!empty($get['party_id'])) {
-            $condition .= " AND transa.party_id = '" . $get['party_id'] . "'";
+        if (!empty($get['customer_id'])) {
+            $condition .= " AND transa.party_id = '" . $get['customer_id'] . "'";
         }
-
-        if (!empty($get['status_filter'])) {
-            $condition .= " AND transa.current_status = '" . $get['status_filter'] . "'";
+        if (!empty($get['project_id'])) {
+            $condition .= " AND transa.project_id = '" . $get['project_id'] . "'";
+        }
+        if (!empty($get['vendor_id'])) {
+            $condition .= " AND transa.party_id = '" . $get['vendor_id'] . "'";
+        }
+        if (!empty($get['user_id'])) {
+            $condition .= " AND transa.originator = '" . $get['user_id'] . "'";
+        }
+        if (!empty($get['status_id'])) {
+            $condition .= " AND transa.current_status = '" . $get['status_id'] . "'";
+        }
+        if (!empty($get['ref_type'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA_REF_TYPE . $get['ref_type'] . "'";
+        }
+        if (!empty($get['ref_id'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA_REF_ID . $get['ref_id'] . "'";
         }
         return $condition;
     }
 
-    private function resolveTransactionPoInfo($ref_id, $company_id) {
+    private function resolveTransactionPoInfo($refId, $companyId) {
         global $callConfig;
-        $po = array('po_number' => '', 'po_date' => '');
-        if (!empty($ref_id)) {
-            $posql = "SELECT transaction_number, transaction_date FROM purchase_orders" . ReportConstants::SQL_WHERE_COMPANY_ID . $company_id . "' AND id = '" . $ref_id . ReportConstants::SQL_AND_IS_ACTIVE_0;
+        $poNumber = '';
+        $poDate = '';
+        if (!empty($refId)) {
+            $posql = "SELECT transaction_number, transaction_date FROM purchase_orders WHERE company_id = '" . $companyId . "' AND id = '" . $refId . ReportConstants::SQL_AND_IS_ACTIVE_0;
             $pores = $callConfig->getRow($posql);
-            if ($pores) {
-                $po['po_number'] = $pores->transaction_number;
-                $po['po_date'] = $pores->transaction_date;
+            if (!empty($pores)) {
+                $poNumber = $pores->transaction_number;
+                $poDate = $pores->transaction_date;
             }
         }
-        return $po;
+        return array('po_number' => $poNumber, 'po_date' => $poDate);
     }
 
-    private function calculateTaxSplit($taxres, $tax_state) {
+    private function calculateTaxSplit($taxres, $taxState) {
+        $hsnSac = '';
         $cgst = 0;
         $sgst = 0;
-        $igst = 0;
-        $total_tax = 0;
-        $hsn_sac = '';
-
-        if (!empty($taxres)) {
-            $hsn_sac = $taxres[0]->tax_name;
-            foreach ($taxres as $tax) {
-                $total_tax += floatval($tax->tax_amount);
+        foreach ($taxres as $tax) {
+            if (empty($hsnSac) && !empty($tax->hsn_sac)) {
+                $hsnSac = $tax->hsn_sac;
+            }
+            if (empty($taxState) || strtolower($taxState) == 's') {
+                $cgst += $tax->tax_amount / 2;
+                $sgst += $tax->tax_amount / 2;
+            } else {
+                $sgst += $tax->tax_amount;
             }
         }
-
-        if (!empty($tax_state) && strtolower($tax_state) == 's') {
-            $sgst = $total_tax;
-        } else {
-            $cgst = $total_tax / 2;
-            $sgst = $total_tax / 2;
-        }
-
-        return array('hsn_sac' => $hsn_sac, 'cgst' => $cgst, 'sgst' => $sgst, 'igst' => $igst);
+        return array(
+            'hsn_sac' => $hsnSac,
+            'cgst' => $cgst,
+            'sgst' => $sgst,
+        );
     }
 
     public function getSalesSummaryReport($get) {
@@ -703,7 +735,7 @@ class ReportUserClass extends userClass {
         $dmtres = $callConfig->getRow($dmtsql);
         $return['dynamic_mapping_tables'] = $dmtres;
 
-        $listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.party_id, transa.party_name, transa.party_additional_details, transa.tax_state, transa.ref_id, transa.current_status FROM " . $dmtres->application_table_name . ReportConstants::SQL_TRANSA_WHERE_CO . $get['company_id'] . ReportConstants::SQL_AND_TRANSA_IS_ACTIVE . $condition . ReportConstants::SQL_ORDER_BY_TX;
+        $listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.doc_ref_no, transa.doc_ref_date, transa.originator, transa.party_id, transa.party_name, transa.party_phone, transa.party_address, transa.party_additional_details, transa.tax_state, transa.ref_id, transa.amount, transa.discount_amount, transa.tax_amount, transa.total_amount, transa.additional_charges, transa.type, transa.current_status FROM " . $dmtres->application_table_name . ReportConstants::SQL_TRANSA_WHERE_CO . $get['company_id'] . ReportConstants::SQL_AND_TRANSA_IS_ACTIVE . $condition . ReportConstants::SQL_ORDER_BY_TX;
         $listres = $callConfig->getAllRows($listsql);
         $return['listres'] = $listsql;
 
@@ -721,22 +753,16 @@ class ReportUserClass extends userClass {
             $listre->po_number = $po['po_number'];
             $listre->po_date = $po['po_date'];
 
-            $itemsql = "SELECT id as item_row_id, item_id, item_name, description as item_description, purchase_uom, item_quantity, item_price, item_amount, discount_amount, tax_amount, total_amount as net_amount FROM " . $dmtres->item_table . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_TX_ID . $listre->id . ReportConstants::SQL_AND_IS_ACTIVE_0;
-            $itemres = $callConfig->getAllRows($itemsql);
-            $listre->items = array();
+            $taxsql = ReportConstants::SQL_SELECT_TAX_NAME_AMOUNT . $dmtres->tax_table . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_TX_ID . $listre->id . "' AND (transaction_item_id IS NULL OR transaction_item_id = '' OR transaction_item_id = '0')" . ReportConstants::SQL_AND_IS_ACTIVE_0;
+            $taxres = $callConfig->getAllRows($taxsql);
+            $taxSplit = $this->calculateTaxSplit($taxres, $listre->tax_state);
+            $listre->hsn_sac = $taxSplit['hsn_sac'];
+            $listre->cgst = $taxSplit['cgst'];
+            $listre->sgst = (!empty($listre->tax_state) && strtolower($listre->tax_state) == 's') ? $taxSplit['sgst'] : 0;
+            $listre->igst = (!empty($listre->tax_state) && strtolower($listre->tax_state) == 's') ? 0 : $taxSplit['sgst'];
+            $listre->taxable_value = $listre->amount;
+            $listre->gross_value = $listre->total_amount;
 
-            foreach ($itemres as $item) {
-                $taxsql = ReportConstants::SQL_SELECT_TAX_NAME_AMOUNT . $dmtres->tax_table . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_TX_ID . $listre->id . ReportConstants::SQL_AND_TX_ITEM_ID . $item->item_row_id . ReportConstants::SQL_AND_IS_ACTIVE_0;
-                $taxres = $callConfig->getAllRows($taxsql);
-                $taxSplit = $this->calculateTaxSplit($taxres, $listre->tax_state);
-                $item->hsn_sac = $taxSplit['hsn_sac'];
-                $item->cgst = $taxSplit['cgst'];
-                $item->sgst = $taxSplit['sgst'];
-                $item->igst = $taxSplit['igst'];
-                $item->taxable_amount = $item->item_amount;
-                $item->gross_amount = $item->item_amount + $item->discount_amount;
-                $listre->items[] = $item;
-            }
             $list[] = $listre;
         }
 
@@ -745,7 +771,80 @@ class ReportUserClass extends userClass {
         return $return;
     }
 
+    private function loadOrderSalesTransactionItems($dmtres, $companyId, $txId, $taxState, array $uomList): array {
+        global $callConfig;
+        $items = array();
+        $itemsql = "SELECT id as item_row_id, item_id, account_code, item_name, description, item_quantity, purchase_uom, item_price, pending_qty, item_amount, tax_amount, discount_amount, total_amount FROM " . $dmtres->item_table . ReportConstants::SQL_WHERE_COMPANY_ID . $companyId . ReportConstants::SQL_AND_TX_ID . $txId . ReportConstants::SQL_AND_IS_ACTIVE_0;
+        $itemres = $callConfig->getAllRows($itemsql);
+
+        foreach ($itemres as $item) {
+            $item->uom_name = $uomList[$item->purchase_uom] ?? $item->purchase_uom;
+            $taxsql = ReportConstants::SQL_SELECT_TAX_NAME_AMOUNT . $dmtres->tax_table . ReportConstants::SQL_WHERE_COMPANY_ID . $companyId . ReportConstants::SQL_AND_TX_ID . $txId . ReportConstants::SQL_AND_TX_ITEM_ID . $item->item_row_id . ReportConstants::SQL_AND_IS_ACTIVE_0;
+            $taxres = $callConfig->getAllRows($taxsql);
+            $taxSplit = $this->calculateTaxSplit($taxres, $taxState);
+            $item->hsn_sac = $taxSplit['hsn_sac'];
+            $item->cgst = $taxSplit['cgst'];
+            $isStateS = (!empty($taxState) && strtolower($taxState) == 's');
+            $item->sgst = $isStateS ? $taxSplit['sgst'] : 0;
+            $item->igst = $isStateS ? 0 : $taxSplit['sgst'];
+            $item->taxable_value = $item->item_amount;
+            $item->gross_value = $item->item_amount + $item->tax_amount;
+            $items[] = $item;
+        }
+        return $items;
+    }
+
     public function getordersalesreport($get) {
+        global $callConfig;
+        $return = array();
+        $return['get'] = $get;
+        $condition = $this->buildSalesFilterCondition($get);
+
+        $get['table'] = $get['transaction_table'];
+        $status_progress = $this->getStatusProgressList($get);
+        foreach ($status_progress as $statusprogress) {
+            $return['status_progress'][$statusprogress->status] = $statusprogress;
+        }
+
+        $dmtsql = ReportConstants::SQL_SELECT_DMT . $get['company_id'] . ReportConstants::SQL_AND_APP_TABLE . $get['transaction_table'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
+        $dmtres = $callConfig->getRow($dmtsql);
+        $return['dynamic_mapping_tables'] = $dmtres;
+
+        $uomsql = "SELECT id, uom_short_code, uom_name FROM unit_of_measurements" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
+        $uomres = $callConfig->getAllRows($uomsql);
+        $uom_list = array();
+        foreach ($uomres as $uom) {
+            $uom_list[$uom->id] = $uom->uom_name;
+        }
+
+        $listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.doc_ref_no, transa.doc_ref_date, transa.originator, transa.party_id, transa.party_name, transa.party_phone, transa.party_address, transa.party_additional_details, transa.tax_state, transa.ref_id, transa.amount, transa.discount_amount, transa.tax_amount, transa.total_amount, transa.additional_charges, transa.type, transa.current_status FROM " . $dmtres->application_table_name . ReportConstants::SQL_TRANSA_WHERE_CO . $get['company_id'] . ReportConstants::SQL_AND_TRANSA_IS_ACTIVE . $condition . ReportConstants::SQL_ORDER_BY_TX;
+        $listres = $callConfig->getAllRows($listsql);
+        $return['listres'] = $listsql;
+
+        $list = array();
+        foreach ($listres as $listre) {
+            $listre->gstin = '';
+            if (!empty($listre->party_additional_details)) {
+                $party_details = json_decode($listre->party_additional_details, true);
+                if (isset($party_details['gstin'])) {
+                    $listre->gstin = $party_details['gstin'];
+                }
+            }
+
+            $po = $this->resolveTransactionPoInfo($listre->ref_id, $get['company_id']);
+            $listre->po_number = $po['po_number'];
+            $listre->po_date = $po['po_date'];
+
+            $listre->items = $this->loadOrderSalesTransactionItems($dmtres, $get['company_id'], $listre->id, $listre->tax_state, $uom_list);
+            $list[] = $listre;
+        }
+
+        $return['transaction_list'] = $list;
+        $return['sql'] = $listsql;
+        return $return;
+    }
+
+    public function getSalesRegisterReport($get) {
         global $callConfig;
         $return = array();
         $return['get'] = $get;
@@ -811,172 +910,103 @@ class ReportUserClass extends userClass {
         return $return;
     }
 
-    public function getSalesRegisterReport($get) {
+    public function toGetStandardTransactionDetailsReports($get) {
         global $callConfig;
         $return = array();
         $return['get'] = $get;
-        $condition = $this->buildSalesFilterCondition($get);
-
+        $condition = "";
+        if (!empty($get['from_date']) && !empty($get['to_date'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA_TX_DATE . $this->dateconvertdbformat($get['from_date']) . ReportConstants::SQL_AND_QUOTE . $this->dateconvertdbformat($get['to_date']) . "'";
+        }
+        if (!empty($get['customer_id'])) {
+            $condition .= " AND transa.party_id = '" . $get['customer_id'] . "'";
+        }
+        if (!empty($get['project_id'])) {
+            $condition .= " AND transa.project_id = '" . $get['project_id'] . "'";
+        }
+        if (!empty($get['vendor_id'])) {
+            $condition .= " AND transa.party_id = '" . $get['vendor_id'] . "'";
+        }
+        if (!empty($get['user_id'])) {
+            $condition .= " AND transa.originator = '" . $get['user_id'] . "'";
+        }
+        if (!empty($get['status_id'])) {
+            $condition .= " AND transa.current_status = '" . $get['status_id'] . "'";
+        }
+        if (!empty($get['ref_type'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA_REF_TYPE . $get['ref_type'] . "'";
+        }
+        if (!empty($get['ref_id'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA_REF_ID . $get['ref_id'] . "'";
+        }
         $get['table'] = $get['transaction_table'];
         $status_progress = $this->getStatusProgressList($get);
         foreach ($status_progress as $statusprogress) {
             $return['status_progress'][$statusprogress->status] = $statusprogress;
         }
-
         $dmtsql = ReportConstants::SQL_SELECT_DMT . $get['company_id'] . ReportConstants::SQL_AND_APP_TABLE . $get['transaction_table'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
         $dmtres = $callConfig->getRow($dmtsql);
         $return['dynamic_mapping_tables'] = $dmtres;
 
-        $listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.doc_ref_no, transa.doc_ref_date, transa.party_id, transa.party_name, transa.party_additional_details, transa.tax_state, transa.ref_id, transa.current_status FROM " . $dmtres->application_table_name . ReportConstants::SQL_TRANSA_WHERE_CO . $get['company_id'] . ReportConstants::SQL_AND_TRANSA_IS_ACTIVE . $condition . ReportConstants::SQL_ORDER_BY_TX;
+        $listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.originator, transa.party_id, transa.party_name, transa.party_phone, transa.party_address, transa.ref_id, transa.amount, transa.discount_amount, transa.tax_amount, transa.total_amount, transa.additional_charges, transa.type, transa.current_status FROM " . $dmtres->application_table_name . ReportConstants::SQL_TRANSA_WHERE_CO . $get['company_id'] . ReportConstants::SQL_AND_TRANSA_IS_ACTIVE . $condition . ReportConstants::SQL_ORDER_BY_TX;
         $listres = $callConfig->getAllRows($listsql);
         $return['listres'] = $listsql;
 
         $list = array();
         foreach ($listres as $listre) {
-            $listre->gstin = '';
-            if (!empty($listre->party_additional_details)) {
-                $party_details = json_decode($listre->party_additional_details, true);
-                if (isset($party_details['gstin'])) {
-                    $listre->gstin = $party_details['gstin'];
-                }
-            }
-
-            $po = $this->resolveTransactionPoInfo($listre->ref_id, $get['company_id']);
-            $listre->po_number = $po['po_number'];
-            $listre->po_date = $po['po_date'];
-
-            $itemsql = "SELECT itemtb.id as item_row_id, itemtb.item_id, itemtb.item_name, itemtb.description as item_description, itemtb.purchase_uom, itemtb.item_quantity, itemtb.item_price, itemtb.item_amount, itemtb.discount_amount, itemtb.tax_amount, itemtb.total_amount as net_amount, items.sku as sku_code FROM " . $dmtres->item_table . " itemtb LEFT JOIN items ON itemtb.item_id = items.id AND itemtb.company_id = items.company_id" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . "'  AND itemtb.transaction_id = '" . $listre->id . ReportConstants::SQL_AND_IS_ACTIVE_0;
+            $itemsql = "SELECT id as item_row_id, item_id, account_code, item_name, description, item_quantity, purchase_uom, item_price, pending_qty, item_amount, tax_amount, discount_amount, total_amount FROM " . $dmtres->item_table . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_TX_ID . $listre->id . ReportConstants::SQL_AND_IS_ACTIVE_0;
             $itemres = $callConfig->getAllRows($itemsql);
             $listre->items = array();
-
             foreach ($itemres as $item) {
                 $taxsql = ReportConstants::SQL_SELECT_TAX_NAME_AMOUNT . $dmtres->tax_table . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_TX_ID . $listre->id . ReportConstants::SQL_AND_TX_ITEM_ID . $item->item_row_id . ReportConstants::SQL_AND_IS_ACTIVE_0;
                 $taxres = $callConfig->getAllRows($taxsql);
-                $taxSplit = $this->calculateTaxSplit($taxres, $listre->tax_state);
-                $item->hsn_sac = $taxSplit['hsn_sac'];
-                $item->cgst = $taxSplit['cgst'];
-                $item->sgst = $taxSplit['sgst'];
-                $item->igst = $taxSplit['igst'];
-                $item->taxable_amount = $item->item_amount;
-                $item->gross_amount = $item->item_amount + $item->discount_amount;
-                $item->taxable_value = $item->item_amount;
+                $item->tax = $taxres;
                 $listre->items[] = $item;
             }
             $list[] = $listre;
         }
-
         $return['transaction_list'] = $list;
-        $return['sql'] = $listsql;
         return $return;
     }
 
-    public function toGetStandardTransactionDetailsReports($get){
+    public function toGetStandardDayStockBalanceReport($get) {
         global $callConfig;
         $return = array();
+        $return['get'] = $get;
+        $sql = "SELECT ssb.id, ssb.item_id, ssb.opening_balance, ssb.receipts, ssb.issues, ssb.closing_balance, ssb.created_date, ssb.is_active, ssb.closing_rate, itm.item_name, itm.item_code, itm.purchase_uom, uom.uom_name FROM standard_day_stock_balance ssb, items itm, unit_of_measurements uom WHERE ssb.company_id = '" . $get['company_id'] . "' AND ssb.company_id = itm.company_id AND ssb.company_id = uom.company_id AND ssb.item_id = itm.id AND itm.purchase_uom = uom.id AND ssb.is_active = 0 AND itm.is_active = 0 AND uom.is_active = 0 AND ssb.created_date = '" . $this->dateconvertdbformat($get['date']) . "' GROUP BY ssb.item_id";
+        $res = $callConfig->getAllRows($sql);
+        $return['sql'] = $sql;
+        $return['res'] = $res;
+        return $return;
+    }
+
+    public function getProjectTaskTimeLogReport($get) {
+        global $callConfig;
+        $return = array();
+        $return['get'] = $get;
         $condition = "";
-        $transaction_table = $get['transaction_table'];
-        $transaction_list = $unit_of_measurements = $items = array();
+        if (!empty($get['user_id'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA . "user_id = '" . $get['user_id'] . "'";
+        }
+        if (!empty($get['project_id'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA . "project_id = '" . $get['project_id'] . "'";
+        }
+        if (!empty($get['task_id'])) {
+            $condition .= ReportConstants::SQL_AND_TRANSA . "task_id = '" . $get['task_id'] . "'";
+        }
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $condition .= " AND par.transaction_date BETWEEN '" . $get['from_date'] . ReportConstants::SQL_AND_QUOTE . $get['to_date'] . "'";
+            $condition .= ReportConstants::SQL_AND_TRANSA . "time_date BETWEEN '" . $this->dateconvertdbformat($get['from_date']) . ReportConstants::SQL_AND_QUOTE . $this->dateconvertdbformat($get['to_date']) . "'";
         }
-
-        $dmtsql = "SELECT id, page_title, application_table_name,display_table,item_table,tax_table FROM dynamic_mapping_tables" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_APP_TABLE . $transaction_table."' AND item_table !='' AND tax_table !=''" . ReportConstants::SQL_AND_IS_ACTIVE_0;
-        $dmtres = $callConfig->getRow($dmtsql);
-        $return['dynamic_mapping_tables'] = $dmtres;
-
-        $itemssql = "SELECT id, sku, item_name FROM items" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
-        $itemsres = $callConfig->getAllRows($itemssql);
-        foreach($itemsres as $iteml){
-            $items[$iteml->id] = $iteml;
-        }
-        $return['items'] = $items;
-
-        $unit_of_measurementssql = "SELECT id, uom_name FROM unit_of_measurements" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
-        $unit_of_measurementsres = $callConfig->getAllRows($unit_of_measurementssql);
-        foreach($unit_of_measurementsres as $uoml){
-            $unit_of_measurements[$uoml->id] = $uoml->uom_name;
-        }
-        $return['unit_of_measurements'] = $unit_of_measurements;
-
-        $listsql = "SELECT  par.id, par.transaction_number, par.transaction_date, par.originator, party_id, par.party_name, par.payment_terms, par.amount,  par.type, par.tax_type,  par.shipping_tax, par.shipping_amount, par.shipping_tax_amount, par.doc_ref_no, par.doc_ref_date, par.due_date, par.ref_type, par.ref_id, par.ref_no, par.ref_date, par.old_ref_no, par.old_ref_date, par.cancel_invoice, par.cancel_invoice_date, par.cancel_invoice_reason, par.additional_charges, par.additional_attributes, par.total_tds_amount, par.advance_payment, par.pending_advance_payment,  par.rounding_off, par.discount_mode, par.multi_reference, par.originator_state_id, par.supplier_state_id, par.total_amount as par_total_amount, par.current_status, soi.id as childtabid ,soi.item_id, soi.item_name, soi.description, soi.purchase_uom, soi.item_quantity, soi.item_price, soi.item_amount, soi.tax_amount, soi.discount_amount, soi.total_amount, soi.tds_amount, soi.pending_qty, soi.ref_transaction_table_id FROM ".$dmtres->application_table_name." par, ".$dmtres->item_table." soi" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . "' ".$condition." AND par.company_id = soi.company_id AND par.id = soi.transaction_id AND par.is_active = soi.is_active  AND par.current_status = 199 AND par.is_active = 0 AND (par.cancel_invoice = 'N' OR par.cancel_invoice IS NULL)  ORDER BY par.id Asc";
-        $listres = $callConfig->getAllRows($listsql);
-        foreach($listres as $transres){
-            $transaction_list[$transres->id][] = $transres;
-        }
-        $return['transaction_list_sql'] = $listsql;
-        $return['transaction_list'] = $transaction_list;
-
-        $refrancetransactions = array();
-        if($transaction_table == "purchase_invoices"){
-            $reftranssql = "SELECT id, transaction_number, transaction_date FROM purchase_orders" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
-            $reftransres = $callConfig->getAllRows($reftranssql);
-            foreach($reftransres as $reftra){
-                $refrancetransactions[$reftra->id] = $reftra;
-            }
-        }elseif($transaction_table == "sales_invoices" || $transaction_table == "purchase_orders"){
-            $reftranssql = "SELECT id, transaction_number, transaction_date FROM sales_orders" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
-            $reftransres = $callConfig->getAllRows($reftranssql);
-            foreach($reftransres as $reftra){
-                $refrancetransactions[$reftra->id] = $reftra;
-            }
-        }
-        $return['refrance_transactions'] = $refrancetransactions;
-
-        return $return;
-    }
-
-    public function toGetStandardDayStockBalanceReport($get){
-        global $callConfig;
-        $return = array();
-        $balance_date = $this->dateconvertdbformat($get['balance_date']);
-        $dmtsql = "SELECT itm.sku, itm.item_name, iwb.balance_date, iwb.opening_qty, iwb.in_qty, iwb.out_qty, iwb.closing_qty FROM items itm LEFT JOIN item_wa_balances iwb ON itm.company_id = iwb.company_id AND itm.id = iwb.item_id AND iwb.balance_date = ( SELECT MAX(iwb1.balance_date) FROM item_wa_balances iwb1 WHERE itm.company_id = iwb1.company_id AND iwb1.balance_date <= '".$balance_date."' AND itm.id = iwb1.item_id)" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . ReportConstants::SQL_AND_IS_ACTIVE_0;
+        $dmtsql = "SELECT transa.id, transa.time_date, transa.user_id, transa.project_id, transa.task_id, transa.time_spent, (SELECT usr.display_name FROM application_users usr WHERE usr.company_id = transa.company_id AND usr.id = transa.user_id AND usr.is_active = 0) as user_name, (SELECT pro.project_name FROM projects pro WHERE pro.company_id = transa.company_id AND pro.id = transa.project_id AND pro.is_active = 0) as project_name, (SELECT tsk.task_name FROM project_tasks tsk WHERE tsk.company_id = transa.company_id AND tsk.id = transa.task_id AND tsk.is_active = 0) as task_name, (SELECT count(pttl.id) FROM project_task_time_log pttl WHERE pttl.company_id = transa.company_id AND pttl.is_active = transa.is_active AND pttl.user_id = transa.user_id AND pttl.time_date = transa.time_date) as day_log_cnt, (SELECT sum(pttl.time_spent) FROM project_task_time_log pttl WHERE pttl.company_id = transa.company_id AND pttl.is_active = transa.is_active AND pttl.user_id = transa.user_id AND pttl.time_date = transa.time_date) as day_total_time_spent FROM project_task_time_log transa WHERE transa.company_id = '" . $get['company_id'] . ReportConstants::SQL_AND_TRANSA_IS_ACTIVE . $condition . " ORDER BY transa.time_date ASC, transa.user_id ASC";
         $dmtres = $callConfig->getAllRows($dmtsql);
-        $return['stock_list'] = $dmtres;
-        return $return;
-    }
 
-    public function getProjectTaskTimeLogReport($get){
-        global $callConfig;
-        $return = array();
-
-        $application_user_id = $get['application_user_id'];
-        $select_month = $get['select_month'];
-        $dmtsql = "SELECT id, display_name, user_email FROM application_users" . ReportConstants::SQL_WHERE_COMPANY_ID . $get['company_id'] . "' AND  user_type = 1" . ReportConstants::SQL_AND_IS_ACTIVE_0;
-        $dmtres = $callConfig->getallRows($dmtsql);
-        $return['application_users'] = $dmtres;
-
-        $dmtsql = "SELECT id, task_name FROM project_task_details WHERE company_id = 1 AND is_active = 0";
-        $project_task_detailsres = $callConfig->getAllRows($dmtsql);
-        $project_task_details = array();
-        foreach($project_task_detailsres as $ptd){
-            $project_task_details[$ptd->id] = $ptd;
-        }
-
-        $arr = explode('-', $select_month);
-        $month = $arr[1];
-        $year  = $arr[0];
-        $dates = [];
-        $start = new DateTime("$year-$month-01");
-        $end   = new DateTime($start->format('Y-m-t'));
-        while ($start <= $end) {
-            $dates[] = $start->format('Y-m-d');
-            $start->modify('+1 day');
-        }
-        $return['project_task_dates'] = $dates;
-        $whrcond = "";
-        if($application_user_id != ""){
-            $whrcond = " AND  p.user_id =".$application_user_id;
-        }
-        $dmtsql = "SELECT p.time_date, p.user_id, u.display_name, p.time_date, GROUP_CONCAT(p.task_id) AS task_ids, SEC_TO_TIME( ROUND(SUM(p.task_end - p.task_start) / 1000) ) AS total_working_time FROM project_task_time_log p LEFT JOIN application_users u ON u.id = p.user_id WHERE p.company_id = 1 AND p.company_id = u.company_id AND u.id = p.user_id ".$whrcond." GROUP BY p.time_date, p.user_id ORDER BY p.time_date";
-        $project_task_time_logres = $callConfig->getAllRows($dmtsql);
         $project_task_time_log = array();
-        foreach($project_task_time_logres as $ptl){
-            $explodeid = explode(',',$ptl->task_ids);
-            $task_names = "";
-            foreach($explodeid as $exlid){
-                if (isset($project_task_details[$exlid])) {
-                    $task_names .= $project_task_details[$exlid]->task_name;
-                }
+        foreach ($dmtres as $ptl) {
+            $task_sql = "SELECT pttl.time_spent, (SELECT tsk.task_name FROM project_tasks tsk WHERE tsk.company_id = pttl.company_id AND tsk.id = pttl.task_id AND tsk.is_active = 0) as task_name FROM project_task_time_log pttl WHERE pttl.company_id = '" . $get['company_id'] . "' AND pttl.user_id = '" . $ptl->user_id . "' AND pttl.time_date = '" . $ptl->time_date . "' AND pttl.is_active = 0";
+            $task_res = $callConfig->getAllRows($task_sql);
+            $task_names = array();
+            foreach ($task_res as $task) {
+                $task_names[] = $task->task_name . " (" . $task->time_spent . " hrs)";
             }
             $ptl->task_names = $task_names;
             $project_task_time_log[$ptl->user_id][$ptl->time_date] = $ptl;
@@ -987,6 +1017,6 @@ class ReportUserClass extends userClass {
         return $return;
     }
 }
-if (!class_exists('reportUserClass', false)) {
+if (!class_exists('reportUserClass', false)) {
     class_alias('ReportUserClass', 'reportUserClass');
 }
