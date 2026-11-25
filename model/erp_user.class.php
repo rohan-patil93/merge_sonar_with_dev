@@ -3136,5 +3136,6 @@ class ErpUserClass extends userClass {
 
 
 }
-
-class_alias('ErpUserClass', 'erpUserClass');
+if (!class_exists('erpUserClass', false)) {
+    class_alias('ErpUserClass', 'erpUserClass');
+}

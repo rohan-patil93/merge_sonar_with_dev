@@ -1702,5 +1702,6 @@ class TallyClass extends userClass
         return $this->toSendItemCategoriesToTally($get);
     }
 }
-
-class_alias('TallyClass', 'tallyClass');
+if (!class_exists('tallyClass', false)) {
+    class_alias('TallyClass', 'tallyClass');
+}

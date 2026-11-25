@@ -4,12 +4,12 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 class EmployeeManagementUserClass extends userClass
 {
-    public const SQL_DATE_APRIL_FIRST = self::SQL_DATE_APRIL_FIRST;
-    public const SQL_DATE_MARCH_THIRTYFIRST = self::SQL_DATE_MARCH_THIRTYFIRST;
-    public const SQL_AND_IS_ACTIVE_0 = "' . self::SQL_AND_IS_ACTIVE_0";
-    public const SQL_INPROGRESS_CNT = self::SQL_INPROGRESS_CNT;
-    public const SQL_REVIEW_CNT = self::SQL_REVIEW_CNT;
-    public const SQL_APPROVE_CNT = self::SQL_APPROVE_CNT;
+    public const SQL_DATE_APRIL_FIRST = "-04-01";
+    public const SQL_DATE_MARCH_THIRTYFIRST = "-03-31";
+    public const SQL_AND_IS_ACTIVE_0 = " AND is_active = 0";
+    public const SQL_INPROGRESS_CNT = ",1,0)) as inprogress_cnt, sum(if(current_status=";
+    public const SQL_REVIEW_CNT = ",1,0)) as review_cnt, sum(if(current_status=";
+    public const SQL_APPROVE_CNT = ",1,0)) as approve_cnt, sum(if(current_status=";
 
     public function getEMAminDashboard($get){
         global $callConfig;
@@ -20,7 +20,7 @@ class EmployeeManagementUserClass extends userClass
             $startdate =date($finance_tax_year.self::SQL_DATE_APRIL_FIRST);
             $enddate =date(($finance_tax_year+1).self::SQL_DATE_MARCH_THIRTYFIRST);
         }
-        $empsql1 = "SELECT id, user_id FROM employees WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $empsql1 = "SELECT id, user_id FROM employees WHERE company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $empres1 = $callConfig->getAllRows($empsql1);
         $empidwithuserid = array();
         foreach($empres1 as $empres0){
@@ -29,7 +29,7 @@ class EmployeeManagementUserClass extends userClass
         $return['empidwithuserid'] = $empidwithuserid;
 
         $employee_id = $get['employee_id'];
-        $empsql = "SELECT id, image, emp_code, display_name, email_id, user_id, joining_date, date_of_leaving, finance_buddy FROM employees WHERE company_id = '".$get['company_id']."' AND joining_date <='".$startdate."' . self::SQL_AND_IS_ACTIVE_0 AND (date_of_leaving >= '".$startdate."' OR date_of_leaving IS NULL) AND (('1' = '".$get['admin_type']."') OR (reporting_manager_id = '".$get['user_id']."') OR (hr_buddy = '".$employee_id."') OR (finance_buddy  = '".$employee_id."') OR (admin_buddy = '".$employee_id."') OR (project_buddy = '".$employee_id."') OR (loc_buddy = '".$employee_id."')) ORDER BY display_name ASC";
+        $empsql = "SELECT id, image, emp_code, display_name, email_id, user_id, joining_date, date_of_leaving, finance_buddy FROM employees WHERE company_id = '".$get['company_id']."' AND joining_date <='".$startdate."'" . self::SQL_AND_IS_ACTIVE_0 . " AND (date_of_leaving >= '".$startdate."' OR date_of_leaving IS NULL) AND (('1' = '".$get['admin_type']."') OR (reporting_manager_id = '".$get['user_id']."') OR (hr_buddy = '".$employee_id."') OR (finance_buddy  = '".$employee_id."') OR (admin_buddy = '".$employee_id."') OR (project_buddy = '".$employee_id."') OR (loc_buddy = '".$employee_id."')) ORDER BY display_name ASC";
         $empres = $callConfig->getAllRows($empsql);
         $return['employees_sql'] = $empsql;
         $return['employees'] = $empres;
@@ -266,13 +266,17 @@ class EmployeeManagementUserClass extends userClass
         $return['transaction_activity_schedule'] = $taskactivityres;
         return $return;
     }
-    public function updateSendVerificationDocuments($get,$post){
+    public function updateSendVerificationDocuments($get, $post)
+    {
+        if (isset($get)) {
+            /* noop */
+        }
         $post['get'] = $get;
         global $callConfig;
         $transaction_table = $post['transaction_table'];
         $transaction_id = $post['transaction_id'];
         //Start All task Sedn to Approve
-        $tasquery = "SELECT id FROM `transaction_activity_schedule` WHERE company_id = '".$post['company_id']."' AND transaction_table = '".$transaction_table."' AND assigned_to = '".$post['user_id']."' AND transaction_id = '".$transaction_id."' AND current_status = '".ST_INPROGRESS."' . self::SQL_AND_IS_ACTIVE_0";
+        $tasquery = "SELECT id FROM `transaction_activity_schedule` WHERE company_id = '".$post['company_id']."' AND transaction_table = '".$transaction_table."' AND assigned_to = '".$post['user_id']."' AND transaction_id = '".$transaction_id."' AND current_status = '".ST_INPROGRESS."'" . self::SQL_AND_IS_ACTIVE_0;
         $tasres = $callConfig->getAllRows($tasquery);
         $i = 0;
         foreach($tasres as $tas){
@@ -326,11 +330,11 @@ class EmployeeManagementUserClass extends userClass
         global $callConfig;
         $return = array();
         $return['get']= $get;
-        $vendorslistsql = "SELECT id,display_name FROM vendors WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendorslistsql = "SELECT id,display_name FROM vendors WHERE company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendorslistres = $callConfig->getAllRows($vendorslistsql);
         $return['vendorslist'] = $vendorslistres;
 
-        $vendorssql = "SELECT * FROM vendors WHERE company_id = '".$get['company_id']."' AND id = '".$get['id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendorssql = "SELECT * FROM vendors WHERE company_id = '".$get['company_id']."' AND id = '".$get['id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendorres = $callConfig->getRow($vendorssql);
         $return['vendors'] = $vendorres;
         if($get['transaction_table'] =="vendor_registers"){
@@ -342,7 +346,7 @@ class EmployeeManagementUserClass extends userClass
             $vendor_registerssql = "SELECT * FROM vendor_registers WHERE company_id = '".$get['company_id']."'  AND is_active = 0 ".$vendregcond;
             $vendorres = $callConfig->getRow($vendor_registerssql);
 
-            $vendorssql = "SELECT id FROM vendors WHERE company_id = '".$get['company_id']."' AND email = '".$vendorres->email."' . self::SQL_AND_IS_ACTIVE_0";
+            $vendorssql = "SELECT id FROM vendors WHERE company_id = '".$get['company_id']."' AND email = '".$vendorres->email."'" . self::SQL_AND_IS_ACTIVE_0;
             $venid = $callConfig->getRow($vendorssql);
             $vendorres->created_vendor_id  =$venid->id;
             $return['vendor_registers'] = $vendorres;
@@ -360,32 +364,32 @@ class EmployeeManagementUserClass extends userClass
             $tasks_cntsres = $callConfig->getRow($tasks_cntssql);
             $return['task_cnt'] = $tasks_cntsres;
         }
-        $vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$vendorres->id."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$vendorres->id."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendor_agreementsres = $callConfig->getAllRows($vendor_agreementssql);
         $return['vendor_agreements'] = $vendor_agreementsres;
 
-        $paymentmethodsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETHOD' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $paymentmethodsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETHOD' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $paymentmethodres=$callConfig->getAllRows($paymentmethodsql);
         foreach($paymentmethodres as $pm){
             $paymentmethod[$pm->genc_detail_code] = $pm->genc_detail_name;
         }
         $return['payment_method'] = $paymentmethod;
 
-        $salestypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'SALESTYPE' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $salestypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'SALESTYPE' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $salestyperes=$callConfig->getAllRows($salestypesql);
         foreach($salestyperes as $st){
             $salestype[$st->genc_detail_code] = $st->genc_detail_name;
         }
         $return['salestype'] = $salestype;
 
-        $paymenttermsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETERM' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $paymenttermsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETERM' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $paymenttermres=$callConfig->getAllRows($paymenttermsql);
         foreach($paymenttermres as $pt){
             $pmtype[$pt->genc_detail_code] = $pt->genc_detail_name;
         }
         $return['paymenttype'] = $pmtype;
 
-        $empsql = "SELECT 'display_name','email_id','billable','transaction_number' FROM employess WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$get['id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $empsql = "SELECT 'display_name','email_id','billable','transaction_number' FROM employess WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$get['id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $empres = $callConfig->getAllRows($empsql);
         $return['employess'] = $empres;
 
@@ -402,29 +406,29 @@ class EmployeeManagementUserClass extends userClass
         $citiesres = $callConfig->getAllRows($citiessql);
         $return['cities'] = $citiesres;
 
-        $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
         $return['tasks_categories'] = $tasks_categoriesres;
 
-        $vendortypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORTYPE' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendortypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORTYPE' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendortyperes=$callConfig->getAllRows($vendortypesql);
         foreach($vendortyperes as $vt){
             $vendor_type[$vt->genc_detail_code] = $vt->genc_detail_name;
         }
         $return['vendor_type'] = $vendor_type;
 
-        $vcitsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORCONTACTINFOTYP' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vcitsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORCONTACTINFOTYP' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vcitres=$callConfig->getAllRows($vcitsql);
         foreach($vcitres as $pm){
             $vendorcontactinfotype[$pm->genc_detail_code] = $pm->genc_detail_name;
         }
         $return['vendor_contact_info_type'] = $vendorcontactinfotype;
 
-        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $company_typesres = $callConfig->getAllRows($company_typessql);
         $return['company_types'] = $company_typesres;
 
-        $incotermssql = "select id,incoterm_name FROM incoterms WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $incotermssql = "select id,incoterm_name FROM incoterms WHERE company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $incotermsres = $callConfig->getAllRows($incotermssql);
         $return['incoterms'] = $incotermsres;
 
@@ -432,23 +436,23 @@ class EmployeeManagementUserClass extends userClass
         $payment_termsres = $callConfig->getAllRows($payment_termssql);
         $return['payment_terms'] = $payment_termsres;
 
-        $batypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'BANKACCTTYPE' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $batypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'BANKACCTTYPE' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $batyperes=$callConfig->getAllRows($batypesql);
         foreach($batyperes as $pm){
             $bankacoounttype[$pm->genc_detail_code] = $pm->genc_detail_name;
         }
         $return['bank_acoount_type'] = $bankacoounttype;
 
-        $tasquery = "SELECT COUNT(id) as total_task, SUM(if(current_status = '".ST_APPROVED."',1,0)) as total_approved  FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."' AND approval_user_id = '".$get['user_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $tasquery = "SELECT COUNT(id) as total_task, SUM(if(current_status = '".ST_APPROVED."',1,0)) as total_approved  FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."' AND approval_user_id = '".$get['user_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $tasres = $callConfig->getRow($tasquery);
         $return['transaction_activity_schedule_cnt'] = $tasres;
 
-        $tasquery = "SELECT id, task_name, check_list, current_status, transaction_table, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."' . self::SQL_AND_IS_ACTIVE_0";
+        $tasquery = "SELECT id, task_name, check_list, current_status, transaction_table, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."'" . self::SQL_AND_IS_ACTIVE_0;
         $tasres = $callConfig->getAllRows($tasquery);
         $return['transaction_activity_schedule_list'] = $tasres;
 
         if($get['edittype'] == "SendVerificationProfile"){
-            $tasquery = "SELECT * FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."' . self::SQL_AND_IS_ACTIVE_0";
+            $tasquery = "SELECT * FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."'" . self::SQL_AND_IS_ACTIVE_0;
             $tasres = $callConfig->getAllRows($tasquery);
             $return['transaction_activity_schedule'] = $tasres;
         }
@@ -457,7 +461,7 @@ class EmployeeManagementUserClass extends userClass
         $spihitres=$callConfig->getAllRows($spihitsql);
         $return['api_hits'] = $spihitres;
 
-        $vendor_display_fieldssql = "SELECT id, field_list FROM vendor_display_fields WHERE company_id = '".$get['company_id']."' AND role_short_code = '".$get['working_role_short_code']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendor_display_fieldssql = "SELECT id, field_list FROM vendor_display_fields WHERE company_id = '".$get['company_id']."' AND role_short_code = '".$get['working_role_short_code']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendor_display_fieldsres=$callConfig->getRow($vendor_display_fieldssql);
         $return['vendor_display_fields'] = $vendor_display_fieldsres;
 
@@ -469,11 +473,11 @@ class EmployeeManagementUserClass extends userClass
         global $callConfig;
         $return = array();
         $return['get']= $get;
-        $vendorslistsql = "SELECT id,display_name FROM vendors WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendorslistsql = "SELECT id,display_name FROM vendors WHERE company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendorslistres = $callConfig->getAllRows($vendorslistsql);
         $return['vendorslist'] = $vendorslistres;
 
-        $vendorssql = "SELECT * FROM vendors WHERE company_id = '".$get['company_id']."' AND id = '".$get['id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendorssql = "SELECT * FROM vendors WHERE company_id = '".$get['company_id']."' AND id = '".$get['id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendorres = $callConfig->getRow($vendorssql);
         $return['vendors'] = $vendorres;
         if($get['transaction_table'] =="vendor_registers"){
@@ -485,7 +489,7 @@ class EmployeeManagementUserClass extends userClass
             $vendor_registerssql = "SELECT * FROM vendor_registers WHERE company_id = '".$get['company_id']."'  AND is_active = 0 ".$vendregcond;
             $vendorres = $callConfig->getRow($vendor_registerssql);
 
-            $vendorssql = "SELECT id FROM vendors WHERE company_id = '".$get['company_id']."' AND email = '".$vendorres->email."' . self::SQL_AND_IS_ACTIVE_0";
+            $vendorssql = "SELECT id FROM vendors WHERE company_id = '".$get['company_id']."' AND email = '".$vendorres->email."'" . self::SQL_AND_IS_ACTIVE_0;
             $venid = $callConfig->getRow($vendorssql);
             $vendorres->created_vendor_id  =$venid->id;
             $return['vendor_registers'] = $vendorres;
@@ -503,32 +507,32 @@ class EmployeeManagementUserClass extends userClass
             $tasks_cntsres = $callConfig->getRow($tasks_cntssql);
             $return['task_cnt'] = $tasks_cntsres;
         }
-        $vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$vendorres->id."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$vendorres->id."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendor_agreementsres = $callConfig->getAllRows($vendor_agreementssql);
         $return['vendor_agreements'] = $vendor_agreementsres;
 
-        $paymentmethodsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETHOD' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $paymentmethodsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETHOD' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $paymentmethodres=$callConfig->getAllRows($paymentmethodsql);
         foreach($paymentmethodres as $pm){
             $paymentmethod[$pm->genc_detail_code] = $pm->genc_detail_name;
         }
         $return['payment_method'] = $paymentmethod;
 
-        $salestypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'SALESTYPE' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $salestypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'SALESTYPE' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $salestyperes=$callConfig->getAllRows($salestypesql);
         foreach($salestyperes as $st){
             $salestype[$st->genc_detail_code] = $st->genc_detail_name;
         }
         $return['salestype'] = $salestype;
 
-        $paymenttermsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETERM' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $paymenttermsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETERM' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $paymenttermres=$callConfig->getAllRows($paymenttermsql);
         foreach($paymenttermres as $pt){
             $pmtype[$pt->genc_detail_code] = $pt->genc_detail_name;
         }
         $return['paymenttype'] = $pmtype;
 
-        $empsql = "SELECT 'display_name','email_id','billable','transaction_number' FROM employess WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$get['id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $empsql = "SELECT 'display_name','email_id','billable','transaction_number' FROM employess WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$get['id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $empres = $callConfig->getAllRows($empsql);
         $return['employess'] = $empres;
 
@@ -545,29 +549,29 @@ class EmployeeManagementUserClass extends userClass
         $citiesres = $callConfig->getAllRows($citiessql);
         $return['cities'] = $citiesres;
 
-        $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
         $return['tasks_categories'] = $tasks_categoriesres;
 
-        $vendortypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORTYPE' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendortypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORTYPE' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendortyperes=$callConfig->getAllRows($vendortypesql);
         foreach($vendortyperes as $vt){
             $vendor_type[$vt->genc_detail_code] = $vt->genc_detail_name;
         }
         $return['vendor_type'] = $vendor_type;
 
-        $vcitsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORCONTACTINFOTYP' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vcitsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORCONTACTINFOTYP' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vcitres=$callConfig->getAllRows($vcitsql);
         foreach($vcitres as $pm){
             $vendorcontactinfotype[$pm->genc_detail_code] = $pm->genc_detail_name;
         }
         $return['vendor_contact_info_type'] = $vendorcontactinfotype;
 
-        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $company_typesres = $callConfig->getAllRows($company_typessql);
         $return['company_types'] = $company_typesres;
 
-        $incotermssql = "select id,incoterm_name FROM incoterms WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $incotermssql = "select id,incoterm_name FROM incoterms WHERE company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $incotermsres = $callConfig->getAllRows($incotermssql);
         $return['incoterms'] = $incotermsres;
 
@@ -575,23 +579,23 @@ class EmployeeManagementUserClass extends userClass
         $payment_termsres = $callConfig->getAllRows($payment_termssql);
         $return['payment_terms'] = $payment_termsres;
 
-        $batypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'BANKACCTTYPE' AND company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $batypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'BANKACCTTYPE' AND company_id = '".$get['company_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $batyperes=$callConfig->getAllRows($batypesql);
         foreach($batyperes as $pm){
             $bankacoounttype[$pm->genc_detail_code] = $pm->genc_detail_name;
         }
         $return['bank_acoount_type'] = $bankacoounttype;
 
-        $tasquery = "SELECT COUNT(id) as total_task, SUM(if(current_status = '".ST_APPROVED."',1,0)) as total_approved  FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."' AND approval_user_id = '".$get['user_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $tasquery = "SELECT COUNT(id) as total_task, SUM(if(current_status = '".ST_APPROVED."',1,0)) as total_approved  FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."' AND approval_user_id = '".$get['user_id']."'" . self::SQL_AND_IS_ACTIVE_0;
         $tasres = $callConfig->getRow($tasquery);
         $return['transaction_activity_schedule_cnt'] = $tasres;
 
-        $tasquery = "SELECT id, task_name, check_list, current_status, transaction_table, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."' . self::SQL_AND_IS_ACTIVE_0";
+        $tasquery = "SELECT id, task_name, check_list, current_status, transaction_table, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."'" . self::SQL_AND_IS_ACTIVE_0;
         $tasres = $callConfig->getAllRows($tasquery);
         $return['transaction_activity_schedule_list'] = $tasres;
 
         if($get['edittype'] == "SendVerificationProfile"){
-            $tasquery = "SELECT * FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."' . self::SQL_AND_IS_ACTIVE_0";
+            $tasquery = "SELECT * FROM `transaction_activity_schedule` WHERE company_id = '".$get['company_id']."' AND transaction_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."'" . self::SQL_AND_IS_ACTIVE_0;
             $tasres = $callConfig->getAllRows($tasquery);
             $return['transaction_activity_schedule'] = $tasres;
         }
@@ -600,7 +604,7 @@ class EmployeeManagementUserClass extends userClass
         $spihitres=$callConfig->getAllRows($spihitsql);
         $return['api_hits'] = $spihitres;
 
-        $vendor_display_fieldssql = "SELECT id, field_list FROM vendor_display_fields WHERE company_id = '".$get['company_id']."' AND role_short_code = '".$get['working_role_short_code']."' . self::SQL_AND_IS_ACTIVE_0";
+        $vendor_display_fieldssql = "SELECT id, field_list FROM vendor_display_fields WHERE company_id = '".$get['company_id']."' AND role_short_code = '".$get['working_role_short_code']."'" . self::SQL_AND_IS_ACTIVE_0;
         $vendor_display_fieldsres=$callConfig->getRow($vendor_display_fieldssql);
         $return['vendor_display_fields'] = $vendor_display_fieldsres;
 

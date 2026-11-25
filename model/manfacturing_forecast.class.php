@@ -2868,5 +2868,6 @@ class ManfacturingForecastUserClass
         return array('data' => array(array('status' => 'sucess', 'LASTID' => $firmOrderId, 'message' => 'Firm order saved successfully.')));
     }
 }
-
-class_alias('ManfacturingForecastUserClass', 'manfacturingForecastUserClass');
+if (!class_exists('manfacturingForecastUserClass', false)) {
+    class_alias('ManfacturingForecastUserClass', 'manfacturingForecastUserClass');
+}

@@ -1228,5 +1228,6 @@ class SpaceUserClass extends userClass {
         print_r($return);
     }
 }
-
-class_alias('SpaceUserClass', 'spaceUserClass');
+if (!class_exists('spaceUserClass', false)) {
+    class_alias('SpaceUserClass', 'spaceUserClass');
+}

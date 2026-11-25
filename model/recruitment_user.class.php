@@ -2,7 +2,19 @@
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;
-class recruitmentUserClass extends userClass
+interface RecruitmentConstants
+{
+    public const PATH_CANDIDATES_OFFER_LETTERS = "/uploads/candidates_offer_latters/";
+    public const SQL_AND_ID_EQ = "' AND id = '";
+    public const SQL_AND_IS_ACTIVE_0 = "' AND is_active =0";
+    public const SQL_SEL_CANDIDATES = "SELECT * FROM candidates WHERE company_id = '";
+    public const SQL_AND_IS_ACTIVE_NOSPACE_0 = "' AND is_active=0";
+    public const SQL_AND_IS_ACTIVE_EQ_0 = "' AND is_active = 0 ";
+    public const SQL_SEL_COUNT_JOB_POSTINGS = "SELECT count(id) cc FROM `job_postings` WHERE company_id = '";
+    public const SQL_AND_CURRENT_STATUS = " AND current_status = ";
+}
+
+class RecruitmentUserClass extends userClass implements RecruitmentConstants
 {
     public function candidatesofferhistories($data)
     {
@@ -220,48 +232,48 @@ return $returnary;
         $application_usersres = $callConfig->getRow($application_userssql);
         $returnresult['admin_application_users'] = $application_usersres;
 
-        $candidatessql = "self::SQL_SEL_CANDIDATES . '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $get['rid'] . "' . self::SQL_AND_IS_ACTIVE_0";
+        $candidatessql = self::SQL_SEL_CANDIDATES . $get['company_id'] . self::SQL_AND_ID_EQ . $get['rid'] . self::SQL_AND_IS_ACTIVE_0;
         $candidatesres = $callConfig->getRow($candidatessql);
         $returnresult['candidates'] = $candidatesres;
 
-        $rmapplication_userssql = "SELECT id,display_name, user_email, user_mobile FROM application_users WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $candidatesres->rm_id . "' . self::SQL_AND_IS_ACTIVE_0";
+        $rmapplication_userssql = "SELECT id,display_name, user_email, user_mobile FROM application_users WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $candidatesres->rm_id . self::SQL_AND_IS_ACTIVE_0;
         $rmapplication_usersres = $callConfig->getRow($rmapplication_userssql);
         $returnresult['rm_application_users'] = $rmapplication_usersres;
 
 
-        $offer_detailssql = "SELECT  id, parent_id, category_id, header, sub_header, content, image, url, is_active, current_status FROM offer_details WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_IS_ACTIVE_0";
+        $offer_detailssql = "SELECT  id, parent_id, category_id, header, sub_header, content, image, url, is_active, current_status FROM offer_details WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
         $offer_detailsres = $callConfig->getAllRows($offer_detailssql);
         $returnresult['offer_details'] = $offer_detailsres;
 
-        $offer_detailssql = "SELECT  id, job_category_id, eeo_category_id, job_title, job_description, list_check, note, notice_period FROM job_titles WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $candidatesres->job_tittle_id . "' . self::SQL_AND_IS_ACTIVE_0";
+        $offer_detailssql = "SELECT  id, job_category_id, eeo_category_id, job_title, job_description, list_check, note, notice_period FROM job_titles WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $candidatesres->job_tittle_id . self::SQL_AND_IS_ACTIVE_0;
         $offer_detailsres = $callConfig->getRow($offer_detailssql);
         $returnresult['job_titles'] = $offer_detailsres;
 
 
-        $job_grade_templatessql = "SELECT  id,  `name`, `grade_id`, `salary_template_id`, `letter_template_id` FROM job_grade_templates WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $candidatesres->pay_template . "' . self::SQL_AND_IS_ACTIVE_0";
+        $job_grade_templatessql = "SELECT  id,  `name`, `grade_id`, `salary_template_id`, `letter_template_id` FROM job_grade_templates WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $candidatesres->pay_template . self::SQL_AND_IS_ACTIVE_0;
         $job_grade_templatesres = $callConfig->getRow($job_grade_templatessql);
         $returnresult['job_grade_templates'] = $job_grade_templatesres;
 
-        $letterssql = "SELECT  id,  `transaction_number`, `transaction_date`, `version_number`, `originator`, `customer_id`, `ref_id`, `ref_no`, `ref_date`, `subject`, `address_to`, `content` FROM letters WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $job_grade_templatesres->letter_template_id . "' . self::SQL_AND_IS_ACTIVE_0";
+        $letterssql = "SELECT  id,  `transaction_number`, `transaction_date`, `version_number`, `originator`, `customer_id`, `ref_id`, `ref_no`, `ref_date`, `subject`, `address_to`, `content` FROM letters WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $job_grade_templatesres->letter_template_id . self::SQL_AND_IS_ACTIVE_0;
         $lettersres = $callConfig->getRow($letterssql);
         $returnresult['letters'] = $lettersres;
 
-        $employeessql = "SELECT image FROM employees WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $job_grade_templatesres->hr_connect . "' . self::SQL_AND_IS_ACTIVE_0";
+        $employeessql = "SELECT image FROM employees WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $job_grade_templatesres->hr_connect . self::SQL_AND_IS_ACTIVE_0;
         $lettersres = $callConfig->getRow($employeessql);
         $returnresult['hrempdata'] = $lettersres;
 
-        $salary_templatesql = "SELECT * FROM salary_template WHERE company_id = '" . $get['company_id'] . "' AND candidate_id =  '" . $get['rid'] . "' . self::SQL_AND_IS_ACTIVE_0";
+        $salary_templatesql = "SELECT * FROM salary_template WHERE company_id = '" . $get['company_id'] . "' AND candidate_id =  '" . $get['rid'] . self::SQL_AND_IS_ACTIVE_0;
         $salary_templateres = $callConfig->getRow($salary_templatesql);
         $returnresult['salary_template'] = $salary_templateres;
         $salary_template_componentssql = "SELECT stc.id, stc.salary_template_id, stc.component_id, stc.component_cat_id, stc.component_name, stc.component_category, stc.component_type, stc.monthly_amount, stc.yearly_amount, ear.name, ear.display_in_salary_structure FROM salary_template_components stc, earnings ear WHERE stc.company_id = '" . $get['company_id'] . "' AND stc.company_id = ear.company_id AND stc.salary_template_id =  '" . $salary_templateres->id . "' AND stc.component_id = ear.id AND stc.is_active = ear.is_active AND stc.is_active = 0 ORDER BY ear.display_seq ASC";
         $salary_template_componentsres = $callConfig->getAllRows($salary_template_componentssql);
         $returnresult['salary_template_components'] = $salary_template_componentsres;
 
-        $salary_categoriessql = "SELECT * FROM salary_categories WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_IS_ACTIVE_0";
+        $salary_categoriessql = "SELECT * FROM salary_categories WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
         $salary_categoriesres = $callConfig->getAllRows($salary_categoriessql);
         $returnresult['salary_categories'] = $salary_categoriesres;
 
-        $candidate_offer_historiessql = "SELECT id,current_status,status_date FROM candidate_offer_histories WHERE company_id = '" . $get['company_id'] . "' AND candidate_id = '" . $get['rid'] . "' . self::SQL_AND_IS_ACTIVE_0 order by id DESC";
+        $candidate_offer_historiessql = "SELECT id,current_status,status_date FROM candidate_offer_histories WHERE company_id = '" . $get['company_id'] . "' AND candidate_id = '" . $get['rid'] . self::SQL_AND_IS_ACTIVE_0 . " order by id DESC";
         $candidate_offer_historiesres = $callConfig->getRow($candidate_offer_historiessql);
         $returnresult['candidate_offer_histories'] = $candidate_offer_historiesres;
 
@@ -270,7 +282,7 @@ return $returnary;
         $email_contentres = $callConfig->getRow($email_contentsql);
         $returnresult['email_content'] = $email_contentres;
 
-        $configsql = "SELECT * FROM config WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_IS_ACTIVE_0";
+        $configsql = "SELECT * FROM config WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
         $configres = $callConfig->getRow($configsql);
         $returnresult['config'] = $configres;
         return $returnresult;
@@ -279,27 +291,27 @@ return $returnary;
     {
         global $callConfig;
         $job_post_can_id = $get['job_post_can_id'];
-        $job_posting_candidatessql = "SELECT * FROM job_posting_candidates WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $job_post_can_id . "' . self::SQL_AND_IS_ACTIVE_0";
+        $job_posting_candidatessql = "SELECT * FROM job_posting_candidates WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $job_post_can_id . self::SQL_AND_IS_ACTIVE_0;
         $job_posting_candidatesres = $callConfig->getRow($job_posting_candidatessql);
         $returnresult['job_posting_candidates'] = $job_posting_candidatesres;
 
-        $locationssql = "SELECT location_name FROM locations WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $job_posting_candidatesres->preferred_location . "' . self::SQL_AND_IS_ACTIVE_0";
+        $locationssql = "SELECT location_name FROM locations WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $job_posting_candidatesres->preferred_location . self::SQL_AND_IS_ACTIVE_0;
         $locationsres = $callConfig->getRow($locationssql);
         $returnresult['locations'] = $locationsres;
 
 
-        $job_posting_candidatessql = "self::SQL_SEL_CANDIDATES . '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $job_posting_candidatesres->candidate_id . "' . self::SQL_AND_IS_ACTIVE_0";
+        $job_posting_candidatessql = self::SQL_SEL_CANDIDATES . $get['company_id'] . self::SQL_AND_ID_EQ . $job_posting_candidatesres->candidate_id . self::SQL_AND_IS_ACTIVE_0;
         $returnresult['candidate_details'] = $callConfig->getRow($job_posting_candidatessql);
 
-        $application_sharesql = "SELECT * FROM application_share WHERE company_id = '" . $get['company_id'] . "' AND application_table = 'job_posting_candidates' AND transaction_id = '" . $job_post_can_id . "' . self::SQL_AND_IS_ACTIVE_0";
+        $application_sharesql = "SELECT * FROM application_share WHERE company_id = '" . $get['company_id'] . "' AND application_table = 'job_posting_candidates' AND transaction_id = '" . $job_post_can_id . self::SQL_AND_IS_ACTIVE_0;
         $application_shareres = $callConfig->getAllRows($application_sharesql);
         $returnresult['application_share'] = $application_shareres;
 
-        $job_postingssql = "SELECT * FROM job_postings WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $job_posting_candidatesres->job_posting_id . "' . self::SQL_AND_IS_ACTIVE_0";
+        $job_postingssql = "SELECT * FROM job_postings WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $job_posting_candidatesres->job_posting_id . self::SQL_AND_IS_ACTIVE_0;
         $job_postingsres = $callConfig->getRow($job_postingssql);
         $returnresult['job_postings'] = $job_postingsres;
 
-        $job_selection_process_stepssql = "SELECT * FROM job_selection_process_steps WHERE company_id = '" . $get['company_id'] . "' AND process_id = '" . $job_postingsres->job_selection_process . "' . self::SQL_AND_IS_ACTIVE_0";
+        $job_selection_process_stepssql = "SELECT * FROM job_selection_process_steps WHERE company_id = '" . $get['company_id'] . "' AND process_id = '" . $job_postingsres->job_selection_process . self::SQL_AND_IS_ACTIVE_0;
         $job_selection_process_stepsres = $callConfig->getAllRows($job_selection_process_stepssql);
         $returnresult['job_selection_process_steps'] = $job_selection_process_stepsres;
 
@@ -307,7 +319,7 @@ return $returnary;
         $application_usersres = $callConfig->getAllRows($application_userssql);
         $returnresult['application_users'] = $application_usersres;
 
-        $job_candidate_interview_schedulessql = "SELECT id,job_posing_candidate_id,job_selection_step_id,assign_id,inerview_date_time,remarks FROM job_candidate_interview_schedules WHERE company_id = '" . $get['company_id'] . "' AND job_posing_candidate_id = '" . $job_post_can_id . "' . self::SQL_AND_IS_ACTIVE_0";
+        $job_candidate_interview_schedulessql = "SELECT id,job_posing_candidate_id,job_selection_step_id,assign_id,inerview_date_time,remarks FROM job_candidate_interview_schedules WHERE company_id = '" . $get['company_id'] . "' AND job_posing_candidate_id = '" . $job_post_can_id . self::SQL_AND_IS_ACTIVE_0;
         $job_candidate_interview_schedulessres = $callConfig->getAllRows($job_candidate_interview_schedulessql);
         $returnresult['job_candidate_interview_schedules'] = $job_candidate_interview_schedulessres;
         return $returnresult;
@@ -315,15 +327,15 @@ return $returnary;
     public function getCandidateMaster($get)
     {
         global $callConfig;
-        $application_querysql = "SELECT id, field_group FROM application_query WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_IS_ACTIVE_0";
+        $application_querysql = "SELECT id, field_group FROM application_query WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
         $application_queryres = $callConfig->getAllRows($application_querysql);
         $return['application_query'] = $application_queryres;
 
-        $candidatessql = "self::SQL_SEL_CANDIDATES . '" . $get['company_id'] . "' AND id ='" . $get['candidate_id'] . "' . self::SQL_AND_IS_ACTIVE_0";
+        $candidatessql = self::SQL_SEL_CANDIDATES . $get['company_id'] . self::SQL_AND_ID_EQ . $get['candidate_id'] . self::SQL_AND_IS_ACTIVE_0;
         $candidatesres = $callConfig->getRow($candidatessql);
         $return['candidates'] = $candidatesres;
 
-        $job_posting_candidatessql = "SELECT id FROM job_posting_candidates WHERE company_id = '" . $get['company_id'] . "' AND candidate_id ='" . $get['candidate_id'] . "' . self::SQL_AND_IS_ACTIVE_0";
+        $job_posting_candidatessql = "SELECT id FROM job_posting_candidates WHERE company_id = '" . $get['company_id'] . "' AND candidate_id ='" . $get['candidate_id'] . self::SQL_AND_IS_ACTIVE_0;
         $job_posting_candidatesres = $callConfig->getRow($job_posting_candidatessql);
         $return['job_posting_candidates'] = $job_posting_candidatesres;
 
@@ -337,16 +349,16 @@ return $returnary;
         $return['task_cnt'] = $tasks_cntsres;
         $return['task_cnt_sql'] = $tasks_cntssql;
 
-        $whrcat = "company_id = '" . $get['company_id'] . "' . self::SQL_AND_IS_ACTIVE_NOSPACE_0";
+        $whrcat = "company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_NOSPACE_0;
         $query = $callConfig->selectQuery('countries', 'id,country_name', $whrcat, '', '', '');
         $components6 = (array) $callConfig->getAllRows($query);
         $return['countries'] = (array) $components6;
 
-        $statessql = "SELECT id, state_name FROM `states` WHERE company_id = '" . $get['company_id'] . "' AND country_id = '" . $candidatesres->country_id . "' . self::SQL_AND_IS_ACTIVE_NOSPACE_0";
+        $statessql = "SELECT id, state_name FROM `states` WHERE company_id = '" . $get['company_id'] . "' AND country_id = '" . $candidatesres->country_id . self::SQL_AND_IS_ACTIVE_NOSPACE_0;
         $statesres = $callConfig->getAllRows($statessql);
         $return['states'] = $statesres;
 
-        $citiessql = "SELECT id, city_name FROM `cities` WHERE company_id = '" . $get['company_id'] . "' AND state_id = '" . $candidatesres->state_id . "' . self::SQL_AND_IS_ACTIVE_NOSPACE_0";
+        $citiessql = "SELECT id, city_name FROM `cities` WHERE company_id = '" . $get['company_id'] . "' AND state_id = '" . $candidatesres->state_id . self::SQL_AND_IS_ACTIVE_NOSPACE_0;
         $citiesres = $callConfig->getAllRows($citiessql);
         $return['cities'] = $citiesres;
 
@@ -368,16 +380,16 @@ return $returnary;
         if (in_array(RECRUITINGMANAGER_ROLE, (array) $roleshortcodes)) {
             $whr = " AND (recruitment_manager = '" . $get['user_id'] . "' AND current_status > 0)";
         }
-        $job_postingssql = "SELECT * FROM `job_postings` WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_IS_ACTIVE_EQ_0" . $whr;
+        $job_postingssql = "SELECT * FROM `job_postings` WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_0 . $whr;
         $job_postingsres = $callConfig->getAllRows($job_postingssql);
         $return['job_postings'] = $job_postingsres;
 
-        $job_titlessql = "SELECT id,job_title FROM `job_titles` WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_IS_ACTIVE_EQ_0";
+        $job_titlessql = "SELECT id,job_title FROM `job_titles` WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_0;
         $job_titlesres = $callConfig->getAllRows($job_titlessql);
         $return['job_titles'] = $job_titlesres;
 
 
-        $job_posting_distributesql = "SELECT id,job_posting_id FROM `job_posting_distribute` WHERE company_id = '" . $get['company_id'] . "' AND vendor_id = '" . $get['vendor_id'] . "' . self::SQL_AND_IS_ACTIVE_EQ_0";
+        $job_posting_distributesql = "SELECT id,job_posting_id FROM `job_posting_distribute` WHERE company_id = '" . $get['company_id'] . "' AND vendor_id = '" . $get['vendor_id'] . self::SQL_AND_IS_ACTIVE_EQ_0;
         $job_posting_distributeres = $callConfig->getAllRows($job_posting_distributesql);
         $return['job_posting_distribute'] = $job_posting_distributeres;
 
@@ -430,7 +442,7 @@ return $returnary;
         global $callConfig;
         $return = array();
 
-        $candidatessql = "SELECT jpc.id,jpc.candidate_id ,jpc.candidate_name display_name,jpc.candidate_email, jpc.created_date,jpc.image FROM job_posting_candidates jpc,job_postings jp WHERE jpc.company_id = jp.company_id AND jpc.company_id ='" . $get['company_id'] . "' AND jpc.job_posting_id = jp.id " . $whrjp . self::SQL_AND_IS_ACTIVE_EQ_0 . "ORDER BY jpc.id DESC limit 0,3";
+        $candidatessql = "SELECT jpc.id,jpc.candidate_id ,jpc.candidate_name display_name,jpc.candidate_email, jpc.created_date,jpc.image FROM job_posting_candidates jpc,job_postings jp WHERE jpc.company_id = jp.company_id AND jpc.company_id ='" . $get['company_id'] . "' AND jpc.job_posting_id = jp.id " . $whrjp . self::SQL_AND_IS_ACTIVE_EQ_0 . " ORDER BY jpc.id DESC limit 0,3";
         $return['candidates'] = $callConfig->getAllRows($candidatessql);
 
         $condidate_postingssql = "SELECT jpc.job_posting_id,COUNT(jpc.id) as apply_total,SUM(IF(ca.current_status =" . ST_RMSHORTLISTED . ", 1,0)) AS rm_shortlisted,SUM(IF(ca.current_status =" . ST_HMSHORTLISTED . ", 1,0)) AS hm_shortlisted, SUM(IF(ca.current_status =" . ST_LOIREQUESTED . ", 1,0)) AS loi_requested, SUM(IF(ca.current_status =" . ST_LOIGENERATED . ", 1,0)) AS loi_generated, SUM(IF(ca.current_status =" . ST_LOIACCEPTED . ", 1,0)) AS loi_accepted,SUM(IF(ca.current_status =" . ST_REJECTED . ", 1,0)) AS loi_rejected, SUM(IF(ca.current_status >'30', 1,0)) AS filter_cnt FROM job_posting_candidates jpc, candidates ca where jpc.company_id = ca.company_id AND ca.company_id = " . $get['company_id'] . " AND jpc.candidate_id = ca.id AND jpc.is_active = 0 GROUP BY job_posting_id";
@@ -524,7 +536,7 @@ return $returnary;
     {
         global $callConfig;
         if (($get['apitype'] ?? '') == "candidatelistpopup") {
-            $candidatessql = "SELECT id, candidate_code, display_name, email_id, phone, skills FROM candidates WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . "IN(" . $get['candidate_ids'] . ")" . self::SQL_AND_IS_ACTIVE_0;
+            $candidatessql = "SELECT id, candidate_code, display_name, email_id, phone, skills FROM candidates WHERE company_id = '" . $get['company_id'] . "' AND id IN(" . $get['candidate_ids'] . ")" . self::SQL_AND_IS_ACTIVE_0;
             $return['candidates'] = $callConfig->getAllRows($candidatessql);
             return $return;
         }

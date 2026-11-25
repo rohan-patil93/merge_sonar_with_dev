@@ -872,5 +872,6 @@ class ConfigClass
         throw new BadMethodCallException("Method {$name} does not exist in ConfigClass");
     }
 }
-
-class_alias('ConfigClass', 'configClass');
+if (!class_exists('configClass', false)) {
+    class_alias('ConfigClass', 'configClass');
+}

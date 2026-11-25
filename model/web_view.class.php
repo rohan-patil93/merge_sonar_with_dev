@@ -1,12 +1,16 @@
 <?php
-class WebViewClass extends userClass
+interface WebViewConstants
 {
-    public const SQL_TAL_T1_ACTIVE = "' . self::SQL_TAL_T1_ACTIVE";
-    public const DATE_FORMAT_HIS = self::DATE_FORMAT_HIS;
-    public const SQL_AND_IS_ACTIVE_0 = "' . self::SQL_AND_IS_ACTIVE_0";
-    public const SQL_AND_ID_EQ = "' . self::SQL_AND_ID_EQ . '";
-    public const SQL_AND_TRANSACTION_ID_EQ = "' . self::SQL_AND_TRANSACTION_ID_EQ . '";
-    public const SQL_AND_TRANSACTION_TABLE_EQ = "' . self::SQL_AND_TRANSACTION_TABLE_EQ . '";
+    public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
+    public const SQL_AND_IS_ACTIVE_0 = " AND is_active = 0";
+    public const SQL_TAL_T1_ACTIVE = " AND tal.transaction_id = t1.id AND t1.is_active = 0";
+    public const SQL_AND_ID_EQ = "' AND id = '";
+    public const SQL_AND_TRANSACTION_ID_EQ = "' AND transaction_id = '";
+    public const SQL_AND_TRANSACTION_TABLE_EQ = "' AND transaction_table = '";
+}
+
+class WebViewClass extends userClass implements WebViewConstants
+{
 
     public function dynamicdatashowbasedontable($get){
         global $callConfig;
@@ -14,7 +18,7 @@ class WebViewClass extends userClass
         $company_id = $get['company_id'];
         $user_id = $get['user_id'];
 
-        $sql = "SELECT id, page_title FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= '$table_name' . self::SQL_AND_IS_ACTIVE_0 ";
+        $sql = "SELECT id, page_title FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= '$table_name'" . self::SQL_AND_IS_ACTIVE_0;
         $res = $callConfig->getRow($sql);
            $return['main_data'] = $res;
 
@@ -27,7 +31,7 @@ class WebViewClass extends userClass
         $return['status_progress'] = $status_progress;
 
         $transapprlogsql = "SELECT tal.request_date,tal.response_date, tal.response_type, t1.transaction_number, t1.transaction_date, t1.total_amount, t1.party_name, t1.id
-        FROM transaction_approval_logs tal, $table_name t1 WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = '$table_name' AND tal.user_id = '".$get['user_id']."' . self::SQL_TAL_T1_ACTIVE";
+        FROM transaction_approval_logs tal, $table_name t1 WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = '$table_name' AND tal.user_id = '".$get['user_id']."'" . self::SQL_TAL_T1_ACTIVE;
         $transapprlogres = $callConfig->getAllRows($transapprlogsql);
         $return['transaction_approval_logs'] = $transapprlogres;
            return $return;
@@ -46,7 +50,7 @@ class WebViewClass extends userClass
             $configres=$callConfig->getRow($configsql);
             $return['config'] = $configres;
 
-            $sql = "SELECT id, page_title,item_table, tax_table FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= '$table_name' AND item_table !='' AND tax_table!=self::SQL_AND_IS_ACTIVE_0 ";
+            $sql = "SELECT id, page_title,item_table, tax_table FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= '$table_name' AND item_table !='' AND tax_table!=''" . self::SQL_AND_IS_ACTIVE_0;
             $res = $callConfig->getRow($sql);
             $return['mapping_table'] = $res;
             $child_table = $res->item_table;
@@ -78,7 +82,7 @@ class WebViewClass extends userClass
         $return = array();
         $company_id = $get['company_id'];
 
-        $sql = "SELECT id, page_title FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= 'attendenace_regularization_requests' . self::SQL_AND_IS_ACTIVE_0 ";
+        $sql = "SELECT id, page_title FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= 'attendenace_regularization_requests'" . self::SQL_AND_IS_ACTIVE_0;
         $res = $callConfig->getRow($sql);
            $return['main_data'] = $res;
 
@@ -89,7 +93,7 @@ class WebViewClass extends userClass
         $transapprlogsql = "SELECT tal.request_date,tal.response_date, tal.response_type, t1.request_date, t1.regularization_date, t1.regularization_of_checkout, t1.remarks, t1.id, emp.display_name
         FROM transaction_approval_logs tal, attendenace_regularization_requests t1
         LEFT JOIN employees emp ON emp.id = t1.employee_id AND emp.company_id = {$get['company_id']} AND emp.is_active=0
-        WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = 'attendenace_regularization_requests' AND tal.user_id = '".$get['user_id']."' . self::SQL_TAL_T1_ACTIVE";
+        WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = 'attendenace_regularization_requests' AND tal.user_id = '".$get['user_id']."'" . self::SQL_TAL_T1_ACTIVE;
         $transapprlogres = $callConfig->getAllRows($transapprlogsql);
         $return['transaction_approval_logs'] = $transapprlogres;
 
@@ -198,7 +202,7 @@ class WebViewClass extends userClass
             $transapprlogsql = "SELECT tal.request_date,tal.response_date, tal.response_type, t1.visit_purpose, t1.location, t1.vehicle_number, t1.id, t1.entry_date, t1.entry_time, au.display_name, au.email_id as email, t1.person_details
             FROM transaction_approval_logs tal, transport_personal_gateway t1
             LEFT JOIN employees au ON au.id = t1.user_id AND au.company_id = {$get['company_id']} AND au.is_active=0
-            WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = 'transport_personal_gateway' AND tal.user_id = '".$user_id."' . self::SQL_TAL_T1_ACTIVE";
+            WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = 'transport_personal_gateway' AND tal.user_id = '".$user_id."'" . self::SQL_TAL_T1_ACTIVE;
             $transapprlogres = $callConfig->getAllRows($transapprlogsql);
             $return['transaction_approval_logs'] = $transapprlogres;
 
@@ -247,7 +251,7 @@ class WebViewClass extends userClass
             FROM transaction_approval_logs tal, transport_gateway t1
             LEFT JOIN employees au ON au.id = t1.driver_name AND au.company_id = {$get['company_id']} AND au.is_active=0
             LEFT JOIN employees emp ON FIND_IN_SET(emp.id, t1.emp_ids) AND emp.company_id = t1.company_id AND emp.is_active = 0
-            WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = 'transport_gateway' AND tal.user_id = '".$user_id."' . self::SQL_TAL_T1_ACTIVE GROUP BY t1.id";
+            WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = 'transport_gateway' AND tal.user_id = '".$user_id."'" . self::SQL_TAL_T1_ACTIVE . " GROUP BY t1.id";
             $transapprlogres = $callConfig->getAllRows($transapprlogsql);
             $return['transaction_approval_logs'] = $transapprlogres;
 
@@ -512,7 +516,7 @@ class WebViewClass extends userClass
             return $users;
         }
 
-        $transactionsql = "SELECT * FROM " . $transaction_table . " WHERE company_id = '" . $company_id . self::SQL_AND_ID_EQ . $transaction_id . self::SQL_AND_IS_ACTIVE_0;
+        $transactionsql = "SELECT * FROM " . $transaction_table . " WHERE company_id = '" . $company_id . self::SQL_AND_ID_EQ . $transaction_id . "'" . self::SQL_AND_IS_ACTIVE_0;
         $transactionres = $callConfig->getRow($transactionsql);
         if (!$transactionres || empty($transactionres->id)) {
             return $users;
@@ -556,14 +560,14 @@ class WebViewClass extends userClass
         }
 
         if (!empty($transactionres->employee_id)) {
-            $empsql = "SELECT user_id FROM employees WHERE company_id = '" . $company_id . self::SQL_AND_ID_EQ . $transactionres->employee_id . self::SQL_AND_IS_ACTIVE_0;
+            $empsql = "SELECT user_id FROM employees WHERE company_id = '" . $company_id . self::SQL_AND_ID_EQ . $transactionres->employee_id . "'" . self::SQL_AND_IS_ACTIVE_0;
             $empres = $callConfig->getRow($empsql);
             if (!empty($empres->user_id)) {
                 $users[$empres->user_id] = 1;
             }
         }
 
-        $msgsql = "SELECT DISTINCT created_by FROM approval_discussion_messages WHERE company_id = '" . $company_id . self::SQL_AND_TRANSACTION_TABLE_EQ . $transaction_table . self::SQL_AND_TRANSACTION_ID_EQ . $transaction_id . self::SQL_AND_IS_ACTIVE_0;
+        $msgsql = "SELECT DISTINCT created_by FROM approval_discussion_messages WHERE company_id = '" . $company_id . self::SQL_AND_TRANSACTION_TABLE_EQ . $transaction_table . self::SQL_AND_TRANSACTION_ID_EQ . $transaction_id . "'" . self::SQL_AND_IS_ACTIVE_0;
         $msgres = $callConfig->getAllRows($msgsql);
         foreach ((array) $msgres as $msgrow) {
             if (!empty($msgrow->created_by)) {
@@ -673,7 +677,7 @@ class WebViewClass extends userClass
                 $return['message'] = 'Failed to save message.';
             } else {
                 $last_id = $res['LASTID'];
-                $usersql = "SELECT display_name FROM application_users WHERE id = '" . $post['user_id'] . "' AND company_id = '" . $post['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+                $usersql = "SELECT display_name FROM application_users WHERE id = '" . $post['user_id'] . "' AND company_id = '" . $post['company_id'] . "'" . self::SQL_AND_IS_ACTIVE_0;
                 $userres = $callConfig->getRow($usersql);
                 $sender_name = !empty($userres->display_name) ? $userres->display_name : 'User';
 

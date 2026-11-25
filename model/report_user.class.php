@@ -987,5 +987,6 @@ class ReportUserClass extends userClass {
         return $return;
     }
 }
-
-class_alias('ReportUserClass', 'reportUserClass');
+if (!class_exists('reportUserClass', false)) {
+    class_alias('ReportUserClass', 'reportUserClass');
+}

@@ -1437,5 +1437,6 @@ class PmsUserClass extends userClass
         return $callConfig->updateRecord('employee_performance_appraisals',$insert_array,'id',$post['rid']);
     }
 }
-
-class_alias('PmsUserClass', 'pmsUserClass');
+if (!class_exists('pmsUserClass', false)) {
+    class_alias('PmsUserClass', 'pmsUserClass');
+}

@@ -1,5 +1,5 @@
 <?php
-class UserClass
+class EcommerceClass
 {
     public const SQL_IS_ACTIVE_0 = "is_active = '0'";
 
@@ -34,3 +34,8 @@ class UserClass
         return $callConfig->getAllRows($query);
     }
 }
+
+if (!class_exists('userClass')) {
+    class_alias('EcommerceClass', 'userClass');
+}
+

@@ -1,5 +1,18 @@
 <?php
-class pettyCashUserClass extends userClass
+interface PettyCashConstants
+{
+    public const SQL_PCBO_JOIN = " AND pcbo.company_id = pcb.company_id AND pcbo.pc_box_id = pcb.id  AND pcbo.is_active = pcb.is_active ";
+    public const DATE_FORMAT_LOWER_HIS = "Y-m-d h:i:s";
+    public const DATE_FORMAT_UPPER_HIS = "Y-m-d H:i:s";
+    public const SQL_AND_ID_EQ = "' AND id = '";
+    public const SQL_AND_IS_ACTIVE_0 = "' AND is_active = 0";
+    public const SQL_SEL_PC_BALANCES = "SELECT id, pc_box_id, pt_owner_id, balance_date, debit_amount, credit_amount, opening_balance, closing_balance FROM petty_cash_balances WHERE company_id='";
+    public const SQL_AND_PC_BOX_ID = "' AND pc_box_id='";
+    public const SQL_AND_PT_OWNER_ID = "' AND pt_owner_id='";
+    public const SQL_WHERE_ID_EQ = " WHERE id = '";
+}
+
+class PettyCashUserClass extends userClass implements PettyCashConstants
 {
     public function pettyCashDashboard($get)
     {
@@ -9,7 +22,7 @@ class pettyCashUserClass extends userClass
         if ($get['admin_type'] != 1 || $get['admin_access_employee'] == 'Y') {
             $condition .= " AND pcbo.owner_id = '" . $get['user_id'] . "'";
         }
-        $cntsql = "SELECT * FROM ((SELECT count(*) as total_petty_cash_box_topup_requests FROM petty_cash_box_topup_requests WHERE company_id = '" . $get['company_id'] . "' AND is_active =0) as total_petty_cash_box_topup_requests , (SELECT count(*) as total_petty_cash FROM petty_cash WHERE company_id = '" . $get['company_id'] . "' and is_active =0) as total_petty_cash, (SELECT count(*) as total_petty_cash_box_owner FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '" . $get['company_id'] . "' . self::SQL_PCBO_JOIN" . $condition . " AND pcbo.is_active = 0) as total_petty_cash_box_owner)";
+        $cntsql = "SELECT * FROM ((SELECT count(*) as total_petty_cash_box_topup_requests FROM petty_cash_box_topup_requests WHERE company_id = '" . $get['company_id'] . "' AND is_active =0) as total_petty_cash_box_topup_requests , (SELECT count(*) as total_petty_cash FROM petty_cash WHERE company_id = '" . $get['company_id'] . "' and is_active =0) as total_petty_cash, (SELECT count(*) as total_petty_cash_box_owner FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '" . $get['company_id'] . "'" . self::SQL_PCBO_JOIN . $condition . " AND pcbo.is_active = 0) as total_petty_cash_box_owner)";
         $cntres = $callConfig->getRow($cntsql);
         $return['total_cnt'] = $cntres;
         $return['topuprequest'] = $this->getPettyCashBoxTopUpRequests($get);
@@ -99,14 +112,14 @@ class pettyCashUserClass extends userClass
     {
         global $callConfig;
         $return['get'] = $get;
-        $pcrsql = "SELECT * FROM petty_cash_box_topup_requests WHERE company_id = '" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $get['rid'] . "' AND is_active = 0";
+        $pcrsql = "SELECT * FROM petty_cash_box_topup_requests WHERE company_id = '" . $get['company_id'] . self::SQL_AND_ID_EQ . $get['rid'] . "' AND is_active = 0";
         $pcrres = $callConfig->getRow($pcrsql);
         $return['petty_cash_box_topup_requests'] = $pcrres;
         //}
         if ($pcrres->originator == $get['user_id'] || $pcrres->originator == "") {
             $condition = "  AND pcbo.owner_id = '" . $get['user_id'] . "'";
         }
-        $ptcbsql = "SELECT pcbo.id, pcbo.pc_box_id, pcbo.pc_limit, pcbo.pc_type_id, pcb.pc_box_code, pcb.pc_box_description, pcb.topup_frequency, pcb.topup_amount FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '" . $get['company_id'] . "' . self::SQL_PCBO_JOIN" . $condition . " AND pcbo.is_active = 0";
+        $ptcbsql = "SELECT pcbo.id, pcbo.pc_box_id, pcbo.pc_limit, pcbo.pc_type_id, pcb.pc_box_code, pcb.pc_box_description, pcb.topup_frequency, pcb.topup_amount FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '" . $get['company_id'] . "'" . self::SQL_PCBO_JOIN . $condition . " AND pcbo.is_active = 0";
         $ptcbres = $callConfig->getAllRows($ptcbsql);
         $return['petty_cash_boxes'] = $ptcbres;
 
@@ -169,7 +182,7 @@ class pettyCashUserClass extends userClass
             $pc_box_id = $petty_cash->ref_id;
             $pt_owner_id = $petty_cash->party_id;
         } else {
-            $petty_cashsql = "SELECT id, transaction_number, transaction_date, amount, notes, party_id, ref_id, current_status FROM petty_cash WHERE company_id='" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $get['rid'] . "' . self::SQL_AND_IS_ACTIVE_0";
+            $petty_cashsql = "SELECT id, transaction_number, transaction_date, amount, notes, party_id, ref_id, current_status FROM petty_cash WHERE company_id='" . $get['company_id'] . self::SQL_AND_ID_EQ . $get['rid'] . self::SQL_AND_IS_ACTIVE_0;
             $petty_cashres = $callConfig->getRow($petty_cashsql);
             $pc_box_id = $petty_cashres->ref_id;
             $pt_owner_id = $petty_cashres->party_id;
@@ -182,16 +195,16 @@ class pettyCashUserClass extends userClass
         global $callConfig;
         $return = array();
         if ($get['type'] == "add") {
-            $petty_cash_itemssql = "SELECT id, item_name, description FROM petty_cash_items WHERE company_id='" . $get['company_id'] . "' . self::SQL_AND_IS_ACTIVE_0";
+            $petty_cash_itemssql = "SELECT id, item_name, description FROM petty_cash_items WHERE company_id='" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
             $petty_cash_itemsres = $callConfig->getAllRows($petty_cash_itemssql);
             $return['petty_cash_items'] = $petty_cash_itemsres;
 
             if ($get['rid'] != "") {
-                $petty_cashsql = "SELECT id, transaction_number, transaction_date, amount, notes, party_id, ref_id, current_status FROM petty_cash WHERE company_id='" . $get['company_id'] . "' . self::SQL_AND_ID_EQ . '" . $get['rid'] . "' . self::SQL_AND_IS_ACTIVE_0";
+                $petty_cashsql = "SELECT id, transaction_number, transaction_date, amount, notes, party_id, ref_id, current_status FROM petty_cash WHERE company_id='" . $get['company_id'] . self::SQL_AND_ID_EQ . $get['rid'] . self::SQL_AND_IS_ACTIVE_0;
                 $petty_cashres = $callConfig->getRow($petty_cashsql);
                 $return['petty_cash'] = $petty_cashres;
 
-                $pc_itemssql = "SELECT id, transaction_id, item_id, item_name, description, total_amount FROM pc_items WHERE company_id='" . $get['company_id'] . "' AND transaction_id = '" . $get['rid'] . "' . self::SQL_AND_IS_ACTIVE_0";
+                $pc_itemssql = "SELECT id, transaction_id, item_id, item_name, description, total_amount FROM pc_items WHERE company_id='" . $get['company_id'] . "' AND transaction_id = '" . $get['rid'] . self::SQL_AND_IS_ACTIVE_0;
                 $pc_itemsres = $callConfig->getAllRows($pc_itemssql);
                 $return['pc_items'] = $pc_itemsres;
 
@@ -199,7 +212,7 @@ class pettyCashUserClass extends userClass
             }
 
         } else {
-            $frequencysql = "SELECT genc_detail_code,genc_detail_name  FROM " . TBL_GENRAL_CODE_DETAILS . " WHERE company_id='" . $get['company_id'] . "' AND genc_code='TASKFREQUENCY' . self::SQL_AND_IS_ACTIVE_0";
+            $frequencysql = "SELECT genc_detail_code,genc_detail_name  FROM " . TBL_GENRAL_CODE_DETAILS . " WHERE company_id='" . $get['company_id'] . "' AND genc_code='TASKFREQUENCY'" . self::SQL_AND_IS_ACTIVE_0;
             $frequencyres = $callConfig->getAllRows($frequencysql);
             $topup_frequency = array();
             foreach ($frequencyres as $frq) {
@@ -207,7 +220,7 @@ class pettyCashUserClass extends userClass
             }
             $return['topup_frequency'] = $topup_frequency;
             $condition = '';
-            $sql = "SELECT pcbo.id, pcbo.pc_box_id, pcbo.pc_limit, pcbo.pc_type_id, pcb.pc_box_code, pcb.pc_box_description, pcb.topup_frequency, pcb.topup_amount FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '" . $get['company_id'] . "' . self::SQL_PCBO_JOIN" . $condition . " AND pcbo.is_active = 0";
+            $sql = "SELECT pcbo.id, pcbo.pc_box_id, pcbo.pc_limit, pcbo.pc_type_id, pcb.pc_box_code, pcb.pc_box_description, pcb.topup_frequency, pcb.topup_amount FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '" . $get['company_id'] . "'" . self::SQL_PCBO_JOIN . $condition . " AND pcbo.is_active = 0";
             $res = $callConfig->getAllRows($sql);
             $return['petty_cash_box_owner'] = $res;
         }
@@ -271,19 +284,19 @@ class pettyCashUserClass extends userClass
         $transaction_no = $post['transaction_no']; // workflow field used
         $transaction_table = $post['transaction_table'];
         if ($transaction_table == "petty_cash_box_topup_requests") {
-            $pcbrsql = "SELECT id, originator, petty_cash_boxe_id, final_amount, transaction_date FROM petty_cash_box_topup_requests WHERE company_id='" . $post['company_id'] . "' AND id='" . $transaction_no . "' . self::SQL_AND_IS_ACTIVE_0";
+            $pcbrsql = "SELECT id, originator, petty_cash_boxe_id, final_amount, transaction_date FROM petty_cash_box_topup_requests WHERE company_id='" . $post['company_id'] . "' AND id='" . $transaction_no . self::SQL_AND_IS_ACTIVE_0;
             $pcbrres = $callConfig->getRow($pcbrsql);
             $return['pcbrsql'] = $pcbrsql;
             $return['pcbrsqlres'] = $pcbrres;
             if ($pcbrres->id != "") {
-                $pcbsql = "self::SQL_SEL_PC_BALANCES . '" . $post['company_id'] . "' . self::SQL_AND_PC_BOX_ID . '" . $pcbrres->petty_cash_boxe_id . "' . self::SQL_AND_PT_OWNER_ID . '" . $pcbrres->originator . "' . self::SQL_AND_IS_ACTIVE_0 ORDER BY balance_date DESC limit 1";
+                $pcbsql = self::SQL_SEL_PC_BALANCES . $post['company_id'] . self::SQL_AND_PC_BOX_ID . $pcbrres->petty_cash_boxe_id . self::SQL_AND_PT_OWNER_ID . $pcbrres->originator . self::SQL_AND_IS_ACTIVE_0 . " ORDER BY balance_date DESC limit 1";
                 $pcbres = $callConfig->getRow($pcbsql);
                 $return['pcbsqlres'] = $pcbsql;
                 $return['pcbres'] = $pcbres;
                 if (isset($pcbres->id)) {
                     $return['balance_date_todaydate'] = $pcbres->balance_date . "==" . $pcbrres->transaction_date;
                     if ($pcbres->balance_date == $todaydate) {
-                        $updatequery = "UPDATE petty_cash_balances SET credit_amount = credit_amount" . $balancetype . $pcbrres->final_amount . ",closing_balance= closing_balance" . $balancetype . $pcbrres->final_amount . "self::SQL_WHERE_ID_EQ . '" . $pcbres->id . "'";
+                        $updatequery = "UPDATE petty_cash_balances SET credit_amount = credit_amount" . $balancetype . $pcbrres->final_amount . ",closing_balance= closing_balance" . $balancetype . $pcbrres->final_amount . self::SQL_WHERE_ID_EQ . $pcbres->id . "'";
                         $samedate = $callConfig->executeQuery($updatequery);
                         $return['samedate'] = $samedate;
                     } else {

@@ -1,123 +1,56 @@
 <?php
-class EsopUserClass extends userClass
+
+interface EsopConstants
 {
-    public const DATE_FORMAT_LOWER_HIS = "Y-m-d h:i:s";
-    public const DATE_FORMAT_UPPER_HIS = self::DATE_FORMAT_UPPER_HIS;
-    public const SQL_AND_IS_ACTIVE_VAL_ASC = "' . self::SQL_AND_IS_ACTIVE_VAL_ASC";
-    public const SQL_SEL_COMPANY_VALUATIONS = "self::SQL_SEL_COMPANY_VALUATIONS . '";
-    public const SQL_AND_IS_ACTIVE_0 = "' . self::SQL_AND_IS_ACTIVE_0";
-    public const SQL_AND_IS_ACTIVE_EQ_0 = "' . self::SQL_AND_IS_ACTIVE_EQ_0";
-    public const SQL_SEL_ESOP_ALLOCATIONS = "self::SQL_SEL_ESOP_ALLOCATIONS . '";
-    public const SQL_SEL_GENERAL_CODE_DETAILS = "self::SQL_SEL_GENERAL_CODE_DETAILS . '";
-    public const SQL_AND_ID_IN = "' . self::SQL_AND_ID_IN . ";
-    public const SQL_CLOSE_PAREN_IS_ACTIVE_0 = ")' . self::SQL_AND_IS_ACTIVE_0";
+    public const DATE_FORMAT_LOWER_HIS = 'Y-m-d h:i:s';
+    public const DATE_FORMAT_UPPER_HIS = 'Y-m-d H:i:s';
+    public const SQL_AND_IS_ACTIVE_0 = "' AND is_active=0";
+    public const SQL_AND_IS_ACTIVE_SPACE_0 = "' AND is_active = 0 ";
+    public const SQL_AND_IS_ACTIVE_VAL_ASC = "' AND is_active=0 ORDER BY valuation_date ASC";
+    public const SQL_SEL_COMPANY_VALUATIONS = "SELECT id, valuation_name, valuation_date, company_value, old_share_qty,valuation_shareholding, new_share_qty, total_share_qty, per_share_value, notes FROM company_valuations WHERE company_id = '";
+    public const SQL_SEL_ESOP_ALLOCATIONS = "SELECT * FROM esop_allocations WHERE company_id = '";
+    public const SQL_SEL_GENERAL_CODE_DETAILS = " SELECT genc_detail_code, genc_detail_name  FROM  general_code_details WHERE company_id = '";
+    public const SQL_CLOSE_PAREN_IS_ACTIVE_0 = ") AND is_active=0";
+    public const SQL_AND_ID_IN = "' AND id IN(";
+}
 
-    private function processValuationDistributions($post, $rid, &$return)
-    {
+class EsopUserClass extends userClass implements EsopConstants
+{
+    public function insertCompanyValuations($post){
         global $callConfig;
-        foreach ((array) $post['distributer_name'] as $keyid => $keyvalue) {
-            if ($post['distributer_name'][$keyid] != "" && $post['distribute_percentage'][$keyid] != "") {
-                $dilution_seq = $post['dilution_seq'][$keyid];
-                $dilution = $post['dilution'][$dilution_seq] == '0' ? '0' : '1';
-                $distributamount = round($post['total_share'][$keyid] * $post['per_share_value']);
-
-                $equity_shares_percentage_share = round(($post['equity_shares_percentage'][$keyid] / 100) * $post['total_share'][$keyid]);
-                $equity_shares_percentage_amt = round(($post['equity_shares_percentage'][$keyid] / 100) * $distributamount, 2);
-
-                $preference_shares_percentage_share = round(($post['preference_shares_percentage'][$keyid] / 100) * $post['total_share'][$keyid]);
-                $preference_shares_percentage_amt = round(($post['preference_shares_percentage'][$keyid] / 100) * $distributamount, 2);
-
-                $insertary = array(
-                    'company_id' => $post['company_id'],
-                    'company_valuation_id' => $rid,
-                    'distributer_name' => $post['distributer_name'][$keyid],
-                    'old_percentage' => $post['old_percentage'][$keyid],
-                    'new_percentage' => $post['new_percentage'][$keyid],
-                    'distribute_percentage' => $post['distribute_percentage'][$keyid],
-                    'company_contribution_user_id' => $post['ccuid'][$keyid],
-                    'total_amount' => $distributamount,
-                    'old_shares' => $post['old_shares_qty'][$keyid],
-                    'new_shares' => $post['new_shares_qty'][$keyid],
-                    'total_shares' => $post['total_share'][$keyid],
-                    'equity_shares_percentage' => $post['equity_shares_percentage'][$keyid],
-                    'equity_shares' => $equity_shares_percentage_share,
-                    'equity_shares_amount' => $equity_shares_percentage_amt,
-                    'preference_shares_percentage' => $post['preference_shares_percentage'][$keyid],
-                    'preference_shares' => $preference_shares_percentage_share,
-                    'preference_shares_amount' => $preference_shares_percentage_amt,
-                    'dilution' => $dilution
-                );
-
-                if (!empty($post['irid'][$keyid])) {
-                    $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
-                    $insertary['updated_by'] = $post['user_id'];
-                    $insertary['is_active'] = 0;
-                    $return['item'][] = $callConfig->updateRecord('company_valuation_distributions', $insertary, 'id', $post['irid'][$keyid]);
-                } else {
-                    $insertary['is_active'] = 0;
-                    $insertary['current_status'] = 0;
-                    $insertary['created_by'] = $post['user_id'];
-                    $insertary['created_date'] = date(self::DATE_FORMAT_UPPER_HIS);
-                    $return['item'][] = $callConfig->insertRecord('company_valuation_distributions', $insertary);
-                }
-                if ($dilution == '0') {
-                    $updateCcu = array('dilution' => $dilution, 'dilution_percentage' => $post['distribute_percentage'][$keyid]);
-                    $return['ccu'][] = $callConfig->updateRecord('company_contribution_users', $updateCcu, 'id', $post['ccuid'][$keyid]);
-                }
-            }
-        }
-    }
-
-    public function insertCompanyValuations($post)
-    {
-        global $callConfig;
-        $return = array();
-        $insertary = array(
-            'company_id' => $post['company_id'],
-            'valuation_name' => $post['valuation_name'],
-            'valuation_date' => $this->dateconvertdbformat($post['valuation_date']),
-            'company_value' => $post['company_value'],
-            'old_share_qty' => $post['old_share_qty'],
-            'valuation_shareholding' => $post['valuation_shareholding'],
-            'new_share_qty' => $post['new_share_qty'],
-            'total_share_qty' => $post['total_share_qty'],
-            'per_share_value' => $post['per_share_value'],
-            'notes' => $post['notes']
-        );
-        if ($post['rid'] != "") {
-            $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
-            $insertary['updated_by'] = $post['user_id'];
-            $res = $callConfig->updateRecord('company_valuations', $insertary, 'id', $post['rid']);
+        $insertary=array('company_id'=>$post['company_id'],'valuation_name'=>$post['valuation_name'],'valuation_date'=>$this->dateconvertdbformat($post['valuation_date']),'company_value'=>$post['company_value'],'old_share_qty'=>$post['old_share_qty'],'valuation_shareholding'=>$post['valuation_shareholding'],'new_share_qty'=>$post['new_share_qty'],'total_share_qty'=>$post['total_share_qty'],'per_share_value'=>$post['per_share_value'],'notes'=>$post['notes']);
+        if($post['rid'] !=""){
+            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
+            $insertary['updated_by']=$post['user_id'];
+            $res= $callConfig->updateRecord('company_valuations',$insertary,'id',$post['rid']);
             $return['res'] = $res;
             $rid = $post['rid'];
-        } else {
-            $insertary['is_active'] = 0;
-            $insertary['current_status'] = 0;
-            $insertary['created_by'] = $post['user_id'];
-            $insertary['created_date'] = date(self::DATE_FORMAT_UPPER_HIS);
-            $res = $callConfig->insertRecord('company_valuations', $insertary);
+        }else{
+            $insertary['is_active']=0;
+            $insertary['current_status']=0;
+            $insertary['created_by']=$post['user_id'];
+            $insertary['created_date']=date(self::DATE_FORMAT_UPPER_HIS);
+            $res = $callConfig->insertRecord('company_valuations',$insertary);
             $return['res'] = $res;
             $rid = $res['LASTID'];
         }
-        $updateary = array('is_active' => null);
-        $callConfig->updateRecord('company_valuation_distributions', $updateary, 'company_valuation_id', $rid);
-
+        $updateary = array('is_active'=>null);
+        $callConfig->updateRecord('company_valuation_distributions',$updateary,'company_valuation_id',$rid);
         $this->processValuationDistributions($post, $rid, $return);
         return $return;
     }
-
     public function getCompanyValuations($get){
         global $callConfig;
         $return = array();
 
-        $companyvaluationssql = "self::SQL_SEL_COMPANY_VALUATIONS . '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_VAL_ASC";
+        $companyvaluationssql = self::SQL_SEL_COMPANY_VALUATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_VAL_ASC;
         $paymentalocres = $callConfig->getAllRows($companyvaluationssql);
 
-        $lastvaluationsql = "SELECT id, valuation_date, company_value, total_share_qty FROM company_valuations WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0 ORDER BY valuation_date DESC";
+        $lastvaluationsql = "SELECT id, valuation_date, company_value, total_share_qty FROM company_valuations WHERE company_id = '".$get['company_id']."' AND is_active=0 ORDER BY valuation_date DESC";
         $lastvaluationres = $callConfig->getRow($lastvaluationsql);
         $return['last_company_valuations'] = $lastvaluationres;
 
-        $company_contribution_userssql = "SELECT id, display_name, total_contribuition, user_type, dilution, dilution_percentage,image FROM company_contribution_users WHERE company_id = '".$get['company_id']."' AND user_type !='EMP' . self::SQL_AND_IS_ACTIVE_0";
+        $company_contribution_userssql = "SELECT id, display_name, total_contribuition, user_type, dilution, dilution_percentage,image FROM company_contribution_users WHERE company_id = '".$get['company_id']."' AND user_type !='EMP' AND is_active=0";
         $company_contribution_usersres = $callConfig->getAllRows($company_contribution_userssql);
         $return['company_contribution_users'] = $company_contribution_usersres;
 
@@ -126,7 +59,7 @@ class EsopUserClass extends userClass
         $typsres = $callConfig->getAllRows($typsql);
         $return['contribution_users_type'] = $typsres;
 
-        $companyvaluationsdistributionssql = "SELECT id, `company_contribution_user_id`, `distributer_name`,dilution,new_percentage, `old_percentage`, `distribute_percentage`, `total_amount`, `old_shares`, `new_shares`, `total_shares`, `dilution`, `equity_shares_percentage`, `equity_shares`, `equity_shares_amount`, `preference_shares_percentage`, `preference_shares`, `preference_shares_amount` FROM company_valuation_distributions WHERE company_id = '".$get['company_id']."' AND company_valuation_id = '".$get['rid']."' . self::SQL_AND_IS_ACTIVE_0";
+        $companyvaluationsdistributionssql = "SELECT id, `company_contribution_user_id`, `distributer_name`,dilution,new_percentage, `old_percentage`, `distribute_percentage`, `total_amount`, `old_shares`, `new_shares`, `total_shares`, `dilution`, `equity_shares_percentage`, `equity_shares`, `equity_shares_amount`, `preference_shares_percentage`, `preference_shares`, `preference_shares_amount` FROM company_valuation_distributions WHERE company_id = '".$get['company_id']."' AND company_valuation_id = '".$get['rid'].self::SQL_AND_IS_ACTIVE_0;
         $companyvaluationsdistributionsres = $callConfig->getAllRows($companyvaluationsdistributionssql);
         $comvaldist = array();
         foreach($companyvaluationsdistributionsres as $cvd){
@@ -141,7 +74,7 @@ class EsopUserClass extends userClass
         $return['company_valuations'] = $companyval[$get['rid']];
         $return['company_valuations_all'] = $companyval;
 
-        $lastvaluationsql = "SELECT distribute_percentage, company_contribution_user_id,equity_shares_percentage, preference_shares_percentage ,total_shares  FROM company_valuation_distributions WHERE company_id = '".$get['company_id']."' AND company_valuation_id = (SELECT id FROM company_valuations WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_EQ_0ORDER BY valuation_date DESC LIMIT 1)' . self::SQL_AND_IS_ACTIVE_0";
+        $lastvaluationsql = "SELECT distribute_percentage, company_contribution_user_id,equity_shares_percentage, preference_shares_percentage ,total_shares  FROM company_valuation_distributions WHERE company_id = '".$get['company_id']."' AND company_valuation_id = (SELECT id FROM company_valuations WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY valuation_date DESC LIMIT 1) AND is_active=0";
         $lastvaluationres = $callConfig->getAllRows($lastvaluationsql);
         $lastvaluationresult =$lastvaluationtotalshare= array();
         foreach($lastvaluationres as $cvd){
@@ -216,11 +149,11 @@ class EsopUserClass extends userClass
         $companyvaluationsres = $callConfig->getAllRows($companyvaluationssql);
         $return['company_valuations'] = $companyvaluationsres;
 
-        $esopplanssql = "SELECT  id, company_valuation_id, company_valuation_distribution_id, plan_name, date_of_grant, company_valuation, share, share_price_at_grant_time, note FROM esop_plans WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."' . self::SQL_AND_IS_ACTIVE_0";
+        $esopplanssql = "SELECT  id, company_valuation_id, company_valuation_distribution_id, plan_name, date_of_grant, company_valuation, share, share_price_at_grant_time, note FROM esop_plans WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid'].self::SQL_AND_IS_ACTIVE_0;
         $esopplansres = $callConfig->getRow($esopplanssql);
         $return['esop_plans'] = $esopplansres;
 
-        $esopplanbucketssql = "SELECT id, esop_plans_id, bucket_name, grant_price, discount, expected_option_benefit, bs_option_value, options_granted, total_discount, discount_per_option, vesting_schedule FROM esop_plan_buckets WHERE company_id = '".$get['company_id']."' AND esop_plans_id = '".$get['rid']."' . self::SQL_AND_IS_ACTIVE_0";
+        $esopplanbucketssql = "SELECT id, esop_plans_id, bucket_name, grant_price, discount, expected_option_benefit, bs_option_value, options_granted, total_discount, discount_per_option, vesting_schedule FROM esop_plan_buckets WHERE company_id = '".$get['company_id']."' AND esop_plans_id = '".$get['rid'].self::SQL_AND_IS_ACTIVE_0;
         $esopplansres = $callConfig->getAllRows($esopplanbucketssql);
         $return['esop_plan_buckets'] = $esopplansres;
         return $return;
@@ -235,16 +168,16 @@ class EsopUserClass extends userClass
             $return['esop_allocations_sql'] = $esopallocationsql;
             $return['esop_allocations'] = $esopallocationres;
 
-            $esopvestingschedulecntsql = "SELECT SUM(allocation_share) total_share, SUM(IF(current_status = ".ST_APPROVED.",allocation_share,0)) allocated_share, SUM(IF(current_status = 0 OR current_status = ".ST_REJECTED.",allocation_share,0)) un_allocated_share, SUM(total_amount) as total_ammount, SUM(IF(current_status = ".ST_APPROVED.",total_amount,0)) allocated_ammount, SUM(IF(current_status = 0 OR current_status = ".ST_REJECTED.",total_amount,0)) un_allocated_ammount FROM esop_vesting_schedule WHERE company_id = '".$get['company_id']."' AND esop_allocation_id='".$get['rid']."' . self::SQL_AND_IS_ACTIVE_0";
+            $esopvestingschedulecntsql = "SELECT SUM(allocation_share) total_share, SUM(IF(current_status = ".ST_APPROVED.",allocation_share,0)) allocated_share, SUM(IF(current_status = 0 OR current_status = ".ST_REJECTED.",allocation_share,0)) un_allocated_share, SUM(total_amount) as total_ammount, SUM(IF(current_status = ".ST_APPROVED.",total_amount,0)) allocated_ammount, SUM(IF(current_status = 0 OR current_status = ".ST_REJECTED.",total_amount,0)) un_allocated_ammount FROM esop_vesting_schedule WHERE company_id = '".$get['company_id']."' AND esop_allocation_id='".$get['rid'].self::SQL_AND_IS_ACTIVE_0;
             $esopvestingschedulecntres = $callConfig->getRow($esopvestingschedulecntsql);
             $return['esop_vesting_schedule_cnt'] = $esopvestingschedulecntres;
 
-            $esopvestingschedulesql = "SELECT * FROM esop_vesting_schedule WHERE company_id = '".$get['company_id']."' AND esop_allocation_id='".$get['rid']."' . self::SQL_AND_IS_ACTIVE_0 ORDER BY allocation_date ASC";
+            $esopvestingschedulesql = "SELECT * FROM esop_vesting_schedule WHERE company_id = '".$get['company_id']."' AND esop_allocation_id='".$get['rid']."' AND is_active=0 ORDER BY allocation_date ASC";
             $esopvestingscheduleres = $callConfig->getAllRows($esopvestingschedulesql);
             $return['esop_vesting_schedule'] = $esopvestingscheduleres;
 
         }else{ //insert and update page get detals
-            $esopallocationsql = "self::SQL_SEL_ESOP_ALLOCATIONS . '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+            $esopallocationsql = self::SQL_SEL_ESOP_ALLOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
             $esopallocationres = $callConfig->getAllRows($esopallocationsql);
             $esop_allocations =array();
             foreach($esopallocationres as $cval){
@@ -253,14 +186,14 @@ class EsopUserClass extends userClass
             $return['esop_allocations'] = $esop_allocations[$get['rid']];
             $return['esop_allocations_all'] = $esop_allocations;
 
-            $esopplanssql = "SELECT id, plan_name FROM esop_plans WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+            $esopplanssql = "SELECT id, plan_name FROM esop_plans WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
             $esopplansres = $callConfig->getAllRows($esopplanssql);
             foreach($esopplansres as $esopval){
                 $esopplansval[$esopval->id] = $esopval;
             }
             $return['esop_plans'] = $esopplansval;
 
-            $esopplanbucketssql = "SELECT id, esop_plans_id,bucket_name FROM esop_plan_buckets WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+            $esopplanbucketssql = "SELECT id, esop_plans_id,bucket_name FROM esop_plan_buckets WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
             $esopplanbucketsres = $callConfig->getAllRows($esopplanbucketssql);
             $esop_plan_buckets = array();
             foreach($esopplanbucketsres as $esopbuckval){
@@ -268,7 +201,7 @@ class EsopUserClass extends userClass
             }
             $return['esop_plan_buckets'] = $esop_plan_buckets;
 
-            $company_contribution_userssql = "SELECT id, display_name FROM company_contribution_users WHERE company_id = '".$get['company_id']."' AND user_type ='EMP' . self::SQL_AND_IS_ACTIVE_0";
+            $company_contribution_userssql = "SELECT id, display_name FROM company_contribution_users WHERE company_id = '".$get['company_id']."' AND user_type ='EMP' AND is_active=0";
             $company_contribution_usersres = $callConfig->getAllRows($company_contribution_userssql);
             $return['company_contribution_users'] = $company_contribution_usersres;
 
@@ -289,18 +222,18 @@ class EsopUserClass extends userClass
     public function insertESOPAllocations($post){
         global $callConfig;
         $explname = explode(" ",$post['emp_name']);
-        $auquery = "SELECT id FROM application_users where company_id = '".$post['company_id']."' AND user_email ='".trim($post['user_email'])."' . self::SQL_AND_IS_ACTIVE_EQ_0";
+        $auquery = "SELECT id FROM application_users where company_id = '".$post['company_id']."' AND user_email ='".trim($post['user_email']).self::SQL_AND_IS_ACTIVE_SPACE_0;
         $aures = $callConfig->getRow($auquery);
         $return['aures'] = $aures;
         if(!isset($aures->id)){
             $role = json_encode(array(ESOP_USER_ROLE));
-            $fieldnames=array('company_id'=>$post['company_id'],'user_name'=>$post['emp_code'],'first_name'=>$explname[0],"last_name"=>$explname[1],"display_name"=>$post['emp_name'],'user_email'=>$post['user_email'],'current_status'=>'0','is_active' =>'0',"created_date"=>date('Y-m-d H:i:s'),"created_by"=>$post['user_id'],'user_type'=>'1','role_id'=>$role,"esop_connect"=>$post['esop_connect']);
+            $fieldnames=array('company_id'=>$post['company_id'],'user_name'=>$post['emp_code'],'first_name'=>$explname[0],"last_name"=>$explname[1],"display_name"=>$post['emp_name'],'user_email'=>$post['user_email'],'current_status'=>'0','is_active' =>'0',"created_date"=>date(self::DATE_FORMAT_UPPER_HIS),"created_by"=>$post['user_id'],'user_type'=>'1','role_id'=>$role,"esop_connect"=>$post['esop_connect']);
             $user=$callConfig->insertRecord('application_users',$fieldnames);
             $return['insertau'] = $user;
             $userid = $user['LASTID'];
             $returnarray['user_create'] = $user;
             if(isset($user['LASTID']) && $user['LASTID'] !=""){
-                $query = "SELECT application_module,id,role_short_code FROM application_roles where company_id = '".$post['company_id']."' AND role_short_code ='".ESOP_USER_ROLE."' . self::SQL_AND_IS_ACTIVE_EQ_0";
+                $query = "SELECT application_module,id,role_short_code FROM application_roles where company_id = '".$post['company_id']."' AND role_short_code ='".ESOP_USER_ROLE.self::SQL_AND_IS_ACTIVE_SPACE_0;
                 $roleres = $callConfig->getRow($query);
 
                 $insertarray = array("company_id"=>$post['company_id'],"user_id"=>$userid,"module_setup_id"=>$roleres->application_module,"application_module_id"=>$roleres->application_module,"role_id"=>$roleres->id,"role_short_code"=>$roleres->role_short_code,"is_active"=>"0","current_status"=>"0","created_date"=>date(self::DATE_FORMAT_LOWER_HIS),"created_by"=>$post['user_id']);
@@ -339,7 +272,7 @@ class EsopUserClass extends userClass
             $company_contribution_user_id = $res1['LASTID'];
         }
 
-        $getuseridsql = "SELECT user_id FROM company_contribution_users where company_id = '".$post['company_id']."' AND id ='".$company_contribution_user_id."' . self::SQL_AND_IS_ACTIVE_EQ_0";
+        $getuseridsql = "SELECT user_id FROM company_contribution_users where company_id = '".$post['company_id']."' AND id ='".$company_contribution_user_id.self::SQL_AND_IS_ACTIVE_SPACE_0;
         $getuseridsres = $callConfig->getRow($getuseridsql);
 
 
@@ -354,7 +287,7 @@ class EsopUserClass extends userClass
 
         $insertary=array('company_id'=>$post['company_id'],'user_id'=>$getuseridsres->user_id,'company_contribution_user_id'=>$company_contribution_user_id,'emp_code'=>$post['emp_code'],'date_of_joining'=>$this->dateconvertdbformat($post['date_of_joining']),'emp_name'=>$post['emp_name'],'designation'=>$post['designation'],'tenure'=>$post['tenure'],'esop_plan_id'=>$post['esop_plan_id'],'esop_bucket_id'=>$post['esop_bucket_id'],'annual_ctc'=>$post['annual_ctc'],'grant_price'=>$post['grant_price'],'option_granted'=>$post['option_granted'],'discount_per_option'=>$post['discount_per_option'],'total_discount'=>$post['total_discount'],'expected_option_benefit'=>$post['expected_option_benefit'],'total_expected_benefit'=>$post['total_expected_benefit'],'benefit_ctc'=>$post['benefit_ctc'],'note'=>$post['note'],'user_email'=>$post['user_email'], 'esop_connect'=>$post['esop_connect'], 'stock'=>$post['stock'], 'value'=>$post['value'], 'stock_value'=>$post['stock_value'], 'grant_date'=>$this->dateconvertdbformat($post['grant_date']), 'vesting_schedule'=>$vestingScheduleencode);
         if($post['rid'] !=""){
-            $esopallocatsql = "SELECT esop_bucket_id, option_granted FROM esop_allocations where company_id = '".$post['company_id']."' AND id ='".$post['rid']."' . self::SQL_AND_IS_ACTIVE_EQ_0";
+            $esopallocatsql = "SELECT esop_bucket_id, option_granted FROM esop_allocations where company_id = '".$post['company_id']."' AND id ='".$post['rid'].self::SQL_AND_IS_ACTIVE_SPACE_0;
             $esopallocatres = $callConfig->getRow($esopallocatsql);
             $return['esopallocatres'] = $esopallocatres;
 
@@ -389,7 +322,7 @@ class EsopUserClass extends userClass
         if($get['type']=="ALL"){
 
             $usertype = $investortype = array();
-            $company_contribution_userssql = "SELECT id, display_name, user_type, investor_type FROM company_contribution_users WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+            $company_contribution_userssql = "SELECT id, display_name, user_type, investor_type FROM company_contribution_users WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
             $company_contribution_usersres = $callConfig->getAllRows($company_contribution_userssql);
             foreach($company_contribution_usersres as $ccu){
                 $usertype[$ccu->id] =$ccu->user_type;
@@ -397,7 +330,7 @@ class EsopUserClass extends userClass
             }
 
 
-            $companyvaluationssql = "self::SQL_SEL_COMPANY_VALUATIONS . '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_VAL_ASC";
+            $companyvaluationssql = self::SQL_SEL_COMPANY_VALUATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_VAL_ASC;
             $companyvaluationsres = $callConfig->getAllRows($companyvaluationssql);
             $return['company_valuations_all'] = $companyvaluationsres;
 
@@ -423,21 +356,21 @@ class EsopUserClass extends userClass
             $return['percentagecheck'] = $percentagecheck;
             $return['company_valuation_distributions'] = $cvd;
 
-            $typsql = "self::SQL_SEL_GENERAL_CODE_DETAILS . '".$get['company_id']."' AND is_active ='0' AND genc_code ='DISTRIBUTIONTYPES' ORDER BY id ASC";
+            $typsql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']."' AND is_active ='0' AND genc_code ='DISTRIBUTIONTYPES' ORDER BY id ASC";
             $typsres = $callConfig->getAllRows($typsql);
             $return['contribution_users_type'] = $typsres;
 
-            $itypsql = "self::SQL_SEL_GENERAL_CODE_DETAILS . '".$get['company_id']."' AND is_active ='0' AND genc_code ='ESOPINVESTERTYPE' ORDER BY id ASC";
+            $itypsql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']."' AND is_active ='0' AND genc_code ='ESOPINVESTERTYPE' ORDER BY id ASC";
             $itypres = $callConfig->getAllRows($itypsql);
             $return['invester_type'] = $itypres;
 
 
         }else{
-            $companyvaluationssql = "SELECT id, valuation_name FROM company_valuations WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_VAL_ASC";
+            $companyvaluationssql = "SELECT id, valuation_name FROM company_valuations WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_VAL_ASC;
             $companyvaluationsres = $callConfig->getAllRows($companyvaluationssql);
             $return['company_valuations_all'] = $companyvaluationsres;
 
-            $companyvaluationssql = "self::SQL_SEL_COMPANY_VALUATIONS . '".$get['company_id']."' AND id = '".$get['rid']."' . self::SQL_AND_IS_ACTIVE_0";
+            $companyvaluationssql = self::SQL_SEL_COMPANY_VALUATIONS.$get['company_id']."' AND id = '".$get['rid'].self::SQL_AND_IS_ACTIVE_0;
 
             $companyvaluationssingle = $callConfig->getRow($companyvaluationssql);
             $return['company_valuations'] = $companyvaluationssingle;
@@ -459,7 +392,7 @@ class EsopUserClass extends userClass
 
         if($get['result_type']== "USER"){
 
-            $esopplanssql = "self::SQL_SEL_ESOP_ALLOCATIONS . '".$get['company_id']."' AND user_id = '".$get['user_id']."' . self::SQL_AND_IS_ACTIVE_0";
+            $esopplanssql = self::SQL_SEL_ESOP_ALLOCATIONS.$get['company_id']."' AND user_id = '".$get['user_id'].self::SQL_AND_IS_ACTIVE_0;
             $esopallocationsres = $callConfig->getAllRows($esopplanssql);
             $return['esop_allocations'] = $esopallocationsres;
             $esopplansid =$esopplanbucketsid =  array();
@@ -472,26 +405,26 @@ class EsopUserClass extends userClass
             $esopplanbucketsids = implode(',', $esopplanbucketsid);
             $esopallocationids = implode(',', $esopallocationid);
 
-            $esopplanssql = "SELECT id,plan_name FROM esop_plans WHERE company_id = '".$get['company_id']."' . self::SQL_AND_ID_IN . ".$esopplansids.")' . self::SQL_AND_IS_ACTIVE_0";
+            $esopplanssql = "SELECT id,plan_name FROM esop_plans WHERE company_id = '".$get['company_id'].self::SQL_AND_ID_IN.$esopplansids.self::SQL_CLOSE_PAREN_IS_ACTIVE_0;
             $esopplansres = $callConfig->getAllRows($esopplanssql);
             foreach($esopplansres as $esopplan){
                 $esopplansname[$esopplan->id] = $esopplan->plan_name;
             }
             $return['esop_plans'] = $esopplansname;
 
-            $esopplanbucketssql = "SELECT id, bucket_name FROM esop_plan_buckets WHERE company_id = '".$get['company_id']."' . self::SQL_AND_ID_IN . ".$esopplanbucketsids.")' . self::SQL_AND_IS_ACTIVE_0";
+            $esopplanbucketssql = "SELECT id, bucket_name FROM esop_plan_buckets WHERE company_id = '".$get['company_id'].self::SQL_AND_ID_IN.$esopplanbucketsids.self::SQL_CLOSE_PAREN_IS_ACTIVE_0;
             $esopplanbucketsres = $callConfig->getAllRows($esopplanbucketssql);
             foreach($esopplanbucketsres as $esopplanbucket){
                 $esopplanbuckets[$esopplanbucket->id] = $esopplanbucket->bucket_name;
             }
             $return['esop_plan_buckets'] = $esopplanbuckets;
 
-            $esopplanscntsql = "SELECT COUNT(id) as total_cnt, SUM(IF(current_status =".ST_APPROVED.",1,0)) as approved_cnt, SUM(IF(current_status !=".ST_APPROVED.",1,0)) as pendding_cnt, SUM(IF(current_status=".ST_APPROVED.",option_granted,0)) as option_granted FROM esop_allocations WHERE company_id = '".$get['company_id']."' . self::SQL_AND_ID_IN . ".$esopallocationids.")' . self::SQL_AND_IS_ACTIVE_0";
+            $esopplanscntsql = "SELECT COUNT(id) as total_cnt, SUM(IF(current_status =".ST_APPROVED.",1,0)) as approved_cnt, SUM(IF(current_status !=".ST_APPROVED.",1,0)) as pendding_cnt, SUM(IF(current_status=".ST_APPROVED.",option_granted,0)) as option_granted FROM esop_allocations WHERE company_id = '".$get['company_id'].self::SQL_AND_ID_IN.$esopallocationids.self::SQL_CLOSE_PAREN_IS_ACTIVE_0;
             $esopplanscntres = $callConfig->getRow($esopplanscntsql);
             $return['esop_allocations_cnt'] = $esopplanscntres;
 
 
-            $esopvestingschedulecntsql = "SELECT SUM(allocation_share) total_share, SUM(IF(current_status = ".ST_APPROVED.",allocation_share,0)) allocated_share, SUM(IF(current_status = 0 OR current_status = ".ST_REJECTED.",allocation_share,0)) un_allocated_share, SUM(total_amount) as total_ammount, SUM(IF(current_status = ".ST_APPROVED.",total_amount,0)) allocated_ammount, SUM(IF(current_status = 0 OR current_status = ".ST_REJECTED.",total_amount,0)) un_allocated_ammount FROM esop_vesting_schedule WHERE company_id = '".$get['company_id']."' AND esop_allocation_id IN(".$esopallocationids.")' . self::SQL_AND_IS_ACTIVE_0";
+            $esopvestingschedulecntsql = "SELECT SUM(allocation_share) total_share, SUM(IF(current_status = ".ST_APPROVED.",allocation_share,0)) allocated_share, SUM(IF(current_status = 0 OR current_status = ".ST_REJECTED.",allocation_share,0)) un_allocated_share, SUM(total_amount) as total_ammount, SUM(IF(current_status = ".ST_APPROVED.",total_amount,0)) allocated_ammount, SUM(IF(current_status = 0 OR current_status = ".ST_REJECTED.",total_amount,0)) un_allocated_ammount FROM esop_vesting_schedule WHERE company_id = '".$get['company_id']."' AND esop_allocation_id IN(".$esopallocationids.self::SQL_CLOSE_PAREN_IS_ACTIVE_0;
             $esopvestingschedulecntres = $callConfig->getRow($esopvestingschedulecntsql);
             $return['esop_vesting_schedule_cnt'] = $esopvestingschedulecntres;
 
@@ -499,15 +432,15 @@ class EsopUserClass extends userClass
 
         }else{
 
-            $companyvaluationssql = "SELECT id, valuation_name, valuation_date, company_value,  new_share_qty, total_share_qty, per_share_value FROM company_valuations WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_VAL_ASC LIMIT ".$get['limit'];
+            $companyvaluationssql = "SELECT id, valuation_name, valuation_date, company_value,  new_share_qty, total_share_qty, per_share_value FROM company_valuations WHERE company_id = '".$get['company_id']."' AND is_active=0 ORDER BY valuation_date ASC LIMIT ".$get['limit'];
             $companyvaluationsres = $callConfig->getAllRows($companyvaluationssql);
             $return['company_valuations'] = $companyvaluationsres;
 
-            $esopplanssql = "SELECT id, plan_name, date_of_grant, company_valuation, share FROM esop_plans WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0 ORDER BY date_of_grant ASC LIMIT ".$get['limit'];
+            $esopplanssql = "SELECT id, plan_name, date_of_grant, company_valuation, share FROM esop_plans WHERE company_id = '".$get['company_id']."' AND is_active=0 ORDER BY date_of_grant ASC LIMIT ".$get['limit'];
             $esopplansres = $callConfig->getAllRows($esopplanssql);
             $return['esop_plans'] = $esopplansres;
 
-            $typsql = "self::SQL_SEL_GENERAL_CODE_DETAILS . '".$get['company_id']."' AND is_active ='0' AND genc_code ='DISTRIBUTIONTYPES' AND genc_detail_code != 'EMP' ORDER BY id ASC";
+            $typsql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']."' AND is_active ='0' AND genc_code ='DISTRIBUTIONTYPES' AND genc_detail_code != 'EMP' ORDER BY id ASC";
             $typsres = $callConfig->getAllRows($typsql);
             $return['contribution_users_type'] = $typsres;
 
@@ -519,7 +452,7 @@ class EsopUserClass extends userClass
             $return['company_valuation_graph_sql'] = $graphsql;
             $return['company_valuation_graph'] = $graph;
 //----------------------------------------------------------------
-            $lastcopanyvaluationsql = "SELECT id,valuation_date, company_value, total_share_qty, per_share_value FROM `company_valuations` WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0 ORDER BY valuation_date DESC LIMIT 1";
+            $lastcopanyvaluationsql = "SELECT id,valuation_date, company_value, total_share_qty, per_share_value FROM `company_valuations` WHERE company_id = '".$get['company_id']."' AND is_active=0 ORDER BY valuation_date DESC LIMIT 1";
             $lastcopanyvaluationres = $callConfig->getRow($lastcopanyvaluationsql);
             $return['last_company_valuations'] = $lastcopanyvaluationres;
 
@@ -528,27 +461,27 @@ class EsopUserClass extends userClass
             $return['last_company_valuation_distributions'] = $lastcopanyvaluationdistrres;
 //---------------------------------------------------------------------
 
-            $totalusersql = "SELECT SUM(IF(user_type ='EMP',1,0)) as employee_cnt, SUM(IF(user_type ='I',1,0)) as invester_cnt, SUM(IF(user_type ='F',1,0)) as founder_cnt  FROM company_contribution_users WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+            $totalusersql = "SELECT SUM(IF(user_type ='EMP',1,0)) as employee_cnt, SUM(IF(user_type ='I',1,0)) as invester_cnt, SUM(IF(user_type ='F',1,0)) as founder_cnt  FROM company_contribution_users WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
             $totaluserres = $callConfig->getRow($totalusersql);
             $return['total_users_with_type_cnt'] = $totaluserres;
 
-            $esopplanssql = "SELECT SUM(id) as cnt  FROM esop_plans WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+            $esopplanssql = "SELECT SUM(id) as cnt  FROM esop_plans WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
             $esopplansres = $callConfig->getRow($esopplanssql);
             $return['esop_plans_cnt'] = $esopplansres->cnt;
 
-            $esop_allocationssql = "SELECT SUM(IF(current_status =".ST_APPROVED.",1,0)) as approved_cnt, SUM(IF(current_status !=".ST_APPROVED.",1,0)) as pendding_cnt  FROM esop_allocations WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+            $esop_allocationssql = "SELECT SUM(IF(current_status =".ST_APPROVED.",1,0)) as approved_cnt, SUM(IF(current_status !=".ST_APPROVED.",1,0)) as pendding_cnt  FROM esop_allocations WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
             $esop_allocationsres = $callConfig->getRow($esop_allocationssql);
             $return['esop_allocations_cnt'] = $esop_allocationsres;
 
-            $trendgraphsql = "SELECT valuation_date, company_value, per_share_value FROM company_valuations WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_VAL_ASC";
+            $trendgraphsql = "SELECT valuation_date, company_value, per_share_value FROM company_valuations WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_VAL_ASC;
             $trendgraphres = $callConfig->getAllRows($trendgraphsql);
             $return['company_valuations_trend'] = $trendgraphres;
 
-            $esop_plansgraphsql = "SELECT date_of_grant, company_valuation, share_price_at_grant_time FROM esop_plans WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0 ORDER BY date_of_grant ASC";
+            $esop_plansgraphsql = "SELECT date_of_grant, company_valuation, share_price_at_grant_time FROM esop_plans WHERE company_id = '".$get['company_id']."' AND is_active=0 ORDER BY date_of_grant ASC";
             $esop_plansgraphres = $callConfig->getAllRows($esop_plansgraphsql);
             $return['esop_plans_trend'] = $esop_plansgraphres;
 
-            $esopplanssql = "self::SQL_SEL_ESOP_ALLOCATIONS . '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0 ORDER BY created_date ASC";
+            $esopplanssql = self::SQL_SEL_ESOP_ALLOCATIONS.$get['company_id']."' AND is_active=0 ORDER BY created_date ASC";
             $esopallocationsres = $callConfig->getAllRows($esopplanssql);
             $return['esop_allocations'] = $esopallocationsres;
         }
@@ -557,7 +490,7 @@ class EsopUserClass extends userClass
     public function getValuationReport($get){
         global $callConfig;
 
-        $company_contribution_userssql = "SELECT id, display_name FROM company_contribution_users WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_0";
+        $company_contribution_userssql = "SELECT id, display_name FROM company_contribution_users WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $company_contribution_usersres = $callConfig->getAllRows($company_contribution_userssql);
         $companycontributionusers = array();
         foreach($company_contribution_usersres as $ccu){
@@ -565,11 +498,11 @@ class EsopUserClass extends userClass
         }
         $return['company_contribution_users'] = $companycontributionusers;
 
-        $companyvaluationssql = "SELECT id, valuation_name, valuation_date, company_value,  new_share_qty,total_share_qty,per_share_value FROM company_valuations WHERE company_id = '".$get['company_id']."' . self::SQL_AND_IS_ACTIVE_VAL_ASC";
+        $companyvaluationssql = "SELECT id, valuation_name, valuation_date, company_value,  new_share_qty,total_share_qty,per_share_value FROM company_valuations WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_VAL_ASC;
         $companyvaluationsres = $callConfig->getAllRows($companyvaluationssql);
         $return['company_valuations'] = $companyvaluationsres;
 
-        $companyvaluationsdistsql = "SELECT id, company_valuation_id, company_contribution_user_id, total_shares, total_amount,  distribute_percentage FROM company_valuation_distributions WHERE company_id = '".$get['company_id']."' AND distribute_percentage !='0' . self::SQL_AND_IS_ACTIVE_0";
+        $companyvaluationsdistsql = "SELECT id, company_valuation_id, company_contribution_user_id, total_shares, total_amount,  distribute_percentage FROM company_valuation_distributions WHERE company_id = '".$get['company_id']."' AND distribute_percentage !='0' AND is_active=0";
         $companyvaluationsdistres = $callConfig->getAllRows($companyvaluationsdistsql);
         $return['company_valuation_distributions'] = $companyvaluationsdistres;
 
@@ -612,7 +545,7 @@ class EsopUserClass extends userClass
 
         $return['esop_allocations_cnt']['cnt'] = count((array)$esop_allocationsres);
 
-        $esopplanbucketssql = "SELECT id, esop_plans_id, bucket_name, grant_price, discount, expected_option_benefit, bs_option_value, options_granted, total_discount, discount_per_option, vesting_schedule, allocated_shares, unallocated_shares FROM esop_plan_buckets WHERE company_id = '".$get['company_id']."' AND esop_plans_id =  '".$esopplansid."' . self::SQL_AND_IS_ACTIVE_0";
+        $esopplanbucketssql = "SELECT id, esop_plans_id, bucket_name, grant_price, discount, expected_option_benefit, bs_option_value, options_granted, total_discount, discount_per_option, vesting_schedule, allocated_shares, unallocated_shares FROM esop_plan_buckets WHERE company_id = '".$get['company_id']."' AND esop_plans_id =  '".$esopplansid.self::SQL_AND_IS_ACTIVE_0;
         $esopplansres = $callConfig->getAllRows($esopplanbucketssql);
         $return['esop_plan_buckets'] = $esopplansres;
         $options_granted =$allocated_shares = $unallocated_shares =  0;
@@ -629,4 +562,60 @@ class EsopUserClass extends userClass
         return $return;
     }
 
+
+    private function processValuationDistributions($post, $rid, &$return)
+    {
+        global $callConfig;
+        foreach ((array) $post['distributer_name'] as $keyid => $keyvalue) {
+            if ($post['distributer_name'][$keyid] != "" && $post['distribute_percentage'][$keyid] != "") {
+                $dilution_seq = $post['dilution_seq'][$keyid];
+                $dilution = $post['dilution'][$dilution_seq] == '0' ? '0' : '1';
+                $distributamount = round($post['total_share'][$keyid] * $post['per_share_value']);
+
+                $equity_shares_percentage_share = round(($post['equity_shares_percentage'][$keyid] / 100) * $post['total_share'][$keyid]);
+                $equity_shares_percentage_amt = round(($post['equity_shares_percentage'][$keyid] / 100) * $distributamount, 2);
+
+                $preference_shares_percentage_share = round(($post['preference_shares_percentage'][$keyid] / 100) * $post['total_share'][$keyid]);
+                $preference_shares_percentage_amt = round(($post['preference_shares_percentage'][$keyid] / 100) * $distributamount, 2);
+
+                $insertary = array(
+                    'company_id' => $post['company_id'],
+                    'company_valuation_id' => $rid,
+                    'distributer_name' => $post['distributer_name'][$keyid],
+                    'old_percentage' => $post['old_percentage'][$keyid],
+                    'new_percentage' => $post['new_percentage'][$keyid],
+                    'distribute_percentage' => $post['distribute_percentage'][$keyid],
+                    'company_contribution_user_id' => $post['ccuid'][$keyid],
+                    'total_amount' => $distributamount,
+                    'old_shares' => $post['old_shares_qty'][$keyid],
+                    'new_shares' => $post['new_shares_qty'][$keyid],
+                    'total_shares' => $post['total_share'][$keyid],
+                    'equity_shares_percentage' => $post['equity_shares_percentage'][$keyid],
+                    'equity_shares' => $equity_shares_percentage_share,
+                    'equity_shares_amount' => $equity_shares_percentage_amt,
+                    'preference_shares_percentage' => $post['preference_shares_percentage'][$keyid],
+                    'preference_shares' => $preference_shares_percentage_share,
+                    'preference_shares_amount' => $preference_shares_percentage_amt,
+                    'dilution' => $dilution
+                );
+
+                if ($post['irid'][$keyid] != "") {
+                    $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+                    $insertary['updated_by'] = $post['user_id'];
+                    $insertary['is_active'] = 0;
+                    $return['item'][] = $callConfig->updateRecord('company_valuation_distributions', $insertary, 'id', $post['irid'][$keyid]);
+                } else {
+                    $insertary['is_active'] = 0;
+                    $insertary['current_status'] = 0;
+                    $insertary['created_by'] = $post['user_id'];
+                    $insertary['created_date'] = date(self::DATE_FORMAT_UPPER_HIS);
+                    $return['item'][] = $callConfig->insertRecord('company_valuation_distributions', $insertary);
+                }
+                if ($dilution == '0') {
+                    $insertary = array('dilution' => $dilution, 'dilution_percentage' => $post['distribute_percentage'][$keyid]);
+                    $return['ccu'][] = $callConfig->updateRecord('company_contribution_users', $insertary, 'id', $post['ccuid'][$keyid]);
+                }
+            }
+        }
+    }
 }

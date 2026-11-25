@@ -1,5 +1,18 @@
 <?php
 
+interface AmcAccountConstants
+{
+    public const DATE_FORMAT_HIS = 'Y-m-d H:i:s';
+    public const DATE_FORMAT_LOWER_HIS = 'Y-m-d h:i:s';
+    public const SQL_AND_IS_ACTIVE_0 = "' AND is_active = 0";
+    public const SQL_AND_SPACE_IS_ACTIVE_0 = "' AND is_active = 0";
+    public const SQL_AND_IS_ACTIVE_EQ_QUOTE_0 = "' AND is_active = '0'";
+    public const SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0 = "' AND is_active = 0 ";
+    public const SQL_SELECT_AMC_ACCOUNT_NAME = "SELECT id, account_name FROM amc_account_details WHERE company_id='";
+    public const SQL_SEL_AMC_ACCOUNT_GROUPS = "SELECT id, group_name from amc_account_groups where company_id='";
+    public const ERR_INSERTING_DYNAMIC_SERVICE_FIELDS = "Error inserting dynamic service fields";
+}
+
 trait AmcStationeryAndComplaintsTrait {
   public function getqrgenerationdetails($get) {
     global $callConfig;
@@ -155,6 +168,36 @@ trait AmcStationeryAndComplaintsTrait {
     return $return;
   }
 
+
+  private function updateStationeryGrnItems($post, $company_id, $user_id, $grn_id, &$return) {
+      global $callConfig;
+      if (count((array)$post['item_id']) <= 0) {
+          return;
+      }
+      foreach ($post['item_id'] as $i => $item_id) {
+          $child_id = intval($post['grn_items_id'][$i] ?? 0);
+          $child_data = array(
+              'item_id' => $item_id,
+              'qty' => floatval($post['qty'][$i]),
+              'amount' => floatval($post['amount'][$i])
+          );
+          if ($child_id > 0) {
+              $child_data['updated_by'] = $user_id;
+              $child_data['is_active'] = 0;
+              $child_data['updated_date'] = date(self::DATE_FORMAT_HIS);
+              $return['update3'][] = $callConfig->updateRecord('stationery_grn_items', $child_data, 'id', $child_id);
+          } else {
+              $child_data['company_id'] = $company_id;
+              $child_data['grn_id'] = $grn_id;
+              $child_data['is_active'] = 0;
+              $child_data['current_status'] = 0;
+              $child_data['created_by'] = $user_id;
+              $child_data['created_date'] = date(self::DATE_FORMAT_HIS);
+              $return['insert'][] = $callConfig->insertRecord('stationery_grn_items', $child_data);
+          }
+      }
+  }
+
   public function insertstationerydata($get, $post){
     global $callConfig;
     $return = array();
@@ -177,36 +220,7 @@ trait AmcStationeryAndComplaintsTrait {
                   AND grn_id = '{$grn_id}'
                   AND is_active = 0";
         $return['update2'] = $callConfig->executeQuery($sql);
-          // --- Loop through child items ---
-          if (count((array)$post['item_id']) > 0) {
-              foreach ($post['item_id'] as $i => $item_id) {
-                  $child_id = intval($post['grn_items_id'][$i] ?? 0);
-
-                  $child_data = array(
-                      'item_id'      => $item_id,
-                      'qty'          => floatval($post['qty'][$i]),
-                      'amount'       => floatval($post['amount'][$i]),
-                  );
-
-                  if ($child_id > 0) {
-                    $child_data['updated_by']     = $user_id;
-                    $child_data['is_active']      = 0;
-                      $child_data['updated_date']   = date(self::DATE_FORMAT_HIS);
-                      // --- Update existing GRN item ---
-                    $return['update3'][] =  $callConfig->updateRecord('stationery_grn_items', $child_data, 'id', $child_id);
-                  } else {
-                      // --- Insert new GRN item ---
-                      $child_data['company_id']     = $company_id;
-                      $child_data['grn_id']         = $grn_id;
-                      $child_data['is_active']      = 0;
-                      $child_data['current_status'] = 0;
-                      $child_data['created_by']     = $user_id;
-                      $child_data['created_date']   = date(self::DATE_FORMAT_HIS);
-
-                     $return['insert'][] =  $callConfig->insertRecord('stationery_grn_items', $child_data);
-                  }
-              }
-          }
+          $this->updateStationeryGrnItems($post, $company_id, $user_id, $grn_id, $return);
 
           $return[] = array('status' => 'success', 'message' => 'GRN updated successfully', 'grn_id' => $grn_id);
     }else{
@@ -676,16 +690,10 @@ trait AmcStationeryAndComplaintsTrait {
 
 }
 
-class AmcAccountDetailsClass extends userClass {
+class AmcAccountDetailsClass extends userClass implements AmcAccountConstants {
     use AmcStationeryAndComplaintsTrait;
 
-    public const DATE_FORMAT_HIS = 'Y-m-d H:i:s';
-    public const DATE_FORMAT_LOWER_HIS = 'Y-m-d h:i:s';
-    public const SQL_AND_IS_ACTIVE_0 = self::SQL_AND_IS_ACTIVE_0;
-    public const SQL_AND_SPACE_IS_ACTIVE_0 = self::SQL_AND_SPACE_IS_ACTIVE_0;
-    public const SQL_AND_IS_ACTIVE_EQ_QUOTE_0 = self::SQL_AND_IS_ACTIVE_EQ_QUOTE_0;
-    public const SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0 = self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
-    public const SQL_SELECT_AMC_ACCOUNT_NAME = self::SQL_SELECT_AMC_ACCOUNT_NAME;
+
 
 
   public function insertAmcAccountDetails($get, $post){
@@ -896,7 +904,7 @@ class AmcAccountDetailsClass extends userClass {
        $tech_details[$row->id] = $row->account_name;
     }
     $return['tech_details'] = $tech_details;
-     $account_group_query = "SELECT id, group_name from amc_account_groups where company_id='" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
+     $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
     $account_group_details = $callConfig->getAllRows($account_group_query);
     $ag_details = array();
     foreach ($account_group_details as $row) {
@@ -986,7 +994,7 @@ class AmcAccountDetailsClass extends userClass {
           $dynamicRes = $callConfig->insertRecord('amc_registration_services', $serviceInsertary);
 
           if (!$dynamicRes) {
-            $return['error'] = 'Error inserting dynamic service fields';
+            $return['error'] = self::ERR_INSERTING_DYNAMIC_SERVICE_FIELDS;
             break;
           }
         }
@@ -1050,7 +1058,7 @@ class AmcAccountDetailsClass extends userClass {
           $dynamicRes = $callConfig->insertRecord('amc_registration_services', $serviceInsertary);
 
           if (!$dynamicRes) {
-            $return['error'] = 'Error inserting dynamic service fields';
+            $return['error'] = self::ERR_INSERTING_DYNAMIC_SERVICE_FIELDS;
             break;
           }
         }
@@ -1071,7 +1079,7 @@ class AmcAccountDetailsClass extends userClass {
             $checkRes = $callConfig->insertRecord('application_check_lists', $check_array);
 
             if (!$checkRes) {
-              $return['check_error'] = 'Error inserting dynamic service fields';
+              $return['check_error'] = self::ERR_INSERTING_DYNAMIC_SERVICE_FIELDS;
               break;
             }
           }
@@ -1125,6 +1133,48 @@ class AmcAccountDetailsClass extends userClass {
     return $return;
   }
 
+
+  private function processScheduleInterval($serviceOn, &$currentDate, $endDate, $noOfServices, $serviceDetails, $baseValues, &$return) {
+      global $callConfig;
+      if ($serviceOn == '1') {
+          for ($i = 1; $i <= $noOfServices; $i++) {
+              $serviceTime = $serviceDetails[$i];
+              $serviceDate = date('Y-m-d', strtotime($currentDate)) . " $serviceTime";
+              $values = array_merge($baseValues, ['service_date' => $serviceDate]);
+              $return['dynamicRes'][$i] = $callConfig->insertRecord('amc_service_schedules', $values);
+          }
+          $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
+      } elseif ($serviceOn == '2') {
+          for ($i = 1; $i <= $noOfServices; $i++) {
+              $serviceDay = $serviceDetails[$i];
+              $serviceDate = date('Y-m-d', strtotime("next $serviceDay", strtotime($currentDate)));
+              if (strtotime($serviceDate) > strtotime($endDate)) {
+                  break;
+              }
+              $values = array_merge($baseValues, ['service_date' => $serviceDate]);
+              $callConfig->insertRecord('amc_service_schedules', $values);
+              $return['dynamicRes'][$serviceDay][$i] = $serviceDate;
+          }
+          $currentDate = date('Y-m-d', strtotime($currentDate . ' +7 days'));
+      } elseif ($serviceOn == '3') {
+          for ($i = 1; $i <= $noOfServices; $i++) {
+              $serviceDay = $serviceDetails[$i];
+              $serviceDay = $serviceDay < '10' ? '0' . $serviceDay : $serviceDay;
+              $serviceDate = date('Y-m-' . $serviceDay, strtotime($currentDate));
+              $values = array_merge($baseValues, ['service_date' => $serviceDate]);
+              $return['dynamicRes'][$i] = $callConfig->insertRecord('amc_service_schedules', $values);
+          }
+          $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 month'));
+      } elseif ($serviceOn == '4') {
+          for ($i = 1; $i <= $noOfServices; $i++) {
+              $serviceDate = $serviceDetails[$i];
+              $values = array_merge($baseValues, ['service_date' => $serviceDate]);
+              $return['dynamicRes'][$i] = $callConfig->insertRecord('amc_service_schedules', $values);
+          }
+          $currentDate = $endDate;
+      }
+  }
+
   public function createSchedule($get){
     global $callConfig;
     $return = array();
@@ -1170,111 +1220,24 @@ class AmcAccountDetailsClass extends userClass {
       $endDate = $deactivationDate;
 
 
+      $baseValues = [
+          'company_id' => $companyId,
+          'registration_id' => $registrationId,
+          'product_id' => $product_id,
+          'customer_id' => $customerId,
+          'payment_type' => $paymentType,
+          'service_charge' => $serviceCharge,
+          'technician_id' => $technicianId,
+          'account_group_id'=> $account_group_id,
+          'building_id' => $building_id,
+          'building_floor_id' => $building_floor_id,
+          'building_floor_space_id' => $building_floor_space_id,
+          'is_active' => '0',
+          'created_by' => $createdBy,
+          'created_date' => $createdDate
+      ];
       while (strtotime($currentDate) < strtotime($endDate)) {
-        if ($serviceOn == '1') { // Daily
-          for ($i = 1; $i <= $noOfServices; $i++) {
-            $serviceTime = $serviceDetails[$i];
-            $serviceDate = date('Y-m-d', strtotime($currentDate)) . " $serviceTime";
-            $values = [
-              'company_id' => $companyId,
-              'registration_id' => $registrationId,
-              'product_id' => $product_id,
-              'customer_id' => $customerId,
-              'service_date' => $serviceDate,
-              'payment_type' => $paymentType,
-              'service_charge' => $serviceCharge,
-              'technician_id' => $technicianId,
-              'account_group_id'=> $account_group_id,
-              'building_id' => $building_id,
-              'building_floor_id' => $building_floor_id,
-              'building_floor_space_id' => $building_floor_space_id,
-              'is_active' => '0',
-              'created_by' => $createdBy,
-              'created_date' => $createdDate
-            ];
-            $dynamicRes = $callConfig->insertRecord('amc_service_schedules', $values);
-            $return['dynamicRes'][$i] = $dynamicRes;
-          }
-          $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
-        } elseif ($serviceOn == '2') { // Weekly
-          for ($i = 1; $i <= $noOfServices; $i++) {
-            $serviceDay = $serviceDetails[$i];
-            $serviceDate = date('Y-m-d', strtotime("next $serviceDay", strtotime($currentDate)));
-            if (strtotime($serviceDate) > strtotime($endDate)) {
-              break;
-            }
-            $values = [
-              'company_id' => $companyId,
-              'registration_id' => $registrationId,
-              'product_id' => $product_id,
-              'customer_id' => $customerId,
-              'service_date' => $serviceDate,
-              'payment_type' => $paymentType,
-              'service_charge' => $serviceCharge,
-              'technician_id' => $technicianId,
-              'account_group_id'=> $account_group_id,
-              'building_id' => $building_id,
-              'building_floor_id' => $building_floor_id,
-              'building_floor_space_id' => $building_floor_space_id,
-              'is_active' => '0',
-              'created_by' => $createdBy,
-              'created_date' => $createdDate
-            ];
-            $dynamicRes = $callConfig->insertRecord('amc_service_schedules', $values);
-            $return['dynamicRes'][$serviceDay][$i] = $serviceDate;
-          }
-          $currentDate = date('Y-m-d', strtotime($currentDate . ' +7 days'));
-        } elseif ($serviceOn == '3') { // Monthly
-          for ($i = 1; $i <= $noOfServices; $i++) {
-            $serviceDay = $serviceDetails[$i];
-            $serviceDay =  $serviceDay < '10' ? '0' . $serviceDay : $serviceDay;
-            $serviceDate = date('Y-m-' . $serviceDay, strtotime($currentDate));
-            $values = [
-              'company_id' => $companyId,
-              'registration_id' => $registrationId,
-              'product_id' => $product_id,
-              'customer_id' => $customerId,
-              'service_date' => $serviceDate,
-              'payment_type' => $paymentType,
-              'service_charge' => $serviceCharge,
-              'account_group_id'=> $account_group_id,
-              'technician_id' => $technicianId,
-              'building_id' => $building_id,
-              'building_floor_id' => $building_floor_id,
-              'building_floor_space_id' => $building_floor_space_id,
-              'is_active' => '0',
-              'created_by' => $createdBy,
-              'created_date' => $createdDate
-            ];
-            $dynamicRes = $callConfig->insertRecord('amc_service_schedules', $values);
-            $return['dynamicRes'][$i] = $dynamicRes;
-          }
-          $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 month'));
-        } elseif ($serviceOn == '4') { // Yearly
-          for ($i = 1; $i <= $noOfServices; $i++) {
-            $serviceDate = $serviceDetails[$i];
-            $values = [
-              'company_id' => $companyId,
-              'registration_id' => $registrationId,
-              'product_id' => $product_id,
-              'customer_id' => $customerId,
-              'service_date' => $serviceDate,
-              'payment_type' => $paymentType,
-              'service_charge' => $serviceCharge,
-              'account_group_id'=> $account_group_id,
-              'technician_id' => $technicianId,
-              'building_id' => $building_id,
-              'building_floor_id' => $building_floor_id,
-              'building_floor_space_id' => $building_floor_space_id,
-              'is_active' => '0',
-              'created_by' => $createdBy,
-              'created_date' => $createdDate
-            ];
-            $dynamicRes = $callConfig->insertRecord('amc_service_schedules', $values);
-            $return['dynamicRes'][$i] = $dynamicRes;
-          }
-          break; // Yearly only adds records once
-        }
+          $this->processScheduleInterval($serviceOn, $currentDate, $endDate, $noOfServices, $serviceDetails, $baseValues, $return);
       }
 
       // Return response
@@ -1312,7 +1275,7 @@ class AmcAccountDetailsClass extends userClass {
     }
     $return['gc_details'] = $gc_details;
 
-    $account_group_query = "SELECT id, group_name from amc_account_groups where company_id='" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
+    $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
     $account_group_details = $callConfig->getAllRows($account_group_query);
     $ag_details = array();
     foreach ($account_group_details as $row) {
@@ -1366,7 +1329,7 @@ class AmcAccountDetailsClass extends userClass {
     }
     $return['gc_details'] = $gc_details;
 
-    $account_group_query = "SELECT id, group_name from amc_account_groups where company_id='" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
+    $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
     $account_group_details = $callConfig->getAllRows($account_group_query);
     $ag_details = array();
     foreach ($account_group_details as $row) {
@@ -1516,7 +1479,7 @@ class AmcAccountDetailsClass extends userClass {
        $tech_details[$row->id] = $row->account_name;
     }
     $return['tech_details'] = $tech_details;
-     $account_group_query = "SELECT id, group_name from amc_account_groups where company_id='" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
+     $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
     $account_group_details = $callConfig->getAllRows($account_group_query);
     $ag_details = array();
     foreach ($account_group_details as $row) {

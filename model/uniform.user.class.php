@@ -124,7 +124,7 @@ trait UniformAdminSearchTrait {
 class UniformClass extends userClass
 {
     use UniformAdminSearchTrait;
-    public const DATE_FORMAT_HIS = self::DATE_FORMAT_HIS;
+    public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
 
     public function getUniformStockData($get) {
         global $callConfig;
@@ -798,43 +798,7 @@ class UniformClass extends userClass
         }
 
         foreach ($items as $itm) {
-            $item_id     = ($itm['item_id']);
-            $color_id     = ($itm['color_id']);
-            $size_id     = ($itm['size_id']);
-            $uniform_type_id = ($itm['uniform_type_id']);
-            $req_qty     = ($itm['qty']);
-
-            if ($req_qty <= 0) {
-            continue;
-        }
-            /*  Generate Serial Number (same as your old logic)*/
-            $itemArr = array(
-                'company_id'    => $company_id,
-                'item_id'    => $item_id,
-                'user_id'    => $user_id,
-                'qty'    => $req_qty,
-                'request_no'    => $req_no,
-                'request_id'    => $request_id,
-                'color_id'       => $color_id,
-                'size_id'       => $size_id,
-                'uniform_type_id' => $uniform_type_id,
-                'is_active'     => 0,
-                'current_status'=> 0,
-                'created_by'    => $user_id,
-                'created_date'  => date(self::DATE_FORMAT_HIS)
-            );
-
-             $res = $callConfig->insertRecord('stationery_cart', $itemArr);
-              /* Update Stock & Ledger */
-              $this->updateUniformStockAfterRequest($company_id, $item_id, $req_qty, $user_id, $req_no);
-             $get['transaction_table'] = 'stationery_requests';
-            $get['current_status'] = 0;
-            $get['transaction_no'] = $request_id;
-            $get['next_status'] = 1;
-             $auto_forward_docs = $this->submitStatusDynamicWorkFlow($get);
-
-            /* Store each request response */
-            $responses[] = $res;
+            $this->insertStationeryCartItem($company_id, $user_id, $req_no, $request_id, $itm, $get, $responses, $auto_forward_docs);
         }
 
         return array(

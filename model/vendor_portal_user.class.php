@@ -1609,5 +1609,6 @@ class VendorPortalUserClass
         return $this->msmeConfirmationUpdate($get, $post);
     }
 }
-
-class_alias('VendorPortalUserClass', 'vendorPortelUserClass');
+if (!class_exists('vendorPortelUserClass', false)) {
+    class_alias('VendorPortalUserClass', 'vendorPortelUserClass');
+}

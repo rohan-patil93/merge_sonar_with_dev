@@ -1696,7 +1696,7 @@ class CrmUserClass extends userClass {
     public const SQL_QUOTE_AND_ID_EQ = "' AND id = '";
     public const SQL_QUOTE_AND_ID_EQ_NUM = "' AND id = ";
     public const SQL_QUOTE_AND_CRM_COMPANY_ID = "' AND crm_company_id = '";
-    public const SQL_AND_POSITION_ = " AND position_";
+    public const SQL_AND_POSITION_PREFIX = " AND position_";
     public const SQL_AND_COMPANY_ID_EQ = " AND company_id=";
     public const SQL_SPACE_COMPANY_ID_EQ = " company_id=";
     public const SQL_QUOTE_AND_APP_SERIAL_ID = "' AND application_serial_number_master_id = '";

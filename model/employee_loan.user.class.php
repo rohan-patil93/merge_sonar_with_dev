@@ -3152,5 +3152,6 @@ class EmployeeLoanClass extends userClass
         throw new BadMethodCallException("Method {$name} does not exist.");
     }
 }
-
-class_alias('EmployeeLoanClass', 'employeeLoanClass');
+if (!class_exists('employeeLoanClass', false)) {
+    class_alias('EmployeeLoanClass', 'employeeLoanClass');
+}

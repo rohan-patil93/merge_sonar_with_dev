@@ -1,5 +1,28 @@
 <?php
 
+interface AssetConstants
+{
+    public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
+    public const SQL_AND_IS_ACTIVE_0 = "' AND is_active =0";
+    public const SQL_AND_IS_ACTIVE_0_SPACE = "' AND is_active = 0";
+    public const SQL_AND_IS_ACTIVE_EQ_0 = "' AND is_active = 0 ";
+    public const SQL_AND_ID_EQ_QUOTE = "' AND id = '";
+    public const SQL_QUOTE_AND_ID_EQ_QUOTE = "' AND id = '";
+    public const SQL_ID_EQ_QUOTE = " id = '";
+    public const SQL_QUOTE_AND_ID_IN = "' AND id IN (";
+    public const SQL_QUOTE_AND_ASSET_ID_IN = "' AND asset_id IN (";
+    public const SQL_QUOTE_AND_ORIGINATOR_EQ = "' AND originator = '";
+    public const SQL_SEL_ASSET_CATEGORIES = "SELECT id,category_description,depreciation_account,disposal_account,Journal_id,duration,duration_type FROM  asset_categories WHERE  company_id = '";
+    public const SQL_SEL_LOCATIONS = "SELECT id,location_name FROM locations WHERE company_id = '";
+    public const SQL_SEL_APPLICATION_USERS = "SELECT id,display_name FROM application_users WHERE company_id = '";
+    public const SQL_SEL_ASSET_STATUS = "SELECT id,name FROM asset_status WHERE company_id = '";
+    public const SQL_SEL_DEPARTMENTS = "SELECT id,department_name FROM departments WHERE company_id = '";
+    public const SQL_SEL_ASSET_CONDITION_TYPE = "SELECT id,condition_name FROM asset_condition_type WHERE is_active =0 AND company_id = '";
+    public const SQL_SEL_COST_CENTERS = "SELECT id, cost_center_name FROM cost_centers WHERE company_id = '";
+    public const SQL_SEL_ASSETS_DETAIL = "SELECT id, asset_code, asset_description, asset_location FROM assets WHERE company_id = '";
+    public const SQL_SEL_ALL_ASSETS_ACTIVE = "SELECT * FROM assets WHERE company_id = '";
+}
+
 trait AssetOperationsTrait {
     public function getAssetAllocationOld($get){
         global $callConfig;
@@ -512,28 +535,10 @@ trait AssetOperationsTrait {
 
 }
 
-class AssetUserClass extends userClass {
+class AssetUserClass extends userClass implements AssetConstants {
     use AssetOperationsTrait;
 
-    public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
-    public const SQL_AND_IS_ACTIVE_0 = self::SQL_AND_IS_ACTIVE_0;
-    public const SQL_AND_IS_ACTIVE_0_SPACE = self::SQL_AND_IS_ACTIVE_0_SPACE;
-    public const SQL_AND_IS_ACTIVE_EQ_0 = self::SQL_AND_IS_ACTIVE_EQ_0;
-    public const SQL_AND_ID_EQ_QUOTE = self::SQL_AND_ID_EQ_QUOTE;
-    public const SQL_QUOTE_AND_ID_EQ_QUOTE = self::SQL_QUOTE_AND_ID_EQ_QUOTE;
-    public const SQL_ID_EQ_QUOTE = self::SQL_ID_EQ_QUOTE;
-    public const SQL_QUOTE_AND_ID_IN = self::SQL_QUOTE_AND_ID_IN;
-    public const SQL_QUOTE_AND_ASSET_ID_IN = self::SQL_QUOTE_AND_ASSET_ID_IN;
-    public const SQL_QUOTE_AND_ORIGINATOR_EQ = self::SQL_QUOTE_AND_ORIGINATOR_EQ;
-    public const SQL_SEL_ASSET_CATEGORIES = self::SQL_SEL_ASSET_CATEGORIES;
-    public const SQL_SEL_LOCATIONS = self::SQL_SEL_LOCATIONS;
-    public const SQL_SEL_APPLICATION_USERS = self::SQL_SEL_APPLICATION_USERS;
-    public const SQL_SEL_ASSET_STATUS = self::SQL_SEL_ASSET_STATUS;
-    public const SQL_SEL_DEPARTMENTS = self::SQL_SEL_DEPARTMENTS;
-    public const SQL_SEL_ASSET_CONDITION_TYPE = self::SQL_SEL_ASSET_CONDITION_TYPE;
-    public const SQL_SEL_COST_CENTERS = self::SQL_SEL_COST_CENTERS;
-    public const SQL_SEL_ASSETS_DETAIL = self::SQL_SEL_ASSETS_DETAIL;
-    public const SQL_SEL_ALL_ASSETS_ACTIVE = self::SQL_SEL_ALL_ASSETS_ACTIVE;
+
 
 
     public function getAssetAllocation($get){

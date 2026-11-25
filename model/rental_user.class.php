@@ -2577,5 +2577,6 @@ class RentalUserClass
     use RentalPropertyTrait;
     use RentalBillingTrait;
 }
-
-class_alias('RentalUserClass', 'rentalUserClass');
+if (!class_exists('rentalUserClass', false)) {
+    class_alias('RentalUserClass', 'rentalUserClass');
+}
