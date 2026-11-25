@@ -63,9 +63,15 @@ interface AccountConstants {
     public const SQL_LTE_REC_TRANSACTION_DATE = "' <= rec.transaction_date  AND '";
     public const SQL_AND_QUOTE = " AND '";
     public const SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID = "') WHERE coa.company_id = ";
+    public const SQL_COA_REPORT_SELECT_1 = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ";
+    public const SQL_COA_REPORT_SUBQUERY_1 = " AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '";
+    public const SQL_COA_REPORT_GROUP_1 = " AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+    public const SQL_COA_REPORT_SELECT_2 = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ";
+    public const SQL_COA_REPORT_SUBQUERY_2 = " AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '";
+    public const SQL_COA_REPORT_GROUP_2 = " AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
 }
 
-trait AccountVouchersAndBudgetsTrait {
+trait AccountBudgetsAndReconciliationsTrait {
     public function insertDeferredRevenues($get,$post){
         if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
         global $callConfig;
@@ -290,6 +296,10 @@ trait AccountVouchersAndBudgetsTrait {
         }
         return $res;
     }
+
+}
+
+trait AccountVouchersTrait {
     public function getJournalVouchers($get){
         global $callConfig;
         $return= $partylist = array();
@@ -725,69 +735,44 @@ trait AccountVouchersAndBudgetsTrait {
     }
     public function insertBankVouchers($get,$post){
         if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
-         global $callConfig;
-        $return =array();
+        global $callConfig;
+        $return = array();
         $return['get'] = $get;
         $return['post'] = $post;
 
         $partysql = "SELECT au.*, (SELECT department_id FROM cost_centers cc WHERE au.company_id = cc.company_id AND au.cost_center = cc.id AND au.is_active = cc.is_active) as department_id FROM application_users au WHERE au.company_id = '".$post['company_id']."' AND au.id = '".$post['user_id']."' AND au.is_active = 0";
         $user = $callConfig->getRow($partysql);
 
-        $insertary=array('company_id'=>$post['company_id'],'transaction_date'=>$this->dateconvertdbformat($post['transaction_date']),'currency_id'=>$post['currency_id'],'printing_notes'=>$post['printing_notes'],'notes'=>$post['notes'],'amount'=>$post['total_amount'],'total_amount'=>$post['total_amount'],'bank_account_code'=>$post['bank_account_code'],'doc_ref_no'=>$post['doc_ref_no'],'doc_ref_date'=>$this->dateconvertdbformat($post['doc_ref_date']),'voucher_type'=>$post['voucher_type']);
-        if($post['rid'] !=""){
-            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-            $insertary['updated_by']=$post['user_id'];
-            $res= $callConfig->updateRecord('bank_vouchers',$insertary,'id',$post['rid']);
+        $insertary = array('company_id'=>$post['company_id'],'transaction_date'=>$this->dateconvertdbformat($post['transaction_date']),'currency_id'=>$post['currency_id'],'printing_notes'=>$post['printing_notes'],'notes'=>$post['notes'],'amount'=>$post['total_amount'],'total_amount'=>$post['total_amount'],'bank_account_code'=>$post['bank_account_code'],'doc_ref_no'=>$post['doc_ref_no'],'doc_ref_date'=>$this->dateconvertdbformat($post['doc_ref_date']),'voucher_type'=>$post['voucher_type']);
+        if ($post['rid'] != "") {
+            $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+            $insertary['updated_by'] = $post['user_id'];
+            $res = $callConfig->updateRecord('bank_vouchers', $insertary, 'id', $post['rid']);
             $return['res'] = $res;
             $rid = $post['rid'];
-            //all transaction update
             $callConfig->executeQuery("DELETE FROM general_ledger WHERE transaction_id = '".$rid."'");
-            $callConfig->updateRecord('bv_items',array('is_active'=>'1'),'transaction_id',$rid);
+            $callConfig->updateRecord('bv_items', array('is_active'=>'1'), 'transaction_id', $rid);
             $callConfig->executeQuery(self::SQL_DEL_GL_VOUCHER_ID.$rid."' AND ledger_type = 'BV'");
-            //all transaction update
-        }else{
+        } else {
             $transation = $this->toGetApplicationSerialNumber('bank_vouchers');
-            $transationyear = $this->toGetApplicationVoucherSerialNumbers($post,'bank_vouchers',$post['transaction_date'],'Y',$post['voucher_type']);
-            $transationmonth = $this->toGetApplicationVoucherSerialNumbers($post,'bank_vouchers',$post['transaction_date'],'M',$post['voucher_type']);
-            $insertary['transaction_number_yearly']=$transationyear;
-            $insertary['transaction_number_monthly']=$transationmonth;
-            $insertary['transaction_number']=$transation;
-            $post['transaction_number']=$transation;
-            $insertary['originator']=$post['user_id'];
-            $insertary['is_active']=0;
-            $insertary['current_status']=0;
-            $insertary['created_by']=$post['user_id'];
-            $insertary['created_date']=date(self::DATE_FORMAT_HIS);
-            $res = $callConfig->insertRecord('bank_vouchers',$insertary);
+            $transationyear = $this->toGetApplicationVoucherSerialNumbers($post, 'bank_vouchers', $post['transaction_date'], 'Y', $post['voucher_type']);
+            $transationmonth = $this->toGetApplicationVoucherSerialNumbers($post, 'bank_vouchers', $post['transaction_date'], 'M', $post['voucher_type']);
+            $insertary['transaction_number_yearly'] = $transationyear;
+            $insertary['transaction_number_monthly'] = $transationmonth;
+            $insertary['transaction_number'] = $transation;
+            $post['transaction_number'] = $transation;
+            $insertary['originator'] = $post['user_id'];
+            $insertary['is_active'] = 0;
+            $insertary['current_status'] = 0;
+            $insertary['created_by'] = $post['user_id'];
+            $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
+            $res = $callConfig->insertRecord('bank_vouchers', $insertary);
             $return['res'] = $res;
             $rid = $res['LASTID'];
         }
-//reverse balance update code
 
-        foreach($post['old_jv_item_id'] as $key=>$val){
-            $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['old_account_code'][$key],'date'=>$this->dateconvertdbformat($post['old_transaction_date']),'debit_amount'=>$post['old_debit_amount'][$key],'credit_amount'=>$post['old_credit_amount'][$key],'account_type'=>$post['old_account_type'][$key],'location_id'=>$post['old_transaction_location_id'][$key],'department_id'=>$post['old_department_id'][$key],'cost_center_id'=>$post['old_cost_center_id'][$key]);
-            $updatebalances = $this->insertReverseAccountBalances($balanceary);
-            $return['reversaerenty'][] = $updatebalances;
-        }
-        if($post['old_bank_account_code'] !=""){
-            $oldchartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['old_bank_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $oldchartofaccountsres = $callConfig->getRow($oldchartofaccountssql);
+        $return['reversaerenty'] = $this->reverseOldVoucherBalances($post, $user, 'old_bank_account_code');
 
-            $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['old_bank_account_code'],'date'=>$this->dateconvertdbformat($post['old_transaction_date']),'account_type'=>$oldchartofaccountsres->account_type,'location_id'=>$user->location_id,'department_id'=>$user->department_id,'cost_center_id'=>$user->cost_center);
-            if($post['old_voucher_type'] == "RV"){
-                $balanceary['debit_amount'] = $post['old_total_amount'];
-                $balanceary['credit_amount'] = 0;
-            }else{
-                $balanceary['debit_amount'] = 0;
-                $balanceary['credit_amount'] = $post['old_total_amount'];
-            }
-            $updatebalances = $this->insertReverseAccountBalances($balanceary);
-            $return['reversaerenty'][] = $updatebalances;
-        }
-//reverse balance update code
-
-
-//New parent level entry
         $parentacccountsql = self::SQL_SEL_BANK_ACCOUNTS.$post['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['bank_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $parentacccountres = $callConfig->getRow($parentacccountsql);
 
@@ -795,85 +780,11 @@ trait AccountVouchersAndBudgetsTrait {
         $newchartofaccountsres = $callConfig->getRow($newchartofaccountssql);
         $return['newchartofaccountssql'][] = $newchartofaccountssql;
         $return['newchartofaccountsres'][] = $newchartofaccountsres;
-        $insertaryitmledger=array('company_id'=>$post['company_id'],'voucher_id'=>$rid,'voucher_ref_no'=>$post['transaction_number'],'voucher_date'=>$this->dateconvertdbformat($post['transaction_date']),'account_code'=>$post['bank_account_code'],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'ledger_type'=>'BV','account_name'=>$parentacccountres->bank_account_name,'remarks'=>$newchartofaccountsres->account_name,'account_type'=>$newchartofaccountsres->account_type);
-        if($post['voucher_type'] == "RV"){
-            $insertaryitmledger['debit_amount'] = $post['total_amount'];
-            $insertaryitmledger['credit_amount'] = 0;
-        }else{
-            $insertaryitmledger['debit_amount'] = 0;
-            $insertaryitmledger['credit_amount'] = $post['total_amount'];
-        }
-        $res2 = $callConfig->insertRecord('general_ledger',$insertaryitmledger);
-        $return['res_item_ledger'][] = $res2;
 
-///New balance update
-    $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['bank_account_code'],'date'=>$this->dateconvertdbformat($post['transaction_date']),'account_type'=>$newchartofaccountsres->account_type,'location_id'=>$user->location_id,'department_id'=>$user->department_id,'cost_center_id'=>$user->cost_center);
-    if($post['voucher_type'] == "RV"){
-        $balanceary['debit_amount'] = $post['total_amount'];
-        $balanceary['credit_amount'] = 0;
-    }else{
-        $balanceary['debit_amount'] = 0;
-        $balanceary['credit_amount'] = $post['total_amount'];
-    }
-    $return['balanceenty_ary'][] = $balanceary;
-    $updatebalances = $this->insertAccountBalances($balanceary);
-    $return['balanceenty'][] = $updatebalances;
-///New balance update
+        $this->recordVoucherParentLedgerAndBalance($post, $user, $rid, $post['bank_account_code'], $parentacccountres->bank_account_name ?? '', $newchartofaccountsres->account_name ?? '', $newchartofaccountsres->account_type ?? '', 'BV', $return);
 
+        $this->recordVoucherChildItems($post, $rid, 'bv_items', 'BV', $return);
 
-
-        //child level entry
-        foreach($post['chart_of_account_id'] as $key=>$val){
-            if($post['party_id'][$key] !=""){
-                $explod = explode('||', $post['party_id'][$key]);
-                $party_transaction_table = $explod[1];
-                $party_id = $explod[0];
-            }
-            $insertaryitm=array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'account_code'=>$post['account_code'][$key],'particulars'=>$post['particulars'][$key],'party_transaction_table'=>$party_transaction_table,'party_id'=>$party_id,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'account_name'=>$post['account_name'][$key],'account_type'=>$post['account_type'][$key],'transaction_location_id'=>$post['transaction_location_id'][$key],'department_id'=>$post['department_id'][$key],'cost_center_id'=>$post['cost_center_id'][$key]);
-
-            $insertaryitmledger=array('company_id'=>$post['company_id'],'voucher_id'=>$rid,'voucher_ref_no'=>$post['transaction_number'],'voucher_date'=>$this->dateconvertdbformat($post['transaction_date']),'account_code'=>$post['account_code'][$key],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'ledger_type'=>'BV','account_name'=>$post['account_name'][$key],'remarks'=>$post['particulars'][$key],'account_type'=>$post['account_type'][$key]);
-
-            if($post['voucher_type'] == "RV"){
-                $insertaryitm['credit_amount'] = $post['amount'][$key];
-                $insertaryitm['debit_amount'] = 0;
-                $insertaryitmledger['credit_amount'] = $post['amount'][$key];
-            }else{
-                $insertaryitm['debit_amount'] = $post['amount'][$key];
-                $insertaryitm['credit_amount'] = 0;
-                $insertaryitmledger['debit_amount'] = $post['amount'][$key];
-            }
-            if($post['jv_item_id'][$key] !=""){
-                $insertaryitm['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-                $insertaryitm['updated_by']=$post['user_id'];
-                $res1= $callConfig->updateRecord('bv_items',$insertaryitm,'id',$post['jv_item_id'][$key]);
-                $return['res_item'] = $res1;
-            }else{
-                $insertaryitm['created_by']=$post['user_id'];
-                $insertaryitm['created_date']=date(self::DATE_FORMAT_HIS);
-                $res1 = $callConfig->insertRecord('bv_items',$insertaryitm);
-                $return['res_item'] = $res1;
-            }
-            $res2 = $callConfig->insertRecord('general_ledger',$insertaryitmledger);
-            $return['res_item_ledger'][] = $res2;
-
-
-///New balance update
-        $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['account_code'][$key],'date'=>$this->dateconvertdbformat($post['transaction_date']),'account_type'=>$post['account_type'][$key],'location_id'=>$post['transaction_location_id'][$key],'department_id'=>$post['department_id'][$key],'cost_center_id'=>$post['cost_center_id'][$key]);
-        if($post['voucher_type'] == "RV"){
-            $balanceary['credit_amount'] = $post['amount'][$key];
-            $balanceary['debit_amount'] = 0;
-        }else{
-            $balanceary['credit_amount'] = 0;
-            $balanceary['debit_amount'] = $post['amount'][$key];
-        }
-        $return['balanceenty_ary'][] = $balanceary;
-        $updatebalances = $this->insertAccountBalances($balanceary);
-        $return['balanceenty'][] = $updatebalances;
-
-///New balance update
-
-        }
-        //child level entry
         return $return;
     }
     public function getCashVouchers($get){
@@ -942,155 +853,53 @@ trait AccountVouchersAndBudgetsTrait {
         return $return;
     }
 
-     public function insertCashVouchers($get,$post){
+    public function insertCashVouchers($get,$post){
         global $callConfig;
-        $return =array();
+        $return = array();
         $return['get'] = $get;
         $return['post'] = $post;
         $partysql = "SELECT au.*, (SELECT department_id FROM cost_centers cc WHERE au.company_id = cc.company_id AND au.cost_center = cc.id AND au.is_active = cc.is_active) as department_id FROM application_users au WHERE au.company_id = '".$post['company_id']."' AND au.id = '".$post['user_id']."' AND au.is_active = 0";
         $user = $callConfig->getRow($partysql);
 
-
-        $insertary=array('company_id'=>$post['company_id'],'transaction_date'=>$this->dateconvertdbformat($post['transaction_date']),'currency_id'=>$post['currency_id'],'printing_notes'=>$post['printing_notes'],'notes'=>$post['notes'],'amount'=>$post['total_amount'],'total_amount'=>$post['total_amount'],'cash_account_code'=>$post['cash_account_code'],'doc_ref_no'=>$post['doc_ref_no'],'doc_ref_date'=>$this->dateconvertdbformat($post['doc_ref_date']),'voucher_type'=>$post['voucher_type']);
-        if($post['rid'] !=""){
-            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-            $insertary['updated_by']=$post['user_id'];
-            $res= $callConfig->updateRecord('cash_vouchers',$insertary,'id',$post['rid']);
+        $insertary = array('company_id'=>$post['company_id'],'transaction_date'=>$this->dateconvertdbformat($post['transaction_date']),'currency_id'=>$post['currency_id'],'printing_notes'=>$post['printing_notes'],'notes'=>$post['notes'],'amount'=>$post['total_amount'],'total_amount'=>$post['total_amount'],'cash_account_code'=>$post['cash_account_code'],'doc_ref_no'=>$post['doc_ref_no'],'doc_ref_date'=>$this->dateconvertdbformat($post['doc_ref_date']),'voucher_type'=>$post['voucher_type']);
+        if ($post['rid'] != "") {
+            $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+            $insertary['updated_by'] = $post['user_id'];
+            $res = $callConfig->updateRecord('cash_vouchers', $insertary, 'id', $post['rid']);
             $return['res'] = $res;
             $rid = $post['rid'];
-            //all transaction update
             $callConfig->executeQuery("DELETE FROM general_ledger WHERE transaction_id = '".$rid."'");
-            $callConfig->updateRecord('cv_items',array('is_active'=>'1'),'transaction_id',$rid);
+            $callConfig->updateRecord('cv_items', array('is_active'=>'1'), 'transaction_id', $rid);
             $callConfig->executeQuery(self::SQL_DEL_GL_VOUCHER_ID.$rid."' AND ledger_type = 'CV'");
-            //all transaction update
-        }else{
+        } else {
             $transation = $this->toGetApplicationSerialNumber('cash_vouchers');
-            $transationyear = $this->toGetApplicationVoucherSerialNumbers($post,'cash_vouchers',$post['transaction_date'],'Y',$post['voucher_type']);
-            $transationmonth = $this->toGetApplicationVoucherSerialNumbers($post,'cash_vouchers',$post['transaction_date'],'M',$post['voucher_type']);
-            $insertary['transaction_number_yearly']=$transationyear;
-            $insertary['transaction_number_monthly']=$transationmonth;
-            $insertary['transaction_number']=$transation;
-            $post['transaction_number']=$transation;
-            $insertary['originator']=$post['user_id'];
-            $insertary['is_active']=0;
-            $insertary['current_status']=0;
-            $insertary['created_by']=$post['user_id'];
-            $insertary['created_date']=date(self::DATE_FORMAT_HIS);
-            $res = $callConfig->insertRecord('cash_vouchers',$insertary);
+            $transationyear = $this->toGetApplicationVoucherSerialNumbers($post, 'cash_vouchers', $post['transaction_date'], 'Y', $post['voucher_type']);
+            $transationmonth = $this->toGetApplicationVoucherSerialNumbers($post, 'cash_vouchers', $post['transaction_date'], 'M', $post['voucher_type']);
+            $insertary['transaction_number_yearly'] = $transationyear;
+            $insertary['transaction_number_monthly'] = $transationmonth;
+            $insertary['transaction_number'] = $transation;
+            $post['transaction_number'] = $transation;
+            $insertary['originator'] = $post['user_id'];
+            $insertary['is_active'] = 0;
+            $insertary['current_status'] = 0;
+            $insertary['created_by'] = $post['user_id'];
+            $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
+            $res = $callConfig->insertRecord('cash_vouchers', $insertary);
             $return['res'] = $res;
             $rid = $res['LASTID'];
         }
 
-//reverse balance update code
+        $return['reversaerenty'] = $this->reverseOldVoucherBalances($post, $user, 'old_cash_account_code');
 
-        foreach($post['old_jv_item_id'] as $key=>$val){
-            $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['old_account_code'][$key],'date'=>$this->dateconvertdbformat($post['old_transaction_date']),'debit_amount'=>$post['old_debit_amount'][$key],'credit_amount'=>$post['old_credit_amount'][$key],'account_type'=>$post['old_account_type'][$key],'location_id'=>$post['old_transaction_location_id'][$key],'department_id'=>$post['old_department_id'][$key],'cost_center_id'=>$post['old_cost_center_id'][$key]);
-            $updatebalances = $this->insertReverseAccountBalances($balanceary);
-            $return['reversaerenty'][] = $updatebalances;
-        }
-        if($post['old_cash_account_code'] !=""){
-            $oldchartofaccountssql = self::SQL_SEL_COA_TYPE.$get['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['old_cash_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $oldchartofaccountsres = $callConfig->getRow($oldchartofaccountssql);
-
-            $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['old_cash_account_code'],'date'=>$this->dateconvertdbformat($post['old_transaction_date']),'account_type'=>$oldchartofaccountsres->account_type,'location_id'=>$user->location_id,'department_id'=>$user->department_id,'cost_center_id'=>$user->cost_center);
-            if($post['old_voucher_type'] == "RV"){
-                $balanceary['debit_amount'] = $post['old_total_amount'];
-                $balanceary['credit_amount'] = 0;
-            }else{
-                $balanceary['debit_amount'] = 0;
-                $balanceary['credit_amount'] = $post['old_total_amount'];
-            }
-            $updatebalances = $this->insertReverseAccountBalances($balanceary);
-            $return['reversaerenty'][] = $updatebalances;
-        }
-//reverse balance update code
-
-
-        //parent level entry
         $parentacccountsql = self::SQL_SEL_PETTY_CASH_BOXES.$post['company_id']." AND gl_account_pc_cash = '".$post['cash_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $parentacccountres = $callConfig->getRow($parentacccountsql);
 
         $newchartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['cash_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $newchartofaccountsres = $callConfig->getRow($newchartofaccountssql);
 
-        $insertaryitmledger=array('company_id'=>$post['company_id'],'voucher_id'=>$rid,'voucher_ref_no'=>$post['transaction_number'],'voucher_date'=>$this->dateconvertdbformat($post['transaction_date']),'account_code'=>$post['cash_account_code'],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'ledger_type'=>'CV','account_name'=>$parentacccountres->pc_box_description,'remarks'=>$newchartofaccountsres->account_name,'account_type'=>$newchartofaccountsres->account_type);
-         if($post['voucher_type'] == "RV"){
-            $insertaryitmledger['debit_amount'] = $post['total_amount'];
-             $insertaryitmledger['credit_amount'] = 0;
-        }else{
-            $insertaryitmledger['debit_amount'] = 0;
-            $insertaryitmledger['credit_amount'] = $post['total_amount'];
-        }
-        $res2 = $callConfig->insertRecord('general_ledger',$insertaryitmledger);
-        $return['res_item_ledger'][] = $res2;
+        $this->recordVoucherParentLedgerAndBalance($post, $user, $rid, $post['cash_account_code'], $parentacccountres->pc_box_description ?? '', $newchartofaccountsres->account_name ?? '', $newchartofaccountsres->account_type ?? '', 'CV', $return);
 
-///New balance update
-    $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['cash_account_code'],'date'=>$this->dateconvertdbformat($post['transaction_date']),'account_type'=>$newchartofaccountsres->account_type,'location_id'=>$user->location_id,'department_id'=>$user->department_id,'cost_center_id'=>$user->cost_center);
-    if($post['voucher_type'] == "RV"){
-        $balanceary['debit_amount'] = $post['total_amount'];
-        $balanceary['credit_amount'] = 0;
-    }else{
-        $balanceary['debit_amount'] = 0;
-        $balanceary['credit_amount'] = $post['total_amount'];
-    }
-    $return['balanceenty_ary'][] = $balanceary;
-    $updatebalances = $this->insertAccountBalances($balanceary);
-    $return['balanceenty'][] = $updatebalances;
-///New balance update
-
-
-
-        //parent level entry
-        //child level entry
-        foreach($post['chart_of_account_id'] as $key=>$val){
-            if($post['party_id'][$key] !=""){
-                $explod = explode('||', $post['party_id'][$key]);
-                $party_transaction_table = $explod[1];
-                $party_id = $explod[0];
-            }
-            $insertaryitm=array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'account_code'=>$post['account_code'][$key],'particulars'=>$post['particulars'][$key],'party_transaction_table'=>$party_transaction_table,'party_id'=>$party_id,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'account_name'=>$post['account_name'][$key],'account_type'=>$post['account_type'][$key],'transaction_location_id'=>$post['transaction_location_id'][$key],'department_id'=>$post['department_id'][$key],'cost_center_id'=>$post['cost_center_id'][$key]);
-
-            $insertaryitmledger=array('company_id'=>$post['company_id'],'voucher_id'=>$rid,'voucher_ref_no'=>$post['transaction_number'],'voucher_date'=>$this->dateconvertdbformat($post['transaction_date']),'account_code'=>$post['account_code'][$key],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'ledger_type'=>'CV','account_name'=>$post['account_name'][$key],'remarks'=>$post['particulars'][$key],'account_type'=>$post['account_type'][$key]);
-
-            if($post['voucher_type'] == "RV"){
-                $insertaryitm['credit_amount'] = $post['amount'][$key];
-                $insertaryitm['debit_amount'] = 0;
-                $insertaryitmledger['credit_amount'] = $post['amount'][$key];
-            }else{
-                $insertaryitm['debit_amount'] = $post['amount'][$key];
-                $insertaryitm['credit_amount'] = 0;
-                $insertaryitmledger['debit_amount'] = $post['amount'][$key];
-            }
-            if($post['jv_item_id'][$key] !=""){
-                $insertaryitm['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-                $insertaryitm['updated_by']=$post['user_id'];
-                $res1= $callConfig->updateRecord('cv_items',$insertaryitm,'id',$post['jv_item_id'][$key]);
-                $return['res_item'] = $res1;
-            }else{
-                $insertaryitm['created_by']=$post['user_id'];
-                $insertaryitm['created_date']=date(self::DATE_FORMAT_HIS);
-                $res1 = $callConfig->insertRecord('cv_items',$insertaryitm);
-                $return['res_item'] = $res1;
-            }
-            $res2 = $callConfig->insertRecord('general_ledger',$insertaryitmledger);
-            $return['res_item_ledger'][] = $res2;
-
-        ///New balance update
-            $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['account_code'][$key],'date'=>$this->dateconvertdbformat($post['transaction_date']),'account_type'=>$post['account_type'][$key],'location_id'=>$post['transaction_location_id'][$key],'department_id'=>$post['department_id'][$key],'cost_center_id'=>$post['cost_center_id'][$key]);
-            if($post['voucher_type'] == "RV"){
-                $balanceary['credit_amount'] = $post['amount'][$key];
-                $balanceary['debit_amount'] = 0;
-            }else{
-                $balanceary['credit_amount'] = 0;
-                $balanceary['debit_amount'] = $post['amount'][$key];
-            }
-            $return['balanceenty_ary'][] = $balanceary;
-            $updatebalances = $this->insertAccountBalances($balanceary);
-            $return['balanceenty'][] = $updatebalances;
-        ///New balance update
-
-        }
-        //child level entry
+        $this->recordVoucherChildItems($post, $rid, 'cv_items', 'CV', $return);
 
         return $return;
     }
@@ -1140,6 +949,24 @@ trait AccountVouchersAndBudgetsTrait {
 
         return $return;
     }
+    protected function computeVoucherSerialDates($serial_number_type, $trans_date){
+        if ($serial_number_type == "M") {
+            $startdate = date("Y-m-01", strtotime($trans_date));
+            $enddate = date("Y-m-t", strtotime($trans_date));
+        } else {
+            if (date("m", strtotime($trans_date)) >= 4) {
+                $startyear = date("Y", strtotime($trans_date));
+                $endyear = (date("Y", strtotime($trans_date)) + 1);
+            } else {
+                $startyear = (date("Y", strtotime($trans_date)) - 1);
+                $endyear = date("Y", strtotime($trans_date));
+            }
+            $startdate = $startyear.self::SQL_DATE_APRIL_FIRST;
+            $enddate = $endyear.self::SQL_DATE_MARCH_THIRTYFIRST;
+        }
+        return array($startdate, $enddate);
+    }
+
     public function toGetApplicationVoucherSerialNumbers($get,$table_name,$trans_date,$serial_number_type,$voucher_type=""){
         global $callConfig;
         $return = array();
@@ -1148,54 +975,125 @@ trait AccountVouchersAndBudgetsTrait {
         $return['query_1'] = $query;
         $res = $callConfig->getRow($query);
         $return['query_1_res'] = $res;
-        if($res->id !=""){
+        if ($res->id != "") {
             $le = $res->doc_no_length;
             $var = "%0".$le."d";
-            $data = $res->pre_fix.sprintf($var,$res->serial_number+1).$res->post_fix;
-            $update = $callConfig->updateRecord('application_voucher_serial_numbers',array('serial_number' =>$res->serial_number+1),'id',$res->id);
+            $data = $res->pre_fix.sprintf($var, $res->serial_number + 1).$res->post_fix;
+            $update = $callConfig->updateRecord('application_voucher_serial_numbers', array('serial_number' => $res->serial_number + 1), 'id', $res->id);
             $return['query_1_update'] = $update;
-       }else{
+        } else {
             $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type.self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $res = $callConfig->getRow($query);
             $return['query_2_res'] = $res;
-            if(isset($res->doc_no_length)){
+            if (isset($res->doc_no_length)) {
                 $le = $res->doc_no_length;
                 $var = "%0".$le."d";
-                $data = $res->pre_fix.sprintf($var,1).$res->post_fix;
-
-                if($serial_number_type == "M"){
-                    $startdate = date("Y-m-01",strtotime($trans_date));
-                    $enddate = date("Y-m-t",strtotime($trans_date));
-                }else{
-                    if(date("m",strtotime($trans_date)) >= 4){
-                        $startyear = date("Y",strtotime($trans_date));
-                        $endyear = (date("Y",strtotime($trans_date))+1);
-                        $startdate = $startyear.self::SQL_DATE_APRIL_FIRST;
-                        $enddate = $endyear.self::SQL_DATE_MARCH_THIRTYFIRST;
-                    }else{
-                        $startyear = (date("Y",strtotime($trans_date)) - 1);
-                        $endyear = date("Y",strtotime($trans_date));
-                        $startdate = $startyear.self::SQL_DATE_APRIL_FIRST;
-                        $enddate = $endyear.self::SQL_DATE_MARCH_THIRTYFIRST;
-                    }
-                }
-                if($res->post_fix !="" && $res->pre_fix !="" && $res->doc_no_length !="" && $res->serial_number_type !="" &&  $res->voucher_type !=""){
-                    $insertary=array('company_id'=>$get['company_id'],'application_table_name'=>$table_name,'serial_number'=>'1','pre_fix'=>$res->pre_fix,'post_fix'=>$res->post_fix,'doc_no_length'=>$res->doc_no_length,'serial_number_type'=>$res->serial_number_type,'voucher_type'=>$res->voucher_type,'start_date'=>$startdate,'end_date'=>$enddate,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
+                $data = $res->pre_fix.sprintf($var, 1).$res->post_fix;
+                list($startdate, $enddate) = $this->computeVoucherSerialDates($serial_number_type, $trans_date);
+                if ($res->post_fix != "" && $res->pre_fix != "" && $res->doc_no_length != "" && $res->serial_number_type != "" && $res->voucher_type != "") {
+                    $insertary = array('company_id'=>$get['company_id'],'application_table_name'=>$table_name,'serial_number'=>'1','pre_fix'=>$res->pre_fix,'post_fix'=>$res->post_fix,'doc_no_length'=>$res->doc_no_length,'serial_number_type'=>$res->serial_number_type,'voucher_type'=>$res->voucher_type,'start_date'=>$startdate,'end_date'=>$enddate,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
                     $return['res_item_insertary'] = $insertary;
-                    $res1 = $callConfig->insertRecord('application_voucher_serial_numbers',$insertary);
+                    $res1 = $callConfig->insertRecord('application_voucher_serial_numbers', $insertary);
                     $return['res_item'] = $res1;
                 }
-            }else{
+            } else {
                 $data = 1;
             }
         }
         return trim($data);
     }
 
+    protected function reverseOldVoucherBalances($post, $user, $accountCodeField){
+        $reversals = array();
+        if (isset($post['old_jv_item_id']) && is_array($post['old_jv_item_id'])) {
+            foreach ($post['old_jv_item_id'] as $key => $val) {
+                $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['old_account_code'][$key],'date'=>$this->dateconvertdbformat($post['old_transaction_date']),'debit_amount'=>$post['old_debit_amount'][$key],'credit_amount'=>$post['old_credit_amount'][$key],'account_type'=>$post['old_account_type'][$key],'location_id'=>$post['old_transaction_location_id'][$key],'department_id'=>$post['old_department_id'][$key],'cost_center_id'=>$post['old_cost_center_id'][$key]);
+                $reversals[] = $this->insertReverseAccountBalances($balanceary);
+            }
+        }
+        if (isset($post[$accountCodeField]) && $post[$accountCodeField] != "") {
+            global $callConfig;
+            $oldchartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post[$accountCodeField].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $oldchartofaccountsres = $callConfig->getRow($oldchartofaccountssql);
+            $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post[$accountCodeField],'date'=>$this->dateconvertdbformat($post['old_transaction_date']),'account_type'=>$oldchartofaccountsres->account_type ?? '','location_id'=>$user->location_id ?? '','department_id'=>$user->department_id ?? '','cost_center_id'=>$user->cost_center ?? '');
+            if (($post['old_voucher_type'] ?? '') == "RV") {
+                $balanceary['debit_amount'] = $post['old_total_amount'] ?? 0;
+                $balanceary['credit_amount'] = 0;
+            } else {
+                $balanceary['debit_amount'] = 0;
+                $balanceary['credit_amount'] = $post['old_total_amount'] ?? 0;
+            }
+            $reversals[] = $this->insertReverseAccountBalances($balanceary);
+        }
+        return $reversals;
+    }
+
+    protected function recordVoucherParentLedgerAndBalance($post, $user, $rid, $accountCode, $accountName, $remarks, $accountType, $ledgerType, &$return){
+        global $callConfig;
+        $insertaryitmledger = array('company_id'=>$post['company_id'],'voucher_id'=>$rid,'voucher_ref_no'=>$post['transaction_number'],'voucher_date'=>$this->dateconvertdbformat($post['transaction_date']),'account_code'=>$accountCode,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'ledger_type'=>$ledgerType,'account_name'=>$accountName,'remarks'=>$remarks,'account_type'=>$accountType);
+        $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$accountCode,'date'=>$this->dateconvertdbformat($post['transaction_date']),'account_type'=>$accountType,'location_id'=>$user->location_id ?? '','department_id'=>$user->department_id ?? '','cost_center_id'=>$user->cost_center ?? '');
+        if ($post['voucher_type'] == "RV") {
+            $insertaryitmledger['debit_amount'] = $post['total_amount'];
+            $insertaryitmledger['credit_amount'] = 0;
+            $balanceary['debit_amount'] = $post['total_amount'];
+            $balanceary['credit_amount'] = 0;
+        } else {
+            $insertaryitmledger['debit_amount'] = 0;
+            $insertaryitmledger['credit_amount'] = $post['total_amount'];
+            $balanceary['debit_amount'] = 0;
+            $balanceary['credit_amount'] = $post['total_amount'];
+        }
+        $return['res_item_ledger'][] = $callConfig->insertRecord('general_ledger', $insertaryitmledger);
+        $return['balanceenty_ary'][] = $balanceary;
+        $return['balanceenty'][] = $this->insertAccountBalances($balanceary);
+    }
+
+    protected function recordVoucherChildItems($post, $rid, $itemTable, $ledgerType, &$return){
+        global $callConfig;
+        if (!isset($post['chart_of_account_id']) || !is_array($post['chart_of_account_id'])) {
+            return;
+        }
+        foreach ($post['chart_of_account_id'] as $key => $val) {
+            $party_transaction_table = '';
+            $party_id = '';
+            if (isset($post['party_id'][$key]) && $post['party_id'][$key] != "") {
+                $explod = explode('||', $post['party_id'][$key]);
+                $party_transaction_table = $explod[1] ?? '';
+                $party_id = $explod[0] ?? '';
+            }
+            $insertaryitm = array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'account_code'=>$post['account_code'][$key],'particulars'=>$post['particulars'][$key],'party_transaction_table'=>$party_transaction_table,'party_id'=>$party_id,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'account_name'=>$post['account_name'][$key],'account_type'=>$post['account_type'][$key],'transaction_location_id'=>$post['transaction_location_id'][$key],'department_id'=>$post['department_id'][$key],'cost_center_id'=>$post['cost_center_id'][$key]);
+            $insertaryitmledger = array('company_id'=>$post['company_id'],'voucher_id'=>$rid,'voucher_ref_no'=>$post['transaction_number'],'voucher_date'=>$this->dateconvertdbformat($post['transaction_date']),'account_code'=>$post['account_code'][$key],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'ledger_type'=>$ledgerType,'account_name'=>$post['account_name'][$key],'remarks'=>$post['particulars'][$key],'account_type'=>$post['account_type'][$key]);
+            $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['account_code'][$key],'date'=>$this->dateconvertdbformat($post['transaction_date']),'account_type'=>$post['account_type'][$key],'location_id'=>$post['transaction_location_id'][$key],'department_id'=>$post['department_id'][$key],'cost_center_id'=>$post['cost_center_id'][$key]);
+            if ($post['voucher_type'] == "RV") {
+                $insertaryitm['credit_amount'] = $post['amount'][$key];
+                $insertaryitm['debit_amount'] = 0;
+                $insertaryitmledger['credit_amount'] = $post['amount'][$key];
+                $balanceary['credit_amount'] = $post['amount'][$key];
+                $balanceary['debit_amount'] = 0;
+            } else {
+                $insertaryitm['debit_amount'] = $post['amount'][$key];
+                $insertaryitm['credit_amount'] = 0;
+                $insertaryitmledger['debit_amount'] = $post['amount'][$key];
+                $balanceary['credit_amount'] = 0;
+                $balanceary['debit_amount'] = $post['amount'][$key];
+            }
+            if (isset($post['jv_item_id'][$key]) && $post['jv_item_id'][$key] != "") {
+                $insertaryitm['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+                $insertaryitm['updated_by'] = $post['user_id'];
+                $return['res_item'] = $callConfig->updateRecord($itemTable, $insertaryitm, 'id', $post['jv_item_id'][$key]);
+            } else {
+                $insertaryitm['created_by'] = $post['user_id'];
+                $insertaryitm['created_date'] = date(self::DATE_FORMAT_HIS);
+                $return['res_item'] = $callConfig->insertRecord($itemTable, $insertaryitm);
+            }
+            $return['res_item_ledger'][] = $callConfig->insertRecord('general_ledger', $insertaryitmledger);
+            $return['balanceenty_ary'][] = $balanceary;
+            $return['balanceenty'][] = $this->insertAccountBalances($balanceary);
+        }
+    }
 }
 
-trait AccountLedgersAndReportsTrait {
-
+trait AccountReportsAndNotesTrait {
     public function getAccountClosingBalance($get,$acount_code){
         global $callConfig;
         $closingbalance = 0;
@@ -1311,31 +1209,29 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         global $callConfig;
         $start_date = $get['start_date'];
         $end_date = $get['end_date'];
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_1.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_1.$this->dateconvertdbformat($start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_1;
         $res = $callConfig->getAllRows($query);
         $return['start_query'] =$query;
         $return['start_balances'] =$res;
 
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_2.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_2.$this->dateconvertdbformat($end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_2;
         $res = $callConfig->getAllRows($query);
         $return['end_query'] =$query;
         $return['end_balances'] =$res;
         //previous year data
         $prev_start_date = $get['prev_start_date'];
         $prev_end_date = $get['prev_end_date'];
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_1.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_1.$this->dateconvertdbformat($prev_start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_1;
         $res = $callConfig->getAllRows($query);
         $return['prev_start_query'] =$query;
         $return['prev_start_balances'] =$res;
 
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_2.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_2.$this->dateconvertdbformat($prev_end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_2;
         $res = $callConfig->getAllRows($query);
         $return['prev_end_query'] =$query;
         $return['prev_end_balances'] =$res;
         //previous year data
         return $return;
-
-
     }
     public function getBalanceSheetReport($get){
         global $callConfig;
@@ -1357,24 +1253,24 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         global $callConfig;
         $start_date = $get['start_date'];
         $end_date = $get['end_date'];
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_1.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_1.$this->dateconvertdbformat($start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_1;
         $res = $callConfig->getAllRows($query);
         $return['start_query'] =$query;
         $return['start_balances'] =$res;
 
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_2.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_2.$this->dateconvertdbformat($end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_2;
         $res = $callConfig->getAllRows($query);
         $return['end_query'] =$query;
         $return['end_balances'] =$res;
         //previous year data
         $prev_start_date = $get['prev_start_date'];
         $prev_end_date = $get['prev_end_date'];
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_1.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_1.$this->dateconvertdbformat($prev_start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_1;
         $res = $callConfig->getAllRows($query);
         $return['prev_start_query'] =$query;
         $return['prev_start_balances'] =$res;
 
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY  coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_2.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_2.$this->dateconvertdbformat($prev_end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_2;
         $res = $callConfig->getAllRows($query);
         $return['prev_end_query'] =$query;
         $return['prev_end_balances'] =$res;
@@ -1445,6 +1341,47 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
          }
         return $return;
     }
+    protected function calculateDebitCreditNoteAmount($post){
+        $amount = 0;
+        if (isset($post['account_code']) && is_array($post['account_code'])) {
+            foreach ($post['account_code'] as $key => $value) {
+                if ($post['account_code'][$key] != "" && $post['item_price'][$key] != "") {
+                    $amount += $post['item_price'][$key];
+                }
+            }
+        }
+        return $amount;
+    }
+
+    protected function insertDebitCreditNoteItems($get, $post, $rid, $itemTable, &$return){
+        global $callConfig;
+        $chartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_IS_ACTIVE_0;
+        $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
+        $chart_of_accounts = array();
+        foreach ($chartofaccountsres as $cca) {
+            $chart_of_accounts[$cca->account_code] = $cca;
+        }
+
+        $callConfig->updateRecord($itemTable, array('is_active' => null), 'transaction_id', $rid);
+        if (isset($post['account_code']) && is_array($post['account_code'])) {
+            foreach ($post['account_code'] as $key => $value) {
+                if ($post['account_code'][$key] != "" && $post['item_price'][$key] != "") {
+                    $insertcust = array('company_id'=>$get['company_id'],'transaction_id'=>$rid,'item_id'=>'0','account_code'=>$post['account_code'][$key],'item_name'=>$chart_of_accounts[$post['account_code'][$key]]->account_name ?? '','description'=>$post['description'][$key] ?? '','purchase_uom'=>'UN','item_quantity'=>'1','item_price'=>$post['item_price'][$key],'item_amount'=>$post['item_price'][$key],'tax_amount'=>'0','total_amount'=>$post['item_price'][$key],'approved_quantity'=>'1','transaction_qty'=>'1','pending_qty'=>'1','is_active'=>0,'current_status'=>0);
+                    if (isset($post['old_id'][$key]) && $post['old_id'][$key] != "") {
+                        $insertcust['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+                        $insertcust['updated_by'] = $post['user_id'];
+                        $callConfig->updateRecord($itemTable, $insertcust, 'id', $post['old_id'][$key]);
+                    } else {
+                        $insertcust['created_by'] = $post['user_id'];
+                        $insertcust['created_date'] = date(self::DATE_FORMAT_HIS);
+                        $callConfig->insertRecord($itemTable, $insertcust);
+                    }
+                    $return['debit_note_items'][] = $insertcust;
+                }
+            }
+        }
+    }
+
     public function insertdebitandcreditnotes($get,$post){
         global $callConfig;
         $return = array();
@@ -1456,64 +1393,38 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $transactionsql = self::SQL_SELECT_ALL_FROM.$transaction_table.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_ID_EQ_QUOTE.$transaction_id.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $transactionres = $callConfig->getRow($transactionsql);
 
-        $transaction_number = $this->toGetApplicationSerialNumber($note_type,$post);
+        $transaction_number = $this->toGetApplicationSerialNumber($note_type, $post);
         $transaction_date = $due_date = $this->dateconvertdbformat($post['transaction_date']);
+        $amount = $this->calculateDebitCreditNoteAmount($post);
 
-        $amount = 0;
-        foreach($post['account_code'] as $key=>$value){
-            if($post['account_code'][$key] !="" && $post['item_price'][$key] !=""){
-                $amount += $post['item_price'][$key];
-            }
-        }
-        //ST_APPROVED
-        $insertcust = array('company_id'=>$get['company_id'],'transaction_location_id'=>$transactionres->transaction_location_id,'transaction_number'=>$transaction_number,'transaction_date'=>$transaction_date,'originator'=>$get['user_id'],'party_id'=>$transactionres->party_id,'party_name'=>$transactionres->party_name,'party_email'=>$transactionres->party_email,'party_phone'=>$transactionres->party_phone,'party_address'=>$transactionres->party_address,'amount'=>$amount,'tax_amount'=>'0','total_amount'=>$amount,'due_date'=>$due_date,'ref_type'=>$transaction_table,'ref_id'=>$transaction_id,'ref_date'=>$transactionres->transaction_date,'ref_no'=>$transactionres->transaction_number,'pending_amount'=>$amount);
-         if($post['rid'] !=""){
-            $insertcust['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-            $insertcust['updated_by']=$post['user_id'];
-            $res= $callConfig->updateRecord($note_type,$insertcust,'id',$post['rid']);
+        $insertcust = array('company_id'=>$get['company_id'],'transaction_location_id'=>$transactionres->transaction_location_id ?? '','transaction_number'=>$transaction_number,'transaction_date'=>$transaction_date,'originator'=>$get['user_id'],'party_id'=>$transactionres->party_id ?? '','party_name'=>$transactionres->party_name ?? '','party_email'=>$transactionres->party_email ?? '','party_phone'=>$transactionres->party_phone ?? '','party_address'=>$transactionres->party_address ?? '','amount'=>$amount,'tax_amount'=>'0','total_amount'=>$amount,'due_date'=>$due_date,'ref_type'=>$transaction_table,'ref_id'=>$transaction_id,'ref_date'=>$transactionres->transaction_date ?? '','ref_no'=>$transactionres->transaction_number ?? '','pending_amount'=>$amount);
+        if ($post['rid'] != "") {
+            $insertcust['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+            $insertcust['updated_by'] = $post['user_id'];
+            $res = $callConfig->updateRecord($note_type, $insertcust, 'id', $post['rid']);
             $return['res'] = $res;
             $rid = $post['rid'];
-        }else{
-            $insertcust['is_active']=0;
-            $insertcust['current_status']=0;
-            $insertcust['created_by']=$post['user_id'];
-            $insertcust['created_date']=date(self::DATE_FORMAT_HIS);
-            $res = $callConfig->insertRecord($note_type,$insertcust);
+        } else {
+            $insertcust['is_active'] = 0;
+            $insertcust['current_status'] = 0;
+            $insertcust['created_by'] = $get['user_id'];
+            $insertcust['created_date'] = date(self::DATE_FORMAT_HIS);
+            $res = $callConfig->insertRecord($note_type, $insertcust);
             $return['res'] = $res;
             $rid = $res['LASTID'];
         }
-        if($res['status'] =='sucess'){
-            $chartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
-            $chart_of_accounts = array();
-            foreach($chartofaccountsres as $cca){
-                $chart_of_accounts[$cca->account_code] = $cca;
-            }
-
+        if (isset($res['status']) && $res['status'] == 'sucess') {
             $parentdmtsql = "SELECT id,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id'].self::SQL_AND_APPLICATION_TABLE_NAME.$note_type.self::SQL_AND_ITEM_TABLE_NOT_EMPTY;
-            $parentdmtres=$callConfig->getRow($parentdmtsql);
-
-            $callConfig->updateRecord($parentdmtres->item_table,array('is_active'=>null),'transaction_id',$rid);
-            foreach($post['account_code'] as $key=>$value){
-                if($post['account_code'][$key] !="" && $post['item_price'][$key] !=""){
-                    $insertcust = array('company_id'=>$get['company_id'],'transaction_id'=>$rid,'item_id'=>'0','account_code'=>$post['account_code'][$key],'item_name'=>$chart_of_accounts[$post['account_code'][$key]]->account_name,'description'=>$post['description'][$key],'purchase_uom'=>'UN','item_quantity'=>'1','item_price'=>$post['item_price'][$key],'item_amount'=>$post['item_price'][$key],'tax_amount'=>'0','total_amount'=>$post['item_price'][$key],'approved_quantity'=>'1','transaction_qty'=>'1','pending_qty'=>'1','is_active'=>0,'current_status'=>0);
-
-                    if($post['old_id'][$key] !=""){
-                        $insertcust['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-                        $insertcust['updated_by']=$post['user_id'];
-                        $callConfig->updateRecord($parentdmtres->item_table,$insertcust,'id',$post['old_id'][$key]);
-                        $return['debit_note_items'][] = $insertcust;
-                    }else{
-                        $insertcust['created_by']=$post['user_id'];
-                        $insertcust['created_date']=date(self::DATE_FORMAT_HIS);
-                        $callConfig->insertRecord($parentdmtres->item_table,$insertcust);
-                        $return['debit_note_items'][] = $insertcust;
-                    }
-               }
+            $parentdmtres = $callConfig->getRow($parentdmtsql);
+            if (!empty($parentdmtres->item_table)) {
+                $this->insertDebitCreditNoteItems($get, $post, $rid, $parentdmtres->item_table, $return);
             }
         }
         return $return;
     }
+}
+
+trait AccountLedgersTrait {
     public function getdynamicmappingtableinvoices($get){
         global $callConfig;
         $return = array();
@@ -1836,32 +1747,33 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['search_result'] =$vencustres;
         return $return;
     }
+    protected function resolveAccountCodePrefix($post, $sep){
+        global $callConfig;
+        if (!empty($post['parent_account_code'])) {
+            $parentRow = $callConfig->getRow("SELECT account_code FROM chart_of_accounts WHERE account_code = '" . $post['parent_account_code'] . "' LIMIT 1");
+            return $parentRow ? $parentRow->account_code : "";
+        }
+        $components = array();
+        if (!empty($post['account_type'])) {
+            $typeRow = $callConfig->getRow("SELECT account_type_short_name FROM account_type WHERE id = '" . (int) $post['account_type'] . "' AND is_active = 0 LIMIT 1");
+            if ($typeRow && !empty($typeRow->account_type_short_name)) {
+                $components[] = strtoupper(trim($typeRow->account_type_short_name));
+            }
+        }
+        if (!empty($post['account_groups'])) {
+            $groupRow = $callConfig->getRow("SELECT group_short_name FROM account_groups WHERE id = '" . (int) $post['account_groups'] . "' AND is_active = 0 LIMIT 1");
+            if ($groupRow && !empty($groupRow->group_short_name)) {
+                $components[] = strtoupper(trim($groupRow->group_short_name));
+            }
+        }
+        return implode($sep, $components);
+    }
+
     public function setAccountCode($get, $post){
         global $callConfig;
         $sep = "-";
         $serialLen = 2;
-        $prefix = "";
-        if (!empty($post['parent_account_code'])) {
-            $parentRow = $callConfig->getRow("SELECT account_code FROM chart_of_accounts WHERE account_code = '" . $post['parent_account_code'] . "' LIMIT 1");
-            if ($parentRow) {
-                $prefix = $parentRow->account_code;
-            }
-        } else {
-            $components = [];
-            if (!empty($post['account_type'])) {
-                $typeRow = $callConfig->getRow("SELECT account_type_short_name FROM account_type WHERE id = '" . (int) $post['account_type'] . "' AND is_active = 0 LIMIT 1");
-                if ($typeRow && !empty($typeRow->account_type_short_name)) {
-                    $components[] = strtoupper(trim($typeRow->account_type_short_name));
-                }
-            }
-            if (!empty($post['account_groups'])) {
-                $groupRow = $callConfig->getRow("SELECT group_short_name FROM account_groups WHERE id = '" . (int) $post['account_groups'] . "' AND is_active = 0 LIMIT 1");
-                if ($groupRow && !empty($groupRow->group_short_name)) {
-                    $components[] = strtoupper(trim($groupRow->group_short_name));
-                }
-            }
-            $prefix = implode($sep, $components);
-        }
+        $prefix = $this->resolveAccountCodePrefix($post, $sep);
         $lastRow = $callConfig->getRow("SELECT account_code FROM account_code_list WHERE account_code LIKE '" . $prefix . $sep . "%' ORDER BY id DESC LIMIT 1");
         if ($lastRow && preg_match('/(\d+)$/', $lastRow->account_code, $matches)) {
             $serial = (int) $matches[1] + 1;
@@ -1870,9 +1782,9 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         }
         $serialFormatted = str_pad($serial, $serialLen, "0", STR_PAD_LEFT);
         $finalCode = $prefix . $sep . $serialFormatted;
-        $insertArray = [ "account_type" => $post['account_type'] ?? "", "account_groups" => $post['account_groups'] ?? "", "length" => $serialLen, "sepration_symbol" => $sep, "account_code" => $finalCode, "is_active" => 0, "current_status" => 0, "created_by" => $get['user_id'], "created_date" => date(self::DATE_FORMAT_HIS), ];
+        $insertArray = array("account_type" => $post['account_type'] ?? "", "account_groups" => $post['account_groups'] ?? "", "length" => $serialLen, "sepration_symbol" => $sep, "account_code" => $finalCode, "is_active" => 0, "current_status" => 0, "created_by" => $get['user_id'], "created_date" => date(self::DATE_FORMAT_HIS));
         $callConfig->insertRecord("account_code_list", $insertArray);
-        return ["account_code" => $finalCode];
+        return array("account_code" => $finalCode);
     }
     public function chartOfAccountLockAndUnlock($get){
         global $callConfig;
@@ -1886,14 +1798,254 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     }
 
 
+}
+
+trait AccountTaxAndFiscalTrait {
+    public function getTaxAuthorities($get){
+        global $callConfig;
+        $all_tax_authoritiessql = "SELECT id, tax_name, tax_type, tax_scope, tax_rate, tax_computation_id FROM `tax_authorities` WHERE company_id = ".$get['company_id']." AND tax_computation_id != '1' AND id != '".$get['rid']."'  AND is_active =0";
+        $all_tax_authoritiesres = $callConfig->getAllRows($all_tax_authoritiessql);
+        $return['all_tax_authorities']= $all_tax_authoritiesres;
+
+        $taxtypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']." AND genc_code = 'TAXTYPE' AND is_active =0";
+        $taxtyperes = $callConfig->getAllRows($taxtypesql);
+        $taxtype = array();
+        foreach($taxtyperes as $tt){
+            $taxtype[$tt->genc_detail_code] = $tt;
+        }
+        $return['tax_type']= $taxtype;
+
+        $taxscopesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']." AND genc_code = 'TAXSCOPE' AND is_active =0";
+        $taxscoperes = $callConfig->getAllRows($taxscopesql);
+        $return['tax_scope']= $taxscoperes;
+
+        $tax_computationssql = "SELECT id, tax_computations_name FROM `tax_computations` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
+        $tax_computationsres = $callConfig->getAllRows($tax_computationssql);
+        $tax_computations = array();
+        foreach($tax_computationsres as $tc){
+            $tax_computations[$tc->id] = $tc;
+        }
+        $return['tax_computations']= $tax_computations;
+
+        $chart_of_accountssql = self::SQL_SEL_CHART_OF_ACCOUNTS_SP.$get['company_id'].self::SQL_AND_IS_ACTIVE_ORDER_PRIORITY;
+        $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
+        $return['chart_of_accounts']= $chart_of_accountsres;
+
+        if(isset($get['rid']) && $get['rid'] !=""){
+            $tax_authoritiessql = "SELECT * FROM `tax_authorities` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $tax_authoritiesres = $callConfig->getRow($tax_authoritiessql);
+            $return['tax_authorities']= $tax_authoritiesres;
+
+            $tax_authorities_ratessql = "SELECT id, tax_authority, dispatch_tax_province, tax_description FROM `tax_authorities_rates` WHERE company_id = ".$get['company_id']." AND tax_authority = '".$tax_authoritiesres->id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $tax_authorities_ratesres = $callConfig->getAllRows($tax_authorities_ratessql);
+            $return['tax_authorities_rates']= $tax_authorities_ratesres;
+
+
+            $taiid = array();
+            foreach($tax_authorities_ratesres as $tar){
+                $taiid[$tar->id] = $tar->id;
+            }
+
+            if(count((array)$taiid) != 0){
+                $tax_authoritiessql = "SELECT id, tax_rate, account_code, split_type, tax_authority_id, authority_rate_id FROM `tax_authorities_rates_split` WHERE company_id = ".$get['company_id']." AND tax_authority_id IN(".implode(',',$taiid).") AND is_active =0";
+                $tax_authoritiessql = $callConfig->getAllRows($tax_authoritiessql);
+                $return['tax_authorities_rates_split']= $tax_authoritiessql;
+            }
+        }
+
+        $hsn_and_sac_codessql = "SELECT id, code, code_description, gst, tax_authority_id FROM `hsn_and_sac_codes` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
+        $hsn_and_sac_codesres = $callConfig->getAllRows($hsn_and_sac_codessql);
+        $return['hsn_and_sac_codes']= $hsn_and_sac_codesres;
+
+        return $return;
+
+    }
+    protected function insertTaxAuthoritySplitRates($post, $rid, $parseq, $taxAuthoritiesRatesId, &$return){
+        global $callConfig;
+        if (!isset($post['split_type'][$parseq]) || !is_array($post['split_type'][$parseq])) {
+            return;
+        }
+        foreach ($post['split_type'][$parseq] as $keyid => $v) {
+            if (($post['tax_rate_split'][$parseq][$keyid] ?? '') != "" && ($post['accountcode_split'][$parseq][$keyid] ?? '') != "") {
+                $insertary = array('company_id'=>$post['company_id'],'split_type'=>$v,'tax_authority_id'=>$rid,'tax_rate'=>$post['tax_rate_split'][$parseq][$keyid],'account_code'=>$post['accountcode_split'][$parseq][$keyid],'authority_rate_id'=>$taxAuthoritiesRatesId,'is_active'=>'0');
+                if (($post['srid'][$parseq][$keyid] ?? '') != "") {
+                    $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+                    $insertary['updated_by'] = $post['user_id'];
+                    $return['splite_res'][] = $callConfig->updateRecord('tax_authorities_rates_split', $insertary, 'id', $post['srid'][$parseq][$keyid]);
+                } else {
+                    $insertary['current_status'] = 0;
+                    $insertary['created_by'] = $post['user_id'];
+                    $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
+                    $return['splite_res'][] = $callConfig->insertRecord('tax_authorities_rates_split', $insertary);
+                }
+            }
+        }
+    }
+
+    protected function insertTaxAuthorityRates($post, $rid, &$return){
+        global $callConfig;
+        if (!isset($post['tax_authorities_rates_seq']) || !is_array($post['tax_authorities_rates_seq'])) {
+            return;
+        }
+        foreach ($post['tax_authorities_rates_seq'] as $parseq) {
+            $insertary = array('company_id'=>$post['company_id'],'tax_authority'=>$rid,'tax_description'=>$post['tax_description'][$parseq] ?? '','is_active'=>'0');
+            if (($post['tax_authorities_rates_id'][$parseq] ?? '') != "") {
+                $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+                $insertary['updated_by'] = $post['user_id'];
+                $res11 = $callConfig->updateRecord('tax_authorities_rates', $insertary, 'id', $post['tax_authorities_rates_id'][$parseq]);
+                $return['tax_authorities_rates'][] = $res11;
+                $tax_authorities_rates_id = $post['tax_authorities_rates_id'][$parseq];
+            } else {
+                $insertary['current_status'] = 0;
+                $insertary['created_by'] = $post['user_id'];
+                $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
+                $res11 = $callConfig->insertRecord('tax_authorities_rates', $insertary);
+                $tax_authorities_rates_id = $res11['LASTID'] ?? null;
+            }
+            if (isset($res11['status']) && $res11['status'] == "sucess") {
+                $this->insertTaxAuthoritySplitRates($post, $rid, $parseq, $tax_authorities_rates_id, $return);
+            }
+        }
+    }
+
+    public function insertTaxAuthorities($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
+        global $callConfig;
+        $return = array();
+        $return['get'] = $get;
+        $return['post'] = $post;
+        $group_tax = json_encode($post['group_tax'], 1);
+        $insertary = array('company_id'=>$post['company_id'],'tax_name'=>$post['tax_name'],'tax_type'=>$post['tax_type'],'tax_scope'=>$post['tax_scope'],'tax_computation_id'=>$post['tax_computation_id'],'description'=>$post['description'],'group_tax'=>$group_tax);
+        if ($post['rid'] != "") {
+            $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+            $insertary['updated_by'] = $post['user_id'];
+            $res = $callConfig->updateRecord('tax_authorities', $insertary, 'id', $post['rid']);
+            $return['res'] = $res;
+            $rid = $post['rid'];
+        } else {
+            $insertary['is_active'] = 0;
+            $insertary['current_status'] = 0;
+            $insertary['created_by'] = $post['user_id'];
+            $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
+            $res = $callConfig->insertRecord('tax_authorities', $insertary);
+            $return['res'] = $res;
+            $rid = $res['LASTID'];
+        }
+        $callConfig->updateRecord('hsn_and_sac_codes', array('tax_authority_id'=>''), 'tax_authority_id', $rid);
+        if (isset($post['hsn_and_sac_code_id']) && is_array($post['hsn_and_sac_code_id'])) {
+            foreach ($post['hsn_and_sac_code_id'] as $hsn_id) {
+                $callConfig->updateRecord('hsn_and_sac_codes', array('tax_authority_id'=>$rid), 'id', $hsn_id);
+            }
+        }
+
+        $callConfig->updateRecord('tax_authorities_rates', array('is_active'=>null), 'tax_authority', $rid);
+        $callConfig->updateRecord('tax_authorities_rates_split', array('is_active'=>null), 'tax_authority_id', $rid);
+
+        $this->insertTaxAuthorityRates($post, $rid, $return);
+
+        return $return;
+    }
+    public function getFiscalPositions($get){
+        global $callConfig;
+        $return = array();
+        $countriessql = "SELECT id, country_name FROM `countries` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY country_name ASC";
+        $countriesres = $callConfig->getAllRows($countriessql);
+        $return['countries']= $countriesres;
+
+        $tax_authoritiessql = "SELECT id, tax_name FROM `tax_authorities` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
+        $tax_authoritiesres = $callConfig->getAllRows($tax_authoritiessql);
+        $return['tax_authorities']= $tax_authoritiesres;
+
+        $chart_of_accountssql = self::SQL_SEL_CHART_OF_ACCOUNTS_SP.$get['company_id'].self::SQL_AND_IS_ACTIVE_ORDER_PRIORITY;
+        $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
+        $return['chart_of_accounts']= $chart_of_accountsres;
+
+        if(isset($get['rid']) && $get['rid'] !=""){
+            $fiscal_positionssql = "SELECT * FROM `fiscal_positions` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $fiscal_positionsres = $callConfig->getRow($fiscal_positionssql);
+            $return['fiscal_positions']= $fiscal_positionsres;
+
+            $fiscal_positions_mappingssql = "SELECT * FROM `fiscal_positions_mappings` WHERE company_id = ".$get['company_id']." AND fiscal_positions_id = '".$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $fiscal_positions_mappingsres = $callConfig->getAllRows($fiscal_positions_mappingssql);
+            $return['fiscal_positions_mappings']= $fiscal_positions_mappingsres;
+        }
+
+        return $return;
+
+    }
+    public function insertFiscalPositions($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
+        global $callConfig;
+        $return =array();
+        $return['get'] = $get;
+        $return['post'] = $post;
+        $insertary=array('company_id'=>$post['company_id'],'fiscal_positions_name'=>$post['fiscal_positions_name'],'country_id'=>$post['country_id']);
+        if($post['rid'] !=""){
+            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
+            $insertary['updated_by']=$post['user_id'];
+            $res= $callConfig->updateRecord('fiscal_positions',$insertary,'id',$post['rid']);
+            $return['res'] = $res;
+            $rid = $post['rid'];
+        }else{
+            $insertary['is_active']=0;
+            $insertary['current_status']=0;
+            $insertary['created_by']=$post['user_id'];
+            $insertary['created_date']=date(self::DATE_FORMAT_HIS);
+            $res = $callConfig->insertRecord('fiscal_positions',$insertary);
+            $return['res'] = $res;
+            $rid = $res['LASTID'];
+        }
+
+        $callConfig->updateRecord('fiscal_positions_mappings',array('is_active'=>null),'fiscal_positions_id',$rid);
+        foreach($post['fiscal_type'] as $keyid=>$v){
+            if($post['get_type'][$keyid] !="" && $post['apply_type'][$keyid] !=""){
+                $insertary=array('company_id'=>$post['company_id'],'fiscal_type'=>$v,'fiscal_positions_id'=>$rid,'get_type'=>$post['get_type'][$keyid],'apply_type'=>$post['apply_type'][$keyid],'is_active'=>'0');
+                if($post['srid'][$keyid] !=""){
+                    $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
+                    $insertary['updated_by']=$post['user_id'];
+                    $res= $callConfig->updateRecord('fiscal_positions_mappings',$insertary,'id',$post['srid'][$keyid]);
+                    $return['ampping_res'][] = $res;
+                }else{
+                    $insertary['current_status']=0;
+                    $insertary['created_by']=$post['user_id'];
+                    $insertary['created_date']=date(self::DATE_FORMAT_HIS);
+                    $res = $callConfig->insertRecord('fiscal_positions_mappings',$insertary);
+                    $return['ampping_res'][] = $res;
+                }
+            }
+        }
+        return $return;
+    }
+    public function getDeferredRevenues($get){
+        global $callConfig;
+        $return =array();
+        $return['get'] = $get;
+        $depreciationmethodsql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']." AND genc_code = 'DEPRECIATIONMETHOD' AND is_active =0";
+        $depreciationmethodres = $callConfig->getAllRows($depreciationmethodsql);
+        $return['depreciation_method']= $depreciationmethodres;
+
+         $chart_of_accountssql = self::SQL_SEL_CHART_OF_ACCOUNTS_SP.$get['company_id'].self::SQL_AND_IS_ACTIVE_ORDER_PRIORITY;
+        $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
+        $return['chart_of_accounts']= $chart_of_accountsres;
+
+        if(isset($get['rid']) && $get['rid'] !=""){
+            $fiscal_positionssql = "SELECT * FROM `deferred_revenues` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $fiscal_positionsres = $callConfig->getRow($fiscal_positionssql);
+            $return['deferred_revenues']= $fiscal_positionsres;
+        }
+
+
+        return $return;
+    }
 
 }
 
 class AccountUserClass extends userClass implements AccountConstants {
-    use AccountVouchersAndBudgetsTrait;
-    use AccountLedgersAndReportsTrait;
-
-
+    use AccountBudgetsAndReconciliationsTrait;
+    use AccountVouchersTrait;
+    use AccountReportsAndNotesTrait;
+    use AccountLedgersTrait;
+    use AccountTaxAndFiscalTrait;
     public function getFinanaceReportGroups($get){
         global $callConfig;
         $return = array();
@@ -2047,54 +2199,55 @@ class AccountUserClass extends userClass implements AccountConstants {
 
         return $return;
     }
-    public function insertChartOfAccounts($get,$post){
+    protected function insertChartOfAccountsOpeningBalances($get, $post, &$return){
         global $callConfig;
-        $return =array();
-        $return['post'] = $post;
+        $totalopening_balance = 0;
+        $configssql = "SELECT system_start_date FROM `config` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0_SPACE;
+        $configres = $callConfig->getRow($configssql);
+        $system_start_date = !empty($configres->system_start_date) ? $configres->system_start_date : date("Y-m-d");
+        $getFinanceialYear = $this->getFinanceialYear($system_start_date);
+        $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
 
-        $allow_posting = ($post['allow_posting'] =="0")?0:1;
-         $allow_manual_entries = ($post['allow_manual_entries'] =="0")?0:1;
-        if($post['Rid']!=""){
-            $insert_array = array('account_code'=>$post['account_code'],'account_name'=>$post['account_name'],'account_short_name'=> $post['account_short_name'],'account_type'=>$post['account_type'],'parent_account_code'=>$post['parent_account_code'],'display_priority'=>$post['display_priority'],'tax_id'=>$post['tax_id'],'currency_id'=>$post['currency_id'],'journal_id'=>$post['journal_id'],'reconciliation'=>$post['reconciliation'],'allow_posting'=>$allow_posting,'allow_manual_entries'=>$allow_manual_entries,'updated_by'=>$get['user_id'],'updated_date'=>date(self::DATE_FORMAT_HIS),'accgro_group_id' => $post['account_groups']);
-            $res=$callConfig->updateRecord('chart_of_accounts',$insert_array,'id',$post['Rid']);
-            $return['res'] = $res;
-        }else{
-            $accountcode = $this->setAccountCode($get, $post);
-            $post['account_code'] = $accountcode['account_code'];
-            $insert_array = array('company_id'=>$get['company_id'],'account_code'=>$post['account_code'],'account_name'=>$post['account_name'],'account_short_name'=> $post['account_short_name'],'account_type'=>$post['account_type'],'parent_account_code'=>$post['parent_account_code'],'display_priority'=>$post['display_priority'],'tax_id'=>$post['tax_id'],'currency_id'=>$post['currency_id'],'journal_id'=>$post['journal_id'],'reconciliation'=>$post['reconciliation'],'allow_posting'=>$allow_posting,'allow_manual_entries'=>$allow_manual_entries,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'accgro_group_id' => $post['account_groups']);
-            $insert_data=$callConfig->insertRecord('chart_of_accounts',$insert_array);
-            $return['res'] = $insert_data;
-             //Open  account balance
-
-            if($insert_data['status'] =='sucess'){
-                $totalopening_balance = 0;
-                $configssql = "SELECT system_start_date FROM `config` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0_SPACE;
-                $configres = $callConfig->getRow($configssql);
-                $system_start_date = $configres->system_start_date !=""?$configres->system_start_date:date("Y-m-d");
-                $getFinanceialYear = $this->getFinanceialYear($system_start_date);
-                $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
-
-                $query = "INSERT INTO account_balances_details (`company_id`, `finance_year`, `account_code`, `location_id`, `department_id`, `cost_center_id`, `balance_date`, `debit_amount`, `credit_amount`, `opening_balance`, `closing_balance`, `is_active`, `current_status`,`created_by`,`created_date`) VALUES";
-                foreach($post['opening_balance'] as $lockey=> $locid){
-                     foreach($locid as $depkey=>$depid){
-                        foreach($depid as $cckey=>$amount){
-                            $totalopening_balance += $amount !=""?$amount:0;
-                    $query.="('".$get['company_id']."','".$financeyear."' ,'".$post['account_code']."' ,'".$lockey."' ,'".$depkey."' ,'".$cckey."' ,'".$this->dateconvertdbformat($system_start_date)."','0','0','0','".$amount."','0','0','".$get['user_id']."','".date(self::DATE_FORMAT_HIS)."'),";
-                        }
+        $query = "INSERT INTO account_balances_details (`company_id`, `finance_year`, `account_code`, `location_id`, `department_id`, `cost_center_id`, `balance_date`, `debit_amount`, `credit_amount`, `opening_balance`, `closing_balance`, `is_active`, `current_status`,`created_by`,`created_date`) VALUES";
+        if (isset($post['opening_balance']) && is_array($post['opening_balance'])) {
+            foreach ($post['opening_balance'] as $lockey => $locid) {
+                foreach ($locid as $depkey => $depid) {
+                    foreach ($depid as $cckey => $amount) {
+                        $totalopening_balance += ($amount != "") ? $amount : 0;
+                        $query .= "('".$get['company_id']."','".$financeyear."' ,'".$post['account_code']."' ,'".$lockey."' ,'".$depkey."' ,'".$cckey."' ,'".$this->dateconvertdbformat($system_start_date)."','0','0','0','".$amount."','0','0','".$get['user_id']."','".date(self::DATE_FORMAT_HIS)."'),";
                     }
                 }
-                $prscquery= trim($query,",");
-
-                $return['prscquery'] = $prscquery;
-                $callConfig->executeQuery($prscquery);
-
-               $insertaryitmledger=array('company_id'=>$get['company_id'],'finance_year'=>$financeyear,'account_code'=>$post['account_code'],'balance_date'=>$this->dateconvertdbformat($system_start_date),'debit_amount'=>0,'credit_amount'=>0,'opening_balance'=>0,'closing_balance'=>$totalopening_balance,'is_active'=>0,'current_status'=>0,'created_by'=>'','created_date'=>date(self::DATE_FORMAT_HIS));
-                $callConfig->insertRecord('account_balances',$insertaryitmledger);
             }
+        }
+        $prscquery = trim($query, ",");
+        $return['prscquery'] = $prscquery;
+        $callConfig->executeQuery($prscquery);
 
-             //Close account balance
-           }
+        $insertaryitmledger = array('company_id'=>$get['company_id'],'finance_year'=>$financeyear,'account_code'=>$post['account_code'],'balance_date'=>$this->dateconvertdbformat($system_start_date),'debit_amount'=>0,'credit_amount'=>0,'opening_balance'=>0,'closing_balance'=>$totalopening_balance,'is_active'=>0,'current_status'=>0,'created_by'=>'','created_date'=>date(self::DATE_FORMAT_HIS));
+        $callConfig->insertRecord('account_balances', $insertaryitmledger);
+    }
 
+    public function insertChartOfAccounts($get,$post){
+        global $callConfig;
+        $return = array();
+        $return['post'] = $post;
+
+        $allow_posting = ($post['allow_posting'] == "0") ? 0 : 1;
+        $allow_manual_entries = ($post['allow_manual_entries'] == "0") ? 0 : 1;
+        if ($post['Rid'] != "") {
+            $insert_array = array('account_code'=>$post['account_code'],'account_name'=>$post['account_name'],'account_short_name'=>$post['account_short_name'],'account_type'=>$post['account_type'],'parent_account_code'=>$post['parent_account_code'],'display_priority'=>$post['display_priority'],'tax_id'=>$post['tax_id'],'currency_id'=>$post['currency_id'],'journal_id'=>$post['journal_id'],'reconciliation'=>$post['reconciliation'],'allow_posting'=>$allow_posting,'allow_manual_entries'=>$allow_manual_entries,'updated_by'=>$get['user_id'],'updated_date'=>date(self::DATE_FORMAT_HIS),'accgro_group_id'=>$post['account_groups']);
+            $res = $callConfig->updateRecord('chart_of_accounts', $insert_array, 'id', $post['Rid']);
+            $return['res'] = $res;
+        } else {
+            $accountcode = $this->setAccountCode($get, $post);
+            $post['account_code'] = $accountcode['account_code'];
+            $insert_array = array('company_id'=>$get['company_id'],'account_code'=>$post['account_code'],'account_name'=>$post['account_name'],'account_short_name'=>$post['account_short_name'],'account_type'=>$post['account_type'],'parent_account_code'=>$post['parent_account_code'],'display_priority'=>$post['display_priority'],'tax_id'=>$post['tax_id'],'currency_id'=>$post['currency_id'],'journal_id'=>$post['journal_id'],'reconciliation'=>$post['reconciliation'],'allow_posting'=>$allow_posting,'allow_manual_entries'=>$allow_manual_entries,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'accgro_group_id'=>$post['account_groups']);
+            $insert_data = $callConfig->insertRecord('chart_of_accounts', $insert_array);
+            $return['res'] = $insert_data;
+            if (isset($insert_data['status']) && $insert_data['status'] == 'sucess') {
+                $this->insertChartOfAccountsOpeningBalances($get, $post, $return);
+            }
+        }
         return $return;
     }
     public function insertTOCHeaders($get,$post){
@@ -2283,228 +2436,6 @@ class AccountUserClass extends userClass implements AccountConstants {
             $res = $callConfig->insertRecord('journal_settings',$insertary);
             $return['res'] = $res;
         }
-        return $return;
-    }
-    public function getTaxAuthorities($get){
-        global $callConfig;
-        $all_tax_authoritiessql = "SELECT id, tax_name, tax_type, tax_scope, tax_rate, tax_computation_id FROM `tax_authorities` WHERE company_id = ".$get['company_id']." AND tax_computation_id != '1' AND id != '".$get['rid']."'  AND is_active =0";
-        $all_tax_authoritiesres = $callConfig->getAllRows($all_tax_authoritiessql);
-        $return['all_tax_authorities']= $all_tax_authoritiesres;
-
-        $taxtypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']." AND genc_code = 'TAXTYPE' AND is_active =0";
-        $taxtyperes = $callConfig->getAllRows($taxtypesql);
-        $taxtype = array();
-        foreach($taxtyperes as $tt){
-            $taxtype[$tt->genc_detail_code] = $tt;
-        }
-        $return['tax_type']= $taxtype;
-
-        $taxscopesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']." AND genc_code = 'TAXSCOPE' AND is_active =0";
-        $taxscoperes = $callConfig->getAllRows($taxscopesql);
-        $return['tax_scope']= $taxscoperes;
-
-        $tax_computationssql = "SELECT id, tax_computations_name FROM `tax_computations` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $tax_computationsres = $callConfig->getAllRows($tax_computationssql);
-        $tax_computations = array();
-        foreach($tax_computationsres as $tc){
-            $tax_computations[$tc->id] = $tc;
-        }
-        $return['tax_computations']= $tax_computations;
-
-        $chart_of_accountssql = self::SQL_SEL_CHART_OF_ACCOUNTS_SP.$get['company_id'].self::SQL_AND_IS_ACTIVE_ORDER_PRIORITY;
-        $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
-        $return['chart_of_accounts']= $chart_of_accountsres;
-
-        if(isset($get['rid']) && $get['rid'] !=""){
-            $tax_authoritiessql = "SELECT * FROM `tax_authorities` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $tax_authoritiesres = $callConfig->getRow($tax_authoritiessql);
-            $return['tax_authorities']= $tax_authoritiesres;
-
-            $tax_authorities_ratessql = "SELECT id, tax_authority, dispatch_tax_province, tax_description FROM `tax_authorities_rates` WHERE company_id = ".$get['company_id']." AND tax_authority = '".$tax_authoritiesres->id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $tax_authorities_ratesres = $callConfig->getAllRows($tax_authorities_ratessql);
-            $return['tax_authorities_rates']= $tax_authorities_ratesres;
-
-
-            $taiid = array();
-            foreach($tax_authorities_ratesres as $tar){
-                $taiid[$tar->id] = $tar->id;
-            }
-
-            if(count((array)$taiid) != 0){
-                $tax_authoritiessql = "SELECT id, tax_rate, account_code, split_type, tax_authority_id, authority_rate_id FROM `tax_authorities_rates_split` WHERE company_id = ".$get['company_id']." AND tax_authority_id IN(".implode(',',$taiid).") AND is_active =0";
-                $tax_authoritiessql = $callConfig->getAllRows($tax_authoritiessql);
-                $return['tax_authorities_rates_split']= $tax_authoritiessql;
-            }
-        }
-
-        $hsn_and_sac_codessql = "SELECT id, code, code_description, gst, tax_authority_id FROM `hsn_and_sac_codes` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $hsn_and_sac_codesres = $callConfig->getAllRows($hsn_and_sac_codessql);
-        $return['hsn_and_sac_codes']= $hsn_and_sac_codesres;
-
-        return $return;
-
-    }
-    public function insertTaxAuthorities($get,$post){
-        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
-        global $callConfig;
-        $return =array();
-        $return['get'] = $get;
-        $return['post'] = $post;
-        $group_tax = json_encode($post['group_tax'],1);
-        $insertary=array('company_id'=>$post['company_id'],'tax_name'=>$post['tax_name'],'tax_type'=>$post['tax_type'],'tax_scope'=>$post['tax_scope'],'tax_computation_id'=>$post['tax_computation_id'],'description'=>$post['description'],'group_tax'=>$group_tax);
-        if($post['rid'] !=""){
-            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-            $insertary['updated_by']=$post['user_id'];
-            $res= $callConfig->updateRecord('tax_authorities',$insertary,'id',$post['rid']);
-            $return['res'] = $res;
-            $rid = $post['rid'];
-        }else{
-            $insertary['is_active']=0;
-            $insertary['current_status']=0;
-            $insertary['created_by']=$post['user_id'];
-            $insertary['created_date']=date(self::DATE_FORMAT_HIS);
-            $res = $callConfig->insertRecord('tax_authorities',$insertary);
-            $return['res'] = $res;
-            $rid = $res['LASTID'];
-        }
-        $callConfig->updateRecord('hsn_and_sac_codes',array('tax_authority_id'=>''),'tax_authority_id',$rid);
-        foreach($post['hsn_and_sac_code_id'] as $hsn_id){
-            $callConfig->updateRecord('hsn_and_sac_codes',array('tax_authority_id'=>$rid),'id',$hsn_id);
-        }
-
-        $callConfig->updateRecord('tax_authorities_rates',array('is_active'=>null),'tax_authority',$rid);
-        $callConfig->updateRecord('tax_authorities_rates_split',array('is_active'=>null),'tax_authority_id',$rid);
-
-        foreach($post['tax_authorities_rates_seq'] as $parseq){
-
-            $insertary=array('company_id'=>$post['company_id'],'tax_authority'=>$rid,'tax_description'=>$post['tax_description'][$parseq],'is_active'=>'0');
-            if($post['tax_authorities_rates_id'][$parseq] !=""){
-                $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-                $insertary['updated_by']=$post['user_id'];
-                $res11= $callConfig->updateRecord('tax_authorities_rates',$insertary,'id',$post['tax_authorities_rates_id'][$parseq]);
-                $return['tax_authorities_rates'][] = $res11;
-                $tax_authorities_rates_id = $post['tax_authorities_rates_id'][$parseq];
-            }else{
-                $insertary['current_status']=0;
-                $insertary['created_by']=$post['user_id'];
-                $insertary['created_date']=date(self::DATE_FORMAT_HIS);
-                $res11 = $callConfig->insertRecord('tax_authorities_rates',$insertary);
-                $tax_authorities_rates_id = $res11['LASTID'];
-            }
-            if($res11['status'] == "sucess"){
-
-                foreach($post['split_type'][$parseq] as $keyid=>$v){
-                    if($post['tax_rate_split'][$parseq][$keyid] !="" && $post['accountcode_split'][$parseq][$keyid] !=""){
-                        $insertary=array('company_id'=>$post['company_id'],'split_type'=>$v,'tax_authority_id'=>$rid,'tax_rate'=>$post['tax_rate_split'][$parseq][$keyid],'account_code'=>$post['accountcode_split'][$parseq][$keyid],'authority_rate_id'=>$tax_authorities_rates_id,'is_active'=>'0');
-                        if($post['srid'][$parseq][$keyid] !=""){
-                            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-                            $insertary['updated_by']=$post['user_id'];
-                            $res= $callConfig->updateRecord('tax_authorities_rates_split',$insertary,'id',$post['srid'][$parseq][$keyid]);
-                            $return['splite_res'][] = $res;
-                        }else{
-                            $insertary['current_status']=0;
-                            $insertary['created_by']=$post['user_id'];
-                            $insertary['created_date']=date(self::DATE_FORMAT_HIS);
-                            $res = $callConfig->insertRecord('tax_authorities_rates_split',$insertary);
-                            $return['splite_res'][] = $res;
-                        }
-                    }
-                }
-            }
-        }
-
-        return $return;
-    }
-    public function getFiscalPositions($get){
-        global $callConfig;
-        $return = array();
-        $countriessql = "SELECT id, country_name FROM `countries` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY country_name ASC";
-        $countriesres = $callConfig->getAllRows($countriessql);
-        $return['countries']= $countriesres;
-
-        $tax_authoritiessql = "SELECT id, tax_name FROM `tax_authorities` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $tax_authoritiesres = $callConfig->getAllRows($tax_authoritiessql);
-        $return['tax_authorities']= $tax_authoritiesres;
-
-        $chart_of_accountssql = self::SQL_SEL_CHART_OF_ACCOUNTS_SP.$get['company_id'].self::SQL_AND_IS_ACTIVE_ORDER_PRIORITY;
-        $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
-        $return['chart_of_accounts']= $chart_of_accountsres;
-
-        if(isset($get['rid']) && $get['rid'] !=""){
-            $fiscal_positionssql = "SELECT * FROM `fiscal_positions` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $fiscal_positionsres = $callConfig->getRow($fiscal_positionssql);
-            $return['fiscal_positions']= $fiscal_positionsres;
-
-            $fiscal_positions_mappingssql = "SELECT * FROM `fiscal_positions_mappings` WHERE company_id = ".$get['company_id']." AND fiscal_positions_id = '".$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $fiscal_positions_mappingsres = $callConfig->getAllRows($fiscal_positions_mappingssql);
-            $return['fiscal_positions_mappings']= $fiscal_positions_mappingsres;
-        }
-
-        return $return;
-
-    }
-    public function insertFiscalPositions($get,$post){
-        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
-        global $callConfig;
-        $return =array();
-        $return['get'] = $get;
-        $return['post'] = $post;
-        $insertary=array('company_id'=>$post['company_id'],'fiscal_positions_name'=>$post['fiscal_positions_name'],'country_id'=>$post['country_id']);
-        if($post['rid'] !=""){
-            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-            $insertary['updated_by']=$post['user_id'];
-            $res= $callConfig->updateRecord('fiscal_positions',$insertary,'id',$post['rid']);
-            $return['res'] = $res;
-            $rid = $post['rid'];
-        }else{
-            $insertary['is_active']=0;
-            $insertary['current_status']=0;
-            $insertary['created_by']=$post['user_id'];
-            $insertary['created_date']=date(self::DATE_FORMAT_HIS);
-            $res = $callConfig->insertRecord('fiscal_positions',$insertary);
-            $return['res'] = $res;
-            $rid = $res['LASTID'];
-        }
-
-        $callConfig->updateRecord('fiscal_positions_mappings',array('is_active'=>null),'fiscal_positions_id',$rid);
-        foreach($post['fiscal_type'] as $keyid=>$v){
-            if($post['get_type'][$keyid] !="" && $post['apply_type'][$keyid] !=""){
-                $insertary=array('company_id'=>$post['company_id'],'fiscal_type'=>$v,'fiscal_positions_id'=>$rid,'get_type'=>$post['get_type'][$keyid],'apply_type'=>$post['apply_type'][$keyid],'is_active'=>'0');
-                if($post['srid'][$keyid] !=""){
-                    $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-                    $insertary['updated_by']=$post['user_id'];
-                    $res= $callConfig->updateRecord('fiscal_positions_mappings',$insertary,'id',$post['srid'][$keyid]);
-                    $return['ampping_res'][] = $res;
-                }else{
-                    $insertary['current_status']=0;
-                    $insertary['created_by']=$post['user_id'];
-                    $insertary['created_date']=date(self::DATE_FORMAT_HIS);
-                    $res = $callConfig->insertRecord('fiscal_positions_mappings',$insertary);
-                    $return['ampping_res'][] = $res;
-                }
-            }
-        }
-        return $return;
-    }
-    public function getDeferredRevenues($get){
-        global $callConfig;
-        $return =array();
-        $return['get'] = $get;
-        $depreciationmethodsql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']." AND genc_code = 'DEPRECIATIONMETHOD' AND is_active =0";
-        $depreciationmethodres = $callConfig->getAllRows($depreciationmethodsql);
-        $return['depreciation_method']= $depreciationmethodres;
-
-         $chart_of_accountssql = self::SQL_SEL_CHART_OF_ACCOUNTS_SP.$get['company_id'].self::SQL_AND_IS_ACTIVE_ORDER_PRIORITY;
-        $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
-        $return['chart_of_accounts']= $chart_of_accountsres;
-
-        if(isset($get['rid']) && $get['rid'] !=""){
-            $fiscal_positionssql = "SELECT * FROM `deferred_revenues` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $fiscal_positionsres = $callConfig->getRow($fiscal_positionssql);
-            $return['deferred_revenues']= $fiscal_positionsres;
-        }
-
-
         return $return;
     }
 

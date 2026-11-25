@@ -696,25 +696,21 @@ class ManufacturingUserClass extends userClass implements ManufacturingConstants
 
     private function validateWorkOrderRequired(array $post, array $ctx): ?string
     {
+        $err = null;
         if ($ctx['companyId'] <= 0 || $ctx['userId'] <= 0) {
-            return 'Company and user details are required.';
+            $err = 'Company and user details are required.';
+        } elseif ($ctx['transactionDate'] == '' || $ctx['plannedStartDate'] == '' || $ctx['plannedEndDate'] == '') {
+            $err = 'Transaction date, planned start date and planned due date are required.';
+        } elseif (strtotime($ctx['plannedEndDate']) < strtotime($ctx['plannedStartDate'])) {
+            $err = 'Planned due date cannot be earlier than planned start date.';
+        } elseif ($ctx['workOrderItemId'] <= 0 || $ctx['workOrderQty'] <= 0 || $ctx['bomId'] <= 0 || $ctx['warehouseId'] <= 0) {
+            $err = 'Product, quantity, BOM and warehouse are required.';
+        } elseif (empty($post['item_id']) || !is_array($post['item_id'])) {
+            $err = 'Please select a BOM to load required components.';
+        } elseif (empty($post['manufacturing_operation_id']) || !is_array($post['manufacturing_operation_id'])) {
+            $err = 'Please select a BOM to load required operations.';
         }
-        if ($ctx['transactionDate'] == '' || $ctx['plannedStartDate'] == '' || $ctx['plannedEndDate'] == '') {
-            return 'Transaction date, planned start date and planned due date are required.';
-        }
-        if (strtotime($ctx['plannedEndDate']) < strtotime($ctx['plannedStartDate'])) {
-            return 'Planned due date cannot be earlier than planned start date.';
-        }
-        if ($ctx['workOrderItemId'] <= 0 || $ctx['workOrderQty'] <= 0 || $ctx['bomId'] <= 0 || $ctx['warehouseId'] <= 0) {
-            return 'Product, quantity, BOM and warehouse are required.';
-        }
-        if (empty($post['item_id']) || !is_array($post['item_id'])) {
-            return 'Please select a BOM to load required components.';
-        }
-        if (empty($post['manufacturing_operation_id']) || !is_array($post['manufacturing_operation_id'])) {
-            return 'Please select a BOM to load required operations.';
-        }
-        return null;
+        return $err;
     }
 
     private function validateExistingWorkOrder(int $companyId, int $rid): ?string
@@ -725,16 +721,18 @@ class ManufacturingUserClass extends userClass implements ManufacturingConstants
         }
         $existingWorkOrder = $callConfig->getRow("SELECT id, current_status, work_log_status FROM manufacturing_work_orders WHERE company_id='" . $companyId . self::AND_ID_QUOTE . $rid . self::AND_IS_ACTIVE_0_NOSPACE);
         if (empty($existingWorkOrder->id)) {
-            return 'Work order not found.';
+            $err = 'Work order not found.';
+        } else {
+            $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null, 0, '0');
+            if (!in_array($existingWorkOrder->current_status, $editableStatuses)) {
+                $err = 'Approved work order cannot be edited.';
+            } elseif ($existingWorkOrder->work_log_status !== null && $existingWorkOrder->work_log_status !== '') {
+                $err = 'Production already started. Work order cannot be edited.';
+            } else {
+                $err = null;
+            }
         }
-        $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null, 0, '0');
-        if (!in_array($existingWorkOrder->current_status, $editableStatuses)) {
-            return 'Approved work order cannot be edited.';
-        }
-        if ($existingWorkOrder->work_log_status !== null && $existingWorkOrder->work_log_status !== '') {
-            return 'Production already started. Work order cannot be edited.';
-        }
-        return null;
+        return $err;
     }
 
     private function validateFirmOrderMatch(int $companyId, int $firmOrderItemId, int $workOrderItemId, float $workOrderQty, int $rid): ?string
@@ -745,23 +743,20 @@ class ManufacturingUserClass extends userClass implements ManufacturingConstants
         }
         $firmOrderRow = $callConfig->getRow("SELECT mfo.id, mfo.product_id, mfo.firm_qty_1, firm.current_status FROM manufacturing_firm_order_items mfo INNER JOIN manufacturing_firm_orders firm ON firm.company_id=mfo.company_id AND firm.id=mfo.manufacturing_firm_order_id AND firm.is_active=mfo.is_active WHERE mfo.company_id='" . $companyId . self::AND_ID_QUOTE . $firmOrderItemId . self::AND_IS_ACTIVE_0_NOSPACE);
         if (empty($firmOrderRow->id) || $firmOrderRow->current_status != ST_APPROVED) {
-            return 'Firm order must be approved before creating a work order.';
+            $err = 'Firm order must be approved before creating a work order.';
+        } elseif (intval($firmOrderRow->product_id) != $workOrderItemId) {
+            $err = 'Firm order product does not match selected work order product.';
+        } elseif ($workOrderQty > floatval($firmOrderRow->firm_qty_1)) {
+            $err = 'Work order quantity cannot exceed firm order quantity.';
+        } else {
+            $duplicateSql = "SELECT id FROM manufacturing_work_orders WHERE company_id='" . $companyId . "' AND manufacturing_firm_order_id='" . $firmOrderItemId . "' AND is_active=0 AND current_status != " . ST_REJECTED;
+            if ($rid > 0) {
+                $duplicateSql .= " AND id != '" . $rid . "'";
+            }
+            $duplicateWorkOrder = $callConfig->getRow($duplicateSql . self::LIMIT_1);
+            $err = !empty($duplicateWorkOrder->id) ? 'A work order already exists for this firm order.' : null;
         }
-        if (intval($firmOrderRow->product_id) != $workOrderItemId) {
-            return 'Firm order product does not match selected work order product.';
-        }
-        if ($workOrderQty > floatval($firmOrderRow->firm_qty_1)) {
-            return 'Work order quantity cannot exceed firm order quantity.';
-        }
-        $duplicateSql = "SELECT id FROM manufacturing_work_orders WHERE company_id='" . $companyId . "' AND manufacturing_firm_order_id='" . $firmOrderItemId . "' AND is_active=0 AND current_status != " . ST_REJECTED;
-        if ($rid > 0) {
-            $duplicateSql .= " AND id != '" . $rid . "'";
-        }
-        $duplicateWorkOrder = $callConfig->getRow($duplicateSql . self::LIMIT_1);
-        if (!empty($duplicateWorkOrder->id)) {
-            return 'A work order already exists for this firm order.';
-        }
-        return null;
+        return $err;
     }
 
     private function validateSubcontractWipComponents(int $companyId, array $post): ?string
@@ -801,19 +796,17 @@ class ManufacturingUserClass extends userClass implements ManufacturingConstants
 
         $itemRow = $callConfig->getRow(self::SQL_ITEMS_STOCKING_TYPE . $ctx['companyId'] . self::AND_ID_QUOTE . $ctx['workOrderItemId'] . self::AND_IS_ACTIVE_0_NOSPACE);
         if (empty($itemRow->id) || !in_array($itemRow->stocking_type, array('F', 'W'))) {
-            return 'Work order product must be an active finished good or WIP item.';
+            $err = 'Work order product must be an active finished good or WIP item.';
+        } else {
+            $bomRow = $callConfig->getRow("SELECT id, bom_item_id FROM manufacturing_boms WHERE company_id='" . $ctx['companyId'] . self::AND_ID_QUOTE . $ctx['bomId'] . "' AND bom_item_id='" . $ctx['workOrderItemId'] . self::AND_IS_ACTIVE_0_NOSPACE);
+            if (empty($bomRow->id)) {
+                $err = 'Selected BOM does not belong to the selected product.';
+            } else {
+                $firmErr = $this->validateFirmOrderMatch($ctx['companyId'], $ctx['firmOrderItemId'], $ctx['workOrderItemId'], $ctx['workOrderQty'], $ctx['rid']);
+                $err = ($firmErr !== null) ? $firmErr : $this->validateSubcontractWipComponents($ctx['companyId'], $post);
+            }
         }
-        $bomRow = $callConfig->getRow("SELECT id, bom_item_id FROM manufacturing_boms WHERE company_id='" . $ctx['companyId'] . self::AND_ID_QUOTE . $ctx['bomId'] . "' AND bom_item_id='" . $ctx['workOrderItemId'] . self::AND_IS_ACTIVE_0_NOSPACE);
-        if (empty($bomRow->id)) {
-            return 'Selected BOM does not belong to the selected product.';
-        }
-
-        $firmErr = $this->validateFirmOrderMatch($ctx['companyId'], $ctx['firmOrderItemId'], $ctx['workOrderItemId'], $ctx['workOrderQty'], $ctx['rid']);
-        if ($firmErr !== null) {
-            return $firmErr;
-        }
-
-        return $this->validateSubcontractWipComponents($ctx['companyId'], $post);
+        return $err;
     }
 
     private function resolveComponentPartyWarehouse(int $companyId, array $post, int $seq): array
@@ -934,7 +927,7 @@ class ManufacturingUserClass extends userClass implements ManufacturingConstants
         $plannedStartDate = $this->dateconvertdbformat($post['planned_start_date'] ?? '');
         $plannedEndDate = $this->dateconvertdbformat($post['planned_end_date'] ?? '');
 
-                $ctx = array(
+        $ctx = array(
             'companyId' => $companyId,
             'userId' => $userId,
             'rid' => $rid,

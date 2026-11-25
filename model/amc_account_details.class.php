@@ -687,6 +687,250 @@ trait AmcStationeryAndComplaintsTrait {
   }
 
 
+  public function getServiceScheduleDetails($get){
+    global $callConfig;
+    $return = array();
+    if ($get['id'] != "") {
+      $service_schedule_details_query = "SELECT * FROM amc_service_schedules WHERE registration_id = '" . $get['id'] . "' AND company_id='" . $get['company_id'] . "' AND is_active = '0' order by service_date asc";
+      $service_schedule_details = $callConfig->getAllRows($service_schedule_details_query);
+      $return['serviceDetails'] = $service_schedule_details;
+
+      $customer_details_query = "SELECT ard.amc_name, acd.customer_name, acd.mobile_no, acd.address_line1,acd.address_line2,ard.activation_date, ard.deactivation_date, account_group_id, serv.genc_detail_name AS service_frequency FROM `amc_registration_details` ard
+        LEFT join amc_customer_details acd on acd.id = ard.customer_id
+        LEFT JOIN (SELECT genc_detail_code,genc_detail_name  FROM  general_code_details WHERE  genc_code ='AMCSERVICE' AND company_id='{$get['company_id']}' AND is_active =0 ) serv ON serv.genc_detail_code = ard.service_on
+        where ard.id='" . $get['id'] . "' AND ard.company_id='" . $get['company_id'] . "' AND ard.is_active = '0' ";
+      $customer_details = $callConfig->getRow($customer_details_query);
+      $return['customer_details'] = $customer_details;
+    }
+    $general_code_details = "SELECT id, company_id, genc_code,genc_detail_code,genc_detail_name FROM  general_code_details WHERE  genc_code ='AMCPAYTYPE' AND company_id='" . $get['company_id'] . "' AND is_active ='0' ";
+    $general_code_details = $callConfig->getAllRows($general_code_details);
+    $gc_details = array();
+
+    foreach ($general_code_details as $row) {
+      $gc_details[$row->genc_detail_code] = $row->genc_detail_name;
+    }
+    $return['gc_details'] = $gc_details;
+
+    $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
+    $account_group_details = $callConfig->getAllRows($account_group_query);
+    $ag_details = array();
+    foreach ($account_group_details as $row) {
+      $ag_details[$row->id] = $row->group_name;
+    }
+    $return['ag_details'] = $ag_details;
+
+    $technician_query = self::SQL_SELECT_AMC_ACCOUNT_NAME . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_0;
+    $technician_details = $callConfig->getAllRows($technician_query);
+    $tech_details = array();
+    foreach ($technician_details as $row) {
+      $tech_details[$row->id] = $row->account_name;
+    }
+    $return['tech_details'] = $tech_details;
+    return $return;
+  }
+  public function getAmcServiceDetails($get){
+    global $callConfig;
+    $return = array();
+    $return['get'] = $get;
+    if ($get['id'] != "") {
+      $amc_service_schedules_query = "SELECT * FROM amc_service_schedules WHERE company_id='" . $get['company_id'] . "' AND id = '" . $get['id'] . self::SQL_AND_IS_ACTIVE_0;
+      $amc_service_schedules = $callConfig->getRow($amc_service_schedules_query);
+      $return['amc_service_schedules'] = $amc_service_schedules;
+      $registrationId = $amc_service_schedules->registration_id ?? '';
+      if($registrationId != ''){
+        $checklist_query = "SELECT id,  check_name FROM application_check_lists WHERE transaction_id = '{$registrationId}' AND application_tablename='amc_registration_details' AND company_id={$get['company_id']} AND is_active = 0";
+        $result = $callConfig->getAllRows($checklist_query);
+        $checklist_items = array();
+        foreach ($result as $row) {
+          $checklist_items[$row->id] = $row->check_name;
+        }
+        $return['checklist_items'] = $checklist_items;
+      }
+
+      $query = "SELECT id,application_check_list_id, check_status, check_remarks FROM amc_check_list WHERE amc_service_schedule_id = '{$get['id']}' AND amc_registration_id = '{$registrationId}' AND company_id='{$get['company_id']}' AND is_active = 0";
+      $check_list_details = $callConfig->getAllRows($query);
+      $check_list_status = array();
+      foreach ($check_list_details as $row) {
+        $check_list_status[$row->application_check_list_id] = $row;
+      }
+      $return['check_list_status'] = $check_list_status;
+
+    }
+    $general_code_details = "SELECT id, company_id, genc_code,genc_detail_code,genc_detail_name FROM  general_code_details WHERE  genc_code ='AMCPAYTYPE' AND company_id='" . $get['company_id'] . "' AND is_active ='0' ";
+    $general_code_details = $callConfig->getAllRows($general_code_details);
+    $gc_details = array();
+
+    foreach ($general_code_details as $row) {
+      $gc_details[$row->genc_detail_code] = $row->genc_detail_name;
+    }
+    $return['gc_details'] = $gc_details;
+
+    $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
+    $account_group_details = $callConfig->getAllRows($account_group_query);
+    $ag_details = array();
+    foreach ($account_group_details as $row) {
+      $ag_details[$row->id] = $row->group_name;
+    }
+    $return['ag_details'] = $ag_details;
+    return $return;
+  }
+
+  public function togetuserfielddashboard($get){
+    global $callConfig;
+    $whr = "";
+
+    if($get['moduletype']=='FIELD_EMPLOYEE'){
+       $whr = "AND user_id = ".$get['user_id'];
+    }
+    if($get['moduletype']=='FIELD_MANAGER'){
+       $whr = "AND user_id IN ( SELECT id FROM application_users WHERE reports_to =".$get['user_id']." AND is_active =0)";
+    }
+    $query = "SELECT COUNT(id) as cc_plan FROM field_work_daily_plans WHERE company_id =".$get['company_id']." ".$whr."  AND current_status NOT IN (25,28) AND is_active = 0";
+    $pdata = $callConfig->getRow($query);
+    $return['user_daily_plan'] = $pdata->cc_plan;
+    $query = "SELECT COUNT(id) as cc_plan, sum(if(field_work_daily_plan_id!='',1,0)) as cc_daily_plan FROM field_work_user_map_points WHERE company_id =".$get['company_id']."  ".$whr." AND is_active = 0";
+    $udpdata = $callConfig->getRow($query);
+    $return['all_user_map'] = $udpdata->cc_plan;
+    $return['all_user_daily_map'] = $udpdata->cc_daily_plan;
+    $return['all_user_extra_map'] = $return['all_user_map']- $return['all_user_daily_map'];
+    $return['alldatamonth'] = $this->togetoprationlistbasedonmonthly($get);
+
+    return $return;
+  }
+  public function togetoprationlistbasedonmonthly($get){
+    global $callConfig;
+    $year_month = $get['year_month']!="" ? $get['year_month'] : date('Y-m');
+    $from_date =  date('Y-m-d', strtotime($year_month."-01"));
+    $to_date =  date('Y-m-t', strtotime($from_date));
+    $whr = "";
+
+    if($get['moduletype']=='FIELD_EMPLOYEE'){
+       $whr = "AND user_id = ".$get['user_id'];
+    }
+    if($get['moduletype']=='FIELD_MANAGER'){
+       $whr = "AND user_id IN ( SELECT id FROM application_users WHERE reports_to =".$get['user_id']." AND is_active =0)";
+    }
+    $query = "SELECT id, contact_person as map_title, plan_date as map_date,plan_time as map_time, current_status, user_id  FROM field_work_daily_plans WHERE company_id =".$get['company_id']."  ".$whr." AND  plan_date >= '".$from_date."' AND plan_date <= '".$to_date.self::SQL_AND_IS_ACTIVE_0;
+    $palldata = $callConfig->getAllRows($query);
+    $return['user_all_daily_plan'] = $palldata;
+    $return['user_all_daily_plan_query'] = $query;
+    $query = "SELECT id, map_title, map_date, map_time, field_work_daily_plan_id, current_status, user_id FROM field_work_user_map_points WHERE company_id =".$get['company_id']." ".$whr." AND map_date >= '".$from_date."' AND map_date <= '".$to_date."'  AND is_active = 0";
+    $aumapudpdata = $callConfig->getAllRows($query);
+    $return['all_user_map_detail'] = $aumapudpdata;
+    return $return;
+  }
+  public function updateAmcServiceDetailsAndCheckList($get, $post){
+    global $callConfig;
+    $update_arr = array(
+      'service_date' => $post['service_date'],
+      'payment_type' => $post['payment_type'],
+      'service_charge' => $post['service_charge'] ?? 0,
+      'technician_id' => $post['technician_id'] ?? '',
+      'account_group_id' => $post['account_group_id'] ?? '',
+      'service_expenditure' => $post['service_expenditure'] ?? 0,
+      'ta_or_da' => $post['ta_or_da'] ?? 0,
+      'service_reports' => $post['service_reports'] ?? '',
+      'updated_by' => $get['user_id'],
+      'updated_date' => date(self::DATE_FORMAT_HIS)
+    );
+
+    $res = $callConfig->updateRecord('amc_service_schedules', $update_arr, 'id', $post['record_id']);
+    $return['res'] = $res;
+
+    if(count((array)$post['checklist_items'])>0){
+      foreach ($post['checklist_items'] as $i => $fieldValue) {
+        $check_id = $post['existing_checklist_ids'][$i];
+        if(isset($post['new_checklist_ids'][$i]) && $post['new_checklist_ids'][$i] != ''){
+          // Insert new checklist item
+          $check_update_arr = array(
+            'check_status' => $post['checklist_status'][$check_id],
+            'check_remarks' => $post['checklist_remarks'][$i],
+            'updated_by' => $get['user_id'],
+            'updated_date' => date(self::DATE_FORMAT_HIS)
+          );
+          $res = $callConfig->updateRecord('amc_check_list', $check_update_arr, 'id', $post['new_checklist_ids'][$i]);
+
+          $return['checklist_result'][$check_id] = $res;
+        }else{
+          $check_array = array(
+            'company_id' => $get['company_id'],
+            'amc_registration_id' => $post['registration_id'],
+            'amc_service_schedule_id' => $post['record_id'],
+            'application_check_list_id' => $check_id,
+            'check_status' => $post['checklist_status'][$check_id],
+            'check_remarks' => $post['checklist_remarks'][$i],
+            'check_name' => $fieldValue,
+            'current_status' => '0',
+            'is_active' => '0',
+            'created_by' => $get['user_id'],
+            'created_date' => date(self::DATE_FORMAT_HIS)
+          );
+          $result = $callConfig->insertRecord('amc_check_list', $check_array);
+          $return['checklist_result'][$check_id] = $result;
+
+        }
+
+      }
+    }
+    return $return;
+  }
+  public function getAmcCheckListDetails($get){
+    global $callConfig;
+    $data = json_decode(urldecode($get['data']),1);
+    $whr = "";
+    if($data['product_id'] != ''){
+      $whr .= " AND s.product_id={$data['product_id']}";
+    }
+
+    if($data['account_group_id'] != ''){
+      $whr .= " AND s.account_group_id={$data['account_group_id']}";
+    }
+    if($data['customer_id'] != ''){
+      $whr .= " AND s.customer_id={$data['customer_id']}";
+    }
+    if($data['building_id'] != ''){
+      $whr .= " AND r.building_id={$data['building_id']}";
+    }
+    if($data['building_floor_id'] != ''){
+      $whr .= " AND r.building_floor_id={$data['building_floor_id']}";
+    }
+    if($data['building_floor_space_id'] != ''){
+      $whr .= " AND r.building_floor_space_id={$data['building_floor_space_id']}";
+    }
+    if($data['activation_date'] != ''){
+      $whr .= " AND s.service_date LIKE'%{$data['activation_date']}%'";
+    }
+
+    $query = "SELECT s.* FROM  amc_service_schedules  s
+    LEFT JOIN amc_registration_details r ON r.id=s.registration_id AND r.company_id=s.company_id AND r.is_active=0
+    WHERE s.company_id= {$get['company_id']} AND s.is_active=0 $whr";
+    $res = $callConfig->getAllRows($query);
+    $return['query'] = $query;
+    $return['service'] = $res;
+
+    $technician_query = self::SQL_SELECT_AMC_ACCOUNT_NAME . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_0;
+    $technician_details = $callConfig->getAllRows($technician_query);
+    $tech_details = array();
+    foreach ($technician_details as $row) {
+       $tech_details[$row->id] = $row->account_name;
+    }
+    $return['tech_details'] = $tech_details;
+     $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
+    $account_group_details = $callConfig->getAllRows($account_group_query);
+    $ag_details = array();
+    foreach ($account_group_details as $row) {
+      $ag_details[$row->id] = $row->group_name;
+    }
+    $return['ag_details'] = $ag_details;
+
+    $general_code_details = "SELECT genc_code,genc_detail_code,genc_detail_name FROM  general_code_details WHERE is_active =0  AND  genc_code in ('AMCPAYTYPE','AMCSERVICE')";
+    $gc_details = $callConfig->getAllRows($general_code_details);
+    $return['gc_details'] = $gc_details;
+
+
+    return $return;
+
+  }
 
 }
 
@@ -1000,8 +1244,56 @@ class AmcAccountDetailsClass extends userClass implements AmcAccountConstants {
     return null;
   }
 
-  public function insertAmcRegistrationDetails($get, $post){
+  private function updateAmcRegistrationRecord($get, $post, array $insertary, array &$return) {
     global $callConfig;
+    $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+    $insertary['updated_by'] = $get['user_id'];
+    $return['res'] = $callConfig->updateRecord('amc_registration_details', $insertary, 'id', $post['record_id']);
+
+    $delte_array = array(
+      'is_active' => '1',
+      'service_on' => 'NULL',
+      'updated_by' => $get['user_id']
+    );
+    $return['delete_res'] = $callConfig->updateRecord('amc_registration_services', $delte_array, 'registration_id', $post['record_id']);
+    if ($return['delete_res']) {
+      $err = $this->saveAmcDynamicFields($get['company_id'], $post['record_id'], $post, $post['user_id']);
+      if ($err) {
+        $return['error'] = $err;
+      }
+    }
+
+    $update_date = date(self::DATE_FORMAT_HIS);
+    $query = "UPDATE application_check_lists SET is_active = NULL, updated_by={$get['user_id']}, updated_date = '{$update_date}' WHERE transaction_id = '" . $post['record_id'] . "' AND application_tablename='amc_registration_details' AND company_id={$get['company_id']} AND is_active = 0";
+    $callConfig->executeQuery($query);
+
+    $this->saveAmcChecklist($get['company_id'], $post['record_id'], $post, $get['user_id'], true);
+  }
+
+  private function insertNewAmcRegistrationRecord($get, $post, array $insertary, array &$return) {
+    global $callConfig;
+    $insertary['is_active'] = 0;
+    $insertary['current_status'] = 0;
+    $insertary['created_by'] = $get['user_id'];
+    $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
+    $res = $callConfig->insertRecord('amc_registration_details', $insertary);
+    $return['res'] = $res;
+    $last_rec_id = $res['LASTID'] ?? null;
+
+    if ($last_rec_id) {
+      $err = $this->saveAmcDynamicFields($get['company_id'], $last_rec_id, $post, $get['user_id']);
+      if ($err) {
+        $return['error'] = $err;
+      }
+      $checkErr = $this->saveAmcChecklist($get['company_id'], $last_rec_id, $post, $get['user_id'], false);
+      if ($checkErr) {
+        $return['check_error'] = $checkErr;
+      }
+    }
+    $return['last_rec_id'] = $last_rec_id;
+  }
+
+  public function insertAmcRegistrationDetails($get, $post){
     $return = array();
     $insertary = array(
       'company_id' => $get['company_id'],
@@ -1025,48 +1317,9 @@ class AmcAccountDetailsClass extends userClass implements AmcAccountConstants {
     );
 
     if (isset($post['record_id']) && $post['record_id'] != '') {
-      $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
-      $insertary['updated_by'] = $get['user_id'];
-      $return['res'] = $callConfig->updateRecord('amc_registration_details', $insertary, 'id', $post['record_id']);
-
-      $delte_array = array(
-        'is_active' => '1',
-        'service_on' => 'NULL',
-        'updated_by' => $get['user_id']
-      );
-      $return['delete_res'] = $callConfig->updateRecord('amc_registration_services', $delte_array, 'registration_id', $post['record_id']);
-      if ($return['delete_res']) {
-        $err = $this->saveAmcDynamicFields($get['company_id'], $post['record_id'], $post, $post['user_id']);
-        if ($err) {
-          $return['error'] = $err;
-        }
-      }
-
-      $update_date = date(self::DATE_FORMAT_HIS);
-      $query = "UPDATE application_check_lists SET is_active = NULL, updated_by={$get['user_id']}, updated_date = '{$update_date}' WHERE transaction_id = '" . $post['record_id'] . "' AND application_tablename='amc_registration_details' AND company_id={$get['company_id']} AND is_active = 0";
-      $callConfig->executeQuery($query);
-
-      $this->saveAmcChecklist($get['company_id'], $post['record_id'], $post, $get['user_id'], true);
+      $this->updateAmcRegistrationRecord($get, $post, $insertary, $return);
     } else {
-      $insertary['is_active'] = 0;
-      $insertary['current_status'] = 0;
-      $insertary['created_by'] = $get['user_id'];
-      $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
-      $res = $callConfig->insertRecord('amc_registration_details', $insertary);
-      $return['res'] = $res;
-      $last_rec_id = $res['LASTID'] ?? null;
-
-      if ($last_rec_id) {
-        $err = $this->saveAmcDynamicFields($get['company_id'], $last_rec_id, $post, $get['user_id']);
-        if ($err) {
-          $return['error'] = $err;
-        }
-        $checkErr = $this->saveAmcChecklist($get['company_id'], $last_rec_id, $post, $get['user_id'], false);
-        if ($checkErr) {
-          $return['check_error'] = $checkErr;
-        }
-      }
-      $return['last_rec_id'] = $last_rec_id;
+      $this->insertNewAmcRegistrationRecord($get, $post, $insertary, $return);
     }
     return $return;
   }
@@ -1245,251 +1498,6 @@ class AmcAccountDetailsClass extends userClass implements AmcAccountConstants {
     }
 
     return $return;
-  }
-
-  public function getServiceScheduleDetails($get){
-    global $callConfig;
-    $return = array();
-    if ($get['id'] != "") {
-      $service_schedule_details_query = "SELECT * FROM amc_service_schedules WHERE registration_id = '" . $get['id'] . "' AND company_id='" . $get['company_id'] . "' AND is_active = '0' order by service_date asc";
-      $service_schedule_details = $callConfig->getAllRows($service_schedule_details_query);
-      $return['serviceDetails'] = $service_schedule_details;
-
-      $customer_details_query = "SELECT ard.amc_name, acd.customer_name, acd.mobile_no, acd.address_line1,acd.address_line2,ard.activation_date, ard.deactivation_date, account_group_id, serv.genc_detail_name AS service_frequency FROM `amc_registration_details` ard
-        LEFT join amc_customer_details acd on acd.id = ard.customer_id
-        LEFT JOIN (SELECT genc_detail_code,genc_detail_name  FROM  general_code_details WHERE  genc_code ='AMCSERVICE' AND company_id='{$get['company_id']}' AND is_active =0 ) serv ON serv.genc_detail_code = ard.service_on
-        where ard.id='" . $get['id'] . "' AND ard.company_id='" . $get['company_id'] . "' AND ard.is_active = '0' ";
-      $customer_details = $callConfig->getRow($customer_details_query);
-      $return['customer_details'] = $customer_details;
-    }
-    $general_code_details = "SELECT id, company_id, genc_code,genc_detail_code,genc_detail_name FROM  general_code_details WHERE  genc_code ='AMCPAYTYPE' AND company_id='" . $get['company_id'] . "' AND is_active ='0' ";
-    $general_code_details = $callConfig->getAllRows($general_code_details);
-    $gc_details = array();
-
-    foreach ($general_code_details as $row) {
-      $gc_details[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['gc_details'] = $gc_details;
-
-    $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
-    $account_group_details = $callConfig->getAllRows($account_group_query);
-    $ag_details = array();
-    foreach ($account_group_details as $row) {
-      $ag_details[$row->id] = $row->group_name;
-    }
-    $return['ag_details'] = $ag_details;
-
-    $technician_query = self::SQL_SELECT_AMC_ACCOUNT_NAME . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_0;
-    $technician_details = $callConfig->getAllRows($technician_query);
-    $tech_details = array();
-    foreach ($technician_details as $row) {
-      $tech_details[$row->id] = $row->account_name;
-    }
-    $return['tech_details'] = $tech_details;
-    return $return;
-  }
-  public function getAmcServiceDetails($get){
-    global $callConfig;
-    $return = array();
-    $return['get'] = $get;
-    if ($get['id'] != "") {
-      $amc_service_schedules_query = "SELECT * FROM amc_service_schedules WHERE company_id='" . $get['company_id'] . "' AND id = '" . $get['id'] . self::SQL_AND_IS_ACTIVE_0;
-      $amc_service_schedules = $callConfig->getRow($amc_service_schedules_query);
-      $return['amc_service_schedules'] = $amc_service_schedules;
-      $registrationId = $amc_service_schedules->registration_id ?? '';
-      if($registrationId != ''){
-        $checklist_query = "SELECT id,  check_name FROM application_check_lists WHERE transaction_id = '{$registrationId}' AND application_tablename='amc_registration_details' AND company_id={$get['company_id']} AND is_active = 0";
-        $result = $callConfig->getAllRows($checklist_query);
-        $checklist_items = array();
-        foreach ($result as $row) {
-          $checklist_items[$row->id] = $row->check_name;
-        }
-        $return['checklist_items'] = $checklist_items;
-      }
-
-      $query = "SELECT id,application_check_list_id, check_status, check_remarks FROM amc_check_list WHERE amc_service_schedule_id = '{$get['id']}' AND amc_registration_id = '{$registrationId}' AND company_id='{$get['company_id']}' AND is_active = 0";
-      $check_list_details = $callConfig->getAllRows($query);
-      $check_list_status = array();
-      foreach ($check_list_details as $row) {
-        $check_list_status[$row->application_check_list_id] = $row;
-      }
-      $return['check_list_status'] = $check_list_status;
-
-    }
-    $general_code_details = "SELECT id, company_id, genc_code,genc_detail_code,genc_detail_name FROM  general_code_details WHERE  genc_code ='AMCPAYTYPE' AND company_id='" . $get['company_id'] . "' AND is_active ='0' ";
-    $general_code_details = $callConfig->getAllRows($general_code_details);
-    $gc_details = array();
-
-    foreach ($general_code_details as $row) {
-      $gc_details[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['gc_details'] = $gc_details;
-
-    $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
-    $account_group_details = $callConfig->getAllRows($account_group_query);
-    $ag_details = array();
-    foreach ($account_group_details as $row) {
-      $ag_details[$row->id] = $row->group_name;
-    }
-    $return['ag_details'] = $ag_details;
-    return $return;
-  }
-
-  public function togetuserfielddashboard($get){
-    global $callConfig;
-    $whr = "";
-
-    if($get['moduletype']=='FIELD_EMPLOYEE'){
-       $whr = "AND user_id = ".$get['user_id'];
-    }
-    if($get['moduletype']=='FIELD_MANAGER'){
-       $whr = "AND user_id IN ( SELECT id FROM application_users WHERE reports_to =".$get['user_id']." AND is_active =0)";
-    }
-    $query = "SELECT COUNT(id) as cc_plan FROM field_work_daily_plans WHERE company_id =".$get['company_id']." ".$whr."  AND current_status NOT IN (25,28) AND is_active = 0";
-    $pdata = $callConfig->getRow($query);
-    $return['user_daily_plan'] = $pdata->cc_plan;
-    $query = "SELECT COUNT(id) as cc_plan, sum(if(field_work_daily_plan_id!='',1,0)) as cc_daily_plan FROM field_work_user_map_points WHERE company_id =".$get['company_id']."  ".$whr." AND is_active = 0";
-    $udpdata = $callConfig->getRow($query);
-    $return['all_user_map'] = $udpdata->cc_plan;
-    $return['all_user_daily_map'] = $udpdata->cc_daily_plan;
-    $return['all_user_extra_map'] = $return['all_user_map']- $return['all_user_daily_map'];
-    $return['alldatamonth'] = $this->togetoprationlistbasedonmonthly($get);
-
-    return $return;
-  }
-  public function togetoprationlistbasedonmonthly($get){
-    global $callConfig;
-    $year_month = $get['year_month']!="" ? $get['year_month'] : date('Y-m');
-    $from_date =  date('Y-m-d', strtotime($year_month."-01"));
-    $to_date =  date('Y-m-t', strtotime($from_date));
-    $whr = "";
-
-    if($get['moduletype']=='FIELD_EMPLOYEE'){
-       $whr = "AND user_id = ".$get['user_id'];
-    }
-    if($get['moduletype']=='FIELD_MANAGER'){
-       $whr = "AND user_id IN ( SELECT id FROM application_users WHERE reports_to =".$get['user_id']." AND is_active =0)";
-    }
-    $query = "SELECT id, contact_person as map_title, plan_date as map_date,plan_time as map_time, current_status, user_id  FROM field_work_daily_plans WHERE company_id =".$get['company_id']."  ".$whr." AND  plan_date >= '".$from_date."' AND plan_date <= '".$to_date.self::SQL_AND_IS_ACTIVE_0;
-    $palldata = $callConfig->getAllRows($query);
-    $return['user_all_daily_plan'] = $palldata;
-    $return['user_all_daily_plan_query'] = $query;
-    $query = "SELECT id, map_title, map_date, map_time, field_work_daily_plan_id, current_status, user_id FROM field_work_user_map_points WHERE company_id =".$get['company_id']." ".$whr." AND map_date >= '".$from_date."' AND map_date <= '".$to_date."'  AND is_active = 0";
-    $aumapudpdata = $callConfig->getAllRows($query);
-    $return['all_user_map_detail'] = $aumapudpdata;
-    return $return;
-  }
-  public function updateAmcServiceDetailsAndCheckList($get, $post){
-    global $callConfig;
-    $update_arr = array(
-      'service_date' => $post['service_date'],
-      'payment_type' => $post['payment_type'],
-      'service_charge' => $post['service_charge'] ?? 0,
-      'technician_id' => $post['technician_id'] ?? '',
-      'account_group_id' => $post['account_group_id'] ?? '',
-      'service_expenditure' => $post['service_expenditure'] ?? 0,
-      'ta_or_da' => $post['ta_or_da'] ?? 0,
-      'service_reports' => $post['service_reports'] ?? '',
-      'updated_by' => $get['user_id'],
-      'updated_date' => date(self::DATE_FORMAT_HIS)
-    );
-
-    $res = $callConfig->updateRecord('amc_service_schedules', $update_arr, 'id', $post['record_id']);
-    $return['res'] = $res;
-
-    if(count((array)$post['checklist_items'])>0){
-      foreach ($post['checklist_items'] as $i => $fieldValue) {
-        $check_id = $post['existing_checklist_ids'][$i];
-        if(isset($post['new_checklist_ids'][$i]) && $post['new_checklist_ids'][$i] != ''){
-          // Insert new checklist item
-          $check_update_arr = array(
-            'check_status' => $post['checklist_status'][$check_id],
-            'check_remarks' => $post['checklist_remarks'][$i],
-            'updated_by' => $get['user_id'],
-            'updated_date' => date(self::DATE_FORMAT_HIS)
-          );
-          $res = $callConfig->updateRecord('amc_check_list', $check_update_arr, 'id', $post['new_checklist_ids'][$i]);
-
-          $return['checklist_result'][$check_id] = $res;
-        }else{
-          $check_array = array(
-            'company_id' => $get['company_id'],
-            'amc_registration_id' => $post['registration_id'],
-            'amc_service_schedule_id' => $post['record_id'],
-            'application_check_list_id' => $check_id,
-            'check_status' => $post['checklist_status'][$check_id],
-            'check_remarks' => $post['checklist_remarks'][$i],
-            'check_name' => $fieldValue,
-            'current_status' => '0',
-            'is_active' => '0',
-            'created_by' => $get['user_id'],
-            'created_date' => date(self::DATE_FORMAT_HIS)
-          );
-          $result = $callConfig->insertRecord('amc_check_list', $check_array);
-          $return['checklist_result'][$check_id] = $result;
-
-        }
-
-      }
-    }
-    return $return;
-  }
-  public function getAmcCheckListDetails($get){
-    global $callConfig;
-    $data = json_decode(urldecode($get['data']),1);
-    $whr = "";
-    if($data['product_id'] != ''){
-      $whr .= " AND s.product_id={$data['product_id']}";
-    }
-
-    if($data['account_group_id'] != ''){
-      $whr .= " AND s.account_group_id={$data['account_group_id']}";
-    }
-    if($data['customer_id'] != ''){
-      $whr .= " AND s.customer_id={$data['customer_id']}";
-    }
-    if($data['building_id'] != ''){
-      $whr .= " AND r.building_id={$data['building_id']}";
-    }
-    if($data['building_floor_id'] != ''){
-      $whr .= " AND r.building_floor_id={$data['building_floor_id']}";
-    }
-    if($data['building_floor_space_id'] != ''){
-      $whr .= " AND r.building_floor_space_id={$data['building_floor_space_id']}";
-    }
-    if($data['activation_date'] != ''){
-      $whr .= " AND s.service_date LIKE'%{$data['activation_date']}%'";
-    }
-
-    $query = "SELECT s.* FROM  amc_service_schedules  s
-    LEFT JOIN amc_registration_details r ON r.id=s.registration_id AND r.company_id=s.company_id AND r.is_active=0
-    WHERE s.company_id= {$get['company_id']} AND s.is_active=0 $whr";
-    $res = $callConfig->getAllRows($query);
-    $return['query'] = $query;
-    $return['service'] = $res;
-
-    $technician_query = self::SQL_SELECT_AMC_ACCOUNT_NAME . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_0;
-    $technician_details = $callConfig->getAllRows($technician_query);
-    $tech_details = array();
-    foreach ($technician_details as $row) {
-       $tech_details[$row->id] = $row->account_name;
-    }
-    $return['tech_details'] = $tech_details;
-     $account_group_query = self::SQL_SEL_AMC_ACCOUNT_GROUPS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_QUOTE_SPACE_0;
-    $account_group_details = $callConfig->getAllRows($account_group_query);
-    $ag_details = array();
-    foreach ($account_group_details as $row) {
-      $ag_details[$row->id] = $row->group_name;
-    }
-    $return['ag_details'] = $ag_details;
-
-    $general_code_details = "SELECT genc_code,genc_detail_code,genc_detail_name FROM  general_code_details WHERE is_active =0  AND  genc_code in ('AMCPAYTYPE','AMCSERVICE')";
-    $gc_details = $callConfig->getAllRows($general_code_details);
-    $return['gc_details'] = $gc_details;
-
-
-    return $return;
-
   }
 
 }

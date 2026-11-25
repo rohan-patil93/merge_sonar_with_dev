@@ -208,45 +208,57 @@ trait PurchasingSubcontractReceiptTrait
         return $result;
     }
 
-    private function prepareReceiptHeaderData(array $post, array $get, $work_order_details, float $received_qty, float $total_received_qty): array
+    private function resolvePartyName($work_order_details): string
     {
-        $transaction_date = isset($post['transaction_date']) && $post['transaction_date'] != '' ? date('Y-m-d', strtotime($post['transaction_date'])) : date('Y-m-d');
-        $gst_percentage = isset($post['receipt_gst_percentage']) ? (float) $post['receipt_gst_percentage'] : 0;
-        $hsn_code_id = isset($post['receipt_hsn_code_id']) ? (int) $post['receipt_hsn_code_id'] : 0;
-        $hsn_code = isset($post['receipt_hsn_code']) ? $post['receipt_hsn_code'] : '';
-        $tax_type = isset($post['receipt_tax_type']) && $post['receipt_tax_type'] != '' ? $post['receipt_tax_type'] : 'I';
-        $amount = isset($post['receipt_amount']) ? (float) $post['receipt_amount'] : 0;
-        $tax_amount = isset($post['receipt_tax_amount']) ? (float) $post['receipt_tax_amount'] : 0;
-        $total_amount = isset($post['receipt_total_amount']) ? (float) $post['receipt_total_amount'] : 0;
+        if ($work_order_details->party_name != '') {
+            return $work_order_details->party_name;
+        }
+        if ($work_order_details->vendor_company != '') {
+            return $work_order_details->vendor_company;
+        }
+        return (string) $work_order_details->vendor_display_name;
+    }
 
-        $work_order_item_qty = isset($work_order_details->work_order_item_qty) ? (float) $work_order_details->work_order_item_qty : 0;
-        $pending_qty = max(0, round(($work_order_item_qty - $total_received_qty) - $received_qty, 2));
-
-        $total_tax_split_details = array();
-        if (isset($post['receipt_tax_split_details']) && $post['receipt_tax_split_details'] != '') {
-            $decoded = json_decode($post['receipt_tax_split_details'], true);
+    private function parseTaxSplitDetails(?string $raw): array
+    {
+        if (!empty($raw)) {
+            $decoded = json_decode($raw, true);
             if (is_array($decoded)) {
-                $total_tax_split_details = $decoded;
+                return $decoded;
             }
         }
+        return array();
+    }
+
+    private function prepareReceiptHeaderData(array $post, array $get, $work_order_details, float $received_qty, float $total_received_qty): array
+    {
+        $transaction_date = !empty($post['transaction_date']) ? date('Y-m-d', strtotime($post['transaction_date'])) : date('Y-m-d');
+        $gst_percentage = (float) ($post['receipt_gst_percentage'] ?? 0);
+        $hsn_code_id = (int) ($post['receipt_hsn_code_id'] ?? 0);
+        $hsn_code = (string) ($post['receipt_hsn_code'] ?? '');
+        $tax_type = !empty($post['receipt_tax_type']) ? $post['receipt_tax_type'] : 'I';
+        $amount = (float) ($post['receipt_amount'] ?? 0);
+        $tax_amount = (float) ($post['receipt_tax_amount'] ?? 0);
+        $total_amount = (float) ($post['receipt_total_amount'] ?? 0);
+
+        $work_order_item_qty = (float) ($work_order_details->work_order_item_qty ?? 0);
+        $pending_qty = max(0, round(($work_order_item_qty - $total_received_qty) - $received_qty, 2));
+
+        $total_tax_split_details = $this->parseTaxSplitDetails($post['receipt_tax_split_details'] ?? null);
 
         $party_additional_details = json_encode(array(
             'gstin' => $work_order_details->gstin,
             'pan_no' => $work_order_details->pan_no
         ));
 
-        if ($work_order_details->party_name != '') {
-            $party_name = $work_order_details->party_name;
-        } elseif ($work_order_details->vendor_company != '') {
-            $party_name = $work_order_details->vendor_company;
-        } else {
-            $party_name = $work_order_details->vendor_display_name;
-        }
+        $party_name = $this->resolvePartyName($work_order_details);
+
+        $warehouse_id = !empty($post['transaction_warehouse_id']) ? $post['transaction_warehouse_id'] : $work_order_details->request_warehouse_id;
 
         $postdata = array(
             'company_id' => $get['company_id'],
             'transaction_date' => $transaction_date,
-            'transaction_warehouse_id' => isset($post['transaction_warehouse_id']) && $post['transaction_warehouse_id'] != '' ? $post['transaction_warehouse_id'] : $work_order_details->request_warehouse_id,
+            'transaction_warehouse_id' => $warehouse_id,
             'request_warehouse_id' => $work_order_details->party_warehouse_id,
             'originator' => $get['user_id'],
             'party_id' => $work_order_details->party_id,
@@ -256,7 +268,7 @@ trait PurchasingSubcontractReceiptTrait
             'party_phone' => $work_order_details->vendor_phone,
             'party_address' => $work_order_details->billing_address,
             'party_ship_adderss' => $work_order_details->shipping_address,
-            'notes' => isset($post['notes']) ? $post['notes'] : '',
+            'notes' => $post['notes'] ?? '',
             'amount' => $amount,
             'tax_amount' => $tax_amount,
             'tax_type' => $tax_type,

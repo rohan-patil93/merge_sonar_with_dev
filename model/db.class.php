@@ -130,9 +130,12 @@ trait ConfigQueryTrait
 
     private function fetchAuditRemarks($type, $table, &$id, $where): string
     {
-        $query1 = ($type == "INSERT")
-            ? DbConstants::SELECT_STAR_FROM . $table . " WHERE id ='" . $id . "'"
-            : DbConstants::SELECT_STAR_FROM . $table . " " . (str_contains($where, 'WHERE') ? $where : ("WHERE " . $where));
+        if ($type == "INSERT") {
+            $query1 = DbConstants::SELECT_STAR_FROM . $table . " WHERE id ='" . $id . "'";
+        } else {
+            $clause = str_contains($where, 'WHERE') ? $where : ("WHERE " . $where);
+            $query1 = DbConstants::SELECT_STAR_FROM . $table . " " . $clause;
+        }
         $exicutesql = mysqli_query($this->con, $query1);
         $valuessql = mysqli_fetch_object($exicutesql);
         if ($id == '' && !empty($valuessql->id)) {

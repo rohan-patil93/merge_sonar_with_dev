@@ -179,21 +179,21 @@ class VmsDocumentClass extends userClass
         global $callConfig;
 
         if ($documentTypeId <= 0) {
-            return 'Document type is required';
-        }
-        if ($documentName == '') {
-            return 'Document name is required';
-        }
-        if (empty($validFiles)) {
-            return 'At least one valid file is required';
+            $error = 'Document type is required';
+        } elseif ($documentName == '') {
+            $error = 'Document name is required';
+        } elseif (empty($validFiles)) {
+            $error = 'At least one valid file is required';
+        } else {
+            $typeCheckQuery = "SELECT id FROM " . TBL_DOCUMENT_TYPES . "
+                WHERE id = '" . $documentTypeId . self::AND_COMPANY_ID . $companyId . "'
+                AND is_active = 0
+                LIMIT 1";
+            $typeRow = $callConfig->getRow($typeCheckQuery);
+            $error = empty($typeRow) ? 'Invalid document type' : null;
         }
 
-        $typeCheckQuery = "SELECT id FROM " . TBL_DOCUMENT_TYPES . "
-            WHERE id = '" . $documentTypeId . self::AND_COMPANY_ID . $companyId . "'
-            AND is_active = 0
-            LIMIT 1";
-        $typeRow = $callConfig->getRow($typeCheckQuery);
-        return empty($typeRow) ? 'Invalid document type' : null;
+        return $error;
     }
 
     private function updateParentDoc(int $rid, int $companyId, string $userId, int $documentTypeId, string $documentName, string $now): array

@@ -157,15 +157,15 @@ trait WebViewDiscussionTrait
     private function validateDiscussionPost($access, $message_text)
     {
         if (!$access['can_post']) {
-            return 'You are not authorized to post in this discussion.';
+            $error = 'You are not authorized to post in this discussion.';
+        } elseif ($message_text == '') {
+            $error = 'Message cannot be empty.';
+        } elseif (strlen($message_text) > 2000) {
+            $error = 'Message is too long (max 2000 characters).';
+        } else {
+            $error = null;
         }
-        if ($message_text == '') {
-            return 'Message cannot be empty.';
-        }
-        if (strlen($message_text) > 2000) {
-            return 'Message is too long (max 2000 characters).';
-        }
-        return null;
+        return $error;
     }
 
     private function insertDiscussionMessageRecord($post, $message_text)
