@@ -191,9 +191,9 @@
         </td>
     <?php }else{ ?>
      <td>
-        <div  class="btn btn-primary" onclick="serialno(<?php echo $tab2['item_id']; ?>,<?php echo $i; ?>)" id="" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php if($pop_type[$tab2['item_id']] ==1 ){ echo "Serial";
+        <button type="button" class="btn btn-primary" onclick="serialno(<?php echo $tab2['item_id']; ?>,<?php echo $i; ?>)"><?php if($pop_type[$tab2['item_id']] ==1 ){ echo "Serial";
 }else{ echo "Lot";
-} ?></div>
+} ?></button>
     </td>
     <?php } ?>
 

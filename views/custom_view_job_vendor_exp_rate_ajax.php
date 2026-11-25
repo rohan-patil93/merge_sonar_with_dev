@@ -147,7 +147,7 @@ echo $cc_val_arr[$cc_id]; ?> &nbsp;</span>
             $lists[$sl][$vieeee] = $avvr;
             ?>
             <td class="<?php echo $css_text; ?>" style="position: relative; background-color: <?php echo $bgcolor; ?> !important;" >
-              <span class="cursor-pointer text-white d-block text-center" onclick="viewallpop('id_<?php echo $vendor_id."_".$key; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">  <?php echo $disval; ?>
+              <button type="button" class="btn p-0 border-0 bg-transparent text-white d-block w-100 text-center cursor-pointer" onclick="viewallpop('id_<?php echo $vendor_id."_".$key; ?>')">  <?php echo $disval; ?>
               <?php
               $pass_array = array(); $p_job_id = array();
               $p_purchase_uom = array(); $p_rate = array(); $mul_pass_array =array();
@@ -178,7 +178,7 @@ echo $cc_val_arr[$cc_id]; ?> &nbsp;</span>
 } ?>
                   </sup></span>
                 <?php } ?>
-              </span>
+              </button>
               <input type="hidden" name="" id="id_<?php echo $vendor_id."_".$key; ?>" value="<?php echo urlencode(json_encode($mul_pass_array)); ?>">
             </td>
           <?php } ?>

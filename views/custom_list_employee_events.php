@@ -8,9 +8,9 @@
       <div class="card-toolbar card-header-right">
         <?php if(count((array)$res_team)>0){ ?>
         <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=<?php echo $_GET['NI']; ?>" class="nav-link d-inline-block" aria-label="<?= htmlspecialchars(__('Attendance'), ENT_QUOTES, 'UTF-8'); ?>" <?php if($_GET['TEAM']!=1){  ?> style="border-bottom: 1px solid #3699FF;" <?php
-} ?>> <span class="nav-icon"><i class="flaticon2-user"></i></span>&nbsp;<?= __('Attendance'); ?></a>
+} ?>> <span class="nav-icon"><i class="flaticon2-user"></i></span><span class="d-none">Attendance</span>&nbsp;<?= __('Attendance'); ?></a>
         <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=<?php echo $_GET['NI']; ?>&TEAM=1"  class="nav-link d-inline-block" aria-label="<?= htmlspecialchars(__('Team Attendance'), ENT_QUOTES, 'UTF-8'); ?>"  <?php if($_GET['TEAM']==1){  ?> style="border-bottom: 1px solid #3699FF;" <?php
-} ?>> <span class="nav-icon"><i class="flaticon-network"></i></span>&nbsp;<?= __('Team Attendance'); ?></a>
+} ?>> <span class="nav-icon"><i class="flaticon-network"></i></span><span class="d-none">Team Attendance</span>&nbsp;<?= __('Team Attendance'); ?></a>
       <?php } ?>
         <?php if($_GET['TEAM']==1){ ?>
           <input type="hidden" name="calendar_cat" id="calendar_cat" value="51">

@@ -79,10 +79,10 @@ $feedback_setup_details = $data['feedback_setup_details'];
     <div class="col-lg-3">
       <?php $k=1; foreach($responses as $resp){ ?>
         <div class="p-l-30 p-t-15">
-          <div class="btn  <?php if($k==1){ echo 'btn-primary';
-} ?> waves-effect" style="width:210px; text-align: left;" id="bttn<?php echo $resp['id']; ?>" onclick="showbaseuserdet(<?php echo $resp['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+          <button type="button" class="btn  <?php if($k==1){ echo 'btn-primary';
+} ?> waves-effect" style="width:210px; text-align: left;" id="bttn<?php echo $resp['id']; ?>" onclick="showbaseuserdet(<?php echo $resp['id']; ?>)">
             <?php echo $feedback_setup_details[$resp['vendor_feedback_setup_id']]['feedback_name']." - ".fromDate($resp['response_start_date']); ?>
-          </div>
+          </button>
         </div>
       <?php $k++;
 } ?>

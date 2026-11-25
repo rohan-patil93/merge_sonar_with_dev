@@ -5,7 +5,7 @@ defined('DATE_ZERO') || define('DATE_ZERO', '0000-00-00');
 defined('ONB_SELECT_ANY_ONE') || define('ONB_SELECT_ANY_ONE', 'Select Any One');
 defined('ONB_UPLOADS_DIR') || define('ONB_UPLOADS_DIR', 'uploads/all/');
 defined('ONB_WORK_IMAGE') || define('ONB_WORK_IMAGE', 'assets/images/work.png');
-defined('ONB_WORK_IMAGE_ALT') || define('ONB_WORK_IMAGE_ALT', 'Work in progress');
+defined('ONB_WORK_ALT') || define('ONB_WORK_ALT', 'Work in progress');
 defined('ONB_ADD_MORE') || define('ONB_ADD_MORE', '+ Add More');
 defined('ONB_ATTACHMENTS_PREVIEW') || define('ONB_ATTACHMENTS_PREVIEW', 'Attachments Preview');
 defined('STR_DRIVING_LICENCE') || define('STR_DRIVING_LICENCE', 'Driving Licence');
@@ -51,7 +51,7 @@ if (!function_exists('renderOnbEmptyStateCard')) {
         <div class="card-px text-center py-20 mt-2">
             <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __($message); ?> </p>
             <div class="text-center px-4">
-                <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__(ONB_WORK_IMAGE_ALT), ENT_QUOTES, 'UTF-8'); ?>" src="<?php echo ONB_WORK_IMAGE; ?>" style="max-height: 300px!important;">
+                <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__(ONB_WORK_ALT), ENT_QUOTES, 'UTF-8'); ?>" src="<?php echo ONB_WORK_IMAGE; ?>" style="max-height: 300px!important;">
             </div>
         </div>
         <?php
@@ -174,49 +174,51 @@ $onbVars = array_merge($ctx, array(
         });
     }
 </script>
-<?php if(($_POST['edittype'] ?? '') =="VIEW"){ ?>
 <?php
 $pageType = $_POST['pagetype'] ?? ($_POST['showpagetype'] ?? '');
-$viewMap = array (
-  'basic_information' => 'renderOnbViewBasicInformation',
-  'work_details' => 'renderOnbViewWorkDetails',
-  'personal_details' => 'renderOnbViewPersonalDetails',
-  'bank_details' => 'renderOnbViewBankDetails',
-  'proof_details' => 'renderOnbViewProofDetails',
-  'experience_details' => 'renderOnbViewExperienceDetails',
-  'employee_qualifications' => 'renderOnbViewEmployeeQualifications',
-  'employee_dependents' => 'renderOnbViewEmployeeDependents',
-  'employee_contacts' => 'renderOnbViewEmployeeContacts',
-  'employee_buddies' => 'renderOnbViewEmployeeBuddies',
-  'employee_access' => 'renderOnbViewEmployeeAccess',
-  'employee_other_access' => 'renderOnbViewEmployeeOtherAccess',
-  'emp_visa' => 'renderOnbViewEmpVisa',
-  'emp_skills' => 'renderOnbViewEmpSkills',
-);
-if (isset($viewMap[$pageType]) && function_exists($viewMap[$pageType])) {
-    $viewMap[$pageType]($onbVars);
+if (($_POST['edittype'] ?? '') === "VIEW") {
+    $viewMap = array(
+        'basic_information' => 'renderOnbViewBasicInformation',
+        'work_details' => 'renderOnbViewWorkDetails',
+        'personal_details' => 'renderOnbViewPersonalDetails',
+        'bank_details' => 'renderOnbViewBankDetails',
+        'proof_details' => 'renderOnbViewProofDetails',
+        'experience_details' => 'renderOnbViewExperienceDetails',
+        'employee_qualifications' => 'renderOnbViewEmployeeQualifications',
+        'employee_dependents' => 'renderOnbViewEmployeeDependents',
+        'employee_contacts' => 'renderOnbViewEmployeeContacts',
+        'employee_buddies' => 'renderOnbViewEmployeeBuddies',
+        'employee_access' => 'renderOnbViewEmployeeAccess',
+        'employee_other_access' => 'renderOnbViewEmployeeOtherAccess',
+        'emp_visa' => 'renderOnbViewEmpVisa',
+        'emp_skills' => 'renderOnbViewEmpSkills',
+    );
+    if (isset($viewMap[$pageType]) && function_exists($viewMap[$pageType])) {
+        $viewMap[$pageType]($onbVars);
+    }
+} else {
+    $editMap = array(
+        'basic_information' => 'renderOnbEditBasicInformation',
+        'work_details' => 'renderOnbEditWorkDetails',
+        'personal_details' => 'renderOnbEditPersonalDetails',
+        'bank_details' => 'renderOnbEditBankDetails',
+        'employee_buddies' => 'renderOnbEditEmployeeBuddies',
+        'employee_other_access' => 'renderOnbEditEmployeeOtherAccess',
+        'employee_access' => 'renderOnbEditEmployeeAccess',
+        'proof_details' => 'renderOnbEditProofDetails',
+        'experience_details' => 'renderOnbEditExperienceDetails',
+        'employee_qualifications' => 'renderOnbEditEmployeeQualifications',
+        'employee_dependents' => 'renderOnbEditEmployeeDependents',
+        'employee_contacts' => 'renderOnbEditEmployeeContacts',
+        'emp_visa' => 'renderOnbEditEmpVisa',
+    );
+    if (isset($editMap[$pageType]) && function_exists($editMap[$pageType])) {
+        $editMap[$pageType]($onbVars);
+    }
 }
-$editMap = array (
-  'basic_information' => 'renderOnbEditBasicInformation',
-  'work_details' => 'renderOnbEditWorkDetails',
-  'personal_details' => 'renderOnbEditPersonalDetails',
-  'bank_details' => 'renderOnbEditBankDetails',
-  'employee_buddies' => 'renderOnbEditEmployeeBuddies',
-  'employee_other_access' => 'renderOnbEditEmployeeOtherAccess',
-  'employee_access' => 'renderOnbEditEmployeeAccess',
-  'proof_details' => 'renderOnbEditProofDetails',
-  'experience_details' => 'renderOnbEditExperienceDetails',
-  'employee_qualifications' => 'renderOnbEditEmployeeQualifications',
-  'employee_dependents' => 'renderOnbEditEmployeeDependents',
-  'employee_contacts' => 'renderOnbEditEmployeeContacts',
-  'emp_visa' => 'renderOnbEditEmpVisa',
-);
-if (isset($editMap[$pageType]) && function_exists($editMap[$pageType])) {
-    $editMap[$pageType]($onbVars);
 }
-?>
-<?php
 }
+
 if (!function_exists('renderOnbViewBasicInformation')) {
 function renderOnbViewBasicInformation($vars) {
     $vafield = $vars['vafield'] ?? null;
@@ -260,7 +262,13 @@ function renderOnbViewBasicInformation($vars) {
 }
 
 if (!function_exists('renderOnbViewWorkOrgFields')) {
-function renderOnbViewWorkOrgFields($fieldaccesright, $data, $departments, $designations, $divisions, $employment_bands, $employment_levels, $verticals) {
+function renderOnbViewWorkOrgFields($fieldaccesright, $data, $lookups = array()) {
+    $departments = $lookups['departments'] ?? array();
+    $designations = $lookups['designations'] ?? array();
+    $divisions = $lookups['divisions'] ?? array();
+    $employment_bands = $lookups['employment_bands'] ?? array();
+    $employment_levels = $lookups['employment_levels'] ?? array();
+    $verticals = $lookups['verticals'] ?? array();
     if($fieldaccesright['field']['department_id']!="NA"){
         renderOnbViewField('Department', emptytextdashShow($departments[$data['department_id']]['department_name']));
     }
@@ -840,7 +848,7 @@ function renderOnbViewEmpSkills($vars) {
         renderOnbEmptyStateCard('No Skills');
     } ?>
     </div>
-    <?php } //View part End
+    <?php
 }
 }
 
@@ -1088,7 +1096,9 @@ function renderOnbEditWorkExperienceFields($fieldaccesright, $data) {
 
 if (!function_exists('renderOnbEditLocationSelect')) {
 function renderOnbEditLocationSelect($fieldaccesright, $data, $locations) {
-    if($fieldaccesright['field']['location_id']=="NA") return;
+    if ($fieldaccesright['field']['location_id'] == "NA") {
+        return;
+    }
     $readonlycheck = onbReadonlyClass($fieldaccesright, 'location_id'); ?>
     <div class="col-xl-6 mt-2" >
         <span class="form-label d-inline-block fw-bold"><?php echo __('Work Location'); ?> </span>
@@ -1111,7 +1121,9 @@ function renderOnbEditLocationSelect($fieldaccesright, $data, $locations) {
 
 if (!function_exists('renderOnbEditEmploymentTypeRadio')) {
 function renderOnbEditEmploymentTypeRadio($fieldaccesright, $data, $employeement_types, $safeEmpIdJs, $text_color_ety) {
-    if($fieldaccesright['field']['employee_type']=="NA") return;
+    if ($fieldaccesright['field']['employee_type'] == "NA") {
+        return;
+    }
     $readonlycheck = onbReadonlyClass($fieldaccesright, 'employee_type'); ?>
     <div class="col-xl-6 mt-2" >
         <span class="form-label d-inline-block fw-bold"><?php echo __('Employment Type'); ?></span>
@@ -1217,7 +1229,8 @@ function renderOnbEditPersonalDetails($vars) {
                 <input aria-label="<?= htmlspecialchars(__('Date of birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg datepicker"  value="<?php echo onbFormatDate($data['date_of_birth']); ?>"  name="date_of_birth" placeholder="<?php echo __('Enter Date of Birth'); ?>" onchange="selectdateOfBirth(this.value)" />
             </div>
         </div>
-        <?php } // Age field handled in employee profile details if($fieldaccesright['field']['marital_status']!="NA"){
+        <?php } // Age field handled in employee profile details ?>
+        <?php if($fieldaccesright['field']['marital_status']!="NA"){
               $readonlycheck = onbReadonlyClass($fieldaccesright, 'marital_status'); ?>
         <div class="col-xl-6 mt-2" >
             <span class="form-label d-inline-block fw-bold"><?php echo __('Marital Status'); ?></span>
@@ -1578,11 +1591,19 @@ function renderOnbEditEmployeeAccess($vars) {
 }
 
 if (!function_exists('renderOnbEditProofRow')) {
-function renderOnbEditProofRow($fieldaccesright, $fieldKey, $label, $ariaLabel, $inputName, $value, $placeholder, $expiryHtml, $fileId, $oldAttachmentName, $attachmentFile) {
+function renderOnbEditProofRow($fieldaccesright, $fieldKey, $label, $proofConfig = array()) {
     if ($fieldaccesright['field'][$fieldKey] == "NA") {
         return;
     }
     $readonlycheck = onbReadonlyClass($fieldaccesright, $fieldKey);
+    $ariaLabel = $proofConfig['ariaLabel'] ?? '';
+    $inputName = $proofConfig['inputName'] ?? '';
+    $value = $proofConfig['value'] ?? '';
+    $placeholder = $proofConfig['placeholder'] ?? '';
+    $expiryHtml = $proofConfig['expiryHtml'] ?? '';
+    $fileId = $proofConfig['fileId'] ?? '';
+    $oldAttachmentName = $proofConfig['oldAttachmentName'] ?? '';
+    $attachmentFile = $proofConfig['attachmentFile'] ?? '';
     ?>
     <tr class="<?php echo $readonlycheck; ?>">
         <th scope="row" class="p-2"><?php echo __($label); ?></th>

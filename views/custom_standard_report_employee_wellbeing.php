@@ -209,15 +209,15 @@ $count_emp_res = count((array)$resemp);
             <?php $k=0;
             $lcolor = array('d70206','f05b4f','f4c63d','d17905'); $mn=5;
             foreach($questopic as $quekey=>$quec){ ?>
-            <div class="align-middle m-b-25 mt-4 row cursor-pointer" onclick="displatraito(<?php echo $quekey; ?>)" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}">
-              <div class="col-lg-3 text-center m-t-10"><span class="img-radius p-2" style="background-color: <?php echo "#".$lcolor[$k]; ?>;" ><?php echo $mn = $mn-0.3; ?></span></div>
+            <button type="button" class="btn btn-link text-decoration-none text-start p-0 border-0 w-100 align-middle m-b-25 mt-4 row cursor-pointer text-dark" onclick="displatraito(<?php echo $quekey; ?>)">
+              <div class="col-lg-3 text-center m-t-10"><span class="img-radius p-2 text-white" style="background-color: <?php echo "#".$lcolor[$k]; ?>;" ><?php echo $mn = $mn-0.3; ?></span></div>
               <div class="col-lg-9 p-0">
                 <div class="d-inline-block align-middle">
-                  <a href="#!"><h6 class="text-success f-w-600 f-14"><?php echo $quec; ?></h6></a>
+                  <h6 class="text-success f-w-600 f-14 mb-1"><?php echo $quec; ?></h6>
                   <p class="text-muted m-b-0"><?php echo $result['survey_question'][$quekey]['survey_question']; ?></p>
                 </div>
               </div>
-            </div>
+            </button>
             <input type="hidden" name="" id="disqueid_<?php echo $quekey; ?>" value="0">
             <div class="" style="display: none;" id="raioqus_<?php echo $quekey; ?>">
               <?php foreach($keysurvey as $surveykey){ ?>

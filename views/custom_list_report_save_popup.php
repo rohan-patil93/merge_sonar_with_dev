@@ -97,8 +97,8 @@ foreach($row as $rowdata){
                                 <a href="javascript:void(0)">
                                  <?php echo $value['page_name']; ?></a>
                             </div>
-                            <div class=" col-lg-1" onclick="listchangebase(<?php echo $value['id'].",'".$value['page_name']."'"; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                <a href="javascript:void(0)"><i class="ti-angle-down"></i></a>
+                            <div class=" col-lg-1">
+                                <a href="javascript:void(0)" aria-label="<?= htmlspecialchars(__('Change Report Folder'), ENT_QUOTES, 'UTF-8'); ?>" onclick="listchangebase(<?php echo $value['id'].",'".$value['page_name']."'"; ?>)"><i class="ti-angle-down"></i></a>
                             </div>
                         </div>
                         <?php } ?>

@@ -98,11 +98,11 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
                             </div>
                               </td>
                               <td class="p-2">
-                                  <div class="bar multi-color" style="min-height:40px" onclick="NewMessageAdded('<?php echo $transaction['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                  <button type="button" class="btn btn-link text-decoration-none p-0 border-0 text-start w-100 bar multi-color" style="min-height:40px" onclick="NewMessageAdded('<?php echo $transaction['id']; ?>')">
                                   <div class="color bg-success" style="width: <?php echo round($completionper); ?>%;background-color:#82bac7 !important; min-height:40px"><?= __('Completion'); ?> - <?php echo round($completionper); ?>%</div>
                                   <div class="color bg-success" style="width: <?php echo 100-round($completionper); ?>%;background-color:#cf9eb5 !important; min-height:40px"><?= __('Missing'); ?> - <?php echo 100-round($completionper); ?>%</div>
 
-                              </div>
+                              </button>
 
                   <div class="custom-popup-open cardpopup_<?php echo $transaction['id']; ?> text-start" style="left: 0px; top: 90px;">
                     <div class="card">

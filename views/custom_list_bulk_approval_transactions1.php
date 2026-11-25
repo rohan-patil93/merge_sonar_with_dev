@@ -308,8 +308,7 @@ foreach ($count as $cc) {
                                                         </label>
                                                     </div>
                                                 </div>
-                                                    <div class="kt-todo__details" tabindex="0"
-                                                        onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+                                                    <button type="button" class="btn btn-link text-decoration-none text-start p-0 border-0 w-100 kt-todo__details"
                                                         onclick="ajaxview(<?php echo $list['transaction_id']; ?>,<?php echo "'" . $list['transaction_type'] . "'"; ?>)">
                                                         <div class="kt-todo__message">
                                                             <span
@@ -328,7 +327,7 @@ foreach ($count as $cc) {
                                                                 class="kt-todo__label kt-badge kt-badge--unified-brand kt-badge--bold kt-badge--inline"><?php echo customeummarmonyformate($list['total_amount']); ?></span>
 
                                                         </div>
-                                                    </div>
+                                                    </button>
                                                     <div class="kt-todo__datetime" data-toggle="view">
                                                         <?php $days = dateDiffInDays($list['request_date']);
                                                         if ($days == 0) {

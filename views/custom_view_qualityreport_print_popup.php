@@ -52,9 +52,9 @@ $listgroup = $spfulljson['group'];
             <div class="card-header">
                 <h5><?= __('Simple Method - 1: Measuring Quality Performance in Defective Percentageqq'); ?></h5>
                 <div  class="card-header-right">
-                    <div class="" onclick="printview()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <button type="button" class="btn btn-link p-0 border-0" onclick="printview()" aria-label="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>">
                         <i class="ti-printer f-18 text-success"></i>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div class="card-body">

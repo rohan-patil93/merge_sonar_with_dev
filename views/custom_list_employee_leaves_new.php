@@ -27,9 +27,9 @@ foreach ($emp_leave_balances as $value) {
                     <div class="card-header-right table-card-header">
                         <?php if(count((array)$res_team)>0){ ?>
         <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=<?php echo $_GET['NI']; ?>" class="nav-link ml-3 float-left" aria-label="<?= htmlspecialchars(__('Leaves'), ENT_QUOTES, 'UTF-8'); ?>" <?php if($_GET['TEAM']!=1){  ?> style="border-bottom: 1px solid #3699FF;" <?php
-} ?>> <span class="nav-icon"><i class="flaticon2-user"></i></span>&nbsp;<?= __('Leaves'); ?></a>
+} ?>> <span class="nav-icon"><i class="flaticon2-user"></i></span><span class="d-none">Leaves</span>&nbsp;<?= __('Leaves'); ?></a>
         <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=<?php echo $_GET['NI']; ?>&TEAM=1"  class="nav-link ml-3 float-left" aria-label="<?= htmlspecialchars(__('Team Leaves'), ENT_QUOTES, 'UTF-8'); ?>"  <?php if($_GET['TEAM']==1){  ?> style="border-bottom: 1px solid #3699FF;" <?php
-} ?>> <span class="nav-icon"><i class="flaticon-network"></i></span>&nbsp;<?= __('Team Leaves'); ?></a>
+} ?>> <span class="nav-icon"><i class="flaticon-network"></i></span><span class="d-none">Team Leaves</span>&nbsp;<?= __('Team Leaves'); ?></a>
       <?php } ?>
                         <a href="index.php?option=COM_INSERT_LEAVE_REQUEST_NEW"  class="btn btn-primary font-weight-bold ml-3 float-left">
                             <i class="ki ki-plus icon-md mr-2"></i> <?= __('Apply Leave'); ?> </a>

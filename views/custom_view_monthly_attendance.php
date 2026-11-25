@@ -217,7 +217,7 @@
                                $dacss = "date-item-att";
                             }
                             ?>
-                            <div class="<?php echo $dacss; ?> f-10 cursor-pointer" onclick="toviewthedateclock(<?php echo $cdate.",".$employee_id; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $i; ?></div>
+                            <button type="button" class="btn p-0 border-0 bg-transparent <?php echo $dacss; ?> f-10 cursor-pointer" onclick="toviewthedateclock(<?php echo $cdate.",".$employee_id; ?>)"><?php echo $i; ?></button>
                             <?php
                                 if($cal == 7){
                                     $cal = 0; ?>

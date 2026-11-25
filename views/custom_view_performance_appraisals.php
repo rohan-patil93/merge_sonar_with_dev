@@ -66,21 +66,23 @@ foreach($transaction_approval_logs as $tal){
             <div class="tab-pane card-body active" id="appraisal_setting_team" role="tabpanel">
                 <div class="row">
                     <?php if(count((array)$performancesetupary) != 0){  foreach($performancesetupary as $assetyaerkey=>$performancesetu){?>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-12" onclick="showAppraisalList('<?php echo $assetyaerkey; ?>','pageviewteam','T')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                        <div class="card comp-card">
-                            <div class="card-body empty_pageviewteam" id="pageviewteam_1_<?php echo $assetyaerkey; ?>">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h6 class="m-b-25">
-                                            <a> <?php echo $assetyaerkey; ?></a>
-                                        </h6>
-                                    </div>
-                                    <div class="col-auto" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Count Of Appraisals'), ENT_QUOTES, 'UTF-8'); ?>" >
-                                        <i class="fas bg-c-blue" ><?php echo count((array)$performancesetu); ?></i>
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                        <button type="button" class="btn p-0 border-0 bg-transparent text-start w-100" onclick="showAppraisalList('<?php echo $assetyaerkey; ?>','pageviewteam','T')">
+                            <div class="card comp-card">
+                                <div class="card-body empty_pageviewteam" id="pageviewteam_1_<?php echo $assetyaerkey; ?>">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h6 class="m-b-25">
+                                                <a> <?php echo $assetyaerkey; ?></a>
+                                            </h6>
+                                        </div>
+                                        <div class="col-auto" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Count Of Appraisals'), ENT_QUOTES, 'UTF-8'); ?>" >
+                                            <i class="fas bg-c-blue" ><?php echo count((array)$performancesetu); ?></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                     <?php } ?>
                     <?php } else { ?>

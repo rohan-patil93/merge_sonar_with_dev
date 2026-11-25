@@ -258,7 +258,7 @@ function valueemtpydash($val){
                                     <td></td>
                                     <td><?php echo $l; ?></td>
                                     <td><a target="_blank" class="text-primary"  href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo $from_cur_year; ?>&PAY_MONTH=<?php echo $from_cur_month; ?>&EMP=<?php echo $data['employee_id']; ?>"><?php echo $data['employee_name']; ?> </a>
-                                    <span class="cursor-pointer" onclick="employeedetails(<?php echo $data['employee_id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="ti-info-alt"></i></span>
+                                    <button type="button" class="btn btn-link p-0 border-0 align-baseline cursor-pointer" onclick="employeedetails(<?php echo $data['employee_id']; ?>)" aria-label="<?= htmlspecialchars(__('Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-info-alt"></i></button>
                                     </td>
                                     <td class="text-right"><?php echo $data['billable_hrs']/8; ?></td>
                                     <td class="text-right"><?php echo $data['nonbillable_hrs']/8; ?></td>

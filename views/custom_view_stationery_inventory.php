@@ -720,9 +720,9 @@ $st_show_type=$_SESSION['st_show_type'];
                                     <?php echo $stationery_item['available_qty']; ?>
                                 </div>
                                 <div class="col-lg-1 col-md-1 col-sm-6 col-6 text-end">
-                                    <div class="cursor-pointer" onclick="viewstreport(<?php echo $stationery_item['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                    <button type="button" class="btn btn-link p-0 border-0 cursor-pointer" onclick="viewstreport(<?php echo $stationery_item['id']; ?>)" aria-label="<?= htmlspecialchars(__('View Report'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <i class="ti-eye"></i>
-                                    </div>
+                                    </button>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <span class="f-14 f-w-600"><?= __('Descroption'); ?>: </span>

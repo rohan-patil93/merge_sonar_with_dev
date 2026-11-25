@@ -146,7 +146,7 @@ $seating_pools  =$result['seating_pools'];
 
                 ?>
               <div id="position_<?php echo $cabincnt; ?>" class="equipment-allocation-icon     cursor-pointer <?php echo $dynmicclass; ?> " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $ealloc['cabin_name']; ?>" style="top: <?php echo $ealloc['y_size']; ?>%; left: <?php echo $ealloc['x_size']; ?>%;">
-                    <div onclick="toCubicleSpaceAllocateEmployeePopup('<?php echo $ealloc['id']; ?>')" class="cubicle_line_space" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <button type="button" onclick="toCubicleSpaceAllocateEmployeePopup('<?php echo $ealloc['id']; ?>')" class="btn p-0 border-0 bg-transparent cubicle_line_space">
                       <?php if($allocationdetail['emp_id'] !=""){ ?>
                         <?php if($employees[$allocationdetail['emp_id']]['image'] !="") { ?>
                             <img src="uploads/all/<?php echo $employees[$allocationdetail['emp_id']]['image']; ?>" class="img-radius img-30 align-top" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -158,7 +158,7 @@ $seating_pools  =$result['seating_pools'];
                       <?php  }else{ ?>
                             <i class="ti-location-pin"></i>
                       <?php } ?>
-                    </div>
+                    </button>
                         <div class="custom-popup" id="custom-popup_<?php echo $cabincnt; ?>">
                             <div class="empty_popup_template custom-popup-open to_allocate_employee_popup_<?php echo $ealloc['id']; ?> text-start" style="right: 34px; top: -160px; width: 340px;">
 

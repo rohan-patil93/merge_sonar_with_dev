@@ -100,7 +100,7 @@
                     }
 
 ?>
-                <div class="card  proj-progress-card allcrd cardid_<?php echo $esopplans['id']; ?> <?php echo $i=='0'?"card-green text-white":""; ?>" onclick="getESOPAllocationDetails('<?php echo $esopplans['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                <button type="button" class="btn p-0 border-0 text-start w-100 card proj-progress-card allcrd cardid_<?php echo $esopplans['id']; ?> <?php echo $i=='0'?"card-green text-white":""; ?>" onclick="getESOPAllocationDetails('<?php echo $esopplans['id']; ?>')">
                     <div class="card-body ">
                         <h6><?php echo $esopplans['plan_name']; ?> <span class="form-label label label-md label-primary float-end"><?= __('Buckets'); ?> : <?php echo $esop_plans_detail['total_bucket_cnt']; ?></span></h6>
                         <h5 class="mt-3 mb-2 f-w-700"><?php echo $esopplans['share']; ?> <span class="f-12"><?= __('(Allocated Shares'); ?> - <?php echo $esop_plans_detail['allocated_shares']; ?>)</span><span class=" float-end"><?php echo $allocateper; ?>%</span></h5>
@@ -108,7 +108,7 @@
                             <div class="progress-bar bg-c-red" style="width:<?php echo $allocateper; ?>%"></div>
                         </div>
                     </div>
-                </div>
+                </button>
                 <?php $i++;
 } ?>
             </div>
