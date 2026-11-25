@@ -157,7 +157,7 @@ class AicallUserClass extends userClass{
             $return['job_posting_candidates'][] = $inserts;
         }
 
-        $where = self::SQL_CANDIDATE_ID . $screening['candidate_id'] . self::SQL_AND_JOB_POSTING_ID . $screening['job_posting_id'] . "' AND is_active = 0";
+        $where = self::SQL_CANDIDATE_ID . $screening['candidate_id'] . self::SQL_AND_JOB_POSTING_ID . $screening['job_posting_id'] . self::SQL_AND_IS_ACTIVE_0;
         $insert_array = array('screening_status' =>'Y', 'screening_start_datetime'=>date(self::DATE_FORMAT_LOWER_HIS), 'updated_by'=>$get['user_id'], 'updated_date'=>date(self::DATE_FORMAT_LOWER_HIS));
         $callConfig->updateRecord('job_posting_candidates', $insert_array, '', '', $where);
 
@@ -175,7 +175,7 @@ class AicallUserClass extends userClass{
         foreach ($screening['answers'] as $messages) {
             $question_key = $messages['key'];
             $answer = $messages['answer'];
-            $where = self::SQL_CANDIDATE_ID . $screening['candidate_id'] . self::SQL_AND_JOB_POSTING_ID . $screening['job_posting_id'] . "' AND question_key = '" . $question_key . "' AND is_active = 0";
+            $where = self::SQL_CANDIDATE_ID . $screening['candidate_id'] . self::SQL_AND_JOB_POSTING_ID . $screening['job_posting_id'] . "' AND question_key = '" . $question_key . self::SQL_AND_IS_ACTIVE_0;
             $insert_array = array('answers' => $answer, 'updated_by'=>$get['user_id'], 'updated_date'=>date(self::DATE_FORMAT_LOWER_HIS));
             $insert_data = $callConfig->updateRecord('candidate_screening_questions_and_answers', $insert_array, '', '', $where);
             $return['job_posting_candidates'][] = $insert_data;
@@ -183,7 +183,7 @@ class AicallUserClass extends userClass{
 
         $recommendation = $screening['evaluation']['recommendation'];
         $summary = $screening['evaluation']['summary'];
-        $where = self::SQL_CANDIDATE_ID . $screening['candidate_id'] . self::SQL_AND_JOB_POSTING_ID . $screening['job_posting_id'] . "' AND is_active = 0";
+        $where = self::SQL_CANDIDATE_ID . $screening['candidate_id'] . self::SQL_AND_JOB_POSTING_ID . $screening['job_posting_id'] . self::SQL_AND_IS_ACTIVE_0;
         $insert_array = array('screening_end_datetime'=>date(self::DATE_FORMAT_LOWER_HIS), 'ai_shortlisted'=>$recommendation,'ai_summary'=>$summary,  'updated_by'=>$get['user_id'], 'updated_date'=>date(self::DATE_FORMAT_LOWER_HIS));
         $return['job_posting_candidates1'] = $callConfig->updateRecord('job_posting_candidates', $insert_array, '', '', $where);
 

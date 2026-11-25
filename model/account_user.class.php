@@ -3,10 +3,73 @@ require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+
+interface AccountConstants {
+    public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
+    public const DATE_FORMAT_LOWER_HIS = "Y-m-d h:i:s";
+    public const SQL_AND_IS_ACTIVE_0 = self::SQL_AND_IS_ACTIVE_0;
+    public const SQL_AND_IS_ACTIVE_0_SPACE = self::SQL_AND_IS_ACTIVE_0_SPACE;
+    public const SQL_QUOTE_AND_IS_ACTIVE_0 = self::SQL_QUOTE_AND_IS_ACTIVE_0;
+    public const SQL_QUOTE_AND_IS_ACTIVE_0_SPACE = self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE;
+    public const SQL_QUOTE_AND_IS_ACTIVE_EQ_0 = self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
+    public const SQL_AND_ID_EQ_QUOTE = self::SQL_AND_ID_EQ_QUOTE;
+    public const SQL_QUOTE_AND_ID_EQ_QUOTE = self::SQL_QUOTE_AND_ID_EQ_QUOTE;
+    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE = self::SQL_WHERE_COMPANY_ID_EQ_QUOTE;
+    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE = self::SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE;
+    public const SQL_WHERE_COMPANY_ID_EQ = self::SQL_WHERE_COMPANY_ID_EQ;
+    public const SQL_SELECT_ALL_FROM = self::SQL_SELECT_ALL_FROM;
+    public const SQL_AND_ACCOUNT_CODE_EQ_QUOTE = self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE;
+    public const SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE = self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE;
+    public const SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE = self::SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE;
+    public const SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE = self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE;
+    public const SQL_AND_FINANCE_YEAR_EQ_QUOTE = self::SQL_AND_FINANCE_YEAR_EQ_QUOTE;
+    public const SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE = self::SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE;
+    public const SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE = self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE;
+    public const SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE = self::SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE;
+    public const SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE = self::SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE;
+    public const SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE = self::SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE;
+    public const SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE = self::SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE;
+    public const SQL_AND_PARTY_ID_EQ_QUOTE = self::SQL_AND_PARTY_ID_EQ_QUOTE;
+    public const SQL_DATE_APRIL_FIRST = self::SQL_DATE_APRIL_FIRST;
+    public const SQL_DATE_MARCH_THIRTYFIRST = self::SQL_DATE_MARCH_THIRTYFIRST;
+    public const SQL_AND_IS_ACTIVE_ORDER_PRIORITY = self::SQL_AND_IS_ACTIVE_ORDER_PRIORITY;
+    public const SQL_SEL_CHART_OF_ACCOUNTS = self::SQL_SEL_CHART_OF_ACCOUNTS;
+    public const SQL_SEL_CHART_OF_ACCOUNTS_SP = self::SQL_SEL_CHART_OF_ACCOUNTS_SP;
+    public const SQL_SEL_FINANCE_REPORT_GROUPS = self::SQL_SEL_FINANCE_REPORT_GROUPS;
+    public const SQL_SEL_LOCATIONS = self::SQL_SEL_LOCATIONS;
+    public const SQL_SEL_DEPARTMENTS = self::SQL_SEL_DEPARTMENTS;
+    public const SQL_SEL_COST_CENTERS = self::SQL_SEL_COST_CENTERS;
+    public const SQL_SEL_CURRENCIES = self::SQL_SEL_CURRENCIES;
+    public const SQL_SEL_GENERAL_CODE_DETAILS = self::SQL_SEL_GENERAL_CODE_DETAILS;
+    public const SQL_SEL_VENDORS = self::SQL_SEL_VENDORS;
+    public const SQL_SEL_CUSTOMERS = self::SQL_SEL_CUSTOMERS;
+    public const SQL_SEL_EMPLOYEES = self::SQL_SEL_EMPLOYEES;
+    public const SQL_SEL_BANK_ACCOUNTS = self::SQL_SEL_BANK_ACCOUNTS;
+    public const SQL_SEL_COA_TYPE = self::SQL_SEL_COA_TYPE;
+    public const SQL_SEL_PETTY_CASH_BOXES = self::SQL_SEL_PETTY_CASH_BOXES;
+    public const SQL_SEL_ACCOUNT_BALANCES = self::SQL_SEL_ACCOUNT_BALANCES;
+    public const SQL_DEL_GL_VOUCHER_ID = self::SQL_DEL_GL_VOUCHER_ID;
+    public const SQL_QUOTE_IS_ACTIVE_0_BAL_DESC = self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC;
+    public const SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER = self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER;
+    public const SQL_AND_APPLICATION_TABLE_NAME = self::SQL_AND_APPLICATION_TABLE_NAME;
+    public const SQL_AND_ITEM_TABLE_NOT_EMPTY = self::SQL_AND_ITEM_TABLE_NOT_EMPTY;
+    public const SQL_AND_TRANSACTION_ID_EQ = self::SQL_AND_TRANSACTION_ID_EQ;
+    public const SQL_AND_ALLOW_POSTING_0 = self::SQL_AND_ALLOW_POSTING_0;
+    public const SQL_AND_GENC_CODE_VOUCHERTYPE = self::SQL_AND_GENC_CODE_VOUCHERTYPE;
+    public const SQL_AND_TOC_HEADERS = self::SQL_AND_TOC_HEADERS;
+    public const SQL_AND_REF_TYPE_SALES_INVOICES = self::SQL_AND_REF_TYPE_SALES_INVOICES;
+    public const SQL_AND_REF_TYPE_SUPPLIER_BILLS = self::SQL_AND_REF_TYPE_SUPPLIER_BILLS;
+    public const SQL_LTE_TRANSACTION_DATE = self::SQL_LTE_TRANSACTION_DATE;
+    public const SQL_LTE_REC_TRANSACTION_DATE = self::SQL_LTE_REC_TRANSACTION_DATE;
+    public const SQL_AND_QUOTE = self::SQL_AND_QUOTE;
+    public const SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID = self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID;
+}
+
 trait AccountVouchersAndBudgetsTrait {
     public function insertDeferredRevenues($get,$post){
         global $callConfig;
         $return =array();
+        $return['get'] = $get;
         $return['post'] = $post;
         $deferred_revenue_table = array();
         foreach($post['depreciation_date'] as $keyid=>$valu){
@@ -35,7 +98,7 @@ trait AccountVouchersAndBudgetsTrait {
         $return['get'] = $get;
 
 
-        $email_contentsql = "SELECT id, template_name FROM `email_content` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $email_contentsql = "SELECT id, template_name FROM `email_content` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $email_contentres = $callConfig->getAllRows($email_contentsql);
         $email_content = array();
         foreach($email_contentres as $ec){
@@ -43,12 +106,12 @@ trait AccountVouchersAndBudgetsTrait {
         }
         $return['email_content']= $email_content;
 
-        $follow_up_levelssql = "SELECT * FROM `follow_up_levels` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $follow_up_levelssql = "SELECT * FROM `follow_up_levels` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $follow_up_levelsres = $callConfig->getAllRows($follow_up_levelssql);
         $return['follow_up_levels_all']= $follow_up_levelsres;
 
         if(isset($get['rid']) && $get['rid'] !=""){
-            $fiscal_positionssql = "SELECT * FROM `follow_up_levels` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
+            $fiscal_positionssql = "SELECT * FROM `follow_up_levels` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $fiscal_positionsres = $callConfig->getRow($fiscal_positionssql);
             $return['follow_up_levels']= $fiscal_positionsres;
         }
@@ -57,6 +120,7 @@ trait AccountVouchersAndBudgetsTrait {
     public function insertFollowUpLevels($get,$post){
          global $callConfig;
         $return =array();
+        $return['get'] = $get;
         $return['post'] = $post;
         $insertary=array('company_id'=>$post['company_id'],'follow_up_level_name'=>$post['follow_up_level_name'],'days'=>$post['days'],'send_sms'=>$post['send_sms'],'follow_up_call'=>$post['follow_up_call'],'send_email'=>$post['send_email'],'attach_invoice'=>$post['attach_invoice'],'email_content_id'=>$post['email_content_id']);
         if($post['rid'] !=""){
@@ -77,7 +141,7 @@ trait AccountVouchersAndBudgetsTrait {
     public function getReconciliations($get){
         global $callConfig;
         $return =array();
-        $reconciliationtypesql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'RECONCILIATIONTYPE' AND is_active =0";
+        $reconciliationtypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']." AND genc_code = 'RECONCILIATIONTYPE' AND is_active =0";
         $reconciliationtyperes = $callConfig->getAllRows($reconciliationtypesql);
         $reconciliationtype = array();
         foreach($reconciliationtyperes as $rct){
@@ -85,7 +149,7 @@ trait AccountVouchersAndBudgetsTrait {
         }
         $return['reconciliationtype']= $reconciliationtype;
 
-        $transactiontypesql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'TRANSACTIONTYPE' AND is_active =0";
+        $transactiontypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id']." AND genc_code = 'TRANSACTIONTYPE' AND is_active =0";
         $transactiontyperes = $callConfig->getAllRows($transactiontypesql);
         $transactiontype = array();
         foreach($transactiontyperes as $tt){
@@ -93,24 +157,24 @@ trait AccountVouchersAndBudgetsTrait {
         }
         $return['transactiontype']= $transactiontype;
 
-        $journalssql = "SELECT id,journal_name FROM `journals` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $journalssql = "SELECT id,journal_name FROM `journals` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $journalsres = $callConfig->getAllRows($journalssql);
         $return['journals']= $journalsres;
 
-        $chartofaccountssql = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $chartofaccountssql = self::SQL_SEL_CHART_OF_ACCOUNTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
         $return['chart_of_accounts']= $chartofaccountsres;
 
-        $vendorssql = "SELECT id,display_name FROM `vendors` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $vendorssql = self::SQL_SEL_VENDORS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $vendorsres = $callConfig->getAllRows($vendorssql);
         $return['vendors']= $vendorsres;
 
-        $customerssql = "SELECT id,display_name FROM `customers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = self::SQL_SEL_CUSTOMERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         $return['customers']= $customersres;
 
         if(isset($get['rid']) && $get['rid'] !=""){
-            $reconciliationssql = "SELECT * FROM `reconciliations` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
+            $reconciliationssql = "SELECT * FROM `reconciliations` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $reconciliationsres = $callConfig->getRow($reconciliationssql);
             $return['reconciliations']= $reconciliationsres;
         }
@@ -119,6 +183,7 @@ trait AccountVouchersAndBudgetsTrait {
     public function insertReconciliations($get,$post){
          global $callConfig;
         $return =array();
+        $return['get'] = $get;
         $return['post'] = $post;
         $journal_availability = json_encode((array)$post['journal_availability']);
         $customer_ids = json_encode((array)$post['customer_ids']);
@@ -184,9 +249,9 @@ trait AccountVouchersAndBudgetsTrait {
     }
     public function budgetinsertaccount($get,$post){
         global $callConfig;
-        $whrqu= "UPDATE account_budgets SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
+        $whrqu= "UPDATE account_budgets SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year'].self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $callConfig->executeQuery($whrqu);
-        $whrqu= "UPDATE budget SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
+        $whrqu= "UPDATE budget SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year'].self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $callConfig->executeQuery($whrqu);
 
         $insert_array = array('company_id'=>$get['company_id'],'budget_name'=>$post['budget_name'],'user_id'=>$post['user_id'],'budget_created'=>$post['inveral'],'budget_version'=>$post['budget_version'],'cost_center_id'=>$post['cost_center_id'],'fiscal_year'=>$post['fiscal_year'],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id']);
@@ -226,26 +291,26 @@ trait AccountVouchersAndBudgetsTrait {
         global $callConfig;
         $return= $partylist = array();
         if(isset($get['rid']) && $get['rid'] !=""){
-            $journal_voucherssql = "SELECT * FROM `journal_vouchers` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
+            $journal_voucherssql = "SELECT * FROM `journal_vouchers` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $journal_vouchersres = $callConfig->getRow($journal_voucherssql);
             $return['journal_vouchers']= $journal_vouchersres;
 
             if($journal_vouchersres->ref_type !=""){
 
-                $application_pagessaql = "SELECT application_table_name, view_page_name, list_page_name, insert_page_name FROM application_pages WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$journal_vouchersres->ref_type."' AND is_active=0";
+                $application_pagessaql = "SELECT application_table_name, view_page_name, list_page_name, insert_page_name FROM application_pages WHERE company_id = '".$get['company_id'].self::SQL_AND_APPLICATION_TABLE_NAME.$journal_vouchersres->ref_type."' AND is_active=0";
                 $application_pagessres = $callConfig->getRow($application_pagessaql);
                 $return['ref_details_table']= $application_pagessres;
 
-                $parentdmtsql = "SELECT id,display_table,item_table,tax_table,application_table_name FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$journal_vouchersres->ref_type."' AND item_table !='' AND is_active = 0";
+                $parentdmtsql = "SELECT id,display_table,item_table,tax_table,application_table_name FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id'].self::SQL_AND_APPLICATION_TABLE_NAME.$journal_vouchersres->ref_type.self::SQL_AND_ITEM_TABLE_NOT_EMPTY;
                 $parentdmtres=$callConfig->getRow($parentdmtsql);
                 $return['parentdmtsql']= $parentdmtsql;
 
-                $ref_deatils_sql = "SELECT * FROM ".$parentdmtres->application_table_name." WHERE company_id = ".$get['company_id']." AND id = '".$journal_vouchersres->ref_id."' AND is_active =0";
+                $ref_deatils_sql = self::SQL_SELECT_ALL_FROM.$parentdmtres->application_table_name.self::SQL_WHERE_COMPANY_ID_EQ.$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$journal_vouchersres->ref_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
                 $ref_deatils_res = $callConfig->getRow($ref_deatils_sql);
                 $return['ref_details_sql']= $ref_deatils_sql;
                 $return['ref_details']= $ref_deatils_res;
 
-                $ref_item_deatils_sql = "SELECT * FROM ".$parentdmtres->item_table." WHERE company_id = ".$get['company_id']." AND transaction_id = '".$journal_vouchersres->ref_id."' AND is_active =0";
+                $ref_item_deatils_sql = self::SQL_SELECT_ALL_FROM.$parentdmtres->item_table.self::SQL_WHERE_COMPANY_ID_EQ.$get['company_id'].self::SQL_AND_TRANSACTION_ID_EQ.$journal_vouchersres->ref_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
                 $ref_item_deatils_res = $callConfig->getAllRows($ref_item_deatils_sql);
                 $return['ref_item_details_sql']= $ref_item_deatils_sql;
                 $return['ref_item_details']= $ref_item_deatils_res;
@@ -254,52 +319,52 @@ trait AccountVouchersAndBudgetsTrait {
 
 
 
-            $jv_itemssql = "SELECT * FROM `jv_items` WHERE company_id = ".$get['company_id']." AND transaction_id = '".$get['rid']."' AND is_active =0";
+            $jv_itemssql = "SELECT * FROM `jv_items` WHERE company_id = ".$get['company_id'].self::SQL_AND_TRANSACTION_ID_EQ.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $jv_itemsres = $callConfig->getAllRows($jv_itemssql);
             $return['jv_items']= $jv_itemsres;
 
 
 
         }
-        $locationsql = "SELECT id,location_name FROM `locations` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $locationres = $callConfig->getAllRows($locationsql);
         $return['locations']= $locationres;
 
-        $cost_centerssql = "SELECT id,cost_center_name FROM `cost_centers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $cost_centerssql = self::SQL_SEL_COST_CENTERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $cost_centersres = $callConfig->getAllRows($cost_centerssql);
         $return['cost_centers']= $cost_centersres;
 
-        $departmentssql = "SELECT id,department_name FROM `departments` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $departmentssql = self::SQL_SEL_DEPARTMENTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $departmentsres = $callConfig->getAllRows($departmentssql);
         $return['departments']= $departmentsres;
 
 
-        $currenciessql = "SELECT id,currency_name, currency_short_code, currency_symbol FROM `currencies` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $currenciessql = self::SQL_SEL_CURRENCIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $currenciesres = $callConfig->getAllRows($currenciessql);
         $return['currencies']= $currenciesres;
 
-        $journalssql = "SELECT id,journal_name FROM `journal_settings` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $journalssql = "SELECT id,journal_name FROM `journal_settings` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $journalsres = $callConfig->getAllRows($journalssql);
         $return['journal_settings']= $journalsres;
 
-        $chartofaccountssql = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND allow_posting = 0 AND is_active =0 ORDER BY account_name ASC";
+        $chartofaccountssql = self::SQL_SEL_CHART_OF_ACCOUNTS.$get['company_id'].self::SQL_AND_ALLOW_POSTING_0;
         $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
 
         $return['chart_of_accounts']= $chartofaccountsres;
 
-        $vendorssql = "SELECT id,display_name,company FROM `vendors` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $vendorssql = "SELECT id,display_name,company FROM `vendors` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $vendorsres = $callConfig->getAllRows($vendorssql);
         foreach($vendorsres as $prty){
             $partylist['vendors'][$prty->id]= $prty;
         }
 
-        $customerssql = "SELECT id,display_name ,company FROM `customers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = "SELECT id,display_name ,company FROM `customers` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         foreach($customersres as $prty){
             $partylist['customers'][$prty->id]= $prty;
         }
 
-        $employeessql = "SELECT id,display_name FROM `employees` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $employeessql = self::SQL_SEL_EMPLOYEES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $employeesres = $callConfig->getAllRows($employeessql);
         foreach($employeesres as $prty){
             $partylist['employees'][$prty->id]= $prty;
@@ -311,6 +376,7 @@ trait AccountVouchersAndBudgetsTrait {
     public function insertJournalVouchers($get,$post){
          global $callConfig;
         $return =array();
+        $return['get'] = $get;
         $return['post'] = $post;
         $insertary=array('company_id'=>$post['company_id'],'transaction_date'=>$this->dateconvertdbformat($post['transaction_date']),'currency_id'=>$post['currency_id'],'printing_notes'=>$post['printing_notes'],'notes'=>$post['notes'],'amount'=>$post['total_amount'],'total_amount'=>$post['total_amount'],'journal_id'=>$post['journal_id'],'doc_ref_no'=>$post['doc_ref_no'],'doc_ref_date'=>$this->dateconvertdbformat($post['doc_ref_date']));
         if($post['rid'] !=""){
@@ -322,7 +388,7 @@ trait AccountVouchersAndBudgetsTrait {
             //all transaction update
             $callConfig->executeQuery("DELETE FROM jv_items WHERE transaction_id = '".$rid."'");
             $callConfig->executeQuery("DELETE FROM jv_items_references WHERE transaction_id = '".$rid."'");
-            $callConfig->executeQuery("DELETE FROM general_ledger WHERE voucher_id = '".$rid."' AND ledger_type = 'JV'");
+            $callConfig->executeQuery(self::SQL_DEL_GL_VOUCHER_ID.$rid."' AND ledger_type = 'JV'");
             //$callConfig->updateRecord('jv_items',array('is_active'=>'1'),'transaction_id',$rid);
             //all transaction update
         }else{
@@ -426,19 +492,19 @@ trait AccountVouchersAndBudgetsTrait {
 //account_balances start
 
          // Check if an entry exists for the entry date
-        $sql = "SELECT * FROM account_balances WHERE company_id ='".$company_id."' AND account_code = '".$accountId."' AND finance_year = '".$financeyear."' AND balance_date = '".$entryDate."' AND is_active = 0";
+        $sql = "SELECT * FROM account_balances WHERE company_id ='".$company_id.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE.$entryDate.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $existingEntry = $callConfig->getRow($sql);
         $return['existingEntrysql'] = $sql;
         $return['existingEntry'] = $existingEntry;
 
         if($existingEntry->id !=""){
             $updatedBalance = $existingEntry->closing_balance - $amountChange;
-            $sql = "UPDATE account_balances SET closing_balance = '".$updatedBalance."', debit_amount = debit_amount-".$debitAmount.",credit_amount = credit_amount-".$creditAmount." WHERE company_id ='".$company_id."' AND id = '".$existingEntry->id."'";
+            $sql = "UPDATE account_balances SET closing_balance = '".$updatedBalance."', debit_amount = debit_amount-".$debitAmount.",credit_amount = credit_amount-".$creditAmount.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE.$company_id.self::SQL_QUOTE_AND_ID_EQ_QUOTE.$existingEntry->id."'";
             $callConfig->executeQuery($sql);
             $return['update_account_balances'] = $sql;
         }
 
-        $sql = "UPDATE account_balances SET closing_balance = closing_balance + ".$amountChange." WHERE company_id ='".$company_id."' AND finance_year = '".$financeyear."' AND account_code = '".$accountId."' AND balance_date > '".$entryDate."' AND is_active = 0";
+        $sql = "UPDATE account_balances SET closing_balance = closing_balance + ".$amountChange.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE.$company_id.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId."' AND balance_date > '".$entryDate.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $callConfig->executeQuery($sql);
         $return['update_all_record'] = $sql;
 //account_balances End
@@ -446,7 +512,7 @@ trait AccountVouchersAndBudgetsTrait {
 
 //account_balances start
          // Check if an entry exists for the entry date
-         $sql = "SELECT * FROM account_balances_details WHERE company_id ='".$company_id."' AND account_code = '".$accountId."' AND finance_year = '".$financeyear."' AND balance_date = '".$entryDate."' AND location_id = '".$location_id."'  AND department_id = '".$department_id."' AND cost_center_id = '".$cost_center_id."' AND is_active = 0 ORDER BY balance_date DESC LIMIT 1";
+         $sql = "SELECT * FROM account_balances_details WHERE company_id ='".$company_id.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE.$entryDate.self::SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE.$location_id.self::SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE.$department_id.self::SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE.$cost_center_id.self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC;
 
         $existingEntry = $callConfig->getRow($sql);
         $return['existingEntrysql_details'] = $sql;
@@ -454,12 +520,12 @@ trait AccountVouchersAndBudgetsTrait {
 
         if($existingEntry->id !=""){
             $updatedBalance = $existingEntry->closing_balance - $amountChange;
-            $sql = "UPDATE account_balances_details SET closing_balance = '".$updatedBalance."', debit_amount = debit_amount-".$debitAmount.",credit_amount = credit_amount-".$creditAmount." WHERE company_id ='".$company_id."' AND id = '".$existingEntry->id."'";
+            $sql = "UPDATE account_balances_details SET closing_balance = '".$updatedBalance."', debit_amount = debit_amount-".$debitAmount.",credit_amount = credit_amount-".$creditAmount.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE.$company_id.self::SQL_QUOTE_AND_ID_EQ_QUOTE.$existingEntry->id."'";
             $callConfig->executeQuery($sql);
             $return['update_account_balances_details'] = $sql;
         }
 
-        $sql = "UPDATE account_balances_details SET closing_balance = closing_balance + ".$amountChange." WHERE company_id ='".$company_id."' AND finance_year = '".$financeyear."' AND account_code = '".$accountId."' AND balance_date > '".$entryDate."' AND location_id = '".$location_id."'  AND department_id = '".$department_id."' AND cost_center_id = '".$cost_center_id."' AND is_active = 0";
+        $sql = "UPDATE account_balances_details SET closing_balance = closing_balance + ".$amountChange.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE.$company_id.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId."' AND balance_date > '".$entryDate.self::SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE.$location_id.self::SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE.$department_id.self::SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE.$cost_center_id.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $callConfig->executeQuery($sql);
         $return['update_all_record_details'] = $sql;
 //account_balances End
@@ -489,7 +555,7 @@ trait AccountVouchersAndBudgetsTrait {
 
 //account_balances Start
          // Check if an entry exists for the entry date
-        $sql = "SELECT * FROM account_balances WHERE company_id ='".$company_id."' AND account_code = '".$accountId."' AND finance_year = '".$financeyear."' AND balance_date = '".$entryDate."' AND is_active = 0";
+        $sql = "SELECT * FROM account_balances WHERE company_id ='".$company_id.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE.$entryDate.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $existingEntry = $callConfig->getRow($sql);
         $return['existingEntrysql'] = $sql;
         $return['existingEntry'] = $existingEntry;
@@ -506,7 +572,7 @@ trait AccountVouchersAndBudgetsTrait {
             $updatedBalance = $existingEntry->closing_balance + $amountChange;
 
             $sql = "UPDATE account_balances SET closing_balance = '".$updatedBalance."', debit_amount = '".$updateddebitamt."',credit_amount = '".$updatedcreditamt."'
-                    WHERE company_id ='".$company_id."' AND id = '".$existingEntry->id."'";
+                    WHERE company_id ='".$company_id.self::SQL_QUOTE_AND_ID_EQ_QUOTE.$existingEntry->id."'";
 
             $callConfig->executeQuery($sql);
             $return['update_account_balances'] = $sql;
@@ -516,7 +582,7 @@ trait AccountVouchersAndBudgetsTrait {
         }else{
 
             // Fetch the latest balance before the entry date
-            $sql = "SELECT closing_balance, balance_date FROM account_balances WHERE company_id ='".$company_id."' AND finance_year = '".$financeyear."' AND account_code = '".$accountId."' AND balance_date < '".$entryDate."' AND is_active = 0 ORDER BY balance_date DESC LIMIT 1";
+            $sql = "SELECT closing_balance, balance_date FROM account_balances WHERE company_id ='".$company_id.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId.self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE.$entryDate.self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC;
             $latestBalance = $callConfig->getRow($sql);
             $return['latestBalancesql'] = $sql;
             $return['latestBalance'] = $latestBalance;
@@ -531,7 +597,7 @@ trait AccountVouchersAndBudgetsTrait {
             $return['insert_account_balances'] = $res2;
         }
 
-        $sql = "UPDATE account_balances SET closing_balance = closing_balance + ".$amountChange.",opening_balance = opening_balance + ".$amountChange." WHERE company_id ='".$company_id."' AND finance_year = '".$financeyear."' AND account_code = '".$accountId."' AND balance_date > '".$entryDate."' AND is_active = 0";
+        $sql = "UPDATE account_balances SET closing_balance = closing_balance + ".$amountChange.",opening_balance = opening_balance + ".$amountChange.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE.$company_id.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId."' AND balance_date > '".$entryDate.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $callConfig->executeQuery($sql);
         $return['update_all_record'] = $sql;
 //account_balances End
@@ -540,7 +606,7 @@ trait AccountVouchersAndBudgetsTrait {
         $isDebit = in_array($accountType, array('1', '4'));
         $amountChange = $isDebit ? $debitAmount - $creditAmount : $creditAmount - $debitAmount;
         if($location_id !="" && $department_id !="" && $cost_center_id !=""){
-            $sql = "SELECT * FROM account_balances_details WHERE company_id ='".$company_id."' AND account_code = '".$accountId."' AND finance_year = '".$financeyear."' AND balance_date = '".$entryDate."' AND location_id = '".$location_id."'  AND department_id = '".$department_id."' AND cost_center_id = '".$cost_center_id."' AND is_active = 0 ORDER BY balance_date DESC LIMIT 1";
+            $sql = "SELECT * FROM account_balances_details WHERE company_id ='".$company_id.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE.$entryDate.self::SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE.$location_id.self::SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE.$department_id.self::SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE.$cost_center_id.self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC;
             $existingEntry1 = $callConfig->getRow($sql);
             $return['existingEntrysql_details'] = $sql;
             $return['existingEntry_details'] = $existingEntry1;
@@ -557,7 +623,7 @@ trait AccountVouchersAndBudgetsTrait {
             $updatedBalance = $existingEntry1->closing_balance + $amountChange;
 
             $sql = "UPDATE account_balances_details SET closing_balance = '".$updatedBalance."', debit_amount = '".$updateddebitamt."',credit_amount = '".$updatedcreditamt."'
-                    WHERE company_id ='".$company_id."' AND id = '".$existingEntry1->id."'";
+                    WHERE company_id ='".$company_id.self::SQL_QUOTE_AND_ID_EQ_QUOTE.$existingEntry1->id."'";
 
             $callConfig->executeQuery($sql);
             $return['account_balances_details_balances_details'] = $sql;
@@ -566,7 +632,7 @@ trait AccountVouchersAndBudgetsTrait {
             $amountChange = $updatedBalance;
         }else{
 
-            $sql = "SELECT closing_balance, balance_date FROM account_balances_details WHERE company_id ='".$company_id."' AND finance_year = '".$financeyear."' AND account_code = '".$accountId."' AND balance_date < '".$entryDate."' AND location_id = '".$location_id."'  AND department_id = '".$department_id."' AND cost_center_id = '".$cost_center_id."' AND is_active = 0 ORDER BY balance_date DESC LIMIT 1";
+            $sql = "SELECT closing_balance, balance_date FROM account_balances_details WHERE company_id ='".$company_id.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId.self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE.$entryDate.self::SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE.$location_id.self::SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE.$department_id.self::SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE.$cost_center_id.self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC;
             $latestBalance = $callConfig->getRow($sql);
             $return['latestBalancesql_details'] = $sql;
             $return['latestBalance_details'] = $latestBalance;
@@ -581,7 +647,7 @@ trait AccountVouchersAndBudgetsTrait {
             $return['insert_account_balances_details_details'] = $res2;
         }
 
-        $sql = "UPDATE account_balances_details SET closing_balance = closing_balance + ".$amountChange." ,opening_balance = opening_balance + ".$amountChange." WHERE company_id ='".$company_id."' AND finance_year = '".$financeyear."' AND account_code = '".$accountId."' AND balance_date > '".$entryDate."' AND location_id = '".$location_id."'  AND department_id = '".$department_id."' AND cost_center_id = '".$cost_center_id."' AND is_active = 0";
+        $sql = "UPDATE account_balances_details SET closing_balance = closing_balance + ".$amountChange." ,opening_balance = opening_balance + ".$amountChange.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE.$company_id.self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE.$accountId."' AND balance_date > '".$entryDate.self::SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE.$location_id.self::SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE.$department_id.self::SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE.$cost_center_id.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $callConfig->executeQuery($sql);
         $return['update_all_record_details'] = $sql;
 //account_balances_details End
@@ -592,59 +658,59 @@ trait AccountVouchersAndBudgetsTrait {
         global $callConfig;
         $return= $partylist = array();
         if(isset($get['rid']) && $get['rid'] !=""){
-            $journal_voucherssql = "SELECT * FROM `bank_vouchers` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
+            $journal_voucherssql = "SELECT * FROM `bank_vouchers` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $journal_vouchersres = $callConfig->getRow($journal_voucherssql);
             $return['journal_vouchers']= $journal_vouchersres;
 
-            $jv_itemssql = "SELECT * FROM `bv_items` WHERE company_id = ".$get['company_id']." AND transaction_id = '".$get['rid']."' AND is_active =0";
+            $jv_itemssql = "SELECT * FROM `bv_items` WHERE company_id = ".$get['company_id'].self::SQL_AND_TRANSACTION_ID_EQ.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $jv_itemsres = $callConfig->getAllRows($jv_itemssql);
             $return['jv_items']= $jv_itemsres;
         }
-        $locationsql = "SELECT id,location_name FROM `locations` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $locationres = $callConfig->getAllRows($locationsql);
         $return['locations']= $locationres;
 
-        $cost_centerssql = "SELECT id,cost_center_name FROM `cost_centers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $cost_centerssql = self::SQL_SEL_COST_CENTERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $cost_centersres = $callConfig->getAllRows($cost_centerssql);
         $return['cost_centers']= $cost_centersres;
 
-        $departmentssql = "SELECT id,department_name FROM `departments` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $departmentssql = self::SQL_SEL_DEPARTMENTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $departmentsres = $callConfig->getAllRows($departmentssql);
         $return['departments']= $departmentsres;
 
-        $currenciessql = "SELECT id,currency_name, currency_short_code, currency_symbol FROM `currencies` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $currenciessql = self::SQL_SEL_CURRENCIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $currenciesres = $callConfig->getAllRows($currenciessql);
         $return['currencies']= $currenciesres;
 
-        $journalssql = "SELECT id,account_code,bank_account_name FROM `bank_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $journalssql = self::SQL_SEL_BANK_ACCOUNTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $journalsres = $callConfig->getAllRows($journalssql);
         $return['bank_accounts']= $journalsres;
 
-        $chartofaccountssql = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND allow_posting = 0 AND is_active =0 ORDER BY account_name ASC";
+        $chartofaccountssql = self::SQL_SEL_CHART_OF_ACCOUNTS.$get['company_id'].self::SQL_AND_ALLOW_POSTING_0;
         $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
 
         $return['chart_of_accounts']= $chartofaccountsres;
 
-        $vendorssql = "SELECT id,display_name FROM `vendors` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $vendorssql = self::SQL_SEL_VENDORS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $vendorsres = $callConfig->getAllRows($vendorssql);
         foreach($vendorsres as $prty){
             $partylist['vendors'][$prty->id]= $prty;
         }
 
-        $customerssql = "SELECT id,display_name FROM `customers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = self::SQL_SEL_CUSTOMERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         foreach($customersres as $prty){
             $partylist['customers'][$prty->id]= $prty;
         }
 
-        $employeessql = "SELECT id,display_name FROM `employees` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $employeessql = self::SQL_SEL_EMPLOYEES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $employeesres = $callConfig->getAllRows($employeessql);
         foreach($employeesres as $prty){
             $partylist['employees'][$prty->id]= $prty;
         }
         $return['partylist'] = $partylist;
 
-        $vouchartypesql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'VOUCHERTYPE' AND is_active =0";
+        $vouchartypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id'].self::SQL_AND_GENC_CODE_VOUCHERTYPE;
         $vouchartyperes = $callConfig->getAllRows($vouchartypesql);
         $vouchar_type = array();
         foreach($vouchartyperes as $tt){
@@ -656,6 +722,7 @@ trait AccountVouchersAndBudgetsTrait {
     public function insertBankVouchers($get,$post){
          global $callConfig;
         $return =array();
+        $return['get'] = $get;
         $return['post'] = $post;
 
         $partysql = "SELECT au.*, (SELECT department_id FROM cost_centers cc WHERE au.company_id = cc.company_id AND au.cost_center = cc.id AND au.is_active = cc.is_active) as department_id FROM application_users au WHERE au.company_id = '".$post['company_id']."' AND au.id = '".$post['user_id']."' AND au.is_active = 0";
@@ -671,7 +738,7 @@ trait AccountVouchersAndBudgetsTrait {
             //all transaction update
             $callConfig->executeQuery("DELETE FROM general_ledger WHERE transaction_id = '".$rid."'");
             $callConfig->updateRecord('bv_items',array('is_active'=>'1'),'transaction_id',$rid);
-            $callConfig->executeQuery("DELETE FROM general_ledger WHERE voucher_id = '".$rid."' AND ledger_type = 'BV'");
+            $callConfig->executeQuery(self::SQL_DEL_GL_VOUCHER_ID.$rid."' AND ledger_type = 'BV'");
             //all transaction update
         }else{
             $transation = $this->toGetApplicationSerialNumber('bank_vouchers');
@@ -698,7 +765,7 @@ trait AccountVouchersAndBudgetsTrait {
             $return['reversaerenty'][] = $updatebalances;
         }
         if($post['old_bank_account_code'] !=""){
-            $oldchartofaccountssql = "SELECT id,account_name,account_code,account_type FROM `chart_of_accounts` WHERE company_id = ".$post['company_id']." AND account_code = '".$post['old_bank_account_code']."' AND is_active =0";
+            $oldchartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['old_bank_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $oldchartofaccountsres = $callConfig->getRow($oldchartofaccountssql);
 
             $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['old_bank_account_code'],'date'=>$this->dateconvertdbformat($post['old_transaction_date']),'account_type'=>$oldchartofaccountsres->account_type,'location_id'=>$user->location_id,'department_id'=>$user->department_id,'cost_center_id'=>$user->cost_center);
@@ -716,10 +783,10 @@ trait AccountVouchersAndBudgetsTrait {
 
 
 //New parent level entry
-        $parentacccountsql = "SELECT id,account_code,bank_account_name FROM `bank_accounts` WHERE company_id = ".$post['company_id']." AND account_code = '".$post['bank_account_code']."' AND is_active =0";
+        $parentacccountsql = self::SQL_SEL_BANK_ACCOUNTS.$post['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['bank_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $parentacccountres = $callConfig->getRow($parentacccountsql);
 
-        $newchartofaccountssql = "SELECT id,account_name,account_code,account_type FROM `chart_of_accounts` WHERE company_id = ".$post['company_id']." AND account_code = '".$post['bank_account_code']."' AND is_active =0";
+        $newchartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['bank_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $newchartofaccountsres = $callConfig->getRow($newchartofaccountssql);
         $return['newchartofaccountssql'][] = $newchartofaccountssql;
         $return['newchartofaccountsres'][] = $newchartofaccountsres;
@@ -808,59 +875,59 @@ trait AccountVouchersAndBudgetsTrait {
         global $callConfig;
         $return= $partylist = array();
         if(isset($get['rid']) && $get['rid'] !=""){
-            $journal_voucherssql = "SELECT * FROM `cash_vouchers` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
+            $journal_voucherssql = "SELECT * FROM `cash_vouchers` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $journal_vouchersres = $callConfig->getRow($journal_voucherssql);
             $return['journal_vouchers']= $journal_vouchersres;
 
-            $jv_itemssql = "SELECT * FROM `cv_items` WHERE company_id = ".$get['company_id']." AND transaction_id = '".$get['rid']."' AND is_active =0";
+            $jv_itemssql = "SELECT * FROM `cv_items` WHERE company_id = ".$get['company_id'].self::SQL_AND_TRANSACTION_ID_EQ.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $jv_itemsres = $callConfig->getAllRows($jv_itemssql);
             $return['jv_items']= $jv_itemsres;
         }
-         $locationsql = "SELECT id,location_name FROM `locations` WHERE company_id = ".$get['company_id']." AND is_active =0";
+         $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $locationres = $callConfig->getAllRows($locationsql);
         $return['locations']= $locationres;
 
-        $cost_centerssql = "SELECT id,cost_center_name FROM `cost_centers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $cost_centerssql = self::SQL_SEL_COST_CENTERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $cost_centersres = $callConfig->getAllRows($cost_centerssql);
         $return['cost_centers']= $cost_centersres;
 
-        $departmentssql = "SELECT id,department_name FROM `departments` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $departmentssql = self::SQL_SEL_DEPARTMENTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $departmentsres = $callConfig->getAllRows($departmentssql);
         $return['departments']= $departmentsres;
 
-        $currenciessql = "SELECT id,currency_name, currency_short_code, currency_symbol FROM `currencies` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $currenciessql = self::SQL_SEL_CURRENCIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $currenciesres = $callConfig->getAllRows($currenciessql);
         $return['currencies']= $currenciesres;
 
-        $journalssql = "SELECT id,gl_account_pc_cash,pc_box_description FROM `petty_cash_boxes` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $journalssql = self::SQL_SEL_PETTY_CASH_BOXES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $journalsres = $callConfig->getAllRows($journalssql);
         $return['petty_cash_boxes']= $journalsres;
 
-        $chartofaccountssql = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND allow_posting = 0 AND is_active =0 ORDER BY account_name ASC";
+        $chartofaccountssql = self::SQL_SEL_CHART_OF_ACCOUNTS.$get['company_id'].self::SQL_AND_ALLOW_POSTING_0;
         $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
 
         $return['chart_of_accounts']= $chartofaccountsres;
 
-        $vendorssql = "SELECT id,display_name FROM `vendors` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $vendorssql = self::SQL_SEL_VENDORS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $vendorsres = $callConfig->getAllRows($vendorssql);
         foreach($vendorsres as $prty){
             $partylist['vendors'][$prty->id]= $prty;
         }
 
-        $customerssql = "SELECT id,display_name FROM `customers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = self::SQL_SEL_CUSTOMERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         foreach($customersres as $prty){
             $partylist['customers'][$prty->id]= $prty;
         }
 
-        $employeessql = "SELECT id,display_name FROM `employees` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $employeessql = self::SQL_SEL_EMPLOYEES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $employeesres = $callConfig->getAllRows($employeessql);
         foreach($employeesres as $prty){
             $partylist['employees'][$prty->id]= $prty;
         }
         $return['partylist'] = $partylist;
 
-        $vouchartypesql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'VOUCHERTYPE' AND is_active =0";
+        $vouchartypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id'].self::SQL_AND_GENC_CODE_VOUCHERTYPE;
         $vouchartyperes = $callConfig->getAllRows($vouchartypesql);
         $vouchar_type = array();
         foreach($vouchartyperes as $tt){
@@ -889,7 +956,7 @@ trait AccountVouchersAndBudgetsTrait {
             //all transaction update
             $callConfig->executeQuery("DELETE FROM general_ledger WHERE transaction_id = '".$rid."'");
             $callConfig->updateRecord('cv_items',array('is_active'=>'1'),'transaction_id',$rid);
-            $callConfig->executeQuery("DELETE FROM general_ledger WHERE voucher_id = '".$rid."' AND ledger_type = 'CV'");
+            $callConfig->executeQuery(self::SQL_DEL_GL_VOUCHER_ID.$rid."' AND ledger_type = 'CV'");
             //all transaction update
         }else{
             $transation = $this->toGetApplicationSerialNumber('cash_vouchers');
@@ -917,7 +984,7 @@ trait AccountVouchersAndBudgetsTrait {
             $return['reversaerenty'][] = $updatebalances;
         }
         if($post['old_cash_account_code'] !=""){
-            $oldchartofaccountssql = "SELECT id,account_name,account_code,account_type FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND account_code = '".$post['old_cash_account_code']."' AND is_active =0";
+            $oldchartofaccountssql = self::SQL_SEL_COA_TYPE.$get['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['old_cash_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $oldchartofaccountsres = $callConfig->getRow($oldchartofaccountssql);
 
             $balanceary = array('company_id'=>$post['company_id'],'account_code'=>$post['old_cash_account_code'],'date'=>$this->dateconvertdbformat($post['old_transaction_date']),'account_type'=>$oldchartofaccountsres->account_type,'location_id'=>$user->location_id,'department_id'=>$user->department_id,'cost_center_id'=>$user->cost_center);
@@ -935,10 +1002,10 @@ trait AccountVouchersAndBudgetsTrait {
 
 
         //parent level entry
-        $parentacccountsql = "SELECT id,gl_account_pc_cash,pc_box_description FROM `petty_cash_boxes` WHERE company_id = ".$post['company_id']." AND gl_account_pc_cash = '".$post['cash_account_code']."' AND is_active =0";
+        $parentacccountsql = self::SQL_SEL_PETTY_CASH_BOXES.$post['company_id']." AND gl_account_pc_cash = '".$post['cash_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $parentacccountres = $callConfig->getRow($parentacccountsql);
 
-        $newchartofaccountssql = "SELECT id,account_name,account_code,account_type FROM `chart_of_accounts` WHERE company_id = ".$post['company_id']." AND account_code = '".$post['cash_account_code']."' AND is_active =0";
+        $newchartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$post['cash_account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $newchartofaccountsres = $callConfig->getRow($newchartofaccountssql);
 
         $insertaryitmledger=array('company_id'=>$post['company_id'],'voucher_id'=>$rid,'voucher_ref_no'=>$post['transaction_number'],'voucher_date'=>$this->dateconvertdbformat($post['transaction_date']),'account_code'=>$post['cash_account_code'],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'ledger_type'=>'CV','account_name'=>$parentacccountres->pc_box_description,'remarks'=>$newchartofaccountsres->account_name,'account_type'=>$newchartofaccountsres->account_type);
@@ -1027,30 +1094,30 @@ trait AccountVouchersAndBudgetsTrait {
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
 
-        $chartofaccountssql = "SELECT id,account_name,account_code,parent_account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND allow_posting = 0 AND is_active =0 ORDER BY account_name ASC";
+        $chartofaccountssql = "SELECT id,account_name,account_code,parent_account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id'].self::SQL_AND_ALLOW_POSTING_0;
         $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
 
         $return['chart_of_accounts']= $chartofaccountsres;
         $gl_condition = "";
         if($get['from_date'] !="" && $get['to_date'] !=""){
-            $gl_condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= voucher_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= voucher_date";
+            $gl_condition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date'])."' <= voucher_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= voucher_date";
         }
         if($get['GLT'] !=""){
             $gl_condition .= " AND ledger_type = '".$get['GLT']."'";
         }
-        $general_ledgersql = "SELECT * FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND account_code = '".$get['account_code']."' AND is_active =0 ".$gl_condition." ORDER BY voucher_date ASC";
+        $general_ledgersql = "SELECT * FROM `general_ledger` WHERE company_id = ".$get['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$get['account_code'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$gl_condition." ORDER BY voucher_date ASC";
         $general_ledgerres = $callConfig->getAllRows($general_ledgersql);
         $return['general_ledgersql']= $general_ledgersql;
         $return['general_ledger']= $general_ledgerres;
 
-        $lastbalancesql ="SELECT * FROM `account_balances` WHERE company_id = ".$get['company_id']." AND finance_year = '".$financeyear."' AND  account_code = '".$get['account_code']."' AND balance_date < '".$this->dateconvertdbformat($get['from_date'])."' AND is_active = 0 ORDER BY balance_date desc limit 1";
+        $lastbalancesql =self::SQL_SEL_ACCOUNT_BALANCES.$get['company_id'].self::SQL_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE.$get['account_code'].self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER;
         $lastbalanceres = $callConfig->getRow($lastbalancesql);
         $return['last_account_balances_sql']= $lastbalancesql;
         $return['last_account_balances']= $lastbalanceres;
 
 
 
-        $vouchartypesql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'VOUCHERTYPE' AND is_active =0";
+        $vouchartypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id'].self::SQL_AND_GENC_CODE_VOUCHERTYPE;
         $vouchartyperes = $callConfig->getAllRows($vouchartypesql);
         $vouchar_type = array();
         foreach($vouchartyperes as $tt){
@@ -1058,11 +1125,11 @@ trait AccountVouchersAndBudgetsTrait {
         }
         $return['vouchar_type']= $vouchar_type;
 
-        $bank_accountssql = "SELECT id,account_code,bank_account_name FROM `bank_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $bank_accountssql = self::SQL_SEL_BANK_ACCOUNTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $bank_accountsres = $callConfig->getAllRows($bank_accountssql);
         $return['bank_accounts']= $bank_accountsres;
 
-        $petty_cash_boxessql = "SELECT id,gl_account_pc_cash,pc_box_description FROM `petty_cash_boxes` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $petty_cash_boxessql = self::SQL_SEL_PETTY_CASH_BOXES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $petty_cash_boxesres = $callConfig->getAllRows($petty_cash_boxessql);
         $return['petty_cash_boxes']= $petty_cash_boxesres;
 
@@ -1071,7 +1138,8 @@ trait AccountVouchersAndBudgetsTrait {
     public function toGetApplicationVoucherSerialNumbers($get,$table_name,$trans_date,$serial_number_type,$voucher_type=""){
         global $callConfig;
         $return = array();
-        $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND start_date <= '".$this->dateconvertdbformat($trans_date)."' AND end_date >= '".$this->dateconvertdbformat($trans_date)."' AND is_active =0";
+        $return['voucher_type'] = $voucher_type;
+        $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND start_date <= '".$this->dateconvertdbformat($trans_date)."' AND end_date >= '".$this->dateconvertdbformat($trans_date).self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $return['query_1'] = $query;
         $res = $callConfig->getRow($query);
         $return['query_1_res'] = $res;
@@ -1082,7 +1150,7 @@ trait AccountVouchersAndBudgetsTrait {
             $update = $callConfig->updateRecord('application_voucher_serial_numbers',array('serial_number' =>$res->serial_number+1),'id',$res->id);
             $return['query_1_update'] = $update;
        }else{
-            $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND is_active =0";
+            $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type.self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $res = $callConfig->getRow($query);
             $return['query_2_res'] = $res;
             if(isset($res->doc_no_length)){
@@ -1097,13 +1165,13 @@ trait AccountVouchersAndBudgetsTrait {
                     if(date("m",strtotime($trans_date)) >= 4){
                         $startyear = date("Y",strtotime($trans_date));
                         $endyear = (date("Y",strtotime($trans_date))+1);
-                        $startdate = $startyear."-04-01";
-                        $enddate = $endyear."-03-31";
+                        $startdate = $startyear.self::SQL_DATE_APRIL_FIRST;
+                        $enddate = $endyear.self::SQL_DATE_MARCH_THIRTYFIRST;
                     }else{
                         $startyear = (date("Y",strtotime($trans_date)) - 1);
                         $endyear = date("Y",strtotime($trans_date));
-                        $startdate = $startyear."-04-01";
-                        $enddate = $endyear."-03-31";
+                        $startdate = $startyear.self::SQL_DATE_APRIL_FIRST;
+                        $enddate = $endyear.self::SQL_DATE_MARCH_THIRTYFIRST;
                     }
                 }
                 if($res->post_fix !="" && $res->pre_fix !="" && $res->doc_no_length !="" && $res->serial_number_type !="" &&  $res->voucher_type !=""){
@@ -1126,7 +1194,7 @@ trait AccountLedgersAndReportsTrait {
     public function getAccountClosingBalance($get,$acount_code){
         global $callConfig;
         $closingbalance = 0;
-        $query = "SELECT id, balance_amount FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND account_code = '".$acount_code."' AND is_active =0 ORDER BY voucher_date DESC limit 1";
+        $query = "SELECT id, balance_amount FROM `general_ledger` WHERE company_id = ".$get['company_id'].self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE.$acount_code."' AND is_active =0 ORDER BY voucher_date DESC limit 1";
         $res = $callConfig->getRow($query);
         if($res->id !=""){
             $closingbalance = $res->balance_amount;
@@ -1182,15 +1250,15 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
             $shortendyear = (date("y",strtotime($trans_date))+1);
             $startyear = date("Y",strtotime($trans_date));
             $endyear = (date("Y",strtotime($trans_date))+1);
-            $startdate = $startyear."-04-01";
-            $enddate = $endyear."-03-31";
+            $startdate = $startyear.self::SQL_DATE_APRIL_FIRST;
+            $enddate = $endyear.self::SQL_DATE_MARCH_THIRTYFIRST;
         }else{
             $shortstartyear = (date("Y",strtotime($trans_date)) - 1);
             $shortendyear = date("Y",strtotime($trans_date));
             $startyear = (date("Y",strtotime($trans_date)) - 1);
             $endyear = date("Y",strtotime($trans_date));
-            $startdate = $startyear."-04-01";
-            $enddate = $endyear."-03-31";
+            $startdate = $startyear.self::SQL_DATE_APRIL_FIRST;
+            $enddate = $endyear.self::SQL_DATE_MARCH_THIRTYFIRST;
         }
         return array('startdate'=>$startdate,'enddate'=>$enddate,'fullstartyear'=>$startyear,'fullendyear'=>$endyear,'shortstartyear'=>$shortstartyear,'shortendyear'=>$shortendyear);
     }
@@ -1198,17 +1266,17 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         global $callConfig;
         $condition = "";
         if($get['from_date'] !="" && $get['to_date'] !=""){
-            $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
+            $condition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
         }
         if($get['vendor_id'] !=""){
-            $condition .= " AND party_id = '".$get['vendor_id']."'";
+            $condition .= self::SQL_AND_PARTY_ID_EQ_QUOTE.$get['vendor_id']."'";
         }
 
-        $vendorsquery = "SELECT id,display_name,company FROM `vendors` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $vendorsquery = "SELECT id,display_name,company FROM `vendors` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $vendorsres = $callConfig->getAllRows($vendorsquery);
         $return['vendors'] =$vendorsres;
 
-        $purchase_invoicessql = "SELECT * FROM `purchase_invoices` WHERE company_id = ".$get['company_id']." AND is_active =0 ".$condition;
+        $purchase_invoicessql = "SELECT * FROM `purchase_invoices` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0_SPACE.$condition;
         $purchase_invoicesres = $callConfig->getAllRows($purchase_invoicessql);
         $return['purchase_invoices_Sql'] =$purchase_invoicessql;
         $return['purchase_invoices'] =$purchase_invoicesres;
@@ -1218,17 +1286,17 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         global $callConfig;
         $condition = "";
         if($get['from_date'] !="" && $get['to_date'] !=""){
-            $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
+            $condition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
         }
         if($get['customer_id'] !=""){
-            $condition .= " AND party_id = '".$get['customer_id']."'";
+            $condition .= self::SQL_AND_PARTY_ID_EQ_QUOTE.$get['customer_id']."'";
         }
 
-        $customerssql = "SELECT id,display_name,company FROM `customers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = "SELECT id,display_name,company FROM `customers` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         $return['customers'] =$customersres;
 
-        $sales_invoicessql = "SELECT * FROM `sales_invoices` WHERE company_id = ".$get['company_id']." AND is_active =0 ".$condition;
+        $sales_invoicessql = "SELECT * FROM `sales_invoices` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0_SPACE.$condition;
         $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
         $return['sales_invoices_Sql'] =$sales_invoicessql;
         $return['sales_invoices'] =$sales_invoicesres;
@@ -1238,24 +1306,24 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         global $callConfig;
         $start_date = $get['start_date'];
         $end_date = $get['end_date'];
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($start_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['start_query'] =$query;
         $return['start_balances'] =$res;
 
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($end_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
+        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['end_query'] =$query;
         $return['end_balances'] =$res;
         //previous year data
         $prev_start_date = $get['prev_start_date'];
         $prev_end_date = $get['prev_end_date'];
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_start_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['prev_start_query'] =$query;
         $return['prev_start_balances'] =$res;
 
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_end_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
+        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['prev_end_query'] =$query;
         $return['prev_end_balances'] =$res;
@@ -1267,13 +1335,13 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     public function getBalanceSheetReport($get){
         global $callConfig;
         $balance_date = $get['balance_date'];
-        $query = "SELECT coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($balance_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = "SELECT coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($balance_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['query'] =$query;
         $return['balances'] =$res;
 
         $prev_balance_date = $get['prev_balance_date'];
-        $query = "SELECT coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_balance_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = "SELECT coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_balance_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['prev_query'] =$query;
         $return['prev_balances'] =$res;
@@ -1284,24 +1352,24 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         global $callConfig;
         $start_date = $get['start_date'];
         $end_date = $get['end_date'];
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($start_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['start_query'] =$query;
         $return['start_balances'] =$res;
 
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($end_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
+        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['end_query'] =$query;
         $return['end_balances'] =$res;
         //previous year data
         $prev_start_date = $get['prev_start_date'];
         $prev_end_date = $get['prev_end_date'];
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_start_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT  MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_start_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code,coa.account_name,coa.parent_account_code,coa.company_id, coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['prev_start_query'] =$query;
         $return['prev_start_balances'] =$res;
 
-        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_end_date)."') WHERE coa.company_id = ".$get['company_id']." AND coa.is_active = 0 GROUP BY  coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
+        $query = "SELECT coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2  WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_end_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY  coa.account_code,coa.account_name,coa.parent_account_code, coa.company_id, coa.account_type,coa.allow_posting,coa.allow_manual_entries,ab1.balance_date,ab1.closing_balance";
         $res = $callConfig->getAllRows($query);
         $return['prev_end_query'] =$query;
         $return['prev_end_balances'] =$res;
@@ -1315,7 +1383,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $note_type = $get['note_type'];
         $rid = $get['rid'];
         if($rid !=""){
-            $notetypesql = "SELECT * FROM ".$note_type." WHERE company_id = '".$get['company_id']."' AND id = '".$rid."' AND is_active = 0";
+            $notetypesql = self::SQL_SELECT_ALL_FROM.$note_type.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_ID_EQ_QUOTE.$rid.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
             $notetyperes = $callConfig->getRow($notetypesql);
             $return['note_type_res']= $notetyperes;
         }
@@ -1327,45 +1395,45 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
             $transaction_id = $get['transaction_id'];
         }
 
-        $parentdmtsql = "SELECT id,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$note_type."' AND item_table !='' AND is_active = 0";
+        $parentdmtsql = "SELECT id,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id'].self::SQL_AND_APPLICATION_TABLE_NAME.$note_type.self::SQL_AND_ITEM_TABLE_NOT_EMPTY;
         $parentdmtres=$callConfig->getRow($parentdmtsql);
         if($parentdmtres->item_table !=""){
-            $notetypeitemsql = "SELECT * FROM ".$parentdmtres->item_table." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$rid."' AND is_active = 0";
+            $notetypeitemsql = self::SQL_SELECT_ALL_FROM.$parentdmtres->item_table.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id']."' AND transaction_id = '".$rid.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
             $notetypeitemres = $callConfig->getallRows($notetypeitemsql);
             $return['note_type_items_res']= $notetypeitemres;
         }
-        $chart_of_accountssql = "SELECT id, account_code, account_name FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND allow_posting = 0 AND is_active =0 ORDER BY account_name ASC";
+        $chart_of_accountssql = self::SQL_SEL_CHART_OF_ACCOUNTS_SP.$get['company_id'].self::SQL_AND_ALLOW_POSTING_0;
         $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
         $return['chart_of_accounts']= $chart_of_accountsres;
 
        if($transaction_table !="" && $transaction_id !=""){
 
-            $transactionssql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND id ='".$transaction_id."' AND is_active =0";
+            $transactionssql = self::SQL_SELECT_ALL_FROM.$transaction_table.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id']."' AND id ='".$transaction_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $transactionsres=$callConfig->getRow($transactionssql);
             $return['transactions_sql'] = $transactionssql;
             $return['transactions'] = $transactionsres;
 
-            $alltransaction = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND current_status = '".ST_APPROVED."' AND is_active =0 ";
+            $alltransaction = self::SQL_SELECT_ALL_FROM.$transaction_table.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id']."' AND current_status = '".ST_APPROVED.self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE;
             $alltransactionres=$callConfig->getAllRows($alltransaction);
             $return['all_transactions'] = $alltransactionres;
 
 
-            $credit_notessql = "SELECT * FROM credit_notes WHERE company_id = '".$get['company_id']."' AND ref_type = '".$transaction_table."' AND ref_id = '".$transaction_id."' AND is_active = 0";
+            $credit_notessql = "SELECT * FROM credit_notes WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE.$transaction_table."' AND ref_id = '".$transaction_id.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
             $credit_notesres = $callConfig->getAllRows($credit_notessql);
             $return['credit_notessql']= $credit_notessql;
             $return['credit_notes']= $credit_notesres;
 
-            $debit_notessql = "SELECT * FROM debit_notes WHERE company_id = '".$get['company_id']."' AND ref_type = '".$transaction_table."' AND ref_id = '".$transaction_id."' AND is_active = 0";
+            $debit_notessql = "SELECT * FROM debit_notes WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE.$transaction_table."' AND ref_id = '".$transaction_id.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
             $debit_notesres = $callConfig->getAllRows($debit_notessql);
             $return['debit_notes']= $debit_notesres;
             $return['debit_notessql']= $debit_notessql;
         }elseif($get['list'] =="Y"){
-            $credit_notessql = "SELECT * FROM credit_notes WHERE company_id = '".$get['company_id']."' AND is_active = 0";
+            $credit_notessql = "SELECT * FROM credit_notes WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
             $credit_notesres = $callConfig->getAllRows($credit_notessql);
             $return['credit_notessql']= $credit_notessql;
             $return['credit_notes']= $credit_notesres;
 
-            $debit_notessql = "SELECT * FROM debit_notes WHERE company_id = '".$get['company_id']."' AND is_active = 0";
+            $debit_notessql = "SELECT * FROM debit_notes WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
             $debit_notesres = $callConfig->getAllRows($debit_notessql);
             $return['debit_notes']= $debit_notesres;
             $return['debit_notessql']= $debit_notessql;
@@ -1380,7 +1448,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $transaction_id = $post['ref_id'];
         $note_type = $post['note_type'];
 
-        $transactionsql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND id = '".$transaction_id."' AND is_active = 0";
+        $transactionsql = self::SQL_SELECT_ALL_FROM.$transaction_table.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_ID_EQ_QUOTE.$transaction_id.self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
         $transactionres = $callConfig->getRow($transactionsql);
 
         $transaction_number = $this->toGetApplicationSerialNumber($note_type,$post);
@@ -1410,14 +1478,14 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
             $rid = $res['LASTID'];
         }
         if($res['status'] =='sucess'){
-            $chartofaccountssql = "SELECT id,account_name,account_code,account_type FROM `chart_of_accounts` WHERE company_id = ".$post['company_id']." AND is_active =0";
+            $chartofaccountssql = self::SQL_SEL_COA_TYPE.$post['company_id'].self::SQL_AND_IS_ACTIVE_0;
             $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
             $chart_of_accounts = array();
             foreach($chartofaccountsres as $cca){
                 $chart_of_accounts[$cca->account_code] = $cca;
             }
 
-            $parentdmtsql = "SELECT id,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$note_type."' AND item_table !='' AND is_active = 0";
+            $parentdmtsql = "SELECT id,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id'].self::SQL_AND_APPLICATION_TABLE_NAME.$note_type.self::SQL_AND_ITEM_TABLE_NOT_EMPTY;
             $parentdmtres=$callConfig->getRow($parentdmtsql);
 
             $callConfig->updateRecord($parentdmtres->item_table,array('is_active'=>null),'transaction_id',$rid);
@@ -1449,18 +1517,18 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND transaction_date >= '".$this->dateconvertdbformat($get['from_date'])."'  AND transaction_date <= '".$this->dateconvertdbformat($get['to_date'])."'";
         }
-        $transactionssql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND is_active =0".$condition;
+        $transactionssql = self::SQL_SELECT_ALL_FROM.$transaction_table.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0.$condition;
         $transactionsres=$callConfig->getAllRows($transactionssql);
         $return['transactions'] = $transactionsres;
 
-        $credit_notessql = "SELECT ref_id, SUM(total_amount) as total_amount FROM `credit_notes` WHERE company_id = '".$get['company_id']."' AND ref_type = '".$transaction_table."' AND is_active = 0 GROUP BY ref_id";
+        $credit_notessql = "SELECT ref_id, SUM(total_amount) as total_amount FROM `credit_notes` WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE.$transaction_table."' AND is_active = 0 GROUP BY ref_id";
         $credit_notesres = $callConfig->getAllRows($credit_notessql);
         $credit_notes_sum =  array();
         foreach($credit_notesres as $pwd){
             $credit_notes_sum[$pwd->ref_id]= $pwd->total_amount;
         }
         $return['credit_notes_sum']= $credit_notes_sum;
-        $debit_notessql = "SELECT ref_id, SUM(total_amount) as total_amount FROM `debit_notes` WHERE company_id = '".$get['company_id']."' AND ref_type = '".$transaction_table."' AND is_active = 0 GROUP BY ref_id";
+        $debit_notessql = "SELECT ref_id, SUM(total_amount) as total_amount FROM `debit_notes` WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE.$transaction_table."' AND is_active = 0 GROUP BY ref_id";
         $debit_notesres = $callConfig->getAllRows($debit_notessql);
         $debit_notes_sum =  array();
         foreach($debit_notesres as $pwd){
@@ -1469,7 +1537,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['debit_notes_sum_sql']= $debit_notessql;
         $return['debit_notes_sum']= $debit_notes_sum;
 
-        $salesmensql = "SELECT id,salesman_name FROM salesmen WHERE company_id = '".$get['company_id']."' AND is_active =0";
+        $salesmensql = "SELECT id,salesman_name FROM salesmen WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $salesmenres=$callConfig->getAllRows($salesmensql);
         $salesmen =  array();
         foreach($salesmenres as $smres){
@@ -1488,7 +1556,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
-        $customerssql = "SELECT id,display_name,company, account_code FROM `customers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = "SELECT id,display_name,company, account_code FROM `customers` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         $customers = array();
         foreach($customersres as $custres){
@@ -1497,18 +1565,18 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['customers'] =$customers;
 
         if($get['from_date'] !="" && $get['to_date'] !=""){
-            $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
-           $paycondition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= rec.transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
+            $condition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
+           $paycondition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_REC_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
         }
         if($get['customer_id'] !=""){
 
-            $lastbalancesql ="SELECT * FROM `account_balances` WHERE company_id = ".$get['company_id']." AND finance_year = '".$financeyear."' AND  account_code = '".$customers[$get['customer_id']]->account_code."' AND balance_date < '".$this->dateconvertdbformat($get['from_date'])."' AND is_active = 0 ORDER BY balance_date desc limit 1";
+            $lastbalancesql =self::SQL_SEL_ACCOUNT_BALANCES.$get['company_id'].self::SQL_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE.$customers[$get['customer_id']]->account_code.self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER;
             $lastbalanceres = $callConfig->getRow($lastbalancesql);
             $return['last_account_balances_sql']= $lastbalancesql;
             $return['last_account_balances']= $lastbalanceres;
 
 
-            $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount FROM `sales_invoices` WHERE company_id = ".$get['company_id']." AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount FROM `sales_invoices` WHERE company_id = ".$get['company_id'].self::SQL_AND_PARTY_ID_EQ_QUOTE.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
             $return['sales_invoices_sql'] =$sales_invoicessql;
             foreach($sales_invoicesres as $si){
@@ -1516,7 +1584,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
                 $transactionwithdates[date('Ymd',strtotime($si->transaction_date))][] =$si;
             }
 
-            $debit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount FROM `debit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = 'sales_invoices' AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $debit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount FROM `debit_notes` WHERE company_id = ".$get['company_id'].self::SQL_AND_REF_TYPE_SALES_INVOICES.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $debit_notesres = $callConfig->getAllRows($debit_notessql);
             $return['debit_notessql'] =$debit_notessql;
             foreach($debit_notesres as $dn){
@@ -1524,7 +1592,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
                 $transactionwithdates[date('Ymd',strtotime($dn->transaction_date))][] =$dn;
             }
 
-            $credit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount FROM `credit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = 'sales_invoices' AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $credit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount FROM `credit_notes` WHERE company_id = ".$get['company_id'].self::SQL_AND_REF_TYPE_SALES_INVOICES.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $credit_notesres = $callConfig->getAllRows($credit_notessql);
             $return['credit_notessql'] =$credit_notessql;
             foreach($credit_notesres as $cn){
@@ -1555,7 +1623,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $receipts_amt = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
-        $customerssql = "SELECT id,display_name,company, account_code, email, phone FROM `customers` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = "SELECT id,display_name,company, account_code, email, phone FROM `customers` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         $customers = array();
         foreach($customersres as $custres){
@@ -1564,16 +1632,16 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['customers'] =$customers;
 
         if($get['from_date'] !="" && $get['to_date'] !=""){
-            $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
-            $paycondition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= rec.transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
+            $condition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
+            $paycondition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_REC_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
         }
         if($get['customer_id'] !=""){
 
-            $lastbalancesql ="SELECT * FROM `account_balances` WHERE company_id = ".$get['company_id']." AND finance_year = '".$financeyear."' AND  account_code = '".$customers[$get['customer_id']]->account_code."' AND balance_date < '".$this->dateconvertdbformat($get['from_date'])."' AND is_active = 0 ORDER BY balance_date desc limit 1";
+            $lastbalancesql =self::SQL_SEL_ACCOUNT_BALANCES.$get['company_id'].self::SQL_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE.$customers[$get['customer_id']]->account_code.self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER;
             $lastbalanceres = $callConfig->getRow($lastbalancesql);
             $return['last_account_balances_sql']= $lastbalancesql;
             $return['last_account_balances']= $lastbalanceres;
-            $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount, due_date, payment_term_history, ref_id FROM `sales_invoices` WHERE company_id = ".$get['company_id']." AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount, due_date, payment_term_history, ref_id FROM `sales_invoices` WHERE company_id = ".$get['company_id'].self::SQL_AND_PARTY_ID_EQ_QUOTE.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
             $return['sales_invoices_sql'] =$sales_invoicessql;
             foreach($sales_invoicesres as $si){
@@ -1584,7 +1652,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
             }
             $return['sales_invoices_amt'] =$sales_invoices_amt;
             $return['sales_invoices'] =$sales_invoices;
-            $debit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount, due_date, ref_id FROM `debit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = 'sales_invoices' AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $debit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount, due_date, ref_id FROM `debit_notes` WHERE company_id = ".$get['company_id'].self::SQL_AND_REF_TYPE_SALES_INVOICES.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $debit_notesres = $callConfig->getAllRows($debit_notessql);
             $return['debit_notessql'] =$debit_notessql;
             foreach($debit_notesres as $dn){
@@ -1593,7 +1661,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
                 $debit_notes_amt[$dn->ref_id] += $dn->p_total_amount;
             }
             $return['debit_notes_amt'] =$debit_notes_amt;
-            $credit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount, due_date, ref_id FROM `credit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = 'sales_invoices' AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $credit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount, due_date, ref_id FROM `credit_notes` WHERE company_id = ".$get['company_id'].self::SQL_AND_REF_TYPE_SALES_INVOICES.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $credit_notesres = $callConfig->getAllRows($credit_notessql);
             $return['credit_notessql'] =$credit_notessql;
             foreach($credit_notesres as $cn){
@@ -1625,7 +1693,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
-        $customerssql = "SELECT id,display_name,company, account_code FROM `vendors` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = "SELECT id,display_name,company, account_code FROM `vendors` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         $customers = array();
         foreach($customersres as $custres){
@@ -1634,17 +1702,17 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['customers'] =$customers;
 
         if($get['from_date'] !="" && $get['to_date'] !=""){
-            $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
+            $condition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
         }
         if($get['customer_id'] !=""){
 
-            $lastbalancesql ="SELECT * FROM `account_balances` WHERE company_id = ".$get['company_id']." AND finance_year = '".$financeyear."' AND  account_code = '".$customers[$get['customer_id']]->account_code."' AND balance_date < '".$this->dateconvertdbformat($get['from_date'])."' AND is_active = 0 ORDER BY balance_date desc limit 1";
+            $lastbalancesql =self::SQL_SEL_ACCOUNT_BALANCES.$get['company_id'].self::SQL_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE.$customers[$get['customer_id']]->account_code.self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER;
             $lastbalanceres = $callConfig->getRow($lastbalancesql);
             $return['last_account_balances_sql']= $lastbalancesql;
             $return['last_account_balances']= $lastbalanceres;
 
 
-            $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount FROM `supplier_bills` WHERE company_id = ".$get['company_id']." AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount FROM `supplier_bills` WHERE company_id = ".$get['company_id'].self::SQL_AND_PARTY_ID_EQ_QUOTE.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
             $return['sales_invoices_sql'] =$sales_invoicessql;
             foreach($sales_invoicesres as $si){
@@ -1652,7 +1720,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
                 $transactionwithdates[date('Ymd',strtotime($si->transaction_date))][] =$si;
             }
 
-            $debit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount FROM `debit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = 'supplier_bills' AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $debit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount FROM `debit_notes` WHERE company_id = ".$get['company_id'].self::SQL_AND_REF_TYPE_SUPPLIER_BILLS.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $debit_notesres = $callConfig->getAllRows($debit_notessql);
             $return['debit_notessql'] =$debit_notessql;
             foreach($debit_notesres as $dn){
@@ -1660,7 +1728,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
                 $transactionwithdates[date('Ymd',strtotime($dn->transaction_date))][] =$dn;
             }
 
-            $credit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount FROM `credit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = 'supplier_bills' AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $credit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount FROM `credit_notes` WHERE company_id = ".$get['company_id'].self::SQL_AND_REF_TYPE_SUPPLIER_BILLS.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $credit_notesres = $callConfig->getAllRows($credit_notessql);
             $return['credit_notessql'] =$credit_notessql;
             foreach($credit_notesres as $cn){
@@ -1691,7 +1759,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $receipts_amt = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
-        $customerssql = "SELECT id,display_name,company, account_code, email, phone FROM `vendors` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $customerssql = "SELECT id,display_name,company, account_code, email, phone FROM `vendors` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
         $customersres = $callConfig->getAllRows($customerssql);
         $customers = array();
         foreach($customersres as $custres){
@@ -1700,16 +1768,16 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['customers'] =$customers;
 
         if($get['from_date'] !="" && $get['to_date'] !=""){
-            $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
-            $paycondition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= rec.transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
+            $condition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
+            $paycondition .= self::SQL_AND_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_LTE_REC_TRANSACTION_DATE.$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
         }
         if($get['customer_id'] !=""){
 
-            $lastbalancesql ="SELECT * FROM `account_balances` WHERE company_id = ".$get['company_id']." AND finance_year = '".$financeyear."' AND  account_code = '".$customers[$get['customer_id']]->account_code."' AND balance_date < '".$this->dateconvertdbformat($get['from_date'])."' AND is_active = 0 ORDER BY balance_date desc limit 1";
+            $lastbalancesql =self::SQL_SEL_ACCOUNT_BALANCES.$get['company_id'].self::SQL_AND_FINANCE_YEAR_EQ_QUOTE.$financeyear.self::SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE.$customers[$get['customer_id']]->account_code.self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE.$this->dateconvertdbformat($get['from_date']).self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER;
             $lastbalanceres = $callConfig->getRow($lastbalancesql);
             $return['last_account_balances_sql']= $lastbalancesql;
             $return['last_account_balances']= $lastbalanceres;
-            $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount, due_date, payment_term_history, ref_id FROM `supplier_bills` WHERE company_id = ".$get['company_id']." AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount, due_date, payment_term_history, ref_id FROM `supplier_bills` WHERE company_id = ".$get['company_id'].self::SQL_AND_PARTY_ID_EQ_QUOTE.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
             $return['sales_invoices_sql'] =$sales_invoicessql;
             foreach($sales_invoicesres as $si){
@@ -1720,7 +1788,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
             }
             $return['sales_invoices_amt'] =$sales_invoices_amt;
             $return['sales_invoices'] =$sales_invoices;
-            $debit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount, due_date, ref_id FROM `debit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = 'supplier_bills' AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $debit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount, due_date, ref_id FROM `debit_notes` WHERE company_id = ".$get['company_id'].self::SQL_AND_REF_TYPE_SUPPLIER_BILLS.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $debit_notesres = $callConfig->getAllRows($debit_notessql);
             $return['debit_notessql'] =$debit_notessql;
             foreach($debit_notesres as $dn){
@@ -1729,7 +1797,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
                 $debit_notes_amt[$dn->ref_id] += $dn->p_total_amount;
             }
             $return['debit_notes_amt'] =$debit_notes_amt;
-            $credit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount, due_date, ref_id FROM `credit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = 'supplier_bills' AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
+            $credit_notessql = "SELECT id, transaction_number, transaction_date, party_id, amount, ref_type, ref_no, total_amount as p_total_amount, due_date, ref_id FROM `credit_notes` WHERE company_id = ".$get['company_id'].self::SQL_AND_REF_TYPE_SUPPLIER_BILLS.$get['customer_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE.$condition;
             $credit_notesres = $callConfig->getAllRows($credit_notessql);
             $return['credit_notessql'] =$credit_notessql;
             foreach($credit_notesres as $cn){
@@ -1758,7 +1826,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return = array();
         $return['get'] =$get;
         $value = $get['value'];
-        $vencustsql = "SELECT id, display_name, company, image FROM ".$get['searchvendorcustomertype']." WHERE company_id = ".$get['company_id']." AND (display_name like '%".$value."%' OR company like '%".$value."%') AND is_active =0 ";
+        $vencustsql = "SELECT id, display_name, company, image FROM ".$get['searchvendorcustomertype'].self::SQL_WHERE_COMPANY_ID_EQ.$get['company_id']." AND (display_name like '%".$value."%' OR company like '%".$value."%') AND is_active =0 ";
         $vencustres = $callConfig->getAllRows($vencustsql);
         $return['search_result'] =$vencustres;
         return $return;
@@ -1816,66 +1884,9 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
 
 }
 
-class AccountUserClass extends userClass {
+class AccountUserClass extends userClass implements AccountConstants {
     use AccountVouchersAndBudgetsTrait;
     use AccountLedgersAndReportsTrait;
-
-    public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
-    public const DATE_FORMAT_LOWER_HIS = "Y-m-d h:i:s";
-    public const SQL_AND_IS_ACTIVE_0 = " AND is_active =0";
-    public const SQL_AND_IS_ACTIVE_0_SPACE = " AND is_active =0 ";
-    public const SQL_QUOTE_AND_IS_ACTIVE_0 = "' AND is_active =0";
-    public const SQL_QUOTE_AND_IS_ACTIVE_0_SPACE = "' AND is_active =0 ";
-    public const SQL_QUOTE_AND_IS_ACTIVE_EQ_0 = "' AND is_active = 0";
-    public const SQL_AND_ID_EQ_QUOTE = " AND id = '";
-    public const SQL_QUOTE_AND_ID_EQ_QUOTE = "' AND id = '";
-    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE = " WHERE company_id = '";
-    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE = " WHERE company_id ='";
-    public const SQL_WHERE_COMPANY_ID_EQ = " WHERE company_id = ";
-    public const SQL_SELECT_ALL_FROM = "SELECT * FROM ";
-    public const SQL_AND_ACCOUNT_CODE_EQ_QUOTE = " AND account_code = '";
-    public const SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE = "' AND account_code = '";
-    public const SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE = "' AND  account_code = '";
-    public const SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE = "' AND finance_year = '";
-    public const SQL_AND_FINANCE_YEAR_EQ_QUOTE = " AND finance_year = '";
-    public const SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE = "' AND balance_date = '";
-    public const SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE = "' AND balance_date < '";
-    public const SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE = "'  AND department_id = '";
-    public const SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE = "' AND cost_center_id = '";
-    public const SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE = "' AND location_id = '";
-    public const SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE = "' AND ref_type = '";
-    public const SQL_AND_PARTY_ID_EQ_QUOTE = " AND party_id = '";
-    public const SQL_DATE_APRIL_FIRST = "-04-01";
-    public const SQL_DATE_MARCH_THIRTYFIRST = "-03-31";
-    public const SQL_AND_IS_ACTIVE_ORDER_PRIORITY = " AND is_active =0 ORDER BY display_priority ASC";
-    public const SQL_SEL_CHART_OF_ACCOUNTS = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ";
-    public const SQL_SEL_CHART_OF_ACCOUNTS_SP = "SELECT id, account_code, account_name FROM `chart_of_accounts` WHERE company_id = ";
-    public const SQL_SEL_FINANCE_REPORT_GROUPS = "SELECT * FROM `finance_report_groups` WHERE company_id = ";
-    public const SQL_SEL_LOCATIONS = "SELECT id,location_name FROM `locations` WHERE company_id = ";
-    public const SQL_SEL_DEPARTMENTS = "SELECT id,department_name FROM `departments` WHERE company_id = ";
-    public const SQL_SEL_COST_CENTERS = "SELECT id,cost_center_name FROM `cost_centers` WHERE company_id = ";
-    public const SQL_SEL_CURRENCIES = "SELECT id,currency_name, currency_short_code, currency_symbol FROM `currencies` WHERE company_id = ";
-    public const SQL_SEL_GENERAL_CODE_DETAILS = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ";
-    public const SQL_SEL_VENDORS = "SELECT id,display_name FROM `vendors` WHERE company_id = ";
-    public const SQL_SEL_CUSTOMERS = "SELECT id,display_name FROM `customers` WHERE company_id = ";
-    public const SQL_SEL_EMPLOYEES = "SELECT id,display_name FROM `employees` WHERE company_id = ";
-    public const SQL_SEL_BANK_ACCOUNTS = "SELECT id,account_code,bank_account_name FROM `bank_accounts` WHERE company_id = ";
-    public const SQL_SEL_COA_TYPE = "SELECT id,account_name,account_code,account_type FROM `chart_of_accounts` WHERE company_id = ";
-    public const SQL_SEL_PETTY_CASH_BOXES = "SELECT id,gl_account_pc_cash,pc_box_description FROM `petty_cash_boxes` WHERE company_id = ";
-    public const SQL_SEL_ACCOUNT_BALANCES = "SELECT * FROM `account_balances` WHERE company_id = ";
-    public const SQL_DEL_GL_VOUCHER_ID = "DELETE FROM general_ledger WHERE voucher_id = '";
-    public const SQL_QUOTE_IS_ACTIVE_0_BAL_DESC = "' AND is_active = 0 ORDER BY balance_date DESC LIMIT 1";
-    public const SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER = "' AND is_active = 0 ORDER BY balance_date desc limit 1";
-    public const SQL_AND_APPLICATION_TABLE_NAME = "' AND application_table_name = '";
-    public const SQL_AND_ITEM_TABLE_NOT_EMPTY = "' AND item_table !='' AND is_active = 0";
-    public const SQL_AND_TRANSACTION_ID_EQ = " AND transaction_id = '";
-    public const SQL_AND_ALLOW_POSTING_0 = " AND allow_posting = 0 AND is_active =0 ORDER BY account_name ASC";
-    public const SQL_AND_GENC_CODE_VOUCHERTYPE = " AND genc_code = 'VOUCHERTYPE' AND is_active =0";
-    public const SQL_AND_TOC_HEADERS = "' AND apply_table_name = 'toc_headers'  AND is_active = 0";
-    public const SQL_AND_REF_TYPE_SALES_INVOICES = " AND ref_type = 'sales_invoices' AND party_id = '";
-    public const SQL_AND_REF_TYPE_SUPPLIER_BILLS = " AND ref_type = 'supplier_bills' AND party_id = '";
-    public const SQL_LTE_TRANSACTION_DATE = "' <= transaction_date  AND '";
-    public const SQL_LTE_REC_TRANSACTION_DATE = "' <= rec.transaction_date  AND '";
 
 
     public function getFinanaceReportGroups($get){
@@ -2243,6 +2254,7 @@ class AccountUserClass extends userClass {
     public function insertJournals($get,$post){
         global $callConfig;
         $return =array();
+        $return['get'] = $get;
         $return['post'] = $post;
         $journal_details = array();
         foreach($post['currency_id'] as $keyid=>$valu){
@@ -2329,6 +2341,7 @@ class AccountUserClass extends userClass {
     public function insertTaxAuthorities($get,$post){
         global $callConfig;
         $return =array();
+        $return['get'] = $get;
         $return['post'] = $post;
         $group_tax = json_encode($post['group_tax'],1);
         $insertary=array('company_id'=>$post['company_id'],'tax_name'=>$post['tax_name'],'tax_type'=>$post['tax_type'],'tax_scope'=>$post['tax_scope'],'tax_computation_id'=>$post['tax_computation_id'],'description'=>$post['description'],'group_tax'=>$group_tax);
@@ -2426,6 +2439,7 @@ class AccountUserClass extends userClass {
     public function insertFiscalPositions($get,$post){
         global $callConfig;
         $return =array();
+        $return['get'] = $get;
         $return['post'] = $post;
         $insertary=array('company_id'=>$post['company_id'],'fiscal_positions_name'=>$post['fiscal_positions_name'],'country_id'=>$post['country_id']);
         if($post['rid'] !=""){
