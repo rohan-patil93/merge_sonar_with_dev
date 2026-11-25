@@ -93,7 +93,7 @@ foreach($customers as $cust){ $rid = deocdeId("id:".$cust['id']); ?>
         <div class="row mt-3">
          <div class="col-lg-8 text-start">
 
-          <i class="ti-email m-l-15 f-18 text-danger cursor-pointer"  onclick="sendEmailCandidate('<?php echo $cust['id']; ?>','<?php echo $cust['email_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+          <button type="button" class="btn btn-link p-0 border-0 text-danger" onclick="sendEmailCandidate('<?php echo $cust['id']; ?>','<?php echo $cust['email_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-email m-l-15 f-18"></i></button>
         </div>
         <div class="col-lg-4 text-right">
           <a href="#" ><span class="f-12 f-w-600 text-primary mb-0 rented"><?php echo $total_property_cnt[$cust['id']]!=""?$total_property_cnt[$cust['id']]:"0"; ?> <?= __('Properties'); ?></span></a>

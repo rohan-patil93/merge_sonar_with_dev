@@ -86,7 +86,7 @@ $stausresult = ViewStatusData();
                                                         <div class="text-muted font-weight-bold"><?php echo $surveyData['rate']; ?></div>
                                                     </div>
                                                     <div class="progress bg-light-warning progress-xs">
-                                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="<?php echo $surveyData['rate']; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-warning"  style="width: 100%;" aria-valuenow="<?php echo $surveyData['rate']; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>

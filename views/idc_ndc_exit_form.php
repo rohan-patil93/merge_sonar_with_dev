@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_CHECK_ICON_CLASS')) {
+    define('STR_CHECK_ICON_CLASS', STR_CHECK_ICON_CLASS);
+}
 if(isset($_GET['Rid']) && $_GET['Rid'] != ''){
     $rid = encodeId($_GET['Rid']);
     $rid = urldecode($rid);
@@ -52,10 +55,10 @@ $signature = $data['signature'] ?? [];
         </tr>
         <tr>
             <td colspan="4" style="font-size: 15px; border: 1px solid #eeeeee; text-align: left;">
-                <span><i class="fa-regular fa-square<?php echo ($employee['employee_type']=='Full Time Employee')?' text-primary fa-solid fa-square-check':''; ?>"></i> <?= __('Full Time Employee'); ?></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-square<?php echo ($employee['employee_type']=='Intern')?' text-primary fa-solid fa-square-check':''; ?>"></i> <?= __('Intern'); ?></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-square<?php echo ($employee['employee_type']=='Direct Contractor')?' text-primary fa-solid fa-square-check':''; ?>"></i> <?= __('Direct Contractor'); ?></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-square<?php echo ($employee['employee_type'] == 'Third Party Contractor') ? ' text-primary fa-solid fa-square-check' : ''; ?>"></i> <?= __('Third Party Contractor'); ?></span>
+                <span><i class="fa-regular fa-square<?php echo ($employee['employee_type']=='Full Time Employee')?STR_CHECK_ICON_CLASS:''; ?>"></i> <?= __('Full Time Employee'); ?></span>&nbsp;&nbsp;
+                <span><i class="fa-regular fa-square<?php echo ($employee['employee_type']=='Intern')?STR_CHECK_ICON_CLASS:''; ?>"></i> <?= __('Intern'); ?></span>&nbsp;&nbsp;
+                <span><i class="fa-regular fa-square<?php echo ($employee['employee_type']=='Direct Contractor')?STR_CHECK_ICON_CLASS:''; ?>"></i> <?= __('Direct Contractor'); ?></span>&nbsp;&nbsp;
+                <span><i class="fa-regular fa-square<?php echo ($employee['employee_type'] == 'Third Party Contractor') ? STR_CHECK_ICON_CLASS : ''; ?>"></i> <?= __('Third Party Contractor'); ?></span>
             </td>
         </tr>
 
@@ -100,9 +103,9 @@ $signature = $data['signature'] ?? [];
         </tr>
         <tr>
             <td colspan="4" style="font-size: 15px; border: 1px solid #eeeeee;">
-                <span><i class="fa-regular fa-square<?php echo ($termination['termination_type'] == 'Termination') ? ' text-primary fa-solid fa-square-check' : ''; ?>"></i> <?= __('Termination'); ?></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-square<?php echo ($termination['termination_type'] == 'International Transfer') ? ' text-primary fa-solid fa-square-check' : ''; ?>"></i> <?= __('International Transfer'); ?></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-square<?php echo ($termination['termination_type'] == 'IDC Location Transfer') ? ' text-primary fa-solid fa-square-check' : ''; ?>"></i> <?= __('IDC Location Transfer'); ?></span>
+                <span><i class="fa-regular fa-square<?php echo ($termination['termination_type'] == 'Termination') ? STR_CHECK_ICON_CLASS : ''; ?>"></i> <?= __('Termination'); ?></span>&nbsp;&nbsp;
+                <span><i class="fa-regular fa-square<?php echo ($termination['termination_type'] == 'International Transfer') ? STR_CHECK_ICON_CLASS : ''; ?>"></i> <?= __('International Transfer'); ?></span>&nbsp;&nbsp;
+                <span><i class="fa-regular fa-square<?php echo ($termination['termination_type'] == 'IDC Location Transfer') ? STR_CHECK_ICON_CLASS : ''; ?>"></i> <?= __('IDC Location Transfer'); ?></span>
             </td>
         </tr>
 

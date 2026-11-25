@@ -28,7 +28,7 @@ if($_POST['recordtype']=="discrepancy"){
 $dates = $workingentrys['date'];
 
 $selected_pay_area_id = $_POST['pay_area_id'] ??  '';
-function worktyme_percentage($num_amount, $num_total) {
+function worktymePercentage($num_amount, $num_total) {
   if($num_total != 0 && $num_total !=""){
     $num_total = 1;
   }

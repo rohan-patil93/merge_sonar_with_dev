@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_DAYS')) {
+    define('STR_DAYS', ' Days');
+}
 $empid = $_GET['newempid'];
 $url = API."?mode=employeeleaveapplyattendance&empid=".$empid;
 $cudata = callAPI($url);
@@ -64,11 +67,11 @@ $_SESSION['apply_js']['Switch'] = 1;
                       <?php echo $main['leave_type_name']; ?>
                     </td>
 
-                    <td><?php echo $sub['base_on']." Days"; ?></td>
+                    <td><?php echo $sub['base_on'].STR_DAYS; ?></td>
                     <td><?php echo $sub['accured_action_based']=='Y' ? 'Yearly' : 'Monthly' ; ?></td>
                     <td><?php echo $sub['before_or_after']=='A' ? 'After' : 'Before' ; ?></td>
-                    <td><?php echo $sub['action_number']." Days"; ?></td>
-                    <td><?php echo $sub['max_accured_limit']." Days"; ?></td>
+                    <td><?php echo $sub['action_number'].STR_DAYS; ?></td>
+                    <td><?php echo $sub['max_accured_limit'].STR_DAYS; ?></td>
 
                   </tr>
                   <input type="hidden" name="leave[<?php echo $main['id']; ?>]" value="<?php echo $sub['action_number']; ?>">

@@ -113,11 +113,7 @@ function renderEpfSummaryTable($report_rows, $unique) {
     <?php
 }
 
-if(!function_exists('render_epf_summary_table')){
-    function render_epf_summary_table($report_rows, $unique){
-        renderEpfSummaryTable($report_rows, $unique);
-    }
-}
+// wrapper removed for cleaner PSR naming
 
 ?>
 <div class="flex-column-fluid">

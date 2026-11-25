@@ -100,7 +100,7 @@ if(!empty($kpi_data_list)){
                                   ?>
 
                                   <div class="to-do-list">
-                                      <div class="checkbox-fade fade-in-primary" onclick="statuspopup('<?php echo $task['status_list'][0]['status']; ?>','<?php echo $Notification_Table_Id; ?>','<?php echo $Notification_Table; ?>','<?php echo $task['view_status']=="0"?"0":$_SESSION['error_message'][$task['view_status']]; ?>','task')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                      <div class="checkbox-fade fade-in-primary" onclick="statuspopup('<?php echo $task['status_list'][0]['status']; ?>','<?php echo $Notification_Table_Id; ?>','<?php echo $Notification_Table; ?>','<?php echo $task['view_status']=="0"?"0":$_SESSION['error_message'][$task['view_status']]; ?>','task')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                           <label class="form-label check-task " id="checkstausid<?php echo $Notification_Table_Id; ?>">
                                               <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  value="" id="checkstausinput<?php echo $Notification_Table_Id; ?>" >
                                               <span class="cr ">

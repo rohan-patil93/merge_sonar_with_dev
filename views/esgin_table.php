@@ -224,7 +224,7 @@
 </td>
 <?php if(isset($_GET['Rid'])){ ?>
     <td>
-     <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="assignemployeeitemlist(<?php echo $rid; ?>,'<?php echo $tab2['id']; ?>')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-user"></i></div>
+     <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="assignemployeeitemlist(<?php echo $rid; ?>,'<?php echo $tab2['id']; ?>')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-user"></i></div>
 
 </td>
 <?php }  ?>

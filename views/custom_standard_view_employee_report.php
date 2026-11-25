@@ -58,10 +58,7 @@ function empReportDateDisplay($date_value)
     }
 
     $time = strtotime($date_value);
-    if ($time === false) {
-        return $date_value;
-    }
-    return date('d-m-Y', $time);
+    return ($time === false) ? $date_value : date('d-m-Y', $time);
 }
 
 function empReportCsvSafe($value)

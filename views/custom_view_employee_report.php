@@ -53,10 +53,7 @@ function empReportDateDisplay($date_value)
     }
 
     $time = strtotime($date_value);
-    if ($time === false) {
-        return $date_value;
-    }
-    return date('d-m-Y', $time);
+    return ($time === false) ? $date_value : date('d-m-Y', $time);
 }
 
 $employee_report_css_v = @filemtime(__DIR__ . '/../assets/css/custom_view_employee_report.css');

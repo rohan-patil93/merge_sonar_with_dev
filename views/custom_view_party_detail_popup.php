@@ -83,7 +83,7 @@ if($vendordetail['phone']!=""){  ?>
                                     <i class="fa fa-phone f-14 text-primary"></i>&nbsp;<?php echo DynamicPhoneNumberFormt($vendordetail['phone']);?></a>
                                 <?php }  ?>
                                 <?php if($vendordetail['billing_address']!=""){ ?>
-                                    <a class="font-weight-bold text-dark-50 d-block mb-2 mt-2"><i class="ti-location-pin text-primary f-18"></i>&nbsp;<?php echo $vendordetail['billing_address']." ".$vendordetail['post_code'];?> </a>
+                                    <span class="font-weight-bold text-dark-50 d-block mb-2 mt-2"><i class="ti-location-pin text-primary f-18"></i>&nbsp;<?php echo $vendordetail['billing_address']." ".$vendordetail['post_code'];?> </span>
                                 <?php } ?>
                                 <div class="font-weight-bold text-dark-50 mt-1 f-14">
                                     <?php if($vendordetail['established_year']!="" && $vendordetail['established_year']!="0"){  ?>

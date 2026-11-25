@@ -1,4 +1,7 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_THI')) {
+    define('DATE_FORMAT_YMD_THI', 'Y-m-d\\TH:i');
+}
 date_default_timezone_set('Asia/Kolkata');
 $selected_gate_id = $_SESSION['gate_id'] ?? 1;
 
@@ -162,7 +165,7 @@ $vehicle_no_val = !empty($row['vehicle_number']) ? $row['vehicle_number'] : ($ro
                     <div class="row mt-3">
                         <div class="form-group col-md-6">
                             <span class="form-label font-weight-bold text-dark"><i class="fa fa-clock text-primary me-1"></i> <?= htmlspecialchars(__('Out Date & Time'), ENT_QUOTES, 'UTF-8'); ?></span>
-                            <input aria-label="<?= htmlspecialchars(__('Out Datetime'), ENT_QUOTES, 'UTF-8'); ?>" type="datetime-local" class="form-control" id="out_datetime" name="out_datetime" value="<?= (date('Y-m-d\TH:i')) ?>" min="<?= (date('Y-m-d\TH:i')) ?>" required>
+                            <input aria-label="<?= htmlspecialchars(__('Out Datetime'), ENT_QUOTES, 'UTF-8'); ?>" type="datetime-local" class="form-control" id="out_datetime" name="out_datetime" value="<?= (date(DATE_FORMAT_YMD_THI)) ?>" min="<?= (date(DATE_FORMAT_YMD_THI)) ?>" required>
                         </div>
 
 
@@ -219,7 +222,7 @@ $vehicle_no_val = !empty($row['vehicle_number']) ? $row['vehicle_number'] : ($ro
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <span class="form-label"><?= htmlspecialchars(__('Return Date & Time'), ENT_QUOTES, 'UTF-8'); ?></span>
-                                    <input aria-label="<?= htmlspecialchars(__('Pass Return[returned At]'), ENT_QUOTES, 'UTF-8'); ?>" type="datetime-local" class="form-control" name="pass_return[returned_at]" value="<?= (date('Y-m-d\TH:i')) ?>" min="<?= (date('Y-m-d\TH:i')) ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Pass Return[returned At]'), ENT_QUOTES, 'UTF-8'); ?>" type="datetime-local" class="form-control" name="pass_return[returned_at]" value="<?= (date(DATE_FORMAT_YMD_THI)) ?>" min="<?= (date(DATE_FORMAT_YMD_THI)) ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <span class="form-label"><?= __('Remarks (Optional)'); ?></span>

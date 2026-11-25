@@ -75,7 +75,7 @@ if($aci == 0){?>
         $nrid = "id:".$value['option_id'];
         $link = "index.php?option=".$option_url."&Rid=". deocdeId($nrid)."&noti_id=".deocdeId($value['id']); ?>
         <div class="media userlist-box waves-effect waves-light notification-box-shadow bg-white p-2 mb-1"  id="infoclose<?php echo $value['id']; ?>">
-            <span class="crossbutn" onclick="closenotificationinfo(<?php echo $value['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-close text-danger f-12"></i></span>
+            <button type="button" class="btn btn-link p-0 border-0 crossbutn text-danger" aria-label="<?= htmlspecialchars(__('Close notification'), ENT_QUOTES, 'UTF-8'); ?>" onclick="closenotificationinfo(<?php echo $value['id']; ?>)"><i class="ti-close f-12"></i></button>
             <a class="" >
                 <div class="img-radius img-50 align-top m-r-15 text-center userimageround pt-3">
                     <span class="font-size-h3 font-weight-boldest"><?php echo initials(str_replace('_', ' ',$value['Notification_Table'])); ?></span>

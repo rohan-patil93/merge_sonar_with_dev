@@ -198,7 +198,7 @@ $overviewTitle = $display_tag . ' Overview';
                             <div class="card-block">
                                 <div class="table-responsive survey_dashboard">
                                     <table class="table table-bordered table-sm f-12">
-                                        <tr bgcolor="#eeeeee">
+                                        <tr style="background-color: #eeeeee;">
                                             <th scope="col"><?php echo $display_tag; ?> <?= __('Name'); ?></th>
                                             <th scope="col"><?= __('Category'); ?></th>
                                             <th scope="col"><?= __('Assigned To'); ?></th>

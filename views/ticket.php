@@ -4,7 +4,7 @@
                                                 <div class="card-header-right">
                                                     <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal" data-bs-target="#large-Modal"><i class="ti-plus text-white"></i> <?= __('Large'); ?></button>
                                                     <div class="modal fade" id="large-Modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-dialog modal-lg" >
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title"><?= __('Add Ticket'); ?></h4>

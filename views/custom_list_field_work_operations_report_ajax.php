@@ -57,16 +57,15 @@ function fworFormatTime($time) {
 
 function fworStatusClass($status) {
     $status = strtolower((string)$status);
+    $cls = '';
     if ($status == 'visited') {
-        return 'fwor-status-visited';
+        $cls = 'fwor-status-visited';
+    } elseif ($status == 'pending') {
+        $cls = 'fwor-status-pending';
+    } elseif ($status == 'extra') {
+        $cls = 'fwor-status-extra';
     }
-    if ($status == 'pending') {
-        return 'fwor-status-pending';
-    }
-    if ($status == 'extra') {
-        return 'fwor-status-extra';
-    }
-    return '';
+    return $cls;
 }
 ?>
 <div class="col-12">

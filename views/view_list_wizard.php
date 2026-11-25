@@ -35,7 +35,7 @@ foreach ($lists as $key => $value) {
 }
 ksort($dis);
 ?>
-<div class="card card-custom gutter-b draggable" role="region" style="">
+<div class="card card-custom gutter-b draggable"  style="">
                                 <div class="card-header">
                                     <div class="card-title">
                                         <h3 class="card-label"><?php echo $title; ?></h3>

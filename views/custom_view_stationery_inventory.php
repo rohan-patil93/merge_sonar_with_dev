@@ -720,7 +720,7 @@ $st_show_type=$_SESSION['st_show_type'];
                                     <?php echo $stationery_item['available_qty']; ?>
                                 </div>
                                 <div class="col-lg-1 col-md-1 col-sm-6 col-6 text-end">
-                                    <div class="cursor-pointer" onclick="viewstreport(<?php echo $stationery_item['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                    <div class="cursor-pointer" onclick="viewstreport(<?php echo $stationery_item['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                         <i class="ti-eye"></i>
                                     </div>
                                 </div>

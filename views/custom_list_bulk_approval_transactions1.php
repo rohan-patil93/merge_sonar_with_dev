@@ -308,7 +308,7 @@ foreach ($count as $cc) {
                                                         </label>
                                                     </div>
                                                 </div>
-                                                    <div class="kt-todo__details" role="button" tabindex="0"
+                                                    <div class="kt-todo__details" tabindex="0"
                                                         onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
                                                         onclick="ajaxview(<?php echo $list['transaction_id']; ?>,<?php echo "'" . $list['transaction_type'] . "'"; ?>)">
                                                         <div class="kt-todo__message">

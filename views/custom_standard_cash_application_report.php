@@ -140,8 +140,13 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
             <td>
               <?php
               $status = $row['allocation_status'] ?? 'N/A';
-              $color = ($status == 'Fully Allocated') ? 'text-success' :
-                      (($status == 'Partially Allocated') ? 'text-warning' : 'text-danger');
+              if ($status == 'Fully Allocated') {
+                  $color = 'text-success';
+              } elseif ($status == 'Partially Allocated') {
+                  $color = 'text-warning';
+              } else {
+                  $color = 'text-danger';
+              }
               ?>
               <span class="<?= $color; ?>"><b><?= $status; ?></b></span>
             </td>

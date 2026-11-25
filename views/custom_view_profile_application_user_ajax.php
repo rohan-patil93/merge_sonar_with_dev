@@ -291,7 +291,7 @@ if($_POST['transactiontype'] != ''){ ?>
                                             <td style="width: 10%;"><?php echo $k; ?></td>
                                             <td style="width: 40%;"><?php echo $aumr['ms_display_name']; ?></td>
                                             <td style="width: 40%;"><?php echo $aumr['ar_display_name']; ?></td>
-                                            <td style="width: 10%;"><i class="ti-trash text-danger" onclick="removeRoleModule('<?php echo $aumr['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Remove Role'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></td>
+                                            <td style="width: 10%;"><button type="button" class="btn btn-link p-0 border-0 text-danger" aria-label="<?= htmlspecialchars(__('Remove Role'), ENT_QUOTES, 'UTF-8'); ?>" onclick="removeRoleModule('<?php echo $aumr['id']; ?>')"><i class="ti-trash"></i></button></td>
                                         </tr>
                                     <?php $k++;
 }  ?>

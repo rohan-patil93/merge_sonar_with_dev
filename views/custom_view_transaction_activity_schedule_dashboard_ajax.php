@@ -66,7 +66,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule'];
                             <?php $i=1; foreach($transactions as $tansres){
                                 $transaction_activity = $transaction_activity_schedule[$tansres['id']];
                                 ?>
-                            <tr onclick="getTaskPerticulerUser('<?php echo $ajax_transaction_table; ?>','<?php echo $tansres['id']; ?>')" class="cursor-pointer" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                            <tr onclick="getTaskPerticulerUser('<?php echo $ajax_transaction_table; ?>','<?php echo $tansres['id']; ?>')" class="cursor-pointer" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                 <td class="p-2"><?php echo $i; ?></td>
                                 <td class="p-2 f-w-600"><?php echo ucwords($tansres['display_name']); ?></td>
                                 <td class="text-right p-2"><?php echo customNanAndEmptyValidation($transaction_activity['total_task_cnt']); ?></td>

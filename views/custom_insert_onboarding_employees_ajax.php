@@ -8,6 +8,8 @@ defined('ONB_WORK_IMAGE') || define('ONB_WORK_IMAGE', 'assets/images/work.png');
 defined('ONB_WORK_IMAGE_ALT') || define('ONB_WORK_IMAGE_ALT', 'Work in progress');
 defined('ONB_ADD_MORE') || define('ONB_ADD_MORE', '+ Add More');
 defined('ONB_ATTACHMENTS_PREVIEW') || define('ONB_ATTACHMENTS_PREVIEW', 'Attachments Preview');
+defined('STR_DRIVING_LICENCE') || define('STR_DRIVING_LICENCE', 'Driving Licence');
+defined('STR_COVER_UNDER_PF') || define('STR_COVER_UNDER_PF', 'Cover Under Pf');
 if(isset($_POST['ajaxcallemployee']) && $_POST['ajaxcallemployee'] =="Y"){
     $employee_id = $_POST['employee_id'] ?? '';
     include_once '../includes/session.php';
@@ -78,56 +80,12 @@ if (!function_exists('renderOnbSelectOptions')) {
     }
 }
 
-if (!function_exists('render_onboarding_employees_ajax_section')) {
-    function render_onboarding_employees_ajax_section($ctx) {
-        renderOnboardingEmployeesAjaxSection($ctx);
-    }
-}
 if (!function_exists('renderOnboardingEmployeesAjaxSection')) {
 function renderOnboardingEmployeesAjaxSection($ctx) {
 
 $result = $ctx['result'] ?? array();
 $data = $ctx['data'] ?? array();
-$employee_id = $ctx['employee_id'] ?? '';
-$text_color_ety = $ctx['text_color_ety'] ?? '';
-$text_color_ebi = $ctx['text_color_ebi'] ?? '';
-$text_color_gen = $ctx['text_color_gen'] ?? '';
-$read_only_ln = $ctx['read_only_ln'] ?? '';
-$job_titles = $ctx['job_titles'] ?? array();
 $employees_display_fields = $result['employees_display_fields'] ?? array();
-$vafield = json_decode((string)($employees_display_fields['field_list'] ?? ''), true);
-$departments = $result['departments'] ?? array();
-$designations = $result['designations'] ?? array();
-$divisions     = $result['divisions'] ?? array();
-$locations = $result['locations'] ?? array();
-$employment_bands = $result['employment_bands'] ?? array();
-$employment_levels = $result['employment_levels'] ?? array();
-$employment_roles = $result['employment_roles'] ?? array();
-$marital_statuses = $result['marital_statuses'] ?? array();
-$blood_groups = $result['blood_groups'] ?? array();
-$verticals = $result['verticals'] ?? array();
-$gender_details = $result['gender_details'] ?? array();
-$employeement_types = $result['employeement_types'] ?? array();
-$education_type = $result['education_type'] ?? array();
-$banks = $result['banks'] ?? array();
-$emp_educations = $result['emp_educations'] ?? array();
-$emp_dependents = $result['emp_dependents'] ?? array();
-$emp_contacts = $result['emp_contacts'] ?? array();
-$emp_work_experiences = $result['emp_work_experiences'] ?? array();
-$relations = $result['relations'] ?? array();
-$application_users = $result['application_users'] ?? array();
-$all_employees = $result['all_employees'] ?? array();
-$countries = $result['countries'] ?? array();
-$emp_visa = $result['emp_visa'] ?? array();
-$emp_skills = $result['emp_skills'] ?? array();
-$skills = $result['skills'] ?? array();
-$emp_banks = $result['emp_banks'] ?? array();
-$emp_bank_status = $result['emp_bank_status'] ?? array();
-$statuse = ViewStatusData();
-
-
-$billable = array("0"=>"Yes","1"=>"No"," "=>"Not Defined");
-$yesno = array('0'=>'Yes','1'=>'No');
 
 $agecalc = '';
 $dobRaw = $data['date_of_birth'] ?? '';
@@ -142,7 +100,44 @@ if (!empty($dobRaw) && $dobRaw !== DATE_ZERO) {
         $agecalc = '';
     }
 }
-$bank_work_flow = "Y";
+
+$onbVars = array_merge($ctx, array(
+    'result' => $result,
+    'data' => $data,
+    'vafield' => json_decode((string)($employees_display_fields['field_list'] ?? ''), true),
+    'departments' => $result['departments'] ?? array(),
+    'designations' => $result['designations'] ?? array(),
+    'divisions' => $result['divisions'] ?? array(),
+    'locations' => $result['locations'] ?? array(),
+    'employment_bands' => $result['employment_bands'] ?? array(),
+    'employment_levels' => $result['employment_levels'] ?? array(),
+    'employment_roles' => $result['employment_roles'] ?? array(),
+    'marital_statuses' => $result['marital_statuses'] ?? array(),
+    'blood_groups' => $result['blood_groups'] ?? array(),
+    'verticals' => $result['verticals'] ?? array(),
+    'gender_details' => $result['gender_details'] ?? array(),
+    'employeement_types' => $result['employeement_types'] ?? array(),
+    'education_type' => $result['education_type'] ?? array(),
+    'banks' => $result['banks'] ?? array(),
+    'emp_educations' => $result['emp_educations'] ?? array(),
+    'emp_dependents' => $result['emp_dependents'] ?? array(),
+    'emp_contacts' => $result['emp_contacts'] ?? array(),
+    'emp_work_experiences' => $result['emp_work_experiences'] ?? array(),
+    'relations' => $result['relations'] ?? array(),
+    'application_users' => $result['application_users'] ?? array(),
+    'all_employees' => $result['all_employees'] ?? array(),
+    'countries' => $result['countries'] ?? array(),
+    'emp_visa' => $result['emp_visa'] ?? array(),
+    'emp_skills' => $result['emp_skills'] ?? array(),
+    'skills' => $result['skills'] ?? array(),
+    'emp_banks' => $result['emp_banks'] ?? array(),
+    'emp_bank_status' => $result['emp_bank_status'] ?? array(),
+    'statuse' => ViewStatusData(),
+    'billable' => array("0"=>"Yes","1"=>"No"," "=>"Not Defined"),
+    'yesno' => array('0'=>'Yes','1'=>'No'),
+    'agecalc' => $agecalc,
+    'bank_work_flow' => "Y",
+));
 ?>
 <script>
     function tochangedeparment(){
@@ -181,7 +176,6 @@ $bank_work_flow = "Y";
 </script>
 <?php if(($_POST['edittype'] ?? '') =="VIEW"){ ?>
 <?php
-$onbVars = get_defined_vars();
 $pageType = $_POST['pagetype'] ?? ($_POST['showpagetype'] ?? '');
 $viewMap = array (
   'basic_information' => 'renderOnbViewBasicInformation',
@@ -348,7 +342,7 @@ function renderOnbViewWorkDetails($vars) {
 ?>
         <div class="row">
             <?php
-            renderOnbViewWorkOrgFields($fieldaccesright, $data, $departments, $designations, $divisions, $employment_bands, $employment_levels, $verticals);
+            renderOnbViewWorkOrgFields($fieldaccesright, $data, compact('departments', 'designations', 'divisions', 'employment_bands', 'employment_levels', 'verticals'));
             renderOnbViewWorkExperienceFields($fieldaccesright, $data);
             renderOnbViewWorkLocationFields($fieldaccesright, $data, $locations, $employeement_types, $billable);
             ?>
@@ -358,7 +352,7 @@ function renderOnbViewWorkDetails($vars) {
 }
 
 if (!function_exists('renderOnbViewPersonalBioFields')) {
-function renderOnbViewPersonalBioFields($fieldaccesright, $data, $agecalc, $marital_statuses, $gender_details, $blood_groups, $yesno) {
+function renderOnbViewPersonalBioFields($fieldaccesright, $data, $agecalc, $marital_statuses, $gender_details, $blood_groups) {
     if($fieldaccesright['field']['date_of_birth']!="NA"){
         renderOnbViewField('Date of Birth', dateFormate($data['date_of_birth']));
     }
@@ -421,7 +415,7 @@ function renderOnbViewPersonalDetails($vars) {
     ?>
         <div class="row">
             <?php
-            renderOnbViewPersonalBioFields($fieldaccesright, $data, $agecalc, $marital_statuses, $gender_details, $blood_groups, $yesno);
+            renderOnbViewPersonalBioFields($fieldaccesright, $data, $agecalc, $marital_statuses, $gender_details, $blood_groups);
             renderOnbViewPersonalOtherFields($fieldaccesright, $data, $yesno);
             ?>
         </div>
@@ -555,7 +549,7 @@ function renderOnbViewProofDetails($vars) {
                   <?php
                     renderOnbViewProofRow($fieldaccesright, 'adhar_no', 'Aadhar Card', renderSensitiveDataWithToggle($data['adhar_no'], 'aadhaar'), ' - ', $attached_files['aadhar_attachment']);
                     renderOnbViewProofRow($fieldaccesright, 'passport', 'Passport', renderSensitiveDataWithToggle($data['passport'], 'passport'), onbFormatDate($data['passport_expiry_date'], ' - '), $attached_files['passport_attachment']);
-                    renderOnbViewProofRow($fieldaccesright, 'driving_licence', 'Driving Licence', renderSensitiveDataWithToggle($data['driving_licence'], 'driving_licence'), onbFormatDate($data['driving_licence_expiry_date'], ' - '), $attached_files['driving_licence_attachment']);
+                    renderOnbViewProofRow($fieldaccesright, 'driving_licence', STR_DRIVING_LICENCE, renderSensitiveDataWithToggle($data['driving_licence'], 'driving_licence'), onbFormatDate($data['driving_licence_expiry_date'], ' - '), $attached_files['driving_licence_attachment']);
                     renderOnbViewProofRow($fieldaccesright, 'pan_number', 'PAN Number', renderSensitiveDataWithToggle($data['pan_number'], 'pan'), ' - ', $attached_files['pan_attachment']);
                     renderOnbViewProofRow($fieldaccesright, 'pf_no', 'PF Number', renderSensitiveDataWithToggle($data['pf_no'], 'pf_number'), ' - ', $attached_files['pf_attachment']);
                     renderOnbViewProofRow($fieldaccesright, 'pf_uan', 'UAN Number', renderSensitiveDataWithToggle($data['pf_uan'], 'uan_number'), ' - ', $attached_files['pf_uan_attachment']);
@@ -952,7 +946,13 @@ function renderOnbEditBasicInformation($vars) {
 }
 
 if (!function_exists('renderOnbEditWorkOrgFields')) {
-function renderOnbEditWorkOrgFields($fieldaccesright, $data, $departments, $designations, $divisions, $employment_bands, $employment_levels, $verticals) {
+function renderOnbEditWorkOrgFields($fieldaccesright, $data, $lookups) {
+    $departments = $lookups['departments'] ?? array();
+    $designations = $lookups['designations'] ?? array();
+    $divisions = $lookups['divisions'] ?? array();
+    $employment_bands = $lookups['employment_bands'] ?? array();
+    $employment_levels = $lookups['employment_levels'] ?? array();
+    $verticals = $lookups['verticals'] ?? array();
     if($fieldaccesright['field']['department_id']!="NA"){
           $readonlycheck = onbReadonlyClass($fieldaccesright, 'department_id'); ?>
         <div class="col-xl-6 mt-2" >
@@ -1086,78 +1086,90 @@ function renderOnbEditWorkExperienceFields($fieldaccesright, $data) {
 }
 }
 
+if (!function_exists('renderOnbEditLocationSelect')) {
+function renderOnbEditLocationSelect($fieldaccesright, $data, $locations) {
+    if($fieldaccesright['field']['location_id']=="NA") return;
+    $readonlycheck = onbReadonlyClass($fieldaccesright, 'location_id'); ?>
+    <div class="col-xl-6 mt-2" >
+        <span class="form-label d-inline-block fw-bold"><?php echo __('Work Location'); ?> </span>
+        <div class="<?php echo $readonlycheck; ?>">
+            <select aria-label="<?= htmlspecialchars(__('Location id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control js-example-basic-single" name="location_id">
+                <option value=""><?php echo __(ONB_SELECT_ANY_ONE); ?></option>
+                  <?php foreach ($locations as $loc) {
+                    if($loc['parent_location_id'] =='') { ?>
+                    <option <?php if($data['location_id'] == $loc['id']){ ?>selected <?php } ?> value="<?php echo onbEsc($loc['id']); ?>" >
+                      <?php echo onbEsc($loc['location_name']); ?>
+                    </option>
+                <?php }
+                } ?>
+            </select>
+        </div>
+    </div>
+    <?php
+}
+}
+
+if (!function_exists('renderOnbEditEmploymentTypeRadio')) {
+function renderOnbEditEmploymentTypeRadio($fieldaccesright, $data, $employeement_types, $safeEmpIdJs, $text_color_ety) {
+    if($fieldaccesright['field']['employee_type']=="NA") return;
+    $readonlycheck = onbReadonlyClass($fieldaccesright, 'employee_type'); ?>
+    <div class="col-xl-6 mt-2" >
+        <span class="form-label d-inline-block fw-bold"><?php echo __('Employment Type'); ?></span>
+        <button type="button" class="float-end btn btn-success" onclick="employementviewhistoryppup(<?php echo $safeEmpIdJs; ?>)"><?php echo __('History'); ?></button>
+        <div class="form-radio <?php echo $readonlycheck; ?>">
+        <?php
+         foreach ($employeement_types as $emptypes) {
+            $safeEmpTypeJs = onbEsc(json_encode($emptypes['genc_detail_code']));
+        ?>
+          <div class="radio radio-inline">
+           <label class="form-label <?php echo $text_color_ety; ?>">
+             <input aria-label="Employee field" type="radio" onclick="employeementtypepopup(<?php echo $safeEmpIdJs . ',' . $safeEmpTypeJs; ?>)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php } ?> value="<?php echo onbEsc($emptypes['genc_detail_code']); ?>" style="display:none"/>
+             <i class="helper"></i><?php echo __($emptypes['genc_detail_name']);?> </label>
+           </div>
+        <?php } ?>
+        </div>
+    </div>
+    <?php
+}
+}
+
 if (!function_exists('renderOnbEditWorkLocationFields')) {
 function renderOnbEditWorkLocationFields($fieldaccesright, $data, $locations, $employee_id, $employeement_types, $text_color_ety, $text_color_ebi) {
     $safeEmpIdJs = onbEsc(json_encode($employee_id));
-    if($fieldaccesright['field']['location_id']!="NA"){
-          $readonlycheck = onbReadonlyClass($fieldaccesright, 'location_id'); ?>
-        <div class="col-xl-6 mt-2" >
-            <span class="form-label d-inline-block fw-bold"><?php echo __('Work Location'); ?> </span>
-            <div class="<?php echo $readonlycheck; ?>">
-                <select aria-label="<?= htmlspecialchars(__('Location id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control js-example-basic-single" name="location_id">
-                    <option value=""><?php echo __(ONB_SELECT_ANY_ONE); ?></option>
-                      <?php foreach ($locations as $loc) {
-                        if($loc['parent_location_id'] =='') { ?>
-                        <option <?php if($data['location_id'] == $loc['id']){ ?>selected <?php } ?> value="<?php echo onbEsc($loc['id']); ?>" >
-                          <?php echo onbEsc($loc['location_name']); ?>
-                        </option>
-                    <?php }
-                    } ?>
-                </select>
+    renderOnbEditLocationSelect($fieldaccesright, $data, $locations);
+    renderOnbEditEmploymentTypeRadio($fieldaccesright, $data, $employeement_types, $safeEmpIdJs, $text_color_ety);
+    if($fieldaccesright['field']['billable']!="NA"){
+      $readonlycheck = onbReadonlyClass($fieldaccesright, 'billable'); ?>
+    <div class="col-xl-6 mt-2" >
+        <span class="form-label d-inline-block fw-bold"><?php echo __('Billable'); ?> </span>
+        <div class="form-radio <?php echo $readonlycheck; ?>">
+           <div class="radio radio-inline">
+                   <label class="form-label <?php echo $text_color_ebi; ?>">
+                 <input aria-label="Billable" type="radio" name="billable" <?php if($data['billable'] ==0) {?> checked="checked" <?php } ?> value="0" style="display:none" />
+                 <i class="helper"></i><?php echo __('Yes'); ?> </label>
+            </div>
+            <div class="radio radio-inline">
+                <label class="form-label <?php echo $text_color_ebi; ?>">
+                   <input aria-label="Billable" type="radio" name="billable" <?php if($data['billable'] ==1) {?> checked="checked" <?php } ?> value="1" style="display:none" />
+                   <i class="helper"></i><?php echo __('No'); ?> </label>
             </div>
         </div>
-        <?php }
-        if($fieldaccesright['field']['employee_type']!="NA"){
-          $readonlycheck = onbReadonlyClass($fieldaccesright, 'employee_type'); ?>
-       <div class="col-xl-6 mt-2" >
-            <span class="form-label d-inline-block fw-bold"><?php echo __('Employment Type'); ?></span>
-            <button type="button" class="float-end btn btn-success" onclick="employementviewhistoryppup(<?php echo $safeEmpIdJs; ?>)"><?php echo __('History'); ?></button>
-            <div class="form-radio <?php echo $readonlycheck; ?>">
-            <?php
-             foreach ($employeement_types as $emptypes) {
-                $safeEmpTypeJs = onbEsc(json_encode($emptypes['genc_detail_code']));
-            ?>
-              <div class="radio radio-inline">
-               <label class="form-label <?php echo $text_color_ety; ?>">
-                 <input aria-label="Employee field" type="radio" onclick="employeementtypepopup(<?php echo $safeEmpIdJs . ',' . $safeEmpTypeJs; ?>)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php } ?> value="<?php echo onbEsc($emptypes['genc_detail_code']); ?>" style="display:none"/>
-                 <i class="helper"></i><?php echo __($emptypes['genc_detail_name']);?> </label>
-               </div>
-            <?php } ?>
-            </div>
-        </div>
-        <?php }
-        if($fieldaccesright['field']['billable']!="NA"){
-          $readonlycheck = onbReadonlyClass($fieldaccesright, 'billable'); ?>
-        <div class="col-xl-6 mt-2" >
-            <span class="form-label d-inline-block fw-bold"><?php echo __('Billable'); ?> </span>
-            <div class="form-radio <?php echo $readonlycheck; ?>">
-               <div class="radio radio-inline">
-                       <label class="form-label <?php echo $text_color_ebi; ?>">
-                     <input aria-label="Billable" type="radio" name="billable" <?php if($data['billable'] ==0) {?> checked="checked" <?php } ?> value="0" style="display:none" />
-                     <i class="helper"></i><?php echo __('Yes'); ?> </label>
-                </div>
-                <div class="radio radio-inline">
-                    <label class="form-label <?php echo $text_color_ebi; ?>">
-                       <input aria-label="Billable" type="radio" name="billable" <?php if($data['billable'] ==1) {?> checked="checked" <?php } ?> value="1" style="display:none" />
-                       <i class="helper"></i><?php echo __('No'); ?> </label>
-                </div>
-            </div>
-        </div>
-        <?php }
-        if($fieldaccesright['field']['office_phone']!="NA"){
-          $readonlycheck = onbReadonlyClass($fieldaccesright, 'office_phone'); ?>
-        <div class="col-xl-6 mt-2" >
-            <span class="form-label d-inline-block fw-bold"><?php echo __('Office Phone'); ?>  </span>
-            <input aria-label="<?= htmlspecialchars(__('Office phone'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_phone" placeholder="<?php echo __('Enter Office Phone'); ?>" value="<?php echo onbEsc($data['office_phone'] ?? ''); ?>"/>
-        </div>
-        <?php }
-        if($fieldaccesright['field']['office_ext']!="NA"){
-          $readonlycheck = onbReadonlyClass($fieldaccesright, 'office_ext'); ?>
-        <div class="col-xl-6 mt-2" >
-            <span class="form-label d-inline-block fw-bold"><?php echo __('Extension'); ?> </span>
-            <input aria-label="<?= htmlspecialchars(__('Office ext'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_ext" placeholder="<?php echo __('Enter Extension'); ?>" value="<?php echo onbEsc($data['office_ext'] ?? ''); ?>"/>
-        </div>
-        <?php }
+    </div>
+    <?php }
+    if($fieldaccesright['field']['office_phone']!="NA"){
+      $readonlycheck = onbReadonlyClass($fieldaccesright, 'office_phone'); ?>
+    <div class="col-xl-6 mt-2" >
+        <span class="form-label d-inline-block fw-bold"><?php echo __('Office Phone'); ?>  </span>
+        <input aria-label="<?= htmlspecialchars(__('Office phone'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_phone" placeholder="<?php echo __('Enter Office Phone'); ?>" value="<?php echo onbEsc($data['office_phone'] ?? ''); ?>"/>
+    </div>
+    <?php }
+    if($fieldaccesright['field']['office_ext']!="NA"){
+      $readonlycheck = onbReadonlyClass($fieldaccesright, 'office_ext'); ?>
+    <div class="col-xl-6 mt-2" >
+        <span class="form-label d-inline-block fw-bold"><?php echo __('Extension'); ?> </span>
+        <input aria-label="<?= htmlspecialchars(__('Office ext'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_ext" placeholder="<?php echo __('Enter Extension'); ?>" value="<?php echo onbEsc($data['office_ext'] ?? ''); ?>"/>
+    </div>
+    <?php }
 }
 }
 
@@ -1180,7 +1192,7 @@ function renderOnbEditWorkDetails($vars) {
 ?>
         <div class="row">
             <?php
-            renderOnbEditWorkOrgFields($fieldaccesright, $data, $departments, $designations, $divisions, $employment_bands, $employment_levels, $verticals);
+            renderOnbEditWorkOrgFields($fieldaccesright, $data, compact('departments', 'designations', 'divisions', 'employment_bands', 'employment_levels', 'verticals'));
             renderOnbEditWorkExperienceFields($fieldaccesright, $data);
             renderOnbEditWorkLocationFields($fieldaccesright, $data, $locations, $employee_id, $employeement_types, $text_color_ety, $text_color_ebi);
             ?>
@@ -1194,10 +1206,6 @@ function renderOnbEditPersonalDetails($vars) {
     $vafield = $vars['vafield'] ?? null;
     $data = $vars['data'] ?? null;
     $marital_statuses = $vars['marital_statuses'] ?? null;
-    $gender_details = $vars['gender_details'] ?? null;
-    $text_color_gen = $vars['text_color_gen'] ?? null;
-    $blood_groups = $vars['blood_groups'] ?? null;
-    $yesno = $vars['yesno'] ?? null;
     $fieldaccesright = $vafield['personal_details'];
     ?>
     <div class="row">
@@ -1472,7 +1480,9 @@ function renderOnbEditEmployeeBuddies($vars) {
 }
 
 if (!function_exists('renderOnbYesNoRadioGroup')) {
-function renderOnbYesNoRadioGroup($fieldaccesright, $fieldKey, $label, $ariaLabel, $inputName, $currentValue, $yesVal, $noVal) {
+function renderOnbYesNoRadioGroup($fieldaccesright, $fieldKey, $label, $ariaLabel, $inputName, $currentValue, $vals = ['0', '1']) {
+    $yesVal = $vals[0] ?? '0';
+    $noVal = $vals[1] ?? '1';
     if ($fieldaccesright['field'][$fieldKey] == "NA") {
         return;
     }
@@ -1524,8 +1534,8 @@ function renderOnbEditEmployeeOtherAccess($vars) {
                 </div>
             </div>
             <?php }
-        renderOnbYesNoRadioGroup($fieldaccesright, 'is_muslim', 'Are You Muslim ?', 'Cover Under Pf', 'cover_under_pf', $data['is_muslim'] ?? null, '0', '1');
-        renderOnbYesNoRadioGroup($fieldaccesright, 'is_local', 'Are You Local ?', 'Cover Under Pf', 'cover_under_pf', $data['is_local'] ?? null, '0', '1');
+        renderOnbYesNoRadioGroup($fieldaccesright, 'is_muslim', 'Are You Muslim ?', STR_COVER_UNDER_PF, 'cover_under_pf', $data['is_muslim'] ?? null);
+        renderOnbYesNoRadioGroup($fieldaccesright, 'is_local', 'Are You Local ?', STR_COVER_UNDER_PF, 'cover_under_pf', $data['is_local'] ?? null);
         ?>
 
 <?php
@@ -1541,13 +1551,13 @@ function renderOnbEditEmployeeAccess($vars) {
     ?>
     <div class="row">
         <!-- Cover Under PF -->
-        <?php renderOnbYesNoRadioGroup($fieldaccesright, 'cover_under_pf', 'Cover Under PF', 'Cover Under Pf', 'cover_under_pf', $data['cover_under_pf'] ?? null, '0', '1'); ?>
+        <?php renderOnbYesNoRadioGroup($fieldaccesright, 'cover_under_pf', 'Cover Under PF', STR_COVER_UNDER_PF, 'cover_under_pf', $data['cover_under_pf'] ?? null); ?>
 
         <!-- Cover Under ESI -->
-        <?php renderOnbYesNoRadioGroup($fieldaccesright, 'cover_under_esi', 'Cover Under ESI', 'Cover Under Esi', 'cover_under_esi', $data['cover_under_esi'] ?? null, '0', '1'); ?>
+        <?php renderOnbYesNoRadioGroup($fieldaccesright, 'cover_under_esi', 'Cover Under ESI', 'Cover Under Esi', 'cover_under_esi', $data['cover_under_esi'] ?? null); ?>
 
         <!-- Clock In & Clock Out Access -->
-        <?php renderOnbYesNoRadioGroup($fieldaccesright, 'clock_event_type', 'ClockIn & ClockOut Access', 'Clock Event Type', 'clock_event_type', $data['clock_event_type'] ?? null, 'Y', 'N'); ?>
+        <?php renderOnbYesNoRadioGroup($fieldaccesright, 'clock_event_type', 'ClockIn & ClockOut Access', 'Clock Event Type', 'clock_event_type', $data['clock_event_type'] ?? null, ['Y', 'N']); ?>
 
         <?php if($fieldaccesright['field']['b_machine_id']!="NA"){
               $readonlycheck = onbReadonlyClass($fieldaccesright, 'b_machine_id'); ?>
@@ -1613,13 +1623,13 @@ function renderOnbEditProofDetails($vars) {
         </thead>
         <tbody>
             <?php
-            renderOnbEditProofRow($fieldaccesright, 'adhar_no', 'Aadhar Card', 'Adhar No', 'adhar_no', dynamicDataDecode($data['adhar_no']), 'Enter Aadhar Card', ' - ', 'aadhar_attachment', 'old_aadhar_attachment', $attached_files['aadhar_attachment']);
-            renderOnbEditProofRow($fieldaccesright, 'passport', 'Passport', 'Passport', 'passport', dynamicDataDecode($data['passport']), 'Enter Passport No.', $passportExpiryHtml, 'passport_attachment', 'old_passport_attachment', $attached_files['passport_attachment']);
-            renderOnbEditProofRow($fieldaccesright, 'driving_licence', 'Driving Licence', 'Driving Licence', 'driving_licence', dynamicDataDecode($data['driving_licence']), 'Enter Driving Licence', $dlExpiryHtml, 'driving_licence_attachment', 'old_driving_licence_attachment', $attached_files['driving_licence_attachment']);
-            renderOnbEditProofRow($fieldaccesright, 'pan_number', 'PAN Number', 'Pan Number', 'pan_number', dynamicDataDecode($data['pan_number']), 'Enter PAN Number', ' - ', 'pan_attachment', 'old_pan_attachment', $attached_files['pan_attachment']);
-            renderOnbEditProofRow($fieldaccesright, 'pf_no', 'PF Number', 'Pf No', 'pf_no', dynamicDataDecode($data['pf_no']), 'Enter PF Number', ' - ', 'pf_attachment', 'old_pf_attachment', $attached_files['pf_attachment']);
-            renderOnbEditProofRow($fieldaccesright, 'pf_uan', 'UAN Number', 'Pf Uan', 'pf_uan', dynamicDataDecode($data['pf_uan']), 'Enter UAN Number', ' - ', 'pf_uan_attachment', 'old_pf_uan_attachment', $attached_files['pf_uan_attachment']);
-            renderOnbEditProofRow($fieldaccesright, 'gosi_number', 'GOSI Number', 'Gosi Number', 'gosi_number', dynamicDataDecode($data['gosi_number']), 'Enter GOSI Number', ' - ', 'gosi_attachment', 'old_gosi_attachment', $attached_files['gosi_attachment']);
+            renderOnbEditProofRow($fieldaccesright, 'adhar_no', 'Aadhar Card', ['ariaLabel' => 'Adhar No', 'inputName' => 'adhar_no', 'value' => dynamicDataDecode($data['adhar_no']), 'placeholder' => 'Enter Aadhar Card', 'expiryHtml' => ' - ', 'fileId' => 'aadhar_attachment', 'oldAttachmentName' => 'old_aadhar_attachment', 'attachmentFile' => $attached_files['aadhar_attachment']]);
+            renderOnbEditProofRow($fieldaccesright, 'passport', 'Passport', ['ariaLabel' => 'Passport', 'inputName' => 'passport', 'value' => dynamicDataDecode($data['passport']), 'placeholder' => 'Enter Passport No.', 'expiryHtml' => $passportExpiryHtml, 'fileId' => 'passport_attachment', 'oldAttachmentName' => 'old_passport_attachment', 'attachmentFile' => $attached_files['passport_attachment']]);
+            renderOnbEditProofRow($fieldaccesright, 'driving_licence', STR_DRIVING_LICENCE, ['ariaLabel' => STR_DRIVING_LICENCE, 'inputName' => 'driving_licence', 'value' => dynamicDataDecode($data['driving_licence']), 'placeholder' => 'Enter Driving Licence', 'expiryHtml' => $dlExpiryHtml, 'fileId' => 'driving_licence_attachment', 'oldAttachmentName' => 'old_driving_licence_attachment', 'attachmentFile' => $attached_files['driving_licence_attachment']]);
+            renderOnbEditProofRow($fieldaccesright, 'pan_number', 'PAN Number', ['ariaLabel' => 'Pan Number', 'inputName' => 'pan_number', 'value' => dynamicDataDecode($data['pan_number']), 'placeholder' => 'Enter PAN Number', 'expiryHtml' => ' - ', 'fileId' => 'pan_attachment', 'oldAttachmentName' => 'old_pan_attachment', 'attachmentFile' => $attached_files['pan_attachment']]);
+            renderOnbEditProofRow($fieldaccesright, 'pf_no', 'PF Number', ['ariaLabel' => 'Pf No', 'inputName' => 'pf_no', 'value' => dynamicDataDecode($data['pf_no']), 'placeholder' => 'Enter PF Number', 'expiryHtml' => ' - ', 'fileId' => 'pf_attachment', 'oldAttachmentName' => 'old_pf_attachment', 'attachmentFile' => $attached_files['pf_attachment']]);
+            renderOnbEditProofRow($fieldaccesright, 'pf_uan', 'UAN Number', ['ariaLabel' => 'Pf Uan', 'inputName' => 'pf_uan', 'value' => dynamicDataDecode($data['pf_uan']), 'placeholder' => 'Enter UAN Number', 'expiryHtml' => ' - ', 'fileId' => 'pf_uan_attachment', 'oldAttachmentName' => 'old_pf_uan_attachment', 'attachmentFile' => $attached_files['pf_uan_attachment']]);
+            renderOnbEditProofRow($fieldaccesright, 'gosi_number', 'GOSI Number', ['ariaLabel' => 'Gosi Number', 'inputName' => 'gosi_number', 'value' => dynamicDataDecode($data['gosi_number']), 'placeholder' => 'Enter GOSI Number', 'expiryHtml' => ' - ', 'fileId' => 'gosi_attachment', 'oldAttachmentName' => 'old_gosi_attachment', 'attachmentFile' => $attached_files['gosi_attachment']]);
             ?>
         </tbody>
     </table>
@@ -1998,7 +2008,7 @@ function renderOnbEditEmpVisa($vars) {
 }
 
 if (empty($onboarding_employees_ajax_define_only)) {
-    render_onboarding_employees_ajax_section(array(
+    renderOnboardingEmployeesAjaxSection(array(
         'result' => $result ?? array(),
         'data' => $data ?? array(),
         'employee_id' => $employee_id ?? '',

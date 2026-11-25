@@ -20,7 +20,7 @@ if($_POST['recordtype']=="discrepancy"){
     $emplist=array_intersect_key($emplist,$discrepancy);
 }
 
-function worktyme_percentage($num_amount, $num_total) {
+function worktymePercentage($num_amount, $num_total) {
   if($num_total != 0 && $num_total !=""){
     $num_total = 1;
   }
@@ -198,7 +198,7 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
                         $billable_hrs = $timesheets[$keye][$date2]['billable_hrs']!=""?$timesheets[$keye][$date2]['billable_hrs']:0;
                         $workingday = $timesheets[$keye][$date2]['day'];
                         $minworkinghrs = $workingentrys['min_working_hours'] ==""?"8":$workingentrys['min_working_hours'];
-                        $workingper = worktyme_percentage($billable_hrs,$minworkinghrs);
+                        $workingper = worktymePercentage($billable_hrs,$minworkinghrs);
                         $workingtypecolor = $workingday == 'W'?$partial_color:$timesheets[$keye][$date2]['color_code'];
                         $timesheetid = $timesheets[$keye][$date2]['timesheetid'];
                         ?>

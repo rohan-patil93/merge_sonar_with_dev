@@ -757,11 +757,7 @@ $stausresult = ViewStatusData();
                                         <span
                                             class="form-label d-inline-block fw-bold"><?= __('Criteria'); ?>-<?php echo $j; ?>
                                         </span>
-                                        <span class="float-right"><button type="button" class="btn btn-link p-0 border-0" onclick="deletecriteria('deletdiv_<?php echo $j; ?>')" aria-label="Delete"><i
-                                                aria-label="<?= htmlspecialchars(__('Deletecriteria'), ENT_QUOTES, 'UTF-8'); ?>"
-                                                onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                                class="ti-close text-danger f-12"
-                                                ></i></button></span>
+                                        <span class="float-right"><button type="button" class="btn btn-link p-0 border-0 text-danger" onclick="deletecriteria('deletdiv_<?php echo $j; ?>')" aria-label="<?= htmlspecialchars(__('Deletecriteria'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-close f-12"></i></button></span>
                                         <div <?php echo $criterias != "-1" ? 'style="pointer-events: none; opacity: 0.6;"' : ""; ?>>
                                             <select class="form-select js-example-basic-single selectcriteria"
                                                 name="criteria[]"

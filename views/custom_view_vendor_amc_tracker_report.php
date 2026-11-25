@@ -10,6 +10,42 @@ function vendorAmcTrackerFiscalMonthLabels()
     );
 }
 
+function vendorAmcTrackerBuildAssetCsvRow($assetRow, $catName, $block, $fiscalStartYear, $si, $monthOrder, $monthLabels)
+{
+    $csvRow = array(
+        'Category' => $catName,
+        'Vendor' => $block['vendor_name'] ?? '',
+        'Contract' => $block['contract_number'] ?? '',
+        'Period' => $block['period_label'] ?? vendorAmcTrackerPeriodLabel($fiscalStartYear),
+        'S.No' => $si,
+        'Equipment Name' => $assetRow['equipment_name'] ?? '',
+        'Frequency' => $assetRow['frequency_label'] ?? '',
+    );
+    $months = $assetRow['months'] ?? array();
+    if (count((array)$monthOrder) > 0) {
+        foreach ($monthOrder as $mk) {
+            $ml = $monthLabels[$mk] ?? $mk;
+            $cell = $months[$mk] ?? array('planned' => '', 'actual_start' => '');
+            $visitDisp = vendorAmcTrackerGetVisitCellDisplay($cell['planned'] ?? '', $cell['actual_start'] ?? '');
+            $csvRow[$ml . ' Plan'] = $visitDisp['planned_text'];
+            $csvRow[$ml . ' Actual'] = $visitDisp['actual_text'];
+        }
+    }
+    return $csvRow;
+}
+
+function vendorAmcTrackerBuildBlockCsvRows($block, $catName, $fiscalStartYear, $monthOrder, $monthLabels)
+{
+    $blockRows = array();
+    $si = 1;
+    if (count((array)($block['rows'] ?? array())) > 0) {
+        foreach ($block['rows'] as $assetRow) {
+            $blockRows[] = vendorAmcTrackerBuildAssetCsvRow($assetRow, $catName, $block, $fiscalStartYear, $si++, $monthOrder, $monthLabels);
+        }
+    }
+    return $blockRows;
+}
+
 function vendorAmcTrackerBuildCsvRows($categories, $fiscalStartYear)
 {
     $rows = array();
@@ -20,31 +56,7 @@ function vendorAmcTrackerBuildCsvRows($categories, $fiscalStartYear)
             $catName = $cat['category_name'] ?? '';
             if (count((array)($cat['blocks'] ?? array())) > 0) {
                 foreach ($cat['blocks'] as $block) {
-                    $si = 1;
-                    if (count((array)($block['rows'] ?? array())) > 0) {
-                        foreach ($block['rows'] as $assetRow) {
-                            $csvRow = array(
-                                'Category' => $catName,
-                                'Vendor' => $block['vendor_name'] ?? '',
-                                'Contract' => $block['contract_number'] ?? '',
-                                'Period' => $block['period_label'] ?? vendorAmcTrackerPeriodLabel($fiscalStartYear),
-                                'S.No' => $si++,
-                                'Equipment Name' => $assetRow['equipment_name'] ?? '',
-                                'Frequency' => $assetRow['frequency_label'] ?? '',
-                            );
-                            $months = $assetRow['months'] ?? array();
-                            if (count((array)$monthOrder) > 0) {
-                                foreach ($monthOrder as $mk) {
-                                    $ml = $monthLabels[$mk] ?? $mk;
-                                    $cell = $months[$mk] ?? array('planned' => '', 'actual_start' => '');
-                                    $visitDisp = vendorAmcTrackerGetVisitCellDisplay($cell['planned'] ?? '', $cell['actual_start'] ?? '');
-                                    $csvRow[$ml . ' Plan'] = $visitDisp['planned_text'];
-                                    $csvRow[$ml . ' Actual'] = $visitDisp['actual_text'];
-                                }
-                            }
-                            $rows[] = $csvRow;
-                        }
-                    }
+                    $rows = array_merge($rows, vendorAmcTrackerBuildBlockCsvRows($block, $catName, $fiscalStartYear, $monthOrder, $monthLabels));
                 }
             }
         }

@@ -50,7 +50,7 @@ if($_POST['getajax'] == 'Y'  || $_POST['ajaxpage'] == "Y"){
                             <div class="card-body">
                                 <?php foreach($building_with_floors[$building['id']] as $bfloor){ ?>
                                     <a href="index.php?option=COM_INSERT_BUILDING_FLOORS&Rid=<?php echo deocdeId("id:".$bfloor['id']); ?>" target="_blank">
-                                        <div class="card" onclick="ShowBuildingFloors('<?php echo $bfloor['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                        <div class="card" onclick="ShowBuildingFloors('<?php echo $bfloor['id']; ?>')">
                                             <div class="card-body">
                                                 <img src="uploads/building_floors/<?php echo $bfloor['floor_image']; ?>" class="img-100" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <span><?php echo $bfloor['floor_name']; ?></span>

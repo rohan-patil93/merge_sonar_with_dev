@@ -2,10 +2,7 @@
     <div class="row mb-2">
         <ul class="nav md-tabs m-l-10" id="myTab1">
             <?php $km = 0;  foreach($saidnav as $nav){  $activtb ='';
-                if($nav['Page_Name'] == $_GET['SUBO']){
-                    $activtb = "active";
-                    $option_name = $nav['Page_Name'];
-                }elseif($km==0 && $_GET['SUBO']==""){
+                if($nav['Page_Name'] == $_GET['SUBO'] || ($km == 0 && $_GET['SUBO'] == "")){
                     $activtb = "active";
                     $option_name = $nav['Page_Name'];
                 }

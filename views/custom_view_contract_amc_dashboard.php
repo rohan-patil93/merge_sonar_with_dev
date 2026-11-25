@@ -150,7 +150,12 @@ $sections = array(
 
                                             $status = (int) ($row['current_status'] ?? 0);
 
-                                            $statusLabel = $status >= 199 ? 'Completed' : ($status > 0 ? 'In Progress' : 'Pending');
+                                            $statusLabel = 'Pending';
+                                            if ($status >= 199) {
+                                                $statusLabel = 'Completed';
+                                            } elseif ($status > 0) {
+                                                $statusLabel = 'In Progress';
+                                            }
 
                                             ?>
 

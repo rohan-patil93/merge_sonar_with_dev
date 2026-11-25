@@ -55,7 +55,7 @@ $statuse = ViewStatusData();
     <?php foreach($transactiontables as $trans_id=>$tableslist){ ?>
         <tr class="main">
             <td class="cursor-pointer">
-                <i class="ti-angle-double-down" onclick="opensubtable('<?php echo $trans_id; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <button type="button" class="btn btn-link p-0 border-0 text-dark" aria-label="<?= htmlspecialchars(__('Toggle subtable'), ENT_QUOTES, 'UTF-8'); ?>" onclick="opensubtable('<?php echo $trans_id; ?>')"><i class="ti-angle-double-down"></i></button>
                 <input type="hidden" class="showclassval" id="showhide<?php echo $trans_id; ?>" value="0">
             </td>
             <td><?php echo $tableslist[0]['transaction_number']; ?></td>

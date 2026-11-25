@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_CHECKED_DISABLED')) {
+    define('STR_CHECKED_DISABLED', 'checked disabled');
+}
 if(isset($_POST['submit'])){
     $emp_id  = $_POST['emp_id'];
     $user_id  = $_POST['user_id'];
@@ -804,7 +807,7 @@ if($emp_assets['current_status']==32){ echo "Returned";
                     <div class="col-lg-2">
                         <div class="checkbox-fade fade-in-primary">
                             <label class="form-label">
-                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox1" <?php if(in_array($sub['id'],(array)$esign_eba)){ echo "checked disabled";
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox1" <?php if(in_array($sub['id'],(array)$esign_eba)){ echo STR_CHECKED_DISABLED;
 } ?>  onclick="toinsertandpdateesignemployeeonlyone(<?php echo $emp_id.",".$dis_esign['id'].",".$sub['id']; ?>)" type="checkbox" id="checkbox1" onkeydown="">
                                 <span class="cr">
                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -880,7 +883,7 @@ if($emp_assets['current_status']==32){ echo "Returned";
                     <div class="row">
                         <div class="col-lg-2">
                             <div class="border-checkbox-group border-checkbox-group-primary">
-                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox" <?php if(in_array($sub['id'],(array)$mpc_eba)){ echo "checked disabled";
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox" <?php if(in_array($sub['id'],(array)$mpc_eba)){ echo STR_CHECKED_DISABLED;
 } ?>  onclick="vrcandpoemployeeassign(<?php echo $emp_id.",".$dis_esign['id'].",".$sub['id'].",'mpc'"; ?>)" type="checkbox" id="checkbox1_3" onkeydown="">
                             </div>
                         </div>
@@ -919,7 +922,7 @@ if($emp_assets['current_status']==32){ echo "Returned";
                     <div class="row">
                         <div class="col-lg-2">
                             <div class="border-checkbox-group border-checkbox-group-primary">
-                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox" <?php if(in_array($sub['id'],(array)$mpc_eba)){ echo "checked disabled";
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox" <?php if(in_array($sub['id'],(array)$mpc_eba)){ echo STR_CHECKED_DISABLED;
 } ?>  onclick="milstonedetail(<?php echo $emp_id.",".$dis_esign['id'].",".$sub['id']; ?>)" type="checkbox" id="checkbox1_4" onkeydown="">
 
                             </div>

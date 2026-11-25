@@ -1,4 +1,7 @@
 <?php
+if (!defined('DATE_FORMAT_D_M_Y')) {
+    define('DATE_FORMAT_D_M_Y', 'd M, Y');
+}
 $fileupload_path = "uploads/all/";
 $emp_role_id = json_decode($_SESSION['role_id']);
 $addcondition = '';
@@ -177,7 +180,7 @@ $announcement_reslut_view = 'Y';
                               </div>
                               <!--end::Info-->
                            </div>
-                           <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date('d M, Y', strtotime($myannounce['expiry_date']));?></button>
+                           <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date(DATE_FORMAT_D_M_Y, strtotime($myannounce['expiry_date']));?></button>
                            <div class="text-dark-50 font-weight-bolder font-size-sm mb-3 mt-2">
                                 <i class="ti-comments text-primary m-r-10 text-dark f-w-600"></i>
                               <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $myannounce['id'];?>" data-view-type="comment">
@@ -260,7 +263,7 @@ $announcement_reslut_view = 'Y';
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                              </span>
-                                             <span class="text-muted font-weight-bold"><?= __('Posted:'); ?> <?php echo date('d M, Y', strtotime($annvalue['start_date']));?></span>
+                                             <span class="text-muted font-weight-bold"><?= __('Posted:'); ?> <?php echo date(DATE_FORMAT_D_M_Y, strtotime($annvalue['start_date']));?></span>
                                           </div>
                                           <div class="d-flex align-items-center">
                                              <span class="svg-icon svg-icon-md svg-icon-primary pr-1">
@@ -274,7 +277,7 @@ $announcement_reslut_view = 'Y';
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                              </span>
-                                             <span class="text-muted font-weight-bold"><?= __('Expires:'); ?> <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?> </span>
+                                             <span class="text-muted font-weight-bold"><?= __('Expires:'); ?> <?php echo date(DATE_FORMAT_D_M_Y, strtotime($annvalue['expiry_date']));?> </span>
                                           </div>
                                        </div>
                                     </div>
@@ -483,7 +486,7 @@ $announcement_reslut_view = 'Y';
                                              </span>
                                           </div>
                                        </div>
-                                       <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?></button>
+                                       <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date(DATE_FORMAT_D_M_Y, strtotime($annvalue['expiry_date']));?></button>
                                        <div class="text-dark-50 font-weight-bolder font-size-sm pb-7 pt-3">
                                           <i class="icon-xxl la la-comment-o" ></i>
                                           <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="comment">
@@ -518,7 +521,7 @@ $announcement_reslut_view = 'Y';
                                              </span>
                                           </div>
                                        </div>
-                                       <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?></button>
+                                       <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date(DATE_FORMAT_D_M_Y, strtotime($annvalue['expiry_date']));?></button>
                                        <div class="text-dark-50 font-weight-bolder font-size-sm pb-7 pt-3">
                                           <i class="icon-xxl la la-comment-o"></i>
                                           <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="comment">

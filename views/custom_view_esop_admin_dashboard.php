@@ -74,17 +74,18 @@ if(count((array)$esoplanstrend) !=0){
 
 $esop_allocations = $result['esop_allocations'];
 function getNumberConvertName($val,$title){
-   if(strlen($val) >= 8){
-          return 'Crore';
-  }elseif(strlen($val) >= 6){
-      return 'lakh';  //millian
-  }elseif(strlen($val) >= 4){
-      return 'Thousand';
-  }elseif(strlen($val) == 3){
-      return 'hundred';
-  }else{
-    return $title;
-  }
+    $len = strlen($val);
+    $res = $title;
+    if ($len >= 8) {
+        $res = 'Crore';
+    } elseif ($len >= 6) {
+        $res = 'lakh';
+    } elseif ($len >= 4) {
+        $res = 'Thousand';
+    } elseif ($len == 3) {
+        $res = 'hundred';
+    }
+    return $res;
 }
 ?>
 <div class="row">

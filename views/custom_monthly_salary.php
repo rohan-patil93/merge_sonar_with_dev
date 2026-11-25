@@ -386,7 +386,6 @@ if(catlink=='PTX'){
                                 <?php $j=1; foreach ($data as  $dat) {
                                     if(in_array($dat['id'], $checkmainids)){
                                         $maincss ="";
-                                    }else{
                                     }
                                     ?>
                                     <table <?php echo $maincss; ?> id="invoiceItem<?php echo  $dat['id']; ?>">

@@ -62,16 +62,15 @@ function eerFormatMoney($amount) {
 
 function eerStatusClass($status_code) {
     $status_code = (string)$status_code;
+    $cls = '';
     if ($status_code == '2') {
-        return 'eer-status-draft';
+        $cls = 'eer-status-draft';
+    } elseif ($status_code == '0') {
+        $cls = 'eer-status-active';
+    } elseif ($status_code == '199') {
+        $cls = 'eer-status-approved';
     }
-    if ($status_code == '0') {
-        return 'eer-status-active';
-    }
-    if ($status_code == '199') {
-        return 'eer-status-approved';
-    }
-    return '';
+    return $cls;
 }
 ?>
 <div class="col-12">

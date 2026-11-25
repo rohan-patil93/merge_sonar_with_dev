@@ -1,4 +1,5 @@
 <?php
+defined('URL_OPTION_PREFIX') || define('URL_OPTION_PREFIX', 'index.php?option=');
 $page_details= toGetTableNameBaseApplicationPagesList('list_page_name', $_GET['option']);
 $menu_details= toGetMenuDetailsBaseMenuPageName($_GET['option']);
 $pageurl = API."?mode=displayattributesview&fid=application_table_name&view=".$page_details['application_table_name'];
@@ -49,7 +50,7 @@ $stausresult = ViewStatusData();
                     </a>
                     &nbsp;
                     <?php
-                                        $link = "index.php?option=".$insert  ?>
+                                        $link = URL_OPTION_PREFIX.$insert  ?>
                     <div class="dropdown dropdown-inline">
                         <a href="<?php echo $link; ?>"  class="btn btn-brand btn-elevate btn-icon-sm">
                             <i class="la la-plus"></i>
@@ -82,8 +83,8 @@ $stausresult = ViewStatusData();
                             <td><?php echo $bill['statu_labels']; ?></td>
                             <td>
                                 <?php
-                                    $edit = "index.php?option=".$insert."&table=". $bill['table_name']."&progress=". $bill['id'];
-                                    $link_copy = $insert_permission == 1 ? "index.php?option=".$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
+                                    $edit = URL_OPTION_PREFIX.$insert."&table=". $bill['table_name']."&progress=". $bill['id'];
+                                    $link_copy = $insert_permission == 1 ? URL_OPTION_PREFIX.$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
                                 ?>
 
                                             <div style="float: left;">

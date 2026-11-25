@@ -68,7 +68,7 @@
                                             </td>
 
                                             <td class="text-center">
-                                                <i class="fa fa-eye" onclick="assetsReturnReceive('<?php echo $assreturn['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                                <button type="button" class="btn btn-link p-0 border-0 text-dark" aria-label="<?= htmlspecialchars(__('Return assets'), ENT_QUOTES, 'UTF-8'); ?>" onclick="assetsReturnReceive('<?php echo $assreturn['id']; ?>')"><i class="fa fa-eye"></i></button>
                                             </td>
                                         </tr>
                                     <?php $mk++;

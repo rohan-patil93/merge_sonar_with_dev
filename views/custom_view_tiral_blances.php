@@ -1,4 +1,7 @@
 <?php
+if (!defined('CONST_3000_00')) {
+    define('CONST_3000_00', CONST_3000_00);
+}
 
 $acconts[] = array('acont_name'=>'Capital Acount','debit'=>'0.00','credit'=>'190000.00');
 $acconts[] = array('acont_name'=>'Secured Llabillty','debit'=>'0.00','credit'=>'12000.00');
@@ -7,13 +10,13 @@ $acconts[] = array('acont_name'=>'Current Llabillty','debit'=>'0.00','credit'=>'
 $acconts[] = array('acont_name'=>'Fixed Assert','debit'=>'303000.00','credit'=>'0.00');
 
 $gen['1'][] = array('acont_name'=>'Secured Llabillty 1','debit'=>'0.00','credit'=>'4000.00');
-$gen['1'][] = array('acont_name'=>'Secured Llabillty 2','debit'=>'0.00','credit'=>'3000.00');
+$gen['1'][] = array('acont_name'=>'Secured Llabillty 2','debit'=>'0.00','credit'=>CONST_3000_00);
 $gen['1'][] = array('acont_name'=>'Secured Llabillty 3','debit'=>'0.00','credit'=>'5000.00');
-$gen['2'][] = array('acont_name'=>'Unsecured Llabillty 1','debit'=>'0.00','credit'=>'3000.00');
+$gen['2'][] = array('acont_name'=>'Unsecured Llabillty 1','debit'=>'0.00','credit'=>CONST_3000_00);
 $gen['2'][] = array('acont_name'=>'Unsecured Llabillty 2','debit'=>'0.00','credit'=>'2000.00');
 $gen['2'][] = array('acont_name'=>'Unsecured Llabillty 3','debit'=>'0.00','credit'=>'5000.00');
 $gen['3'][] = array('acont_name'=>'Current Llabillty 1','debit'=>'0.00','credit'=>'6000.00');
-$gen['3'][] = array('acont_name'=>'Current Llabillty 1','debit'=>'0.00','credit'=>'3000.00');
+$gen['3'][] = array('acont_name'=>'Current Llabillty 1','debit'=>'0.00','credit'=>CONST_3000_00);
 $gen['4'][] = array('acont_name'=>'Fixed Llabillty 1','debit'=>'0.00','credit'=>'303000.00');
 ?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>

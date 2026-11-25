@@ -91,28 +91,30 @@ foreach($parentcoa as $pcoa1){
 
 
 function findBreadcrumbPath($nodes, $parentchildacount, $targetCode, $path = array(), $level = 1) {
-    if ($level > 5 || empty($nodes)) {
-        return null;
-    }
-    foreach ($nodes as $node) {
-        $currentPath = $path;
-        $currentPath[$level] = array(
-            'account_code' => $node['account_code'],
-            'account_name' => $node['account_name']
-        );
-        if ($node['account_code'] == $targetCode) {
-            for ($k = $level + 1; $k <= 5; $k++) {
-                $currentPath[$k] = array();
+    $result = null;
+    if ($level <= 5 && !empty($nodes)) {
+        foreach ($nodes as $node) {
+            $currentPath = $path;
+            $currentPath[$level] = array(
+                'account_code' => $node['account_code'],
+                'account_name' => $node['account_name']
+            );
+            if ($node['account_code'] == $targetCode) {
+                for ($k = $level + 1; $k <= 5; $k++) {
+                    $currentPath[$k] = array();
+                }
+                $result = $currentPath;
+                break;
             }
-            return $currentPath;
-        }
-        $children = $parentchildacount[$node['account_code']] ?? array();
-        $found = findBreadcrumbPath($children, $parentchildacount, $targetCode, $currentPath, $level + 1);
-        if ($found !== null) {
-            return $found;
+            $children = $parentchildacount[$node['account_code']] ?? array();
+            $found = findBreadcrumbPath($children, $parentchildacount, $targetCode, $currentPath, $level + 1);
+            if ($found !== null) {
+                $result = $found;
+                break;
+            }
         }
     }
-    return null;
+    return $result;
 }
 
 function getbredcrump($parentcoa, $parentchildacount, $parent_account_code) {

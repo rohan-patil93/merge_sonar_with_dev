@@ -120,7 +120,8 @@ function matchingResult($post,$candidate){
         <div class="col-lg-10 p-l-20">
           <a class="f-w-600 f-18 text-capitalize d-block" href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$candidate['id']); ?>" ><?php echo $candidate['display_name']; ?>
           <?php if($candidate['employee_id']!=""){?>
-          <span class="form-label label label-sm label-warning"><?= __('Emp'); ?></span> <?php } ?></a>
+          <span class="form-label label label-sm label-warning"><?= __('Emp'); ?></span>
+          <?php } ?></a>
           <p class="f-12 f-w-600 text-muted mb-0" ><?php echo $candidate['candidate_code']; ?>
           <?php if(isset($jobpostingcandidates[$candidate['id']])){ ?>
             <i class='fa fa-check text-info'></i>

@@ -369,11 +369,11 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                             <?php } ?>
                         </div>
                         <?php if ($vendordetail['email'] != "") { ?>
-                            <a href="mailto:<?php echo $vendordetail['email']; ?>" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5">
+                            <a href="mailto:<?php echo $vendordetail['email']; ?>" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5" aria-label="<?= htmlspecialchars(__('Email: ') . $vendordetail['email'], ENT_QUOTES, 'UTF-8'); ?>">
                                 <i class="ti-email f-14 text-primary"></i>&nbsp;<?php echo $vendordetail['email']; ?></a>
                         <?php }
                         if ($vendordetail['phone'] != "") {  ?>
-                            <a href="tel:<?php echo $vendordetail['phone']; ?>" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5">
+                            <a href="tel:<?php echo $vendordetail['phone']; ?>" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5" aria-label="<?= htmlspecialchars(__('Phone: ') . DynamicPhoneNumberFormt($vendordetail['phone']), ENT_QUOTES, 'UTF-8'); ?>">
                                 <i class="fa fa-phone f-14 text-primary"></i>&nbsp;<?php echo DynamicPhoneNumberFormt($vendordetail['phone']); ?></a>
                         <?php }  ?>
                         <?php if ($vendordetail['billing_address'] != "") { ?>

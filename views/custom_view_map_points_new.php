@@ -3,23 +3,21 @@ $_SESSION['apply_js']['multiselest'] = 1;
 
 $fwdpPageOption = 'COM_VIEW_MAP_POINTS_NEW';
 
-if (isset($_POST['submit'])) {
-    if ($_POST['submit'] == 'insert') {
-        unset($_POST['submit']);
-        $table_name = 'field_work_daily_plans';
-        $data = $_POST;
-        $data['current_status'] = '0';
-        $data['is_active'] = '0';
-        $data['status_date'] = nowDate();
-        $data['company_id'] = $_SESSION['company_id'];
-        $data['created_date'] = nowDate();
-        $data['created_by'] = $_SESSION['userid'];
-        $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
-        $response = file_post_contents($url, $data, 'insert');
-        if ($response) {
-            header("location:index.php?option=" . $fwdpPageOption . "&error=9999");
-            exit;
-        }
+if (isset($_POST['submit']) && $_POST['submit'] == 'insert') {
+    unset($_POST['submit']);
+    $table_name = 'field_work_daily_plans';
+    $data = $_POST;
+    $data['current_status'] = '0';
+    $data['is_active'] = '0';
+    $data['status_date'] = nowDate();
+    $data['company_id'] = $_SESSION['company_id'];
+    $data['created_date'] = nowDate();
+    $data['created_by'] = $_SESSION['userid'];
+    $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
+    $response = file_post_contents($url, $data, 'insert');
+    if ($response) {
+        header("location:index.php?option=" . $fwdpPageOption . "&error=9999");
+        exit;
     }
 }
 

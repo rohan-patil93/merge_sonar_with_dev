@@ -1,4 +1,7 @@
 <?php
+if (!defined('DATE_FORMAT_DMY_HIS')) {
+    define('DATE_FORMAT_DMY_HIS', 'd-m-Y H:i:s');
+}
 $_SESSION['download_data'] = array();
 $_SESSION['apply_js']['multiselest'] = 1;
 
@@ -145,11 +148,11 @@ if (count((array)$result)>0) {
                                 }
 
                                 if ($clockInTimestamp != '' && $clockOutTimestamp != '') {
-                                    $lastUsedDateTime = date('d-m-Y H:i:s', max($clockInTimestamp, $clockOutTimestamp));
+                                    $lastUsedDateTime = date(DATE_FORMAT_DMY_HIS, max($clockInTimestamp, $clockOutTimestamp));
                                 } elseif ($clockOutTimestamp != '') {
-                                    $lastUsedDateTime = date('d-m-Y H:i:s', $clockOutTimestamp);
+                                    $lastUsedDateTime = date(DATE_FORMAT_DMY_HIS, $clockOutTimestamp);
                                 } elseif ($clockInTimestamp != '') {
-                                    $lastUsedDateTime = date('d-m-Y H:i:s', $clockInTimestamp);
+                                    $lastUsedDateTime = date(DATE_FORMAT_DMY_HIS, $clockInTimestamp);
                                 }
 
                                 $csvData[] = array(
@@ -181,7 +184,7 @@ if (count((array)$result)>0) {
                             $_SESSION['download_data'] = $csvData;
                             $_SESSION['csv_header']['company_name'] = $_SESSION['config']['name'] ?? '';
                             $_SESSION['csv_header']['title'] = 'Biometric Machine Last Used Report';
-                            $_SESSION['csv_header']['date_time'] = date('d-m-Y H:i:s');
+                            $_SESSION['csv_header']['date_time'] = date(DATE_FORMAT_DMY_HIS);
                         } else {
                             ?>
                             <tr>

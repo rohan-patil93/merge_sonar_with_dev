@@ -98,7 +98,7 @@ foreach($equipment_allocations as $equipres){
             $cabincnt = 0;
             foreach($equipment_allocations as $ealloc){  $cabincnt++;
                 ?>
-                    <div id="position_<?php echo $cabincnt; ?>" class="equipment-allocation-icon cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $cabincnt; ?> <?= htmlspecialchars(__('Seat'), ENT_QUOTES, 'UTF-8'); ?>" style="top: <?php echo $ealloc['top_size']; ?>%; left: <?php echo $ealloc['left_size']; ?>%;" onclick="showPopup('equipment_alloc_id_<?php echo $ealloc['id']; ?>')">
+                    <div id="position_<?php echo $cabincnt; ?>" class="equipment-allocation-icon cursor-pointer" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $cabincnt; ?> <?= htmlspecialchars(__('Seat'), ENT_QUOTES, 'UTF-8'); ?>" style="top: <?php echo $ealloc['top_size']; ?>%; left: <?php echo $ealloc['left_size']; ?>%;" onclick="showPopup('equipment_alloc_id_<?php echo $ealloc['id']; ?>')">
                         <?php if($employees[$ealloc['emp_id']]['display_name'] !=""){ ?>
                         <?php if($employees[$ealloc['emp_id']]['image'] !="") {?>
                             <img src="uploads/all/<?php echo $employees[$ealloc['emp_id']]['image']; ?>" class="img-radius img-30 align-top" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">

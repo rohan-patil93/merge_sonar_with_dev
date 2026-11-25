@@ -66,7 +66,7 @@ foreach($transaction_approval_logs as $tal){
             <div class="tab-pane card-body active" id="appraisal_setting_team" role="tabpanel">
                 <div class="row">
                     <?php if(count((array)$performancesetupary) != 0){  foreach($performancesetupary as $assetyaerkey=>$performancesetu){?>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-12" onclick="showAppraisalList('<?php echo $assetyaerkey; ?>','pageviewteam','T')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-12" onclick="showAppraisalList('<?php echo $assetyaerkey; ?>','pageviewteam','T')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                         <div class="card comp-card">
                             <div class="card-body empty_pageviewteam" id="pageviewteam_1_<?php echo $assetyaerkey; ?>">
                                 <div class="row align-items-center">

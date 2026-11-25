@@ -131,7 +131,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
         htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Roperand'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control  js-example-basic-single" id="roperand_'+count+'" name= "roperand[]" ><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
 } ?></select></td>';
 
-        htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><div  id="'+count+'"  class="close" onclick="deletestatickRows(this.id)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-trash"></i></div>';
+        htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><div  id="'+count+'"  class="close" onclick="deletestatickRows(this.id)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-trash"></i></div>';
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
              $(".js-example-basic-single").select2();
@@ -332,7 +332,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                                     </td>
                                                     <td>
                                                         <input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
-                                                        <div  id="<?php echo $count; ?>" class="close" onclick="deletestatickRows(this.id)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-trash"></i></div>
+                                                        <div  id="<?php echo $count; ?>" class="close" onclick="deletestatickRows(this.id)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-trash"></i></div>
 
                                                     </td>
                                                 </tr>

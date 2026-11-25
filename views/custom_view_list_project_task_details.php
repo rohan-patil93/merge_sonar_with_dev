@@ -38,7 +38,7 @@ $atchlabel = $data['attach_labels'];
         $colors = $data['task_label'][$pts['id']];
         ?>
       <div class="col-lg-4">
-       <div class="todo p-2" id="tsakid_<?php echo $pts['id']; ?>"  onclick="taskdetailspopup(<?php echo $pts['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+       <div class="todo p-2" id="tsakid_<?php echo $pts['id']; ?>"  onclick="taskdetailspopup(<?php echo $pts['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
         <div class="col-lg-12">
           <?php foreach($colors as $color){ ?>

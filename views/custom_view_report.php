@@ -8,8 +8,7 @@ if(isset($_GET['DGM']) && $_GET['DGM'] != ""){
 }
 $fld = $_GET['FLD'];
 $data12["where"]['is_active'] = '0';
-if($fld!=""){
-}
+
 
 $data = urlencode(json_encode($data12));
 $itemurl = API."?mode=gettabledetailswithconditions&table=my_reports&data=".$data;

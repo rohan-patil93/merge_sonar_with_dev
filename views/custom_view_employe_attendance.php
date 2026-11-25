@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_HOURS')) {
+    define('STR_HOURS', ' Hours');
+}
 $url = API."?mode=togetlocationemployeeattendance&empid=".$_GET['newempid'];
 $cudata = callAPI($url);
 $attdetails = json_decode($cudata,1);
@@ -121,9 +124,9 @@ $fields = array('maximum_hours_cap', 'full_day_hours', 'half_day_hours', 'break_
                       </label>
                     </td>
                     <td><?php echo $shiftdata['name']; ?></td>
-                    <td><?php echo $shiftdata['minimum_hours_required']." Hours"; ?></td>
-                    <td><?php echo $shiftdata['full_day_hours']." Hours"; ?></td>
-                    <td><?php echo $shiftdata['half_day_hours']." Hours"; ?></td>
+                    <td><?php echo $shiftdata['minimum_hours_required'].STR_HOURS; ?></td>
+                    <td><?php echo $shiftdata['full_day_hours'].STR_HOURS; ?></td>
+                    <td><?php echo $shiftdata['half_day_hours'].STR_HOURS; ?></td>
                     <td><?php echo implode(",", json_decode($shiftdata['working_days'],1)); ?></td>
                   </tr>
                   <?php } ?>

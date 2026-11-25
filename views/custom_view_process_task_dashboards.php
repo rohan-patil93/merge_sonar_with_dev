@@ -89,7 +89,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                         </div>
                         <div class="col-md-12">
                           <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo $totaltaskper; ?>%;" aria-valuenow="<?php echo $totaltaskper; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-success" style="width:<?php echo $totaltaskper; ?>%;" aria-valuenow="<?php echo $totaltaskper; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                     </div>

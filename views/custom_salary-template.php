@@ -241,7 +241,7 @@ $data = json_decode($data,1);
                                         </div>
                                         <div class="col-lg-4">
                                             <span><?= __('Notes'); ?>:</span>
-                                            <textarea aria-label="<?= htmlspecialchars(__('Max 5000 characters'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2_2" name="note" placeholder="<?= htmlspecialchars(__('Max 5000 characters'), ENT_QUOTES, 'UTF-8'); ?>" ></textarea>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Notes'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2_2" name="note" placeholder="<?= htmlspecialchars(__('Max 5000 characters'), ENT_QUOTES, 'UTF-8'); ?>" ></textarea>
                                         </div>
                                     </div>
                                 </div>

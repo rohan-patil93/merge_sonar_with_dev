@@ -185,7 +185,9 @@ function displaystausdrop(id,table,status_id){
 } ?></select></td>';
         htmlRows += '<?php if($_SESSION["user_type"] !=3){ ?><td>&nbsp; </td><td>&nbsp;</textarea> </td>';
         htmlRows += '<td>&nbsp;</textarea> </td><td> <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".$stausresult[0]['color']; ?>;    background:  <?php echo "#".strval($stausresult[0]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[0]['background_color']); ?>;" type="button"  ><?php echo $stausresult[0]['name']; ?> </button></td>';
-        htmlRows += '<td><button type="button" class="btn btn-secondary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"> <?= htmlspecialchars(__('Genrate'), ENT_QUOTES, 'UTF-8'); ?> </button></td> <?php } ?>';
+        htmlRows += '<td><button type="button" class="btn btn-secondary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"> <?= htmlspecialchars(__('Genrate'), ENT_QUOTES, 'UTF-8'); ?> </button></td>';
+        <?php
+} ?>
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
     }

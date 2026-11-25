@@ -32,7 +32,10 @@ function submitResumeFiles(){
             contentType: false,
             success: function (response) {
                 console.log(response);
-                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('File uploaded successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php
+if (!defined('STR_HTML_NBSP')) {
+    define('STR_HTML_NBSP', '&nbsp;');
+} echo json_encode(__('File uploaded successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                     location.reload();
             }
         });
@@ -300,7 +303,7 @@ function SynchCandidateFolder(){
                           <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
                           <div class="d-inline-block width73">
                               <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
-                              <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
+                              <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : STR_HTML_NBSP; ?></p>
                               <p class="text-muted m-b-0"><?php echo $canres['created_date']; ?></p>
                           </div>
                       </div>
@@ -339,7 +342,7 @@ function SynchCandidateFolder(){
                       <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
                       <div class="d-inline-block width73">
                           <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
-                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
+                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : STR_HTML_NBSP; ?></p>
                           <p class="text-muted m-b-0"><?php echo $canres['screening_start_datetime']; ?></p>
 
                       </div>
@@ -378,7 +381,7 @@ function SynchCandidateFolder(){
                       <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
                       <div class="d-inline-block width73">
                           <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class=" text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
-                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
+                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : STR_HTML_NBSP; ?></p>
                           <p class="text-muted m-b-0"><?php echo $canres['screening_end_datetime']; ?></p>
 
                       </div>
@@ -417,7 +420,7 @@ function SynchCandidateFolder(){
                       <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
                       <div class="d-inline-block width73">
                           <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
-                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
+                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : STR_HTML_NBSP; ?></p>
                           <p class="text-muted m-b-0"><?php echo $canres['ai_summary']!=""?$canres['ai_summary']:"-"; ?></p>
 
                       </div>

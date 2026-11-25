@@ -56,7 +56,11 @@ $today = date('Y-m-d');
                             foreach($employees as $employee_row){
                                 $eid = is_array($employee_row) ? $employee_row['id'] : $employee_row->id;
                                 $ename = is_array($employee_row) ? $employee_row['display_name'] : $employee_row->display_name;
-                                $ecode = is_array($employee_row) ? (isset($employee_row['emp_code']) ? $employee_row['emp_code'] : '') : (isset($employee_row->emp_code) ? $employee_row->emp_code : '');
+                                if (is_array($employee_row)) {
+                                    $ecode = isset($employee_row['emp_code']) ? $employee_row['emp_code'] : '';
+                                } else {
+                                    $ecode = isset($employee_row->emp_code) ? $employee_row->emp_code : '';
+                                }
                                 $label = $ename;
                                 if($ecode != ''){
                                     $label .= ' ('.$ecode.')';

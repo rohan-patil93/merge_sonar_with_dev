@@ -1,4 +1,7 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+}
 $_SESSION['apply_js']['multiselest'] = 1;
 if (isset($_POST['save'])) {
     $result = array();
@@ -10,7 +13,7 @@ if (isset($_POST['save'])) {
   $updateAll = [
     'is_active'    => 1,
     'updated_by'   => $_SESSION['userid'],
-    'updated_date' => date('Y-m-d H:i:s')
+    'updated_date' => date(DATE_FORMAT_YMD_HIS)
   ];
   $url = API . "?mode=updaterowtabledata&table=$table_name&method=post&rid=$rid&fid=$is_active";
   $result['update'] = file_post_contents($url, $updateAll, 'update');
@@ -29,18 +32,18 @@ if (isset($_POST['save'])) {
           'company_id'     => $_SESSION['company_id'],
           'current_status' => 0,
           'is_active'      => 0,
-          'status_date'    => date('Y-m-d H:i:s')
+          'status_date'    => date(DATE_FORMAT_YMD_HIS)
         ];
 
         if (!empty($ids[$i])) {
           $data['updated_by'] = $_SESSION['userid'];
-          $data['updated_date'] = date('Y-m-d H:i:s');
+          $data['updated_date'] = date(DATE_FORMAT_YMD_HIS);
           $url = API . "?mode=updaterowtabledata&rid={$ids[$i]
 }&table=$table_name&method=post";
           $result[$type][] = file_post_contents($url, $data, 'update');
         } else {
           $data['created_by'] = $_SESSION['userid'];
-          $data['created_date'] = date('Y-m-d H:i:s');
+          $data['created_date'] = date(DATE_FORMAT_YMD_HIS);
           $url = API . "?mode=adddata&table=$table_name&method=post";
           $result[$type][] = file_post_contents($url, $data, 'insert');
         }

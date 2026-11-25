@@ -123,7 +123,7 @@ $_SESSION['download_data'] = array();
             <div class="col-md-12 mt-2">
               <h5><?php echo $i; ?></h5>
               <div class="progress">
-                <div class="progress-bar progress-bar-warning " role="progressbar" style="width: <?php echo $countyear[$i]; ?>%" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100"><?php echo $countyear[$i]; ?></div>
+                <div class="progress-bar progress-bar-warning " style="width: <?php echo $countyear[$i]; ?>%" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100"><?php echo $countyear[$i]; ?></div>
               </div>
             </div>
             <?php  } ?>

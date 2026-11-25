@@ -156,7 +156,7 @@ $emp_pf_list = json_decode($configesponse,1);
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite"><?= __('Showing 1 to 10 of 50 entries'); ?>
+                            <div class="dataTables_info" id="kt_datatable_info"  aria-live="polite"><?= __('Showing 1 to 10 of 50 entries'); ?>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-7">

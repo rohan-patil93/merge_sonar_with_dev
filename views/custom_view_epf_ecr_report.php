@@ -50,7 +50,7 @@ function valueemtpydash($val){
 }
 
 if(!function_exists('render_epf_ecr_table')){
-    function render_epf_ecr_table($report_rows, $unique, $pay_month_year){
+    function renderEpfEcrTable($report_rows, $unique, $pay_month_year){
         $total_columns = 8 + (count((array)$unique) * 2);
         ?>
         <div class="dt-responsive table-responsive mt-2">
@@ -170,11 +170,11 @@ if(!function_exists('render_epf_ecr_table')){
 
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="ecr-tab-all" role="tabpanel">
-                                        <?php render_epf_ecr_table($all_ecr_list, $unique, $pay_month_year); ?>
+                                        <?php renderEpfEcrTable($all_ecr_list, $unique, $pay_month_year); ?>
                                     </div>
                                     <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                                         <div class="tab-pane fade" id="ecr-tab-<?php echo $pay_area_id; ?>" role="tabpanel">
-                                            <?php render_epf_ecr_table((array)$pay_area_wise_list[$pay_area_id], $unique, $pay_month_year); ?>
+                                            <?php renderEpfEcrTable((array)$pay_area_wise_list[$pay_area_id], $unique, $pay_month_year); ?>
                                         </div>
                                     <?php } ?>
                                 </div>

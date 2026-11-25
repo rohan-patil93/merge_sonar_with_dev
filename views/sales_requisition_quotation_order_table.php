@@ -320,7 +320,7 @@ if($tab2['item_id']== $item['id']){ $itmdoclist = $item['compliance_specificatio
         <div style="display: none;color: red;" id="<?php echo 'uom_err_'.$i;  ?>"> <?= __('Enter UOM'); ?></div>
             <p class="mt-3" id="item_history_detail_btn_<?php echo $i; ?>">
                 <?php if($tab2['item_name'] !=""){ ?>
-                    <span class="m-l-5 text-primary cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Click To Open Item History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getPreviousOrder('<?php echo $tab2['item_id']; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti ti-timer icon-dark"></i> <?= __('Item History'); ?></span>
+                    <span class="m-l-5 text-primary cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Click To Open Item History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getPreviousOrder('<?php echo $tab2['item_id']; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-timer icon-dark"></i> <?= __('Item History'); ?></span>
                 <?php } ?>
             </p>
             <div id="custom-popup_3">

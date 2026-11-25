@@ -68,7 +68,7 @@ include_once "new_from_submit.php";
                                             </div>
                                         </div>
                                         <div class="col p-0">
-                                            <div class="f-w-600 f-14 close m-0" onclick="location.href='<?php echo $vieopt; ?>';"  role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                            <div class="f-w-600 f-14 close m-0" onclick="location.href='<?php echo $vieopt; ?>';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                 <?php echo $rcent['category_name']; ?>
                                             </div>
                                             <span class="text-muted f-12">

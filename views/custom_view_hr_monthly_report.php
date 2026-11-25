@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_PLUS_ONE_MONTH')) {
+    define('STR_PLUS_ONE_MONTH', STR_PLUS_ONE_MONTH);
+}
 $year = date('Y');
 $month = date('m');
 $apiurl = API."?mode=reportofyearmonthalldetails&year=".$year."&admin_type=".$_SESSION['admin_type'];
@@ -80,7 +83,7 @@ $menus['2']['code']= 'YEAR';
                             <th scope="col"> <?php $download_data['0'][] = date('M Y', strtotime($sdate));
                                      echo date('M Y', strtotime($sdate)); ?></th>
                         <?php
-                            $sdate = date('Y-m-d', strtotime('+1 month', strtotime($sdate)));
+                            $sdate = date('Y-m-d', strtotime(STR_PLUS_ONE_MONTH, strtotime($sdate)));
                           }
                         ?>
                      </tr>
@@ -99,7 +102,7 @@ $menus['2']['code']= 'YEAR';
                                 $download_data[$k][] = customeummarmonyformateround($ndata);
                                 ?>
                                 <td> <?php echo customeummarmonyformateround($ndata); ?></td>
-                                <?php   $sdate = date('Y-m-d', strtotime('+1 month', strtotime($sdate)));
+                                <?php   $sdate = date('Y-m-d', strtotime(STR_PLUS_ONE_MONTH, strtotime($sdate)));
                             } $k++;
                             ?>
                             </tr>
@@ -118,7 +121,7 @@ $menus['2']['code']= 'YEAR';
                                 $download_data[$k][] = customeummarmonyformateround($ndata);
                                 ?>
                                 <td> <?php echo customeummarmonyformateround($ndata); ?> </td>
-                                <?php  $sdate = date('Y-m-d', strtotime('+1 month', strtotime($sdate)));
+                                <?php  $sdate = date('Y-m-d', strtotime(STR_PLUS_ONE_MONTH, strtotime($sdate)));
                             } $k++;
                             ?>
                             </tr>
@@ -146,7 +149,7 @@ $menus['2']['code']= 'YEAR';
                                 $s_total[$i] = $s_total[$i]+$ndata;
                                 ?>
                                 <td> <?php echo customeummarmonyformateround($ndata); ?> </td>
-                                <?php  $sdate = date('Y-m-d', strtotime('+1 month', strtotime($sdate)));
+                                <?php  $sdate = date('Y-m-d', strtotime(STR_PLUS_ONE_MONTH, strtotime($sdate)));
                             }$k++;
                             ?>
                             </tr>
@@ -177,7 +180,7 @@ $menus['2']['code']= 'YEAR';
                                 $t_total[$i] = $t_total[$i]+$ndata;
                                 ?>
                                 <td> <?php echo customeummarmonyformateround($ndata); ?> </td>
-                                <?php $sdate = date('Y-m-d', strtotime('+1 month', strtotime($sdate)));
+                                <?php $sdate = date('Y-m-d', strtotime(STR_PLUS_ONE_MONTH, strtotime($sdate)));
                             }$k++;
                             ?>
                             </tr>
@@ -246,7 +249,7 @@ $menus['2']['code']= 'YEAR';
                                 $download_data[$k][] = customeummarmonyformateround($ndata);
                                 ?>
                                 <td> <?php echo customeummarmonyformateround($ndata); ?> </td>
-                                <?php  $sdate = date('Y-m-d', strtotime('+1 month', strtotime($sdate)));
+                                <?php  $sdate = date('Y-m-d', strtotime(STR_PLUS_ONE_MONTH, strtotime($sdate)));
                             } $k++;
                             ?>
 

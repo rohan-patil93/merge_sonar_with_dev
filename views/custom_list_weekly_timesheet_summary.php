@@ -81,10 +81,9 @@ foreach((array)$result as $key=>$ressum){
                     <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <span class="f-w-700 mb-1">Reporting Manager</span>
-                            <select aria-label="Reproting Manager" class="form-select js-example-basic-single p-2" name="reproting_manager">
+                            <select aria-label="Reporting Manager" class="form-select js-example-basic-single p-2" name="reproting_manager">
                                 <option value="0">All</option>
-                                foreach((array)$_SESSION['users'] as $key=>$reporting_tolists){
-                                ?>
+                                <?php foreach((array)$_SESSION['users'] as $key=>$reporting_tolists){ ?>
                                     <option value="<?php echo $key; ?>" <?php echo $reproting_manager==$key?"selected":"";?>><?php echo $reporting_tolists; ?></option>
                                 <?php }?>
                             </select>

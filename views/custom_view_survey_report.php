@@ -17,7 +17,7 @@ $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] 
             <thead>
                 <tr>
                     <th scope="col" class="font-size-h5">#</th>
-                    <th scope="col" width="30%" class="font-size-h5"><?= __('Questions'); ?> </th>
+                    <th scope="col" style="width: 30%;" class="font-size-h5"><?= __('Questions'); ?> </th>
                     <?php for($op_count=1; $op_count<=$maxoptions; $op_count++) { ?>
                     <th scope="col" class="font-size-h5"><?php echo $op_count; ?> </th>
                     <?php } ?>

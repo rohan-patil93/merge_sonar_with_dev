@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_HTML_NBSP')) {
+    define('STR_HTML_NBSP', '&nbsp;');
+}
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -78,7 +81,7 @@ foreach($bulkdata as $bulkd){
                               <?php } ?>
                               <div class="d-inline-block width73">
                                   <button type="button" !" class="text-dark text-capitalize" onclick="getBasicInfoPopUp(<?php echo $value['id']; ?>)" ><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></button>
-                                  <p class="text-muted m-b-0"><?php echo $value['email_id']!="" ? $value['email_id'] : "&nbsp;"; ?></p>
+                                  <p class="text-muted m-b-0"><?php echo $value['email_id']!="" ? $value['email_id'] : STR_HTML_NBSP; ?></p>
                               </div>
                           </div>
                       </div>
@@ -98,7 +101,7 @@ foreach($bulkdata as $bulkd){
                               <?php } ?>
                               <div class="d-inline-block width73">
                                   <button type="button" !" onclick="getBasicInfoPopUp(<?php echo $value['id']; ?>)"  class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></button>
-                                  <p class="text-muted m-b-0"><?php echo $value['email_id']!="" ? $value['email_id'] : "&nbsp;"; ?></p>
+                                  <p class="text-muted m-b-0"><?php echo $value['email_id']!="" ? $value['email_id'] : STR_HTML_NBSP; ?></p>
 
                               </div>
                           </div>
@@ -118,7 +121,7 @@ foreach($bulkdata as $bulkd){
                               <?php } ?>
                               <div class="d-inline-block width73">
                                   <button type="button" !" onclick="getBasicInfoPopUp(<?php echo $value['id']; ?>)"  class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></button>
-                                  <p class="text-muted m-b-0"><?php echo $value['email_id']!="" ? $value['email_id'] : "&nbsp;"; ?></p>
+                                  <p class="text-muted m-b-0"><?php echo $value['email_id']!="" ? $value['email_id'] : STR_HTML_NBSP; ?></p>
                               </div>
                           </div>
                       </div>
@@ -137,7 +140,7 @@ foreach($bulkdata as $bulkd){
                               <?php } ?>
                               <div class="d-inline-block width73">
                                   <button type="button" !" onclick="getBasicInfoPopUp(<?php echo $value['id']; ?>)"  class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></button>
-                                  <p class="text-muted m-b-0"><?php echo $value['email_id']!="" ? $value['email_id'] : "&nbsp;"; ?></p>
+                                  <p class="text-muted m-b-0"><?php echo $value['email_id']!="" ? $value['email_id'] : STR_HTML_NBSP; ?></p>
 
                               </div>
                           </div>

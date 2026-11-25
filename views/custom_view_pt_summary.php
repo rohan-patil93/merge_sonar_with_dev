@@ -50,7 +50,7 @@ function valueemtpydash($val){
 }
 
 if(!function_exists('render_pt_summary_table')){
-    function render_pt_summary_table($report_rows){
+    function renderPtSummaryTable($report_rows){
         ?>
         <div class="dt-responsive table-responsive">
             <table id="basic-btn" class="table table-striped table-bordered nowrap">
@@ -138,11 +138,11 @@ if(!function_exists('render_pt_summary_table')){
 
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="pt-tab-all" role="tabpanel">
-                        <?php render_pt_summary_table($all_ecr_list); ?>
+                        <?php renderPtSummaryTable($all_ecr_list); ?>
                     </div>
                     <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                         <div class="tab-pane fade" id="pt-tab-<?php echo $pay_area_id; ?>" role="tabpanel">
-                            <?php render_pt_summary_table((array)$pay_area_wise_list[$pay_area_id]); ?>
+                            <?php renderPtSummaryTable((array)$pay_area_wise_list[$pay_area_id]); ?>
                         </div>
                     <?php } ?>
                 </div>

@@ -334,7 +334,7 @@ $headers[1] =  $filterfileds;
                                 <?php foreach ($showarraylist as $masterkey=>$value2){  ?>
                                     <tr class="main">
                                         <td class="cursor-pointer">
-                                            <i class="ti-angle-double-down" onclick="opensubtable(<?php echo $key5; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                            <button type="button" class="btn btn-link p-0 border-0 text-dark" aria-label="<?= htmlspecialchars(__('Toggle subtable'), ENT_QUOTES, 'UTF-8'); ?>" onclick="opensubtable(<?php echo $key5; ?>)"><i class="ti-angle-double-down"></i></button>
                                             <input type="hidden" id="showhide<?php echo $key5; ?>" value="0">
                                         </td>
                                         <td></td>

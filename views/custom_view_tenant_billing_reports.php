@@ -208,10 +208,7 @@ function printReport(divId) {
                 <tr>
                   <td class="p-2"><?php echo $i;?></td>
                   <td class="p-2 border-right-black"><?php echo $mothlable; ?>
-                    <!-- <p class="d-block text-start mt-1 mb-0 " >
-                          <span data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Opening Balance">O : <?php echo customeummarmonyformateifine($rentinvoice['ob_total_amount']); ?></span>
-                            <span class="m-l-5" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Payments">P : <?php echo customeummarmonyformateifine($rentinvoice['ob_total_amount']-$rentinvoice['ob_pending_amount']); ?></span>
-                            <span class="m-l-5" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Due Amount">D : <?php echo customeummarmonyformateifine($rentinvoice['ob_pending_amount']); ?></span></p> -->
+
                   </td>
                   <td class="p-2 text-right"><?php echo customeummarmonyformateifine($rentinvoice['total_amount']); ?></td>
                   <td class="p-2 text-right"><?php echo customeummarmonyformateifine($rentpayment); ?></td>

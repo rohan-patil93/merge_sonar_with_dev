@@ -1,4 +1,7 @@
 <?php
+if (!defined('DATE_FORMAT_YMD_HIS')) {
+    define('DATE_FORMAT_YMD_HIS', 'Y-m-d H:i:s');
+}
 $_SESSION['apply_js']['multiselest'] = 1;
 
 if (isset($_POST['submit'])) {
@@ -17,7 +20,7 @@ if (isset($_POST['submit'])) {
                 'is_active' => '0',
                 'status_date' => date('Y-m-d'),
                 'company_id' => $_SESSION['company_id'],
-                'created_date' => date('Y-m-d H:i:s'),
+                'created_date' => date(DATE_FORMAT_YMD_HIS),
                 'created_by' => $_SESSION['userid']
             ];
             $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
@@ -34,7 +37,7 @@ if (isset($_POST['submit'])) {
         $rid = $_POST['emp_id'];
         $data = array(
             'is_active' => 1,
-            'updated_date' => date('Y-m-d H:i:s'),
+            'updated_date' => date(DATE_FORMAT_YMD_HIS),
             'updated_by' => $_SESSION['userid']
         );
 
@@ -55,7 +58,7 @@ if (isset($_POST['submit'])) {
                 'is_active' => '0',
                 'status_date' => date('Y-m-d'),
                 'company_id' => $_SESSION['company_id'],
-                'created_date' => date('Y-m-d H:i:s'),
+                'created_date' => date(DATE_FORMAT_YMD_HIS),
                 'created_by' => $_SESSION['userid']
             ];
             $url = API . "?mode=adddata&table=" . $table_name . "&method=post";

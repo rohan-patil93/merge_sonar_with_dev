@@ -173,7 +173,7 @@ $stausresult = ViewStatusData();
                               </tr>
                               <tr>
                                   <th scope="col" class="p-2" ><?= __('Transactions'); ?></th>
-                                  <td class="text-right p-2 text-primary" id="custom-popup"><span class="cursor-pointer" onclick="opentTenantUtilityPopUp('<?php echo $pay['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-eye"></i> <?php echo count((array)$payment_allocations[$pay['id']]); ?></span>
+                                  <td class="text-right p-2 text-primary" id="custom-popup"><button type="button" class="btn btn-link p-0 border-0 cursor-pointer text-primary" aria-label="<?= htmlspecialchars(__('View payment allocations'), ENT_QUOTES, 'UTF-8'); ?>" onclick="opentTenantUtilityPopUp('<?php echo $pay['id']; ?>')"><i class="fa fa-eye"></i> <?php echo count((array)$payment_allocations[$pay['id']]); ?></button>
 
                                     <div class="custom-popup-open open_popup_tenant_billing_<?php echo $pay['id']; ?> text-start" style="width: 333px;  display: none;">
                                       <div class="card">

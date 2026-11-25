@@ -50,7 +50,7 @@ function valueemtpydash($val){
 }
 
 if(!function_exists('render_pt_monthly_statement_table')){
-    function render_pt_monthly_statement_table($report_rows){
+    function renderPtMonthlyStatementTable($report_rows){
         ?>
         <div class="dt-responsive table-responsive">
             <table id="basic-btn" class="table table-striped table-bordered nowrap">
@@ -136,11 +136,11 @@ if(!function_exists('render_pt_monthly_statement_table')){
 
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="pt-statement-tab-all" role="tabpanel">
-                        <?php render_pt_monthly_statement_table($all_ecr_list); ?>
+                        <?php renderPtMonthlyStatementTable($all_ecr_list); ?>
                     </div>
                     <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                         <div class="tab-pane fade" id="pt-statement-tab-<?php echo $pay_area_id; ?>" role="tabpanel">
-                            <?php render_pt_monthly_statement_table((array)$pay_area_wise_list[$pay_area_id]); ?>
+                            <?php renderPtMonthlyStatementTable((array)$pay_area_wise_list[$pay_area_id]); ?>
                         </div>
                     <?php } ?>
                 </div>

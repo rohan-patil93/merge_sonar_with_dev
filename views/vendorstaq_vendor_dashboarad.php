@@ -1,9 +1,12 @@
   <?php
+if (!defined('STR_VENDOR_ID_PARAM')) {
+    define('STR_VENDOR_ID_PARAM', '&vendor_id=');
+}
 
-  $url1 = API."?mode=admindashboarddetails&company_id=".$_SESSION['company_id']."&vendor_id=".$_SESSION['userid'];
+  $url1 = API."?mode=admindashboarddetails&company_id=".$_SESSION['company_id'].STR_VENDOR_ID_PARAM.$_SESSION['userid'];
   $data_details1 = callAPI($url1);
   $emp_count_dashboard = json_decode($data_details1,1);
-  $url13 = API."?mode=timesheethrsdashboard&company_id=".$_SESSION['company_id']."&vendor_id=".$_SESSION['userid'];
+  $url13 = API."?mode=timesheethrsdashboard&company_id=".$_SESSION['company_id'].STR_VENDOR_ID_PARAM.$_SESSION['userid'];
   $data_details13 = callAPI($url13);
   $timesheet = json_decode($data_details13,1);
   $stringconverttimesheet = implode(',',(array)$timesheet['timesheet_total_hrs']);
@@ -14,7 +17,7 @@
   $emp_count_dashboard = json_decode($data_details1,1);
    $fromdate = date('Y-m')."-01";
    $todate = date('Y-m-d');
-  $emp_url = API."?mode=togetvendoremployeedetails&company_id=".$_SESSION['company_id']."&vendor_id=".$_SESSION['vendor_id']."&fromdate=".$fromdate."&todate=".$todate;
+  $emp_url = API."?mode=togetvendoremployeedetails&company_id=".$_SESSION['company_id'].STR_VENDOR_ID_PARAM.$_SESSION['vendor_id']."&fromdate=".$fromdate."&todate=".$todate;
   $emp_data_list = callAPI($emp_url);
   $emp_data_list = json_decode($emp_data_list,1);
   ?>

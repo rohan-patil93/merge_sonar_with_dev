@@ -214,7 +214,7 @@
                                                                             <td><?php echo $month_l['consumed']; ?></td>
                                                                             <td>
                                                                                 <div class="progress progress--sm">
-                                                                                        <div class="progress-bar kt-bg-info" role="progressbar" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                        <div class="progress-bar kt-bg-info"  style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
                                                                             <td class="kt-align-right kt-font-brand kt-font-bold"><?php echo $month_l['pc_limit']-$month_l['consumed']; ?></td>

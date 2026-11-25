@@ -82,7 +82,7 @@ $stausresult = ViewStatusData();
                                                         <div class="text-muted font-weight-bold"><?php echo $assessmentData['rate']; ?></div>
                                                     </div>
                                                     <div class="progress bg-light-warning progress-xs">
-                                                        <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $assessmentData['rate']; ?>%;" aria-valuenow="60" aria-valuemin="60" aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-warning"  style="width: <?php echo $assessmentData['rate']; ?>%;" aria-valuenow="60" aria-valuemin="60" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>

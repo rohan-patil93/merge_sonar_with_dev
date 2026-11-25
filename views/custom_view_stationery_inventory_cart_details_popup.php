@@ -193,7 +193,7 @@ $old_requests = $data['old_requests'];
                 <div class="col-lg-12 mt-1">
                     <textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="comment" id="comment"></textarea>
                 </div>
-                <?php if(($_SESSION['admin_type']==1 && $stationery_requests['current_status']==10)  ){ ?>
+                <?php if($_SESSION['admin_type']==1 && $stationery_requests['current_status']==10){ ?>
 
                 <?php } ?>
                 <?php } else { ?>

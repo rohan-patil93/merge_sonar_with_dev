@@ -355,7 +355,7 @@ if ($_SESSION['insert_msg'] != "") {
   </div>
 </div>
 <div class="modal fade" id="timesheet_edit_modal" tabindex="-1" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content " id="workentrypop">
 
           </div>

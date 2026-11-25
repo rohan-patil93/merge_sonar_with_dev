@@ -1,4 +1,7 @@
 <?php
+if (!defined('DATETIME_ZERO')) {
+    define('DATETIME_ZERO', DATETIME_ZERO);
+}
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -39,8 +42,8 @@ if (!empty($data['luggages'])) {
 $uom_map = $data['uom_map'] ?? [];
 
 // Formatting date times
-$in_time = !empty($log->in_datetime) && $log->in_datetime !== '0000-00-00 00:00:00' ? date('d-M-Y h:i A', strtotime($log->in_datetime)) : '—';
-$out_time = !empty($log->out_datetime) && $log->out_datetime !== '0000-00-00 00:00:00' ? date('d-M-Y h:i A', strtotime($log->out_datetime)) : '—';
+$in_time = !empty($log->in_datetime) && $log->in_datetime !== DATETIME_ZERO ? date('d-M-Y h:i A', strtotime($log->in_datetime)) : '—';
+$out_time = !empty($log->out_datetime) && $log->out_datetime !== DATETIME_ZERO ? date('d-M-Y h:i A', strtotime($log->out_datetime)) : '—';
 
 // Visit Type Badge color
 $visit_type = strtolower($log->visit_type ?? 'visitor');
@@ -199,7 +202,7 @@ $display_email = $log->email ?: '—';
                         </div>
 
                         <!-- Check Out Block -->
-                        <?php if (!empty($log->out_datetime) && $log->out_datetime !== '0000-00-00 00:00:00'): ?>
+                        <?php if (!empty($log->out_datetime) && $log->out_datetime !== DATETIME_ZERO): ?>
                             <div class="p-2.5 rounded" style="background-color: #fef2f2; border-left: 4px solid #ef4444;">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="text-xs font-weight-bold text-danger text-uppercase"><?= __('Check-Out Details'); ?></span>

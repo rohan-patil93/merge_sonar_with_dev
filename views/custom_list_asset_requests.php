@@ -95,11 +95,7 @@ $locations = $result['locations'];
 
 
                                                 <td class="text-center">
-                                                    <i role="button" tabindex="0"
-                                                        aria-label="<?= htmlspecialchars(__('Request assets'), ENT_QUOTES, 'UTF-8'); ?>"
-                                                        onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                                        class="fa fa-eye"
-                                                        onclick="requestAssets('<?php echo $requestdeatil['id']; ?>')"></i>
+                                                    <button type="button" class="btn btn-link p-0 border-0 text-dark" aria-label="<?= htmlspecialchars(__('Request assets'), ENT_QUOTES, 'UTF-8'); ?>" onclick="requestAssets('<?php echo $requestdeatil['id']; ?>')"><i class="fa fa-eye"></i></button>
                                                 </td>
                                             </tr>
                                         <?php } ?>

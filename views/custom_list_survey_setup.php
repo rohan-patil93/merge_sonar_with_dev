@@ -63,7 +63,7 @@ $survey_qtype_names = implode('|',array_keys((array)$surveyData['survey_qtypes']
                                     <div class="text-muted font-weight-bold"><?php echo $surveyData['rate']; ?></div>
                                 </div>
                                 <div class="progress bg-light-warning progress-xs">
-                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-warning"  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>

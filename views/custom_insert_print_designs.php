@@ -764,16 +764,15 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                     $logo = ($id == "") ? 3 : ($headers['orderlogo'] ?? 3);
                                     $addres = ($id == "") ? 6 : ($headers['addresorder'] ?? 6);
 
+                                    $res = '<div class="col-lg-4  box" draggable="true" data-id="' . $seq . '" ></div>';
                                     if ($seq == $hedding) {
-                                        return printDesignGetHeadingHtml($seq, $headers);
+                                        $res = printDesignGetHeadingHtml($seq, $headers);
+                                    } elseif ($seq == $addres) {
+                                        $res = printDesignGetAddressHtml($seq, $headers);
+                                    } elseif ($seq == $logo) {
+                                        $res = printDesignGetLogoHtml($seq, $headers);
                                     }
-                                    if ($seq == $addres) {
-                                        return printDesignGetAddressHtml($seq, $headers);
-                                    }
-                                    if ($seq == $logo) {
-                                        return printDesignGetLogoHtml($seq, $headers);
-                                    }
-                                    return '<div class="col-lg-4  box" draggable="true" data-id="' . $seq . '" ></div>';
+                                    return $res;
                                 }
                                 ?>
 

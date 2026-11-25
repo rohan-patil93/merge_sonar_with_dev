@@ -60,7 +60,14 @@ $_SESSION['download_data'] = [];
                 $sl = 1;
                 $csvData = [];
                 foreach ($list as $r) {
-                    $statusColor = ($r['credit_status'] == 'Safe') ? 'text-success' : (($r['credit_status'] == 'Near Limit') ? 'text-warning' : 'text-danger');
+                    $credit_status = $r['credit_status'] ?? '';
+                    if ($credit_status == 'Safe') {
+                        $statusColor = 'text-success';
+                    } elseif ($credit_status == 'Near Limit') {
+                        $statusColor = 'text-warning';
+                    } else {
+                        $statusColor = 'text-danger';
+                    }
                 ?>
                 <tr>
                     <td><?php echo $sl; ?></td>

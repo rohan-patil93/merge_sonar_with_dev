@@ -365,7 +365,7 @@ if($type == "afteraprovassigntask"){
                     </div>
                 </form>
 
-<div id="kt_modal_KTDatatable_remotem_task" class="modal fade" role="dialog"  aria-hidden="true">
+<div id="kt_modal_KTDatatable_remotem_task" class="modal fade"   aria-hidden="true">
     <div class="modal-dialog modal-xl " >
         <div class="modal-content"  id="popupm_task">
 

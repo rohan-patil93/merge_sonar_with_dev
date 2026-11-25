@@ -99,7 +99,7 @@ foreach ($crm_feasibilities as $item) {
                         'so-gen' => ['title' => 'SO Generated', 'data' => $so_generated],
                     ];
 
-                    foreach ($tabs as $id => $tab):
+                    foreach ($tabs as $id => $tab) {
                     ?>
                         <div class="tab-pane fade <?= $id === 'open' ? 'show active' : '' ?>" id="<?= $id ?>" role="tabpanel">
                             <?php if (!empty($tab['data'])): ?>
@@ -136,7 +136,7 @@ foreach ($crm_feasibilities as $item) {
                                 </div>
                             <?php endif; ?>
                         </div>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </div>
             </div>
 

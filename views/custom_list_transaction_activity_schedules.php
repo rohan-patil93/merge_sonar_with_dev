@@ -19,7 +19,7 @@ function paggination($records,$pageno ="",$limit="",$functionname=""){
       $pageui .='</ul></td></td></nav>';
     return array('array'=>$array,'pageui'=>$pageui,'pagenumber'=>$pageno);
 }
-function cal_percentage($num_amount, $num_total) {
+function calPercentage($num_amount, $num_total) {
   $count1 = $num_amount / $num_total;
   $count2 = $count1 * 100;
   return number_format($count2, 0);
@@ -122,7 +122,7 @@ foreach($result['checklist'] as $dataaa){
     }
 }
 }
-$percentage = cal_percentage($tskcomplate,$totaltask);
+$percentage = calPercentage($tskcomplate,$totaltask);
 ?>
 
                     <div class="d-flex flex-column w-100 mr-2">

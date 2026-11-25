@@ -209,7 +209,7 @@ $count_emp_res = count((array)$resemp);
             <?php $k=0;
             $lcolor = array('d70206','f05b4f','f4c63d','d17905'); $mn=5;
             foreach($questopic as $quekey=>$quec){ ?>
-            <div class="align-middle m-b-25 mt-4 row" onclick="displatraito(<?php echo $quekey; ?>)">
+            <div class="align-middle m-b-25 mt-4 row cursor-pointer" onclick="displatraito(<?php echo $quekey; ?>)" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}">
               <div class="col-lg-3 text-center m-t-10"><span class="img-radius p-2" style="background-color: <?php echo "#".$lcolor[$k]; ?>;" ><?php echo $mn = $mn-0.3; ?></span></div>
               <div class="col-lg-9 p-0">
                 <div class="d-inline-block align-middle">

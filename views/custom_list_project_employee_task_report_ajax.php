@@ -1,4 +1,5 @@
 <?php
+defined('DATE_ZERO') || define('DATE_ZERO', DATE_ZERO);
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -45,12 +46,12 @@ $today = date('Y-m-d');
                     $current_status = isset($row['current_status']) ? $row['current_status'] : '';
 
                     $row_style = '';
-                    if($planned_finish != '' && $planned_finish != '0000-00-00' && $planned_finish < $today && $current_status < 199){
+                    if($planned_finish != '' && $planned_finish != DATE_ZERO && $planned_finish < $today && $current_status < 199){
                         $row_style = 'background-color:#f8d7da;';
                     }
 
-                    $planned_start_display = ($planned_start != '' && $planned_start != '0000-00-00') ? fromDate($planned_start) : '-';
-                    $planned_finish_display = ($planned_finish != '' && $planned_finish != '0000-00-00') ? fromDate($planned_finish) : '-';
+                    $planned_start_display = ($planned_start != '' && $planned_start != DATE_ZERO) ? fromDate($planned_start) : '-';
+                    $planned_finish_display = ($planned_finish != '' && $planned_finish != DATE_ZERO) ? fromDate($planned_finish) : '-';
 
                     $status_label = (isset($progress_var[$current_status]['name']) && $progress_var[$current_status]['name'] != '') ? $progress_var[$current_status]['name'] : $current_status;
                     $status_color = isset($_SESSION['status'][$current_status]['color']) ? $_SESSION['status'][$current_status]['color'] : '';

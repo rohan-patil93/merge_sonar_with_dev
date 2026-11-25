@@ -86,7 +86,7 @@ if($i !=0 && $i!=""){
                                                         </div>
                                                         <div class="col-md-12">
                                                                 <div class="progress progress-xs">
-                                                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:  <?php echo $pp; ?>%;" aria-valuenow="<?php echo $pp; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    <div class="progress-bar progress-bar-success"  style="width:  <?php echo $pp; ?>%;" aria-valuenow="<?php echo $pp; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                                 </div>
                                                             </div>
                                                 </div>

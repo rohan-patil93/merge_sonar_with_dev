@@ -303,56 +303,62 @@ function amcLandingRenderExpiryAccordionRows($rows, $mode)
     }
 }
 
+function amcLandingRenderAccordionPanel($section, $index, $accordionId, $idPrefix, $rowMode, $daysColumnLabel, $includeTotalInTitle)
+{
+    $collapseId = $idPrefix . ($index + 1);
+    $headingId = $idPrefix . 'Heading' . ($index + 1);
+    $isOpen = ($index == 0);
+    $title = htmlspecialchars($section['title'] ?? '', ENT_QUOTES, 'UTF-8');
+    if ($includeTotalInTitle) {
+        $title .= ' (' . ((int) ($section['total'] ?? 0)) . ')';
+    }
+    $toggleClass = 'accordion-msg waves-effect waves-dark border-0' . ($isOpen ? '' : ' collapsed');
+    ?>
+    <div class="accordion-panel">
+        <div class="accordion-heading" role="tab" id="<?php echo $headingId; ?>">
+            <h3 class="card-title accordion-title p-0 bg-gray mb-0">
+                <a class="<?php echo $toggleClass; ?>"
+                    data-bs-toggle="collapse"
+                    data-bs-parent="#<?php echo $accordionId; ?>"
+                    href="#<?php echo $collapseId; ?>"
+                    aria-expanded="<?php echo $isOpen ? 'true' : 'false'; ?>"
+                    aria-controls="<?php echo $collapseId; ?>">
+                    <?php echo $title; ?>
+                </a>
+            </h3>
+        </div>
+        <div id="<?php echo $collapseId; ?>"
+            class="panel-collapse collapse<?php echo $isOpen ? ' show' : ''; ?>"
+            role="tabpanel"
+            aria-labelledby="<?php echo $headingId; ?>">
+            <div class="accordion-content accordion-desc p-0 custom-scroll">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm f-12 mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col"><?= __('Contract'); ?></th>
+                                <th scope="col"><?= $daysColumnLabel; ?></th>
+                                <th scope="col"><?= __('End Date'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody><?php amcLandingRenderExpiryAccordionRows($section['rows'] ?? array(), $rowMode); ?></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
 function amcLandingRenderExpiryAccordion($sections, $accordionId, $idPrefix, $rowMode, $daysColumnLabel, $includeTotalInTitle)
 {
     ?>
     <div id="<?php echo $accordionId; ?>" class="amc-landing-expiry-accordion" role="tablist" aria-multiselectable="true">
         <?php if (count((array)$sections) > 0) {
             foreach ($sections as $index => $section) {
-                $section = is_array($section) ? $section : (array) $section;
-                $collapseId = $idPrefix . ($index + 1);
-                $headingId = $idPrefix . 'Heading' . ($index + 1);
-                $isOpen = ($index == 0);
-                $title = htmlspecialchars($section['title'] ?? '', ENT_QUOTES, 'UTF-8');
-                if ($includeTotalInTitle) {
-                    $title .= ' (' . ((int) ($section['total'] ?? 0)) . ')';
-                }
-                $toggleClass = 'accordion-msg waves-effect waves-dark border-0' . ($isOpen ? '' : ' collapsed');
-                ?>
-                <div class="accordion-panel">
-                    <div class="accordion-heading" role="tab" id="<?php echo $headingId; ?>">
-                        <h3 class="card-title accordion-title p-0 bg-gray mb-0">
-                            <a class="<?php echo $toggleClass; ?>"
-                                data-bs-toggle="collapse"
-                                data-bs-parent="#<?php echo $accordionId; ?>"
-                                href="#<?php echo $collapseId; ?>"
-                                aria-expanded="<?php echo $isOpen ? 'true' : 'false'; ?>"
-                                aria-controls="<?php echo $collapseId; ?>">
-                                <?php echo $title; ?>
-                            </a>
-                        </h3>
-                    </div>
-                    <div id="<?php echo $collapseId; ?>"
-                        class="panel-collapse collapse<?php echo $isOpen ? ' show' : ''; ?>"
-                        role="tabpanel"
-                        aria-labelledby="<?php echo $headingId; ?>">
-                        <div class="accordion-content accordion-desc p-0 custom-scroll">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-sm f-12 mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col"><?= __('Contract'); ?></th>
-                                            <th scope="col"><?= $daysColumnLabel; ?></th>
-                                            <th scope="col"><?= __('End Date'); ?></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody><?php amcLandingRenderExpiryAccordionRows($section['rows'] ?? array(), $rowMode); ?></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php }
+                $sec = is_array($section) ? $section : (array) $section;
+                amcLandingRenderAccordionPanel($sec, $index, $accordionId, $idPrefix, $rowMode, $daysColumnLabel, $includeTotalInTitle);
+            }
         } ?>
     </div>
     <?php

@@ -146,7 +146,7 @@ $seating_pools  =$result['seating_pools'];
 
                 ?>
               <div id="position_<?php echo $cabincnt; ?>" class="equipment-allocation-icon     cursor-pointer <?php echo $dynmicclass; ?> " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $ealloc['cabin_name']; ?>" style="top: <?php echo $ealloc['y_size']; ?>%; left: <?php echo $ealloc['x_size']; ?>%;">
-                    <div onclick="toCubicleSpaceAllocateEmployeePopup('<?php echo $ealloc['id']; ?>')" class="cubicle_line_space" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <div onclick="toCubicleSpaceAllocateEmployeePopup('<?php echo $ealloc['id']; ?>')" class="cubicle_line_space" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                       <?php if($allocationdetail['emp_id'] !=""){ ?>
                         <?php if($employees[$allocationdetail['emp_id']]['image'] !="") { ?>
                             <img src="uploads/all/<?php echo $employees[$allocationdetail['emp_id']]['image']; ?>" class="img-radius img-30 align-top" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">

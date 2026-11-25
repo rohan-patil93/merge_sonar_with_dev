@@ -133,7 +133,7 @@ function checkAll(ele) {
                                 <td>
                                     <button class="btn btn-primary btn-sm btn-pd" style="color: <?php echo "#".$stausresult[$res['current_status']]['color']; ?>;    background:  <?php echo "#".strval( $stausresult[$res['current_status']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$res['current_status']]['background_color']); ?>;" type="button"><?php echo  $stausresult[$res['current_status']]['name']; ?> </button>
                                 </td>
-                                <td nowrap="nowrap" style="display: flex;">
+                                <td  style="display: flex;">
 
                                     <button type="button" class="btn btn-sm btn-clean btn-icon" onclick="displaycandidateview(<?php echo $res['job_post_id']; ?>)" title="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i>    </button>
                             </td>

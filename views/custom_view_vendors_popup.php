@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_CLASS_D_NONE')) {
+    define('STR_CLASS_D_NONE', "<?php echo STR_CLASS_D_NONE; ?>");
+}
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -772,20 +775,20 @@ if($fieldaccesright['field']['sales_type']!="NA"){ ?>
                     <th scope="col" style="text-align: left;"><?= __('4. Do you have hourly employees that works at manufacturer facility? For the purpose of this form, hourly employees are employees that are subject to local laws governing overtime pay or subject to hourly increased or decreased in compensation based on volume of product if Yes (Please answer a, b and c, if No then skip to Question no 5)'); ?></th>
                     <td style="font-size:13px; color: #000000; padding: 10px 20px; border: 1px solid #eeeeee;"><?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4']); ?></td>
                 </tr>
-                <tr <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":"class='d-none'"; ?>>
+                <tr <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":"<?php echo STR_CLASS_D_NONE; ?>"; ?>>
                     <th scope="col" style="text-align: left;"><?= __('a) Do all hourly workers work less than 60 hours per week?'); ?></th>
                     <td><?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_a']); ?></td>
                 </tr>
-                <tr <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":"class='d-none'"; ?>>
+                <tr <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":"<?php echo STR_CLASS_D_NONE; ?>"; ?>>
                     <th scope="col" style="text-align: left;"><?= __('b) Do you have a policy prohibiting forced, involuntory, indentured, trafficked, or slave labor?'); ?></th>
                     <td><?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_b']); ?></td>
                 </tr>
-                <tr <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":"class='d-none'"; ?>>
+                <tr <?php echo $vendor_questions['supply_Chain_responsibility'][4] =="Y"?"":"<?php echo STR_CLASS_D_NONE; ?>"; ?>>
                     <th scope="col" style="text-align: left;"><?= __('c) Do you expect your supplier to have a policy prohibiting forced, involuntory, indentured, trafficked, or slave labor'); ?></th>
                     <td><?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_c']); ?></td>
                 </tr>
 
-                <tr <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="")?"":"class='d-none'"; ?>>
+                <tr <?php echo ($vendor_questions['supply_Chain_responsibility'][4] =="N" || $vendor_questions['supply_Chain_responsibility'][4] =="")?"":"<?php echo STR_CLASS_D_NONE; ?>"; ?>>
                     <th scope="col" style="text-align: left;"><?= __('5. Do any employee have to reimburse recruitment fee to your company?'); ?></th>
                     <td><?= __('Yes'); ?></td>
                 </tr>

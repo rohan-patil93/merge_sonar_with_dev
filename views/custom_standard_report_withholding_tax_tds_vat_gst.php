@@ -67,7 +67,8 @@ $_SESSION['download_data'] = [];
                     $sl = 1;
                     foreach ($list as $r) {
                         // Display helpers
-                        $gst_type = ($r['tax_state'] === 'S') ? 'Intra (CGST+SGST)' : (($r['tax_state'] === 'I') ? 'Inter (IGST)' : '-');
+                        $gst_type_fallback = ($r['tax_state'] === 'I') ? 'Inter (IGST)' : '-';
+                        $gst_type = ($r['tax_state'] === 'S') ? 'Intra (CGST+SGST)' : $gst_type_fallback;
                     ?>
                         <tr>
                             <td class="text-right p-1"><?php echo $sl; ?></td>

@@ -95,9 +95,7 @@ if(isset($_POST['sid'])){
                         $varianc_filt = 1;
                     }
                 }
-                if($filter_veriances !="all" && $filter_veriances != $varianc_class){
-
-                }else{
+                if($filter_veriances =="all" || $filter_veriances == $varianc_class){
                     ?>
                     <tr class="<?php echo $varianc_class; ?>">
                         <td><?php echo $incnt; ?></td>

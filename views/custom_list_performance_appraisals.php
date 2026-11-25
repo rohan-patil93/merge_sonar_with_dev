@@ -1,4 +1,5 @@
 <?php
+defined('URL_INSERT_PERF_APPRAISAL') || define('URL_INSERT_PERF_APPRAISAL', URL_INSERT_PERF_APPRAISAL);
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -69,7 +70,7 @@ foreach($employee_performance_appraisals as $epahlres){
                                             <?php $mk=1; foreach($isactivelist as $isactiveres){
                                             $id=deocdeId("id:".$isactiveres['id']);
                                             $empdetails = $employees[$isactiveres['employee_id']];
-                                            $href = "index.php?option=COM_INSERT_EMPLOYEE_PERFORMANCE_APPRAISALS&Rid=".$id;
+                                            $href = URL_INSERT_PERF_APPRAISAL.$id;
                                             ?>
                                             <tr class="w-100 display-table">
                                                 <td class="p-2" style="width: 60%;">
@@ -139,7 +140,7 @@ foreach($employee_performance_appraisals as $epahlres){
                                             <?php $mk=1; foreach($isactivelist as $isactiveres){
                                             $id=deocdeId("id:".$isactiveres['id']);
                                             $empdetails = $employees[$isactiveres['employee_id']];
-                                            $href = "index.php?option=COM_INSERT_EMPLOYEE_PERFORMANCE_APPRAISALS&Rid=".$id;
+                                            $href = URL_INSERT_PERF_APPRAISAL.$id;
                                             ?>
                                             <tr class="w-100 display-table">
 
@@ -210,7 +211,7 @@ foreach($employee_performance_appraisals as $epahlres){
                                             <?php $mk=1; foreach($isactivelist as $isactiveres){
                                             $id=deocdeId("id:".$isactiveres['id']);
                                             $empdetails = $employees[$isactiveres['employee_id']];
-                                        $href = "index.php?option=COM_INSERT_EMPLOYEE_PERFORMANCE_APPRAISALS&Rid=".$id;
+                                        $href = URL_INSERT_PERF_APPRAISAL.$id;
                                             ?>
                                             <tr class="w-100 display-table">
                                                 <td class="p-2" style="width: 60%;">

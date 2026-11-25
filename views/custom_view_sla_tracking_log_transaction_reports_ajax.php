@@ -1,4 +1,7 @@
 <?php
+if (!defined('STR_HOURS_COLON')) {
+    define('STR_HOURS_COLON', ' Hours : ');
+}
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -165,11 +168,11 @@ foreach($frist_array as $frist_key =>$frist){
                         $lastusertime1 = end($useidtim);
                         $perticulerusertime = totalHoursAndMinutesInDateTimeArray($lastusertime);
                         ?>
-                        <p class=" mb-0 hidealluserdata <?php echo "selectuserid_".$uid; ?>"><span class="f-w-600"><?php echo $_SESSION['users'][$uid]." </span>- ".$perticulerusertime['hours']." Hours : ".$perticulerusertime['minutes']." Minutes";  ?> </p>
+                        <p class=" mb-0 hidealluserdata <?php echo "selectuserid_".$uid; ?>"><span class="f-w-600"><?php echo $_SESSION['users'][$uid]." </span>- ".$perticulerusertime['hours'].STR_HOURS_COLON.$perticulerusertime['minutes']." Minutes";  ?> </p>
 
                     <?php
                     }
-                    echo "<p class='d-block mb-0'><span class='f-w-600'>".__('Total')." </span>- ".$usertime['hours']." Hours : ".$usertime['minutes']." Minutes";
+                    echo "<p class='d-block mb-0'><span class='f-w-600'>".__('Total')." </span>- ".$usertime['hours'].STR_HOURS_COLON.$usertime['minutes']." Minutes";
                     ?>
                     </span>
                     <?php
@@ -183,7 +186,7 @@ foreach($frist_array as $frist_key =>$frist){
                 if(count((array)$transactiontotaltime) != 0){
                     sort($transactiontotaltime);
                     $transactiontotaltimes = totalHoursAndMinutesInDateTimeArray($transactiontotaltime);
-                    echo "<span class='f-w-600'>".$transactiontotaltimes['days']." Days : ".$transactiontotaltimes['hours']." Hours : ".$transactiontotaltimes['minutes']." ".__('Minutes')."</span>"."</br>";
+                    echo "<span class='f-w-600'>".$transactiontotaltimes['days']." Days : ".$transactiontotaltimes['hours'].STR_HOURS_COLON.$transactiontotaltimes['minutes']." ".__('Minutes')."</span>"."</br>";
                     }else{
                         echo "-";
                     }

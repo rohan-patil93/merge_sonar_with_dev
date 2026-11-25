@@ -1,4 +1,7 @@
 <?php
+if (!defined('TIME_FORMAT_HIS_A')) {
+    define('TIME_FORMAT_HIS_A', 'h:i:s A');
+}
 if($_POST['filter'] == "Y"){
   include_once '../includes/session.php';
   include_once '../dbconfig.php';
@@ -35,7 +38,7 @@ if($_POST['type'] =="login"){
               $icontype='<span class="ti-home f-18 d-block mt-2"></span>';
           ?>
         <div class="row p-t-20 p-b-20 border-top border-bottom today-border">
-          <div class="col-lg-2 text-start"><p><?php echo date('h:i:s A',strtotime($audittrailv['login_from'])); ?></p></div>
+          <div class="col-lg-2 text-start"><p><?php echo date(TIME_FORMAT_HIS_A,strtotime($audittrailv['login_from'])); ?></p></div>
           <div class="col-lg-1 text-center" style="z-index:1">
             <?php if($i == 1){ echo $dayspan;
 } ?>
@@ -80,7 +83,7 @@ if($_POST['type'] =="login"){
               }
           ?>
         <div class="row p-t-20 p-b-20 border-top border-bottom today-border">
-          <div class="col-lg-2 text-start"><p><?php echo date('h:i:s A',strtotime($audittrailv['request_date'])); ?></p></div>
+          <div class="col-lg-2 text-start"><p><?php echo date(TIME_FORMAT_HIS_A,strtotime($audittrailv['request_date'])); ?></p></div>
           <div class="col-lg-1 text-center" style="z-index:1">
             <?php if($i == 1){ echo $dayspan;
 } ?>
@@ -147,7 +150,7 @@ if($_POST['type'] =="login"){
           ?>
         <div class="row p-t-20 p-b-20 border-top border-bottom today-border">
 
-          <div class="col-lg-2 text-start"><p><?php echo date('h:i:s A',strtotime($audittrailv['created_date'])); ?></p></div>
+          <div class="col-lg-2 text-start"><p><?php echo date(TIME_FORMAT_HIS_A,strtotime($audittrailv['created_date'])); ?></p></div>
           <div class="col-lg-1 text-center" style="z-index:1">
             <?php if($i == 1){ echo $dayspan;
 } ?>

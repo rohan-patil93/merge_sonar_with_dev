@@ -43,7 +43,7 @@ function valueemtpydash($val){
 }
 
 if(!function_exists('render_esi_return_table')){
-    function render_esi_return_table($report_rows, $pay_month_year){
+    function renderEsiReturnTable($report_rows, $pay_month_year){
         $has_data = false;
         ?>
         <div class="dt-responsive table-responsive">
@@ -146,11 +146,11 @@ if(!function_exists('render_esi_return_table')){
 
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="esi-return-tab-all" role="tabpanel">
-                                    <?php render_esi_return_table($all_ecr_list, $pay_month_year); ?>
+                                    <?php renderEsiReturnTable($all_ecr_list, $pay_month_year); ?>
                                 </div>
                                 <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                                     <div class="tab-pane fade" id="esi-return-tab-<?php echo $pay_area_id; ?>" role="tabpanel">
-                                        <?php render_esi_return_table((array)$pay_area_wise_list[$pay_area_id], $pay_month_year); ?>
+                                        <?php renderEsiReturnTable((array)$pay_area_wise_list[$pay_area_id], $pay_month_year); ?>
                                     </div>
                                 <?php } ?>
                             </div>

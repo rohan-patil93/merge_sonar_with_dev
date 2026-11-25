@@ -219,11 +219,7 @@ function printReport(divId) {
                   <th scope="row" colspan="2" class="text-right"><?= __('Total Debit Notes (+)'); ?></th>
                   <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($debit_notes[$cust['id']][$ptd['id']]['total_amount']); ?></td>
                 </tr>
-               <!--  <tr>
-                  <th class="text-right" colspan="6">-</th>
-                  <th colspan="2" class="text-right">Un-Allocated Payment</th>
-                  <th class="text-right text-danger"><?php echo customeummarmonyformateifine($payments[$cust['id']]['unallocated_amount']); ?></th>
-                </tr> -->
+
                 <tr>
                   <th class="text-right" colspan="8">-</th>
                   <th scope="row" colspan="2" class="text-right"><?= __('Final Due'); ?></th>

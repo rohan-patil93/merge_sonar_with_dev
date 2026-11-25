@@ -107,7 +107,7 @@ $stausresult = ViewStatusData();
                                     <?php if($_GET['TYPE']!="PUBLISH" && $_GET['TYPE']!="YET"){
                                         if($_GET['TYPE']!="UNPUBLISH"){ ?>
                                     <div class="btn-group">
-                                            <span onclick="displaystausdrop(<?php echo $jobpostings['id']; ?>,<?php echo "'job_postings'"; ?>,<?php echo $jobpostings['current_status']; ?>,'1act')" class="btn " style="color: <?php echo "#". $nmm['color']; ?>;    background:  <?php echo "#".strval($nmm['background_color'] ); ?>; border-color: <?php echo "#".strval($nmm['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-target"></i> </span>
+                                            <button onclick="displaystausdrop(<?php echo $jobpostings['id']; ?>,<?php echo "'job_postings'"; ?>,<?php echo $jobpostings['current_status']; ?>,'1act')" class="btn " style="color: <?php echo "#". $nmm['color']; ?>;    background:  <?php echo "#".strval($nmm['background_color'] ); ?>; border-color: <?php echo "#".strval($nmm['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="<?= htmlspecialchars(__('Status options'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-target"></i></button>
                                             <div class="dropdown-menu" id="dropdownlist_1act_<?php echo $jobpostings['id']; ?>">
                                             </div>
                                         </div>

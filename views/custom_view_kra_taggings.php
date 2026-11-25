@@ -24,7 +24,7 @@ $designation_list = $result['designation_list'];
  </script>
 <div class="row">
     <?php foreach($organization_goals as $og){ ?>
-    <div class="col-lg-2 cursor-pointer" onclick="getOrganizationGoals('<?php echo $og['location_id']; ?>','<?php echo $og['department_id']; ?>','<?php echo $og['job_title_id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+    <div class="col-lg-2 cursor-pointer" onclick="getOrganizationGoals('<?php echo $og['location_id']; ?>','<?php echo $og['department_id']; ?>','<?php echo $og['job_title_id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
         <div class="card">
             <div class="card-body">
                 <p  class="text-facebook f-w-700 f-12 mb-0 text-capitalize"><?php echo $location_list[$og['location_id']]['location_name']; ?></p>

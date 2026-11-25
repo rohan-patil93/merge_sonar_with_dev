@@ -847,7 +847,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "basic_information";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -877,7 +877,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "work_details";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -907,7 +907,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "personal_details";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -936,7 +936,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "bank_details";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -965,7 +965,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                             <?php
                                             $_POST['edittype'] = "VIEW";
                                             $_POST['showpagetype'] = "bank_details";
-                                            render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                            renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                             unset($_POST['edittype']);
                                             unset($_POST['showpagetype']);
                                             ?>
@@ -996,7 +996,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "employee_buddies";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1027,7 +1027,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "employee_access";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1059,7 +1059,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "employee_other_access";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1091,7 +1091,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "proof_details";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1121,7 +1121,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "experience_details";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1151,7 +1151,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "employee_qualifications";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1181,7 +1181,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "employee_dependents";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1211,7 +1211,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "employee_contacts";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1241,7 +1241,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "emp_visa";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>
@@ -1271,7 +1271,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
                                         <?php
                                         $_POST['edittype'] = "VIEW";
                                         $_POST['showpagetype'] = "emp_skills";
-                                        render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
+                                        renderOnboardingEmployeesAjaxSection($onboarding_employees_ajax_ctx);
                                         unset($_POST['edittype']);
                                         unset($_POST['showpagetype']);
                                         ?>

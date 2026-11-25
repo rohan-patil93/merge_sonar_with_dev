@@ -194,7 +194,7 @@ table td, table th {
                       $i=1; foreach ($approval_completed_res as $row){ ?>
                     <tr>
                       <th scope="col"><?php echo $i++; ?></th>
-                      <td class="text-primary cursor-pointer" onclick='approvalOrReject("<?php echo $row['tranaction_approval_id']; ?>", "<?php echo $row['doa_id']; ?>", "1", "COMPLETED")' role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo htmlspecialchars($row['display_name']); ?><p class="mb-0 f-12"><?php echo $row['emp_code'] ?? ''; ?></p></td>
+                      <td class="text-primary cursor-pointer" onclick='approvalOrReject("<?php echo $row['tranaction_approval_id']; ?>", "<?php echo $row['doa_id']; ?>", "1", "COMPLETED")' tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo htmlspecialchars($row['display_name']); ?><p class="mb-0 f-12"><?php echo $row['emp_code'] ?? ''; ?></p></td>
                       <td><?php echo !empty($row['resignation_date']) ? date('d-m-Y', strtotime($row['resignation_date'])) : '-'; ?>
                       </td>
                       <?php

@@ -44,7 +44,8 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
                     $action_class = ($action_type == 'Removed') ? 'label-danger' : 'label-success';
                     $user_name = (isset($session_users[$user_id]) && $session_users[$user_id] != '') ? $session_users[$user_id] : '-';
                     $done_by_name = (isset($session_users[$row_action_by]) && $session_users[$row_action_by] != '') ? $session_users[$row_action_by] : '-';
-                    $role_display = ($role_name != '') ? $role_name : (($role_short_code != '') ? $role_short_code : '-');
+                    $role_fallback = ($role_short_code != '') ? $role_short_code : '-';
+                    $role_display = ($role_name != '') ? $role_name : $role_fallback;
             ?>
                 <tr>
                     <td><?php echo $i; ?></td>

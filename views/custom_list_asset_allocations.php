@@ -1,4 +1,5 @@
 <?php
+defined('PATH_ASSET_ALLOC_TABLE') || define('PATH_ASSET_ALLOC_TABLE', 'views/custom_list_asset_allocation_table.php');
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -428,7 +429,7 @@ foreach($assetconditionsary as $conditionid=>$conditioncnt){
         var tabletype = (document.getElementById('tabletype'))? document.getElementById('tabletype').value : '';
 
         jQuery.ajax({
-            url: "views/custom_list_asset_allocation_table.php",
+            url: PATH_ASSET_ALLOC_TABLE,
             data: "ownership="+ownership+"&allocation_status="+allocation_status+"&Parent_asset="+Parent_asset+"&category="+category+"&location="+location+"&asset_owner="+asset_owner+"&status="+status+"&candition="+candition+'&tabletype='+tabletype+'&userid=<?php echo $_SESSION['userid']; ?>',
             type: "POST",
             success:function(data){
@@ -566,8 +567,8 @@ foreach($assetconditionsary as $conditionid=>$conditioncnt){
 
                 <div class="row mt-4 assetstable">
                     <?php
-                    if(file_exists("views/custom_list_asset_allocation_table.php")){
-                        include_once "views/custom_list_asset_allocation_table.php";
+                    if(file_exists(PATH_ASSET_ALLOC_TABLE)){
+                        include_once PATH_ASSET_ALLOC_TABLE;
                     }else{
                         include_once "custom_list_asset_allocation_table.php";
                     }
@@ -791,8 +792,8 @@ foreach($assetconditionsary as $conditionid=>$conditioncnt){
 
                 <div class="row mt-4 assetstable">
                     <?php
-                    if(file_exists("views/custom_list_asset_allocation_table.php")){
-                        include_once "views/custom_list_asset_allocation_table.php";
+                    if(file_exists(PATH_ASSET_ALLOC_TABLE)){
+                        include_once PATH_ASSET_ALLOC_TABLE;
                     }else{
                         include_once "custom_list_asset_allocation_table.php";
                     }

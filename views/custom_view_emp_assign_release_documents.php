@@ -284,7 +284,7 @@ $vdata1["where"] = array('is_active'=> '0', 'category_id'=>'4');
                   </td>
                   <td class="p-2">
                     <p>
-                      <?php if((isset($aemp[$row['id']]) && $aemp[$row['id']]['read_type']=='Y')){ ?>
+                      <?php if(isset($aemp[$row['id']]) && $aemp[$row['id']]['read_type']=='Y'){ ?>
                       <span class="f-14 f-w-600  text-success"><?php echo fromDate($aemp[$row['send_date']]); ?></span>
                     <?php } ?>
                     </p>
