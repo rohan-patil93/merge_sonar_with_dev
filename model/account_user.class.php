@@ -7,66 +7,67 @@ use Dompdf\Options;
 interface AccountConstants {
     public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
     public const DATE_FORMAT_LOWER_HIS = "Y-m-d h:i:s";
-    public const SQL_AND_IS_ACTIVE_0 = self::SQL_AND_IS_ACTIVE_0;
-    public const SQL_AND_IS_ACTIVE_0_SPACE = self::SQL_AND_IS_ACTIVE_0_SPACE;
-    public const SQL_QUOTE_AND_IS_ACTIVE_0 = self::SQL_QUOTE_AND_IS_ACTIVE_0;
-    public const SQL_QUOTE_AND_IS_ACTIVE_0_SPACE = self::SQL_QUOTE_AND_IS_ACTIVE_0_SPACE;
-    public const SQL_QUOTE_AND_IS_ACTIVE_EQ_0 = self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
-    public const SQL_AND_ID_EQ_QUOTE = self::SQL_AND_ID_EQ_QUOTE;
-    public const SQL_QUOTE_AND_ID_EQ_QUOTE = self::SQL_QUOTE_AND_ID_EQ_QUOTE;
-    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE = self::SQL_WHERE_COMPANY_ID_EQ_QUOTE;
-    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE = self::SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE;
-    public const SQL_WHERE_COMPANY_ID_EQ = self::SQL_WHERE_COMPANY_ID_EQ;
-    public const SQL_SELECT_ALL_FROM = self::SQL_SELECT_ALL_FROM;
-    public const SQL_AND_ACCOUNT_CODE_EQ_QUOTE = self::SQL_AND_ACCOUNT_CODE_EQ_QUOTE;
-    public const SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE = self::SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE;
-    public const SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE = self::SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE;
-    public const SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE = self::SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE;
-    public const SQL_AND_FINANCE_YEAR_EQ_QUOTE = self::SQL_AND_FINANCE_YEAR_EQ_QUOTE;
-    public const SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE = self::SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE;
-    public const SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE = self::SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE;
-    public const SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE = self::SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE;
-    public const SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE = self::SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE;
-    public const SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE = self::SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE;
-    public const SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE = self::SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE;
-    public const SQL_AND_PARTY_ID_EQ_QUOTE = self::SQL_AND_PARTY_ID_EQ_QUOTE;
-    public const SQL_DATE_APRIL_FIRST = self::SQL_DATE_APRIL_FIRST;
-    public const SQL_DATE_MARCH_THIRTYFIRST = self::SQL_DATE_MARCH_THIRTYFIRST;
-    public const SQL_AND_IS_ACTIVE_ORDER_PRIORITY = self::SQL_AND_IS_ACTIVE_ORDER_PRIORITY;
-    public const SQL_SEL_CHART_OF_ACCOUNTS = self::SQL_SEL_CHART_OF_ACCOUNTS;
-    public const SQL_SEL_CHART_OF_ACCOUNTS_SP = self::SQL_SEL_CHART_OF_ACCOUNTS_SP;
-    public const SQL_SEL_FINANCE_REPORT_GROUPS = self::SQL_SEL_FINANCE_REPORT_GROUPS;
-    public const SQL_SEL_LOCATIONS = self::SQL_SEL_LOCATIONS;
-    public const SQL_SEL_DEPARTMENTS = self::SQL_SEL_DEPARTMENTS;
-    public const SQL_SEL_COST_CENTERS = self::SQL_SEL_COST_CENTERS;
-    public const SQL_SEL_CURRENCIES = self::SQL_SEL_CURRENCIES;
-    public const SQL_SEL_GENERAL_CODE_DETAILS = self::SQL_SEL_GENERAL_CODE_DETAILS;
-    public const SQL_SEL_VENDORS = self::SQL_SEL_VENDORS;
-    public const SQL_SEL_CUSTOMERS = self::SQL_SEL_CUSTOMERS;
-    public const SQL_SEL_EMPLOYEES = self::SQL_SEL_EMPLOYEES;
-    public const SQL_SEL_BANK_ACCOUNTS = self::SQL_SEL_BANK_ACCOUNTS;
-    public const SQL_SEL_COA_TYPE = self::SQL_SEL_COA_TYPE;
-    public const SQL_SEL_PETTY_CASH_BOXES = self::SQL_SEL_PETTY_CASH_BOXES;
-    public const SQL_SEL_ACCOUNT_BALANCES = self::SQL_SEL_ACCOUNT_BALANCES;
-    public const SQL_DEL_GL_VOUCHER_ID = self::SQL_DEL_GL_VOUCHER_ID;
-    public const SQL_QUOTE_IS_ACTIVE_0_BAL_DESC = self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC;
-    public const SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER = self::SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER;
-    public const SQL_AND_APPLICATION_TABLE_NAME = self::SQL_AND_APPLICATION_TABLE_NAME;
-    public const SQL_AND_ITEM_TABLE_NOT_EMPTY = self::SQL_AND_ITEM_TABLE_NOT_EMPTY;
-    public const SQL_AND_TRANSACTION_ID_EQ = self::SQL_AND_TRANSACTION_ID_EQ;
-    public const SQL_AND_ALLOW_POSTING_0 = self::SQL_AND_ALLOW_POSTING_0;
-    public const SQL_AND_GENC_CODE_VOUCHERTYPE = self::SQL_AND_GENC_CODE_VOUCHERTYPE;
-    public const SQL_AND_TOC_HEADERS = self::SQL_AND_TOC_HEADERS;
-    public const SQL_AND_REF_TYPE_SALES_INVOICES = self::SQL_AND_REF_TYPE_SALES_INVOICES;
-    public const SQL_AND_REF_TYPE_SUPPLIER_BILLS = self::SQL_AND_REF_TYPE_SUPPLIER_BILLS;
-    public const SQL_LTE_TRANSACTION_DATE = self::SQL_LTE_TRANSACTION_DATE;
-    public const SQL_LTE_REC_TRANSACTION_DATE = self::SQL_LTE_REC_TRANSACTION_DATE;
-    public const SQL_AND_QUOTE = self::SQL_AND_QUOTE;
-    public const SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID = self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID;
+    public const SQL_AND_IS_ACTIVE_0 = " AND is_active =0";
+    public const SQL_AND_IS_ACTIVE_0_SPACE = " AND is_active =0 ";
+    public const SQL_QUOTE_AND_IS_ACTIVE_0 = "' AND is_active =0";
+    public const SQL_QUOTE_AND_IS_ACTIVE_0_SPACE = "' AND is_active =0 ";
+    public const SQL_QUOTE_AND_IS_ACTIVE_EQ_0 = "' AND is_active = 0";
+    public const SQL_AND_ID_EQ_QUOTE = " AND id = '";
+    public const SQL_QUOTE_AND_ID_EQ_QUOTE = "' AND id = '";
+    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE = " WHERE company_id = '";
+    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE_NOSPACE = " WHERE company_id ='";
+    public const SQL_WHERE_COMPANY_ID_EQ = " WHERE company_id = ";
+    public const SQL_SELECT_ALL_FROM = "SELECT * FROM ";
+    public const SQL_AND_ACCOUNT_CODE_EQ_QUOTE = " AND account_code = '";
+    public const SQL_QUOTE_AND_ACCOUNT_CODE_EQ_QUOTE = "' AND account_code = '";
+    public const SQL_QUOTE_AND_SPACE_ACCOUNT_CODE_EQ_QUOTE = "' AND  account_code = '";
+    public const SQL_QUOTE_AND_FINANCE_YEAR_EQ_QUOTE = "' AND finance_year = '";
+    public const SQL_AND_FINANCE_YEAR_EQ_QUOTE = " AND finance_year = '";
+    public const SQL_QUOTE_AND_BALANCE_DATE_EQ_QUOTE = "' AND balance_date = '";
+    public const SQL_QUOTE_AND_BALANCE_DATE_LT_QUOTE = "' AND balance_date < '";
+    public const SQL_QUOTE_AND_DEPARTMENT_ID_EQ_QUOTE = "'  AND department_id = '";
+    public const SQL_QUOTE_AND_COST_CENTER_ID_EQ_QUOTE = "' AND cost_center_id = '";
+    public const SQL_QUOTE_AND_LOCATION_ID_EQ_QUOTE = "' AND location_id = '";
+    public const SQL_QUOTE_AND_REF_TYPE_EQ_QUOTE = "' AND ref_type = '";
+    public const SQL_AND_PARTY_ID_EQ_QUOTE = " AND party_id = '";
+    public const SQL_DATE_APRIL_FIRST = "-04-01";
+    public const SQL_DATE_MARCH_THIRTYFIRST = "-03-31";
+    public const SQL_AND_IS_ACTIVE_ORDER_PRIORITY = " AND is_active =0 ORDER BY display_priority ASC";
+    public const SQL_SEL_CHART_OF_ACCOUNTS = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ";
+    public const SQL_SEL_CHART_OF_ACCOUNTS_SP = "SELECT id, account_code, account_name FROM `chart_of_accounts` WHERE company_id = ";
+    public const SQL_SEL_FINANCE_REPORT_GROUPS = "SELECT * FROM `finance_report_groups` WHERE company_id = ";
+    public const SQL_SEL_LOCATIONS = "SELECT id,location_name FROM `locations` WHERE company_id = ";
+    public const SQL_SEL_DEPARTMENTS = "SELECT id,department_name FROM `departments` WHERE company_id = ";
+    public const SQL_SEL_COST_CENTERS = "SELECT id,cost_center_name FROM `cost_centers` WHERE company_id = ";
+    public const SQL_SEL_CURRENCIES = "SELECT id,currency_name, currency_short_code, currency_symbol FROM `currencies` WHERE company_id = ";
+    public const SQL_SEL_GENERAL_CODE_DETAILS = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ";
+    public const SQL_SEL_VENDORS = "SELECT id,display_name FROM `vendors` WHERE company_id = ";
+    public const SQL_SEL_CUSTOMERS = "SELECT id,display_name FROM `customers` WHERE company_id = ";
+    public const SQL_SEL_EMPLOYEES = "SELECT id,display_name FROM `employees` WHERE company_id = ";
+    public const SQL_SEL_BANK_ACCOUNTS = "SELECT id,account_code,bank_account_name FROM `bank_accounts` WHERE company_id = ";
+    public const SQL_SEL_COA_TYPE = "SELECT id,account_name,account_code,account_type FROM `chart_of_accounts` WHERE company_id = ";
+    public const SQL_SEL_PETTY_CASH_BOXES = "SELECT id,gl_account_pc_cash,pc_box_description FROM `petty_cash_boxes` WHERE company_id = ";
+    public const SQL_SEL_ACCOUNT_BALANCES = "SELECT * FROM `account_balances` WHERE company_id = ";
+    public const SQL_DEL_GL_VOUCHER_ID = "DELETE FROM general_ledger WHERE voucher_id = '";
+    public const SQL_QUOTE_IS_ACTIVE_0_BAL_DESC = "' AND is_active = 0 ORDER BY balance_date DESC LIMIT 1";
+    public const SQL_QUOTE_IS_ACTIVE_0_BAL_DESC_LOWER = "' AND is_active = 0 ORDER BY balance_date desc limit 1";
+    public const SQL_AND_APPLICATION_TABLE_NAME = "' AND application_table_name = '";
+    public const SQL_AND_ITEM_TABLE_NOT_EMPTY = "' AND item_table !='' AND is_active = 0";
+    public const SQL_AND_TRANSACTION_ID_EQ = " AND transaction_id = '";
+    public const SQL_AND_ALLOW_POSTING_0 = " AND allow_posting = 0 AND is_active =0 ORDER BY account_name ASC";
+    public const SQL_AND_GENC_CODE_VOUCHERTYPE = " AND genc_code = 'VOUCHERTYPE' AND is_active =0";
+    public const SQL_AND_TOC_HEADERS = "' AND apply_table_name = 'toc_headers'  AND is_active = 0";
+    public const SQL_AND_REF_TYPE_SALES_INVOICES = " AND ref_type = 'sales_invoices' AND party_id = '";
+    public const SQL_AND_REF_TYPE_SUPPLIER_BILLS = " AND ref_type = 'supplier_bills' AND party_id = '";
+    public const SQL_LTE_TRANSACTION_DATE = "' <= transaction_date  AND '";
+    public const SQL_LTE_REC_TRANSACTION_DATE = "' <= rec.transaction_date  AND '";
+    public const SQL_AND_QUOTE = " AND '";
+    public const SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID = "') WHERE coa.company_id = ";
 }
 
 trait AccountVouchersAndBudgetsTrait {
     public function insertDeferredRevenues($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
         global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -118,6 +119,7 @@ trait AccountVouchersAndBudgetsTrait {
         return $return;
     }
     public function insertFollowUpLevels($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
          global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -181,6 +183,7 @@ trait AccountVouchersAndBudgetsTrait {
         return $return;
     }
     public function insertReconciliations($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
          global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -374,6 +377,7 @@ trait AccountVouchersAndBudgetsTrait {
 
     }
     public function insertJournalVouchers($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
          global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -720,6 +724,7 @@ trait AccountVouchersAndBudgetsTrait {
         return $return;
     }
     public function insertBankVouchers($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
          global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -2252,6 +2257,7 @@ class AccountUserClass extends userClass implements AccountConstants {
         return $return;
     }
     public function insertJournals($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
         global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -2339,6 +2345,7 @@ class AccountUserClass extends userClass implements AccountConstants {
 
     }
     public function insertTaxAuthorities($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
         global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -2437,6 +2444,7 @@ class AccountUserClass extends userClass implements AccountConstants {
 
     }
     public function insertFiscalPositions($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
         global $callConfig;
         $return =array();
         $return['get'] = $get;
