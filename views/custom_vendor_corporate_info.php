@@ -3,7 +3,8 @@
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <h3 class="kt-portlet__head-title"><?= __('Corporate Information'); ?>
-                    <small><?= __('update your corporate informaiton'); ?></small></h3>
+                    <small><?= __('update your corporate informaiton'); ?></small>
+                </h3>
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-wrapper">
@@ -165,7 +166,8 @@
                                                 <option value="CO" data-select2-id="105"><?= __('Colorado'); ?></option>
                                                 <option value="ID" data-select2-id="106"><?= __('Idaho'); ?></option>
                                                 <option value="MT" selected="" data-select2-id="12">
-                                                    <?= __('Montana'); ?></option>
+                                                    <?= __('Montana'); ?>
+                                                </option>
                                                 <option value="NE" data-select2-id="107"><?= __('Nebraska'); ?></option>
                                                 <option value="NM" data-select2-id="108"><?= __('New Mexico'); ?>
                                                 </option>
@@ -300,14 +302,16 @@
                                             data-select2-id="kt_select2_3_4" tabindex="-1">
                                             <optgroup label="Alaskan/Hawaiian Time Zone" data-select2-id="97_2">
                                                 <option value="AK" selected="" data-select2-id="10_2">
-                                                    <?= __('Alaska'); ?></option>
+                                                    <?= __('Alaska'); ?>
+                                                </option>
                                                 <option value="HI" data-select2-id="98_2"><?= __('Hawaii'); ?></option>
                                             </optgroup>
                                             <optgroup label="Pacific Time Zone" data-select2-id="99_2">
                                                 <option value="CA" data-select2-id="100_2"><?= __('California'); ?>
                                                 </option>
                                                 <option value="NV" selected="" data-select2-id="11_2">
-                                                    <?= __('Nevada'); ?></option>
+                                                    <?= __('Nevada'); ?>
+                                                </option>
                                                 <option value="OR" data-select2-id="101_2"><?= __('Oregon'); ?></option>
                                                 <option value="WA" data-select2-id="102_2"><?= __('Washington'); ?>
                                                 </option>
@@ -319,7 +323,8 @@
                                                 </option>
                                                 <option value="ID" data-select2-id="106_2"><?= __('Idaho'); ?></option>
                                                 <option value="MT" selected="" data-select2-id="12_2">
-                                                    <?= __('Montana'); ?></option>
+                                                    <?= __('Montana'); ?>
+                                                </option>
                                                 <option value="NE" data-select2-id="107_2"><?= __('Nebraska'); ?>
                                                 </option>
                                                 <option value="NM" data-select2-id="108_2"><?= __('New Mexico'); ?>

@@ -1,741 +1,6 @@
 <?php
-class crmuserClass extends userClass{
-    public function getCRMLeads($get){
-        global $callConfig;
-        $return = array();
-        $return['get'] = $get;
-        $todaydate = date("Y-m-d");
-        if($get['admin_type'] != 1){
-            $originatercondition = " AND originator = '".$get['user_id']."'";
-            $prooriginatercondition = " AND assigner_id = '".$get['user_id']."'";
-            $feasibiltycondition = " AND fr.created_by = '".$get['user_id']."'";
 
-        }
-        if($get['dashboard'] == "Y"){
-            $datecondition = " AND created_date BETWEEN '".$todaydate." 00:00:00' AND '".$todaydate." 23:59:59'";
-            $othercondition  =" WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-            $crm_leadssql = "SELECT (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition.$datecondition.$originatercondition.") as today_crm_lead_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition.$datecondition.$originatercondition.") as today_crm_contacts_cnt, (SELECT COUNT(id) as cnt FROM crm_deals ".$othercondition.$datecondition.$originatercondition.") as today_crm_deals_cnt, (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition.$originatercondition.") as crm_lead_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition.$originatercondition.") as crm_contacts_cnt, (SELECT COUNT(id) as cnt FROM crm_companies ".$othercondition.$originatercondition.") as crm_companies_cnt, (SELECT COUNT(id) as cnt FROM crm_campaigns ".$othercondition.$originatercondition.") as crm_campaigns_cnt, (SELECT COUNT(id) as cnt FROM crm_deals ".$othercondition.$originatercondition.") as crm_deals_cnt, (SELECT COUNT(id) as cnt FROM projects ".$othercondition.$prooriginatercondition.") as projects_cnt";
-            $crm_leadsres=$callConfig->getRow($crm_leadssql);
-            $return['dashboard_sql'] = $crm_leadssql;
-            $return['dashboard_cnt'] = $crm_leadsres;
-
-            $crm_leadssql = "SELECT * FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  ORDER BY created_date DESC limit 5";
-            $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-            $return['crm_leads'] = $crm_leadsres;
-
-            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 GROUP BY crm_status";
-            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
-            $return['crm_leads_graph'] = $crm_leadsgraphres;
-
-            $crm_leadssql = "SELECT * FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 ORDER BY created_date DESC limit 5";
-            $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-            $return['crm_contacts'] = $crm_leadsres;
-
-            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 GROUP BY crm_status";
-            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
-            $return['crm_contacts_graph'] = $crm_leadsgraphres;
-
-            $crm_dealssql = "SELECT * FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 ORDER BY created_date DESC limit 5";
-            $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-            $return['crm_deals'] = $crm_dealsres;
-
-            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 GROUP BY crm_status";
-            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
-            $return['crm_deals_graph'] = $crm_leadsgraphres;
-
-            $crm_companiessql = "SELECT id, company_name FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
-            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-            $crm_companies = array();
-            foreach($crm_companiesres as $crmlead){
-                $crm_companies[$crmlead->id] = $crmlead->company_name;
-            }
-            $return['crm_companies_id_name'] = $crm_companies;
-
-
-            $crm_lead_typessql = "SELECT id,type_name,type, icon FROM crm_activity_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-            $crm_lead_typesres=$callConfig->getAllRows($crm_lead_typessql);
-            $return['crm_activity_types'] = $crm_lead_typesres;
-
-            $crm_lead_detailssql = "SELECT id, transaction_table, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, created_date FROM crm_histories WHERE company_id = '".$get['company_id']."' AND lead_type IN(2,3,6,7,8) AND(originator = '".$get['user_id']."' OR JSON_SEARCH(member, 'one', '".$get['user_id']."') IS NOT NULL) AND  current_status = 0 AND is_active = 0";
-            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
-            $return['crm_pendding_tasks'] = $crm_lead_detailsres;
-            $tasktabd = array();
-            foreach($crm_lead_detailsres as $hist){
-                $tasktabd[$hist->transaction_table][$hist->transaction_id] = $hist->transaction_id;
-            }
-            foreach($tasktabd as $transtable=>$ids){
-                $crm_leadssql = "SELECT id,display_name,phone FROM ".$transtable." WHERE company_id = '".$get['company_id']."' AND id IN(".implode(',', (array)$ids).") ".$originatercondition." AND is_active = 0";
-                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-                foreach($crm_leadsres as $crmdet){
-                    $return['crm_pendding_task_details'][$transtable][$crmdet->id] = $crmdet;
-                }
-            }
-
-            $frsql =  "SELECT fr.id as feasibility_id, cc.id as crm_contact_id, cc.display_name, cc.email_id, cc.phone, cc.company_name, cc.crm_company_id FROM feasibility_requirements fr, crm_contacts cc WHERE fr.company_id = '".$get['company_id']."' AND fr.company_id = cc.company_id AND fr.lead_id = cc.id AND fr.is_active = cc.is_active  AND fr.is_active = 0 AND fr.sales_order_id IS NULL AND fr.current_status = '".ST_APPROVED."'".$feasibiltycondition;
-            $frres=$callConfig->getAllRows($frsql);
-            $return['feasibility_requirements'] = $frres;
-
-
-            $query = "SELECT fr.id AS feasibility_id, fr.current_status, fr.lead_id AS lead_id, ft.type_name AS feasibility_type, fe.end_date AS evaluation_end_date, crmcon.display_name FROM feasibility_requirements fr LEFT JOIN feasibility_types ft ON fr.feasibility_type_id = ft.id AND ft.company_id = " . $get['company_id'] . " AND ft.is_active = 0 LEFT JOIN lead_feasibility_evaluations fe ON fr.id = fe.feasibility_id  AND fe.company_id = " . $get['company_id'] . " AND fe.is_active = 0 LEFT JOIN crm_contacts crmcon  ON fr.company_id  = crmcon.company_id AND fr.lead_id = crmcon.id WHERE fr.company_id = " . $get['company_id'] . " AND fr.current_status != " . ST_APPROVED ." AND fr.is_active = 0  " ;
-            $data11 = $callConfig->getAllRows($query);
-            $return['feasibility_requirements_expiry_days'] = $data11;
-
-
-        }elseif($get['list'] == "Y"){
-            $from_date = $this->dateconvertdbformat($get['from_date']);
-            $to_date = $this->dateconvertdbformat($get['to_date']);
-            $datecondition = " AND created_date BETWEEN '".$from_date." 00:00:00' AND '".$to_date." 23:59:59'";
-            if($get['transaction_table_list']=="crm_leads"){
-                $crm_leadssql = "SELECT * FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0".$datecondition;
-                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-                $return['crm_leads'] = $crm_leadsres;
-
-                $crm_leadssql1 = "SELECT count(id) as cnt, crm_status,  GROUP_CONCAT(CONCAT_WS('|', id,display_name, phone,image) SEPARATOR ',') AS group_values   FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  GROUP BY crm_status";
-                $crm_leadsres1=$callConfig->getAllRows($crm_leadssql1);
-                $return['crm_leads_graph'] = $crm_leadsres1;
-
-
-            }elseif($get['transaction_table_list']=="crm_contacts"){
-                $crm_leadssql = "SELECT * FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0".$datecondition;
-                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-                $return['crm_contacts'] = $crm_leadsres;
-
-                $feasibilitycrmcontactid = array();
-                foreach($crm_leadsres as $crml){
-                    if($crml->feasibility_check == "Y"){
-                        $feasibilitycrmcontactid[$crml->id] = $crml->id;
-                    }
-                }
-                if(count((array)$feasibilitycrmcontactid) !="0"){
-                    $feasibility_requirementssql = "SELECT id, lead_id, sales_order_id, current_status FROM feasibility_requirements WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0".$datecondition;
-                    $feasibility_requirementsres=$callConfig->getAllRows($feasibility_requirementssql);
-                    foreach($feasibility_requirementsres as $feasl){
-                        $feasibility_requirements[$feasl->lead_id] = $feasl;
-                    }
-                    $return['feasibility_requirements'] = $feasibility_requirements;
-                }
-
-
-
-                $crm_leadssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,display_name, phone,image) SEPARATOR ',') AS group_values  FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  GROUP BY crm_status";
-                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-                $return['crm_contacts_graph'] = $crm_leadsres;
-
-
-            }elseif($get['transaction_table_list']=="crm_companies"){
-                $crm_companiessql = "SELECT * FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0".$datecondition;
-                $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-                $return['crm_companies'] = $crm_companiesres;
-
-                $crm_companiessql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,company_name, company_registration_number,image) SEPARATOR ',') AS group_values  FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 GROUP BY crm_status";
-                $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-                $return['crm_companies_graph'] = $crm_companiesres;
-
-            }elseif($get['transaction_table_list']=="crm_campaigns"){
-                $crm_campaignssql = "SELECT * FROM crm_campaigns WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0".$datecondition;
-                $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
-                $return['crm_campaigns'] = $crm_campaignsres;
-
-                $crm_campaignssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,campaign_name, total_budget,image) SEPARATOR ',') AS group_values  FROM crm_campaigns WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 GROUP BY crm_status";
-                $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
-                $return['crm_campaigns_graph'] = $crm_campaignsres;
-            }elseif($get['transaction_table_list']=="crm_deals"){
-                $crm_dealssql = "SELECT * FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0".$datecondition;
-                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-                $return['crm_deals'] = $crm_dealsres;
-
-                $crm_dealssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,deal_name, total_budget,image) SEPARATOR ',') AS group_values FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 GROUP BY crm_status";
-                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-                $return['crm_deals_graph'] = $crm_dealsres;
-            }elseif($get['transaction_table_list']=="crm_projects"){
-                $crm_dealssql = "SELECT * FROM projects WHERE company_id = '".$get['company_id']."' AND is_active = 0".$datecondition;
-                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-                $return['crm_projects'] = $crm_dealsres;
-            }elseif($get['transaction_table_list']=="crm_feasibilities"){
-                $query = "SELECT fr.id AS feasibility_id,fr.lead_id AS lead_id,ft.type_name AS feasibility_type,
-                    crm_con.display_name,fr.current_status,fr.sales_order_id,crm_con.phone,fr.updated_date
-                FROM feasibility_requirements fr
-                LEFT JOIN feasibility_types ft  ON fr.feasibility_type_id = ft.id AND ft.company_id = fr.company_id AND  ft.is_active = 0
-                LEFT JOIN crm_contacts crm_con ON fr.lead_id = crm_con.id AND crm_con.company_id = fr.company_id AND  crm_con.is_active = 0
-                WHERE fr.company_id = " .$get['company_id']." AND fr.created_date BETWEEN '".$from_date." 00:00:00' AND '".$to_date." 23:59:59' AND fr.is_active = 0";
-            $crm_feasibilities = $callConfig->getAllRows($query);
-            $return['crm_feasibilities'] = $crm_feasibilities;
-
-        }
-
-
-            $todaycrmleadssql = "SELECT crmp.id, crmp.transaction_table, crmp.transaction_id, crmp.lead_type, crmp.date, crmp.time, crmp.address, crmp.country_id, crmp.state_id, crmp.city_id, crmp.post_code, crmp.phone, crmp.sms_text, crmp.email_content_id, crmp.recipient_email_id, crmp.member, crmp.comment, crmp.created_date FROM crm_histories crmp WHERE crmp.company_id = '".$get['company_id']."' AND crmp.is_active = 0 AND crmp.id IN(SELECT MAX(id) as id FROM crm_histories crmc WHERE crmc.company_id = crmp.company_id AND crmc.is_active = crmp.is_active AND crmc.transaction_table = crmp.transaction_table AND crmc.transaction_id = crmp.transaction_id GROUP BY crmc.transaction_table, crmc.transaction_id)";
-            $todaycrmleadsres=$callConfig->getAllRows($todaycrmleadssql);
-            $return['crm_histories'] = $todaycrmleadsres;
-
-
-            $crm_companiessql = "SELECT id, company_name FROM crm_companies WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-            $crm_companies = array();
-            foreach($crm_companiesres as $crmlead){
-                $crm_companies[$crmlead->id] = $crmlead->company_name;
-            }
-            $return['crm_companies_id_name'] = $crm_companies;
-
-
-
-
-        }elseif($get['rid'] !=0 && $get['rid'] !="" && $get['transaction_table'] !=""){
-            //* requird please don't add filed list
-            $crm_leadssql = "SELECT * FROM ".$get['transaction_table']." WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."' AND is_active = 0";
-            $crm_leadsres=$callConfig->getRow($crm_leadssql);
-            $return['transaction'] = $crm_leadsres;
-            if($crm_leadsres->country_id !=""){
-                $statessql = "SELECT id,state_name FROM states WHERE company_id = '".$get['company_id']."' AND country_id = '".$crm_leadsres->country_id."' AND is_active = 0";
-                $statesres=$callConfig->getAllRows($statessql);
-                $return['states'] = $statesres;
-            }
-            if($crm_leadsres->state_id !=""){
-                $citiessql = "SELECT id,city_name FROM cities WHERE company_id = '".$get['company_id']."' AND state_id = '".$crm_leadsres->state_id."' AND is_active = 0";
-                $citiesres=$callConfig->getAllRows($citiessql);
-                $return['cities'] = $citiesres;
-            }
-            $crm_lead_detailssql = "SELECT id, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, created_date FROM crm_histories WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$get['rid']."' AND transaction_table = '".$get['transaction_table']."' AND is_active = 0";
-            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
-            $return['crm_lead_details_sql'] = $crm_lead_detailssql;
-            $return['crm_lead_details'] = $crm_lead_detailsres;
-
-            $email_contentsql = "SELECT template_reference_id,template_name FROM email_content WHERE company_id = '".$get['company_id']."' AND application_module = '29' AND template_reference_id = 73 AND is_active = 0";
-            $email_contentres=$callConfig->getAllRows($email_contentsql);
-            $return['email_content'] = $email_contentres;
-
-            if($get['transaction_table'] == "crm_companies"){ //only use for company with contacts
-                $crm_leadssql1 = "SELECT * FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND crm_company_id = '".$get['rid']."' AND is_active = 0";
-                $crm_leadsres1=$callConfig->getAllRows($crm_leadssql1);
-                $return['company_with_contacts'] = $crm_leadsres1;
-
-                $company_with_dealssql = "SELECT * FROM crm_deals WHERE company_id = '".$get['company_id']."' AND crm_company_id = '".$get['rid']."' AND is_active = 0";
-                $company_with_dealsres=$callConfig->getAllRows($company_with_dealssql);
-                $return['company_with_deals'] = $company_with_dealsres;
-
-            }elseif($get['transaction_table'] == "crm_deals"){ //only use for company with contacts
-                $crm_contactssql = "SELECT id, display_name, phone, originator FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND crm_company_id = '".$crm_leadsres->crm_company_id."' AND is_active = 0";
-                $crm_contactsres=$callConfig->getAllRows($crm_contactssql);
-                $return['deal_with_contacts'] = $crm_contactsres;
-            }elseif($get['transaction_table'] == "projects"){ //only use for company with contacts
-                $projctteamsql = "SELECT id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND project_id = '".$crm_leadsres->id."' AND is_active = 0";
-                $projctteamres=$callConfig->getAllRows($projctteamsql);
-                $return['project_teams'] = $projctteamres;
-            }
-
-            $application_userssql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', 'CRM_USER') IS NOT NULL";
-            $application_usersres=$callConfig->getAllRows($application_userssql);
-            $return['application_users_role'] = $application_usersres;
-
-        }
-        $crm_general_codessql = "SELECT id, code, value, label FROM crm_general_codes WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-        $crm_general_codesres=$callConfig->getAllRows($crm_general_codessql);
-        foreach($crm_general_codesres as $crmcode){
-            $crm_general_codes[$crmcode->code][] =$crmcode;
-        }
-        $return['crm_general_codes'] = $crm_general_codes;
-
-        $application_userssql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-        $application_usersres=$callConfig->getAllRows($application_userssql);
-        $return['application_users'] = $application_usersres;
-
-        $countriessql = "SELECT id,country_name FROM countries WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-        $countriesres=$callConfig->getAllRows($countriessql);
-        $return['countries'] = $countriesres;
-
-        $crm_lead_typessql = "SELECT id,type_name,type, icon FROM crm_activity_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-        $crm_lead_typesres=$callConfig->getAllRows($crm_lead_typessql);
-        $return['crm_lead_types'] = $crm_lead_typesres;
-
-        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-        $company_typesres = $callConfig->getAllRows($company_typessql);
-        $return['company_types'] = $company_typesres;
-
-        $project_task_statussql = "SELECT  id, table_name, name, status, action_label FROM project_task_status WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-        $project_task_statusres = $callConfig->getAllRows($project_task_statussql);
-        $project_task_status = array();
-        foreach($project_task_statusres as $aulres){
-            $project_task_status[$aulres->table_name][$aulres->status]= $aulres;
-        }
-        $return['project_task_status'] = $project_task_status;
-        if($get['transaction_table'] =="crm_companies"){
-            $crm_lead_detailssql = "SELECT id, display_name FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND (crm_company_id IN ('".$get['rid']."') OR crm_company_id IS NULL) AND is_active = 0";
-            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
-            $return['company_crm_contacts'] = $crm_lead_detailsres;
-
-            $crm_all_pending_contactsql = "SELECT id, display_name FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND (crm_company_id ='' OR crm_company_id IS NULL) AND is_active = 0";
-            $crm_all_pending_contactres=$callConfig->getAllRows($crm_all_pending_contactsql);
-            $return['without_company_contacts'] = $crm_all_pending_contactres;
-
-        }elseif($get['transaction_table'] =="crm_deals" || $get['transaction_table'] =="crm_contacts"){
-            $crm_companiessql = "SELECT id, company_name FROM crm_companies WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-            $return['crm_companies'] = $crm_companiesres;
-        }elseif($get['transaction_table'] =="projects" || $get['transaction_table'] =="crm_projects"){
-            $customerssql = "SELECT id, display_name, company FROM customers WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-            $customersres=$callConfig->getAllRows($customerssql);
-            $return['customers'] = $customersres;
-        }
-        if($get['transaction_table'] =="crm_leads" || $get['transaction_table'] =="crm_contacts"){
-            $crm_campaignssql = "SELECT id, campaign_name FROM crm_campaigns WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-            $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
-            $return['crm_campaigns'] = $crm_campaignsres;
-        }
-        return $return;
-    }
-    public function insertCRMLeads($get,$post){
-        global $callConfig;
-        $return = array();
-        $return['post'] = $post;
-        $transaction_table = $post['transaction_table'];
-        $display_name = $post['first_name']." ".$post['last_name'];
-        $insertary=array('company_id'=>$post['company_id'],'first_name'=>$post['first_name'],'middle_name'=>$post['middle_name'],'last_name'=>$post['last_name'],'display_name'=>$display_name,'phone'=>$post['phone'],'office_phone'=>$post['office_phone'],'fax'=>$post['fax'],'website'=>$post['website'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'contact_source'=>$post['contact_source'],'remark'=>$post['remark'],'email_id'=>$post['email_id'],'image'=>$post['image']);
-        if($transaction_table== "crm_leads"){
-            $insertary['company_name'] = $post['company_name'];
-            $insertary['crm_status'] = $post['crm_status'];
-            $insertary['crm_campaign_id'] = $post['crm_campaign_id'];
-
-        }elseif($transaction_table== "crm_contacts"){
-            $insertary['crm_company_id'] = $post['crm_company_id'];
-            $insertary['crm_campaign_id'] = $post['crm_campaign_id'];
-            $insertary['feasibility_check'] = $post['feasibility_check'] =="Y"?"Y":"N";
-        }elseif($transaction_table =="crm_companies"){
-
-            $insertary=array('company_id'=>$post['company_id'],'company_name'=>$post['company_name'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'gstin'=>$post['gstin'],'fax'=>$post['fax'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
-
-                $insertary1=array('company_id'=>$post['company_id'],'display_name'=>$post['company_name'],'company'=>$post['company_name'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'billing_address'=>$post['address'], 'shipping_address'=>$post['address'],'billing_post_code'=>$post['post_code'], 'shipping_post_code'=>$post['post_code'], 'billing_country'=>$post['country_id'], 'shipping_country'=>$post['country_id'], 'billing_state'=>$post['state_id'], 'shipping_state'=>$post['state_id'], 'billing_city'=>$post['city_id'], 'shipping_city'=>$post['city_id'],'image'=>$post['image'],'updated_by'=>$post['user_id'],'updated_date'=>date("Y-m-d H:i:s"),'gstin'=>$post['gstin'],'fax'=>$post['fax']);
-
-                if($post['crm_customer_id'] !=""){
-                    $return['customer'] = $callConfig->updateRecord('customers',$insertary1,'id',$post['crm_customer_id']);
-                }else{
-                    $customerinsert =$callConfig->insertRecord('customers',$insertary1);
-                    $return['customer'] = $customerinsert;
-                    $insertary['customer_id'] = $customerinsert['LASTID'];
-                }
-
-
-        }elseif($transaction_table =="crm_campaigns"){
-            $insertary=array('company_id'=>$post['company_id'],'campaign_name'=>$post['campaign_name'],'crm_campaign_type'=>$post['crm_campaign_type'],'campaign_objective'=>$post['campaign_objective'],'campaign_start_date'=>$this->dateconvertdbformat($post['campaign_start_date']),'campaign_end_date'=>$this->dateconvertdbformat($post['campaign_end_date']),'total_budget'=>$post['total_budget'],'redirect_url'=>$post['redirect_url'],'contact_email_id'=>$post['contact_email_id'],'contact_no'=>$post['contact_no'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
-        }elseif($transaction_table =="crm_deals"){
-            $insertary=array('company_id'=>$post['company_id'],'deal_name'=>$post['deal_name'],'source_type'=>$post['source_type'],'crm_company_id'=>$post['crm_company_id'],'crm_contact_id'=>$post['crm_contact_id'],'total_budget'=>$post['total_budget'],'due_date'=>$this->dateconvertdbformat($post['due_date']),'expected_close_date'=>$this->dateconvertdbformat($post['expected_close_date']),'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
-        }elseif($transaction_table =="projects"){
-            $insertary=array('company_id'=>$post['company_id'],'project_name'=>$post['project_name'],'customer_id'=>$post['customer_id'],'project_cost'=>$post['project_cost'],'planned_start'=>$this->dateconvertdbformat($post['planned_start']),'planned_finish'=>$this->dateconvertdbformat($post['planned_finish']),'assigner_id'=>$post['originator'],'description'=>$post['description'],'assigner_id'=>$post['originator'],'project_logo'=>$post['image']);
-        }
-         if($post['rid'] !="" && $post['rid'] !="0"){
-            $insertary['updated_date']=date('Y-m-d h:i:s');
-            $insertary['updated_by']=$post['user_id'];
-            $return['res'] = $callConfig->updateRecord($transaction_table,$insertary,'id',$post['rid']);
-            $lastid = $post['rid'];
-
-            if($transaction_table == "projects"){
-                $projctteamsql = "SELECT id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND project_id = '".$lastid."' AND is_active = 0";
-                $projctteamres=$callConfig->getAllRows($projctteamsql);
-                $project_teamsuserid = array();
-                foreach($projctteamres as $prteam){
-                    $project_teamsuserid[$prteam->user_id] = $prteam->id;
-                }
-                $callConfig->updateRecord('project_teams',array('is_active'=>null),'id',$lastid);
-                if(count((array)$post['project_team_user_id']) != '0'){
-                    foreach($post['project_team_user_id'] as $userid){
-                        if($project_teamsuserid[$userid] !=""){
-                            $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
-                            $return['project_teams_up'][] = $callConfig->updateRecord('project_teams',$insertary1,'id',$project_teamsuserid[$userid]);
-                        }else{
-                            $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
-                            $return['project_teams'][] = $callConfig->insertRecord('project_teams',$insertary1);
-                        }
-                    }
-                }
-            }
-
-        }else{
-            $return['insertary---'] = $insertary;
-            $insertary['created_by']=$post['user_id'];
-            $insertary['created_date']=date("Y-m-d H:i:s");
-            $insertary['is_active']='0';
-            $insertary['current_status']='0';
-            $tapres = $callConfig->insertRecord($transaction_table,$insertary);
-            $return['res'] =$tapres;
-            $lastid = $tapres['LASTID'];
-
-            if($tapres['status'] == 'sucess' && $transaction_table == "projects" && !empty($post['project_team_user_id'])){
-                foreach($post['project_team_user_id'] as $userid){
-                    $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
-                    $return['project_teams'][] = $callConfig->insertRecord('project_teams',$insertary1);
-                }
-            }
-        }
-
-        return $return;
-    }
-    public function insertCRMLeadDetails($get,$post){
-        global $callConfig;
-        $return = array();
-        if($post['rid'] !=""){ // updatre status
-            $insertary1=array('company_id'=>$post['company_id'],'completion_datetime'=>date("Y-m-d H:i:s"),'completion_note'=>$post['comment'],'current_status'=>ST_APPROVED,'updated_by'=>$post['user_id'],'updated_date'=>date("Y-m-d H:i:s"));
-            $crmleaddetails = $callConfig->updateRecord('crm_histories',$insertary1,'id',$post['rid']);
-        }else{
-             $insertary=array('company_id'=>$post['company_id'],'transaction_id'=>$post['transaction_id'],'transaction_table'=>$post['transaction_table'],'lead_type'=>$post['lead_type'],'date'=>$this->dateconvertdbformat($post['date']),'time'=>$post['time'],'address'=>$post['address'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'post_code'=>$post['post_code'],'email_id'=>$post['email_id'],'phone'=>$post['phone'],'sms_text'=>$post['sms_text'],'email_content_id'=>$post['email_content_id'],'recipient_email_id'=>$post['recipient_email_id'],'member'=>json_encode((array)$post['member']),'comment'=>$post['comment'],'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"),'originator'=>$post['user_id']);
-            $crmleaddetails = $callConfig->insertRecord('crm_histories',$insertary);
-        }
-        if($crmleaddetails['status'] == "sucess"){
-            if($post['lead_type'] == '6' || $post['lead_type'] == '7'){
-                $aulist = "SELECT id, display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND id IN(".implode(',',(array)$post['member']).") AND is_active = 0";
-                $aulres=$callConfig->getAllRows($aulist);
-                $assign_user_list = "";
-                foreach($aulres as $aulres){
-                    $assign_user_list .= $aulres->display_name.", ";
-                }
-            }
-            $touserarray = $post['member'];
-            $ccuserarray = array();
-            $ccuserarray[] = $post['user_id'];
-            if($post['lead_type'] == '6'){
-                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>'28','to_users'=>$touserarray,'cc_users'=>$ccuserarray);
-                $senddata['lead_date_time'] = $this->dateconvertdbformat($post['date'])." ".$post['time'];
-                $senddata['lead_Task'] = $post['comment'];
-                $senddata['assign_user_list'] = $assign_user_list;
-                $this->emailsendmediaternew($senddata);
-
-                $msg = "New Task Assign For You :".$post['comment'];
-                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $this->tosendnotifiations($notdataa);
-                $notdataa['notification_message'] = "New Task Assign Successfully";
-                $notdataa['notification_users'] = $ccuserarray;
-                $notdataa['type'] = "INFORMATION";
-                $this->tosendnotifiations($notdataa);
-
-            }
-            if($post['lead_type'] == '7'){
-                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>'29','to_users'=>$touserarray,'cc_users'=>$ccuserarray);
-                $senddata['lead_date_time'] = $this->dateconvertdbformat($post['date'])." ".$post['time'];
-                $senddata['lead_Task'] = $post['comment'];
-                $senddata['assign_user_list'] = $assign_user_list;
-                $this->emailsendmediaternew($senddata);
-
-                $msg = "New Meeting Assign For You :".$post['comment'];
-                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $this->tosendnotifiations($notdataa);
-                $notdataa['notification_message'] = "New Meeting Assign Successfully";
-                $notdataa['notification_users'] = $ccuserarray;
-                $notdataa['type'] = "INFORMATION";
-                $this->tosendnotifiations($notdataa);
-            }
-            if($post['lead_type'] == '5'){
-                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>$post['email_content_id'],'to_users'=>$ccuserarray,'cc_users'=>array(),'recipient_email_id'=>array($post['recipient_email_id']));
-                $this->emailsendmediaternew($senddata);
-                $msg = "Email Send Successfully";
-                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'INFORMATION', 'notification_users'=>$ccuserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $this->tosendnotifiations($notdataa);
-            }
-        }
-        $return['res'] = $crmleaddetails;
-        return $return;
-    }
-    public function dynamicUpdateStatus($get,$post){
-        global $callConfig;
-        $return = array();
-        $return['post'] = $post;
-        $updateary['updated_date']=date('Y-m-d h:i:s');
-        $updateary['updated_by']=$post['user_id'];
-        $updateary['current_status'] = $post['current_status'];
-        $return['res'] = $callConfig->updateRecord($post['transaction_table'],$updateary,'id',$post['rid']);
-        return $return;
-    }
-
-
-
-//Start Email New Code
-
-    public function emailsendmediaternew($senddata){
-        global $callConfig;
-        $senddata['super_admin_email_id'] = SUPERADMIN_EMAIL_ID;
-        $senddata['super_admin_company_name'] = SUPERADMIN_COMPNAY_NAME;
-        $senddata['super_admin_display_name'] = SUPERADMIN_DISLAY_NAME;
-        $adminsersql = "SELECT au.id, au.display_name, au.user_email, au.user_mobile, comp.name FROM application_users au, companies comp WHERE au.company_id = '".$senddata['session_company_id']."' AND au.company_id = comp.id AND au.role_id LIKE '".'%"'.ADMIN_ROLES.'"%'."'";
-        $adminserres = $callConfig->getRow($adminsersql);
-        $senddata['admin_email_sql'] = $adminsersql;
-        $senddata['admin_email_id'] = $adminserres->user_email;
-        $senddata['admin_company_name'] = $adminserres->name;
-        $senddata['company_name'] = $adminserres->name;
-        $senddata['admin_display_name'] = $adminserres->display_name;
-        $senddata['admin_phone_number'] = $adminserres->user_mobile;
-
-        $email_send_types = array('TO'=>'to_users','CC'=>'cc_users');
-        $query = "SELECT id,user_email FROM application_users";
-        $emaildata = $callConfig->getAllRows($query);
-        foreach($emaildata as $emaild){
-            $useremail[$emaild->id] = $emaild->user_email;
-        }
-        $ress = array();
-        foreach($email_send_types as $key=>$email_send_type){
-            $revicer = array();
-            $senddata['email_send_type'] =$key;
-            $email_array = $this->emailtemplatenew($senddata);
-            $file_name = 'email'.'_'.time().uniqid().'.'.'html';
-            $email_array ['content'] = $file_name;
-            if(count((array)$senddata[$email_send_type]) !='0'){
-                foreach($senddata[$email_send_type] as $email_send){
-                    $revicer[] = $useremail[$email_send];
-                }
-                $email_array['revicer'] = (count((array)$senddata['recipient_email_id'])!='0')?$senddata['recipient_email_id']:$revicer;
-                $email_array['email_type'] = 1;
-                $email = $email_array['mesg'];
-                $file_path='uploads/email/'.$file_name;
-                file_put_contents($file_path, $email);
-                $this->sendEmailslistnew($email_array);
-                $ress[] = $email_array;
-            }
-        }
-        return $ress;
-    }
-    public function sendEmailslistnew($data){
-        global $callConfig;
-        $email_data = array('email_source'=>$data['sender'], 'content'=>$data['content'], 'email_type'=>$data['email_type'], 'is_active'=>0 , 'current_status'=>0,'email_content_ref_id'=>$data['email_content_ref_id'], 'created_by'=>$data['created_by'] ,'created_date'=> date('Y-m-d H:i:s'));
-        foreach ($data['revicer'] as $email) {
-            $email_data['email'] = $email;
-            $callConfig->insertRecord(TBL_EMAIL_LOGS,$email_data);
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            // More headers
-            $sender = $data['sender']!="" ? $data['sender']:SUPERADMIN_EMAIL_ID;
-            $headers .= 'From:'.$sender . "\r\n";
-            $subject = ucwords(str_replace('_', ' ', $data['subject']));
-            mail($email,$subject,$data['mesg'],$headers);
-        }
-        return $email_data;
-    }
-    public function emailtemplatenew($send_data){
-        global $callConfig;
-        $temp = "";
-        $configsql = "SELECT name,contact_address,application_module,admin_email,display_logo FROM config WHERE id = 1";
-        $return['config'] = $configsql;
-        $configres=$callConfig->getRow($configsql);
-        $send_data['company_name'] = $configres->name!=""?$configres->name:SUPERADMIN_COMPNAY_NAME;
-        $send_data['contact_address'] = $configres->contact_address ;
-        if($send_data['email_send_type'] == "TO"){
-            $emailcontentsql = "SELECT email_subject_to as email_subject,email_header_to as email_header,email_content_to as email_content_1,button_label, email_footer  as email_fotter FROM email_content WHERE company_id = '".$send_data['session_company_id']."' AND  template_reference_id = '".$send_data['template_reference_id'] ."' AND is_active = 0 ";
-        }else{
-            $emailcontentsql = "SELECT email_subject_cc as email_subject,email_header_cc as email_header,email_content_cc as email_content_1,button_label,email_footer  as email_fotter FROM email_content WHERE company_id = '".$send_data['session_company_id']."' AND  template_reference_id = '".$send_data['template_reference_id'] ."' AND is_active = 0";
-        }
-        $return['emailcontentsql'] = $emailcontentsql;
-        $emailcontentres=$callConfig->getRow($emailcontentsql);
-        $subject =  $this->emaildatareplace($send_data, $emailcontentres->email_subject);
-
-        $temp = '
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-        <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-        </head>
-        <body yahoo bgcolor="#f6f8f1">
-        <table width="70%" style="padding:20px;background-color:#f5f5f5;" align="center" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-        <td style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424;padding:15px 0px;">
-        <img class="fix" src="'.SITEURL.'/uploads/all/'.$configres->display_logo.'" border="0" alt="" style="width:150px"/>
-        </td>
-        </tr>
-        <tr>
-        <td>
-        <table width="100%" style="padding:10px;background-color:#FFFFFF;"  >
-        <tr>
-        <td style="padding-left:32px; padding-top:20px; font-size:14px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424" >
-        '.$this->emaildatareplace($send_data, $emailcontentres->email_header).'
-        </td>
-        </tr>
-        <tr>
-        <td style="padding-left:33px; font-size:13px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-        '.$this->emaildatareplace($send_data, $emailcontentres->email_sub_header).'
-        </td>
-        </tr>
-        <tr>
-        <td style="padding-left:33px; font-size:13px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-        <div>'.$this->emaildatareplace($send_data, $emailcontentres->email_content_1).' </div>
-
-        </td>
-        </tr>
-        <tr>
-        <td>
-        &nbsp;
-        </td>
-        </tr>
-        <tr>
-        <td>
-        &nbsp;
-        </td>
-        </tr>
-        <tr>
-        <td style="padding-left:33px; font-size:13px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-        '.$this->emaildatareplace($send_data, $emailcontentres->email_content_2).'
-        </td>
-        </tr>
-        <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-        '.$this->emaildatareplace($send_data, $emailcontentres->email_fotter).'
-
-        </td>
-        </tr>
-        </table>
-        </body>
-        </html>
-        ';
-        $return['subject'] = $subject;
-        $return['mesg'] = $temp;
-        $return['sender'] =  $configres->admin_email;
-        return $return;
-    }
-
-//End Email New Code
-
-    public function setStateCity($get){
-        global $callConfig;
-        $citiessql = "SELECT id,city_name FROM cities";
-        $citiesres=$callConfig->getAllRows($citiessql);
-        foreach($citiesres as $citt){
-            $cityNames[$citt->id] = $citt->city_name;
-        }
-
-        $state_namesql = "SELECT id,state_name FROM states";
-        $state_nameres=$callConfig->getAllRows($state_namesql);
-        foreach($state_nameres as $citt){
-            $stateNames[$citt->id] = $citt->state_name;
-        }
-
-        $customersssql = "SELECT id,billing_address FROM customers WHERE billing_address !=''";
-        $customerssres=$callConfig->getAllRows($customersssql);
-        foreach($customerssres as $cust){
-            $customers[$cust->id]['billing_address'] = $cust->billing_address;
-
-            //Statrt Get Post Code
-            preg_match('/\b\d{6}\b/', $cust->billing_address, $postalCodeMatch);
-            $postalCode = $postalCodeMatch[0] ?? null;
-            $customers[$cust->id]['post_code'] = $postalCode;
-            //End Get Post Code
-
-
-
-
-            $updateary = array('billing_city'=>'','billing_state'=>'','billing_post_code'=>$postalCode,'billing_country'=>'101','shipping_city'=>'','shipping_state'=>'','shipping_post_code'=>$postalCode,'shipping_country'=>'101');
-            $return['res'] = $callConfig->updateRecord('customers',$updateary,'id',$cust->id);
-        }
-        echo "<pre>";
-        print_r($return);
-
-    }
-    public function leadConvertToContacts($get,$post){
-        global $callConfig;
-        $transaction_id = $post['transaction_id'];
-        $exicutesql = "INSERT INTO `crm_contacts`(`crm_lead_id`,`company_name`,`company_id`, `first_name`, `middle_name`, `last_name`, `display_name`, `email_id`, `phone`, `office_phone`, `fax`, `website`, `address`, `post_code`, `country_id`, `state_id`, `city_id`, `originator`, `contact_source`, `is_active`, `current_status`, `created_date`, `created_by`,`image`) SELECT `id`,`company_name`,'".$post['company_id']."', `first_name`, `middle_name`, `last_name`, `display_name`, `email_id`, `phone`, `office_phone`, `fax`, `website`, `address`, `post_code`, `country_id`, `state_id`, `city_id`, `originator`, `contact_source`, 0, 0,'".date('Y-m-d H:i:s')."', '".$post['user_id']."',`image` FROM `crm_leads` WHERE id='".$transaction_id."'";
-        $res = $callConfig->executeQuery($exicutesql);
-        if($res['status'] == 'sucess'){
-            $insertary['updated_date']=date('Y-m-d h:i:s');
-            $insertary['updated_by']=$post['user_id'];
-            $insertary['lead_convert_to_contact']="Y";
-            $insertary['crm_contact_id']=$transaction_id;
-            $callConfig->updateRecord("crm_leads",$insertary,'id',$transaction_id);
-        }
-        return $res;
-
-    }
-    public function getLeadAndContactAssigned($get){
-        global $callConfig;
-        if($get['admin_type'] != 1){
-            $originatercondition = " AND crml.originator = '".$get['user_id']."'";
-            $originatercondition2 = " AND originator = '".$get['user_id']."'";
-        }
-
-        $application_userssql = "SELECT id,display_name,user_photo FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0  AND JSON_SEARCH(role_id, 'one', 'CRM_USER') IS NOT NULL";
-        $application_usersres=$callConfig->getAllRows($application_userssql);
-
-
-         $crm_historiessql = "SELECT crml.access_user_id, COUNT(DISTINCT crml.id) AS lead_total_cnt, COUNT(DISTINCT crmh.transaction_id) AS lead_used_cnt FROM crm_leads crml LEFT JOIN crm_histories crmh ON crmh.company_id = crml.company_id AND crmh.transaction_table = 'crm_leads' AND crmh.transaction_id = crml.id AND crmh.is_active = crml.is_active WHERE crml.company_id = '".$get['company_id']."' ".$originatercondition." AND crml.is_active = 0 GROUP BY crml.access_user_id";
-         $return['crm_historiessql'] = $crm_historiessql;
-         $crm_historiesres=$callConfig->getAllRows($crm_historiessql);
-         foreach($crm_historiesres as $aus){
-             $crm_histories_lead['crm_leads'][$aus->access_user_id] =$aus;
-         }
-
-         $crm_contactssql = "SELECT crml.access_user_id, COUNT(DISTINCT crml.id) AS lead_total_cnt, COUNT(DISTINCT crmh.transaction_id) AS lead_used_cnt FROM crm_contacts crml LEFT JOIN crm_histories crmh ON crmh.company_id = crml.company_id AND crmh.transaction_table = 'crm_contacts' AND crmh.transaction_id = crml.id AND crmh.is_active = crml.is_active WHERE crml.company_id = '".$get['company_id']."' ".$originatercondition." AND crml.is_active = 0 GROUP BY crml.access_user_id";
-         $return['crm_contactssql'] = $crm_contactssql;
-         $crm_contactsres=$callConfig->getAllRows($crm_contactssql);
-         foreach($crm_contactsres as $aus){
-             $crm_histories_lead['crm_contacts'][$aus->access_user_id] =$aus;
-         }
-         $return['crm_histories_lead'] = $crm_histories_lead;
-
-         $application_users = array();
-         foreach($application_usersres as $aus){
-             $aus->leads = $crm_histories_lead['crm_leads'][$aus->id];
-             $aus->contacts = $crm_histories_lead['crm_contacts'][$aus->id];
-             $application_users[$aus->id] = $aus;
-         }
-        $return['application_users'] = $application_users;
-
-        $othercondition  =" WHERE company_id = '".$get['company_id']."' ".$originatercondition2." AND is_active = 0";
-        $crm_leadssql = "SELECT (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition.") as crm_lead_total_cnt, (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition." AND access_user_id IS NOT NULL) as crm_lead_assigne_cnt, (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition." AND access_user_id IS NULL) as crm_lead_un_assigne_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition.") as crm_contacts_total_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition." AND access_user_id IS NOT NULL) as crm_contacts_assigne_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition." AND access_user_id IS NULL) as crm_contacts_un_assigne_cnt";
-        $crm_leadsres=$callConfig->getRow($crm_leadssql);
-        $return['dashboard_sql'] = $crm_leadssql;
-        $return['dashboard_cnt'] = $crm_leadsres;
-
-        $crm_dealssql = "SELECT id, project_name, (SELECT COUNT(pt.id) as cnt FROM project_teams pt WHERE pt.company_id = proj.company_id AND pt.project_id = proj.id AND pt.is_active = proj.is_active) as team_user_cnt FROM projects proj WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-        $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-        $return['crm_projects'] = $crm_dealsres;
-
-        return $return;
-    }
-    public function leadAndContactAssigning($get,$post){
-        global $callConfig;
-        $return['post'] = $post;
-        $assign_lead_contact = $post['assign_lead_contact'];
-        if($get['admin_type'] != 1){
-            $originatercondition = " AND originator = '".$get['user_id']."'";
-        }
-        $user_id = array();
-        if($post['assign_type'] =="2"){ //project
-            $sql = "SELECT user_id FROM project_teams WHERE company_id ='".$post['company_id']."' AND project_id ='".$post['project_id']."'  AND is_active = 0";
-            $resul=$callConfig->getAllRows($sql);
-            $projuid = array();
-            foreach($resul as $resultt){
-                $projuid[] = $resultt->user_id;
-            }
-            $return['projuid'] = $projuid;
-            $contactCount = $post['number_of_lead_contact'];
-            $employeeCount = count((array)$projuid);
-            $contactsPerEmployee = intdiv($contactCount, $employeeCount);
-            $extraContacts = $contactCount % $employeeCount;
-            $seq = 0;
-            for ($i = 0; $i < $employeeCount; $i++){
-                $distribution = $contactsPerEmployee + ($i == $employeeCount - 1 ? $extraContacts : 0);
-                $user_id[] = array("user_id"=>$projuid[$seq],"contact"=>$distribution);
-                $seq++;
-            }
-        }else{ //user
-            $user_id[] = array("user_id"=>$post['application_user_id'],"contact"=>$post['number_of_lead_contact']);
-        }
-        $insertary=array('company_id'=>$post['company_id'],'assign_type'=>$post['assign_type'],'assign_lead_contact'=>$post['assign_lead_contact'],'order_by'=>$post['order_by'],'user_id'=>json_encode((array)$user_id),'project_id'=>$post['project_id'],'number_of_lead_contact'=>$post['number_of_lead_contact'],'assigning_datetime'=>date("Y-m-d H:i:s"),'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
-        $crm_lead_and_contact_assignings = $callConfig->insertRecord('crm_lead_and_contact_assignings',$insertary);
-        $return['res'] = $crm_lead_and_contact_assignings;
-        if($crm_lead_and_contact_assignings['status'] == 'sucess'){
-            foreach($user_id as $usepor){
-                $uids = $usepor['user_id'];
-                $contact = $usepor['contact'];
-                $query = "UPDATE ".$assign_lead_contact." SET access_user_id =".$uids.", access_datetime = '".date("Y-m-d H:i:s")."', crm_lead_and_contact_assigning_id =".$crm_lead_and_contact_assignings['LASTID']." WHERE company_id = '".$post['company_id']."' ".$originatercondition." AND `access_user_id` IS NULL AND is_active = 0 ORDER BY created_date asc limit ".$contact;
-                $return['udate_crm_leads']  = $callConfig->executeQuery($query);
-
-                $msg = $contact. " : New Lead/Cntacts Assign For You";
-                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>"",'application_table_name'=>'crm_lead_and_contact_assignings', 'type'=>'INFORMATION', 'notification_users'=>array($uids),'option'=>'','assigner_id'=>$post['user_id']);
-                $this->tosendnotifiations($notdataa);
-
-            }
-        }
-        return $return;
-    }
-    public function testAPI($get){
-        global $callConfig;
-        $return = array();
-        echo "Working<pre>"; print_r($return);
-
-    }
-
-    //Koteswar start
+trait CrmSalesAndImportsTrait {
     public function importCSV($get, $post){
         global $callConfig;
         $return = array();
@@ -1302,6 +567,10 @@ class crmuserClass extends userClass{
     }
 
     // End feasibilty part By Kote - 25-06-2025
+
+}
+
+trait CrmFeasibilityAndCustomerTrait {
     public function getFeasiblityData($get){
         global $callConfig;
         $return = array();
@@ -1324,7 +593,7 @@ class crmuserClass extends userClass{
             $feasibility_requirement_res = $callConfig->getRow($query);
             $return['feasibility_requirement_res'] = $feasibility_requirement_res;
         }
-        if( (isset($feasibility_id) && $feasibility_id != '')){
+        if (isset($feasibility_id) && $feasibility_id != '') {
             $query = "SELECT * FROM feasibility_requirements WHERE id = ".$feasibility_id." AND company_id=".$get['company_id']." AND is_active=0";
             $feasibility_requirement_res = $callConfig->getRow($query);
             $return['feasibility_requirement_res'] = $feasibility_requirement_res;
@@ -1976,7 +1245,7 @@ $html .= "</div>";
         }
         return $return;
     }
-    public function createCustomerWithContactLeadDetails($crm_contactsres, $crm_lead_contact_id, $crm_company_id="", $get){
+    public function createCustomerWithContactLeadDetails($crm_contactsres, $crm_lead_contact_id, $crm_company_id, $get){
         global $callConfig;
         $return = array();
         $post = array();
@@ -2403,5 +1672,772 @@ $html .= "</div>";
         return $return;
 
     }
+
+
+}
+
+class CrmUserClass extends userClass {
+    use CrmSalesAndImportsTrait;
+    use CrmFeasibilityAndCustomerTrait;
+
+    public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
+    public const DATE_FORMAT_LOWER_HIS = "Y-m-d h:i:s";
+    public const SQL_AND_IS_ACTIVE_0 = " AND is_active = 0";
+    public const SQL_AND_IS_ACTIVE_0_NOSPACE = " AND is_active=0";
+    public const SQL_QUOTE_AND_IS_ACTIVE_0 = "' AND is_active = 0";
+    public const SQL_AND_IS_ACTIVE_0_GROUP_STATUS = " AND is_active = 0 GROUP BY crm_status";
+    public const SQL_WHERE_COMPANY_ID_EQ_QUOTE = " WHERE company_id = '";
+    public const SQL_SEL_CRM_CONTACTS = "SELECT * FROM crm_contacts WHERE company_id = '";
+    public const SQL_SEL_CRM_DEALS = "SELECT * FROM crm_deals WHERE company_id = '";
+    public const SQL_SEL_CRM_COMPANIES = "SELECT id, company_name FROM crm_companies WHERE company_id = '";
+    public const SQL_AND_ORIGINATOR_EQ = " AND originator = '";
+    public const SQL_ZERO_TIME_AND = " 00:00:00' AND '";
+    public const SQL_QUOTE_AND_ID_IN = "' AND id IN(";
+    public const SQL_QUOTE_AND_ID_EQ = "' AND id = '";
+    public const SQL_QUOTE_AND_ID_EQ_NUM = "' AND id = ";
+    public const SQL_QUOTE_AND_CRM_COMPANY_ID = "' AND crm_company_id = '";
+    public const SQL_AND_POSITION_ = " AND position_";
+    public const SQL_AND_COMPANY_ID_EQ = " AND company_id=";
+    public const SQL_SPACE_COMPANY_ID_EQ = " company_id=";
+    public const SQL_QUOTE_AND_APP_SERIAL_ID = "' AND application_serial_number_master_id = '";
+    public const SQL_SEL_APP_SERIAL_MASTER_DETAILS = "SELECT * FROM application_serial_number_master_details WHERE company_id = '";
+
+
+    public function getCRMLeads($get){
+        global $callConfig;
+        $return = array();
+        $return['get'] = $get;
+        $todaydate = date("Y-m-d");
+        if($get['admin_type'] != 1){
+            $originatercondition = self::SQL_AND_ORIGINATOR_EQ.$get['user_id']."'";
+            $prooriginatercondition = " AND assigner_id = '".$get['user_id']."'";
+            $feasibiltycondition = " AND fr.created_by = '".$get['user_id']."'";
+
+        }
+        if($get['dashboard'] == "Y"){
+            $datecondition = " AND created_date BETWEEN '".$todaydate.self::SQL_ZERO_TIME_AND.$todaydate." 23:59:59'";
+            $othercondition  =self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $crm_leadssql = "SELECT (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition.$datecondition.$originatercondition.") as today_crm_lead_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition.$datecondition.$originatercondition.") as today_crm_contacts_cnt, (SELECT COUNT(id) as cnt FROM crm_deals ".$othercondition.$datecondition.$originatercondition.") as today_crm_deals_cnt, (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition.$originatercondition.") as crm_lead_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition.$originatercondition.") as crm_contacts_cnt, (SELECT COUNT(id) as cnt FROM crm_companies ".$othercondition.$originatercondition.") as crm_companies_cnt, (SELECT COUNT(id) as cnt FROM crm_campaigns ".$othercondition.$originatercondition.") as crm_campaigns_cnt, (SELECT COUNT(id) as cnt FROM crm_deals ".$othercondition.$originatercondition.") as crm_deals_cnt, (SELECT COUNT(id) as cnt FROM projects ".$othercondition.$prooriginatercondition.") as projects_cnt";
+            $crm_leadsres=$callConfig->getRow($crm_leadssql);
+            $return['dashboard_sql'] = $crm_leadssql;
+            $return['dashboard_cnt'] = $crm_leadsres;
+
+            $crm_leadssql = "SELECT * FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  ORDER BY created_date DESC limit 5";
+            $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
+            $return['crm_leads'] = $crm_leadsres;
+
+            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
+            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
+            $return['crm_leads_graph'] = $crm_leadsgraphres;
+
+            $crm_leadssql = self::SQL_SEL_CRM_CONTACTS.$get['company_id']."' ".$originatercondition." AND is_active = 0 ORDER BY created_date DESC limit 5";
+            $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
+            $return['crm_contacts'] = $crm_leadsres;
+
+            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
+            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
+            $return['crm_contacts_graph'] = $crm_leadsgraphres;
+
+            $crm_dealssql = self::SQL_SEL_CRM_DEALS.$get['company_id']."' ".$originatercondition." AND is_active = 0 ORDER BY created_date DESC limit 5";
+            $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
+            $return['crm_deals'] = $crm_dealsres;
+
+            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
+            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
+            $return['crm_deals_graph'] = $crm_leadsgraphres;
+
+            $crm_companiessql = self::SQL_SEL_CRM_COMPANIES.$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0;
+            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
+            $crm_companies = array();
+            foreach($crm_companiesres as $crmlead){
+                $crm_companies[$crmlead->id] = $crmlead->company_name;
+            }
+            $return['crm_companies_id_name'] = $crm_companies;
+
+
+            $crm_lead_typessql = "SELECT id,type_name,type, icon FROM crm_activity_types WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $crm_lead_typesres=$callConfig->getAllRows($crm_lead_typessql);
+            $return['crm_activity_types'] = $crm_lead_typesres;
+
+            $crm_lead_detailssql = "SELECT id, transaction_table, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, created_date FROM crm_histories WHERE company_id = '".$get['company_id']."' AND lead_type IN(2,3,6,7,8) AND(originator = '".$get['user_id']."' OR JSON_SEARCH(member, 'one', '".$get['user_id']."') IS NOT NULL) AND  current_status = 0 AND is_active = 0";
+            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
+            $return['crm_pendding_tasks'] = $crm_lead_detailsres;
+            $tasktabd = array();
+            foreach($crm_lead_detailsres as $hist){
+                $tasktabd[$hist->transaction_table][$hist->transaction_id] = $hist->transaction_id;
+            }
+            foreach($tasktabd as $transtable=>$ids){
+                $crm_leadssql = "SELECT id,display_name,phone FROM ".$transtable.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_ID_IN.implode(',', (array)$ids).") ".$originatercondition.self::SQL_AND_IS_ACTIVE_0;
+                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
+                foreach($crm_leadsres as $crmdet){
+                    $return['crm_pendding_task_details'][$transtable][$crmdet->id] = $crmdet;
+                }
+            }
+
+            $frsql =  "SELECT fr.id as feasibility_id, cc.id as crm_contact_id, cc.display_name, cc.email_id, cc.phone, cc.company_name, cc.crm_company_id FROM feasibility_requirements fr, crm_contacts cc WHERE fr.company_id = '".$get['company_id']."' AND fr.company_id = cc.company_id AND fr.lead_id = cc.id AND fr.is_active = cc.is_active  AND fr.is_active = 0 AND fr.sales_order_id IS NULL AND fr.current_status = '".ST_APPROVED."'".$feasibiltycondition;
+            $frres=$callConfig->getAllRows($frsql);
+            $return['feasibility_requirements'] = $frres;
+
+
+            $query = "SELECT fr.id AS feasibility_id, fr.current_status, fr.lead_id AS lead_id, ft.type_name AS feasibility_type, fe.end_date AS evaluation_end_date, crmcon.display_name FROM feasibility_requirements fr LEFT JOIN feasibility_types ft ON fr.feasibility_type_id = ft.id AND ft.company_id = " . $get['company_id'] . " AND ft.is_active = 0 LEFT JOIN lead_feasibility_evaluations fe ON fr.id = fe.feasibility_id  AND fe.company_id = " . $get['company_id'] . " AND fe.is_active = 0 LEFT JOIN crm_contacts crmcon  ON fr.company_id  = crmcon.company_id AND fr.lead_id = crmcon.id WHERE fr.company_id = " . $get['company_id'] . " AND fr.current_status != " . ST_APPROVED ." AND fr.is_active = 0  " ;
+            $data11 = $callConfig->getAllRows($query);
+            $return['feasibility_requirements_expiry_days'] = $data11;
+
+
+        }elseif($get['list'] == "Y"){
+            $from_date = $this->dateconvertdbformat($get['from_date']);
+            $to_date = $this->dateconvertdbformat($get['to_date']);
+            $datecondition = " AND created_date BETWEEN '".$from_date.self::SQL_ZERO_TIME_AND.$to_date." 23:59:59'";
+            if($get['transaction_table_list']=="crm_leads"){
+                $crm_leadssql = "SELECT * FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
+                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
+                $return['crm_leads'] = $crm_leadsres;
+
+                $crm_leadssql1 = "SELECT count(id) as cnt, crm_status,  GROUP_CONCAT(CONCAT_WS('|', id,display_name, phone,image) SEPARATOR ',') AS group_values   FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  GROUP BY crm_status";
+                $crm_leadsres1=$callConfig->getAllRows($crm_leadssql1);
+                $return['crm_leads_graph'] = $crm_leadsres1;
+
+
+            }elseif($get['transaction_table_list']=="crm_contacts"){
+                $crm_leadssql = self::SQL_SEL_CRM_CONTACTS.$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
+                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
+                $return['crm_contacts'] = $crm_leadsres;
+
+                $feasibilitycrmcontactid = array();
+                foreach($crm_leadsres as $crml){
+                    if($crml->feasibility_check == "Y"){
+                        $feasibilitycrmcontactid[$crml->id] = $crml->id;
+                    }
+                }
+                if(count((array)$feasibilitycrmcontactid) !="0"){
+                    $feasibility_requirementssql = "SELECT id, lead_id, sales_order_id, current_status FROM feasibility_requirements WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
+                    $feasibility_requirementsres=$callConfig->getAllRows($feasibility_requirementssql);
+                    foreach($feasibility_requirementsres as $feasl){
+                        $feasibility_requirements[$feasl->lead_id] = $feasl;
+                    }
+                    $return['feasibility_requirements'] = $feasibility_requirements;
+                }
+
+
+
+                $crm_leadssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,display_name, phone,image) SEPARATOR ',') AS group_values  FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  GROUP BY crm_status";
+                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
+                $return['crm_contacts_graph'] = $crm_leadsres;
+
+
+            }elseif($get['transaction_table_list']=="crm_companies"){
+                $crm_companiessql = "SELECT * FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
+                $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
+                $return['crm_companies'] = $crm_companiesres;
+
+                $crm_companiessql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,company_name, company_registration_number,image) SEPARATOR ',') AS group_values  FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
+                $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
+                $return['crm_companies_graph'] = $crm_companiesres;
+
+            }elseif($get['transaction_table_list']=="crm_campaigns"){
+                $crm_campaignssql = "SELECT * FROM crm_campaigns WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
+                $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
+                $return['crm_campaigns'] = $crm_campaignsres;
+
+                $crm_campaignssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,campaign_name, total_budget,image) SEPARATOR ',') AS group_values  FROM crm_campaigns WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
+                $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
+                $return['crm_campaigns_graph'] = $crm_campaignsres;
+            }elseif($get['transaction_table_list']=="crm_deals"){
+                $crm_dealssql = self::SQL_SEL_CRM_DEALS.$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
+                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
+                $return['crm_deals'] = $crm_dealsres;
+
+                $crm_dealssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,deal_name, total_budget,image) SEPARATOR ',') AS group_values FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
+                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
+                $return['crm_deals_graph'] = $crm_dealsres;
+            }elseif($get['transaction_table_list']=="crm_projects"){
+                $crm_dealssql = "SELECT * FROM projects WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0.$datecondition;
+                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
+                $return['crm_projects'] = $crm_dealsres;
+            }elseif($get['transaction_table_list']=="crm_feasibilities"){
+                $query = "SELECT fr.id AS feasibility_id,fr.lead_id AS lead_id,ft.type_name AS feasibility_type,
+                    crm_con.display_name,fr.current_status,fr.sales_order_id,crm_con.phone,fr.updated_date
+                FROM feasibility_requirements fr
+                LEFT JOIN feasibility_types ft  ON fr.feasibility_type_id = ft.id AND ft.company_id = fr.company_id AND  ft.is_active = 0
+                LEFT JOIN crm_contacts crm_con ON fr.lead_id = crm_con.id AND crm_con.company_id = fr.company_id AND  crm_con.is_active = 0
+                WHERE fr.company_id = " .$get['company_id']." AND fr.created_date BETWEEN '".$from_date.self::SQL_ZERO_TIME_AND.$to_date." 23:59:59' AND fr.is_active = 0";
+            $crm_feasibilities = $callConfig->getAllRows($query);
+            $return['crm_feasibilities'] = $crm_feasibilities;
+
+        }
+
+
+            $todaycrmleadssql = "SELECT crmp.id, crmp.transaction_table, crmp.transaction_id, crmp.lead_type, crmp.date, crmp.time, crmp.address, crmp.country_id, crmp.state_id, crmp.city_id, crmp.post_code, crmp.phone, crmp.sms_text, crmp.email_content_id, crmp.recipient_email_id, crmp.member, crmp.comment, crmp.created_date FROM crm_histories crmp WHERE crmp.company_id = '".$get['company_id']."' AND crmp.is_active = 0 AND crmp.id IN(SELECT MAX(id) as id FROM crm_histories crmc WHERE crmc.company_id = crmp.company_id AND crmc.is_active = crmp.is_active AND crmc.transaction_table = crmp.transaction_table AND crmc.transaction_id = crmp.transaction_id GROUP BY crmc.transaction_table, crmc.transaction_id)";
+            $todaycrmleadsres=$callConfig->getAllRows($todaycrmleadssql);
+            $return['crm_histories'] = $todaycrmleadsres;
+
+
+            $crm_companiessql = self::SQL_SEL_CRM_COMPANIES.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
+            $crm_companies = array();
+            foreach($crm_companiesres as $crmlead){
+                $crm_companies[$crmlead->id] = $crmlead->company_name;
+            }
+            $return['crm_companies_id_name'] = $crm_companies;
+
+
+
+
+        }elseif($get['rid'] !=0 && $get['rid'] !="" && $get['transaction_table'] !=""){
+            //* requird please don't add filed list
+            $crm_leadssql = "SELECT * FROM ".$get['transaction_table'].self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_ID_EQ.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $crm_leadsres=$callConfig->getRow($crm_leadssql);
+            $return['transaction'] = $crm_leadsres;
+            if($crm_leadsres->country_id !=""){
+                $statessql = "SELECT id,state_name FROM states WHERE company_id = '".$get['company_id']."' AND country_id = '".$crm_leadsres->country_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+                $statesres=$callConfig->getAllRows($statessql);
+                $return['states'] = $statesres;
+            }
+            if($crm_leadsres->state_id !=""){
+                $citiessql = "SELECT id,city_name FROM cities WHERE company_id = '".$get['company_id']."' AND state_id = '".$crm_leadsres->state_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+                $citiesres=$callConfig->getAllRows($citiessql);
+                $return['cities'] = $citiesres;
+            }
+            $crm_lead_detailssql = "SELECT id, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, created_date FROM crm_histories WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$get['rid']."' AND transaction_table = '".$get['transaction_table'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
+            $return['crm_lead_details_sql'] = $crm_lead_detailssql;
+            $return['crm_lead_details'] = $crm_lead_detailsres;
+
+            $email_contentsql = "SELECT template_reference_id,template_name FROM email_content WHERE company_id = '".$get['company_id']."' AND application_module = '29' AND template_reference_id = 73 AND is_active = 0";
+            $email_contentres=$callConfig->getAllRows($email_contentsql);
+            $return['email_content'] = $email_contentres;
+
+            if($get['transaction_table'] == "crm_companies"){ //only use for company with contacts
+                $crm_leadssql1 = self::SQL_SEL_CRM_CONTACTS.$get['company_id'].self::SQL_QUOTE_AND_CRM_COMPANY_ID.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+                $crm_leadsres1=$callConfig->getAllRows($crm_leadssql1);
+                $return['company_with_contacts'] = $crm_leadsres1;
+
+                $company_with_dealssql = self::SQL_SEL_CRM_DEALS.$get['company_id'].self::SQL_QUOTE_AND_CRM_COMPANY_ID.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+                $company_with_dealsres=$callConfig->getAllRows($company_with_dealssql);
+                $return['company_with_deals'] = $company_with_dealsres;
+
+            }elseif($get['transaction_table'] == "crm_deals"){ //only use for company with contacts
+                $crm_contactssql = "SELECT id, display_name, phone, originator FROM crm_contacts WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_CRM_COMPANY_ID.$crm_leadsres->crm_company_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+                $crm_contactsres=$callConfig->getAllRows($crm_contactssql);
+                $return['deal_with_contacts'] = $crm_contactsres;
+            }elseif($get['transaction_table'] == "projects"){ //only use for company with contacts
+                $projctteamsql = "SELECT id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND project_id = '".$crm_leadsres->id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+                $projctteamres=$callConfig->getAllRows($projctteamsql);
+                $return['project_teams'] = $projctteamres;
+            }
+
+            $application_userssql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', 'CRM_USER') IS NOT NULL";
+            $application_usersres=$callConfig->getAllRows($application_userssql);
+            $return['application_users_role'] = $application_usersres;
+
+        }
+        $crm_general_codessql = "SELECT id, code, value, label FROM crm_general_codes WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $crm_general_codesres=$callConfig->getAllRows($crm_general_codessql);
+        foreach($crm_general_codesres as $crmcode){
+            $crm_general_codes[$crmcode->code][] =$crmcode;
+        }
+        $return['crm_general_codes'] = $crm_general_codes;
+
+        $application_userssql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $application_usersres=$callConfig->getAllRows($application_userssql);
+        $return['application_users'] = $application_usersres;
+
+        $countriessql = "SELECT id,country_name FROM countries WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $countriesres=$callConfig->getAllRows($countriessql);
+        $return['countries'] = $countriesres;
+
+        $crm_lead_typessql = "SELECT id,type_name,type, icon FROM crm_activity_types WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $crm_lead_typesres=$callConfig->getAllRows($crm_lead_typessql);
+        $return['crm_lead_types'] = $crm_lead_typesres;
+
+        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $company_typesres = $callConfig->getAllRows($company_typessql);
+        $return['company_types'] = $company_typesres;
+
+        $project_task_statussql = "SELECT  id, table_name, name, status, action_label FROM project_task_status WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $project_task_statusres = $callConfig->getAllRows($project_task_statussql);
+        $project_task_status = array();
+        foreach($project_task_statusres as $aulres){
+            $project_task_status[$aulres->table_name][$aulres->status]= $aulres;
+        }
+        $return['project_task_status'] = $project_task_status;
+        if($get['transaction_table'] =="crm_companies"){
+            $crm_lead_detailssql = "SELECT id, display_name FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND (crm_company_id IN ('".$get['rid']."') OR crm_company_id IS NULL) AND is_active = 0";
+            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
+            $return['company_crm_contacts'] = $crm_lead_detailsres;
+
+            $crm_all_pending_contactsql = "SELECT id, display_name FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND (crm_company_id ='' OR crm_company_id IS NULL) AND is_active = 0";
+            $crm_all_pending_contactres=$callConfig->getAllRows($crm_all_pending_contactsql);
+            $return['without_company_contacts'] = $crm_all_pending_contactres;
+
+        }elseif($get['transaction_table'] =="crm_deals" || $get['transaction_table'] =="crm_contacts"){
+            $crm_companiessql = self::SQL_SEL_CRM_COMPANIES.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
+            $return['crm_companies'] = $crm_companiesres;
+        }elseif($get['transaction_table'] =="projects" || $get['transaction_table'] =="crm_projects"){
+            $customerssql = "SELECT id, display_name, company FROM customers WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $customersres=$callConfig->getAllRows($customerssql);
+            $return['customers'] = $customersres;
+        }
+        if($get['transaction_table'] =="crm_leads" || $get['transaction_table'] =="crm_contacts"){
+            $crm_campaignssql = "SELECT id, campaign_name FROM crm_campaigns WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
+            $return['crm_campaigns'] = $crm_campaignsres;
+        }
+        return $return;
+    }
+    public function insertCRMLeads($get,$post){
+        global $callConfig;
+        $return = array();
+        $return['post'] = $post;
+        $transaction_table = $post['transaction_table'];
+        $display_name = $post['first_name']." ".$post['last_name'];
+        $insertary=array('company_id'=>$post['company_id'],'first_name'=>$post['first_name'],'middle_name'=>$post['middle_name'],'last_name'=>$post['last_name'],'display_name'=>$display_name,'phone'=>$post['phone'],'office_phone'=>$post['office_phone'],'fax'=>$post['fax'],'website'=>$post['website'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'contact_source'=>$post['contact_source'],'remark'=>$post['remark'],'email_id'=>$post['email_id'],'image'=>$post['image']);
+        if($transaction_table== "crm_leads"){
+            $insertary['company_name'] = $post['company_name'];
+            $insertary['crm_status'] = $post['crm_status'];
+            $insertary['crm_campaign_id'] = $post['crm_campaign_id'];
+
+        }elseif($transaction_table== "crm_contacts"){
+            $insertary['crm_company_id'] = $post['crm_company_id'];
+            $insertary['crm_campaign_id'] = $post['crm_campaign_id'];
+            $insertary['feasibility_check'] = $post['feasibility_check'] =="Y"?"Y":"N";
+        }elseif($transaction_table =="crm_companies"){
+
+            $insertary=array('company_id'=>$post['company_id'],'company_name'=>$post['company_name'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'gstin'=>$post['gstin'],'fax'=>$post['fax'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
+
+                $insertary1=array('company_id'=>$post['company_id'],'display_name'=>$post['company_name'],'company'=>$post['company_name'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'billing_address'=>$post['address'], 'shipping_address'=>$post['address'],'billing_post_code'=>$post['post_code'], 'shipping_post_code'=>$post['post_code'], 'billing_country'=>$post['country_id'], 'shipping_country'=>$post['country_id'], 'billing_state'=>$post['state_id'], 'shipping_state'=>$post['state_id'], 'billing_city'=>$post['city_id'], 'shipping_city'=>$post['city_id'],'image'=>$post['image'],'updated_by'=>$post['user_id'],'updated_date'=>date(self::DATE_FORMAT_HIS),'gstin'=>$post['gstin'],'fax'=>$post['fax']);
+
+                if($post['crm_customer_id'] !=""){
+                    $return['customer'] = $callConfig->updateRecord('customers',$insertary1,'id',$post['crm_customer_id']);
+                }else{
+                    $customerinsert =$callConfig->insertRecord('customers',$insertary1);
+                    $return['customer'] = $customerinsert;
+                    $insertary['customer_id'] = $customerinsert['LASTID'];
+                }
+
+
+        }elseif($transaction_table =="crm_campaigns"){
+            $insertary=array('company_id'=>$post['company_id'],'campaign_name'=>$post['campaign_name'],'crm_campaign_type'=>$post['crm_campaign_type'],'campaign_objective'=>$post['campaign_objective'],'campaign_start_date'=>$this->dateconvertdbformat($post['campaign_start_date']),'campaign_end_date'=>$this->dateconvertdbformat($post['campaign_end_date']),'total_budget'=>$post['total_budget'],'redirect_url'=>$post['redirect_url'],'contact_email_id'=>$post['contact_email_id'],'contact_no'=>$post['contact_no'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
+        }elseif($transaction_table =="crm_deals"){
+            $insertary=array('company_id'=>$post['company_id'],'deal_name'=>$post['deal_name'],'source_type'=>$post['source_type'],'crm_company_id'=>$post['crm_company_id'],'crm_contact_id'=>$post['crm_contact_id'],'total_budget'=>$post['total_budget'],'due_date'=>$this->dateconvertdbformat($post['due_date']),'expected_close_date'=>$this->dateconvertdbformat($post['expected_close_date']),'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
+        }elseif($transaction_table =="projects"){
+            $insertary=array('company_id'=>$post['company_id'],'project_name'=>$post['project_name'],'customer_id'=>$post['customer_id'],'project_cost'=>$post['project_cost'],'planned_start'=>$this->dateconvertdbformat($post['planned_start']),'planned_finish'=>$this->dateconvertdbformat($post['planned_finish']),'assigner_id'=>$post['originator'],'description'=>$post['description'],'assigner_id'=>$post['originator'],'project_logo'=>$post['image']);
+        }
+         if($post['rid'] !="" && $post['rid'] !="0"){
+            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
+            $insertary['updated_by']=$post['user_id'];
+            $return['res'] = $callConfig->updateRecord($transaction_table,$insertary,'id',$post['rid']);
+            $lastid = $post['rid'];
+
+            if($transaction_table == "projects"){
+                $projctteamsql = "SELECT id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND project_id = '".$lastid.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+                $projctteamres=$callConfig->getAllRows($projctteamsql);
+                $project_teamsuserid = array();
+                foreach($projctteamres as $prteam){
+                    $project_teamsuserid[$prteam->user_id] = $prteam->id;
+                }
+                $callConfig->updateRecord('project_teams',array('is_active'=>null),'id',$lastid);
+                if(count((array)$post['project_team_user_id']) != '0'){
+                    foreach($post['project_team_user_id'] as $userid){
+                        if($project_teamsuserid[$userid] !=""){
+                            $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
+                            $return['project_teams_up'][] = $callConfig->updateRecord('project_teams',$insertary1,'id',$project_teamsuserid[$userid]);
+                        }else{
+                            $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
+                            $return['project_teams'][] = $callConfig->insertRecord('project_teams',$insertary1);
+                        }
+                    }
+                }
+            }
+
+        }else{
+            $return['insertary---'] = $insertary;
+            $insertary['created_by']=$post['user_id'];
+            $insertary['created_date']=date(self::DATE_FORMAT_HIS);
+            $insertary['is_active']='0';
+            $insertary['current_status']='0';
+            $tapres = $callConfig->insertRecord($transaction_table,$insertary);
+            $return['res'] =$tapres;
+            $lastid = $tapres['LASTID'];
+
+            if($tapres['status'] == 'sucess' && $transaction_table == "projects" && !empty($post['project_team_user_id'])){
+                foreach($post['project_team_user_id'] as $userid){
+                    $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
+                    $return['project_teams'][] = $callConfig->insertRecord('project_teams',$insertary1);
+                }
+            }
+        }
+
+        return $return;
+    }
+    public function insertCRMLeadDetails($get,$post){
+        global $callConfig;
+        $return = array();
+        if($post['rid'] !=""){ // updatre status
+            $insertary1=array('company_id'=>$post['company_id'],'completion_datetime'=>date(self::DATE_FORMAT_HIS),'completion_note'=>$post['comment'],'current_status'=>ST_APPROVED,'updated_by'=>$post['user_id'],'updated_date'=>date(self::DATE_FORMAT_HIS));
+            $crmleaddetails = $callConfig->updateRecord('crm_histories',$insertary1,'id',$post['rid']);
+        }else{
+             $insertary=array('company_id'=>$post['company_id'],'transaction_id'=>$post['transaction_id'],'transaction_table'=>$post['transaction_table'],'lead_type'=>$post['lead_type'],'date'=>$this->dateconvertdbformat($post['date']),'time'=>$post['time'],'address'=>$post['address'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'post_code'=>$post['post_code'],'email_id'=>$post['email_id'],'phone'=>$post['phone'],'sms_text'=>$post['sms_text'],'email_content_id'=>$post['email_content_id'],'recipient_email_id'=>$post['recipient_email_id'],'member'=>json_encode((array)$post['member']),'comment'=>$post['comment'],'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'originator'=>$post['user_id']);
+            $crmleaddetails = $callConfig->insertRecord('crm_histories',$insertary);
+        }
+        if($crmleaddetails['status'] == "sucess"){
+            if($post['lead_type'] == '6' || $post['lead_type'] == '7'){
+                $aulist = "SELECT id, display_name FROM application_users WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ID_IN.implode(',',(array)$post['member']).") AND is_active = 0";
+                $aulres=$callConfig->getAllRows($aulist);
+                $assign_user_list = "";
+                foreach($aulres as $aulres){
+                    $assign_user_list .= $aulres->display_name.", ";
+                }
+            }
+            $touserarray = $post['member'];
+            $ccuserarray = array();
+            $ccuserarray[] = $post['user_id'];
+            if($post['lead_type'] == '6'){
+                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>'28','to_users'=>$touserarray,'cc_users'=>$ccuserarray);
+                $senddata['lead_date_time'] = $this->dateconvertdbformat($post['date'])." ".$post['time'];
+                $senddata['lead_Task'] = $post['comment'];
+                $senddata['assign_user_list'] = $assign_user_list;
+                $this->emailsendmediaternew($senddata);
+
+                $msg = "New Task Assign For You :".$post['comment'];
+                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
+                $this->tosendnotifiations($notdataa);
+                $notdataa['notification_message'] = "New Task Assign Successfully";
+                $notdataa['notification_users'] = $ccuserarray;
+                $notdataa['type'] = "INFORMATION";
+                $this->tosendnotifiations($notdataa);
+
+            }
+            if($post['lead_type'] == '7'){
+                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>'29','to_users'=>$touserarray,'cc_users'=>$ccuserarray);
+                $senddata['lead_date_time'] = $this->dateconvertdbformat($post['date'])." ".$post['time'];
+                $senddata['lead_Task'] = $post['comment'];
+                $senddata['assign_user_list'] = $assign_user_list;
+                $this->emailsendmediaternew($senddata);
+
+                $msg = "New Meeting Assign For You :".$post['comment'];
+                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
+                $this->tosendnotifiations($notdataa);
+                $notdataa['notification_message'] = "New Meeting Assign Successfully";
+                $notdataa['notification_users'] = $ccuserarray;
+                $notdataa['type'] = "INFORMATION";
+                $this->tosendnotifiations($notdataa);
+            }
+            if($post['lead_type'] == '5'){
+                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>$post['email_content_id'],'to_users'=>$ccuserarray,'cc_users'=>array(),'recipient_email_id'=>array($post['recipient_email_id']));
+                $this->emailsendmediaternew($senddata);
+                $msg = "Email Send Successfully";
+                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'INFORMATION', 'notification_users'=>$ccuserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
+                $this->tosendnotifiations($notdataa);
+            }
+        }
+        $return['res'] = $crmleaddetails;
+        return $return;
+    }
+    public function dynamicUpdateStatus($get,$post){
+        global $callConfig;
+        $return = array();
+        $return['post'] = $post;
+        $updateary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
+        $updateary['updated_by']=$post['user_id'];
+        $updateary['current_status'] = $post['current_status'];
+        $return['res'] = $callConfig->updateRecord($post['transaction_table'],$updateary,'id',$post['rid']);
+        return $return;
+    }
+
+
+
+//Start Email New Code
+
+    public function emailsendmediaternew($senddata){
+        global $callConfig;
+        $senddata['super_admin_email_id'] = SUPERADMIN_EMAIL_ID;
+        $senddata['super_admin_company_name'] = SUPERADMIN_COMPNAY_NAME;
+        $senddata['super_admin_display_name'] = SUPERADMIN_DISLAY_NAME;
+        $adminsersql = "SELECT au.id, au.display_name, au.user_email, au.user_mobile, comp.name FROM application_users au, companies comp WHERE au.company_id = '".$senddata['session_company_id']."' AND au.company_id = comp.id AND au.role_id LIKE '".'%"'.ADMIN_ROLES.'"%'."'";
+        $adminserres = $callConfig->getRow($adminsersql);
+        $senddata['admin_email_sql'] = $adminsersql;
+        $senddata['admin_email_id'] = $adminserres->user_email;
+        $senddata['admin_company_name'] = $adminserres->name;
+        $senddata['company_name'] = $adminserres->name;
+        $senddata['admin_display_name'] = $adminserres->display_name;
+        $senddata['admin_phone_number'] = $adminserres->user_mobile;
+
+        $email_send_types = array('TO'=>'to_users','CC'=>'cc_users');
+        $query = "SELECT id,user_email FROM application_users";
+        $emaildata = $callConfig->getAllRows($query);
+        foreach($emaildata as $emaild){
+            $useremail[$emaild->id] = $emaild->user_email;
+        }
+        $ress = array();
+        foreach($email_send_types as $key=>$email_send_type){
+            $revicer = array();
+            $senddata['email_send_type'] =$key;
+            $email_array = $this->emailtemplatenew($senddata);
+            $file_name = 'email'.'_'.time().uniqid().'.'.'html';
+            $email_array ['content'] = $file_name;
+            if(count((array)$senddata[$email_send_type]) !='0'){
+                foreach($senddata[$email_send_type] as $email_send){
+                    $revicer[] = $useremail[$email_send];
+                }
+                $email_array['revicer'] = (count((array)$senddata['recipient_email_id'])!='0')?$senddata['recipient_email_id']:$revicer;
+                $email_array['email_type'] = 1;
+                $email = $email_array['mesg'];
+                $file_path='uploads/email/'.$file_name;
+                file_put_contents($file_path, $email);
+                $this->sendEmailslistnew($email_array);
+                $ress[] = $email_array;
+            }
+        }
+        return $ress;
+    }
+    public function sendEmailslistnew($data){
+        global $callConfig;
+        $email_data = array('email_source'=>$data['sender'], 'content'=>$data['content'], 'email_type'=>$data['email_type'], 'is_active'=>0 , 'current_status'=>0,'email_content_ref_id'=>$data['email_content_ref_id'], 'created_by'=>$data['created_by'] ,'created_date'=> date(self::DATE_FORMAT_HIS));
+        foreach ($data['revicer'] as $email) {
+            $email_data['email'] = $email;
+            $callConfig->insertRecord(TBL_EMAIL_LOGS,$email_data);
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            // More headers
+            $sender = $data['sender']!="" ? $data['sender']:SUPERADMIN_EMAIL_ID;
+            $headers .= 'From:'.$sender . "\r\n";
+            $subject = ucwords(str_replace('_', ' ', $data['subject']));
+            mail($email,$subject,$data['mesg'],$headers);
+        }
+        return $email_data;
+    }
+    public function emailtemplatenew($send_data){
+        global $callConfig;
+        $temp = "";
+        $configsql = "SELECT name,contact_address,application_module,admin_email,display_logo FROM config WHERE id = 1";
+        $return['config'] = $configsql;
+        $configres=$callConfig->getRow($configsql);
+        $send_data['company_name'] = $configres->name!=""?$configres->name:SUPERADMIN_COMPNAY_NAME;
+        $send_data['contact_address'] = $configres->contact_address ;
+        if($send_data['email_send_type'] == "TO"){
+            $emailcontentsql = "SELECT email_subject_to as email_subject,email_header_to as email_header,email_content_to as email_content_1,button_label, email_footer  as email_fotter FROM email_content WHERE company_id = '".$send_data['session_company_id']."' AND  template_reference_id = '".$send_data['template_reference_id'] ."' AND is_active = 0 ";
+        }else{
+            $emailcontentsql = "SELECT email_subject_cc as email_subject,email_header_cc as email_header,email_content_cc as email_content_1,button_label,email_footer  as email_fotter FROM email_content WHERE company_id = '".$send_data['session_company_id']."' AND  template_reference_id = '".$send_data['template_reference_id'] .self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        }
+        $return['emailcontentsql'] = $emailcontentsql;
+        $emailcontentres=$callConfig->getRow($emailcontentsql);
+        $subject =  $this->emaildatareplace($send_data, $emailcontentres->email_subject);
+
+        $temp = '
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+        </head>
+        <body yahoo bgcolor="#f6f8f1">
+        <table width="70%" style="padding:20px;background-color:#f5f5f5;" align="center" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+        <td style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424;padding:15px 0px;">
+        <img class="fix" src="'.SITEURL.'/uploads/all/'.$configres->display_logo.'" border="0" alt="" style="width:150px"/>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <table width="100%" style="padding:10px;background-color:#FFFFFF;"  >
+        <tr>
+        <td style="padding-left:32px; padding-top:20px; font-size:14px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424" >
+        '.$this->emaildatareplace($send_data, $emailcontentres->email_header).'
+        </td>
+        </tr>
+        <tr>
+        <td style="padding-left:33px; font-size:13px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
+        '.$this->emaildatareplace($send_data, $emailcontentres->email_sub_header).'
+        </td>
+        </tr>
+        <tr>
+        <td style="padding-left:33px; font-size:13px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
+        <div>'.$this->emaildatareplace($send_data, $emailcontentres->email_content_1).' </div>
+
+        </td>
+        </tr>
+        <tr>
+        <td>
+        &nbsp;
+        </td>
+        </tr>
+        <tr>
+        <td>
+        &nbsp;
+        </td>
+        </tr>
+        <tr>
+        <td style="padding-left:33px; font-size:13px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+        '.$this->emaildatareplace($send_data, $emailcontentres->email_content_2).'
+        </td>
+        </tr>
+        <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
+        '.$this->emaildatareplace($send_data, $emailcontentres->email_fotter).'
+
+        </td>
+        </tr>
+        </table>
+        </body>
+        </html>
+        ';
+        $return['subject'] = $subject;
+        $return['mesg'] = $temp;
+        $return['sender'] =  $configres->admin_email;
+        return $return;
+    }
+
+//End Email New Code
+
+    public function setStateCity($get){
+        global $callConfig;
+        $citiessql = "SELECT id,city_name FROM cities";
+        $citiesres=$callConfig->getAllRows($citiessql);
+        foreach($citiesres as $citt){
+            $cityNames[$citt->id] = $citt->city_name;
+        }
+
+        $state_namesql = "SELECT id,state_name FROM states";
+        $state_nameres=$callConfig->getAllRows($state_namesql);
+        foreach($state_nameres as $citt){
+            $stateNames[$citt->id] = $citt->state_name;
+        }
+
+        $customersssql = "SELECT id,billing_address FROM customers WHERE billing_address !=''";
+        $customerssres=$callConfig->getAllRows($customersssql);
+        foreach($customerssres as $cust){
+            $customers[$cust->id]['billing_address'] = $cust->billing_address;
+
+            //Statrt Get Post Code
+            preg_match('/\b\d{6}\b/', $cust->billing_address, $postalCodeMatch);
+            $postalCode = $postalCodeMatch[0] ?? null;
+            $customers[$cust->id]['post_code'] = $postalCode;
+            //End Get Post Code
+
+
+
+
+            $updateary = array('billing_city'=>'','billing_state'=>'','billing_post_code'=>$postalCode,'billing_country'=>'101','shipping_city'=>'','shipping_state'=>'','shipping_post_code'=>$postalCode,'shipping_country'=>'101');
+            $return['res'] = $callConfig->updateRecord('customers',$updateary,'id',$cust->id);
+        }
+        echo "<pre>";
+        print_r($return);
+
+    }
+    public function leadConvertToContacts($get,$post){
+        global $callConfig;
+        $transaction_id = $post['transaction_id'];
+        $exicutesql = "INSERT INTO `crm_contacts`(`crm_lead_id`,`company_name`,`company_id`, `first_name`, `middle_name`, `last_name`, `display_name`, `email_id`, `phone`, `office_phone`, `fax`, `website`, `address`, `post_code`, `country_id`, `state_id`, `city_id`, `originator`, `contact_source`, `is_active`, `current_status`, `created_date`, `created_by`,`image`) SELECT `id`,`company_name`,'".$post['company_id']."', `first_name`, `middle_name`, `last_name`, `display_name`, `email_id`, `phone`, `office_phone`, `fax`, `website`, `address`, `post_code`, `country_id`, `state_id`, `city_id`, `originator`, `contact_source`, 0, 0,'".date(self::DATE_FORMAT_HIS)."', '".$post['user_id']."',`image` FROM `crm_leads` WHERE id='".$transaction_id."'";
+        $res = $callConfig->executeQuery($exicutesql);
+        if($res['status'] == 'sucess'){
+            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
+            $insertary['updated_by']=$post['user_id'];
+            $insertary['lead_convert_to_contact']="Y";
+            $insertary['crm_contact_id']=$transaction_id;
+            $callConfig->updateRecord("crm_leads",$insertary,'id',$transaction_id);
+        }
+        return $res;
+
+    }
+    public function getLeadAndContactAssigned($get){
+        global $callConfig;
+        if($get['admin_type'] != 1){
+            $originatercondition = " AND crml.originator = '".$get['user_id']."'";
+            $originatercondition2 = self::SQL_AND_ORIGINATOR_EQ.$get['user_id']."'";
+        }
+
+        $application_userssql = "SELECT id,display_name,user_photo FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0  AND JSON_SEARCH(role_id, 'one', 'CRM_USER') IS NOT NULL";
+        $application_usersres=$callConfig->getAllRows($application_userssql);
+
+
+         $crm_historiessql = "SELECT crml.access_user_id, COUNT(DISTINCT crml.id) AS lead_total_cnt, COUNT(DISTINCT crmh.transaction_id) AS lead_used_cnt FROM crm_leads crml LEFT JOIN crm_histories crmh ON crmh.company_id = crml.company_id AND crmh.transaction_table = 'crm_leads' AND crmh.transaction_id = crml.id AND crmh.is_active = crml.is_active WHERE crml.company_id = '".$get['company_id']."' ".$originatercondition." AND crml.is_active = 0 GROUP BY crml.access_user_id";
+         $return['crm_historiessql'] = $crm_historiessql;
+         $crm_historiesres=$callConfig->getAllRows($crm_historiessql);
+         foreach($crm_historiesres as $aus){
+             $crm_histories_lead['crm_leads'][$aus->access_user_id] =$aus;
+         }
+
+         $crm_contactssql = "SELECT crml.access_user_id, COUNT(DISTINCT crml.id) AS lead_total_cnt, COUNT(DISTINCT crmh.transaction_id) AS lead_used_cnt FROM crm_contacts crml LEFT JOIN crm_histories crmh ON crmh.company_id = crml.company_id AND crmh.transaction_table = 'crm_contacts' AND crmh.transaction_id = crml.id AND crmh.is_active = crml.is_active WHERE crml.company_id = '".$get['company_id']."' ".$originatercondition." AND crml.is_active = 0 GROUP BY crml.access_user_id";
+         $return['crm_contactssql'] = $crm_contactssql;
+         $crm_contactsres=$callConfig->getAllRows($crm_contactssql);
+         foreach($crm_contactsres as $aus){
+             $crm_histories_lead['crm_contacts'][$aus->access_user_id] =$aus;
+         }
+         $return['crm_histories_lead'] = $crm_histories_lead;
+
+         $application_users = array();
+         foreach($application_usersres as $aus){
+             $aus->leads = $crm_histories_lead['crm_leads'][$aus->id];
+             $aus->contacts = $crm_histories_lead['crm_contacts'][$aus->id];
+             $application_users[$aus->id] = $aus;
+         }
+        $return['application_users'] = $application_users;
+
+        $othercondition  =self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id']."' ".$originatercondition2.self::SQL_AND_IS_ACTIVE_0;
+        $crm_leadssql = "SELECT (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition.") as crm_lead_total_cnt, (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition." AND access_user_id IS NOT NULL) as crm_lead_assigne_cnt, (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition." AND access_user_id IS NULL) as crm_lead_un_assigne_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition.") as crm_contacts_total_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition." AND access_user_id IS NOT NULL) as crm_contacts_assigne_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition." AND access_user_id IS NULL) as crm_contacts_un_assigne_cnt";
+        $crm_leadsres=$callConfig->getRow($crm_leadssql);
+        $return['dashboard_sql'] = $crm_leadssql;
+        $return['dashboard_cnt'] = $crm_leadsres;
+
+        $crm_dealssql = "SELECT id, project_name, (SELECT COUNT(pt.id) as cnt FROM project_teams pt WHERE pt.company_id = proj.company_id AND pt.project_id = proj.id AND pt.is_active = proj.is_active) as team_user_cnt FROM projects proj WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
+        $return['crm_projects'] = $crm_dealsres;
+
+        return $return;
+    }
+    public function leadAndContactAssigning($get,$post){
+        global $callConfig;
+        $return['post'] = $post;
+        $assign_lead_contact = $post['assign_lead_contact'];
+        if($get['admin_type'] != 1){
+            $originatercondition = self::SQL_AND_ORIGINATOR_EQ.$get['user_id']."'";
+        }
+        $user_id = array();
+        if($post['assign_type'] =="2"){ //project
+            $sql = "SELECT user_id FROM project_teams WHERE company_id ='".$post['company_id']."' AND project_id ='".$post['project_id']."'  AND is_active = 0";
+            $resul=$callConfig->getAllRows($sql);
+            $projuid = array();
+            foreach($resul as $resultt){
+                $projuid[] = $resultt->user_id;
+            }
+            $return['projuid'] = $projuid;
+            $contactCount = $post['number_of_lead_contact'];
+            $employeeCount = count((array)$projuid);
+            $contactsPerEmployee = intdiv($contactCount, $employeeCount);
+            $extraContacts = $contactCount % $employeeCount;
+            $seq = 0;
+            for ($i = 0; $i < $employeeCount; $i++){
+                $distribution = $contactsPerEmployee + ($i == $employeeCount - 1 ? $extraContacts : 0);
+                $user_id[] = array("user_id"=>$projuid[$seq],"contact"=>$distribution);
+                $seq++;
+            }
+        }else{ //user
+            $user_id[] = array("user_id"=>$post['application_user_id'],"contact"=>$post['number_of_lead_contact']);
+        }
+        $insertary=array('company_id'=>$post['company_id'],'assign_type'=>$post['assign_type'],'assign_lead_contact'=>$post['assign_lead_contact'],'order_by'=>$post['order_by'],'user_id'=>json_encode((array)$user_id),'project_id'=>$post['project_id'],'number_of_lead_contact'=>$post['number_of_lead_contact'],'assigning_datetime'=>date(self::DATE_FORMAT_HIS),'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
+        $crm_lead_and_contact_assignings = $callConfig->insertRecord('crm_lead_and_contact_assignings',$insertary);
+        $return['res'] = $crm_lead_and_contact_assignings;
+        if($crm_lead_and_contact_assignings['status'] == 'sucess'){
+            foreach($user_id as $usepor){
+                $uids = $usepor['user_id'];
+                $contact = $usepor['contact'];
+                $query = "UPDATE ".$assign_lead_contact." SET access_user_id =".$uids.", access_datetime = '".date(self::DATE_FORMAT_HIS)."', crm_lead_and_contact_assigning_id =".$crm_lead_and_contact_assignings['LASTID'].self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$post['company_id']."' ".$originatercondition." AND `access_user_id` IS NULL AND is_active = 0 ORDER BY created_date asc limit ".$contact;
+                $return['udate_crm_leads']  = $callConfig->executeQuery($query);
+
+                $msg = $contact. " : New Lead/Cntacts Assign For You";
+                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>"",'application_table_name'=>'crm_lead_and_contact_assignings', 'type'=>'INFORMATION', 'notification_users'=>array($uids),'option'=>'','assigner_id'=>$post['user_id']);
+                $this->tosendnotifiations($notdataa);
+
+            }
+        }
+        return $return;
+    }
+    public function testAPI($get){
+        global $callConfig;
+        $return = array();
+        echo "Working<pre>"; print_r($return);
+
+    }
+
+    //Koteswar start
 
 }
