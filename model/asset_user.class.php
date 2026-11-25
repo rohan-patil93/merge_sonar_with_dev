@@ -22,178 +22,149 @@ interface AssetConstants
     public const SQL_SEL_ASSETS_DETAIL = "SELECT id, asset_code, asset_description, asset_location FROM assets WHERE company_id = '";
     public const SQL_SEL_ALL_ASSETS_ACTIVE = "SELECT * FROM assets WHERE company_id = '";
 }
-
 trait AssetOperationsTrait {
-    public function getAssetAllocationOld($get){
+    protected function buildAssetListAllocationOld($get, &$returnresult){
         global $callConfig;
         $conditionassetlist = "";
         $todaytedate = date('Y-m-d');
-        if($get['list']=='Y'){
-            if(isset($get['assetid']) && $get['assetid'] !=""){
-                $conditionassetlist .= " AND ass.id IN(".$get['assetid'].")";
-            }
-            if(isset($get['ownership']) && $get['ownership'] !=""){
-                $conditionassetlist .= " AND ass.ownership  = '".$get['ownership']."'";
-            }
-            if(isset($get['allocation_status']) && $get['allocation_status'] !=""){
-                $conditionassetlist .= " AND ass.allocation_status = '".$get['allocation_status']."'";
-            }
-            if(isset($get['parent_asset']) && $get['parent_asset'] !=""){
-                if($get['parent_asset'] == "Y"){
-                    $conditionassetlist  .= " AND ass.parent_asset !=''";
-                }else{
-                    $conditionassetlist .= " AND ass.parent_asset IS NULL";
-                }
-            }
-            if(isset($get['category']) && $get['category'] !=""){
-                $conditionassetlist .= " AND ass.category_id  = '".$get['category']."'";
-            }
-            if(isset($get['location']) && $get['location'] !=""){
-                $conditionassetlist .= " AND ass.asset_location  = '".$get['location']."'";
-            }
-            if(isset($get['asset_owner']) && $get['asset_owner'] !=""){
-                $conditionassetlist .= " AND emp_ass.user_id = '".$get['asset_owner']."'";
-            }
-            if(isset($get['status']) && $get['status'] !=""){
-                $conditionassetlist .= " AND ass.asset_status ='".$get['status']."'";
-            }
-            if(isset($get['candition']) && $get['candition'] !=""){
-                $conditionassetlist .= " AND ass.conditions  = '".$get['candition']."'";
-            }
-            $assetsql = "SELECT ass.id,ass.asset_code,ass.asset_description,ass.category_id,ass.serial_no,ass.asset_location,ass.asset_img,ass.brand,ass.model,ass.conditions,ass.asset_status,ass.asset_owner,ass.allocation_status,ass.attribute, ass.ownership, ass.allocation_status, ass.Parent_asset, ass.current_status, emp_ass.end_date,emp_ass.remarks,emp_ass.allocation_type,emp_ass.id as emp_asset_id,emp_ass.attribute as emp_attribute, emp_ass.user_id as user_assets_user_id FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '".$get['company_id']."'".$conditionassetlist;
-            $returnresult['list_assets_sql'] = $assetsql;
-            $assets=$callConfig->getAllRows($assetsql);
-            $returnresult['list_assets'] = $assets;
-            $assetid = array();
-            foreach($assets as $assets2){
-                $assetid[$assets2->id] = $assets2->id;
-            }
-            $asidlist = implode(',', (array)$assetid);
-            $sql1 ="SELECT sum(if(end_date <= '".$todaytedate."',1,0) AND allocation_type !=3) as overduecnt, sum(if(end_date >= '".$todaytedate."',1,0) AND allocation_type !=3) as duesooncnt FROM `user_assets` WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ASSET_ID_IN.$asidlist.") AND is_active = 0";
-            $res1=$callConfig->getRow($sql1);
-            $returnresult['user_asset_cnt'] = $res1;
-            $sql2 ="SELECT sum(if(warranty_expiry_date <= '".$todaytedate."' AND  warranty_expiry_date !='0000-00-00',1,0)) as warranty_expiry_cnt, sum(if(end_of_life >= '".$todaytedate."'  AND end_of_life !='0000-00-00',1,0)) as end_of_life, sum(if(allocation_status ='N',1,0)) as unallocatedcnt FROM assets WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ID_IN.$asidlist.") AND is_active = 0";
-            $res2=$callConfig->getRow($sql2);
-            $returnresult['asset_cnt'] = $res2;
+        if (isset($get['assetid']) && $get['assetid'] != "") {
+            $conditionassetlist .= " AND ass.id IN(" . $get['assetid'] . ")";
         }
-
-        if($get['assetupdate']=='Y'){
-            if(isset($get['assetid']) && $get['assetid'] !=""){
-                $conditionassetlist .= " AND ass.id IN(".$get['assetid'].")";
-            }
-            $assetsql = "SELECT ass.*,emp_ass.end_date,emp_ass.remarks,emp_ass.id as emp_asset_id,emp_ass.attribute as emp_attribute FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id  AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '".$get['company_id']."'".$conditionassetlist;
-            $assets=$callConfig->getAllRows($assetsql);
-            $returnresult['list_assets'] = $assets;
+        if (isset($get['ownership']) && $get['ownership'] != "") {
+            $conditionassetlist .= " AND ass.ownership  = '" . $get['ownership'] . "'";
         }
-
-        if($get['assetverifications']=='Y'){
-            $assetsql = "SELECT id, asset_code, asset_description, asset_owner, asset_custodian FROM assets WHERE is_active =0 AND company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ID_IN.$get['assetid'].")";
-            $assets=$callConfig->getAllRows($assetsql);
-            $returnresult['list_assets'] = $assets;
-
-            $asset_verificationssql = "SELECT id, asset_id, start_date_time, end_date_time FROM asset_verifications WHERE is_active =0 AND company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ASSET_ID_IN.$get['assetid'].") AND current_status !='".ST_APPROVED."'";
-            $asset_verificationsres=$callConfig->getAllRows($asset_verificationssql);
-            foreach($asset_verificationsres as $asset_verifications){
-                $asset_verificationsarray[$asset_verifications->asset_id] = $asset_verifications;
-            }
-            $returnresult['asset_verifications'] = $asset_verificationsarray;
-
+        if (isset($get['allocation_status']) && $get['allocation_status'] != "") {
+            $conditionassetlist .= " AND ass.allocation_status = '" . $get['allocation_status'] . "'";
         }
-
-        if($get['momenthistory']=='Y'){
-            $assetsql = "SELECT * FROM asset_transactions WHERE is_active =0 AND company_id = '".$get['company_id']."' AND asset_code  IN(".$get['assetid'].")";
-            $assets=$callConfig->getAllRows($assetsql);
-            $returnresult['momenthistory'] = $assets;
+        if (isset($get['parent_asset']) && $get['parent_asset'] != "") {
+            $conditionassetlist .= ($get['parent_asset'] == "Y") ? " AND ass.parent_asset !=''" : " AND ass.parent_asset IS NULL";
         }
-
-        if($get['request']=='Y'){   // request page sqls
-            $conditionrequest = "";
-            $requestsql = "SELECT * FROM asset_transfer_requests WHERE is_active =0 AND company_id = '".$get['company_id']."' AND id  IN(".$get['req_id'].")";
-            $requestres=$callConfig->getRow($requestsql);
-            $returnresult['request'] = $requestres;
-            $attributessql = "SELECT id,name FROM asset_attributes WHERE is_active =0 AND company_id = '".$get['company_id']."' AND category_id IN(".$requestres->asset_category_id.")";
-            $attributesres=$callConfig->getAllRows($attributessql);
-            $returnresult['attributes'] = $attributesres;
-
-            if($requestres->asset_category_id != ""){
-                $conditionrequest .= " AND ass.category_id  = '".$requestres->asset_category_id."'";
-            }
-            if(isset($get['categroy_list']) && $get['categroy_list'] !=""){
-                $conditionrequest .= " AND ass.category_id  IN (".$get['categroy_list'].")";
-            }
-            if(isset($get['asset_status']) && $get['asset_status'] !=""){
-                $conditionrequest .= " AND ass.asset_status IN('".$get['asset_status']."')";
-            }
-            if(isset($get['asset_condition']) && $get['asset_condition'] !=""){
-                $conditionrequest .= " AND ass.conditions IN ('".$get['asset_condition']."')";
-            }
-            $assetssql = "SELECT ass.id,ass.asset_code,ass.asset_description,ass.category_id,ass.serial_no,ass.asset_location,ass.asset_img,ass.brand,ass.model,ass.conditions,ass.asset_status,ass.asset_owner,emp_ass.end_date,ass.allocation_status FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id  AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '".$get['company_id']."' ".$conditionrequest;
-            $assetrespons=$callConfig->getAllRows($assetssql);
-            $returnresult['request_list_asset'] = $assetrespons;
+        if (isset($get['category']) && $get['category'] != "") {
+            $conditionassetlist .= " AND ass.category_id  = '" . $get['category'] . "'";
         }
-
-    //used allocation popup
-    $costcentersql = self::SQL_SEL_COST_CENTERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-    $costcenter=$callConfig->getAllRows($costcentersql);
-    $returnresult['costcenter'] = $costcenter;
-
-    $employeessql = self::SQL_SEL_APPLICATION_USERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-    $employees=$callConfig->getAllRows($employeessql);
-    $returnresult['employees'] = $employees;
-    //end allocation popup
-    $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-    $asset_categorieres=$callConfig->getAllRows($asset_categorie);
-    $returnresult['asset_categories'] = $asset_categorieres;
-    $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-    $locationsres=$callConfig->getAllRows($locationsql);
-    $returnresult['locations'] = $locationsres;
-    $assetstatussql = self::SQL_SEL_ASSET_STATUS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-    $assetstatusres=$callConfig->getAllRows($assetstatussql);
-    $returnresult['asset_status'] = $assetstatusres;
-    $departmentsql = self::SQL_SEL_DEPARTMENTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-    $departmentres=$callConfig->getAllRows($departmentsql);
-    $returnresult['departments'] = $departmentres;
-
-    $asset_condition_typesql = self::SQL_SEL_ASSET_CONDITION_TYPE.$get['company_id']."'";
-    $asset_condition_typeres=$callConfig->getAllRows($asset_condition_typesql);
-    foreach($asset_condition_typeres as $assetct){
-        $assetcondition[$assetct->id] = $assetct->condition_name;
+        if (isset($get['location']) && $get['location'] != "") {
+            $conditionassetlist .= " AND ass.asset_location  = '" . $get['location'] . "'";
+        }
+        if (isset($get['asset_owner']) && $get['asset_owner'] != "") {
+            $conditionassetlist .= " AND emp_ass.user_id = '" . $get['asset_owner'] . "'";
+        }
+        if (isset($get['status']) && $get['status'] != "") {
+            $conditionassetlist .= " AND ass.asset_status ='" . $get['status'] . "'";
+        }
+        if (isset($get['candition']) && $get['candition'] != "") {
+            $conditionassetlist .= " AND ass.conditions  = '" . $get['candition'] . "'";
+        }
+        $assetsql = "SELECT ass.id,ass.asset_code,ass.asset_description,ass.category_id,ass.serial_no,ass.asset_location,ass.asset_img,ass.brand,ass.model,ass.conditions,ass.asset_status,ass.asset_owner,ass.allocation_status,ass.attribute, ass.ownership, ass.allocation_status, ass.Parent_asset, ass.current_status, emp_ass.end_date,emp_ass.remarks,emp_ass.allocation_type,emp_ass.id as emp_asset_id,emp_ass.attribute as emp_attribute, emp_ass.user_id as user_assets_user_id FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '" . $get['company_id'] . "'" . $conditionassetlist;
+        $returnresult['list_assets_sql'] = $assetsql;
+        $assets = $callConfig->getAllRows($assetsql);
+        $returnresult['list_assets'] = $assets;
+        $assetid = array();
+        foreach ($assets as $assets2) {
+            $assetid[$assets2->id] = $assets2->id;
+        }
+        $asidlist = implode(',', (array)$assetid);
+        $sql1 = "SELECT sum(if(end_date <= '" . $todaytedate . "',1,0) AND allocation_type !=3) as overduecnt, sum(if(end_date >= '" . $todaytedate . "',1,0) AND allocation_type !=3) as duesooncnt FROM `user_assets` WHERE company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ASSET_ID_IN . $asidlist . ") AND is_active = 0";
+        $returnresult['user_asset_cnt'] = $callConfig->getRow($sql1);
+        $sql2 = "SELECT sum(if(warranty_expiry_date <= '" . $todaytedate . "' AND  warranty_expiry_date !='0000-00-00',1,0)) as warranty_expiry_cnt, sum(if(end_of_life >= '" . $todaytedate . "'  AND end_of_life !='0000-00-00',1,0)) as end_of_life, sum(if(allocation_status ='N',1,0)) as unallocatedcnt FROM assets WHERE company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ID_IN . $asidlist . ") AND is_active = 0";
+        $returnresult['asset_cnt'] = $callConfig->getRow($sql2);
     }
-    $returnresult['asset_condition_type'] = $assetcondition;
 
-    $user = "SELECT id,display_name FROM application_users WHERE is_active =0 AND company_id = '".$get['company_id']."'";
-    $users=$callConfig->getAllRows($user);
-    $returnresult['users'] = $users;
-    if($get['Rid'] !=""){
-        $assetsql = self::SQL_SEL_ALL_ASSETS_ACTIVE.$get['company_id']."' AND id=".$get['Rid'];
-        $assets=$callConfig->getRow($assetsql);
-        $returnresult['assets'] = $assets;
+    protected function buildAssetUpdateAllocationOld($get, &$returnresult){
+        global $callConfig;
+        $conditionassetlist = "";
+        if (isset($get['assetid']) && $get['assetid'] != "") {
+            $conditionassetlist .= " AND ass.id IN(" . $get['assetid'] . ")";
+        }
+        $assetsql = "SELECT ass.*,emp_ass.end_date,emp_ass.remarks,emp_ass.id as emp_asset_id,emp_ass.attribute as emp_attribute FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id  AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '" . $get['company_id'] . "'" . $conditionassetlist;
+        $returnresult['list_assets'] = $callConfig->getAllRows($assetsql);
     }
-    $assetlistsql = "SELECT id,asset_description,asset_code  FROM assets WHERE is_active =0 AND company_id = '".$get['company_id']."'";
-    $assetslist=$callConfig->getAllRows($assetlistsql);
-    $returnresult['assets_list'] = $assetslist;
-    $vendorsql = "SELECT id,display_name  FROM vendors WHERE is_active =0 AND company_id = '".$get['company_id']."'";
-    $vendorlist=$callConfig->getAllRows($vendorsql);
-    $returnresult['vendors'] = $vendorlist;
 
+    protected function buildAssetVerificationsAllocationOld($get, &$returnresult){
+        global $callConfig;
+        $assetsql = "SELECT id, asset_code, asset_description, asset_owner, asset_custodian FROM assets WHERE is_active =0 AND company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ID_IN . $get['assetid'] . ")";
+        $returnresult['list_assets'] = $callConfig->getAllRows($assetsql);
+        $asset_verificationssql = "SELECT id, asset_id, start_date_time, end_date_time FROM asset_verifications WHERE is_active =0 AND company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ASSET_ID_IN . $get['assetid'] . ") AND current_status !='" . ST_APPROVED . "'";
+        $asset_verificationsres = $callConfig->getAllRows($asset_verificationssql);
+        $asset_verificationsarray = array();
+        foreach ($asset_verificationsres as $asset_verifications) {
+            $asset_verificationsarray[$asset_verifications->asset_id] = $asset_verifications;
+        }
+        $returnresult['asset_verifications'] = $asset_verificationsarray;
+    }
 
-    $depreciationmethodsql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'DEPRECIATIONMETHOD' AND is_active =0";
-    $depreciationmethodres = $callConfig->getAllRows($depreciationmethodsql);
-    $returnresult['depreciation_method']= $depreciationmethodres;
+    protected function buildAssetRequestAllocationOld($get, &$returnresult){
+        global $callConfig;
+        $conditionrequest = "";
+        $requestsql = "SELECT * FROM asset_transfer_requests WHERE is_active =0 AND company_id = '" . $get['company_id'] . "' AND id  IN(" . $get['req_id'] . ")";
+        $requestres = $callConfig->getRow($requestsql);
+        $returnresult['request'] = $requestres;
+        $attributessql = "SELECT id,name FROM asset_attributes WHERE is_active =0 AND company_id = '" . $get['company_id'] . "' AND category_id IN(" . $requestres->asset_category_id . ")";
+        $returnresult['attributes'] = $callConfig->getAllRows($attributessql);
+        if ($requestres->asset_category_id != "") {
+            $conditionrequest .= " AND ass.category_id  = '" . $requestres->asset_category_id . "'";
+        }
+        if (isset($get['categroy_list']) && $get['categroy_list'] != "") {
+            $conditionrequest .= " AND ass.category_id  IN (" . $get['categroy_list'] . ")";
+        }
+        if (isset($get['asset_status']) && $get['asset_status'] != "") {
+            $conditionrequest .= " AND ass.asset_status IN('" . $get['asset_status'] . "')";
+        }
+        if (isset($get['asset_condition']) && $get['asset_condition'] != "") {
+            $conditionrequest .= " AND ass.conditions IN ('" . $get['asset_condition'] . "')";
+        }
+        $assetssql = "SELECT ass.id,ass.asset_code,ass.asset_description,ass.category_id,ass.serial_no,ass.asset_location,ass.asset_img,ass.brand,ass.model,ass.conditions,ass.asset_status,ass.asset_owner,emp_ass.end_date,ass.allocation_status FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id  AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '" . $get['company_id'] . "' " . $conditionrequest;
+        $returnresult['request_list_asset'] = $callConfig->getAllRows($assetssql);
+    }
 
-     $chart_of_accountssql = "SELECT id, account_code, account_name FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY display_priority ASC";
-    $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
-    $returnresult['chart_of_accounts']= $chart_of_accountsres;
+    public function getAssetAllocationOld($get){
+        global $callConfig;
+        $returnresult = array();
+        if (($get['list'] ?? '') == 'Y') {
+            $this->buildAssetListAllocationOld($get, $returnresult);
+        }
+        if (($get['assetupdate'] ?? '') == 'Y') {
+            $this->buildAssetUpdateAllocationOld($get, $returnresult);
+        }
+        if (($get['assetverifications'] ?? '') == 'Y') {
+            $this->buildAssetVerificationsAllocationOld($get, $returnresult);
+        }
+        if (($get['momenthistory'] ?? '') == 'Y') {
+            $assetsql = "SELECT * FROM asset_transactions WHERE is_active =0 AND company_id = '" . $get['company_id'] . "' AND asset_code  IN(" . $get['assetid'] . ")";
+            $returnresult['momenthistory'] = $callConfig->getAllRows($assetsql);
+        }
+        if (($get['request'] ?? '') == 'Y') {
+            $this->buildAssetRequestAllocationOld($get, $returnresult);
+        }
 
+        $costcentersql = self::SQL_SEL_COST_CENTERS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+        $returnresult['costcenter'] = $callConfig->getAllRows($costcentersql);
+        $employeessql = self::SQL_SEL_APPLICATION_USERS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+        $returnresult['employees'] = $callConfig->getAllRows($employeessql);
+        $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+        $returnresult['asset_categories'] = $callConfig->getAllRows($asset_categorie);
+        $locationsql = self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+        $returnresult['locations'] = $callConfig->getAllRows($locationsql);
+        $assetstatussql = self::SQL_SEL_ASSET_STATUS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+        $returnresult['asset_status'] = $callConfig->getAllRows($assetstatussql);
+        $departmentsql = self::SQL_SEL_DEPARTMENTS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+        $returnresult['departments'] = $callConfig->getAllRows($departmentsql);
+        $asset_condition_typesql = self::SQL_SEL_ASSET_CONDITION_TYPE . $get['company_id'] . "'";
+        $asset_condition_typeres = $callConfig->getAllRows($asset_condition_typesql);
+        $assetcondition = array();
+        foreach ((array)$asset_condition_typeres as $assetct) {
+            $assetcondition[$assetct->id] = $assetct->condition_name;
+        }
+        $returnresult['asset_condition_type'] = $assetcondition;
+        $currenciessql = "SELECT id,currency_name, currency_short_code, currency_symbol FROM `currencies` WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+        $returnresult['currencies'] = $callConfig->getAllRows($currenciessql);
+        $journalssql = "SELECT id,journal_name,journal_code FROM `journals` WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+        $returnresult['journals'] = $callConfig->getAllRows($journalssql);
 
-    $journalssql = "SELECT id, journal_name FROM `journals` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY journal_name ASC";
-    $journalsres = $callConfig->getAllRows($journalssql);
-    $returnresult['journals']= $journalsres;
-
-    return $returnresult;
-}
-
+        return $returnresult;
+    }
     public function insertAssetAllocation($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
+        $returnresult['get'] = $get;
         global $callConfig;
         $table = "user_assets";
         if($post['singleasset']=="Y"){ //single asset alocation request page
@@ -352,6 +323,7 @@ trait AssetOperationsTrait {
 
     /*End asset allocation */
     public function getemployeeassetandassetsdata($get, $post){
+        $return['post'] = $post;
         global $callConfig;
         $equery = "SELECT eas.id id, eas.asset_id,  eas.start_date, eas.end_date, eas.remarks, eas.current_status, ast.asset_code, ast.serial_no, ast.asset_description FROM user_assets eas, assets ast WHERE eas.company_id = ast.company_id AND eas.asset_id = ast.id AND eas.user_id = ".$get['empid']."  AND eas.is_active = 0";
         $return['emp_assets'] = $callConfig->getAllRows($equery);
@@ -367,73 +339,82 @@ trait AssetOperationsTrait {
         $return['employee'] = $callConfig->getRow($equery);
         return     $return;
     }
+    protected function processAssetAllocationItem($get, $post, $key, $asset, &$rlist_assets, &$alist_assets, &$resquery, &$res){
+        global $callConfig;
+        $query = "SELECT id,current_status FROM user_assets WHERE company_id =" . $get['company_id'] . " AND asset_id =" . $asset . " AND user_id =" . $post['emp_id'] . " AND is_active =0";
+        $adata = $callConfig->getRow($query);
+        $start_date = ($post['start_date'][$key] != "") ? date('Y-m-d', strtotime(str_replace('/', '-', $post['start_date'][$key]))) : $post['start_date'][$key];
+        $end_date = ($post['end_date'][$key] != "") ? date('Y-m-d', strtotime(str_replace('/', '-', $post['end_date'][$key]))) : $post['end_date'][$key];
+
+        if (!empty($adata->id)) {
+            $updatequery = "UPDATE user_assets SET start_date='" . $start_date . "',end_date='" . $end_date . "',remarks='" . $post['remarks'][$key] . "',updated_by=" . $get['user_id'] . ",current_status=" . $post['current_status'][$key] . " WHERE id=" . $adata->id;
+            $res = $callConfig->executeQuery($updatequery);
+            $resquery[] = $updatequery;
+            if ($post['current_status'][$key] == ST_RETURNED && $adata->current_status != ST_RETURNED) {
+                $rlist_assets[] = $asset;
+            }
+        } else {
+            $fieldnames = array('company_id' => $get['company_id'], 'user_id' => $post['emp_id'], 'asset_id' => $asset, 'start_date' => $start_date, 'end_date' => $end_date, 'remarks' => $post['remarks'][$key], 'is_active' => '0', 'current_status' => ST_ALLOCATE, 'created_by' => $get['user_id'], 'created_date' => date('Y-m-d h:i:s'));
+            $res = $callConfig->insertRecord('user_assets', $fieldnames);
+            $alist_assets[] = $asset;
+        }
+    }
+
+    protected function notifyAssetAllocationChanges($get, $post, $emp_data, $adminusers, $alist_assets, $rlist_assets, $lastId){
+        global $callConfig;
+        if (count((array)$alist_assets) > 0) {
+            $query = "SELECT id,asset_code,asset_description FROM assets WHERE id IN(" . implode(",", (array)$alist_assets) . ")";
+            $asdata = $callConfig->getAllRows($query);
+            $namerassets = array();
+            foreach ($asdata as $astdata) {
+                $namerassets[] = $astdata->asset_description . " - " . $astdata->asset_code;
+            }
+            $notiarray = array('notification_message' => 'Following asset(s) allocated to you ' . implode(",", (array)$namerassets), 'notification_users' => array($emp_data->user_id), 'id' => $lastId, 'application_table_name' => 'user_assets', 'company_id' => $get['company_id'], 'option' => '', 'notification_datetime' => date('y-m-d h:i:s'), 'user_name' => $emp_data->display_name, 'list_assets' => implode(",", (array)$namerassets), 'email_content_id' => 25);
+            $this->tosendnotifiations($notiarray);
+            $notiarray = array('notification_message' => 'Following asset(s) allocated to ' . $emp_data->display_name . ' - ' . implode(",", (array)$namerassets), 'notification_users' => $adminusers, 'id' => $lastId, 'application_table_name' => 'user_assets', 'company_id' => $get['company_id'], 'option' => '', 'notification_datetime' => date('y-m-d h:i:s'), 'user_name' => $emp_data->display_name, 'list_assets' => implode(",", (array)$namerassets), 'email_content_id' => 26);
+            $this->tosendnotifiations($notiarray);
+        }
+        if (count((array)$rlist_assets) > 0) {
+            $query = "SELECT id,asset_code,asset_description FROM assets WHERE id IN(" . implode(",", (array)$rlist_assets) . ")";
+            $asdata = $callConfig->getAllRows($query);
+            $nameassets = array();
+            foreach ($asdata as $astdata) {
+                $nameassets[] = $astdata->asset_description . " - " . $astdata->asset_code;
+            }
+            $notiarray = array('notification_message' => 'Following asset(s) retured by you' . implode(",", (array)$nameassets), 'notification_users' => array($emp_data->user_id), 'id' => $lastId, 'application_table_name' => 'user_assets', 'company_id' => $get['company_id'], 'option' => '', 'notification_datetime' => date('y-m-d h:i'), 'user_name' => $emp_data->display_name, 'list_assets' => implode(",", (array)$nameassets), 'email_content_id' => 23);
+            $this->tosendnotifiations($notiarray);
+            $notiarray = array('notification_message' => 'Following asset(s) retured by ' . $emp_data->display_name . ' - ' . implode(",", (array)$nameassets), 'notification_users' => array($emp_data->user_id), 'id' => $lastId, 'application_table_name' => 'user_assets', 'company_id' => $get['company_id'], 'option' => '', 'notification_datetime' => date('y-m-d h:i'), 'user_name' => $emp_data->display_name, 'list_assets' => implode(",", (array)$nameassets), 'email_content_id' => 24);
+            $this->tosendnotifiations($notiarray);
+        }
+    }
+
     public function addupdateassetsallocation($post, $get){
         global $callConfig;
         $resquery = array();
         $rlist_assets = array();
         $alist_assets = array();
         $adminusers = array();
-        foreach($post['asset_id'] as $key=>$asset){
-            if($asset!=""){
-                $query = "SELECT id,current_status FROM user_assets WHERE company_id =".$get['company_id']." AND asset_id =".$asset." AND user_id =".$post['emp_id']." AND is_active =0";
-                $adata = $callConfig->getRow($query);
+        $res = null;
 
-                if($post['start_date'][$key]!=""){  $start_date = date('Y-m-d', strtotime(str_replace('/', '-', $post['start_date'][$key])));
-                }else{ $start_date = $post['start_date'][$key];
-                }
-                if($post['end_date'][$key]!=""){ $end_date = date('Y-m-d', strtotime(str_replace('/', '-', $post['end_date'][$key])));
-                }else{ $end_date = $post['end_date'][$key];
-                }
-                if($adata->id!=""){
-                    $updatequery = "UPDATE user_assets SET start_date='".$start_date."',end_date='".$end_date."',remarks='".$post['remarks'][$key]."',updated_by=".$get['user_id'].",current_status=".$post['current_status'][$key]." WHERE id=".$adata->id;
-                    $res = $callConfig->executeQuery($updatequery);
-                    $resquery[] = $updatequery;
-                    if($post['current_status'][$key] == ST_RETURNED && $adata->current_status != ST_RETURNED){
-                        $rlist_assets[] = $asset;
-                    }
-                }else{
-                    $fieldnames=array('company_id'=>$get['company_id'],'user_id'=>$post['emp_id'],'asset_id'=>$asset,'start_date'=>$start_date,'end_date'=>$end_date,'remarks'=>$post['remarks'][$key],'is_active'=>'0','current_status'=>ST_ALLOCATE,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d h:i:s'));
-                    $res=$callConfig->insertRecord('user_assets',$fieldnames);
-                    $alist_assets[] = $asset;
-                }
+        foreach ($post['asset_id'] as $key => $asset) {
+            if ($asset != "") {
+                $this->processAssetAllocationItem($get, $post, $key, $asset, $rlist_assets, $alist_assets, $resquery, $res);
             }
         }
-        $query = "SELECT id,display_name,user_id,it_buddy,admin_buddy FROM employees WHERE id =".$post['emp_id'];
+        $query = "SELECT id,display_name,user_id,it_buddy,admin_buddy FROM employees WHERE id =" . $post['emp_id'];
         $emp_data = $callConfig->getRow($query);
-        if($emp_data->it_buddy!="") { $adminusers[] = $emp_data->it_buddy;
-        }
-        if($emp_data->admin_buddy!="") { $adminusers[] = $emp_data->admin_buddy;
-        }
-        $query = "SELECT id,display_name,user_id,it_buddy,admin_buddy FROM employees WHERE id IN(".implode(",",(array)$adminusers).")";
+        if (!empty($emp_data->it_buddy)) { $adminusers[] = $emp_data->it_buddy; }
+        if (!empty($emp_data->admin_buddy)) { $adminusers[] = $emp_data->admin_buddy; }
+        $query = "SELECT id,display_name,user_id,it_buddy,admin_buddy FROM employees WHERE id IN(" . implode(",", (array)$adminusers) . ")";
         $empusser_data = $callConfig->getAllRows($query);
-        foreach($empusser_data as $empusser_da){
-            $adminusers[]=$empusser_da->user_id;
+        foreach ($empusser_data as $empusser_da) {
+            $adminusers[] = $empusser_da->user_id;
         }
-        if(count((array)$alist_assets)>0){
-            $query = "SELECT id,asset_code,asset_description FROM assets WHERE id IN(".implode(",",(array)$alist_assets).")";
-            $asdata = $callConfig->getAllRows($query);
-            $namerassets = array();
-            foreach($asdata as $astdata){
-                $namerassets[] = $astdata->asset_description." - ".$astdata->asset_code;
-            }
-            $notiarray = array('notification_message'=>'Following asset(s) allocated to you '.implode(",",(array)$namerassets),'notification_users'=>array($emp_data->user_id),'id'=>$res['LASTID'],'application_table_name'=>'user_assets','company_id'=>$get['company_id'],'option'=>'','notification_datetime'=>date('y-m-d h:i:s'),'user_name'=>$emp_data->display_name,'list_assets'=>implode(",",(array)$namerassets),'email_content_id'=>25);
-            $this->tosendnotifiations($notiarray);
-            $notiarray = array('notification_message'=>'Following asset(s) allocated to '.$emp_data->display_name.' - '.implode(",",(array)$namerassets),'notification_users'=>$adminusers,'id'=>$res['LASTID'],'application_table_name'=>'user_assets','company_id'=>$get['company_id'],'option'=>'','notification_datetime'=>date('y-m-d h:i:s'),'user_name'=>$emp_data->display_name,'list_assets'=>implode(",",(array)$namerassets),'email_content_id'=>26);
-            $this->tosendnotifiations($notiarray);
-        }
-        if(count((array)$rlist_assets)>0){
-            $query = "SELECT id,asset_code,asset_description FROM assets WHERE id IN(".implode(",",(array)$rlist_assets).")";
-            $asdata = $callConfig->getAllRows($query);
-            $nameassets = array();
-            foreach($asdata as $astdata){
-                $nameassets[] = $astdata->asset_description." - ".$astdata->asset_code;
-            }
-            $notiarray = array('notification_message'=>'Following asset(s) retured by you'.implode(",",(array)$nameassets),'notification_users'=>array($emp_data->user_id),'id'=>$res['LASTID'],'application_table_name'=>'user_assets','company_id'=>$get['company_id'],'option'=>'','notification_datetime'=>date('y-m-d h:i'),'user_name'=>$emp_data->display_name,'list_assets'=>implode(",",(array)$nameassets),'email_content_id'=>23);
-            $this->tosendnotifiations($notiarray);
-            $notiarray = array('notification_message'=>'Following asset(s) retured by '.$emp_data->display_name.' - '.implode(",",(array)$nameassets),'notification_users'=>array($emp_data->user_id),'id'=>$res['LASTID'],'application_table_name'=>'user_assets','company_id'=>$get['company_id'],'option'=>'','notification_datetime'=>date('y-m-d h:i'),'user_name'=>$emp_data->display_name,'list_assets'=>implode(",",(array)$nameassets),'email_content_id'=>24);
-            $this->tosendnotifiations($notiarray);
-        }
-        return array('post'=>$post,'query'=>$resquery);
+
+        $lastId = $res['LASTID'] ?? null;
+        $this->notifyAssetAllocationChanges($get, $post, $emp_data, $adminusers, $alist_assets, $rlist_assets, $lastId);
+
+        return array('post' => $post, 'query' => $resquery);
     }
     public function  vmssingleemployeedashoard($get){
         global $callConfig;
@@ -484,12 +465,14 @@ trait AssetOperationsTrait {
         $assmentholidays = $callConfig->getAllRows($query);
         return array('timesheet'=>$timesheet, 'submited'=>$sumit, 'approved'=>$approve, 'create'=>$create,'employee'=>$employee, 'holidays'=>$holidays,'holileave'=>$holileave, 'workdays'=>$workdays, 'nonetworkindays'=>$nonetworkindays, 'assmentholidays'=>$assmentholidays, 'weekdates'=>$weekdates,'queries'=>$queries);
     }
-    public function togetassetsempassetdetails($get,$post){
+    public function togetassetsempassetdetails($get,$post = null){
+        if (!empty($post) && empty($get)) { $get = $post; }
         global $callConfig;
         $emp_assetssql = " SELECT emp_a.id, emp_a.start_date, emp_a.end_date, emp_a.current_status, asset.asset_code , asset.asset_description FROM `user_assets` emp_a, assets asset WHERE emp_a.company_id = '".$get['company_id']."' AND emp_a.is_active = 0 AND emp_a.asset_id = asset.id AND emp_a.user_id =  '".$get['empid']."'";
         return $callConfig->getAllRows($emp_assetssql);
     }
-    public function togetassestdashboarddetails($get,$post){
+    public function togetassestdashboarddetails($get,$post = null){
+        $return = array('get' => $get, 'post' => $post);
         global $callConfig;
         $query = "SELECT sum(if(current_status=31,1,0)) allocated, sum(if(current_status=32,1,0)) returned FROM `user_assets` WHERE is_active =0";
         $data1 = $callConfig->getRow($query);
@@ -541,378 +524,264 @@ class AssetUserClass extends userClass implements AssetConstants {
 
 
 
-    public function getAssetAllocation($get){
+    protected function getAssetAllocationAdminDash($get, &$return){
         global $callConfig;
-        $return = array();
-        $return['get']= $get;
+        $codition = ($get['admin_type'] != '1') ? " AND asset_custodian = '" . $get['user_id'] . "'" : "";
+        $conditionassetlist = "";
         $todaytedate = date('Y-m-d');
-        if($get['resultgettype'] =="ADMINDASH"){
-            $codition = "";
-            $conditionassetlist = "";
 
-            if($get['admin_type'] !='1'){
-                $codition = " AND asset_custodian = '".$get['user_id']."'";
+        $asset_categorieres = $callConfig->getAllRows(self::SQL_SEL_ASSET_CATEGORIES . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $asset_categories = array();
+        foreach ((array)$asset_categorieres as $ascat) {
+            $asset_categories[$ascat->id] = $ascat;
+        }
+        $return['asset_categories'] = $asset_categories;
+
+        $locationsres = $callConfig->getAllRows(self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $locations = array();
+        foreach ((array)$locationsres as $loc) {
+            $locations[$loc->id] = $loc;
+        }
+        $return['locations'] = $locations;
+
+        $application_usersres = $callConfig->getAllRows(self::SQL_SEL_APPLICATION_USERS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $application_users = array();
+        foreach ((array)$application_usersres as $aus) {
+            $application_users[$aus->id] = $aus;
+        }
+        $return['application_users'] = $application_users;
+
+        $assetstatusres = $callConfig->getAllRows(self::SQL_SEL_ASSET_STATUS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $asset_status = array();
+        foreach ((array)$assetstatusres as $aas) {
+            $asset_status[$aas->id] = $aas;
+        }
+        $return['asset_status'] = $asset_status;
+
+        $return['departments'] = $callConfig->getAllRows(self::SQL_SEL_DEPARTMENTS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+
+        $asset_condition_typeres = $callConfig->getAllRows(self::SQL_SEL_ASSET_CONDITION_TYPE . $get['company_id'] . "'");
+        $assetcondition = array();
+        foreach ((array)$asset_condition_typeres as $assetct) {
+            $assetcondition[$assetct->id] = $assetct;
+        }
+        $return['asset_condition_type'] = $assetcondition;
+
+        $return['assets_graph'] = $callConfig->getAllRows(self::SQL_SEL_ALL_ASSETS_ACTIVE . $get['company_id'] . "' AND is_active =0");
+
+        $sql1 = "SELECT sum(if(end_date <= '" . $todaytedate . "',1,0) AND allocation_type !=3) as overduecnt, sum(if(end_date >= '" . $todaytedate . "',1,0) AND allocation_type !=3) as duesooncnt FROM `user_assets` WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_0;
+        $return['user_asset_cnt_sql'] = $sql1;
+        $return['user_asset_cnt'] = $callConfig->getRow($sql1);
+
+        $sql2 = "SELECT sum(if(warranty_expiry_date <= '" . $todaytedate . "' AND  warranty_expiry_date !='0000-00-00',1,0)) as warranty_expiry_cnt, sum(if(end_of_life >= '" . $todaytedate . "'  AND end_of_life !='0000-00-00',1,0)) as end_of_life, sum(if(allocation_status ='N',1,0)) as unallocatedcnt FROM assets WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_EQ_0;
+        $return['asset_cnt'] = $callConfig->getRow($sql2);
+        $return['asset_cnt_sql'] = $sql2;
+
+        if (isset($get['ownership']) && $get['ownership'] != "") { $conditionassetlist .= " AND ownership  = '" . $get['ownership'] . "'"; }
+        if (isset($get['allocation_status']) && $get['allocation_status'] != "") { $conditionassetlist .= " AND allocation_status = '" . $get['allocation_status'] . "'"; }
+        if (isset($get['parent_asset']) && $get['parent_asset'] != "") {
+            $conditionassetlist .= ($get['parent_asset'] == "Y") ? " AND parent_asset !=''" : " AND parent_asset IS NULL";
+        }
+        if (isset($get['category']) && $get['category'] != "") { $conditionassetlist .= " AND category_id  = '" . $get['category'] . "'"; }
+        if (isset($get['location']) && $get['location'] != "") { $conditionassetlist .= " AND asset_location  = '" . $get['location'] . "'"; }
+        if (isset($get['status']) && $get['status'] != "") { $conditionassetlist .= " AND asset_status ='" . $get['status'] . "'"; }
+        if (isset($get['candition']) && $get['candition'] != "") { $conditionassetlist .= " AND conditions  = '" . $get['candition'] . "'"; }
+
+        $assetsql = self::SQL_SEL_ALL_ASSETS_ACTIVE . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0_SPACE . $conditionassetlist . " " . $codition;
+        $return['assets'] = $callConfig->getAllRows($assetsql);
+
+        $uaquery = "SELECT id, user_id, asset_id FROM user_assets WHERE company_id =" . $get['company_id'] . " AND is_active =0";
+        $uaqueryres = $callConfig->getAllRows($uaquery);
+        $user_assets = array();
+        foreach ((array)$uaqueryres as $assetct) {
+            $user_assets[$assetct->asset_id] = $assetct->user_id;
+        }
+        $return['user_assets'] = $user_assets;
+    }
+
+    protected function getAssetAllocationUserDash($get, &$return){
+        global $callConfig;
+        $dashcntsql = "SELECT (SELECT count(id) as cnt FROM user_assets WHERE company_id = '" . $get['company_id'] . "' AND user_id = '" . $get['user_id'] . "' AND is_active =0) as self_asset_cnt, (SELECT count(id) as cnt FROM asset_requests WHERE company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ORIGINATOR_EQ . $get['user_id'] . "' AND is_active =0) as asset_requests_cnt, (SELECT count(art.id) as cnt FROM asset_request_transfers art, asset_requests ar WHERE art.company_id = '" . $get['company_id'] . "' AND art.company_id = ar.company_id AND art.asset_request_id = ar.id AND ar.originator = '" . $get['user_id'] . "' AND art.is_active = ar.is_active AND art.is_active = 0) as asset_request_transfers_cnt";
+        $return['dashboard_cnt'] = $callConfig->getRow($dashcntsql);
+
+        if ($get['pagetype'] == 'ASSETS_REQUEST') {
+            $asset_requestssql = "SELECT * FROM asset_requests WHERE company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ORIGINATOR_EQ . $get['user_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['asset_requests'] = $callConfig->getAllRows($asset_requestssql);
+        } elseif ($get['pagetype'] == 'ASSET_RETURNS') {
+            $asset_requestssql = "SELECT ass.asset_code, ass.asset_description, ass.category_id, assretur.id, assretur.return_date, assretur.description, assretur.approve_datetime, assretur.current_status FROM asset_returns assretur , assets ass WHERE assretur.company_id = '" . $get['company_id'] . "' AND assretur.originator = '" . $get['user_id'] . "' AND assretur.company_id = ass.company_id AND assretur.asset_id = ass.id  AND assretur.is_active = ass.is_active AND ass.is_active =0";
+            $return['asset_returns'] = $callConfig->getAllRows($asset_requestssql);
+            $return['asset_requestssql'] = $asset_requestssql;
+        } elseif ($get['pagetype'] == 'REQUEST_INPROCESS') {
+            $assetsql = "SELECT id, asset_code, asset_description FROM assets WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0_SPACE;
+            $assetsres = $callConfig->getAllRows($assetsql);
+            $assets = array();
+            foreach ((array)$assetsres as $assetct) {
+                $assets[$assetct->id] = $assetct;
             }
-            $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $asset_categorieres=$callConfig->getAllRows($asset_categorie);
-            $asset_categories = array();
-            foreach((array)$asset_categorieres as $ascat){
-                $asset_categories[$ascat->id] = $ascat;
+            $return['assets'] = $assets;
+            $asset_requestssql = "SELECT art.id, art.asset_id, art.asset_request_id, art.asset_transfer_date, art.start_date, art.end_date, art.current_status, art.delivery_type, art.asset_accept_or_reject_date, ar.request_datetime FROM asset_request_transfers art, asset_requests ar WHERE art.company_id = '" . $get['company_id'] . "' AND art.company_id = ar.company_id AND art.asset_request_id = ar.id AND ar.originator = '" . $get['user_id'] . "' AND art.is_active = ar.is_active AND art.is_active = 0";
+            $return['asset_request_transfers'] = $callConfig->getAllRows($asset_requestssql);
+        } else {
+            $asset_requestssql = "SELECT ass.asset_code, ass.asset_description, ass.category_id, aua.id, aua.asset_id, aua.start_date, aua.end_date, aua.current_status FROM user_assets aua , assets ass WHERE aua.company_id = '" . $get['company_id'] . "' AND aua.user_id = '" . $get['user_id'] . "' AND aua.company_id = ass.company_id AND aua.asset_id = ass.id  AND aua.is_active = ass.is_active AND aua.is_active =0";
+            $return['user_assets'] = $callConfig->getAllRows($asset_requestssql);
+            $return['asset_requestssql'] = $asset_requestssql;
+
+            $assetsql = "SELECT id, asset_id, user_asset_id, return_date FROM asset_returns WHERE company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ORIGINATOR_EQ . $get['user_id'] . self::SQL_AND_IS_ACTIVE_0_SPACE;
+            $assetsres = $callConfig->getAllRows($assetsql);
+            $asset_returns = array();
+            foreach ((array)$assetsres as $assetct) {
+                $asset_returns[$assetct->asset_id] = $assetct;
             }
-            $return['asset_categories'] = $asset_categories;
+            $return['asset_returns'] = $asset_returns;
+        }
 
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            $locations = array();
-            foreach((array)$locationsres as $loc){
-                $locations[$loc->id] = $loc;
-            }
-            $return['locations'] = $locations;
+        $asset_categorieres = $callConfig->getAllRows(self::SQL_SEL_ASSET_CATEGORIES . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $asset_categories = array();
+        foreach ((array)$asset_categorieres as $ascat) {
+            $asset_categories[$ascat->id] = $ascat;
+        }
+        $return['asset_categories'] = $asset_categories;
 
-            $application_userssql = self::SQL_SEL_APPLICATION_USERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $application_usersres=$callConfig->getAllRows($application_userssql);
-            $application_users = array();
-            foreach((array)$application_usersres as $aus){
-                $application_users[$aus->id] = $aus;
-            }
-            $return['application_users'] = $application_users;
+        $locationsres = $callConfig->getAllRows(self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $locations = array();
+        foreach ((array)$locationsres as $loc) {
+            $locations[$loc->id] = $loc;
+        }
+        $return['locations'] = $locations;
+        $return['locations_sql'] = self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+    }
 
-            $assetstatussql = self::SQL_SEL_ASSET_STATUS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $assetstatusres=$callConfig->getAllRows($assetstatussql);
-            $asset_status = array();
-            foreach((array)$assetstatusres as $aas){
-                $asset_status[$aas->id] = $aas;
-            }
-            $return['asset_status'] = $asset_status;
-
-            $departmentsql = self::SQL_SEL_DEPARTMENTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $departmentres=$callConfig->getAllRows($departmentsql);
-            $return['departments'] = $departmentres;
-
-            $asset_condition_typesql = self::SQL_SEL_ASSET_CONDITION_TYPE.$get['company_id']."'";
-            $asset_condition_typeres=$callConfig->getAllRows($asset_condition_typesql);
-            foreach((array)$asset_condition_typeres as $assetct){
-                $assetcondition[$assetct->id] = $assetct;
+    protected function getAssetAllocationInsertPages($get, &$return){
+        global $callConfig;
+        if (($get['resultgettype'] ?? '') == 'INSERTPAGE') {
+            $costcentersql = self::SQL_SEL_COST_CENTERS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['costcenter'] = $callConfig->getAllRows($costcentersql);
+            $employeessql = self::SQL_SEL_APPLICATION_USERS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['employees'] = $callConfig->getAllRows($employeessql);
+            $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['asset_categories'] = $callConfig->getAllRows($asset_categorie);
+            $locationsql = self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['locations'] = $callConfig->getAllRows($locationsql);
+            $assetstatussql = self::SQL_SEL_ASSET_STATUS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['asset_status'] = $callConfig->getAllRows($assetstatussql);
+            $departmentsql = self::SQL_SEL_DEPARTMENTS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['departments'] = $callConfig->getAllRows($departmentsql);
+            $asset_condition_typesql = self::SQL_SEL_ASSET_CONDITION_TYPE . $get['company_id'] . "'";
+            $asset_condition_typeres = $callConfig->getAllRows($asset_condition_typesql);
+            $assetcondition = array();
+            foreach ((array)$asset_condition_typeres as $assetct) {
+                $assetcondition[$assetct->id] = $assetct->condition_name;
             }
             $return['asset_condition_type'] = $assetcondition;
-
-            $assetsql = "SELECT * FROM assets WHERE company_id = '".$get['company_id']."' AND  is_active =0";
-            $assets=$callConfig->getAllRows($assetsql);
-            $return['assets_graph'] = $assets;
-
-            $sql1 ="SELECT sum(if(end_date <= '".$todaytedate."',1,0) AND allocation_type !=3) as overduecnt, sum(if(end_date >= '".$todaytedate."',1,0) AND allocation_type !=3) as duesooncnt FROM `user_assets` WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_EQ_0;
-            $res1=$callConfig->getRow($sql1);
-            $return['user_asset_cnt_sql'] = $sql1;
-            $return['user_asset_cnt'] = $res1;
-
-            $sql2 ="SELECT sum(if(warranty_expiry_date <= '".$todaytedate."' AND  warranty_expiry_date !='0000-00-00',1,0)) as warranty_expiry_cnt, sum(if(end_of_life >= '".$todaytedate."'  AND end_of_life !='0000-00-00',1,0)) as end_of_life, sum(if(allocation_status ='N',1,0)) as unallocatedcnt FROM assets WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_EQ_0;
-            $res2=$callConfig->getRow($sql2);
-            $return['asset_cnt'] = $res2;
-            $return['asset_cnt_sql'] = $sql2;
-
-            if(isset($get['ownership']) && $get['ownership'] !=""){ //self/partner
-                $conditionassetlist .= " AND ownership  = '".$get['ownership']."'";
+            $user = "SELECT id,display_name FROM application_users WHERE is_active =0 AND company_id = '" . $get['company_id'] . "'";
+            $return['users'] = $callConfig->getAllRows($user);
+            if (!empty($get['Rid'])) {
+                $assetsql = self::SQL_SEL_ALL_ASSETS_ACTIVE . $get['company_id'] . "' AND id=" . $get['Rid'];
+                $return['assets'] = $callConfig->getRow($assetsql);
             }
-            if(isset($get['allocation_status']) && $get['allocation_status'] !=""){
-                $conditionassetlist .= " AND allocation_status = '".$get['allocation_status']."'";
-            }
-            if(isset($get['parent_asset']) && $get['parent_asset'] !=""){ //parent vendor
-                if($get['parent_asset'] == "Y"){
-                    $conditionassetlist  .= " AND parent_asset !=''";
-                }else{
-                    $conditionassetlist .= " AND parent_asset IS NULL";
-                }
-            }
-            if(isset($get['category']) && $get['category'] !=""){
-                $conditionassetlist .= " AND category_id  = '".$get['category']."'";
-            }
-            if(isset($get['location']) && $get['location'] !=""){
-                $conditionassetlist .= " AND asset_location  = '".$get['location']."'";
-            }
-            if(isset($get['status']) && $get['status'] !=""){
-                $conditionassetlist .= " AND asset_status ='".$get['status']."'";
-            }
-            if(isset($get['candition']) && $get['candition'] !=""){
-                $conditionassetlist .= " AND conditions  = '".$get['candition']."'";
-            }
-            $assetsql = "SELECT * FROM assets WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0_SPACE.$conditionassetlist." ".$codition;
-            $assets=$callConfig->getAllRows($assetsql);
-            $return['assets'] = $assets;
+            $assetlistsql = "SELECT id,asset_description,asset_code FROM assets WHERE is_active =0 AND company_id = '" . $get['company_id'] . "'";
+            $return['assets_list'] = $callConfig->getAllRows($assetlistsql);
+            $vendorsql = "SELECT id,display_name FROM vendors WHERE is_active =0 AND company_id = '" . $get['company_id'] . "'";
+            $return['vendors'] = $callConfig->getAllRows($vendorsql);
+            $depreciationmethodsql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = " . $get['company_id'] . " AND genc_code = 'DEPRECIATIONMETHOD' AND is_active =0";
+            $return['depreciation_method'] = $callConfig->getAllRows($depreciationmethodsql);
+            $chart_of_accountssql = "SELECT id, account_code, account_name FROM `chart_of_accounts` WHERE company_id = " . $get['company_id'] . " AND is_active =0 ORDER BY display_priority ASC";
+            $return['chart_of_accounts'] = $callConfig->getAllRows($chart_of_accountssql);
+        } elseif (($get['resultgettype'] ?? '') == 'INSERTASSETREQUESTS') {
+            $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['asset_categories'] = $callConfig->getAllRows($asset_categorie);
+            $locationsql = self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['locations'] = $callConfig->getAllRows($locationsql);
+            $applicationuserssql = "SELECT id, reports_to FROM application_users WHERE company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ID_EQ_QUOTE . $get['user_id'] . self::SQL_AND_IS_ACTIVE_0;
+            $return['reporting_manager'] = $callConfig->getRow($applicationuserssql);
+        }
+    }
 
-
-            $uaquery = "SELECT id, user_id, asset_id FROM user_assets WHERE company_id =".$get['company_id']." AND is_active =0";
-            $uaqueryres = $callConfig->getAllRows($uaquery);
-            foreach((array)$uaqueryres as $assetct){
-                $user_assets[$assetct->asset_id] = $assetct->user_id;
-            }
-            $return['user_assets'] = $user_assets;
-        }elseif($get['resultgettype'] =='USERDASH'){ // user data
-            $dashcntsql = "SELECT (SELECT count(id) as cnt FROM user_assets WHERE company_id = '".$get['company_id']."' AND user_id = '".$get['user_id']."' AND is_active =0) as self_asset_cnt, (SELECT count(id) as cnt FROM asset_requests WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ORIGINATOR_EQ.$get['user_id']."' AND is_active =0) as asset_requests_cnt, (SELECT count(art.id) as cnt FROM asset_request_transfers art, asset_requests ar WHERE art.company_id = '".$get['company_id']."' AND art.company_id = ar.company_id AND art.asset_request_id = ar.id AND ar.originator = '".$get['user_id']."' AND art.is_active = ar.is_active AND art.is_active = 0) as asset_request_transfers_cnt";
-            $dashcntres=$callConfig->getRow($dashcntsql);
-            $return['dashboard_cnt'] = $dashcntres;
-
-
-            if($get['pagetype'] == 'ASSETS_REQUEST'){
-
-                $asset_requestssql = "SELECT * FROM asset_requests WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ORIGINATOR_EQ.$get['user_id'].self::SQL_AND_IS_ACTIVE_0;
-                $asset_requestsres=$callConfig->getAllRows($asset_requestssql);
-                $return['asset_requests'] = $asset_requestsres;
-
-            }elseif($get['pagetype'] == 'ASSET_RETURNS'){
-
-
-                $asset_requestssql = "SELECT ass.asset_code, ass.asset_description, ass.category_id, assretur.id, assretur.return_date, assretur.description, assretur.approve_datetime, assretur.current_status FROM asset_returns assretur , assets ass WHERE assretur.company_id = '".$get['company_id']."' AND assretur.originator = '".$get['user_id']."' AND assretur.company_id = ass.company_id AND assretur.asset_id = ass.id  AND assretur.is_active = ass.is_active AND ass.is_active =0";
-                $asset_requestsres=$callConfig->getAllRows($asset_requestssql);
-                $return['asset_returns'] = $asset_requestsres;
-                $return['asset_requestssql'] = $asset_requestssql;
-
-            }elseif($get['pagetype'] == 'REQUEST_INPROCESS'){
-
-                $assetsql = "SELECT id, asset_code, asset_description FROM assets WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0_SPACE;
-                $assetsres=$callConfig->getAllRows($assetsql);
-                foreach((array)$assetsres as $assetct){
-                    $assets[$assetct->id] = $assetct;
-                }
-                $return['assets'] = $assets;
-
-
-                $asset_requestssql = "SELECT art.id, art.asset_id, art.asset_request_id, art.asset_transfer_date, art.start_date, art.end_date, art.current_status, art.delivery_type, art.asset_accept_or_reject_date, ar.request_datetime FROM asset_request_transfers art, asset_requests ar WHERE art.company_id = '".$get['company_id']."' AND art.company_id = ar.company_id AND art.asset_request_id = ar.id AND ar.originator = '".$get['user_id']."' AND art.is_active = ar.is_active AND art.is_active = 0";
-                $asset_requestsres=$callConfig->getAllRows($asset_requestssql);
-                $return['asset_request_transfers'] = $asset_requestsres;
-
-            }else{
-
-                $asset_requestssql = "SELECT ass.asset_code, ass.asset_description, ass.category_id, aua.id, aua.asset_id, aua.start_date, aua.end_date, aua.current_status FROM user_assets aua , assets ass WHERE aua.company_id = '".$get['company_id']."' AND aua.user_id = '".$get['user_id']."' AND aua.company_id = ass.company_id AND aua.asset_id = ass.id  AND aua.is_active = ass.is_active AND ass.is_active =0";
-                $asset_requestsres=$callConfig->getAllRows($asset_requestssql);
-                $return['user_assets'] = $asset_requestsres;
-                $return['asset_requestssql'] = $asset_requestssql;
-
-
-                $assetsql = "SELECT id, asset_id, user_asset_id, return_date FROM asset_returns WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ORIGINATOR_EQ.$get['user_id'].self::SQL_AND_IS_ACTIVE_0_SPACE;
-                $assetsres=$callConfig->getAllRows($assetsql);
-                foreach((array)$assetsres as $assetct){
-                    $asset_returns[$assetct->asset_id] = $assetct;
-                }
-                $return['asset_returns'] = $asset_returns;
-
-            }
-
-
-
-
-            $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $asset_categorieres=$callConfig->getAllRows($asset_categorie);
-            $asset_categories = array();
-            foreach((array)$asset_categorieres as $ascat){
-                $asset_categories[$ascat->id] = $ascat;
-            }
-            $return['asset_categories'] = $asset_categories;
-
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            $locations = array();
-            foreach((array)$locationsres as $loc){
-                $locations[$loc->id] = $loc;
-            }
-            $return['locations'] = $locations;
-            $return['locations_sql'] = $locationsql;
-        }elseif($get['resultgettype'] =='ASSET_RETURNS'){ // user data
-
-            $asset_requestssql = "SELECT ass.asset_code, ass.asset_description, ass.category_id, assretur.id, assretur.originator, assretur.request_datetime,  assretur.return_date, assretur.description, assretur.approve_datetime, assretur.current_status FROM asset_returns assretur , assets ass WHERE assretur.company_id = '".$get['company_id']."' AND assretur.company_id = ass.company_id AND assretur.asset_id = ass.id  AND assretur.is_active = ass.is_active AND ass.is_active =0";
-                $asset_requestsres=$callConfig->getAllRows($asset_requestssql);
-                $return['asset_returns'] = $asset_requestsres;
-                $return['asset_requestssql'] = $asset_requestssql;
-
-        }elseif($get['resultgettype'] =='VERIFYASSETS'){ //Insert Page data
-            $assetsql = "SELECT id, asset_code, asset_description, asset_custodian, asset_location FROM assets WHERE is_active =0 AND company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ID_IN.$get['assetid'].")";
-            $assets=$callConfig->getAllRows($assetsql);
-            $return['list_assets'] = $assets;
-
-            $asset_verificationssql = "SELECT id, asset_id, start_date_time, end_date_time FROM asset_verifications WHERE is_active =0 AND company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ASSET_ID_IN.$get['assetid'].") AND current_status !='".ST_APPROVED."'";
-            $asset_verificationsres=$callConfig->getAllRows($asset_verificationssql);
-            foreach((array)$asset_verificationsres as $asset_verifications){
+    protected function getAssetAllocationActionPages($get, &$return){
+        global $callConfig;
+        if ($get['resultgettype'] == 'ASSET_RETURNS') {
+            $asset_requestssql = "SELECT ass.asset_code, ass.asset_description, ass.category_id, assretur.id, assretur.originator, assretur.request_datetime,  assretur.return_date, assretur.description, assretur.approve_datetime, assretur.current_status FROM asset_returns assretur , assets ass WHERE assretur.company_id = '" . $get['company_id'] . "' AND assretur.company_id = ass.company_id AND assretur.asset_id = ass.id  AND assretur.is_active = ass.is_active AND ass.is_active =0";
+            $return['asset_returns'] = $callConfig->getAllRows($asset_requestssql);
+            $return['asset_requestssql'] = $asset_requestssql;
+        } elseif ($get['resultgettype'] == 'VERIFYASSETS') {
+            $assetsql = "SELECT id, asset_code, asset_description, asset_custodian, asset_location FROM assets WHERE is_active =0 AND company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ID_IN . $get['assetid'] . ")";
+            $return['list_assets'] = $callConfig->getAllRows($assetsql);
+            $asset_verificationssql = "SELECT id, asset_id, start_date_time, end_date_time FROM asset_verifications WHERE is_active =0 AND company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_ASSET_ID_IN . $get['assetid'] . ") AND current_status !='" . ST_APPROVED . "'";
+            $asset_verificationsres = $callConfig->getAllRows($asset_verificationssql);
+            $asset_verificationsarray = array();
+            foreach ((array)$asset_verificationsres as $asset_verifications) {
                 $asset_verificationsarray[$asset_verifications->asset_id] = $asset_verifications;
             }
             $return['asset_verifications'] = $asset_verificationsarray;
-
-
-
-
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            foreach((array)$locationsres as $assetct){
+            $locationsres = $callConfig->getAllRows(self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+            $locations = array();
+            foreach ((array)$locationsres as $assetct) {
                 $locations[$assetct->id] = $assetct->location_name;
             }
             $return['locations'] = $locations;
-
-
-
-
-            $user = self::SQL_SEL_APPLICATION_USERS.$get['company_id']."' AND JSON_SEARCH(role_id, 'one', '".ASSET_EXECUTIVE_ROLE."') IS NOT NULL AND is_active = 0";
-            $users=$callConfig->getAllRows($user);
-            $return['users'] = $users;
-
-
-
-        }elseif($get['resultgettype'] =='INSERTASSETRETURN'){ //Insert Page data
-
-            $user_assetssql = "SELECT * FROM user_assets WHERE company_id =".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['user_asset_id'].self::SQL_AND_IS_ACTIVE_0;
-            $user_assetsres = $callConfig->getRow($user_assetssql);
+            $user = self::SQL_SEL_APPLICATION_USERS . $get['company_id'] . "' AND JSON_SEARCH(role_id, 'one', '" . ASSET_EXECUTIVE_ROLE . "') IS NOT NULL AND is_active = 0";
+            $return['users'] = $callConfig->getAllRows($user);
+        } elseif ($get['resultgettype'] == 'INSERTASSETRETURN') {
+            $user_assetsres = $callConfig->getRow("SELECT * FROM user_assets WHERE company_id =" . $get['company_id'] . self::SQL_AND_ID_EQ_QUOTE . $get['user_asset_id'] . self::SQL_AND_IS_ACTIVE_0);
             $return['user_assets'] = $user_assetsres;
-            $assetssql = "SELECT * FROM assets WHERE company_id =".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$user_assetsres->asset_id.self::SQL_AND_IS_ACTIVE_0;
-            $assetsres = $callConfig->getRow($assetssql);
-            $return['assets'] = $assetsres;
-
-        }elseif($get['resultgettype'] =='DIRECTASSETALLOCATE'){ //Insert Page data
-
-            $conditionrequest = '';
-
-            $departmentsql = self::SQL_SEL_DEPARTMENTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $departmentres=$callConfig->getAllRows($departmentsql);
-            $return['departments'] = $departmentres;
-
-            $costcentersql = self::SQL_SEL_COST_CENTERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $costcenter=$callConfig->getAllRows($costcentersql);
-            $return['costcenter'] = $costcenter;
-
-            $assetstatussql = self::SQL_SEL_ASSET_STATUS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $assetstatusres=$callConfig->getAllRows($assetstatussql);
-            $return['asset_status'] = $assetstatusres;
-
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            $return['locations'] = $locationsres;
-
-            $application_userssql = self::SQL_SEL_APPLICATION_USERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $application_usersres=$callConfig->getAllRows($application_userssql);
-            $return['application_users'] = $application_usersres;
-
-
-            $alreadyusedasset = $this->getactiveassetanystage($get);
-            $return['already_assets_list'] = $alreadyusedasset;
-            $assetsql = self::SQL_SEL_ASSETS_DETAIL.$get['company_id'].self::SQL_QUOTE_AND_ID_IN.$get['assetid'].") AND is_active =0".$conditionrequest;
-            $assets=$callConfig->getAllRows($assetsql);
+            $return['assets'] = $callConfig->getRow("SELECT * FROM assets WHERE company_id =" . $get['company_id'] . self::SQL_AND_ID_EQ_QUOTE . $user_assetsres->asset_id . self::SQL_AND_IS_ACTIVE_0);
+        } elseif ($get['resultgettype'] == 'DIRECTASSETALLOCATE') {
+            $return['departments'] = $callConfig->getAllRows(self::SQL_SEL_DEPARTMENTS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+            $return['costcenter'] = $callConfig->getAllRows(self::SQL_SEL_COST_CENTERS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+            $return['asset_status'] = $callConfig->getAllRows(self::SQL_SEL_ASSET_STATUS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+            $return['locations'] = $callConfig->getAllRows(self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+            $return['application_users'] = $callConfig->getAllRows(self::SQL_SEL_APPLICATION_USERS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+            $return['already_assets_list'] = $this->getactiveassetanystage($get);
+            $assetsql = self::SQL_SEL_ASSETS_DETAIL . $get['company_id'] . self::SQL_QUOTE_AND_ID_IN . $get['assetid'] . ") AND is_active =0";
             $return['assetsql'] = $assetsql;
-            $return['list_assets'] = $assets;
-
-            if($get['momenthistory']=='Y'){
-                $assetsql = "SELECT * FROM asset_transactions WHERE is_active =0 AND company_id = '".$get['company_id']."' AND asset_code  IN(".$get['assetid'].")";
-                $assets=$callConfig->getAllRows($assetsql);
-                $return['momenthistory'] = $assets;
+            $return['list_assets'] = $callConfig->getAllRows($assetsql);
+            if (($get['momenthistory'] ?? '') == 'Y') {
+                $assetsql = "SELECT * FROM asset_transactions WHERE is_active =0 AND company_id = '" . $get['company_id'] . "' AND asset_code  IN(" . $get['assetid'] . ")";
+                $return['momenthistory'] = $callConfig->getAllRows($assetsql);
             }
-
-
-        }elseif($get['resultgettype'] == "ASSETREQUESTTRANSFERSACCEPTORREJECT"){
-
-            $asset_request_transferssql = "SELECT * FROM asset_request_transfers WHERE company_id = '".$get['company_id']."' AND  is_active =0 AND id = '".$get['asset_request_transfer_id']."'";
-            $asset_request_transfersres=$callConfig->getRow($asset_request_transferssql);
+        } elseif ($get['resultgettype'] == "ASSETREQUESTTRANSFERSACCEPTORREJECT") {
+            $asset_request_transferssql = "SELECT * FROM asset_request_transfers WHERE company_id = '" . $get['company_id'] . "' AND  is_active =0 AND id = '" . $get['asset_request_transfer_id'] . "'";
+            $asset_request_transfersres = $callConfig->getRow($asset_request_transferssql);
             $return['asset_request_transferssql'] = $asset_request_transferssql;
             $return['asset_request_transfers'] = $asset_request_transfersres;
-
-            if($asset_request_transfersres->asset_id !=""){
-                $assetsql = self::SQL_SEL_ASSETS_DETAIL.$get['company_id']."' AND id ='".$asset_request_transfersres->asset_id.self::SQL_AND_IS_ACTIVE_0;
-                $assets=$callConfig->getRow($assetsql);
+            if (!empty($asset_request_transfersres->asset_id)) {
+                $assetsql = self::SQL_SEL_ASSETS_DETAIL . $get['company_id'] . "' AND id ='" . $asset_request_transfersres->asset_id . self::SQL_AND_IS_ACTIVE_0;
                 $return['assetsql'] = $assetsql;
-                $return['assets'] = $assets;
+                $return['assets'] = $callConfig->getRow($assetsql);
             }
-
-
-        }elseif($get['resultgettype'] =='MULTIPLEASSETUPDATE'){ //Insert Page data
-
-            $conditionrequest = '';
-            $assetsql = self::SQL_SEL_ASSETS_DETAIL.$get['company_id'].self::SQL_QUOTE_AND_ID_IN.$get['assetid'].") AND is_active =0".$conditionrequest;
-            $assets=$callConfig->getAllRows($assetsql);
+        } elseif ($get['resultgettype'] == 'MULTIPLEASSETUPDATE') {
+            $assetsql = self::SQL_SEL_ASSETS_DETAIL . $get['company_id'] . self::SQL_QUOTE_AND_ID_IN . $get['assetid'] . ") AND is_active =0";
             $return['assetsql'] = $assetsql;
-            $return['list_assets'] = $assets;
-
-            $asset_condition_typesql = self::SQL_SEL_ASSET_CONDITION_TYPE.$get['company_id']."'";
-            $asset_condition_typeres=$callConfig->getAllRows($asset_condition_typesql);
-            foreach((array)$asset_condition_typeres as $assetct){
+            $return['list_assets'] = $callConfig->getAllRows($assetsql);
+            $asset_condition_typeres = $callConfig->getAllRows(self::SQL_SEL_ASSET_CONDITION_TYPE . $get['company_id'] . "'");
+            $assetcondition = array();
+            foreach ((array)$asset_condition_typeres as $assetct) {
                 $assetcondition[$assetct->id] = $assetct->condition_name;
             }
             $return['asset_condition_type'] = $assetcondition;
-
-            $asset_categorie = "SELECT id,category_description FROM  asset_categories WHERE  company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $asset_categorieres=$callConfig->getAllRows($asset_categorie);
-            $return['asset_categories'] = $asset_categorieres;
-
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            $return['locations'] = $locationsres;
-
-            $assetstatussql = self::SQL_SEL_ASSET_STATUS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $assetstatusres=$callConfig->getAllRows($assetstatussql);
-            $return['asset_status'] = $assetstatusres;
-
-
-        }elseif($get['resultgettype'] =='INSERTPAGE'){ //Insert Page data
-            //used allocation popup
-            $costcentersql = self::SQL_SEL_COST_CENTERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $costcenter=$callConfig->getAllRows($costcentersql);
-            $return['costcenter'] = $costcenter;
-            $employeessql = self::SQL_SEL_APPLICATION_USERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $employees=$callConfig->getAllRows($employeessql);
-            $return['employees'] = $employees;
-            //end allocation popup
-            $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $asset_categorieres=$callConfig->getAllRows($asset_categorie);
-            $return['asset_categories'] = $asset_categorieres;
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            $return['locations'] = $locationsres;
-            $assetstatussql = self::SQL_SEL_ASSET_STATUS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $assetstatusres=$callConfig->getAllRows($assetstatussql);
-            $return['asset_status'] = $assetstatusres;
-            $departmentsql = self::SQL_SEL_DEPARTMENTS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $departmentres=$callConfig->getAllRows($departmentsql);
-            $return['departments'] = $departmentres;
-            $asset_condition_typesql = self::SQL_SEL_ASSET_CONDITION_TYPE.$get['company_id']."'";
-            $asset_condition_typeres=$callConfig->getAllRows($asset_condition_typesql);
-            foreach((array)$asset_condition_typeres as $assetct){
-                $assetcondition[$assetct->id] = $assetct->condition_name;
-            }
-            $return['asset_condition_type'] = $assetcondition;
-
-            $user = "SELECT id,display_name FROM application_users WHERE is_active =0 AND company_id = '".$get['company_id']."'";
-            $users=$callConfig->getAllRows($user);
-            $return['users'] = $users;
-            if($get['Rid'] !=""){
-                $assetsql = self::SQL_SEL_ALL_ASSETS_ACTIVE.$get['company_id']."' AND id=".$get['Rid'];
-                $assets=$callConfig->getRow($assetsql);
-                $return['assets'] = $assets;
-            }
-            $assetlistsql = "SELECT id,asset_description,asset_code  FROM assets WHERE is_active =0 AND company_id = '".$get['company_id']."'";
-            $assetslist=$callConfig->getAllRows($assetlistsql);
-            $return['assets_list'] = $assetslist;
-            $vendorsql = "SELECT id,display_name  FROM vendors WHERE is_active =0 AND company_id = '".$get['company_id']."'";
-            $vendorlist=$callConfig->getAllRows($vendorsql);
-            $return['vendors'] = $vendorlist;
-
-            $depreciationmethodsql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'DEPRECIATIONMETHOD' AND is_active =0";
-            $depreciationmethodres = $callConfig->getAllRows($depreciationmethodsql);
-            $return['depreciation_method']= $depreciationmethodres;
-
-             $chart_of_accountssql = "SELECT id, account_code, account_name FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY display_priority ASC";
-            $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
-            $return['chart_of_accounts']= $chart_of_accountsres;
-
-        }elseif($get['resultgettype'] =='INSERTASSETREQUESTS'){
-            $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $asset_categorieres=$callConfig->getAllRows($asset_categorie);
-            $return['asset_categories'] = $asset_categorieres;
-
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            $return['locations'] = $locationsres;
-
-            $applicationuserssql = "SELECT id, reports_to FROM application_users WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ID_EQ_QUOTE.$get['user_id'].self::SQL_AND_IS_ACTIVE_0;
-            $applicationusersres=$callConfig->getRow($applicationuserssql);
-            $return['reporting_manager'] = $applicationusersres;
+            $return['asset_categories'] = $callConfig->getAllRows("SELECT id,category_description FROM  asset_categories WHERE  company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+            $return['locations'] = $callConfig->getAllRows(self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
         }
+    }
 
+    public function getAssetAllocation($get){
+        $return = array();
+        $return['get'] = $get;
+        $type = $get['resultgettype'] ?? '';
+        if ($type == "ADMINDASH") {
+            $this->getAssetAllocationAdminDash($get, $return);
+        } elseif ($type == 'USERDASH') {
+            $this->getAssetAllocationUserDash($get, $return);
+        } elseif ($type == 'INSERTPAGE' || $type == 'INSERTASSETREQUESTS') {
+            $this->getAssetAllocationInsertPages($get, $return);
+        } else {
+            $this->getAssetAllocationActionPages($get, $return);
+        }
         return $return;
     }
     public function insertAssetRequest($get, $post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
+        $return['get'] = $get;
         global $callConfig;
         $return['post'] = $post;
         $attributes =implode(",",(array)$post['attribute']);
@@ -930,79 +799,76 @@ class AssetUserClass extends userClass implements AssetConstants {
         }
         return $return;
     }
-    public function getassetTransferRequests($get){
+    protected function getAssetTransferRequestsSingle($get, &$return){
         global $callConfig;
-        $return = array();
-        if($get['rid'] !=""){
-            $assettrareqsql = "SELECT * FROM asset_requests WHERE company_id = '".$get['company_id']."' AND  is_active =0 AND id = '".$get['rid']."'";
-            $assettrareqres=$callConfig->getRow($assettrareqsql);
-            $return['asset_requests'] = $assettrareqres;
+        $assettrareqsql = "SELECT * FROM asset_requests WHERE company_id = '" . $get['company_id'] . "' AND  is_active =0 AND id = '" . $get['rid'] . "'";
+        $return['asset_requests'] = $callConfig->getRow($assettrareqsql);
 
-            $asset_request_transferssql = "SELECT * FROM asset_request_transfers WHERE company_id = '".$get['company_id']."' AND  is_active =0 AND asset_request_id = '".$get['rid']."'";
-            $asset_request_transfersres=$callConfig->getAllRows($asset_request_transferssql);
-            $return['asset_request_transfers'] = $asset_request_transfersres;
+        $asset_request_transferssql = "SELECT * FROM asset_request_transfers WHERE company_id = '" . $get['company_id'] . "' AND  is_active =0 AND asset_request_id = '" . $get['rid'] . "'";
+        $return['asset_request_transfers'] = $callConfig->getAllRows($asset_request_transferssql);
 
-            $allassetsql = "SELECT id, asset_description FROM assets WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $allassets=$callConfig->getAllRows($allassetsql);
-            $all_assets = array();
-            foreach($allassets as $allass){
-                $all_assets[$allass->id] = $allass->asset_description;
-            }
-            $return['all_assets'] = $all_assets;
-
-            $alreadyusedasset = $this->getactiveassetanystage($get);
-
-            $conditionrequest = "";
-            if(isset($get['categroy_list']) && $get['categroy_list'] !=""){
-                $conditionrequest .= " AND category_id  IN (".$get['categroy_list'].")";
-            }
-            if(isset($get['asset_status']) && $get['asset_status'] !=""){
-                $conditionrequest .= " AND asset_status IN('".$get['asset_status']."')";
-            }
-            if(isset($get['asset_condition']) && $get['asset_condition'] !=""){
-                $conditionrequest .= " AND conditions IN ('".$get['asset_condition']."')";
-            }
-            if($alreadyusedasset !=""){
-                $conditionrequest .= " AND id NOT IN(".$alreadyusedasset.")";
-            }
-            $assetsql = "SELECT id, allocation_status, asset_img, asset_description, category_id, asset_status FROM assets WHERE company_id = '".$get['company_id'].self::SQL_AND_IS_ACTIVE_0.$conditionrequest;
-            $assets=$callConfig->getAllRows($assetsql);
-            $return['assetsql'] = $assetsql;
-            $return['assets'] = $assets;
-
-            $assetstatussql = self::SQL_SEL_ASSET_STATUS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $assetstatusres=$callConfig->getAllRows($assetstatussql);
-            $return['asset_status'] = $assetstatusres;
-
-            $asset_condition_typesql = self::SQL_SEL_ASSET_CONDITION_TYPE.$get['company_id']."'";
-            $asset_condition_typeres=$callConfig->getAllRows($asset_condition_typesql);
-            foreach($asset_condition_typeres as $assetct){
-                $assetcondition[$assetct->id] = $assetct->condition_name;
-            }
-            $return['asset_condition_type'] = $assetcondition;
-
-        }else{
-            $assettrareqsql = "SELECT areq.*, (SELECT count(art.id) FROM asset_request_transfers art WHERE art.company_id = areq.company_id AND art.asset_request_id =areq.id AND art.is_active = 0) as asset_request_transfers_cnt FROM asset_requests areq WHERE areq.company_id = '".$get['company_id']."' AND areq.is_active =0 AND (areq.approval_user_id = '".$get['admin_buddy']."' OR 1 = '".$get['admin_type']."')";
-            $assettrareqres=$callConfig->getAllRows($assettrareqsql);
-            $return['asset_requests'] = $assettrareqres;
+        $allassets = $callConfig->getAllRows("SELECT id, asset_description FROM assets WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $all_assets = array();
+        foreach ($allassets as $allass) {
+            $all_assets[$allass->id] = $allass->asset_description;
         }
-        $asset_categorie = self::SQL_SEL_ASSET_CATEGORIES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $asset_categorieres=$callConfig->getAllRows($asset_categorie);
-        $asset_categories = array();
-        foreach($asset_categorieres as $ascat){
-            $asset_categories[$ascat->id] = $ascat;
-        }
-        $return['asset_categories'] = $asset_categories;
+        $return['all_assets'] = $all_assets;
 
-        $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $locationsres=$callConfig->getAllRows($locationsql);
+        $alreadyusedasset = $this->getactiveassetanystage($get);
+        $conditionrequest = "";
+        if (isset($get['categroy_list']) && $get['categroy_list'] != "") { $conditionrequest .= " AND category_id  IN (" . $get['categroy_list'] . ")"; }
+        if (isset($get['asset_status']) && $get['asset_status'] != "") { $conditionrequest .= " AND asset_status IN('" . $get['asset_status'] . "')"; }
+        if (isset($get['asset_condition']) && $get['asset_condition'] != "") { $conditionrequest .= " AND conditions IN ('" . $get['asset_condition'] . "')"; }
+        if ($alreadyusedasset != "") { $conditionrequest .= " AND id NOT IN(" . $alreadyusedasset . ")"; }
+
+        $assetsql = "SELECT id, allocation_status, asset_img, asset_description, category_id, asset_status FROM assets WHERE company_id = '" . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0 . $conditionrequest;
+        $return['assetsql'] = $assetsql;
+        $return['assets'] = $callConfig->getAllRows($assetsql);
+        $return['asset_status'] = $callConfig->getAllRows(self::SQL_SEL_ASSET_STATUS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+
+        $asset_condition_typeres = $callConfig->getAllRows(self::SQL_SEL_ASSET_CONDITION_TYPE . $get['company_id'] . "'");
+        $assetcondition = array();
+        foreach ($asset_condition_typeres as $assetct) {
+            $assetcondition[$assetct->id] = $assetct->condition_name;
+        }
+        $return['asset_condition_type'] = $assetcondition;
+
+        $locationsres = $callConfig->getAllRows(self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
         $locations = array();
-        foreach($locationsres as $loc){
+        foreach ($locationsres as $loc) {
             $locations[$loc->id] = $loc;
         }
         $return['locations'] = $locations;
-        $return['locations_sql'] = $locationsql;
 
+        $application_usersres = $callConfig->getAllRows(self::SQL_SEL_APPLICATION_USERS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $application_users = array();
+        foreach ($application_usersres as $aus) {
+            $application_users[$aus->id] = $aus;
+        }
+        $return['application_users'] = $application_users;
+    }
+
+    protected function getAssetTransferRequestsList($get, &$return){
+        global $callConfig;
+        $condition = "";
+        if (isset($get['status']) && $get['status'] != "") { $condition .= " AND ar.current_status  = '" . $get['status'] . "'"; }
+        if (isset($get['category']) && $get['category'] != "") { $condition .= " AND ar.category_id  = '" . $get['category'] . "'"; }
+        if (isset($get['delivery_type']) && $get['delivery_type'] != "") { $condition .= " AND ar.delivery_type  = '" . $get['delivery_type'] . "'"; }
+        if (isset($get['location_id']) && $get['location_id'] != "") { $condition .= " AND ar.location_id  = '" . $get['location_id'] . "'"; }
+        if (isset($get['approval_user_id']) && $get['approval_user_id'] != "") { $condition .= " AND ar.approval_user_id  = '" . $get['approval_user_id'] . "'"; }
+
+        $assettrareqsql = "SELECT ar.*, ac.category_description, loc.location_name, aus.display_name as user_name FROM asset_requests ar LEFT JOIN asset_categories ac ON ar.company_id = ac.company_id AND ar.category_id = ac.id AND ar.is_active = ac.is_active LEFT JOIN locations loc ON ar.company_id = loc.company_id AND ar.location_id = loc.id AND ar.is_active = loc.is_active LEFT JOIN application_users aus ON ar.company_id = aus.company_id AND ar.originator = aus.id AND ar.is_active = aus.is_active WHERE ar.company_id = '" . $get['company_id'] . "' AND ar.is_active =0" . $condition . " ORDER BY ar.id DESC";
+        $return['asset_requests'] = $callConfig->getAllRows($assettrareqsql);
+        $return['asset_requests_sql'] = $assettrareqsql;
+    }
+
+    public function getassetTransferRequests($get){
+        $return = array();
+        if (($get['rid'] ?? '') != "") {
+            $this->getAssetTransferRequestsSingle($get, $return);
+        } else {
+            $this->getAssetTransferRequestsList($get, $return);
+        }
         return $return;
     }
     public function insertAssetRequestTransfers($get, $post){
@@ -1052,6 +918,7 @@ class AssetUserClass extends userClass implements AssetConstants {
         return implode(",",(array)$asset_ids);
     }
     public function insertAssetVerification($get,$post){
+        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
         global $callConfig;
         $assetary = explode(',', $post['asset_id']);
         $res = array();
@@ -1069,62 +936,67 @@ class AssetUserClass extends userClass implements AssetConstants {
     }
 
 
-    public function getAssetVerifications($get){
+    protected function getAssetVerificationsDetail($get, &$return){
         global $callConfig;
-        $return = array();
+        $query = "SELECT ass.*, (SELECT ac.category_description FROM asset_categories ac WHERE ac.company_id = ass.company_id AND ac.id = ass.category_id AND ac.is_active = ass.is_active) as category_name,(SELECT act.condition_name FROM asset_condition_type act WHERE act.company_id = ass.company_id AND act.id = ass.conditions AND act.is_active = ass.is_active) as condition_name FROM asset_verifications av, assets ass WHERE av.company_id=" . $get['company_id'] . " AND av.company_id = ass.company_id AND av.asset_id = ass.id AND av.id='" . $get['verification_id'] . "' AND av.is_active = ass.is_active AND av.is_active = '0'";
+        $return['asset_verifications'] = $callConfig->getRow($query);
+
+        $asset_condition_typeres = $callConfig->getAllRows(self::SQL_SEL_ASSET_CONDITION_TYPE . $get['company_id'] . "'");
+        $assetcondition = array();
+        foreach ($asset_condition_typeres as $assetct) {
+            $assetcondition[$assetct->id] = $assetct->condition_name;
+        }
+        $return['asset_condition_type'] = $assetcondition;
+
+        $locationsres = $callConfig->getAllRows(self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+        $locations = array();
+        foreach ($locationsres as $loc) {
+            $locations[$loc->id] = $loc;
+        }
+        $return['locations'] = $locations;
+        $return['locations_sql'] = self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0;
+    }
+
+    protected function getAssetVerificationsList($get, &$return){
+        global $callConfig;
         $todaytedate = date('Y-m-d');
         $tomorrowdate = date('Y-m-d', strtotime('+1 days', strtotime($todaytedate)));
-        if($get['verification_id'] !=""){
-            $query = "SELECT ass.*, (SELECT ac.category_description FROM asset_categories ac WHERE ac.company_id = ass.company_id AND ac.id = ass.category_id AND ac.is_active = ass.is_active) as category_name,(SELECT act.condition_name FROM asset_condition_type act WHERE act.company_id = ass.company_id AND act.id = ass.conditions AND act.is_active = ass.is_active) as condition_name FROM asset_verifications av, assets ass WHERE av.company_id=".$get['company_id']." AND av.company_id = ass.company_id AND av.asset_id = ass.id AND av.id='".$get['verification_id']."' AND av.is_active = ass.is_active AND av.is_active = '0'";
-            $result = $callConfig->getRow($query);
-            $return['asset_verifications']= $result;
-            $asset_condition_typesql = self::SQL_SEL_ASSET_CONDITION_TYPE.$get['company_id']."'";
-            $asset_condition_typeres=$callConfig->getAllRows($asset_condition_typesql);
-            foreach($asset_condition_typeres as $assetct){
-                $assetcondition[$assetct->id] = $assetct->condition_name;
+        $codition = "";
+        $admin_access_employee = $get['admin_access_employee'] ?? '';
+        if (($get['admin_type'] ?? '') != 1 || $admin_access_employee == 'Y') {
+            $codition = " AND av.user_id = '" . $get['user_id'] . "'";
+        }
+        if (isset($get['type']) && $get['type'] != "") {
+            if ($get['type'] == "IP") {
+                $codition .= " AND av.start_date_time <= '" . $todaytedate . " 23:59:59'  AND av.current_status != '" . ST_APPROVED . "' ";
+            } elseif ($get['type'] == "UCV") {
+                $codition .= " AND  av.start_date_time >= '" . $tomorrowdate . " 00:00:00' AND av.current_status != '" . ST_APPROVED . "'";
+            } elseif ($get['type'] == "COMPL") {
+                $codition .= " AND av.current_status = '" . ST_APPROVED . "'";
             }
-            $return['asset_condition_type'] = $assetcondition;
+        }
+        $query = "SELECT av.id, av.asset_id, av.user_id, av.start_date_time, av.end_date_time, av.verification_date_time, av.verification_date_time, av.user_note,  av.current_status, ass.asset_code, ass.asset_description, ass.asset_location FROM asset_verifications av, assets ass WHERE av.company_id=" . $get['company_id'] . " AND av.company_id = ass.company_id AND av.asset_id = ass.id " . $codition . " AND av.is_active = ass.is_active AND av.is_active = '0'";
+        $return['query'] = $query;
+        $return['asset_verifications'] = $callConfig->getAllRows($query);
 
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            $locations = array();
-            foreach($locationsres as $loc){
-                $locations[$loc->id] = $loc;
-            }
-            $return['locations'] = $locations;
-            $return['locations_sql'] = $locationsql;
-        }else{
-            $admin_access_employee = $get['admin_access_employee'];
-            if($get['admin_type'] !=1 || $admin_access_employee =='Y'){
-                $codition = " AND av.user_id = '".$get['user_id']."'";
-            }
-            if(isset($get['type']) && $get['type'] !=""){
-                if($get['type'] == "IP"){
-                    $codition .= " AND av.start_date_time <= '".$todaytedate." 23:59:59'  AND av.current_status != '".ST_APPROVED."' ";
-                }elseif($get['type'] == "UCV"){
-                    $codition .= " AND  av.start_date_time >= '".$tomorrowdate." 00:00:00' AND av.current_status != '".ST_APPROVED."'";
-                }elseif($get['type'] == "COMPL"){
-                    $codition .= " AND av.current_status = '".ST_APPROVED."'";
-                }
-            }
-            $query = "SELECT av.id, av.asset_id, av.user_id, av.start_date_time, av.end_date_time, av.verification_date_time, av.verification_date_time, av.user_note,  av.current_status, ass.asset_code, ass.asset_description, ass.asset_location FROM asset_verifications av, assets ass WHERE av.company_id=".$get['company_id']." AND av.company_id = ass.company_id AND av.asset_id = ass.id ".$codition." AND av.is_active = ass.is_active AND av.is_active = '0'";
-            $result = $callConfig->getAllRows($query);
-            $return['query']= $query;
-            $return['asset_verifications']= $result;
+        $query = "SELECT count(id) as total, sum(if(start_date_time <= '" . $todaytedate . " 23:59:59'  AND current_status != '" . ST_APPROVED . "',1,0)) as inprocess_cnt, sum(if(start_date_time >= '" . $tomorrowdate . " 00:00:00' AND current_status != '" . ST_APPROVED . "',1,0)) as upcoming_cnt, sum(if(current_status = '" . ST_APPROVED . "',1,0)) as completed FROM `asset_verifications` WHERE company_id = '" . $get['company_id'] . "' AND user_id = '" . $get['user_id'] . self::SQL_AND_IS_ACTIVE_EQ_0;
+        $return['asset_verifications_cnt_sql'] = $query;
+        $return['asset_verifications_cnt'] = $callConfig->getRow($query);
 
-            $query = "SELECT count(id) as total, sum(if(start_date_time <= '".$todaytedate." 23:59:59'  AND current_status != '".ST_APPROVED."',1,0)) as inprocess_cnt, sum(if(start_date_time >= '".$tomorrowdate." 00:00:00' AND current_status != '".ST_APPROVED."',1,0)) as upcoming_cnt, sum(if(current_status = '".ST_APPROVED."',1,0)) as completed FROM `asset_verifications` WHERE company_id = '".$get['company_id']."' AND user_id = '".$get['user_id'].self::SQL_AND_IS_ACTIVE_EQ_0;
-            $result = $callConfig->getRow($query);
-            $return['asset_verifications_cnt_sql']= $query;
-            $return['asset_verifications_cnt']= $result;
+        $return['locations'] = $callConfig->getAllRows(self::SQL_SEL_LOCATIONS . $get['company_id'] . self::SQL_AND_IS_ACTIVE_0);
+    }
 
-
-            $locationsql = self::SQL_SEL_LOCATIONS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-            $locationsres=$callConfig->getAllRows($locationsql);
-            $return['locations'] = $locationsres;
+    public function getAssetVerifications($get){
+        $return = array();
+        if (($get['verification_id'] ?? '') != "") {
+            $this->getAssetVerificationsDetail($get, $return);
+        } else {
+            $this->getAssetVerificationsList($get, $return);
         }
         return $return;
     }
     public function updateAssetVerificationStatus($get, $post){
+        $return['get'] = $get;
         global $callConfig;
         $return = array();
         $insert_array = array('verification_date_time'=>date(self::DATE_FORMAT_HIS),'user_note'=>$post['user_note'],'current_status'=>ST_APPROVED,'updated_date'=>date(self::DATE_FORMAT_HIS),'updated_by'=>$post['user_id']);
@@ -1169,6 +1041,7 @@ class AssetUserClass extends userClass implements AssetConstants {
         return $returnresult;
     }
 public function updateAssetAllocation($get, $post){
+        $returncdc['get'] = $get;
         global $callConfig;
         $table =  "Assets";
         foreach($post['asset_id'] as $key=>$rid){
