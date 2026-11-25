@@ -1,7 +1,34 @@
 <?php
-class CSRClass
+
+class CsrConstants
 {
-    public function insertData($get)
+    public const UPDATED_BY_APOS = "', updated_by='";
+    public const SEL_APP_USERS_FIELD_WORK = "SELECT id, display_name, user_field_work_type FROM  application_users WHERE company_id='";
+    public const AND_IS_ACTIVE_0_SPACE = "' AND is_active =0 ";
+    public const AND_COMPANY_ID_APOS = "' AND company_id='";
+    public const APOS_AND_APOS = "' AND '";
+    public const UPDATE_PREFIX = "UPDATE ";
+    public const APOS_AND_SPACE = "' AND ";
+    public const ID_EQ_APOS = "id = '";
+    public const AND_COMPANY_ID_EQ_APOS = "' AND company_id = '";
+    public const AND_IS_ACTIVE_0_NO_SPACE = "' AND is_active=0";
+    public const DATE_FORMAT_YMD_HIS = "Y-m-d H:i:s";
+    public const AND_IS_ACTIVE_0_DOUBLE_SPACE = "' AND  is_active=0";
+    public const AND_IS_ACTIVE_0_STANDARD = "' AND is_active = 0";
+    public const AND_PROJECT_ID_IN = " AND project_id IN (";
+    public const AND_ONE_EQ_ZERO = " AND 1=0";
+    public const AND_P_FIN_YEAR = " AND p.financial_year = '";
+    public const IN_PROGRESS = "In Progress";
+    public const PROPOSAL_NOT_FOUND = "Proposal not found";
+    public const AND_MAP_DATE_LTE = "' AND map_date <= '";
+    public const SEL_CC_ACTIVE = "SELECT COUNT(DISTINCT user_id) AS cc_active FROM field_work_user_map_points WHERE company_id = ";
+    public const AND_MAP_DATE_EQ = " AND map_date = '";
+    public const AND_FWDP_ACTIVE_0 = "' AND fwdp.is_active = 0";
+}
+
+trait CsrFieldWorkTrait
+{
+public function insertData($get)
     {
         global $callConfig;
         $transaction_no = '';
@@ -29,7 +56,7 @@ class CSRClass
             $updated_date = date('Y-m-d h:i:s');
             $updated_by = $get['user_id'];
 
-            $query = "UPDATE csr_proposal_data  SET is_active = 1 , updated_date='" . $updated_date . "', updated_by='" . $updated_by . "'  WHERE id= '" . $id . "'";
+            $query = "UPDATE csr_proposal_data  SET is_active = 1 , updated_date='" . $updated_date . CsrConstants::UPDATED_BY_APOS . $updated_by . "'  WHERE id= '" . $id . "'";
             $callConfig->executeQuery($query);
         }
         if ($get['rid'] != "") {
@@ -334,7 +361,7 @@ class CSRClass
         }
         $return['ct_details'] = $ct_details;
 
-        $application_users_details = "SELECT id, display_name, user_field_work_type FROM  application_users WHERE company_id='" . $get['company_id'] . "'
+        $application_users_details = CsrConstants::SEL_APP_USERS_FIELD_WORK . $get['company_id'] . "'
     AND is_active =0";
         $application_users_details = $callConfig->getAllRows($application_users_details);
         $application_users = array();
@@ -356,7 +383,7 @@ class CSRClass
         }
         $return['cr_details'] = $cr_details;
 
-        $companies_details = "SELECT id, name  FROM  companies WHERE  company_id='" . $get['company_id'] . "' AND is_active =0 ";
+        $companies_details = "SELECT id, name  FROM  companies WHERE  company_id='" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_SPACE;
         $companies_details = $callConfig->getAllRows($companies_details);
         $cmp_details = array();
         $i = 1;
@@ -377,7 +404,7 @@ class CSRClass
         $map_date = $get['map_date'];
         $user_field_work_type = $get['user_field_work_type'];
         if ($user_field_work_type == '1') {
-            $query1 = "SELECT id, user_id, plan_date, plan_longitude as lng, plan_latitude as lat, plan_location as name From field_work_daily_plans Where user_id='" . $userid . "' AND plan_date='" . $map_date . "' AND company_id='" . $get['company_id'] . "' AND is_active =0 ";
+            $query1 = "SELECT id, user_id, plan_date, plan_longitude as lng, plan_latitude as lat, plan_location as name From field_work_daily_plans Where user_id='" . $userid . "' AND plan_date='" . $map_date . CsrConstants::AND_COMPANY_ID_APOS . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_SPACE;
             $query1 = $callConfig->getAllRows($query1);
             $assignedLocations = array();
             $i = 1;
@@ -390,7 +417,7 @@ class CSRClass
             $return['assignedLocations'] = $assignedLocations;
         }
 
-        $query2 = "SELECT id, user_id, map_latitude as lat, map_longitude as lng, map_date, map_title as name, map_time, field_work_daily_plan_id From field_work_user_map_points Where user_id='" . $userid . "' AND map_date='" . $map_date . "' AND company_id='" . $get['company_id'] . "' AND is_active =0 ";
+        $query2 = "SELECT id, user_id, map_latitude as lat, map_longitude as lng, map_date, map_title as name, map_time, field_work_daily_plan_id From field_work_user_map_points Where user_id='" . $userid . "' AND map_date='" . $map_date . CsrConstants::AND_COMPANY_ID_APOS . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_SPACE;
         $query2 = $callConfig->getAllRows($query2);
         $visitedLocations = array();
         $i = 1;
@@ -451,7 +478,7 @@ class CSRClass
         JOIN application_users au ON au.id = fwdp.user_id
         WHERE fwdp.user_id IN (" . $ids . ")
         AND au.user_field_work_type IN ('1','2')
-        AND fwdp.plan_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
+        AND fwdp.plan_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "'
         AND fwdp.company_id='" . $company_id . "'
         AND fwdp.is_active = 0
         GROUP BY fwdp.user_id, fwdp.plan_date";
@@ -472,8 +499,8 @@ class CSRClass
         AND (
             ('" . $from_date . "' BETWEEN work_from_date AND work_to_date) OR
             ('" . $to_date . "' BETWEEN work_from_date AND work_to_date) OR
-            (work_from_date BETWEEN '" . $from_date . "' AND '" . $to_date . "') OR
-            (work_to_date BETWEEN '" . $from_date . "' AND '" . $to_date . "')
+            (work_from_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "') OR
+            (work_to_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "')
         )";
         $result2 = $callConfig->getAllRows($query2);
         if ($result2 && count((array) $result2) > 0) {
@@ -493,10 +520,10 @@ class CSRClass
         global $callConfig;
         $return = array();
         if ($table == 'field_work_daily_plans') {
-            $query = "SELECT *  FROM field_work_daily_plans where user_id='" . $userid . "' AND plan_date= '" . $date . "' AND company_id='" . $get['company_id'] . "' AND is_active =0 ";
+            $query = "SELECT *  FROM field_work_daily_plans where user_id='" . $userid . "' AND plan_date= '" . $date . CsrConstants::AND_COMPANY_ID_APOS . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_SPACE;
             $result = $callConfig->getAllRows($query);
         } else {
-            $query = "SELECT * FROM user_field_work_details WHERE user_id='" . $userid . "' AND  '" . $date . "' BETWEEN work_from_date AND work_to_date AND company_id='" . $get['company_id'] . "' AND is_active =0 ";
+            $query = "SELECT * FROM user_field_work_details WHERE user_id='" . $userid . "' AND  '" . $date . "' BETWEEN work_from_date AND work_to_date AND company_id='" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_SPACE;
             $result = $callConfig->getRow($query);
         }
         if ($result) {
@@ -513,9 +540,9 @@ class CSRClass
         $updated_date = date('Y-m-d h:i:s');
         $updated_by = $get['user_id'];
         if ($table == 'field_work_daily_plans') {
-            $query = "UPDATE " . $table . "  SET is_active = NULL , updated_date='" . $updated_date . "', updated_by='" . $updated_by . "'  WHERE user_id= '" . $rid . "' AND plan_date = '" . $date . "'";
+            $query = CsrConstants::UPDATE_PREFIX . $table . "  SET is_active = NULL , updated_date='" . $updated_date . CsrConstants::UPDATED_BY_APOS . $updated_by . "'  WHERE user_id= '" . $rid . "' AND plan_date = '" . $date . "'";
         } else {
-            $query = "UPDATE " . $table . "  SET is_active = NULL , updated_date='" . $updated_date . "', updated_by='" . $updated_by . "'  WHERE id = '" . $rid . "'";
+            $query = CsrConstants::UPDATE_PREFIX . $table . "  SET is_active = NULL , updated_date='" . $updated_date . CsrConstants::UPDATED_BY_APOS . $updated_by . "'  WHERE id = '" . $rid . "'";
         }
 
         return $callConfig->executeQuery($query);
@@ -529,11 +556,11 @@ class CSRClass
 
         $whr = "";
         if ($admin_type == '2' || $admin_type == '1') {
-            $whr = "reports_to ='" . $get['user_id'] . "' AND ";
+            $whr = "reports_to ='" . $get['user_id'] . CsrConstants::APOS_AND_SPACE;
         } elseif ($admin_type == '3') {
-            $whr = "id = '" . $get['user_id'] . "' AND ";
+            $whr = CsrConstants::ID_EQ_APOS . $get['user_id'] . CsrConstants::APOS_AND_SPACE;
         }
-        $application_users_details = "SELECT id, display_name, user_field_work_type FROM  application_users WHERE company_id='" . $get['company_id'] . "' AND  " . $whr . " is_active =0";
+        $application_users_details = CsrConstants::SEL_APP_USERS_FIELD_WORK . $get['company_id'] . "' AND  " . $whr . " is_active =0";
         $application_users_details = $callConfig->getAllRows($application_users_details);
         $application_users = array();
         $i = 1;
@@ -554,11 +581,11 @@ class CSRClass
 
         $whr = "";
         if ($admin_type == '2') {
-            $whr = "reports_to ='" . $get['user_id'] . "' AND ";
+            $whr = "reports_to ='" . $get['user_id'] . CsrConstants::APOS_AND_SPACE;
         } elseif ($admin_type == '3') {
-            $whr = "id = '" . $get['user_id'] . "' AND ";
+            $whr = CsrConstants::ID_EQ_APOS . $get['user_id'] . CsrConstants::APOS_AND_SPACE;
         }
-        $application_users_details = "SELECT id, display_name, user_field_work_type FROM  application_users WHERE company_id='" . $get['company_id'] . "' AND  " . $whr . " is_active =0";
+        $application_users_details = CsrConstants::SEL_APP_USERS_FIELD_WORK . $get['company_id'] . "' AND  " . $whr . " is_active =0";
         $application_users_details = $callConfig->getAllRows($application_users_details);
         $application_users = array();
         $i = 1;
@@ -600,7 +627,7 @@ class CSRClass
                     AND fwdp.is_active = '0'
                 WHERE
                     fwump.user_id = '" . $userid . "'
-                    AND fwump.map_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
+                    AND fwump.map_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "'
                     AND fwump.company_id = '" . $get['company_id'] . "'
                     AND fwump.is_active = '0'
                 GROUP BY
@@ -612,7 +639,7 @@ class CSRClass
                 COUNT(fwump.map_date) visited, '0' as extra, '0' as pending
                 FROM     application_users au
                 LEFT JOIN     field_work_user_map_points fwump ON  fwump.user_id = au.id
-                WHERE au.id = '" . $userid . "' AND  fwump.map_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
+                WHERE au.id = '" . $userid . "' AND  fwump.map_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "'
                     AND fwump.company_id = '" . $get['company_id'] . "'  AND fwump.is_active = '0'
                 GROUP BY  au.display_name,  au.user_email, au.user_field_work_type, fwump.map_date";
             }
@@ -635,7 +662,7 @@ class CSRClass
     JOIN (
         SELECT user_id, MAX(id) AS max_id
         FROM field_work_user_map_points
-        WHERE map_date = '" . $date . "' AND company_id='" . $get['company_id'] . "' AND is_active='0'
+        WHERE map_date = '" . $date . CsrConstants::AND_COMPANY_ID_APOS . $get['company_id'] . "' AND is_active='0'
         GROUP BY user_id, map_date
         ) t2
         ON t1.user_id = t2.user_id AND t1.id = t2.max_id
@@ -665,7 +692,7 @@ class CSRClass
         $return = array();
         $userid = $get['userid'];
         $date = $get['date'];
-        $query1 = "SELECT user_id,  plan_date, plan_longitude as lng, plan_latitude as lat , plan_location as name  From field_work_daily_plans Where user_id='" . $userid . "' AND plan_date='" . $date . "' AND company_id='" . $get['company_id'] . "' AND is_active =0 ";
+        $query1 = "SELECT user_id,  plan_date, plan_longitude as lng, plan_latitude as lat , plan_location as name  From field_work_daily_plans Where user_id='" . $userid . "' AND plan_date='" . $date . CsrConstants::AND_COMPANY_ID_APOS . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_SPACE;
         $query1 = $callConfig->getAllRows($query1);
         $assignedLocations = array();
         $i = 1;
@@ -678,7 +705,11 @@ class CSRClass
     }
 
     // adding new function
-    public function getCsrProjectTracking($get)
+}
+
+trait CsrSyncAndDataTrait
+{
+public function getCsrProjectTracking($get)
     {
         global $callConfig;
         $return = array();
@@ -700,7 +731,7 @@ class CSRClass
         $return = array();
         $orgininaor = $get['orgininaor'];
 
-        $query = "SELECT * FROM  csr_proposal_data where orgininaor = '" . $orgininaor . "' AND company_id = '" . $get['company_id'] . "' AND is_active=0 ORDER BY id DESC";
+        $query = "SELECT * FROM  csr_proposal_data where orgininaor = '" . $orgininaor . CsrConstants::AND_COMPANY_ID_EQ_APOS . $get['company_id'] . "' AND is_active=0 ORDER BY id DESC";
         $query_res = $callConfig->getAllRows($query);
         $csr_proposal_arr = array();
         foreach ($query_res as $row) {
@@ -761,7 +792,7 @@ class CSRClass
     {
         global $callConfig;
         $return = array();
-        $query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total, current_status, tracking_status FROM  csr_proposal_data where  company_id = '" . $get['company_id'] . "' AND is_active=0";
+        $query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total, current_status, tracking_status FROM  csr_proposal_data where  company_id = '" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_NO_SPACE;
         $query_res = $callConfig->getAllRows($query);
         $csr_proposal_arr = array();
         foreach ($query_res as $row) {
@@ -845,7 +876,7 @@ class CSRClass
         $to_date = $get['to_date'];
 
         $query1 = "SELECT  id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total, current_status, tracking_status FROM  csr_proposal_data
-        where project_start_date >= '" . $from_date . "'   AND project_start_date <= '" . $to_date . "' AND company_id = '" . $get['company_id'] . "' AND is_active=0";
+        where project_start_date >= '" . $from_date . "'   AND project_start_date <= '" . $to_date . CsrConstants::AND_COMPANY_ID_EQ_APOS . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_NO_SPACE;
         $query_res = $callConfig->getAllRows($query1);
         $csr_history = array();
         foreach ($query_res as $row) {
@@ -888,7 +919,7 @@ class CSRClass
 
         } else {
             $query1 = "SELECT * FROM  csr_yearly_budget
-            where company_id = '" . $get['company_id'] . "' AND is_active=0";
+            where company_id = '" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_NO_SPACE;
             $query_res = $callConfig->getAllRows($query1);
             $csr_yearly_budget = array();
             if (!empty($query_res)) {
@@ -1180,8 +1211,8 @@ class CSRClass
     public function updateCSRTableData($get)
     {
         global $callConfig;
-        $updated_date = date('Y-m-d H:i:s');
-        $query = "UPDATE " . $get['table_name'] . "  SET current_status = 199 , updated_date='" . $updated_date . "', updated_by='" . $get['user_id'] . "'  WHERE id = '" . $get['transaction_id'] . "'";
+        $updated_date = date(CsrConstants::DATE_FORMAT_YMD_HIS);
+        $query = CsrConstants::UPDATE_PREFIX . $get['table_name'] . "  SET current_status = 199 , updated_date='" . $updated_date . CsrConstants::UPDATED_BY_APOS . $get['user_id'] . "'  WHERE id = '" . $get['transaction_id'] . "'";
         return $callConfig->executeQuery($query);
 
     }
@@ -1190,7 +1221,7 @@ class CSRClass
     {
         global $callConfig;
         $return = array();
-        $query = "SELECT * FROM  application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active=0";
+        $query = "SELECT * FROM  application_users WHERE company_id = '" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_NO_SPACE;
         $query_res = $callConfig->getAllRows($query);
         $application_users_arr = array();
         foreach ($query_res as $row) {
@@ -1217,7 +1248,7 @@ class CSRClass
         $return = array();
         $data = json_decode($post['data'], 1);
 
-        $query = "SELECT id FROM  application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active=0";
+        $query = "SELECT id FROM  application_users WHERE company_id = '" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_NO_SPACE;
         $query_res = $callConfig->getAllRows($query);
         $application_users_arr = array();
         foreach ($query_res as $row) {
@@ -1499,10 +1530,10 @@ class CSRClass
             'from_db' => $get['data_name'],
             'to_db' => $get['target_db'],
             'table_names' => $post['table_names'],
-            'last_sync_time' => date("Y-m-d H:i:s"),
+            'last_sync_time' => date(CsrConstants::DATE_FORMAT_YMD_HIS),
             'is_active' => 0,
             'current_status' => 0,
-            'created_date' => date("Y-m-d H:i:s"),
+            'created_date' => date(CsrConstants::DATE_FORMAT_YMD_HIS),
             'created_by' => $get['user_id'] ?? 1
         );
 
@@ -1546,7 +1577,7 @@ class CSRClass
             $rows = $callConfig->getRow($query);
             $return['csr_data'] = $rows;
         }
-        $query1 = "SELECT id, type_of_work FROM csr_type_of_works WHERE company_id = '" . $get['company_id'] . "' AND  is_active=0";
+        $query1 = "SELECT id, type_of_work FROM csr_type_of_works WHERE company_id = '" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_DOUBLE_SPACE;
         $rows1 = $callConfig->getAllRows($query1);
         $csr_type_of_works = array();
         if (!empty($rows1)) {
@@ -1556,7 +1587,7 @@ class CSRClass
         }
         $return['csr_type_of_works'] = $csr_type_of_works;
 
-        $query2 = "SELECT id, csr_area FROM csr_areas WHERE company_id = '" . $get['company_id'] . "' AND  is_active=0";
+        $query2 = "SELECT id, csr_area FROM csr_areas WHERE company_id = '" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_DOUBLE_SPACE;
         $rows2 = $callConfig->getAllRows($query2);
         $csr_areas = array();
         if (!empty($rows2)) {
@@ -1588,7 +1619,7 @@ class CSRClass
         }
         $return['locations'] = $locations;
 
-        $query = "SELECT * FROM csr_entity_name WHERE company_id = '" . $get['company_id'] . "' AND  is_active=0";
+        $query = "SELECT * FROM csr_entity_name WHERE company_id = '" . $get['company_id'] . CsrConstants::AND_IS_ACTIVE_0_DOUBLE_SPACE;
         $data = $callConfig->getAllRows($query);
         $return['entity_names'] = $data;
 
@@ -1656,7 +1687,7 @@ class CSRClass
                     WHEN COALESCE(ts.total_rows, 0) = 0 THEN 'Not Started'
                     WHEN COALESCE(ts.null_rows, 0) = ts.total_rows THEN 'Not Started'
                     WHEN  ts.completed_rows = ts.total_rows OR p.tracking_status = 1 THEN 'Completed'
-                    ELSE 'In Progress'
+                    ELSE CsrConstants::IN_PROGRESS
                 END AS project_status
             FROM csr_proposal_data p
             LEFT JOIN (SELECT proposal_id,COUNT(*) AS total_rows, SUM(CASE WHEN status IS NULL THEN 1 ELSE 0 END) AS null_rows, SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed_rows FROM csr_project_tracking WHERE is_active = 0 GROUP BY proposal_id) ts ON ts.proposal_id = p.id
@@ -1673,7 +1704,11 @@ class CSRClass
 
         return $return;
     }
-    public function getCsrProjectSummaryReport($get)
+}
+
+trait CsrReportsTrait
+{
+public function getCsrProjectSummaryReport($get)
     {
         global $callConfig;
         $return = array();
@@ -1768,7 +1803,7 @@ class CSRClass
             WHEN IFNULL(tr.total_tracking, 0) = 0 THEN 'Not Started'
             WHEN IFNULL(tr.null_status_count, 0) = tr.total_tracking THEN 'Not Started'
             WHEN p.tracking_status = 1 THEN 'Completed'
-            ELSE 'In Progress'
+            ELSE CsrConstants::IN_PROGRESS
             END AS project_status
 
             FROM csr_proposal_data p
@@ -1919,7 +1954,7 @@ class CSRClass
         // 🧾 Fetch yearly budget data
         $budgetQuery = "SELECT financial_year, net_profit_before_tax_mtipl
             FROM csr_complaince
-            WHERE company_id = '" . $company_id . "' AND is_active = 0";
+            WHERE company_id = '" . $company_id . CsrConstants::AND_IS_ACTIVE_0_STANDARD;
 
         $budgetData = $callConfig->getAllRows($budgetQuery);
 
@@ -2268,8 +2303,8 @@ class CSRClass
 
             $data['current_status'] = '0';
             $data['is_active'] = '0';
-            $data['status_date'] = date('Y-m-d H:i:s');
-            $data['created_date'] = date('Y-m-d H:i:s');
+            $data['status_date'] = date(CsrConstants::DATE_FORMAT_YMD_HIS);
+            $data['created_date'] = date(CsrConstants::DATE_FORMAT_YMD_HIS);
             $data['company_id'] = $get['company_id'] ?? '';
             $data['created_by'] = $get['user_id'] ?? '';
             $data['originator'] = $get['user_id'] ?? '';
@@ -2372,8 +2407,8 @@ class CSRClass
 
             $data['current_status'] = '0';
             $data['is_active'] = '0';
-            $data['status_date'] = date('Y-m-d H:i:s');
-            $data['created_date'] = date('Y-m-d H:i:s');
+            $data['status_date'] = date(CsrConstants::DATE_FORMAT_YMD_HIS);
+            $data['created_date'] = date(CsrConstants::DATE_FORMAT_YMD_HIS);
             $data['company_id'] = $company_id;
             $data['created_by'] = $created_by;
             $data['originator'] = $originator;
@@ -2416,13 +2451,13 @@ class CSRClass
         // Set to false when role-based filtering is needed again.
         $force_admin_scope = true;
         if ($force_admin_scope) {
-            $project_id_subquery = "SELECT id FROM csr_proposal_data WHERE company_id = '" . $company_id . "' AND is_active = 0";
+            $project_id_subquery = "SELECT id FROM csr_proposal_data WHERE company_id = '" . $company_id . CsrConstants::AND_IS_ACTIVE_0_STANDARD;
             return array(
                 'is_admin' => true,
                 'base_scope' => '',
                 'proposal_where' => '',
                 'project_id_subquery' => $project_id_subquery,
-                'po_project_scope' => " AND project_id IN (" . $project_id_subquery . ")"
+                'po_project_scope' => CsrConstants::AND_PROJECT_ID_IN . $project_id_subquery . ")"
             );
         }
 
@@ -2445,11 +2480,11 @@ class CSRClass
                     AND tal.company_id = '" . $company_id . "'
                 )";
             } else {
-                $base_scope = " AND 1=0";
+                $base_scope = CsrConstants::AND_ONE_EQ_ZERO;
             }
         }
 
-        $project_id_subquery = "SELECT id FROM csr_proposal_data WHERE company_id = '" . $company_id . "' AND is_active = 0" . $base_scope;
+        $project_id_subquery = "SELECT id FROM csr_proposal_data WHERE company_id = '" . $company_id . CsrConstants::AND_IS_ACTIVE_0_STANDARD . $base_scope;
         $proposal_where = '';
         if ($base_scope != '') {
             $proposal_where = str_replace('orgininaor', 'p.orgininaor', str_replace(' AND id IN', ' AND p.id IN', $base_scope));
@@ -2460,11 +2495,14 @@ class CSRClass
             'base_scope' => $base_scope,
             'proposal_where' => $proposal_where,
             'project_id_subquery' => $project_id_subquery,
-            'po_project_scope' => " AND project_id IN (" . $project_id_subquery . ")"
+            'po_project_scope' => CsrConstants::AND_PROJECT_ID_IN . $project_id_subquery . ")"
         );
     }
+}
 
-    public function getCsrFirstDashboardData($get)
+trait CsrDashboardTrait
+{
+public function getCsrFirstDashboardData($get)
     {
         global $callConfig;
 
@@ -2635,7 +2673,7 @@ class CSRClass
             $chart_yearly_rows = array_slice($yearly_rows, max($selected_year_index - 4, 0), 5);
         }
 
-        $proposal_fy_where = $selected_fy != '' ? " AND p.financial_year = '" . $selected_fy . "'" : "";
+        $proposal_fy_where = $selected_fy != '' ? CsrConstants::AND_P_FIN_YEAR . $selected_fy . "'" : "";
         $po_fy_where = $selected_fy != '' ? " AND (CASE WHEN po.financial_year REGEXP '^[0-9]{4}-[0-9]{4}$' THEN CONCAT(LEFT(po.financial_year, 4), '-', RIGHT(po.financial_year, 2)) ELSE po.financial_year END) = '" . $selected_fy . "'" : "";
         $inv_fy_where = $selected_fy != '' ? " AND (CASE WHEN inv.financial_year REGEXP '^[0-9]{4}-[0-9]{4}$' THEN CONCAT(LEFT(inv.financial_year, 4), '-', RIGHT(inv.financial_year, 2)) ELSE inv.financial_year END) = '" . $selected_fy . "'" : "";
 
@@ -2801,10 +2839,10 @@ class CSRClass
             $previous_fy = $fy_rows[$selected_fy_index - 1]->genc_detail_code;
         }
 
-        $proposal_fy_where = $selected_fy != '' ? " AND p.financial_year = '" . $selected_fy . "'" : "";
-        $previous_proposal_fy_where = $previous_fy != '' ? " AND p.financial_year = '" . $previous_fy . "'" : " AND 1=0";
+        $proposal_fy_where = $selected_fy != '' ? CsrConstants::AND_P_FIN_YEAR . $selected_fy . "'" : "";
+        $previous_proposal_fy_where = $previous_fy != '' ? CsrConstants::AND_P_FIN_YEAR . $previous_fy . "'" : CsrConstants::AND_ONE_EQ_ZERO;
         $selected_inv_fy_where = $selected_fy != '' ? " AND (CASE WHEN inv.financial_year REGEXP '^[0-9]{4}-[0-9]{4}$' THEN CONCAT(LEFT(inv.financial_year, 4), '-', RIGHT(inv.financial_year, 2)) ELSE inv.financial_year END) = '" . $selected_fy . "'" : "";
-        $previous_inv_fy_where = $previous_fy != '' ? " AND (CASE WHEN inv.financial_year REGEXP '^[0-9]{4}-[0-9]{4}$' THEN CONCAT(LEFT(inv.financial_year, 4), '-', RIGHT(inv.financial_year, 2)) ELSE inv.financial_year END) = '" . $previous_fy . "'" : " AND 1=0";
+        $previous_inv_fy_where = $previous_fy != '' ? " AND (CASE WHEN inv.financial_year REGEXP '^[0-9]{4}-[0-9]{4}$' THEN CONCAT(LEFT(inv.financial_year, 4), '-', RIGHT(inv.financial_year, 2)) ELSE inv.financial_year END) = '" . $previous_fy . "'" : CsrConstants::AND_ONE_EQ_ZERO;
 
         $project_query = "SELECT
                 p.id,
@@ -2908,7 +2946,7 @@ class CSRClass
             }
             if ($current_status > 100 && $current_status < $approved_status) {
                 $project_row->progress = 0;
-                $project_row->status_label = 'In Progress';
+                $project_row->status_label = CsrConstants::IN_PROGRESS;
                 $project_row->status_class = 'btn-primary';
                 $project_row->progress_class = 'bg-primary';
                 $project_row->has_tracking = 0;
@@ -3202,7 +3240,7 @@ class CSRClass
         $scope = $this->getCsrDashboardProposalScope($get);
         $proposal_scope = $scope['proposal_where'];
         $po_project_scope = $scope['po_project_scope'];
-        $proposal_fy_where = $selected_fy != '' ? " AND p.financial_year = '" . $selected_fy . "'" : "";
+        $proposal_fy_where = $selected_fy != '' ? CsrConstants::AND_P_FIN_YEAR . $selected_fy . "'" : "";
         $po_fy_where = $selected_fy != '' ? " AND (CASE WHEN po.financial_year REGEXP '^[0-9]{4}-[0-9]{4}$' THEN CONCAT(LEFT(po.financial_year, 4), '-', RIGHT(po.financial_year, 2)) ELSE po.financial_year END) = '" . $selected_fy . "'" : "";
         $inv_fy_where = $selected_fy != '' ? " AND (CASE WHEN inv.financial_year REGEXP '^[0-9]{4}-[0-9]{4}$' THEN CONCAT(LEFT(inv.financial_year, 4), '-', RIGHT(inv.financial_year, 2)) ELSE inv.financial_year END) = '" . $selected_fy . "'" : "";
 
@@ -3218,7 +3256,7 @@ class CSRClass
         } elseif ($type == 'pending_obligation') {
             $where = " AND p.current_status = " . ST_APPROVED . " AND (IFNULL(po.approved_amount, 0) - IFNULL(inv.spent_amount, 0)) > 0";
         } else {
-            $where = " AND 1=0";
+            $where = CsrConstants::AND_ONE_EQ_ZERO;
         }
 
         $query = "SELECT
@@ -3313,8 +3351,8 @@ class CSRClass
             'access_type' => $post['access_type'] ?? 'internal',
             'is_active' => $post['is_active'] ?? '0',
             'current_status' => $post['current_status'] ?? '0',
-            'status_date' => $post['status_date'] ?? date('Y-m-d H:i:s'),
-            'created_date' => $post['created_date'] ?? date('Y-m-d H:i:s'),
+            'status_date' => $post['status_date'] ?? date(CsrConstants::DATE_FORMAT_YMD_HIS),
+            'created_date' => $post['created_date'] ?? date(CsrConstants::DATE_FORMAT_YMD_HIS),
             'created_by' => $created_by != '' ? $created_by : null
         );
 
@@ -3357,7 +3395,7 @@ class CSRClass
         }
 
         $updateData['updated_by'] = $get['user_id'];
-        $updateData['updated_date'] = date('Y-m-d H:i:s');
+        $updateData['updated_date'] = date(CsrConstants::DATE_FORMAT_YMD_HIS);
         return $callConfig->updateRecord('csr_project_documents', $updateData, 'id', $document_id);
     }
     public function getCsrProjectTrackingManage($get)
@@ -3387,7 +3425,7 @@ class CSRClass
             AND is_active = 0";
         $proposal = $callConfig->getRow($proposalQuery);
         if (empty($proposal)) {
-            $return['message'] = 'Proposal not found';
+            $return['message'] = CsrConstants::PROPOSAL_NOT_FOUND;
             return $return;
         }
 
@@ -3418,7 +3456,7 @@ class CSRClass
         $user_id = isset($get['user_id']) ? $get['user_id'] : ($post['user_id'] ?? '');
         $proposal_id = isset($post['proposal_id']) ? (int) $post['proposal_id'] : 0;
         $approved_status = defined('ST_APPROVED') ? (int) ST_APPROVED : 199;
-        $now = date('Y-m-d H:i:s');
+        $now = date(CsrConstants::DATE_FORMAT_YMD_HIS);
 
         if ($company_id <= 0 || $proposal_id <= 0) {
             return array('status' => 'error', 'message' => 'Invalid proposal details');
@@ -3430,7 +3468,7 @@ class CSRClass
             AND is_active = 0";
         $proposal = $callConfig->getRow($proposalQuery);
         if (empty($proposal)) {
-            return array('status' => 'error', 'message' => 'Proposal not found');
+            return array('status' => 'error', 'message' => CsrConstants::PROPOSAL_NOT_FOUND);
         }
 
         $tracking_ids = $post['tracking_id'] ?? array();
@@ -3539,7 +3577,7 @@ class CSRClass
             AND is_active = 0";
         $proposal = $callConfig->getRow($query);
         if (empty($proposal)) {
-            $return['message'] = 'Proposal not found';
+            $return['message'] = CsrConstants::PROPOSAL_NOT_FOUND;
             return $return;
         }
 
@@ -3561,7 +3599,7 @@ class CSRClass
         $proposal_id = isset($post['proposal_id']) ? (int) $post['proposal_id'] : 0;
         $project_start_date = trim((string) ($post['project_start_date'] ?? ''));
         $project_end_date = trim((string) ($post['project_end_date'] ?? ''));
-        $now = date('Y-m-d H:i:s');
+        $now = date(CsrConstants::DATE_FORMAT_YMD_HIS);
 
         if ($company_id <= 0 || $proposal_id <= 0) {
             return array('status' => 'error', 'message' => 'Invalid proposal details');
@@ -3573,7 +3611,7 @@ class CSRClass
             AND is_active = 0";
         $proposal = $callConfig->getRow($checkQuery);
         if (empty($proposal)) {
-            return array('status' => 'error', 'message' => 'Proposal not found');
+            return array('status' => 'error', 'message' => CsrConstants::PROPOSAL_NOT_FOUND);
         }
 
         $updateData = array(
@@ -3620,8 +3658,8 @@ class CSRClass
         $last_month_start = date('Y-m-01', strtotime('first day of last month'));
         $last_month_end = date('Y-m-t', strtotime('last day of last month'));
 
-        $active_this_month_q = "SELECT COUNT(DISTINCT user_id) AS cc_active FROM field_work_user_map_points WHERE company_id = " . $company_id . " AND map_date >= '" . $this_month_start . "' AND map_date <= '" . $this_month_end . "' AND is_active = 0" . $user_wh;
-        $active_last_month_q = "SELECT COUNT(DISTINCT user_id) AS cc_active FROM field_work_user_map_points WHERE company_id = " . $company_id . " AND map_date >= '" . $last_month_start . "' AND map_date <= '" . $last_month_end . "' AND is_active = 0" . $user_wh;
+        $active_this_month_q = CsrConstants::SEL_CC_ACTIVE . $company_id . " AND map_date >= '" . $this_month_start . CsrConstants::AND_MAP_DATE_LTE . $this_month_end . CsrConstants::AND_IS_ACTIVE_0_STANDARD . $user_wh;
+        $active_last_month_q = CsrConstants::SEL_CC_ACTIVE . $company_id . " AND map_date >= '" . $last_month_start . CsrConstants::AND_MAP_DATE_LTE . $last_month_end . CsrConstants::AND_IS_ACTIVE_0_STANDARD . $user_wh;
         $active_this_month = (int) ($callConfig->getRow($active_this_month_q)->cc_active ?? 0);
         $active_last_month = (int) ($callConfig->getRow($active_last_month_q)->cc_active ?? 0);
         if ($active_last_month > 0) {
@@ -3633,7 +3671,7 @@ class CSRClass
         $planned_today_q = "SELECT COUNT(id) AS cc_plan FROM field_work_daily_plans WHERE company_id = " . $company_id . " AND plan_date = '" . $today . "' AND current_status NOT IN (25,28) AND is_active = 0" . $user_wh;
         $return['planned_visits_today'] = (int) ($callConfig->getRow($planned_today_q)->cc_plan ?? 0);
 
-        $map_today_q = "SELECT COUNT(id) AS cc_map, SUM(IF(field_work_daily_plan_id != '' AND field_work_daily_plan_id IS NOT NULL, 1, 0)) AS cc_linked FROM field_work_user_map_points WHERE company_id = " . $company_id . " AND map_date = '" . $today . "' AND is_active = 0" . $user_wh;
+        $map_today_q = "SELECT COUNT(id) AS cc_map, SUM(IF(field_work_daily_plan_id != '' AND field_work_daily_plan_id IS NOT NULL, 1, 0)) AS cc_linked FROM field_work_user_map_points WHERE company_id = " . $company_id . CsrConstants::AND_MAP_DATE_EQ . $today . CsrConstants::AND_IS_ACTIVE_0_STANDARD . $user_wh;
         $map_today_row = $callConfig->getRow($map_today_q);
         $return['completed_today'] = (int) ($map_today_row->cc_linked ?? 0);
         $return['extra_visits_today'] = (int) ($map_today_row->cc_map ?? 0) - $return['completed_today'];
@@ -3655,7 +3693,7 @@ class CSRClass
         }
 
         $yesterday = date('Y-m-d', strtotime('-1 day'));
-        $extra_yesterday_q = "SELECT COUNT(id) AS cc_map, SUM(IF(field_work_daily_plan_id != '' AND field_work_daily_plan_id IS NOT NULL, 1, 0)) AS cc_linked FROM field_work_user_map_points WHERE company_id = " . $company_id . " AND map_date = '" . $yesterday . "' AND is_active = 0" . $user_wh;
+        $extra_yesterday_q = "SELECT COUNT(id) AS cc_map, SUM(IF(field_work_daily_plan_id != '' AND field_work_daily_plan_id IS NOT NULL, 1, 0)) AS cc_linked FROM field_work_user_map_points WHERE company_id = " . $company_id . CsrConstants::AND_MAP_DATE_EQ . $yesterday . CsrConstants::AND_IS_ACTIVE_0_STANDARD . $user_wh;
         $extra_yesterday_row = $callConfig->getRow($extra_yesterday_q);
         $extra_yesterday = (int) ($extra_yesterday_row->cc_map ?? 0) - (int) ($extra_yesterday_row->cc_linked ?? 0);
         if ($extra_yesterday < 0) {
@@ -3663,7 +3701,7 @@ class CSRClass
         }
         $return['extra_visits_change_today'] = $return['extra_visits_today'] - $extra_yesterday;
 
-        $active_emp_q = "SELECT COUNT(DISTINCT user_id) AS cc_active FROM field_work_user_map_points WHERE company_id = " . $company_id . " AND map_date = '" . $today . "' AND is_active = 0" . $user_wh;
+        $active_emp_q = CsrConstants::SEL_CC_ACTIVE . $company_id . CsrConstants::AND_MAP_DATE_EQ . $today . CsrConstants::AND_IS_ACTIVE_0_STANDARD . $user_wh;
         $return['active_employees_today'] = (int) ($callConfig->getRow($active_emp_q)->cc_active ?? 0);
         $return['pending_today'] = $return['remaining_today'];
 
@@ -3673,7 +3711,7 @@ class CSRClass
             FROM field_work_daily_plans fwdp
             LEFT JOIN application_users au ON au.id = fwdp.user_id AND au.is_active = 0
             LEFT JOIN field_work_user_map_points fwump ON fwump.field_work_daily_plan_id = fwdp.id AND fwump.map_date = fwdp.plan_date AND fwump.is_active = 0
-            WHERE fwdp.company_id = " . $company_id . " AND fwdp.plan_date = '" . $today . "' AND fwdp.is_active = 0" . $user_wh_alias . "
+            WHERE fwdp.company_id = " . $company_id . " AND fwdp.plan_date = '" . $today . CsrConstants::AND_FWDP_ACTIVE_0 . $user_wh_alias . "
             ORDER BY fwdp.plan_time ASC";
         $return['planned_visits'] = $callConfig->getAllRows($planned_visits_q);
 
@@ -3702,7 +3740,7 @@ class CSRClass
         $week_end = date('Y-m-d', strtotime('sunday this week'));
         $weekly_q = "SELECT DATE(map_date) AS visit_date, COUNT(id) AS visit_count
             FROM field_work_user_map_points
-            WHERE company_id = " . $company_id . " AND map_date >= '" . $week_start . "' AND map_date <= '" . $week_end . "' AND is_active = 0" . $user_wh . "
+            WHERE company_id = " . $company_id . " AND map_date >= '" . $week_start . CsrConstants::AND_MAP_DATE_LTE . $week_end . CsrConstants::AND_IS_ACTIVE_0_STANDARD . $user_wh . "
             GROUP BY DATE(map_date)";
         $weekly_rows = $callConfig->getAllRows($weekly_q);
         $weekly_map = array();
@@ -3739,7 +3777,7 @@ class CSRClass
             SUM(IF(fwump.id IS NOT NULL, 1, 0)) AS completed_planned
             FROM field_work_daily_plans fwdp
             LEFT JOIN field_work_user_map_points fwump ON fwump.field_work_daily_plan_id = fwdp.id AND fwump.map_date = fwdp.plan_date AND fwump.is_active = 0
-            WHERE fwdp.company_id = " . $company_id . " AND fwdp.plan_date >= '" . $this_month_start . "' AND fwdp.plan_date <= '" . $this_month_end . "' AND fwdp.is_active = 0" . $user_wh_alias;
+            WHERE fwdp.company_id = " . $company_id . " AND fwdp.plan_date >= '" . $this_month_start . "' AND fwdp.plan_date <= '" . $this_month_end . CsrConstants::AND_FWDP_ACTIVE_0 . $user_wh_alias;
         $success_this_row = $callConfig->getRow($success_this_q);
         $total_planned_month = (int) ($success_this_row->total_planned ?? 0);
         $completed_planned_month = (int) ($success_this_row->completed_planned ?? 0);
@@ -3753,7 +3791,7 @@ class CSRClass
             SUM(IF(fwump.id IS NOT NULL, 1, 0)) AS completed_planned
             FROM field_work_daily_plans fwdp
             LEFT JOIN field_work_user_map_points fwump ON fwump.field_work_daily_plan_id = fwdp.id AND fwump.map_date = fwdp.plan_date AND fwump.is_active = 0
-            WHERE fwdp.company_id = " . $company_id . " AND fwdp.plan_date >= '" . $last_month_start . "' AND fwdp.plan_date <= '" . $last_month_end . "' AND fwdp.is_active = 0" . $user_wh_alias;
+            WHERE fwdp.company_id = " . $company_id . " AND fwdp.plan_date >= '" . $last_month_start . "' AND fwdp.plan_date <= '" . $last_month_end . CsrConstants::AND_FWDP_ACTIVE_0 . $user_wh_alias;
         $success_last_row = $callConfig->getRow($success_last_q);
         $total_planned_last = (int) ($success_last_row->total_planned ?? 0);
         $completed_planned_last = (int) ($success_last_row->completed_planned ?? 0);
@@ -3780,7 +3818,7 @@ class CSRClass
 
         $spark_q = "SELECT DATE(map_date) AS visit_day, COUNT(id) AS visit_count
             FROM field_work_user_map_points
-            WHERE company_id = " . $company_id . " AND map_date >= '" . date('Y-m-d', strtotime('-6 day')) . "' AND map_date <= '" . $today . "' AND is_active = 0" . $user_wh . "
+            WHERE company_id = " . $company_id . " AND map_date >= '" . date('Y-m-d', strtotime('-6 day')) . CsrConstants::AND_MAP_DATE_LTE . $today . CsrConstants::AND_IS_ACTIVE_0_STANDARD . $user_wh . "
             GROUP BY DATE(map_date)
             ORDER BY visit_day ASC";
         $spark_rows = $callConfig->getAllRows($spark_q);
@@ -3798,7 +3836,7 @@ class CSRClass
 
         $extra_spark_q = "SELECT DATE(map_date) AS visit_day, COUNT(id) AS visit_count
             FROM field_work_user_map_points
-            WHERE company_id = " . $company_id . " AND map_date >= '" . date('Y-m-d', strtotime('-6 day')) . "' AND map_date <= '" . $today . "'
+            WHERE company_id = " . $company_id . " AND map_date >= '" . date('Y-m-d', strtotime('-6 day')) . CsrConstants::AND_MAP_DATE_LTE . $today . "'
             AND (field_work_daily_plan_id = '' OR field_work_daily_plan_id IS NULL) AND is_active = 0" . $user_wh . "
             GROUP BY DATE(map_date)
             ORDER BY visit_day ASC";
@@ -4054,7 +4092,7 @@ class CSRClass
         $is_admin_scope = $scope['is_admin'];
 
         // CSR working areas
-        $query_areas = "SELECT id, csr_area FROM csr_areas WHERE company_id = '" . $company_id . "' AND  is_active=0";
+        $query_areas = "SELECT id, csr_area FROM csr_areas WHERE company_id = '" . $company_id . CsrConstants::AND_IS_ACTIVE_0_DOUBLE_SPACE;
         $rows_areas = $callConfig->getAllRows($query_areas);
         $csr_areas = array();
         if (count((array) $rows_areas) > 0) {
@@ -4079,7 +4117,7 @@ class CSRClass
 
 
         // Entities for filter
-        $query_entities = "SELECT * FROM csr_entity_name WHERE company_id = '" . $company_id . "' AND  is_active=0";
+        $query_entities = "SELECT * FROM csr_entity_name WHERE company_id = '" . $company_id . CsrConstants::AND_IS_ACTIVE_0_DOUBLE_SPACE;
         $entity_names = $callConfig->getAllRows($query_entities);
         $return['entity_names'] = $entity_names;
 
@@ -4148,7 +4186,7 @@ class CSRClass
             WHERE p.company_id = '" . $company_id . "'
             AND p.is_active = 0
             AND p.current_status = " . ST_APPROVED . $csr_type_where . $proposal_scope . $filter_where;
-        $invoice_project_scope = " AND project_id IN (" . $filtered_project_ids . ")";
+        $invoice_project_scope = CsrConstants::AND_PROJECT_ID_IN . $filtered_project_ids . ")";
 
         $budgets = array();
         if ($is_admin_scope) {
@@ -4242,7 +4280,7 @@ class CSRClass
                     WHEN IFNULL(tr.total_tracking, 0) = 0 THEN 'Not Started'
                     WHEN IFNULL(tr.null_status_count, 0) = tr.total_tracking THEN 'Not Started'
                     WHEN p.tracking_status = 1 THEN 'Completed'
-                    ELSE 'In Progress'
+                    ELSE CsrConstants::IN_PROGRESS
                 END AS project_status
             FROM csr_proposal_data p
             LEFT JOIN csr_areas cas ON cas.id = p.working_area AND cas.company_id = p.company_id AND cas.is_active = 0
@@ -4336,7 +4374,7 @@ class CSRClass
                 }
 
                 $status = $p_row->project_status;
-                if ($status == 'In Progress') {
+                if ($status == CsrConstants::IN_PROGRESS) {
                     $status = 'In-Process';
                 }
 
@@ -4405,7 +4443,7 @@ class CSRClass
                 }
                 $location_agg[$loc_key]['amount'] += $project_total;
                 $st = $p_row->project_status;
-                if ($st == 'In Progress') {
+                if ($st == CsrConstants::IN_PROGRESS) {
                     $st = 'In-Process';
                 }
                 $location_agg[$loc_key]['statuses'][] = $st;
@@ -4488,13 +4526,13 @@ class CSRClass
 
         $whr = "";
         if ($admin_type == '2') {
-            $whr = "reports_to = '" . $user_id . "' AND ";
+            $whr = "reports_to = '" . $user_id . CsrConstants::APOS_AND_SPACE;
         } elseif ($admin_type == '3') {
-            $whr = "id = '" . $user_id . "' AND ";
+            $whr = CsrConstants::ID_EQ_APOS . $user_id . CsrConstants::APOS_AND_SPACE;
         }
 
         $users_q = "SELECT id, display_name, user_field_work_type FROM application_users
-            WHERE company_id = '" . $company_id . "' AND " . $whr . " is_active = 0
+            WHERE company_id = '" . $company_id . CsrConstants::APOS_AND_SPACE . $whr . " is_active = 0
             AND user_field_work_type IN ('1','2')
             ORDER BY display_name ASC";
         $users_rows = $callConfig->getAllRows($users_q);
@@ -4576,7 +4614,7 @@ class CSRClass
                     AND fwump.is_active = 0
                 WHERE fwdp.company_id = '" . $company_id . "'
                     AND fwdp.user_id IN (" . $ids . ")
-                    AND fwdp.plan_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
+                    AND fwdp.plan_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "'
                     AND fwdp.is_active = 0
                     AND fwump.id IS NULL";
             $pending_rows = $callConfig->getAllRows($pending_q);
@@ -4602,7 +4640,7 @@ class CSRClass
                 LEFT JOIN field_work_daily_plans fwdp ON fwdp.id = fwump.field_work_daily_plan_id AND fwdp.is_active = 0
                 WHERE fwump.company_id = '" . $company_id . "'
                     AND fwump.user_id IN (" . $ids . ")
-                    AND fwump.map_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
+                    AND fwump.map_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "'
                     AND fwump.is_active = 0
                     AND fwump.field_work_daily_plan_id IS NOT NULL
                     AND fwump.field_work_daily_plan_id != ''
@@ -4629,7 +4667,7 @@ class CSRClass
                 LEFT JOIN application_users au ON au.id = fwump.user_id AND au.is_active = 0
                 WHERE fwump.company_id = '" . $company_id . "'
                     AND fwump.user_id IN (" . $ids . ")
-                    AND fwump.map_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
+                    AND fwump.map_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "'
                     AND fwump.is_active = 0
                     AND (fwump.field_work_daily_plan_id IS NULL
                         OR fwump.field_work_daily_plan_id = ''
@@ -4723,7 +4761,7 @@ class CSRClass
 
         $emp_whr = "";
         if ($admin_type == '2') {
-            $emp_whr = " AND emp.user_id IN (SELECT id FROM application_users WHERE reports_to = '" . $user_id . "' AND company_id = '" . $company_id . "' AND is_active = 0)";
+            $emp_whr = " AND emp.user_id IN (SELECT id FROM application_users WHERE reports_to = '" . $user_id . CsrConstants::AND_COMPANY_ID_EQ_APOS . $company_id . "' AND is_active = 0)";
         } elseif ($admin_type == '3') {
             $emp_whr = " AND emp.user_id = '" . $user_id . "'";
         }
@@ -4851,7 +4889,7 @@ class CSRClass
                 AND ee.is_active = 0
                 AND ee.emp_id IN (" . $emp_ids . ")
                 AND ee.current_status IN (" . $status_ids . ")
-                AND ee.expense_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
+                AND ee.expense_date BETWEEN '" . $from_date . CsrConstants::APOS_AND_APOS . $to_date . "'
                 " . $type_whr . "
             ORDER BY ee.expense_date DESC, ee.expense_code ASC, eed.id ASC";
         $data_rows = $callConfig->getAllRows($data_q);
@@ -4914,4 +4952,12 @@ class CSRClass
 
         return $return;
     }
+}
+
+class CSRClass
+{
+    use CsrFieldWorkTrait;
+    use CsrSyncAndDataTrait;
+    use CsrReportsTrait;
+    use CsrDashboardTrait;
 }
