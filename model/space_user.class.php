@@ -371,125 +371,144 @@ trait SpaceAllocationsTrait {
             }
             $return['equipment_allocations'] = $equipment_allocations;
         } elseif ($get['pagetype'] == 'IEQ') {
-            $condition = "";
-            if ($get['equipment_category_id'] != "") {
-                $condition .= " AND eq_cat.id = " . $get['equipment_category_id'];
-            }
-            if ($get['equipment_type_id'] != "") {
-                $condition .= " AND eq_type.id = " . $get['equipment_type_id'];
-            }
-            if ($get['equipment_id'] != "") {
-                $condition .= " AND eq.id = " . $get['equipment_id'];
-            }
-            if ($get['seating_equipment'] != "") {
-                $condition .= " AND eq_type.seating_equipment = '" . $get['seating_equipment'] . "'";
-            }
-            $equipmentsql = "SELECT eq.id, eq.equipment_type_id, eq.equipment_name, eq.employee_seating, eq.qr_code, eq.bar_code, eq.equipment_image, eq_cat.category_name, eq_type.equipment_types_name,eq_type.seating_equipment FROM equipments eq, equipment_categories eq_cat, equipment_types eq_type WHERE eq.company_id = '" . $get['company_id'] . "' AND eq.company_id = eq_cat.company_id AND eq.company_id = eq_type.company_id AND eq.equipment_type_id = eq_type.id AND eq_type.equipment_category_id = eq_cat.id AND eq.is_active = 0 AND eq.is_active = eq_cat.is_active AND eq.is_active = eq_type.is_active" . $condition;
-            $equipments = $callConfig->getAllRows($equipmentsql);
-            $return['equipmentsql'] = $equipmentsql;
-            $return['equipments_list'] = $equipments;
-
-            $equipment_allocationssql = "SELECT eq_al.id, eq_al.building_floor_space_id, eq_al.equipment_category_id, eq_al.equipment_type_id, eq_al.equipment_id, eq_al.emp_id, eq_al.top_size, eq_al.left_size, bfs.cabin_name, bfs.building_floor_id, bf.floor_name, bf.building_id FROM equipment_allocations eq_al, building_floor_spaces bfs, building_floors bf WHERE eq_al.company_id = '" . $get['company_id'] . "' AND eq_al.company_id = bfs.company_id AND eq_al.company_id = bf.company_id AND eq_al.building_floor_space_id = bfs.id AND bfs.building_floor_id = bf.id AND eq_al.is_active = 0 ";
-            $equipment_allocationsres = $callConfig->getAllRows($equipment_allocationssql);
-            $return['equipment_allocations'] = $equipment_allocationsres;
+            $this->getEquipmentAllocationsIeq($return, $get);
         } elseif ($get['pagetype'] == 'ASSETS') {
-            $assets_condition = "";
-            if ($get['equipment_category_id'] != "") {
-                $assets_condition .= " AND category_id = " . $get['equipment_category_id'];
-            }
-            if ($get['equipment_type_id'] != "") {
-                $assets_condition .= SpaceConstants::AND_ID_EQ_NO_QUOTE_START . $get['equipment_type_id'] . "'";
-            }
-
-            $assetssql = SpaceConstants::SQL_SELECT_ASSETS . $get['company_id'] . "' " . $assets_condition . SpaceConstants::AND_IS_ACTIVE_0_NO_QUOTE;
-            $assetsres = $callConfig->getAllRows($assetssql);
-            $return['assets'] = $assetsres;
-
-            $asset_categorie = "SELECT id,category_description FROM  asset_categories WHERE  company_id = '" . $get['company_id'] . "' AND is_active =0";
-            $asset_categorieres = $callConfig->getAllRows($asset_categorie);
-            $asset_categories = array();
-            foreach ($asset_categorieres as $aas) {
-                $asset_categories[$aas->id] = $aas;
-            }
-            $return['asset_categories'] = $asset_categories;
-
-            $asset_allocationssql = "SELECT * FROM asset_allocations WHERE company_id = '" . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
-            $asset_allocationsres = $callConfig->getAllRows($asset_allocationssql);
-            $return['asset_allocations'] = $asset_allocationsres;
+            $this->getEquipmentAllocationsAssets($return, $get);
         }
     }
 
-    private function getEquipmentAllocationsEmployeeViews(&$return, $get) {
+    private function getEquipmentAllocationsIeq(&$return, $get) {
         global $callConfig;
-        if ($get['pagetype'] == 'IEM') {
-            $condition = "";
-            $empcondition = "";
-            if ($get['building_id'] != "") {
-                $condition .= " AND bf.building_id = " . $get['building_id'];
-            }
-            if ($get['building_floor_id'] != "") {
-                $condition .= " AND bf.id = " . $get['building_floor_id'];
-            }
-            if ($get['equipment_id'] != "") {
-                $condition .= " AND eq_al.equipment_id = " . $get['equipment_id'];
-            }
-            if ($get['emp_id'] != "") {
-                $condition .= " AND eq_al.emp_id = " . $get['emp_id'];
-                $empcondition .= SpaceConstants::AND_ID_EQ_NUM . $get['emp_id'];
-            }
-
-            $employeessql = SpaceConstants::SQL_SELECT_EMPLOYEES . $get['company_id'] . "' " . $empcondition . " AND id NOT IN(SELECT emp_id FROM equipment_allocations WHERE company_id = '" . $get['company_id'] . "'  AND emp_id IS NOT NULL AND is_active = 0)" . SpaceConstants::AND_IS_ACTIVE_0;
-            $employeesres = $callConfig->getAllRows($employeessql);
-            $return['employeessql'] = $employeessql;
-            $return['employees_list'] = $employeesres;
-
-            $equipment_allocationssql = "SELECT eq_al.id, eq_al.building_floor_space_id, eq_al.equipment_category_id, eq_al.equipment_type_id, eq_al.equipment_id, eq_al.emp_id, eq_al.top_size, eq_al.left_size, bfs.cabin_name, bfs.building_floor_id, bf.floor_name, bf.building_id, emp.id as empp_id, emp.display_name, emp.emp_code, emp.email_id, emp.image FROM equipment_allocations eq_al, building_floor_spaces bfs, building_floors bf, employees emp WHERE eq_al.company_id = '" . $get['company_id'] . "' AND eq_al.company_id = bfs.company_id AND eq_al.company_id = bf.company_id AND eq_al.company_id = emp.company_id AND eq_al.building_floor_space_id = bfs.id AND bfs.building_floor_id = bf.id AND eq_al.emp_id = emp.id  AND eq_al.is_active = emp.is_active  AND eq_al.is_active = 0 " . $condition;
-            $equipment_allocationsres = $callConfig->getAllRows($equipment_allocationssql);
-            $return['equipment_allocations'] = $equipment_allocationsres;
-
-            $buildingssql = SpaceConstants::SQL_SELECT_BUILDINGS_ALT . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
-            $buildingsres = $callConfig->getAllRows($buildingssql);
-            $return['buildings'] = $buildingsres;
-
-            $building_floorssql = SpaceConstants::SQL_SELECT_FLOORS_ALT . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
-            $building_floorsres = $callConfig->getAllRows($building_floorssql);
-            $return['building_floors'] = $building_floorsres;
-        } elseif ($get['pagetype'] == 'BSEM') {
-            $condition = "";
-            if ($get['building_id'] != "") {
-                $condition .= " AND bf.building_id = " . $get['building_id'];
-            }
-            if ($get['building_floor_id'] != "") {
-                $condition .= " AND bf.id = " . $get['building_floor_id'];
-            }
-            if ($get['location_id'] != "") {
-                $locsql = "SELECT id, location_name FROM locations WHERE company_id = '" . $get['company_id'] . SpaceConstants::AND_ID_EQ . $get['location_id'] . SpaceConstants::AND_IS_ACTIVE_0;
-                $locres = $callConfig->getRow($locsql);
-                $return['select_locations'] = $locres;
-            }
-
-            $emplocatincondition = "";
-            if ($get['admin_type'] != '1') {
-                $emplocatincondition = "AND (location_id = '" . $get['location_id'] . "' OR location_id IS NULL)";
-            }
-            $employeessql = "SELECT id, display_name, emp_code, email_id, image, reporting_manager_id, user_id FROM employees WHERE company_id = '" . $get['company_id'] . "' " . $emplocatincondition . SpaceConstants::AND_IS_ACTIVE_0;
-            $return['select_employees_sql'] = $employeessql;
-            $employeesres = $callConfig->getAllRows($employeessql);
-            $return['select_employees'] = $employeesres;
-
-            $building_floor_space_allocationssql = "SELECT bfs.id, bfs.building_floor_id, bfs.cabin_name, bfs.space_type_id, bfsa.building_floor_space_id, bfsa.emp_id, bfsa.reserve_pool_id, bf.floor_name, b.building_name FROM building_floor_spaces bfs, building_floor_space_allocations bfsa, building_floors bf, buildings b  WHERE bfs.company_id = '" . $get['company_id'] . "' AND bfs.company_id = bfsa.company_id AND bfs.id = bfsa.building_floor_space_id AND bfs.is_active = bfsa.is_active
-            AND bf.company_id = bfsa.company_id AND bf.id = bfs.building_floor_id AND bf.is_active = bfsa.is_active AND b.company_id = bfsa.company_id AND b.id = bf.building_id AND b.is_active = bfsa.is_active AND bfs.is_active = 0 AND bfsa.emp_id IS NOT NULL";
-            $building_floor_space_allocationsres = $callConfig->getAllRows($building_floor_space_allocationssql);
-            $return['building_floor_space_allocations'] = $building_floor_space_allocationsres;
-
-            $buildingssql = SpaceConstants::SQL_SELECT_BUILDINGS_ALT . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
-            $buildingsres = $callConfig->getAllRows($buildingssql);
-            $return['buildings'] = $buildingsres;
-
-            $building_floorssql = SpaceConstants::SQL_SELECT_FLOORS_ALT . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
-            $building_floorsres = $callConfig->getAllRows($building_floorssql);
-            $return['building_floors'] = $building_floorsres;
+        $condition = "";
+        if ($get['equipment_category_id'] != "") {
+            $condition .= " AND eq_cat.id = " . $get['equipment_category_id'];
         }
+        if ($get['equipment_type_id'] != "") {
+            $condition .= " AND eq_type.id = " . $get['equipment_type_id'];
+        }
+        if ($get['equipment_id'] != "") {
+            $condition .= " AND eq.id = " . $get['equipment_id'];
+        }
+        if ($get['seating_equipment'] != "") {
+            $condition .= " AND eq_type.seating_equipment = '" . $get['seating_equipment'] . "'";
+        }
+        $equipmentsql = "SELECT eq.id, eq.equipment_type_id, eq.equipment_name, eq.employee_seating, eq.qr_code, eq.bar_code, eq.equipment_image, eq_cat.category_name, eq_type.equipment_types_name,eq_type.seating_equipment FROM equipments eq, equipment_categories eq_cat, equipment_types eq_type WHERE eq.company_id = '" . $get['company_id'] . "' AND eq.company_id = eq_cat.company_id AND eq.company_id = eq_type.company_id AND eq.equipment_type_id = eq_type.id AND eq_type.equipment_category_id = eq_cat.id AND eq.is_active = 0 AND eq.is_active = eq_cat.is_active AND eq.is_active = eq_type.is_active" . $condition;
+        $equipments = $callConfig->getAllRows($equipmentsql);
+        $return['equipmentsql'] = $equipmentsql;
+        $return['equipments_list'] = $equipments;
+
+        $equipment_allocationssql = "SELECT eq_al.id, eq_al.building_floor_space_id, eq_al.equipment_category_id, eq_al.equipment_type_id, eq_al.equipment_id, eq_al.emp_id, eq_al.top_size, eq_al.left_size, bfs.cabin_name, bfs.building_floor_id, bf.floor_name, bf.building_id FROM equipment_allocations eq_al, building_floor_spaces bfs, building_floors bf WHERE eq_al.company_id = '" . $get['company_id'] . "' AND eq_al.company_id = bfs.company_id AND eq_al.company_id = bf.company_id AND eq_al.building_floor_space_id = bfs.id AND bfs.building_floor_id = bf.id AND eq_al.is_active = 0 ";
+        $equipment_allocationsres = $callConfig->getAllRows($equipment_allocationssql);
+        $return['equipment_allocations'] = $equipment_allocationsres;
+    }
+
+    private function getEquipmentAllocationsAssets(&$return, $get) {
+        global $callConfig;
+        $assets_condition = "";
+        if ($get['equipment_category_id'] != "") {
+            $assets_condition .= " AND category_id = " . $get['equipment_category_id'];
+        }
+        if ($get['equipment_type_id'] != "") {
+            $assets_condition .= SpaceConstants::AND_ID_EQ_NO_QUOTE_START . $get['equipment_type_id'] . "'";
+        }
+
+        $assetssql = SpaceConstants::SQL_SELECT_ASSETS . $get['company_id'] . "' " . $assets_condition . SpaceConstants::AND_IS_ACTIVE_0_NO_QUOTE;
+        $assetsres = $callConfig->getAllRows($assetssql);
+        $return['assets'] = $assetsres;
+
+        $asset_categorie = "SELECT id,category_description FROM  asset_categories WHERE  company_id = '" . $get['company_id'] . "' AND is_active =0";
+        $asset_categorieres = $callConfig->getAllRows($asset_categorie);
+        $asset_categories = array();
+        foreach ($asset_categorieres as $aas) {
+            $asset_categories[$aas->id] = $aas;
+        }
+        $return['asset_categories'] = $asset_categories;
+
+        $asset_allocationssql = "SELECT * FROM asset_allocations WHERE company_id = '" . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
+        $asset_allocationsres = $callConfig->getAllRows($asset_allocationssql);
+        $return['asset_allocations'] = $asset_allocationsres;
+    }
+
+    private function getEquipmentAllocationsEmployeeViews(&$return, $get) {
+        if ($get['pagetype'] == 'IEM') {
+            $this->getEquipmentAllocationsIem($return, $get);
+        } elseif ($get['pagetype'] == 'BSEM') {
+            $this->getEquipmentAllocationsBsem($return, $get);
+        }
+    }
+
+    private function getEquipmentAllocationsIem(&$return, $get) {
+        global $callConfig;
+        $condition = "";
+        $empcondition = "";
+        if ($get['building_id'] != "") {
+            $condition .= " AND bf.building_id = " . $get['building_id'];
+        }
+        if ($get['building_floor_id'] != "") {
+            $condition .= " AND bf.id = " . $get['building_floor_id'];
+        }
+        if ($get['equipment_id'] != "") {
+            $condition .= " AND eq_al.equipment_id = " . $get['equipment_id'];
+        }
+        if ($get['emp_id'] != "") {
+            $condition .= " AND eq_al.emp_id = " . $get['emp_id'];
+            $empcondition .= SpaceConstants::AND_ID_EQ_NUM . $get['emp_id'];
+        }
+
+        $employeessql = SpaceConstants::SQL_SELECT_EMPLOYEES . $get['company_id'] . "' " . $empcondition . " AND id NOT IN(SELECT emp_id FROM equipment_allocations WHERE company_id = '" . $get['company_id'] . "'  AND emp_id IS NOT NULL AND is_active = 0)" . SpaceConstants::AND_IS_ACTIVE_0;
+        $employeesres = $callConfig->getAllRows($employeessql);
+        $return['employeessql'] = $employeessql;
+        $return['employees_list'] = $employeesres;
+
+        $equipment_allocationssql = "SELECT eq_al.id, eq_al.building_floor_space_id, eq_al.equipment_category_id, eq_al.equipment_type_id, eq_al.equipment_id, eq_al.emp_id, eq_al.top_size, eq_al.left_size, bfs.cabin_name, bfs.building_floor_id, bf.floor_name, bf.building_id, emp.id as empp_id, emp.display_name, emp.emp_code, emp.email_id, emp.image FROM equipment_allocations eq_al, building_floor_spaces bfs, building_floors bf, employees emp WHERE eq_al.company_id = '" . $get['company_id'] . "' AND eq_al.company_id = bfs.company_id AND eq_al.company_id = bf.company_id AND eq_al.company_id = emp.company_id AND eq_al.building_floor_space_id = bfs.id AND bfs.building_floor_id = bf.id AND eq_al.emp_id = emp.id  AND eq_al.is_active = emp.is_active  AND eq_al.is_active = 0 " . $condition;
+        $equipment_allocationsres = $callConfig->getAllRows($equipment_allocationssql);
+        $return['equipment_allocations'] = $equipment_allocationsres;
+
+        $buildingssql = SpaceConstants::SQL_SELECT_BUILDINGS_ALT . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
+        $buildingsres = $callConfig->getAllRows($buildingssql);
+        $return['buildings'] = $buildingsres;
+
+        $building_floorssql = SpaceConstants::SQL_SELECT_FLOORS_ALT . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
+        $building_floorsres = $callConfig->getAllRows($building_floorssql);
+        $return['building_floors'] = $building_floorsres;
+    }
+
+    private function getEquipmentAllocationsBsem(&$return, $get) {
+        global $callConfig;
+        $condition = "";
+        if ($get['building_id'] != "") {
+            $condition .= " AND bf.building_id = " . $get['building_id'];
+        }
+        if ($get['building_floor_id'] != "") {
+            $condition .= " AND bf.id = " . $get['building_floor_id'];
+        }
+        if ($get['location_id'] != "") {
+            $locsql = "SELECT id, location_name FROM locations WHERE company_id = '" . $get['company_id'] . SpaceConstants::AND_ID_EQ . $get['location_id'] . SpaceConstants::AND_IS_ACTIVE_0;
+            $locres = $callConfig->getRow($locsql);
+            $return['select_locations'] = $locres;
+        }
+
+        $emplocatincondition = "";
+        if ($get['admin_type'] != '1') {
+            $emplocatincondition = "AND (location_id = '" . $get['location_id'] . "' OR location_id IS NULL)";
+        }
+        $employeessql = "SELECT id, display_name, emp_code, email_id, image, reporting_manager_id, user_id FROM employees WHERE company_id = '" . $get['company_id'] . "' " . $emplocatincondition . SpaceConstants::AND_IS_ACTIVE_0;
+        $return['select_employees_sql'] = $employeessql;
+        $employeesres = $callConfig->getAllRows($employeessql);
+        $return['select_employees'] = $employeesres;
+
+        $building_floor_space_allocationssql = "SELECT bfs.id, bfs.building_floor_id, bfs.cabin_name, bfs.space_type_id, bfsa.building_floor_space_id, bfsa.emp_id, bfsa.reserve_pool_id, bf.floor_name, b.building_name FROM building_floor_spaces bfs, building_floor_space_allocations bfsa, building_floors bf, buildings b  WHERE bfs.company_id = '" . $get['company_id'] . "' AND bfs.company_id = bfsa.company_id AND bfs.id = bfsa.building_floor_space_id AND bfs.is_active = bfsa.is_active
+        AND bf.company_id = bfsa.company_id AND bf.id = bfs.building_floor_id AND bf.is_active = bfsa.is_active AND b.company_id = bfsa.company_id AND b.id = bf.building_id AND b.is_active = bfsa.is_active AND bfs.is_active = 0 AND bfsa.emp_id IS NOT NULL";
+        $building_floor_space_allocationsres = $callConfig->getAllRows($building_floor_space_allocationssql);
+        $return['building_floor_space_allocations'] = $building_floor_space_allocationsres;
+
+        $buildingssql = SpaceConstants::SQL_SELECT_BUILDINGS_ALT . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
+        $buildingsres = $callConfig->getAllRows($buildingssql);
+        $return['buildings'] = $buildingsres;
+
+        $building_floorssql = SpaceConstants::SQL_SELECT_FLOORS_ALT . $get['company_id'] . SpaceConstants::AND_IS_ACTIVE_0;
+        $building_floorsres = $callConfig->getAllRows($building_floorssql);
+        $return['building_floors'] = $building_floorsres;
     }
 
     private function getEquipmentAllocationsPopupAndDetails(&$return, $get) {
@@ -710,16 +729,16 @@ trait SpaceEquipmentTrait {
         $return['emailarray'][] = $emailarray;
     }
 
-    private function sendSpaceAllocationApprovalNotification($get, $post, $building_res, $emp_data, $location_user_id, $location_user_email_id, $location_user_display_name, $resbfsa_id, $application_users) {
-        $notarry['notification_users'] = array($location_user_id);
+    private function sendSpaceAllocationApprovalNotification($get, $post, $emp_data, $locationUser, $resbfsa_id, $application_users) {
+        $notarry['notification_users'] = array($locationUser['id']);
         $notarry['company_id'] = $get['company_id'];
         $notarry['option'] = SpaceConstants::TAB_COM_VIEW_OFFICE_MGMT;
         $notarry['type'] = "ACTION";
         $notarry['id'] = $resbfsa_id;
         $notarry['notification_message'] = " Request for Cubicle Space Allocation Approval for " . $emp_data->display_name;
 
-        $emailarray['approval_user_email_id'] = $location_user_email_id;
-        $emailarray['user_display_name'] = $location_user_display_name;
+        $emailarray['approval_user_email_id'] = $locationUser['email_id'];
+        $emailarray['user_display_name'] = $locationUser['display_name'];
         $emailarray['transaction_date_and_time'] = date(SpaceConstants::DATE_FORMAT_HIS);
         $emailarray['to_company_id'] = $get['company_id'];
         $emailarray['session_company_id'] = $get['company_id'];
@@ -730,7 +749,10 @@ trait SpaceEquipmentTrait {
         return array('data_email' => $emailarray, 'data_notarry' => $notarry);
     }
 
-    private function sendSpaceAllocationChangeNotifications(&$return, $get, $post, $building_res, $emp_data, $resbfsa_id, $informationlist, $application_users, $emp_asssign_status) {
+    private function sendSpaceAllocationChangeNotifications(&$return, array $context, $building_res, $emp_data, $resbfsa_id, $informationlist, $application_users) {
+        $get = $context['get'];
+        $post = $context['post'];
+        $emp_asssign_status = $context['status'];
         foreach ($informationlist as $userdetails) {
             foreach ($userdetails as $listdetails) {
                 $notarry['notification_users'] = array($listdetails->user_id);
@@ -770,7 +792,6 @@ class SpaceUserClass extends userClass {
 
     public function insertBuildings($get, $post) {
         global $callConfig;
-        $companyId = !empty($get['company_id']) ? $get['company_id'] : ($post['company_id'] ?? '');
         $building_floors = $post['building_floors'];
         $insertary = array('building_name' => $post['building_name'], 'building_address' => $post['building_address'], 'building_image' => $post['building_image'], 'location_id' => $post['location_id'], 'originator' => json_encode($post['originator']));
         if ($post['rid'] != "") {
@@ -891,7 +912,6 @@ class SpaceUserClass extends userClass {
 
     public function insertBuildingFloorCabins($get, $post) {
         global $callConfig;
-        $companyId = !empty($get['company_id']) ? $get['company_id'] : ($post['company_id'] ?? '');
         $return['post'] = $post;
         $insertary = array('building_floor_id' => $post['building_floor_id'], 'cabin_name' => $post['cabin_name'], 'space_type_id' => $post['space_type_id'], 'x_size' => $post['x_size'], 'y_size' => $post['y_size'], 'width' => $post['width'], 'height' => $post['height']);
         if ($post['building_floor_cabin_id'] != "") {
@@ -1004,7 +1024,6 @@ class SpaceUserClass extends userClass {
 
     public function intertEquipments($get, $post) {
         global $callConfig;
-        $companyId = !empty($get['company_id']) ? $get['company_id'] : ($post['company_id'] ?? '');
         $qruploadDir = SITEROOT . '/uploads/equipments/qr_code/';
         $employee_seating = $post['employee_seating'] == 'Y' ? "Y" : "N";
         $insertary = array('equipment_type_id' => $post['equipment_type_id'], 'equipment_name' => $post['equipment_name'], 'description' => $post['description'], 'employee_seating' => $employee_seating, 'equipment_image' => $post['equipment_image']);
@@ -1085,48 +1104,14 @@ class SpaceUserClass extends userClass {
         $informationlist['buildingadmin'][] = $application_users[$building_res->originator];
         $informationlist['assigner'][] = $application_users[$post['user_id']];
 
-        $emp_asssign_status = $emp_id_available = "";
         $postdataary = array('building_floor_space_id' => $post['building_floor_space_id']);
-        if ($post['emp_id'] != "") {
-            $postdataary['emp_id'] = $post['emp_id'];
-            $postdataary['emp_allocation_datetime'] = date(SpaceConstants::DATE_FORMAT_HIS);
-            if ($building_res->space_type_id == '7') {
-                $postdataary['current_status'] = ST_INPROGRESS;
-                $postdataary['approval_type'] = 'Y';
-            } else {
-                $postdataary['current_status'] = ST_APPROVED;
-            }
-            $emp_id_available = $post['emp_id'];
-            $emp_asssign_status = "Y";
-        } else {
-            $bfspaceallocsql = "SELECT emp_id FROM building_floor_space_allocations WHERE company_id = " . $get['company_id'] . " AND building_floor_space_id=" . $post['building_floor_space_id'] . SpaceConstants::AND_IS_ACTIVE_0_NO_QUOTE;
-            $bfspaceallocres = $callConfig->getRow($bfspaceallocsql);
-            $return['bfspaceallocsql'] = $bfspaceallocsql;
-            if ($bfspaceallocres->emp_id != "") {
-                $emp_id_available = $bfspaceallocres->emp_id;
-                $emp_asssign_status = "N";
-            }
-        }
-        $return['emp_id_available'] = $emp_id_available;
-        $return['emp_asssign_status'] = $emp_asssign_status;
+        list($emp_asssign_status, $emp_id_available) = $this->determineSpaceAllocationAssignment($get, $post, $building_res, $postdataary, $return);
 
         $callConfig->updateRecord('building_floor_space_allocations', array("is_active" => null), 'building_floor_space_id', $post['building_floor_space_id']);
 
         $emp_data = null;
         if ($emp_asssign_status == "Y" || $emp_asssign_status == "N") {
-            $emp_query = "SELECT id, display_name, email_id, user_id, hr_buddy, admin_buddy, loc_buddy  FROM employees WHERE company_id = " . $get['company_id'] . SpaceConstants::AND_ID_EQ_COMPACT . $emp_id_available;
-            $emp_data = $callConfig->getRow($emp_query);
-            $informationlist['employee'][] = $emp_data;
-
-            $locationemp_query = "SELECT id, display_name, email_id, user_id  FROM employees WHERE company_id = " . $get['company_id'] . SpaceConstants::AND_ID_EQ_COMPACT . $emp_data->loc_buddy;
-            $locationemp_data = $callConfig->getRow($locationemp_query);
-            if ($locationemp_data->id != "") {
-                $informationlist['location_connect'][] = $locationemp_data;
-            }
-            $location_user_id = $locationemp_data->user_id;
-            $location_user_display_name = $locationemp_data->display_name;
-            $location_user_email_id = $locationemp_data->email_id;
-            $postdataary['approval_user_id'] = $locationemp_data->user_id;
+            list($emp_data, $location_user_id, $location_user_email_id, $location_user_display_name) = $this->loadSpaceAllocationEmployeeData($get, $emp_id_available, $informationlist, $postdataary);
         }
 
         if ($post['reserve_pool_id'] != "") {
@@ -1154,12 +1139,72 @@ class SpaceUserClass extends userClass {
         $return['location_user_email_id'] = $location_user_email_id;
         $return['location_user_display_name'] = $location_user_display_name;
         if ($building_res->space_type_id == '7' && $location_user_id != "" && $emp_asssign_status == "Y") {
-            return $this->sendSpaceAllocationApprovalNotification($get, $post, $building_res, $emp_data, $location_user_id, $location_user_email_id, $location_user_display_name, $resbfsa_id, $application_users);
+            $locationUser = [
+                'id' => $location_user_id,
+                'email_id' => $location_user_email_id,
+                'display_name' => $location_user_display_name
+            ];
+            return $this->sendSpaceAllocationApprovalNotification($get, $post, $emp_data, $locationUser, $resbfsa_id, $application_users);
         }
         if ($emp_asssign_status == "Y" || $emp_asssign_status == "N") {
-            $this->sendSpaceAllocationChangeNotifications($return, $get, $post, $building_res, $emp_data, $resbfsa_id, $informationlist, $application_users, $emp_asssign_status);
+            $context = [
+                'get' => $get,
+                'post' => $post,
+                'status' => $emp_asssign_status
+            ];
+            $this->sendSpaceAllocationChangeNotifications($return, $context, $building_res, $emp_data, $resbfsa_id, $informationlist, $application_users);
         }
         return $return;
+    }
+
+    private function determineSpaceAllocationAssignment($get, $post, $building_res, array &$postdataary, array &$return): array {
+        global $callConfig;
+        $emp_asssign_status = "";
+        $emp_id_available = "";
+
+        if ($post['emp_id'] != "") {
+            $postdataary['emp_id'] = $post['emp_id'];
+            $postdataary['emp_allocation_datetime'] = date(SpaceConstants::DATE_FORMAT_HIS);
+            if ($building_res->space_type_id == '7') {
+                $postdataary['current_status'] = ST_INPROGRESS;
+                $postdataary['approval_type'] = 'Y';
+            } else {
+                $postdataary['current_status'] = ST_APPROVED;
+            }
+            $emp_id_available = $post['emp_id'];
+            $emp_asssign_status = "Y";
+        } else {
+            $bfspaceallocsql = "SELECT emp_id FROM building_floor_space_allocations WHERE company_id = " . $get['company_id'] . " AND building_floor_space_id=" . $post['building_floor_space_id'] . SpaceConstants::AND_IS_ACTIVE_0_NO_QUOTE;
+            $bfspaceallocres = $callConfig->getRow($bfspaceallocsql);
+            $return['bfspaceallocsql'] = $bfspaceallocsql;
+            if ($bfspaceallocres->emp_id != "") {
+                $emp_id_available = $bfspaceallocres->emp_id;
+                $emp_asssign_status = "N";
+            }
+        }
+        $return['emp_id_available'] = $emp_id_available;
+        $return['emp_asssign_status'] = $emp_asssign_status;
+
+        return [$emp_asssign_status, $emp_id_available];
+    }
+
+    private function loadSpaceAllocationEmployeeData($get, $emp_id_available, array &$informationlist, array &$postdataary): array {
+        global $callConfig;
+        $emp_query = "SELECT id, display_name, email_id, user_id, hr_buddy, admin_buddy, loc_buddy  FROM employees WHERE company_id = " . $get['company_id'] . SpaceConstants::AND_ID_EQ_COMPACT . $emp_id_available;
+        $emp_data = $callConfig->getRow($emp_query);
+        $informationlist['employee'][] = $emp_data;
+
+        $locationemp_query = "SELECT id, display_name, email_id, user_id  FROM employees WHERE company_id = " . $get['company_id'] . SpaceConstants::AND_ID_EQ_COMPACT . $emp_data->loc_buddy;
+        $locationemp_data = $callConfig->getRow($locationemp_query);
+        if ($locationemp_data->id != "") {
+            $informationlist['location_connect'][] = $locationemp_data;
+        }
+        $location_user_id = $locationemp_data->user_id;
+        $location_user_display_name = $locationemp_data->display_name;
+        $location_user_email_id = $locationemp_data->email_id;
+        $postdataary['approval_user_id'] = $locationemp_data->user_id;
+
+        return [$emp_data, $location_user_id, $location_user_email_id, $location_user_display_name];
     }
 
     public function approvedApaceAllocationsStatus($get) {
