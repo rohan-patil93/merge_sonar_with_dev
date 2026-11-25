@@ -20,6 +20,7 @@ if($_POST['recordtype']=="discrepancy"){
     $emplist=array_intersect_key($emplist,$discrepancy);
 }
 
+if (!function_exists('worktymePercentage')) {
 function worktymePercentage($num_amount, $num_total) {
   if($num_total != 0 && $num_total !=""){
     $num_total = 1;
@@ -27,6 +28,7 @@ function worktymePercentage($num_amount, $num_total) {
   $count1 = $num_amount / $num_total;
   $count2 = $count1 * 100;
   return number_format($count2, 0);
+}
 }
 $partial_color = filterArrayValue($key_details,'key_short_code','R');
 $partial_color = $partial_color[0]['color_code'];

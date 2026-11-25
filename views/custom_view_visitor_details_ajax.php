@@ -1,6 +1,6 @@
 <?php
 if (!defined('DATETIME_ZERO')) {
-    define('DATETIME_ZERO', DATETIME_ZERO);
+    define('DATETIME_ZERO', '0000-00-00 00:00:00');
 }
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

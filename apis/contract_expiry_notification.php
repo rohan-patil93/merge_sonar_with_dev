@@ -12,5 +12,4 @@ curl_setopt_array($curl, array(
 ));
 $response = curl_exec($curl);
 $datas = json_decode($response,1);
-return $response
-?>
+return $response;

@@ -1,17 +1,14 @@
 <?php
+defined('URL_PARAM_DATA_NAME') || define('URL_PARAM_DATA_NAME', '&data_name=');
+defined('URL_PARAM_USERID') || define('URL_PARAM_USERID', '&userid=');
 include_once '../dbconfig.php';
 include_once '../comm.php';
 $transaction_table = $_POST['transaction_table'];
 $transaction_id = '';
-
-
-
-
-
 $data1["where"] = array('company_id'=> $_POST['company_id'],'api_code'=>'CANDIDATESCREENINGQUESTIONEDITAPPROVEDANDSTART','is_active'=>'0');
 $data1["field"] = "id, api_code, production_testing, production_url, testing_url";
 $data = urlencode(json_encode($data1));
-$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&data=".$data;
+$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id']."&data=".$data;
 $postData = array();
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $masterurl);
@@ -35,10 +32,9 @@ if (curl_errno($ch)) {
         foreach($_POST['screening_key'] as $key1=>$vald1){
             $aipostData['questions'][] = array('key'=> $_POST['screening_key'][$key1], 'question'=> $_POST['screening_question'][$key1]);
         }
-
         //AI Data
         $insertarray = array('company_id'=>$_POST['company_id'],'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>$masterresult[0]['id'],'api_url'=>$api_url,'api_request_parameters'=>urlencode(json_encode($aipostData)),'request_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$_POST['user_id'],'response_status'=>200);
-        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id'];
+        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id'];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $inserturl);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -70,56 +66,20 @@ if (curl_errno($ch)) {
             if (curl_errno($ch2)) {
                 echo json_encode(array('result'=>curl_error($ch2),'msg'=> 'Oops! There seems to be a server-side issue. Please connect with our IT team to investigate and resolve it.', 'status'=>'failed', 'lastid'=>''));
             }else{
-
                 $response11 = curl_exec($ch2);
                 $retres = json_decode($response11,1);
-
-
                 $data21['api_response_details'] =  urlencode(json_encode($retres));
                 $data21['response_date_time'] = nowDate();
                 $data21['updated_date'] = nowDate();
                 $data21['updated_by'] = $_POST['userid'];
-                $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id;
+                $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id']."&rid=".$last_id;
                 $upch = curl_init();
                 curl_setopt($upch, CURLOPT_URL, $inserturl);
                 curl_setopt($upch, CURLOPT_POST, true);
                 curl_setopt($upch, CURLOPT_POSTFIELDS, $data21);
                 curl_setopt($upch, CURLOPT_RETURNTRANSFER, true);
                 curl_exec($upch);
-/**
-
-
-                $startapi_url = $api_url."/start";
-                $ch3 = curl_init();
-                curl_setopt_array($ch3, array(
-                  CURLOPT_URL => $startapi_url,
-                  CURLOPT_RETURNTRANSFER => true,
-                  CURLOPT_ENCODING => '',
-                  CURLOPT_MAXREDIRS => 10,
-                  CURLOPT_TIMEOUT => 0,
-                  CURLOPT_FOLLOWLOCATION => true,
-                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                  CURLOPT_CUSTOMREQUEST => 'POST',
-                  CURLOPT_POSTFIELDS => $aipostData,
-                  CURLOPT_HTTPHEADER => array(
-                    'X-API-Key: recruit-9f3a2b8e1c7d4f6a0e5b2c9d8f1a4e7b'
-                  ),
-                ));
-                if (curl_errno($ch3)) {
-                    echo json_encode(array('result'=>curl_error($ch3),'msg'=> 'Oops! There seems to be a server-side issue. Please connect with our IT team to investigate and resolve it.', 'status'=>'failed', 'lastid'=>''));
-                }else{
-
-                    $response11 = curl_exec($ch3);
-                    $retres = json_decode($response11,1);
-                    print_r($retres);
-                   // echo json_encode(array('status'=>'second -- success','result'=>$retres, 'question'=> $question, 'buttonhtml'=> $buttonhtml));
-
-                }
-                **/
-
             }
-
         }
     }
 }
-

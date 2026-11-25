@@ -1,6 +1,6 @@
 <?php
 if (!defined('STR_PLUS_ONE_MONTH')) {
-    define('STR_PLUS_ONE_MONTH', STR_PLUS_ONE_MONTH);
+    define('STR_PLUS_ONE_MONTH', '+1 month');
 }
 $year = date('Y');
 $month = date('m');

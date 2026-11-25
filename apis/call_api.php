@@ -144,6 +144,3 @@ $api_code = $_REQUEST['api_code'];
   $data['updated_by'] = $_SESSION['userid'];
   $url = API."?mode=updaterowtabledata&rid=".$last_id."&table=api_hits&method=post";
   $response = file_post_contents($url, $data, 'update');
-
-?>
-

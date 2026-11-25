@@ -62,9 +62,11 @@ if(!empty((array)$ecr_lists['pay_areas'])){
     }
 }
 
-function valueemtpydash($val){
-    $val = $val ?? [];
-    return $val=="" || $val=="0"?" - ":$val;
+if(!function_exists('valueemtpydash')){
+    function valueemtpydash($val){
+        $val = $val ?? [];
+        return $val=="" || $val=="0"?" - ":$val;
+    }
 }
 $now_year = date('Y');
 
@@ -73,7 +75,7 @@ foreach($professional_tax_payments as $ptp){
     $ymdata[$ptp['pay_year']][$ptp['pay_month']] =  $ptp;
 }
 
-if(!function_exists('render_pt_annual_statement_table')){
+if(!function_exists('renderPtAnnualStatementTable')){
     function renderPtAnnualStatementTable($report_rows, $ymdata){
         ?>
         <div class="dt-responsive table-responsive">

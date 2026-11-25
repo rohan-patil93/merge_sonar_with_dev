@@ -1,4 +1,7 @@
 <?php
+defined('URL_PARAM_DATA_NAME') || define('URL_PARAM_DATA_NAME', '&data_name=');
+defined('URL_PARAM_USERID') || define('URL_PARAM_USERID', '&userid=');
+defined('STR_ERROR_PREFIX') || define('STR_ERROR_PREFIX', STR_ERROR_PREFIX);
 include_once'../dbconfig.php';
 include_once'../comm.php';
 $transaction_table = $_POST['transaction_table'];
@@ -17,7 +20,7 @@ $fullPathfilename = $File_Uploads_Path.$upload_transactions_file;
 $data1["where"] = array('company_id'=> $_POST['company_id'],'api_code'=>'AIINTEGRATIONPUSHFILE','is_active'=>'0');
 $data1["field"] = "id, api_code, production_testing, production_url, testing_url";
 $data = urlencode(json_encode($data1));
-$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&data=".$data;
+$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id']."&data=".$data;
 $postData = array();
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $masterurl);
@@ -26,7 +29,7 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($ch);
 if (curl_errno($ch)) {
-    echo 'Error: ' . curl_error($ch);
+    echo STR_ERROR_PREFIX . curl_error($ch);
 }else{
     $masterresult = json_decode($response,1);
     if($masterresult[0]['id'] !=""){
@@ -45,7 +48,7 @@ if (curl_errno($ch)) {
             'upload_transactions_file' => $upload_transactions_file
         ];
         $insertarray = array('company_id'=>$_POST['company_id'],'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>$masterresult[0]['id'],'api_url'=>$api_url,'api_request_parameters'=>json_encode((array)$aipostData),'request_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$_POST['user_id'],'response_status'=>200);
-        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id'];
+        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id'];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $inserturl);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -55,7 +58,7 @@ if (curl_errno($ch)) {
         $insertresponsede = json_decode($insertresponse,1);
         $last_id = $insertresponsede['LASTID'];
         if (curl_errno($ch)) {
-            echo 'Error: ' . curl_error($ch);
+            echo STR_ERROR_PREFIX . curl_error($ch);
         }else{
             $ch2 = curl_init();
             curl_setopt($ch2, CURLOPT_URL, $aiurl);
@@ -68,7 +71,7 @@ if (curl_errno($ch)) {
             ];
             curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers);
             if (curl_errno($ch2)) {
-                echo 'Error: ' . curl_error($ch2);
+                echo STR_ERROR_PREFIX . curl_error($ch2);
             }else{
                 $response11 = curl_exec($ch2);
                 $retres = json_decode($response11,1);
@@ -77,7 +80,7 @@ if (curl_errno($ch)) {
                     $data21['response_date_time'] = nowDate();
                     $data21['updated_date'] = nowDate();
                     $data21['updated_by'] = $_POST['userid'];
-                    $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id;
+                    $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id']."&rid=".$last_id;
                     $upch = curl_init();
                     curl_setopt($upch, CURLOPT_URL, $inserturl);
                     curl_setopt($upch, CURLOPT_POST, true);
@@ -90,7 +93,7 @@ if (curl_errno($ch)) {
                     $data21['response_date_time'] = nowDate();
                     $data21['updated_date'] = nowDate();
                     $data21['updated_by'] = $_POST['userid'];
-                    $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id;
+                    $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id']."&rid=".$last_id;
                     $upch = curl_init();
                     curl_setopt($upch, CURLOPT_URL, $inserturl);
                     curl_setopt($upch, CURLOPT_POST, true);
@@ -109,12 +112,7 @@ if (curl_errno($ch)) {
         }
     }
 }
-function transactionDetailsUI($retres, $fullPathfilename){
-    $matchValidationErrors = $retres['matchValidationErrors'];
-    $validationWarnings = array_merge($retres['validationWarnings'],$retres['matchValidationWarnings']);
-    $lineItems = $retres['lineItems'];
-    $infisuiteLastId = $retres['infisuiteLastId'];
-    $encodeId = deocdeId('id:'.$infisuiteLastId);
+function transactionHeaderAlertUI($infisuiteLastId, $encodeId){
     $html  = '<ul class="nav md-tabs infisuite_tab mb-2">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#response" role="tab" aria-selected="false" tabindex="-1">Response</a>
@@ -140,7 +138,11 @@ function transactionDetailsUI($retres, $fullPathfilename){
                         </button>
                     </div>';
    }
-    $html .= '<div class="row ">
+    return $html;
+}
+
+function transactionValidationTablesUI($matchValidationErrors, $validationWarnings){
+    $html = '<div class="row ">
    <div class="col-lg-6">
    <table class="table table-hover m-b-0" style="font-size:13px;">
         <thead>
@@ -183,8 +185,12 @@ function transactionDetailsUI($retres, $fullPathfilename){
     $html .= '</tbody>
                     </table>
                 </div>
-            </div>
-            <div class="row mt-4">
+            </div>';
+    return $html;
+}
+
+function transactionSummaryRowsUI($retres){
+    $html = '<div class="row mt-4">
                 <div class="col-2 b-l-default text-center">
                     <div class="s-cont d-inline-block">
                         <h5 class="f-w-600 m-b-0">Document Type</h5>
@@ -259,8 +265,12 @@ function transactionDetailsUI($retres, $fullPathfilename){
                         <p class="m-t-10 f-12">'.$retres['grandTotal'].'</p>
                     </div>
                 </div>
-            </div>
-            <table class="table table-hover m-b-0" style="font-size:13px;">
+            </div>';
+    return $html;
+}
+
+function transactionLineItemsTableUI($lineItems){
+    $html = '<table class="table table-hover m-b-0" style="font-size:13px;">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -291,7 +301,22 @@ function transactionDetailsUI($retres, $fullPathfilename){
                 $matcherorse1++;
             }
     $html .= '</tbody>
-        </table></div>';
+        </table>';
+    return $html;
+}
+
+function transactionDetailsUI($retres, $fullPathfilename){
+    $matchValidationErrors = $retres['matchValidationErrors'];
+    $validationWarnings = array_merge($retres['validationWarnings'],$retres['matchValidationWarnings']);
+    $lineItems = $retres['lineItems'];
+    $infisuiteLastId = $retres['infisuiteLastId'];
+    $encodeId = deocdeId('id:'.$infisuiteLastId);
+
+    $html = transactionHeaderAlertUI($infisuiteLastId, $encodeId);
+    $html .= transactionValidationTablesUI($matchValidationErrors, $validationWarnings);
+    $html .= transactionSummaryRowsUI($retres);
+    $html .= transactionLineItemsTableUI($lineItems);
+    $html .= '</div>';
     $html .= '<div class="tab-pane card-body p-0 text-center" id="documents" role="tabpanel">
             <iframe src="'.$fullPathfilename.'" height="700" width="1000" title="Iframe Example"></iframe>
         </div>';

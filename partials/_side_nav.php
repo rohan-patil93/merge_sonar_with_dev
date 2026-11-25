@@ -1,9 +1,11 @@
 <?php
-function menudisplaytop($menuarray,$type){
+defined('URL_OPTION_PREFIX') || define('URL_OPTION_PREFIX', URL_OPTION_PREFIX);
+defined('URI_JAVASCRIPT_VOID') || define('URI_JAVASCRIPT_VOID', URI_JAVASCRIPT_VOID);
+function menudisplaytop($menuarray){
     $str = '<ul class="pcoded-submenu">';
     foreach ($menuarray as $menuarrayvalue) {
         $child = count($menuarrayvalue['child']);
-        $link = $child >0 ?  'javascript:;' : 'index.php?option='.$menuarrayvalue['Page_Name'];
+        $link = $child >0 ?  URI_JAVASCRIPT_VOID : URL_OPTION_PREFIX.$menuarrayvalue['Page_Name'];
         $drop =  $child >0 ?  'pcoded-hasmenu' : '';
         $icon = "";
         $str .= '<li class="'.$drop.'" >
@@ -11,7 +13,7 @@ function menudisplaytop($menuarray,$type){
 
         $str.='</a>';
         if(count($menuarrayvalue['child'])>0){
-            $str.=menudisplaytop($menuarrayvalue['child'],'right');
+            $str.=menudisplaytop($menuarrayvalue['child']);
         }
         $str.='</li>';
     }
@@ -62,26 +64,26 @@ function menudisplaytop($menuarray,$type){
                 <?php }
                 } ?>
                 <?php  if (count($topnav) >0 && in_array('TN', $_SESSION['role_nav'])){ foreach($topnav as $nav){    $child = count($nav['child']);
-                        $link = $child >0 ?  'javascript:;' : 'index.php?option='.$nav['Page_Name'];
+                        $link = $child >0 ?  URI_JAVASCRIPT_VOID : URL_OPTION_PREFIX.$nav['Page_Name'];
                         $drop =  $child >0 ?  'pcoded-hasmenu ' : '';
-			$nav['Menu_Icon'] = $nav['Menu_Icon']!='' ? $nav['Menu_Icon'] : "icon-control-play";
+            $nav['Menu_Icon'] = $nav['Menu_Icon']!='' ? $nav['Menu_Icon'] : "icon-control-play";
                 ?>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="<?php echo  $drop; ?>">
                                 <a href="<?php echo $link; ?>" class="waves-effect waves-dark">
                                     <span class="pcoded-micon">
-					<?php if(strpos($nav['Menu_Icon'], "svg")){ ?>
+                    <?php if(strpos($nav['Menu_Icon'], "svg")){ ?>
                             <span class="svg-icon menu-icon">
                                 <?php echo $nav['Menu_Icon']; ?>
                             </span>
                         <?php }else{ ?>
                             <i class="<?php echo $nav['Menu_Icon']; ?>"></i>
                         <?php } ?>
-				    </span>
+                    </span>
                                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                                 </a>
 
-                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');
+                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child']);
                             } ?>
                             </li>
                         </ul>
@@ -95,20 +97,9 @@ function menudisplaytop($menuarray,$type){
                     }
                     if($_SESSION['userid']==100 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET' ){ $listnav_pagename  = "COM_BULK_FINANCE_PROJECT_TIMESHEET";
                     }
-                    $link = $child >0 ?  'javascript:;' : 'index.php?option='.$listnav_pagename;
+                    $link = $child >0 ?  URI_JAVASCRIPT_VOID : URL_OPTION_PREFIX.$listnav_pagename;
                     $drop =  $child >0 ?  'menu-toggle' : '';
                 ?>
-                       <!--  <ul class="pcoded-item pcoded-left-item">
-                            <li class="<?php echo  $drop; ?>">
-                                <a href="<?php echo $link; ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                    <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
-                                </a>
-
-                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');
-                            } ?>
-                            </li>
-                        </ul> -->
 
                 <?php }
                 } ?>

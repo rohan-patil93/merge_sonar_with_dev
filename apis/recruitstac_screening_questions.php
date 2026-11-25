@@ -1,4 +1,6 @@
 <?php
+defined('URL_PARAM_DATA_NAME') || define('URL_PARAM_DATA_NAME', '&data_name=');
+defined('URL_PARAM_USERID') || define('URL_PARAM_USERID', '&userid=');
 include_once'../dbconfig.php';
 include_once'../comm.php';
 $transaction_table = $_POST['transaction_table'];
@@ -6,7 +8,7 @@ $transaction_id = '';
 $data1["where"] = array('company_id'=> $_POST['company_id'],'api_code'=>'CANDIDATESCREENINGGENERATEQUESTION','is_active'=>'0');
 $data1["field"] = "id, api_code, production_testing, production_url, testing_url";
 $data = urlencode(json_encode($data1));
-$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&data=".$data;
+$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id']."&data=".$data;
 $postData = array();
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $masterurl);
@@ -27,7 +29,7 @@ if (curl_errno($ch)) {
         $api_url = "https://recruitstaq.digixlabs.cloud/api/screening/generate/";
         $aipostData = $_POST;
         $insertarray = array('company_id'=>$_POST['company_id'],'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>$masterresult[0]['id'],'api_url'=>$api_url,'api_request_parameters'=>urlencode(json_encode($aipostData)),'request_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$_POST['user_id'],'response_status'=>200);
-        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id'];
+        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id'];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $inserturl);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -84,7 +86,7 @@ if (curl_errno($ch)) {
                 $data21['response_date_time'] = nowDate();
                 $data21['updated_date'] = nowDate();
                 $data21['updated_by'] = $_POST['userid'];
-                $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id;
+                $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id'].URL_PARAM_DATA_NAME.$_POST['data_name'].URL_PARAM_USERID.$_POST['user_id']."&rid=".$last_id;
                 $upch = curl_init();
                 curl_setopt($upch, CURLOPT_URL, $inserturl);
                 curl_setopt($upch, CURLOPT_POST, true);
@@ -96,4 +98,3 @@ if (curl_errno($ch)) {
         }
     }
 }
-

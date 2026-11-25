@@ -28,6 +28,7 @@ if($_POST['recordtype']=="discrepancy"){
 $dates = $workingentrys['date'];
 
 $selected_pay_area_id = $_POST['pay_area_id'] ??  '';
+if (!function_exists('worktymePercentage')) {
 function worktymePercentage($num_amount, $num_total) {
   if($num_total != 0 && $num_total !=""){
     $num_total = 1;
@@ -35,6 +36,7 @@ function worktymePercentage($num_amount, $num_total) {
   $count1 = $num_amount / $num_total;
   $count2 = $count1 * 100;
   return number_format($count2, 0);
+}
 }
 
 $firstdate = array_slice((array)$dates,0,1)[0];

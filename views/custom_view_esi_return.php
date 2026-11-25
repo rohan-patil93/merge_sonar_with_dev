@@ -37,12 +37,14 @@ if(!empty((array)$ecr_list['pay_areas'])){
         }
     }
 }
-function valueemtpydash($val){
-    $val = $val ?? [];
-    return $val=="" || $val=="0"?" - ":$val;
+if(!function_exists('valueemtpydash')){
+    function valueemtpydash($val){
+        $val = $val ?? [];
+        return $val=="" || $val=="0"?" - ":$val;
+    }
 }
 
-if(!function_exists('render_esi_return_table')){
+if(!function_exists('renderEsiReturnTable')){
     function renderEsiReturnTable($report_rows, $pay_month_year){
         $has_data = false;
         ?>

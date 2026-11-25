@@ -44,12 +44,15 @@ if(!empty((array)$ecr_list['pay_areas'])){
         }
     }
 }
-function valueemtpydash($val){
-    $val = $val ?? [];
-    return $val=="" || $val=="0"?" - ":$val;
+if(!function_exists('valueemtpydash')){
+    function valueemtpydash($val){
+        $val = $val ?? [];
+        return $val=="" || $val=="0"?" - ":$val;
+    }
 }
 
-function renderEpfSummaryEmployeeRow($ecr_data, $unique) {
+if(!function_exists('renderEpfSummaryEmployeeRow')){
+    function renderEpfSummaryEmployeeRow($ecr_data, $unique) {
     $employee_rows = (array)$ecr_data;
     $first_row = $employee_rows[0];
     $employer_contributions = array();
@@ -74,9 +77,11 @@ function renderEpfSummaryEmployeeRow($ecr_data, $unique) {
         <?php } ?>
     </tr>
     <?php
+    }
 }
 
-function renderEpfSummaryTable($report_rows, $unique) {
+if(!function_exists('renderEpfSummaryTable')){
+    function renderEpfSummaryTable($report_rows, $unique) {
     $total_columns = 6 + count((array)$unique);
     ?>
     <div class="dt-responsive table-responsive">
@@ -111,6 +116,7 @@ function renderEpfSummaryTable($report_rows, $unique) {
         </table>
     </div>
     <?php
+    }
 }
 
 // wrapper removed for cleaner PSR naming

@@ -1,6 +1,6 @@
 <?php
 if (!defined('CONST_3000_00')) {
-    define('CONST_3000_00', CONST_3000_00);
+    define('CONST_3000_00', '3000.00');
 }
 
 $acconts[] = array('acont_name'=>'Capital Acount','debit'=>'0.00','credit'=>'190000.00');

@@ -1,6 +1,6 @@
 <?php
 if (!defined('STR_CHECK_ICON_CLASS')) {
-    define('STR_CHECK_ICON_CLASS', STR_CHECK_ICON_CLASS);
+    define('STR_CHECK_ICON_CLASS', ' text-primary fa-solid fa-square-check');
 }
 if(isset($_GET['Rid']) && $_GET['Rid'] != ''){
     $rid = encodeId($_GET['Rid']);

@@ -385,82 +385,28 @@
 
             <?php  foreach($_SESSION['application_menu_TNR'] as $tnrmenuid=>$tnrmenu) { ?>
                 <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __($tnrmenu['Label']); ?>">
-                    <div class="dropdown-primary" role="button" tabindex="0" aria-label="<?php echo htmlspecialchars(__($tnrmenu['Label'])); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=<?php echo $tnrmenu['Page_Name'];?>';">
-                        <div class="" data-bs-toggle="dropdown" >
-                            <i class="<?php echo $tnrmenu['Menu_Icon'];?>"></i>
-                        </div>
-                    </div>
+                    <button type="button" class="btn p-0 border-0 bg-transparent dropdown-primary" aria-label="<?php echo htmlspecialchars(__($tnrmenu['Label'])); ?>" onclick="location.href='index.php?option=<?php echo $tnrmenu['Page_Name'];?>';">
+                        <i class="<?php echo $tnrmenu['Menu_Icon'];?>"></i>
+                    </button>
                 </li>
             <?php } ?>
-
-             <?php /**if( in_array($_SESSION['work_module_setup_id'], array(MODUL_HR,MODUL_PAYROLL,MODUL_ATTENDANCE)) && ($_SESSION['admin_type'] == '1' || $_SESSION['pay_admin_emp'] > 0)){ ?>
-                <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Work Attendance">
-                    <div class="dropdown-primary" role="button" tabindex="0" aria-label="Work Attendance" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_WORK_ATTENDANCES';">
-                        <div class="" data-bs-toggle="dropdown" >
-                            <i class="ti-notepad"></i>
-                        </div>
-                    </div>
-                </li>
-             <?php } ?>
-        <?php if( in_array($_SESSION['work_module_setup_id'], array(MODUL_HR,MODUL_PAYROLL)) ){
-                $vkv = "COM_VIEW_DOCUMENTS";
-                if($_SESSION['admin_type'] == '1' || $_SESSION['pay_admin_emp'] > 0){
-                    $vkv = "COM_VIEW_DOCUMENT_DASH_BOARD";
-                }
-
-        ?>
-                <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Document Dashboard">
-                    <div class="dropdown-primary" role="button" tabindex="0" aria-label="Document Dashboard" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=<?php echo $vkv; ?>';">
-                        <div class="" data-bs-toggle="dropdown" >
-                            <i class="ti-envelope"></i>
-                        </div>
-                    </div>
-                </li>
-        <?php } **/?>
         <?php if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids'])){ ?>
         <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Display Attributes'), ENT_QUOTES, 'UTF-8'); ?>">
-            <div class="dropdown-primary" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Display Attributes'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_DISPLAY_ATTRIBUTES';">
-                <div class="" data-bs-toggle="dropdown">
-                    <i class="ti-tablet"></i>
-                </div>
-            </div>
+            <button type="button" class="btn p-0 border-0 bg-transparent dropdown-primary" aria-label="<?= htmlspecialchars(__('Display Attributes'), ENT_QUOTES, 'UTF-8'); ?>" onclick="location.href='index.php?option=COM_LIST_DISPLAY_ATTRIBUTES';">
+                <i class="ti-tablet"></i>
+            </button>
         </li>
-
-
 
         <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Settings'), ENT_QUOTES, 'UTF-8'); ?>">
-            <div class="dropdown-primary" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Settings'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
-                <div class="" data-bs-toggle="dropdown">
-                    <i class="ti-settings" ></i>
-                </div>
-             </div>
+            <button type="button" class="btn p-0 border-0 bg-transparent dropdown-primary" aria-label="<?= htmlspecialchars(__('Settings'), ENT_QUOTES, 'UTF-8'); ?>" onclick="location.href='index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
+                <i class="ti-settings" ></i>
+            </button>
         </li>
     <?php } ?>
-    <?php /**if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids']) || in_array( $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['role_admin_short_code'],(array)$_SESSION['module_code']) ){ ?>
-    <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Reports">
-            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Reports" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_MY_REPORTS';">
-                <div class="" data-bs-toggle="dropdown">
-                    <!-- <i class="ti-stats-up" ></i> -->
-                    <i class="ti-pie-chart" ></i>
-                </div>
-            </div>
-        </li>
-    <?php } **/ /**?>
-        <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Inbox">
-            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Inbox" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_INBOX';">
-                <div class="" data-bs-toggle="dropdown" >
-                    <i class="ti-email"></i>
-                    <span class="badge bg-c-green customcount"><?php echo $inboxcount['index_cnt']; ?></span>
-                </div>
-            </div>
-        </li>
-        <?php **/?>
          <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Announcements'); ?>">
-            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Announcements" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_VIEW_ANNOUNCEMENTS';">
-                <div class="" data-bs-toggle="dropdown" >
-                    <i class="ti-announcement"></i>
-                </div>
-            </div>
+            <button type="button" class="btn p-0 border-0 bg-transparent dropdown-primary" aria-label="Announcements" onclick="location.href='index.php?option=COM_VIEW_ANNOUNCEMENTS';">
+                <i class="ti-announcement"></i>
+            </button>
         </li>
 
 
@@ -488,27 +434,6 @@
             </div>
         </div>
     </li>
- <!--   <li class="header-notification">
-            <div class="dropdown-primary dropdown">
-                <div class="displayChatbox dropdown-toggle" data-bs-toggle="dropdown">
-                   <i class="feather icon-bell"></i>
-                    <span class="badge bg-c-green customcount"><?php ?></span>
-                </div>
-            </div>
-        </li> -->
-
-
-
-<?php /** ?>
-                <li class="header-notification">
-                    <div class="dropdown-primary dropdown">
-                        <div class="displayChatbox dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="feather icon-message-square"></i>
-                            <span class="badge bg-c-green">3</span>
-                        </div>
-                    </div>
-                </li>
-                <?php **/?>
 <?php } ?> <!--  END ACtiv Check--->
 
                 <li class="user-profile header-notification">
@@ -597,19 +522,8 @@
                         <h4 class="mb-0 text-white p-3"><?php echo __('Modules'); ?></h4>
                     </div>
                     <?php
-                    if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids']) || $showswitch == '0'){
-                   // if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){ ?>
+                    if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids']) || $showswitch == '0'){ ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <!-- <input type="checkbox" class="js-switch" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php ?> aria-label="Input"> -->
-                        <?php /** ?><div class="toggle-button-cover mt-2">
-                            <div class="button-cover">
-                                <div class="button b2" id="button-16">
-                                    <input type="checkbox" class="checkbox" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php echo $_SESSION['admin_access_employee']=="Y"?"checked":"";?> aria-label="Input" />
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                            </div>
-                        </div> <?php **/ ?>
                         <select id="working_role_short_code" onchange="chnageModuleWithRole()" aria-label="Working role">
                             <?php foreach($_SESSION['modulewithroledetails'][$_SESSION['work_module_setup_id']] as $mwithrole){ ?>
                             <option value="<?php echo $mwithrole['role_short_code']; ?>" <?php echo $mwithrole['role_short_code'] == $_SESSION['working_role_short_code']?"selected":""; ?>><?php echo __($mwithrole['display_name']); ?></option>
@@ -662,11 +576,11 @@
                                  $style .= "box-shadow: 0px 0px 10px grey;";
                             }
                             ?>
-                        <div class="col-lg-3 p-1 border" style="<?php echo $style;?> " <?php echo $modultitle; ?>  role="button" tabindex="0" <?php echo $modulfunction == "" ? 'aria-disabled="true"' : ''; ?> onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="<?php echo $modulfunction;?>">
+                        <button type="button" class="btn col-lg-3 p-1 border text-center" style="<?php echo $style;?>" <?php echo $modultitle; ?> <?php echo $modulfunction == "" ? 'disabled' : ''; ?> onclick="<?php echo $modulfunction;?>">
                             <?php echo $icon; ?>
                             <img src="uploads/all/<?php echo $module_list['module_logo']; ?>" class="img-40" alt="" >
                             <h5 class=" f-12"><?php echo __($module_list['module_name']); ?></h5>
-                        </div>
+                        </button>
                     <?php }
                     } ?>
 
@@ -868,30 +782,6 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
     </a>
        </li>
 <?php } ?>
-
-   <!---  <li class="nav-item has-megamenu">
-    <a href="<?php echo $link; ?>" class="nav-link  text-white f-w-600   btn btn-primary btn-shadow-hover font-weight-bold  " style="border-radius: 25px;margin-top:12px;padding: 5px 10px;">
-        Bulk Timesheet Approval
-    </a>
-    </li>
-   <li class="header-search p-custom-search">
-    <div class="main-search morphsearch-search">
-        <div class="input-group">
-            <span class="input-group-text search-close">
-                <i class="ti-close input-group-text text-dark"></i>
-            </span>
-            <input type="text" class="form-control" placeholder="Enter Keyword" aria-label="Enter Keyword">
-            <span class="input-group-text search-btn">
-                <i class="ti-search input-group-text"></i>
-            </span>
-        </div>
-    </div>
-</li>
-<li>
-    <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
-        <i class="full-screen feather icon-maximize"></i>
-    </a>
-</li> -->
 </ul>
 <?php } ?> <!--  END ACtiv Check--->
 </div>

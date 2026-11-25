@@ -40,12 +40,14 @@ if(!empty((array)$ecr_list['pay_areas'])){
         }
     }
 }
-function valueemtpydash($val){
-    $val = $val ?? [];
-    return $val=="" || $val=="0"?" - ":$val;
+if(!function_exists('valueemtpydash')){
+    function valueemtpydash($val){
+        $val = $val ?? [];
+        return $val=="" || $val=="0"?" - ":$val;
+    }
 }
 
-if(!function_exists('render_esi_summary_table')){
+if(!function_exists('renderEsiSummaryTable')){
     function renderEsiSummaryTable($report_rows){
         ?>
         <div class="dt-responsive table-responsive mt-2">

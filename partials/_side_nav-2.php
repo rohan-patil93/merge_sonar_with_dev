@@ -1,9 +1,11 @@
 <?php
-function menudisplaytop($menuarray,$type){
+defined('URL_OPTION_PREFIX') || define('URL_OPTION_PREFIX', URL_OPTION_PREFIX);
+defined('URI_JAVASCRIPT_VOID') || define('URI_JAVASCRIPT_VOID', URI_JAVASCRIPT_VOID);
+function menudisplaytop($menuarray){
     $str = '<ul class="pcoded-submenu">';
     foreach ($menuarray as $menuarrayvalue) {
         $child = count($menuarrayvalue['child']);
-        $link = $child >0 ?  'javascript:;' : 'index.php?option='.$menuarrayvalue['Page_Name'];
+        $link = $child >0 ?  URI_JAVASCRIPT_VOID : URL_OPTION_PREFIX.$menuarrayvalue['Page_Name'];
         $drop =  $child >0 ?  'pcoded-hasmenu' : '';
         $icon = "";
         $str .= '<li class="'.$drop.'" >
@@ -11,7 +13,7 @@ function menudisplaytop($menuarray,$type){
 
         $str.='</a>';
         if(count($menuarrayvalue['child'])>0){
-            $str.=menudisplaytop($menuarrayvalue['child'],'right');
+            $str.=menudisplaytop($menuarrayvalue['child']);
         }
         $str.='</li>';
     }
@@ -60,14 +62,6 @@ function menudisplaytop($menuarray,$type){
         <div class="pcoded-inner-navbar main-menu">
                 <div class="mt-3 border-bottom">
                     <div class="sale-card ">
-                        <!-- <div class="card-header">
-                            <h5 class="card-herder-left">
-                                <a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3 f-16 f-w-600"><?php ?>
-                                </a>
-                                <a href="#">
-                                    <i class="flaticon2-correct text-success font-size-h5 mr-2"></i>
-                                </a>
-                            </h5> -->
                         <div class="card-block text-center">
                             <div data-label="" class="radial-bar radial-bar-100 radial-bar-md radial-bar-danger mb-2 mt-0 custom-radial">
                                 <img src="uploads/all/<?php echo $_SESSION['employee']['image']; ?>" class="img-120 " alt="" />
@@ -84,69 +78,6 @@ function menudisplaytop($menuarray,$type){
                                     <h6 class="text-white f-14"><?php echo 'Hydrabad'; ?></h6>
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="col-6">
-                                    <div class="s-cont d-inline-block">
-                                       <div class="">
-                                        <div id="accordion" role="tablist" aria-multiselectable="true">
-                                        <div class="accordion-panel">
-                                           <div class="accordion-heading" role="tab" id="headingOne">
-                                              <h3 class="mb-0">
-                                                 <a class="accordion-msg waves-effect waves-dark border-0 f-w-600 f-16 t-icon text-white" data-bs-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                                    aria-expanded="true" aria-controls="collapseOne">Details <i class="ti-angle-down"></i>
-                                                    </a>
-                                                </h3>
-                                            </div>
-                                         </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 b-l-default">
-                                    <div class="s-cont d-inline-block m-t-10">
-                                        <a href="<?php echo $_SESSION['employee']['soc_facebook']; ?>" target="_blank" class="m-r-10 text-facebook">
-                                            <i class="ti-facebook text-white"></i>
-                                        </a>
-                                        <a href="<?php echo ($_SESSION['employee']['soc_twitter'])!='' ? $_SESSION['employee']['soc_twitter'] : '#'; ?>" target="_blank" class="m-r-10 text-twitter">
-                                            <i class="ti-twitter text-white"></i>
-                                        </a>
-                                        <a href="<?php echo $_SESSION['employee']['soc_linkedin']; ?>" target="_blank" class="m-r-5 text-linkedin">
-                                            <i class="ti-linkedin text-white"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="mt-4 pt-3" style="border-top:1px dotted #d2d2d2;">
-                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="">
-                                            <p>
-                                                <span style="display: block; text-align: justify;" class="font-weight-bold text-dark-50 mt-1 text-white"><b>About Me : </b><?php echo  $_SESSION['employee']['about_me'];?></span>
-                                            </p>
-                                        </div>
-                                        <div class="mt-4 pt-2" style="border-top:1px dotted #d2d2d2;">
-                                            <?php foreach($food_options as $food_option){ ?>
-                                            <div class="col-lg-6 float-left text-center">
-                                                <span class="switch switch-outline switch-icon switch-success">
-                                                    <label>
-                                                        <span class="col-form-label m-r-10"><?php echo $food_option['food_option']; ?>
-                                                        </span><br />
-                                                        <input type="checkbox" class="js-primary-sm" onclick="checkempfoodoption(<?php echo $food_option['id'].",".$_SESSION['emp_id']; ?>)" value="<?php echo $food_option['id']; ?>"  name="" <?php if(in_array($food_option['id'],$emp_food)){ ?> checked <?php } ?> >
-                                                        <span></span>
-                                                    </label>
-                                                </span>
-                                            </div>
-                                            <?php } ?>
-                                            <div class="col-lg-6 float-left text-center">
-                                                <span class="switch switch-outline switch-icon switch-success">
-                                                <label class="col-form-label m-r-10">
-                                                    <span>Transport </span><br />
-                                                    <input type="checkbox" class="js-primary-sm" onclick="checkemptransportrequest(<?php echo $_SESSION['emp_id'].",".$emptransport['id']; ?>)" value="<?php echo $emptransport['id']; ?>"  name="" <?php if($emptransport['id']!=""){ ?> checked <?php } ?> >
-                                                </label>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -154,26 +85,26 @@ function menudisplaytop($menuarray,$type){
                 <?php }
                 } ?>
                 <?php  if (count($topnav) >0 && in_array('TN', $_SESSION['role_nav'])){ foreach($topnav as $nav){    $child = count($nav['child']);
-                        $link = $child >0 ?  'javascript:;' : 'index.php?option='.$nav['Page_Name'];
+                        $link = $child >0 ?  URI_JAVASCRIPT_VOID : URL_OPTION_PREFIX.$nav['Page_Name'];
                         $drop =  $child >0 ?  'pcoded-hasmenu ' : '';
-			$nav['Menu_Icon'] = $nav['Menu_Icon']!='' ? $nav['Menu_Icon'] : "icon-control-play";
+            $nav['Menu_Icon'] = $nav['Menu_Icon']!='' ? $nav['Menu_Icon'] : "icon-control-play";
                 ?>
                         <ul class="pcoded-item pcoded-left-item custom-menu-nav">
                             <li class="<?php echo  $drop; ?>">
                                 <a href="<?php echo $link; ?>" class="waves-effect waves-dark">
                                     <span class="pcoded-micon">
-					<?php if(strpos($nav['Menu_Icon'], "svg")){ ?>
+                    <?php if(strpos($nav['Menu_Icon'], "svg")){ ?>
                             <span class="svg-icon menu-icon">
                                 <?php echo $nav['Menu_Icon']; ?>
                             </span>
                         <?php }else{ ?>
                             <i class="<?php echo $nav['Menu_Icon']; ?>"></i>
                         <?php } ?>
-				    </span>
+                    </span>
                                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                                 </a>
 
-                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');
+                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child']);
                             } ?>
                             </li>
                         </ul>
@@ -187,20 +118,9 @@ function menudisplaytop($menuarray,$type){
                     }
                     if($_SESSION['userid']==100 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET' ){ $listnav_pagename  = "COM_BULK_FINANCE_PROJECT_TIMESHEET";
                     }
-                    $link = $child >0 ?  'javascript:;' : 'index.php?option='.$listnav_pagename;
+                    $link = $child >0 ?  URI_JAVASCRIPT_VOID : URL_OPTION_PREFIX.$listnav_pagename;
                     $drop =  $child >0 ?  'menu-toggle' : '';
                 ?>
-                        <!--  <ul class="pcoded-item pcoded-left-item">
-                            <li class="<?php echo  $drop; ?>">
-                                <a href="<?php echo $link; ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                    <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
-                                </a>
-
-                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');
-                            } ?>
-                            </li>
-                        </ul> -->
 
 
 

@@ -1,4 +1,5 @@
 <?php
+defined('DATE_FORMAT_YMD_HIS') || define('DATE_FORMAT_YMD_HIS', DATE_FORMAT_YMD_HIS);
 $apiurl = "https://dev.infistaq.in/api.php";
 $itsum_company_id = $_GET['company_id'];
 $itsum_data_name = $_GET['data_name'];
@@ -31,7 +32,7 @@ if ($_GET['refresh'] == "Y") {
   $decores = json_decode($response23, 1);
   $transaction_table = '';
   $transaction_id = 0;
-  $returnresult = array('company_id' => $itsum_company_id, 'application_table' => $transaction_table, 'transaction_id' => $transaction_id, 'api_master_id' => 48, 'api_url' => '', 'api_request_parameters' => $sendpostreq, 'request_date_time' => date("Y-m-d H:i:s"), 'api_response_details' => urlencode(json_encode($decores)), 'response_date_time' => date("Y-m-d H:i:s"), 'is_active' => '0', 'current_status' => '0', 'created_date' => date("Y-m-d H:i:s"), 'created_by' => $itsum_user_id, 'response_status' => 200);
+  $returnresult = array('company_id' => $itsum_company_id, 'application_table' => $transaction_table, 'transaction_id' => $transaction_id, 'api_master_id' => 48, 'api_url' => '', 'api_request_parameters' => $sendpostreq, 'request_date_time' => date(DATE_FORMAT_YMD_HIS), 'api_response_details' => urlencode(json_encode($decores)), 'response_date_time' => date(DATE_FORMAT_YMD_HIS), 'is_active' => '0', 'current_status' => '0', 'created_date' => date(DATE_FORMAT_YMD_HIS), 'created_by' => $itsum_user_id, 'response_status' => 200);
   $inserturl = $apiurl . "?mode=adddata&table=api_hits&method=post&company_id=" . $itsum_company_id . "&data_name=" . $itsum_data_name . "&userid=" . $itsum_user_id;
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $inserturl);
@@ -210,7 +211,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#eeeeee">
+              <tr style="background-color: #eeeeee;">
                 <th scope="col">ERP Module</th>
                 <th scope="col">ACTION Count</th>
               </tr>
@@ -231,7 +232,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#eeeeee">
+              <tr style="background-color: #eeeeee;">
                 <th scope="col">ERP Repeated Alerts</th>
                 <th scope="col">Times Seen</th>
                 <th scope="col">Sample Message</th>
@@ -247,7 +248,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#eeeeee">
+              <tr style="background-color: #eeeeee;">
                 <th scope="col">ERP Breakdown</th>
                 <th scope="col">Unread Count</th>
               </tr>
@@ -273,7 +274,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#eeeeee">
+              <tr style="background-color: #eeeeee;">
                 <th scope="col">Transaction Table</th>
                 <th scope="col">Requested On</th>
                 <th scope="col">Days Pending</th>
@@ -308,7 +309,7 @@ $financeshowtabmodule = array(4);
         <div class="table-responsive mt-4">
           <table class="table table-bordered table-sm">
             <tbody>
-              <tr bgcolor="#eeeeee">
+              <tr style="background-color: #eeeeee;">
                 <th scope="col">task_name</th>
                 <th scope="col">Overdue Day</th>
                 <th scope="col">Severity</th>
@@ -342,8 +343,7 @@ $financeshowtabmodule = array(4);
           <div class="mt-5">
             <h6 class="f-14">Record Completeness </h6>
             <div class="progress progress-xs">
-              <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                aria-valuemin="0" aria-valuemax="100" aria-label="Customer Record Completeness"></div>
+              <progress class="progress-bar progress-bar-danger" value="25" max="100" style="width: 25%;" aria-label="Customer Record Completeness"></progress>
             </div>
           </div>
           <div class="card-wrapper mt-4">
@@ -388,7 +388,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#eeeeee">
+              <tr style="background-color: #eeeeee;">
                 <th scope="col">Customer</th>
                 <th scope="col">Missing Fields</th>
                 <th scope="col">Credit Limit Breach</th>
@@ -426,8 +426,7 @@ $financeshowtabmodule = array(4);
           <div class="mt-5">
             <h6 class="f-14">Record Completeness </h6>
             <div class="progress progress-xs">
-              <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                aria-valuemin="0" aria-valuemax="100" aria-label="Vendor Record Completeness"></div>
+              <progress class="progress-bar progress-bar-danger" value="25" max="100" style="width: 25%;" aria-label="Vendor Record Completeness"></progress>
             </div>
           </div>
           <div class="card-wrapper mt-4">
@@ -477,7 +476,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#eeeeee">
+              <tr style="background-color: #eeeeee;">
                 <th scope="col">Vendor</th>
                 <th scope="col">Missing Fields</th>
                 <th scope="col">Credit / Overpaid</th>
@@ -566,7 +565,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
-              <tr class="text-white" bgcolor="#333333">
+              <tr class="text-white" style="background-color: #333333;">
                 <th scope="col" class="text-white">#</th>
                 <th scope="col" class="text-white">Vendor</th>
                 <th scope="col" class="text-white">AI Status</th>
@@ -603,8 +602,7 @@ $financeshowtabmodule = array(4);
                     <div class="">
                       <h6 class="f-14"><?php echo $ratingsred['total_paid']; ?>% Paid</h6>
                       <div class="progress progress-xs mb-1">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 0%;"
-                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Vendor Payment Progress"></div>
+                        <progress class="progress-bar progress-bar-danger" value="0" max="100" style="width: 0%;" aria-label="Vendor Payment Progress"></progress>
                       </div>
                       <p class="f-10 m-0"><?php echo $ratingsred['total_paid']; ?> paid of
                         <?php echo $ratingsred['total_pending']; ?></p>
@@ -617,7 +615,7 @@ $financeshowtabmodule = array(4);
                   <td class="f-10 white-space-normal"><?php echo $ratingsred['recommended_action']; ?></td>
                 </tr>
 
-                <tr bgcolor="#eeeeee">
+                <tr style="background-color: #eeeeee;">
                   <th scope="col" colspan="9">
                     <table class="table table-bordered table-sm f-13">
                       <tr>
@@ -651,7 +649,7 @@ $financeshowtabmodule = array(4);
                   </th>
                 </tr>
 
-                <tr bgcolor="#eeeeee">
+                <tr style="background-color: #eeeeee;">
                   <th scope="col" colspan="9">
                     <table class="table table-bordered table-sm f-13 text-white">
                       <tr class="header-row" onclick="toggleTable(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTable(this);}">
@@ -663,7 +661,7 @@ $financeshowtabmodule = array(4);
 
                       <tr class="data-row">
                         <td class="text-white">Opening Balance</td>
-                        <td class="text-white" colspan="2" align="right">
+                        <td class="text-white text-end text-right" colspan="2" style="text-align: right;">
                           <?php echo $vendor_payment_ratings['ledger_opening'] != "" ? $vendor_payment_ratings['ledger_opening'] : 0; ?>
                         </td>
                       </tr>
@@ -671,7 +669,7 @@ $financeshowtabmodule = array(4);
 
                       <tr class="data-row">
                         <td class="text-white">Closing Balance</td>
-                        <td class="text-white" colspan="2" align="right">
+                        <td class="text-white text-end text-right" colspan="2" style="text-align: right;">
                           <?php echo $vendor_payment_ratings['ledger_closing'] != "" ? $vendor_payment_ratings['ledger_closing'] : 0; ?>
                           (Receivable)</td>
                       </tr>
@@ -754,7 +752,7 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
               <tbody>
-                <tr class="text-white" bgcolor="#333333">
+                <tr class="text-white" style="background-color: #333333;">
                   <th scope="col" class="text-white">#</th>
                   <th scope="col" class="text-white">Customer</th>
                   <th scope="col" class="text-white">AR Status</th>
@@ -789,8 +787,7 @@ $financeshowtabmodule = array(4);
                       <div class="">
                         <h6 class="f-14"><?php echo $ratingsres['total_paid']; ?>% collected</h6>
                         <div class="progress progress-xs mb-1">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 0%;"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Customer Collection Progress"></div>
+                          <progress class="progress-bar progress-bar-danger" value="0" max="100" style="width: 0%;" aria-label="Customer Collection Progress"></progress>
                         </div>
                         <p class="f-10 m-0"><?php echo $ratingsres['total_paid']; ?> of
                           <?php echo $ratingsres['total_pending']; ?></p>
@@ -803,7 +800,7 @@ $financeshowtabmodule = array(4);
                     <td class="text-danger"><?php echo $ratingsres['pct_of_total']; ?>%</td>
                     <td class="f-10"><?php echo $ratingsres['recommended_action']; ?></td>
                   </tr>
-                  <tr bgcolor="#eeeeee">
+                  <tr style="background-color: #eeeeee;">
                     <th scope="col" colspan="9">
                       <table class="table table-bordered table-sm f-13">
                         <tr>
@@ -813,7 +810,7 @@ $financeshowtabmodule = array(4);
                           </th>
                         </tr>
                         <?php foreach ($ratingsres['invoices_detail'] as $invoicesdetail) { ?>
-                          <tr bgcolor="#f6f7f8">
+                          <tr style="background-color: #f6f7f8;">
                             <th scope="col" colspan="5" class="f-12 bg-info">
                               <i class="fa fa-file-text-o m-r-5"></i>
                               <?php echo $invoicesdetail['invoice_number'] . "  " . $invoicesdetail['invoice_date']; ?>
@@ -860,8 +857,7 @@ $financeshowtabmodule = array(4);
                 <p class="text-success m-b-0 f-w-600 f-12">Overall Financial Health Score</p>
                 <h6><?php echo $finance['health_status']; ?></h6>
                 <div class="progress progress-xs mb-1">
-                  <div class="progress-bar progress-bar-success" role="progressbar" style="width: 50%;"
-                    aria-valuenow="50" aria-valuemin="50" aria-valuemax="100" aria-label="Financial Health Score"></div>
+                  <progress class="progress-bar progress-bar-success" value="50" max="100" style="width: 50%;" aria-label="Financial Health Score"></progress>
                 </div>
               </div>
             </div>
@@ -874,7 +870,7 @@ $financeshowtabmodule = array(4);
           <h4 class="f-18 f-w-600 mt-4">Key Metrics Snapshot</h4>
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#333333" class="text-white">
+              <tr class="text-white" style="background-color: #333333;">
                 <th scope="col" class="text-white">Category</th>
                 <th scope="col" class="text-white">Metric</th>
                 <th scope="col" class="text-white">Value</th>
@@ -885,7 +881,6 @@ $financeshowtabmodule = array(4);
                   <td><?php echo $metrics_snapshot['category']; ?></td>
                   <td><?php echo $metrics_snapshot['metric']; ?></td>
                   <td><?php echo $metrics_snapshot['value']; ?></td>
-                  <!-- <td><i class="ti-angle-<?php ?>"></i></td> -->
                   <td><span class="badge badge-inverse-success"><i class="fa fa-check f-10"></i>
                       <?php echo $metrics_snapshot['status']; ?></span></td>
                 </tr>
@@ -962,7 +957,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#333333" class="text-white">
+              <tr class="text-white" style="background-color: #333333;">
                 <th scope="col" colspan="3" class="text-white">Key P&L Figures</th>
               </tr>
               <tr>
@@ -1054,7 +1049,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#333333" class="text-white">
+              <tr class="text-white" style="background-color: #333333;">
                 <th scope="col" colspan="3" class="text-white">Operating Activities Detail</th>
               </tr>
               <tr>
@@ -1073,7 +1068,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#333333" class="text-white">
+              <tr class="text-white" style="background-color: #333333;">
                 <th scope="col" colspan="3" class="text-white">Investing Activities Detail</th>
               </tr>
               <tr>
@@ -1092,7 +1087,7 @@ $financeshowtabmodule = array(4);
           </div>
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
-              <tr bgcolor="#333333" class="text-white">
+              <tr class="text-white" style="background-color: #333333;">
                 <th scope="col" colspan="3" class="text-white"> Financing Activities Detail</th>
               </tr>
               <tr>

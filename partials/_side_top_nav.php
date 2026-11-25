@@ -1,5 +1,5 @@
 <?php
-function menudisplaytop($menuarray,$type){
+function menudisplaytop($menuarray){
     $str = '<ul class="pcoded-submenu">';
     foreach ($menuarray as $menuarrayvalue) {
         $child = count($menuarrayvalue['child']);
@@ -11,7 +11,7 @@ function menudisplaytop($menuarray,$type){
 
         $str.='</a>';
         if(count($menuarrayvalue['child'])>0){
-            $str.=menudisplaytop($menuarrayvalue['child'],'right');
+            $str.=menudisplaytop($menuarrayvalue['child']);
         }
         $str.='</li>';
     }
@@ -64,17 +64,17 @@ function menudisplaytop($menuarray,$type){
             <li class="pcoded-hasmenu">
                 <a href="<?php echo $link; ?>" class="waves-effect waves-dark">
                     <span class="pcoded-micon">
-			<?php if(strpos($listnav['Menu_Icon'], "svg")){ ?>
+            <?php if(strpos($listnav['Menu_Icon'], "svg")){ ?>
                             <span class="svg-icon menu-icon">
                                 <?php echo $listnav['Menu_Icon']; ?>
                             </span>
                         <?php }else{ ?>
                             <i class="<?php echo $listnav['Menu_Icon']; ?> btn waves-effect waves-light btn-primary btn-icon"></i>
                         <?php } ?>
-		   </span>
+           </span>
                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                 </a>
-                <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');
+                <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child']);
                 } ?>
             </li>
             <?php }
