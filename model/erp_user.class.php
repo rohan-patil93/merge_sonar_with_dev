@@ -23,6 +23,9 @@ interface ErpConstants {
     public const AND_PO_COMPANY_ID = " AND po.company_id = '";
     public const AS_PERIOD = " AS period";
     public const DATE_1970_01_01 = "1970-01-01";
+    public const AND_TX_DATE_BETWEEN = "' AND transaction_date BETWEEN '";
+    public const WHERE_SI_ACTIVE_COMPANY = " WHERE si.is_active = 0 AND si.company_id = '";
+    public const SQL_AND_SPACE = "' AND ";
 }
 
 trait ErpInventoryReportsTrait {
@@ -31,7 +34,7 @@ trait ErpInventoryReportsTrait {
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND tl.document_date >= '".$get['from_date']."' . ErpConstants::AND_TL_DOC_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND tl.document_date >= '".$get['from_date'].ErpConstants::AND_TL_DOC_DATE_LE.$get['to_date']."'";
         }
         $query = "SELECT
         it.id item_id,
@@ -80,7 +83,7 @@ GROUP BY tl.item_id";
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."'";
         }
         $query = "SELECT it.id item_id, it.sku, it.item_name, si.pending_qty qty, so.id so_id, so.transaction_number  FROM sales_orders so, so_items si, items it WHERE  so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = 199 AND si.pending_qty > 0 AND so.is_active = 0 AND si.is_active =0  ".$whr.ErpConstants::GROUP_BY_SI_ITEM_ID;
         $return['query'] = $query;
@@ -119,7 +122,7 @@ FROM    item_ledger_st tl,
 WHERE     tl.company_id = it.company_id
 AND     tl.company_id =".$get['company_id']."
 AND     tl.item_id = it.id
-AND     tl.document_date >= '".$get['from_date']."' . ErpConstants::AND_TL_DOC_DATE_LE . '".$get['to_date']."'
+AND     tl.document_date >= '".$get['from_date'].ErpConstants::AND_TL_DOC_DATE_LE.$get['to_date']."'
 GROUP BY tl.item_id";
 
         $return['query'] = $query;
@@ -139,7 +142,7 @@ GROUP BY tl.item_id";
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."'";
         }
         $query = "SELECT it.id item_id, it.sku, it.item_name, si.pending_qty qty, si.item_amount , si.pending_qty * si.item_amount total,  so.id so_id, so.transaction_number  FROM purchase_orders so, po_items si, items it WHERE  so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = 0 AND so.is_active = 0 AND si.is_active =0  ".$whr.ErpConstants::GROUP_BY_SI_ITEM_ID;
         $return['query'] = $query;
@@ -153,7 +156,7 @@ GROUP BY tl.item_id";
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."'";
         }
         $query = "SELECT it.id item_id, it.sku, it.item_name, si.pending_qty qty, so.id so_id, so.transaction_number, it.purchase_price, it.sale_price, it.sale_price-it.purchase_price margin, (it.sale_price*0.18)+it.sale_price salewithprice   FROM sales_orders so, so_items si, items it WHERE  so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = 199 AND si.pending_qty > 0 AND so.is_active = 0 AND si.is_active =0  ".$whr.ErpConstants::GROUP_BY_SI_ITEM_ID;
         $return['query'] = $query;
@@ -167,7 +170,7 @@ GROUP BY tl.item_id";
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND tl.document_date >= '".$get['from_date']."' . ErpConstants::AND_TL_DOC_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND tl.document_date >= '".$get['from_date'].ErpConstants::AND_TL_DOC_DATE_LE.$get['to_date']."'";
         }
         $query = "SELECT it.id item_id, it.sku, it.item_name, it.purchase_price, sum(tl.in_qty) in_qty, sum(tl.out_qty) out_qty, 0 ord_qty, 0 sh_qty, 0 cm_qty  FROM item_ledger_st tl, items it WHERE tl.company_id = it.company_id AND tl.company_id =".$get['company_id']." AND tl.item_id = it.id ".$whr." GROUP BY tl.item_id";
         $return['query'] = $query;
@@ -181,7 +184,7 @@ GROUP BY tl.item_id";
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND tl.document_date >= '".$get['from_date']."' . ErpConstants::AND_TL_DOC_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND tl.document_date >= '".$get['from_date'].ErpConstants::AND_TL_DOC_DATE_LE.$get['to_date']."'";
         }
         $query = "SELECT it.id item_id, it.sku, it.item_name, it.purchase_price, tl.in_qty, tl.out_qty, tl.document_date_time, tl.document_type, tl.document_no, it.purchase_price, tl.in_value, tl.out_value FROM item_ledger_st tl, items it, item_lot_nos iln WHERE tl.company_id = it.company_id AND tl.company_id = ".$get['company_id']." AND tl.item_id = it.id AND it.id = iln.item_id AND tl.document_no = iln.transaction_id AND tl.document_type = iln.transaction_table" . $whr;
         $return['query'] = $query;
@@ -196,9 +199,9 @@ GROUP BY tl.item_id";
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."'";
         }
-        $query = "SELECT it.id item_id, it.sku, it.item_name, sum(si.item_quantity) qty, sum(si.item_amount) total FROM purchase_invoices so, pi_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id'].ErpConstants::AND_SI_ITEM_ID_IT.ST_APPROVED."' . ErpConstants::AND_SO_SI_IS_ACTIVE_0 . '".$whr.ErpConstants::GROUP_BY_SI_ITEM_ID;
+        $query = "SELECT it.id item_id, it.sku, it.item_name, sum(si.item_quantity) qty, sum(si.item_amount) total FROM purchase_invoices so, pi_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id'].ErpConstants::AND_SI_ITEM_ID_IT.ST_APPROVED.ErpConstants::AND_SO_SI_IS_ACTIVE_0.$whr.ErpConstants::GROUP_BY_SI_ITEM_ID;
         $return['query'] = $query;
         $data = $callConfig->getAllRows($query);
         $return['data']= $data;
@@ -210,7 +213,7 @@ GROUP BY tl.item_id";
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."'";
         }
         $query = "SELECT  so.transaction_date, so.party_name, so.party_id, sum(si.item_quantity) qty,  so.transaction_number, po.transaction_number po_transaction_number FROM goods_receipt_notes so, grn_items si, items it,purchase_orders po WHERE  so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id = po.company_id AND  so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.ref_id = po.id AND so.current_status = 199 AND so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.transaction_id";
         $return['query'] = $query;
@@ -224,7 +227,7 @@ GROUP BY tl.item_id";
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."'";
         }
         $query = "SELECT  so.transaction_date, so.party_name, so.party_id, sum(si.item_quantity) qty, so.transaction_number, sp.name status_name FROM purchase_orders so, po_items si, status_progress sp WHERE  so.company_id = si.company_id AND so.company_id = sp.company_id AND so.company_id =".$get['company_id']."  AND so.id = si.transaction_id AND  so.current_status = sp.status AND  so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.transaction_id";
         $return['query'] = $query;
@@ -380,7 +383,7 @@ trait ErpVendorApReportsTrait {
 
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND  pi.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_PI_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND  pi.transaction_date >= '".$get['from_date'].ErpConstants::AND_PI_TX_DATE_LE.$get['to_date']."'";
         }
         if($vendor_ids != ''){
             $whr .= " AND v.id IN ($vendor_ids) ";
@@ -421,7 +424,7 @@ trait ErpVendorApReportsTrait {
 
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " pi.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_PI_TX_DATE_LE . '".$get['to_date']."' AND ";
+            $whr = " pi.transaction_date >= '".$get['from_date'].ErpConstants::AND_PI_TX_DATE_LE.$get['to_date']."' AND ";
         }
         if($vendor_ids != ''){
             $whr .= " v.id IN ($vendor_ids) AND ";
@@ -467,7 +470,7 @@ trait ErpVendorApReportsTrait {
 
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " cn.transaction_date >= '".$get['from_date']."' AND cn.transaction_date <= '".$get['to_date']."' AND ";
+            $whr = " cn.transaction_date >= '".$get['from_date'].ErpConstants::AND_PI_TX_DATE_LE.$get['to_date'].ErpConstants::SQL_AND_SPACE;
         }
         if($vendor_ids != ''){
             $whr .= " v.id IN ($vendor_ids) AND ";
@@ -511,7 +514,7 @@ trait ErpVendorApReportsTrait {
 
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " p.payment_date >= '".$get['from_date']."' . ErpConstants::AND_P_PAY_DATE_LE . '".$get['to_date']."' AND ";
+            $whr = " p.payment_date >= '".$get['from_date'].ErpConstants::AND_P_PAY_DATE_LE.$get['to_date']."' AND ";
         }
         if($vendor_ids != ''){
             $whr .= " v.id IN ($vendor_ids) AND ";
@@ -554,7 +557,7 @@ trait ErpVendorApReportsTrait {
 
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " po.transaction_date >= '".$get['from_date']."' AND po.transaction_date <= '".$get['to_date']."' AND ";
+            $whr = " po.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date'].ErpConstants::SQL_AND_SPACE;
         }
         if($vendor_ids != ''){
             $whr .= " v.id IN ($vendor_ids) AND ";
@@ -775,7 +778,7 @@ trait ErpVendorApReportsTrait {
         $to_date   = $get['to_date'] ?? "";
         $whr = "";
         if($from_date != "" && $to_date != ""){
-            $whr .= " AND so.transaction_date >= '".$from_date."' . ErpConstants::AND_SO_TX_DATE_LE . '".$to_date."' ";
+            $whr .= " AND so.transaction_date >= '".$from_date.ErpConstants::AND_SO_TX_DATE_LE.$to_date."' ";
         }
         // SQL to calculate shortage
         $listsql = "SELECT i.id item_id, i.item_name, COALESCE(SUM(soi.item_quantity), 0) AS required_qty, COALESCE(MAX(bal.closing_qty), 0) AS available_qty, (COALESCE(SUM(soi.item_quantity), 0) - COALESCE(MAX(bal.closing_qty), 0)) AS shortage_qty FROM so_items soi
@@ -851,7 +854,7 @@ trait ErpKittingProductionTrait {
             return ['sql' => $tranitmsql, 'rows' => $callConfig->getAllRows($tranitmsql)];
         }
         $fieldarray  = $this->toGetDynamicTables($transaction_table,$get['page_option']);
-        $tranitmsql = "SELECT item_id, item_name, SUM(item_quantity) as sum_item_quantity FROM ".$fieldarray[$transaction_table]['item']." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$transaction_id."' AND is_active = 0 GROUP BY item_id, item_name";
+        $tranitmsql = "SELECT item_id, item_name, SUM(item_quantity) as sum_item_quantity FROM ".$fieldarray[$transaction_table]['item'].ErpConstants::WHERE_COMPANY_ID.$get['company_id'].ErpConstants::AND_TRANSACTION_ID.$transaction_id.ErpConstants::AND_IS_ACTIVE_0_COMPACT." GROUP BY item_id, item_name";
         return ['sql' => $tranitmsql, 'rows' => $callConfig->getAllRows($tranitmsql), 'fieldarray' => $fieldarray];
     }
 
@@ -951,7 +954,10 @@ trait ErpKittingProductionTrait {
         }
     }
 
-    private function applyKittingChildMovement($transaction_table, $child_trans_table, $itemres, $res_parent, $mainitem, $aures, $day_rate, $company_id) {
+    private function applyKittingChildMovement($context, $itemres, $res_parent, $mainitem, $aures, $day_rate) {
+        $transaction_table = $context['transaction_table'];
+        $child_trans_table = $context['child_trans_table'];
+        $company_id = $context['company_id'];
         global $callConfig;
         $len = array(
             'company_id' => $company_id,
@@ -1038,6 +1044,26 @@ trait ErpKittingProductionTrait {
         return $itemaccount_code;
     }
 
+    private function checkStockErrors($transactionitemsdetail, $stocknotcheckrequird, $item_wa_balances) {
+        $errorthrow = array();
+        foreach($transactionitemsdetail as $itmid => $itmdetails){
+            if(!isset($stocknotcheckrequird[$itmid])){
+                if(isset($item_wa_balances[$itmid])){
+                    $balancedetail = $item_wa_balances[$itmid];
+                    $sum_item_quantity = $itmdetails->sum_item_quantity;
+                    if($balancedetail->closing_qty < $sum_item_quantity){
+                        $itmdetails->closing_qty = $balancedetail->closing_qty;
+                        $errorthrow[] = $itmdetails;
+                    }
+                }else{
+                    $itmdetails->closing_qty = 0;
+                    $errorthrow[] = $itmdetails;
+                }
+            }
+        }
+        return $errorthrow;
+    }
+
     public function getStockBalanceAvailability($get){
         global $callConfig;
         $return['get']= $get;
@@ -1084,21 +1110,7 @@ trait ErpKittingProductionTrait {
                 $stocknotcheckrequird[$balitem->id]= $balitem->id;
             }
         }
-        foreach($transactionitemsdetail as $itmid => $itmdetails){
-            if(!isset($stocknotcheckrequird[$itmid])){
-                if(isset($item_wa_balances[$itmid])){
-                    $balancedetail = $item_wa_balances[$itmid];
-                    $sum_item_quantity = $itmdetails->sum_item_quantity;
-                    if($balancedetail->closing_qty < $sum_item_quantity){
-                        $itmdetails->closing_qty = $balancedetail->closing_qty;
-                        $errorthrow[] = $itmdetails;
-                    }
-                }else{
-                    $itmdetails->closing_qty = 0;
-                    $errorthrow[] = $itmdetails;
-                }
-            }
-        }
+        $errorthrow = $this->checkStockErrors($transactionitemsdetail, $stocknotcheckrequird, $item_wa_balances);
         $return['errorthrow'] = array('details'=>$errorthrow,'errorcount'=>count((array)$errorthrow));
         return $return;
 
@@ -1220,55 +1232,9 @@ trait ErpKittingProductionTrait {
 
         $return['transaction_id'] = $transaction_id;
 
-        // Build components from nested or parallel arrays
-        $components = [];
-        if (isset($post['components']) && is_array($post['components'])) {
-            $components = $post['components'];
-        } elseif (isset($post['component_item']) && is_array($post['component_item'])) {
-            $count = count($post['component_item']);
-            for ($i = 0; $i < $count; $i++) {
-                $components[] = array(
-                    'component_items_ids' => isset($post['component_items_ids'][$i]) ? $post['component_items_ids'][$i] : null,
-                    'item_id' => $post['component_item'][$i],
-                    'uom_id' => $post['component_uom'][$i],
-                    'quantity' => $post['component_quantity'][$i],
-                    'component_day_rate' => $post['component_day_rate'][$i],
-                    'component_total' => $post['component_total'][$i]
-                );
-            }
-        }
+        $components = $this->parseKittingComponents($post);
         $return['components'] = $components;
-
-        // Process child rows
-        $childResults = array();
-        foreach ($components as $component) {
-            $childData = array(
-                'item_id' => $component['item_id'],
-                'uom_id' => $component['uom_id'],
-                'quantity' => $component['quantity'],
-                'component_day_rate' => $component['component_day_rate'],
-                'component_total' => $component['component_total'],
-                'is_active' => 0,
-                'transaction_id'=>$transaction_id
-            );
-
-            // Check if this is an update or insert
-            if ($component['component_items_ids'] != "") {
-                // Update existing component
-                $childData['updated_by'] =  $get['user_id'];
-                   $childData['updated_date'] = date(ErpConstants::DATE_FORMAT_HIS);
-                $childResults['art'][] = $childData;
-                $childResults['ins'] = $callConfig->updateRecord('dekitting_items', $childData, 'id', $component['component_items_ids']);
-                $updatedComponentIds[] = $component['component_items_ids'];
-            } else {
-                // Insert new component
-                $childData['company_id'] =  $get['company_id'];
-                $childData['created_by'] =  $get['user_id'];
-                   $childData['created_date'] = date(ErpConstants::DATE_FORMAT_HIS);
-                   $childResults['art'][] = $childData;
-                $childResults['ins'] = $callConfig->insertRecord('dekitting_items', $childData);
-            }
-        }
+        $childResults = $this->saveKittingChildComponents($components, $transaction_id, 'dekitting_items', $get);
         $return['child_results'] = $childResults;
         return $return;
     }
@@ -1307,7 +1273,6 @@ trait ErpKittingProductionTrait {
             $updateData = array('is_active' => null);
             $updateResult = $callConfig->updateRecord('kitting_items', $updateData, '', '', $whr);
             $return['update_items_is_active_null'] = $updateResult;
-            $updatedComponentIds = array();
         } else {
             // Add creation fields for new record
             $parentData['is_active'] = 0;
@@ -1348,7 +1313,7 @@ trait ErpKittingProductionTrait {
         $ausql = "SELECT au.*, (SELECT department_id FROM cost_centers cc WHERE au.company_id = cc.company_id AND au.cost_center = cc.id AND au.is_active = cc.is_active) as department_id FROM application_users au WHERE au.company_id = '" . $get['company_id'] . ErpConstants::AND_ID_EQ . $get['user_id'] . ErpConstants::AND_IS_ACTIVE_0;
         $aures = $callConfig->getRow($ausql);
 
-        $sql = "SELECT * FROM ".$transaction_table . " WHERE company_id = '" . $get['company_id'] . ErpConstants::AND_ID_EQ . $transaction_id . ErpConstants::AND_IS_ACTIVE_0_COMPACT;
+        $sql = "SELECT * FROM ".$transaction_table . ErpConstants::WHERE_COMPANY_ID . $get['company_id'] . ErpConstants::AND_ID_EQ . $transaction_id . ErpConstants::AND_IS_ACTIVE_0_COMPACT;
         $res_parent = $callConfig->getRow($sql);
         $itemids = array($res_parent->parent_item_id => $res_parent->parent_item_id);
         $mainitem = $this->togetitemvalues($res_parent->parent_item_id);
@@ -1356,7 +1321,7 @@ trait ErpKittingProductionTrait {
 
         $this->applyKittingParentMovement($transaction_table, $res_parent, $mainitem, $aures, $day_rate, $get['company_id']);
 
-        $sql1 = "SELECT * FROM ".$child_trans_table . " WHERE company_id = '" . $get['company_id'] . ErpConstants::AND_TRANSACTION_ID . $transaction_id . ErpConstants::AND_IS_ACTIVE_0_COMPACT;
+        $sql1 = "SELECT * FROM ".$child_trans_table . ErpConstants::WHERE_COMPANY_ID . $get['company_id'] . ErpConstants::AND_TRANSACTION_ID . $transaction_id . ErpConstants::AND_IS_ACTIVE_0_COMPACT;
         $res_child = $callConfig->getAllRows($sql1);
         $childitemdetail = array();
         foreach($res_child as $itemres){
@@ -1366,7 +1331,8 @@ trait ErpKittingProductionTrait {
             $itemres->mainitem = $child_mainitem;
             $itemres->day_rate = $child_day_rate;
             $childitemdetail[] = $itemres;
-            $this->applyKittingChildMovement($transaction_table, $child_trans_table, $itemres, $res_parent, $child_mainitem, $aures, $child_day_rate, $get['company_id']);
+            $kittingContext = array('transaction_table' => $transaction_table, 'child_trans_table' => $child_trans_table, 'company_id' => $get['company_id']);
+            $this->applyKittingChildMovement($kittingContext, $itemres, $res_parent, $child_mainitem, $aures, $child_day_rate);
         }
 
         $defaultaccount = DEFAULTACCOUNTS;
@@ -1533,9 +1499,9 @@ trait ErpSalesReportsTrait {
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."'";
         }
-        $query = "SELECT it.id item_id, it.sku, it.item_name, sum(si.item_quantity) qty, sum(si.item_amount) total FROM sales_invoices so, si_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id'].ErpConstants::AND_SI_ITEM_ID_IT.ST_APPROVED."' . ErpConstants::AND_SO_SI_IS_ACTIVE_0 . '".$whr.ErpConstants::GROUP_BY_SI_ITEM_ID;
+        $query = "SELECT it.id item_id, it.sku, it.item_name, sum(si.item_quantity) qty, sum(si.item_amount) total FROM sales_invoices so, si_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id'].ErpConstants::AND_SI_ITEM_ID_IT.ST_APPROVED.ErpConstants::AND_SO_SI_IS_ACTIVE_0.$whr.ErpConstants::GROUP_BY_SI_ITEM_ID;
         $return['query'] = $query;
         $data = $callConfig->getAllRows($query);
         $return['data']= $data;
@@ -1548,9 +1514,9 @@ trait ErpSalesReportsTrait {
         $return['get']= $get;
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."'";
         }
-        $query = "SELECT so.id, si.item_id, it.sku, it.item_name, sum(si.item_quantity) as order_qty FROM sales_orders so, so_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id'].ErpConstants::AND_SI_ITEM_ID_IT.ST_APPROVED."' . ErpConstants::AND_SO_SI_IS_ACTIVE_0 . '".$whr." GROUP BY so.id, si.item_id, it.sku, it.item_name";
+        $query = "SELECT so.id, si.item_id, it.sku, it.item_name, sum(si.item_quantity) as order_qty FROM sales_orders so, so_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id'].ErpConstants::AND_SI_ITEM_ID_IT.ST_APPROVED.ErpConstants::AND_SO_SI_IS_ACTIVE_0.$whr." GROUP BY so.id, si.item_id, it.sku, it.item_name";
         $return['query'] = $query;
         $data = $callConfig->getAllRows($query);
         $so_id_array = array();
@@ -1584,7 +1550,7 @@ trait ErpSalesReportsTrait {
 
         $whr = "";
         if($get['from_date']!="" && $get['to_date']!=""){
-            $whr = " AND  pi.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_PI_TX_DATE_LE . '".$get['to_date']."'";
+            $whr = " AND  pi.transaction_date >= '".$get['from_date'].ErpConstants::AND_PI_TX_DATE_LE.$get['to_date']."'";
         }
         if($vendor_ids != ''){
             $whr .= " AND v.id IN ($vendor_ids) ";
@@ -1766,9 +1732,9 @@ trait ErpSalesReportsTrait {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = $get['from_date'];
             $to   = $get['to_date'];
-            $whr .= " AND ((po.transaction_date BETWEEN '".$from."' . ErpConstants::AND_QUOTE . '".$to."')
-                        OR (grn.transaction_date BETWEEN '".$from."' . ErpConstants::AND_QUOTE . '".$to."')
-                        OR (inv.transaction_date BETWEEN '".$from."' . ErpConstants::AND_QUOTE . '".$to."'))";
+            $whr .= " AND ((po.transaction_date BETWEEN '".$from.ErpConstants::AND_QUOTE.$to."')
+                        OR (grn.transaction_date BETWEEN '".$from.ErpConstants::AND_QUOTE.$to."')
+                        OR (inv.transaction_date BETWEEN '".$from.ErpConstants::AND_QUOTE.$to."'))";
         }
         $listsql = "SELECT v.id AS vendor_id, po.party_name, v.display_name,
                 -- Total PO Value
@@ -1845,7 +1811,7 @@ trait ErpSalesReportsTrait {
                     SELECT id FROM purchase_orders
                     WHERE is_active = 0
                     AND company_id = '".$company_id."'
-                    AND transaction_date BETWEEN '".$from_date."' . ErpConstants::AND_QUOTE . '".$to_date."'
+                    AND transaction_date BETWEEN '".$from_date.ErpConstants::AND_QUOTE.$to_date."'
                 )
             LEFT JOIN grn_items gi
                 ON i.id = gi.item_id
@@ -1855,7 +1821,7 @@ trait ErpSalesReportsTrait {
                     SELECT id FROM goods_receipt_notes
                     WHERE is_active = 0
                     AND company_id = '".$company_id."'
-                    AND transaction_date BETWEEN '".$from_date."' . ErpConstants::AND_QUOTE . '".$to_date."'
+                    AND transaction_date BETWEEN '".$from_date.ErpConstants::AND_QUOTE.$to_date."'
                 )
             LEFT JOIN pi_items pii
                 ON i.id = pii.item_id
@@ -1865,7 +1831,7 @@ trait ErpSalesReportsTrait {
                     SELECT id FROM purchase_invoices
                     WHERE is_active = 0
                     AND company_id = '".$company_id."'
-                    AND transaction_date BETWEEN '".$from_date."' . ErpConstants::AND_QUOTE . '".$to_date."'
+                    AND transaction_date BETWEEN '".$from_date.ErpConstants::AND_QUOTE.$to_date."'
                 )
             WHERE ic.company_id = '".$company_id."' GROUP BY ic.id, ic.category_description ORDER BY total_invoice_value DESC ";
         $rows = $callConfig->getAllRows($listsql);
@@ -1888,7 +1854,7 @@ trait ErpSalesReportsTrait {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = $get['from_date'];
             $to   = $get['to_date'];
-            $whr .= " AND so.transaction_date BETWEEN '".$from."' . ErpConstants::AND_QUOTE . '".$to."' ";
+            $whr .= " AND so.transaction_date BETWEEN '".$from.ErpConstants::AND_QUOTE.$to."' ";
         }
 
         // ============================
@@ -1940,7 +1906,7 @@ trait ErpSalesReportsTrait {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = $get['from_date'];
             $to   = $get['to_date'];
-            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$from."' . ErpConstants::AND_QUOTE . '".$to."' ";
+            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$from.ErpConstants::AND_QUOTE.$to."' ";
         }
         // ============================
         // 🧾 Main Query
@@ -1976,7 +1942,7 @@ trait ErpSalesReportsTrait {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = $get['from_date'];
             $to   = $get['to_date'];
-            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$from."' . ErpConstants::AND_QUOTE . '".$to."' ";
+            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$from.ErpConstants::AND_QUOTE.$to."' ";
         }
         // ============================
         // 🧾 Main Query
@@ -1993,7 +1959,7 @@ trait ErpSalesReportsTrait {
                         WHERE so2.party_id = si.party_id
                         AND so2.is_active = 0
                         AND so2.company_id = si.company_id
-                        AND so2.transaction_date BETWEEN '$from' . ErpConstants::AND_QUOTE . '$to'
+                        AND so2.transaction_date BETWEEN '$from' AND '$to'
                     )
                     GROUP BY i.item_name ORDER BY SUM(soi2.item_quantity) DESC LIMIT 1
                 ) AS top_product
@@ -2019,7 +1985,7 @@ trait ErpSalesReportsTrait {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = $get['from_date'];
             $to   = $get['to_date'];
-            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$from."' . ErpConstants::AND_QUOTE . '".$to."' ";
+            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$from.ErpConstants::AND_QUOTE.$to."' ";
         }
         // ============================
         // 🧾 Main Query
@@ -2036,7 +2002,7 @@ trait ErpSalesReportsTrait {
                     WHERE si2.transaction_location_id = si.transaction_location_id
                     AND si2.is_active = 0
                     AND si2.company_id = si.company_id
-                    AND si2.transaction_date BETWEEN '$from' . ErpConstants::AND_QUOTE . '$to'
+                    AND si2.transaction_date BETWEEN '$from' AND '$to'
                     GROUP BY i.item_name
                     ORDER BY SUM(soi2.item_quantity) DESC
                     LIMIT 1
@@ -2128,8 +2094,8 @@ trait ErpSalesReportsTrait {
         $whrPayment = "";
         // 📅 Date filter
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $whrInvoice .= " AND si.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SI_TX_DATE_LE . '".$get['to_date']."' ";
-            $whrPayment .= " AND p.payment_date >= '".$get['from_date']."' . ErpConstants::AND_P_PAY_DATE_LE . '".$get['to_date']."' ";
+            $whrInvoice .= " AND si.transaction_date >= '".$get['from_date'].ErpConstants::AND_SI_TX_DATE_LE.$get['to_date']."' ";
+            $whrPayment .= " AND p.payment_date >= '".$get['from_date'].ErpConstants::AND_P_PAY_DATE_LE.$get['to_date']."' ";
         }
 
         $listsql = "SELECT c.id AS customer_id,c.display_name AS customer_name,
@@ -2185,8 +2151,8 @@ trait ErpSalesReportsTrait {
         $whrPayment = "";
         // 📅 Date filter
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $whrInvoice .= " AND si.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SI_TX_DATE_LE . '".$get['to_date']."' ";
-            $whrPayment .= " AND p.payment_date >= '".$get['from_date']."' . ErpConstants::AND_P_PAY_DATE_LE . '".$get['to_date']."' ";
+            $whrInvoice .= " AND si.transaction_date >= '".$get['from_date'].ErpConstants::AND_SI_TX_DATE_LE.$get['to_date']."' ";
+            $whrPayment .= " AND p.payment_date >= '".$get['from_date'].ErpConstants::AND_P_PAY_DATE_LE.$get['to_date']."' ";
         }
         $listsql = "SELECT c.id AS customer_id,c.display_name AS customer_name,
                 COALESCE(c.opening_balance, 0) AS opening_balance,
@@ -2238,8 +2204,8 @@ trait ErpSalesReportsTrait {
         $whrPayment = "";
         // 📅 Date filters
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $whrInvoice .= " AND si.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SI_TX_DATE_LE . '".$get['to_date']."' ";
-            $whrPayment .= " AND p.payment_date >= '".$get['from_date']."' . ErpConstants::AND_P_PAY_DATE_LE . '".$get['to_date']."' ";
+            $whrInvoice .= " AND si.transaction_date >= '".$get['from_date'].ErpConstants::AND_SI_TX_DATE_LE.$get['to_date']."' ";
+            $whrPayment .= " AND p.payment_date >= '".$get['from_date'].ErpConstants::AND_P_PAY_DATE_LE.$get['to_date']."' ";
         }
         $listsql = "SELECT c.id AS customer_id,c.display_name AS customer_name,
                 COALESCE(c.credit_limit, 0) AS credit_limit,
@@ -2289,23 +2255,27 @@ trait ErpSalesReportsTrait {
 
 trait ErpFinancialReportsTrait {
     private function calculateFreightCharges($additional_charges) {
-        $baseAmount = 0;
-        $taxAmount = 0;
-        if (!empty($additional_charges)) {
-            $charges = json_decode($additional_charges, true);
-            if (is_array($charges)) {
-                foreach ($charges as $ch) {
-                    if (is_array($ch)) {
-                        foreach ($ch as $key => $val) {
-                            if (is_numeric($val)) {
-                                if (stripos($key, '_tax_amount') !== false) {
-                                    $taxAmount += (float)$val;
-                                } elseif (stripos($key, '_amount') !== false) {
-                                    $baseAmount += (float)$val;
-                                }
-                            }
-                        }
-                    }
+        $baseAmount = 0.0;
+        $taxAmount = 0.0;
+        if (empty($additional_charges)) {
+            return ['base_amount' => 0.0, 'tax_amount' => 0.0, 'total_amount' => 0.0];
+        }
+        $charges = json_decode($additional_charges, true);
+        if (!is_array($charges)) {
+            return ['base_amount' => 0.0, 'tax_amount' => 0.0, 'total_amount' => 0.0];
+        }
+        foreach ($charges as $ch) {
+            if (!is_array($ch)) {
+                continue;
+            }
+            foreach ($ch as $key => $val) {
+                if (!is_numeric($val)) {
+                    continue;
+                }
+                if (stripos($key, '_tax_amount') !== false) {
+                    $taxAmount += (float)$val;
+                } elseif (stripos($key, '_amount') !== false) {
+                    $baseAmount += (float)$val;
                 }
             }
         }
@@ -2320,7 +2290,7 @@ trait ErpFinancialReportsTrait {
         $whr = "";
         // 📅 Date filters
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $whr .= " AND so.transaction_date >= '".$get['from_date']."' . ErpConstants::AND_SO_TX_DATE_LE . '".$get['to_date']."' ";
+            $whr .= " AND so.transaction_date >= '".$get['from_date'].ErpConstants::AND_SO_TX_DATE_LE.$get['to_date']."' ";
         }
         $listsql = "SELECT so.id AS order_id,so.transaction_number AS order_number,so.transaction_date AS order_date,c.id AS customer_id,c.display_name AS customer_name,
                 COALESCE(c.credit_limit, 0) AS credit_limit,
@@ -2397,7 +2367,7 @@ trait ErpFinancialReportsTrait {
         // 📅 Handle date filters
         $whr = "";
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $whr .= " AND p.payment_date BETWEEN '".$get['from_date']."' . ErpConstants::AND_QUOTE . '".$get['to_date']."' ";
+            $whr .= " AND p.payment_date BETWEEN '".$get['from_date'].ErpConstants::AND_QUOTE.$get['to_date']."' ";
         }
         $listsql = "SELECT c.display_name AS customer_name,p.payment_date,p.transaction_no AS payment_reference_no,p.payment_type AS payment_mode,COALESCE(p.amount, 0) AS payment_amount,
                 COALESCE(p.tds_amount, 0) AS tds_deductions,
@@ -2421,7 +2391,7 @@ trait ErpFinancialReportsTrait {
         // ✅ Dynamic WHERE for dates
         $whr = "";
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$get['from_date']."' . ErpConstants::AND_QUOTE . '".$get['to_date']."' ";
+            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$get['from_date'].ErpConstants::AND_QUOTE.$get['to_date']."' ";
         }
         // ✅ Main Query
         $query = "SELECT l.location_name AS region_name,
@@ -2454,7 +2424,7 @@ trait ErpFinancialReportsTrait {
         // ✅ Optional Date Filter
         $whr = "";
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$get['from_date']."' . ErpConstants::AND_QUOTE . '".$get['to_date']."' ";
+            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$get['from_date'].ErpConstants::AND_QUOTE.$get['to_date']."' ";
         }
         // ✅ Subquery for total gross (for contribution%)
         $totalGrossSubquery = "
@@ -2489,7 +2459,7 @@ trait ErpFinancialReportsTrait {
         // ✅ Date filter condition
         $whr = "";
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$get['from_date']."' . ErpConstants::AND_QUOTE . '".$get['to_date']."' ";
+            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$get['from_date'].ErpConstants::AND_QUOTE.$get['to_date']."' ";
         }
         // ✅ Report Level (customer / product)
         $level = isset($get['report_level']) ? strtolower($get['report_level']) : 'customer';
@@ -2532,7 +2502,7 @@ trait ErpFinancialReportsTrait {
         // ✅ Build WHERE condition
         $whr = " WHERE si.is_active = 0 AND si.company_id = '".$company_id."' ";
         if ($from_date && $to_date) {
-            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$from_date."' . ErpConstants::AND_QUOTE . '".$to_date."' ";
+            $whr .= ErpConstants::AND_SI_TX_DATE_BETWEEN.$from_date.ErpConstants::AND_QUOTE.$to_date."' ";
         }
         // ✅ Get invoice data with additional charges
         $query = "SELECT si.transaction_number, si.transaction_date, si.party_name, si.additional_charges
@@ -2567,7 +2537,7 @@ trait ErpFinancialReportsTrait {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to   = date('Y-m-d', strtotime($get['to_date']));
-            $whereDate = " AND so.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDate = " AND so.transaction_date BETWEEN '{$from}' AND '{$to}'";
         }
 
         $whereCompany = '';
@@ -2611,7 +2581,7 @@ trait ErpFinancialReportsTrait {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDate = ErpConstants::AND_SI_TX_DATE_BETWEEN . "{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDate = ErpConstants::AND_SI_TX_DATE_BETWEEN . "{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDate = " AND si.transaction_date = '{$date}'";
@@ -2673,7 +2643,7 @@ trait ErpFinancialReportsTrait {
             $whereCompany = ErpConstants::AND_PO_COMPANY_ID . $get['company_id'] . "' ";
         }
 
-        $sql = " SELECT  po.id AS purchase_order_id, po.transaction_number AS po_number, po.transaction_date AS po_date, po.party_name AS supplier_name, poi.item_id, poi.item_name, i.sku AS item_code, i.purchase_price AS list_price, poi.item_price AS ordered_price, gri.item_price AS actual_price, ROUND((gri.item_price - i.purchase_price), 2) AS variance_amount, ROUND(((gri.item_price - i.purchase_price) / i.purchase_price) * 100, 2) AS variance_percent, gri.item_quantity AS received_qty, ROUND((gri.item_quantity * (gri.item_price - i.purchase_price)), 2) AS total_variance_value, po.total_amount AS po_total, po.current_status, s.name AS status_name, s.background_color AS status_bg_color, s.color AS status_text_color, po.company_id FROM purchase_orders po INNER JOIN po_items poi ON po.id = poi.transaction_id LEFT JOIN goods_receipt_notes grn  ON grn.ref_id = po.id  AND grn.is_active = '0' LEFT JOIN grn_items gri ON grn.id = gri.transaction_id  AND gri.item_id = poi.item_id LEFT JOIN items i  ON poi.item_id = i.id LEFT JOIN status s ON po.current_status = s.name_value AND s.is_active = '0' WHERE po.is_active = '0' {$whereCompany} AND po.transaction_date BETWEEN '{$fromDate}' . ErpConstants::AND_QUOTE . '{$toDate}' ORDER BY po.transaction_date DESC, po.transaction_number ASC ";
+        $sql = " SELECT  po.id AS purchase_order_id, po.transaction_number AS po_number, po.transaction_date AS po_date, po.party_name AS supplier_name, poi.item_id, poi.item_name, i.sku AS item_code, i.purchase_price AS list_price, poi.item_price AS ordered_price, gri.item_price AS actual_price, ROUND((gri.item_price - i.purchase_price), 2) AS variance_amount, ROUND(((gri.item_price - i.purchase_price) / i.purchase_price) * 100, 2) AS variance_percent, gri.item_quantity AS received_qty, ROUND((gri.item_quantity * (gri.item_price - i.purchase_price)), 2) AS total_variance_value, po.total_amount AS po_total, po.current_status, s.name AS status_name, s.background_color AS status_bg_color, s.color AS status_text_color, po.company_id FROM purchase_orders po INNER JOIN po_items poi ON po.id = poi.transaction_id LEFT JOIN goods_receipt_notes grn  ON grn.ref_id = po.id  AND grn.is_active = '0' LEFT JOIN grn_items gri ON grn.id = gri.transaction_id  AND gri.item_id = poi.item_id LEFT JOIN items i  ON poi.item_id = i.id LEFT JOIN status s ON po.current_status = s.name_value AND s.is_active = '0' WHERE po.is_active = '0' {$whereCompany} AND po.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' ORDER BY po.transaction_date DESC, po.transaction_number ASC ";
         $reportData = $callConfig->getAllRows($sql);
         $result['price_variance_report'] = $reportData;
         $result['sql'] = $sql;
@@ -2703,7 +2673,7 @@ trait ErpFinancialReportsTrait {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDate = " AND r.payment_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDate = " AND r.payment_date BETWEEN '{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDate = " AND r.payment_date = '{$date}'";
@@ -2749,10 +2719,10 @@ trait ErpFinancialReportsTrait {
         $sql = "
             SELECT vendor_id, vendor_name, total_pos, total_invoices, total_spend, avg_po_value, ROUND((total_spend / grand_total.total_overall_spend) * 100, 2) AS percent_of_total
             FROM ( SELECT  po.party_id AS vendor_id, po.party_name AS vendor_name, COUNT(DISTINCT po.id) AS total_pos, COUNT(DISTINCT pi.id) AS total_invoices, ROUND(SUM(COALESCE(pi.total_amount, po.total_amount)), 2) AS total_spend, ROUND(AVG(COALESCE(po.total_amount, 0)), 2) AS avg_po_value
-            FROM purchase_orders po LEFT JOIN purchase_invoices pi ON pi.ref_id = po.id  AND pi.is_active = '0' WHERE  po.is_active = '0' AND po.transaction_date BETWEEN '{$fromDate}' . ErpConstants::AND_QUOTE . '{$toDate}' GROUP BY po.party_id, po.party_name ) AS vendor_summary CROSS JOIN (
+            FROM purchase_orders po LEFT JOIN purchase_invoices pi ON pi.ref_id = po.id  AND pi.is_active = '0' WHERE  po.is_active = '0' AND po.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' GROUP BY po.party_id, po.party_name ) AS vendor_summary CROSS JOIN (
             SELECT  ROUND(SUM(COALESCE(pi2.total_amount, po2.total_amount)), 2) AS total_overall_spend FROM purchase_orders po2
             LEFT JOIN purchase_invoices pi2 ON pi2.ref_id = po2.id AND pi2.is_active = '0'
-            WHERE po2.is_active = '0'  AND po2.transaction_date BETWEEN '{$fromDate}' . ErpConstants::AND_QUOTE . '{$toDate}' ) AS grand_total ORDER BY total_spend DESC LIMIT 10 ";
+            WHERE po2.is_active = '0'  AND po2.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' ) AS grand_total ORDER BY total_spend DESC LIMIT 10 ";
 
         $reportData = $callConfig->getAllRows($sql);
 
@@ -2783,8 +2753,8 @@ trait ErpFinancialReportsTrait {
         $sql = "
             SELECT po.party_id AS vendor_id, po.party_name AS vendor_name, ROUND(SUM(po.total_amount), 2) AS total_purchase_value,  ROUND(SUM(COALESCE(po.discount_amount, 0)), 2) AS eligible_discount,  ROUND(SUM(COALESCE(pi.discount_amount, 0)), 2) AS utilized_discount,  ROUND(SUM(COALESCE(po.discount_amount, 0)) - SUM(COALESCE(pi.discount_amount, 0)), 2) AS balance_discount, 0 AS eligible_rebate, 0 AS utilized_rebate, 0 AS balance_rebate,
             CASE  WHEN SUM(COALESCE(po.discount_amount, 0)) > 0 THEN  ROUND((SUM(COALESCE(pi.discount_amount, 0)) / SUM(COALESCE(po.discount_amount, 0))) * 100, 2) ELSE 0 END AS utilization_percent
-            FROM purchase_orders po LEFT JOIN purchase_invoices pi  ON pi.ref_id = po.id AND pi.is_active = '0' AND pi.transaction_date BETWEEN '{$fromDate}' . ErpConstants::AND_QUOTE . '{$toDate}'
-            WHERE  po.is_active = '0' AND po.transaction_date BETWEEN '{$fromDate}' . ErpConstants::AND_QUOTE . '{$toDate}' {$whereCompany} GROUP BY po.party_id, po.party_name ORDER BY total_purchase_value DESC ";
+            FROM purchase_orders po LEFT JOIN purchase_invoices pi  ON pi.ref_id = po.id AND pi.is_active = '0' AND pi.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}'
+            WHERE  po.is_active = '0' AND po.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' {$whereCompany} GROUP BY po.party_id, po.party_name ORDER BY total_purchase_value DESC ";
         $reportData = $callConfig->getAllRows($sql);
 
         $result['discount_rebate_utilization_report'] = $reportData;
@@ -2831,7 +2801,7 @@ class ErpUserClass extends userClass {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from_date = date('Y-m-d', strtotime($get['from_date']));
             $to_date = date('Y-m-d', strtotime($get['to_date']));
-            $whereDate = " AND vpi.transaction_date BETWEEN '{$from_date}' . ErpConstants::AND_QUOTE . '{$to_date}' ";
+            $whereDate = " AND vpi.transaction_date BETWEEN '{$from_date}' AND '{$to_date}' ";
         }
         $whereCompany = "";
         if (!empty($get['company_id'])) {
@@ -2889,8 +2859,8 @@ class ErpUserClass extends userClass {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDateCredit = " AND c.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
-            $whereDateDebit = " AND d.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDateCredit = " AND c.transaction_date BETWEEN '{$from}' AND '{$to}'";
+            $whereDateDebit = " AND d.transaction_date BETWEEN '{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDateCredit = " AND c.transaction_date = '{$date}'";
@@ -2921,7 +2891,7 @@ class ErpUserClass extends userClass {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDatePO = " AND po.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDatePO = " AND po.transaction_date BETWEEN '{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDatePO = " AND po.transaction_date = '{$date}'";
@@ -2948,7 +2918,7 @@ class ErpUserClass extends userClass {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDateGRN = " AND grn.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDateGRN = " AND grn.transaction_date BETWEEN '{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDateGRN = " AND grn.transaction_date = '{$date}'";
@@ -2978,7 +2948,7 @@ class ErpUserClass extends userClass {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDate = " AND inv.due_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDate = " AND inv.due_date BETWEEN '{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDate = " AND inv.due_date = '{$date}'";
@@ -3005,7 +2975,7 @@ class ErpUserClass extends userClass {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDate = " AND inv.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDate = " AND inv.transaction_date BETWEEN '{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDate = " AND inv.transaction_date = '{$date}'";
@@ -3066,9 +3036,9 @@ class ErpUserClass extends userClass {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDatePO = " AND po.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
-            $whereDateGRN = " AND grn.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
-            $whereDateINV = " AND pi.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDatePO = " AND po.transaction_date BETWEEN '{$from}' AND '{$to}'";
+            $whereDateGRN = " AND grn.transaction_date BETWEEN '{$from}' AND '{$to}'";
+            $whereDateINV = " AND pi.transaction_date BETWEEN '{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDatePO = " AND po.transaction_date = '{$date}'";
@@ -3107,7 +3077,7 @@ class ErpUserClass extends userClass {
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from = date('Y-m-d', strtotime($get['from_date']));
             $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDate = " AND pi.transaction_date BETWEEN '{$from}' . ErpConstants::AND_QUOTE . '{$to}'";
+            $whereDate = " AND pi.transaction_date BETWEEN '{$from}' AND '{$to}'";
         } elseif (!empty($get['date'])) {
             $date = date('Y-m-d', strtotime($get['date']));
             $whereDate = " AND pi.transaction_date = '{$date}'";
