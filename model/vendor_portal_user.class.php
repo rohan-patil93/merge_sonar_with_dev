@@ -384,7 +384,6 @@ public function getApplicationTickets($get)
         $inforid[$vendorres->user_id] = $vendorres->user_id;
         $inforid[$post['user_id']] = $post['user_id'];
         $notdataa['notification_users'] = $inforid;
-        $emails = $this->tosendnotifiations($notdataa);
         $this->tosendnotifiations($notdataa);
 
         $updateary = array('verification_profile_users' => json_encode($verification_profile_users), 'send_verification_profile_status' => 'Y', 'updated_by' => $post['user_id'], 'updated_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS), 'current_status' => ST_INPROGRESS);
@@ -533,7 +532,7 @@ public function getApplicationTickets($get)
 
 trait VendorPortalOperationsTrait
 {
-public function insertupdatevendorverificationdetails($get, $post)
+    public function insertupdatevendorverificationdetails($get, $post)
     {
         global $callConfig;
         $return = array();
@@ -560,115 +559,147 @@ public function insertupdatevendorverificationdetails($get, $post)
                 $vendor_verification = $decoded_vendor;
             }
         }
+
         if ($verification_type == "PAN") {
-            if (!empty($previousres->pan_no)) {
-                $existingHistory[] = ['date' => $now, 'field' => 'pan_no', 'value' => $previousres->pan_no];
-            }
-            $insertuserarray = ['company' => $post['company'], 'email' => $post['email'], 'company_id' => $get['company_id'], 'display_name' => $post['display_name'], 'pan_no' => $post['pan_no'], 'first_name' => $post['first_name'], 'middle_name' => $post['middle_name'], 'last_name' => $post['last_name'], 'previous_verifications' => $previousres->previous_verifications, 'business_type' => $post['company_type']];
-            if (empty($transaction_id)) {
-
-                $post['vendor_verifications'][$verification_type] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
-                $insertuserarray['vendor_verifications'] = json_encode($post['vendor_verifications']);
-                $insertuserarray['is_active'] = 0;
-                $insertuserarray['current_Status'] = 0;
-                $insertuserarray['created_by'] = $post['user_id'];
-                $insertuserarray['created_date'] = $now;
-                $res = $callConfig->insertRecord($transaction_table, $insertuserarray);
-                $return['LASTID'] = $res['LASTID'];
-            } else {
-                $vendor_verification[$verification_type] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
-                $updateary = ['previous_verifications' => json_encode($existingHistory), 'vendor_verifications' => json_encode($vendor_verification), 'pan_no' => $post['pan_no'], 'updated_by' => $post['user_id'], 'updated_date' => $now, 'business_type' => $post['company_type']];
-                $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
-                $return['LASTID'] = $transaction_id;
-            }
-            $return['res'] = $res;
+            $this->handlePanVerification($return, $previousres, $existingHistory, $vendor_verification, $post, $get, $transaction_table, $transaction_id, $now);
         } elseif ($verification_type == "MSME") {
-            if (!empty($previousres->msme_number)) {
-                $existingHistory[] = ['date' => $now, 'field' => 'msme_number', 'value' => $previousres->msme_number];
-            }
-            $vendor_verification[$verification_type] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
-            $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'msme_register_yes_no' => "Y", 'msme_number' => $post['msme_number'], 'updated_by' => $post['user_id'], 'updated_date' => $now];
-            $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
-            $return['res'] = $res;
+            $this->handleMsmeVerification($return, $previousres, $existingHistory, $vendor_verification, $post, $transaction_table, $transaction_id, $now);
         } elseif ($verification_type == "GSTIN") {
-            if (!empty($previousres->gstin)) {
-                $existingHistory[] = ['date' => $now, 'field' => 'gstin', 'value' => $previousres->gstin];
-            }
-            $vendor_verification[$verification_type] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
-            $state = $post['state'];
-            $statesql = "SELECT id, state_name, country_id FROM states WHERE company_id = '" . $post['company_id'] . "' AND state_name = '" . $state . VendorConstants::AND_IS_ACTIVE_0;
-            $stateres = $callConfig->getRow($statesql);
-            $city = $post['city'];
-            $location = $post['location'];
-            $citysql = "SELECT id, city_name FROM cities WHERE company_id = '" . $post['company_id'] . "' AND is_active = 0 AND ( city_name LIKE '%" . $city . "%' OR city_name LIKE '%" . $location . "%' )";
-            $cityres = $callConfig->getRow($citysql);
-            $shipping_country = $stateres->country_id;
-            $billing_country = $stateres->country_id;
-            $shipping_address = $post['address'];
-            $billing_address = $post['address'];
-            $billing_post_code = $post['post_code'];
-            $shipping_post_code = $post['post_code'];
-            $billing_state = $stateres->id;
-            $shipping_state = $stateres->id;
-            $billing_city = $cityres->id;
-            $shipping_city = $cityres->id;
-            $gstin = $post['gstin'];
-            $transaction_id = $post['transaction_id'];
-            $gst_type = $post['gst_type'];
-            $gst_default = $post['gst_default'];
-
-            if ($gst_type == "new") {
-                $is_default = ($gst_default == 'new') ? 'Y' : 'N';
-                $insertuserarray = ['company_id' => $post['company_id'], 'transaction_table' => $post['transaction_table'], 'customer_vendor_id' => $transaction_id, 'gstin' => $gstin, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'shipping_address' => $shipping_address, 'billing_address' => $billing_address, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'is_default' => $is_default, 'is_active' => 0, 'current_status' => 0, 'created_by' => $post['user_id'], 'created_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS),];
-                $callConfig->insertRecord('customer_vendor_gst_billing_details', $insertuserarray);
-                $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS),];
-                if ($is_default == 'Y') {
-                    $updateary = ['billing_address' => $billing_address, 'shipping_address' => $shipping_address, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'vendor_verifications' => json_encode($vendor_verification), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS)];
-                }
-                $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
-            } else {
-                $gstdetailsql = "SELECT id FROM customer_vendor_gst_billing_details WHERE company_id = '" . $post['company_id'] . "' AND gstin = '" . $gstin . VendorConstants::AND_IS_ACTIVE_0;
-                $gstdetail = $callConfig->getRow($gstdetailsql);
-                if ($gstdetail->id == "") {
-                    $insertuserarray = ['company_id' => $post['company_id'], 'transaction_table' => $post['transaction_table'], 'customer_vendor_id' => $transaction_id, 'gstin' => $gstin, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'shipping_address' => $shipping_address, 'billing_address' => $billing_address, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'is_default' => 'Y', 'is_active' => 0, 'current_status' => 0, 'created_by' => $post['user_id'], 'created_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS),];
-                    $callConfig->insertRecord('customer_vendor_gst_billing_details', $insertuserarray);
-                }
-                $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS), 'billing_address' => $billing_address, 'shipping_address' => $shipping_address, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city,];
-                $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
-            }
-            $return['res'] = $res;
+            $this->handleGstinVerification($return, $previousres, $existingHistory, $vendor_verification, $post, $transaction_table, $transaction_id);
         } elseif ($verification_type == "TAN") {
-            if (!empty($previousres->tan_number)) {
-                $existingHistory[] = ['date' => $now, 'field' => 'tan_number', 'value' => $previousres->tan_number];
-            }
-            $vendor_verification[$verification_type] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
-            $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'tan_number' => $post['tan_number'], 'updated_by' => $post['user_id'], 'updated_date' => $now];
-            $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
-            $return['res'] = $res;
+            $this->handleTanVerification($return, $previousres, $existingHistory, $vendor_verification, $post, $transaction_table, $transaction_id, $now);
         } elseif ($verification_type == "BANK") {
-            if (!empty($previousres->bank_account_no)) {
-                $existingHistory[] = ['date' => $now, 'field' => 'bank_account_no', 'value' => $previousres->bank_account_no];
-            }
-            if (!empty($previousres->ifsc_code)) {
-                $existingHistory[] = ['date' => $now, 'field' => 'ifsc_code', 'value' => $previousres->ifsc_code];
-            }
-            $vendor_verification[$verification_type] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
-            $ifsc_code = $post['ifsc_code'];
-            $bank_account_no = $post['bank_account_no'];
-            $bank_name = $post['bank_name'];
-            $account_type = $post['account_type'];
-            $updateary = array('vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'bank_name' => $bank_name, 'bank_account_no' => $bank_account_no, 'ifsc_code' => $ifsc_code, 'account_type' => $account_type, 'updated_by' => $post['user_id'], 'updated_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS));
-            $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
-            $return['res'] = $res;
+            $this->handleBankVerification($return, $previousres, $existingHistory, $vendor_verification, $post, $transaction_table, $transaction_id);
         }
 
         return $return;
     }
-    //End omkar vdocument verification code added -----
+
+    private function handlePanVerification(&$return, $previousres, &$existingHistory, &$vendor_verification, $post, $get, $transaction_table, $transaction_id, $now)
+    {
+        global $callConfig;
+        if (!empty($previousres->pan_no)) {
+            $existingHistory[] = ['date' => $now, 'field' => 'pan_no', 'value' => $previousres->pan_no];
+        }
+        $insertuserarray = ['company' => $post['company'], 'email' => $post['email'], 'company_id' => $get['company_id'], 'display_name' => $post['display_name'], 'pan_no' => $post['pan_no'], 'first_name' => $post['first_name'], 'middle_name' => $post['middle_name'], 'last_name' => $post['last_name'], 'previous_verifications' => $previousres->previous_verifications, 'business_type' => $post['company_type']];
+        if (empty($transaction_id)) {
+            $post['vendor_verifications'][$post['verification_type']] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
+            $insertuserarray['vendor_verifications'] = json_encode($post['vendor_verifications']);
+            $insertuserarray['is_active'] = 0;
+            $insertuserarray['current_Status'] = 0;
+            $insertuserarray['created_by'] = $post['user_id'];
+            $insertuserarray['created_date'] = $now;
+            $res = $callConfig->insertRecord($transaction_table, $insertuserarray);
+            $return['LASTID'] = $res['LASTID'];
+        } else {
+            $vendor_verification[$post['verification_type']] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
+            $updateary = ['previous_verifications' => json_encode($existingHistory), 'vendor_verifications' => json_encode($vendor_verification), 'pan_no' => $post['pan_no'], 'updated_by' => $post['user_id'], 'updated_date' => $now, 'business_type' => $post['company_type']];
+            $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
+            $return['LASTID'] = $transaction_id;
+        }
+        $return['res'] = $res;
+    }
+
+    private function handleMsmeVerification(&$return, $previousres, &$existingHistory, &$vendor_verification, $post, $transaction_table, $transaction_id, $now)
+    {
+        global $callConfig;
+        if (!empty($previousres->msme_number)) {
+            $existingHistory[] = ['date' => $now, 'field' => 'msme_number', 'value' => $previousres->msme_number];
+        }
+        $vendor_verification[$post['verification_type']] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
+        $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'msme_register_yes_no' => "Y", 'msme_number' => $post['msme_number'], 'updated_by' => $post['user_id'], 'updated_date' => $now];
+        $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
+        $return['res'] = $res;
+    }
+
+    private function handleGstinVerification(&$return, $previousres, &$existingHistory, &$vendor_verification, $post, $transaction_table, $transaction_id)
+    {
+        global $callConfig;
+        $now = date(VendorConstants::DATE_FORMAT_YMD_HIS);
+        if (!empty($previousres->gstin)) {
+            $existingHistory[] = ['date' => $now, 'field' => 'gstin', 'value' => $previousres->gstin];
+        }
+        $vendor_verification[$post['verification_type']] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
+        $state = $post['state'];
+        $statesql = "SELECT id, state_name, country_id FROM states WHERE company_id = '" . $post['company_id'] . "' AND state_name = '" . $state . VendorConstants::AND_IS_ACTIVE_0;
+        $stateres = $callConfig->getRow($statesql);
+        $city = $post['city'];
+        $location = $post['location'];
+        $citysql = "SELECT id, city_name FROM cities WHERE company_id = '" . $post['company_id'] . "' AND is_active = 0 AND ( city_name LIKE '%" . $city . "%' OR city_name LIKE '%" . $location . "%' )";
+        $cityres = $callConfig->getRow($citysql);
+        $shipping_country = $stateres->country_id;
+        $billing_country = $stateres->country_id;
+        $shipping_address = $post['address'];
+        $billing_address = $post['address'];
+        $billing_post_code = $post['post_code'];
+        $shipping_post_code = $post['post_code'];
+        $billing_state = $stateres->id;
+        $shipping_state = $stateres->id;
+        $billing_city = $cityres->id;
+        $shipping_city = $cityres->id;
+        $gstin = $post['gstin'];
+        $gst_type = $post['gst_type'];
+        $gst_default = $post['gst_default'];
+
+        if ($gst_type == "new") {
+            $is_default = ($gst_default == 'new') ? 'Y' : 'N';
+            $insertuserarray = ['company_id' => $post['company_id'], 'transaction_table' => $post['transaction_table'], 'customer_vendor_id' => $transaction_id, 'gstin' => $gstin, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'shipping_address' => $shipping_address, 'billing_address' => $billing_address, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'is_default' => $is_default, 'is_active' => 0, 'current_status' => 0, 'created_by' => $post['user_id'], 'created_date' => $now];
+            $callConfig->insertRecord('customer_vendor_gst_billing_details', $insertuserarray);
+            $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => $now];
+            if ($is_default == 'Y') {
+                $updateary = ['billing_address' => $billing_address, 'shipping_address' => $shipping_address, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'vendor_verifications' => json_encode($vendor_verification), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => $now];
+            }
+            $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
+        } else {
+            $gstdetailsql = "SELECT id FROM customer_vendor_gst_billing_details WHERE company_id = '" . $post['company_id'] . "' AND gstin = '" . $gstin . VendorConstants::AND_IS_ACTIVE_0;
+            $gstdetail = $callConfig->getRow($gstdetailsql);
+            if ($gstdetail->id == "") {
+                $insertuserarray = ['company_id' => $post['company_id'], 'transaction_table' => $post['transaction_table'], 'customer_vendor_id' => $transaction_id, 'gstin' => $gstin, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'shipping_address' => $shipping_address, 'billing_address' => $billing_address, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city, 'is_default' => 'Y', 'is_active' => 0, 'current_status' => 0, 'created_by' => $post['user_id'], 'created_date' => $now];
+                $callConfig->insertRecord('customer_vendor_gst_billing_details', $insertuserarray);
+            }
+            $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'gstin' => $gstin, 'user_id' => $post['user_id'], 'updated_by' => $post['user_id'], 'updated_date' => $now, 'billing_address' => $billing_address, 'shipping_address' => $shipping_address, 'shipping_country' => $shipping_country, 'billing_country' => $billing_country, 'billing_post_code' => $billing_post_code, 'shipping_post_code' => $shipping_post_code, 'billing_state' => $billing_state, 'shipping_state' => $shipping_state, 'billing_city' => $billing_city, 'shipping_city' => $shipping_city];
+            $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
+        }
+        $return['res'] = $res;
+    }
+
+    private function handleTanVerification(&$return, $previousres, &$existingHistory, &$vendor_verification, $post, $transaction_table, $transaction_id, $now)
+    {
+        global $callConfig;
+        if (!empty($previousres->tan_number)) {
+            $existingHistory[] = ['date' => $now, 'field' => 'tan_number', 'value' => $previousres->tan_number];
+        }
+        $vendor_verification[$post['verification_type']] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
+        $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'tan_number' => $post['tan_number'], 'updated_by' => $post['user_id'], 'updated_date' => $now];
+        $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
+        $return['res'] = $res;
+    }
+
+    private function handleBankVerification(&$return, $previousres, &$existingHistory, &$vendor_verification, $post, $transaction_table, $transaction_id)
+    {
+        global $callConfig;
+        $now = date(VendorConstants::DATE_FORMAT_YMD_HIS);
+        if (!empty($previousres->bank_account_no)) {
+            $existingHistory[] = ['date' => $now, 'field' => 'bank_account_no', 'value' => $previousres->bank_account_no];
+        }
+        if (!empty($previousres->ifsc_code)) {
+            $existingHistory[] = ['date' => $now, 'field' => 'ifsc_code', 'value' => $previousres->ifsc_code];
+        }
+        $vendor_verification[$post['verification_type']] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
+        $ifsc_code = $post['ifsc_code'];
+        $bank_account_no = $post['bank_account_no'];
+        $bank_name = $post['bank_name'];
+        $account_type = $post['account_type'];
+        $updateary = array('vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'bank_name' => $bank_name, 'bank_account_no' => $bank_account_no, 'ifsc_code' => $ifsc_code, 'account_type' => $account_type, 'updated_by' => $post['user_id'], 'updated_date' => $now);
+        $res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
+        $return['res'] = $res;
+    }
+
     public function insertVendorandVendorRegistersSynchAPI($get)
     {
         global $callConfig;
         $return = array();
+        $return['get'] = $get;
         $postdata = array();
         $notupdateinsert = array();
         $transaction = array();
@@ -682,38 +713,43 @@ public function insertupdatevendorverificationdetails($get, $post)
         $fieldgetsql = "SHOW COLUMNS FROM " . $transaction_table;
         $fieldgetres = $callConfig->getAllRows($fieldgetsql);
         $dataDev = $this->getApiData($urlDev, $postdata);
-        if (count($dataDev['vendors']) != 0) {
+        if (!empty($dataDev['vendors']) && count($dataDev['vendors']) != 0) {
             foreach ($dataDev['vendors'] as $venddata) {
-
-                $odmapsql = "SELECT id,internal_mapping FROM outside_api_data_mappings WHERE mapping_system_name = '" . $outsidedatabase . VendorConstants::AND_TRANS_TABLE . $transaction_table . "' AND external_mapping = '" . $venddata['id'] . VendorConstants::AND_IS_ACTIVE_0;
-                $odmapres = $callConfig->getRow($odmapsql);
-                if ($odmapres->internal_mapping != "") {
-                    $insertfieldary = array();
-                    foreach ($fieldgetres as $field) {
-                        if (!in_array($field->Field, (array) $notupdateinsert)) {
-                            $insertfieldary[$field->Field] = $venddata[$field->Field];
-                        }
-                    }
-                    $callConfig->updateRecord($transaction_table, $insertfieldary, 'id', $odmapres->internal_mapping);
-                } else {
-                    $insertfieldary = array();
-                    foreach ($fieldgetres as $field) {
-                        if (!in_array($field->Field, (array) $notupdateinsert)) {
-                            $insertfieldary[$field->Field] = $transaction[$field->Field];
-                        }
-                    }
-                    $insertven = $callConfig->insertRecord($transaction_table, $insertfieldary);
-                    $return['insertven'] = $insertven;
-                    if ($insertven['status'] == 'sucess') {
-                        $post_array = array("company_id" => 1, "mapping_system_name" => $outside_db_name, "transaction_table" => $transaction_table, "internal_mapping" => $insertven['LASTID'], "external_mapping" => $transaction_id, "is_active" => "0", "current_status" => "0", "created_date" => date(VendorConstants::DATE_FORMAT_YMD_HIS_LOWER), "created_by" => $post['user_id']);
-                        $callConfig->insertRecord('outside_api_data_mappings', $post_array);
-                    }
-                }
-
+                $this->syncSingleVendorRecord($venddata, $fieldgetres, $notupdateinsert, $outsidedatabase, $transaction_table, $outside_db_name, $transaction_id, $post, $transaction, $return);
             }
         }
         return $return;
     }
+
+    private function syncSingleVendorRecord($venddata, $fieldgetres, $notupdateinsert, $outsidedatabase, $transaction_table, $outside_db_name, $transaction_id, $post, $transaction, &$return)
+    {
+        global $callConfig;
+        $odmapsql = "SELECT id,internal_mapping FROM outside_api_data_mappings WHERE mapping_system_name = '" . $outsidedatabase . VendorConstants::AND_TRANS_TABLE . $transaction_table . "' AND external_mapping = '" . $venddata['id'] . VendorConstants::AND_IS_ACTIVE_0;
+        $odmapres = $callConfig->getRow($odmapsql);
+        if ($odmapres->internal_mapping != "") {
+            $insertfieldary = array();
+            foreach ($fieldgetres as $field) {
+                if (!in_array($field->Field, (array) $notupdateinsert)) {
+                    $insertfieldary[$field->Field] = $venddata[$field->Field];
+                }
+            }
+            $callConfig->updateRecord($transaction_table, $insertfieldary, 'id', $odmapres->internal_mapping);
+        } else {
+            $insertfieldary = array();
+            foreach ($fieldgetres as $field) {
+                if (!in_array($field->Field, (array) $notupdateinsert)) {
+                    $insertfieldary[$field->Field] = $transaction[$field->Field];
+                }
+            }
+            $insertven = $callConfig->insertRecord($transaction_table, $insertfieldary);
+            $return['insertven'] = $insertven;
+            if ($insertven['status'] == 'sucess') {
+                $post_array = array("company_id" => 1, "mapping_system_name" => $outside_db_name, "transaction_table" => $transaction_table, "internal_mapping" => $insertven['LASTID'], "external_mapping" => $transaction_id, "is_active" => "0", "current_status" => "0", "created_date" => date(VendorConstants::DATE_FORMAT_YMD_HIS_LOWER), "created_by" => $post['user_id']);
+                $callConfig->insertRecord('outside_api_data_mappings', $post_array);
+            }
+        }
+    }
+
     public function getvendorandvendorregisterssynchapi()
     {
         global $callConfig;
@@ -723,6 +759,7 @@ public function insertupdatevendorverificationdetails($get, $post)
         $return['vendors'] = $vendorres;
         return $return;
     }
+
     public function getApiData($url, $postData = null)
     {
         $ch = curl_init($url);
@@ -743,79 +780,12 @@ public function insertupdatevendorverificationdetails($get, $post)
         }
         return $return;
     }
-    public function getVendorsDetailsReports($get)
-    {
-        global $callConfig;
-        $return = array();
+}
 
-        if ($get['transaction_table'] != "") {
-            $conditionwh = "";
-            if ($get['vendor_types_id'] != "") {
-                $conditionwh .= " AND vendor_types_id =" . $get['vendor_types_id'];
-            }
-            if ($get['location_id'] != "") {
-                $conditionwh .= " AND location_id =" . $get['location_id'];
-            }
-            if ($get['vendor_connect_user'] != "") {
-                $conditionwh .= " AND (hr_connect =" . $get['vendor_connect_user'] . " OR finance_connect =" . $get['vendor_connect_user'] . " OR purchase_connect =" . $get['vendor_connect_user'] . " OR admin_connect =" . $get['vendor_connect_user'] . " OR project_connect =" . $get['vendor_connect_user'] . " OR legal_connect =" . $get['vendor_connect_user'] . ")";
-            }
-            $locsql = VendorConstants::SEL_FROM . $get['transaction_table'] . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . "' AND is_active = 0 " . $conditionwh;
-            $locres = $callConfig->getAllRows($locsql);
-            $return['vendorlist'] = $locres;
-        }
-        $locsql = "SELECT id, location_name FROM locations WHERE  company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $locres = $callConfig->getAllRows($locsql);
-        foreach ($locres as $loc) {
-            $locations[$loc->id] = $loc;
-        }
-        $return['locations'] = $locations;
-
-        $ausql = "SELECT id, display_name FROM application_users WHERE  company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $aures = $callConfig->getAllRows($ausql);
-        foreach ($aures as $aur) {
-            $application_users[$aur->id] = $aur;
-        }
-        $return['application_users'] = $application_users;
-
-        $vendor_typessql = VendorConstants::SEL_VENDOR_TYPES . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $vendor_typesres = $callConfig->getAllRows($vendor_typessql);
-        foreach ($vendor_typesres as $vt) {
-            $vendor_types[$vt->id] = $vt;
-        }
-        $return['vendor_types'] = $vendor_types;
-
-        $countriessql = "SELECT id, country_name FROM countries WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $countriesres = $callConfig->getAllRows($countriessql);
-        foreach ($countriesres as $sres) {
-            $countries[$sres->id] = $sres;
-        }
-        $return['countries'] = $countries;
-
-
-        $statessql = "SELECT id, state_name FROM states WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $statesres = $callConfig->getAllRows($statessql);
-        foreach ($statesres as $sres) {
-            $states[$sres->id] = $sres;
-        }
-        $return['states'] = $states;
-
-        $citiessql = "SELECT id, city_name FROM cities WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $citiesres = $callConfig->getAllRows($citiessql);
-        foreach ($citiesres as $cres) {
-            $cities[$cres->id] = $cres;
-        }
-        $return['cities'] = $cities;
-        $this->populateVendorRoleUsers($return, $get['company_id']);
-
-
-
-        return $return;
-    }
-
-
+trait VendorPortalRegistrationTrait
+{
     public function msmeConfirmationUpdate($get, $post)
     {
-        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
         global $callConfig;
         $return = array();
         $msme_confirmation = $post['msme_confirmation'] == "Y" ? "Y" : "N";
@@ -823,6 +793,7 @@ public function insertupdatevendorverificationdetails($get, $post)
         $return['res'] = $callConfig->insertRecord('msme_confirmation_logs', $post_array);
         return $return;
     }
+
     public function insertVendorsAndVendorRegisters($get, $post)
     {
         global $callConfig;
@@ -832,113 +803,33 @@ public function insertupdatevendorverificationdetails($get, $post)
         $process_type = $post['transaction_table'] == "vendors" ? "VEDR" : "VR";
         $post_array = $post;
         $rid = $post['rid'];
-        unset($post_array['rid']);
-        unset($post_array['doc_rowid']);
-        unset($post_array['doc_document_id']);
-        unset($post_array['doc_from_date']);
-        unset($post_array['doc_to_date']);
-        unset($post_array['hidden_doc_filename']);
-        unset($post_array['customer_vendor_gst_billing_details']);
-        unset($post_array['doc_filename']);
+        unset($post_array['rid'], $post_array['doc_rowid'], $post_array['doc_document_id'], $post_array['doc_from_date'], $post_array['doc_to_date'], $post_array['hidden_doc_filename'], $post_array['customer_vendor_gst_billing_details'], $post_array['doc_filename']);
+
         if ($rid != "") {
             $vendor_register_id = $rid;
             $return['trans_res'] = $callConfig->updateRecord($transaction_table, $post_array, 'id', $vendor_register_id);
-
             $updatequery = "UPDATE customer_vendor_gst_billing_details SET is_active=NULL WHERE transaction_table = '" . $transaction_table . "' AND customer_vendor_id = '" . $vendor_register_id . "'";
             $callConfig->executeQuery($updatequery);
-
         } else {
             $inserttransaction = $callConfig->insertRecord($transaction_table, $post_array);
             $return['trans_res'] = $inserttransaction;
             $vendor_register_id = $inserttransaction['LASTID'];
-            //vendor task
-            if ($vendor_register_id != "") {
-                $transaction_date = date('Y-m-d');
-                $ausql = VendorConstants::SEL_FROM . $transaction_table . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . VendorConstants::AND_ID_APOS . $vendor_register_id . VendorConstants::AND_IS_ACTIVE_0;
-                $aures = $callConfig->getRow($ausql);
-                $return['aures'] = $aures;
-                $aures->user_id = $post['created_by'];
-
-                $tasquery = "SELECT task_id, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $transaction_table . VendorConstants::AND_TRANS_ID . $vendor_register_id . VendorConstants::AND_IS_ACTIVE_0;
-                $tasres = $callConfig->getAllRows($tasquery);
-                $alreadytaskid = array();
-                foreach ($tasres as $roleres) {
-                    $alreadytaskid[$roleres->task_id][$roleres->assigned_to] = "Y";
-                }
-                $return['tasquery'] = $tasquery;
-                $return['alreadytaskid'] = $alreadytaskid;
-                $whr1 = VendorConstants::COMPANY_ID_EQ . $get['company_id'] . "' AND is_active = 0 AND process_type='" . $process_type . "'";
-                $task_query = $callConfig->selectQuery('process_task_settings', '*', $whr1, '', '', '');
-                $task_data = $callConfig->getAllRows($task_query);
-                $return['task_query'] = $task_query;
-                $return['task_data'] = $task_data;
-                foreach ($task_data as $key => $tasks) {
-                    if ($tasks->action_no == '1') {
-                        if ($tasks->action_frequency == 'WK') {
-                            $day = 7;
-                        } elseif ($tasks->action_frequency == 'MON') {
-                            $day = 30;
-                        } else {
-                            $day = 0;
-                        }
-                        if ($tasks->before_or_after == 'BF') {
-                            $day = "-" . $day;
-                        } else {
-                            $day = "+" . $day;
-                        }
-                        $days_ago = date('Y-m-d', strtotime($day . ' days', strtotime($transaction_date)));
-                    } else {
-                        $days_ago = $transaction_date;
-                    }
-                    if ($tasks->assigned_to == "HB") {
-                        $assigned_to = $aures->hr_connect;
-                    } elseif ($tasks->assigned_to == "AB") {
-                        $assigned_to = $aures->admin_connect;
-                    } elseif ($tasks->assigned_to == "FB") {
-                        $assigned_to = $aures->finance_connect;
-                    } elseif ($tasks->assigned_to == "PB") {
-                        $assigned_to = $aures->project_connect;
-                    } elseif ($tasks->assigned_to == "LB") {
-                        $assigned_to = $aures->location_connect;
-                    } elseif ($tasks->assigned_to == "ESOP") {
-                        $assigned_to = $aures->esop_connect;
-                    } elseif ($tasks->assigned_to == "LEGAL_BUDDY") {
-                        $assigned_to = $aures->legal_connect;
-                    } else {
-                        $assigned_to = $aures->user_id;
-                    }
-                    if (!isset($alreadytaskid[$tasks->id][$assigned_to])) {
-                        if ($tasks->approval_type == "HB") {
-                            $approval_user_id = $aures->hr_connect;
-                        } elseif ($tasks->approval_type == "AB") {
-                            $approval_user_id = $aures->admin_connect;
-                        } elseif ($tasks->approval_type == "FB") {
-                            $approval_user_id = $aures->finance_connect;
-                        } elseif ($tasks->approval_type == "PB") {
-                            $approval_user_id = $aures->project_connect;
-                        } elseif ($tasks->approval_type == "LB") {
-                            $approval_user_id = $aures->location_connect;
-                        } elseif ($tasks->approval_type == "ESOP") {
-                            $approval_user_id = $aures->esop_connect;
-                        } elseif ($tasks->approval_type == "LEGAL_BUDDY") {
-                            $approval_user_id = $aures->legal_connect;
-                        } else {
-                            $approval_user_id = $aures->user_id;
-                        }
-
-                        if ($approval_user_id != "" && $assigned_to != "") {
-                            $task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
-                            $res = $callConfig->insertRecord('transaction_activity_schedule', $task_array);
-                            $return['transaction_activity_schedule'][] = $task_array;
-                            $return['transaction_activity_schedule_insert'][] = $res;
-                        }
-                        $return['checkedcsddsfvdfv'][] = $approval_user_id . " --- " . $assigned_to;
-                    }
-                }
-            }
-            //vendor task
+            $return['checkedcsddsfvdfv'] = array();
+            $this->createVendorRegistrationTasks($get, $transaction_table, $vendor_register_id, $process_type, $return, $post['created_by'] ?? null);
         }
 
+        $this->saveVendorBillingDetails($post, $vendor_register_id, $return);
+        $this->saveVendorDocuments($get, $post, $vendor_register_id, $return);
+
+        return $return;
+    }
+
+    private function saveVendorBillingDetails($post, $vendor_register_id, &$return)
+    {
+        global $callConfig;
+        if (empty($post['customer_vendor_gst_billing_details']) || !is_array($post['customer_vendor_gst_billing_details'])) {
+            return;
+        }
         foreach ($post['customer_vendor_gst_billing_details'] as $detai) {
             $custvend = $detai;
             unset($custvend['customer_vendor_gst_billing_details_id']);
@@ -951,9 +842,15 @@ public function insertupdatevendorverificationdetails($get, $post)
                 $return['customer_vendor_gst_billing_details'][] = $upda;
             }
         }
+    }
 
+    private function saveVendorDocuments($get, $post, $vendor_register_id, &$return)
+    {
+        global $callConfig;
+        if (empty($post['doc_filename']) || !is_array($post['doc_filename'])) {
+            return;
+        }
         foreach ($post['doc_filename'] as $key => $docdetai) {
-
             $fields = array('company_id' => $get['company_id'], 'vendor_user_id' => $vendor_register_id, 'document_id' => $post['doc_document_id'][$key], 'from_date' => $this->dateconvertdbformat($post['doc_from_date'][$key]), 'to_date' => $this->dateconvertdbformat($post['doc_to_date'][$key]), 'filename' => $docdetai, 'category_id' => 0, 'is_active' => '0', 'current_status' => '0');
             if ($post['doc_rowid'][$key] != "") {
                 $fields['created_by'] = $get['user_id'];
@@ -967,15 +864,89 @@ public function insertupdatevendorverificationdetails($get, $post)
                 $return['vendor_documents'][] = $docres;
             }
         }
-
-        return $return;
     }
+
+    private function resolveTaskConnectUser($code, $aures)
+    {
+        $map = [
+            'HB' => 'hr_connect',
+            'AB' => 'admin_connect',
+            'FB' => 'finance_connect',
+            'PB' => 'project_connect',
+            'LB' => 'location_connect',
+            'ESOP' => 'esop_connect',
+            'LEGAL_BUDDY' => 'legal_connect',
+        ];
+        $prop = $map[$code] ?? null;
+        if ($prop !== null && is_object($aures) && isset($aures->$prop)) {
+            return $aures->$prop;
+        }
+        return is_object($aures) ? ($aures->user_id ?? '') : '';
+    }
+
+    private function calculateTaskActionDate($tasks, $transaction_date)
+    {
+        if ($tasks->action_no != '1') {
+            return $transaction_date;
+        }
+        $freqMap = ['WK' => 7, 'MON' => 30];
+        $day = $freqMap[$tasks->action_frequency] ?? 0;
+        $modifier = ($tasks->before_or_after == 'BF') ? "-{$day}" : "+{$day}";
+        return date('Y-m-d', strtotime("{$modifier} days", strtotime($transaction_date)));
+    }
+
+    private function createVendorRegistrationTasks($get, $transaction_table, $vendor_register_id, $process_type, &$return, $auresFallbackUserId = null)
+    {
+        global $callConfig;
+        if (empty($vendor_register_id)) {
+            return;
+        }
+        $transaction_date = date('Y-m-d');
+        $ausql = VendorConstants::SEL_FROM . $transaction_table . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . VendorConstants::AND_ID_APOS . $vendor_register_id . VendorConstants::AND_IS_ACTIVE_0;
+        $aures = $callConfig->getRow($ausql);
+        $return['aures'] = $aures;
+        if ($auresFallbackUserId !== null && is_object($aures)) {
+            $aures->user_id = $auresFallbackUserId;
+        }
+
+        $tasquery = "SELECT task_id, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $transaction_table . VendorConstants::AND_TRANS_ID . $vendor_register_id . VendorConstants::AND_IS_ACTIVE_0;
+        $tasres = $callConfig->getAllRows($tasquery);
+        $alreadytaskid = array();
+        foreach ($tasres as $roleres) {
+            $alreadytaskid[$roleres->task_id][$roleres->assigned_to] = "Y";
+        }
+        $return['tasquery'] = $tasquery;
+        $return['alreadytaskid'] = $alreadytaskid;
+
+        $whr1 = VendorConstants::COMPANY_ID_EQ . $get['company_id'] . "' AND is_active = 0 AND process_type='" . $process_type . "'";
+        $task_query = $callConfig->selectQuery('process_task_settings', '*', $whr1, '', '', '');
+        $task_data = $callConfig->getAllRows($task_query);
+        $return['task_query'] = $task_query;
+        $return['task_data'] = $task_data;
+
+        foreach ($task_data as $tasks) {
+            $days_ago = $this->calculateTaskActionDate($tasks, $transaction_date);
+            $assigned_to = $this->resolveTaskConnectUser($tasks->assigned_to, $aures);
+            if (!isset($alreadytaskid[$tasks->id][$assigned_to])) {
+                $approval_user_id = $this->resolveTaskConnectUser($tasks->approval_type, $aures);
+                if ($approval_user_id != "" && $assigned_to != "") {
+                    $task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
+                    $res = $callConfig->insertRecord('transaction_activity_schedule', $task_array);
+                    $return['transaction_activity_schedule'][] = $task_array;
+                    $return['transaction_activity_schedule_insert'][] = $res;
+                }
+                if (isset($return['checkedcsddsfvdfv'])) {
+                    $return['checkedcsddsfvdfv'][] = $approval_user_id . " --- " . $assigned_to;
+                }
+            }
+        }
+    }
+
     public function sendEmailAPIWithoutLogDocumentVerification($get, $post)
     {
-        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
-        global $callConfig;
-        $return = array();
-        $return['post'] = $post;
+        if (isset($get['company_id']) && empty($post['company_id'])) {
+            $post['company_id'] = $get['company_id'];
+        }
         $api_result = json_decode($post['api_result'], 1);
         $emailarray['user_email_id'] = $post['user_email'];
         $emailarray['to_company_id'] = $post['company_id'];
@@ -994,36 +965,30 @@ public function insertupdatevendorverificationdetails($get, $post)
         $notdataa = array();
         return $this->sendNotificationAndEmails($notdataa, $emailarray, 74);
     }
+
     public function insertApplicationUserInvitations($get, $post)
     {
         global $callConfig;
         $return = array();
         $return['post'] = $post;
         $return['get'] = $get;
+        $retresult = array();
         $transaction_table = $post['transaction_table'] != "" ? $post['transaction_table'] : "vendor_registers";
         $process_type = $post['transaction_table'] == "vendors" ? "VEDR" : "VR";
         $role_id = json_encode(array($post['role_id']));
         $connectuser = $post['connect'];
         $display_name = $post['first_name'] . " " . $post['last_name'];
-        $passrd = 'PensAndPencils123';
-        $password = $callConfig->passwordEncrypt($passrd);
-        $applicationuserary = array('company_id' => $post['company_id'], 'user_name' => $display_name, 'first_name' => $post['first_name'], 'last_name' => $post['last_name'], 'display_name' => $display_name, 'user_email' => $post['user_email'], 'user_mobile' => $post['user_mobile'], 'user_type' => $post['user_type'], 'user_password' => $password, 'role_id' => $role_id, 'hr_connect' => $connectuser['hr_connect'], 'finance_connect' => $connectuser['finance_connect'], 'admin_connect' => $connectuser['admin_connect'], 'project_connect' => $connectuser['project_connect'], 'location_connect' => $connectuser['location_connect'], 'legal_connect' => $connectuser['legal_connect'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $post['user_id'], 'created_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS), 'user_activated' => 'Y');
-        $res = $callConfig->insertRecord('application_users', $applicationuserary);
+        $password = $callConfig->passwordEncrypt('PensAndPencils123');
+
+        $res = $this->createApplicationUserRecord($post, $display_name, $password, $role_id, $connectuser);
         $retresult['application_users'] = $res;
+
         if (isset($res['LASTID'])) {
-            $query = "SELECT application_module,id,role_short_code FROM application_roles where company_id = '" . $post['company_id'] . "' AND role_short_code IN('" . $post['role_id'] . "') AND is_active = 0";
-            $roleres = $callConfig->getAllRows($query);
-            $retresult['application_roles'] = $roleres;
-            $retresult['application_roles_sql'] = $query;
-            $rolesids = array();
-            foreach ($roleres as $rolere) {
-                $insertarray = array("company_id" => $post['company_id'], "user_id" => $res['LASTID'], "module_setup_id" => $rolere->application_module, "application_module_id" => $rolere->application_module, "role_id" => $rolere->id, "role_short_code" => $rolere->role_short_code, "is_active" => "0", "current_status" => "0", "created_date" => date(VendorConstants::DATE_FORMAT_YMD_HIS_LOWER), "created_by" => $post['user_id']);
-                $callConfig->insertRecord('application_user_module_roles', $insertarray);
-                $rolesids[] = $rolere->role_short_code;
-                $user_module_id = $rolere->application_module;
-            }
+            $user_module_id = $this->assignUserModuleRoles($post, $res['LASTID'], $retresult);
+
             $applicationuserinvoiteary = array('company_id' => $post['company_id'], 'company_name' => $post['company_name'], 'user_name' => $post['user_name'], 'first_name' => $post['first_name'], 'last_name' => $post['last_name'], 'display_name' => $display_name, 'user_email' => $post['user_email'], 'user_mobile' => $post['user_mobile'], 'user_type' => $post['user_type'], 'user_id' => $res['LASTID'], 'role_id' => $post['role_id'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $post['user_id'], 'created_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS), 'transaction_table' => $transaction_table);
             $res1 = $callConfig->insertRecord('application_user_invitations', $applicationuserinvoiteary);
+
             $web_site = $facsimile_number = $country_id = "";
             if ($post['vendor_registration_request_id'] != "") {
                 $query1 = "SELECT id, web_site, facsimile_number, country_id, state_id FROM vendor_registration_requests where company_id = '" . $post['company_id'] . VendorConstants::AND_ID_APOS . $post['vendor_registration_request_id'] . VendorConstants::AND_IS_ACTIVE_0;
@@ -1032,95 +997,15 @@ public function insertupdatevendorverificationdetails($get, $post)
                 $facsimile_number = $res11->facsimile_number;
                 $country_id = $res11->country_id;
             }
+
             $vendor_verifications = json_encode(array("PAN" => array("status" => "N"), "GSTIN" => array("status" => "N"), "TAN" => array("status" => "N"), "BANK" => array("status" => "N"), 'MSME' => array("status" => "N")));
             $msme_register_yes_no = $post['msme_register_yes_no'] == "Y" ? "Y" : "N";
             $vendor_registersary = array('company_id' => $post['company_id'], 'user_id' => $res['LASTID'], 'company' => $post['company_name'], 'first_name' => $post['first_name'], 'last_name' => $post['last_name'], 'display_name' => $display_name, 'email' => $post['user_email'], 'phone' => $post['user_mobile'], 'hr_connect' => $connectuser['hr_connect'], 'finance_connect' => $connectuser['finance_connect'], 'admin_connect' => $connectuser['admin_connect'], 'project_connect' => $connectuser['project_connect'], 'location_connect' => $connectuser['location_connect'], 'legal_connect' => $connectuser['legal_connect'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $post['user_id'], 'created_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS), 'originator' => $post['user_id'], 'vendor_registration_request_id' => $post['vendor_registration_request_id'], 'company_registration_country' => $country_id, 'fax' => $facsimile_number, 'website_url' => $web_site, 'vendor_verifications' => $vendor_verifications, 'vendor_type_id' => $post['vendor_type_id'], 'msme_register_yes_no' => $msme_register_yes_no, 'msme_number' => $post['msme_number']);
             $vendregistres = $callConfig->insertRecord($transaction_table, $vendor_registersary);
             $vendor_register_id = $vendregistres['LASTID'];
             $retresult['vendor_register_id'] = $vendor_register_id;
-            //vendor task
-            if ($vendor_register_id != "") {
-                $transaction_date = date('Y-m-d');
-                $ausql = VendorConstants::SEL_FROM . $transaction_table . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . VendorConstants::AND_ID_APOS . $vendor_register_id . VendorConstants::AND_IS_ACTIVE_0;
-                $aures = $callConfig->getRow($ausql);
-                $retresult['aures'] = $aures;
 
-                $tasquery = "SELECT task_id, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $transaction_table . VendorConstants::AND_TRANS_ID . $vendor_register_id . VendorConstants::AND_IS_ACTIVE_0;
-                $tasres = $callConfig->getAllRows($tasquery);
-                $alreadytaskid = array();
-                foreach ($tasres as $roleres) {
-                    $alreadytaskid[$roleres->task_id][$roleres->assigned_to] = "Y";
-                }
-                $retresult['tasquery'] = $tasquery;
-                $retresult['alreadytaskid'] = $alreadytaskid;
-                $whr1 = VendorConstants::COMPANY_ID_EQ . $get['company_id'] . "' AND is_active = 0 AND process_type='" . $process_type . "'";
-                $task_query = $callConfig->selectQuery('process_task_settings', '*', $whr1, '', '', '');
-                $task_data = $callConfig->getAllRows($task_query);
-                $retresult['task_query'] = $task_query;
-                $retresult['task_data'] = $task_data;
-                foreach ($task_data as $tasks) {
-                    if ($tasks->action_no == '1') {
-                        if ($tasks->action_frequency == 'WK') {
-                            $day = 7;
-                        } elseif ($tasks->action_frequency == 'MON') {
-                            $day = 30;
-                        } else {
-                            $day = 0;
-                        }
-                        if ($tasks->before_or_after == 'BF') {
-                            $day = "-" . $day;
-                        } else {
-                            $day = "+" . $day;
-                        }
-                        $days_ago = date('Y-m-d', strtotime($day . ' days', strtotime($transaction_date)));
-                    } else {
-                        $days_ago = $transaction_date;
-                    }
-                    if ($tasks->assigned_to == "HB") {
-                        $assigned_to = $aures->hr_connect;
-                    } elseif ($tasks->assigned_to == "AB") {
-                        $assigned_to = $aures->admin_connect;
-                    } elseif ($tasks->assigned_to == "FB") {
-                        $assigned_to = $aures->finance_connect;
-                    } elseif ($tasks->assigned_to == "PB") {
-                        $assigned_to = $aures->project_connect;
-                    } elseif ($tasks->assigned_to == "LB") {
-                        $assigned_to = $aures->location_connect;
-                    } elseif ($tasks->assigned_to == "ESOP") {
-                        $assigned_to = $aures->esop_connect;
-                    } elseif ($tasks->assigned_to == "LEGAL_BUDDY") {
-                        $assigned_to = $aures->legal_connect;
-                    } else {
-                        $assigned_to = $aures->user_id;
-                    }
-                    if (!isset($alreadytaskid[$tasks->id][$assigned_to])) {
-                        if ($tasks->approval_type == "HB") {
-                            $approval_user_id = $aures->hr_connect;
-                        } elseif ($tasks->approval_type == "AB") {
-                            $approval_user_id = $aures->admin_connect;
-                        } elseif ($tasks->approval_type == "FB") {
-                            $approval_user_id = $aures->finance_connect;
-                        } elseif ($tasks->approval_type == "PB") {
-                            $approval_user_id = $aures->project_connect;
-                        } elseif ($tasks->approval_type == "LB") {
-                            $approval_user_id = $aures->location_connect;
-                        } elseif ($tasks->approval_type == "ESOP") {
-                            $approval_user_id = $aures->esop_connect;
-                        } elseif ($tasks->approval_type == "LEGAL_BUDDY") {
-                            $approval_user_id = $aures->legal_connect;
-                        } else {
-                            $approval_user_id = $aures->user_id;
-                        }
-                        if ($approval_user_id != "" && $assigned_to != "") {
-                            $task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
-                            $res = $callConfig->insertRecord('transaction_activity_schedule', $task_array);
-                            $return['transaction_activity_schedule'][] = $task_array;
-                            $return['transaction_activity_schedule_insert'][] = $res;
-                        }
-                    }
-                }
-            }
-            //vendor task
+            $this->createVendorRegistrationTasks($get, $transaction_table, $vendor_register_id, $process_type, $retresult);
 
             $retresult['vendregistres'] = $vendregistres;
             $retresult['application_user_invitations'] = $res1;
@@ -1139,31 +1024,41 @@ public function insertupdatevendorverificationdetails($get, $post)
             $emailarray['company_id'] = $post['company_id'];
             $emailarray['template_reference_id'] = 3;
             $this->NewUserformate($emailarray, $post['data_name']);
-
         }
         return $retresult;
     }
+
+    private function createApplicationUserRecord($post, $displayName, $password, $roleId, $connectuser)
+    {
+        global $callConfig;
+        $applicationuserary = array('company_id' => $post['company_id'], 'user_name' => $displayName, 'first_name' => $post['first_name'], 'last_name' => $post['last_name'], 'display_name' => $displayName, 'user_email' => $post['user_email'], 'user_mobile' => $post['user_mobile'], 'user_type' => $post['user_type'], 'user_password' => $password, 'role_id' => $roleId, 'hr_connect' => $connectuser['hr_connect'], 'finance_connect' => $connectuser['finance_connect'], 'admin_connect' => $connectuser['admin_connect'], 'project_connect' => $connectuser['project_connect'], 'location_connect' => $connectuser['location_connect'], 'legal_connect' => $connectuser['legal_connect'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $post['user_id'], 'created_date' => date(VendorConstants::DATE_FORMAT_YMD_HIS), 'user_activated' => 'Y');
+        return $callConfig->insertRecord('application_users', $applicationuserary);
+    }
+
+    private function assignUserModuleRoles($post, $newUserId, &$retresult)
+    {
+        global $callConfig;
+        $query = "SELECT application_module,id,role_short_code FROM application_roles where company_id = '" . $post['company_id'] . "' AND role_short_code IN('" . $post['role_id'] . "') AND is_active = 0";
+        $roleres = $callConfig->getAllRows($query);
+        $retresult['application_roles'] = $roleres;
+        $retresult['application_roles_sql'] = $query;
+        $user_module_id = null;
+        foreach ($roleres as $rolere) {
+            $insertarray = array("company_id" => $post['company_id'], "user_id" => $newUserId, "module_setup_id" => $rolere->application_module, "application_module_id" => $rolere->application_module, "role_id" => $rolere->id, "role_short_code" => $rolere->role_short_code, "is_active" => "0", "current_status" => "0", "created_date" => date(VendorConstants::DATE_FORMAT_YMD_HIS_LOWER), "created_by" => $post['user_id']);
+            $callConfig->insertRecord('application_user_module_roles', $insertarray);
+            $user_module_id = $rolere->application_module;
+        }
+        return $user_module_id;
+    }
+
     public function getInvitationVendors($get)
     {
         global $callConfig;
         $return = array();
         if (isset($get['company_name'])) {
-            $sql = "SELECT id FROM `application_user_invitations` WHERE company_id = '" . $get['company_id'] . "' AND company_name = '" . $get['company_name'] . "' AND user_type = 3 AND is_active = 0";
-            $invitationres = $callConfig->getRow($sql);
-            if ($invitationres->id != "") {
-                $return['company_name'] = $invitationres;
-            } else {
-                $sql = "SELECT id FROM `vendor_registers`  WHERE company_id = '" . $get['company_id'] . "' AND company = '" . $get['company_name'] . VendorConstants::AND_IS_ACTIVE_0;
-                $venregres = $callConfig->getRow($sql);
-                if ($venregres->id != "") {
-                    $return['company_name'] = $venregres;
-                } else {
-                    $sql = "SELECT id FROM `vendors`  WHERE company_id = '" . $get['company_id'] . "' AND company = '" . $get['company_name'] . VendorConstants::AND_IS_ACTIVE_0;
-                    $vendors = $callConfig->getRow($sql);
-                    if ($vendors->id != "") {
-                        $return['company_name'] = $vendors;
-                    }
-                }
+            $matchedVendor = $this->findExistingVendorByName($get['company_id'], $get['company_name']);
+            if ($matchedVendor !== null) {
+                $return['company_name'] = $matchedVendor;
             }
         } else {
             $sql = "SELECT id,display_name,application_module, role_short_code FROM application_roles WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
@@ -1172,39 +1067,13 @@ public function insertupdatevendorverificationdetails($get, $post)
 
             $module_setupsql = "SELECT module_id, module_name FROM module_setup WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
             $module_setupres = $callConfig->getAllRows($module_setupsql);
+            $module = array();
             foreach ($module_setupres as $moduleres) {
                 $module[$moduleres->module_id] = $moduleres->module_name;
             }
             $return['module_setup'] = $module;
 
-
-            $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-            $application_usersres = $callConfig->getAllRows($application_userssql);
-            $return['vendor_admin_application_users'] = $application_usersres;
-
-            $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_HR_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-            $application_usersres = $callConfig->getAllRows($application_userssql);
-            $return['vendor_hr_application_users'] = $application_usersres;
-
-            $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_FINANCE_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-            $application_usersres = $callConfig->getAllRows($application_userssql);
-            $return['vendor_finanace_application_users'] = $application_usersres;
-
-            $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_PROJECT_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-            $application_usersres = $callConfig->getAllRows($application_userssql);
-            $return['vendor_project_application_users'] = $application_usersres;
-
-            $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_LOCATION_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-            $application_usersres = $callConfig->getAllRows($application_userssql);
-            $return['vendor_location_application_users'] = $application_usersres;
-
-            $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_PURCHASE_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-            $application_usersres = $callConfig->getAllRows($application_userssql);
-            $return['vendor_purchase_application_users'] = $application_usersres;
-
-            $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_LEGAL_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-            $application_usersres = $callConfig->getAllRows($application_userssql);
-            $return['vendor_legal_application_users'] = $application_usersres;
+            $this->populateVendorRoleUsers($return, $get['company_id']);
 
             if ($get['VRRid'] != "") {
                 $sql = VendorConstants::SEL_VRR . $get['company_id'] . VendorConstants::AND_ID_APOS . $get['VRRid'] . VendorConstants::AND_IS_ACTIVE_0;
@@ -1214,108 +1083,167 @@ public function insertupdatevendorverificationdetails($get, $post)
             $vendor_typessql = VendorConstants::SEL_VENDOR_TYPES . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
             $vendor_typesres = $callConfig->getAllRows($vendor_typessql);
             $return['vendor_types'] = $vendor_typesres;
-
         }
 
         return $return;
     }
-    public function getVendorAdminDashboardPost($get, $post)
-    {
-        if (isset($get['company_id']) && empty($post['company_id'])) { $post['company_id'] = $get['company_id']; }
-        return $this->getVendorAdminDashboard($post);
-    }
-    public function getVendorAdminDashboard($get)
+
+    private function findExistingVendorByName($companyId, $companyName)
     {
         global $callConfig;
-        if ($get['vendorcreate'] == 'Y') {
-            $return['registervendors'] = $this->registervendors($get['vendor_id'], $get);
-        } else {
-            $return['get'] = $get;
-            $dashboard_transaction_table = "vendor_registers";
-            $extracondi = '';
-            $getvrid = '';
-            if ($get['entervendornamefind'] != "") {
-                $extracondi = " AND (company LIKE '%" . $get['entervendornamefind'] . "%' OR display_name LIKE '%" . $get['entervendornamefind'] . "%')";
+        $sql = "SELECT id FROM `application_user_invitations` WHERE company_id = '" . $companyId . "' AND company_name = '" . $companyName . "' AND user_type = 3 AND is_active = 0";
+        $invitationres = $callConfig->getRow($sql);
+        if (!empty($invitationres->id)) {
+            return $invitationres;
+        }
+        $sql = "SELECT id FROM `vendor_registers`  WHERE company_id = '" . $companyId . "' AND company = '" . $companyName . VendorConstants::AND_IS_ACTIVE_0;
+        $venregres = $callConfig->getRow($sql);
+        if (!empty($venregres->id)) {
+            return $venregres;
+        }
+        $sql = "SELECT id FROM `vendors`  WHERE company_id = '" . $companyId . "' AND company = '" . $companyName . VendorConstants::AND_IS_ACTIVE_0;
+        $vendors = $callConfig->getRow($sql);
+        if (!empty($vendors->id)) {
+            return $vendors;
+        }
+        return null;
+    }
+}
+
+trait VendorPortalDashboardTrait
+{
+    public function getVendorsDetailsReports($get)
+    {
+        global $callConfig;
+        $return = array();
+
+        if ($get['transaction_table'] != "") {
+            $conditionwh = "";
+            if ($get['vendor_types_id'] != "") {
+                $conditionwh .= " AND vendor_types_id =" . $get['vendor_types_id'];
             }
-            if ($get['limit_select'] != 0) {
-
-                $cntsql = "SELECT COUNT(id) as cnt FROM " . $dashboard_transaction_table . VendorConstants::VEN_WHERE_COMPANY_ID . $get['company_id'] . VendorConstants::AND_HR_CONNECT . $get['user_id'] . VendorConstants::OR_FINANCE_CONNECT . $get['user_id'] . VendorConstants::OR_PURCHASE_CONNECT . $get['user_id'] . VendorConstants::OR_ADMIN_CONNECT . $get['user_id'] . VendorConstants::OR_PROJECT_CONNECT . $get['user_id'] . VendorConstants::OR_LOCATION_CONNECT . $get['user_id'] . VendorConstants::OR_LEGAL_CONNECT . $get['user_id'] . VendorConstants::OR_CREATED_BY . $get['user_id'] . VendorConstants::OR_APOS . $get['admin_type'] . "'='1' ) AND is_active = 0" . $extracondi;
-                $cntres = $callConfig->getRow($cntsql);
-                $return['total_vendors'] = $cntres->cnt;
-                $return['total_record_cnt'] = $cntres;
-                $respons_data_cnt = ($cntres->cnt != "" && $cntres->cnt != 0) ? $cntres->cnt : 0;
-
-                $total_pages = ceil($respons_data_cnt / $get['limit_select']);
-                $current_page = isset($get['current_page']) ? (int) $get['current_page'] : 1;
-                $current_page = max(1, min($current_page, $total_pages));
-                $start_from = ($current_page - 1) * $get['limit_select'];
-                $return['total_pages'] = $total_pages;
-
-
-                $dynmictablersql = "SELECT id,user_id,display_name,created_date,image,email,created_by,company, send_verification_profile_status, verification_profile_users, current_status, send_verification_profile_status, vendor_id, originator, vendor_type_id " . $getvrid . " FROM " . $dashboard_transaction_table . VendorConstants::VEN_WHERE_COMPANY_ID . $get['company_id'] . VendorConstants::AND_HR_CONNECT . $get['user_id'] . VendorConstants::OR_FINANCE_CONNECT . $get['user_id'] . VendorConstants::OR_PURCHASE_CONNECT . $get['user_id'] . VendorConstants::OR_ADMIN_CONNECT . $get['user_id'] . VendorConstants::OR_PROJECT_CONNECT . $get['user_id'] . VendorConstants::OR_LOCATION_CONNECT . $get['user_id'] . VendorConstants::OR_LEGAL_CONNECT . $get['user_id'] . VendorConstants::OR_CREATED_BY . $get['user_id'] . VendorConstants::OR_APOS . $get['admin_type'] . "'='1' ) AND is_active = 0  " . $extracondi . " LIMIT " . $start_from . ", " . $get['limit_select'];
-                $vendorres = $callConfig->getAllRows($dynmictablersql);
-                $return['vendors'] = $vendorres;
-            } else {
-                $dynmictablersql = "SELECT id,user_id,display_name,created_date,image,email,created_by,company, send_verification_profile_status, verification_profile_users, current_status, send_verification_profile_status, vendor_id, originator, vendor_type_id " . $getvrid . " FROM " . $dashboard_transaction_table . VendorConstants::VEN_WHERE_COMPANY_ID . $get['company_id'] . VendorConstants::AND_HR_CONNECT . $get['user_id'] . VendorConstants::OR_FINANCE_CONNECT . $get['user_id'] . VendorConstants::OR_PURCHASE_CONNECT . $get['user_id'] . VendorConstants::OR_ADMIN_CONNECT . $get['user_id'] . VendorConstants::OR_PROJECT_CONNECT . $get['user_id'] . VendorConstants::OR_LOCATION_CONNECT . $get['user_id'] . VendorConstants::OR_LEGAL_CONNECT . $get['user_id'] . VendorConstants::OR_CREATED_BY . $get['user_id'] . VendorConstants::OR_APOS . $get['admin_type'] . "'='1' ) AND is_active = 0" . $extracondi;
-                $vendorres = $callConfig->getAllRows($dynmictablersql);
-                $return['vendors'] = $vendorres;
-                $return['total_vendors'] = count((array) $vendorres);
-                $return['total_record_cnt'] = count((array) $vendorres);
-
+            if ($get['company_types_id'] != "") {
+                $conditionwh .= " AND business_type =" . $get['company_types_id'];
             }
-
-
-
-
-
-            $vendoruserid = $registervid = array();
-            foreach ($vendorres as $venre) {
-                $vendoruserid[$venre->user_id] = $venre->user_id;
-                $registervid[$venre->id] = $venre->id;
+            if ($get['working_roles'] != "") {
+                $conditionwh .= " AND working_roles =" . $get['working_roles'];
             }
-            $return['onboarduserid'] = $registervid;
-
-            $totalvrsql = "SELECT COUNT(CASE WHEN (vend.current_status = " . ST_ACTIVE . " AND is_active = 0)  THEN 1 END) AS active_cnt, COUNT(CASE WHEN (vend.current_status = " . ST_APPROVED . ") THEN 1 END) AS approved_cnt, COUNT(CASE WHEN (vend.current_status = " . ST_INPROGRESS . "  AND is_active = 0) THEN 1 END) AS inprogress_cnt  FROM " . $dashboard_transaction_table . " vend WHERE company_id =  '" . $get['company_id'] . VendorConstants::AND_HR_CONNECT . $get['user_id'] . VendorConstants::OR_FINANCE_CONNECT . $get['user_id'] . VendorConstants::OR_PURCHASE_CONNECT . $get['user_id'] . VendorConstants::OR_ADMIN_CONNECT . $get['user_id'] . VendorConstants::OR_PROJECT_CONNECT . $get['user_id'] . VendorConstants::OR_LOCATION_CONNECT . $get['user_id'] . VendorConstants::OR_LEGAL_CONNECT . $get['user_id'] . VendorConstants::OR_CREATED_BY . $get['user_id'] . VendorConstants::OR_APOS . $get['admin_type'] . "'='1')";
-            $totalvrres = $callConfig->getRow($totalvrsql);
-            $return['transaction_vendor_cnt'] = $totalvrres;
-
-
-            if ($get['admin_type'] != '1') {
-                $condition_task = " AND (tas.assigned_to = '" . $get['user_id'] . "' OR tas.approval_user_id = '" . $get['user_id'] . "')";
+            if ($get['vendor_status'] != "") {
+                $conditionwh .= " AND current_status =" . $get['vendor_status'];
             }
-            $transaction_activity_schedulesql = "SELECT tas.assigned_to, tas.transaction_id, count(*) as total_task_cnt, sum(if(tas.current_status=" . ST_APPROVED . ",1,0)) as approve_cnt, sum(if(tas.current_status=" . ST_APPROVED1 . ",1,0)) as review_cnt, sum(if(tas.current_status=" . ST_INPROGRESS . ",1,0)) as inprogress_cnt, sum(if(tas.current_status=" . ST_ACTIVE . ",1,0)) as yet_to_start_cnt, sum(if(tas.action_date < tas.completion_date,1,0)) as delayed_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '" . $get['company_id'] . VendorConstants::AND_TAS_TRANS_TABLE . $dashboard_transaction_table . "' AND tas.transaction_id IN(" . implode(',', $registervid) . ")  AND tas.is_active = 0  " . $condition_task . " GROUP BY tas.assigned_to,tas.transaction_id";
-            $transaction_activity_scheduleres = $callConfig->getAllRows($transaction_activity_schedulesql);
-            $return['transaction_activity_scheduleres_sql'] = $transaction_activity_schedulesql;
-            $return['transaction_activity_scheduleres'] = $transaction_activity_scheduleres;
-
-            $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-            $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
-            $return['tasks_categories'] = $tasks_categoriesres;
-
-
-            $action_transaction_activity_schedulesql = "SELECT tas.id, tas.transaction_table, tas.transaction_id, tas.task_id, tas.assigned_to, tas.approval_user_id, tas.action_date, tas.revised_action_date, tas.actual_action_date, tas.completion_date, tas.approval_date, tas.action_flag, tas.comments, tas.note, tas.check_list, tas.finish_date, tas.current_status, tas.task_name, tas.process_id, tal.request_date, tal.response_date, tal.comments, tal.response_type FROM transaction_activity_schedule tas, transaction_approval_logs tal WHERE tas.company_id = '" . $get['company_id'] . "' AND tas.company_id = tal.company_id AND tas.transaction_table = '" . $dashboard_transaction_table . "' AND tas.transaction_id IN(" . implode(',', $registervid) . ") AND tas.id = tal.transaction_id AND tal.transaction_table ='transaction_activity_schedule' AND tal.user_id = '" . $get['user_id'] . "' AND tal.response_type ='0' AND tal.call_back ='1' AND tas.is_active = 0";
-            $action_transaction_activity_scheduleres = $callConfig->getAllRows($action_transaction_activity_schedulesql);
-            $return['action_transaction_activity_schedule'] = $action_transaction_activity_scheduleres;
-
-
-            $vendor_registration_requestssql = "SELECT id, company_name, display_name, user_email, share_pdf, request_datetime FROM vendor_registration_requests WHERE company_id = '" . $get['company_id'] . "' AND (`originator` = '" . $get['user_id'] . "' OR ('" . $get['admin_type'] . "'='1' AND  `share_pdf` = 'Y')) AND id NOT In(SELECT vendor_registration_request_id FROM " . $dashboard_transaction_table . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . "' AND vendor_registration_request_id IS NOT NULL AND is_active = 0) AND is_active = 0";
-            $vendor_registration_requestsres = $callConfig->getAllRows($vendor_registration_requestssql);
-            $return['vendor_registration_requests'] = $vendor_registration_requestsres;
-
-
-            $msmelogssql = "SELECT msmecl.*,(SELECT ven.company FROM vendors ven WHERE ven.company_id = msmecl.company_id AND msmecl.transaction_table = 'vendors' AND msmecl.transaction_id = ven.id AND ven.is_active = 0) as vendor_name,(SELECT venr.company FROM vendor_registers venr WHERE venr.company_id = msmecl.company_id AND msmecl.transaction_table = '" . $dashboard_transaction_table . "' AND msmecl.transaction_id = venr.id AND venr.is_active = 0) as vendor_register_name FROM msme_confirmation_logs msmecl WHERE msmecl.company_id = '" . $get['company_id'] . "' AND msmecl.confirmation_status IS NULL AND current_status = 0 AND msmecl.is_active =0";
-            $msmelogsres = $callConfig->getAllRows($msmelogssql);
-            $return['msme_confirmation_logs'] = $msmelogsres;
-
-
+            if ($get['start_date'] != "" && $get['end_date'] != "") {
+                $conditionwh .= " AND created_date BETWEEN '" . $get['start_date'] . "' AND '" . $get['end_date'] . "'";
+            }
+            $vdrsql = "SELECT * FROM " . $get['transaction_table'] . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0 . $conditionwh;
+            $vdrres = $callConfig->getAllRows($vdrsql);
+            $return['vendor_details'] = $vdrres;
         }
         return $return;
     }
+
+    public function getVendorAdminDashboardPost($get, $post)
+    {
+        if (isset($get['company_id']) && empty($post['company_id'])) {
+            $post['company_id'] = $get['company_id'];
+        }
+        return $this->getVendorAdminDashboard($post);
+    }
+
+    public function getVendorAdminDashboard($get)
+    {
+        if ($get['vendorcreate'] == 'Y') {
+            $return['registervendors'] = $this->registervendors($get['vendor_id'], $get);
+            return $return;
+        }
+        $return = array();
+        $return['get'] = $get;
+        $dashboard_transaction_table = "vendor_registers";
+        $extracondi = '';
+        $getvrid = '';
+        if ($get['entervendornamefind'] != "") {
+            $extracondi = " AND (company LIKE '%" . $get['entervendornamefind'] . "%' OR display_name LIKE '%" . $get['entervendornamefind'] . "%')";
+        }
+
+        $registervid = $this->loadVendorDashboardVendorList($get, $dashboard_transaction_table, $extracondi, $getvrid, $return);
+        $this->loadVendorDashboardStats($get, $dashboard_transaction_table, $registervid, $return);
+        return $return;
+    }
+
+    private function loadVendorDashboardVendorList($get, $dashboard_transaction_table, $extracondi, $getvrid, &$return)
+    {
+        global $callConfig;
+        $commonCond = VendorConstants::VEN_WHERE_COMPANY_ID . $get['company_id'] . VendorConstants::AND_HR_CONNECT . $get['user_id'] . VendorConstants::OR_FINANCE_CONNECT . $get['user_id'] . VendorConstants::OR_PURCHASE_CONNECT . $get['user_id'] . VendorConstants::OR_ADMIN_CONNECT . $get['user_id'] . VendorConstants::OR_PROJECT_CONNECT . $get['user_id'] . VendorConstants::OR_LOCATION_CONNECT . $get['user_id'] . VendorConstants::OR_LEGAL_CONNECT . $get['user_id'] . VendorConstants::OR_CREATED_BY . $get['user_id'] . VendorConstants::OR_APOS . $get['admin_type'] . "'='1' ) AND is_active = 0" . $extracondi;
+
+        if ($get['limit_select'] != 0) {
+            $cntsql = "SELECT COUNT(id) as cnt FROM " . $dashboard_transaction_table . $commonCond;
+            $cntres = $callConfig->getRow($cntsql);
+            $return['total_vendors'] = $cntres->cnt;
+            $return['total_record_cnt'] = $cntres;
+            $respons_data_cnt = ($cntres->cnt != "" && $cntres->cnt != 0) ? $cntres->cnt : 0;
+
+            $total_pages = ceil($respons_data_cnt / $get['limit_select']);
+            $current_page = isset($get['current_page']) ? (int) $get['current_page'] : 1;
+            $current_page = max(1, min($current_page, $total_pages));
+            $start_from = ($current_page - 1) * $get['limit_select'];
+            $return['total_pages'] = $total_pages;
+
+            $dynmictablersql = "SELECT id,user_id,display_name,created_date,image,email,created_by,company, send_verification_profile_status, verification_profile_users, current_status, send_verification_profile_status, vendor_id, originator, vendor_type_id " . $getvrid . " FROM " . $dashboard_transaction_table . $commonCond . " LIMIT " . $start_from . ", " . $get['limit_select'];
+            $vendorres = $callConfig->getAllRows($dynmictablersql);
+            $return['vendors'] = $vendorres;
+        } else {
+            $dynmictablersql = "SELECT id,user_id,display_name,created_date,image,email,created_by,company, send_verification_profile_status, verification_profile_users, current_status, send_verification_profile_status, vendor_id, originator, vendor_type_id " . $getvrid . " FROM " . $dashboard_transaction_table . $commonCond;
+            $vendorres = $callConfig->getAllRows($dynmictablersql);
+            $return['vendors'] = $vendorres;
+            $return['total_vendors'] = count((array) $vendorres);
+            $return['total_record_cnt'] = count((array) $vendorres);
+        }
+
+        $registervid = array();
+        foreach ($vendorres as $venre) {
+            $registervid[$venre->id] = $venre->id;
+        }
+        $return['onboarduserid'] = $registervid;
+        return $registervid;
+    }
+
+    private function loadVendorDashboardStats($get, $dashboard_transaction_table, $registervid, &$return)
+    {
+        global $callConfig;
+        $totalvrsql = "SELECT COUNT(CASE WHEN (vend.current_status = " . ST_ACTIVE . " AND is_active = 0)  THEN 1 END) AS active_cnt, COUNT(CASE WHEN (vend.current_status = " . ST_APPROVED . ") THEN 1 END) AS approved_cnt, COUNT(CASE WHEN (vend.current_status = " . ST_INPROGRESS . "  AND is_active = 0) THEN 1 END) AS inprogress_cnt  FROM " . $dashboard_transaction_table . " vend WHERE company_id =  '" . $get['company_id'] . VendorConstants::AND_HR_CONNECT . $get['user_id'] . VendorConstants::OR_FINANCE_CONNECT . $get['user_id'] . VendorConstants::OR_PURCHASE_CONNECT . $get['user_id'] . VendorConstants::OR_ADMIN_CONNECT . $get['user_id'] . VendorConstants::OR_PROJECT_CONNECT . $get['user_id'] . VendorConstants::OR_LOCATION_CONNECT . $get['user_id'] . VendorConstants::OR_LEGAL_CONNECT . $get['user_id'] . VendorConstants::OR_CREATED_BY . $get['user_id'] . VendorConstants::OR_APOS . $get['admin_type'] . "'='1')";
+        $totalvrres = $callConfig->getRow($totalvrsql);
+        $return['transaction_vendor_cnt'] = $totalvrres;
+
+        $condition_task = "";
+        if ($get['admin_type'] != '1') {
+            $condition_task = " AND (tas.assigned_to = '" . $get['user_id'] . "' OR tas.approval_user_id = '" . $get['user_id'] . "')";
+        }
+        $regVidList = !empty($registervid) ? implode(',', $registervid) : '0';
+        $transaction_activity_schedulesql = "SELECT tas.assigned_to, tas.transaction_id, count(*) as total_task_cnt, sum(if(tas.current_status=" . ST_APPROVED . ",1,0)) as approve_cnt, sum(if(tas.current_status=" . ST_APPROVED1 . ",1,0)) as review_cnt, sum(if(tas.current_status=" . ST_INPROGRESS . ",1,0)) as inprogress_cnt, sum(if(tas.current_status=" . ST_ACTIVE . ",1,0)) as yet_to_start_cnt, sum(if(tas.action_date < tas.completion_date,1,0)) as delayed_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '" . $get['company_id'] . VendorConstants::AND_TAS_TRANS_TABLE . $dashboard_transaction_table . "' AND tas.transaction_id IN(" . $regVidList . ")  AND tas.is_active = 0  " . $condition_task . " GROUP BY tas.assigned_to,tas.transaction_id";
+        $transaction_activity_scheduleres = $callConfig->getAllRows($transaction_activity_schedulesql);
+        $return['transaction_activity_scheduleres_sql'] = $transaction_activity_schedulesql;
+        $return['transaction_activity_scheduleres'] = $transaction_activity_scheduleres;
+
+        $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
+        $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
+        $return['tasks_categories'] = $tasks_categoriesres;
+
+        $action_transaction_activity_schedulesql = "SELECT tas.id, tas.transaction_table, tas.transaction_id, tas.task_id, tas.assigned_to, tas.approval_user_id, tas.action_date, tas.revised_action_date, tas.actual_action_date, tas.completion_date, tas.approval_date, tas.action_flag, tas.comments, tas.note, tas.check_list, tas.finish_date, tas.current_status, tas.task_name, tas.process_id, tal.request_date, tal.response_date, tal.comments, tal.response_type FROM transaction_activity_schedule tas, transaction_approval_logs tal WHERE tas.company_id = '" . $get['company_id'] . "' AND tas.company_id = tal.company_id AND tas.transaction_table = '" . $dashboard_transaction_table . "' AND tas.transaction_id IN(" . $regVidList . ") AND tas.id = tal.transaction_id AND tal.transaction_table ='transaction_activity_schedule' AND tal.user_id = '" . $get['user_id'] . "' AND tal.response_type ='0' AND tal.call_back ='1' AND tas.is_active = 0";
+        $action_transaction_activity_scheduleres = $callConfig->getAllRows($action_transaction_activity_schedulesql);
+        $return['action_transaction_activity_schedule'] = $action_transaction_activity_scheduleres;
+
+        $vendor_registration_requestssql = "SELECT id, company_name, display_name, user_email, share_pdf, request_datetime FROM vendor_registration_requests WHERE company_id = '" . $get['company_id'] . "' AND (`originator` = '" . $get['user_id'] . "' OR ('" . $get['admin_type'] . "'='1' AND  `share_pdf` = 'Y')) AND id NOT In(SELECT vendor_registration_request_id FROM " . $dashboard_transaction_table . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . "' AND vendor_registration_request_id IS NOT NULL AND is_active = 0) AND is_active = 0";
+        $vendor_registration_requestsres = $callConfig->getAllRows($vendor_registration_requestssql);
+        $return['vendor_registration_requests'] = $vendor_registration_requestsres;
+
+        $msmelogssql = "SELECT msmecl.*,(SELECT ven.company FROM vendors ven WHERE ven.company_id = msmecl.company_id AND msmecl.transaction_table = 'vendors' AND msmecl.transaction_id = ven.id AND ven.is_active = 0) as vendor_name,(SELECT venr.company FROM vendor_registers venr WHERE venr.company_id = msmecl.company_id AND msmecl.transaction_table = '" . $dashboard_transaction_table . "' AND msmecl.transaction_id = venr.id AND venr.is_active = 0) as vendor_register_name FROM msme_confirmation_logs msmecl WHERE msmecl.company_id = '" . $get['company_id'] . "' AND msmecl.confirmation_status IS NULL AND current_status = 0 AND msmecl.is_active =0";
+        $msmelogsres = $callConfig->getAllRows($msmelogssql);
+        $return['msme_confirmation_logs'] = $msmelogsres;
+    }
+
     public function getVendorsDetails($get)
     {
         global $callConfig;
         $return = array();
-        $comdition = '';
         $return['get'] = $get;
         $type = $get['transaction_table'] != "" ? $get['transaction_table'] : $get['table'];
 
@@ -1323,84 +1251,94 @@ public function insertupdatevendorverificationdetails($get, $post)
         $vendorslistres = $callConfig->getAllRows($vendorslistsql);
         $return['vendorslist'] = $vendorslistres;
 
+        $vendorres = null;
         if ($get['id'] != "") {
-            $vendregcond = " AND id = '" . $get['id'] . "' ";
-
-
-            $vendor_registerssql = VendorConstants::SEL_FROM . $type . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . "'  AND is_active = 0 " . $vendregcond;
+            $vendor_registerssql = VendorConstants::SEL_FROM . $type . VendorConstants::WHERE_COMPANY_ID . $get['company_id'] . "'  AND is_active = 0  AND id = '" . $get['id'] . "' ";
             $vendorres = $callConfig->getRow($vendor_registerssql);
             $return['vendors_sql'] = $vendor_registerssql;
             $return['vendors'] = $vendorres;
 
-            $taskactivitysql = "SELECT tas.id,tas.action_date,tas.revised_action_date, tas.actual_action_date, tas.action_flag, tas.check_list, tas.current_status, tas.process_id, tas.task_name, tas.approval_user_id,  tas.assigned_to  FROM transaction_activity_schedule tas WHERE tas.company_id = '" . $get['company_id'] . VendorConstants::AND_TAS_TRANS_TABLE . $type . "' AND transaction_id= '" . $vendorres->id . "' " . $comdition . " AND tas.is_active = 0";
-            $taskactivityres = $callConfig->getAllRows($taskactivitysql);
-            $return['sql'] = $taskactivitysql;
-            $return['transaction_activity_schedule'] = $taskactivityres;
-
-            $tasks_cntssql = "SELECT count(*) as total_task_cnt, sum(if(current_status=" . ST_APPROVED . ",1,0)) as approve_cnt, sum(if(current_status=" . ST_COMPLETE . ",1,0)) as review_cnt, sum(if(current_status=" . ST_INPROGRESS . ",1,0)) as inprogress_cnt, sum(if(current_status=" . ST_ACTIVE . ",1,0)) as yet_to_start_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '" . $get['company_id'] . VendorConstants::AND_TAS_TRANS_TABLE . $type . "'  AND transaction_id= '" . $vendorres->id . "'  " . $comdition . " AND tas.is_active = 0";
-            $tasks_cntsres = $callConfig->getRow($tasks_cntssql);
-            $return['task_cnt'] = $tasks_cntsres;
-
-            $vendor_documentsssql = "SELECT * FROM vendor_documents WHERE company_id = '" . $get['company_id'] . "' AND vendor_user_id = '" . $vendorres->id . VendorConstants::AND_IS_ACTIVE_0;
-            $vendor_documentssres = $callConfig->getAllRows($vendor_documentsssql);
-            $return['vendor_documents_sql'] = $vendor_documentsssql;
-            $return['vendor_documents'] = $vendor_documentssres;
-
-
-
-
+            $this->loadVendorRecordDetails($get, $type, $vendorres, $return);
         }
 
-        $vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '" . $get['company_id'] . "' AND vendor_id = '" . $vendorres->id . VendorConstants::AND_IS_ACTIVE_0;
+        $this->loadVendorLookupData($get, $return);
+        $this->loadVendorGstAndGeoDetails($get, $type, $vendorres, $return);
+        $this->populateVendorRoleUsers($return, $get['company_id'], $get['user_id']);
+
+        if ($get['VRRid'] != "") {
+            $sql = VendorConstants::SEL_VRR . $get['company_id'] . VendorConstants::AND_ID_APOS . $get['VRRid'] . VendorConstants::AND_IS_ACTIVE_0;
+            $res = $callConfig->getRow($sql);
+            $return['vendor_registration_requests'] = $res;
+        }
+
+        return $return;
+    }
+
+    private function loadVendorRecordDetails($get, $type, $vendorres, &$return)
+    {
+        global $callConfig;
+        $comdition = '';
+        $vendorId = is_object($vendorres) ? $vendorres->id : $get['id'];
+
+        $taskactivitysql = "SELECT tas.id,tas.action_date,tas.revised_action_date, tas.actual_action_date, tas.action_flag, tas.check_list, tas.current_status, tas.process_id, tas.task_name, tas.approval_user_id,  tas.assigned_to  FROM transaction_activity_schedule tas WHERE tas.company_id = '" . $get['company_id'] . VendorConstants::AND_TAS_TRANS_TABLE . $type . "' AND transaction_id= '" . $vendorId . "' " . $comdition . " AND tas.is_active = 0";
+        $taskactivityres = $callConfig->getAllRows($taskactivitysql);
+        $return['sql'] = $taskactivitysql;
+        $return['transaction_activity_schedule'] = $taskactivityres;
+
+        $tasks_cntssql = "SELECT count(*) as total_task_cnt, sum(if(current_status=" . ST_APPROVED . ",1,0)) as approve_cnt, sum(if(current_status=" . ST_COMPLETE . ",1,0)) as review_cnt, sum(if(current_status=" . ST_INPROGRESS . ",1,0)) as inprogress_cnt, sum(if(current_status=" . ST_ACTIVE . ",1,0)) as yet_to_start_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '" . $get['company_id'] . VendorConstants::AND_TAS_TRANS_TABLE . $type . "'  AND transaction_id= '" . $vendorId . "'  " . $comdition . " AND tas.is_active = 0";
+        $tasks_cntsres = $callConfig->getRow($tasks_cntssql);
+        $return['task_cnt'] = $tasks_cntsres;
+
+        $vendor_documentsssql = "SELECT * FROM vendor_documents WHERE company_id = '" . $get['company_id'] . "' AND vendor_user_id = '" . $vendorId . VendorConstants::AND_IS_ACTIVE_0;
+        $vendor_documentssres = $callConfig->getAllRows($vendor_documentsssql);
+        $return['vendor_documents_sql'] = $vendor_documentsssql;
+        $return['vendor_documents'] = $vendor_documentssres;
+
+        $tasquery = "SELECT COUNT(id) as total_task, SUM(if(current_status = '" . ST_APPROVED . "',1,0)) as total_approved  FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $get['transaction_table'] . VendorConstants::AND_TRANS_ID . $vendorId . "' AND approval_user_id = '" . $get['user_id'] . VendorConstants::AND_IS_ACTIVE_0;
+        $tasres = $callConfig->getRow($tasquery);
+        $return['transaction_activity_schedule_cnt'] = $tasres;
+
+        $tasquery = "SELECT id, task_name, check_list, current_status, transaction_table, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $get['transaction_table'] . VendorConstants::AND_TRANS_ID . $vendorId . VendorConstants::AND_IS_ACTIVE_0;
+        $tasres = $callConfig->getAllRows($tasquery);
+        $return['transaction_activity_schedule_list'] = $tasres;
+
+        if ($get['edittype'] == "SendVerificationProfile") {
+            $tasquery = "SELECT * FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $get['transaction_table'] . VendorConstants::AND_TRANS_ID . $vendorId . VendorConstants::AND_IS_ACTIVE_0;
+            $tasres = $callConfig->getAllRows($tasquery);
+            $return['transaction_activity_schedule'] = $tasres;
+        }
+
+        $spihitsql = "SELECT * FROM api_hits WHERE company_id = '" . $get['company_id'] . "' AND application_table = '" . $get['transaction_table'] . VendorConstants::AND_TRANS_ID . $vendorId . "'  AND is_active = 0 ORDER BY response_date_time DESC";
+        $spihitres = $callConfig->getAllRows($spihitsql);
+        $return['api_hits'] = $spihitres;
+    }
+
+    private function loadVendorLookupData($get, &$return)
+    {
+        global $callConfig;
+        $vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '" . $get['company_id'] . "' AND vendor_id = '" . ($get['id'] ?? '') . VendorConstants::AND_IS_ACTIVE_0;
         $vendor_agreementsres = $callConfig->getAllRows($vendor_agreementssql);
         $return['vendor_agreements_sql'] = $vendor_agreementssql;
         $return['vendor_agreements'] = $vendor_agreementsres;
 
-        $paymentmethodsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETHOD' AND company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $paymentmethodres = $callConfig->getAllRows($paymentmethodsql);
-        foreach ($paymentmethodres as $pm) {
-            $paymentmethod[$pm->genc_detail_code] = $pm->genc_detail_name;
+        $generalCodes = ['PAYMETHOD' => 'payment_method', 'SALESTYPE' => 'salestype', 'PAYMETERM' => 'paymenttype', 'VENDORTYPE' => 'vendor_type', 'VENDORCONTACTINFOTYP' => 'vendor_contact_info_type', 'BANKACCTTYPE' => 'bank_acoount_type', 'GSTREGISTRATIONTYPE' => 'gstregistrationtype'];
+        foreach ($generalCodes as $gencCode => $retKey) {
+            $sql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = '" . $gencCode . "' AND company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
+            $res = $callConfig->getAllRows($sql);
+            $mapped = array();
+            foreach ($res as $item) {
+                $mapped[$item->genc_detail_code] = $item->genc_detail_name;
+            }
+            $return[$retKey] = $mapped;
         }
-        $return['payment_method'] = $paymentmethod;
 
-        $salestypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'SALESTYPE' AND company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $salestyperes = $callConfig->getAllRows($salestypesql);
-        foreach ($salestyperes as $st) {
-            $salestype[$st->genc_detail_code] = $st->genc_detail_name;
-        }
-        $return['salestype'] = $salestype;
-
-        $paymenttermsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'PAYMETERM' AND company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $paymenttermres = $callConfig->getAllRows($paymenttermsql);
-        foreach ($paymenttermres as $pt) {
-            $pmtype[$pt->genc_detail_code] = $pt->genc_detail_name;
-        }
-        $return['paymenttype'] = $pmtype;
-
-        $empsql = "SELECT display_name,email_id,billable,transaction_number FROM employees WHERE company_id = '" . $get['company_id'] . "' AND vendor_id = '" . $get['id'] . VendorConstants::AND_IS_ACTIVE_0;
+        $empsql = "SELECT display_name,email_id,billable,transaction_number FROM employees WHERE company_id = '" . $get['company_id'] . "' AND vendor_id = '" . ($get['id'] ?? '') . VendorConstants::AND_IS_ACTIVE_0;
         $empres = $callConfig->getAllRows($empsql);
         $return['employess'] = $empres;
-
-
-
 
         $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
         $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
         $return['tasks_categories'] = $tasks_categoriesres;
-
-        $vendortypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORTYPE' AND company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $vendortyperes = $callConfig->getAllRows($vendortypesql);
-        foreach ($vendortyperes as $vt) {
-            $vendor_type[$vt->genc_detail_code] = $vt->genc_detail_name;
-        }
-        $return['vendor_type'] = $vendor_type;
-
-        $vcitsql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORCONTACTINFOTYP' AND company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $vcitres = $callConfig->getAllRows($vcitsql);
-        foreach ($vcitres as $pm) {
-            $vendorcontactinfotype[$pm->genc_detail_code] = $pm->genc_detail_name;
-        }
-        $return['vendor_contact_info_type'] = $vendorcontactinfotype;
 
         $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
         $company_typesres = $callConfig->getAllRows($company_typessql);
@@ -1414,48 +1352,37 @@ public function insertupdatevendorverificationdetails($get, $post)
         $payment_termsres = $callConfig->getAllRows($payment_termssql);
         $return['payment_terms'] = $payment_termsres;
 
-        $batypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'BANKACCTTYPE' AND company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $batyperes = $callConfig->getAllRows($batypesql);
-        foreach ($batyperes as $pm) {
-            $bankacoounttype[$pm->genc_detail_code] = $pm->genc_detail_name;
-        }
-        $return['bank_acoount_type'] = $bankacoounttype;
-
-        $tasquery = "SELECT COUNT(id) as total_task, SUM(if(current_status = '" . ST_APPROVED . "',1,0)) as total_approved  FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $get['transaction_table'] . VendorConstants::AND_TRANS_ID . $vendorres->id . "' AND approval_user_id = '" . $get['user_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $tasres = $callConfig->getRow($tasquery);
-        $return['transaction_activity_schedule_cnt'] = $tasres;
-
-        $tasquery = "SELECT id, task_name, check_list, current_status, transaction_table, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $get['transaction_table'] . VendorConstants::AND_TRANS_ID . $vendorres->id . VendorConstants::AND_IS_ACTIVE_0;
-        $tasres = $callConfig->getAllRows($tasquery);
-        $return['transaction_activity_schedule_list'] = $tasres;
-
-        if ($get['edittype'] == "SendVerificationProfile") {
-            $tasquery = "SELECT * FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_TRANS_TABLE . $get['transaction_table'] . VendorConstants::AND_TRANS_ID . $vendorres->id . VendorConstants::AND_IS_ACTIVE_0;
-            $tasres = $callConfig->getAllRows($tasquery);
-            $return['transaction_activity_schedule'] = $tasres;
-        }
-
-        $spihitsql = "SELECT * FROM api_hits WHERE company_id = '" . $get['company_id'] . "' AND application_table = '" . $get['transaction_table'] . VendorConstants::AND_TRANS_ID . $vendorres->id . "'  AND is_active = 0 ORDER BY response_date_time DESC";
-        $spihitres = $callConfig->getAllRows($spihitsql);
-        $return['api_hits'] = $spihitres;
-
-        $vendor_display_fieldssql = "SELECT id, field_list FROM vendor_display_fields WHERE company_id = '" . $get['company_id'] . "' AND role_short_code = '" . $get['working_role_short_code'] . VendorConstants::AND_IS_ACTIVE_0;
+        $vendor_display_fieldssql = "SELECT id, field_list FROM vendor_display_fields WHERE company_id = '" . $get['company_id'] . "' AND role_short_code = '" . ($get['working_role_short_code'] ?? '') . VendorConstants::AND_IS_ACTIVE_0;
         $vendor_display_fieldsres = $callConfig->getRow($vendor_display_fieldssql);
         $return['vendor_display_fields_sql'] = $vendor_display_fieldssql;
         $return['vendor_display_fields'] = $vendor_display_fieldsres;
 
-
-        //Start Koteswar added this code  - 26-09-2025
-
-        $gstregistrationtypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'GSTREGISTRATIONTYPE' AND company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $gstregistrationtyperes = $callConfig->getAllRows($gstregistrationtypesql);
-        foreach ($gstregistrationtyperes as $st) {
-            $gstregistrationtype[$st->genc_detail_code] = $st->genc_detail_name;
+        $locationssql = "SELECT id, location_name FROM locations WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
+        $locationsres = $callConfig->getAllRows($locationssql);
+        $locations = array();
+        foreach ($locationsres as $pm) {
+            $locations[$pm->id] = $pm;
         }
-        $return['gstregistrationtype'] = $gstregistrationtype;
+        $return['locations'] = $locations;
 
+        $document_listssql = "SELECT id,document_name FROM document_lists WHERE company_id = '" . $get['company_id'] . "' AND category_id = 3 AND is_active = 0";
+        $document_listsres = $callConfig->getAllRows($document_listssql);
+        $return['document_lists'] = $document_listsres;
+
+        $accounttypequery = "SELECT * FROM `general_code_details` WHERE genc_code LIKE '%BANKACCTTYPE%'";
+        $accounttypedata = $callConfig->getAllRows($accounttypequery);
+        $return['accounttyperes'] = $accounttypedata;
+
+        $companytypequery = "SELECT id, company_type_name FROM `company_types` WHERE is_active = '0' ORDER BY `company_type_name`";
+        $companytypedata = $callConfig->getAllRows($companytypequery);
+        $return['companytyperes'] = $companytypedata;
+    }
+
+    private function loadVendorGstAndGeoDetails($get, $type, $vendorres, &$return)
+    {
+        global $callConfig;
         $countryid = $statesid = array();
-        $cvgstbdsql = "SELECT * FROM `customer_vendor_gst_billing_details` WHERE company_id = '" . $get['company_id'] . "' AND customer_vendor_id = '" . $get['id'] . VendorConstants::AND_TRANS_TABLE . $type . VendorConstants::AND_IS_ACTIVE_0_NO_SPACE;
+        $cvgstbdsql = "SELECT * FROM `customer_vendor_gst_billing_details` WHERE company_id = '" . $get['company_id'] . "' AND customer_vendor_id = '" . ($get['id'] ?? '') . VendorConstants::AND_TRANS_TABLE . $type . VendorConstants::AND_IS_ACTIVE_0_NO_SPACE;
         $cvgstbdres = $callConfig->getAllRows($cvgstbdsql);
         if (!empty($cvgstbdres)) {
             foreach ($cvgstbdres as $cvgst) {
@@ -1501,14 +1428,13 @@ public function insertupdatevendorverificationdetails($get, $post)
             $citiesres = $callConfig->getAllRows($citiessql);
         }
         $return['cities'] = $citiesres;
-        //End Koteswar added this code  - 26-09-2025
 
         $vlistquery = "SELECT id, company_id, user_id,email, company, bank_account_no, ifsc_code, pan_no, gstin, tan_number, msme_number, vendor_verifications  FROM $type WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0 ORDER BY id DESC";
         $vlistrows = $callConfig->getAllRows($vlistquery);
         $return['rows_sql'] = $vlistquery;
         $return['rows'] = $vlistrows;
 
-        $vidquery = "SELECT id, company_id, user_id,email, company, bank_account_no, ifsc_code, pan_no, gstin, tan_number, msme_number, vendor_verifications  FROM $type WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_ID_APOS . $get['id'] . "' AND is_active = 0 ORDER BY id DESC";
+        $vidquery = "SELECT id, company_id, user_id,email, company, bank_account_no, ifsc_code, pan_no, gstin, tan_number, msme_number, vendor_verifications  FROM $type WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_ID_APOS . ($get['id'] ?? '') . "' AND is_active = 0 ORDER BY id DESC";
         $vidrow = $callConfig->getRow($vidquery);
         $return['data'] = $vidrow;
 
@@ -1519,68 +1445,9 @@ public function insertupdatevendorverificationdetails($get, $post)
             $vendor_types[$pm->id] = $pm;
         }
         $return['vendor_types'] = $vendor_types;
-
-        $accounttypequery = "SELECT * FROM `general_code_details` WHERE genc_code LIKE '%BANKACCTTYPE%'";
-        $accounttypedata = $callConfig->getAllRows($accounttypequery);
-        $return['accounttyperes'] = $accounttypedata;
-
-        $companytypequery = "SELECT id, company_type_name FROM `company_types` WHERE is_active = '0' ORDER BY `company_type_name`";
-        $companytypedata = $callConfig->getAllRows($companytypequery);
-        $return['companytyperes'] = $companytypedata;
-
-
-        $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::AND_ID_NOT_EQ . $get['user_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-        $application_usersres = $callConfig->getAllRows($application_userssql);
-        $return['vendor_admin_application_users'] = $application_usersres;
-
-        $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::AND_ID_NOT_EQ . $get['user_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_HR_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-        $application_usersres = $callConfig->getAllRows($application_userssql);
-        $return['vendor_hr_application_users'] = $application_usersres;
-
-        $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::AND_ID_NOT_EQ . $get['user_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_FINANCE_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-        $application_usersres = $callConfig->getAllRows($application_userssql);
-        $return['vendor_finanace_application_users'] = $application_usersres;
-
-        $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::AND_ID_NOT_EQ . $get['user_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_PROJECT_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-        $application_usersres = $callConfig->getAllRows($application_userssql);
-        $return['vendor_project_application_users'] = $application_usersres;
-
-        $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::AND_ID_NOT_EQ . $get['user_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_LOCATION_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-        $application_usersres = $callConfig->getAllRows($application_userssql);
-        $return['vendor_location_application_users'] = $application_usersres;
-
-        $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::AND_ID_NOT_EQ . $get['user_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_PURCHASE_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-        $application_usersres = $callConfig->getAllRows($application_userssql);
-        $return['vendor_purchase_application_users'] = $application_usersres;
-
-        $application_userssql = VendorConstants::SEL_APP_USERS . $get['company_id'] . VendorConstants::AND_ID_NOT_EQ . $get['user_id'] . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . VENDOR_LEGAL_ROLE . VendorConstants::JSON_ROLE_SEARCH_END;
-        $application_usersres = $callConfig->getAllRows($application_userssql);
-        $return['vendor_legal_application_users'] = $application_usersres;
-
-        $locationssql = "SELECT id, location_name FROM locations WHERE company_id = '" . $get['company_id'] . VendorConstants::AND_IS_ACTIVE_0;
-        $locationsres = $callConfig->getAllRows($locationssql);
-        $locations = array();
-        foreach ($locationsres as $pm) {
-            $locations[$pm->id] = $pm;
-        }
-        $return['locations'] = $locations;
-
-        $document_listssql = "SELECT id,document_name FROM document_lists WHERE company_id = '" . $get['company_id'] . "' AND category_id = 3 AND is_active = 0";
-        $document_listsres = $callConfig->getAllRows($document_listssql);
-        $return['document_lists'] = $document_listsres;
-
-        if ($get['VRRid'] != "") {
-            $sql = VendorConstants::SEL_VRR . $get['company_id'] . VendorConstants::AND_ID_APOS . $get['VRRid'] . VendorConstants::AND_IS_ACTIVE_0;
-            $res = $callConfig->getRow($sql);
-            $return['vendor_registration_requests'] = $res;
-        }
-
-        return $return;
     }
 
-
-
-    private function populateVendorRoleUsers(&$return, $companyId)
+    private function populateVendorRoleUsers(&$return, $companyId, $excludeUserId = null)
     {
         global $callConfig;
         $roles = [
@@ -1592,8 +1459,9 @@ public function insertupdatevendorverificationdetails($get, $post)
             'vendor_purchase_application_users' => VENDOR_PURCHASE_ROLE,
             'vendor_legal_application_users' => VENDOR_LEGAL_ROLE,
         ];
+        $excludeCond = ($excludeUserId !== null) ? VendorConstants::AND_ID_NOT_EQ . $excludeUserId : '';
         foreach ($roles as $key => $roleConstant) {
-            $sql = VendorConstants::SEL_APP_USERS . $companyId . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . $roleConstant . VendorConstants::JSON_ROLE_SEARCH_END;
+            $sql = VendorConstants::SEL_APP_USERS . $companyId . $excludeCond . VendorConstants::JSON_ROLE_SEARCH_START . VENDOR_MODULE_ADMIN_ROLE . VendorConstants::JSON_ROLE_SEARCH_MID . $roleConstant . VendorConstants::JSON_ROLE_SEARCH_END;
             $return[$key] = $callConfig->getAllRows($sql);
         }
     }
@@ -1603,11 +1471,8 @@ class VendorPortalUserClass
 {
     use VendorPortalTicketTrait;
     use VendorPortalOperationsTrait;
-
-    public function MSMEConfirmationUpdate($get, $post = null)
-    {
-        return $this->msmeConfirmationUpdate($get, $post);
-    }
+    use VendorPortalRegistrationTrait;
+    use VendorPortalDashboardTrait;
 }
 if (!class_exists('vendorPortelUserClass', false)) {
     class_alias('VendorPortalUserClass', 'vendorPortelUserClass');
