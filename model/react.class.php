@@ -155,35 +155,37 @@ public function dynamicadddatareact($get, $data)
         $return['application_menu_TNR'] = $this->toGETNavDetails('TNR', $admin_type, $rolepermission);
         return $return;
     }
+    private function resolveNavMenuItemPermission($value, $admin_type, $rolepermission, $child)
+    {
+        if (count((array) $child) > 0 || $admin_type != '0') {
+            return 1;
+        }
+        if (in_array($value->page_name, (array) ($rolepermission['application_no_permission_pages']['option'] ?? []))) {
+            return 1;
+        }
+        return $this->checkPremission($value->page_name, $admin_type, $rolepermission);
+    }
+
     public function toGETNavDetails($type, $admin_type, $rolepermission)
     {
         $menu = $rolepermission['application_menu'];
+        $array = [];
 
         foreach ($menu as $value) {
-            if ($value->menu_location == $type && $value->parent_menu == 0) {
-
-                if ($admin_type == '0') {
-                    if (in_array($value->page_name, (array) $rolepermission['application_no_permission_pages']['option'])) {
-                        $res = 1;
-                    } else {
-                        $res = $this->checkPremission($value->page_name, $admin_type, $rolepermission);
-                    }
-
-                } else {
-                    $res = 1;
-                }
-                $child = $this->getParentidmenus($value->id, 1, $admin_type, $rolepermission);
-                if (count((array) $child) > 0) {
-                    $res = 1;
-                }
+            if ($value->menu_location != $type || $value->parent_menu != 0) {
+                continue;
             }
-            if ($value->menu_location == $type && $value->parent_menu == 0 && $res == 1) {
-                $array[$value->id]['id'] = $value->id;
-                $array[$value->id]['Label'] = $value->menu_label;
-                $array[$value->id]['Menu_Icon'] = $value->menu_icon;
-                $array[$value->id]['Page_Name'] = $value->page_name;
-                $array[$value->id]['dashboard'] = $value->dashboard;
-                $array[$value->id]['child'] = $child;
+            $child = $this->getParentidmenus($value->id, 1, $admin_type, $rolepermission);
+            $res = $this->resolveNavMenuItemPermission($value, $admin_type, $rolepermission, $child);
+            if ($res == 1) {
+                $array[$value->id] = [
+                    'id' => $value->id,
+                    'Label' => $value->menu_label,
+                    'Menu_Icon' => $value->menu_icon,
+                    'Page_Name' => $value->page_name,
+                    'dashboard' => $value->dashboard,
+                    'child' => $child,
+                ];
             }
         }
         if ($admin_type == '0') {
@@ -192,121 +194,118 @@ public function dynamicadddatareact($get, $data)
 
         return $array;
     }
+
     public function menurecheck($data)
     {
         $array = array();
         foreach ($data as $key => $dat) {
-            if (count((array) $dat['child']) > 0) {
+            if (count((array) ($dat['child'] ?? [])) > 0) {
+                $filteredChild = [];
                 foreach ($dat['child'] as $ddkey => $dd) {
-                    if (count((array) $dd['child']) > 0) {
-                        $array[$key]['id'] = $dat['id'];
-                        $array[$key]['Label'] = $dat['Label'];
-                        $array[$key]['Menu_Icon'] = $dat['Menu_Icon'];
-                        $array[$key]['Page_Name'] = $dat['Page_Name'];
-                        $array[$key]['dashboard'] = $dat['dashboard'];
-                        $array[$key]['child'][$ddkey] = $dd;
-                    } else {
-                        if ($dd['Page_Name'] != "") {
-                            $array[$key]['id'] = $dat['id'];
-                            $array[$key]['Label'] = $dat['Label'];
-                            $array[$key]['Menu_Icon'] = $dat['Menu_Icon'];
-                            $array[$key]['Page_Name'] = $dat['Page_Name'];
-                            $array[$key]['dashboard'] = $dat['dashboard'];
-                            $array[$key]['child'][$ddkey] = $dd;
-                        }
+                    if (count((array) ($dd['child'] ?? [])) > 0 || ($dd['Page_Name'] ?? '') != "") {
+                        $filteredChild[$ddkey] = $dd;
                     }
                 }
-
-            } else {
-                if ($dat['Page_Name'] != "") {
-                    $array[$key] = $dat;
+                if (!empty($filteredChild)) {
+                    $array[$key] = [
+                        'id' => $dat['id'],
+                        'Label' => $dat['Label'],
+                        'Menu_Icon' => $dat['Menu_Icon'],
+                        'Page_Name' => $dat['Page_Name'],
+                        'dashboard' => $dat['dashboard'],
+                        'child' => $filteredChild,
+                    ];
                 }
+            } elseif (($dat['Page_Name'] ?? '') != "") {
+                $array[$key] = $dat;
             }
         }
         return $array;
     }
 
-    public function checkPremission($name, $admin_type, $rolepermission)
+    private function resolvePagePermissionTypes($name, $pages)
     {
-        if (isset($admin_type)) { /* noop */ }
-        $return = 0;
-        //echo  $name; //exit;
-        //echo "<pre>"; print_r($_SESSION['role_permission']);print_r($_SESSION['role_permission']);
-        //rohan added page with paramiter passe tis time not working
-        if (strpos($name, '&')) {
-            $explode = explode('&', $name);
-            $name = $explode[0];
-        }
-        //print_r($value);
-        //    rohan adde
-
-        foreach ($rolepermission['application_pages'] as $value) {
+        $config = ['table' => '', 'type' => '', 'approvaltype' => ''];
+        foreach ($pages as $value) {
             if ($value->list_page_name == $name || $value->insert_page_name == $name || $value->edit_page_name == $name || $value->view_page_name == $name) {
-                $table = $value->application_table_name;
-                if ($value->list_page_name == $name) {
-                    $type = 'permission_list';
+                $config['table'] = $value->application_table_name;
+                if ($value->list_page_name == $name || $value->view_page_name == $name) {
+                    $config['type'] = 'permission_list';
                 }
                 if ($value->insert_page_name == $name) {
-                    $approvaltype = 'permission_approval';
-                }
-                if ($value->insert_page_name == $name) {
-                    $type = 'permission_insert';
+                    $config['approvaltype'] = 'permission_approval';
+                    $config['type'] = 'permission_insert';
                 }
                 if ($value->edit_page_name == $name) {
-                    $type = 'permission_update';
-                }
-                if ($value->view_page_name == $name) {
-                    $type = 'permission_list';
+                    $config['type'] = 'permission_update';
                 }
             }
         }
-
-        if (isset($rolepermission['role_permission'][$table][$type]) && $rolepermission['role_permission'][$table][$type] == 0) {
-            $return = 1;
-        }
-        if ($return == 0 && isset($rolepermission['role_page_permission'][$name]) && $rolepermission['role_page_permission'][$name]['permission_list'] == 0) {
-            $return = 1;
-        }
-
-        //approval check
-        if (isset($rolepermission['role_permission'][$table][$approvaltype]) && $rolepermission['role_permission'][$table][$approvaltype] == 0) {
-            $return = 1;
-        }
-        //print_r($_SESSION['role_permission']);
-        //echo $table." -- ".$type." --- ".$return."</br></br>"; //exit;
-        //approval check
-        return $return;
+        return $config;
     }
 
+    public function checkPremission($name, $admin_type, $rolepermission)
+    {
+        if (isset($admin_type)) { /* noop */ }
+        if (strpos($name, '&') !== false) {
+            $explode = explode('&', $name);
+            $name = $explode[0];
+        }
 
+        $permConfig = $this->resolvePagePermissionTypes($name, $rolepermission['application_pages'] ?? []);
+        $table = $permConfig['table'];
+        $type = $permConfig['type'];
+        $approvaltype = $permConfig['approvaltype'];
+
+        if ($table !== '' && isset($rolepermission['role_permission'][$table])) {
+            $tablePerm = $rolepermission['role_permission'][$table];
+            if (isset($tablePerm[$type]) && $tablePerm[$type] == 0) {
+                return 1;
+            }
+            if ($approvaltype !== '' && isset($tablePerm[$approvaltype]) && $tablePerm[$approvaltype] == 0) {
+                return 1;
+            }
+        }
+
+        if (isset($rolepermission['role_page_permission'][$name]['permission_list']) && $rolepermission['role_page_permission'][$name]['permission_list'] == 0) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    private function shouldIncludeParentMenuItem($value, $len, $admin_type, $rolepermission)
+    {
+        if ($admin_type != '0') {
+            return true;
+        }
+        $child = $this->getParentidmenuscheck($value->id, $len + 1, $admin_type, $rolepermission);
+        if (count((array) $child) > 0) {
+            return true;
+        }
+        if (in_array($value->page_name, (array) ($rolepermission['application_no_permission_pages']['option'] ?? []))) {
+            return true;
+        }
+        return ($this->checkPremission($value->page_name, $admin_type, $rolepermission) == 1);
+    }
 
     public function getParentidmenus($pid, $len, $admin_type, $rolepermission)
     {
         $menu = $rolepermission['application_menu'];
         $array1 = array();
         foreach ($menu as $value) {
-
-            $res = 1;
-            if ($value->parent_menu == $pid && $admin_type == '0') {
-                $child = array();
-                $child = $this->getParentidmenuscheck($value->id, $len + 1, $admin_type, $rolepermission);
-                if (count((array) $child) > 0) {
-                    $res = 1;
-                } else {
-                    if (in_array($value->page_name, (array) $rolepermission['application_no_permission_pages']['option'])) {
-                        $res = 1;
-                    } else {
-                        $res = $this->checkPremission($value->page_name, $admin_type, $rolepermission);
-                    }
-                }
+            if ($value->parent_menu != $pid) {
+                continue;
             }
-            if ($value->parent_menu == $pid && $res == 1) {
-                $array1[$value->id]['id'] = $value->id;
-                $array1[$value->id]['Label'] = $value->menu_label;
-                $array1[$value->id]['Menu_Icon'] = $value->menu_icon;
-                $array1[$value->id]['Page_Name'] = $value->page_name;
-                $array1[$value->id]['dashboard'] = $value->dashboard;
-                $array1[$value->id]['child'] = $this->getParentidmenus($value->id, $len + 1, $admin_type, $rolepermission);
+            if ($this->shouldIncludeParentMenuItem($value, $len, $admin_type, $rolepermission)) {
+                $array1[$value->id] = [
+                    'id' => $value->id,
+                    'Label' => $value->menu_label,
+                    'Menu_Icon' => $value->menu_icon,
+                    'Page_Name' => $value->page_name,
+                    'dashboard' => $value->dashboard,
+                    'child' => $this->getParentidmenus($value->id, $len + 1, $admin_type, $rolepermission),
+                ];
             }
         }
         return $array1;
@@ -363,98 +362,127 @@ public function dynamicadddatareact($get, $data)
         return $return;
     }
 
-    public function insertcontractsreact($get, $post)
+    protected function buildContractBaseDataArray($get, $post, $defaultContractType = 'Contract', $includePaymentTermId = false)
     {
-        global $callConfig;
-        $return = [];
-        $return['post'] = $post;
-        $return['get'] = $get;
-        $option = '';
-        $contract_creation_or_updation = "";
-        $locations = '';
-        if (isset($post['locations']) && is_array($post['locations'])) {
-            $locations = json_encode($post['locations']);
-        }
-        $contract_services_id = '';
-        if (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) {
-            $contract_services_id = json_encode($post['contract_services_id']);
-        }
+        $locations = (isset($post['locations']) && is_array($post['locations'])) ? json_encode($post['locations']) : '';
+        $contract_services_id = (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) ? json_encode($post['contract_services_id']) : '';
 
         $contact_personsary = array();
-
-        if (isset($post['contact_persons']) && is_array($post['contact_persons'])) {
-            $contact_personsary = array();
+        if (isset($post['contact_persons']) && is_array($post['contact_persons']) && !empty($post['contact_persons']['name'])) {
             foreach ($post['contact_persons']['name'] as $key => $conpers) {
-                if ($post['contact_persons']['name'][$key] != "" && $post['contact_persons']['number'][$key] != "") {
-                    $contact_personsary[] = array('name' => $post['contact_persons']['name'][$key], 'email' => $post['contact_persons']['email'][$key], 'number' => $post['contact_persons']['number'][$key]);
+                if (($post['contact_persons']['name'][$key] ?? '') != "" && ($post['contact_persons']['number'][$key] ?? '') != "") {
+                    $contact_personsary[] = array(
+                        'name' => $post['contact_persons']['name'][$key],
+                        'email' => $post['contact_persons']['email'][$key] ?? '',
+                        'number' => $post['contact_persons']['number'][$key]
+                    );
                 }
             }
         }
         $contact_persons = json_encode($contact_personsary);
 
-        $contract_type = 'Contract';
+        $contract_type = $defaultContractType;
         if (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) {
             $contract_type = 'SOW';
         }
+
         $insert_array = array(
-            'contract_name' => $post['contract_name'],
-            'renewal_frequency' => $post['renewal_frequency'],
-            'parent_contract_id' => $post['parent_contract_id'],
+            'contract_name' => $post['contract_name'] ?? '',
+            'renewal_frequency' => $post['renewal_frequency'] ?? '',
+            'parent_contract_id' => $post['parent_contract_id'] ?? 0,
             'contract_type' => $contract_type,
-            'invoice_number' => $post['invoice_number'],
-            'rt_number' => $post['rt_number'],
-            'business_code' => $post['business_code'],
-            'party_type' => $post['party_type'],
-            'contract_owner_name' => $post['contract_owner_name'],
-            'contract_owner_email' => $post['contract_owner_email'],
-            'contract_owner_number' => $post['contract_owner_number'],
-            'party_id' => $post['party_id'],
-            'department_id' => $post['department_id'],
-            'type_of_contract_id' => $post['type_of_contract_id'],
-            'start_date' => $this->dateconvertdbformat($post['start_date']),
-            'end_date' => $this->dateconvertdbformat($post['end_date']),
-            'contract_amount' => $post['contract_amount'],
-            'description' => $post['description'],
-            'additional_notes' => $post['additional_notes'],
-            'termination_condition' => $post['termination_condition'],
-            'contract_status' => $post['contract_status'],
+            'invoice_number' => $post['invoice_number'] ?? '',
+            'rt_number' => $post['rt_number'] ?? '',
+            'business_code' => $post['business_code'] ?? '',
+            'party_type' => $post['party_type'] ?? '',
+            'contract_owner_name' => $post['contract_owner_name'] ?? '',
+            'contract_owner_email' => $post['contract_owner_email'] ?? '',
+            'contract_owner_number' => $post['contract_owner_number'] ?? '',
+            'party_id' => $post['party_id'] ?? 0,
+            'department_id' => $post['department_id'] ?? null,
+            'type_of_contract_id' => $post['type_of_contract_id'] ?? null,
+            'start_date' => $this->dateconvertdbformat($post['start_date'] ?? ''),
+            'end_date' => $this->dateconvertdbformat($post['end_date'] ?? ''),
+            'contract_amount' => $post['contract_amount'] ?? 0,
+            'description' => $post['description'] ?? '',
+            'additional_notes' => $post['additional_notes'] ?? '',
+            'termination_condition' => $post['termination_condition'] ?? '',
+            'contract_status' => $post['contract_status'] ?? '',
             'current_status' => 0,
             'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
-            'renew_type' => $post['renew_type'],
-            'state' => $post['state'],
-            'isp' => $post['isp'],
-            'paid_by' => $post['paid_by'],
-            'internet_charges' => $post['internet_charges'],
-            'hub_spoc_name' => $post['hub_spoc_name'],
-            'hub_spoc_number' => $post['hub_spoc_number'],
-            'wifi_pass' => $post['wifi_pass'],
-            'wifi_provider' => $post['wifi_provider'],
-            'additional_document' => $post['additional_document'],
-            'contract_payment_terms' => $post['contract_payment_terms'],
-            'typeofaggrements' => $post['typeofaggrements'],
-            'description_id' => $post['description_id'],
+            'renew_type' => $post['renew_type'] ?? '',
+            'state' => $post['state'] ?? '',
+            'isp' => $post['isp'] ?? '',
+            'paid_by' => $post['paid_by'] ?? '',
+            'internet_charges' => $post['internet_charges'] ?? '',
+            'hub_spoc_name' => $post['hub_spoc_name'] ?? '',
+            'hub_spoc_number' => $post['hub_spoc_number'] ?? '',
+            'wifi_pass' => $post['wifi_pass'] ?? '',
+            'wifi_provider' => $post['wifi_provider'] ?? '',
+            'additional_document' => $post['additional_document'] ?? '',
+            'contract_payment_terms' => $post['contract_payment_terms'] ?? '',
+            'typeofaggrements' => $post['typeofaggrements'] ?? '',
+            'description_id' => $post['description_id'] ?? '',
             'locations' => $locations,
             'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
             'oem_registration_number' => $post['oem_registration_number'] ?? '',
             'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
             'oem_product_category' => $post['oem_product_category'] ?? '',
             'cancel_status' => 'N',
-            // LIVE PATCH: convert type
             'is_amc_contract' => (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N',
             'contract_services_id' => $contract_services_id,
             'contact_persons' => $contact_persons
         );
 
+        if ($includePaymentTermId) {
+            $insert_array['payment_term_id'] = $post['payment_term_id'] ?? '';
+        }
+
+        return $insert_array;
+    }
+
+    protected function cloneContractChildTablesForAmendment($originalId, $newContractId, $userId)
+    {
+        global $callConfig;
+        $related_tables = [
+            'contract_documents',
+            'contract_permissions',
+            'contract_recharge_details',
+            'workflows_contract'
+        ];
+        foreach ($related_tables as $table) {
+            $q = "SELECT * FROM {$table} WHERE contract_id = '" . addslashes($originalId) . "'";
+            $rows = $callConfig->getAllRows($q);
+            if (!empty($rows)) {
+                foreach ($rows as $row) {
+                    $row = (array) $row;
+                    unset($row['id']);
+                    $row['contract_id'] = $newContractId;
+                    $row['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
+                    $row['created_by'] = $userId;
+                    $callConfig->insertRecord($table, $row);
+                }
+            }
+        }
+    }
+
+    protected function executeContractSaveOrAmendment($post, $get, $insert_array)
+    {
+        global $callConfig;
+        $edit_option = 'SaveUpdate';
+        $contract_creation_or_updation = "Created";
+        $contract_id = 0;
+        $insert_data = [];
+
         if (!empty($post['Rid'])) {
             $edit_option = $post['edit_option'] ?? 'SaveUpdate';
             if ($edit_option === '1') {
                 $edit_option = 'Amendment';
-            }
-            if ($edit_option === '2') {
+            } elseif ($edit_option === '2') {
                 $edit_option = 'Addendum';
             }
 
-            if ($edit_option === 'Amendment' || $edit_option === 'Addendum') {  // Amendment/Addendum Contract
+            if ($edit_option === 'Amendment' || $edit_option === 'Addendum') {
                 $original_q = self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_ID . $post['Rid'] . "'";
                 $original_data = (array) $callConfig->getRow($original_q);
                 $final_data = $original_data;
@@ -473,11 +501,12 @@ public function dynamicadddatareact($get, $data)
                 $final_data['parent_contract_id'] = $post['Rid'];
                 $final_data['parent_contract'] = $post['Rid'];
                 $final_data['contract_type'] = $edit_option;
+
                 foreach ($final_data as $key => $value) {
                     if ($value === "" || $value === null) {
                         if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'current_status'])) {
                             $final_data[$key] = 0;
-                        } elseif (in_array($key, ['contract_amount'])) {
+                        } elseif ($key === 'contract_amount') {
                             $final_data[$key] = 0.00;
                         } elseif (in_array($key, ['start_date', 'end_date'])) {
                             $final_data[$key] = date('Y-m-d');
@@ -488,10 +517,9 @@ public function dynamicadddatareact($get, $data)
                 }
                 $insert_data = $callConfig->insertRecord('contracts', $final_data);
                 $contract_id = $insert_data['LASTID'];
-                $return['contract_result'] = $insert_data;
-                $return['contract_result11'] = $insert_data;
                 $contract_creation_or_updation = "Created";
-                if ($edit_option === 'Amendment' && ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success')) {
+
+                if ($edit_option === 'Amendment' && in_array($insert_data['status'] ?? '', ['sucess', 'success'])) {
                     $update_original = [
                         'is_active' => null,
                         'contract_status' => 'Expired',
@@ -500,44 +528,22 @@ public function dynamicadddatareact($get, $data)
                     ];
                     $callConfig->updateRecord('contracts', $update_original, 'id', $post['Rid']);
                 }
-                if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-                    $related_tables = [
-                        'contract_documents',
-                        'contract_permissions',
-                        'contract_recharge_details',
-                        'workflows_contract'
-                    ];
-                    foreach ($related_tables as $table) {
-                        $q = "SELECT * FROM {$table} WHERE contract_id = '" . $post['Rid'] . "'";
-                        $rows = $callConfig->getAllRows($q);
-                        if (!empty($rows)) {
-                            foreach ($rows as $row) {
-                                $row = (array) $row;
-                                unset($row['id']);
-                                $row['contract_id'] = $contract_id;
-                                $row['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-                                $row['created_by'] = $get['user_id'];
-                                $callConfig->insertRecord($table, $row);
-                            }
-                        }
-                    }
+                if (in_array($insert_data['status'] ?? '', ['sucess', 'success'])) {
+                    $this->cloneContractChildTablesForAmendment($post['Rid'], $contract_id, $get['user_id']);
                 }
-            } else {  // Update Contract
+            } else {
                 $insert_array['updated_by'] = $get['user_id'];
                 $insert_array['updated_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-
                 $curr_q = "SELECT contract_type FROM contracts WHERE id = '" . $post['Rid'] . "'";
                 $curr_row = $callConfig->getRow($curr_q);
                 if ($curr_row) {
                     $insert_array['contract_type'] = $curr_row->contract_type;
                 }
-
                 $insert_data = $callConfig->updateRecord('contracts', $insert_array, 'id', $post['Rid']);
                 $contract_id = $post['Rid'];
-                $return['contract_result'] = $insert_data;
                 $contract_creation_or_updation = "Updated";
             }
-        } else { // Insert Contract
+        } else {
             $insert_array['company_id'] = $get['company_id'];
             $insert_array['is_active'] = 0;
             $insert_array['transaction_no'] = $this->toGetApplicationSerialNumber('contracts', $post);
@@ -546,67 +552,193 @@ public function dynamicadddatareact($get, $data)
             $insert_array['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
             $insert_data = $callConfig->insertRecord('contracts', $insert_array);
             $contract_id = $insert_data['LASTID'];
-            $return['contract_result'] = $insert_data;
             $contract_creation_or_updation = "Created";
-
         }
 
-        if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-            $selected_location_ids = array();
-            if (isset($post['locations']) && count((array) $post['locations']) > 0) {
-                foreach ($post['locations'] as $loc_id) {
-                    if ($loc_id != '') {
-                        $selected_location_ids[] = (int) $loc_id;
-                    }
-                }
-            }
-            $admin_cond = "1=0";
-            if (count((array) $selected_location_ids) > 0) {
-                $admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (" . implode(',', $selected_location_ids) . "))";
-            }
-            if ($insert_array['originator'] != "" && $get['user_id'] != "") {
-                $conditins = self::SQL_COND_AND_4 . $admin_cond . self::SQL_COND_OR_ID . $insert_array['originator'] . "' OR id = '" . $get['user_id'] . "')";
-            } elseif ($insert_array['originator'] != "") {
-                $conditins = self::SQL_COND_AND_4 . $admin_cond . self::SQL_COND_OR_ID . $insert_array['originator'] . "')";
-            } elseif ($get['user_id'] != "") {
-                $conditins = self::SQL_COND_AND_4 . $admin_cond . self::SQL_COND_OR_ID . $get['user_id'] . "')";
-            } else {
-                $conditins = self::SQL_COND_AND . $admin_cond;
-            }
+        return [
+            'contract_id' => $contract_id,
+            'insert_data' => $insert_data,
+            'contract_creation_or_updation' => $contract_creation_or_updation,
+            'edit_option' => $edit_option,
+            'insert_array' => $insert_array
+        ];
+    }
 
-            $seluser = "SELECT id, company_id, user_email, display_name FROM application_users WHERE company_id = '" . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0 . $conditins;
-            $return['seluser'] = $seluser;
-            $seluserres = $callConfig->getAllRows($seluser);
-            // $emailuserdetails unused
-            foreach ($seluserres as $seluser) {
-                if ($seluser->id == $insert_array['originator']) {
-                    $originatordetailary = $seluser;
+    protected function sendContractCreationNotifications($insert_array, $contract_id, $get, $post, $contract_creation_or_updation)
+    {
+        global $callConfig;
+        $selected_location_ids = array();
+        if (isset($post['locations']) && count((array) $post['locations']) > 0) {
+            foreach ($post['locations'] as $loc_id) {
+                if ($loc_id != '') {
+                    $selected_location_ids[] = (int) $loc_id;
                 }
-                if ($seluser->id == $get['user_id']) {
-                    $updatedby = $seluser;
-                }
-                $emailuserdetails[$seluser->id] = $seluser;
-            }
-            foreach ($emailuserdetails as $seluser) {
-                $notification_users = array($seluser->id);
-                $emailarray = $post;
-                $emailarray['user_email_id'] = $seluser->user_email;
-                $emailarray['user_display_name'] = $seluser->display_name;
-                $emailarray['to_company_id'] = $seluser->company_id;
-                $emailarray['session_company_id'] = $seluser->company_id;
-                $emailarray['default_module_id'] = 40;
-                $emailarray['created_by'] = $get['user_id'];
-                $emailarray['contract_creation_or_updation'] = $contract_creation_or_updation;
-                $emailarray['contract_name'] = $insert_array['transaction_no'] . " - " . $insert_array['contract_name'];
-                $emailarray['contract_user_name'] = $originatordetailary->display_name;
-                $emailarray['contract_update_datetime'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-                $emailarray['contract_update_by'] = $updatedby->display_name;
-
-                $msg = self::CONST_CONTRACT . $insert_array['contract_name'] . " - " . $insert_array['transaction_no'] . self::CONST_HAS_BEEN_CREATED_SUCCESSFULLY;
-                $notarry = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $contract_id, 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $notification_users, 'option' => $option, 'assigner_id' => $get['user_id']);
-                $this->sendNotificationAndEmails($notarry, $emailarray, 75);
             }
         }
+        $admin_cond = "1=0";
+        if (count((array) $selected_location_ids) > 0) {
+            $admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (" . implode(',', $selected_location_ids) . "))";
+        }
+        $originator = $insert_array['originator'] ?? '';
+        $userId = $get['user_id'] ?? '';
+        if ($originator != "" && $userId != "") {
+            $conditins = self::SQL_COND_AND_4 . $admin_cond . self::SQL_COND_OR_ID . $originator . "' OR id = '" . $userId . "')";
+        } elseif ($originator != "") {
+            $conditins = self::SQL_COND_AND_4 . $admin_cond . self::SQL_COND_OR_ID . $originator . "')";
+        } elseif ($userId != "") {
+            $conditins = self::SQL_COND_AND_4 . $admin_cond . self::SQL_COND_OR_ID . $userId . "')";
+        } else {
+            $conditins = self::SQL_COND_AND . $admin_cond;
+        }
+
+        $seluser = "SELECT id, company_id, user_email, display_name FROM application_users WHERE company_id = '" . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0 . $conditins;
+        $seluserres = $callConfig->getAllRows($seluser);
+        $emailuserdetails = [];
+        $originatordetailary = null;
+        $updatedby = null;
+        foreach ($seluserres as $sel) {
+            if ($sel->id == $originator) {
+                $originatordetailary = $sel;
+            }
+            if ($sel->id == $userId) {
+                $updatedby = $sel;
+            }
+            $emailuserdetails[$sel->id] = $sel;
+        }
+        foreach ($emailuserdetails as $sel) {
+            $notification_users = array($sel->id);
+            $emailarray = $post;
+            $emailarray['user_email_id'] = $sel->user_email;
+            $emailarray['user_display_name'] = $sel->display_name;
+            $emailarray['to_company_id'] = $sel->company_id;
+            $emailarray['session_company_id'] = $sel->company_id;
+            $emailarray['default_module_id'] = 40;
+            $emailarray['created_by'] = $userId;
+            $emailarray['contract_creation_or_updation'] = $contract_creation_or_updation;
+            $emailarray['contract_name'] = ($insert_array['transaction_no'] ?? '') . " - " . ($insert_array['contract_name'] ?? '');
+            $emailarray['contract_user_name'] = $originatordetailary ? $originatordetailary->display_name : '';
+            $emailarray['contract_update_datetime'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
+            $emailarray['contract_update_by'] = $updatedby ? $updatedby->display_name : '';
+
+            $msg = self::CONST_CONTRACT . ($insert_array['contract_name'] ?? '') . " - " . ($insert_array['transaction_no'] ?? '') . self::CONST_HAS_BEEN_CREATED_SUCCESSFULLY;
+            $notarry = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $contract_id, 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $notification_users, 'option' => '', 'assigner_id' => $userId);
+            $this->sendNotificationAndEmails($notarry, $emailarray, 75);
+        }
+        return $seluser;
+    }
+
+    protected function logContractActivities($contract_id, $post, $get, $edit_option)
+    {
+        global $callConfig;
+        $endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
+        if (empty($post['Rid'])) {
+            $activity_text = "Contract Created (Valid until {$endDate})";
+        } elseif ($edit_option === 'Amendment') {
+            $activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
+        } elseif ($edit_option === 'Addendum') {
+            $activity_text = "Contract Addendum Added (New Version Created, Valid until {$endDate})";
+        } else {
+            $activity_text = "Contract Updated (Standard Save, Valid until {$endDate})";
+        }
+
+        $activity_array = array(
+            'company_id' => $get['company_id'] ?? 0,
+            'activity' => $activity_text,
+            'contract_id' => $contract_id,
+            'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+            'is_active' => 0,
+            'created_by' => $get['user_id'] ?? 0,
+            'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
+        );
+        $activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
+
+        if (!empty($post['Rid']) && ($edit_option === 'Amendment' || $edit_option === 'Addendum')) {
+            $parent_msg = ($edit_option === 'Amendment') ? "Contract Amended (New Version Created, Valid until {$endDate})" : "Contract Addendum Added (New Version Created, Valid until {$endDate})";
+            $parent_activity = array(
+                'company_id' => $get['company_id'] ?? 0,
+                'activity' => $parent_msg,
+                'contract_id' => $post['Rid'],
+                'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                'is_active' => 0,
+                'created_by' => $get['user_id'] ?? 0,
+                'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
+            );
+            $callConfig->insertRecord('contract_activity', $parent_activity);
+        }
+        return $activity_insert;
+    }
+
+    protected function persistContractMilestones($contract_id, $post, $get)
+    {
+        global $callConfig;
+        if (!isset($post['milestones']) || !is_array($post['milestones']) || count($post['milestones']) === 0) {
+            return self::CONST_NO_MILESTONES_FOUND_IN_POST;
+        }
+
+        if (!empty($post['Rid'])) {
+            $updateQuery = "UPDATE contract_milestones SET is_active = NULL, updated_date = '" . date(self::DATE_FORMAT_Y_M_D_H_I_S) . "', updated_by = '" . addslashes($get['user_id']) . self::SQL_COND_WHERE_TRANSACTION_ID . addslashes($contract_id) . "'";
+            $callConfig->executeQuery($updateQuery);
+        }
+
+        $inserts = [];
+        foreach ($post['milestones'] as $milestone) {
+            if (empty(trim($milestone['milestone_name'] ?? ''))) {
+                continue;
+            }
+            $milestoneData = [
+                'company_id' => $get['company_id'],
+                'transaction_id' => $contract_id,
+                'transaction_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                'milestone' => trim($milestone['milestone_name']),
+                'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null,
+                'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0,
+                'is_active' => 0,
+                'current_status' => 0,
+                'status_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                'created_by' => $get['user_id'],
+                'updated_by' => $get['user_id'],
+                'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+            ];
+            $inserts[] = $callConfig->insertRecord('contract_milestones', $milestoneData);
+        }
+        return $inserts;
+    }
+
+    protected function cleanupNonAmcContractRecords($contractId, $userId, $now)
+    {
+        global $callConfig;
+        $amcCleanupUser = addslashes($userId ?? 0);
+        $amcCleanupContractId = addslashes($contractId);
+        $callConfig->executeQuery("UPDATE contract_amc_locations SET is_active = NULL, updated_by = '" . $amcCleanupUser . self::SQL_UPDATE_UPDATED_DATE . $now . self::SQL_COND_WHERE_CONTRACT_ID . $amcCleanupContractId . self::SQL_COND_AND_IS_ACTIVE_0);
+        $callConfig->executeQuery("UPDATE contract_amc_assets SET is_active = NULL, updated_by = '" . $amcCleanupUser . self::SQL_UPDATE_UPDATED_DATE . $now . self::SQL_COND_WHERE_CONTRACT_ID . $amcCleanupContractId . self::SQL_COND_AND_IS_ACTIVE_0);
+        $callConfig->executeQuery("UPDATE contract_amc_service_schedules SET is_active = NULL, updated_by = '" . $amcCleanupUser . self::SQL_UPDATE_UPDATED_DATE . $now . self::SQL_COND_WHERE_CONTRACT_ID . $amcCleanupContractId . self::SQL_COND_AND_IS_ACTIVE_0);
+    }
+
+    public function insertcontractsreact($get, $post)
+    {
+        global $callConfig;
+        $return = [];
+        $return['post'] = $post;
+        $return['get'] = $get;
+
+        $insert_array = $this->buildContractBaseDataArray($get, $post, 'Contract', false);
+        $saveOutcome = $this->executeContractSaveOrAmendment($post, $get, $insert_array);
+        $contract_id = $saveOutcome['contract_id'];
+        $insert_data = $saveOutcome['insert_data'];
+        $contract_creation_or_updation = $saveOutcome['contract_creation_or_updation'];
+        $edit_option = $saveOutcome['edit_option'];
+        $insert_array = $saveOutcome['insert_array'];
+
+        $return['contract_result'] = $insert_data;
+        if (isset($saveOutcome['contract_result11'])) {
+            $return['contract_result11'] = $insert_data;
+        }
+
+        if (in_array($insert_data['status'] ?? '', ['sucess', 'success'])) {
+            $return['seluser'] = $this->sendContractCreationNotifications($insert_array, $contract_id, $get, $post, $contract_creation_or_updation);
+        }
+
         $control_array = array(
             'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]),
             'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]),
@@ -619,70 +751,14 @@ public function dynamicadddatareact($get, $data)
             'created_by' => $get['user_id'] ?? 0,
             'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
         );
-        $control_insert = $callConfig->insertRecord('contract_version', $control_array);
-        $return['control_version_result'] = $control_insert;
+        $return['control_version_result'] = $callConfig->insertRecord('contract_version', $control_array);
+        $return['activity_result'] = $this->logContractActivities($contract_id, $post, $get, $edit_option);
+        $return['milestone_inserts'] = $this->persistContractMilestones($contract_id, $post, $get);
 
-        // ---- Contract Activity ----
-        $endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
-        if (empty($post['Rid'])) {
-            $activity_text = "Contract Created (Valid until {$endDate})";
-        } else {
-            $edit_option = $post['edit_option'] ?? 'SaveUpdate';
-            if ($edit_option === '1') {
-                $edit_option = 'Amendment';
-            }
-            if ($edit_option === '2') {
-                $edit_option = 'Addendum';
-            }
-
-            if ($edit_option === 'Amendment') {
-                $activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
-            } elseif ($edit_option === 'Addendum') {
-                $activity_text = "Contract Addendum Added (New Version Created, Valid until {$endDate})";
-            } else {
-                $activity_text = "Contract Updated (Standard Save, Valid until {$endDate})";
-            }
-        }
-        $activity_array = array('company_id' => $get['company_id'] ?? 0, 'activity' => $activity_text, 'contract_id' => $contract_id, 'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S));
-        $activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
-        $return['activity_result'] = $activity_insert;
-
-        // Log on Parent Contract if it's an Amendment or Addendum
-        if (!empty($post['Rid']) && ($edit_option === 'Amendment' || $edit_option === 'Addendum')) {
-            $parent_msg = ($edit_option === 'Amendment') ? "Contract Amended (New Version Created, Valid until {$endDate})" : "Contract Addendum Added (New Version Created, Valid until {$endDate})";
-            $parent_activity = array('company_id' => $get['company_id'] ?? 0, 'activity' => $parent_msg, 'contract_id' => $post['Rid'], 'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S));
-            $callConfig->insertRecord('contract_activity', $parent_activity);
-        }
-
-        if (isset($post['milestones']) && is_array($post['milestones']) && count($post['milestones']) > 0) {
-
-            if (!empty($post['Rid'])) {
-                $updateQuery = "UPDATE  contract_milestones SET is_active = NULL, updated_date = '" . date(self::DATE_FORMAT_Y_M_D_H_I_S) . "',  updated_by = '" . addslashes($get['user_id']) . self::SQL_COND_WHERE_TRANSACTION_ID . addslashes($contract_id) . "'";
-                $callConfig->executeQuery($updateQuery);
-            }
-
-            foreach ($post['milestones'] as $milestone) {
-                if (empty(trim($milestone['milestone_name'] ?? ''))) {
-                    continue;
-                }
-                $milestoneData = ['company_id' => $get['company_id'], 'transaction_id' => $contract_id, 'transaction_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'milestone' => trim($milestone['milestone_name']), 'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null, 'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0, 'is_active' => 0, 'current_status' => 0, 'status_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'created_by' => $get['user_id'], 'updated_by' => $get['user_id'], 'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),];
-
-                $milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
-                $return['milestone_inserts'][] = $milestoneInsert;
-            }
-
-        } else {
-            $return['milestone_inserts'] = self::CONST_NO_MILESTONES_FOUND_IN_POST;
-        }
-        // LIVE PATCH: convert type
         if (($insert_array['is_amc_contract'] ?? 'N') == 'N' && !empty($post['Rid'])) {
-            $amcCleanupNow = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-            $amcCleanupUser = addslashes($get['user_id'] ?? 0);
-            $amcCleanupContractId = addslashes($contract_id);
-            $callConfig->executeQuery("UPDATE contract_amc_locations SET is_active = NULL, updated_by = '" . $amcCleanupUser . self::SQL_UPDATE_UPDATED_DATE . $amcCleanupNow . self::SQL_COND_WHERE_CONTRACT_ID . $amcCleanupContractId . self::SQL_COND_AND_IS_ACTIVE_0);
-            $callConfig->executeQuery("UPDATE contract_amc_assets SET is_active = NULL, updated_by = '" . $amcCleanupUser . self::SQL_UPDATE_UPDATED_DATE . $amcCleanupNow . self::SQL_COND_WHERE_CONTRACT_ID . $amcCleanupContractId . self::SQL_COND_AND_IS_ACTIVE_0);
-            $callConfig->executeQuery("UPDATE contract_amc_service_schedules SET is_active = NULL, updated_by = '" . $amcCleanupUser . self::SQL_UPDATE_UPDATED_DATE . $amcCleanupNow . self::SQL_COND_WHERE_CONTRACT_ID . $amcCleanupContractId . self::SQL_COND_AND_IS_ACTIVE_0);
+            $this->cleanupNonAmcContractRecords($contract_id, $get['user_id'] ?? 0, date(self::DATE_FORMAT_Y_M_D_H_I_S));
         }
+
         $return['commercial_details_result'] = $this->saveContractCommercialDetails($contract_id, $get, $post);
         return $return;
     }
@@ -718,108 +794,99 @@ public function dynamicadddatareact($get, $data)
         return $whr;
     }
 
+    private function loadContractsListLookups($companyId)
+    {
+        global $callConfig;
+        $lookups = [];
+        $paymenttermsres = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_PAYMENT_TERM_NAME_FR . $companyId . " AND is_active = 0 ORDER BY payment_term_name ASC");
+        foreach ($paymenttermsres as $red) {
+            $lookups['payment_terms'][$red->id] = $red;
+        }
+
+        $locationsres = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT);
+        foreach ($locationsres as $red) {
+            $lookups['locations'][$red->id] = $red;
+        }
+
+        $gencres = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE);
+        if (count((array) $gencres) == 0) {
+            $gencres = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $companyId . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE);
+        }
+        foreach ($gencres as $red) {
+            $lookups['agreement_type'][$red->genc_detail_code] = $red;
+        }
+
+        $res = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_DEPARTMENT_NAME_FROM . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ($res as $red) {
+            $lookups['departments'][$red->id] = $red;
+        }
+
+        $gencres = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $companyId . self::SQL_COND_AND_GENC_CODE_CONTRACT_TYPE_AN);
+        foreach ($gencres as $red) {
+            $lookups['contract_types'][$red->genc_detail_code] = $red;
+        }
+
+        $conservres = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_SERVICE_NAME_FROM_CO . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ($conservres as $red) {
+            $lookups['contract_services'][$red->id] = $red;
+        }
+
+        $vendorsres = $callConfig->getAllRows("SELECT id, company FROM vendors WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ($vendorsres as $red) {
+            $lookups['vendors'][$red->id] = $red;
+        }
+
+        return $lookups;
+    }
+
+    private function buildContractsListFilterWhere($get)
+    {
+        $condition = "";
+        if (!empty($get['party_id'])) {
+            $condition .= " AND party_id = '" . $get['party_id'] . "'";
+        }
+        if (!empty($get['contract_services_id'])) {
+            $condition .= " AND JSON_SEARCH(contract_services_id, 'one', '" . $get['contract_services_id'] . self::CONST_IS_NOT_NULL;
+        }
+        if (!empty($get['typeofaggrements'])) {
+            $condition .= " AND typeofaggrements = '" . $get['typeofaggrements'] . "'";
+        }
+        if (!empty($get['locations'])) {
+            $condition .= " AND JSON_SEARCH(locations, 'one', '" . $get['locations'] . self::CONST_IS_NOT_NULL;
+        }
+        if (!empty($get['department_id'])) {
+            $condition .= " AND department_id = '" . $get['department_id'] . "'";
+        }
+        if (!empty($get['type_of_contract_id'])) {
+            $condition .= " AND type_of_contract_id = '" . $get['type_of_contract_id'] . "'";
+        }
+        if (!empty($get['contract_payment_terms'])) {
+            $condition .= " AND contract_payment_terms = '" . $get['contract_payment_terms'] . "'";
+        }
+        if (!empty($get['transaction_no_and_name'])) {
+            $condition .= " AND (transaction_no LIKE '%" . $get['transaction_no_and_name'] . "%' OR contract_name LIKE '%" . $get['transaction_no_and_name'] . "%') ";
+        }
+        if (!empty($get['is_amc_contract'])) {
+            $condition .= " AND is_amc_contract = '" . $get['is_amc_contract'] . "'";
+        }
+        return $condition;
+    }
+
     public function getcontractslist($get)
     {
         global $callConfig;
         $return = array();
         $return['get'] = $get;
         $admin_or_user_whr = $this->adminOrUserOrFM($get);
-        if ($get['api_type'] == "listpage") {
+        if (($get['api_type'] ?? '') == "listpage") {
+            $lookups = $this->loadContractsListLookups($get['company_id']);
+            $return = array_merge($return, $lookups);
 
-            $paymenttermssql = self::SQL_SELECT_SELECT_ID_PAYMENT_TERM_NAME_FR . $get['company_id'] . " AND is_active = 0 ORDER BY payment_term_name ASC";
-            $paymenttermsres = $callConfig->getAllRows($paymenttermssql);
-            $payment_terms = array();
-            foreach ($paymenttermsres as $red) {
-                $payment_terms[$red->id] = $red;
-            }
-            $return['payment_terms'] = $payment_terms;
-
-            $locationssql = self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT;
-            $locationsres = $callConfig->getAllRows($locationssql);
-            $locations = array();
-            foreach ($locationsres as $red) {
-                $locations[$red->id] = $red;
-            }
-            $return['locations'] = $locations;
-
-            $gencsql = self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE;
-            $gencres = $callConfig->getAllRows($gencsql);
-            if (count((array) $gencres) == 0) {
-                $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE;
-                $gencres = $callConfig->getAllRows($gencsql);
-            }
-            $agreement_type = array();
-            foreach ($gencres as $red) {
-                $agreement_type[$red->genc_detail_code] = $red;
-            }
-            $return['agreement_type'] = $agreement_type;
-            $sql = self::SQL_SELECT_SELECT_ID_DEPARTMENT_NAME_FROM . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_14;
-            $res = $callConfig->getAllRows($sql);
-            $departments = array();
-            foreach ($res as $red) {
-                $departments[$red->id] = $red;
-            }
-            $return['departments'] = $departments;
-
-            $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_CONTRACT_TYPE_AN;
-            $gencres = $callConfig->getAllRows($gencsql);
-            $contract_types = array();
-            foreach ($gencres as $red) {
-                $contract_types[$red->genc_detail_code] = $red;
-            }
-            $return['contract_types'] = $contract_types;
-
-            $conservsql = self::SQL_SELECT_SELECT_ID_SERVICE_NAME_FROM_CO . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_14;
-            $conservres = $callConfig->getAllRows($conservsql);
-            $contract_services = array();
-            foreach ($conservres as $red) {
-                $contract_services[$red->id] = $red;
-            }
-            $return['contract_services'] = $contract_services;
-
-            $vendorssql = "SELECT id, company FROM vendors WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_14;
-            $vendorsres = $callConfig->getAllRows($vendorssql);
-            $vendors = array();
-            foreach ($vendorsres as $red) {
-                $vendors[$red->id] = $red;
-            }
-            $return['vendors'] = $vendors;
-
-
-            $condition = "";
-            if ($get['party_id'] != "") {
-                $condition .= " AND party_id = '" . $get['party_id'] . "'";
-            }
-            if ($get['contract_services_id'] != "") {
-                $condition .= " AND JSON_SEARCH(contract_services_id, 'one', '" . $get['contract_services_id'] . self::CONST_IS_NOT_NULL;
-            }
-            if ($get['typeofaggrements'] != "") {
-                $condition .= " AND typeofaggrements = '" . $get['typeofaggrements'] . "'";
-            }
-            if ($get['locations'] != "") {
-                $condition .= " AND JSON_SEARCH(locations, 'one', '" . $get['locations'] . self::CONST_IS_NOT_NULL;
-            }
-            if ($get['department_id'] != "") {
-                $condition .= " AND department_id = '" . $get['department_id'] . "'";
-            }
-            if ($get['type_of_contract_id'] != "") {
-                $condition .= " AND type_of_contract_id = '" . $get['type_of_contract_id'] . "'";
-            }
-            if ($get['contract_payment_terms'] != "") {
-                $condition .= " AND contract_payment_terms = '" . $get['contract_payment_terms'] . "'";
-            }
-            if ($get['transaction_no_and_name'] != "") {
-                $condition .= " AND (transaction_no LIKE '%" . $get['transaction_no_and_name'] . "%' OR contract_name LIKE '%" . $get['transaction_no_and_name'] . "%') ";
-            }
-            if ($get['is_amc_contract'] != "") {
-                $condition .= " AND is_amc_contract = '" . $get['is_amc_contract'] . "'";
-            }
-
+            $condition = $this->buildContractsListFilterWhere($get);
             $cntsql = "SELECT COUNT(id) as cnt FROM contracts WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_14 . $condition . $admin_or_user_whr;
             $cntres = $callConfig->getRow($cntsql);
             $return['total_record_cnt'] = $cntres;
             $respons_data_cnt = ($cntres->cnt != "" && $cntres->cnt != 0) ? $cntres->cnt : 0;
-            // $divide_limit unused
             $total_pages = ceil($respons_data_cnt / $get['limit_select']);
             $current_page = isset($get['current_page']) ? (int) $get['current_page'] : 1;
             $current_page = max(1, min($current_page, $total_pages));
@@ -1493,145 +1560,85 @@ public function getcustomerdetailsreact($get)
         return $return;
     }
 
-    public function getcontractdetailsreactamc($get)
+    private function loadContractDetailsCoreLookups($companyId, $admin_or_user_whr)
     {
         global $callConfig;
-        $return = array();
-        $rid = $get['rid'] ?? 0;
+        $lookups = [];
+        $lookups['displayattributesres'] = $callConfig->getRow("SELECT `id`, `list_attributes`, `insert_attributes`, `additional_attributes`, `file_upload`, `help_text` FROM display_attributes WHERE company_id =" . $companyId . " AND application_table_name = 'contracts' AND is_active = 0 ORDER BY id ASC");
+        $lookups['contractsres'] = $callConfig->getAllRows(self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_CO . $companyId . " AND is_active = 0 " . $admin_or_user_whr . " ORDER BY id ASC");
+        $lookups['paymenttermsres'] = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_PAYMENT_TERM_NAME_FR . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_ID_AS);
+        $lookups['locationsres'] = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_ID_AS);
+        $lookups['useres'] = $callConfig->getAllRows("SELECT `id`, `company_id`, `user_name`, `first_name`, `middle_name`, `last_name`, `display_name`, `user_email`, `user_mobile`, `user_password`, `role_id`, `role_group_id`, `cost_center`, `location_id`, `default_warehouse_id`, `work_station_id`, `remember_token`, `last_logged_in_at`, `user_photo`, `pref_language`, `confirmed_basic_ino`, `user_activated`, `country_id`, `default_state_id`, `timezone`, `default_currency_id`, `hr_connect`, `finance_connect`, `admin_connect`, `project_connect`, `location_connect`, `esop_connect`, `legal_connect`, `reports_to`, `approval_manager`, `user_field_work_type`, `live_lcation`, `user_type`, `mapping_code`, `is_active` FROM application_users WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_ID_AS);
+        $lookups['documentres'] = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY . $companyId . " AND category_id = 5 AND parent_document_id !=0 AND is_active = 0 ORDER BY id ASC");
+        $lookups['document_parent_res'] = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY . $companyId . " AND category_id = 5 AND parent_document_id =0 AND is_active = 0 ORDER BY id ASC");
 
-        $displayattributessql = "SELECT `id`, `list_attributes`, `insert_attributes`, `additional_attributes`, `file_upload`, `help_text` FROM display_attributes WHERE company_id =" . $get['company_id'] . " AND application_table_name = 'contracts' AND is_active = 0 ORDER BY id ASC";
-        $displayattributesres = $callConfig->getRow($displayattributessql);
-        $return['displayattributesres'] = $displayattributesres;
-        $admin_or_user_whr = $this->adminOrUserOrFM($get);
-        $contractssql = self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_CO . $get['company_id'] . " AND is_active = 0 " . $admin_or_user_whr . " ORDER BY id ASC";
-        $contractsres = $callConfig->getAllRows($contractssql);
-        $return['contractsres'] = $contractsres;
-
-        $paymenttermssql = self::SQL_SELECT_SELECT_ID_PAYMENT_TERM_NAME_FR . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_ID_AS;
-        $paymenttermsres = $callConfig->getAllRows($paymenttermssql);
-        $return['paymenttermsres'] = $paymenttermsres;
-
-        $locationssql = self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_ID_AS;
-        $locationsres = $callConfig->getAllRows($locationssql);
-        $return['locationsres'] = $locationsres;
-
-        $userssql = "SELECT `id`, `company_id`, `user_name`, `first_name`, `middle_name`, `last_name`, `display_name`, `user_email`, `user_mobile`, `user_password`, `role_id`, `role_group_id`, `cost_center`, `location_id`, `default_warehouse_id`, `work_station_id`, `remember_token`, `last_logged_in_at`, `user_photo`, `pref_language`, `confirmed_basic_ino`, `user_activated`, `country_id`, `default_state_id`, `timezone`, `default_currency_id`, `hr_connect`, `finance_connect`, `admin_connect`, `project_connect`, `location_connect`, `esop_connect`, `legal_connect`, `reports_to`, `approval_manager`, `user_field_work_type`, `live_lcation`, `user_type`, `mapping_code`, `is_active` FROM application_users WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_ID_AS;
-        $useres = $callConfig->getAllRows($userssql);
-        $return['useres'] = $useres;
-
-        $documentsql = self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY . $get['company_id'] . " AND category_id = 5 AND parent_document_id !=0 AND is_active = 0 ORDER BY id ASC";
-        $documentres = $callConfig->getAllRows($documentsql);
-        $return['documentres'] = $documentres;
-
-        $documentcatsql = self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY . $get['company_id'] . " AND category_id = 5 AND parent_document_id =0 AND is_active = 0 ORDER BY id ASC";
-        $documentcatres = $callConfig->getAllRows($documentcatsql);
-        $return['document_parent_res'] = $documentcatres;
-
-
-        $associatedContractSql = "SELECT `id`, `company_id`, `originator`, `contract_name`, `transaction_no`, `contract_owner_name`, `contract_owner_email`, `contract_owner_number`, `invoice_number`, `rt_number`, `party_type`, `party_id`, `parent_contract_id`, `start_date`, `end_date`, `description`, `additional_notes`, `payment_term_id`, `termination_condition`, `contract_status`, `auto_renew`, `renew_type`, `contract_payment_terms`, `is_active` FROM contracts WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_PARENT_CONTRACT_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0;
-        $associatedContractRes = $callConfig->getAllRows($associatedContractSql);
-        $return['associatedcontractres'] = $associatedContractRes;
-
-        $editcontractssql = self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_CO . $get['company_id'] . self::SQL_COND_AND_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0;
-        $editcontractsres = $callConfig->getRow($editcontractssql);
-        $return['editcontractsres'] = $editcontractsres;
-
-        if (!empty($rid) && !empty($editcontractsres)) {
-            $return['amccontractres'] = $this->getAmcContractEditData($get['company_id'], $rid);
-        }
-
-        $editdocumnentsql = "SELECT `id`, `company_id`, `category_id`, `document_list_id`, `contract_id`, `file_name`, `comments`, is_active FROM contract_documents WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_CONTRACT_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0;
-        $editdocumnentres = $callConfig->getAllRows($editdocumnentsql);
-        $return['editdocumnentres'] = $editdocumnentres;
-
-        $editpermissionsql = "SELECT `id`, `company_id`, `contract_id`, `user`, `basic_permissions`, `document_permissions`, is_active FROM contract_permissions WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_CONTRACT_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0;
-        $editpermissionres = $callConfig->getAllRows($editpermissionsql);
-        $return['editpermissionres'] = $editpermissionres;
-
-        $editworkflowsql = "SELECT `id`, `company_id`, `contract_id`, `workflow_steps`, `steps_permissions`, `is_active` FROM workflows_contract WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_CONTRACT_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0;
-        $editworkflowres = $callConfig->getAllRows($editworkflowsql);
-        $return['editworkflowres'] = $editworkflowres;
-
-        $activitysql = "SELECT `id`, `company_id`, `contract_id`, `activity`, `activity_date`, `is_active` FROM contract_activity WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_CONTRACT_ID . $rid . "' AND is_active = 0 order BY id DESC";
-        $activityres = $callConfig->getAllRows($activitysql);
-        $return['activityres'] = $activityres;
-
-        $milestonesql = "SELECT `id`, `milestone`, `milestone_date`, `milestone_price` FROM contract_milestones WHERE company_id =" . $get['company_id'] . " AND transaction_id = '" . $rid . self::SQL_COND_AND_IS_ACTIVE_0;
-        $milestoneres = $callConfig->getAllRows($milestonesql);
-        $return['milestoneres'] = $milestoneres;
-
-        $gencsql = self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE;
-        $gencres = $callConfig->getAllRows($gencsql);
+        $gencres = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE);
         if (count((array) $gencres) == 0) {
-            $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE;
-            $gencres = $callConfig->getAllRows($gencsql);
+            $gencres = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $companyId . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE);
         }
-        $return['gencres'] = $gencres;
-
-        $dessql = "SELECT `id`, `description`, `description_type` FROM description_contracts WHERE company_id =" . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_14;
-        $desres = $callConfig->getAllRows($dessql);
-        $return['desres'] = $desres;
+        $lookups['gencres'] = $gencres;
+        $lookups['desres'] = $callConfig->getAllRows("SELECT `id`, `description`, `description_type` FROM description_contracts WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        $lookups['departmentsres'] = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_DEPARTMENT_NAME_FROM . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        $lookups['contracttypesres'] = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $companyId . self::SQL_COND_AND_GENC_CODE_CONTRACT_TYPE_AN);
+        $lookups['contract_services'] = $callConfig->getAllRows(self::SQL_SELECT_SELECT_ID_SERVICE_NAME_FROM_CO . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
 
         $today = date('Y-m-d');
-        $contractsres['renewal_frequency'] = "quaterly";
-        switch (strtolower($contractsres['renewal_frequency'])) {
-            case 'onday':
-                $reminderDays = 1;
-                break;
-            case 'weekly':
-                $reminderDays = 7;
-                break;
-            case 'monthly':
-                $reminderDays = 30;
-                break;
-            case 'quarterly':
-                $reminderDays = 90;
-                break;
-            default:
-                $reminderDays = 90;
+        $lookups['expiringContracts'] = $callConfig->getAllRows("SELECT id, company_id, contract_name, end_date, originator FROM contracts WHERE company_id = " . $companyId . " AND is_active = 0 AND end_date IS NOT NULL AND DATEDIFF(end_date, '$today') BETWEEN 1 AND 90");
+
+        return $lookups;
+    }
+
+    private function loadContractSpecificDetails($companyId, $rid)
+    {
+        global $callConfig;
+        $details = [];
+        $details['associatedcontractres'] = $callConfig->getAllRows("SELECT `id`, `company_id`, `originator`, `contract_name`, `transaction_no`, `contract_owner_name`, `contract_owner_email`, `contract_owner_number`, `invoice_number`, `rt_number`, `party_type`, `party_id`, `parent_contract_id`, `start_date`, `end_date`, `description`, `additional_notes`, `payment_term_id`, `termination_condition`, `contract_status`, `auto_renew`, `renew_type`, `contract_payment_terms`, `is_active` FROM contracts WHERE company_id =" . $companyId . self::SQL_COND_AND_PARENT_CONTRACT_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0);
+        $editcontractsres = $callConfig->getRow(self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_CO . $companyId . self::SQL_COND_AND_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0);
+        $details['editcontractsres'] = $editcontractsres;
+
+        if (!empty($rid) && !empty($editcontractsres)) {
+            $details['amccontractres'] = $this->getAmcContractEditData($companyId, $rid);
         }
 
-        $expirySql = "SELECT id, company_id, contract_name, end_date, originator FROM contracts WHERE company_id = " . $get['company_id'] . " AND is_active = 0 AND end_date IS NOT NULL AND DATEDIFF(end_date, '$today') BETWEEN 1 AND $reminderDays ";
-        $expiringContracts = $callConfig->getAllRows($expirySql);
-        $return['expiringContracts'] = $expiringContracts;
+        $details['editdocumnentres'] = $callConfig->getAllRows("SELECT `id`, `company_id`, `category_id`, `document_list_id`, `contract_id`, `file_name`, `comments`, is_active FROM contract_documents WHERE company_id =" . $companyId . self::SQL_COND_AND_CONTRACT_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0);
+        $details['editpermissionres'] = $callConfig->getAllRows("SELECT `id`, `company_id`, `contract_id`, `user`, `basic_permissions`, `document_permissions`, is_active FROM contract_permissions WHERE company_id =" . $companyId . self::SQL_COND_AND_CONTRACT_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0);
+        $details['editworkflowres'] = $callConfig->getAllRows("SELECT `id`, `company_id`, `contract_id`, `workflow_steps`, `steps_permissions`, `is_active` FROM workflows_contract WHERE company_id =" . $companyId . self::SQL_COND_AND_CONTRACT_ID . $rid . self::SQL_COND_AND_IS_ACTIVE_0);
+        $details['activityres'] = $callConfig->getAllRows("SELECT `id`, `company_id`, `contract_id`, `activity`, `activity_date`, `is_active` FROM contract_activity WHERE company_id =" . $companyId . self::SQL_COND_AND_CONTRACT_ID . $rid . "' AND is_active = 0 order BY id DESC");
+        $details['milestoneres'] = $callConfig->getAllRows("SELECT `id`, `milestone`, `milestone_date`, `milestone_price` FROM contract_milestones WHERE company_id =" . $companyId . " AND transaction_id = '" . $rid . self::SQL_COND_AND_IS_ACTIVE_0);
 
         if ($rid != "") {
-            $historySql = "SELECT contract_name,transaction_no, start_date, end_date, parent_contract ,  contract_amount FROM contracts WHERE company_id = " . $get['company_id'] . " AND parent_contract = $rid AND is_active = 0";
-            $historyContracts = $callConfig->getAllRows($historySql);
-            $return['historySql'] = $historySql;
-            $return['historycontractsres'] = $historyContracts;
+            $historySql = "SELECT contract_name,transaction_no, start_date, end_date, parent_contract ,  contract_amount FROM contracts WHERE company_id = " . $companyId . " AND parent_contract = $rid AND is_active = 0";
+            $details['historySql'] = $historySql;
+            $details['historycontractsres'] = $callConfig->getAllRows($historySql);
 
-            $childrenSql = "SELECT parent_contract FROM contracts WHERE company_id = " . $get['company_id'] . self::SQL_COND_AND_ID_36 . $rid . self::SQL_COND_AND_IS_ACTIVE_0_14;
+            $childrenSql = "SELECT parent_contract FROM contracts WHERE company_id = " . $companyId . self::SQL_COND_AND_ID_36 . $rid . self::SQL_COND_AND_IS_ACTIVE_0_14;
             $childrenData = $callConfig->getRow($childrenSql);
-            $return['childrenData'] = $childrenData;
-            $parentId = $childrenData->parent_contract;
-            $return['parentId'] = $parentId;
+            $details['childrenData'] = $childrenData;
+            $parentId = $childrenData->parent_contract ?? null;
+            $details['parentId'] = $parentId;
 
             if (!empty($parentId) && intval($parentId) > 0) {
-                $parentSql = "SELECT * FROM contracts WHERE company_id = " . intval($get['company_id']) . self::SQL_COND_AND_ID_36 . intval($parentId) . self::SQL_COND_AND_IS_ACTIVE_0_14;
-                $parentContracts = $callConfig->getAllRows($parentSql);
-                $return['parentSql'] = $parentSql;
-                $return['parentcontractsres'] = $parentContracts;
-
+                $parentSql = "SELECT * FROM contracts WHERE company_id = " . intval($companyId) . self::SQL_COND_AND_ID_36 . intval($parentId) . self::SQL_COND_AND_IS_ACTIVE_0_14;
+                $details['parentSql'] = $parentSql;
+                $details['parentcontractsres'] = $callConfig->getAllRows($parentSql);
             } else {
-                $return['parentcontractsres'] = [];
+                $details['parentcontractsres'] = [];
             }
         }
 
-        $sql = self::SQL_SELECT_SELECT_ID_DEPARTMENT_NAME_FROM . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_14;
-        $res = $callConfig->getAllRows($sql);
-        $return['departmentsres'] = $res;
+        return $details;
+    }
 
+    public function getcontractdetailsreactamc($get)
+    {
+        $rid = $get['rid'] ?? 0;
+        $companyId = $get['company_id'];
+        $admin_or_user_whr = $this->adminOrUserOrFM($get);
 
-        $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_CONTRACT_TYPE_AN;
-        $gencres = $callConfig->getAllRows($gencsql);
-        $return['contracttypesres'] = $gencres;
+        $lookups = $this->loadContractDetailsCoreLookups($companyId, $admin_or_user_whr);
+        $details = $this->loadContractSpecificDetails($companyId, $rid);
 
-        $conservsql = self::SQL_SELECT_SELECT_ID_SERVICE_NAME_FROM_CO . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_14;
-        $conservres = $callConfig->getAllRows($conservsql);
-        $return['contract_services'] = $conservres;
-
-        return $return;
+        return array_merge($lookups, $details);
     }
     /**/
     public function getAmcContractEditData($company_id, $contract_id)
@@ -1850,78 +1857,32 @@ public function getcustomerdetailsreact($get)
         return $return;
     }
 
-    public function renewcontractreact($get, $post)
+    private function resolveRenewalContractType($old_contract_type)
     {
-        global $callConfig;
-
-        $return = [];
-        $return['post'] = $post;
-        $return['get'] = $get;
-
-        $locations = '';
-        if (isset($post['locations']) && is_array($post['locations'])) {
-            $locations = json_encode($post['locations']);
+        if (in_array($old_contract_type, ['Contract', 'Parent', 'Contract+ Renewal'])) {
+            return 'Contract+ Renewal';
         }
+        if (in_array($old_contract_type, ['SOW', 'associated', 'SOW+ Renewal'])) {
+            return 'SOW+ Renewal';
+        }
+        if (in_array($old_contract_type, ['Amendment', 'Amendment+ Renewal'])) {
+            return 'Amendment+ Renewal';
+        }
+        if (in_array($old_contract_type, ['Addendum', 'Addendum+ Renewal'])) {
+            return 'Addendum+ Renewal';
+        }
+        return 'Renewal';
+    }
 
-        $insert_array = array(
-            'contract_name' => $post['contract_name'],
-            'renewal_frequency' => $post['renewal_frequency'],
-            'parent_contract_id' => $post['parent_contract_id'],
-            'contract_type' => 'Renewal',
-            'transaction_no' => $this->toGetApplicationSerialNumber('contracts', $post),
-            'invoice_number' => $post['invoice_number'],
-            'rt_number' => $post['rt_number'],
-            'business_code' => $post['business_code'],
-            'party_type' => $post['party_type'],
-            'contract_owner_name' => $post['contract_owner_name'],
-            'contract_owner_email' => $post['contract_owner_email'],
-            'contract_owner_number' => $post['contract_owner_number'],
-            'party_id' => $post['party_id'],
-            'department_id' => $post['department_id'] ?? null,
-            'type_of_contract_id' => $post['type_of_contract_id'] ?? null,
-            'start_date' => $this->dateconvertdbformat($post['start_date']),
-            'end_date' => $this->dateconvertdbformat($post['end_date']),
-            'contract_amount' => $post['contract_amount'],
-            'description' => $post['description'],
-            'additional_notes' => $post['additional_notes'],
-            'termination_condition' => $post['termination_condition'],
-            'contract_status' => $post['contract_status'],
-            'current_status' => 0,
-            'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
-            'renew_type' => $post['renew_type'],
-            'state' => $post['state'],
-            'isp' => $post['isp'],
-            'paid_by' => $post['paid_by'],
-            'internet_charges' => $post['internet_charges'],
-            'hub_spoc_name' => $post['hub_spoc_name'],
-            'hub_spoc_number' => $post['hub_spoc_number'],
-            'wifi_pass' => $post['wifi_pass'],
-            'wifi_provider' => $post['wifi_provider'],
-            'additional_document' => $post['additional_document'],
-            'contract_payment_terms' => $post['contract_payment_terms'],
-            'typeofaggrements' => $post['typeofaggrements'],
-            'description_id' => $post['description_id'],
-            'locations' => $locations,
-            'parent_contract' => $post['Rid'],
-            'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
-            'oem_registration_number' => $post['oem_registration_number'] ?? '',
-            'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
-            'oem_product_category' => $post['oem_product_category'] ?? '',
-            'cancel_status' => 'N'
-        );
-
-        $original_q = self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_ID . $post['Rid'] . "'";
-        $original_data = (array) $callConfig->getRow($original_q);
-
+    private function buildRenewalContractPayload($original_data, $insert_array, $get, $post)
+    {
         $final_data = $original_data;
         foreach ($insert_array as $key => $val) {
             if ($val !== "" && $val !== null) {
                 $final_data[$key] = $val;
             }
         }
-
         unset($final_data['id']);
-
         $final_data['company_id'] = $get['company_id'];
         $final_data['is_active'] = 0;
         $final_data['created_by'] = $get['user_id'];
@@ -1929,25 +1890,13 @@ public function getcustomerdetailsreact($get)
         $final_data['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
         $final_data['parent_contract_id'] = $post['Rid'];
         $final_data['parent_contract'] = $post['Rid'];
-        $old_contract_type = $original_data['contract_type'] ?? 'Contract';
-        $new_contract_type = 'Renewal';
-        if ($old_contract_type == 'Contract' || $old_contract_type == 'Parent' || $old_contract_type == 'Contract+ Renewal') {
-            $new_contract_type = 'Contract+ Renewal';
-        } elseif ($old_contract_type == 'SOW' || $old_contract_type == 'associated' || $old_contract_type == 'SOW+ Renewal') {
-            $new_contract_type = 'SOW+ Renewal';
-        } elseif ($old_contract_type == 'Amendment' || $old_contract_type == 'Amendment+ Renewal') {
-            $new_contract_type = 'Amendment+ Renewal';
-        } elseif ($old_contract_type == 'Addendum' || $old_contract_type == 'Addendum+ Renewal') {
-            $new_contract_type = 'Addendum+ Renewal';
-        }
-
-        $final_data['contract_type'] = $new_contract_type;
+        $final_data['contract_type'] = $this->resolveRenewalContractType($original_data['contract_type'] ?? 'Contract');
 
         foreach ($final_data as $key => $value) {
             if ($value === "" || $value === null) {
                 if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'contract_payment_terms', 'current_status'])) {
                     $final_data[$key] = 0;
-                } elseif (in_array($key, ['contract_amount'])) {
+                } elseif ($key === 'contract_amount') {
                     $final_data[$key] = 0.00;
                 } elseif (in_array($key, ['start_date', 'end_date'])) {
                     $final_data[$key] = date('Y-m-d');
@@ -1956,174 +1905,72 @@ public function getcustomerdetailsreact($get)
                 }
             }
         }
+        return $final_data;
+    }
+
+    public function renewcontractreact($get, $post)
+    {
+        global $callConfig;
+
+        $return = [];
+        $return['post'] = $post;
+        $return['get'] = $get;
+
+        $insert_array = $this->buildContractBaseDataArray($get, $post, 'Renewal', false);
+        $insert_array['transaction_no'] = $this->toGetApplicationSerialNumber('contracts', $post);
+        $insert_array['parent_contract'] = $post['Rid'];
+
+        $original_q = self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_ID . $post['Rid'] . "'";
+        $original_data = (array) $callConfig->getRow($original_q);
+
+        $final_data = $this->buildRenewalContractPayload($original_data, $insert_array, $get, $post);
 
         $insert_data = $callConfig->insertRecord('contracts', $final_data);
         $renew_id = $insert_data['LASTID'];
         $return['contract_result'] = $insert_data;
-        $return['renew_id'] = $renew_id;
+        $return['contract_result11'] = $insert_data;
 
-        if (!empty($post['Rid'])) {
-            $rid = $post['Rid'];
-            $contract_query = "SELECT renew_data, contract_type FROM contracts WHERE id = '{$rid}'";
+        $update_original = [
+            'is_active' => null,
+            'contract_status' => 'Renewed',
+            'updated_by' => $get['user_id'],
+            'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
+        ];
+        $callConfig->updateRecord('contracts', $update_original, 'id', $post['Rid']);
 
-            $contract_row = $callConfig->getRow($contract_query);
-
-            $new_renew_info = [
-                'renew_id' => $renew_id,
-                'start_date' => $this->dateconvertdbformat($post['start_date']),
-                'end_date'
-                => $this->dateconvertdbformat($post['end_date']),
-                'contract_amount' => $post['contract_amount']
-            ];
-
-            $return['new_renew_info'] = $new_renew_info;
-            $return['contract_row'] = $contract_row;
-
-            $renew_history = [];
-            if (!empty($contract_row->renew_data)) {
-                $decoded = json_decode($contract_row->renew_data, true);
-                if (is_array($decoded)) {
-                    $renew_history = $decoded;
-                }
-            }
-            $renew_history[] = $new_renew_info;
-
-            $update_data = [
-                'renew_data' => json_encode($renew_history),
-                'updated_by' =>
-                    $get['user_id'],
-                'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
-            ];
-            $callConfig->updateRecord('contracts', $update_data, 'id', $rid);
-        }
-
-        $related_tables = ['contract_documents', 'contract_permissions', 'contract_recharge_details', 'workflows_contract'];
-
-        foreach ($related_tables as $table) {
-            $q = "SELECT * FROM {$table} WHERE contract_id = '" . $post['Rid'] . "'";
-            $rows = $callConfig->getAllRows($q);
-            if (!empty($rows)) {
-                foreach ($rows as $row) {
-                    $row = (array) $row;
-                    unset($row['id']);
-                    $row['contract_id'] = $renew_id;
-                    $row['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-                    $row['created_by'] = $get['user_id'];
-                    $callConfig->insertRecord($table, $row);
-                }
-            }
-        }
+        $return['seluser'] = $this->sendContractCreationNotifications($final_data, $renew_id, $get, $post, "Created");
 
         $control_array = array(
-            'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) :
-                json_encode([]),
+            'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]),
             'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]),
             'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]),
-            'contract_details'
-            => json_encode($insert_array),
+            'contract_details' => json_encode($final_data),
             'version_id' => $post['version_id'] ?? 0,
             'company_id' => $get['company_id'] ?? 0,
             'contract_id' => $renew_id,
             'is_active' => 0,
             'created_by' => $get['user_id'] ?? 0,
-            'created_date' => date('Y-m-d
-                    H:i:s')
+            'created_date' => date('Y-m-d H:i:s')
         );
-        $control_insert = $callConfig->insertRecord('contract_version', $control_array);
-        $return['control_version_result'] = $control_insert;
+        $return['control_version_result'] = $callConfig->insertRecord('contract_version', $control_array);
 
         $endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
-        $activity_array = array(
-            'company_id' => $get['company_id'] ?? 0,
-            'activity' => "Contract Renewed (New End Date:
-                {$endDate})",
-            'contract_id' => $renew_id,
-            'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-            'is_active' => 0,
-            'created_by' => $get['user_id'] ?? 0,
-            'created_date' =>
-                date(self::DATE_FORMAT_Y_M_D_H_I_S)
-        );
-        $activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
-        $return['activity_result'] = $activity_insert;
+        $activity_array = array('company_id' => $get['company_id'] ?? 0, 'activity' => "Contract Renewed (New End Date: {$endDate})", 'contract_id' => $renew_id, 'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S));
+        $return['activity_result'] = $callConfig->insertRecord('contract_activity', $activity_array);
 
         if (!empty($post['Rid'])) {
-            $parent_activity = array(
-                'company_id' => $get['company_id'] ?? 0,
-                'activity' => "Contract Renewed (New Version Created,
-                    New End Date: {$endDate})",
-                'contract_id' => $post['Rid'],
-                'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                'is_active' => 0,
-                'created_by' => $get['user_id'] ?? 0,
-                'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
-            );
+            $parent_activity = array('company_id' => $get['company_id'] ?? 0, 'activity' => "Contract Renewed (New Version Created, New End Date: {$endDate})", 'contract_id' => $post['Rid'], 'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S));
             $callConfig->insertRecord('contract_activity', $parent_activity);
         }
-        if (isset($post['milestones']) && is_array($post['milestones']) && count($post['milestones']) > 0) {
-            if (!empty($post['Rid'])) {
-                $updateQuery = "UPDATE contract_milestones SET is_active = NULL, updated_date = '" . date(self::DATE_FORMAT_Y_M_D_H_I_S) . "',
-                    updated_by = '" . addslashes($get['user_id']) . self::SQL_COND_WHERE_TRANSACTION_ID . addslashes($renew_id) . "'";
-                $callConfig->executeQuery($updateQuery);
-            }
-            foreach ($post['milestones'] as $milestone) {
-                if (empty(trim($milestone['milestone_name'] ?? ''))) {
-                    continue;
-                }
-                $milestoneData = [
-                    'company_id' => $get['company_id'],
-                    'transaction_id' => $renew_id,
-                    'transaction_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                    'milestone' => trim($milestone['milestone_name']),
-                    'milestone_date' => !empty($milestone['milestone_date']) ? $milestone['milestone_date'] : null,
-                    'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0,
-                    'is_active' => 0,
-                    'current_status' => 0,
-                    'status_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                    'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                    'created_by' => $get['user_id'],
-                    'updated_by' => $get['user_id'],
-                    'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                ];
 
-                $milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
-                $return['milestone_inserts'][] = $milestoneInsert;
-            }
-        } else {
-            $return['milestone_inserts'] = self::CONST_NO_MILESTONES_FOUND_IN_POST;
-        }
+        $return['milestone_inserts'] = $this->persistContractMilestones($renew_id, $post, $get);
 
         if (!empty($post['is_amc_contract']) && $post['is_amc_contract'] == 'Y' && !empty($renew_id)) {
             $return['amc_contract_result'] = $this->saveAmcContractData($renew_id, $get, $post);
         }
 
         return $return;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function cancelcontractreact($get, $post)
+    }    public function cancelcontractreact($get, $post)
     {
         global $callConfig;
 
@@ -2172,6 +2019,35 @@ public function getcustomerdetailsreact($get)
     }
 
 
+    private function categorizeExpiringContracts($consres, $locations, $startdate)
+    {
+        $buckets = ['today' => [], 'weekly' => [], 'monthly' => [], 'quarterly' => [], 'expired' => []];
+        foreach ($consres as $contract) {
+            $locationsid = json_decode($contract->locations, true) ?: [];
+            $locationnames = "";
+            foreach ($locationsid as $locid) {
+                if (!empty($locations[$locid]->location_name)) {
+                    $locationnames .= $locations[$locid]->location_name . ", ";
+                }
+            }
+            $contract->location_name = $locationnames;
+            $days_remaining = floor((strtotime($contract->end_date) - strtotime($startdate)) / 86400);
+
+            if ($days_remaining == 0) {
+                $buckets['today'][] = $contract;
+            } elseif ($days_remaining > 0 && $days_remaining <= 7) {
+                $buckets['weekly'][] = $contract;
+            } elseif ($days_remaining > 0 && $days_remaining <= 30) {
+                $buckets['monthly'][] = $contract;
+            } elseif ($days_remaining > 0 && $days_remaining <= 90) {
+                $buckets['quarterly'][] = $contract;
+            } elseif ($days_remaining < 0) {
+                $buckets['expired'][] = $contract;
+            }
+        }
+        return $buckets;
+    }
+
     public function sendCronJobContractExpiryNotifications($get)
     {
         global $callConfig;
@@ -2190,54 +2066,20 @@ public function getcustomerdetailsreact($get)
         foreach ($locationsres as $red) {
             $locations[$red->id] = $red;
         }
-        $todayContracts = array();
-        $weeklyContracts = array();
-        $monthlyContracts = array();
-        $quarterlyContracts = array();
-        $expiredContracts = array();
+
+        $buckets = $this->categorizeExpiringContracts($consres, $locations, $startdate);
+
         $email_body = "";
-        foreach ($consres as $contract) {
-            $locationsid = json_decode($contract->locations, 1);
-            $locationnames = "";
-            foreach ($locationsid as $locid) {
-                if ($locations[$locid]->location_name != "") {
-                    $locationnames .= $locations[$locid]->location_name . ", ";
-                }
-            }
-            $contract->location_name = $locationnames;
-            $days_remaining = floor((strtotime($contract->end_date) - strtotime($startdate)) / 86400);
-            // Expiring Today
-            if ($days_remaining == 0) {
-                $todayContracts[] = $contract;
-            }
-            // Expiring in Next 7 Days
-            if ($days_remaining > 0 && $days_remaining <= 7) {
-                $weeklyContracts[] = $contract;
-            }
-            // Expiring in Next 30 Days
-            if ($days_remaining > 0 && $days_remaining <= 30) {
-                $monthlyContracts[] = $contract;
-            }
-            // Expiring in Next 90 Days
-            if ($days_remaining > 0 && $days_remaining <= 90) {
-                $quarterlyContracts[] = $contract;
-            }
-            // Already Expired
-            if ($days_remaining < 0) {
-                $expiredContracts[] = $contract;
-            }
-        }
-        $email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Today', $todayContracts);
-        $email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 7 Days', $weeklyContracts);
-        $email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 1 Month', $monthlyContracts);
-        $email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 3 Months', $quarterlyContracts);
+        $email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Today', $buckets['today']);
+        $email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 7 Days', $buckets['weekly']);
+        $email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 1 Month', $buckets['monthly']);
+        $email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 3 Months', $buckets['quarterly']);
         echo $email_body;
+
         $conditins = " AND JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL";
         $seluser = "SELECT id, company_id, user_email, display_name FROM application_users WHERE company_id = '" . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0 . $conditins;
-        $return['seluser'] = $seluser;
         $seluserres = $callConfig->getAllRows($seluser);
         $post = array();
-        // $emailuserdetails unused
         $sendnotification = array();
         foreach ($seluserres as $seluser) {
             $emailarray = $post;
@@ -2300,6 +2142,7 @@ public function getcustomerdetailsreact($get)
 
     ////////////// kotesss
 
+
     public function amcInsertContractsReact($get, $post)
     {
         global $callConfig;
@@ -2307,274 +2150,24 @@ public function getcustomerdetailsreact($get)
         $return = [];
         $return['post'] = $post;
         $return['get'] = $get;
-        $option = '';
 
-        $locations = '';
-        if (isset($post['locations']) && is_array($post['locations'])) {
-            $locations = json_encode($post['locations']);
+        $insert_array = $this->buildContractBaseDataArray($get, $post, 'Contract', true);
+        $saveOutcome = $this->executeContractSaveOrAmendment($post, $get, $insert_array);
+        $contract_id = $saveOutcome['contract_id'];
+        $insert_data = $saveOutcome['insert_data'];
+        $contract_creation_or_updation = $saveOutcome['contract_creation_or_updation'];
+        $edit_option = $saveOutcome['edit_option'];
+        $insert_array = $saveOutcome['insert_array'];
+
+        $return['contract_result'] = $insert_data;
+        if (isset($saveOutcome['contract_result11'])) {
+            $return['contract_result11'] = $insert_data;
         }
 
-        $contract_services_id = '';
-        if (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) {
-            $contract_services_id = json_encode($post['contract_services_id']);
+        if (in_array($insert_data['status'] ?? '', ['sucess', 'success'])) {
+            $return['seluser'] = $this->sendContractCreationNotifications($insert_array, $contract_id, $get, $post, $contract_creation_or_updation);
         }
 
-        $contact_personsary = array();
-        if (isset($post['contact_persons']) && is_array($post['contact_persons']) && count((array) ($post['contact_persons']['name'] ?? array())) > 0) {
-            foreach ($post['contact_persons']['name'] as $key => $conpers) {
-                if ($post['contact_persons']['name'][$key] != "" && $post['contact_persons']['number'][$key] != "") {
-                    $contact_personsary[] = array(
-                        'name' => $post['contact_persons']['name'][$key],
-                        'email' => $post['contact_persons']['email'][$key],
-                        'number' => $post['contact_persons']['number'][$key]
-                    );
-                }
-            }
-        }
-        $contact_persons = json_encode($contact_personsary);
-
-        $contract_type = 'Contract';
-        if (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) {
-            $contract_type = 'SOW';
-        }
-
-        $insert_array = array(
-            'contract_name' => $post['contract_name'],
-            'renewal_frequency' => $post['renewal_frequency'],
-            'parent_contract_id' => $post['parent_contract_id'],
-            'contract_type' => $contract_type,
-            'invoice_number' => $post['invoice_number'],
-            'rt_number' => $post['rt_number'],
-            'business_code' => $post['business_code'],
-            'party_type' => $post['party_type'],
-            'contract_owner_name' => $post['contract_owner_name'],
-            'contract_owner_email' => $post['contract_owner_email'],
-            'contract_owner_number' => $post['contract_owner_number'],
-            'party_id' => $post['party_id'],
-            'department_id' => $post['department_id'],
-            'type_of_contract_id' => $post['type_of_contract_id'],
-            'start_date' => $this->dateconvertdbformat($post['start_date']),
-            'end_date' => $this->dateconvertdbformat($post['end_date']),
-            'contract_amount' => $post['contract_amount'],
-            'description' => $post['description'],
-            'additional_notes' => $post['additional_notes'],
-            'payment_term_id' => $post['payment_term_id'],
-            'termination_condition' => $post['termination_condition'],
-            'contract_status' => $post['contract_status'],
-            'current_status' => 0,
-            'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
-            'renew_type' => $post['renew_type'],
-            'state' => $post['state'],
-            'isp' => $post['isp'],
-            'paid_by' => $post['paid_by'],
-            'internet_charges' => $post['internet_charges'],
-            'hub_spoc_name' => $post['hub_spoc_name'],
-            'hub_spoc_number' => $post['hub_spoc_number'],
-            'wifi_pass' => $post['wifi_pass'],
-            'wifi_provider' => $post['wifi_provider'],
-            'additional_document' => $post['additional_document'],
-            'contract_payment_terms' => $post['contract_payment_terms'],
-            'typeofaggrements' => $post['typeofaggrements'],
-            'description_id' => $post['description_id'],
-            'locations' => $locations,
-            'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
-            'oem_registration_number' => $post['oem_registration_number'] ?? '',
-            'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
-            'oem_product_category' => $post['oem_product_category'] ?? '',
-            'cancel_status' => 'N',
-            'is_amc_contract' => (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N',
-            'contract_services_id' => $contract_services_id,
-            'contact_persons' => $contact_persons
-        );
-        ///return $post;
-        if (!empty($post['Rid'])) {
-            $edit_option = $post['edit_option'] ?? 'SaveUpdate';
-            if ($edit_option === '1') {
-                $edit_option = 'Amendment';
-            }
-            if ($edit_option === '2') {
-                $edit_option = 'Addendum';
-            }
-
-            if ($edit_option === 'Amendment' || $edit_option === 'Addendum') {
-                $original_q = self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_ID . $post['Rid'] . "'";
-                $original_data = (array) $callConfig->getRow($original_q);
-                $final_data = $original_data;
-                foreach ($insert_array as $key => $val) {
-                    if ($val !== "" && $val !== null) {
-                        $final_data[$key] = $val;
-                    }
-                }
-
-                unset($final_data['id']);
-
-                $final_data['company_id'] = $get['company_id'];
-                $final_data['is_active'] = 0;
-                $final_data['transaction_no'] = $this->toGetApplicationSerialNumber('contracts', $post);
-                $final_data['created_by'] = $get['user_id'];
-                $final_data['originator'] = $get['user_id'];
-                $final_data['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-                $final_data['parent_contract_id'] = $post['Rid'];
-                $final_data['parent_contract'] = $post['Rid'];
-                $final_data['contract_type'] = $edit_option;
-
-                foreach ($final_data as $key => $value) {
-                    if ($value === "" || $value === null) {
-                        if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'payment_term_id', 'current_status'])) {
-                            $final_data[$key] = 0;
-                        } elseif (in_array($key, ['contract_amount'])) {
-                            $final_data[$key] = 0.00;
-                        } elseif (in_array($key, ['start_date', 'end_date'])) {
-                            $final_data[$key] = date('Y-m-d');
-                        } else {
-                            $final_data[$key] = $value ?? '';
-                        }
-                    }
-                }
-
-                $insert_data = $callConfig->insertRecord('contracts', $final_data);
-                $contract_id = $insert_data['LASTID'];
-                $return['contract_result'] = $insert_data;
-                $return['contract_result11'] = $insert_data;
-
-                if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-                    $seluser = "SELECT id FROM application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL";
-                    $return['seluser'] = $seluser;
-                    $seluserres = $callConfig->getAllRows($seluser);
-                    $notification_users = array();
-                    $notification_users[] = $final_data['originator'];
-                    foreach ($seluserres as $seluser) {
-                        $notification_users[] = $seluser->id;
-                    }
-                    $msg = self::CONST_CONTRACT . $final_data['contract_name'] . " - " . $final_data['transaction_no'] . self::CONST_HAS_BEEN_CREATED_SUCCESSFULLY;
-                    $notarry = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $contract_id, 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $notification_users, 'option' => $option, 'assigner_id' => $get['user_id']);
-                    $this->tosendnotifiations($notarry);
-                    $return['tosendnotifiations'] = $notarry;
-                }
-
-                if ($edit_option === 'Amendment' && ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success')) {
-                    $update_original = [
-                        'is_active' => null,
-                        'contract_status' => 'Expired',
-                        'updated_by' => $get['user_id'],
-                        'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
-                    ];
-                    $callConfig->updateRecord('contracts', $update_original, 'id', $post['Rid']);
-                }
-
-                if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-                    $related_tables = [
-                        'contract_documents',
-                        'contract_permissions',
-                        'contract_recharge_details',
-                        'workflows_contract'
-                    ];
-
-                    foreach ($related_tables as $table) {
-                        $q = "SELECT * FROM {$table} WHERE contract_id = '" . $post['Rid'] . "'";
-                        $rows = $callConfig->getAllRows($q);
-                        if (!empty($rows)) {
-                            foreach ($rows as $row) {
-                                $row = (array) $row;
-                                unset($row['id']);
-                                $row['contract_id'] = $contract_id;
-                                $row['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-                                $row['created_by'] = $get['user_id'];
-                                $callConfig->insertRecord($table, $row);
-                            }
-                        }
-                    }
-                }
-            } else {
-                $insert_array['updated_by'] = $get['user_id'];
-                $insert_array['updated_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-
-                $curr_q = "SELECT contract_type FROM contracts WHERE id = '" . $post['Rid'] . "'";
-                $curr_row = $callConfig->getRow($curr_q);
-                if ($curr_row) {
-                    $insert_array['contract_type'] = $curr_row->contract_type;
-                }
-
-                if (trim((string) ($insert_array['payment_term_id'] ?? '')) == '') {
-                    unset($insert_array['payment_term_id']);
-                }
-
-                $res = $callConfig->updateRecord('contracts', $insert_array, 'id', $post['Rid']);
-                $contract_id = $post['Rid'];
-                $return['contract_result'] = $res;
-            }
-        } else {
-            $insert_array['company_id'] = $get['company_id'];
-            $insert_array['is_active'] = 0;
-            $insert_array['transaction_no'] = $this->toGetApplicationSerialNumber('contracts', $post);
-            $insert_array['created_by'] = $get['user_id'];
-            $insert_array['originator'] = $get['user_id'];
-            $insert_array['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-            $insert_data = $callConfig->insertRecord('contracts', $insert_array);
-            $contract_id = $insert_data['LASTID'];
-            $return['contract_result'] = $insert_data;
-
-            if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-                $selected_location_ids = array();
-                if (isset($post['amc_loc']) && count((array) $post['amc_loc']) > 0) {
-                    foreach ($post['amc_loc'] as $locRow) {
-                        $locationId = (int) ($locRow['location_id'] ?? 0);
-                        if ($locationId > 0) {
-                            $selected_location_ids[] = $locationId;
-                        }
-                    }
-                }
-                $selected_location_ids = array_values(array_unique($selected_location_ids));
-                $admin_cond = "1=0";
-                if (count((array) $selected_location_ids) > 0) {
-                    $admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (" . implode(',', $selected_location_ids) . "))";
-                }
-                if ($insert_array['originator'] != "") {
-                    $conditins = self::SQL_COND_AND_4 . $admin_cond . self::SQL_COND_OR_ID . $insert_array['originator'] . "')";
-                } else {
-                    $conditins = self::SQL_COND_AND . $admin_cond;
-                }
-
-                $seluser = "SELECT id, company_id, user_email FROM application_users WHERE company_id = '" . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0 . $conditins;
-                $return['seluser'] = $seluser;
-                $seluserres = $callConfig->getAllRows($seluser);
-                $notification_users = array();
-                foreach ($seluserres as $seluser) {
-                    if ($seluser->id == $insert_array['originator']) {
-                        $originatordetailary = $seluser;
-                    }
-                }
-                foreach ($seluserres as $seluser) {
-                    $notification_users[] = $seluser->id;
-
-                    //email part
-                    $emailarray = $post;
-                    $emailarray['user_email_id'] = $seluser->user_email;
-                    $emailarray['user_display_name'] = $seluser->display_name;
-                    $emailarray['to_company_id'] = $seluser->company_id;
-                    $emailarray['session_company_id'] = $seluser->company_id;
-                    $emailarray['default_module_id'] = 40;
-                    $emailarray['created_by'] = $get['user_id'];
-
-                    $emailarray['contract_creation_or_updation'] = "Inserted";
-                    $emailarray['contract_vendor_name'] = "";
-                    $emailarray['contract_name'] = $insert_array['contract_name'];
-                    $emailarray['contract_number'] = $insert_array['transaction_no'];
-                    $emailarray['contract_type'] = "";
-                    $emailarray['contract_user_name'] = $originatordetailary->display_name;
-                    $emailarray['contract_update_datetime'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-
-                    $this->sendNotificationAndEmails($notarry, $emailarray, 6);
-                    //email part
-
-                }
-                $msg = self::CONST_CONTRACT . $insert_array['contract_name'] . " - " . $insert_array['transaction_no'] . self::CONST_HAS_BEEN_CREATED_SUCCESSFULLY;
-                $notarry = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $contract_id, 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $notification_users, 'option' => $option, 'assigner_id' => $get['user_id']);
-                $this->tosendnotifiations($notarry);
-                $return['tosendnotifiations'] = $notarry;
-            }
-
-        }
         $control_array = array(
             'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]),
             'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]),
@@ -2587,71 +2180,186 @@ public function getcustomerdetailsreact($get)
             'created_by' => $get['user_id'] ?? 0,
             'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
         );
-        $control_insert = $callConfig->insertRecord('contract_version', $control_array);
-        $post['contract_version_array'] = $control_array;
-        $post['contract_version_res'] = $control_insert;
-        $return['control_version_result'] = $control_insert;
-        //return $return;
-        // ---- Contract Activity ----
-        $endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
-        if (empty($post['Rid'])) {
-            $activity_text = "Contract Created (Valid until {$endDate})";
+        $return['control_version_result'] = $callConfig->insertRecord('contract_version', $control_array);
+        $return['activity_result'] = $this->logContractActivities($contract_id, $post, $get, $edit_option);
+        $return['milestone_inserts'] = $this->persistContractMilestones($contract_id, $post, $get);
+
+        $isAmcContract = ($insert_array['is_amc_contract'] ?? 'N') == 'Y';
+        if ($isAmcContract) {
+            $return['amc_save_result'] = $this->saveAmcContractData($contract_id, $get, $post);
+            $return['commercial_details_result'] = array('status' => 'skipped', 'message' => 'Handled via AMC structured data');
         } else {
-            $edit_option = $post['edit_option'] ?? 'SaveUpdate';
-            if ($edit_option === '1') {
-                $edit_option = 'Amendment';
-            }
-            if ($edit_option === '2') {
-                $edit_option = 'Addendum';
-            }
-
-            if ($edit_option === 'Amendment') {
-                $activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
-            } elseif ($edit_option === 'Addendum') {
-                $activity_text = "Contract Addendum Added (New Version Created, Valid until {$endDate})";
-            } else {
-                $activity_text = "Contract Updated (Standard Save, Valid until {$endDate})";
-            }
-        }
-        $activity_array = array('company_id' => $get['company_id'] ?? 0, 'activity' => $activity_text, 'contract_id' => $contract_id, 'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S));
-        $activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
-        $return['activity_result'] = $activity_insert;
-
-        // Log on Parent Contract if it's an Amendment or Addendum
-        if (!empty($post['Rid']) && ($edit_option === 'Amendment' || $edit_option === 'Addendum')) {
-            $parent_msg = ($edit_option === 'Amendment') ? "Contract Amended (New Version Created, Valid until {$endDate})" : "Contract Addendum Added (New Version Created, Valid until {$endDate})";
-            $parent_activity = array('company_id' => $get['company_id'] ?? 0, 'activity' => $parent_msg, 'contract_id' => $post['Rid'], 'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S));
-            $callConfig->insertRecord('contract_activity', $parent_activity);
-        }
-
-        if (isset($post['milestones']) && is_array($post['milestones']) && count($post['milestones']) > 0) {
-
             if (!empty($post['Rid'])) {
-                $updateQuery = "UPDATE contract_milestones SET is_active = NULL, updated_date = '" . date(self::DATE_FORMAT_Y_M_D_H_I_S) . "',  updated_by = '" . addslashes($get['user_id']) . self::SQL_COND_WHERE_TRANSACTION_ID . addslashes($contract_id) . "'";
-                $callConfig->executeQuery($updateQuery);
+                $this->cleanupNonAmcContractRecords($contract_id, $get['user_id'] ?? 0, date(self::DATE_FORMAT_Y_M_D_H_I_S));
             }
-
-            foreach ($post['milestones'] as $milestone) {
-                if (empty(trim($milestone['milestone_name'] ?? ''))) {
-                    continue;
-                }
-                $milestoneData = ['company_id' => $get['company_id'], 'transaction_id' => $contract_id, 'transaction_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'milestone' => trim($milestone['milestone_name']), 'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null, 'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0, 'is_active' => 0, 'current_status' => 0, 'status_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'created_by' => $get['user_id'], 'updated_by' => $get['user_id'], 'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),];
-
-                $milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
-                $return['milestone_inserts'][] = $milestoneInsert;
-            }
-
-        } else {
-            $return['milestone_inserts'] = self::CONST_NO_MILESTONES_FOUND_IN_POST;
-        }
-
-        if ($insert_array['is_amc_contract'] == 'Y') {
-            $return['amc_contract_result'] = $this->saveAmcContractData($contract_id, $get, $post);
-        } else {
             $return['commercial_details_result'] = $this->saveContractCommercialDetails($contract_id, $get, $post);
         }
 
         return $return;
+    }
+    private function deactivateAmcContractTables($contract_id, $userId, $now)
+    {
+        global $callConfig;
+        $tables = ['contract_amc_details', 'contract_amc_locations', 'contract_amc_assets'];
+        foreach ($tables as $table) {
+            $sql = "UPDATE {$table} SET is_active = NULL, updated_by = '" . addslashes($userId) . "', updated_date = '{$now}' WHERE contract_id = '" . addslashes($contract_id) . self::SQL_COND_AND_IS_ACTIVE_0;
+            $callConfig->executeQuery($sql);
+        }
+    }
+
+    private function buildAmcContractDetailsRow($companyId, $contract_id, $userId, $now, $post)
+    {
+        $reminderDays = isset($post['reminder_days']) && is_array($post['reminder_days']) ? array_values($post['reminder_days']) : [];
+        $completionRules = isset($post['completion_req']) && is_array($post['completion_req']) ? array_values($post['completion_req']) : [];
+        $billingCycle = $post['amc_billing_cycle'] ?? null;
+        if ($billingCycle == 'halfyearly') {
+            $billingCycle = 'half_yearly';
+        }
+        $isInhouse = (($post['amc_service_mode'] ?? '') == 'inhouse') || (($post['party_type'] ?? '') == 'inhouse');
+
+        return array(
+            'company_id' => $companyId,
+            'contract_id' => $contract_id,
+            'payment_mode' => $post['amc_payment_mode'] ?? 'billing_cycle',
+            'billing_cycle' => $billingCycle,
+            'billing_day' => !empty($post['amc_billing_day']) ? (int) $post['amc_billing_day'] : null,
+            'is_draft' => 0,
+            'service_mode' => $isInhouse ? 'inhouse' : 'vendor',
+            'department_id' => ($isInhouse && !empty($post['department_id'])) ? (int) $post['department_id'] : null,
+            'default_employee_id' => !empty($post['amc_default_employee_id']) ? (int) $post['amc_default_employee_id'] : null,
+            'customer_connect_id' => ((($post['party_type'] ?? '') == 'vendor') && !empty($post['customer_connect_id'])) ? (int) $post['customer_connect_id'] : null,
+            'gate_entry' => $post['gate_entry'] ?? null,
+            'reminder_days' => json_encode($reminderDays),
+            'completion_rules' => json_encode($completionRules),
+            'escalation_config' => json_encode($post['amc_escalation_config'] ?? array()),
+            'is_active' => 0,
+            'created_by' => $userId,
+            'created_date' => $now,
+            'updated_by' => $userId,
+            'updated_date' => $now,
+        );
+    }
+
+    private function processAmcLocationsAndAssets($companyId, $contract_id, $userId, $now, $post, $detailsRow, $contractStartYmd, $contractEndYmd)
+    {
+        global $callConfig;
+        $amcServiceMode = $detailsRow['service_mode'];
+        $contractDefaultEmployeeId = (int) ($detailsRow['default_employee_id'] ?? 0);
+        $locationIdsForContract = array();
+        $insertedAssetsForSchedule = array();
+        $locationsResList = array();
+        $assetsResList = array();
+
+        $amcLocations = $post['amc_loc'] ?? array();
+        if (!is_array($amcLocations)) {
+            return ['locations' => [], 'assets' => [], 'insertedAssets' => [], 'locationIds' => []];
+        }
+
+        foreach ($amcLocations as $locIdx => $locRow) {
+            $locationId = (int) ($locRow['location_id'] ?? 0);
+            if ($locationId <= 0) {
+                continue;
+            }
+            $locStartYmd = $this->amcParseDateYmd($locRow['service_start_date'] ?? '') ?: $contractStartYmd;
+            $locEndYmd = $this->amcParseDateYmd($locRow['service_end_date'] ?? '') ?: $contractEndYmd;
+
+            $locInsert = array(
+                'company_id' => $companyId,
+                'contract_id' => $contract_id,
+                'location_id' => $locationId,
+                'service_start_date' => !empty($locStartYmd) ? $locStartYmd : null,
+                'service_end_date' => !empty($locEndYmd) ? $locEndYmd : null,
+                'is_active' => '0',
+                'current_status' => '0',
+                'created_by' => $userId,
+                'created_date' => $now,
+                'updated_by' => $userId,
+                'updated_date' => $now,
+            );
+            $locRes = $callConfig->insertRecord('contract_amc_locations', $locInsert);
+            $locationsResList[] = $locRes;
+            $amcLocationId = (int) ($locRes['LASTID'] ?? 0);
+            if ($amcLocationId <= 0 && in_array($locRes['status'] ?? '', array('sucess', 'success'))) {
+                $locLookupSql = "SELECT id FROM contract_amc_locations WHERE company_id = " . intval($companyId)
+                    . self::SQL_COND_AND_CONTRACT_ID . addslashes($contract_id) . "' AND location_id = '" . addslashes($locationId) . "'"
+                    . " AND is_active = 0 ORDER BY id DESC LIMIT 1";
+                $locLookupRow = $callConfig->getRow($locLookupSql);
+                if ($locLookupRow) {
+                    $locLookupArr = (array) $locLookupRow;
+                    $amcLocationId = (int) ($locLookupArr['id'] ?? 0);
+                }
+            }
+            $locationIdsForContract[] = $locationId;
+
+            $amcAssets = $post['amc_asset'][$locIdx] ?? array();
+            if (!is_array($amcAssets)) {
+                continue;
+            }
+            foreach ($amcAssets as $assetRow) {
+                $assetId = (int) ($assetRow['asset_id'] ?? 0);
+                if ($assetId <= 0) {
+                    continue;
+                }
+                $slots = is_array($assetRow['service_slots'] ?? null) ? $assetRow['service_slots'] : [];
+                $assetStartYmd = $this->amcParseDateYmd($assetRow['service_start_date'] ?? '') ?: ($locStartYmd ?: $contractStartYmd);
+                $assetEndYmd = $this->amcParseDateYmd($assetRow['service_end_date'] ?? '') ?: ($locEndYmd ?: $contractEndYmd);
+
+                $assetInsert = array(
+                    'company_id' => $companyId,
+                    'contract_id' => $contract_id,
+                    'contract_amc_location_id' => $amcLocationId,
+                    'asset_id' => $assetId,
+                    'asset_name' => $assetRow['asset_name'] ?? '',
+                    'service_frequency' => $assetRow['service_frequency'] ?? '',
+                    'visits_per_interval' => !empty($assetRow['visits_per_interval']) ? (int) $assetRow['visits_per_interval'] : 1,
+                    'service_start_date' => !empty($assetStartYmd) ? $assetStartYmd : null,
+                    'service_end_date' => !empty($assetEndYmd) ? $assetEndYmd : null,
+                    'service_slots' => json_encode(array_values($slots)),
+                    'is_active' => 0,
+                    'created_by' => $userId,
+                    'created_date' => $now,
+                    'updated_by' => $userId,
+                    'updated_date' => $now,
+                );
+                if ($amcServiceMode == 'inhouse' && $contractDefaultEmployeeId > 0) {
+                    $assetInsert['default_employee_id'] = $contractDefaultEmployeeId;
+                }
+                $assetRes = $callConfig->insertRecord('contract_amc_assets', $assetInsert);
+                $assetsResList[] = $assetRes;
+                $amcAssetRowId = (int) ($assetRes['LASTID'] ?? 0);
+                if ($amcAssetRowId <= 0 && in_array($assetRes['status'] ?? '', array('sucess', 'success'))) {
+                    $lookupSql = "SELECT id FROM contract_amc_assets WHERE company_id = " . intval($companyId)
+                        . self::SQL_COND_AND_CONTRACT_ID . addslashes($contract_id) . "' AND asset_id = '" . addslashes($assetId) . "'"
+                        . " AND is_active = 0 ORDER BY id DESC LIMIT 1";
+                    $lookupRow = $callConfig->getRow($lookupSql);
+                    if ($lookupRow) {
+                        $lookupArr = (array) $lookupRow;
+                        $amcAssetRowId = (int) ($lookupArr['id'] ?? 0);
+                    }
+                }
+                if ($amcAssetRowId > 0) {
+                    $insertedAssetsForSchedule[] = array(
+                        'contract_amc_asset_id' => $amcAssetRowId,
+                        'contract_amc_location_id' => $amcLocationId,
+                        'asset_id' => $assetId,
+                        'service_frequency' => $assetInsert['service_frequency'],
+                        'visits_per_interval' => $assetInsert['visits_per_interval'],
+                        'service_start_date' => $assetInsert['service_start_date'],
+                        'service_end_date' => $assetInsert['service_end_date'],
+                        'service_slots' => $slots,
+                        'service_mode' => $amcServiceMode,
+                        'default_employee_id' => $assetInsert['default_employee_id'] ?? null,
+                    );
+                }
+            }
+        }
+
+        return [
+            'locations' => $locationsResList,
+            'assets' => $assetsResList,
+            'insertedAssets' => $insertedAssetsForSchedule,
+            'locationIds' => $locationIdsForContract
+        ];
     }
 
     public function saveAmcContractData($contract_id, $get, $post)
@@ -2665,191 +2373,29 @@ public function getcustomerdetailsreact($get)
             return array('status' => 'error', 'message' => 'Missing contract id');
         }
 
-        $deactivate = function ($table) use ($callConfig, $contract_id, $userId, $now) {
-            $sql = "UPDATE {$table} SET is_active = NULL, updated_by = '" . addslashes($userId) . "', updated_date = '{$now}' WHERE contract_id = '" . addslashes($contract_id) . self::SQL_COND_AND_IS_ACTIVE_0;
-            $callConfig->executeQuery($sql);
-        };
-
-        $deactivate('contract_amc_details');
-        $deactivate('contract_amc_locations');
-        $deactivate('contract_amc_assets');
+        $this->deactivateAmcContractTables($contract_id, $userId, $now);
 
         $contractStartYmd = $this->amcParseDateYmd($post['start_date'] ?? '');
         $contractEndYmd = $this->amcParseDateYmd($post['end_date'] ?? '');
 
-        $reminderDays = array();
-        if (isset($post['reminder_days']) && is_array($post['reminder_days'])) {
-            $reminderDays = array_values($post['reminder_days']);
-        }
-
-        $completionRules = array();
-        if (isset($post['completion_req']) && is_array($post['completion_req'])) {
-            $completionRules = array_values($post['completion_req']);
-        }
-
-        $billingCycle = $post['amc_billing_cycle'] ?? null;
-        if ($billingCycle == 'halfyearly') {
-            $billingCycle = 'half_yearly';
-        }
-
-        $detailsRow = array(
-            'company_id' => $companyId,
-            'contract_id' => $contract_id,
-            'payment_mode' => $post['amc_payment_mode'] ?? 'billing_cycle',
-            'billing_cycle' => $billingCycle,
-            'billing_day' => !empty($post['amc_billing_day']) ? (int) $post['amc_billing_day'] : null,
-            'is_draft' => 0,
-            'service_mode' => ((($post['amc_service_mode'] ?? '') == 'inhouse') || (($post['party_type'] ?? '') == 'inhouse')) ? 'inhouse' : 'vendor',
-            'department_id' => (((($post['amc_service_mode'] ?? '') == 'inhouse') || (($post['party_type'] ?? '') == 'inhouse')) && !empty($post['department_id'])) ? (int) $post['department_id'] : null,
-            'default_employee_id' => !empty($post['amc_default_employee_id']) ? (int) $post['amc_default_employee_id'] : null,
-            'customer_connect_id' => ((($post['party_type'] ?? '') == 'vendor') && !empty($post['customer_connect_id'])) ? (int) $post['customer_connect_id'] : null,
-            'gate_entry' => $post['gate_entry'] ?? null,
-            'reminder_days' => json_encode($reminderDays),
-            'completion_rules' => json_encode($completionRules),
-            'escalation_config' => json_encode($post['amc_escalation_config'] ?? array()),
-            'is_active' => 0,
-            'created_by' => $userId,
-            'created_date' => $now,
-            'updated_by' => $userId,
-            'updated_date' => $now,
-        );
+        $detailsRow = $this->buildAmcContractDetailsRow($companyId, $contract_id, $userId, $now, $post);
         $return['details'] = $callConfig->insertRecord('contract_amc_details', $detailsRow);
 
-        $amcServiceMode = $detailsRow['service_mode'];
-        $contractDefaultEmployeeId = (int) ($detailsRow['default_employee_id'] ?? 0);
-        $locationIdsForContract = array();
-        $insertedAssetsForSchedule = array();
-        $amcLocations = $post['amc_loc'] ?? array();
-        if (is_array($amcLocations)) {
-            foreach ($amcLocations as $locIdx => $locRow) {
-                $locationId = (int) ($locRow['location_id'] ?? 0);
-                if ($locationId <= 0) {
-                    continue;
-                }
-                $locStartYmd = $this->amcParseDateYmd($locRow['service_start_date'] ?? '');
-                $locEndYmd = $this->amcParseDateYmd($locRow['service_end_date'] ?? '');
-                if (($locStartYmd == '' || $locStartYmd == null) && ($contractStartYmd != '' && $contractStartYmd != null)) {
-                    $locStartYmd = $contractStartYmd;
-                }
-                if (($locEndYmd == '' || $locEndYmd == null) && ($contractEndYmd != '' && $contractEndYmd != null)) {
-                    $locEndYmd = $contractEndYmd;
-                }
-                $locInsert = array(
-                    'company_id' => $companyId,
-                    'contract_id' => $contract_id,
-                    'location_id' => $locationId,
-                    'service_start_date' => ($locStartYmd != '' && $locStartYmd != null) ? $locStartYmd : null,
-                    'service_end_date' => ($locEndYmd != '' && $locEndYmd != null) ? $locEndYmd : null,
-                    'is_active' => '0',
-                    'current_status' => '0',
-                    'created_by' => $userId,
-                    'created_date' => $now,
-                    'updated_by' => $userId,
-                    'updated_date' => $now,
-                );
-                print_r($locInsert);
-                $locRes = $callConfig->insertRecord('contract_amc_locations', $locInsert);
-                $return['locations'][] = $locRes;
-                $amcLocationId = (int) ($locRes['LASTID'] ?? 0);
-                if ($amcLocationId <= 0 && in_array($locRes['status'] ?? '', array('sucess', 'success'))) {
-                    $locLookupSql = "SELECT id FROM contract_amc_locations WHERE company_id = " . intval($companyId)
-                        . self::SQL_COND_AND_CONTRACT_ID . addslashes($contract_id) . "' AND location_id = '" . addslashes($locationId) . "'"
-                        . " AND is_active = 0 ORDER BY id DESC LIMIT 1";
-                    $locLookupRow = $callConfig->getRow($locLookupSql);
-                    if ($locLookupRow) {
-                        $locLookupArr = is_array($locLookupRow) ? $locLookupRow : (array) $locLookupRow;
-                        $amcLocationId = (int) ($locLookupArr['id'] ?? 0);
-                    }
-                }
-                $locationIdsForContract[] = $locationId;
+        $locAssetsOutcome = $this->processAmcLocationsAndAssets($companyId, $contract_id, $userId, $now, $post, $detailsRow, $contractStartYmd, $contractEndYmd);
+        $return['locations'] = $locAssetsOutcome['locations'];
+        $return['assets'] = $locAssetsOutcome['assets'];
 
-                $amcAssets = $post['amc_asset'][$locIdx] ?? array();
-                if (!is_array($amcAssets)) {
-                    continue;
-                }
-                foreach ($amcAssets as $assetRow) {
-                    $assetId = (int) ($assetRow['asset_id'] ?? 0);
-                    if ($assetId <= 0) {
-                        continue;
-                    }
-                    $slots = $assetRow['service_slots'] ?? array();
-                    if (!is_array($slots)) {
-                        $slots = array();
-                    }
-                    $assetStartYmd = $this->amcParseDateYmd($assetRow['service_start_date'] ?? '');
-                    $assetEndYmd = $this->amcParseDateYmd($assetRow['service_end_date'] ?? '');
-                    if (($assetStartYmd == '' || $assetStartYmd == null) && ($locStartYmd != '' && $locStartYmd != null)) {
-                        $assetStartYmd = $locStartYmd;
-                    }
-                    if (($assetEndYmd == '' || $assetEndYmd == null) && ($locEndYmd != '' && $locEndYmd != null)) {
-                        $assetEndYmd = $locEndYmd;
-                    }
-                    if (($assetStartYmd == '' || $assetStartYmd == null) && ($contractStartYmd != '' && $contractStartYmd != null)) {
-                        $assetStartYmd = $contractStartYmd;
-                    }
-                    if (($assetEndYmd == '' || $assetEndYmd == null) && ($contractEndYmd != '' && $contractEndYmd != null)) {
-                        $assetEndYmd = $contractEndYmd;
-                    }
-                    $scheduleStartYmd = ($assetStartYmd != '' && $assetStartYmd != null) ? $assetStartYmd : null;
-                    $scheduleEndYmd = ($assetEndYmd != '' && $assetEndYmd != null) ? $assetEndYmd : null;
-                    $assetInsert = array(
-                        'company_id' => $companyId,
-                        'contract_id' => $contract_id,
-                        'contract_amc_location_id' => $amcLocationId,
-                        'asset_id' => $assetId,
-                        'asset_name' => $assetRow['asset_name'] ?? '',
-                        'service_frequency' => $assetRow['service_frequency'] ?? '',
-                        'visits_per_interval' => !empty($assetRow['visits_per_interval']) ? (int) $assetRow['visits_per_interval'] : 1,
-                        'service_start_date' => $scheduleStartYmd,
-                        'service_end_date' => $scheduleEndYmd,
-                        'service_slots' => json_encode(array_values($slots)),
-                        'is_active' => 0,
-                        'created_by' => $userId,
-                        'created_date' => $now,
-                        'updated_by' => $userId,
-                        'updated_date' => $now,
-                    );
-                    if ($amcServiceMode == 'inhouse' && $contractDefaultEmployeeId > 0) {
-                        $assetInsert['default_employee_id'] = $contractDefaultEmployeeId;
-                    }
-                    $assetRes = $callConfig->insertRecord('contract_amc_assets', $assetInsert);
-                    $return['assets'][] = $assetRes;
-                    $amcAssetRowId = (int) ($assetRes['LASTID'] ?? 0);
-                    if ($amcAssetRowId <= 0 && in_array($assetRes['status'] ?? '', array('sucess', 'success'))) {
-                        $lookupSql = "SELECT id FROM contract_amc_assets WHERE company_id = " . intval($companyId)
-                            . self::SQL_COND_AND_CONTRACT_ID . addslashes($contract_id) . "' AND asset_id = '" . addslashes($assetId) . "'"
-                            . " AND is_active = 0 ORDER BY id DESC LIMIT 1";
-                        $lookupRow = $callConfig->getRow($lookupSql);
-                        if ($lookupRow) {
-                            $lookupArr = is_array($lookupRow) ? $lookupRow : (array) $lookupRow;
-                            $amcAssetRowId = (int) ($lookupArr['id'] ?? 0);
-                        }
-                    }
-                    if ($amcAssetRowId > 0) {
-                        $insertedAssetsForSchedule[] = array(
-                            'contract_amc_asset_id' => $amcAssetRowId,
-                            'contract_amc_location_id' => $amcLocationId,
-                            'asset_id' => $assetId,
-                            'service_frequency' => $assetInsert['service_frequency'],
-                            'visits_per_interval' => $assetInsert['visits_per_interval'],
-                            'service_start_date' => $scheduleStartYmd,
-                            'service_end_date' => $scheduleEndYmd,
-                            'service_slots' => $slots,
-                            'service_mode' => $amcServiceMode,
-                            'default_employee_id' => $assetInsert['default_employee_id'] ?? null,
-                        );
-                    }
-                }
-            }
-        }
-        if (!empty($locationIdsForContract)) {
-            $callConfig->updateRecord('contracts', array('locations' => json_encode(array_values(array_unique($locationIdsForContract)))), 'id', $contract_id);
+        if (!empty($locAssetsOutcome['locationIds'])) {
+            $callConfig->updateRecord('contracts', array('locations' => json_encode(array_values(array_unique($locAssetsOutcome['locationIds'])))), 'id', $contract_id);
         }
 
         $return['schedule_inserts'] = array();
         $return['schedule_errors'] = array();
+        $insertedAssetsForSchedule = $locAssetsOutcome['insertedAssets'];
         if (!empty($insertedAssetsForSchedule)) {
-            $deactivate('contract_amc_service_schedules');
+            $sqlSched = "UPDATE contract_amc_service_schedules SET is_active = NULL, updated_by = '" . addslashes($userId) . "', updated_date = '{$now}' WHERE contract_id = '" . addslashes($contract_id) . self::SQL_COND_AND_IS_ACTIVE_0;
+            $callConfig->executeQuery($sqlSched);
+
             foreach ($insertedAssetsForSchedule as $assetRow) {
                 $assetScheduleRows = $this->generateContractAmcSchedulesForAsset($contract_id, $companyId, $userId, $assetRow, $now);
                 if (count((array) $assetScheduleRows) > 0) {
@@ -2866,35 +2412,29 @@ public function getcustomerdetailsreact($get)
             }
         }
         $return['schedule_count'] = 0;
-        if (count((array) $return['schedule_inserts']) > 0) {
-            foreach ($return['schedule_inserts'] as $scheduleRow) {
-                if (in_array($scheduleRow['status'] ?? '', array('sucess', 'success'))) {
-                    $return['schedule_count']++;
-                }
+        foreach ($return['schedule_inserts'] as $scheduleRow) {
+            if (in_array($scheduleRow['status'] ?? '', array('sucess', 'success'))) {
+                $return['schedule_count']++;
             }
         }
 
         return $return;
     }
-
     public function saveContractCommercialDetails($contract_id, $get, $post)
     {
         global $callConfig;
-        $return = array();
-        $companyId = $get['company_id'] ?? 0;
-        $userId = $get['user_id'] ?? 0;
-        $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
         if (empty($contract_id)) {
             return array('status' => 'error', 'message' => 'Missing contract id');
         }
 
+        $companyId = $get['company_id'] ?? 0;
+        $userId = $get['user_id'] ?? 0;
+        $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
+
         $sql = "UPDATE contract_amc_details SET is_active = NULL, updated_by = '" . addslashes($userId) . "', updated_date = '{$now}' WHERE contract_id = '" . addslashes($contract_id) . self::SQL_COND_AND_IS_ACTIVE_0;
         $callConfig->executeQuery($sql);
 
-        $billingCycle = $post['amc_billing_cycle'] ?? null;
-        if ($billingCycle == 'halfyearly') {
-            $billingCycle = 'half_yearly';
-        }
+        $billingCycle = ($post['amc_billing_cycle'] ?? null) == 'halfyearly' ? 'half_yearly' : ($post['amc_billing_cycle'] ?? null);
 
         $detailsRow = array(
             'company_id' => $companyId,
@@ -2909,20 +2449,15 @@ public function getcustomerdetailsreact($get)
             'updated_by' => $userId,
             'updated_date' => $now,
         );
-        $return['details'] = $callConfig->insertRecord('contract_amc_details', $detailsRow);
-        return $return;
-    }
-    public function generateContractAmcSchedulesForAsset($contract_id, $companyId, $userId, $assetRow, $now)
+        return array('details' => $callConfig->insertRecord('contract_amc_details', $detailsRow));
+    }    public function generateContractAmcSchedulesForAsset($contract_id, $companyId, $userId, $assetRow, $now)
     {
         global $callConfig;
         $inserted = array();
-        $slots = $assetRow['service_slots'] ?? array();
-        if (is_string($slots)) {
-            $slots = json_decode($slots, true) ?: array();
-        }
-        if (!is_array($slots)) {
-            $slots = array();
-        }
+        $slots = is_string($assetRow['service_slots'] ?? null)
+            ? (json_decode($assetRow['service_slots'], true) ?: [])
+            : (is_array($assetRow['service_slots'] ?? null) ? $assetRow['service_slots'] : []);
+
         $visits = $this->buildAmcPlannedVisits(
             $assetRow['service_frequency'] ?? '',
             $assetRow['service_start_date'] ?? '',
@@ -2930,6 +2465,8 @@ public function getcustomerdetailsreact($get)
             $assetRow['visits_per_interval'] ?? 1,
             $slots
         );
+        $isInhouse = ($assetRow['service_mode'] ?? '') == 'inhouse';
+
         foreach ($visits as $visit) {
             $plannedDt = $this->amcVisitToPlannedDatetime($visit);
             if (!$plannedDt) {
@@ -2951,7 +2488,7 @@ public function getcustomerdetailsreact($get)
                 'updated_by' => $userId,
                 'updated_date' => $now,
             );
-            if (($assetRow['service_mode'] ?? '') == 'inhouse') {
+            if ($isInhouse) {
                 $row['employee_id'] = !empty($assetRow['default_employee_id']) ? (int) $assetRow['default_employee_id'] : null;
                 $row['employee_is_override'] = 0;
             } else {
@@ -2966,8 +2503,7 @@ public function getcustomerdetailsreact($get)
 
 
 trait ReactContractsApprovalTrait
-{
-private function buildAmcPlannedVisits($frequency, $serviceStart, $serviceEnd, $visitsPerInterval, $serviceSlots)
+{private function buildAmcPlannedVisits($frequency, $serviceStart, $serviceEnd, $visitsPerInterval, $serviceSlots)
     {
         $freq = $this->normalizeAmcServiceOn($frequency);
         if ($freq == '') {
