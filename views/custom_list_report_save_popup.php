@@ -99,7 +99,7 @@ foreach((array)$row as $rowdata){
                                  <?php echo $value['page_name']; ?></a>
                             </div>
                             <div class=" col-lg-1">
-                                <a href="javascript:void(0)" aria-label="<?= htmlspecialchars(__('Change Report Folder'), ENT_QUOTES, 'UTF-8'); ?>" onclick="listchangebase(<?php echo $value['id'].",'".$value['page_name']."'"; ?>)"><i class="ti-angle-down"></i></a>
+                                <button type="button" class="btn p-0 border-0 bg-transparent" aria-label="<?= htmlspecialchars(__('Change Report Folder'), ENT_QUOTES, 'UTF-8'); ?>" onclick="listchangebase(<?php echo $value['id'].",'".$value['page_name']."'"; ?>)"><i class="ti-angle-down"></i></button>
                             </div>
                         </div>
                         <?php } ?>

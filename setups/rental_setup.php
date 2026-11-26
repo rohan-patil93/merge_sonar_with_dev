@@ -86,7 +86,7 @@ $rental_utilities =  $result['rental_utilities'];
                                 <input aria-label="Type Name[]" type="text" class="form-control" name="type_name[]" value="<?php echo $utilities['type_name']; ?>">
                             </div>
                             <div class="col-lg-1">
-                                <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeOrganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                <button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeOrganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                             </div>
                         </div>
                         <?php $im++;

@@ -9309,7 +9309,7 @@ if ($page == 'validate_contracts_excel') {
 		}
 		require_once __DIR__ . '/includes/contracts_excel_helper.php';
 		try {
-			$parsed = cex_parse_contracts_workbook($tempPath);
+			$parsed = cexParseContractsWorkbook($tempPath);
 			$contractsJson = json_encode($parsed['contracts'] ?? array());
 			$locationsJson = json_encode($parsed['locations'] ?? array());
 			$assetsJson = json_encode($parsed['assets'] ?? array());

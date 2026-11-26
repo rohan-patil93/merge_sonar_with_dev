@@ -140,7 +140,7 @@
                                     <span class="text-danger f-12" id="<?php echo $errorvendorrowid; ?>"  style="display:none">Email Id Already Register</span>
                                 </div>
                                 <div class="col-lg-1 p-t-25">
-                                    <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeorganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeorganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                 </div>
                             </div>
                     <?php } ?>

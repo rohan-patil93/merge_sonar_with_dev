@@ -8185,7 +8185,7 @@ private function mapAmcAdminLandingContractRow($contract)
             return array('status' => 'error', 'message' => self::CONST_MISSING_COMPANY_ID);
         }
 
-        $contractHeaders = cex_contract_sheet_headers();
+        $contractHeaders = cexContractSheetHeaders();
         $sampleRow = array();
         if (count((array) $contractHeaders) > 0) {
             foreach ($contractHeaders as $_h) {
@@ -8210,9 +8210,9 @@ private function mapAmcAdminLandingContractRow($contract)
 
         $sheets = array();
         $sheets[] = array('name' => 'Contracts', 'rows' => array_merge(array($contractHeaders), array($sampleRow)));
-        $sheets[] = array('name' => 'Locations', 'rows' => array(cex_location_sheet_headers()));
-        $sheets[] = array('name' => 'Assets', 'rows' => array(cex_asset_sheet_headers()));
-        $sheets[] = array('name' => 'Milestones', 'rows' => array(cex_milestone_sheet_headers()));
+        $sheets[] = array('name' => 'Locations', 'rows' => array(cexLocationSheetHeaders()));
+        $sheets[] = array('name' => 'Assets', 'rows' => array(cexAssetSheetHeaders()));
+        $sheets[] = array('name' => 'Milestones', 'rows' => array(cexMilestoneSheetHeaders()));
 
         $sheets[] = array('name' => 'Ref_ContractTypes', 'rows' => array(array('contract_type'), array('standard'), array('amc')));
         $sheets[] = array('name' => 'Ref_PartyTypes', 'rows' => array(array('party_type'), array('vendor'), array('customer'), array('inhouse')));
@@ -8362,7 +8362,7 @@ private function mapAmcAdminLandingContractRow($contract)
         $relPath = 'uploads/contracts/templates/' . $fileName;
         $absPath = dirname(__DIR__) . '/' . str_replace('/', DIRECTORY_SEPARATOR, $relPath);
         try {
-            cex_write_xlsx($sheets, $absPath);
+            cexWriteXlsx($sheets, $absPath);
         } catch (Exception $e) {
             return array('status' => 'error', 'message' => $e->getMessage());
         }
@@ -8726,7 +8726,7 @@ public function validateContractsExcel($get, $post)
                 return array('error' => 'Excel file not found: ' . $tempPath);
             }
             try {
-                $parsed = cex_parse_contracts_workbook($absPath);
+                $parsed = cexParseContractsWorkbook($absPath);
                 $contracts = $parsed['contracts'] ?? array();
                 $locations = $parsed['locations'] ?? array();
                 $assets = $parsed['assets'] ?? array();
@@ -9148,7 +9148,7 @@ public function validateContractsExcel($get, $post)
                 $msRow = is_array($msRow) ? $msRow : (array) $msRow;
                 $msErrors = array();
                 $ref = trim((string) ($msRow['import_ref'] ?? ''));
-                $msDate = cex_normalize_date_ymd($msRow['milestone_date'] ?? '');
+                $msDate = cexNormalizeDateYmd($msRow['milestone_date'] ?? '');
                 if (($msRow['milestone_date'] ?? '') != '' && $msDate == '') {
                     $msErrors[] = 'Invalid milestone_date';
                 }
@@ -9188,8 +9188,8 @@ public function validateContractsExcel($get, $post)
                     $rowErrors[] = 'contract_name is required';
                 }
 
-                $startDate = cex_normalize_date_ymd($contractRow['start_date'] ?? '');
-                $endDate = cex_normalize_date_ymd($contractRow['end_date'] ?? '');
+                $startDate = cexNormalizeDateYmd($contractRow['start_date'] ?? '');
+                $endDate = cexNormalizeDateYmd($contractRow['end_date'] ?? '');
                 if (($contractRow['start_date'] ?? '') != '' && $startDate == '') {
                     $rowErrors[] = 'Invalid start_date';
                 }
@@ -9227,7 +9227,7 @@ public function validateContractsExcel($get, $post)
                 }
 
                 $paymentPlan = $this->cexNormalizePaymentPlan($contractRow['payment_plan'] ?? 'billing_cycle');
-                $billingCycle = cex_normalize_billing_cycle($contractRow['billing_cycle'] ?? '');
+                $billingCycle = cexNormalizeBillingCycle($contractRow['billing_cycle'] ?? '');
                 $billingDayRaw = trim((string) ($contractRow['billing_day'] ?? ''));
                 $billingDay = ($billingDayRaw == '') ? 1 : (int) $billingDayRaw;
                 if ($paymentPlan == 'billing_cycle') {
@@ -9327,8 +9327,8 @@ public function validateContractsExcel($get, $post)
                                 } else {
                                     $rowErrors[] = 'Unknown AMC location: ' . $locName;
                                 }
-                                $locStart = cex_normalize_date_ymd($locRow['service_start_date'] ?? '') ?: $startDate;
-                                $locEnd = cex_normalize_date_ymd($locRow['service_end_date'] ?? '') ?: $endDate;
+                                $locStart = cexNormalizeDateYmd($locRow['service_start_date'] ?? '') ?: $startDate;
+                                $locEnd = cexNormalizeDateYmd($locRow['service_end_date'] ?? '') ?: $endDate;
                                 $amcLoc[] = array(
                                     'location_id' => $locId,
                                     'service_start_date' => $locStart,
@@ -9359,8 +9359,8 @@ public function validateContractsExcel($get, $post)
                                             'asset_name' => $assetInfo['name'] ?? '',
                                             'service_frequency' => $freqCode,
                                             'visits_per_interval' => max(1, (int) ($assetRow['visits_per_interval'] ?? 1)),
-                                            'service_start_date' => cex_normalize_date_ymd($assetRow['service_start_date'] ?? '') ?: $locStart,
-                                            'service_end_date' => cex_normalize_date_ymd($assetRow['service_end_date'] ?? '') ?: $locEnd,
+                                            'service_start_date' => cexNormalizeDateYmd($assetRow['service_start_date'] ?? '') ?: $locStart,
+                                            'service_end_date' => cexNormalizeDateYmd($assetRow['service_end_date'] ?? '') ?: $locEnd,
                                             'service_slots' => array(),
                                         );
                                     }
@@ -9411,7 +9411,7 @@ public function validateContractsExcel($get, $post)
                                     $rowErrors[] = 'Milestone name is required';
                                     continue;
                                 }
-                                $msDate = cex_normalize_date_ymd($msRow['milestone_date'] ?? '');
+                                $msDate = cexNormalizeDateYmd($msRow['milestone_date'] ?? '');
                                 if (($msRow['milestone_date'] ?? '') != '' && $msDate == '') {
                                     $rowErrors[] = 'Invalid milestone_date for ' . $msName;
                                 }
@@ -9429,7 +9429,7 @@ public function validateContractsExcel($get, $post)
                         }
                     }
                 } elseif ($startDate != '' && $endDate != '') {
-                    $resolvedMilestones = cex_generate_billing_milestones($startDate, $endDate, $billingCycle, $billingDay, $amount);
+                    $resolvedMilestones = cexGenerateBillingMilestones($startDate, $endDate, $billingCycle, $billingDay, $amount);
                 }
 
                 $customerConnectId = 0;

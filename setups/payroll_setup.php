@@ -1,4 +1,5 @@
 <?php
+defined('ATTR_STYLE_DISPLAY_NONE') || define('ATTR_STYLE_DISPLAY_NONE', 'style="display:none;"');
 $weekdays = array('Sunday'=>'Sunday','Monday'=>'Monday','Tuesday'=>'Tuesday','Wednesday'=>'Wednesday','Thursday'=>'Thursday','Friday'=>'Friday','Saturday'=>'Saturday');
 $deduction_cycle = array('M'=>'Monthly','Q'=>'Quaterly','H'=>'Half Yearly','Y'=>'Yearly');
 $statelist = $result['states'];
@@ -50,7 +51,7 @@ function addslabrows(){
 
 }
 </script>
-<div id="setup<?php echo $pagedetail[0]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[0]['sequence'])?'':'style="display:none;"'; ?>>
+<div id="setup<?php echo $pagedetail[0]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[0]['sequence']) ? '' : ATTR_STYLE_DISPLAY_NONE; ?>>
     <div class="row align-items-center">
         <div class="col-lg-6 bg-white" style="">
             <div class="center-sec" style="">
@@ -94,7 +95,7 @@ function addslabrows(){
         </div>
     </div>
 </div>
-<div id="setup<?php echo $pagedetail[1]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[1]['sequence'])?'':'style="display:none;"'; ?> >
+<div id="setup<?php echo $pagedetail[1]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[1]['sequence']) ? '' : ATTR_STYLE_DISPLAY_NONE; ?> >
     <div class="taskda-bg">
         <div class="row align-items-center">
             <div class="col-lg-6 p-l-50 p-r-50 bg-white">
@@ -183,7 +184,7 @@ function addslabrows(){
         </div>
     </div>
 </div>
-<div id="setup<?php echo $pagedetail[2]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[2]['sequence'])?'':'style="display:none;"'; ?>>
+<div id="setup<?php echo $pagedetail[2]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[2]['sequence']) ? '' : ATTR_STYLE_DISPLAY_NONE; ?>>
     <div class="taskda-bg">
         <div class="row align-items-center">
             <div class="col-lg-6 p-l-50 p-r-50 bg-white">
@@ -442,7 +443,7 @@ function addslabrows(){
 
 
 
-<div id="setup<?php echo $pagedetail[3]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[3]['sequence'])?'':'style="display:none;"'; ?> >
+<div id="setup<?php echo $pagedetail[3]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[3]['sequence']) ? '' : ATTR_STYLE_DISPLAY_NONE; ?> >
     <div class="taskda-bg">
         <div class="row align-items-center">
             <div class="col-lg-6 p-l-50 p-r-50 bg-white">
