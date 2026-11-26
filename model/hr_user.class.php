@@ -26,6 +26,34 @@ class HrConstants
     public const SEL_GENC = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ";
     public const AND_CURRENT_STATUS_EQ = " AND current_status = ";
     public const DATE_2026_08_31 = "2026-08-31";
+
+    public const VAL_TIME_10_TO_14_STR = "','10:00:00', '1', '1', '14:00:00','0','0', '";
+    public const VAL_ZERO_ZERO_STR = "','0','0', '";
+    public const VAL_EMPTY_THREE_STR = "','',''),";
+    public const AND_IMPORT_SWAP_IN_OUT_ID_EQ = "' AND import_swap_in_out_id = '";
+    public const SQL_SEL_IMPORT_SWAP_69_COLS = "SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11`, `column12`, `column13`, `column14`, `column15`, `column16`, `column17`, `column18`, `column19`, `column20`, `column21`, `column22`, `column23`, `column24`, `column25`, `column26`, `column27`, `column28`, `column29`, `column30`, `column31`, `column32`, `column33`, `column34`, `column35`, `column36`, `column37`, `column38`, `column39`, `column40`, `column41`, `column42`, `column43`, `column44`, `column45`, `column46`, `column47`, `column48`, `column49`, `column50`, `column51`, `column52`, `column53`, `column54`, `column55`, `column56`, `column57`, `column58`, `column59`, `column60`, `column61`, `column62`, `column63`, `column64`, `column65`, `column66`, `column67`, `column68`, `column69` FROM import_swap_in_out_details WHERE company_id = '";
+
+    public const SEL_ACTIVE_REGULAR_EMPLOYEES_BASE = "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving FROM `employees` emp WHERE emp.company_id = '";
+    public const SQL_EMP_ACTIVE_LEAVING_CASE = "' AND emp.employee_type = 1 AND emp.is_active = 0 AND ( CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving <= '";
+    public const SQL_EMP_ACTIVE_STATUS_CASE = "') THEN 1 WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END)= 1 AND (emp.hr_buddy = '";
+    public const OR_EMP_PROJECT_BUDDY = "' OR emp.project_buddy = '";
+    public const OR_EMP_ADMIN_BUDDY = "' OR emp.admin_buddy = '";
+    public const OR_EMP_FINANCE_BUDDY = "' OR emp.finance_buddy = '";
+    public const OR_EMP_LOC_BUDDY = "' OR emp.loc_buddy = '";
+    public const OR_EMP_REPORTING_MGR = "' OR emp.reporting_manager_id = '";
+    public const OR_PAY_AREA_ADMIN_SUBQUERY = "' OR (emp.id IN (SELECT    pae.emp_id FROM pay_area_employees pae, payroll_area_admins paa WHERE pae.company_id = paa.company_id AND pae.company_id = emp.company_id AND    pae.pay_area_id = paa.pay_area_id AND pae.is_active = paa.is_active AND    pae.is_active = 0 AND paa.emp_id = '";
+    public const OR_CASE_ADMIN_TYPE = "' ))    OR ( CASE WHEN '1' = '";
+    public const THEN_1_END_EQ_1 = "' THEN 1 END) = 1)";
+
+    public const SEL_EMP_SHIFTS_BASE = "SELECT ss.id,emps.emp_id, ss.name, ss.minimum_hours_required,ss.half_day_hours,ss.working_days FROM emp_shifts emps, shift_settings ss WHERE emps.is_active  = ss.is_active AND  emps.company_id =ss.company_id AND  emps.shift_id  = ss.id AND emps.is_active = 0 AND emps.company_id=";
+    public const SEL_ATTENDANCE_SETTINGS_BASE = "SELECT * FROM attendance_settings WHERE is_active=0 and company_id=";
+    public const AND_MONTH_ATTENDACE_DATE_EQ = " AND MONTH(attendace_date) = '";
+    public const AND_YEAR_ATTENDACE_DATE_EQ = "' AND YEAR(attendace_date) = '";
+    public const AND_MONTH_HOLIDAY_DATE_EQ = " AND MONTH(holiday_date) = '";
+    public const AND_YEAR_HOLIDAY_DATE_EQ = "' AND YEAR(holiday_date) = '";
+    public const SEL_HOLIDAY_DATE_BASE = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=";
+    public const AND_MONTH_ATTENDANCE_DATE_EQ = " AND MONTH(attendance_date) = '";
+    public const AND_YEAR_ATTENDANCE_DATE_EQ = "' AND YEAR(attendance_date) = '";
 }
 
 trait HrAttendanceTrait
@@ -57,409 +85,55 @@ public function getAttendanceData($data)
     {
         global $callConfig;
         $emp_list = json_decode($get['emplist'], 1);
-        $discrepancy = array();
         $month = $get['month'];
         $year = $get['year'];
-        $shift_check = SHIFT_CHECK; //1 meaning yes
+        $shift_check = SHIFT_CHECK;
         $slctdate = date($get['year'] . "-" . $get['month'] . "-" . $get['monthstartday']);
         $startdate = date("Y-m-d", strtotime($slctdate));
-        $enddate = date("Y-m-d", strtotime(HrConstants::PLUS_ONE_MONTH, strtotime($slctdate)));
-        $enddate = date("Y-m-d", strtotime(HrConstants::MINUS_ONE_DAYS, strtotime($enddate)));
+        $enddate = date("Y-m-d", strtotime(HrConstants::MINUS_ONE_DAYS, strtotime(HrConstants::PLUS_ONE_MONTH, strtotime($slctdate))));
         $retrunarray = array();
+
         $work_attendance_logssql = "SELECT month_year, type, created_date, import_swap_in_out_id FROM `work_attendance_logs` WHERE company_id=  '" . $get['company_id'] . "' AND month_year ='" . $year . "-" . $month . "' AND is_active = 0 GROUP BY type ORDER BY created_date DESC";
-        $work_attendance_logsres = $callConfig->getAllRows($work_attendance_logssql);
-        $retrunarray['work_attendance_logs'] = $work_attendance_logsres;
-        if (empty($emp_list)) {
+        $retrunarray['work_attendance_logs'] = $callConfig->getAllRows($work_attendance_logssql);
 
-            $query = "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving FROM `employees` emp WHERE emp.company_id = '" . $get['company_id'] . "' AND emp.employee_type = 1 AND emp.is_active = 0 AND ( CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving <= '" . $enddate . "') THEN 1 WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END)= 1 AND (emp.hr_buddy = '" . $get['emp_id'] . "' OR emp.finance_buddy = '" . $get['emp_id'] . "' OR emp.admin_buddy = '" . $get['emp_id'] . "' OR emp.project_buddy = '" . $get['emp_id'] . "' OR emp.loc_buddy = '" . $get['emp_id'] . "' OR emp.reporting_manager_id = '" . $get['user_id'] . "' OR (emp.id IN (SELECT    pae.emp_id FROM pay_area_employees pae, payroll_area_admins paa WHERE pae.company_id = paa.company_id AND pae.company_id = emp.company_id AND    pae.pay_area_id = paa.pay_area_id AND pae.is_active = paa.is_active AND    pae.is_active = 0 AND paa.emp_id = '" . $get['emp_id'] . "' ))    OR ( CASE WHEN '1' = '" . $get['admin_type'] . "' THEN 1 END) = 1)";
-
-        } else {
-            $liemp = implode(",", $emp_list);
-            $query = "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving  FROM `employees` WHERE company_id = '" . $get['company_id'] . "' AND employee_type = 1 AND joining_date <= '" . $enddate . "' AND (date_of_leaving >= '" . $startdate . "' OR date_of_leaving IS NULL) AND id IN(" . $liemp . ")";
-        }
+        $query = $this->buildAttendanceEmployeeQuery($get, $emp_list, $startdate, $enddate);
         $retrunarray['employees_sql'] = $query;
         $empdatas = $callConfig->getAllRows($query);
         $retrunarray['empdatas'] = $empdatas;
 
-        $shiftsql = "SELECT ss.id,emps.emp_id, ss.name, ss.minimum_hours_required,ss.half_day_hours,ss.working_days FROM emp_shifts emps, shift_settings ss WHERE emps.is_active  = ss.is_active AND  emps.company_id =ss.company_id AND  emps.shift_id  = ss.id AND emps.is_active = 0 AND emps.company_id=" . $get['company_id'];
-        $shiftres = $callConfig->getAllRows($shiftsql);
-        foreach ($shiftres as $shiftress) {
-            $shiftresarray[$shiftress->emp_id] = $shiftress;
-        }
-        foreach ($empdatas as $value) {
-            if ($shift_check == '1' && $get['shift_categroy'] != "") {
-                if ($shiftresarray[$value->id]->id == $get['shift_categroy']) {
-                    $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'emp_code' => $value->emp_code, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
-                }
-            } else {
-                $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'emp_code' => $value->emp_code, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
-            }
-        }
-        $attstc = "SELECT * FROM attendance_settings WHERE is_active=0 and company_id=" . $get['company_id'];
-        $atsdata = $callConfig->getRow($attstc);
-        $workingdays = json_decode($atsdata->working_days, 1);
+        $lookups = $this->fetchAttendanceLookupData($get, $month, $year);
+        $retrunarray['attendance_key_types'] = $lookups['shift'];
+        $retrunarray['leavetype'] = $lookups['leavetype'];
 
-        $shiftcatsql = "SELECT id, shift_name, clock_in, clock_out FROM shifts WHERE is_active = 0 AND company_id=" . $get['company_id'];
-        $shiftcatres = $callConfig->getAllRows($shiftcatsql);
+        $empidlist = $this->buildAttendanceEmpIdList($empdatas, $lookups['shiftresarray'], $shift_check, $get['shift_categroy'] ?? '');
+        $gridResult = $this->generateEmployeeAttendanceTimesheet($empidlist, $startdate, $enddate, $lookups, $retrunarray);
 
-        $shiftkeys = "SELECT id, key_short_code, display_value, color_code, key_name FROM attendance_key_types WHERE company_id=" . $get['company_id'] . " AND leave_category_id IS NULL AND is_active=0";
-        $shiftkeysdata = $callConfig->getAllRows($shiftkeys); // working //absent
-        foreach ($shiftkeysdata as $svalue) {
-            $shift[$svalue->key_short_code] = (array) $svalue;
-        }
-
-        $attkey = "SELECT lc.id, lc.name, akt.key_short_code, akt.display_value, akt.color_code, akt.key_name FROM leave_categories lc, attendance_key_types akt WHERE lc.company_id = '" . $get['company_id'] . "' AND lc.company_id = akt.company_id AND lc.id = akt.leave_category_id AND lc.is_active = akt.is_active AND lc.is_active = '0'";
-        $attkeyres = $callConfig->getAllRows($attkey); // working //absent
-        foreach ($attkeyres as $svalue) {
-            $shift[$svalue->key_short_code] = (array) $svalue;
-        }
-        $retrunarray['attendance_key_types'] = $shift;
-
-        $attendancesql = "SELECT attendace_date,employee_id,attendance_key_short_code  FROM `employee_daily_attendances` WHERE is_active=0 and company_id=" . $get['company_id'] . " AND MONTH(attendace_date) = '" . $month . "' AND YEAR(attendace_date) = '" . $year . "'";
-        $attendanceres = $callConfig->getAllRows($attendancesql); // working //absent
-        foreach ($attendanceres as $attendancere) {
-            $attendacnearray[$attendancere->employee_id][$attendancere->attendace_date] = $attendancere;
-        }
-
-        $leavetypesql = "SELECT lt.id, lc.name, akt.key_short_code FROM leave_types lt, leave_categories lc, attendance_key_types akt WHERE lt.company_id = '" . $get['company_id'] . "' AND lt.company_id = lc.company_id AND lt.company_id= akt.company_id AND lt.leave_category_id = lc.id AND lc.id = akt.leave_category_id AND lt.is_active = 0 AND lt.is_active = lc.is_active AND lt.is_active= akt.is_active";
-        $leavetypesres = $callConfig->getAllRows($leavetypesql);
-        foreach ($leavetypesres as $ltype) {
-            $leavetype[$ltype->id] = $ltype->key_short_code;
-        }
-        $retrunarray['leavetype'] = $leavetype;
-
-
-        $leavessql = "select employee_id,leave_from,leave_to,leave_type_id,start_half_day,end_half_day,datelist
-        from employee_leaves,
-        (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) datelist from
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) as v
-        where datelist>=leave_from and datelist <=leave_to AND ((MONTH(leave_from) = '" . $month . "' AND YEAR(leave_from) = '" . $year . "') OR (MONTH(leave_to) = '" . $month . "' AND YEAR(leave_to) = '" . $year . "') )";
-        $leavesdetails = $callConfig->getAllRows($leavessql); // working //absent
-        foreach ($leavesdetails as $leavesdetail) {
-            $leavesdetailsarray[$leavesdetail->employee_id][$leavesdetail->datelist] = array('type' => $leavesdetail->leave_type_id, 'start_half_day' => $leavesdetail->start_half_day, 'end_half_day' => $leavesdetail->end_half_day);
-        }
-        $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=" . $get['company_id'] . " AND MONTH(holiday_date) = '" . $month . "' AND YEAR(holiday_date) = '" . $year . "'";
-        $holidaysdata = $callConfig->getAllRows($holidays); //holidays
-        $holidaysdatas = array();
-        foreach ($holidaysdata as $hvalue) {
-            $holidaysdatas[] = $hvalue->holiday_date;
-        }
-        $checkupdate = "SELECT id FROM `employee_daily_attendances` WHERE is_active='0' and company_id=" . $get['company_id'] . " AND MONTH(attendace_date) = '" . $month . "' AND YEAR(attendace_date) = '" . $year . "'";
-
-        if ($get['admin_type'] != 1) {
-            $checkupdate .= " AND employee_id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id IN (SELECT pay_area_id FROM payroll_area_admins WHERE emp_id = " . $get['emp_id'] . "))";
-        }
-        //echo $checkupdate; exit
-
-        $checkupdates = $callConfig->getRow($checkupdate);
-
-        $tempdetails = "SELECT employee_id,attendance_date,attendance_key_short_code,start_half_day,end_half_day,clock_in,clock_out FROM temp_attendance_details WHERE is_active='0' and company_id=" . $get['company_id'] . " AND MONTH(attendance_date) = '" . $month . "' AND YEAR(attendance_date) = '" . $year . "'";
-        $tempdetailsdata = $callConfig->getAllRows($tempdetails); //holidays
-        foreach ($tempdetailsdata as $tempary) {
-            $tempdetailary[$tempary->employee_id][$tempary->attendance_date] = array("date" => $tempary->attendance_date, "type" => $tempary->attendance_key_short_code, "start_half_day" => $tempary->start_half_day, "end_half_day" => $tempary->end_half_day, 'clock_in' => $tempary->clock_in, 'clock_out' => $tempary->clock_out);
-        }
-        $timeshetetrys = array();
-        $i = 0;
-        $notleaveattendancekey = array('P', 'R', 'A', 'H', 'O', 'Z');
-        $workingdayattendancekey = array('P', 'O');
-        foreach ($empidlist as $ky => $emp) {
-            $monthworkingdays = 0;
-            $actualworkingdays = 0;
-            $start = new DateTime($startdate);
-            $end = new DateTime($enddate);
-            $dates = array();
-            $timeshettempoyee = array();
-            $emp_shift_days = json_decode($shiftresarray[$ky]->working_days, 1);
-
-            if (isset($checkupdates->id)) {
-                $retrunarray['valuedisplaytype'] = "update";
-                while ($start <= $end) {
-                    $date = $start->format('Y-m-d');
-                    $dy = $start->format('l');
-                    if (in_array($date, (array) $holidaysdatas)) {
-                        $dates[$date] = array('day' => 'H', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['H']['color_code'], 'display_value' => $shift['H']['display_value']);
-                    } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1' && OFF_CHECK == '0')) {
-                        $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['O']['color_code'], 'display_value' => $shift['O']['display_value']);
-                    }
-                    //elseif(isset($attendacnearray[$ky][$date]) AND isset($leavesdetailsarray[$ky][$date])){
-                    elseif (isset($leavesdetailsarray[$ky][$date])) {
-                        $monthworkingdays++;
-                        $actualworkingdays++;
-                        $leavtypedetail = $leavesdetailsarray[$ky][$date];
-                        $leaveshortcode = $leavetype[$leavtypedetail['type']];
-                        $dates[$date] = array('day' => $leaveshortcode, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift[$leaveshortcode]['color_code'], 'display_value' => $shift[$leaveshortcode]['display_value'], 'strthalfday' => $tempdetailary[$ky][$date]['start_half_day'], 'endthalfday' => $tempdetailary[$ky][$date]['end_half_day'], 'working_color' => $shift[$leaveshortcode]['color_code']);
-                        $discrepancy[$ky] = $emp;
-                    } elseif (isset($attendacnearray[$ky][$date])) {
-                        $shortkey = $attendacnearray[$ky][$date];
-                        if ($shortkey->attendance_key_short_code == "O") {
-                            $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['O']['color_code'], 'display_value' => $shift['O']['display_value']);
-                        } elseif ($shortkey->attendance_key_short_code == "Z") {
-                            $dates[$date] = array('day' => 'Z', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['Z']['color_code'], 'display_value' => $shift['Z']['display_value'], 'working_color' => $shift['Z']['color_code']);
-                        } else {
-                            $monthworkingdays++;
-                            $actualworkingdays++;
-                            $dates[$date] = array('day' => 'P', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['P']['color_code'], 'display_value' => $shift['P']['display_value']);
-                        }
-                    } else {
-                        ///if(isset($leavesdetailsarray[$ky][$date])){
-                        //$monthworkingdays++;
-                        //$actualworkingdays++;
-
-
-
-
-                        /**
-                    if($leavesdetailsarray[$ky][$date]['type'] == '6'){
-                        $dates[$date] = array('day'=>'S','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['S']['color_code'],'display_value'=>$shift['S']['display_value'],'strthalfday'=>$leavesdetailsarray[$ky][$date]['start_half_day'],'endthalfday'=>$leavesdetailsarray[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-                        $discrepancy[$ky] = $emp;
-                    }else{
-                        $dates[$date] = array('day'=>'V','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['V']['color_code'],'display_value'=>$shift['V']['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-                        $discrepancy[$ky] = $emp;
-                    }  **/
-                        //}else{
-                        $dates[$date] = array('day' => 'A', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['A']['color_code'], 'display_value' => $shift['A']['display_value']);
-                        $discrepancy[$ky] = $emp;
-                        //}
-                    }
-                    if ($i == '0') {
-                        $alldate[] = $date;
-                    }
-                    $start->modify(HrConstants::PLUS_ONE_DAYS);
-                }
-            } else {
-                $retrunarray['valuedisplaytype'] = "insert";
-                while ($start <= $end) {
-                    $date = $start->format('Y-m-d');
-                    $dy = $start->format('l');
-                    if ($emp['joining_date'] >= $date || ($emp['date_of_leaving'] <= $date && $emp['date_of_leaving'] != "")) {
-                        $dates[$date] = array('day' => 'A', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['A']['color_code'], 'display_value' => $shift['A']['display_value']);
-                    } elseif (in_array($date, (array) $holidaysdatas)) {
-                        $dates[$date] = array('day' => 'H', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['H']['color_code'], 'display_value' => $shift['H']['display_value']);
-                    } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1') && OFF_CHECK == '0') {
-                        $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['O']['color_code'], 'display_value' => $shift['O']['display_value']);
-                    } elseif ($tempdetailary[$ky][$date] != "") {
-
-                        $clockintime = $tempdetailary[$ky][$date]['clock_in'];
-                        $clockouttime = $tempdetailary[$ky][$date]['clock_out'];
-
-                        $discrepancy[$ky] = $emp;
-                        $attendance_key_short_code = $tempdetailary[$ky][$date]['type'];
-
-                        if (!in_array($attendance_key_short_code, $notleaveattendancekey)) {  // leave Show
-                            $actualworkingdays++;
-                            $monthworkingdays++;
-                            $dates[$date] = array('day' => $attendance_key_short_code, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift[$attendance_key_short_code]['color_code'], 'display_value' => $shift[$attendance_key_short_code]['display_value'], 'strthalfday' => $tempdetailary[$ky][$date]['start_half_day'], 'endthalfday' => $tempdetailary[$ky][$date]['end_half_day'], 'working_color' => $shift[$attendance_key_short_code]['color_code']);
-                        } else { // normal Day Show presdsent and absent
-                            if (in_array($attendance_key_short_code, $workingdayattendancekey)) {  // o,p working day count
-                                $monthworkingdays++;
-                                if ($attendance_key_short_code != 'O') {  // o,p working day count
-                                    $actualworkingdays++;
-
-                                }
-                            }
-                            $dates[$date] = array('day' => $attendance_key_short_code, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift[$attendance_key_short_code]['color_code'], 'display_value' => $shift[$attendance_key_short_code]['display_value'], 'clock_in' => $clockintime, 'clock_out' => $clockouttime, 'working_color' => $shift['Z']['color_code']);
-
-                        }
-
-                        /**
-                        if($tempdetailary[$ky][$date]['type']=="A"){
-                            $discrepancy[$ky] = $emp;
-                            $dates[$date] = array('day'=>'A','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['A']['color_code'],'display_value'=>$shift['A']['display_value'],'clock_in'=>$clockintime,'clock_out'=>$clockouttime);
-                        }elseif($tempdetailary[$ky][$date]['type']=="P"){
-                            $discrepancy[$ky] = $emp;
-                            $dates[$date] = array('day'=>'P','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['P']['color_code'],'display_value'=>$shift['P']['display_value'],'clock_in'=>$clockintime,'clock_out'=>$clockouttime);
-                        }elseif($tempdetailary[$ky][$date]['type']=="O"){
-                            $discrepancy[$ky] = $emp;
-                            $dates[$date] = array('day'=>'O','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['O']['color_code'],'display_value'=>$shift['O']['display_value']);
-                        }else{
-                            $actualworkingdays++;
-                            $discrepancy[$ky] = $emp;
-                            $dates[$date] = array('day'=>$tempdetailary[$ky][$date]['type'],'date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift[$tempdetailary[$ky][$date]['type']]['color_code'],'display_value'=>$shift[$tempdetailary[$ky][$date]['type']]['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-
-
-                            /**if($tempdetailary[$ky][$date]['leave_type_id']=="6"){
-                                $discrepancy[$ky] = $emp;
-                                $dates[$date] = array('day'=>'S','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['S']['color_code'],'display_value'=>$shift['S']['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-                            }else{
-                                $discrepancy[$ky] = $emp;
-                                $dates[$date] = array('day'=>'V','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['V']['color_code'],'display_value'=>$shift['V']['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-                            }    **//**
-                        }  **/
-                    } else {
-                        $monthworkingdays++;
-                        $actualworkingdays++;
-                        $dates[$date] = array('day' => 'P', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['P']['color_code'], 'display_value' => $shift['P']['display_value']);
-                    }
-                    if ($i == '0') {
-                        $alldate[] = $date;
-                    }
-                    $start->modify(HrConstants::PLUS_ONE_DAYS);
-                }
-            }
-            $timeshetetrys[$ky] = $dates;
-            $i++;
-            $monthworkignday[$ky] = $monthworkingdays;
-            $actualworkingday[$ky] = $actualworkingdays;
-        }
-        $retrunarray['shifts'] = $shiftcatres;
-        $retrunarray['monthworkingdays'] = $monthworkignday;
-        $retrunarray['actualworkingdays'] = $actualworkingday;
-        $retrunarray['discrepancy'] = $discrepancy;
-        $retrunarray['timesheet'] = $timeshetetrys;
-        $retrunarray['date'] = $alldate;
+        $retrunarray['shifts'] = $lookups['shiftcatres'];
+        $retrunarray['monthworkingdays'] = $gridResult['monthworkingdays'];
+        $retrunarray['actualworkingdays'] = $gridResult['actualworkingdays'];
+        $retrunarray['discrepancy'] = $gridResult['discrepancy'];
+        $retrunarray['timesheet'] = $gridResult['timesheet'];
+        $retrunarray['date'] = $gridResult['date'];
         $retrunarray['emplist'] = $empidlist;
-        $retrunarray['attendacnearray'] = $attendacnearray;
+        $retrunarray['attendacnearray'] = $lookups['attendacnearray'];
         $retrunarray['query'] = $query;
         return $retrunarray;
     }
     public function insertEmployeeWorkAttendances($get)
     {
-        global $callConfig;
-        $lastid = '';
-        $shift_check = SHIFT_CHECK; //1 meaning yes
-        $month = $get['month'];
-        $year = $get['year'];
-        $get['month_year'] = $year . "-" . $month;
-        $attstc = "SELECT * FROM attendance_settings WHERE is_active=0 and company_id=" . $get['company_id'];
-        $atsdata = $callConfig->getRow($attstc);
-        $workingdays = json_decode($atsdata->working_days, 1);
-        if ($shift_check == 1) {
-            $shiftsql = "SELECT ss.id,emps.emp_id, ss.name, ss.minimum_hours_required,ss.half_day_hours,ss.working_days FROM emp_shifts emps, shift_settings ss WHERE emps.is_active  = ss.is_active AND  emps.company_id =ss.company_id AND  emps.shift_id  = ss.id AND emps.is_active = 0 AND emps.company_id=" . $get['company_id'];
-            $shiftres = $callConfig->getAllRows($shiftsql);
-            foreach ($shiftres as $shiftress) {
-                $shiftresarray[$shiftress->emp_id] = $shiftress;
-            }
-        }
-        $tempdetails = "SELECT * FROM temp_attendance_details WHERE is_active=0 and company_id=" . $get['company_id'] . " AND MONTH(attendance_date) = '" . $month . "' AND YEAR(attendance_date) = '" . $year . "'";
-        /**if($get['admin_type']!=1){
-            $tempdetails.=" AND employee_id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id IN (SELECT pay_area_id FROM payroll_area_admins WHERE emp_id = ".$get['emp_id']."))";
-        }**/
-
-        $tempdetailsdata = $callConfig->getAllRows($tempdetails); //holidays
-        $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=" . $get['company_id'] . " AND MONTH(holiday_date) = '" . $month . "' AND YEAR(holiday_date) = '" . $year . "'";
-        $holidaysdata = $callConfig->getAllRows($holidays); //holidays
-        $holidaysdatas = array();
-        foreach ($holidaysdata as $hvalue) {
-            $holidaysdatas[] = $hvalue->holiday_date;
-        }
-
-        $attendance_key_types = array();
-        $aktypesql = "SELECT key_short_code, leave_category_id FROM attendance_key_types WHERE is_active=0 and company_id=" . $get['company_id'] . " AND leave_category_id !=''";
-        $aktyperes = $callConfig->getAllRows($aktypesql); //holidays
-        foreach ($aktyperes as $valk) {
-            $attendance_key_types[$valk->key_short_code] = $valk->key_short_code;
-        }
-        foreach ($tempdetailsdata as $tempary) {
-            if ($tempary->attendance_key_short_code == 'A') {
-                $absentarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
-            } elseif ($tempary->attendance_key_short_code == 'P' || $tempary->attendance_key_short_code == 'Z') {
-                $presentarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
-            } elseif ($tempary->attendance_key_short_code == 'O') {
-                $offdayarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
-            } elseif (in_array($tempary->attendance_key_short_code, $attendance_key_types)) {
-                $leavearray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
-            }
-        }
-        $slctdate = date($get['year'] . "-" . $get['month'] . "-" . $get['monthstartday']);
-        $startdate = date("Y-m-d", strtotime($slctdate));
-        $enddate = date("Y-m-d", strtotime(HrConstants::PLUS_ONE_MONTH, strtotime($slctdate)));
-        $enddate = date("Y-m-d", strtotime(HrConstants::MINUS_ONE_DAYS, strtotime($enddate)));
-        $query = "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving FROM `employees` emp WHERE emp.company_id = '" . $get['company_id'] . "' AND emp.employee_type = 1 AND emp.is_active = 0 AND ( CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving <= '" . $enddate . "') THEN 1 WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END)= 1 AND (emp.hr_buddy = '" . $get['emp_id'] . "' OR emp.finance_buddy = '" . $get['emp_id'] . "' OR emp.admin_buddy = '" . $get['emp_id'] . "' OR emp.project_buddy = '" . $get['emp_id'] . "' OR emp.loc_buddy = '" . $get['emp_id'] . "' OR emp.reporting_manager_id = '" . $get['user_id'] . "' OR (emp.id IN (SELECT    pae.emp_id FROM pay_area_employees pae, payroll_area_admins paa WHERE pae.company_id = paa.company_id AND pae.company_id = emp.company_id AND    pae.pay_area_id = paa.pay_area_id AND pae.is_active = paa.is_active AND    pae.is_active = 0 AND paa.emp_id = '" . $get['emp_id'] . "' ))    OR ( CASE WHEN '1' = '" . $get['admin_type'] . "' THEN 1 END) = 1)";
-
-        /**if($get['admin_type']!=1){
-            $query.=" AND id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id IN (SELECT pay_area_id FROM payroll_area_admins WHERE emp_id = ".$get['emp_id']."))";
-        } **/
-        $empdatas = $callConfig->getAllRows($query);
-        foreach ($empdatas as $value) {
-            $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
-        }
-        $insdailyattendance = "INSERT INTO `employee_daily_attendances`(`shift_settings_id`,`company_id`, `employee_id`, `attendace_date`, `clock_in`, `check_in_type`, `check_out_type`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`,`attendance_key_short_code`) VALUES ";
-        $insdailyattendancedetails = "INSERT INTO `employee_daily_attendance_details`(`company_id`, `employee_id`, `attendace_date`, `clock_in`, `check_in_type`, `check_out_type`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
-
-        $returnarray['empidlist'] = $empidlist;
-        foreach ($empidlist as $ky => $emp) {
-            $start = new DateTime($startdate);
-            $end = new DateTime($enddate);
-            $emp_details = $shiftresarray[$ky];
-            $emp_shift_days = json_decode($shiftresarray[$ky]->working_days, 1);
-            while ($start <= $end) {
-                $date = $start->format('Y-m-d');
-                $dy = $start->format('l');
-                if ($emp['joining_date'] >= $date || ($emp['date_of_leaving'] <= $date && $emp['date_of_leaving'] != "")) {
-                    // Employee not yet joined or has left
-                } elseif (in_array($date, (array) $holidaysdatas)) {
-                    //holidays
-                } elseif (isset($absentarray[$ky][$date])) {
-                    //absent part
-                } elseif (isset($offdayarray[$ky][$date])) {
-                    $attendance_key_short_code = $offdayarray[$ky][$date]->attendance_key_short_code;
-                    $insdailyattendance .= "('" . $emp_details->id . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','" . $instarttime . "', '1', '1', '0:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
-                } elseif (isset($leavearray[$ky][$date])) {
-                    //leave part
-                    //$arrayleave = array('emp_id'=>$ky,'categorytype'=>$leavearray[$ky][$date]->leave_type_id,'leave_year'=>$get['year'],'company_id'=>$get['company_id']);
-                    //$getleaveid = $this->checkLeaveBalanceOrHalfDay($arrayleave);
-                    $halfdaysleave = 1;
-                    if ($leavearray[$ky][$date]->start_half_day == '0') {
-                        $halfdaysleave = 0.5;
-                        $attendance_key_short_code = $leavearray[$ky][$date]->attendance_key_short_code;
-                        $insdailyattendance .= "('" . $emp_details->id . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','10:00:00', '1', '1', '14:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
-                        $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','10:00:00', '1', '1', '14:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
-                    }
-                    if ($leavearray[$ky][$date]->leave_type_id != "") {
-                        $updatequeryleave = "UPDATE emp_leave_balances SET consumed_leaves=consumed_leaves+" . $halfdaysleave . ",updated_date = '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "',updated_by = '" . $get['user_id'] . "' WHERE employee_id =" . $ky . " AND leave_type='" . $leavearray[$ky][$date]->leave_type_id . "'";
-                        $updateleave = $callConfig->executeQuery($updatequeryleave);
-                    }
-                    $returnarray['emp_leave_balances'][] = $updateleave;
-                    $insert_leave_array = array('company_id' => $get['company_id'], 'employee_id' => $ky, 'leave_type_id' => $leavearray[$ky][$date]->leave_type_id, 'leave_from' => $date, 'leave_to' => $date, 'leave_days' => $halfdaysleave, 'start_half_day' => $leavearray[$ky][$date]->start_half_day, 'end_half_day' => $leavearray[$ky][$date]->end_half_day, 'created_by' => $get['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS), 'is_active' => '0', 'current_status' => '199');
-                    $insertleave = $callConfig->insertRecord('employee_leaves', $insert_leave_array);
-                    $returnarray['employee_leaves'][] = $insertleave;
-                } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1' && OFF_CHECK == '0')) {
-                    //off days
-                } else {
-                    $starttime = $presentarray[$ky][$date]->clock_in;
-                    $endtime = $presentarray[$ky][$date]->clock_out;
-                    $instarttime = $starttime != "" ? $starttime : '10:00:00';
-                    $outendtime = $endtime != "" ? $endtime : '18:00:00';
-                    //working part
-                    $attendance_key_short_code = $presentarray[$ky][$date]->attendance_key_short_code;
-                    $insdailyattendance .= "('" . $emp_details->id . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','" . $instarttime . "', '1', '1', '18:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
-                    $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','10:00:00', '1', '1', '" . $outendtime . "','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
-                }
-                $start->modify(HrConstants::PLUS_ONE_DAYS);
-            }
-        }
-        $insdailyattendance = substr($insdailyattendance, 0, -1);
-        $insdailyattendance .= " ON DUPLICATE KEY UPDATE updated_date ='" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "'";
-        $callConfig->executeQueryString($insdailyattendance);
-        $returnarray['employee_daily_attendances'][] = $insdailyattendance;
-        $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
-        $res1 = $callConfig->executeQueryString($insdailyattendancedetails);
-        $returnarray['employee_daily_attendance_details'][] = $res1;
-
-        $insertuserarray2 = array('company_id' => $get['company_id'], 'import_swap_in_out_id' => $lastid, 'month_year' => $get['month_year'], 'type' => 'S', 'user_id' => $get['user_id'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS));
-        $tapres = $callConfig->insertRecord('work_attendance_logs', $insertuserarray2);
-        $returnaray['work_attendance_logs'] = $tapres;
-
-
-        return $returnarray;
-
+        return $this->persistWorkAttendancesFromTemp($get, false);
     }
 
     public function inserttempattendaceform($get, $data)
     {
         global $callConfig;
-        $datee = str_replace('/', '-', $data['attendance_date']);
+        $datee = date("Y-m-d", strtotime(str_replace('/', '-', $data['attendance_date'])));
         $formdate = str_replace('/', '-', $data['leave_from']);
         $todate = str_replace('/', '-', $data['leave_to']);
         $absentfrom = str_replace('/', '-', $data['absent_from']);
         $absentto = str_replace('/', '-', $data['absent_to']);
-        $datee = date("Y-m-d", strtotime($datee));
-        $shift_check = SHIFT_CHECK; //1 meaning yes
-        $i = 0;
+        $shift_check = SHIFT_CHECK;
+
         if ($data['presentcheck'] == '3') {
             $start = new DateTime($datee);
             $end = new DateTime($datee);
@@ -472,7 +146,8 @@ public function getAttendanceData($data)
         }
         $month = $start->format('m');
         $year = $start->format('Y');
-        $attstc = "SELECT * FROM attendance_settings WHERE is_active=0 and company_id=" . $data['company_id'];
+
+        $attstc = HrConstants::SEL_ATTENDANCE_SETTINGS_BASE . $data['company_id'];
         $atsdata = $callConfig->getRow($attstc);
         $workingdays = json_decode($atsdata->working_days, 1);
 
@@ -480,53 +155,27 @@ public function getAttendanceData($data)
         $shiftres = $callConfig->getRow($shiftsql);
         $emp_shift_days = json_decode($shiftres->working_days, 1);
 
-        $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=" . $data['company_id'] . " AND MONTH(holiday_date) = '" . $month . "' AND YEAR(holiday_date) = '" . $year . "'";
-        $holidaysdata = $callConfig->getAllRows($holidays); //holidays
+        $holidays = HrConstants::SEL_HOLIDAY_DATE_BASE . $data['company_id'] . HrConstants::AND_MONTH_HOLIDAY_DATE_EQ . $month . HrConstants::AND_YEAR_HOLIDAY_DATE_EQ . $year . "'";
+        $holidaysdata = $callConfig->getAllRows($holidays);
         $holidaysdatas = array();
         foreach ($holidaysdata as $hvalue) {
             $holidaysdatas[] = $hvalue->holiday_date;
         }
+        $returnarray = array();
         $returnarray['holidaysdatas'] = $holidaysdatas;
         $returnarray['workingdays'] = $workingdays;
         $returnarray['emp_shift_days'] = $emp_shift_days;
+
         while ($start <= $end) {
             $date = $start->format('Y-m-d');
             $dy = $start->format('l');
             if (in_array($date, (array) $holidaysdatas) || (!in_array($dy, (array) $workingdays) && $shift_check == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1')) {
                 $returnarray['holidaynotworking'][] = $date;
             } else {
-                $query2 = "SELECT id FROM temp_attendance_details WHERE company_id = '" . $data['company_id'] . "'  AND attendance_date='" . $date . HrConstants::AND_EMPLOYEE_ID_EQ . $data['emp_id'];
-                $datas = $callConfig->getRow($query2);
-                $start_half_day = $data['start_half_day'] == "0" ? "0" : "1";
-                $end_half_day = $data['end_half_day'] == "0" ? "0" : "1";
-                $start_half_days = "";
-                $end_half_days = "";
-                $halfdaysleave = '1';
-                if ($start_half_day == '0' && date("Ymd", strtotime($formdate)) == date("Ymd", strtotime($date))) {
-                    $start_half_days = '0';
-                    $halfdaysleave = '0.5';
-                }
-                if ($end_half_day == '0' && date("Ymd", strtotime($todate)) == date("Ymd", strtotime($date))) {
-                    $end_half_days = '0';
-                    $halfdaysleave = '0.5';
-                }
-                if (isset($datas->id)) {
-                    $insert_array = array('shift_settings_id' => $shiftres->id, 'company_id' => $data['company_id'], 'employee_id' => $data['emp_id'], 'attendance_date' => $date, 'attendance_key_short_code' => $data['presentcheck'], 'leave_type_id' => $data['leave_type_id'], 'leave_from' => $date, 'leave_to' => $date, 'leave_days' => $halfdaysleave, 'start_half_day' => $start_half_days, 'end_half_day' => $end_half_days, 'is_active' => '0');
-                    $where = "id = '" . $datas->id . "'";
-                    if ($data['presentcheck'] == '3') {
-                        $insert_array['is_active'] = "";
-                    }
-                    $callConfig->updateRecord("temp_attendance_details", $insert_array, "", "", $where);
-                } else {
-                    if ($data['presentcheck'] != '3') {
-                        $insert_array = array('shift_settings_id' => $shiftres->id, 'company_id' => $data['company_id'], 'employee_id' => $data['emp_id'], 'attendance_date' => $date, 'attendance_key_short_code' => $data['presentcheck'], 'leave_type_id' => $data['leave_type_id'], 'leave_from' => $date, 'leave_to' => $date, 'leave_days' => $halfdaysleave, 'created_by' => $get['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS), 'is_active' => '0', 'current_status' => '0', 'start_half_day' => $start_half_days, 'end_half_day' => $end_half_days);
-                        $callConfig->insertRecord('temp_attendance_details', $insert_array);
-                    }
-                }
+                $this->saveTempAttendanceRecord($data, $shiftres, $date, $formdate, $todate, $get);
                 $returnarray['leavedate'][] = $date;
             }
             $start->modify(HrConstants::PLUS_ONE_DAYS);
-            $i++;
         }
         return $returnarray;
     }
@@ -580,8 +229,7 @@ public function getAttendanceData($data)
         global $callConfig;
 
         $importinoutsql = "SELECT id,file_name,start_date,end_date FROM import_swap_in_outs WHERE company_id = '" . $get['company_id'] . "' AND id = '" . $get['rid'] . HrConstants::AND_IS_ACTIVE_0_APOS;
-        $swapinout = $callConfig->getAllRows($importinoutsql);
-        $return['importinoutsql'] = $swapinout;
+        $return['importinoutsql'] = $callConfig->getAllRows($importinoutsql);
 
         $employee_terminationssql = "SELECT id,emp_id, employee_leaving_date FROM employee_terminations WHERE company_id = '" . $get['company_id'] . HrConstants::AND_IS_ACTIVE_0_APOS;
         $employee_terminationsres = $callConfig->getAllRows($employee_terminationssql);
@@ -591,174 +239,45 @@ public function getAttendanceData($data)
         }
         $return['employee_terminations'] = $employee_terminations;
 
-
-        $sql = "SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11`, `column12`, `column13`, `column14`, `column15`, `column16`, `column17`, `column18`, `column19`, `column20`, `column21`, `column22`, `column23`, `column24`, `column25`, `column26`, `column27`, `column28`, `column29`, `column30`, `column31`, `column32`, `column33`, `column34`, `column35`, `column36`, `column37`, `column38`, `column39`, `column40`, `column41`, `column42`, `column43`, `column44`, `column45`, `column46`, `column47`, `column48`, `column49`, `column50`, `column51`, `column52`, `column53`, `column54`, `column55`, `column56`, `column57`, `column58`, `column59`, `column60`, `column61`, `column62`, `column63`, `column64`, `column65`, `column66`, `column67`, `column68`, `column69` FROM import_swap_in_out_details WHERE company_id = '" . $get['company_id'] . "' AND import_swap_in_out_id = '" . $get['rid'] . HrConstants::AND_IS_ACTIVE_0_APOS;
+        $sql = HrConstants::SQL_SEL_IMPORT_SWAP_69_COLS . $get['company_id'] . HrConstants::AND_IMPORT_SWAP_IN_OUT_ID_EQ . $get['rid'] . HrConstants::AND_IS_ACTIVE_0_APOS;
         $imposrtfileres = $callConfig->getAllRows($sql);
         $query = "SELECT * FROM attendance_settings WHERE company_id={$get['company_id']} AND is_active=0 ORDER BY id ASC LIMIT 1";
         $data = $callConfig->getRow($query);
+        $working_days_arr = array();
         if ($data->working_days != '') {
             $working_days_arr = json_decode($data->working_days, 1);
         }
         $return['attendance_settings'] = $data;
 
-
         if ($get['import_type'] == "withoutattendancesetting") {
-            $empdetails = array();
-            $dates = $empid = array();
-            $notdates = array('column1', 'column2', 'column3');
-            foreach ($imposrtfileres[0] as $keystr => $getdate) {
-                if (!in_array($keystr, $notdates) && $getdate != "") {
-                    $dates[$keystr] = $getdate;
-                }
-            }
-            unset($imposrtfileres[0]);
-            foreach ($imposrtfileres as $importres) {
-                $empid[$importres->column2] = $importres->column2;
-                $offarray = $sundaycnt = $pressentcnt = $absenttcnt = $total_day = $halfdaycnt = $halfdayabsentcnt = $leavecnt = 0;
-                foreach ($dates as $field => $columns) {
-                    $total_day++;
-                    $dayName = date("l", strtotime($columns));
-
-                    if ($employee_terminations[$importres->column2] != "" && strtotime($employee_terminations[$importres->column2]) <= strtotime($columns)) {
-                        $absenttcnt++;
-                    } elseif ($importres->$field == "O") {
-                        $offarray++;
-                    } elseif ($importres->$field == "P") {
-                        $pressentcnt++;
-                    } elseif ($importres->$field == "S") {
-                        $leavecnt++;
-                    } elseif ($importres->$field == "A") {
-                        $absenttcnt++;
-                    } elseif ($importres->$field == "F") {
-                        $halfdaycnt++;
-                    } elseif ($importres->$field == "Z") {
-                        $halfdayabsentcnt++;
-                        $absenttcnt = $absenttcnt + 0.50;
-                        $pressentcnt = $pressentcnt + 0.50;
-                    } else {
-                        $empdetails[$importres->column2]['leave'][$importres->$field]++;
-                    }
-                    if (!in_array($dayName, $working_days_arr)) {
-                        $sundaycnt++;
-                    }
-                    $empdetails[$importres->column2]['offday_cnt'] = $offarray;
-                    $empdetails[$importres->column2]['sunday_cnt'] = $sundaycnt;
-                    $empdetails[$importres->column2]['present_cnt'] = $pressentcnt;
-                    $empdetails[$importres->column2]['absent_cnt'] = $absenttcnt;
-                    $empdetails[$importres->column2]['total_day_cnt'] = $total_day;
-                    $empdetails[$importres->column2]['total_half_day_cnt'] = $halfdaycnt;
-                    $empdetails[$importres->column2]['total_half_day_absent_cnt'] = $halfdayabsentcnt;
-                }
-            }
-            $return['import_swap_in_out_details'] = $empdetails;
-            $empids = implode(",", $empid);
-            $empsql = "SELECT id,display_name,emp_code,email_id,joining_date FROM employees WHERE company_id = '" . $get['company_id'] . "' AND id IN(" . $empids . ") AND is_active = 0";
-            $empres = $callConfig->getAllRows($empsql);
-            foreach ($empres as $empress) {
-                $emplist[$empress->id] = $empress;
-            }
-            $return['empsql'] = $empsql;
-            $return['employees'] = $emplist;
-
-
-            $empleavesql = "SELECT elb.id, elb.employee_id, elb.applicable_leaves, lt.leave_category_id, lc.name, akt.key_short_code FROM emp_leave_balances elb, leave_types lt, leave_categories lc, attendance_key_types akt WHERE elb.company_id = '" . $get['company_id'] . "' AND elb.company_id = lt.company_id AND elb.company_id = lc.company_id AND elb.company_id = akt.company_id AND elb.leave_type = lt.id AND lt.leave_category_id = lc.id AND lc.id = akt.leave_category_id AND employee_id IN(" . $empids . ") AND elb.is_active = lt.is_active AND elb.is_active = lc.is_active AND elb.is_active = akt.is_active AND elb.is_active = '0' GROUP BY employee_id, leave_type";
-            $empleaveres = $callConfig->getAllRows($empleavesql);
-            foreach ($empleaveres as $empress) {
-                $empleavelist[$empress->employee_id][$empress->key_short_code] = $empress;
-            }
-            $return['emp_leave_balances'] = $empleavelist;
-
-
-            $leave_categoriessql = "SELECT lc.id, lc.name, akt.key_short_code FROM leave_categories lc, attendance_key_types akt WHERE lc.company_id = '" . $get['company_id'] . "' AND lc.company_id = akt.company_id AND lc.id = akt.leave_category_id AND lc.is_active = '0'";
-            $leave_categoriesres = $callConfig->getAllRows($leave_categoriessql);
-            foreach ($leave_categoriesres as $leavcat) {
-                $leave_categories[$leavcat->key_short_code] = $leavcat;
-            }
-            $return['leave_categories'] = $leave_categories;
-
-
+            $withoutSettings = $this->calculateWithoutSettingsAttendance($imposrtfileres, $employee_terminations, $working_days_arr, $get['company_id']);
+            $return = array_merge($return, $withoutSettings);
         } else {
             $return['import_swap_in_out_details'] = $imposrtfileres;
         }
-
-
 
         return $return;
     }
     public function insertTempImportSwapInOut($get)
     {
         global $callConfig;
-        $sql = "SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11`, `column12`, `column13`, `column14`, `column15`, `column16`, `column17`, `column18`, `column19`, `column20`, `column21`, `column22`, `column23`, `column24`, `column25`, `column26`, `column27`, `column28`, `column29`, `column30`, `column31`, `column32`, `column33`, `column34`, `column35`, `column36`, `column37`, `column38`, `column39`, `column40`, `column41`, `column42`, `column43`, `column44`, `column45`, `column46`, `column47`, `column48`, `column49`, `column50`, `column51`, `column52`, `column53`, `column54`, `column55`, `column56`, `column57`, `column58`, `column59`, `column60`, `column61`, `column62`, `column63`, `column64`, `column65`, `column66`, `column67`, `column68`, `column69` FROM import_swap_in_out_details WHERE company_id = '" . $get['company_id'] . "' AND import_swap_in_out_id = '" . $get['rid'] . HrConstants::AND_IS_ACTIVE_0_APOS;
+        $sql = HrConstants::SQL_SEL_IMPORT_SWAP_69_COLS . $get['company_id'] . HrConstants::AND_IMPORT_SWAP_IN_OUT_ID_EQ . $get['rid'] . HrConstants::AND_IS_ACTIVE_0_APOS;
         $res = $callConfig->getAllRows($sql);
         $empsql = "SELECT id,display_name,ref_emp_code FROM employees WHERE company_id = '" . $get['company_id'] . HrConstants::AND_IS_ACTIVE_0_APOS;
         $empres = $callConfig->getAllRows($empsql);
+        $emplist = array();
         foreach ($empres as $empress) {
             $emplist[$empress->ref_emp_code] = $empress;
         }
         $importinoutsql = "SELECT id,file_name,start_date,end_date FROM import_swap_in_outs WHERE company_id = '" . $get['company_id'] . "'  AND is_active = 0";
         $importinoutres = $callConfig->getRow($importinoutsql);
-        $departmentwithemp = array();
-        $deaprtname = "";
-        $empnamed = "";
-        $return['res'] = $sql;
-        foreach ($res as $rows) {
-            if (strpos(strtoupper(trim($rows->column1)), strtoupper("Department")) !== false) {
-                $deaprtname = str_replace('|', '_', str_replace(' ', '_', strtolower(trim($rows->column4))));
-            } else {
-                if ($deaprtname != "" && $rows->column1 != "") {
-                    if (strpos(strtoupper(trim($rows->column1)), strtoupper("Employee")) !== false) {
-                        $explode = explode(":", $rows->column4);
-                        $empnamed = str_replace(' ', '_', strtoupper(trim($explode[0])));
-                    }
-                    if ($empnamed != "" && $rows->column1 != "") {
-                        $departmentwithemp[$empnamed][] = $rows;
-                    }
-                }
-            }
-        }
-        $return['total_emp_record_excel'] = count((array) $departmentwithemp);
-        $dateaarray = array('01' => 'column3', '02' => 'column4', '03' => 'column6', '04' => 'column7', '05' => 'column8', '06' => 'column9', '07' => 'column11', '08' => 'column12', '09' => 'column14', '10' => 'column15', '11' => 'column16', '12' => 'column17', '13' => 'column18', '14' => 'column19', '15' => 'column20', '16' => 'column21', '17' => 'column22', '18' => 'column23', '19' => 'column24', '20' => 'column25', '21' => 'column16', '22' => 'column27', '23' => 'column28', '24' => 'column29', '25' => 'column30', '26' => 'column32', '27' => 'column33', '28' => 'column34', '29' => 'column35', '30' => 'column36', '31' => 'column37');
-        $insdailyattendancedetails = "INSERT INTO `temp_attendance_details`(`company_id`, `employee_id`, `attendance_date`, `attendance_key_short_code`, `clock_in`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
-        $notinsertattendanceempcount = 0;
-        $attendanceempcount = 0;
-        $all_emp = $insert_emp = $not_insert_emp = array();
-        foreach ($departmentwithemp as $empcodekey => $value) {
-            $empid = $emplist[$empcodekey]->id;
-            $all_emp[$empcodekey] = $empcodekey;
-            if (trim($empid) != "") {
-                $attendanceempcount++;
-                $insert_emp[$empcodekey] = $empcodekey;
-                $start = new DateTime($importinoutres->start_date);
-                $end = new DateTime($importinoutres->end_date);
-                while ($start <= $end) {
-                    $date = $start->format('Y-m-d');
-                    $dy = $start->format('d');
-                    $dateaarray1 = $dateaarray[$dy];
-                    $intime = $value['2']->$dateaarray1;
-                    $outtime = $value['3']->$dateaarray1;
-                    if ($value['1']->$dateaarray1 == 'P' && $intime != "" && $outtime != "") {
-                        $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $empid . "', '" . $date . "','3','" . $intime . "','" . $outtime . "','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
-                    } else {
-                        $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $empid . "', '" . $date . "','1','" . $intime . "','" . $outtime . "','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
-                    }
-                    $start->modify(HrConstants::PLUS_ONE_DAYS);
-                }
-            } else {
-                $notinsertattendanceempcount++;
-                $not_insert_emp[$empcodekey] = $empcodekey;
-            }
-        }
-        $updaterecord = array('all_emp' => json_encode((array) $all_emp), 'insert_emp' => json_encode((array) $insert_emp), 'not_insert_emp' => json_encode((array) $not_insert_emp));
-        $return['updateisio'][] = $callConfig->updateRecord('import_swap_in_outs', $updaterecord, 'id', $get['rid']);
 
-        $return['insert_temp_attendance_emp_count'] = $attendanceempcount;
-        $return['not_insert_temp_attendance_emp_count'] = $notinsertattendanceempcount;
-        $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
-        $insdailyattendancedetails .= " ON DUPLICATE KEY UPDATE clock_in = VALUES(clock_in),clock_out = VALUES(clock_out),attendance_key_short_code = VALUES(attendance_key_short_code)";
-        $return['employee_daily_attendance_details_sql'] = $insdailyattendancedetails;
-        $res1 = $callConfig->executeQueryString($insdailyattendancedetails);
-        $return['employee_daily_attendance_details'] = $res1;
-        return $return;
+        $departmentwithemp = $this->parseDepartmentEmployeesFromImport($res);
+        $return['res'] = $sql;
+        $return['total_emp_record_excel'] = count((array) $departmentwithemp);
+
+        $batchResult = $this->buildTempImportAttendanceBatch($get, $departmentwithemp, $emplist, $importinoutres);
+        return array_merge($return, $batchResult);
     }
 
 
@@ -766,7 +285,7 @@ public function getAttendanceData($data)
     {
         global $callConfig;
         $return['post'] = $post;
-        $sql = "SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11`, `column12`, `column13`, `column14`, `column15`, `column16`, `column17`, `column18`, `column19`, `column20`, `column21`, `column22`, `column23`, `column24`, `column25`, `column26`, `column27`, `column28`, `column29`, `column30`, `column31`, `column32`, `column33`, `column34`, `column35`, `column36`, `column37`, `column38`, `column39`, `column40`, `column41`, `column42`, `column43`, `column44`, `column45`, `column46`, `column47`, `column48`, `column49`, `column50`, `column51`, `column52`, `column53`, `column54`, `column55`, `column56`, `column57`, `column58`, `column59`, `column60`, `column61`, `column62`, `column63`, `column64`, `column65`, `column66`, `column67`, `column68`, `column69` FROM import_swap_in_out_details WHERE company_id = '" . $get['company_id'] . "' AND import_swap_in_out_id = '" . $post['rid'] . HrConstants::AND_IS_ACTIVE_0_APOS;
+        $sql = HrConstants::SQL_SEL_IMPORT_SWAP_69_COLS . $get['company_id'] . HrConstants::AND_IMPORT_SWAP_IN_OUT_ID_EQ . $post['rid'] . HrConstants::AND_IS_ACTIVE_0_APOS;
         $imposrtfileres = $callConfig->getAllRows($sql);
         $return['import_swap_in_out_details'] = $imposrtfileres;
         $dates = $empid = array();
@@ -784,6 +303,7 @@ public function getAttendanceData($data)
         $empids = implode(",", $empid);
         $empleavesql = "SELECT  elb.employee_id,  elb.leave_type ,lt.leave_category_id, akt.key_short_code FROM emp_leave_balances elb, leave_types lt, leave_categories lc, attendance_key_types akt WHERE elb.company_id = '" . $post['company_id'] . "' AND elb.company_id = lt.company_id AND elb.company_id = lc.company_id AND elb.company_id = akt.company_id AND elb.leave_type = lt.id AND lt.leave_category_id = lc.id AND lc.id = akt.leave_category_id AND employee_id IN(" . $empids . ") AND elb.is_active = lt.is_active AND elb.is_active = lc.is_active AND elb.is_active = akt.is_active AND elb.is_active = '0' GROUP BY employee_id, leave_type";
         $empleaveres = $callConfig->getAllRows($empleavesql);
+        $empleavelist = array();
         foreach ($empleaveres as $empress) {
             $empleavelist[$empress->employee_id][$empress->key_short_code] = $empress->leave_type;
         }
@@ -797,49 +317,41 @@ public function getAttendanceData($data)
             $employee_terminations[$empterm->emp_id] = $empterm->employee_leaving_date;
         }
 
-
         $insdailyattendancedetails = "INSERT INTO `temp_attendance_details`(`company_id`, `employee_id`, `attendance_date`,`leave_type_id`,`attendance_key_short_code`, `leave_from`, `leave_to`, `leave_days`, `start_half_day`, `end_half_day`, `is_active`, `current_status`,`created_date`, `created_by`,`clock_in`,`clock_out`) VALUES ";
+        $lastField = '';
         foreach ($imposrtfileres as $importres) {
             $empid[$importres->column2] = $importres->column2;
-            $total_day = 0;
             foreach ($dates as $field => $dateval) {
-                $total_day++;
+                $lastField = $field;
                 $attendance_date = date("Y-m-d", strtotime($dateval));
-                if ($employee_terminations[$importres->column2] != "" && strtotime($employee_terminations[$importres->column2]) <= strtotime($dateval)) {
-                    $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','','A','','','','','','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . "','',''),";
-
-                } elseif (!in_array($importres->$field, $notleaveattendancekey)) {  // leave insert
-                    $leave_type_id = $empleavelist[$importres->column2][$importres->$field];
+                if (isset($employee_terminations[$importres->column2]) && $employee_terminations[$importres->column2] != "" && strtotime($employee_terminations[$importres->column2]) <= strtotime($dateval)) {
+                    $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','','A','','','','','','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . HrConstants::VAL_EMPTY_THREE_STR;
+                } elseif (!in_array($importres->$field, $notleaveattendancekey)) {
+                    $leave_type_id = $empleavelist[$importres->column2][$importres->$field] ?? '';
                     $return['column2'][] = $importres->column2;
                     $return['field'][] = $importres->$field;
                     $return['leave_type_id'][] = $leave_type_id;
-                    $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','" . $leave_type_id . "','" . $importres->$field . "','" . $attendance_date . "','" . $attendance_date . "','1','1','1','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . "','',''),";
+                    $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','" . $leave_type_id . "','" . $importres->$field . "','" . $attendance_date . "','" . $attendance_date . "','1','1','1','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . HrConstants::VAL_EMPTY_THREE_STR;
                     $return['leave_type_id_sql'][] = $insdailyattendancedetails;
                     $return['leave_insert'][] = $importres->column2 . " -- " . $importres->$field;
-                } else { // normal insert
-
-                    if ($importres->$field == "F") {
-                        $leave_type_id = $empleavelist[$importres->column2]['C'];
-                        $return['column2'][] = $importres->column2;
-                        $return['field'][] = "C";
-                        $return['leave_type_id'][] = $leave_type_id;
-                        $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','" . $leave_type_id . "','C','" . $attendance_date . "','" . $attendance_date . "','1','0','1','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . "','',''),";
-                        $return['leave_type_id_sql'][] = $insdailyattendancedetails;
-                        $return['leave_with_half_day_insert'][] = $importres->column2 . " -- " . $importres->$field;
-
-                    } elseif ($importres->$field == "Z") {
-
-                        $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','','" . $importres->$field . "','','','','','','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . "','10:00:00','14:00:00'),";
-                    } else {
-                        $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','','" . $importres->$field . "','','','','','','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . "','',''),";
-                        $return['all_insert'][] = $importres->column2 . " -- " . $importres->$field;
-                    }
-
+                } elseif ($importres->$field == "F") {
+                    $leave_type_id = $empleavelist[$importres->column2]['C'] ?? '';
+                    $return['column2'][] = $importres->column2;
+                    $return['field'][] = "C";
+                    $return['leave_type_id'][] = $leave_type_id;
+                    $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','" . $leave_type_id . "','C','" . $attendance_date . "','" . $attendance_date . "','1','0','1','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . HrConstants::VAL_EMPTY_THREE_STR;
+                    $return['leave_type_id_sql'][] = $insdailyattendancedetails;
+                    $return['leave_with_half_day_insert'][] = $importres->column2 . " -- " . $importres->$field;
+                } elseif ($importres->$field == "Z") {
+                    $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','','" . $importres->$field . "','','','','','','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . "','10:00:00','14:00:00'),";
+                } else {
+                    $insdailyattendancedetails .= "('" . $post['company_id'] . "', '" . $importres->column2 . "', '" . $attendance_date . "','','" . $importres->$field . "','','','','','','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $post['user_id'] . HrConstants::VAL_EMPTY_THREE_STR;
+                    $return['all_insert'][] = $importres->column2 . " -- " . $importres->$field;
                 }
             }
         }
         $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
-        $insdailyattendancedetails .= " ON DUPLICATE KEY UPDATE attendance_key_short_code = '" . $importres->$field . "'";
+        $insdailyattendancedetails .= " ON DUPLICATE KEY UPDATE attendance_key_short_code = '" . ($importres->$lastField ?? '') . "'";
         $return['employee_daily_attendance_details_sql'] = $insdailyattendancedetails;
         $callConfig->executeQueryString($insdailyattendancedetails);
         $insertuserarray2 = array('company_id' => $post['company_id'], 'import_swap_in_out_id' => $post['rid'], 'month_year' => $post['month_year'], 'type' => 'R', 'user_id' => $post['user_id'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $post['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS));
@@ -888,55 +400,25 @@ public function getAttendanceData($data)
 
         $query = "SELECT * FROM `leave_type_levels` WHERE company_id = " . $get['company_id'] . HrConstants::AND_IS_ACTIVE_0;
         $subleavedatas = $callConfig->getAllRows($query);
+        $sunmain = array();
         foreach ($subleavedatas as $subleavedat) {
             $sunmain[$subleavedat->leave_type_id] = (array) $subleavedat;
         }
 
         $query = "SELECT * FROM `filter_tables` WHERE company_id = " . $get['company_id'] . " AND  `application_tablename` = 'leave_types' AND is_active = 0";
         $filtdata = $callConfig->getAllRows($query);
+        $fdata = array();
         foreach ($filtdata as $fltdata) {
             $fdata[$fltdata->transaction_id] = (array) $fltdata;
         }
         $maindata = array();
         foreach ($leavedatas as $leavedata) {
-            $cond = array();
-            $lscond = array();
-            $checks = $fdata[$leavedata->id];
-            $listcond = $checks['filter_condition'];
-            $divdconds = explode("&", $listcond);
-            foreach ($divdconds as $divdcond) {
-                $codd = explode("=", $divdcond);
-                $lscond[$codd['0']] = $codd['1'];
-                $cond[] = $lscond;
-            }
-            foreach ($cond as $wcond) {
-                if (count((array) $cond) == 1 && isset($wcond['check']) && $wcond['check'] == 1) {
+            $checks = $fdata[$leavedata->id] ?? null;
+            if ($checks && isset($checks['filter_condition'])) {
+                if ($this->doesLeaveConditionMatch($checks['filter_condition'], $empdata)) {
                     $maindata[] = $leavedata;
-                    break;
-                } else {
-                    if (isset($wcond['department_id']) && $wcond['department_id'] != "" && $wcond['department_id'] == $empdata->department_id) {
-                        $maindata[] = $leavedata;
-                        break;
-                    }
-                    if (isset($wcond['designation_id']) && $wcond['designation_id'] != "" && $wcond['designation_id'] == $empdata->designation_id) {
-                        $maindata[] = $leavedata;
-                        break;
-                    }
-                    if (isset($wcond['location_id']) && $wcond['location_id'] != "" && $wcond['location_id'] == $empdata->location_id) {
-                        $maindata[] = $leavedata;
-                        break;
-                    }
-                    if (isset($wcond['gender']) && $wcond['gender'] != "" && $wcond['gender'] == $empdata->gender) {
-                        $maindata[] = $leavedata;
-                        break;
-                    }
-                    if (isset($wcond['employee_type']) && $wcond['employee_type'] != "" && $wcond['employee_type'] == $empdata->employee_type) {
-                        $maindata[] = $leavedata;
-                        break;
-                    }
                 }
             }
-
         }
         return array('main' => $maindata, 'sub' => $sunmain);
     }
@@ -1033,6 +515,633 @@ public function getAttendanceData($data)
         }
         return $res;
     }
+    private function buildAttendanceEmployeeQuery($get, $emp_list, $startdate, $enddate, $pay_area_id = null)
+    {
+        $hasNoList = empty($emp_list);
+        if ($pay_area_id !== null) {
+            $hasNoList = (count((array) $emp_list) == 0 && $pay_area_id == '');
+        }
+
+        if ($hasNoList) {
+            return HrConstants::SEL_ACTIVE_REGULAR_EMPLOYEES_BASE . $get['company_id'] . HrConstants::SQL_EMP_ACTIVE_LEAVING_CASE . $enddate . HrConstants::SQL_EMP_ACTIVE_STATUS_CASE . $get['emp_id'] . HrConstants::OR_EMP_FINANCE_BUDDY . $get['emp_id'] . HrConstants::OR_EMP_ADMIN_BUDDY . $get['emp_id'] . HrConstants::OR_EMP_PROJECT_BUDDY . $get['emp_id'] . HrConstants::OR_EMP_LOC_BUDDY . $get['emp_id'] . HrConstants::OR_EMP_REPORTING_MGR . $get['user_id'] . HrConstants::OR_PAY_AREA_ADMIN_SUBQUERY . $get['emp_id'] . HrConstants::OR_CASE_ADMIN_TYPE . $get['admin_type'] . HrConstants::THEN_1_END_EQ_1;
+        }
+
+        $liemp = implode(",", (array) $emp_list);
+        return "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving FROM `employees` WHERE company_id = '" . $get['company_id'] . "' AND employee_type = 1 AND joining_date <= '" . $enddate . "' AND (date_of_leaving >= '" . $startdate . "' OR date_of_leaving IS NULL) AND id IN(" . $liemp . ")";
+    }
+
+    private function fetchAttendanceLookupData($get, $month, $year)
+    {
+        global $callConfig;
+        $company_id = $get['company_id'];
+
+        $shiftsql = HrConstants::SEL_EMP_SHIFTS_BASE . $company_id;
+        $shiftres = $callConfig->getAllRows($shiftsql);
+        $shiftresarray = array();
+        foreach ($shiftres as $shiftress) {
+            $shiftresarray[$shiftress->emp_id] = $shiftress;
+        }
+
+        $attstc = HrConstants::SEL_ATTENDANCE_SETTINGS_BASE . $company_id;
+        $atsdata = $callConfig->getRow($attstc);
+        $workingdays = json_decode($atsdata->working_days, 1);
+
+        $shiftcatsql = "SELECT id, shift_name, clock_in, clock_out FROM shifts WHERE is_active = 0 AND company_id=" . $company_id;
+        $shiftcatres = $callConfig->getAllRows($shiftcatsql);
+
+        $shift = array();
+        $shiftkeys = "SELECT id, key_short_code, display_value, color_code, key_name FROM attendance_key_types WHERE company_id=" . $company_id . " AND leave_category_id IS NULL AND is_active=0";
+        $shiftkeysdata = $callConfig->getAllRows($shiftkeys);
+        foreach ($shiftkeysdata as $svalue) {
+            $shift[$svalue->key_short_code] = (array) $svalue;
+        }
+
+        $attkey = "SELECT lc.id, lc.name, akt.key_short_code, akt.display_value, akt.color_code, akt.key_name FROM leave_categories lc, attendance_key_types akt WHERE lc.company_id = '" . $company_id . "' AND lc.company_id = akt.company_id AND lc.id = akt.leave_category_id AND lc.is_active = akt.is_active AND lc.is_active = '0'";
+        $attkeyres = $callConfig->getAllRows($attkey);
+        foreach ($attkeyres as $svalue) {
+            $shift[$svalue->key_short_code] = (array) $svalue;
+        }
+
+        $attendancesql = "SELECT attendace_date,employee_id,attendance_key_short_code FROM `employee_daily_attendances` WHERE is_active=0 and company_id=" . $company_id . HrConstants::AND_MONTH_ATTENDACE_DATE_EQ . $month . HrConstants::AND_YEAR_ATTENDACE_DATE_EQ . $year . "'";
+        $attendanceres = $callConfig->getAllRows($attendancesql);
+        $attendacnearray = array();
+        foreach ($attendanceres as $attendancere) {
+            $attendacnearray[$attendancere->employee_id][$attendancere->attendace_date] = $attendancere;
+        }
+
+        $leavetypesql = "SELECT lt.id, lc.name, akt.key_short_code FROM leave_types lt, leave_categories lc, attendance_key_types akt WHERE lt.company_id = '" . $company_id . "' AND lt.company_id = lc.company_id AND lt.company_id= akt.company_id AND lt.leave_category_id = lc.id AND lc.id = akt.leave_category_id AND lt.is_active = 0 AND lt.is_active = lc.is_active AND lt.is_active= akt.is_active";
+        $leavetypesres = $callConfig->getAllRows($leavetypesql);
+        $leavetype = array();
+        foreach ($leavetypesres as $ltype) {
+            $leavetype[$ltype->id] = $ltype->key_short_code;
+        }
+
+        $leavessql = "select employee_id,leave_from,leave_to,leave_type_id,start_half_day,end_half_day,datelist
+        from employee_leaves,
+        (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) datelist from
+        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
+        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
+        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
+        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
+        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) as v
+        where datelist>=leave_from and datelist <=leave_to AND ((MONTH(leave_from) = '" . $month . "' AND YEAR(leave_from) = '" . $year . "') OR (MONTH(leave_to) = '" . $month . "' AND YEAR(leave_to) = '" . $year . "') )";
+        $leavesdetails = $callConfig->getAllRows($leavessql);
+        $leavesdetailsarray = array();
+        foreach ($leavesdetails as $leavesdetail) {
+            $leavesdetailsarray[$leavesdetail->employee_id][$leavesdetail->datelist] = array('type' => $leavesdetail->leave_type_id, 'start_half_day' => $leavesdetail->start_half_day, 'end_half_day' => $leavesdetail->end_half_day);
+        }
+
+        $holidays = HrConstants::SEL_HOLIDAY_DATE_BASE . $company_id . HrConstants::AND_MONTH_HOLIDAY_DATE_EQ . $month . HrConstants::AND_YEAR_HOLIDAY_DATE_EQ . $year . "'";
+        $holidaysdata = $callConfig->getAllRows($holidays);
+        $holidaysdatas = array();
+        foreach ($holidaysdata as $hvalue) {
+            $holidaysdatas[] = $hvalue->holiday_date;
+        }
+
+        $checkupdate = "SELECT id FROM `employee_daily_attendances` WHERE is_active='0' and company_id=" . $company_id . HrConstants::AND_MONTH_ATTENDACE_DATE_EQ . $month . HrConstants::AND_YEAR_ATTENDACE_DATE_EQ . $year . "'";
+        if (($get['admin_type'] ?? '') != 1) {
+            $checkupdate .= " AND employee_id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id IN (SELECT pay_area_id FROM payroll_area_admins WHERE emp_id = " . ($get['emp_id'] ?? 0) . "))";
+        }
+        $checkupdates = $callConfig->getRow($checkupdate);
+
+        $tempdetails = "SELECT employee_id,attendance_date,attendance_key_short_code,start_half_day,end_half_day,clock_in,clock_out FROM temp_attendance_details WHERE is_active='0' and company_id=" . $company_id . HrConstants::AND_MONTH_ATTENDANCE_DATE_EQ . $month . HrConstants::AND_YEAR_ATTENDANCE_DATE_EQ . $year . "'";
+        $tempdetailsdata = $callConfig->getAllRows($tempdetails);
+        $tempdetailary = array();
+        foreach ($tempdetailsdata as $tempary) {
+            $tempdetailary[$tempary->employee_id][$tempary->attendance_date] = array("date" => $tempary->attendance_date, "type" => $tempary->attendance_key_short_code, "start_half_day" => $tempary->start_half_day, "end_half_day" => $tempary->end_half_day, 'clock_in' => $tempary->clock_in, 'clock_out' => $tempary->clock_out);
+        }
+
+        return [
+            'shiftresarray' => $shiftresarray,
+            'atsdata' => $atsdata,
+            'workingdays' => $workingdays,
+            'shiftcatres' => $shiftcatres,
+            'shift' => $shift,
+            'attendacnearray' => $attendacnearray,
+            'leavetype' => $leavetype,
+            'leavesdetailsarray' => $leavesdetailsarray,
+            'holidaysdatas' => $holidaysdatas,
+            'checkupdates' => $checkupdates,
+            'tempdetailary' => $tempdetailary,
+        ];
+    }
+
+    private function buildAttendanceEmpIdList($empdatas, $shiftresarray, $shift_check, $shift_category)
+    {
+        $empidlist = array();
+        foreach ($empdatas as $value) {
+            if ($shift_check == '1' && $shift_category != "") {
+                if (isset($shiftresarray[$value->id]) && $shiftresarray[$value->id]->id == $shift_category) {
+                    $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'emp_code' => $value->emp_code, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
+                }
+            } else {
+                $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'emp_code' => $value->emp_code, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
+            }
+        }
+        return $empidlist;
+    }
+
+    private function generateEmployeeAttendanceTimesheet($empidlist, $startdate, $enddate, $lookups, &$retrunarray)
+    {
+        $checkupdates = $lookups['checkupdates'];
+        $holidaysdatas = $lookups['holidaysdatas'];
+        $workingdays = $lookups['workingdays'];
+        $shiftresarray = $lookups['shiftresarray'];
+        $shift = $lookups['shift'];
+        $leavesdetailsarray = $lookups['leavesdetailsarray'];
+        $leavetype = $lookups['leavetype'];
+        $tempdetailary = $lookups['tempdetailary'];
+        $attendacnearray = $lookups['attendacnearray'];
+
+        $shift_check = SHIFT_CHECK;
+        $timeshetetrys = array();
+        $discrepancy = array();
+        $monthworkignday = array();
+        $actualworkingday = array();
+        $alldate = array();
+        $notleaveattendancekey = array('P', 'R', 'A', 'H', 'O', 'Z');
+        $workingdayattendancekey = array('P', 'O');
+        $i = 0;
+
+        $isUpdate = isset($checkupdates->id);
+        $retrunarray['valuedisplaytype'] = $isUpdate ? "update" : "insert";
+
+        foreach ($empidlist as $ky => $emp) {
+            $monthworkingdays = 0;
+            $actualworkingdays = 0;
+            $start = new DateTime($startdate);
+            $end = new DateTime($enddate);
+            $dates = array();
+            $timeshettempoyee = array();
+            $emp_shift_days = isset($shiftresarray[$ky]) ? json_decode($shiftresarray[$ky]->working_days, 1) : array();
+
+            while ($start <= $end) {
+                $date = $start->format('Y-m-d');
+                $dy = $start->format('l');
+
+                if ($isUpdate) {
+                    if (in_array($date, (array) $holidaysdatas)) {
+                        $dates[$date] = array('day' => 'H', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['H']['color_code'] ?? '', 'display_value' => $shift['H']['display_value'] ?? '');
+                    } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1' && OFF_CHECK == '0')) {
+                        $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['O']['color_code'] ?? '', 'display_value' => $shift['O']['display_value'] ?? '');
+                    } elseif (isset($leavesdetailsarray[$ky][$date])) {
+                        $monthworkingdays++;
+                        $actualworkingdays++;
+                        $leavtypedetail = $leavesdetailsarray[$ky][$date];
+                        $leaveshortcode = $leavetype[$leavtypedetail['type']] ?? '';
+                        $dates[$date] = array('day' => $leaveshortcode, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift[$leaveshortcode]['color_code'] ?? '', 'display_value' => $shift[$leaveshortcode]['display_value'] ?? '', 'strthalfday' => $tempdetailary[$ky][$date]['start_half_day'] ?? '', 'endthalfday' => $tempdetailary[$ky][$date]['end_half_day'] ?? '', 'working_color' => $shift[$leaveshortcode]['color_code'] ?? '');
+                        $discrepancy[$ky] = $emp;
+                    } elseif (isset($attendacnearray[$ky][$date])) {
+                        $shortkey = $attendacnearray[$ky][$date];
+                        if ($shortkey->attendance_key_short_code == "O") {
+                            $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['O']['color_code'] ?? '', 'display_value' => $shift['O']['display_value'] ?? '');
+                        } elseif ($shortkey->attendance_key_short_code == "Z") {
+                            $dates[$date] = array('day' => 'Z', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['Z']['color_code'] ?? '', 'display_value' => $shift['Z']['display_value'] ?? '', 'working_color' => $shift['Z']['color_code'] ?? '');
+                        } else {
+                            $monthworkingdays++;
+                            $actualworkingdays++;
+                            $dates[$date] = array('day' => 'P', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['P']['color_code'] ?? '', 'display_value' => $shift['P']['display_value'] ?? '');
+                        }
+                    } else {
+                        $dates[$date] = array('day' => 'A', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['A']['color_code'] ?? '', 'display_value' => $shift['A']['display_value'] ?? '');
+                        $discrepancy[$ky] = $emp;
+                    }
+                } else {
+                    if ($emp['joining_date'] >= $date || ($emp['date_of_leaving'] <= $date && $emp['date_of_leaving'] != "")) {
+                        $dates[$date] = array('day' => 'A', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['A']['color_code'] ?? '', 'display_value' => $shift['A']['display_value'] ?? '');
+                    } elseif (in_array($date, (array) $holidaysdatas)) {
+                        $dates[$date] = array('day' => 'H', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['H']['color_code'] ?? '', 'display_value' => $shift['H']['display_value'] ?? '');
+                    } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1' && OFF_CHECK == '0')) {
+                        $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['O']['color_code'] ?? '', 'display_value' => $shift['O']['display_value'] ?? '');
+                    } elseif (isset($tempdetailary[$ky][$date]) && $tempdetailary[$ky][$date] != "") {
+                        $clockintime = $tempdetailary[$ky][$date]['clock_in'];
+                        $clockouttime = $tempdetailary[$ky][$date]['clock_out'];
+                        $discrepancy[$ky] = $emp;
+                        $attendance_key_short_code = $tempdetailary[$ky][$date]['type'];
+
+                        if (!in_array($attendance_key_short_code, $notleaveattendancekey)) {
+                            $actualworkingdays++;
+                            $monthworkingdays++;
+                            $dates[$date] = array('day' => $attendance_key_short_code, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift[$attendance_key_short_code]['color_code'] ?? '', 'display_value' => $shift[$attendance_key_short_code]['display_value'] ?? '', 'strthalfday' => $tempdetailary[$ky][$date]['start_half_day'] ?? '', 'endthalfday' => $tempdetailary[$ky][$date]['end_half_day'] ?? '', 'working_color' => $shift[$attendance_key_short_code]['color_code'] ?? '');
+                        } else {
+                            if (in_array($attendance_key_short_code, $workingdayattendancekey)) {
+                                $monthworkingdays++;
+                                if ($attendance_key_short_code != 'O') {
+                                    $actualworkingdays++;
+                                }
+                            }
+                            $dates[$date] = array('day' => $attendance_key_short_code, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift[$attendance_key_short_code]['color_code'] ?? '', 'display_value' => $shift[$attendance_key_short_code]['display_value'] ?? '', 'clock_in' => $clockintime, 'clock_out' => $clockouttime, 'working_color' => $shift['Z']['color_code'] ?? '');
+                        }
+                    } else {
+                        $monthworkingdays++;
+                        $actualworkingdays++;
+                        $dates[$date] = array('day' => 'P', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'] ?? null, 'timesheetid' => $timeshettempoyee[$date]['id'] ?? null, 'color_code' => $shift['P']['color_code'] ?? '', 'display_value' => $shift['P']['display_value'] ?? '');
+                    }
+                }
+
+                if ($i == 0) {
+                    $alldate[] = $date;
+                }
+                $start->modify(HrConstants::PLUS_ONE_DAYS);
+            }
+            $timeshetetrys[$ky] = $dates;
+            $i++;
+            $monthworkignday[$ky] = $monthworkingdays;
+            $actualworkingday[$ky] = $actualworkingdays;
+        }
+
+        return [
+            'timesheet' => $timeshetetrys,
+            'monthworkingdays' => $monthworkignday,
+            'actualworkingdays' => $actualworkingday,
+            'discrepancy' => $discrepancy,
+            'date' => $alldate,
+        ];
+    }
+
+    private function persistWorkAttendancesFromTemp($get, $isPayAreaWise = false)
+    {
+        global $callConfig;
+        $returnarray = array();
+        $lastid = '';
+        $shift_check = SHIFT_CHECK;
+        $month = $get['month'];
+        $year = $get['year'];
+        $get['month_year'] = $year . "-" . $month;
+
+        $attstc = HrConstants::SEL_ATTENDANCE_SETTINGS_BASE . $get['company_id'];
+        $atsdata = $callConfig->getRow($attstc);
+        $workingdays = json_decode($atsdata->working_days, 1);
+
+        $shiftresarray = array();
+        if ($shift_check == 1) {
+            $shiftsql = HrConstants::SEL_EMP_SHIFTS_BASE . $get['company_id'];
+            $shiftres = $callConfig->getAllRows($shiftsql);
+            foreach ($shiftres as $shiftress) {
+                $shiftresarray[$shiftress->emp_id] = $shiftress;
+            }
+        }
+
+        $tempdetails = "SELECT * FROM temp_attendance_details WHERE is_active=0 and company_id=" . $get['company_id'] . HrConstants::AND_MONTH_ATTENDANCE_DATE_EQ . $month . HrConstants::AND_YEAR_ATTENDANCE_DATE_EQ . $year . "'";
+        $tempdetailsdata = $callConfig->getAllRows($tempdetails);
+
+        $holidays = HrConstants::SEL_HOLIDAY_DATE_BASE . $get['company_id'] . HrConstants::AND_MONTH_HOLIDAY_DATE_EQ . $month . HrConstants::AND_YEAR_HOLIDAY_DATE_EQ . $year . "'";
+        $holidaysdata = $callConfig->getAllRows($holidays);
+        $holidaysdatas = array();
+        foreach ($holidaysdata as $hvalue) {
+            $holidaysdatas[] = $hvalue->holiday_date;
+        }
+
+        $attendance_key_types = array();
+        $aktypesql = "SELECT key_short_code, leave_category_id FROM attendance_key_types WHERE is_active=0 and company_id=" . $get['company_id'] . " AND leave_category_id !=''";
+        $aktyperes = $callConfig->getAllRows($aktypesql);
+        foreach ($aktyperes as $valk) {
+            $attendance_key_types[$valk->key_short_code] = $valk->key_short_code;
+        }
+
+        $absentarray = array();
+        $presentarray = array();
+        $offdayarray = array();
+        $leavearray = array();
+        foreach ($tempdetailsdata as $tempary) {
+            if ($tempary->attendance_key_short_code == 'A') {
+                $absentarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
+            } elseif ($tempary->attendance_key_short_code == 'P' || $tempary->attendance_key_short_code == 'Z') {
+                $presentarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
+            } elseif ($tempary->attendance_key_short_code == 'O') {
+                $offdayarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
+            } elseif (in_array($tempary->attendance_key_short_code, $attendance_key_types)) {
+                $leavearray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
+            }
+        }
+
+        $slctdate = date($get['year'] . "-" . $get['month'] . "-" . $get['monthstartday']);
+        $startdate = date("Y-m-d", strtotime($slctdate));
+        $enddate = date("Y-m-d", strtotime(HrConstants::MINUS_ONE_DAYS, strtotime(HrConstants::PLUS_ONE_MONTH, strtotime($slctdate))));
+
+        if ($isPayAreaWise) {
+            $query = "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving
+        FROM `employees` emp
+        WHERE emp.company_id = '" . $get['company_id'] . "' AND
+        emp.employee_type = 1 AND
+        emp.is_active = 0 AND
+        emp.id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id={$get['pay_area_id']} AND company_id={$get['company_id']} AND is_active=0) AND
+        ( CASE
+        WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving <= '" . $enddate . "') THEN 1
+        WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END) = 1 ";
+            $returnarray['sql'] = $query;
+        } else {
+            $query = HrConstants::SEL_ACTIVE_REGULAR_EMPLOYEES_BASE . $get['company_id'] . HrConstants::SQL_EMP_ACTIVE_LEAVING_CASE . $enddate . HrConstants::SQL_EMP_ACTIVE_STATUS_CASE . $get['emp_id'] . HrConstants::OR_EMP_FINANCE_BUDDY . $get['emp_id'] . HrConstants::OR_EMP_ADMIN_BUDDY . $get['emp_id'] . HrConstants::OR_EMP_PROJECT_BUDDY . $get['emp_id'] . HrConstants::OR_EMP_LOC_BUDDY . $get['emp_id'] . HrConstants::OR_EMP_REPORTING_MGR . $get['user_id'] . HrConstants::OR_PAY_AREA_ADMIN_SUBQUERY . $get['emp_id'] . HrConstants::OR_CASE_ADMIN_TYPE . $get['admin_type'] . HrConstants::THEN_1_END_EQ_1;
+        }
+
+        $empdatas = $callConfig->getAllRows($query);
+        $empidlist = array();
+        foreach ($empdatas as $value) {
+            $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
+        }
+
+        if ($isPayAreaWise) {
+            $returnarray['empdatas'] = $empdatas;
+            $returnarray['count'] = count((array) $empdatas);
+        }
+
+        $insdailyattendance = "INSERT INTO `employee_daily_attendances`(`shift_settings_id`,`company_id`, `employee_id`, `attendace_date`, `clock_in`, `check_in_type`, `check_out_type`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`,`attendance_key_short_code`) VALUES ";
+        $insdailyattendancedetails = "INSERT INTO `employee_daily_attendance_details`(`company_id`, `employee_id`, `attendace_date`, `clock_in`, `check_in_type`, `check_out_type`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
+        $returnarray['empidlist'] = $empidlist;
+
+        foreach ($empidlist as $ky => $emp) {
+            $start = new DateTime($startdate);
+            $end = new DateTime($enddate);
+            $emp_details = $shiftresarray[$ky] ?? null;
+            $emp_shift_days = isset($shiftresarray[$ky]) ? json_decode($shiftresarray[$ky]->working_days, 1) : array();
+            $shift_id_val = $emp_details->id ?? '';
+
+            while ($start <= $end) {
+                $date = $start->format('Y-m-d');
+                $dy = $start->format('l');
+
+                if ($emp['joining_date'] >= $date || ($emp['date_of_leaving'] <= $date && $emp['date_of_leaving'] != "")) {
+                    // Employee not yet joined or left
+                } elseif (in_array($date, (array) $holidaysdatas) || isset($absentarray[$ky][$date])) {
+                    // Holiday or absent
+                } elseif (isset($offdayarray[$ky][$date])) {
+                    $attendance_key_short_code = $offdayarray[$ky][$date]->attendance_key_short_code;
+                    $insdailyattendance .= "('" . $shift_id_val . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','10:00:00', '1', '1', '0:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
+                } elseif (isset($leavearray[$ky][$date])) {
+                    $halfdaysleave = 1;
+                    if ($leavearray[$ky][$date]->start_half_day == '0') {
+                        $halfdaysleave = 0.5;
+                        $attendance_key_short_code = $leavearray[$ky][$date]->attendance_key_short_code;
+                        $insdailyattendance .= "('" . $shift_id_val . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . HrConstants::VAL_TIME_10_TO_14_STR . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
+                        $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $ky . "', '" . $date . HrConstants::VAL_TIME_10_TO_14_STR . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
+                    }
+                    if ($leavearray[$ky][$date]->leave_type_id != "") {
+                        $updatequeryleave = "UPDATE emp_leave_balances SET consumed_leaves=consumed_leaves+" . $halfdaysleave . ",updated_date = '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "',updated_by = '" . $get['user_id'] . "' WHERE employee_id =" . $ky . " AND leave_type='" . $leavearray[$ky][$date]->leave_type_id . "'";
+                        $updateleave = $callConfig->executeQuery($updatequeryleave);
+                        $returnarray['emp_leave_balances'][] = $updateleave;
+                    }
+                    $insert_leave_array = array('company_id' => $get['company_id'], 'employee_id' => $ky, 'leave_type_id' => $leavearray[$ky][$date]->leave_type_id, 'leave_from' => $date, 'leave_to' => $date, 'leave_days' => $halfdaysleave, 'start_half_day' => $leavearray[$ky][$date]->start_half_day, 'end_half_day' => $leavearray[$ky][$date]->end_half_day, 'created_by' => $get['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS), 'is_active' => '0', 'current_status' => '199');
+                    $returnarray['employee_leaves'][] = $callConfig->insertRecord('employee_leaves', $insert_leave_array);
+                } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1' && OFF_CHECK == '0')) {
+                    // Off day
+                } else {
+                    $starttime = isset($presentarray[$ky][$date]) ? $presentarray[$ky][$date]->clock_in : '';
+                    $endtime = isset($presentarray[$ky][$date]) ? $presentarray[$ky][$date]->clock_out : '';
+                    $instarttime = $starttime != "" ? $starttime : '10:00:00';
+                    $outendtime = $endtime != "" ? $endtime : '18:00:00';
+                    $attendance_key_short_code = isset($presentarray[$ky][$date]) ? $presentarray[$ky][$date]->attendance_key_short_code : 'P';
+                    $insdailyattendance .= "('" . $shift_id_val . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','" . $instarttime . "', '1', '1', '18:00:00" . HrConstants::VAL_ZERO_ZERO_STR . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
+                    $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','10:00:00', '1', '1', '" . $outendtime . HrConstants::VAL_ZERO_ZERO_STR . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
+                }
+                $start->modify(HrConstants::PLUS_ONE_DAYS);
+            }
+        }
+
+        $insdailyattendance = substr($insdailyattendance, 0, -1);
+        $insdailyattendance .= " ON DUPLICATE KEY UPDATE updated_date ='" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "'";
+        $callConfig->executeQueryString($insdailyattendance);
+        $returnarray['employee_daily_attendances'][] = $insdailyattendance;
+
+        $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
+        $res1 = $callConfig->executeQueryString($insdailyattendancedetails);
+        $returnarray['employee_daily_attendance_details'][] = $res1;
+
+        $insertuserarray2 = array('company_id' => $get['company_id'], 'import_swap_in_out_id' => $lastid, 'month_year' => $get['month_year'], 'type' => 'S', 'user_id' => $get['user_id'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS));
+        if ($isPayAreaWise && isset($get['pay_area_id'])) {
+            $insertuserarray2['pay_area_id'] = $get['pay_area_id'];
+        }
+        $tapres = $callConfig->insertRecord('work_attendance_logs', $insertuserarray2);
+        $returnarray['work_attendance_logs'] = $tapres;
+
+        return $returnarray;
+    }
+
+    private function saveTempAttendanceRecord($data, $shiftres, $date, $formdate, $todate, $get)
+    {
+        global $callConfig;
+        $query2 = "SELECT id FROM temp_attendance_details WHERE company_id = '" . $data['company_id'] . "'  AND attendance_date='" . $date . HrConstants::AND_EMPLOYEE_ID_EQ . $data['emp_id'];
+        $datas = $callConfig->getRow($query2);
+        $start_half_day = $data['start_half_day'] == "0" ? "0" : "1";
+        $end_half_day = $data['end_half_day'] == "0" ? "0" : "1";
+        $start_half_days = "";
+        $end_half_days = "";
+        $halfdaysleave = '1';
+        if ($start_half_day == '0' && date("Ymd", strtotime($formdate)) == date("Ymd", strtotime($date))) {
+            $start_half_days = '0';
+            $halfdaysleave = '0.5';
+        }
+        if ($end_half_day == '0' && date("Ymd", strtotime($todate)) == date("Ymd", strtotime($date))) {
+            $end_half_days = '0';
+            $halfdaysleave = '0.5';
+        }
+        if (isset($datas->id)) {
+            $insert_array = array('shift_settings_id' => $shiftres->id, 'company_id' => $data['company_id'], 'employee_id' => $data['emp_id'], 'attendance_date' => $date, 'attendance_key_short_code' => $data['presentcheck'], 'leave_type_id' => $data['leave_type_id'], 'leave_from' => $date, 'leave_to' => $date, 'leave_days' => $halfdaysleave, 'start_half_day' => $start_half_days, 'end_half_day' => $end_half_days, 'is_active' => '0');
+            $where = "id = '" . $datas->id . "'";
+            if ($data['presentcheck'] == '3') {
+                $insert_array['is_active'] = "";
+            }
+            $callConfig->updateRecord("temp_attendance_details", $insert_array, "", "", $where);
+        } elseif ($data['presentcheck'] != '3') {
+            $insert_array = array('shift_settings_id' => $shiftres->id, 'company_id' => $data['company_id'], 'employee_id' => $data['emp_id'], 'attendance_date' => $date, 'attendance_key_short_code' => $data['presentcheck'], 'leave_type_id' => $data['leave_type_id'], 'leave_from' => $date, 'leave_to' => $date, 'leave_days' => $halfdaysleave, 'created_by' => $get['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS), 'is_active' => '0', 'current_status' => '0', 'start_half_day' => $start_half_days, 'end_half_day' => $end_half_days);
+            $callConfig->insertRecord('temp_attendance_details', $insert_array);
+        }
+    }
+
+    private function calculateWithoutSettingsAttendance($imposrtfileres, $employee_terminations, $working_days_arr, $company_id)
+    {
+        global $callConfig;
+        $return = array();
+        $empdetails = array();
+        $dates = array();
+        $empid = array();
+        $notdates = array('column1', 'column2', 'column3');
+        foreach ($imposrtfileres[0] as $keystr => $getdate) {
+            if (!in_array($keystr, $notdates) && $getdate != "") {
+                $dates[$keystr] = $getdate;
+            }
+        }
+        unset($imposrtfileres[0]);
+        foreach ($imposrtfileres as $importres) {
+            $empid[$importres->column2] = $importres->column2;
+            $offarray = 0;
+            $sundaycnt = 0;
+            $pressentcnt = 0;
+            $absenttcnt = 0;
+            $total_day = 0;
+            $halfdaycnt = 0;
+            $halfdayabsentcnt = 0;
+            $leavecnt = 0;
+            foreach ($dates as $field => $columns) {
+                $total_day++;
+                $dayName = date("l", strtotime($columns));
+
+                if (isset($employee_terminations[$importres->column2]) && $employee_terminations[$importres->column2] != "" && strtotime($employee_terminations[$importres->column2]) <= strtotime($columns)) {
+                    $absenttcnt++;
+                } elseif ($importres->$field == "O") {
+                    $offarray++;
+                } elseif ($importres->$field == "P") {
+                    $pressentcnt++;
+                } elseif ($importres->$field == "S") {
+                    $leavecnt++;
+                } elseif ($importres->$field == "A") {
+                    $absenttcnt++;
+                } elseif ($importres->$field == "F") {
+                    $halfdaycnt++;
+                } elseif ($importres->$field == "Z") {
+                    $halfdayabsentcnt++;
+                    $absenttcnt = $absenttcnt + 0.50;
+                    $pressentcnt = $pressentcnt + 0.50;
+                } else {
+                    if (!isset($empdetails[$importres->column2]['leave'][$importres->$field])) {
+                        $empdetails[$importres->column2]['leave'][$importres->$field] = 0;
+                    }
+                    $empdetails[$importres->column2]['leave'][$importres->$field]++;
+                }
+                if (!in_array($dayName, (array) $working_days_arr)) {
+                    $sundaycnt++;
+                }
+                $empdetails[$importres->column2]['offday_cnt'] = $offarray;
+                $empdetails[$importres->column2]['sunday_cnt'] = $sundaycnt;
+                $empdetails[$importres->column2]['present_cnt'] = $pressentcnt;
+                $empdetails[$importres->column2]['absent_cnt'] = $absenttcnt;
+                $empdetails[$importres->column2]['total_day_cnt'] = $total_day;
+                $empdetails[$importres->column2]['total_half_day_cnt'] = $halfdaycnt;
+                $empdetails[$importres->column2]['total_half_day_absent_cnt'] = $halfdayabsentcnt;
+            }
+        }
+        $return['import_swap_in_out_details'] = $empdetails;
+        $empids = implode(",", $empid);
+        $empsql = "SELECT id,display_name,emp_code,email_id,joining_date FROM employees WHERE company_id = '" . $company_id . "' AND id IN(" . $empids . ") AND is_active = 0";
+        $empres = $callConfig->getAllRows($empsql);
+        $emplist = array();
+        foreach ($empres as $empress) {
+            $emplist[$empress->id] = $empress;
+        }
+        $return['empsql'] = $empsql;
+        $return['employees'] = $emplist;
+
+        $empleavesql = "SELECT elb.id, elb.employee_id, elb.applicable_leaves, lt.leave_category_id, lc.name, akt.key_short_code FROM emp_leave_balances elb, leave_types lt, leave_categories lc, attendance_key_types akt WHERE elb.company_id = '" . $company_id . "' AND elb.company_id = lt.company_id AND elb.company_id = lc.company_id AND elb.company_id = akt.company_id AND elb.leave_type = lt.id AND lt.leave_category_id = lc.id AND lc.id = akt.leave_category_id AND employee_id IN(" . $empids . ") AND elb.is_active = lt.is_active AND elb.is_active = lc.is_active AND elb.is_active = akt.is_active AND elb.is_active = '0' GROUP BY employee_id, leave_type";
+        $empleaveres = $callConfig->getAllRows($empleavesql);
+        $empleavelist = array();
+        foreach ($empleaveres as $empress) {
+            $empleavelist[$empress->employee_id][$empress->key_short_code] = $empress;
+        }
+        $return['emp_leave_balances'] = $empleavelist;
+
+        $leave_categoriessql = "SELECT lc.id, lc.name, akt.key_short_code FROM leave_categories lc, attendance_key_types akt WHERE lc.company_id = '" . $company_id . "' AND lc.company_id = akt.company_id AND lc.id = akt.leave_category_id AND lc.is_active = '0'";
+        $leave_categoriesres = $callConfig->getAllRows($leave_categoriessql);
+        $leave_categories = array();
+        foreach ($leave_categoriesres as $leavcat) {
+            $leave_categories[$leavcat->key_short_code] = $leavcat;
+        }
+        $return['leave_categories'] = $leave_categories;
+
+        return $return;
+    }
+
+    private function parseDepartmentEmployeesFromImport($res)
+    {
+        $departmentwithemp = array();
+        $deaprtname = "";
+        $empnamed = "";
+        foreach ($res as $rows) {
+            if (strpos(strtoupper(trim($rows->column1)), strtoupper("Department")) !== false) {
+                $deaprtname = str_replace('|', '_', str_replace(' ', '_', strtolower(trim($rows->column4))));
+            } else {
+                if ($deaprtname != "" && $rows->column1 != "") {
+                    if (strpos(strtoupper(trim($rows->column1)), strtoupper("Employee")) !== false) {
+                        $explode = explode(":", $rows->column4);
+                        $empnamed = str_replace(' ', '_', strtoupper(trim($explode[0])));
+                    }
+                    if ($empnamed != "" && $rows->column1 != "") {
+                        $departmentwithemp[$empnamed][] = $rows;
+                    }
+                }
+            }
+        }
+        return $departmentwithemp;
+    }
+
+    private function buildTempImportAttendanceBatch($get, $departmentwithemp, $emplist, $importinoutres)
+    {
+        global $callConfig;
+        $return = array();
+        $dateaarray = array('01' => 'column3', '02' => 'column4', '03' => 'column6', '04' => 'column7', '05' => 'column8', '06' => 'column9', '07' => 'column11', '08' => 'column12', '09' => 'column14', '10' => 'column15', '11' => 'column16', '12' => 'column17', '13' => 'column18', '14' => 'column19', '15' => 'column20', '16' => 'column21', '17' => 'column22', '18' => 'column23', '19' => 'column24', '20' => 'column25', '21' => 'column16', '22' => 'column27', '23' => 'column28', '24' => 'column29', '25' => 'column30', '26' => 'column32', '27' => 'column33', '28' => 'column34', '29' => 'column35', '30' => 'column36', '31' => 'column37');
+        $insdailyattendancedetails = "INSERT INTO `temp_attendance_details`(`company_id`, `employee_id`, `attendance_date`, `attendance_key_short_code`, `clock_in`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
+        $notinsertattendanceempcount = 0;
+        $attendanceempcount = 0;
+        $all_emp = array();
+        $insert_emp = array();
+        $not_insert_emp = array();
+
+        foreach ($departmentwithemp as $empcodekey => $value) {
+            $empid = $emplist[$empcodekey]->id ?? null;
+            $all_emp[$empcodekey] = $empcodekey;
+            if (trim((string) $empid) != "") {
+                $attendanceempcount++;
+                $insert_emp[$empcodekey] = $empcodekey;
+                $start = new DateTime($importinoutres->start_date);
+                $end = new DateTime($importinoutres->end_date);
+                while ($start <= $end) {
+                    $date = $start->format('Y-m-d');
+                    $dy = $start->format('d');
+                    $dateaarray1 = $dateaarray[$dy];
+                    $intime = $value['2']->$dateaarray1;
+                    $outtime = $value['3']->$dateaarray1;
+                    if ($value['1']->$dateaarray1 == 'P' && $intime != "" && $outtime != "") {
+                        $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $empid . "', '" . $date . "','3','" . $intime . "','" . $outtime . "','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
+                    } else {
+                        $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $empid . "', '" . $date . "','1','" . $intime . "','" . $outtime . "','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
+                    }
+                    $start->modify(HrConstants::PLUS_ONE_DAYS);
+                }
+            } else {
+                $notinsertattendanceempcount++;
+                $not_insert_emp[$empcodekey] = $empcodekey;
+            }
+        }
+        $updaterecord = array('all_emp' => json_encode((array) $all_emp), 'insert_emp' => json_encode((array) $insert_emp), 'not_insert_emp' => json_encode((array) $not_insert_emp));
+        $return['updateisio'][] = $callConfig->updateRecord('import_swap_in_outs', $updaterecord, 'id', $get['rid']);
+
+        $return['insert_temp_attendance_emp_count'] = $attendanceempcount;
+        $return['not_insert_temp_attendance_emp_count'] = $notinsertattendanceempcount;
+        $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
+        $insdailyattendancedetails .= " ON DUPLICATE KEY UPDATE clock_in = VALUES(clock_in),clock_out = VALUES(clock_out),attendance_key_short_code = VALUES(attendance_key_short_code)";
+        $return['employee_daily_attendance_details_sql'] = $insdailyattendancedetails;
+        $return['employee_daily_attendance_details'] = $callConfig->executeQueryString($insdailyattendancedetails);
+        return $return;
+    }
+
+    private function doesLeaveConditionMatch($filter_condition, $empdata)
+    {
+        $divdconds = explode("&", (string) $filter_condition);
+        $lscond = array();
+        foreach ($divdconds as $divdcond) {
+            $codd = explode("=", $divdcond);
+            if (isset($codd[0])) {
+                $lscond[$codd[0]] = $codd[1] ?? '';
+            }
+        }
+        if (count($lscond) == 1 && isset($lscond['check']) && $lscond['check'] == 1) {
+            return true;
+        }
+        if (isset($lscond['department_id']) && $lscond['department_id'] != "" && $lscond['department_id'] == $empdata->department_id) {
+            return true;
+        }
+        if (isset($lscond['designation_id']) && $lscond['designation_id'] != "" && $lscond['designation_id'] == $empdata->designation_id) {
+            return true;
+        }
+        if (isset($lscond['location_id']) && $lscond['location_id'] != "" && $lscond['location_id'] == $empdata->location_id) {
+            return true;
+        }
+        if (isset($lscond['gender']) && $lscond['gender'] != "" && $lscond['gender'] == $empdata->gender) {
+            return true;
+        }
+        if (isset($lscond['employee_type']) && $lscond['employee_type'] != "" && $lscond['employee_type'] == $empdata->employee_type) {
+            return true;
+        }
+        return false;
+    }
 }
 
 trait HrPayrollTrait
@@ -1112,6 +1221,7 @@ public function togetpayrollstepsdetails($get)
     {
         global $callConfig;
         $return = array();
+        $return['get'] = $get;
         $return['post'] = $post;
         $rolesids = array();
         foreach ($post['first_name'] as $key => $value) {
@@ -1196,6 +1306,7 @@ public function togetpayrollstepsdetails($get)
     public function insertEmployeeTerminations($get, $post)
     {
         global $callConfig;
+        $return = ['get' => $get];
         $inserttermination = array('company_id' => $post['company_id'], 'emp_id' => $post['emp_id'], 'termination_type' => $post['termination_type'], 'termination_reason' => $post['termination_type'], 'effective_date' => $this->dateconvertdbformat($post['effective_date']), 'employee_leaving_date' => $this->dateconvertdbformat($post['effective_date']), 'is_active' => '0', 'current_status' => '199', 'created_by' => $post['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS));
         $res = $callConfig->insertRecord('employee_terminations', $inserttermination);
 
@@ -1442,6 +1553,9 @@ public function togetpayrollstepsdetails($get)
     public function addsalarycontractemployeepay($get, $post)
     {
         global $callConfig;
+        if (isset($get)) {
+            // preserve API signature
+        }
         if ($post['rid'] != "") {
             $upquery = "UPDATE contract_employee_pay SET is_active = NULL WHERE id =" . $post['rid'];
             $callConfig->executeQuery($upquery);
@@ -2134,66 +2248,19 @@ public function getitadmindashboard($get)
         $company_id = isset($get['company_id']) ? intval($get['company_id']) : 0;
         $sync_user_id = isset($get['user_id']) ? intval($get['user_id']) : 0;
 
+        $employees_query = "SELECT id, emp_code, display_name, email_id, user_id, phone, b_machine_id FROM employees WHERE company_id = " . $company_id . " AND is_active = 0";
+        $employees = (array) $callConfig->getAllRows($employees_query);
 
-        $employees_query = "SELECT id, emp_code, display_name, email_id, user_id, phone, b_machine_id
-                            FROM employees
-                            WHERE company_id = " . $company_id . "
-                              AND is_active = 0";
-        $employees = $callConfig->getAllRows($employees_query);
-        if (!$employees) {
-            $employees = array();
-        }
+        $users_query = "SELECT id, user_name, user_email, display_name FROM application_users WHERE company_id = " . $company_id . " AND is_active = 0";
+        $users = (array) $callConfig->getAllRows($users_query);
 
-        $users_query = "SELECT id, user_name, user_email, display_name
-                        FROM application_users
-                        WHERE company_id = " . $company_id . "
-                          AND is_active = 0";
-        $users = $callConfig->getAllRows($users_query);
-        if (!$users) {
-            $users = array();
-        }
+        $salary_query = "SELECT employee_id FROM salary_template WHERE company_id = " . $company_id . " AND is_active = 0";
+        $salary = (array) $callConfig->getAllRows($salary_query);
 
-        $salary_query = "SELECT employee_id
-                         FROM salary_template
-                         WHERE company_id = " . $company_id . "
-                           AND is_active = 0";
-        $salary = $callConfig->getAllRows($salary_query);
-        if (!$salary) {
-            $salary = array();
-        }
+        $pay_area_query = "SELECT emp_id FROM pay_area_employees WHERE company_id = " . $company_id . " AND is_active = 0";
+        $pay_area = (array) $callConfig->getAllRows($pay_area_query);
 
-        $pay_area_query = "SELECT emp_id
-                           FROM pay_area_employees
-                           WHERE company_id = " . $company_id . "
-                             AND is_active = 0";
-        $pay_area = $callConfig->getAllRows($pay_area_query);
-        if (!$pay_area) {
-            $pay_area = array();
-        }
-
-        // Build user maps: usersById and user_emails[email] => id,user_name,email,display_name
-        $usersById = array();
-        $user_emails = array();
-        foreach ($users as $user) {
-            $uid = isset($user->id) ? intval($user->id) : 0;
-            if ($uid <= 0) {
-                continue;
-            }
-
-            $email = isset($user->user_email) ? trim((string) $user->user_email) : '';
-            $email_key = strtolower($email);
-
-            $usersById[$uid] = array(
-                'id' => $uid,
-                'user_name' => isset($user->user_name) ? trim((string) $user->user_name) : '',
-                'user_email' => $email,
-                'display_name' => isset($user->display_name) ? trim((string) $user->display_name) : ''
-            );
-
-            if ($email_key != '') {
-                $user_emails[$email_key] = $usersById[$uid];
-            }
-        }
+        list($usersById, $user_emails) = $this->buildMissingDetailsUserMaps($users);
 
         $sync_summary = array(
             'employee_user_linked' => 0,
@@ -2205,306 +2272,13 @@ public function getitadmindashboard($get)
             'skipped_operations' => array()
         );
 
-        $employeeLinkUpdates = array(); // emp_id => user_id
-        $userNameUpdates = array(); // user_id => ['user_name','user_email']
-        $claimed_usernames = array(); // Track usernames already claimed in this batch (lowercase)
+        list($employeeLinkUpdates, $userNameUpdates) = $this->resolveMissingDetailsLinkAndNameUpdates($employees, $usersById, $user_emails, $sync_summary);
 
-        foreach ($employees as $index => $emp) {
-            $emp_id = isset($emp->id) ? intval($emp->id) : 0;
-            if ($emp_id <= 0) {
-                continue;
-            }
+        $this->applyMissingDetailsSyncUpdates($company_id, $sync_user_id, $employeeLinkUpdates, $userNameUpdates, $sync_summary);
 
-            $emp_email = isset($emp->email_id) ? trim((string) $emp->email_id) : '';
-            $emp_email_key = strtolower($emp_email);
-            $emp_user_id = isset($emp->user_id) ? intval($emp->user_id) : 0;
-            $emp_code = isset($emp->emp_code) ? trim((string) $emp->emp_code) : '';
+        $users = (array) $callConfig->getAllRows($users_query);
+        $missing_employees = $this->assembleMissingEmployeeRecords($employees, $users, $salary, $pay_area);
 
-            // 1) Collect employee->user linking updates by matching email when user_id is empty.
-            if ($emp_user_id <= 0 && $emp_email_key != '' && isset($user_emails[$emp_email_key])) {
-                $matched_user_id = intval($user_emails[$emp_email_key]['id']);
-                if ($matched_user_id > 0) {
-                    $employeeLinkUpdates[$emp_id] = $matched_user_id;
-                    $emp_user_id = $matched_user_id;
-                    $employees[$index]->user_id = $matched_user_id;
-                    // Track details
-                    $sync_summary['employee_link_details'][] = array(
-                        'emp_id' => $emp_id,
-                        'emp_code' => $emp_code,
-                        'user_id' => $matched_user_id,
-                        'matched_by' => 'email'
-                    );
-                }
-            }
-
-            // Resolve matched user data using user_id, fallback by email map.
-            $matched_user = null;
-            if ($emp_user_id > 0 && isset($usersById[$emp_user_id])) {
-                $matched_user = $usersById[$emp_user_id];
-            } elseif ($emp_email_key != '' && isset($user_emails[$emp_email_key])) {
-                $matched_user = $user_emails[$emp_email_key];
-            }
-
-            // 2) Collect user_name sync updates and candidate rows for user_registered_groups.
-            if ($matched_user && $emp_code != '') {
-                $matched_user_id = intval($matched_user['id']);
-                $current_user_name = trim((string) $matched_user['user_name']);
-                $target_email = trim((string) $matched_user['user_email']);
-                $emp_code_lower = strtolower($emp_code);
-
-                // Only sync if user_name differs AND target emp_code isn't already used by another user
-                if ($matched_user_id > 0 && $current_user_name != $emp_code) {
-                    // Check if this user_id is already queued for update in THIS batch
-                    if (isset($userNameUpdates[$matched_user_id])) {
-                        // Skip - this user was already claimed by another employee
-                        $sync_summary['skipped_operations'][] = array(
-                            'type' => 'username_sync',
-                            'emp_id' => $emp_id,
-                            'emp_code' => $emp_code,
-                            'user_id' => $matched_user_id,
-                            'target_username' => $emp_code,
-                            'reason' => 'user_already_queued_for_different_employee'
-                        );
-                        continue; // Skip to next employee
-                    }
-
-                    // Check if emp_code (target user_name) is already used by a different user in DB
-                    $username_taken = false;
-                    $conflict_reason = '';
-                    foreach ($usersById as $existing_uid => $existing_user) {
-                        if (
-                            $existing_uid != $matched_user_id &&
-                            strtolower(trim((string) $existing_user['user_name'])) == $emp_code_lower
-                        ) {
-                            $username_taken = true;
-                            $conflict_reason = 'already_exists_in_db';
-                            break;
-                        }
-                    }
-
-                    // Also check if this target username is already claimed by another user in THIS update batch
-                    if (!$username_taken && isset($claimed_usernames[$emp_code_lower])) {
-                        $username_taken = true;
-                        $conflict_reason = 'already_claimed_in_batch';
-                    }
-
-                    if (!$username_taken) {
-                        $userNameUpdates[$matched_user_id] = array(
-                            'user_name' => $emp_code,
-                            'user_email' => $target_email
-                        );
-                        $claimed_usernames[$emp_code_lower] = $matched_user_id;
-                        // Track details
-                        $sync_summary['username_sync_details'][] = array(
-                            'user_id' => $matched_user_id,
-                            'old_username' => $current_user_name,
-                            'new_username' => $emp_code,
-                            'user_email' => $target_email
-                        );
-                    } else {
-                        // Track skipped operation
-                        $sync_summary['skipped_operations'][] = array(
-                            'type' => 'username_sync',
-                            'emp_id' => $emp_id,
-                            'emp_code' => $emp_code,
-                            'user_id' => $matched_user_id,
-                            'target_username' => $emp_code,
-                            'reason' => $conflict_reason
-                        );
-                    }
-                }
-            }
-        }
-
-        // Execute employee user_id link updates in a single CASE query.
-        if (!empty($employeeLinkUpdates)) {
-            $empIds = array_keys($employeeLinkUpdates);
-            $caseParts = array();
-            foreach ($employeeLinkUpdates as $eid => $uid) {
-                $caseParts[] = "WHEN " . intval($eid) . " THEN " . intval($uid);
-            }
-            $link_query = "UPDATE employees
-                           SET user_id = CASE id " . implode(' ', $caseParts) . " END
-                           WHERE id IN (" . implode(',', array_map('intval', $empIds)) . ")
-                             AND company_id = " . $company_id . "
-                             AND is_active = 0";
-            $link_res = $callConfig->executeQuery($link_query);
-            if ($link_res) {
-                $sync_summary['employee_user_linked'] = count($employeeLinkUpdates);
-            }
-        }
-
-        // Execute application_users.user_name updates in a single CASE query.
-        if (!empty($userNameUpdates)) {
-            $userIds = array_keys($userNameUpdates);
-            $caseParts = array();
-            foreach ($userNameUpdates as $uid => $urow) {
-                $safe_name = addslashes($urow['user_name']);
-                $caseParts[] = "WHEN " . intval($uid) . " THEN '" . $safe_name . "'";
-            }
-
-            $user_update_query = "UPDATE application_users
-                                  SET user_name = CASE id " . implode(' ', $caseParts) . " END
-                                  WHERE id IN (" . implode(',', array_map('intval', $userIds)) . ")
-                                    AND company_id = " . $company_id . "
-                                    AND is_active = 0";
-            $user_update_res = $callConfig->executeQuery($user_update_query);
-            if ($user_update_res) {
-                $sync_summary['user_name_synced'] = count($userNameUpdates);
-            }
-
-            // Prepare bulk lookup for existing user_registered_groups rows (only by email)
-            $candidateEmails = array();
-            $emailList = array();
-            foreach ($userNameUpdates as $urow) {
-                $email = trim((string) $urow['user_email']);
-                if ($email == '') {
-                    continue;
-                }
-                $email_lower = strtolower($email);
-                $candidateEmails[$email_lower] = $urow;
-                $emailList[] = addslashes($email);
-            }
-
-            $existingEmails = array();
-            if (!empty($candidateEmails)) {
-                $emailList = array_unique($emailList);
-
-                $exists_query = "SELECT user_email
-                                 FROM " . MAINDB . ".user_registered_groups
-                                 WHERE is_active = 0
-                                   AND user_email IN ('" . implode("','", $emailList) . "')";
-                $exists_rows = $callConfig->getAllRows($exists_query);
-                if (!empty($exists_rows)) {
-                    foreach ($exists_rows as $erow) {
-                        $e = strtolower(trim((string) $erow->user_email));
-                        $existingEmails[$e] = true;
-                    }
-                }
-
-                foreach ($candidateEmails as $email_lower => $urow) {
-                    if (isset($existingEmails[$email_lower])) {
-                        // Track skipped registered_group insertion
-                        $sync_summary['skipped_operations'][] = array(
-                            'type' => 'registered_group_insert',
-                            'user_email' => $urow['user_email'],
-                            'user_name' => $urow['user_name'],
-                            'reason' => 'email_already_exists_in_registered_groups'
-                        );
-                        continue; // Already exists, skip
-                    }
-
-                    $insert_registered_group = array(
-                        'group_id' => 0,
-                        'user_email' => addslashes($urow['user_email']),
-                        'zqr_text' => '',
-                        'zqr_connect' => '',
-                        'reset_password' => '',
-                        'start_date' => date('Y-m-d'),
-                        'expiry_date' => null,
-                        'email_active' => '',
-                        'email_active_date' => null,
-                        'is_active' => 0,
-                        'current_status' => 0,
-                        'status_date' => date(HrConstants::DATE_FORMAT_YMD_HIS),
-                        'from_date' => date('Y-m-d'),
-                        'to_date' => null,
-                        'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS),
-                        'created_by' => $sync_user_id,
-                        'updated_by' => $sync_user_id,
-                        'updated_date' => date(HrConstants::DATE_FORMAT_YMD_HIS)
-                    );
-
-                    $insert_res = $callConfig->insertRecord(MAINDB . '.user_registered_groups', $insert_registered_group);
-                    if ($insert_res && isset($insert_res['LASTID'])) {
-                        $sync_summary['registered_group_inserted']++;
-                        // Track details
-                        $sync_summary['registered_group_details'][] = array(
-                            'id' => $insert_res['LASTID'],
-                            'user_email' => $urow['user_email'],
-                            'user_name' => $urow['user_name']
-                        );
-                    }
-                }
-            }
-        }
-
-        // Re-run users query so response includes latest synced user_name values.
-        $users = $callConfig->getAllRows($users_query);
-        if (!$users) {
-            $users = array();
-        }
-
-        // Build users_with_name map from refreshed users list.
-        $users_with_name = array();
-        foreach ($users as $user) {
-            $uid = isset($user->id) ? intval($user->id) : 0;
-            if ($uid <= 0) {
-                continue;
-            }
-
-            $users_with_name[$uid] = isset($user->user_name) ? trim((string) $user->user_name) : '';
-        }
-
-        // Build missing-details rows once in backend so frontend does not repeat this logic.
-        $salary_emp_ids = array();
-        foreach ($salary as $salary_row) {
-            $sid = isset($salary_row->employee_id) ? intval($salary_row->employee_id) : 0;
-            if ($sid > 0) {
-                $salary_emp_ids[$sid] = true;
-            }
-        }
-
-        $pay_area_emp_ids = array();
-        foreach ($pay_area as $pay_area_row) {
-            $pid = isset($pay_area_row->emp_id) ? intval($pay_area_row->emp_id) : 0;
-            if ($pid > 0) {
-                $pay_area_emp_ids[$pid] = true;
-            }
-        }
-
-        $missing_employees = array();
-        foreach ($employees as $emp) {
-            $emp_id = isset($emp->id) ? intval($emp->id) : 0;
-            if ($emp_id <= 0) {
-                continue;
-            }
-
-            $emp_code = isset($emp->emp_code) ? trim((string) $emp->emp_code) : '';
-            $display_name = isset($emp->display_name) ? trim((string) $emp->display_name) : '';
-            $email = isset($emp->email_id) ? trim((string) $emp->email_id) : '';
-            $emp_user_id = isset($emp->user_id) ? intval($emp->user_id) : 0;
-            $b_machine_id = isset($emp->b_machine_id) ? trim((string) $emp->b_machine_id) : '';
-
-            $missing_flags = array();
-            if ($email == '') {
-                $missing_flags['email'] = 'N';
-            }
-            if ($b_machine_id == '') {
-                $missing_flags['b_machine_id'] = 'N';
-            }
-            if ($emp_user_id <= 0 || !isset($users_with_name[$emp_user_id]) || $users_with_name[$emp_user_id] == '') {
-                $missing_flags['user'] = 'N';
-            }
-            if (!isset($salary_emp_ids[$emp_id])) {
-                $missing_flags['salary'] = 'N';
-            }
-            if (!isset($pay_area_emp_ids[$emp_id])) {
-                $missing_flags['pay_area'] = 'N';
-            }
-
-            if (!empty($missing_flags)) {
-                $missing_employees[] = array(
-                    'id' => $emp_id,
-                    'emp_code' => $emp_code,
-                    'display_name' => $display_name,
-                    'missing' => $missing_flags
-                );
-            }
-        }
-
-
-        // Non-compact response retained for backward compatibility.
         return array(
             'status' => 'success',
             'employees' => $employees,
@@ -2528,426 +2302,54 @@ public function getitadmindashboard($get)
         global $callConfig;
         $retrunarray = array();
         $query = "SELECT id, name FROM pay_areas WHERE company_id='{$get['company_id']}' AND is_active=0 AND name IS NOT NULL AND name != '' ";
-        $pay_areas = $callConfig->getAllRows($query);
-        $retrunarray['pay_areas'] = $pay_areas;
+        $retrunarray['pay_areas'] = $callConfig->getAllRows($query);
+
         $emp_list = array();
         $pay_area_id = $get['pay_area_id'] ?? '';
-
         if ($pay_area_id != '') {
-            $query = "SELECT emp_id FROM pay_area_employees WHERE pay_area_id={$pay_area_id} AND company_id='{$get['company_id']}' AND is_active=0";
-            $emp_ids_list = $callConfig->getAllRows($query);
+            $emp_ids_list = $callConfig->getAllRows("SELECT emp_id FROM pay_area_employees WHERE pay_area_id={$pay_area_id} AND company_id='{$get['company_id']}' AND is_active=0");
             foreach ($emp_ids_list as $row) {
                 $emp_list[] = $row->emp_id;
             }
         }
 
-        $discrepancy = array();
         $month = $get['month'];
         $year = $get['year'];
-        $shift_check = SHIFT_CHECK; //1 meaning yes
+        $shift_check = SHIFT_CHECK;
         $slctdate = date($get['year'] . "-" . $get['month'] . "-" . $get['monthstartday']);
         $startdate = date("Y-m-d", strtotime($slctdate));
-        $enddate = date("Y-m-d", strtotime(HrConstants::PLUS_ONE_MONTH, strtotime($slctdate)));
-        $enddate = date("Y-m-d", strtotime(HrConstants::MINUS_ONE_DAYS, strtotime($enddate)));
+        $enddate = date("Y-m-d", strtotime(HrConstants::MINUS_ONE_DAYS, strtotime(HrConstants::PLUS_ONE_MONTH, strtotime($slctdate))));
 
         $work_attendance_logssql = "SELECT pay_area_id, month_year, type, created_date, import_swap_in_out_id FROM `work_attendance_logs` WHERE company_id=  '" . $get['company_id'] . "' AND month_year ='" . $year . "-" . $month . "' AND is_active = 0 GROUP BY type ORDER BY created_date DESC";
-        $work_attendance_logsres = $callConfig->getAllRows($work_attendance_logssql);
-        $retrunarray['work_attendance_logs'] = $work_attendance_logsres;
-        if (count((array) $emp_list) == 0 && $pay_area_id == '') {
+        $retrunarray['work_attendance_logs'] = $callConfig->getAllRows($work_attendance_logssql);
 
-            $query = "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving FROM `employees` emp WHERE emp.company_id = '" . $get['company_id'] . "' AND emp.employee_type = 1 AND emp.is_active = 0 AND ( CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving <= '" . $enddate . "') THEN 1 WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END)= 1 AND (emp.hr_buddy = '" . $get['emp_id'] . "' OR emp.finance_buddy = '" . $get['emp_id'] . "' OR emp.admin_buddy = '" . $get['emp_id'] . "' OR emp.project_buddy = '" . $get['emp_id'] . "' OR emp.loc_buddy = '" . $get['emp_id'] . "' OR emp.reporting_manager_id = '" . $get['user_id'] . "' OR (emp.id IN (SELECT    pae.emp_id FROM pay_area_employees pae, payroll_area_admins paa WHERE pae.company_id = paa.company_id AND pae.company_id = emp.company_id AND    pae.pay_area_id = paa.pay_area_id AND pae.is_active = paa.is_active AND    pae.is_active = 0 AND paa.emp_id = '" . $get['emp_id'] . "' ))    OR ( CASE WHEN '1' = '" . $get['admin_type'] . "' THEN 1 END) = 1)";
-
-        } else {
-            $liemp = implode(",", $emp_list);
-            $query = "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving  FROM `employees` WHERE company_id = '" . $get['company_id'] . "' AND employee_type = 1 AND joining_date <= '" . $enddate . "' AND (date_of_leaving >= '" . $startdate . "' OR date_of_leaving IS NULL) AND id IN(" . $liemp . ")";
-        }
+        $query = $this->buildAttendanceEmployeeQuery($get, $emp_list, $startdate, $enddate, $pay_area_id);
         $retrunarray['employees_sql'] = $query;
         $empdatas = $callConfig->getAllRows($query);
         $retrunarray['empdatas'] = $empdatas;
 
+        $lookups = $this->fetchAttendanceLookupData($get, $month, $year);
+        $retrunarray['attendance_key_types'] = $lookups['shift'];
+        $retrunarray['leavetype'] = $lookups['leavetype'];
 
-        $shiftsql = "SELECT ss.id,emps.emp_id, ss.name, ss.minimum_hours_required,ss.half_day_hours,ss.working_days FROM emp_shifts emps, shift_settings ss WHERE emps.is_active  = ss.is_active AND  emps.company_id =ss.company_id AND  emps.shift_id  = ss.id AND emps.is_active = 0 AND emps.company_id=" . $get['company_id'];
-        $shiftres = $callConfig->getAllRows($shiftsql);
-        foreach ($shiftres as $shiftress) {
-            $shiftresarray[$shiftress->emp_id] = $shiftress;
-        }
-        foreach ($empdatas as $value) {
-            if ($shift_check == '1' && $get['shift_categroy'] != "") {
-                if ($shiftresarray[$value->id]->id == $get['shift_categroy']) {
-                    $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'emp_code' => $value->emp_code, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
-                }
-            } else {
-                $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'emp_code' => $value->emp_code, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
-            }
-        }
-        $attstc = "SELECT * FROM attendance_settings WHERE is_active=0 and company_id=" . $get['company_id'];
-        $atsdata = $callConfig->getRow($attstc);
-        $workingdays = json_decode($atsdata->working_days, 1);
+        $empidlist = $this->buildAttendanceEmpIdList($empdatas, $lookups['shiftresarray'], $shift_check, $get['shift_categroy'] ?? '');
+        $gridResult = $this->generateEmployeeAttendanceTimesheet($empidlist, $startdate, $enddate, $lookups, $retrunarray);
 
-        $shiftcatsql = "SELECT id, shift_name, clock_in, clock_out FROM shifts WHERE is_active = 0 AND company_id=" . $get['company_id'];
-        $shiftcatres = $callConfig->getAllRows($shiftcatsql);
-
-        $shiftkeys = "SELECT id, key_short_code, display_value, color_code, key_name FROM attendance_key_types WHERE company_id=" . $get['company_id'] . " AND leave_category_id IS NULL AND is_active=0";
-        $shiftkeysdata = $callConfig->getAllRows($shiftkeys); // working //absent
-        foreach ($shiftkeysdata as $svalue) {
-            $shift[$svalue->key_short_code] = (array) $svalue;
-        }
-
-        $attkey = "SELECT lc.id, lc.name, akt.key_short_code, akt.display_value, akt.color_code, akt.key_name FROM leave_categories lc, attendance_key_types akt WHERE lc.company_id = '" . $get['company_id'] . "' AND lc.company_id = akt.company_id AND lc.id = akt.leave_category_id AND lc.is_active = akt.is_active AND lc.is_active = '0'";
-        $attkeyres = $callConfig->getAllRows($attkey); // working //absent
-        foreach ($attkeyres as $svalue) {
-            $shift[$svalue->key_short_code] = (array) $svalue;
-        }
-        $retrunarray['attendance_key_types'] = $shift;
-
-        $attendancesql = "SELECT attendace_date,employee_id,attendance_key_short_code  FROM `employee_daily_attendances` WHERE is_active=0 and company_id=" . $get['company_id'] . " AND MONTH(attendace_date) = '" . $month . "' AND YEAR(attendace_date) = '" . $year . "'";
-        $attendanceres = $callConfig->getAllRows($attendancesql); // working //absent
-        foreach ($attendanceres as $attendancere) {
-            $attendacnearray[$attendancere->employee_id][$attendancere->attendace_date] = $attendancere;
-        }
-
-        $leavetypesql = "SELECT lt.id, lc.name, akt.key_short_code FROM leave_types lt, leave_categories lc, attendance_key_types akt WHERE lt.company_id = '" . $get['company_id'] . "' AND lt.company_id = lc.company_id AND lt.company_id= akt.company_id AND lt.leave_category_id = lc.id AND lc.id = akt.leave_category_id AND lt.is_active = 0 AND lt.is_active = lc.is_active AND lt.is_active= akt.is_active";
-        $leavetypesres = $callConfig->getAllRows($leavetypesql);
-        foreach ($leavetypesres as $ltype) {
-            $leavetype[$ltype->id] = $ltype->key_short_code;
-        }
-        $retrunarray['leavetype'] = $leavetype;
-
-
-        $leavessql = "select employee_id,leave_from,leave_to,leave_type_id,start_half_day,end_half_day,datelist
-        from employee_leaves,
-        (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) datelist from
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
-        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) as v
-        where datelist>=leave_from and datelist <=leave_to AND ((MONTH(leave_from) = '" . $month . "' AND YEAR(leave_from) = '" . $year . "') OR (MONTH(leave_to) = '" . $month . "' AND YEAR(leave_to) = '" . $year . "') )";
-        $leavesdetails = $callConfig->getAllRows($leavessql); // working //absent
-        foreach ($leavesdetails as $leavesdetail) {
-            $leavesdetailsarray[$leavesdetail->employee_id][$leavesdetail->datelist] = array('type' => $leavesdetail->leave_type_id, 'start_half_day' => $leavesdetail->start_half_day, 'end_half_day' => $leavesdetail->end_half_day);
-        }
-        $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=" . $get['company_id'] . " AND MONTH(holiday_date) = '" . $month . "' AND YEAR(holiday_date) = '" . $year . "'";
-        $holidaysdata = $callConfig->getAllRows($holidays); //holidays
-        $holidaysdatas = array();
-        foreach ($holidaysdata as $hvalue) {
-            $holidaysdatas[] = $hvalue->holiday_date;
-        }
-        $checkupdate = "SELECT id FROM `employee_daily_attendances` WHERE is_active='0' and company_id=" . $get['company_id'] . " AND MONTH(attendace_date) = '" . $month . "' AND YEAR(attendace_date) = '" . $year . "'";
-
-        if ($get['admin_type'] != 1) {
-            $checkupdate .= " AND employee_id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id IN (SELECT pay_area_id FROM payroll_area_admins WHERE emp_id = " . $get['emp_id'] . "))";
-        }
-        //echo $checkupdate; exit
-
-        $checkupdates = $callConfig->getRow($checkupdate);
-
-        $tempdetails = "SELECT employee_id,attendance_date,attendance_key_short_code,start_half_day,end_half_day,clock_in,clock_out FROM temp_attendance_details WHERE is_active='0' and company_id=" . $get['company_id'] . " AND MONTH(attendance_date) = '" . $month . "' AND YEAR(attendance_date) = '" . $year . "'";
-        $tempdetailsdata = $callConfig->getAllRows($tempdetails); //holidays
-        foreach ($tempdetailsdata as $tempary) {
-            $tempdetailary[$tempary->employee_id][$tempary->attendance_date] = array("date" => $tempary->attendance_date, "type" => $tempary->attendance_key_short_code, "start_half_day" => $tempary->start_half_day, "end_half_day" => $tempary->end_half_day, 'clock_in' => $tempary->clock_in, 'clock_out' => $tempary->clock_out);
-        }
-        $timeshetetrys = array();
-        $i = 0;
-        $notleaveattendancekey = array('P', 'R', 'A', 'H', 'O', 'Z');
-        $workingdayattendancekey = array('P', 'O');
-        foreach ($empidlist as $ky => $emp) {
-            $monthworkingdays = 0;
-            $actualworkingdays = 0;
-            $start = new DateTime($startdate);
-            $end = new DateTime($enddate);
-            $dates = array();
-            $timeshettempoyee = array();
-            $emp_shift_days = json_decode($shiftresarray[$ky]->working_days, 1);
-
-            if (isset($checkupdates->id)) {
-                $retrunarray['valuedisplaytype'] = "update";
-                while ($start <= $end) {
-                    $date = $start->format('Y-m-d');
-                    $dy = $start->format('l');
-                    if (in_array($date, (array) $holidaysdatas)) {
-                        $dates[$date] = array('day' => 'H', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['H']['color_code'], 'display_value' => $shift['H']['display_value']);
-                    } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1' && OFF_CHECK == '0')) {
-                        $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['O']['color_code'], 'display_value' => $shift['O']['display_value']);
-                    }
-                    //elseif(isset($attendacnearray[$ky][$date]) AND isset($leavesdetailsarray[$ky][$date])){
-                    elseif (isset($leavesdetailsarray[$ky][$date])) {
-                        $monthworkingdays++;
-                        $actualworkingdays++;
-                        $leavtypedetail = $leavesdetailsarray[$ky][$date];
-                        $leaveshortcode = $leavetype[$leavtypedetail['type']];
-                        $dates[$date] = array('day' => $leaveshortcode, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift[$leaveshortcode]['color_code'], 'display_value' => $shift[$leaveshortcode]['display_value'], 'strthalfday' => $tempdetailary[$ky][$date]['start_half_day'], 'endthalfday' => $tempdetailary[$ky][$date]['end_half_day'], 'working_color' => $shift[$leaveshortcode]['color_code']);
-                        $discrepancy[$ky] = $emp;
-                    } elseif (isset($attendacnearray[$ky][$date])) {
-                        $shortkey = $attendacnearray[$ky][$date];
-                        if ($shortkey->attendance_key_short_code == "O") {
-                            $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['O']['color_code'], 'display_value' => $shift['O']['display_value']);
-                        } elseif ($shortkey->attendance_key_short_code == "Z") {
-                            $dates[$date] = array('day' => 'Z', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['Z']['color_code'], 'display_value' => $shift['Z']['display_value'], 'working_color' => $shift['Z']['color_code']);
-                        } else {
-                            $monthworkingdays++;
-                            $actualworkingdays++;
-                            $dates[$date] = array('day' => 'P', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['P']['color_code'], 'display_value' => $shift['P']['display_value']);
-                        }
-                    } else {
-                        ///if(isset($leavesdetailsarray[$ky][$date])){
-                        //$monthworkingdays++;
-                        //$actualworkingdays++;
-
-
-
-
-                        /**
-                    if($leavesdetailsarray[$ky][$date]['type'] == '6'){
-                        $dates[$date] = array('day'=>'S','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['S']['color_code'],'display_value'=>$shift['S']['display_value'],'strthalfday'=>$leavesdetailsarray[$ky][$date]['start_half_day'],'endthalfday'=>$leavesdetailsarray[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-                        $discrepancy[$ky] = $emp;
-                    }else{
-                        $dates[$date] = array('day'=>'V','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['V']['color_code'],'display_value'=>$shift['V']['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-                        $discrepancy[$ky] = $emp;
-                    }  **/
-                        //}else{
-                        $dates[$date] = array('day' => 'A', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['A']['color_code'], 'display_value' => $shift['A']['display_value']);
-                        $discrepancy[$ky] = $emp;
-                        //}
-                    }
-                    if ($i == '0') {
-                        $alldate[] = $date;
-                    }
-                    $start->modify(HrConstants::PLUS_ONE_DAYS);
-                }
-            } else {
-                $retrunarray['valuedisplaytype'] = "insert";
-                while ($start <= $end) {
-                    $date = $start->format('Y-m-d');
-                    $dy = $start->format('l');
-                    if ($emp['joining_date'] >= $date || ($emp['date_of_leaving'] <= $date && $emp['date_of_leaving'] != "")) {
-                        $dates[$date] = array('day' => 'A', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['A']['color_code'], 'display_value' => $shift['A']['display_value']);
-                    } elseif (in_array($date, (array) $holidaysdatas)) {
-                        $dates[$date] = array('day' => 'H', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['H']['color_code'], 'display_value' => $shift['H']['display_value']);
-                    } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1') && OFF_CHECK == '0') {
-                        $dates[$date] = array('day' => 'O', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['O']['color_code'], 'display_value' => $shift['O']['display_value']);
-                    } elseif ($tempdetailary[$ky][$date] != "") {
-
-                        $clockintime = $tempdetailary[$ky][$date]['clock_in'];
-                        $clockouttime = $tempdetailary[$ky][$date]['clock_out'];
-
-                        $discrepancy[$ky] = $emp;
-                        $attendance_key_short_code = $tempdetailary[$ky][$date]['type'];
-
-                        if (!in_array($attendance_key_short_code, $notleaveattendancekey)) {  // leave Show
-                            $actualworkingdays++;
-                            $monthworkingdays++;
-                            $dates[$date] = array('day' => $attendance_key_short_code, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift[$attendance_key_short_code]['color_code'], 'display_value' => $shift[$attendance_key_short_code]['display_value'], 'strthalfday' => $tempdetailary[$ky][$date]['start_half_day'], 'endthalfday' => $tempdetailary[$ky][$date]['end_half_day'], 'working_color' => $shift[$attendance_key_short_code]['color_code']);
-                        } else { // normal Day Show presdsent and absent
-                            if (in_array($attendance_key_short_code, $workingdayattendancekey)) {  // o,p working day count
-                                $monthworkingdays++;
-                                if ($attendance_key_short_code != 'O') {  // o,p working day count
-                                    $actualworkingdays++;
-
-                                }
-                            }
-                            $dates[$date] = array('day' => $attendance_key_short_code, 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift[$attendance_key_short_code]['color_code'], 'display_value' => $shift[$attendance_key_short_code]['display_value'], 'clock_in' => $clockintime, 'clock_out' => $clockouttime, 'working_color' => $shift['Z']['color_code']);
-
-                        }
-
-                        /**
-                        if($tempdetailary[$ky][$date]['type']=="A"){
-                            $discrepancy[$ky] = $emp;
-                            $dates[$date] = array('day'=>'A','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['A']['color_code'],'display_value'=>$shift['A']['display_value'],'clock_in'=>$clockintime,'clock_out'=>$clockouttime);
-                        }elseif($tempdetailary[$ky][$date]['type']=="P"){
-                            $discrepancy[$ky] = $emp;
-                            $dates[$date] = array('day'=>'P','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['P']['color_code'],'display_value'=>$shift['P']['display_value'],'clock_in'=>$clockintime,'clock_out'=>$clockouttime);
-                        }elseif($tempdetailary[$ky][$date]['type']=="O"){
-                            $discrepancy[$ky] = $emp;
-                            $dates[$date] = array('day'=>'O','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['O']['color_code'],'display_value'=>$shift['O']['display_value']);
-                        }else{
-                            $actualworkingdays++;
-                            $discrepancy[$ky] = $emp;
-                            $dates[$date] = array('day'=>$tempdetailary[$ky][$date]['type'],'date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift[$tempdetailary[$ky][$date]['type']]['color_code'],'display_value'=>$shift[$tempdetailary[$ky][$date]['type']]['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-
-
-                            /**if($tempdetailary[$ky][$date]['leave_type_id']=="6"){
-                                $discrepancy[$ky] = $emp;
-                                $dates[$date] = array('day'=>'S','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['S']['color_code'],'display_value'=>$shift['S']['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-                            }else{
-                                $discrepancy[$ky] = $emp;
-                                $dates[$date] = array('day'=>'V','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['V']['color_code'],'display_value'=>$shift['V']['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['P']['color_code']);
-                            }    **//**
-                        }  **/
-                    } else {
-                        $monthworkingdays++;
-                        $actualworkingdays++;
-                        $dates[$date] = array('day' => 'P', 'date' => $date, 'billable_hrs' => $timeshettempoyee[$date]['billable_hrs'], 'timesheetid' => $timeshettempoyee[$date]['id'], 'color_code' => $shift['P']['color_code'], 'display_value' => $shift['P']['display_value']);
-                    }
-                    if ($i == '0') {
-                        $alldate[] = $date;
-                    }
-                    $start->modify(HrConstants::PLUS_ONE_DAYS);
-                }
-            }
-            $timeshetetrys[$ky] = $dates;
-            $i++;
-            $monthworkignday[$ky] = $monthworkingdays;
-            $actualworkingday[$ky] = $actualworkingdays;
-        }
-        $retrunarray['shifts'] = $shiftcatres;
-        $retrunarray['monthworkingdays'] = $monthworkignday;
-        $retrunarray['actualworkingdays'] = $actualworkingday;
-        $retrunarray['discrepancy'] = $discrepancy;
-        $retrunarray['timesheet'] = $timeshetetrys;
-        $retrunarray['date'] = $alldate;
+        $retrunarray['shifts'] = $lookups['shiftcatres'];
+        $retrunarray['monthworkingdays'] = $gridResult['monthworkingdays'];
+        $retrunarray['actualworkingdays'] = $gridResult['actualworkingdays'];
+        $retrunarray['discrepancy'] = $gridResult['discrepancy'];
+        $retrunarray['timesheet'] = $gridResult['timesheet'];
+        $retrunarray['date'] = $gridResult['date'];
         $retrunarray['emplist'] = $empidlist;
-        $retrunarray['attendacnearray'] = $attendacnearray;
+        $retrunarray['attendacnearray'] = $lookups['attendacnearray'];
         $retrunarray['query'] = $query;
         return $retrunarray;
     }
 
     public function insertemployeeworkattendancespayareawise($get)
     {
-        global $callConfig;
-        $returnarray = array();
-        $lastid = '';
-        $shift_check = SHIFT_CHECK; //1 meaning yes
-        $month = $get['month'];
-        $year = $get['year'];
-        $get['month_year'] = $year . "-" . $month;
-        $attstc = "SELECT * FROM attendance_settings WHERE is_active=0 and company_id=" . $get['company_id'];
-        $atsdata = $callConfig->getRow($attstc);
-        $workingdays = json_decode($atsdata->working_days, 1);
-        if ($shift_check == 1) {
-            $shiftsql = "SELECT ss.id,emps.emp_id, ss.name, ss.minimum_hours_required,ss.half_day_hours,ss.working_days FROM emp_shifts emps, shift_settings ss WHERE emps.is_active  = ss.is_active AND  emps.company_id =ss.company_id AND  emps.shift_id  = ss.id AND emps.is_active = 0 AND emps.company_id=" . $get['company_id'];
-            $shiftres = $callConfig->getAllRows($shiftsql);
-            foreach ($shiftres as $shiftress) {
-                $shiftresarray[$shiftress->emp_id] = $shiftress;
-            }
-        }
-        $tempdetails = "SELECT * FROM temp_attendance_details WHERE is_active=0 and company_id=" . $get['company_id'] . " AND MONTH(attendance_date) = '" . $month . "' AND YEAR(attendance_date) = '" . $year . "'";
-        /**if($get['admin_type']!=1){
-            $tempdetails.=" AND employee_id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id IN (SELECT pay_area_id FROM payroll_area_admins WHERE emp_id = ".$get['emp_id']."))";
-        }**/
-
-        $tempdetailsdata = $callConfig->getAllRows($tempdetails); //holidays
-        $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=" . $get['company_id'] . " AND MONTH(holiday_date) = '" . $month . "' AND YEAR(holiday_date) = '" . $year . "'";
-        $holidaysdata = $callConfig->getAllRows($holidays); //holidays
-        $holidaysdatas = array();
-        foreach ($holidaysdata as $hvalue) {
-            $holidaysdatas[] = $hvalue->holiday_date;
-        }
-
-        $attendance_key_types = array();
-        $aktypesql = "SELECT key_short_code, leave_category_id FROM attendance_key_types WHERE is_active=0 and company_id=" . $get['company_id'] . " AND leave_category_id !=''";
-        $aktyperes = $callConfig->getAllRows($aktypesql); //holidays
-        foreach ($aktyperes as $valk) {
-            $attendance_key_types[$valk->key_short_code] = $valk->key_short_code;
-        }
-        foreach ($tempdetailsdata as $tempary) {
-            if ($tempary->attendance_key_short_code == 'A') {
-                $absentarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
-            } elseif ($tempary->attendance_key_short_code == 'P' || $tempary->attendance_key_short_code == 'Z') {
-                $presentarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
-            } elseif ($tempary->attendance_key_short_code == 'O') {
-                $offdayarray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
-            } elseif (in_array($tempary->attendance_key_short_code, $attendance_key_types)) {
-                $leavearray[$tempary->employee_id][$tempary->attendance_date] = $tempary;
-            }
-        }
-        $slctdate = date($get['year'] . "-" . $get['month'] . "-" . $get['monthstartday']);
-        $startdate = date("Y-m-d", strtotime($slctdate));
-        $enddate = date("Y-m-d", strtotime(HrConstants::PLUS_ONE_MONTH, strtotime($slctdate)));
-        $enddate = date("Y-m-d", strtotime(HrConstants::MINUS_ONE_DAYS, strtotime($enddate)));
-        $query = "SELECT id,display_name,image,emp_code, joining_date, date_of_leaving
-        FROM `employees` emp
-        WHERE emp.company_id = '" . $get['company_id'] . "' AND
-        emp.employee_type = 1 AND
-        emp.is_active = 0 AND
-        emp.id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id={$get['pay_area_id']} AND company_id={$get['company_id']} AND is_active=0) AND
-        ( CASE
-        WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving <= '" . $enddate . "') THEN 1
-        WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END) = 1 ";
-
-        /**if($get['admin_type']!=1){
-            $query.=" AND id IN (SELECT emp_id FROM pay_area_employees WHERE pay_area_id IN (SELECT pay_area_id FROM payroll_area_admins WHERE emp_id = ".$get['emp_id']."))";
-        } **/
-
-        $returnarray['sql'] = $query;
-        $empdatas = $callConfig->getAllRows($query);
-        foreach ($empdatas as $value) {
-            $empidlist[$value->id] = array('display_name' => $value->display_name, 'image' => $value->image, 'joining_date' => $value->joining_date, 'date_of_leaving' => $value->date_of_leaving);
-        }
-        $returnarray['empdatas'] = $empdatas;
-        $returnarray['count'] = count((array) $empdatas);
-
-
-        $insdailyattendance = "INSERT INTO `employee_daily_attendances`(`shift_settings_id`,`company_id`, `employee_id`, `attendace_date`, `clock_in`, `check_in_type`, `check_out_type`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`,`attendance_key_short_code`) VALUES ";
-        $insdailyattendancedetails = "INSERT INTO `employee_daily_attendance_details`(`company_id`, `employee_id`, `attendace_date`, `clock_in`, `check_in_type`, `check_out_type`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
-
-        $returnarray['empidlist'] = $empidlist;
-        foreach ($empidlist as $ky => $emp) {
-            $start = new DateTime($startdate);
-            $end = new DateTime($enddate);
-            $emp_details = $shiftresarray[$ky];
-            $emp_shift_days = json_decode($shiftresarray[$ky]->working_days, 1);
-            while ($start <= $end) {
-                $date = $start->format('Y-m-d');
-                $dy = $start->format('l');
-                if ($emp['joining_date'] >= $date || ($emp['date_of_leaving'] <= $date && $emp['date_of_leaving'] != "")) {
-                    // Employee not yet joined or has left
-                } elseif (in_array($date, (array) $holidaysdatas)) {
-                    //holidays
-                } elseif (isset($absentarray[$ky][$date])) {
-                    //absent part
-                } elseif (isset($offdayarray[$ky][$date])) {
-                    $attendance_key_short_code = $offdayarray[$ky][$date]->attendance_key_short_code;
-                    $insdailyattendance .= "('" . $emp_details->id . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','" . $instarttime . "', '1', '1', '0:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
-                } elseif (isset($leavearray[$ky][$date])) {
-                    //leave part
-                    //$arrayleave = array('emp_id'=>$ky,'categorytype'=>$leavearray[$ky][$date]->leave_type_id,'leave_year'=>$get['year'],'company_id'=>$get['company_id']);
-                    //$getleaveid = $this->checkLeaveBalanceOrHalfDay($arrayleave);
-                    $halfdaysleave = 1;
-                    if ($leavearray[$ky][$date]->start_half_day == '0') {
-                        $halfdaysleave = 0.5;
-                        $attendance_key_short_code = $leavearray[$ky][$date]->attendance_key_short_code;
-                        $insdailyattendance .= "('" . $emp_details->id . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','10:00:00', '1', '1', '14:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
-                        $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','10:00:00', '1', '1', '14:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
-                    }
-                    if ($leavearray[$ky][$date]->leave_type_id != "") {
-                        $updatequeryleave = "UPDATE emp_leave_balances SET consumed_leaves=consumed_leaves+" . $halfdaysleave . ",updated_date = '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "',updated_by = '" . $get['user_id'] . "' WHERE employee_id =" . $ky . " AND leave_type='" . $leavearray[$ky][$date]->leave_type_id . "'";
-                        $updateleave = $callConfig->executeQuery($updatequeryleave);
-                    }
-                    $returnarray['emp_leave_balances'][] = $updateleave;
-                    $insert_leave_array = array('company_id' => $get['company_id'], 'employee_id' => $ky, 'leave_type_id' => $leavearray[$ky][$date]->leave_type_id, 'leave_from' => $date, 'leave_to' => $date, 'leave_days' => $halfdaysleave, 'start_half_day' => $leavearray[$ky][$date]->start_half_day, 'end_half_day' => $leavearray[$ky][$date]->end_half_day, 'created_by' => $get['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS), 'is_active' => '0', 'current_status' => '199');
-                    $insertleave = $callConfig->insertRecord('employee_leaves', $insert_leave_array);
-                    $returnarray['employee_leaves'][] = $insertleave;
-                } elseif ((!in_array($dy, (array) $workingdays) && $shift_check == '0' && OFF_CHECK == '0') || (!in_array($dy, (array) $emp_shift_days) && $shift_check == '1' && OFF_CHECK == '0')) {
-                    //off days
-                } else {
-                    $starttime = $presentarray[$ky][$date]->clock_in;
-                    $endtime = $presentarray[$ky][$date]->clock_out;
-                    $instarttime = $starttime != "" ? $starttime : '10:00:00';
-                    $outendtime = $endtime != "" ? $endtime : '18:00:00';
-                    //working part
-                    $attendance_key_short_code = $presentarray[$ky][$date]->attendance_key_short_code;
-                    $insdailyattendance .= "('" . $emp_details->id . "','" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','" . $instarttime . "', '1', '1', '18:00:00','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "','" . $attendance_key_short_code . "'),";
-                    $insdailyattendancedetails .= "('" . $get['company_id'] . "', '" . $ky . "', '" . $date . "','10:00:00', '1', '1', '" . $outendtime . "','0','0', '" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "', '" . $get['user_id'] . "'),";
-                }
-                $start->modify(HrConstants::PLUS_ONE_DAYS);
-            }
-        }
-        $insdailyattendance = substr($insdailyattendance, 0, -1);
-        $insdailyattendance .= " ON DUPLICATE KEY UPDATE updated_date ='" . date(HrConstants::DATE_FORMAT_YMD_HIS) . "'";
-        $callConfig->executeQueryString($insdailyattendance);
-        $returnarray['employee_daily_attendances'][] = $insdailyattendance;
-        $insdailyattendancedetails = substr($insdailyattendancedetails, 0, -1);
-        $res1 = $callConfig->executeQueryString($insdailyattendancedetails);
-        $returnarray['employee_daily_attendance_details'][] = $res1;
-
-        $insertuserarray2 = array('company_id' => $get['company_id'], 'import_swap_in_out_id' => $lastid, 'month_year' => $get['month_year'], 'type' => 'S', 'user_id' => $get['user_id'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS), 'pay_area_id' => $get['pay_area_id']);
-        $tapres = $callConfig->insertRecord('work_attendance_logs', $insertuserarray2);
-        $returnarray['work_attendance_logs'] = $tapres;
-
-
-        return $returnarray;
-
+        return $this->persistWorkAttendancesFromTemp($get, true);
     }
     public function getAttendanceAuditHistoryByRid($get)
     {
@@ -3001,22 +2403,21 @@ public function getitadmindashboard($get)
             return $return;
         }
 
+        $dateError = $this->validateDateRanges($get);
+        if ($dateError !== null) {
+            $return['status'] = 'error';
+            $return['message'] = $dateError;
+            $return['report_rows'] = array();
+            return $return;
+        }
+
         $employee_type_query = "SELECT genc_detail_code, genc_detail_name FROM general_code_details
             WHERE genc_code LIKE '%EMPLOYEETYPES%' AND company_id=" . $company_id . " AND is_active=0 ORDER BY genc_detail_name ASC";
+        $return['employees'] = (array) $callConfig->getAllRows("SELECT id, emp_code, display_name FROM employees WHERE company_id=" . $company_id . " AND is_active=0 ORDER BY display_name ASC");
+        $return['departments'] = (array) $callConfig->getAllRows("SELECT id, department_name FROM departments WHERE company_id=" . $company_id . " AND is_active=0 ORDER BY department_name ASC");
+        $return['designations'] = (array) $callConfig->getAllRows("SELECT id, designation_name FROM designations WHERE company_id=" . $company_id . " AND is_active=0 ORDER BY designation_name ASC");
+        $return['locations'] = (array) $callConfig->getAllRows("SELECT id, location_name FROM locations WHERE company_id=" . $company_id . " AND is_active=0 ORDER BY location_name ASC");
 
-        $employees_query = "SELECT id, emp_code, display_name FROM employees
-            WHERE company_id=" . $company_id . " AND is_active=0 ORDER BY display_name ASC";
-        $departments_query = "SELECT id, department_name FROM departments
-            WHERE company_id=" . $company_id . " AND is_active=0 ORDER BY department_name ASC";
-        $designations_query = "SELECT id, designation_name FROM designations
-            WHERE company_id=" . $company_id . " AND is_active=0 ORDER BY designation_name ASC";
-        $locations_query = "SELECT id, location_name FROM locations
-            WHERE company_id=" . $company_id . " AND is_active=0 ORDER BY location_name ASC";
-
-        $return['employees'] = (array) $callConfig->getAllRows($employees_query);
-        $return['departments'] = (array) $callConfig->getAllRows($departments_query);
-        $return['designations'] = (array) $callConfig->getAllRows($designations_query);
-        $return['locations'] = (array) $callConfig->getAllRows($locations_query);
         $emp_types = $callConfig->getAllRows($employee_type_query);
         $emp_type_arr = array();
         foreach ($emp_types as $emp_type) {
@@ -3024,76 +2425,7 @@ public function getitadmindashboard($get)
         }
         $return['employee_type_map'] = $emp_type_arr;
 
-        $where = array();
-        $where[] = "e.company_id=" . $company_id;
-        $where[] = "e.is_active=0";
-
-        $employee_id = isset($get['employee_id']) ? (int) $get['employee_id'] : 0;
-        if ($employee_id > 0) {
-            $where[] = "e.id=" . $employee_id;
-        }
-
-        $department_id = isset($get['department_id']) ? (int) $get['department_id'] : 0;
-        if ($department_id > 0) {
-            $where[] = "e.department_id=" . $department_id;
-        }
-
-        $designation_id = isset($get['designation_id']) ? (int) $get['designation_id'] : 0;
-        if ($designation_id > 0) {
-            $where[] = "e.designation_id=" . $designation_id;
-        }
-
-        $location_id = isset($get['location_id']) ? (int) $get['location_id'] : 0;
-        if ($location_id > 0) {
-            $where[] = "e.location_id=" . $location_id;
-        }
-
-        $employee_type = isset($get['employee_type']) ? trim((string) $get['employee_type']) : '';
-        if ($employee_type !== '') {
-            $where[] = "e.employee_type='" . addslashes($employee_type) . "'";
-        }
-
-        $employee_status = isset($get['employee_status']) ? strtolower(trim((string) $get['employee_status'])) : '';
-        if ($employee_status === 'active') {
-            $where[] = "(e.date_of_leaving IS NULL OR e.date_of_leaving='' OR e.date_of_leaving='0000-00-00')";
-        } elseif ($employee_status === 'resigned') {
-            $where[] = "(e.date_of_leaving IS NOT NULL AND e.date_of_leaving<>'' AND e.date_of_leaving<>'0000-00-00')";
-        }
-
-        $joining_date_from = isset($get['joining_date_from']) ? trim((string) $get['joining_date_from']) : '';
-        $joining_date_to = isset($get['joining_date_to']) ? trim((string) $get['joining_date_to']) : '';
-        if ($joining_date_from !== '' && $joining_date_to !== '' && $joining_date_from > $joining_date_to) {
-            $return['status'] = 'error';
-            $return['message'] = 'Join Date From should be less than or equal to Join Date To.';
-            $return['report_rows'] = array();
-            return $return;
-        }
-
-        if ($joining_date_from !== '') {
-            $where[] = "DATE(e.joining_date) >= '" . addslashes($joining_date_from) . "'";
-        }
-
-        if ($joining_date_to !== '') {
-            $where[] = "DATE(e.joining_date) <= '" . addslashes($joining_date_to) . "'";
-        }
-
-        $relieving_date_from = isset($get['relieving_date_from']) ? trim((string) $get['relieving_date_from']) : '';
-        $relieving_date_to = isset($get['relieving_date_to']) ? trim((string) $get['relieving_date_to']) : '';
-        if ($relieving_date_from !== '' && $relieving_date_to !== '' && $relieving_date_from > $relieving_date_to) {
-            $return['status'] = 'error';
-            $return['message'] = 'Relieving Date From should be less than or equal to Relieving Date To.';
-            $return['report_rows'] = array();
-            return $return;
-        }
-
-        if ($relieving_date_from !== '') {
-            $where[] = "(e.date_of_leaving IS NOT NULL AND e.date_of_leaving<>'' AND e.date_of_leaving<>'0000-00-00' AND DATE(e.date_of_leaving) >= '" . addslashes($relieving_date_from) . "')";
-        }
-
-        if ($relieving_date_to !== '') {
-            $where[] = "(e.date_of_leaving IS NOT NULL AND e.date_of_leaving<>'' AND e.date_of_leaving<>'0000-00-00' AND DATE(e.date_of_leaving) <= '" . addslashes($relieving_date_to) . "')";
-        }
-
+        $where = $this->buildEmployeeReportFilterWhere($get, $company_id);
         $report_query = "SELECT
                 e.id,
                 e.emp_code,
@@ -3113,38 +2445,8 @@ public function getitadmindashboard($get)
             ORDER BY e.display_name ASC";
 
         $report_data = (array) $callConfig->getAllRows($report_query);
-        $report_rows = array();
-        foreach ($report_data as $row) {
-            $employee_type_val = $row->employee_type;
-            $employee_type_label = isset($emp_type_arr[(int) $employee_type_val])
-                ? $emp_type_arr[(int) $employee_type_val]
-                : (string) $employee_type_val;
-
-            $is_resigned = (
-                isset($row->date_of_leaving)
-                && $row->date_of_leaving !== null
-                && trim((string) $row->date_of_leaving) !== ''
-                && trim((string) $row->date_of_leaving) !== '0000-00-00'
-            );
-
-            $report_rows[] = array(
-                'id' => $row->id,
-                'emp_code' => $row->emp_code,
-                'display_name' => $row->display_name,
-                'phone' => $row->phone,
-                'employee_type' => $employee_type_val,
-                'employee_type_label' => $employee_type_label,
-                'department' => $row->department_name,
-                'designation' => $row->designation_name,
-                'location' => $row->location_name,
-                'employee_status' => $is_resigned ? 'Resigned' : 'Active',
-                'joining_date' => $row->joining_date,
-                'date_of_leaving' => $row->date_of_leaving
-            );
-        }
-
         $return['status'] = 'success';
-        $return['report_rows'] = $report_rows;
+        $return['report_rows'] = $this->formatEmployeeReportRows($report_data, $emp_type_arr);
         return $return;
     }
     public function togetemployeesassementyear($get)
@@ -3205,6 +2507,413 @@ public function getitadmindashboard($get)
         }
         return $res;
     }
+    private function buildMissingDetailsUserMaps($users)
+    {
+        $usersById = array();
+        $user_emails = array();
+        foreach ($users as $user) {
+            $uid = isset($user->id) ? intval($user->id) : 0;
+            if ($uid <= 0) {
+                continue;
+            }
+
+            $email = isset($user->user_email) ? trim((string) $user->user_email) : '';
+            $email_key = strtolower($email);
+
+            $usersById[$uid] = array(
+                'id' => $uid,
+                'user_name' => isset($user->user_name) ? trim((string) $user->user_name) : '',
+                'user_email' => $email,
+                'display_name' => isset($user->display_name) ? trim((string) $user->display_name) : ''
+            );
+
+            if ($email_key != '') {
+                $user_emails[$email_key] = $usersById[$uid];
+            }
+        }
+        return [$usersById, $user_emails];
+    }
+
+    private function resolveMissingDetailsLinkAndNameUpdates(&$employees, $usersById, $user_emails, &$sync_summary)
+    {
+        $employeeLinkUpdates = array();
+        $userNameUpdates = array();
+        $claimed_usernames = array();
+
+        foreach ($employees as $index => $emp) {
+            $emp_id = isset($emp->id) ? intval($emp->id) : 0;
+            if ($emp_id <= 0) {
+                continue;
+            }
+
+            $emp_email = isset($emp->email_id) ? trim((string) $emp->email_id) : '';
+            $emp_email_key = strtolower($emp_email);
+            $emp_user_id = isset($emp->user_id) ? intval($emp->user_id) : 0;
+            $emp_code = isset($emp->emp_code) ? trim((string) $emp->emp_code) : '';
+
+            if ($emp_user_id <= 0 && $emp_email_key != '' && isset($user_emails[$emp_email_key])) {
+                $matched_user_id = intval($user_emails[$emp_email_key]['id']);
+                if ($matched_user_id > 0) {
+                    $employeeLinkUpdates[$emp_id] = $matched_user_id;
+                    $emp_user_id = $matched_user_id;
+                    $employees[$index]->user_id = $matched_user_id;
+                    $sync_summary['employee_link_details'][] = array(
+                        'emp_id' => $emp_id,
+                        'emp_code' => $emp_code,
+                        'user_id' => $matched_user_id,
+                        'matched_by' => 'email'
+                    );
+                }
+            }
+
+            $matched_user = null;
+            if ($emp_user_id > 0 && isset($usersById[$emp_user_id])) {
+                $matched_user = $usersById[$emp_user_id];
+            } elseif ($emp_email_key != '' && isset($user_emails[$emp_email_key])) {
+                $matched_user = $user_emails[$emp_email_key];
+            }
+
+            if ($matched_user && $emp_code != '') {
+                $matched_user_id = intval($matched_user['id']);
+                $current_user_name = trim((string) $matched_user['user_name']);
+                $target_email = trim((string) $matched_user['user_email']);
+                $emp_code_lower = strtolower($emp_code);
+
+                if ($matched_user_id > 0 && $current_user_name != $emp_code) {
+                    if (isset($userNameUpdates[$matched_user_id])) {
+                        $sync_summary['skipped_operations'][] = array(
+                            'type' => 'username_sync',
+                            'emp_id' => $emp_id,
+                            'emp_code' => $emp_code,
+                            'user_id' => $matched_user_id,
+                            'target_username' => $emp_code,
+                            'reason' => 'user_already_queued_for_different_employee'
+                        );
+                        continue;
+                    }
+
+                    $username_taken = false;
+                    $conflict_reason = '';
+                    foreach ($usersById as $existing_uid => $existing_user) {
+                        if ($existing_uid != $matched_user_id && strtolower(trim((string) $existing_user['user_name'])) == $emp_code_lower) {
+                            $username_taken = true;
+                            $conflict_reason = 'already_exists_in_db';
+                            break;
+                        }
+                    }
+
+                    if (!$username_taken && isset($claimed_usernames[$emp_code_lower])) {
+                        $username_taken = true;
+                        $conflict_reason = 'already_claimed_in_batch';
+                    }
+
+                    if (!$username_taken) {
+                        $userNameUpdates[$matched_user_id] = array('user_name' => $emp_code, 'user_email' => $target_email);
+                        $claimed_usernames[$emp_code_lower] = $matched_user_id;
+                        $sync_summary['username_sync_details'][] = array(
+                            'user_id' => $matched_user_id,
+                            'old_username' => $current_user_name,
+                            'new_username' => $emp_code,
+                            'user_email' => $target_email
+                        );
+                    } else {
+                        $sync_summary['skipped_operations'][] = array(
+                            'type' => 'username_sync',
+                            'emp_id' => $emp_id,
+                            'emp_code' => $emp_code,
+                            'user_id' => $matched_user_id,
+                            'target_username' => $emp_code,
+                            'reason' => $conflict_reason
+                        );
+                    }
+                }
+            }
+        }
+        return [$employeeLinkUpdates, $userNameUpdates];
+    }
+
+    private function applyMissingDetailsSyncUpdates($company_id, $sync_user_id, $employeeLinkUpdates, $userNameUpdates, &$sync_summary)
+    {
+        global $callConfig;
+        if (!empty($employeeLinkUpdates)) {
+            $empIds = array_keys($employeeLinkUpdates);
+            $caseParts = array();
+            foreach ($employeeLinkUpdates as $eid => $uid) {
+                $caseParts[] = "WHEN " . intval($eid) . " THEN " . intval($uid);
+            }
+            $link_query = "UPDATE employees
+                           SET user_id = CASE id " . implode(' ', $caseParts) . " END
+                           WHERE id IN (" . implode(',', array_map('intval', $empIds)) . ")
+                             AND company_id = " . $company_id . "
+                             AND is_active = 0";
+            if ($callConfig->executeQuery($link_query)) {
+                $sync_summary['employee_user_linked'] = count($employeeLinkUpdates);
+            }
+        }
+
+        if (!empty($userNameUpdates)) {
+            $userIds = array_keys($userNameUpdates);
+            $caseParts = array();
+            foreach ($userNameUpdates as $uid => $urow) {
+                $safe_name = addslashes($urow['user_name']);
+                $caseParts[] = "WHEN " . intval($uid) . " THEN '" . $safe_name . "'";
+            }
+
+            $user_update_query = "UPDATE application_users
+                                  SET user_name = CASE id " . implode(' ', $caseParts) . " END
+                                  WHERE id IN (" . implode(',', array_map('intval', $userIds)) . ")
+                                    AND company_id = " . $company_id . "
+                                    AND is_active = 0";
+            if ($callConfig->executeQuery($user_update_query)) {
+                $sync_summary['user_name_synced'] = count($userNameUpdates);
+            }
+
+            $candidateEmails = array();
+            $emailList = array();
+            foreach ($userNameUpdates as $urow) {
+                $email = trim((string) $urow['user_email']);
+                if ($email == '') {
+                    continue;
+                }
+                $email_lower = strtolower($email);
+                $candidateEmails[$email_lower] = $urow;
+                $emailList[] = addslashes($email);
+            }
+
+            if (!empty($candidateEmails)) {
+                $emailList = array_unique($emailList);
+                $exists_query = "SELECT user_email FROM " . MAINDB . ".user_registered_groups WHERE is_active = 0 AND user_email IN ('" . implode("','", $emailList) . "')";
+                $exists_rows = $callConfig->getAllRows($exists_query);
+                $existingEmails = array();
+                if (!empty($exists_rows)) {
+                    foreach ($exists_rows as $erow) {
+                        $existingEmails[strtolower(trim((string) $erow->user_email))] = true;
+                    }
+                }
+
+                foreach ($candidateEmails as $email_lower => $urow) {
+                    if (isset($existingEmails[$email_lower])) {
+                        $sync_summary['skipped_operations'][] = array(
+                            'type' => 'registered_group_insert',
+                            'user_email' => $urow['user_email'],
+                            'user_name' => $urow['user_name'],
+                            'reason' => 'email_already_exists_in_registered_groups'
+                        );
+                        continue;
+                    }
+
+                    $insert_registered_group = array(
+                        'group_id' => 0,
+                        'user_email' => addslashes($urow['user_email']),
+                        'zqr_text' => '',
+                        'zqr_connect' => '',
+                        'reset_password' => '',
+                        'start_date' => date('Y-m-d'),
+                        'expiry_date' => null,
+                        'email_active' => '',
+                        'email_active_date' => null,
+                        'is_active' => 0,
+                        'current_status' => 0,
+                        'status_date' => date(HrConstants::DATE_FORMAT_YMD_HIS),
+                        'from_date' => date('Y-m-d'),
+                        'to_date' => null,
+                        'created_date' => date(HrConstants::DATE_FORMAT_YMD_HIS),
+                        'created_by' => $sync_user_id,
+                        'updated_by' => $sync_user_id,
+                        'updated_date' => date(HrConstants::DATE_FORMAT_YMD_HIS)
+                    );
+
+                    $insert_res = $callConfig->insertRecord(MAINDB . '.user_registered_groups', $insert_registered_group);
+                    if ($insert_res && isset($insert_res['LASTID'])) {
+                        $sync_summary['registered_group_inserted']++;
+                        $sync_summary['registered_group_details'][] = array(
+                            'id' => $insert_res['LASTID'],
+                            'user_email' => $urow['user_email'],
+                            'user_name' => $urow['user_name']
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    private function assembleMissingEmployeeRecords($employees, $users, $salary, $pay_area)
+    {
+        $users_with_name = array();
+        foreach ($users as $user) {
+            $uid = isset($user->id) ? intval($user->id) : 0;
+            if ($uid > 0) {
+                $users_with_name[$uid] = isset($user->user_name) ? trim((string) $user->user_name) : '';
+            }
+        }
+
+        $salary_emp_ids = array();
+        foreach ($salary as $salary_row) {
+            $sid = isset($salary_row->employee_id) ? intval($salary_row->employee_id) : 0;
+            if ($sid > 0) {
+                $salary_emp_ids[$sid] = true;
+            }
+        }
+
+        $pay_area_emp_ids = array();
+        foreach ($pay_area as $pay_area_row) {
+            $pid = isset($pay_area_row->emp_id) ? intval($pay_area_row->emp_id) : 0;
+            if ($pid > 0) {
+                $pay_area_emp_ids[$pid] = true;
+            }
+        }
+
+        $missing_employees = array();
+        foreach ($employees as $emp) {
+            $emp_id = isset($emp->id) ? intval($emp->id) : 0;
+            if ($emp_id <= 0) {
+                continue;
+            }
+
+            $emp_code = isset($emp->emp_code) ? trim((string) $emp->emp_code) : '';
+            $display_name = isset($emp->display_name) ? trim((string) $emp->display_name) : '';
+            $email = isset($emp->email_id) ? trim((string) $emp->email_id) : '';
+            $emp_user_id = isset($emp->user_id) ? intval($emp->user_id) : 0;
+            $b_machine_id = isset($emp->b_machine_id) ? trim((string) $emp->b_machine_id) : '';
+
+            $missing_flags = array();
+            if ($email == '') {
+                $missing_flags['email'] = 'N';
+            }
+            if ($b_machine_id == '') {
+                $missing_flags['b_machine_id'] = 'N';
+            }
+            if ($emp_user_id <= 0 || !isset($users_with_name[$emp_user_id]) || $users_with_name[$emp_user_id] == '') {
+                $missing_flags['user'] = 'N';
+            }
+            if (!isset($salary_emp_ids[$emp_id])) {
+                $missing_flags['salary'] = 'N';
+            }
+            if (!isset($pay_area_emp_ids[$emp_id])) {
+                $missing_flags['pay_area'] = 'N';
+            }
+
+            if (!empty($missing_flags)) {
+                $missing_employees[] = array(
+                    'id' => $emp_id,
+                    'emp_code' => $emp_code,
+                    'display_name' => $display_name,
+                    'missing' => $missing_flags
+                );
+            }
+        }
+        return $missing_employees;
+    }
+
+    private function validateDateRanges($get)
+    {
+        $joining_date_from = isset($get['joining_date_from']) ? trim((string) $get['joining_date_from']) : '';
+        $joining_date_to = isset($get['joining_date_to']) ? trim((string) $get['joining_date_to']) : '';
+        if ($joining_date_from !== '' && $joining_date_to !== '' && $joining_date_from > $joining_date_to) {
+            return 'Join Date From should be less than or equal to Join Date To.';
+        }
+
+        $relieving_date_from = isset($get['relieving_date_from']) ? trim((string) $get['relieving_date_from']) : '';
+        $relieving_date_to = isset($get['relieving_date_to']) ? trim((string) $get['relieving_date_to']) : '';
+        if ($relieving_date_from !== '' && $relieving_date_to !== '' && $relieving_date_from > $relieving_date_to) {
+            return 'Relieving Date From should be less than or equal to Relieving Date To.';
+        }
+
+        return null;
+    }
+
+    private function buildEmployeeReportFilterWhere($get, $company_id)
+    {
+        $where = array();
+        $where[] = "e.company_id=" . $company_id;
+        $where[] = "e.is_active=0";
+
+        $employee_id = isset($get['employee_id']) ? (int) $get['employee_id'] : 0;
+        if ($employee_id > 0) {
+            $where[] = "e.id=" . $employee_id;
+        }
+
+        $department_id = isset($get['department_id']) ? (int) $get['department_id'] : 0;
+        if ($department_id > 0) {
+            $where[] = "e.department_id=" . $department_id;
+        }
+
+        $designation_id = isset($get['designation_id']) ? (int) $get['designation_id'] : 0;
+        if ($designation_id > 0) {
+            $where[] = "e.designation_id=" . $designation_id;
+        }
+
+        $location_id = isset($get['location_id']) ? (int) $get['location_id'] : 0;
+        if ($location_id > 0) {
+            $where[] = "e.location_id=" . $location_id;
+        }
+
+        $employee_type = isset($get['employee_type']) ? trim((string) $get['employee_type']) : '';
+        if ($employee_type !== '') {
+            $where[] = "e.employee_type='" . addslashes($employee_type) . "'";
+        }
+
+        $employee_status = isset($get['employee_status']) ? strtolower(trim((string) $get['employee_status'])) : '';
+        if ($employee_status === 'active') {
+            $where[] = "(e.date_of_leaving IS NULL OR e.date_of_leaving='' OR e.date_of_leaving='0000-00-00')";
+        } elseif ($employee_status === 'resigned') {
+            $where[] = "(e.date_of_leaving IS NOT NULL AND e.date_of_leaving<>'' AND e.date_of_leaving<>'0000-00-00')";
+        }
+
+        $joining_date_from = isset($get['joining_date_from']) ? trim((string) $get['joining_date_from']) : '';
+        $joining_date_to = isset($get['joining_date_to']) ? trim((string) $get['joining_date_to']) : '';
+        if ($joining_date_from !== '') {
+            $where[] = "DATE(e.joining_date) >= '" . addslashes($joining_date_from) . "'";
+        }
+        if ($joining_date_to !== '') {
+            $where[] = "DATE(e.joining_date) <= '" . addslashes($joining_date_to) . "'";
+        }
+
+        $relieving_date_from = isset($get['relieving_date_from']) ? trim((string) $get['relieving_date_from']) : '';
+        $relieving_date_to = isset($get['relieving_date_to']) ? trim((string) $get['relieving_date_to']) : '';
+        if ($relieving_date_from !== '') {
+            $where[] = "(e.date_of_leaving IS NOT NULL AND e.date_of_leaving<>'' AND e.date_of_leaving<>'0000-00-00' AND DATE(e.date_of_leaving) >= '" . addslashes($relieving_date_from) . "')";
+        }
+        if ($relieving_date_to !== '') {
+            $where[] = "(e.date_of_leaving IS NOT NULL AND e.date_of_leaving<>'' AND e.date_of_leaving<>'0000-00-00' AND DATE(e.date_of_leaving) <= '" . addslashes($relieving_date_to) . "')";
+        }
+
+        return $where;
+    }
+
+    private function formatEmployeeReportRows($report_data, $emp_type_arr)
+    {
+        $report_rows = array();
+        foreach ($report_data as $row) {
+            $employee_type_val = $row->employee_type;
+            $employee_type_label = isset($emp_type_arr[(int) $employee_type_val])
+                ? $emp_type_arr[(int) $employee_type_val]
+                : (string) $employee_type_val;
+
+            $is_resigned = (
+                isset($row->date_of_leaving)
+                && $row->date_of_leaving !== null
+                && trim((string) $row->date_of_leaving) !== ''
+                && trim((string) $row->date_of_leaving) !== '0000-00-00'
+            );
+
+            $report_rows[] = array(
+                'id' => $row->id,
+                'emp_code' => $row->emp_code,
+                'display_name' => $row->display_name,
+                'phone' => $row->phone,
+                'employee_type' => $employee_type_val,
+                'employee_type_label' => $employee_type_label,
+                'department' => $row->department_name,
+                'designation' => $row->designation_name,
+                'location' => $row->location_name,
+                'employee_status' => $is_resigned ? 'Resigned' : 'Active',
+                'joining_date' => $row->joining_date,
+                'date_of_leaving' => $row->date_of_leaving
+            );
+        }
+        return $report_rows;
+    }
 }
 
 class HrUserClass extends userClass
@@ -3213,33 +2922,23 @@ class HrUserClass extends userClass
     use HrPayrollTrait;
     use HrReportsAndOperationsTrait;
 
-    public function InsertImportSwapInOut($get, $post)
+    public function __call($name, $arguments)
     {
-        return $this->insertImportSwapInOut($get, $post);
-    }
-
-    public function holdpayroll_exclusions($get, $post = null)
-    {
-        return $this->holdPayrollExclusions($get, $post);
-    }
-
-    public function InsertCustomerEmployeeBillings($get, $post)
-    {
-        return $this->insertCustomerEmployeeBillings($get, $post);
-    }
-
-    public function getemployeeworkattendances_new($get)
-    {
-        return $this->getEmployeeWorkAttendancesNew($get);
-    }
-
-    public function Resetthrpayrolldatabasedonmonthandyearandpayarea($get, $post)
-    {
-        return $this->resetthrpayrolldatabasedonmonthandyearandpayarea($get, $post);
-    }
-
-    public function togetpayareaconfigdetailsbasedonemp_id($emp_id)
-    {
-        return $this->toGetPayAreaConfigDetailsBasedOnEmpId($emp_id);
+        $map = [
+            'insertimportswapinout' => 'insertImportSwapInOut',
+            'holdpayroll_exclusions' => 'holdPayrollExclusions',
+            'insertcustomeremployeebillings' => 'insertCustomerEmployeeBillings',
+            'getemployeeworkattendances_new' => 'getEmployeeWorkAttendancesNew',
+            'resetthrpayrolldatabasedonmonthandyearandpayarea' => 'resetthrpayrolldatabasedonmonthandyearandpayarea',
+            'togetpayareaconfigdetailsbasedonemp_id' => 'toGetPayAreaConfigDetailsBasedOnEmpId',
+        ];
+        $lower = strtolower($name);
+        if (isset($map[$lower])) {
+            return $this->{$map[$lower]}(...$arguments);
+        }
+        if (is_callable(['parent', '__call'])) {
+            return parent::__call($name, $arguments);
+        }
+        throw new \BadMethodCallException("Method {$name} does not exist.");
     }
 }
