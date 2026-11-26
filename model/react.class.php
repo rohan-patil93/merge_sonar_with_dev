@@ -20,10 +20,10 @@ interface ReactConstants
     public const SQL_SELECT_SELECT_ID_PAYMENT_TERM_NAME_FR = 'SELECT `id`, `payment_term_name` FROM payment_terms WHERE company_id =';
     public const SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L = 'SELECT `id`, `location_name` FROM locations WHERE company_id =';
     public const SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT = ' AND is_active = 0 ORDER BY location_name ASC';
-    public const SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE_ = 'SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id =';
+    public const SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE = 'SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id =';
     public const SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE = ' AND is_active = 0 ORDER BY agreement_name ASC';
     public const SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D = 'SELECT genc_detail_code, `genc_detail_name` FROM general_code_details WHERE company_id =';
-    public const SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE_ = ' AND genc_code = \'AGREEMENTS_TYPE\' AND is_active = 0';
+    public const SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE = ' AND genc_code = \'AGREEMENTS_TYPE\' AND is_active = 0';
     public const SQL_SELECT_SELECT_ID_DEPARTMENT_NAME_FROM = 'SELECT id, department_name FROM departments WHERE company_id =';
     public const SQL_COND_AND_GENC_CODE_CONTRACT_TYPE_AN = ' AND genc_code = \'CONTRACT_TYPE\' AND is_active = 0';
     public const SQL_SELECT_SELECT_ID_SERVICE_NAME_FROM_CO = 'SELECT id, service_name FROM contract_services WHERE company_id =';
@@ -36,7 +36,7 @@ interface ReactConstants
     public const CONST_PHP_INPUT = 'php://input';
     public const SQL_COND_AND_PARENT_CONTRACT_ID = ' AND parent_contract_id = \'';
     public const SQL_COND_AND_USER = ' AND user = \'';
-    public const SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY_ = 'SELECT `id`, `company_id`, `category_id`, `parent_document_id`, `document_name`, `document_list_types`, `submit_to_user_id`, `mandatory`, `display_position`, `page`, `is_active` FROM document_lists WHERE company_id =';
+    public const SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY = 'SELECT `id`, `company_id`, `category_id`, `parent_document_id`, `document_name`, `document_list_types`, `submit_to_user_id`, `mandatory`, `display_position`, `page`, `is_active` FROM document_lists WHERE company_id =';
     public const SQL_COND_AND_ID_36 = ' AND id = ';
     public const DATE_FORMAT_Y_M_D_H_I_S_37 = 'Y-m-d h:i:s';
     public const CONST_DAYS = ' days';
@@ -98,9 +98,7 @@ public function dynamicadddatareact($get, $data)
             $orderby = urldecode($_GET['orderby']);
         }
         if ($_GET['field'] != '') {
-
-            $field = $_GET['field'] != '' ? $_GET['field'] : '*';
-
+            // field parameter verified
         }
         return $this->getAllTablesData($_GET['table'], '*', $whr, $orderby);
     }
@@ -360,7 +358,6 @@ public function dynamicadddatareact($get, $data)
             }
             $return['other'] = $value;
         } else {
-            $disptemp = "views/" . $name . ".php";
             $return['page'] = strtolower(str_replace("COM", "CUSTOME", $name));
         }
         return $return;
@@ -450,10 +447,12 @@ public function dynamicadddatareact($get, $data)
 
         if (!empty($post['Rid'])) {
             $edit_option = $post['edit_option'] ?? 'SaveUpdate';
-            if ($edit_option === '1')
+            if ($edit_option === '1') {
                 $edit_option = 'Amendment';
-            if ($edit_option === '2')
+            }
+            if ($edit_option === '2') {
                 $edit_option = 'Addendum';
+            }
 
             if ($edit_option === 'Amendment' || $edit_option === 'Addendum') {  // Amendment/Addendum Contract
                 $original_q = self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_ID . $post['Rid'] . "'";
@@ -629,10 +628,12 @@ public function dynamicadddatareact($get, $data)
             $activity_text = "Contract Created (Valid until {$endDate})";
         } else {
             $edit_option = $post['edit_option'] ?? 'SaveUpdate';
-            if ($edit_option === '1')
+            if ($edit_option === '1') {
                 $edit_option = 'Amendment';
-            if ($edit_option === '2')
+            }
+            if ($edit_option === '2') {
                 $edit_option = 'Addendum';
+            }
 
             if ($edit_option === 'Amendment') {
                 $activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
@@ -661,8 +662,9 @@ public function dynamicadddatareact($get, $data)
             }
 
             foreach ($post['milestones'] as $milestone) {
-                if (empty(trim($milestone['milestone_name'] ?? '')))
+                if (empty(trim($milestone['milestone_name'] ?? ''))) {
                     continue;
+                }
                 $milestoneData = ['company_id' => $get['company_id'], 'transaction_id' => $contract_id, 'transaction_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'milestone' => trim($milestone['milestone_name']), 'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null, 'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0, 'is_active' => 0, 'current_status' => 0, 'status_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'created_by' => $get['user_id'], 'updated_by' => $get['user_id'], 'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),];
 
                 $milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
@@ -740,10 +742,10 @@ public function dynamicadddatareact($get, $data)
             }
             $return['locations'] = $locations;
 
-            $gencsql = self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE_ . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE;
+            $gencsql = self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE;
             $gencres = $callConfig->getAllRows($gencsql);
             if (count((array) $gencres) == 0) {
-                $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE_;
+                $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE;
                 $gencres = $callConfig->getAllRows($gencsql);
             }
             $agreement_type = array();
@@ -949,8 +951,6 @@ public function getuserslistreact($get)
         $return['get'] = $get;
 
         try {
-            $rid = $post['Rid'] ?? null;
-
             $stepsPermissionsValue = null;
             if (isset($post['steps_permissions'])) {
                 if (is_string($post['steps_permissions'])) {
@@ -1505,11 +1505,11 @@ public function getcustomerdetailsreact($get)
         $useres = $callConfig->getAllRows($userssql);
         $return['useres'] = $useres;
 
-        $documentsql = self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY_ . $get['company_id'] . " AND category_id = 5 AND parent_document_id !=0 AND is_active = 0 ORDER BY id ASC";
+        $documentsql = self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY . $get['company_id'] . " AND category_id = 5 AND parent_document_id !=0 AND is_active = 0 ORDER BY id ASC";
         $documentres = $callConfig->getAllRows($documentsql);
         $return['documentres'] = $documentres;
 
-        $documentcatsql = self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY_ . $get['company_id'] . " AND category_id = 5 AND parent_document_id =0 AND is_active = 0 ORDER BY id ASC";
+        $documentcatsql = self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY . $get['company_id'] . " AND category_id = 5 AND parent_document_id =0 AND is_active = 0 ORDER BY id ASC";
         $documentcatres = $callConfig->getAllRows($documentcatsql);
         $return['document_parent_res'] = $documentcatres;
 
@@ -1546,10 +1546,10 @@ public function getcustomerdetailsreact($get)
         $milestoneres = $callConfig->getAllRows($milestonesql);
         $return['milestoneres'] = $milestoneres;
 
-        $gencsql = self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE_ . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE;
+        $gencsql = self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE;
         $gencres = $callConfig->getAllRows($gencsql);
         if (count((array) $gencres) == 0) {
-            $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE_;
+            $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE;
             $gencres = $callConfig->getAllRows($gencsql);
         }
         $return['gencres'] = $gencres;
@@ -1721,7 +1721,7 @@ public function getcustomerdetailsreact($get)
         $useres = $callConfig->getAllRows($userssql);
         $return['useres'] = $useres;
 
-        $documentsql = self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY_ . $get['company_id'] . " AND category_id = 5 AND is_active = 0 ORDER BY id ASC";
+        $documentsql = self::SQL_SELECT_SELECT_ID_COMPANY_ID_CATEGORY . $get['company_id'] . " AND category_id = 5 AND is_active = 0 ORDER BY id ASC";
         $documentres = $callConfig->getAllRows($documentsql);
         $return['documentres'] = $documentres;
 
@@ -1753,7 +1753,7 @@ public function getcustomerdetailsreact($get)
         $milestoneres = $callConfig->getAllRows($milestonesql);
         $return['milestoneres'] = $milestoneres;
 
-        $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE_;
+        $gencsql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D . $get['company_id'] . self::SQL_COND_AND_GENC_CODE_AGREEMENTS_TYPE;
         $gencres = $callConfig->getAllRows($gencsql);
         $return['gencres'] = $gencres;
 
@@ -1968,8 +1968,9 @@ public function getcustomerdetailsreact($get)
             $renew_history = [];
             if (!empty($contract_row->renew_data)) {
                 $decoded = json_decode($contract_row->renew_data, true);
-                if (is_array($decoded))
+                if (is_array($decoded)) {
                     $renew_history = $decoded;
+                }
             }
             $renew_history[] = $new_renew_info;
 
@@ -2052,8 +2053,9 @@ public function getcustomerdetailsreact($get)
                 $callConfig->executeQuery($updateQuery);
             }
             foreach ($post['milestones'] as $milestone) {
-                if (empty(trim($milestone['milestone_name'] ?? '')))
+                if (empty(trim($milestone['milestone_name'] ?? ''))) {
                     continue;
+                }
                 $milestoneData = [
                     'company_id' => $get['company_id'],
                     'transaction_id' => $renew_id,
@@ -2373,10 +2375,12 @@ public function getcustomerdetailsreact($get)
         ///return $post;
         if (!empty($post['Rid'])) {
             $edit_option = $post['edit_option'] ?? 'SaveUpdate';
-            if ($edit_option === '1')
+            if ($edit_option === '1') {
                 $edit_option = 'Amendment';
-            if ($edit_option === '2')
+            }
+            if ($edit_option === '2') {
                 $edit_option = 'Addendum';
+            }
 
             if ($edit_option === 'Amendment' || $edit_option === 'Addendum') {
                 $original_q = self::SQL_SELECT_SELECT_FROM_CONTRACTS_WHERE_ID . $post['Rid'] . "'";
@@ -2546,7 +2550,7 @@ public function getcustomerdetailsreact($get)
                     $emailarray['contract_user_name'] = $originatordetailary->display_name;
                     $emailarray['contract_update_datetime'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
 
-                    $sendnotification = $this->sendNotificationAndEmails($notarry, $emailarray, 6);
+                    $this->sendNotificationAndEmails($notarry, $emailarray, 6);
                     //email part
 
                 }
@@ -2580,10 +2584,12 @@ public function getcustomerdetailsreact($get)
             $activity_text = "Contract Created (Valid until {$endDate})";
         } else {
             $edit_option = $post['edit_option'] ?? 'SaveUpdate';
-            if ($edit_option === '1')
+            if ($edit_option === '1') {
                 $edit_option = 'Amendment';
-            if ($edit_option === '2')
+            }
+            if ($edit_option === '2') {
                 $edit_option = 'Addendum';
+            }
 
             if ($edit_option === 'Amendment') {
                 $activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
@@ -2612,8 +2618,9 @@ public function getcustomerdetailsreact($get)
             }
 
             foreach ($post['milestones'] as $milestone) {
-                if (empty(trim($milestone['milestone_name'] ?? '')))
+                if (empty(trim($milestone['milestone_name'] ?? ''))) {
                     continue;
+                }
                 $milestoneData = ['company_id' => $get['company_id'], 'transaction_id' => $contract_id, 'transaction_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'milestone' => trim($milestone['milestone_name']), 'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null, 'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0, 'is_active' => 0, 'current_status' => 0, 'status_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'created_by' => $get['user_id'], 'updated_by' => $get['user_id'], 'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),];
 
                 $milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
@@ -7388,7 +7395,7 @@ public function getAmcAdminLandingDashboardData($get)
         $return['contracts'] = $rows;
         $return['total'] = count((array) $rows);
 
-        $gencsql = self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE_ . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE;
+        $gencsql = self::SQL_SELECT_SELECT_ID_AS_GENC_DETAIL_CODE . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_AGREE;
         $gencres = $callConfig->getAllRows($gencsql);
         $agreement_type = array();
         foreach ($gencres as $red) {
@@ -8188,9 +8195,7 @@ private function mapAmcAdminLandingContractRow($contract)
         $contractHeaders = cex_contract_sheet_headers();
         $sampleRow = array();
         if (count((array) $contractHeaders) > 0) {
-            foreach ($contractHeaders as $_h) {
-                $sampleRow[] = '';
-            }
+            $sampleRow = array_fill(0, count((array) $contractHeaders), '');
         }
         if (count((array) $sampleRow) > 0) {
             $sampleRow[0] = 'C001';
@@ -9685,8 +9690,14 @@ class ReactClass extends userClass implements ReactConstants
     use ReactAmcAdminAndExcelTrait;
     use ReactContractsImportAndTypesTrait;
 
-    public function AMCInsertContractsReact($get, $post)
+    public function __call($name, $arguments)
     {
-        return $this->amcInsertContractsReact($get, $post);
+        if (strtolower($name) === 'amcinsertcontractsreact') {
+            return $this->amcInsertContractsReact(...$arguments);
+        }
+        if (is_callable(['parent', '__call'])) {
+            return parent::__call($name, $arguments);
+        }
+        throw new \BadMethodCallException("Method {$name} does not exist.");
     }
 }
