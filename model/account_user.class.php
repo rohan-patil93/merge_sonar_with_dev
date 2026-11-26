@@ -668,6 +668,38 @@ trait AccountVouchersTrait {
 
         return $return;
     }
+    protected function getVoucherPartyList($company_id) {
+        global $callConfig;
+        $partylist = array();
+        $vendorssql = self::SQL_SEL_VENDORS.$company_id.self::SQL_AND_IS_ACTIVE_0;
+        $vendorsres = $callConfig->getAllRows($vendorssql);
+        foreach((array)$vendorsres as $prty){
+            $partylist['vendors'][$prty->id]= $prty;
+        }
+
+        $customerssql = self::SQL_SEL_CUSTOMERS.$company_id.self::SQL_AND_IS_ACTIVE_0;
+        $customersres = $callConfig->getAllRows($customerssql);
+        foreach((array)$customersres as $prty){
+            $partylist['customers'][$prty->id]= $prty;
+        }
+
+        $employeessql = self::SQL_SEL_EMPLOYEES.$company_id.self::SQL_AND_IS_ACTIVE_0;
+        $employeesres = $callConfig->getAllRows($employeessql);
+        foreach((array)$employeesres as $prty){
+            $partylist['employees'][$prty->id]= $prty;
+        }
+        return $partylist;
+    }
+    protected function getVoucherTypes($company_id) {
+        global $callConfig;
+        $vouchartypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$company_id.self::SQL_AND_GENC_CODE_VOUCHERTYPE;
+        $vouchartyperes = $callConfig->getAllRows($vouchartypesql);
+        $vouchar_type = array();
+        foreach((array)$vouchartyperes as $tt){
+            $vouchar_type[$tt->genc_detail_code] = $tt->genc_detail_name;
+        }
+        return $vouchar_type;
+    }
     public function getBankVouchers($get){
         global $callConfig;
         $return= $partylist = array();
@@ -705,32 +737,8 @@ trait AccountVouchersTrait {
 
         $return['chart_of_accounts']= $chartofaccountsres;
 
-        $vendorssql = self::SQL_SEL_VENDORS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $vendorsres = $callConfig->getAllRows($vendorssql);
-        foreach($vendorsres as $prty){
-            $partylist['vendors'][$prty->id]= $prty;
-        }
-
-        $customerssql = self::SQL_SEL_CUSTOMERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $customersres = $callConfig->getAllRows($customerssql);
-        foreach($customersres as $prty){
-            $partylist['customers'][$prty->id]= $prty;
-        }
-
-        $employeessql = self::SQL_SEL_EMPLOYEES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $employeesres = $callConfig->getAllRows($employeessql);
-        foreach($employeesres as $prty){
-            $partylist['employees'][$prty->id]= $prty;
-        }
-        $return['partylist'] = $partylist;
-
-        $vouchartypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id'].self::SQL_AND_GENC_CODE_VOUCHERTYPE;
-        $vouchartyperes = $callConfig->getAllRows($vouchartypesql);
-        $vouchar_type = array();
-        foreach($vouchartyperes as $tt){
-            $vouchar_type[$tt->genc_detail_code] = $tt->genc_detail_name;
-        }
-        $return['vouchar_type']= $vouchar_type;
+        $return['partylist'] = $this->getVoucherPartyList($get['company_id']);
+        $return['vouchar_type'] = $this->getVoucherTypes($get['company_id']);
         return $return;
     }
     public function insertBankVouchers($get,$post){
@@ -824,32 +832,8 @@ trait AccountVouchersTrait {
 
         $return['chart_of_accounts']= $chartofaccountsres;
 
-        $vendorssql = self::SQL_SEL_VENDORS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $vendorsres = $callConfig->getAllRows($vendorssql);
-        foreach($vendorsres as $prty){
-            $partylist['vendors'][$prty->id]= $prty;
-        }
-
-        $customerssql = self::SQL_SEL_CUSTOMERS.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $customersres = $callConfig->getAllRows($customerssql);
-        foreach($customersres as $prty){
-            $partylist['customers'][$prty->id]= $prty;
-        }
-
-        $employeessql = self::SQL_SEL_EMPLOYEES.$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
-        $employeesres = $callConfig->getAllRows($employeessql);
-        foreach($employeesres as $prty){
-            $partylist['employees'][$prty->id]= $prty;
-        }
-        $return['partylist'] = $partylist;
-
-        $vouchartypesql = self::SQL_SEL_GENERAL_CODE_DETAILS.$get['company_id'].self::SQL_AND_GENC_CODE_VOUCHERTYPE;
-        $vouchartyperes = $callConfig->getAllRows($vouchartypesql);
-        $vouchar_type = array();
-        foreach($vouchartyperes as $tt){
-            $vouchar_type[$tt->genc_detail_code] = $tt->genc_detail_name;
-        }
-        $return['vouchar_type']= $vouchar_type;
+        $return['partylist'] = $this->getVoucherPartyList($get['company_id']);
+        $return['vouchar_type'] = $this->getVoucherTypes($get['company_id']);
         return $return;
     }
 
@@ -1236,13 +1220,13 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     public function getBalanceSheetReport($get){
         global $callConfig;
         $balance_date = $get['balance_date'];
-        $query = "SELECT coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($balance_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_1.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_1.$this->dateconvertdbformat($balance_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_1;
         $res = $callConfig->getAllRows($query);
         $return['query'] =$query;
         $return['balances'] =$res;
 
         $prev_balance_date = $get['prev_balance_date'];
-        $query = "SELECT coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance FROM chart_of_accounts coa LEFT JOIN account_balances ab1 ON coa.account_code = ab1.account_code AND coa.company_id = ab1.company_id AND coa.company_id = ".$get['company_id']." AND ab1.balance_date = (SELECT MAX(balance_date) FROM account_balances ab2 WHERE ab1.company_id = ab2.company_id AND ab1.account_code = ab2.account_code AND ab2.balance_date <= '".$this->dateconvertdbformat($prev_balance_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id']." AND coa.is_active = 0 GROUP BY coa.account_code, coa.account_name,coa.parent_account_code,coa.company_id,coa.account_type, coa.allow_posting, coa.allow_manual_entries, ab1.balance_date, ab1.closing_balance";
+        $query = self::SQL_COA_REPORT_SELECT_1.$get['company_id'].self::SQL_COA_REPORT_SUBQUERY_1.$this->dateconvertdbformat($prev_balance_date).self::SQL_CLOSE_PAREN_WHERE_COA_COMPANY_ID.$get['company_id'].self::SQL_COA_REPORT_GROUP_1;
         $res = $callConfig->getAllRows($query);
         $return['prev_query'] =$query;
         $return['prev_balances'] =$res;
@@ -1801,6 +1785,26 @@ trait AccountLedgersTrait {
 }
 
 trait AccountTaxAndFiscalTrait {
+    protected function getTaxAuthorityRatesAndSplits($company_id, $rid, &$return) {
+        global $callConfig;
+        $tax_authoritiessql = "SELECT * FROM `tax_authorities` WHERE company_id = ".$company_id.self::SQL_AND_ID_EQ_QUOTE.$rid.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $tax_authoritiesres = $callConfig->getRow($tax_authoritiessql);
+        $return['tax_authorities']= $tax_authoritiesres;
+
+        $tax_authorities_ratessql = "SELECT id, tax_authority, dispatch_tax_province, tax_description FROM `tax_authorities_rates` WHERE company_id = ".$company_id." AND tax_authority = '".($tax_authoritiesres->id ?? '').self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $tax_authorities_ratesres = $callConfig->getAllRows($tax_authorities_ratessql);
+        $return['tax_authorities_rates']= $tax_authorities_ratesres;
+
+        $taiid = array();
+        foreach((array)$tax_authorities_ratesres as $tar){
+            $taiid[$tar->id] = $tar->id;
+        }
+
+        if(count((array)$taiid) != 0){
+            $tax_authoritiessql = "SELECT id, tax_rate, account_code, split_type, tax_authority_id, authority_rate_id FROM `tax_authorities_rates_split` WHERE company_id = ".$company_id." AND tax_authority_id IN(".implode(',',$taiid).") AND is_active =0";
+            $return['tax_authorities_rates_split']= $callConfig->getAllRows($tax_authoritiessql);
+        }
+    }
     public function getTaxAuthorities($get){
         global $callConfig;
         $all_tax_authoritiessql = "SELECT id, tax_name, tax_type, tax_scope, tax_rate, tax_computation_id FROM `tax_authorities` WHERE company_id = ".$get['company_id']." AND tax_computation_id != '1' AND id != '".$get['rid']."'  AND is_active =0";
@@ -1832,25 +1836,7 @@ trait AccountTaxAndFiscalTrait {
         $return['chart_of_accounts']= $chart_of_accountsres;
 
         if(isset($get['rid']) && $get['rid'] !=""){
-            $tax_authoritiessql = "SELECT * FROM `tax_authorities` WHERE company_id = ".$get['company_id'].self::SQL_AND_ID_EQ_QUOTE.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $tax_authoritiesres = $callConfig->getRow($tax_authoritiessql);
-            $return['tax_authorities']= $tax_authoritiesres;
-
-            $tax_authorities_ratessql = "SELECT id, tax_authority, dispatch_tax_province, tax_description FROM `tax_authorities_rates` WHERE company_id = ".$get['company_id']." AND tax_authority = '".$tax_authoritiesres->id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $tax_authorities_ratesres = $callConfig->getAllRows($tax_authorities_ratessql);
-            $return['tax_authorities_rates']= $tax_authorities_ratesres;
-
-
-            $taiid = array();
-            foreach($tax_authorities_ratesres as $tar){
-                $taiid[$tar->id] = $tar->id;
-            }
-
-            if(count((array)$taiid) != 0){
-                $tax_authoritiessql = "SELECT id, tax_rate, account_code, split_type, tax_authority_id, authority_rate_id FROM `tax_authorities_rates_split` WHERE company_id = ".$get['company_id']." AND tax_authority_id IN(".implode(',',$taiid).") AND is_active =0";
-                $tax_authoritiessql = $callConfig->getAllRows($tax_authoritiessql);
-                $return['tax_authorities_rates_split']= $tax_authoritiessql;
-            }
+            $this->getTaxAuthorityRatesAndSplits($get['company_id'], $get['rid'], $return);
         }
 
         $hsn_and_sac_codessql = "SELECT id, code, code_description, gst, tax_authority_id FROM `hsn_and_sac_codes` WHERE company_id = ".$get['company_id'].self::SQL_AND_IS_ACTIVE_0;
@@ -2291,6 +2277,24 @@ class AccountUserClass extends userClass implements AccountConstants {
         return $returnarray;
 
     }
+    protected function extractTocDocumentFields($toc_headersres, $createdocumentsfieldsres) {
+        $stringfields = array();
+        $tables = array();
+        foreach ($toc_headersres as $tocheadersres) {
+            $contents = urldecode(json_decode($tocheadersres->header_contain, 1));
+            foreach ($createdocumentsfieldsres as $cdf) {
+                if ($cdf->field_type == '2' || $cdf->field_type == '3') {
+                    $replacekey = strtolower(str_replace(' ', '_', $cdf->label));
+                    $matchstring = "{[" . $replacekey . "]}";
+                    if (substr_count($contents, $matchstring) != 0) {
+                        $stringfields[$tocheadersres->id][] = $cdf;
+                        $tables[$cdf->application_table_name] = $cdf->application_table_name;
+                    }
+                }
+            }
+        }
+        return array($stringfields, $tables);
+    }
     public function getTextOfContentReports($get){
         global $callConfig;
         if($get['inputformreport'] =="Y"){
@@ -2322,28 +2326,13 @@ class AccountUserClass extends userClass implements AccountConstants {
 
         $create_documents_fieldssql = "SELECT id, apply_table_name, application_table_name,  display_field, value_field, label,preview_value,field_type FROM create_documents_fields WHERE company_id = '".$get['company_id'].self::SQL_AND_TOC_HEADERS;
         $createdocumentsfieldsres = $callConfig->getAllRows($create_documents_fieldssql);
-        $stringfields = array();
-        $tables = array();
+        list($stringfields, $tables) = $this->extractTocDocumentFields($toc_headersres, $createdocumentsfieldsres);
         $tablesresult = array();
-         foreach($toc_headersres as $tocheadersres){
-             $contents = urldecode(json_decode($tocheadersres->header_contain,1));
-            foreach($createdocumentsfieldsres as $cdf){
-                if($cdf->field_type == '2' || $cdf->field_type == '3'){
-                    $replacekey = strtolower(str_replace(' ', '_', $cdf->label));
-                       $matchstring = "{[".$replacekey."]}";
-                    if(substr_count($contents,$matchstring) !=0)
-                    {
-                        $stringfields[$tocheadersres->id][] = $cdf;
-                        $tables[$cdf->application_table_name] = $cdf->application_table_name;
-                    }
-                }
-            }
-         }
-         foreach($tables as $table){
-             $valuefieldsql = self::SQL_SELECT_ALL_FROM.$table.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
+        foreach($tables as $table){
+            $valuefieldsql = self::SQL_SELECT_ALL_FROM.$table.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_EQ_0;
             $valuefieldres = $callConfig->getAllRows($valuefieldsql);
             $tablesresult[$table]= $valuefieldres;
-         }
+        }
         $returnarray['tablesresult']  = $tablesresult;
         $returnarray['stringfields']  = $stringfields;
         return $returnarray;
