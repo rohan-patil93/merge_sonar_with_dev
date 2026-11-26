@@ -875,12 +875,12 @@ trait ManufacturingForecastProductNotesTrait
             return array(array('status' => 'fail', 'message' => $validation['message']));
         }
         if ($note_id > 0) {
-            return $this->updateManufacturingProductNoteRecord($company_id, $user_id, $note_id, $post);
+            return $this->updateManufacturingProductNoteRecord($user_id, $note_id, $post);
         }
         return $this->insertManufacturingProductNoteRecord($company_id, $user_id, $post);
     }
 
-    private function updateManufacturingProductNoteRecord($company_id, $user_id, $note_id, $post)
+    private function updateManufacturingProductNoteRecord($user_id, $note_id, $post)
     {
         global $callConfig;
         $record = array(
@@ -982,26 +982,32 @@ trait ManufacturingForecastProductNotesTrait
         return $return;
     }
 
+    private function checkInventoryPostingPrerequisites($company_id, $note_id, $work_order_id, $product_id, $produced_qty)
+    {
+        global $callConfig;
+        if ($company_id <= 0 || $note_id <= 0 || $work_order_id <= 0 || $product_id <= 0 || $produced_qty <= 0) {
+            return 'Inventory posting not required';
+        }
+        $qc_header = $callConfig->getRow("SELECT quality_check FROM application_table_quality_check WHERE company_id = '{$company_id}' AND application_table_name = 'manufacturing_product_notes' AND transaction_id = '{$note_id}' AND is_active = 0 LIMIT 0,1");
+        if (!empty($qc_header) && intval($qc_header->quality_check ?? 0) != 1) {
+            return 'Inventory posting waits for QC pass';
+        }
+        $existing = $callConfig->getRow("SELECT id FROM item_ledger_wa WHERE company_id = '{$company_id}' AND document_no = '{$note_id}' AND document_type IN ('mfg_product_note', 'mfg_product_mat', 'manufacturing_produc', 'manufacturing_product_notes', 'manufacturing_product_note_items') AND is_active = 0 LIMIT 0,1");
+        if (!empty($existing->id)) {
+            return 'Inventory already posted for this product note';
+        }
+        return null;
+    }
+
     public function postManufacturingProductNoteInventory($company_id, $user_id, $note_id, $post)
     {
         global $callConfig;
         $work_order_id = intval($post['work_order_id'] ?? 0);
         $product_id = intval($post['item_id'] ?? 0);
         $produced_qty = floatval($post['produced_qty'] ?? 0);
-        if ($company_id <= 0 || $note_id <= 0 || $work_order_id <= 0 || $product_id <= 0 || $produced_qty <= 0) {
-            return array('status' => 'skipped', 'message' => 'Inventory posting not required');
-        }
-
-        $qc_header = $callConfig->getRow("SELECT quality_check FROM application_table_quality_check WHERE company_id = '{$company_id}' AND application_table_name = 'manufacturing_product_notes' AND transaction_id = '{$note_id}' AND is_active = 0 LIMIT 0,1");
-        if (!empty($qc_header) && intval($qc_header->quality_check ?? 0) != 1) {
-            return array('status' => 'skipped', 'message' => 'Inventory posting waits for QC pass');
-        }
-
-        $finished_document_type = 'mfg_product_note';
-        $material_document_type = 'mfg_product_mat';
-        $existing = $callConfig->getRow("SELECT id FROM item_ledger_wa WHERE company_id = '{$company_id}' AND document_no = '{$note_id}' AND document_type IN ('{$finished_document_type}', '{$material_document_type}', 'manufacturing_produc', 'manufacturing_product_notes', 'manufacturing_product_note_items') AND is_active = 0 LIMIT 0,1");
-        if (!empty($existing->id)) {
-            return array('status' => 'skipped', 'message' => 'Inventory already posted for this product note');
+        $skipMessage = $this->checkInventoryPostingPrerequisites($company_id, $note_id, $work_order_id, $product_id, $produced_qty);
+        if ($skipMessage !== null) {
+            return array('status' => 'skipped', 'message' => $skipMessage);
         }
 
         $note = $callConfig->getRow("SELECT transaction_no, transaction_date FROM manufacturing_product_notes WHERE company_id = '{$company_id}' AND id = '{$note_id}' AND is_active = 0");
@@ -1161,139 +1167,146 @@ trait ManufacturingForecastProductNotesTrait
         $work_order_id = intval($post['work_order_id'] ?? 0);
         $product_id = intval($post['item_id'] ?? 0);
         $produced_qty = floatval($post['produced_qty'] ?? 0);
+        $errorMessage = null;
+
         if ($company_id <= 0 || $work_order_id <= 0 || $product_id <= 0) {
-            return array('status' => 'fail', 'message' => 'Company, work order and product are required.');
-        }
-        if ($produced_qty <= 0) {
-            return array('status' => 'fail', 'message' => 'Produced quantity must be greater than zero.');
-        }
-        $work_order = $callConfig->getRow("SELECT id, work_order_item_id, work_order_item_qty, completed_qty, current_status, work_log_status FROM manufacturing_work_orders WHERE company_id = '{$company_id}' AND id = '{$work_order_id}' AND is_active = 0");
-        if (empty($work_order->id)) {
-            return array('status' => 'fail', 'message' => 'Work order not found.');
-        }
-        if ($work_order->current_status != ST_APPROVED) {
-            return array('status' => 'fail', 'message' => 'Work order must be approved before creating a product note.');
-        }
-        if (intval($work_order->work_order_item_id) != $product_id) {
-            return array('status' => 'fail', 'message' => 'Product note product does not match the selected work order.');
-        }
-        $product = $callConfig->getRow("SELECT IFNULL(tracking_type, 0) AS tracking_type FROM items WHERE company_id = '{$company_id}' AND id = '{$product_id}' AND is_active = 0");
-        $tracking_type = intval($post['tracking_type'] ?? ($product->tracking_type ?? 0));
-
-        if ($tracking_type == 1) {
-            $serialErr = $this->validateProductNoteSerials($company_id, $product_id, $post, $note_id, $produced_qty);
-            if ($serialErr !== null) {
-                return array('status' => 'fail', 'message' => $serialErr);
-            }
-        } elseif ($tracking_type == 2) {
-            $lotErr = $this->validateProductNoteLots($company_id, $product_id, $post, $note_id, $produced_qty);
-            if ($lotErr !== null) {
-                return array('status' => 'fail', 'message' => $lotErr);
+            $errorMessage = 'Company, work order and product are required.';
+        } elseif ($produced_qty <= 0) {
+            $errorMessage = 'Produced quantity must be greater than zero.';
+        } else {
+            $work_order = $callConfig->getRow("SELECT id, work_order_item_id, work_order_item_qty, completed_qty, current_status, work_log_status FROM manufacturing_work_orders WHERE company_id = '{$company_id}' AND id = '{$work_order_id}' AND is_active = 0");
+            if (empty($work_order->id)) {
+                $errorMessage = 'Work order not found.';
+            } elseif ($work_order->current_status != ST_APPROVED) {
+                $errorMessage = 'Work order must be approved before creating a product note.';
+            } elseif (intval($work_order->work_order_item_id) != $product_id) {
+                $errorMessage = 'Product note product does not match the selected work order.';
+            } else {
+                $product = $callConfig->getRow("SELECT IFNULL(tracking_type, 0) AS tracking_type FROM items WHERE company_id = '{$company_id}' AND id = '{$product_id}' AND is_active = 0");
+                $tracking_type = intval($post['tracking_type'] ?? ($product->tracking_type ?? 0));
+                if ($tracking_type == 1) {
+                    $errorMessage = $this->validateProductNoteSerials($company_id, $product_id, $post, $note_id, $produced_qty);
+                } elseif ($tracking_type == 2) {
+                    $errorMessage = $this->validateProductNoteLots($company_id, $product_id, $post, $note_id, $produced_qty);
+                }
+                if ($errorMessage === null) {
+                    $errorMessage = $this->validateProductNoteMaterials($company_id, $work_order_id, $post, $work_order, $note_id, $produced_qty);
+                }
             }
         }
 
-        $materialErr = $this->validateProductNoteMaterials($company_id, $work_order_id, $post, $work_order, $note_id, $produced_qty);
-        if ($materialErr !== null) {
-            return array('status' => 'fail', 'message' => $materialErr);
+        if ($errorMessage !== null) {
+            return array('status' => 'fail', 'message' => $errorMessage);
         }
-
         return array('status' => 'success');
     }
 
     private function validateProductNoteSerials($company_id, $product_id, $post, $note_id, $produced_qty)
     {
         global $callConfig;
+        $err = null;
         if (floor($produced_qty) != $produced_qty) {
-            return 'Serial tracked product note quantity must be a whole number.';
-        }
-        $serials = array();
-        foreach ((array) ($post['serial_no'] ?? array()) as $serial_no) {
-            $serial_no = trim($serial_no);
-            if ($serial_no != '') {
-                $serials[] = $serial_no;
+            $err = 'Serial tracked product note quantity must be a whole number.';
+        } else {
+            $serials = array();
+            foreach ((array) ($post['serial_no'] ?? array()) as $serial_no) {
+                $serial_no = trim($serial_no);
+                if ($serial_no != '') {
+                    $serials[] = $serial_no;
+                }
+            }
+            if (count($serials) != intval($produced_qty)) {
+                $err = 'Please enter one serial number for each produced quantity.';
+            } elseif (count($serials) != count(array_unique($serials))) {
+                $err = 'Duplicate serial numbers are not allowed.';
+            } else {
+                foreach ($serials as $serial_no) {
+                    $serial_no_esc = $callConfig->real_escape_string($serial_no);
+                    $existing_serial = $callConfig->getRow("SELECT id FROM item_serial_nos WHERE company_id = '{$company_id}' AND item_id = '{$product_id}' AND serial_no = '{$serial_no_esc}' AND is_active = 0 AND NOT (transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}') LIMIT 0,1");
+                    if (!empty($existing_serial->id)) {
+                        $err = 'Serial number ' . $serial_no . ' already exists for this item.';
+                        break;
+                    }
+                }
             }
         }
-        if (count($serials) != intval($produced_qty)) {
-            return 'Please enter one serial number for each produced quantity.';
-        }
-        if (count($serials) != count(array_unique($serials))) {
-            return 'Duplicate serial numbers are not allowed.';
-        }
-        foreach ($serials as $serial_no) {
-            $serial_no_esc = $callConfig->real_escape_string($serial_no);
-            $existing_serial = $callConfig->getRow("SELECT id FROM item_serial_nos WHERE company_id = '{$company_id}' AND item_id = '{$product_id}' AND serial_no = '{$serial_no_esc}' AND is_active = 0 AND NOT (transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}') LIMIT 0,1");
-            if (!empty($existing_serial->id)) {
-                return 'Serial number ' . $serial_no . ' already exists for this item.';
-            }
-        }
-        return null;
+        return $err;
     }
 
     private function validateProductNoteLots($company_id, $product_id, $post, $note_id, $produced_qty)
     {
         global $callConfig;
+        $err = null;
         $lot_total = 0;
         $lot_nos = array();
         foreach ((array) ($post['lot_no'] ?? array()) as $seq => $lot_no) {
             $lot_no = trim($lot_no);
             $lot_qty = floatval($post['lot_qty'][$seq] ?? 0);
             if ($lot_no == '' || $lot_qty <= 0) {
-                return 'Lot number and quantity are required for lot tracked product notes.';
+                $err = 'Lot number and quantity are required for lot tracked product notes.';
+                break;
             }
             $lot_total += $lot_qty;
             $lot_nos[] = $lot_no;
         }
-        if (empty($lot_nos)) {
-            return 'Please enter at least one lot number.';
-        }
-        if (count($lot_nos) != count(array_unique($lot_nos))) {
-            return 'Duplicate lot numbers are not allowed.';
-        }
-        if (abs($lot_total - $produced_qty) > 0.0001) {
-            return 'Total lot quantity must equal produced quantity.';
-        }
-        foreach ($lot_nos as $lot_no) {
-            $lot_no_esc = $callConfig->real_escape_string($lot_no);
-            $existing_lot = $callConfig->getRow("SELECT id FROM item_lot_nos WHERE company_id = '{$company_id}' AND item_id = '{$product_id}' AND lot_no = '{$lot_no_esc}' AND is_active = 0 AND NOT (transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}') LIMIT 0,1");
-            if (!empty($existing_lot->id)) {
-                return 'Lot number ' . $lot_no . ' already exists for this item.';
+        if ($err === null) {
+            if (empty($lot_nos)) {
+                $err = 'Please enter at least one lot number.';
+            } elseif (count($lot_nos) != count(array_unique($lot_nos))) {
+                $err = 'Duplicate lot numbers are not allowed.';
+            } elseif (abs($lot_total - $produced_qty) > 0.0001) {
+                $err = 'Total lot quantity must equal produced quantity.';
+            } else {
+                foreach ($lot_nos as $lot_no) {
+                    $lot_no_esc = $callConfig->real_escape_string($lot_no);
+                    $existing_lot = $callConfig->getRow("SELECT id FROM item_lot_nos WHERE company_id = '{$company_id}' AND item_id = '{$product_id}' AND lot_no = '{$lot_no_esc}' AND is_active = 0 AND NOT (transaction_table = 'manufacturing_product_notes' AND transaction_id = '{$note_id}') LIMIT 0,1");
+                    if (!empty($existing_lot->id)) {
+                        $err = 'Lot number ' . $lot_no . ' already exists for this item.';
+                        break;
+                    }
+                }
             }
         }
-        return null;
+        return $err;
     }
 
     private function validateProductNoteMaterials($company_id, $work_order_id, $post, $work_order, $note_id, $produced_qty)
     {
         global $callConfig;
+        if (!empty($post['skip_work_order_updates'])) {
+            return null;
+        }
         $existing_note_qty = 0;
         if ($note_id > 0) {
             $existing_note = $callConfig->getRow("SELECT produced_qty FROM manufacturing_product_notes WHERE company_id = '{$company_id}' AND id = '{$note_id}' AND work_order_id = '{$work_order_id}' AND is_active = 0");
             $existing_note_qty = floatval($existing_note->produced_qty ?? 0);
         }
-        if (empty($post['skip_work_order_updates'])) {
-            $remaining_qty = floatval($work_order->work_order_item_qty ?? 0) - (floatval($work_order->completed_qty ?? 0) - $existing_note_qty);
-            if ($produced_qty > $remaining_qty) {
-                return 'Produced quantity cannot exceed remaining work order quantity.';
-            }
+        $remaining_qty = floatval($work_order->work_order_item_qty ?? 0) - (floatval($work_order->completed_qty ?? 0) - $existing_note_qty);
+        if ($produced_qty > $remaining_qty) {
+            return 'Produced quantity cannot exceed remaining work order quantity.';
         }
-        if (empty($post['skip_work_order_updates'])) {
-            foreach ((array) ($post['note_items'] ?? array()) as $row) {
-                $material_item_id = intval($row['item_id'] ?? 0);
-                $material_qty = floatval($row['produced_qty'] ?? 0);
-                if ($material_item_id <= 0 || $material_qty <= 0) {
-                    continue;
-                }
-                $mwo_item = $callConfig->getRow("SELECT id, request_qty, stock_receipts_qty, completed_qty FROM manufacturing_work_order_items WHERE company_id = '{$company_id}' AND transaction_id = '{$work_order_id}' AND item_id = '{$material_item_id}' AND is_active = 0 LIMIT 1");
-                if (empty($mwo_item->id)) {
-                    return 'Product note contains material that is not part of the work order.';
-                }
-                $available_material_qty = floatval($mwo_item->stock_receipts_qty ?? 0);
-                if ($available_material_qty <= 0) {
-                    $available_material_qty = floatval($mwo_item->request_qty ?? 0);
-                }
-                if ((floatval($mwo_item->completed_qty ?? 0) + $material_qty) > $available_material_qty) {
-                    return 'Material consumption cannot exceed received/required material quantity.';
-                }
+        return $this->validateProductNoteMaterialItems($company_id, $work_order_id, (array) ($post['note_items'] ?? array()));
+    }
+
+    private function validateProductNoteMaterialItems($company_id, $work_order_id, array $note_items)
+    {
+        global $callConfig;
+        foreach ($note_items as $row) {
+            $material_item_id = intval($row['item_id'] ?? 0);
+            $material_qty = floatval($row['produced_qty'] ?? 0);
+            if ($material_item_id <= 0 || $material_qty <= 0) {
+                continue;
+            }
+            $mwo_item = $callConfig->getRow("SELECT id, request_qty, stock_receipts_qty, completed_qty FROM manufacturing_work_order_items WHERE company_id = '{$company_id}' AND transaction_id = '{$work_order_id}' AND item_id = '{$material_item_id}' AND is_active = 0 LIMIT 1");
+            if (empty($mwo_item->id)) {
+                return 'Product note contains material that is not part of the work order.';
+            }
+            $available_material_qty = floatval($mwo_item->stock_receipts_qty ?? 0);
+            if ($available_material_qty <= 0) {
+                $available_material_qty = floatval($mwo_item->request_qty ?? 0);
+            }
+            if ((floatval($mwo_item->completed_qty ?? 0) + $material_qty) > $available_material_qty) {
+                return 'Material consumption cannot exceed received/required material quantity.';
             }
         }
         return null;
@@ -1363,21 +1376,17 @@ trait ManufacturingForecastProductNotesTrait
 
     public function saveManufacturingProductNoteSerialLot($company_id, $user_id, $note_id, $item_id, $post, $random_no = '')
     {
-        if ($note_id <= 0 || $item_id <= 0) {
-            return array();
+        $res = array();
+        if ($note_id > 0 && $item_id > 0) {
+            $tracking_type = intval($post['tracking_type'] ?? 0);
+            $rnd = trim($random_no) !== '' ? trim($random_no) : date('YmdHis') . $note_id . random_int(1000, 9999);
+            if ($tracking_type == 1 && !empty($post['serial_no']) && is_array($post['serial_no'])) {
+                $res = $this->saveProductNoteSerials($company_id, $user_id, $note_id, $item_id, $post, $rnd);
+            } elseif ($tracking_type == 2 && !empty($post['lot_no']) && is_array($post['lot_no'])) {
+                $res = $this->saveProductNoteLots($company_id, $user_id, $note_id, $item_id, $post, $rnd);
+            }
         }
-        $tracking_type = intval($post['tracking_type'] ?? 0);
-        $random_no = trim($random_no);
-        if ($random_no == '') {
-            $random_no = date('YmdHis') . $note_id . random_int(1000, 9999);
-        }
-        if ($tracking_type == 1 && isset($post['serial_no']) && is_array($post['serial_no'])) {
-            return $this->saveProductNoteSerials($company_id, $user_id, $note_id, $item_id, $post, $random_no);
-        }
-        if ($tracking_type == 2 && isset($post['lot_no']) && is_array($post['lot_no'])) {
-            return $this->saveProductNoteLots($company_id, $user_id, $note_id, $item_id, $post, $random_no);
-        }
-        return array();
+        return $res;
     }
 
     private function saveProductNoteSerials($company_id, $user_id, $note_id, $item_id, $post, $random_no)
@@ -1575,6 +1584,34 @@ trait ManufacturingForecastStockTransferTrait
         }
     }
 
+    private function validateStockTransferItems($post_items, array $items_array, array &$selected_items, array &$validation_errors)
+    {
+        if (empty($post_items) || !is_array($post_items)) {
+            return;
+        }
+        foreach ($post_items as $row) {
+            $item_id = intval($row['item_id'] ?? 0);
+            $stock_transfer_qty = floatval($row['stock_transfer_qty'] ?? 0);
+            if ($stock_transfer_qty <= 0) {
+                continue;
+            }
+            if (!isset($items_array[$item_id])) {
+                $validation_errors[] = 'Invalid or completed stock request item selected.';
+                continue;
+            }
+            $stkreq_item = $items_array[$item_id];
+            $current_pending = floatval($stkreq_item->pending_qty ?? 0);
+            if ($stock_transfer_qty > $current_pending) {
+                $validation_errors[] = ($stkreq_item->item_name ?? 'Item') . ' transfer qty cannot exceed pending qty ' . $current_pending . '.';
+                continue;
+            }
+            $selected_items[] = array(
+                'stock_request_item' => $stkreq_item,
+                'stock_transfer_qty' => $stock_transfer_qty
+            );
+        }
+    }
+
     public function insertstocktransfer($get, $post)
     {
         global $callConfig;
@@ -1590,7 +1627,6 @@ trait ManufacturingForecastStockTransferTrait
         $stock_request_sql = "SELECT * FROM stock_requests WHERE company_id = '{$company_id}' AND id = '{$stock_request_id}' AND ref_type = 'manufacturing_work_orders' AND current_status = '" . ST_APPROVED . "' AND is_active = 0";
         $stock_request_res = $callConfig->getRow($stock_request_sql);
         $return['stock_request'] = $stock_request_res;
-
         if (empty($stock_request_res->id)) {
             return $return;
         }
@@ -1606,34 +1642,11 @@ trait ManufacturingForecastStockTransferTrait
 
         $selected_items = array();
         $validation_errors = array();
-        if (!empty($post['items']) && is_array($post['items'])) {
-            foreach ($post['items'] as $row) {
-                $item_id = intval($row['item_id'] ?? 0);
-                $stock_transfer_qty = floatval($row['stock_transfer_qty'] ?? 0);
-                if ($stock_transfer_qty <= 0) {
-                    continue;
-                }
-                if (!isset($items_array[$item_id])) {
-                    $validation_errors[] = 'Invalid or completed stock request item selected.';
-                    continue;
-                }
-                $stkreq_item = $items_array[$item_id];
-                $current_pending = floatval($stkreq_item->pending_qty ?? 0);
-                if ($stock_transfer_qty > $current_pending) {
-                    $validation_errors[] = ($stkreq_item->item_name ?? 'Item') . ' transfer qty cannot exceed pending qty ' . $current_pending . '.';
-                    continue;
-                }
-                $selected_items[] = array(
-                    'stock_request_item' => $stkreq_item,
-                    'stock_transfer_qty' => $stock_transfer_qty
-                );
-            }
-        }
+        $this->validateStockTransferItems($post['items'] ?? array(), $items_array, $selected_items, $validation_errors);
 
         if (!empty($validation_errors)) {
             return array(array('status' => 'fail', 'message' => implode(' ', array_unique($validation_errors))));
         }
-
         if (empty($selected_items)) {
             return array(array('status' => 'fail', 'message' => 'Please enter at least one valid transfer quantity.'));
         }
@@ -1784,6 +1797,34 @@ trait ManufacturingForecastStockTransferTrait
         return $return;
     }
 
+    private function validateStockTransferReceiptItems($post_items, array $items_array, array &$selected_items, array &$validation_errors)
+    {
+        if (empty($post_items) || !is_array($post_items)) {
+            return;
+        }
+        foreach ($post_items as $row) {
+            $item_id = intval($row['item_id'] ?? 0);
+            $receipt_qty = floatval($row['receipt_qty'] ?? 0);
+            if ($receipt_qty <= 0) {
+                continue;
+            }
+            if (!isset($items_array[$item_id])) {
+                $validation_errors[] = 'Invalid or fully received stock transfer item selected.';
+                continue;
+            }
+            $stktrn_item = $items_array[$item_id];
+            $current_pending = floatval($stktrn_item->pending_qty ?? 0);
+            if ($receipt_qty > $current_pending) {
+                $validation_errors[] = ($stktrn_item->item_name ?? 'Item') . ' receipt qty cannot exceed pending qty ' . $current_pending . '.';
+                continue;
+            }
+            $selected_items[] = array(
+                'stock_transfer_item' => $stktrn_item,
+                'receipt_qty' => $receipt_qty
+            );
+        }
+    }
+
     public function insertstocktransferreceipt($get, $post)
     {
         global $callConfig;
@@ -1800,7 +1841,6 @@ trait ManufacturingForecastStockTransferTrait
         $stock_transfer_sql = "SELECT * FROM stock_transfers WHERE company_id = '{$company_id}' AND id = '{$stock_transfer_id}' AND ref_type = 'stock_requests' " . ($stock_request_id > 0 ? " AND ref_id = '{$stock_request_id}' " : "") . " AND is_active = 0";
         $stock_transfer_res = $callConfig->getRow($stock_transfer_sql);
         $return['stock_transfer'] = $stock_transfer_res;
-
         if (empty($stock_transfer_res)) {
             return $return;
         }
@@ -1816,39 +1856,41 @@ trait ManufacturingForecastStockTransferTrait
 
         $selected_items = array();
         $validation_errors = array();
-        if (!empty($post['items']) && is_array($post['items'])) {
-            foreach ($post['items'] as $row) {
-                $item_id = intval($row['item_id'] ?? 0);
-                $receipt_qty = floatval($row['receipt_qty'] ?? 0);
-                if ($receipt_qty <= 0) {
-                    continue;
-                }
-                if (!isset($items_array[$item_id])) {
-                    $validation_errors[] = 'Invalid or fully received stock transfer item selected.';
-                    continue;
-                }
-                $stktrn_item = $items_array[$item_id];
-                $current_pending = floatval($stktrn_item->pending_qty ?? 0);
-                if ($receipt_qty > $current_pending) {
-                    $validation_errors[] = ($stktrn_item->item_name ?? 'Item') . ' receipt qty cannot exceed pending qty ' . $current_pending . '.';
-                    continue;
-                }
-                $selected_items[] = array(
-                    'stock_transfer_item' => $stktrn_item,
-                    'receipt_qty' => $receipt_qty
-                );
-            }
-        }
+        $this->validateStockTransferReceiptItems($post['items'] ?? array(), $items_array, $selected_items, $validation_errors);
 
         if (!empty($validation_errors)) {
             return array(array('status' => 'fail', 'message' => implode(' ', array_unique($validation_errors))));
         }
-
         if (empty($selected_items)) {
             return array(array('status' => 'fail', 'message' => 'Please enter at least one valid receipt quantity.'));
         }
 
         return $this->saveStockTransferReceiptItems($company_id, $user_id, $stock_transfer_res, $selected_items, $post);
+    }
+
+    private function updateWorkOrderItemReceiptQty($company_id, $user_id, $stktrn_item, $receipt_qty)
+    {
+        global $callConfig;
+        if (empty($stktrn_item->ref_transaction_item_table_id)) {
+            return;
+        }
+        $stkreq_item = $callConfig->getRow("SELECT id, transaction_id FROM stkreq_items WHERE company_id = '{$company_id}' AND id = '{$stktrn_item->ref_transaction_item_table_id}' AND is_active = 0");
+        if (empty($stkreq_item->id)) {
+            return;
+        }
+        $stkreq_master = $callConfig->getRow("SELECT id, ref_id FROM stock_requests WHERE company_id = '{$company_id}' AND id = '{$stkreq_item->transaction_id}' AND ref_type = 'manufacturing_work_orders' AND is_active = 0");
+        if (empty($stkreq_master->ref_id)) {
+            return;
+        }
+        $mwo_item = $callConfig->getRow("SELECT id, stock_receipts_qty FROM manufacturing_work_order_items WHERE company_id = '{$company_id}' AND transaction_id = '{$stkreq_master->ref_id}' AND item_id = '{$stktrn_item->item_id}' AND is_active = 0 LIMIT 1");
+        if (!empty($mwo_item->id)) {
+            $new_stock_receipts_qty = floatval($mwo_item->stock_receipts_qty ?? 0) + $receipt_qty;
+            $callConfig->updateRecord('manufacturing_work_order_items', array(
+                'stock_receipts_qty' => $new_stock_receipts_qty,
+                'updated_by' => $user_id,
+                'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+            ), 'id', $mwo_item->id);
+        }
     }
 
     private function saveStockTransferReceiptItems($company_id, $user_id, $stock_transfer_res, $selected_items, $post)
@@ -1929,24 +1971,7 @@ trait ManufacturingForecastStockTransferTrait
                 'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
             ), 'id', $stktrn_item->id);
 
-            if (!empty($stktrn_item->ref_transaction_item_table_id)) {
-                $stkreq_item = $callConfig->getRow("SELECT id, transaction_id FROM stkreq_items WHERE company_id = '{$company_id}' AND id = '{$stktrn_item->ref_transaction_item_table_id}' AND is_active = 0");
-                if (!empty($stkreq_item->id)) {
-                    $stkreq_master = $callConfig->getRow("SELECT id, ref_id FROM stock_requests WHERE company_id = '{$company_id}' AND id = '{$stkreq_item->transaction_id}' AND ref_type = 'manufacturing_work_orders' AND is_active = 0");
-                    if (!empty($stkreq_master->ref_id)) {
-                        $mwo_item = $callConfig->getRow("SELECT id, stock_receipts_qty FROM manufacturing_work_order_items WHERE company_id = '{$company_id}' AND transaction_id = '{$stkreq_master->ref_id}' AND item_id = '{$stktrn_item->item_id}' AND is_active = 0 LIMIT 1");
-                        if (!empty($mwo_item->id)) {
-                            $new_stock_receipts_qty = floatval($mwo_item->stock_receipts_qty ?? 0) + $receipt_qty;
-                            $callConfig->updateRecord('manufacturing_work_order_items', array(
-                                'stock_receipts_qty' => $new_stock_receipts_qty,
-                                'updated_by' => $user_id,
-                                'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
-                            ), 'id', $mwo_item->id);
-                        }
-                    }
-                }
-            }
-
+            $this->updateWorkOrderItemReceiptQty($company_id, $user_id, $stktrn_item, $receipt_qty);
             $receipt_total_amount += $item_amount;
         }
 
@@ -2069,176 +2094,247 @@ trait ManufacturingForecastStockTransferTrait
         $completed_qty = $post['completed_qty'] ?? 0;
         $remarks = $post['remarks'] ?? '';
         $hold_reason = $post['hold_reason'] ?? '';
+        $valError = null;
 
         if (!$work_order_id || !$company_id) {
-            return array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_COMPANY_REQUIRED);
-        }
-        if (!in_array($production_type, array('HOLD', 'COMPLETED'))) {
-            return array('status' => 'error', 'message' => 'Invalid production type');
+            $valError = array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_COMPANY_REQUIRED);
+        } elseif (!in_array($production_type, array('HOLD', 'COMPLETED'))) {
+            $valError = array('status' => 'error', 'message' => 'Invalid production type');
+        } else {
+            $current_completed_row = $callConfig->getRow(
+                "SELECT mwo.completed_qty, mwo.work_order_item_id, mwo.work_order_item_qty, mwo.current_status, mwo.work_log_status,
+                    i.item_name, IFNULL(i.quality_check, 0) AS quality_check, IFNULL(i.tracking_type, 0) AS tracking_type
+                 FROM manufacturing_work_orders mwo
+                 LEFT JOIN items i ON i.company_id = mwo.company_id AND i.id = mwo.work_order_item_id
+                 WHERE mwo.id = '{$work_order_id}' AND mwo.company_id = '{$company_id}' AND mwo.is_active = 0"
+            );
+            $valError = $this->validateManufacturingProductionData($company_id, $work_order_id, $production_type, $completed_qty, $current_completed_row, $post);
         }
 
-        $current_completed_row = $callConfig->getRow(
-            "SELECT mwo.completed_qty, mwo.work_order_item_id, mwo.work_order_item_qty, mwo.current_status, mwo.work_log_status,
-                i.item_name, IFNULL(i.quality_check, 0) AS quality_check, IFNULL(i.tracking_type, 0) AS tracking_type
-             FROM manufacturing_work_orders mwo
-             LEFT JOIN items i ON i.company_id = mwo.company_id AND i.id = mwo.work_order_item_id
-             WHERE mwo.id = '{$work_order_id}' AND mwo.company_id = '{$company_id}' AND mwo.is_active = 0"
-        );
-
-        $valError = $this->validateManufacturingProductionData($company_id, $work_order_id, $production_type, $completed_qty, $current_completed_row, $post);
         if ($valError !== null) {
             return $valError;
         }
 
-        return $this->executeManufacturingProductionUpdates($get, $post, $company_id, $work_order_id, $created_by, $production_type, $completed_qty, $remarks, $hold_reason, $current_completed_row);
+        $prodContext = array(
+            'company_id' => $company_id,
+            'work_order_id' => $work_order_id,
+            'created_by' => $created_by,
+            'production_type' => $production_type,
+            'completed_qty' => $completed_qty,
+            'remarks' => $remarks,
+            'hold_reason' => $hold_reason
+        );
+        return $this->executeManufacturingProductionUpdates($get, $post, $prodContext, $current_completed_row);
     }
 
     private function validateManufacturingProductionData($company_id, $work_order_id, $production_type, $completed_qty, $current_completed_row, $post)
     {
-        global $callConfig;
+        $err = null;
         if (empty($current_completed_row->work_order_item_id)) {
-            return array('status' => 'error', 'message' => ManufacturingForecastConstants::ERR_WO_NOT_FOUND);
-        }
-        if ($current_completed_row->current_status != ST_APPROVED) {
-            return array('status' => 'error', 'message' => 'Work Order must be approved before production updates');
-        }
-        if ($production_type === 'HOLD' && $current_completed_row->work_log_status != 0) {
-            return array('status' => 'error', 'message' => 'Only in-progress production can be put on hold');
-        }
-        if ($production_type === 'COMPLETED' && !in_array($current_completed_row->work_log_status, array(0, '0', 1, '1'))) {
-            return array('status' => 'error', 'message' => 'Production must be started before completion');
-        }
-        $current_completed_qty = floatval($current_completed_row->completed_qty ?? 0);
-        $session_completed_qty = floatval($completed_qty);
-        $ordered_qty = floatval($current_completed_row->work_order_item_qty ?? 0);
-        if ($production_type === 'COMPLETED' && $session_completed_qty <= 0) {
-            return array('status' => 'error', 'message' => 'Completed quantity must be greater than zero');
-        }
-        if ($production_type === 'HOLD' && $session_completed_qty < 0) {
-            return array('status' => 'error', 'message' => 'Completed quantity cannot be negative');
-        }
-        if (($current_completed_qty + $session_completed_qty) > $ordered_qty) {
-            return array('status' => 'error', 'message' => 'Completed quantity cannot exceed work order quantity');
+            $err = ManufacturingForecastConstants::ERR_WO_NOT_FOUND;
+        } elseif ($current_completed_row->current_status != ST_APPROVED) {
+            $err = 'Work Order must be approved before production updates';
+        } elseif ($production_type === 'HOLD' && $current_completed_row->work_log_status != 0) {
+            $err = 'Only in-progress production can be put on hold';
+        } elseif ($production_type === 'COMPLETED' && !in_array($current_completed_row->work_log_status, array(0, '0', 1, '1'))) {
+            $err = 'Production must be started before completion';
+        } else {
+            $current_completed_qty = floatval($current_completed_row->completed_qty ?? 0);
+            $session_completed_qty = floatval($completed_qty);
+            $ordered_qty = floatval($current_completed_row->work_order_item_qty ?? 0);
+            if ($production_type === 'COMPLETED' && $session_completed_qty <= 0) {
+                $err = 'Completed quantity must be greater than zero';
+            } elseif ($production_type === 'HOLD' && $session_completed_qty < 0) {
+                $err = 'Completed quantity cannot be negative';
+            } elseif (($current_completed_qty + $session_completed_qty) > $ordered_qty) {
+                $err = 'Completed quantity cannot exceed work order quantity';
+            } else {
+                return $this->validateManufacturingProductionTracking($company_id, $work_order_id, $production_type, $session_completed_qty, $current_completed_row, $post);
+            }
         }
 
-        return $this->validateManufacturingProductionTracking($company_id, $work_order_id, $production_type, $session_completed_qty, $current_completed_row, $post);
+        return array('status' => 'error', 'message' => $err);
+    }
+
+    private function validateProductionSerials($company_id, $item_id, $session_completed_qty, $post)
+    {
+        global $callConfig;
+        if (floor($session_completed_qty) != $session_completed_qty) {
+            return array('status' => 'error', 'message' => 'Serial tracked production quantity must be a whole number');
+        }
+        $serials = array();
+        foreach ((array) ($post['serial_no'] ?? array()) as $serial_no) {
+            $serial_no = trim($serial_no);
+            if ($serial_no != '') {
+                $serials[] = $serial_no;
+            }
+        }
+        if (count($serials) != intval($session_completed_qty)) {
+            return array('status' => 'error', 'message' => 'Please enter one serial number for each completed quantity');
+        }
+        if (count($serials) != count(array_unique($serials))) {
+            return array('status' => 'error', 'message' => 'Duplicate serial numbers are not allowed');
+        }
+        foreach ($serials as $serial_no) {
+            $serial_no_esc = $callConfig->real_escape_string($serial_no);
+            $existing_serial = $callConfig->getRow("SELECT id FROM item_serial_nos WHERE company_id = '{$company_id}' AND item_id = '{$item_id}' AND serial_no = '{$serial_no_esc}' AND is_active = 0 LIMIT 0,1");
+            if (!empty($existing_serial)) {
+                return array('status' => 'error', 'message' => 'Serial number ' . $serial_no . ' already exists for this item');
+            }
+        }
+        return null;
+    }
+
+    private function validateProductionLots($company_id, $item_id, $session_completed_qty, $post)
+    {
+        global $callConfig;
+        $lot_total = 0;
+        $lot_nos = array();
+        foreach ((array) ($post['lot_no'] ?? array()) as $seq => $lot_no) {
+            $lot_no = trim($lot_no);
+            $lot_qty = floatval($post['lot_qty'][$seq] ?? 0);
+            if ($lot_no == '' || $lot_qty <= 0) {
+                return array('status' => 'error', 'message' => 'Lot number and quantity are required for lot tracked production');
+            }
+            $lot_total += $lot_qty;
+            $lot_nos[] = $lot_no;
+        }
+        if (empty($lot_nos)) {
+            return array('status' => 'error', 'message' => 'Please enter at least one lot number');
+        }
+        if (count($lot_nos) != count(array_unique($lot_nos))) {
+            return array('status' => 'error', 'message' => 'Duplicate lot numbers are not allowed');
+        }
+        if (abs($lot_total - $session_completed_qty) > 0.0001) {
+            return array('status' => 'error', 'message' => 'Total lot quantity must equal completed quantity');
+        }
+        foreach ($lot_nos as $lot_no) {
+            $lot_no_esc = $callConfig->real_escape_string($lot_no);
+            $existing_lot = $callConfig->getRow("SELECT id FROM item_lot_nos WHERE company_id = '{$company_id}' AND item_id = '{$item_id}' AND lot_no = '{$lot_no_esc}' AND is_active = 0 LIMIT 0,1");
+            if (!empty($existing_lot)) {
+                return array('status' => 'error', 'message' => 'Lot number ' . $lot_no . ' already exists for this item');
+            }
+        }
+        return null;
+    }
+
+    private function validateProductionChildOrders($company_id, $work_order_id)
+    {
+        global $callConfig;
+        $child_orders_query = "SELECT child.id, child.transaction_no, child.work_order_item_id, child.work_order_item_qty, child.completed_qty, child.work_log_status, itm.item_name,
+            IFNULL((
+                SELECT iwb.closing_qty FROM item_wa_balances iwb
+                WHERE iwb.company_id = child.company_id AND iwb.item_id = child.work_order_item_id
+                    AND iwb.balance_date = (SELECT MAX(iwb2.balance_date) FROM item_wa_balances iwb2 WHERE iwb2.company_id = iwb.company_id AND iwb2.item_id = iwb.item_id)
+                LIMIT 0,1
+            ), 0) AS available_qty
+            FROM manufacturing_work_orders child
+            LEFT JOIN items itm ON itm.company_id = child.company_id AND itm.id = child.work_order_item_id
+            WHERE child.company_id = '{$company_id}' AND child.parent_manufacturing_work_order_id = '{$work_order_id}' AND child.is_active = 0";
+        $child_orders = $callConfig->getAllRows($child_orders_query);
+        foreach ((array) $child_orders as $child_order) {
+            $child_order_qty = floatval($child_order->work_order_item_qty ?? 0);
+            $child_completed_qty = floatval($child_order->completed_qty ?? 0);
+            $child_available_qty = floatval($child_order->available_qty ?? 0);
+            $child_completed = ($child_order->work_log_status == 199 || $child_completed_qty >= $child_order_qty);
+            $child_available = ($child_available_qty >= $child_order_qty);
+            if (!$child_completed && !$child_available) {
+                $child_item_name = $child_order->item_name ?: ('Item #' . $child_order->work_order_item_id);
+                return array('status' => 'error', 'message' => 'Cannot complete parent work order. Child work order ' . $child_order->transaction_no . ' for ' . $child_item_name . ' must be completed or available in stock.');
+            }
+        }
+        return null;
+    }
+
+    private function validateProductionConsumedMaterials($company_id, $post)
+    {
+        global $callConfig;
+        if (!isset($post['item_id']) || !is_array($post['item_id'])) {
+            return null;
+        }
+        foreach ($post['item_id'] as $seq => $item_id) {
+            $mwoi_id = intval($post['manufacturing_work_order_item_id'][$seq] ?? 0);
+            $consumed_qty = floatval($post['consumed_qty'][$seq] ?? 0);
+            if ($mwoi_id > 0 && $consumed_qty > 0) {
+                $current_item_row = $callConfig->getRow("SELECT completed_qty, request_qty, stock_receipts_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0");
+                $current_item_completed = floatval($current_item_row->completed_qty ?? 0);
+                $available_material_qty = floatval($current_item_row->stock_receipts_qty ?? 0);
+                if ($available_material_qty <= 0) {
+                    $available_material_qty = floatval($current_item_row->request_qty ?? 0);
+                }
+                if (($current_item_completed + $consumed_qty) > $available_material_qty) {
+                    return array('status' => 'error', 'message' => 'Consumed quantity cannot exceed received material quantity');
+                }
+            }
+        }
+        return null;
     }
 
     private function validateManufacturingProductionTracking($company_id, $work_order_id, $production_type, $session_completed_qty, $current_completed_row, $post)
     {
-        global $callConfig;
         $product_quality_check = intval($current_completed_row->quality_check ?? 0);
         $tracking_type = intval($current_completed_row->tracking_type ?? 0);
         $qc_required = ($product_quality_check == 1 && ($post['qc_required'] ?? '0') == '1' && $session_completed_qty > 0) ? 1 : 0;
-        if ($product_quality_check != 1) {
-            $qc_required = 0;
-        }
 
-        if ($qc_required == 1 && $tracking_type == 1) {
-            if (floor($session_completed_qty) != $session_completed_qty) {
-                return array('status' => 'error', 'message' => 'Serial tracked production quantity must be a whole number');
-            }
-            $serials = array();
-            foreach ((array) ($post['serial_no'] ?? array()) as $serial_no) {
-                $serial_no = trim($serial_no);
-                if ($serial_no != '') {
-                    $serials[] = $serial_no;
+        if ($qc_required == 1) {
+            if ($tracking_type == 1) {
+                $serialErr = $this->validateProductionSerials($company_id, $current_completed_row->work_order_item_id, $session_completed_qty, $post);
+                if ($serialErr !== null) {
+                    return $serialErr;
                 }
-            }
-            if (count($serials) != intval($session_completed_qty)) {
-                return array('status' => 'error', 'message' => 'Please enter one serial number for each completed quantity');
-            }
-            if (count($serials) != count(array_unique($serials))) {
-                return array('status' => 'error', 'message' => 'Duplicate serial numbers are not allowed');
-            }
-            foreach ($serials as $serial_no) {
-                $serial_no_esc = $callConfig->real_escape_string($serial_no);
-                $existing_serial = $callConfig->getRow("SELECT id FROM item_serial_nos WHERE company_id = '{$company_id}' AND item_id = '{$current_completed_row->work_order_item_id}' AND serial_no = '{$serial_no_esc}' AND is_active = 0 LIMIT 0,1");
-                if (!empty($existing_serial)) {
-                    return array('status' => 'error', 'message' => 'Serial number ' . $serial_no . ' already exists for this item');
-                }
-            }
-        }
-
-        if ($qc_required == 1 && $tracking_type == 2) {
-            $lot_total = 0;
-            $lot_nos = array();
-            foreach ((array) ($post['lot_no'] ?? array()) as $seq => $lot_no) {
-                $lot_no = trim($lot_no);
-                $lot_qty = floatval($post['lot_qty'][$seq] ?? 0);
-                if ($lot_no == '' || $lot_qty <= 0) {
-                    return array('status' => 'error', 'message' => 'Lot number and quantity are required for lot tracked production');
-                }
-                $lot_total += $lot_qty;
-                $lot_nos[] = $lot_no;
-            }
-            if (empty($lot_nos)) {
-                return array('status' => 'error', 'message' => 'Please enter at least one lot number');
-            }
-            if (count($lot_nos) != count(array_unique($lot_nos))) {
-                return array('status' => 'error', 'message' => 'Duplicate lot numbers are not allowed');
-            }
-            if (abs($lot_total - $session_completed_qty) > 0.0001) {
-                return array('status' => 'error', 'message' => 'Total lot quantity must equal completed quantity');
-            }
-            foreach ($lot_nos as $lot_no) {
-                $lot_no_esc = $callConfig->real_escape_string($lot_no);
-                $existing_lot = $callConfig->getRow("SELECT id FROM item_lot_nos WHERE company_id = '{$company_id}' AND item_id = '{$current_completed_row->work_order_item_id}' AND lot_no = '{$lot_no_esc}' AND is_active = 0 LIMIT 0,1");
-                if (!empty($existing_lot)) {
-                    return array('status' => 'error', 'message' => 'Lot number ' . $lot_no . ' already exists for this item');
+            } elseif ($tracking_type == 2) {
+                $lotErr = $this->validateProductionLots($company_id, $current_completed_row->work_order_item_id, $session_completed_qty, $post);
+                if ($lotErr !== null) {
+                    return $lotErr;
                 }
             }
         }
 
         if ($production_type === 'COMPLETED') {
-            $child_orders_query = "SELECT child.id, child.transaction_no, child.work_order_item_id, child.work_order_item_qty, child.completed_qty, child.work_log_status, itm.item_name,
-                IFNULL((
-                    SELECT iwb.closing_qty FROM item_wa_balances iwb
-                    WHERE iwb.company_id = child.company_id AND iwb.item_id = child.work_order_item_id
-                        AND iwb.balance_date = (SELECT MAX(iwb2.balance_date) FROM item_wa_balances iwb2 WHERE iwb2.company_id = iwb.company_id AND iwb2.item_id = iwb.item_id)
-                    LIMIT 0,1
-                ), 0) AS available_qty
-                FROM manufacturing_work_orders child
-                LEFT JOIN items itm ON itm.company_id = child.company_id AND itm.id = child.work_order_item_id
-                WHERE child.company_id = '{$company_id}' AND child.parent_manufacturing_work_order_id = '{$work_order_id}' AND child.is_active = 0";
-            $child_orders = $callConfig->getAllRows($child_orders_query);
-            foreach ((array) $child_orders as $child_order) {
-                $child_order_qty = floatval($child_order->work_order_item_qty ?? 0);
-                $child_completed_qty = floatval($child_order->completed_qty ?? 0);
-                $child_available_qty = floatval($child_order->available_qty ?? 0);
-                $child_completed = ($child_order->work_log_status == 199 || $child_completed_qty >= $child_order_qty);
-                $child_available = ($child_available_qty >= $child_order_qty);
-                if (!$child_completed && !$child_available) {
-                    $child_item_name = $child_order->item_name ?: ('Item #' . $child_order->work_order_item_id);
-                    return array('status' => 'error', 'message' => 'Cannot complete parent work order. Child work order ' . $child_order->transaction_no . ' for ' . $child_item_name . ' must be completed or available in stock.');
-                }
+            $childErr = $this->validateProductionChildOrders($company_id, $work_order_id);
+            if ($childErr !== null) {
+                return $childErr;
             }
         }
 
-        if (isset($post['item_id']) && is_array($post['item_id'])) {
-            foreach ($post['item_id'] as $seq => $item_id) {
-                $mwoi_id = intval($post['manufacturing_work_order_item_id'][$seq] ?? 0);
-                $consumed_qty = floatval($post['consumed_qty'][$seq] ?? 0);
-                if ($mwoi_id > 0 && $consumed_qty > 0) {
-                    $current_item_row = $callConfig->getRow("SELECT completed_qty, request_qty, stock_receipts_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0");
-                    $current_item_completed = floatval($current_item_row->completed_qty ?? 0);
-                    $available_material_qty = floatval($current_item_row->stock_receipts_qty ?? 0);
-                    if ($available_material_qty <= 0) {
-                        $available_material_qty = floatval($current_item_row->request_qty ?? 0);
-                    }
-                    if (($current_item_completed + $consumed_qty) > $available_material_qty) {
-                        return array('status' => 'error', 'message' => 'Consumed quantity cannot exceed received material quantity');
-                    }
-                }
-            }
-        }
-
-        return null;
+        return $this->validateProductionConsumedMaterials($company_id, $post);
     }
 
-    private function executeManufacturingProductionUpdates($get, $post, $company_id, $work_order_id, $created_by, $production_type, $completed_qty, $remarks, $hold_reason, $current_completed_row)
+    private function updateConsumedMaterialsAndNoteItems($company_id, $post, array &$production_post)
     {
         global $callConfig;
+        if (!isset($post['item_id']) || !is_array($post['item_id'])) {
+            return;
+        }
+        foreach ($post['item_id'] as $seq => $item_id) {
+            $mwoi_id = $post['manufacturing_work_order_item_id'][$seq] ?? 0;
+            $consumed_qty = $post['consumed_qty'][$seq] ?? 0;
+            if ($mwoi_id > 0 && $consumed_qty > 0) {
+                $current_item_row = $callConfig->getRow("SELECT completed_qty, item_id, request_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0");
+                $current_item_completed = floatval($current_item_row->completed_qty ?? 0);
+                $total_item_completed = $current_item_completed + floatval($consumed_qty);
+                $callConfig->updateRecord('manufacturing_work_order_items', array('completed_qty' => $total_item_completed), 'id', $mwoi_id);
+                $production_post['note_items'][] = array(
+                    'item_id' => $current_item_row->item_id ?? 0,
+                    'received_qty' => $current_item_row->request_qty ?? 0,
+                    'produced_qty' => $consumed_qty ?? 0,
+                    'wastage_qty' => 0,
+                );
+            }
+        }
+    }
+
+    private function executeManufacturingProductionUpdates($get, $post, array $prodContext, $current_completed_row)
+    {
+        global $callConfig;
+        $company_id = $prodContext['company_id'];
+        $work_order_id = $prodContext['work_order_id'];
+        $created_by = $prodContext['created_by'];
+        $production_type = $prodContext['production_type'];
+        $completed_qty = $prodContext['completed_qty'];
+        $remarks = $prodContext['remarks'];
+        $hold_reason = $prodContext['hold_reason'];
+
         try {
             $production_data = array(
                 'work_order_id' => $work_order_id,
@@ -2301,24 +2397,7 @@ trait ManufacturingForecastStockTransferTrait
                 'skip_work_order_updates' => 1,
             );
 
-            if (isset($post['item_id']) && is_array($post['item_id'])) {
-                foreach ($post['item_id'] as $seq => $item_id) {
-                    $mwoi_id = $post['manufacturing_work_order_item_id'][$seq] ?? 0;
-                    $consumed_qty = $post['consumed_qty'][$seq] ?? 0;
-                    if ($mwoi_id > 0 && $consumed_qty > 0) {
-                        $current_item_row = $callConfig->getRow("SELECT completed_qty, item_id, request_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0");
-                        $current_item_completed = floatval($current_item_row->completed_qty ?? 0);
-                        $total_item_completed = $current_item_completed + floatval($consumed_qty);
-                        $callConfig->updateRecord('manufacturing_work_order_items', array('completed_qty' => $total_item_completed), 'id', $mwoi_id);
-                        $production_post['note_items'][] = array(
-                            'item_id' => $current_item_row->item_id ?? 0,
-                            'received_qty' => $current_item_row->request_qty ?? 0,
-                            'produced_qty' => $consumed_qty ?? 0,
-                            'wastage_qty' => 0,
-                        );
-                    }
-                }
-            }
+            $this->updateConsumedMaterialsAndNoteItems($company_id, $post, $production_post);
 
             $production_res = array();
             if ($session_completed_qty > 0) {
@@ -2516,76 +2595,119 @@ class ManfacturingForecastUserClass
         $year = intval($post['year'] ?? 0);
         $forecast_date = !empty($post['forecast_date']) ? $this->dateconvertdbformat($post['forecast_date']) : date('Y-m-d');
         $remarks = trim($post['remarks'] ?? '');
+        $err = null;
+        $forecastHeaderId = 0;
 
         if ($year == 0 || empty($post['rows']) || !is_array($post['rows'])) {
-            return array(array('status' => 'fail', 'message' => 'Forecast year and product rows are required.'));
-        }
-
-        $activeProducts = array();
-        $products = $callConfig->getAllRows("SELECT id FROM items WHERE company_id='{$company_id}' AND stocking_type='F' AND is_active=0");
-        foreach ((array) $products as $product) {
-            $activeProducts[$product->id] = $product->id;
-        }
-
-        $forecastHeader = $callConfig->getRow("SELECT * FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}'" . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
-        $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
-        if (!empty($forecastHeader->id) && !in_array($forecastHeader->current_status, $editableStatuses)) {
-            return array(array('status' => 'fail', 'message' => 'Approved forecast cannot be edited.'));
-        }
-
-        if (!empty($forecastHeader->id)) {
-            $forecastHeaderId = intval($forecastHeader->id);
-            $headerRecord = array(
-                'forecast_date' => $forecast_date,
-                'remarks' => $remarks,
-                'updated_by' => $user_id,
-                'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
-            );
-            $return['forecast_header'] = $callConfig->updateRecord('manufacturing_forecast', $headerRecord, 'id', $forecastHeaderId);
+            $err = 'Forecast year and product rows are required.';
         } else {
-            $forecastNo = $this->toGetApplicationSerialNumber('manufacturing_forecast', array(
-                'company_id' => $company_id,
-                'user_id' => $user_id,
-                'transaction_date' => $forecast_date
-            ));
-            $headerRecord = array(
-                'company_id' => $company_id,
-                'forecast_no' => $forecastNo,
-                'forecast_date' => $forecast_date,
-                'year' => $year,
-                'remarks' => $remarks,
-                'is_active' => 0,
-                'current_status' => 0,
-                'created_by' => $user_id,
-                'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
-            );
-            $headerResult = $callConfig->insertRecord('manufacturing_forecast', $headerRecord);
-            if (($headerResult['status'] ?? '') != 'sucess') {
-                return array(array('status' => 'fail', 'message' => 'Unable to create forecast header.'));
+            $activeProducts = array();
+            $products = $callConfig->getAllRows("SELECT id FROM items WHERE company_id='{$company_id}' AND stocking_type='F' AND is_active=0");
+            foreach ((array) $products as $product) {
+                $activeProducts[$product->id] = $product->id;
             }
-            $forecastHeaderId = intval($headerResult['LASTID']);
-            $return['forecast_header'] = $headerResult;
+
+            $forecastHeader = $callConfig->getRow("SELECT * FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}'" . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+            $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
+            if (!empty($forecastHeader->id) && !in_array($forecastHeader->current_status, $editableStatuses)) {
+                $err = 'Approved forecast cannot be edited.';
+            } else {
+                if (!empty($forecastHeader->id)) {
+                    $forecastHeaderId = intval($forecastHeader->id);
+                    $headerRecord = array(
+                        'forecast_date' => $forecast_date,
+                        'remarks' => $remarks,
+                        'updated_by' => $user_id,
+                        'updated_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+                    );
+                    $return['forecast_header'] = $callConfig->updateRecord('manufacturing_forecast', $headerRecord, 'id', $forecastHeaderId);
+                } else {
+                    $forecastNo = $this->toGetApplicationSerialNumber('manufacturing_forecast', array(
+                        'company_id' => $company_id,
+                        'user_id' => $user_id,
+                        'transaction_date' => $forecast_date
+                    ));
+                    $headerRecord = array(
+                        'company_id' => $company_id,
+                        'forecast_no' => $forecastNo,
+                        'forecast_date' => $forecast_date,
+                        'year' => $year,
+                        'remarks' => $remarks,
+                        'is_active' => 0,
+                        'current_status' => 0,
+                        'created_by' => $user_id,
+                        'created_date' => date(ManufacturingForecastConstants::DATE_TIME_FORMAT)
+                    );
+                    $headerResult = $callConfig->insertRecord('manufacturing_forecast', $headerRecord);
+                    if (($headerResult['status'] ?? '') != 'sucess') {
+                        $err = 'Unable to create forecast header.';
+                    } else {
+                        $forecastHeaderId = intval($headerResult['LASTID']);
+                        $return['forecast_header'] = $headerResult;
+                    }
+                }
+
+                if ($err === null) {
+                    $existingRecords = $callConfig->getAllRows("SELECT id, product_id FROM manufacturing_forecast_items WHERE company_id='{$company_id}' AND (manufacturing_forecast_id='{$forecastHeaderId}' OR (year='{$year}' AND (manufacturing_forecast_id IS NULL OR manufacturing_forecast_id=0))) AND is_active=0");
+                    $existingMap = array();
+                    if (!empty($existingRecords) && is_array($existingRecords)) {
+                        foreach ($existingRecords as $r) {
+                            $existingMap[$r->product_id] = $r->id;
+                        }
+                    }
+                    $forecastParams = array(
+                        'company_id' => $company_id,
+                        'user_id' => $user_id,
+                        'year' => $year,
+                        'remarks' => $remarks,
+                        'forecastHeaderId' => $forecastHeaderId
+                    );
+                    $err = $this->saveManufacturingForecastRows($forecastParams, $post['rows'], $activeProducts, $existingMap, $return);
+                }
+            }
         }
 
-        $existingRecords = $callConfig->getAllRows("SELECT id, product_id FROM manufacturing_forecast_items WHERE company_id='{$company_id}' AND (manufacturing_forecast_id='{$forecastHeaderId}' OR (year='{$year}' AND (manufacturing_forecast_id IS NULL OR manufacturing_forecast_id=0))) AND is_active=0");
-        $existingMap = array();
-        if (!empty($existingRecords) && is_array($existingRecords)) {
-            foreach ($existingRecords as $r) {
-                $existingMap[$r->product_id] = $r->id;
-            }
-        }
-
-        $rowErr = $this->saveManufacturingForecastRows($company_id, $user_id, $year, $remarks, $forecastHeaderId, $post['rows'], $activeProducts, $existingMap, $return);
-        if ($rowErr !== null) {
-            return array(array('status' => 'fail', 'message' => $rowErr));
+        if ($err !== null) {
+            return array(array('status' => 'fail', 'message' => $err));
         }
 
         return array(array('status' => 'sucess', 'LASTID' => $forecastHeaderId, 'message' => 'Forecast saved successfully.'));
     }
 
-    private function saveManufacturingForecastRows($company_id, $user_id, $year, $remarks, $forecastHeaderId, $rows, $activeProducts, $existingMap, &$return)
+    private function extractForecastMonthQuantities(array $row, array &$record)
+    {
+        $total = 0;
+        for ($i = 1; $i <= 12; $i++) {
+            $key = "forecast_month_$i";
+            $rawValue = $row[$key] ?? '';
+            if ($rawValue === '' || !is_numeric($rawValue)) {
+                return 'Forecast quantity must be numeric.';
+            }
+            $val = floatval($rawValue);
+            if ($val < 0) {
+                return 'Forecast quantity cannot be negative.';
+            }
+            $record[$key] = $val;
+            $total += $val;
+        }
+        $record['forecast_quarterly_1'] = $record['forecast_month_1'] + $record['forecast_month_2'] + $record['forecast_month_3'];
+        $record['forecast_quarterly_2'] = $record['forecast_month_4'] + $record['forecast_month_5'] + $record['forecast_month_6'];
+        $record['forecast_quarterly_3'] = $record['forecast_month_7'] + $record['forecast_month_8'] + $record['forecast_month_9'];
+        $record['forecast_quarterly_4'] = $record['forecast_month_10'] + $record['forecast_month_11'] + $record['forecast_month_12'];
+        $record['forecast_yearly'] = $total;
+        $record['total_forecast'] = $total;
+        return null;
+    }
+
+    private function saveManufacturingForecastRows(array $forecastParams, $rows, $activeProducts, $existingMap, &$return)
     {
         global $callConfig;
+        $company_id = $forecastParams['company_id'];
+        $user_id = $forecastParams['user_id'];
+        $year = $forecastParams['year'];
+        $remarks = $forecastParams['remarks'];
+        $forecastHeaderId = $forecastParams['forecastHeaderId'];
+
         foreach ($rows as $product_id => $row) {
             $product_id = intval($product_id);
             if (!isset($activeProducts[$product_id])) {
@@ -2602,27 +2724,10 @@ class ManfacturingForecastUserClass
                 'is_active' => 0
             ];
 
-            $total = 0;
-            for ($i = 1; $i <= 12; $i++) {
-                $key = "forecast_month_$i";
-                $rawValue = $row[$key] ?? '';
-                if ($rawValue === '' || !is_numeric($rawValue)) {
-                    return 'Forecast quantity must be numeric.';
-                }
-                $val = floatval($rawValue);
-                if ($val < 0) {
-                    return 'Forecast quantity cannot be negative.';
-                }
-                $record[$key] = $val;
-                $total += $val;
+            $qtyErr = $this->extractForecastMonthQuantities($row, $record);
+            if ($qtyErr !== null) {
+                return $qtyErr;
             }
-
-            $record['forecast_quarterly_1'] = $record['forecast_month_1'] + $record['forecast_month_2'] + $record['forecast_month_3'];
-            $record['forecast_quarterly_2'] = $record['forecast_month_4'] + $record['forecast_month_5'] + $record['forecast_month_6'];
-            $record['forecast_quarterly_3'] = $record['forecast_month_7'] + $record['forecast_month_8'] + $record['forecast_month_9'];
-            $record['forecast_quarterly_4'] = $record['forecast_month_10'] + $record['forecast_month_11'] + $record['forecast_month_12'];
-            $record['forecast_yearly'] = $total;
-            $record['total_forecast'] = $total;
 
             if (isset($existingMap[$product_id])) {
                 $record['updated_by'] = $user_id;
@@ -2684,15 +2789,13 @@ class ManfacturingForecastUserClass
         return $return;
     }
 
-    private function resolvePendingFirmOrderRows($company_id, $year, $month, $selectedDate, $monthDates, &$return)
+    private function resolvePendingFirmOrderMonthOne($company_id, $year, $monthDates, &$return)
     {
         global $callConfig;
-        if ($month == 1) {
-            $forecastHeader = $callConfig->getRow("SELECT id FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}' AND current_status=" . ST_APPROVED . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
-            if (empty($forecastHeader->id)) {
-                $return['message'] = ManufacturingForecastConstants::PLEASE_APPROVE . $year . ' manufacturing forecast before creating firm orders.';
-                return;
-            }
+        $forecastHeader = $callConfig->getRow("SELECT id FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}' AND current_status=" . ST_APPROVED . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+        if (empty($forecastHeader->id)) {
+            $return['message'] = ManufacturingForecastConstants::PLEASE_APPROVE . $year . ' manufacturing forecast before creating firm orders.';
+        } else {
             $query = "SELECT fi.product_id, i.item_name, fi.forecast_month_1 AS firm_qty_1, fi.forecast_month_2 AS firm_qty_2, fi.forecast_month_3 AS firm_qty_3,
                     '{$monthDates[1]}' AS firm_month_1, '{$monthDates[2]}' AS firm_month_2, '{$monthDates[3]}' AS firm_month_3
                 FROM manufacturing_forecast_items fi
@@ -2700,9 +2803,12 @@ class ManfacturingForecastUserClass
                 WHERE fi.company_id='{$company_id}' AND fi.manufacturing_forecast_id='{$forecastHeader->id}' AND fi.is_active=0
                 ORDER BY i.item_name ASC";
             $return['data'] = $callConfig->getAllRows($query);
-            return;
         }
+    }
 
+    private function resolvePendingFirmOrderLaterMonths($company_id, $selectedDate, $monthDates, &$return)
+    {
+        global $callConfig;
         $previousYearMonth = date("Y-m", strtotime($selectedDate . " -1 month"));
         $previousHeader = $callConfig->getRow("SELECT id FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$previousYearMonth}' AND current_status=" . ST_APPROVED . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
         if (empty($previousHeader->id)) {
@@ -2730,6 +2836,15 @@ class ManfacturingForecastUserClass
         $return['data'] = $callConfig->getAllRows($query);
     }
 
+    private function resolvePendingFirmOrderRows($company_id, $year, $month, $selectedDate, $monthDates, &$return)
+    {
+        if ($month == 1) {
+            $this->resolvePendingFirmOrderMonthOne($company_id, $year, $monthDates, $return);
+            return;
+        }
+        $this->resolvePendingFirmOrderLaterMonths($company_id, $selectedDate, $monthDates, $return);
+    }
+
     public function insertandupdatemanufacturingfirmorder($get, $post)
     {
         global $callConfig;
@@ -2739,23 +2854,26 @@ class ManfacturingForecastUserClass
         $month = intval($post['month'] ?? 0);
         $firmOrderDate = !empty($post['firm_order_date']) ? $this->dateconvertdbformat($post['firm_order_date']) : date('Y-m-d');
         $remarks = trim($post['remarks'] ?? '');
+        $err = null;
+        $m_y = '';
+        $firmOrder = null;
 
         if ($year == 0 || $month < 1 || $month > 12 || empty($post['rows']) || !is_array($post['rows'])) {
-            return array('data' => array(array('status' => 'fail', 'message' => 'Firm order year, month, and product rows are required.')));
+            $err = 'Firm order year, month, and product rows are required.';
+        } else {
+            $new_date = date("Y-m-d", strtotime($year . "-" . $month . "-01"));
+            $m_y = date("Y-m", strtotime($new_date));
+            $firmOrder = $callConfig->getRow("SELECT * FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$m_y}'" . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
+            $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
+            if (!empty($firmOrder->id) && !in_array($firmOrder->current_status, $editableStatuses)) {
+                $err = 'Approved firm order cannot be edited.';
+            } else {
+                $err = $this->validateFirmOrderPrerequisites($company_id, $year, $month, $new_date);
+            }
         }
 
-        $new_date = date("Y-m-d", strtotime($year . "-" . $month . "-01"));
-        $m_y = date("Y-m", strtotime($new_date));
-
-        $firmOrder = $callConfig->getRow("SELECT * FROM manufacturing_firm_orders WHERE company_id='{$company_id}' AND `year_month`='{$m_y}'" . ManufacturingForecastConstants::AND_ACTIVE_LIMIT_1);
-        $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
-        if (!empty($firmOrder->id) && !in_array($firmOrder->current_status, $editableStatuses)) {
-            return array('data' => array(array('status' => 'fail', 'message' => 'Approved firm order cannot be edited.')));
-        }
-
-        $validationError = $this->validateFirmOrderPrerequisites($company_id, $year, $month, $new_date);
-        if ($validationError !== null) {
-            return array('data' => array(array('status' => 'fail', 'message' => $validationError)));
+        if ($err !== null) {
+            return array('data' => array(array('status' => 'fail', 'message' => $err)));
         }
 
         return $this->saveFirmOrderData($company_id, $user_id, $firmOrderDate, $remarks, $m_y, $firmOrder, $post['rows']);
