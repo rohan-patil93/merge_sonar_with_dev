@@ -6143,6 +6143,24 @@ public function getAmcAdminLandingDashboardData($get)
 
         return $return;
     }
+    private function buildSingleExpirySection($contracts, $section, $isExpired)
+    {
+        $filtered = $isExpired
+            ? $this->filterAmcAdminLandingContractsByExpiredRange($contracts, $section['start_days'], $section['days'])
+            : $this->filterAmcAdminLandingContractsByExpiryRange($contracts, $section['min'], $section['max']);
+        $type = $isExpired ? 'expired' : 'expiring';
+        $rows = array();
+        foreach ((array) $filtered as $contract) {
+            $rows[] = $this->mapAmcAdminLandingExpiryRow($contract, $type);
+        }
+        return array(
+            'key' => $section['key'],
+            'title' => $section['title'],
+            'total' => count($rows),
+            'rows' => $rows,
+        );
+    }
+
     private function buildAmcAdminLandingContractExpiry($contracts)
     {
         $expiringSections = array(
@@ -6159,48 +6177,30 @@ public function getAmcAdminLandingDashboardData($get)
         );
 
         $expiring = array();
-        if (count((array) $expiringSections) > 0) {
-            foreach ($expiringSections as $section) {
-                $filtered = $this->filterAmcAdminLandingContractsByExpiryRange($contracts, $section['min'], $section['max']);
-                $rows = array();
-                if (count((array) $filtered) > 0) {
-                    foreach ($filtered as $contract) {
-                        $rows[] = $this->mapAmcAdminLandingExpiryRow($contract, 'expiring');
-                    }
-                }
-                $expiring[] = array(
-                    'key' => $section['key'],
-                    'title' => $section['title'],
-                    'total' => count((array) $rows),
-                    'rows' => $rows,
-                );
-            }
+        foreach ($expiringSections as $section) {
+            $expiring[] = $this->buildSingleExpirySection($contracts, $section, false);
         }
 
         $expired = array();
-        if (count((array) $expiredSections) > 0) {
-            foreach ($expiredSections as $section) {
-                $filtered = $this->filterAmcAdminLandingContractsByExpiredRange(
-                    $contracts,
-                    $section['start_days'],
-                    $section['days']
-                );
-                $rows = array();
-                if (count((array) $filtered) > 0) {
-                    foreach ($filtered as $contract) {
-                        $rows[] = $this->mapAmcAdminLandingExpiryRow($contract, 'expired');
-                    }
-                }
-                $expired[] = array(
-                    'key' => $section['key'],
-                    'title' => $section['title'],
-                    'total' => count((array) $rows),
-                    'rows' => $rows,
-                );
-            }
+        foreach ($expiredSections as $section) {
+            $expired[] = $this->buildSingleExpirySection($contracts, $section, true);
         }
 
         return array('expiring' => $expiring, 'expired' => $expired);
+    }
+    private function calculateDaysUntilExpiry($contract, DateTime $today)
+    {
+        $c = is_array($contract) ? $contract : (array) $contract;
+        $endDateRaw = $c['end_date'] ?? '';
+        if ($endDateRaw === '') {
+            return null;
+        }
+        $endDate = new DateTime($endDateRaw);
+        $endDate->setTime(0, 0, 0);
+        if ($endDate < $today) {
+            return null;
+        }
+        return (int) ceil(($endDate->getTimestamp() - $today->getTimestamp()) / 86400);
     }
 
     private function filterAmcAdminLandingContractsByExpiryRange($contracts, $daysMin, $daysMax)
@@ -6208,22 +6208,10 @@ public function getAmcAdminLandingDashboardData($get)
         $today = new DateTime();
         $today->setTime(0, 0, 0);
         $filtered = array();
-        if (count((array) $contracts) > 0) {
-            foreach ($contracts as $contract) {
-                $c = is_array($contract) ? $contract : (array) $contract;
-                $endDateRaw = $c['end_date'] ?? '';
-                if ($endDateRaw == '') {
-                    continue;
-                }
-                $endDate = new DateTime($endDateRaw);
-                $endDate->setTime(0, 0, 0);
-                if ($endDate < $today) {
-                    continue;
-                }
-                $daysLeft = (int) ceil(($endDate->getTimestamp() - $today->getTimestamp()) / 86400);
-                if ($daysLeft >= (int) $daysMin && $daysLeft <= (int) $daysMax) {
-                    $filtered[] = $c;
-                }
+        foreach ((array) $contracts as $contract) {
+            $daysLeft = $this->calculateDaysUntilExpiry($contract, $today);
+            if ($daysLeft !== null && $daysLeft >= (int) $daysMin && $daysLeft <= (int) $daysMax) {
+                $filtered[] = is_array($contract) ? $contract : (array) $contract;
             }
         }
         return $filtered;
@@ -6252,6 +6240,16 @@ public function getAmcAdminLandingDashboardData($get)
         }
         return $filtered;
     }
+    private function calculateContractExpiryDiff($endDateRaw, DateTime $today)
+    {
+        if ($endDateRaw === '') {
+            return array(0, 0);
+        }
+        $endDate = new DateTime($endDateRaw);
+        $endDate->setTime(0, 0, 0);
+        $diffDays = (int) ceil(($endDate->getTimestamp() - $today->getTimestamp()) / 86400);
+        return $diffDays >= 0 ? array($diffDays, 0) : array(0, abs($diffDays));
+    }
 
     private function mapAmcAdminLandingExpiryRow($contract, $type)
     {
@@ -6259,24 +6257,10 @@ public function getAmcAdminLandingDashboardData($get)
         $today = new DateTime();
         $today->setTime(0, 0, 0);
         $endDateRaw = $c['end_date'] ?? '';
-        $daysLeft = 0;
-        $daysExpired = 0;
-        if ($endDateRaw != '') {
-            $endDate = new DateTime($endDateRaw);
-            $endDate->setTime(0, 0, 0);
-            $diffDays = (int) ceil(($endDate->getTimestamp() - $today->getTimestamp()) / 86400);
-            if ($diffDays >= 0) {
-                $daysLeft = $diffDays;
-            } else {
-                $daysExpired = abs($diffDays);
-            }
-        }
+        list($daysLeft, $daysExpired) = $this->calculateContractExpiryDiff($endDateRaw, $today);
         $contractType = trim((string) ($c['contract_type'] ?? ''));
         $contractName = trim((string) ($c['contract_name'] ?? ''));
-        $displayName = $contractName;
-        if ($contractType != '') {
-            $displayName .= ' (' . $contractType . ')';
-        }
+        $displayName = $contractType !== '' ? $contractName . ' (' . $contractType . ')' : $contractName;
         return array(
             'id' => (int) ($c['id'] ?? 0),
             'contract_name' => $contractName,
@@ -6387,17 +6371,10 @@ public function getAmcAdminLandingDashboardData($get)
         }
         return $filtered;
     }
-
-    private function buildAmcAdminLandingAssignmentRollups($companyId, $contractIds)
+    private function fetchAmcLandingAssetCounts($companyId, array $contractIds)
     {
         global $callConfig;
-        $rollups = array();
-        if ($companyId <= 0 || count((array) $contractIds) == 0) {
-            return $rollups;
-        }
-
         $idList = implode(',', array_map('intval', $contractIds));
-
         $countSql = "SELECT ca.contract_id,
             COUNT(*) AS asset_total,
             SUM(CASE
@@ -6409,27 +6386,31 @@ public function getAmcAdminLandingDashboardData($get)
             WHERE ca.company_id = {$companyId} AND ca.is_active = 0 AND ca.contract_id IN ({$idList})
             GROUP BY ca.contract_id";
         $countRows = $callConfig->getAllRows($countSql);
-        if (count((array) $countRows) > 0) {
-            foreach ($countRows as $row) {
-                $r = is_array($row) ? $row : (array) $row;
-                $contractId = (int) ($r['contract_id'] ?? 0);
-                $assetTotal = (int) ($r['asset_total'] ?? 0);
-                $assetAssigned = (int) ($r['asset_assigned'] ?? 0);
-                $assetUnassigned = max(0, $assetTotal - $assetAssigned);
-                $status = $this->resolveAmcAdminLandingAssignmentStatus($assetTotal, $assetAssigned);
-                $rollups[$contractId] = array(
-                    'asset_total' => $assetTotal,
-                    'asset_assigned' => $assetAssigned,
-                    'asset_unassigned' => $assetUnassigned,
-                    'assignment_status' => $status['status'],
-                    'assignment_label' => $status['label'],
-                    'assignment_class' => $status['class'],
-                    'assignee_label' => '—',
-                    'assignee_type' => 'Technician',
-                );
-            }
+        $rollups = array();
+        foreach ((array) $countRows as $row) {
+            $r = is_array($row) ? $row : (array) $row;
+            $contractId = (int) ($r['contract_id'] ?? 0);
+            $assetTotal = (int) ($r['asset_total'] ?? 0);
+            $assetAssigned = (int) ($r['asset_assigned'] ?? 0);
+            $status = $this->resolveAmcAdminLandingAssignmentStatus($assetTotal, $assetAssigned);
+            $rollups[$contractId] = array(
+                'asset_total' => $assetTotal,
+                'asset_assigned' => $assetAssigned,
+                'asset_unassigned' => max(0, $assetTotal - $assetAssigned),
+                'assignment_status' => $status['status'],
+                'assignment_label' => $status['label'],
+                'assignment_class' => $status['class'],
+                'assignee_label' => '—',
+                'assignee_type' => 'Technician',
+            );
         }
+        return $rollups;
+    }
 
+    private function fetchAmcLandingAssignees($companyId, array $contractIds)
+    {
+        global $callConfig;
+        $idList = implode(',', array_map('intval', $contractIds));
         $assigneeSql = "SELECT ca.contract_id,
             CASE WHEN COALESCE(cad.service_mode, 'vendor') = 'inhouse' THEN ca.default_employee_id ELSE ca.default_technician_id END AS assignee_id,
             CASE WHEN COALESCE(cad.service_mode, 'vendor') = 'inhouse' THEN e.display_name ELSE t.account_name END AS assignee_name,
@@ -6445,14 +6426,11 @@ public function getAmcAdminLandingDashboardData($get)
             )";
         $assigneeRows = $callConfig->getAllRows($assigneeSql);
         $assigneesByContract = array();
-        if (count((array) $assigneeRows) > 0) {
-            foreach ($assigneeRows as $row) {
-                $r = is_array($row) ? $row : (array) $row;
-                $contractId = (int) ($r['contract_id'] ?? 0);
-                $assigneeId = (int) ($r['assignee_id'] ?? 0);
-                if ($contractId <= 0 || $assigneeId <= 0) {
-                    continue;
-                }
+        foreach ((array) $assigneeRows as $row) {
+            $r = is_array($row) ? $row : (array) $row;
+            $contractId = (int) ($r['contract_id'] ?? 0);
+            $assigneeId = (int) ($r['assignee_id'] ?? 0);
+            if ($contractId > 0 && $assigneeId > 0) {
                 if (!isset($assigneesByContract[$contractId])) {
                     $assigneesByContract[$contractId] = array();
                 }
@@ -6462,80 +6440,97 @@ public function getAmcAdminLandingDashboardData($get)
                 );
             }
         }
+        return $assigneesByContract;
+    }
 
-        if (count((array) $contractIds) > 0) {
-            foreach ($contractIds as $contractId) {
-                $contractId = (int) $contractId;
-                if (!isset($rollups[$contractId])) {
-                    $status = $this->resolveAmcAdminLandingAssignmentStatus(0, 0);
-                    $rollups[$contractId] = array(
-                        'asset_total' => 0,
-                        'asset_assigned' => 0,
-                        'asset_unassigned' => 0,
-                        'assignment_status' => $status['status'],
-                        'assignment_label' => $status['label'],
-                        'assignment_class' => $status['class'],
-                        'assignee_label' => '—',
-                        'assignee_type' => 'Technician',
-                    );
-                }
-                $assigneeMap = $assigneesByContract[$contractId] ?? array();
-                $distinctIds = array_keys($assigneeMap);
-                if (count((array) $distinctIds) == 1) {
-                    $first = $assigneeMap[$distinctIds[0]];
-                    $rollups[$contractId]['assignee_label'] = $first['name'] != '' ? $first['name'] : '—';
-                    $rollups[$contractId]['assignee_type'] = $first['type'] ?? 'Technician';
-                } elseif (count((array) $distinctIds) > 1) {
-                    $rollups[$contractId]['assignee_label'] = 'Multiple';
-                    $first = reset($assigneeMap);
-                    $rollups[$contractId]['assignee_type'] = $first['type'] ?? 'Technician';
-                }
+    private function assembleAmcLandingRollups(array $contractIds, array $rollups, array $assigneesByContract)
+    {
+        foreach ($contractIds as $contractId) {
+            $contractId = (int) $contractId;
+            if (!isset($rollups[$contractId])) {
+                $status = $this->resolveAmcAdminLandingAssignmentStatus(0, 0);
+                $rollups[$contractId] = array(
+                    'asset_total' => 0,
+                    'asset_assigned' => 0,
+                    'asset_unassigned' => 0,
+                    'assignment_status' => $status['status'],
+                    'assignment_label' => $status['label'],
+                    'assignment_class' => $status['class'],
+                    'assignee_label' => '—',
+                    'assignee_type' => 'Technician',
+                );
+            }
+            $assigneeMap = $assigneesByContract[$contractId] ?? array();
+            $distinctIds = array_keys($assigneeMap);
+            if (count($distinctIds) === 1) {
+                $first = $assigneeMap[$distinctIds[0]];
+                $rollups[$contractId]['assignee_label'] = $first['name'] !== '' ? $first['name'] : '—';
+                $rollups[$contractId]['assignee_type'] = $first['type'] ?? 'Technician';
+            } elseif (count($distinctIds) > 1) {
+                $rollups[$contractId]['assignee_label'] = 'Multiple';
+                $first = reset($assigneeMap);
+                $rollups[$contractId]['assignee_type'] = $first['type'] ?? 'Technician';
             }
         }
-
         return $rollups;
     }
 
+    private function buildAmcAdminLandingAssignmentRollups($companyId, $contractIds)
+    {
+        if ($companyId <= 0 || count((array) $contractIds) === 0) {
+            return array();
+        }
+        $rollups = $this->fetchAmcLandingAssetCounts($companyId, $contractIds);
+        $assigneesByContract = $this->fetchAmcLandingAssignees($companyId, $contractIds);
+        return $this->assembleAmcLandingRollups($contractIds, $rollups, $assigneesByContract);
+    }
     private function resolveAmcAdminLandingAssignmentStatus($assetTotal, $assetAssigned)
     {
         $assetTotal = (int) $assetTotal;
         $assetAssigned = (int) $assetAssigned;
-        if ($assetTotal == 0) {
-            return array('status' => 'no_assets', 'label' => 'No assets', 'class' => 'bg-secondary');
-        }
-        if ($assetAssigned == 0) {
-            return array('status' => 'not_assigned', 'label' => 'Not assigned', 'class' => 'bg-danger');
-        }
-        if ($assetAssigned < $assetTotal) {
+        $result = array('status' => 'fully_assigned', 'label' => 'Fully assigned', 'class' => 'bg-success');
+        if ($assetTotal === 0) {
+            $result = array('status' => 'no_assets', 'label' => 'No assets', 'class' => 'bg-secondary');
+        } elseif ($assetAssigned === 0) {
+            $result = array('status' => 'not_assigned', 'label' => 'Not assigned', 'class' => 'bg-danger');
+        } elseif ($assetAssigned < $assetTotal) {
             $unassigned = $assetTotal - $assetAssigned;
-            return array(
+            $result = array(
                 'status' => 'partial',
                 'label' => $unassigned . ' of ' . $assetTotal . ' unassigned',
                 'class' => 'bg-warning',
             );
         }
-        return array('status' => 'fully_assigned', 'label' => 'Fully assigned', 'class' => 'bg-success');
+        return $result;
+    }
+    private function matchesKpiType(array $c, $type, DateTime $today)
+    {
+        $endDate = $c['end_date'] ?? '';
+        $isExpired = ($endDate !== '' && new DateTime($endDate) < $today);
+        if ($type === 'expired') {
+            return $isExpired;
+        }
+        if ($type === 'active') {
+            return ($endDate === '' || new DateTime($endDate) >= $today);
+        }
+        return false;
     }
 
     private function filterAmcAdminLandingContractsByKpiType($contracts, $type)
     {
-        if ($type == 'total') {
+        if ($type === 'total') {
             return is_array($contracts) ? $contracts : array();
         }
 
         $today = new DateTime();
         $filtered = array();
-        if (count((array) $contracts) > 0) {
-            foreach ($contracts as $contract) {
-                $c = is_array($contract) ? $contract : (array) $contract;
-                if (($c['is_active'] ?? 0) != 0) {
-                    continue;
-                }
-                $endDate = $c['end_date'] ?? '';
-                $isExpired = ($endDate != '' && new DateTime($endDate) < $today);
-                if (($type == 'expired' && $isExpired) || ($type == 'active' && ($endDate == '' || new DateTime($endDate) >= $today))) {
-                    $filtered[] = $c;
-                }
+        foreach ((array) $contracts as $contract) {
+            $c = is_array($contract) ? $contract : (array) $contract;
+            if (($c['is_active'] ?? 0) != 0) {
+                continue;
+            }
+            if ($this->matchesKpiType($c, $type, $today)) {
+                $filtered[] = $c;
             }
         }
         return $filtered;
@@ -6591,57 +6586,47 @@ public function getAmcAdminLandingDashboardData($get)
 
         return $allcontracts;
     }
-
     private function splitAmcAdminLandingActiveExpired($contracts)
     {
         $today = new DateTime();
         $active = 0;
         $expired = 0;
         $cancelcontract = 0;
-        if (count((array) $contracts) > 0) {
-            foreach ($contracts as $contract) {
-                $c = is_array($contract) ? $contract : (array) $contract;
-                if (($c['is_active'] ?? 0) != 0) {
-                    continue;
-                }
-                $endDate = $c['end_date'] ?? '';
-                if ($c['cancel_status'] == 'Y') {
-                    $cancelcontract++;
-                }
-                if ($endDate != '' && new DateTime($endDate) < $today) {
-                    $expired++;
-                } elseif ($endDate == '' || new DateTime($endDate) >= $today) {
-                    $active++;
-                }
+        foreach ((array) $contracts as $contract) {
+            $c = is_array($contract) ? $contract : (array) $contract;
+            if (($c['is_active'] ?? 0) != 0) {
+                continue;
+            }
+            if (($c['cancel_status'] ?? '') === 'Y') {
+                $cancelcontract++;
+            }
+            $endDate = $c['end_date'] ?? '';
+            if ($endDate !== '' && new DateTime($endDate) < $today) {
+                $expired++;
+            } else {
+                $active++;
             }
         }
         return array('active' => $active, 'expired' => $expired, 'cancelcontract' => $cancelcontract);
     }
-
     private function buildAmcAdminLandingYearlyChart($contracts)
     {
         $contractsByYear = array();
-        if (count((array) $contracts) > 0) {
-            foreach ($contracts as $contract) {
-                $c = is_array($contract) ? $contract : (array) $contract;
-                $dateValue = '';
-                if (!empty($c['start_date'])) {
-                    $dateValue = $c['start_date'];
-                } elseif (!empty($c['created_date'])) {
-                    $dateValue = $c['created_date'];
-                }
-                if ($dateValue == '') {
-                    continue;
-                }
-                $year = date('Y', strtotime($dateValue));
-                if (!isset($contractsByYear[$year])) {
-                    $contractsByYear[$year] = array('y' => $year, 'vendor' => 0, 'customer' => 0, 'inhouse' => 0);
-                }
-                $partyType = strtolower(trim((string) ($c['party_type'] ?? '')));
-                if ($partyType == 'vendor' || $partyType == 'customer' || $partyType == 'inhouse') {
-                    $contractsByYear[$year][$partyType]++;
-                }
+        foreach ((array) $contracts as $contract) {
+            $c = is_array($contract) ? $contract : (array) $contract;
+            $dateValue = !empty($c['start_date']) ? $c['start_date'] : ($c['created_date'] ?? '');
+            if ($dateValue === '') {
+                continue;
             }
+            $partyType = strtolower(trim((string) ($c['party_type'] ?? '')));
+            if (!in_array($partyType, array('vendor', 'customer', 'inhouse'), true)) {
+                continue;
+            }
+            $year = date('Y', strtotime($dateValue));
+            if (!isset($contractsByYear[$year])) {
+                $contractsByYear[$year] = array('y' => $year, 'vendor' => 0, 'customer' => 0, 'inhouse' => 0);
+            }
+            $contractsByYear[$year][$partyType]++;
         }
         $chart = array_values($contractsByYear);
         usort($chart, function ($a, $b) {
@@ -6664,53 +6649,39 @@ public function getAmcAdminLandingDashboardData($get)
         }
         return $list;
     }
-
     private function amcLandingContractStatusClass($currentStatus, $cancelStatus)
     {
-        if (($cancelStatus ?? 'N') == 'Y') {
-            return 'bg-danger';
-        }
         $currentStatus = (int) $currentStatus;
-        if ($currentStatus == 0) {
-            return 'bg-secondary';
+        $class = 'bg-secondary';
+        if (($cancelStatus ?? 'N') === 'Y' || $currentStatus === (int) ST_CANCEL) {
+            $class = 'bg-danger';
+        } elseif ($currentStatus === (int) ST_APPROVED) {
+            $class = 'bg-success';
+        } elseif ($currentStatus > 0 && $currentStatus < (int) ST_APPROVED) {
+            $class = 'bg-warning';
         }
-        if ($currentStatus == (int) ST_APPROVED) {
-            return 'bg-success';
-        }
-        if ($currentStatus == (int) ST_CANCEL) {
-            return 'bg-danger';
-        }
-        if ($currentStatus > 0 && $currentStatus < (int) ST_APPROVED) {
-            return 'bg-warning';
-        }
-        return 'bg-secondary';
+        return $class;
     }
-
     private function amcLandingContractStatusLabel($currentStatus, $cancelStatus = 'N')
     {
-        if (($cancelStatus ?? 'N') == 'Y') {
-            return 'Cancelled';
-        }
         $currentStatus = (int) ($currentStatus ?? 0);
-        if ($currentStatus == 0) {
-            return 'Draft';
+        $label = '-';
+        if (($cancelStatus ?? 'N') === 'Y') {
+            $label = 'Cancelled';
+        } elseif ($currentStatus === 0) {
+            $label = 'Draft';
+        } elseif (!empty($_SESSION['status'][$currentStatus]['name'])) {
+            $label = $_SESSION['status'][$currentStatus]['name'];
+        } elseif ($currentStatus === (int) ST_APPROVED) {
+            $label = 'Approved';
+        } elseif (defined('ST_REJECTED') && $currentStatus === (int) ST_REJECTED) {
+            $label = 'Rejected';
+        } elseif (defined('ST_CANCEL') && $currentStatus === (int) ST_CANCEL) {
+            $label = 'Cancelled';
+        } elseif ($currentStatus > 100 && $currentStatus < (int) ST_APPROVED) {
+            $label = self::CONST_IN_PROGRESS;
         }
-        if (isset($_SESSION['status'][$currentStatus]['name']) && $_SESSION['status'][$currentStatus]['name'] != '') {
-            return $_SESSION['status'][$currentStatus]['name'];
-        }
-        if ($currentStatus == (int) ST_APPROVED) {
-            return 'Approved';
-        }
-        if (defined('ST_REJECTED') && $currentStatus == (int) ST_REJECTED) {
-            return 'Rejected';
-        }
-        if (defined('ST_CANCEL') && $currentStatus == (int) ST_CANCEL) {
-            return 'Cancelled';
-        }
-        if ($currentStatus > 100 && $currentStatus < (int) ST_APPROVED) {
-            return self::CONST_IN_PROGRESS;
-        }
-        return '-';
+        return $label;
     }
 }
 
@@ -6735,16 +6706,14 @@ private function mapAmcAdminLandingContractRow($contract)
             'can_edit' => ($currentStatus == 0 && ($cancelStatus ?? 'N') != 'Y') ? 1 : 0,
         );
     }
-
     private function buildAmcAdminLandingContractsByParty($contracts, $partyType)
     {
+        $partyType = strtolower(trim((string) $partyType));
         $filtered = array();
-        if (count((array) $contracts) > 0) {
-            foreach ($contracts as $contract) {
-                $c = is_array($contract) ? $contract : (array) $contract;
-                if (strtolower(trim((string) ($c['party_type'] ?? ''))) == $partyType) {
-                    $filtered[] = $c;
-                }
+        foreach ((array) $contracts as $contract) {
+            $c = is_array($contract) ? $contract : (array) $contract;
+            if (strtolower(trim((string) ($c['party_type'] ?? ''))) === $partyType) {
+                $filtered[] = $c;
             }
         }
         usort($filtered, function ($a, $b) {
@@ -6754,12 +6723,10 @@ private function mapAmcAdminLandingContractRow($contract)
         });
         $rows = array();
         $slice = array_slice($filtered, 0, 5);
-        if (count((array) $slice) > 0) {
-            foreach ($slice as $contract) {
-                $rows[] = $this->mapAmcAdminLandingContractRow($contract);
-            }
+        foreach ($slice as $contract) {
+            $rows[] = $this->mapAmcAdminLandingContractRow($contract);
         }
-        return array('total' => count((array) $filtered), 'rows' => $rows);
+        return array('total' => count($filtered), 'rows' => $rows);
     }
 
     private function buildAmcAdminLandingVisitJoin()
@@ -7069,10 +7036,8 @@ private function mapAmcAdminLandingContractRow($contract)
         $callConfig->getRow($countSql);
         return $get;
     }
-
-    private function buildAmcAdminLandingRepairs($get)
+    private function buildAmcAdminLandingRepairsWhere($get)
     {
-        global $callConfig;
         $companyId = (int) ($get['company_id'] ?? 0);
         $locWhere = '';
         $locId = (int) ($get['LOCID'] ?? 0);
@@ -7080,11 +7045,40 @@ private function mapAmcAdminLandingContractRow($contract)
             $locWhere = " AND ro.location_id = {$locId}";
         }
         $admin_or_user_whr = "";
-        if ($get['admin_type'] != 1) {
+        if (($get['admin_type'] ?? 0) != 1) {
             $admin_or_user_whr = " AND ro.created_by='{$get['user_id']}'";
         }
-        $baseWhere = "ro.company_id = {$companyId} AND ro.is_active = 0 AND ro.current_status != 199{$locWhere} {$admin_or_user_whr}";
+        return "ro.company_id = {$companyId} AND ro.is_active = 0 AND ro.current_status != 199{$locWhere} {$admin_or_user_whr}";
+    }
 
+    private function mapAmcAdminLandingRepairRow($dbRow)
+    {
+        $r = is_array($dbRow) ? $dbRow : (array) $dbRow;
+        $sourceType = trim((string) ($r['source_type'] ?? ''));
+        $source = $sourceType !== '' ? ucfirst(str_replace('_', ' ', $sourceType)) : '-';
+        $statusLabel = trim((string) ($r['status_name'] ?? ''));
+        if ($statusLabel === '') {
+            $statusLabel = ((int) ($r['current_status'] ?? 0) === 0) ? 'Active' : '-';
+        }
+        $contractName = trim((string) ($r['contract_name'] ?? ''));
+        $vendorName = trim((string) ($r['vendor_name'] ?? ''));
+        return array(
+            'id' => (int) ($r['id'] ?? 0),
+            'ro_no' => $r['transaction_no'] ?? '',
+            'contract_name' => $contractName !== '' ? $contractName : '—',
+            'vendor_name' => $vendorName !== '' ? $vendorName : '—',
+            'source' => $source,
+            'date' => !empty($r['repair_date']) ? date('Y-m-d', strtotime($r['repair_date'])) : '',
+            'status_label' => $statusLabel,
+            'status_color' => !empty($r['background_color']) ? $r['background_color'] : '#6c757d',
+            'status_text_color' => !empty($r['color']) ? $r['color'] : '#fff',
+        );
+    }
+
+    private function buildAmcAdminLandingRepairs($get)
+    {
+        global $callConfig;
+        $baseWhere = $this->buildAmcAdminLandingRepairsWhere($get);
         $countSql = "SELECT COUNT(*) AS c FROM contract_amc_repair_orders ro WHERE {$baseWhere}";
         $countRow = $callConfig->getRow($countSql);
         $total = (int) ($countRow->c ?? 0);
@@ -7101,29 +7095,8 @@ private function mapAmcAdminLandingContractRow($contract)
             LIMIT 5";
         $dbRows = $callConfig->getAllRows($sql);
         $rows = array();
-        if (count((array) $dbRows) > 0) {
-            foreach ($dbRows as $dbRow) {
-                $r = is_array($dbRow) ? $dbRow : (array) $dbRow;
-                $sourceType = trim((string) ($r['source_type'] ?? ''));
-                $source = $sourceType != '' ? ucfirst(str_replace('_', ' ', $sourceType)) : '-';
-                $statusLabel = trim((string) ($r['status_name'] ?? ''));
-                if ($statusLabel == '') {
-                    $statusLabel = ((int) ($r['current_status'] ?? 0) == 0) ? 'Active' : '-';
-                }
-                $contractName = trim((string) ($r['contract_name'] ?? ''));
-                $vendorName = trim((string) ($r['vendor_name'] ?? ''));
-                $rows[] = array(
-                    'id' => (int) ($r['id'] ?? 0),
-                    'ro_no' => $r['transaction_no'] ?? '',
-                    'contract_name' => $contractName != '' ? $contractName : '—',
-                    'vendor_name' => $vendorName != '' ? $vendorName : '—',
-                    'source' => $source,
-                    'date' => !empty($r['repair_date']) ? date('Y-m-d', strtotime($r['repair_date'])) : '',
-                    'status_label' => $statusLabel,
-                    'status_color' => !empty($r['background_color']) ? $r['background_color'] : '#6c757d',
-                    'status_text_color' => !empty($r['color']) ? $r['color'] : '#fff',
-                );
-            }
+        foreach ((array) $dbRows as $dbRow) {
+            $rows[] = $this->mapAmcAdminLandingRepairRow($dbRow);
         }
         return array('total' => $total, 'rows' => $rows);
     }
@@ -7143,47 +7116,10 @@ private function mapAmcAdminLandingContractRow($contract)
 
 
     // koti end
-
-
-
-
-    public function generateContractsExcelTemplate($get, $post = array())
+    private function buildContractsExcelReferenceSheets($companyId)
     {
-        if (isset($post)) { /* noop */ }
         global $callConfig;
-        require_once dirname(__DIR__) . self::CONST_INCLUDES_CONTRACTS_EXCEL_HELPE;
-        $companyId = (int) ($get['company_id'] ?? 0);
-        if ($companyId <= 0) {
-            return array('status' => 'error', 'message' => self::CONST_MISSING_COMPANY_ID);
-        }
-
-        $contractHeaders = cex_contract_sheet_headers();
-        $sampleRow = array();
-        if (count((array) $contractHeaders) > 0) {
-            $sampleRow = array_fill(0, count((array) $contractHeaders), '');
-        }
-        if (count((array) $sampleRow) > 0) {
-            $sampleRow[0] = 'C001';
-            $sampleRow[1] = 'amc';
-            $sampleRow[2] = 'Sample AMC Contract';
-            $sampleRow[3] = date('Y-m-d');
-            $sampleRow[4] = date('Y-m-d', strtotime('+1 year'));
-            $sampleRow[5] = '100000';
-            $sampleRow[6] = '';
-            $sampleRow[7] = 'vendor';
-            $sampleRow[8] = '';
-            $sampleRow[9] = '';
-            $sampleRow[10] = 'billing_cycle';
-            $sampleRow[11] = 'quarterly';
-            $sampleRow[12] = '1';
-        }
-
         $sheets = array();
-        $sheets[] = array('name' => 'Contracts', 'rows' => array_merge(array($contractHeaders), array($sampleRow)));
-        $sheets[] = array('name' => 'Locations', 'rows' => array(cex_location_sheet_headers()));
-        $sheets[] = array('name' => 'Assets', 'rows' => array(cex_asset_sheet_headers()));
-        $sheets[] = array('name' => 'Milestones', 'rows' => array(cex_milestone_sheet_headers()));
-
         $sheets[] = array('name' => 'Ref_ContractTypes', 'rows' => array(array('contract_type'), array('standard'), array('amc')));
         $sheets[] = array('name' => 'Ref_PartyTypes', 'rows' => array(array('party_type'), array('vendor'), array('customer'), array('inhouse')));
         $sheets[] = array('name' => 'Ref_PaymentPlans', 'rows' => array(array('payment_plan'), array('billing_cycle'), array('milestones')));
@@ -7193,81 +7129,65 @@ private function mapAmcAdminLandingContractRow($contract)
         $freqSql = self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'AMCSERVICE' ORDER BY genc_detail_name ASC";
         $freqDb = $callConfig->getAllRows($freqSql);
         $freqMerged = $this->mergeAmcServiceFrequencyOptions($freqDb);
-        if (count((array) $freqMerged) > 0) {
-            foreach ($freqMerged as $freqRow) {
-                $freqRow = is_array($freqRow) ? $freqRow : (array) $freqRow;
-                $freqRows[] = array($freqRow['genc_detail_code'] ?? '', $freqRow['genc_detail_name'] ?? '');
-            }
+        foreach ((array) $freqMerged as $freqRow) {
+            $freqRow = is_array($freqRow) ? $freqRow : (array) $freqRow;
+            $freqRows[] = array($freqRow['genc_detail_code'] ?? '', $freqRow['genc_detail_name'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_ServiceFrequencies', 'rows' => $freqRows);
 
         $deptRows = array(array('id', 'department_name'));
         $deptRes = $callConfig->getAllRows("SELECT id, department_name FROM departments WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY department_name ASC");
-        if (count((array) $deptRes) > 0) {
-            foreach ($deptRes as $deptRow) {
-                $deptRow = is_array($deptRow) ? $deptRow : (array) $deptRow;
-                $deptRows[] = array($deptRow['id'] ?? '', $deptRow['department_name'] ?? '');
-            }
+        foreach ((array) $deptRes as $deptRow) {
+            $deptRow = is_array($deptRow) ? $deptRow : (array) $deptRow;
+            $deptRows[] = array($deptRow['id'] ?? '', $deptRow['department_name'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_Departments', 'rows' => $deptRows);
 
         $vendorRows = array(array('bp_code', 'company', 'display_name', 'id'));
         $vendorRes = $callConfig->getAllRows("SELECT id, COALESCE(NULLIF(account_code,''), NULLIF(reference_vendor_code,''), NULLIF(short_name,''), CAST(id AS CHAR)) AS bp_code, company, display_name FROM vendors WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY company ASC");
-        if (count((array) $vendorRes) > 0) {
-            foreach ($vendorRes as $vendorRow) {
-                $vendorRow = is_array($vendorRow) ? $vendorRow : (array) $vendorRow;
-                $vendorRows[] = array($vendorRow['bp_code'] ?? '', $vendorRow['company'] ?? '', $vendorRow['display_name'] ?? '', $vendorRow['id'] ?? '');
-            }
+        foreach ((array) $vendorRes as $vendorRow) {
+            $vendorRow = is_array($vendorRow) ? $vendorRow : (array) $vendorRow;
+            $vendorRows[] = array($vendorRow['bp_code'] ?? '', $vendorRow['company'] ?? '', $vendorRow['display_name'] ?? '', $vendorRow['id'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_Vendors', 'rows' => $vendorRows);
 
         $customerRows = array(array('bp_code', 'company', 'display_name', 'id'));
         $customerRes = $callConfig->getAllRows("SELECT id, COALESCE(NULLIF(account_code,''), CAST(id AS CHAR)) AS bp_code, company, display_name FROM customers WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY company ASC");
-        if (count((array) $customerRes) > 0) {
-            foreach ($customerRes as $customerRow) {
-                $customerRow = is_array($customerRow) ? $customerRow : (array) $customerRow;
-                $customerRows[] = array($customerRow['bp_code'] ?? '', $customerRow['company'] ?? '', $customerRow['display_name'] ?? '', $customerRow['id'] ?? '');
-            }
+        foreach ((array) $customerRes as $customerRow) {
+            $customerRow = is_array($customerRow) ? $customerRow : (array) $customerRow;
+            $customerRows[] = array($customerRow['bp_code'] ?? '', $customerRow['company'] ?? '', $customerRow['display_name'] ?? '', $customerRow['id'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_Customers', 'rows' => $customerRows);
 
         $locRows = array(array('id', 'location_name'));
-        $locRes = $callConfig->getAllRows("SELECT id, location_name FROM locations WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT);
-        if (count((array) $locRes) > 0) {
-            foreach ($locRes as $locRow) {
-                $locRow = is_array($locRow) ? $locRow : (array) $locRow;
-                $locRows[] = array($locRow['id'] ?? '', $locRow['location_name'] ?? '');
-            }
+        $locRes = $callConfig->getAllRows("SELECT id, location_name FROM locations WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY location_name ASC");
+        foreach ((array) $locRes as $locRow) {
+            $locRow = is_array($locRow) ? $locRow : (array) $locRow;
+            $locRows[] = array($locRow['id'] ?? '', $locRow['location_name'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_Locations', 'rows' => $locRows);
 
-        $assetRows = array(array('location_name', 'asset_code', 'name'));
-        $assetRes = $callConfig->getAllRows("SELECT a.asset_code, a.asset_description, l.location_name FROM assets a LEFT JOIN locations l ON l.id = a.asset_location AND l.company_id = a.company_id AND l.is_active = 0 WHERE a.company_id = " . $companyId . " AND a.is_active = 0 ORDER BY a.asset_description ASC");
-        if (count((array) $assetRes) > 0) {
-            foreach ($assetRes as $assetRow) {
-                $assetRow = is_array($assetRow) ? $assetRow : (array) $assetRow;
-                $assetRows[] = array($assetRow['location_name'] ?? '', $assetRow['asset_code'] ?? '', $assetRow['asset_description'] ?? '');
-            }
+        $assetRows = array(array('id', 'asset_code', 'asset_name', 'location_id'));
+        $assetRes = $callConfig->getAllRows("SELECT id, asset_code, asset_name, location_id FROM assets WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY asset_name ASC");
+        foreach ((array) $assetRes as $assetRow) {
+            $assetRow = is_array($assetRow) ? $assetRow : (array) $assetRow;
+            $assetRows[] = array($assetRow['id'] ?? '', $assetRow['asset_code'] ?? '', $assetRow['asset_name'] ?? '', $assetRow['location_id'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_Assets', 'rows' => $assetRows);
 
         $catRows = array(array('code', 'name'));
         $catRes = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'CONTRACT_TYPE' ORDER BY genc_detail_name ASC");
-        if (count((array) $catRes) > 0) {
-            foreach ($catRes as $catRow) {
-                $catRow = is_array($catRow) ? $catRow : (array) $catRow;
-                $catRows[] = array($catRow['genc_detail_code'] ?? '', $catRow['genc_detail_name'] ?? '');
-            }
+        foreach ((array) $catRes as $catRow) {
+            $catRow = is_array($catRow) ? $catRow : (array) $catRow;
+            $catRows[] = array($catRow['genc_detail_code'] ?? '', $catRow['genc_detail_name'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_ContractCategories', 'rows' => $catRows);
 
         $ptRows = array(array('id', 'payment_term_name'));
         $ptRes = $callConfig->getAllRows("SELECT id, payment_term_name FROM payment_terms WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY payment_term_name ASC");
-        if (count((array) $ptRes) > 0) {
-            foreach ($ptRes as $ptRow) {
-                $ptRow = is_array($ptRow) ? $ptRow : (array) $ptRow;
-                $ptRows[] = array($ptRow['id'] ?? '', $ptRow['payment_term_name'] ?? '');
-            }
+        foreach ((array) $ptRes as $ptRow) {
+            $ptRow = is_array($ptRow) ? $ptRow : (array) $ptRow;
+            $ptRows[] = array($ptRow['id'] ?? '', $ptRow['payment_term_name'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_PaymentTerms', 'rows' => $ptRows);
 
@@ -7276,41 +7196,33 @@ private function mapAmcAdminLandingContractRow($contract)
         if (count((array) $agrRes) == 0) {
             $agrRes = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'AGREEMENTS_TYPE' ORDER BY genc_detail_name ASC");
         }
-        if (count((array) $agrRes) > 0) {
-            foreach ($agrRes as $agrRow) {
-                $agrRow = is_array($agrRow) ? $agrRow : (array) $agrRow;
-                $agrRows[] = array($agrRow['genc_detail_code'] ?? '', $agrRow['genc_detail_name'] ?? '');
-            }
+        foreach ((array) $agrRes as $agrRow) {
+            $agrRow = is_array($agrRow) ? $agrRow : (array) $agrRow;
+            $agrRows[] = array($agrRow['genc_detail_code'] ?? '', $agrRow['genc_detail_name'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_AgreementTypes', 'rows' => $agrRows);
 
         $descRows = array(array('id', 'description_type', 'description'));
         $descRes = $callConfig->getAllRows("SELECT id, description_type, description FROM description_contracts WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY description_type ASC");
-        if (count((array) $descRes) > 0) {
-            foreach ($descRes as $descRow) {
-                $descRow = is_array($descRow) ? $descRow : (array) $descRow;
-                $descRows[] = array($descRow['id'] ?? '', $descRow['description_type'] ?? '', $descRow['description'] ?? '');
-            }
+        foreach ((array) $descRes as $descRow) {
+            $descRow = is_array($descRow) ? $descRow : (array) $descRow;
+            $descRows[] = array($descRow['id'] ?? '', $descRow['description_type'] ?? '', $descRow['description'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_DescriptionTypes', 'rows' => $descRows);
 
         $svcRows = array(array('id', 'service_name'));
         $svcRes = $callConfig->getAllRows("SELECT id, service_name FROM contract_services WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY service_name ASC");
-        if (count((array) $svcRes) > 0) {
-            foreach ($svcRes as $svcRow) {
-                $svcRow = is_array($svcRow) ? $svcRow : (array) $svcRow;
-                $svcRows[] = array($svcRow['id'] ?? '', $svcRow['service_name'] ?? '');
-            }
+        foreach ((array) $svcRes as $svcRow) {
+            $svcRow = is_array($svcRow) ? $svcRow : (array) $svcRow;
+            $svcRows[] = array($svcRow['id'] ?? '', $svcRow['service_name'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_Services', 'rows' => $svcRows);
 
         $userRows = array(array('id', 'display_name', 'user_email'));
         $userRes = $callConfig->getAllRows("SELECT id, display_name, user_email FROM application_users WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY display_name ASC");
-        if (count((array) $userRes) > 0) {
-            foreach ($userRes as $userRow) {
-                $userRow = is_array($userRow) ? $userRow : (array) $userRow;
-                $userRows[] = array($userRow['id'] ?? '', $userRow['display_name'] ?? '', $userRow['user_email'] ?? '');
-            }
+        foreach ((array) $userRes as $userRow) {
+            $userRow = is_array($userRow) ? $userRow : (array) $userRow;
+            $userRows[] = array($userRow['id'] ?? '', $userRow['display_name'] ?? '', $userRow['user_email'] ?? '');
         }
         $sheets[] = array('name' => 'Ref_Users', 'rows' => $userRows);
 
@@ -7327,6 +7239,45 @@ private function mapAmcAdminLandingContractRow($contract)
                 array('7. Delete sample row before import or replace with real data.'),
             )
         );
+        return $sheets;
+    }
+
+    public function generateContractsExcelTemplate($get, $post = array())
+    {
+        if (isset($post)) { /* noop */ }
+        require_once dirname(__DIR__) . self::CONST_INCLUDES_CONTRACTS_EXCEL_HELPE;
+        $companyId = (int) ($get['company_id'] ?? 0);
+        if ($companyId <= 0) {
+            return array('status' => 'error', 'message' => self::CONST_MISSING_COMPANY_ID);
+        }
+
+        $contractHeaders = cex_contract_sheet_headers();
+        $sampleRow = count((array) $contractHeaders) > 0 ? array_fill(0, count((array) $contractHeaders), '') : array();
+        if (count((array) $sampleRow) > 0) {
+            $sampleRow[0] = 'C001';
+            $sampleRow[1] = 'amc';
+            $sampleRow[2] = 'Sample AMC Contract';
+            $sampleRow[3] = date('Y-m-d');
+            $sampleRow[4] = date('Y-m-d', strtotime('+1 year'));
+            $sampleRow[5] = '100000';
+            $sampleRow[6] = '';
+            $sampleRow[7] = 'vendor';
+            $sampleRow[8] = '';
+            $sampleRow[9] = '';
+            $sampleRow[10] = 'billing_cycle';
+            $sampleRow[11] = 'quarterly';
+            $sampleRow[12] = '1';
+        }
+
+        $sheets = array(
+            array('name' => 'Contracts', 'rows' => array_merge(array($contractHeaders), array($sampleRow))),
+            array('name' => 'Locations', 'rows' => array(cex_location_sheet_headers())),
+            array('name' => 'Assets', 'rows' => array(cex_asset_sheet_headers())),
+            array('name' => 'Milestones', 'rows' => array(cex_milestone_sheet_headers())),
+        );
+
+        $refSheets = $this->buildContractsExcelReferenceSheets($companyId);
+        $sheets = array_merge($sheets, $refSheets);
 
         $fileName = 'contracts_import_template_' . $companyId . '_' . time() . '.xlsx';
         $relPath = 'uploads/contracts/templates/' . $fileName;
@@ -7349,113 +7300,83 @@ private function mapAmcAdminLandingContractRow($contract)
 
 trait ReactContractsImportAndTypesTrait
 {
-public function validateContractsExcel($get, $post)
+    public function validateContractsExcel($get, $post)
     {
         global $callConfig;
         require_once dirname(__DIR__) . self::CONST_INCLUDES_CONTRACTS_EXCEL_HELPE;
         $companyId = (int) ($get['company_id'] ?? 0);
         if ($companyId <= 0) {
-            return array('status' => 'error', 'message' => self::CONST_MISSING_COMPANY_ID, 'errors' => array(self::CONST_MISSING_COMPANY_ID));
-        }
+            $result = array('status' => 'error', 'message' => self::CONST_MISSING_COMPANY_ID, 'errors' => array(self::CONST_MISSING_COMPANY_ID));
+        } else {
+            $sheetData = $this->cexLoadContractsExcelImportData($post);
+            if (!empty($sheetData['error'])) {
+                $result = array('status' => 'error', 'message' => $sheetData['error'], 'errors' => array($sheetData['error']));
+            } else {
+                $contracts = $sheetData['contracts'];
+                $locations = $sheetData['locations'];
+                $assets = $sheetData['assets'];
+                $milestones = $sheetData['milestones'];
 
-        $sheetData = $this->cexLoadContractsExcelImportData($post);
-        if (!empty($sheetData['error'])) {
-            return array('status' => 'error', 'message' => $sheetData['error'], 'errors' => array($sheetData['error']));
-        }
-        $contracts = $sheetData['contracts'];
-        $locations = $sheetData['locations'];
-        $assets = $sheetData['assets'];
-        $milestones = $sheetData['milestones'];
+                $fileName = trim((string) ($post['file_name'] ?? ''));
+                if ($fileName === '') {
+                    $fileName = basename(trim((string) ($post['temp_xlsx'] ?? 'import.xlsx')));
+                }
 
-        $batchInsert = array(
-            'company_id' => $companyId,
-            'file_name' => trim((string) ($post['file_name'] ?? '')),
-            'uploaded_by' => (int) ($get['user_id'] ?? 0),
-            'uploaded_at' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-            'contracts_data' => json_encode($contracts),
-            'locations_data' => json_encode($locations),
-            'assets_data' => json_encode($assets),
-            'milestones_data' => json_encode($milestones),
-            'status' => 'uploaded',
-            'is_active' => 0,
-        );
-        if ($batchInsert['file_name'] == '') {
-            $batchInsert['file_name'] = basename(trim((string) ($post['temp_xlsx'] ?? 'import.xlsx')));
-        }
-        $batchRes = $callConfig->insertRecord('contracts_excel_import_batches', $batchInsert);
-        $batchId = $batchRes['LASTID'];
-        if ($batchId <= 0) {
-            return array('status' => 'error', 'message' => 'Unable to create import batch', 'errors' => array('Batch insert failed'));
-        }
-        $lookups = $this->cexBuildContractsExcelLookups($companyId);
-        $validation = $this->cexValidateContractsExcelData($contracts, $locations, $assets, $milestones, $lookups);
+                $batchInsert = array(
+                    'company_id' => $companyId,
+                    'file_name' => $fileName,
+                    'uploaded_by' => (int) ($get['user_id'] ?? 0),
+                    'uploaded_at' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                    'contracts_data' => json_encode($contracts),
+                    'locations_data' => json_encode($locations),
+                    'assets_data' => json_encode($assets),
+                    'milestones_data' => json_encode($milestones),
+                    'status' => 'uploaded',
+                    'is_active' => 0,
+                );
+                $batchRes = $callConfig->insertRecord('contracts_excel_import_batches', $batchInsert);
+                $batchId = $batchRes['LASTID'] ?? 0;
+                if ($batchId <= 0) {
+                    $result = array('status' => 'error', 'message' => 'Unable to create import batch', 'errors' => array('Batch insert failed'));
+                } else {
+                    $lookups = $this->cexBuildContractsExcelLookups($companyId);
+                    $validation = $this->cexValidateContractsExcelData($contracts, $locations, $assets, $milestones, $lookups);
 
-        $batchStatus = 'validated';
-        if (count((array) $validation['errors']) > 0 && count((array) $validation['valid_import_refs']) == 0) {
-            $batchStatus = 'failed';
-        }
-        $summaryJson = json_encode(array(
-            'validation' => array(
-                'valid_count' => count((array) $validation['valid_import_refs']),
-                'error_count' => count((array) $validation['errors']),
-                'warning_count' => count((array) $validation['warnings']),
-                'validated_at' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-            ),
-        ));
-        $callConfig->updateRecord('contracts_excel_import_batches', array(
-            'status' => $batchStatus,
-            'import_summary' => $summaryJson,
-        ), 'id', $batchId);
+                    $batchStatus = 'validated';
+                    if (count((array) $validation['errors']) > 0 && count((array) $validation['valid_import_refs']) == 0) {
+                        $batchStatus = 'failed';
+                    }
+                    $summaryJson = json_encode(array(
+                        'validation' => array(
+                            'valid_count' => count((array) $validation['valid_import_refs']),
+                            'error_count' => count((array) $validation['errors']),
+                            'warning_count' => count((array) $validation['warnings']),
+                            'validated_at' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                        ),
+                    ));
+                    $callConfig->updateRecord('contracts_excel_import_batches', array(
+                        'status' => $batchStatus,
+                        'import_summary' => $summaryJson,
+                    ), 'id', $batchId);
 
-        return array(
-            'batch_id' => $batchId,
-            'status' => $batchStatus,
-            'contracts' => $validation['contracts'],
-            'locations' => $validation['locations'],
-            'assets' => $validation['assets'],
-            'milestones' => $validation['milestones'],
-            'errors' => $validation['errors'],
-            'warnings' => $validation['warnings'],
-            'valid_import_refs' => $validation['valid_import_refs'],
-        );
-    }
-    public function importInsertContractReact($get, $post)
-    {
-        global $callConfig;
-        $return = array();
-        $return['post'] = $post;
-        $return['get'] = $get;
-        $locations = '';
-        if (isset($post['locations']) && is_array($post['locations'])) {
-            $locations = json_encode($post['locations']);
-        }
-
-        $contract_services_id = '';
-        if (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) {
-            $contract_services_id = json_encode($post['contract_services_id']);
-        }
-
-        $contact_personsary = array();
-        if (isset($post['contact_persons']) && is_array($post['contact_persons']) && count((array) ($post['contact_persons']['name'] ?? array())) > 0) {
-            foreach ($post['contact_persons']['name'] as $key => $conpers) {
-                if ($post['contact_persons']['name'][$key] != "" && $post['contact_persons']['number'][$key] != "") {
-                    $contact_personsary[] = array(
-                        'name' => $post['contact_persons']['name'][$key],
-                        'email' => $post['contact_persons']['email'][$key],
-                        'number' => $post['contact_persons']['number'][$key]
+                    $result = array(
+                        'batch_id' => $batchId,
+                        'status' => $batchStatus,
+                        'contracts' => $validation['contracts'],
+                        'locations' => $validation['locations'],
+                        'assets' => $validation['assets'],
+                        'milestones' => $validation['milestones'],
+                        'errors' => $validation['errors'],
+                        'warnings' => $validation['warnings'],
+                        'valid_import_refs' => $validation['valid_import_refs'],
                     );
                 }
             }
         }
-        $contact_persons = json_encode($contact_personsary);
-
-        $contract_type = 'Contract';
-        if (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) {
-            $contract_type = 'SOW';
-        }
-
-        $isAmcContract = (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N';
-
+        return $result;
+    }
+    private function buildImportContractInsertArray($get, $post, $locations, $contract_services_id, $contact_persons, $isAmcContract, $contract_type)
+    {
         $insert_array = array(
             'contract_name' => $post['contract_name'],
             'renewal_frequency' => $post['renewal_frequency'],
@@ -7513,38 +7434,71 @@ public function validateContractsExcel($get, $post)
         if (trim((string) ($insert_array['payment_term_id'] ?? '')) == '') {
             unset($insert_array['payment_term_id']);
         }
+        return $insert_array;
+    }
+
+    private function persistImportContractMilestones($contract_id, $get, $post)
+    {
+        global $callConfig;
+        if (!isset($post['milestones']) || !is_array($post['milestones']) || count((array) $post['milestones']) == 0) {
+            return self::CONST_NO_MILESTONES_FOUND_IN_POST;
+        }
+        $inserts = array();
+        foreach ($post['milestones'] as $milestone) {
+            if (empty(trim($milestone['milestone_name'] ?? ''))) {
+                continue;
+            }
+            $milestoneData = array(
+                'company_id' => $get['company_id'],
+                'transaction_id' => $contract_id,
+                'transaction_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                'milestone' => trim($milestone['milestone_name']),
+                'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null,
+                'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0,
+                'is_active' => 0,
+                'current_status' => 0,
+                'status_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+                'created_by' => $get['user_id'],
+                'updated_by' => $get['user_id'],
+                'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
+            );
+            $inserts[] = $callConfig->insertRecord('contract_milestones', $milestoneData);
+        }
+        return $inserts;
+    }
+
+    public function importInsertContractReact($get, $post)
+    {
+        global $callConfig;
+        $return = array('post' => $post, 'get' => $get);
+        $locations = (isset($post['locations']) && is_array($post['locations'])) ? json_encode($post['locations']) : '';
+        $contract_services_id = (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) ? json_encode($post['contract_services_id']) : '';
+
+        $contact_personsary = array();
+        if (isset($post['contact_persons']['name']) && is_array($post['contact_persons']['name'])) {
+            foreach ($post['contact_persons']['name'] as $key => $conpers) {
+                if (($post['contact_persons']['name'][$key] ?? '') != "" && ($post['contact_persons']['number'][$key] ?? '') != "") {
+                    $contact_personsary[] = array(
+                        'name' => $post['contact_persons']['name'][$key],
+                        'email' => $post['contact_persons']['email'][$key] ?? '',
+                        'number' => $post['contact_persons']['number'][$key]
+                    );
+                }
+            }
+        }
+        $contact_persons = json_encode($contact_personsary);
+
+        $contract_type = (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) ? 'SOW' : 'Contract';
+        $isAmcContract = (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N';
+
+        $insert_array = $this->buildImportContractInsertArray($get, $post, $locations, $contract_services_id, $contact_persons, $isAmcContract, $contract_type);
         $insert_data = $callConfig->insertRecord('contracts', $insert_array);
         $contract_id = $insert_data['LASTID'] ?? 0;
         $return['contract_result'] = $insert_data;
 
         if (($insert_data['status'] ?? '') == 'sucess' || ($insert_data['status'] ?? '') == 'success') {
-            if (isset($post['milestones']) && is_array($post['milestones']) && count((array) $post['milestones']) > 0) {
-                foreach ($post['milestones'] as $milestone) {
-                    if (empty(trim($milestone['milestone_name'] ?? ''))) {
-                        continue;
-                    }
-                    $milestoneData = array(
-                        'company_id' => $get['company_id'],
-                        'transaction_id' => $contract_id,
-                        'transaction_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                        'milestone' => trim($milestone['milestone_name']),
-                        'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null,
-                        'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0,
-                        'is_active' => 0,
-                        'current_status' => 0,
-                        'status_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                        'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                        'created_by' => $get['user_id'],
-                        'updated_by' => $get['user_id'],
-                        'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-                    );
-                    $milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
-                    $return['milestone_inserts'][] = $milestoneInsert;
-                }
-            } else {
-                $return['milestone_inserts'] = self::CONST_NO_MILESTONES_FOUND_IN_POST;
-            }
-
+            $return['milestone_inserts'] = $this->persistImportContractMilestones($contract_id, $get, $post);
             if ($isAmcContract == 'Y') {
                 $return['amc_contract_result'] = $this->saveAmcContractData($contract_id, $get, $post);
             }
@@ -7552,67 +7506,65 @@ public function validateContractsExcel($get, $post)
 
         return $return;
     }
+    private function processSingleContractExcelImport($contractPreview, $validation, $get, $post, &$successCount, &$failCount, &$summaryItems)
+    {
+        $importRef = $contractPreview['import_ref'] ?? '';
+        if (!$contractPreview['ok']) {
+            $failCount++;
+            $summaryItems[] = array('import_ref' => $importRef, 'status' => 'failed', 'errors' => $contractPreview['errors']);
+            return;
+        }
+        try {
+            $contractPayload = $this->cexBuildContractImportPayload($contractPreview, $validation, $get, $post);
+            $contractResult = $this->importInsertContractReact($get, $contractPayload);
+            $resStatus = $contractResult['contract_result']['status'] ?? '';
+            $contractId = (int) ($contractResult['contract_result']['LASTID'] ?? 0);
+            if ($contractId > 0 && ($resStatus == 'sucess' || $resStatus == 'success')) {
+                $successCount++;
+                $summaryItems[] = array('import_ref' => $importRef, 'status' => 'success', 'contract_id' => $contractId);
+            } else {
+                $failCount++;
+                $summaryItems[] = array(
+                    'import_ref' => $importRef,
+                    'status' => 'failed',
+                    'message' => $contractResult['message'] ?? 'Insert failed',
+                    'contract_result' => $contractResult,
+                );
+            }
+        } catch (Exception $e) {
+            $failCount++;
+            $summaryItems[] = array('import_ref' => $importRef, 'status' => 'failed', 'message' => $e->getMessage());
+        }
+    }
+
     public function importContractsExcel($get, $post)
     {
         global $callConfig;
         require_once dirname(__DIR__) . self::CONST_INCLUDES_CONTRACTS_EXCEL_HELPE;
-
         $companyId = (int) ($get['company_id'] ?? 0);
         $batchId = (int) ($post['batch_id'] ?? 0);
-        if ($companyId <= 0 || $batchId <= 0) {
-            return array('status' => 'error', 'message' => 'Missing company_id or batch_id');
+        if ($companyId <= 0) {
+            return array('status' => 'error', 'message' => self::CONST_MISSING_COMPANY_ID);
         }
 
-        $batchSql = "SELECT * FROM contracts_excel_import_batches WHERE id = '" . addslashes($batchId) . "' AND company_id = " . $companyId . " AND is_active = 0 LIMIT 1";
-        $batchRow = $callConfig->getRow($batchSql);
-        if (!$batchRow) {
-            return array('status' => 'error', 'message' => 'Import batch not found');
+        $sheetData = $this->cexLoadContractsExcelImportData($post);
+        if (!empty($sheetData['error'])) {
+            return array('status' => 'error', 'message' => $sheetData['error']);
         }
-        $batch = is_array($batchRow) ? $batchRow : (array) $batchRow;
-
-        $contracts = $this->cexDecodeImportJsonField($batch['contracts_data'] ?? '');
-        $locations = $this->cexDecodeImportJsonField($batch['locations_data'] ?? '');
-        $assets = $this->cexDecodeImportJsonField($batch['assets_data'] ?? '');
-        $milestones = $this->cexDecodeImportJsonField($batch['milestones_data'] ?? '');
+        $contracts = $sheetData['contracts'];
+        $locations = $sheetData['locations'];
+        $assets = $sheetData['assets'];
+        $milestones = $sheetData['milestones'];
 
         $lookups = $this->cexBuildContractsExcelLookups($companyId);
         $validation = $this->cexValidateContractsExcelData($contracts, $locations, $assets, $milestones, $lookups);
 
-        $summaryItems = array();
         $successCount = 0;
         $failCount = 0;
-        if (count((array) $validation['valid_import_refs']) > 0) {
-            foreach ($validation['valid_import_refs'] as $importRef) {
-                $contractPreview = $validation['contracts_by_ref'][$importRef] ?? null;
-                if ($contractPreview == null || empty($contractPreview['ok'])) {
-                    $failCount++;
-                    $summaryItems[] = array('import_ref' => $importRef, 'status' => 'failed', 'message' => 'Validation failed on re-check');
-                    continue;
-                }
-                $payload = $this->cexBuildContractImportPayload($contractPreview, $validation, $get, $post);
-                $payload['company_id'] = $companyId;
-                try {
-                    $result = $this->importInsertContractReact($get, $payload);
-                    $contractResult = $result['contract_result'] ?? array();
-                    $contractId = $contractResult['LASTID'];
-                    $resStatus = strtolower((string) ($contractResult['status'] ?? ''));
-                    if ($contractId > 0 && ($resStatus == 'sucess' || $resStatus == 'success')) {
-                        $successCount++;
-                        $summaryItems[] = array('import_ref' => $importRef, 'status' => 'success', 'contract_id' => $contractId);
-                    } else {
-                        $failCount++;
-                        $summaryItems[] = array(
-                            'import_ref' => $importRef,
-                            'status' => 'failed',
-                            'message' => $contractResult['message'] ?? 'Insert failed',
-                            'contract_result' => $contractResult,
-                        );
-                    }
-                } catch (Exception $e) {
-                    $failCount++;
-                    $summaryItems[] = array('import_ref' => $importRef, 'status' => 'failed', 'message' => $e->getMessage());
-                }
-            }
+        $summaryItems = array();
+
+        foreach ((array) $validation['contracts'] as $contractPreview) {
+            $this->processSingleContractExcelImport($contractPreview, $validation, $get, $post, $successCount, $failCount, $summaryItems);
         }
 
         $totalAttempted = $successCount + $failCount;
@@ -7639,7 +7591,6 @@ public function validateContractsExcel($get, $post)
             'batch_id' => $batchId,
             'summary' => $importSummary,
         );
-
     }
 
     public function getContractsExcelBatch($get, $post = array())
@@ -7677,7 +7628,6 @@ public function validateContractsExcel($get, $post)
         $decoded = json_decode($value, true);
         return is_array($decoded) ? $decoded : array();
     }
-
     private function cexLoadContractsExcelImportData($post)
     {
         require_once dirname(__DIR__) . self::CONST_INCLUDES_CONTRACTS_EXCEL_HELPE;
@@ -7687,27 +7637,33 @@ public function validateContractsExcel($get, $post)
         $milestones = $this->cexDecodeImportJsonField($post['milestones_data'] ?? ($post['parsed_milestones'] ?? array()));
 
         $tempPath = trim((string) ($post['temp_xlsx'] ?? ($post['file_path'] ?? '')));
+        $error = null;
         if ($tempPath != '' && count((array) $contracts) == 0) {
             $absPath = $tempPath;
             if (!file_exists($absPath)) {
                 $absPath = dirname(__DIR__) . '/' . ltrim(str_replace('\\', '/', $tempPath), '/');
             }
             if (!file_exists($absPath)) {
-                return array('error' => 'Excel file not found: ' . $tempPath);
-            }
-            try {
-                $parsed = cex_parse_contracts_workbook($absPath);
-                $contracts = $parsed['contracts'] ?? array();
-                $locations = $parsed['locations'] ?? array();
-                $assets = $parsed['assets'] ?? array();
-                $milestones = $parsed['milestones'] ?? array();
-            } catch (Exception $e) {
-                return array('error' => $e->getMessage());
+                $error = 'Excel file not found: ' . $tempPath;
+            } else {
+                try {
+                    $parsed = cex_parse_contracts_workbook($absPath);
+                    $contracts = $parsed['contracts'] ?? array();
+                    $locations = $parsed['locations'] ?? array();
+                    $assets = $parsed['assets'] ?? array();
+                    $milestones = $parsed['milestones'] ?? array();
+                } catch (Exception $e) {
+                    $error = $e->getMessage();
+                }
             }
         }
 
-        if (count((array) $contracts) == 0) {
-            return array('error' => 'No contract rows found in upload');
+        if ($error === null && count((array) $contracts) == 0) {
+            $error = 'No contract rows found in upload';
+        }
+
+        if ($error !== null) {
+            return array('error' => $error);
         }
 
         return array(
@@ -7717,10 +7673,196 @@ public function validateContractsExcel($get, $post)
             'milestones' => $milestones,
         );
     }
+    private function cexLoadPartyAndOrgLookups($companyId, &$lookups)
+    {
+        global $callConfig;
+        $deptRes = $callConfig->getAllRows("SELECT id, department_name FROM departments WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $deptRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $key = strtolower(trim((string) ($row['department_name'] ?? '')));
+            if ($key != '') {
+                $lookups['departments'][$key] = (int) ($row['id'] ?? 0);
+            }
+            $lookups['departments_by_id'][(int) ($row['id'] ?? 0)] = $row['department_name'] ?? '';
+        }
+
+        $vendorRes = $callConfig->getAllRows("SELECT id, account_code, reference_vendor_code, short_name, company, display_name FROM vendors WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $vendorRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            foreach (array($row['company'] ?? '', $row['display_name'] ?? '') as $name) {
+                $key = strtolower(trim((string) $name));
+                if ($key != '') {
+                    $lookups['vendors'][$key] = $id;
+                }
+            }
+            foreach (array($row['account_code'] ?? '', $row['reference_vendor_code'] ?? '', $row['short_name'] ?? '', (string) $id) as $bpRaw) {
+                $bp = strtolower(trim((string) $bpRaw));
+                if ($bp != '') {
+                    $lookups['vendors_by_bp'][$bp] = $id;
+                }
+            }
+        }
+
+        $custRes = $callConfig->getAllRows("SELECT id, account_code, company, display_name FROM customers WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $custRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            foreach (array($row['company'] ?? '', $row['display_name'] ?? '') as $name) {
+                $key = strtolower(trim((string) $name));
+                if ($key != '') {
+                    $lookups['customers'][$key] = $id;
+                }
+            }
+            foreach (array($row['account_code'] ?? '', (string) $id) as $bpRaw) {
+                $bp = strtolower(trim((string) $bpRaw));
+                if ($bp != '') {
+                    $lookups['customers_by_bp'][$bp] = $id;
+                }
+            }
+        }
+
+        $locRes = $callConfig->getAllRows("SELECT id, location_name FROM locations WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $locRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            $key = strtolower(trim((string) ($row['location_name'] ?? '')));
+            if ($key != '') {
+                $lookups['locations'][$key] = $id;
+            }
+            $lookups['locations_by_id'][$id] = $row['location_name'] ?? '';
+        }
+    }
+
+    private function cexLoadAssetAndServiceLookups($companyId, &$lookups)
+    {
+        global $callConfig;
+        $assetRes = $callConfig->getAllRows("SELECT id, asset_code, asset_name, location_id FROM assets WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $assetRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            $locId = (int) ($row['location_id'] ?? 0);
+            $nameKey = strtolower(trim((string) ($row['asset_name'] ?? '')));
+            $codeKey = strtolower(trim((string) ($row['asset_code'] ?? '')));
+            if ($nameKey != '') {
+                $lookups['assets'][$locId][$nameKey] = $id;
+                $lookups['assets'][0][$nameKey] = $id;
+            }
+            if ($codeKey != '') {
+                $lookups['assets_by_code'][$codeKey] = $id;
+            }
+        }
+
+        $svcRes = $callConfig->getAllRows("SELECT id, service_name FROM contract_services WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $svcRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            $key = strtolower(trim((string) ($row['service_name'] ?? '')));
+            if ($key != '') {
+                $lookups['services'][$key] = $id;
+            }
+            $lookups['services_by_id'][$id] = $row['service_name'] ?? '';
+        }
+
+        $ptRes = $callConfig->getAllRows("SELECT id, payment_term_name FROM payment_terms WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $ptRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            $key = strtolower(trim((string) ($row['payment_term_name'] ?? '')));
+            if ($key != '') {
+                $lookups['payment_terms'][$key] = $id;
+            }
+            $lookups['payment_terms_by_id'][$id] = $row['payment_term_name'] ?? '';
+        }
+    }
+
+    private function cexLoadMetaAndStaffLookups($companyId, &$lookups)
+    {
+        global $callConfig;
+        $catRes = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'CONTRACT_TYPE'");
+        foreach ((array) $catRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $code = trim((string) ($row['genc_detail_code'] ?? ''));
+            $name = strtolower(trim((string) ($row['genc_detail_name'] ?? '')));
+            if ($code != '') {
+                $lookups['contract_categories'][$name] = $code;
+                $lookups['contract_categories'][strtolower($code)] = $code;
+            }
+        }
+
+        $agrRes = $callConfig->getAllRows("SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        if (count((array) $agrRes) == 0) {
+            $agrRes = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'AGREEMENTS_TYPE'");
+        }
+        foreach ((array) $agrRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $code = trim((string) ($row['genc_detail_code'] ?? ''));
+            $name = strtolower(trim((string) ($row['genc_detail_name'] ?? '')));
+            if ($code != '') {
+                $lookups['agreement_types'][$name] = $code;
+                $lookups['agreement_types'][strtolower($code)] = $code;
+            }
+        }
+
+        $descRes = $callConfig->getAllRows("SELECT id, description_type, description FROM description_contracts WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $descRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            $typeKey = strtolower(trim((string) ($row['description_type'] ?? '')));
+            $descKey = strtolower(trim((string) ($row['description'] ?? '')));
+            if ($typeKey != '') {
+                $lookups['description_types'][$typeKey] = $id;
+            }
+            if ($descKey != '') {
+                $lookups['description_types'][$descKey] = $id;
+            }
+            $lookups['description_types_by_id'][$id] = $row['description_type'] ?? '';
+        }
+
+        $userRes = $callConfig->getAllRows("SELECT id, display_name, user_email FROM application_users WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $userRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            $name = strtolower(trim((string) ($row['display_name'] ?? '')));
+            $email = strtolower(trim((string) ($row['user_email'] ?? '')));
+            if ($name != '') {
+                $lookups['users'][$name] = $id;
+            }
+            if ($email != '') {
+                $lookups['users'][$email] = $id;
+            }
+        }
+
+        $empRes = $callConfig->getAllRows("SELECT id, display_name, emp_code FROM employees WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
+        foreach ((array) $empRes as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $id = (int) ($row['id'] ?? 0);
+            $name = strtolower(trim((string) ($row['display_name'] ?? '')));
+            $empCode = strtolower(trim((string) ($row['emp_code'] ?? '')));
+            if ($name != '') {
+                $lookups['employees'][$name] = $id;
+            }
+            if ($empCode != '') {
+                $lookups['employees'][$empCode] = $id;
+            }
+            $lookups['employees_by_id'][$id] = $row['display_name'] ?? '';
+        }
+
+        $freqDb = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'AMCSERVICE'");
+        $freqMerged = $this->mergeAmcServiceFrequencyOptions($freqDb);
+        foreach ((array) $freqMerged as $row) {
+            $row = is_array($row) ? $row : (array) $row;
+            $code = $this->normalizeAmcServiceOn($row['genc_detail_code'] ?? '');
+            $name = strtolower(trim((string) ($row['genc_detail_name'] ?? '')));
+            if ($code != '') {
+                $lookups['service_frequencies'][$name] = $code;
+                $lookups['service_frequencies'][strtolower($code)] = $code;
+            }
+        }
+    }
 
     private function cexBuildContractsExcelLookups($companyId)
     {
-        global $callConfig;
         $companyId = (int) $companyId;
         $lookups = array(
             'departments' => array(),
@@ -7747,217 +7889,9 @@ public function validateContractsExcel($get, $post)
             'service_frequencies' => array(),
         );
 
-        $deptRes = $callConfig->getAllRows("SELECT id, department_name FROM departments WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $deptRes) > 0) {
-            foreach ($deptRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $key = strtolower(trim((string) ($row['department_name'] ?? '')));
-                if ($key != '') {
-                    $lookups['departments'][$key] = (int) ($row['id'] ?? 0);
-                }
-                $lookups['departments_by_id'][(int) ($row['id'] ?? 0)] = $row['department_name'] ?? '';
-            }
-        }
-
-        $vendorRes = $callConfig->getAllRows("SELECT id, account_code, reference_vendor_code, short_name, company, display_name FROM vendors WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $vendorRes) > 0) {
-            foreach ($vendorRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $names = array($row['company'] ?? '', $row['display_name'] ?? '');
-                if (count((array) $names) > 0) {
-                    foreach ($names as $name) {
-                        $key = strtolower(trim((string) $name));
-                        if ($key != '') {
-                            $lookups['vendors'][$key] = $id;
-                        }
-                    }
-                }
-                $bpCandidates = array($row['account_code'] ?? '', $row['reference_vendor_code'] ?? '', $row['short_name'] ?? '', (string) $id);
-                if (count((array) $bpCandidates) > 0) {
-                    foreach ($bpCandidates as $bpRaw) {
-                        $bp = strtolower(trim((string) $bpRaw));
-                        if ($bp != '') {
-                            $lookups['vendors_by_bp'][$bp] = $id;
-                        }
-                    }
-                }
-            }
-        }
-
-        $custRes = $callConfig->getAllRows("SELECT id, account_code, company, display_name FROM customers WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $custRes) > 0) {
-            foreach ($custRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $names = array($row['company'] ?? '', $row['display_name'] ?? '');
-                if (count((array) $names) > 0) {
-                    foreach ($names as $name) {
-                        $key = strtolower(trim((string) $name));
-                        if ($key != '') {
-                            $lookups['customers'][$key] = $id;
-                        }
-                    }
-                }
-                $bpCandidates = array($row['account_code'] ?? '', (string) $id);
-                if (count((array) $bpCandidates) > 0) {
-                    foreach ($bpCandidates as $bpRaw) {
-                        $bp = strtolower(trim((string) $bpRaw));
-                        if ($bp != '') {
-                            $lookups['customers_by_bp'][$bp] = $id;
-                        }
-                    }
-                }
-            }
-        }
-
-        $locRes = $callConfig->getAllRows("SELECT id, location_name FROM locations WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $locRes) > 0) {
-            foreach ($locRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $key = strtolower(trim((string) ($row['location_name'] ?? '')));
-                if ($key != '') {
-                    $lookups['locations'][$key] = $id;
-                }
-                $lookups['locations_by_id'][$id] = $row['location_name'] ?? '';
-            }
-        }
-
-        $assetRes = $callConfig->getAllRows("SELECT id, asset_code, asset_description FROM assets WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $assetRes) > 0) {
-            foreach ($assetRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $code = strtolower(trim((string) ($row['asset_code'] ?? '')));
-                $name = strtolower(trim((string) ($row['asset_description'] ?? '')));
-                if ($code != '') {
-                    $lookups['assets_by_code'][$code] = array('id' => $id, 'name' => $row['asset_description'] ?? '');
-                }
-                if ($name != '') {
-                    $lookups['assets'][$name] = array('id' => $id, 'code' => $row['asset_code'] ?? '', 'name' => $row['asset_description'] ?? '');
-                }
-            }
-        }
-
-        $svcRes = $callConfig->getAllRows("SELECT id, service_name FROM contract_services WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $svcRes) > 0) {
-            foreach ($svcRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $key = strtolower(trim((string) ($row['service_name'] ?? '')));
-                if ($key != '') {
-                    $lookups['services'][$key] = $id;
-                }
-                $lookups['services_by_id'][$id] = $row['service_name'] ?? '';
-            }
-        }
-
-        $ptRes = $callConfig->getAllRows("SELECT id, payment_term_name FROM payment_terms WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $ptRes) > 0) {
-            foreach ($ptRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $key = strtolower(trim((string) ($row['payment_term_name'] ?? '')));
-                if ($key != '') {
-                    $lookups['payment_terms'][$key] = $id;
-                }
-                $lookups['payment_terms_by_id'][$id] = $row['payment_term_name'] ?? '';
-            }
-        }
-
-        $catRes = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'CONTRACT_TYPE'");
-        if (count((array) $catRes) > 0) {
-            foreach ($catRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $code = trim((string) ($row['genc_detail_code'] ?? ''));
-                $name = strtolower(trim((string) ($row['genc_detail_name'] ?? '')));
-                if ($code != '') {
-                    $lookups['contract_categories'][$name] = $code;
-                    $lookups['contract_categories'][strtolower($code)] = $code;
-                }
-            }
-        }
-
-        $agrRes = $callConfig->getAllRows("SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $agrRes) == 0) {
-            $agrRes = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'AGREEMENTS_TYPE'");
-        }
-        if (count((array) $agrRes) > 0) {
-            foreach ($agrRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $code = trim((string) ($row['genc_detail_code'] ?? ''));
-                $name = strtolower(trim((string) ($row['genc_detail_name'] ?? '')));
-                if ($code != '') {
-                    $lookups['agreement_types'][$name] = $code;
-                    $lookups['agreement_types'][strtolower($code)] = $code;
-                }
-            }
-        }
-
-        $descRes = $callConfig->getAllRows("SELECT id, description_type, description FROM description_contracts WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $descRes) > 0) {
-            foreach ($descRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $typeKey = strtolower(trim((string) ($row['description_type'] ?? '')));
-                $descKey = strtolower(trim((string) ($row['description'] ?? '')));
-                if ($typeKey != '') {
-                    $lookups['description_types'][$typeKey] = $id;
-                }
-                if ($descKey != '') {
-                    $lookups['description_types'][$descKey] = $id;
-                }
-                $lookups['description_types_by_id'][$id] = $row['description_type'] ?? '';
-            }
-        }
-
-        $userRes = $callConfig->getAllRows("SELECT id, display_name, user_email FROM application_users WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $userRes) > 0) {
-            foreach ($userRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $name = strtolower(trim((string) ($row['display_name'] ?? '')));
-                $email = strtolower(trim((string) ($row['user_email'] ?? '')));
-                if ($name != '') {
-                    $lookups['users'][$name] = $id;
-                }
-                if ($email != '') {
-                    $lookups['users'][$email] = $id;
-                }
-            }
-        }
-
-        $empRes = $callConfig->getAllRows("SELECT id, display_name, emp_code FROM employees WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_14);
-        if (count((array) $empRes) > 0) {
-            foreach ($empRes as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $id = (int) ($row['id'] ?? 0);
-                $name = strtolower(trim((string) ($row['display_name'] ?? '')));
-                $empCode = strtolower(trim((string) ($row['emp_code'] ?? '')));
-                if ($name != '') {
-                    $lookups['employees'][$name] = $id;
-                }
-                if ($empCode != '') {
-                    $lookups['employees'][$empCode] = $id;
-                }
-                $lookups['employees_by_id'][$id] = $row['display_name'] ?? '';
-            }
-        }
-
-        $freqDb = $callConfig->getAllRows(self::SQL_SELECT_SELECT_GENC_DETAIL_CODE_GENC_D_51 . $companyId . " AND is_active = 0 AND genc_code = 'AMCSERVICE'");
-        $freqMerged = $this->mergeAmcServiceFrequencyOptions($freqDb);
-        if (count((array) $freqMerged) > 0) {
-            foreach ($freqMerged as $row) {
-                $row = is_array($row) ? $row : (array) $row;
-                $code = $this->normalizeAmcServiceOn($row['genc_detail_code'] ?? '');
-                $name = strtolower(trim((string) ($row['genc_detail_name'] ?? '')));
-                if ($code != '') {
-                    $lookups['service_frequencies'][$name] = $code;
-                    $lookups['service_frequencies'][strtolower($code)] = $code;
-                }
-            }
-        }
+        $this->cexLoadPartyAndOrgLookups($companyId, $lookups);
+        $this->cexLoadAssetAndServiceLookups($companyId, $lookups);
+        $this->cexLoadMetaAndStaffLookups($companyId, $lookups);
 
         return $lookups;
     }
@@ -8002,7 +7936,6 @@ public function validateContractsExcel($get, $post)
         }
         return 'billing_cycle';
     }
-
     private function cexResolvePartyId($partyType, $bpCode, $partyName, $lookups)
     {
         $partyType = strtolower(trim((string) $partyType));
@@ -8011,22 +7944,21 @@ public function validateContractsExcel($get, $post)
         }
         $bp = strtolower(trim((string) $bpCode));
         $name = strtolower(trim((string) $partyName));
+        $resId = 0;
         if ($partyType == 'customer') {
             if ($bp != '' && isset($lookups['customers_by_bp'][$bp])) {
-                return (int) $lookups['customers_by_bp'][$bp];
-            }
-            if ($name != '' && isset($lookups['customers'][$name])) {
-                return (int) $lookups['customers'][$name];
+                $resId = (int) $lookups['customers_by_bp'][$bp];
+            } elseif ($name != '' && isset($lookups['customers'][$name])) {
+                $resId = (int) $lookups['customers'][$name];
             }
         } else {
             if ($bp != '' && isset($lookups['vendors_by_bp'][$bp])) {
-                return (int) $lookups['vendors_by_bp'][$bp];
-            }
-            if ($name != '' && isset($lookups['vendors'][$name])) {
-                return (int) $lookups['vendors'][$name];
+                $resId = (int) $lookups['vendors_by_bp'][$bp];
+            } elseif ($name != '' && isset($lookups['vendors'][$name])) {
+                $resId = (int) $lookups['vendors'][$name];
             }
         }
-        return 0;
+        return $resId;
     }
 
     private function cexParseCsvValues($csv)
@@ -8047,6 +7979,426 @@ public function validateContractsExcel($get, $post)
         }
         return $items;
     }
+    private function validateContractsExcelLocations($locations, $lookups)
+    {
+        $previews = array();
+        foreach ((array) $locations as $locRow) {
+            $locRow = is_array($locRow) ? $locRow : (array) $locRow;
+            $locErrors = array();
+            $ref = trim((string) ($locRow['import_ref'] ?? ''));
+            $locName = trim((string) ($locRow['location_name'] ?? ''));
+            $locKey = strtolower($locName);
+            $locId = 0;
+            if ($locName != '' && ctype_digit($locName) && isset($lookups['locations_by_id'][(int) $locName])) {
+                $locId = (int) $locName;
+            } elseif ($locKey != '' && isset($lookups['locations'][$locKey])) {
+                $locId = (int) $lookups['locations'][$locKey];
+            } elseif ($locName != '') {
+                $locErrors[] = 'Unknown location: ' . $locName;
+            }
+            $previews[] = array(
+                'row' => $locRow,
+                'import_ref' => $ref,
+                'ok' => count($locErrors) == 0,
+                'errors' => $locErrors,
+                'resolved' => array('location_id' => $locId),
+            );
+        }
+        return $previews;
+    }
+
+    private function validateContractsExcelAssets($assets, $lookups)
+    {
+        $previews = array();
+        foreach ((array) $assets as $assetRow) {
+            $assetRow = is_array($assetRow) ? $assetRow : (array) $assetRow;
+            $assetErrors = array();
+            $ref = trim((string) ($assetRow['import_ref'] ?? ''));
+            $assetCode = strtolower(trim((string) ($assetRow['asset_code'] ?? '')));
+            $assetInfo = $lookups['assets_by_code'][$assetCode] ?? null;
+            if ($assetCode == '') {
+                $assetErrors[] = 'asset_code is required';
+            } elseif ($assetInfo == null) {
+                $assetErrors[] = 'Unknown asset_code: ' . ($assetRow['asset_code'] ?? '');
+            }
+            $freqRaw = trim((string) ($assetRow['service_frequency'] ?? ''));
+            $freqCode = $lookups['service_frequencies'][strtolower($freqRaw)] ?? $this->normalizeAmcServiceOn($freqRaw);
+            $previews[] = array(
+                'row' => $assetRow,
+                'import_ref' => $ref,
+                'ok' => count($assetErrors) == 0,
+                'errors' => $assetErrors,
+                'resolved' => array(
+                    'asset_id' => (int) ($assetInfo['id'] ?? 0),
+                    'asset_name' => $assetInfo['name'] ?? '',
+                    'service_frequency' => $freqCode,
+                    'visits_per_interval' => max(1, (int) ($assetRow['visits_per_interval'] ?? 1)),
+                ),
+            );
+        }
+        return $previews;
+    }
+
+    private function validateContractsExcelMilestones($milestones)
+    {
+        $previews = array();
+        foreach ((array) $milestones as $msRow) {
+            $msRow = is_array($msRow) ? $msRow : (array) $msRow;
+            $msErrors = array();
+            $ref = trim((string) ($msRow['import_ref'] ?? ''));
+            $msDate = cex_normalize_date_ymd($msRow['milestone_date'] ?? '');
+            if (($msRow['milestone_date'] ?? '') != '' && $msDate == '') {
+                $msErrors[] = 'Invalid milestone_date';
+            }
+            $previews[] = array(
+                'row' => $msRow,
+                'import_ref' => $ref,
+                'ok' => count($msErrors) == 0,
+                'errors' => $msErrors,
+                'resolved' => array(
+                    'milestone_name' => trim((string) ($msRow['milestone_name'] ?? '')),
+                    'milestone_date' => $msDate,
+                    'milestone_price' => (float) ($msRow['milestone_amount'] ?? 0),
+                ),
+            );
+        }
+        return $previews;
+    }
+
+    private function validateContractRowCore($contractRow, &$seenRefs, &$rowErrors)
+    {
+        $importRef = trim((string) ($contractRow['import_ref'] ?? ''));
+        if ($importRef == '') {
+            $rowErrors[] = 'import_ref is required';
+        } elseif (isset($seenRefs[$importRef])) {
+            $rowErrors[] = 'Duplicate import_ref: ' . $importRef;
+        } else {
+            $seenRefs[$importRef] = 1;
+        }
+
+        $contractType = $this->cexNormalizeContractType($contractRow['contract_type'] ?? 'standard');
+        if ($contractType != 'standard' && $contractType != 'amc') {
+            $rowErrors[] = 'Invalid contract_type (use standard or amc)';
+        }
+
+        if (trim((string) ($contractRow['contract_name'] ?? '')) == '') {
+            $rowErrors[] = 'contract_name is required';
+        }
+
+        $startDate = cex_normalize_date_ymd($contractRow['start_date'] ?? '');
+        $endDate = cex_normalize_date_ymd($contractRow['end_date'] ?? '');
+        if (($contractRow['start_date'] ?? '') != '' && $startDate == '') {
+            $rowErrors[] = 'Invalid start_date';
+        }
+        if (($contractRow['end_date'] ?? '') != '' && $endDate == '') {
+            $rowErrors[] = 'Invalid end_date';
+        }
+        if ($startDate != '' && $endDate != '' && $startDate > $endDate) {
+            $rowErrors[] = 'start_date must be before end_date';
+        }
+
+        $amount = (float) ($contractRow['contract_amount'] ?? 0);
+        if ($amount <= 0) {
+            $rowErrors[] = 'contract_amount must be greater than zero';
+        }
+
+        return array(
+            'importRef' => $importRef,
+            'contractType' => $contractType,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'amount' => $amount,
+        );
+    }
+
+    private function validateContractRowPartiesAndDept($contractRow, $lookups, &$rowErrors)
+    {
+        $partyType = strtolower(trim((string) ($contractRow['party_type'] ?? 'vendor')));
+        if (!in_array($partyType, array('vendor', 'customer', 'inhouse'), true)) {
+            $rowErrors[] = 'Invalid party_type';
+        }
+        $partyId = $this->cexResolvePartyId($partyType, $contractRow['party_bp_code'] ?? '', $contractRow['party_name'] ?? '', $lookups);
+        if ($partyType != 'inhouse' && $partyId <= 0) {
+            $rowErrors[] = 'Unable to resolve party from party_bp_code or party_name';
+        }
+
+        $deptId = 0;
+        $deptName = strtolower(trim((string) ($contractRow['department_name'] ?? '')));
+        if ($deptName == '') {
+            $rowErrors[] = 'department_name is required';
+        } elseif (ctype_digit(trim((string) ($contractRow['department_name'] ?? ''))) && isset($lookups['departments_by_id'][(int) $contractRow['department_name']])) {
+            $deptId = (int) $contractRow['department_name'];
+        } elseif (isset($lookups['departments'][$deptName])) {
+            $deptId = (int) $lookups['departments'][$deptName];
+        } else {
+            $rowErrors[] = 'Unknown department_name';
+        }
+
+        return array(
+            'partyType' => $partyType,
+            'partyId' => $partyId,
+            'deptId' => $deptId,
+        );
+    }
+
+    private function validateContractRowBillingAndTerms($contractRow, $lookups, &$rowErrors)
+    {
+        $paymentPlan = $this->cexNormalizePaymentPlan($contractRow['payment_plan'] ?? 'billing_cycle');
+        $billingCycle = cex_normalize_billing_cycle($contractRow['billing_cycle'] ?? '');
+        $billingDayRaw = trim((string) ($contractRow['billing_day'] ?? ''));
+        $billingDay = ($billingDayRaw == '') ? 1 : (int) $billingDayRaw;
+        if ($paymentPlan == 'billing_cycle') {
+            if ($billingCycle == '') {
+                $billingCycle = 'quarterly';
+            }
+            if (!in_array($billingCycle, array('monthly', 'quarterly', 'half_yearly', 'yearly'), true)) {
+                $rowErrors[] = 'Invalid billing_cycle (use monthly, quarterly, half_yearly, yearly)';
+            }
+            if ($billingDay < 1 || $billingDay > 31) {
+                $rowErrors[] = 'billing_day must be between 1 and 31';
+            }
+        } else {
+            if ($billingCycle == '') {
+                $billingCycle = 'quarterly';
+            }
+            if ($billingDay < 1 || $billingDay > 31) {
+                $billingDay = 1;
+            }
+        }
+
+        $categoryRaw = strtolower(trim((string) ($contractRow['contract_category'] ?? '')));
+        $typeOfContractId = $lookups['contract_categories'][$categoryRaw] ?? trim((string) ($contractRow['contract_category'] ?? ''));
+
+        $paymentTermId = 0;
+        $paymentTermText = trim((string) ($contractRow['payment_terms'] ?? ''));
+        $ptKey = strtolower($paymentTermText);
+        if ($paymentTermText != '') {
+            if (ctype_digit($paymentTermText) && isset($lookups['payment_terms_by_id'][(int) $paymentTermText])) {
+                $paymentTermId = (int) $paymentTermText;
+            } elseif (isset($lookups['payment_terms'][$ptKey])) {
+                $paymentTermId = (int) $lookups['payment_terms'][$ptKey];
+            }
+            if ($paymentTermId <= 0) {
+                $rowErrors[] = 'Unknown payment_terms: ' . $paymentTermText;
+            }
+        }
+
+        $typeofaggrements = '';
+        $agrRawText = trim((string) ($contractRow['agreement_type'] ?? ''));
+        $agrRaw = strtolower($agrRawText);
+        if ($agrRawText != '') {
+            if (isset($lookups['agreement_types'][$agrRaw])) {
+                $typeofaggrements = $lookups['agreement_types'][$agrRaw];
+            } else {
+                $rowErrors[] = 'Unknown agreement_type: ' . $agrRawText;
+            }
+        }
+
+        $descriptionId = '';
+        $descRawText = trim((string) ($contractRow['description_type'] ?? ''));
+        $descRaw = strtolower($descRawText);
+        if ($descRawText != '') {
+            if (ctype_digit($descRawText) && isset($lookups['description_types_by_id'][(int) $descRawText])) {
+                $descriptionId = (int) $descRawText;
+            } elseif (isset($lookups['description_types'][$descRaw])) {
+                $descriptionId = $lookups['description_types'][$descRaw];
+            } else {
+                $rowErrors[] = 'Unknown description_type: ' . $descRawText;
+            }
+        }
+
+        $serviceIds = array();
+        $serviceParts = $this->cexParseCsvValues($contractRow['services_csv'] ?? '');
+        foreach ((array) $serviceParts as $svcPart) {
+            $svcKey = strtolower(trim((string) $svcPart));
+            if (ctype_digit($svcPart) && isset($lookups['services_by_id'][(int) $svcPart])) {
+                $serviceIds[] = (int) $svcPart;
+            } elseif (isset($lookups['services'][$svcKey])) {
+                $serviceIds[] = (int) $lookups['services'][$svcKey];
+            } elseif ($svcPart != '') {
+                $rowErrors[] = 'Unknown service: ' . $svcPart;
+            }
+        }
+
+        return array(
+            'paymentPlan' => $paymentPlan,
+            'billingCycle' => $billingCycle,
+            'billingDay' => $billingDay,
+            'typeOfContractId' => $typeOfContractId,
+            'paymentTermId' => $paymentTermId,
+            'typeofaggrements' => $typeofaggrements,
+            'descriptionId' => $descriptionId,
+            'serviceIds' => $serviceIds,
+        );
+    }
+
+    private function validateContractRowAmcOrLocations($contractRow, $contractType, $startDate, $endDate, $locationsByRef, $assetsByRef, $lookups, &$rowErrors)
+    {
+        $locationIds = array();
+        $amcLoc = array();
+        $amcAsset = array();
+        $importRef = trim((string) ($contractRow['import_ref'] ?? ''));
+
+        if ($contractType == 'amc') {
+            $locRows = $locationsByRef[$importRef] ?? array();
+            if (count((array) $locRows) == 0) {
+                $rowErrors[] = 'AMC contract requires at least one Locations sheet row';
+            } else {
+                $locIdx = 0;
+                foreach ($locRows as $locRow) {
+                    $locName = trim((string) ($locRow['location_name'] ?? ''));
+                    $locKey = strtolower($locName);
+                    $locId = 0;
+                    if ($locName != '' && ctype_digit($locName) && isset($lookups['locations_by_id'][(int) $locName])) {
+                        $locId = (int) $locName;
+                    } elseif ($locKey != '' && isset($lookups['locations'][$locKey])) {
+                        $locId = (int) $lookups['locations'][$locKey];
+                    } else {
+                        $rowErrors[] = 'Unknown AMC location: ' . $locName;
+                    }
+                    $locStart = cex_normalize_date_ymd($locRow['service_start_date'] ?? '') ?: $startDate;
+                    $locEnd = cex_normalize_date_ymd($locRow['service_end_date'] ?? '') ?: $endDate;
+                    $amcLoc[] = array(
+                        'location_id' => $locId,
+                        'service_start_date' => $locStart,
+                        'service_end_date' => $locEnd,
+                    );
+                    if ($locId > 0) {
+                        $locationIds[] = $locId;
+                    }
+
+                    $amcAsset[$locIdx] = array();
+                    $assetRowsForRef = $assetsByRef[$importRef] ?? array();
+                    foreach ((array) $assetRowsForRef as $assetRow) {
+                        $assetLocName = trim((string) ($assetRow['location_name'] ?? ''));
+                        if ($assetLocName != '' && strcasecmp($assetLocName, $locName) != 0) {
+                            continue;
+                        }
+                        $assetCode = strtolower(trim((string) ($assetRow['asset_code'] ?? '')));
+                        $assetInfo = $lookups['assets_by_code'][$assetCode] ?? null;
+                        if ($assetInfo == null) {
+                            $rowErrors[] = 'Unknown asset_code for location ' . $locName . ': ' . ($assetRow['asset_code'] ?? '');
+                            continue;
+                        }
+                        $freqRaw = trim((string) ($assetRow['service_frequency'] ?? ''));
+                        $freqCode = $lookups['service_frequencies'][strtolower($freqRaw)] ?? $this->normalizeAmcServiceOn($freqRaw);
+                        $amcAsset[$locIdx][] = array(
+                            'asset_id' => (int) ($assetInfo['id'] ?? 0),
+                            'asset_name' => $assetInfo['name'] ?? '',
+                            'service_frequency' => $freqCode,
+                            'visits_per_interval' => max(1, (int) ($assetRow['visits_per_interval'] ?? 1)),
+                            'service_start_date' => cex_normalize_date_ymd($assetRow['service_start_date'] ?? '') ?: $locStart,
+                            'service_end_date' => cex_normalize_date_ymd($assetRow['service_end_date'] ?? '') ?: $locEnd,
+                            'service_slots' => array(),
+                        );
+                    }
+                    $locIdx++;
+                }
+            }
+            $hasAsset = false;
+            foreach ($amcAsset as $assetList) {
+                if (count((array) $assetList) > 0) {
+                    $hasAsset = true;
+                    break;
+                }
+            }
+            if (!$hasAsset) {
+                $rowErrors[] = 'AMC contract requires at least one Assets sheet row';
+            }
+        } else {
+            $locParts = $this->cexParseCsvValues($contractRow['locations_csv'] ?? '');
+            foreach ((array) $locParts as $locPart) {
+                $locKey = strtolower(trim((string) $locPart));
+                if (ctype_digit($locPart) && isset($lookups['locations_by_id'][(int) $locPart])) {
+                    $locationIds[] = (int) $locPart;
+                } elseif (isset($lookups['locations'][$locKey])) {
+                    $locationIds[] = (int) $lookups['locations'][$locKey];
+                } elseif ($locPart != '') {
+                    $rowErrors[] = 'Unknown location in locations_csv: ' . $locPart;
+                }
+            }
+        }
+
+        return array(
+            'locationIds' => $locationIds,
+            'amcLoc' => $amcLoc,
+            'amcAsset' => $amcAsset,
+        );
+    }
+
+    private function validateContractRowMilestones($contractRow, $startDate, $endDate, $amount, $paymentPlan, $billingCycle, $billingDay, $milestonesByRef, &$rowErrors, &$warnings)
+    {
+        $importRef = trim((string) ($contractRow['import_ref'] ?? ''));
+        $resolvedMilestones = array();
+        if ($paymentPlan == 'milestones') {
+            $msRows = $milestonesByRef[$importRef] ?? array();
+            if (count((array) $msRows) == 0) {
+                $rowErrors[] = 'payment_plan milestones requires Milestones sheet rows';
+            } else {
+                $msTotal = 0;
+                foreach ($msRows as $msRow) {
+                    $msName = trim((string) ($msRow['milestone_name'] ?? ''));
+                    if ($msName == '') {
+                        $rowErrors[] = 'Milestone name is required';
+                        continue;
+                    }
+                    $msDate = cex_normalize_date_ymd($msRow['milestone_date'] ?? '');
+                    if (($msRow['milestone_date'] ?? '') != '' && $msDate == '') {
+                        $rowErrors[] = 'Invalid milestone_date for ' . $msName;
+                    }
+                    $msPrice = (float) ($msRow['milestone_amount'] ?? 0);
+                    $msTotal += $msPrice;
+                    $resolvedMilestones[] = array(
+                        'milestone_name' => $msName,
+                        'milestone_date' => $msDate,
+                        'milestone_price' => $msPrice,
+                    );
+                }
+                if ($msTotal > 0 && abs($msTotal - $amount) > 0.05) {
+                    $warnings[] = 'import_ref ' . $importRef . ': milestone total (' . $msTotal . ') differs from contract_amount (' . $amount . ')';
+                }
+            }
+        } elseif ($startDate != '' && $endDate != '') {
+            $resolvedMilestones = cex_generate_billing_milestones($startDate, $endDate, $billingCycle, $billingDay, $amount);
+        }
+        return $resolvedMilestones;
+    }
+
+    private function validateContractRowStaffAndOem($contractRow, $lookups, &$rowErrors)
+    {
+        $customerConnectId = 0;
+        $ccNameRaw = trim((string) ($contractRow['customer_connect_name'] ?? ''));
+        $ccName = strtolower($ccNameRaw);
+        if ($ccNameRaw != '') {
+            if (isset($lookups['customers'][$ccName])) {
+                $customerConnectId = (int) $lookups['customers'][$ccName];
+            } else {
+                $rowErrors[] = 'Unknown customer_connect_name: ' . $ccNameRaw;
+            }
+        }
+
+        $defaultEmployeeId = 0;
+        $empNameRaw = trim((string) ($contractRow['default_employee_name'] ?? ''));
+        $empName = strtolower($empNameRaw);
+        if ($empNameRaw != '') {
+            if (ctype_digit($empNameRaw) && isset($lookups['employees_by_id'][(int) $empNameRaw])) {
+                $defaultEmployeeId = (int) $empNameRaw;
+            } elseif (isset($lookups['employees'][$empName])) {
+                $defaultEmployeeId = (int) $lookups['employees'][$empName];
+            } else {
+                $rowErrors[] = 'Unknown default_employee_name: ' . $empNameRaw;
+            }
+        }
+
+        $isOem = strtolower(trim((string) ($contractRow['is_oem'] ?? '')));
+        $isOemVal = ($isOem == 'y' || $isOem == 'yes' || $isOem == '1') ? 'Y' : 'N';
+
+        return array(
+            'customerConnectId' => $customerConnectId,
+            'defaultEmployeeId' => $defaultEmployeeId,
+            'isOemVal' => $isOemVal,
+        );
+    }
 
     private function cexValidateContractsExcelData($contracts, $locations, $assets, $milestones, $lookups)
     {
@@ -8061,417 +8413,61 @@ public function validateContractsExcel($get, $post)
         $assetsByRef = $this->cexGroupRowsByImportRef($assets);
         $milestonesByRef = $this->cexGroupRowsByImportRef($milestones);
 
-        $locationPreviews = array();
-        if (count((array) $locations) > 0) {
-            foreach ($locations as $locRow) {
-                $locRow = is_array($locRow) ? $locRow : (array) $locRow;
-                $locErrors = array();
-                $ref = trim((string) ($locRow['import_ref'] ?? ''));
-                $locName = trim((string) ($locRow['location_name'] ?? ''));
-                $locKey = strtolower($locName);
-                $locId = 0;
-                if ($locName != '' && ctype_digit($locName) && isset($lookups['locations_by_id'][(int) $locName])) {
-                    $locId = (int) $locName;
-                } elseif ($locKey != '' && isset($lookups['locations'][$locKey])) {
-                    $locId = (int) $lookups['locations'][$locKey];
-                } elseif ($locName != '') {
-                    $locErrors[] = 'Unknown location: ' . $locName;
-                }
-                $locationPreviews[] = array('row' => $locRow, 'import_ref' => $ref, 'ok' => count((array) $locErrors) == 0, 'errors' => $locErrors, 'resolved' => array('location_id' => $locId));
-            }
-        }
+        $locationPreviews = $this->validateContractsExcelLocations($locations, $lookups);
+        $assetPreviews = $this->validateContractsExcelAssets($assets, $lookups);
+        $milestonePreviews = $this->validateContractsExcelMilestones($milestones);
 
-        $assetPreviews = array();
-        if (count((array) $assets) > 0) {
-            foreach ($assets as $assetRow) {
-                $assetRow = is_array($assetRow) ? $assetRow : (array) $assetRow;
-                $assetErrors = array();
-                $ref = trim((string) ($assetRow['import_ref'] ?? ''));
-                $assetCode = strtolower(trim((string) ($assetRow['asset_code'] ?? '')));
-                $assetId = 0;
-                $assetName = '';
-                if ($assetCode != '' && isset($lookups['assets_by_code'][$assetCode])) {
-                    $assetId = (int) ($lookups['assets_by_code'][$assetCode]['id'] ?? 0);
-                    $assetName = $lookups['assets_by_code'][$assetCode]['name'] ?? '';
-                } elseif ($assetCode != '') {
-                    $assetErrors[] = 'Unknown asset_code: ' . ($assetRow['asset_code'] ?? '');
-                }
-                $freqRaw = trim((string) ($assetRow['service_frequency'] ?? ''));
-                $freqKey = strtolower($freqRaw);
-                $freqCode = $lookups['service_frequencies'][$freqKey] ?? $this->normalizeAmcServiceOn($freqRaw);
-                if ($freqRaw != '' && $freqCode == '') {
-                    $assetErrors[] = 'Unknown service_frequency: ' . $freqRaw;
-                }
-                $assetPreviews[] = array(
-                    'row' => $assetRow,
-                    'import_ref' => $ref,
-                    'ok' => count((array) $assetErrors) == 0,
-                    'errors' => $assetErrors,
-                    'resolved' => array('asset_id' => $assetId, 'asset_name' => $assetName, 'service_frequency' => $freqCode),
-                );
-            }
-        }
+        foreach ((array) $contracts as $contractRow) {
+            $contractRow = is_array($contractRow) ? $contractRow : (array) $contractRow;
+            $rowErrors = array();
 
-        $milestonePreviews = array();
-        if (count((array) $milestones) > 0) {
-            foreach ($milestones as $msRow) {
-                $msRow = is_array($msRow) ? $msRow : (array) $msRow;
-                $msErrors = array();
-                $ref = trim((string) ($msRow['import_ref'] ?? ''));
-                $msDate = cex_normalize_date_ymd($msRow['milestone_date'] ?? '');
-                if (($msRow['milestone_date'] ?? '') != '' && $msDate == '') {
-                    $msErrors[] = 'Invalid milestone_date';
-                }
-                $milestonePreviews[] = array(
-                    'row' => $msRow,
-                    'import_ref' => $ref,
-                    'ok' => count((array) $msErrors) == 0,
-                    'errors' => $msErrors,
-                    'resolved' => array(
-                        'milestone_name' => trim((string) ($msRow['milestone_name'] ?? '')),
-                        'milestone_date' => $msDate,
-                        'milestone_price' => (float) ($msRow['milestone_amount'] ?? 0),
-                    ),
-                );
-            }
-        }
+            $core = $this->validateContractRowCore($contractRow, $seenRefs, $rowErrors);
+            $parties = $this->validateContractRowPartiesAndDept($contractRow, $lookups, $rowErrors);
+            $billing = $this->validateContractRowBillingAndTerms($contractRow, $lookups, $rowErrors);
+            $locData = $this->validateContractRowAmcOrLocations($contractRow, $core['contractType'], $core['startDate'], $core['endDate'], $locationsByRef, $assetsByRef, $lookups, $rowErrors);
+            $resolvedMilestones = $this->validateContractRowMilestones($contractRow, $core['startDate'], $core['endDate'], $core['amount'], $billing['paymentPlan'], $billing['billingCycle'], $billing['billingDay'], $milestonesByRef, $rowErrors, $warnings);
+            $staff = $this->validateContractRowStaffAndOem($contractRow, $lookups, $rowErrors);
 
-        if (count((array) $contracts) > 0) {
-            foreach ($contracts as $contractRow) {
-                $contractRow = is_array($contractRow) ? $contractRow : (array) $contractRow;
-                $rowErrors = array();
-                $importRef = trim((string) ($contractRow['import_ref'] ?? ''));
-                if ($importRef == '') {
-                    $rowErrors[] = 'import_ref is required';
-                } elseif (isset($seenRefs[$importRef])) {
-                    $rowErrors[] = 'Duplicate import_ref: ' . $importRef;
+            $preview = array(
+                'row' => $contractRow,
+                'import_ref' => $core['importRef'],
+                'ok' => count($rowErrors) == 0,
+                'errors' => $rowErrors,
+                'resolved' => array(
+                    'contract_type' => $core['contractType'],
+                    'start_date' => $core['startDate'],
+                    'end_date' => $core['endDate'],
+                    'contract_amount' => $core['amount'],
+                    'party_type' => $parties['partyType'],
+                    'party_id' => $parties['partyId'],
+                    'department_id' => $parties['deptId'],
+                    'payment_plan' => $billing['paymentPlan'],
+                    'billing_cycle' => $billing['billingCycle'],
+                    'billing_day' => $billing['billingDay'],
+                    'type_of_contract_id' => $billing['typeOfContractId'],
+                    'payment_term_id' => $billing['paymentTermId'],
+                    'contract_payment_terms' => $billing['paymentTermId'] > 0 ? $billing['paymentTermId'] : '',
+                    'typeofaggrements' => $billing['typeofaggrements'],
+                    'description_id' => $billing['descriptionId'],
+                    'contract_services_id' => $billing['serviceIds'],
+                    'locations' => array_values(array_unique($locData['locationIds'])),
+                    'amc_loc' => $locData['amcLoc'],
+                    'amc_asset' => $locData['amcAsset'],
+                    'milestones' => $resolvedMilestones,
+                    'customer_connect_id' => $staff['customerConnectId'],
+                    'amc_default_employee_id' => $staff['defaultEmployeeId'],
+                    'is_oem' => $staff['isOemVal'],
+                ),
+            );
+
+            $contractPreviews[] = $preview;
+            if ($core['importRef'] != '') {
+                $contractsByRef[$core['importRef']] = $preview;
+                if ($preview['ok']) {
+                    $validImportRefs[] = $core['importRef'];
                 } else {
-                    $seenRefs[$importRef] = 1;
-                }
-
-                $contractType = $this->cexNormalizeContractType($contractRow['contract_type'] ?? 'standard');
-                if ($contractType != 'standard' && $contractType != 'amc') {
-                    $rowErrors[] = 'Invalid contract_type (use standard or amc)';
-                }
-
-                if (trim((string) ($contractRow['contract_name'] ?? '')) == '') {
-                    $rowErrors[] = 'contract_name is required';
-                }
-
-                $startDate = cex_normalize_date_ymd($contractRow['start_date'] ?? '');
-                $endDate = cex_normalize_date_ymd($contractRow['end_date'] ?? '');
-                if (($contractRow['start_date'] ?? '') != '' && $startDate == '') {
-                    $rowErrors[] = 'Invalid start_date';
-                }
-                if (($contractRow['end_date'] ?? '') != '' && $endDate == '') {
-                    $rowErrors[] = 'Invalid end_date';
-                }
-                if ($startDate != '' && $endDate != '' && $startDate > $endDate) {
-                    $rowErrors[] = 'start_date must be before end_date';
-                }
-
-                $amount = (float) ($contractRow['contract_amount'] ?? 0);
-                if ($amount <= 0) {
-                    $rowErrors[] = 'contract_amount must be greater than zero';
-                }
-
-                $partyType = strtolower(trim((string) ($contractRow['party_type'] ?? 'vendor')));
-                if (!in_array($partyType, array('vendor', 'customer', 'inhouse'))) {
-                    $rowErrors[] = 'Invalid party_type';
-                }
-                $partyId = $this->cexResolvePartyId($partyType, $contractRow['party_bp_code'] ?? '', $contractRow['party_name'] ?? '', $lookups);
-                if ($partyType != 'inhouse' && $partyId <= 0) {
-                    $rowErrors[] = 'Unable to resolve party from party_bp_code or party_name';
-                }
-
-                $deptId = 0;
-                $deptName = strtolower(trim((string) ($contractRow['department_name'] ?? '')));
-                if ($deptName == '') {
-                    $rowErrors[] = 'department_name is required';
-                } elseif (ctype_digit(trim((string) ($contractRow['department_name'] ?? ''))) && isset($lookups['departments_by_id'][(int) $contractRow['department_name']])) {
-                    $deptId = (int) $contractRow['department_name'];
-                } elseif (isset($lookups['departments'][$deptName])) {
-                    $deptId = (int) $lookups['departments'][$deptName];
-                } else {
-                    $rowErrors[] = 'Unknown department_name';
-                }
-
-                $paymentPlan = $this->cexNormalizePaymentPlan($contractRow['payment_plan'] ?? 'billing_cycle');
-                $billingCycle = cex_normalize_billing_cycle($contractRow['billing_cycle'] ?? '');
-                $billingDayRaw = trim((string) ($contractRow['billing_day'] ?? ''));
-                $billingDay = ($billingDayRaw == '') ? 1 : (int) $billingDayRaw;
-                if ($paymentPlan == 'billing_cycle') {
-                    if ($billingCycle == '') {
-                        $billingCycle = 'quarterly';
-                    }
-                    if (!in_array($billingCycle, array('monthly', 'quarterly', 'half_yearly', 'yearly'))) {
-                        $rowErrors[] = 'Invalid billing_cycle (use monthly, quarterly, half_yearly, yearly)';
-                    }
-                    if ($billingDay < 1 || $billingDay > 31) {
-                        $rowErrors[] = 'billing_day must be between 1 and 31';
-                    }
-                } else {
-                    if ($billingCycle == '') {
-                        $billingCycle = 'quarterly';
-                    }
-                    if ($billingDay < 1 || $billingDay > 31) {
-                        $billingDay = 1;
-                    }
-                }
-
-                $categoryRaw = strtolower(trim((string) ($contractRow['contract_category'] ?? '')));
-                $typeOfContractId = $lookups['contract_categories'][$categoryRaw] ?? trim((string) ($contractRow['contract_category'] ?? ''));
-
-                $paymentTermId = 0;
-                $paymentTermText = trim((string) ($contractRow['payment_terms'] ?? ''));
-                $ptKey = strtolower($paymentTermText);
-                if ($paymentTermText != '') {
-                    if (ctype_digit($paymentTermText) && isset($lookups['payment_terms_by_id'][(int) $paymentTermText])) {
-                        $paymentTermId = (int) $paymentTermText;
-                    } elseif (isset($lookups['payment_terms'][$ptKey])) {
-                        $paymentTermId = (int) $lookups['payment_terms'][$ptKey];
-                    }
-                    if ($paymentTermId <= 0) {
-                        $rowErrors[] = 'Unknown payment_terms: ' . $paymentTermText;
-                    }
-                }
-
-                $typeofaggrements = '';
-                $agrRawText = trim((string) ($contractRow['agreement_type'] ?? ''));
-                $agrRaw = strtolower($agrRawText);
-                if ($agrRawText != '') {
-                    if (isset($lookups['agreement_types'][$agrRaw])) {
-                        $typeofaggrements = $lookups['agreement_types'][$agrRaw];
-                    } else {
-                        $rowErrors[] = 'Unknown agreement_type: ' . $agrRawText;
-                    }
-                }
-
-                $descriptionId = '';
-                $descRawText = trim((string) ($contractRow['description_type'] ?? ''));
-                $descRaw = strtolower($descRawText);
-                if ($descRawText != '') {
-                    if (ctype_digit($descRawText) && isset($lookups['description_types_by_id'][(int) $descRawText])) {
-                        $descriptionId = (int) $descRawText;
-                    } elseif (isset($lookups['description_types'][$descRaw])) {
-                        $descriptionId = $lookups['description_types'][$descRaw];
-                    } else {
-                        $rowErrors[] = 'Unknown description_type: ' . $descRawText;
-                    }
-                }
-
-                $serviceIds = array();
-                $serviceParts = $this->cexParseCsvValues($contractRow['services_csv'] ?? '');
-                if (count((array) $serviceParts) > 0) {
-                    foreach ($serviceParts as $svcPart) {
-                        $svcKey = strtolower(trim((string) $svcPart));
-                        if (ctype_digit($svcPart) && isset($lookups['services_by_id'][(int) $svcPart])) {
-                            $serviceIds[] = (int) $svcPart;
-                        } elseif (isset($lookups['services'][$svcKey])) {
-                            $serviceIds[] = (int) $lookups['services'][$svcKey];
-                        } elseif ($svcPart != '') {
-                            $rowErrors[] = 'Unknown service: ' . $svcPart;
-                        }
-                    }
-                }
-
-                $locationIds = array();
-                $amcLoc = array();
-                $amcAsset = array();
-
-                if ($contractType == 'amc') {
-                    $locRows = $locationsByRef[$importRef] ?? array();
-                    if (count((array) $locRows) == 0) {
-                        $rowErrors[] = 'AMC contract requires at least one Locations sheet row';
-                    } else {
-                        $locIdx = 0;
-                        if (count((array) $locRows) > 0) {
-                            foreach ($locRows as $locRow) {
-                                $locName = trim((string) ($locRow['location_name'] ?? ''));
-                                $locKey = strtolower($locName);
-                                $locId = 0;
-                                if ($locName != '' && ctype_digit($locName) && isset($lookups['locations_by_id'][(int) $locName])) {
-                                    $locId = (int) $locName;
-                                } elseif ($locKey != '' && isset($lookups['locations'][$locKey])) {
-                                    $locId = (int) $lookups['locations'][$locKey];
-                                } else {
-                                    $rowErrors[] = 'Unknown AMC location: ' . $locName;
-                                }
-                                $locStart = cex_normalize_date_ymd($locRow['service_start_date'] ?? '') ?: $startDate;
-                                $locEnd = cex_normalize_date_ymd($locRow['service_end_date'] ?? '') ?: $endDate;
-                                $amcLoc[] = array(
-                                    'location_id' => $locId,
-                                    'service_start_date' => $locStart,
-                                    'service_end_date' => $locEnd,
-                                );
-                                if ($locId > 0) {
-                                    $locationIds[] = $locId;
-                                }
-
-                                $amcAsset[$locIdx] = array();
-                                $assetRowsForRef = $assetsByRef[$importRef] ?? array();
-                                if (count((array) $assetRowsForRef) > 0) {
-                                    foreach ($assetRowsForRef as $assetRow) {
-                                        $assetLocName = trim((string) ($assetRow['location_name'] ?? ''));
-                                        if ($assetLocName != '' && strcasecmp($assetLocName, $locName) != 0) {
-                                            continue;
-                                        }
-                                        $assetCode = strtolower(trim((string) ($assetRow['asset_code'] ?? '')));
-                                        $assetInfo = $lookups['assets_by_code'][$assetCode] ?? null;
-                                        if ($assetInfo == null) {
-                                            $rowErrors[] = 'Unknown asset_code for location ' . $locName . ': ' . ($assetRow['asset_code'] ?? '');
-                                            continue;
-                                        }
-                                        $freqRaw = trim((string) ($assetRow['service_frequency'] ?? ''));
-                                        $freqCode = $lookups['service_frequencies'][strtolower($freqRaw)] ?? $this->normalizeAmcServiceOn($freqRaw);
-                                        $amcAsset[$locIdx][] = array(
-                                            'asset_id' => (int) ($assetInfo['id'] ?? 0),
-                                            'asset_name' => $assetInfo['name'] ?? '',
-                                            'service_frequency' => $freqCode,
-                                            'visits_per_interval' => max(1, (int) ($assetRow['visits_per_interval'] ?? 1)),
-                                            'service_start_date' => cex_normalize_date_ymd($assetRow['service_start_date'] ?? '') ?: $locStart,
-                                            'service_end_date' => cex_normalize_date_ymd($assetRow['service_end_date'] ?? '') ?: $locEnd,
-                                            'service_slots' => array(),
-                                        );
-                                    }
-                                }
-                                $locIdx++;
-                            }
-                        }
-                    }
-                    $hasAsset = false;
-                    if (count((array) $amcAsset) > 0) {
-                        foreach ($amcAsset as $assetList) {
-                            if (count((array) $assetList) > 0) {
-                                $hasAsset = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!$hasAsset) {
-                        $rowErrors[] = 'AMC contract requires at least one Assets sheet row';
-                    }
-                } else {
-                    $locParts = $this->cexParseCsvValues($contractRow['locations_csv'] ?? '');
-                    if (count((array) $locParts) > 0) {
-                        foreach ($locParts as $locPart) {
-                            $locKey = strtolower(trim((string) $locPart));
-                            if (ctype_digit($locPart) && isset($lookups['locations_by_id'][(int) $locPart])) {
-                                $locationIds[] = (int) $locPart;
-                            } elseif (isset($lookups['locations'][$locKey])) {
-                                $locationIds[] = (int) $lookups['locations'][$locKey];
-                            } elseif ($locPart != '') {
-                                $rowErrors[] = 'Unknown location in locations_csv: ' . $locPart;
-                            }
-                        }
-                    }
-                }
-
-                $resolvedMilestones = array();
-                if ($paymentPlan == 'milestones') {
-                    $msRows = $milestonesByRef[$importRef] ?? array();
-                    if (count((array) $msRows) == 0) {
-                        $rowErrors[] = 'payment_plan milestones requires Milestones sheet rows';
-                    } else {
-                        $msTotal = 0;
-                        if (count((array) $msRows) > 0) {
-                            foreach ($msRows as $msRow) {
-                                $msName = trim((string) ($msRow['milestone_name'] ?? ''));
-                                if ($msName == '') {
-                                    $rowErrors[] = 'Milestone name is required';
-                                    continue;
-                                }
-                                $msDate = cex_normalize_date_ymd($msRow['milestone_date'] ?? '');
-                                if (($msRow['milestone_date'] ?? '') != '' && $msDate == '') {
-                                    $rowErrors[] = 'Invalid milestone_date for ' . $msName;
-                                }
-                                $msPrice = (float) ($msRow['milestone_amount'] ?? 0);
-                                $msTotal += $msPrice;
-                                $resolvedMilestones[] = array(
-                                    'milestone_name' => $msName,
-                                    'milestone_date' => $msDate,
-                                    'milestone_price' => $msPrice,
-                                );
-                            }
-                        }
-                        if ($msTotal > 0 && abs($msTotal - $amount) > 0.05) {
-                            $warnings[] = 'import_ref ' . $importRef . ': milestone total (' . $msTotal . ') differs from contract_amount (' . $amount . ')';
-                        }
-                    }
-                } elseif ($startDate != '' && $endDate != '') {
-                    $resolvedMilestones = cex_generate_billing_milestones($startDate, $endDate, $billingCycle, $billingDay, $amount);
-                }
-
-                $customerConnectId = 0;
-                $ccNameRaw = trim((string) ($contractRow['customer_connect_name'] ?? ''));
-                $ccName = strtolower($ccNameRaw);
-                if ($ccNameRaw != '') {
-                    if (isset($lookups['customers'][$ccName])) {
-                        $customerConnectId = (int) $lookups['customers'][$ccName];
-                    } else {
-                        $rowErrors[] = 'Unknown customer_connect_name: ' . $ccNameRaw;
-                    }
-                }
-
-                $defaultEmployeeId = 0;
-                $empNameRaw = trim((string) ($contractRow['default_employee_name'] ?? ''));
-                $empName = strtolower($empNameRaw);
-                if ($empNameRaw != '') {
-                    if (ctype_digit($empNameRaw) && isset($lookups['employees_by_id'][(int) $empNameRaw])) {
-                        $defaultEmployeeId = (int) $empNameRaw;
-                    } elseif (isset($lookups['employees'][$empName])) {
-                        $defaultEmployeeId = (int) $lookups['employees'][$empName];
-                    } else {
-                        $rowErrors[] = 'Unknown default_employee_name: ' . $empNameRaw;
-                    }
-                }
-
-                $isOem = strtolower(trim((string) ($contractRow['is_oem'] ?? '')));
-                $isOemVal = ($isOem == 'y' || $isOem == 'yes' || $isOem == '1') ? 'Y' : 'N';
-
-                $preview = array(
-                    'row' => $contractRow,
-                    'import_ref' => $importRef,
-                    'ok' => count((array) $rowErrors) == 0,
-                    'errors' => $rowErrors,
-                    'resolved' => array(
-                        'contract_type' => $contractType,
-                        'start_date' => $startDate,
-                        'end_date' => $endDate,
-                        'contract_amount' => $amount,
-                        'party_type' => $partyType,
-                        'party_id' => $partyId,
-                        'department_id' => $deptId,
-                        'payment_plan' => $paymentPlan,
-                        'billing_cycle' => $billingCycle,
-                        'billing_day' => $billingDay,
-                        'type_of_contract_id' => $typeOfContractId,
-                        'payment_term_id' => $paymentTermId,
-                        'contract_payment_terms' => $paymentTermId > 0 ? $paymentTermId : '',
-                        'typeofaggrements' => $typeofaggrements,
-                        'description_id' => $descriptionId,
-                        'contract_services_id' => $serviceIds,
-                        'locations' => array_values(array_unique($locationIds)),
-                        'amc_loc' => $amcLoc,
-                        'amc_asset' => $amcAsset,
-                        'milestones' => $resolvedMilestones,
-                        'customer_connect_id' => $customerConnectId,
-                        'amc_default_employee_id' => $defaultEmployeeId,
-                        'is_oem' => $isOemVal,
-                    ),
-                );
-
-                $contractPreviews[] = $preview;
-                if ($importRef != '') {
-                    $contractsByRef[$importRef] = $preview;
-                    if ($preview['ok']) {
-                        $validImportRefs[] = $importRef;
-                    } else {
-                        if (count((array) $rowErrors) > 0) {
-                            foreach ($rowErrors as $errMsg) {
-                                $errors[] = 'import_ref ' . $importRef . ': ' . $errMsg;
-                            }
-                        }
+                    foreach ($rowErrors as $errMsg) {
+                        $errors[] = 'import_ref ' . $core['importRef'] . ': ' . $errMsg;
                     }
                 }
             }
@@ -8570,71 +8566,52 @@ public function validateContractsExcel($get, $post)
 
         return $payload;
     }
+    private function parseAssignedContractTypeIds($assignRow)
+    {
+        if (empty($assignRow)) {
+            return array();
+        }
+        $assignArr = is_array($assignRow) ? $assignRow : (array) $assignRow;
+        $typeIdsRaw = $assignArr['type_ids'] ?? '';
+        $typeIds = is_array($typeIdsRaw) ? $typeIdsRaw : json_decode((string) $typeIdsRaw, true);
+        $cleanIds = array();
+        foreach ((array) $typeIds as $tid) {
+            $tidInt = (int) $tid;
+            if ($tidInt > 0) {
+                $cleanIds[] = $tidInt;
+            }
+        }
+        return $cleanIds;
+    }
+
     public function getusercontracttypelist($get)
     {
         global $callConfig;
         $return = array('types' => array());
-
         $company_id = isset($get['company_id']) ? (int) $get['company_id'] : 0;
         $user_id = isset($get['user_id']) ? (int) $get['user_id'] : 0;
-        if ($company_id <= 0 || $user_id <= 0) {
-            return $return;
-        }
-
-        $assignSql = "SELECT type_ids FROM user_assigned_contract_types
-            WHERE company_id = " . $company_id . "
-            AND user_id = " . $user_id . "
-            AND is_active = 0
-            LIMIT 1";
-        $assignRow = $callConfig->getRow($assignSql);
-        if (empty($assignRow)) {
-            return $return;
-        }
-
-        $assignArr = is_array($assignRow) ? $assignRow : json_decode(json_encode($assignRow), true);
-        $typeIdsRaw = $assignArr['type_ids'] ?? '';
-        $typeIds = array();
-        if (is_array($typeIdsRaw)) {
-            $typeIds = $typeIdsRaw;
-        } else {
-            $decoded = json_decode((string) $typeIdsRaw, true);
-            if (is_array($decoded)) {
-                $typeIds = $decoded;
-            }
-        }
-
-        $cleanIds = array();
-        if (count((array) $typeIds) > 0) {
-            foreach ($typeIds as $tid) {
-                $tidInt = (int) $tid;
-                if ($tidInt > 0) {
-                    $cleanIds[] = $tidInt;
+        if ($company_id > 0 && $user_id > 0) {
+            $assignSql = "SELECT type_ids FROM user_assigned_contract_types
+                WHERE company_id = {$company_id} AND user_id = {$user_id} AND is_active = 0 LIMIT 1";
+            $assignRow = $callConfig->getRow($assignSql);
+            $cleanIds = $this->parseAssignedContractTypeIds($assignRow);
+            if (count($cleanIds) > 0) {
+                $idList = implode(',', $cleanIds);
+                $typesSql = "SELECT type_name, type_code, icon_class
+                    FROM contract_types
+                    WHERE company_id = {$company_id} AND is_active = 0 AND id IN ({$idList})
+                    ORDER BY sort_order ASC, id ASC";
+                $typeRows = $callConfig->getAllRows($typesSql);
+                foreach ((array) $typeRows as $row) {
+                    $rowArr = is_array($row) ? $row : (array) $row;
+                    $return['types'][] = array(
+                        'label' => (string) ($rowArr['type_name'] ?? ''),
+                        'code' => (string) ($rowArr['type_code'] ?? ''),
+                        'class' => (string) ($rowArr['icon_class'] ?? ''),
+                    );
                 }
             }
         }
-        if (count((array) $cleanIds) == 0) {
-            return $return;
-        }
-
-        $idList = implode(',', $cleanIds);
-        $typesSql = "SELECT type_name, type_code, icon_class
-            FROM contract_types
-            WHERE company_id = " . $company_id . "
-            AND is_active = 0
-            AND id IN (" . $idList . ")
-            ORDER BY sort_order ASC, id ASC";
-        $typeRows = $callConfig->getAllRows($typesSql);
-        if (count((array) $typeRows) > 0) {
-            foreach ($typeRows as $row) {
-                $rowArr = is_array($row) ? $row : json_decode(json_encode($row), true);
-                $return['types'][] = array(
-                    'label' => (string) ($rowArr['type_name'] ?? ''),
-                    'code' => (string) ($rowArr['type_code'] ?? ''),
-                    'class' => (string) ($rowArr['icon_class'] ?? ''),
-                );
-            }
-        }
-
         return $return;
     }
 }
