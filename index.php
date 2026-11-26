@@ -1,4 +1,6 @@
 <?php
+const DATE_TIME_DEBUG_FORMAT = 'm/d/Y h:i:s a';
+const CONTROLLER_PATH = 'includes/controller.php';
 $timeprint = '0';
 $maxtimeshow = 40;
 $start =0;
@@ -9,7 +11,7 @@ include_once 'dbconfig.php';
 include_once 'comm.php';
 
 if(($timeprint == '1' && $maxtimeshow >= '2') || $start ==1 ){
-	echo "after include dbconfig - ".date('m/d/Y h:i:s a')."</br>";
+    echo "after include dbconfig - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
 if(isset($_GET['view_session'])){
     echo "<pre>"; print_r($_SESSION); echo "</pre>";
@@ -46,7 +48,7 @@ $login_details = togetlogindetails();
 
 if(count((array)$_SESSION['modulewithrole']) ==0){
     if($timeprint == '1' && $maxtimeshow >= '3'){
-        echo "Call Main function- ".date('m/d/Y h:i:s a')."</br>";
+        echo "Call Main function- ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
     }
     $modulewithrole =$modulewithroledetails =  array();
     foreach($login_details['rolepermission']['role'] as $mwithrole){
@@ -70,7 +72,7 @@ if(count((array)$_SESSION['application_user_module_roles']) == 0){
     $_SESSION['application_user_module_roles'] = $login_details['application_user_module_roles'];
 }
 if($timeprint == '1' && $maxtimeshow >= '3'){
-	echo "Get user - ".date('m/d/Y h:i:s a')."</br>";
+    echo "Get user - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
 $_SESSION['user_type'] = $user['user_type'];
 $_SESSION['user_email'] = $user['user_email'];
@@ -86,11 +88,11 @@ if(count((array)$_SESSION['config']) == 0){
     $_SESSION['config'] = $login_details['config'];
 }
 if($timeprint == '1' && $maxtimeshow >= '4'){
-	echo "config - ".date('m/d/Y h:i:s a')."</br>";
+    echo "config - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
 if(in_array(ADMIN_ROLES,(array)$user_roles)){
-	$_SESSION['admin_type'] = 1;
-	$_SESSION['config']['role_permission']=1;
+    $_SESSION['admin_type'] = 1;
+    $_SESSION['config']['role_permission']=1;
 }
 //rohan added
 if(!isset($_SESSION['work_module_setup_id'])){
@@ -139,11 +141,11 @@ if(isset($_GET['noti_id'])){
     NotificationRead($_GET['noti_id']);
 }
 if($timeprint == '1' && $maxtimeshow >= '5'){
-echo "Notifition - ".date('m/d/Y h:i:s a')."</br>";
+echo "Notifition - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
 
 if($timeprint == '1' && $maxtimeshow >= '6'){
-	echo "inbox count - ".date('m/d/Y h:i:s a')."</br>";
+    echo "inbox count - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
 
 
@@ -159,10 +161,10 @@ if($user['user_type'] ==4){  //db config get candidate type
     }
     $check = array('com_logout','COM_INSERT_CANDIDATE','COM_LIST_CANDIDATE_DOCUMENTS','COM_LIST_CANDIDATE_QUERY','COM_LIST_CANDIDATE_OFFER','COM_LIST_JOIN_REQUIRED_DOCUMENTS','COM_INSERT_EMPLOYEE_CONTRACT','COM_VIEW_CANDIDATE_DETAILS');
     if(!in_array($_GET['option'], (array)$check) && $_GET['option'] !=""){
-        include_once "includes/controller.php";
+        include_once CONTROLLER_PATH;
         $disptemp = "views/custom_logout.php";
     }else{
-        include_once "includes/controller.php";
+        include_once CONTROLLER_PATH;
     }
 }elseif($user['user_type'] ==3){ //db config get Vendor type
     if(count((array)$_SESSION['application_pages']) == 0){
@@ -198,8 +200,7 @@ if($user['user_type'] ==4){  //db config get candidate type
         $_GET['option'] = 'COM_INSERT_VENDOR_REGISTERS';
         $_GET['VTYPE']  = 'VR';
         $_GET['Rid']= deocdeId("id:".$vendor['id']);
-        //COM_INSERT_VENDORS
-       //header("location:vendorsetup.php");
+
     }
 
 
@@ -208,24 +209,22 @@ if($user['user_type'] ==4){  //db config get candidate type
         $_GET['option'] = 'COM_INSERT_VENDORS';
     }
 
-    include_once "includes/controller.php";
+    include_once CONTROLLER_PATH;
 }else{
 
 
 
 
-    if(isset($_POST['user_image']) && $_POST['user_image']=='user_image'){
-        if($_FILES['profile_avatar']['name']!=""){
-            $image_nname = imageupload('all','profile_avatar','');
-            $data = toupdateemployee($image_nname);
-        }
+    if(isset($_POST['user_image']) && $_POST['user_image']=='user_image' && $_FILES['profile_avatar']['name']!=""){
+        $image_nname = imageupload('all','profile_avatar','');
+        $data = toupdateemployee($image_nname);
     }
 
  if(count((array)$_SESSION['employee']) == 0){  //To Get Employee Details For The session
-	   $_SESSION['employee'] =   $login_details['employees'];
+       $_SESSION['employee'] =   $login_details['employees'];
     }
 if($timeprint == '1' && $maxtimeshow >= '7'){
-	echo "GEt employe details - ".date('m/d/Y h:i:s a')."</br>";
+    echo "GEt employe details - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
     $_SESSION['emp_id'] = $_SESSION['employee']['id'];
     if($_SESSION['confirmed_basic_ino_val'] == 2){
@@ -241,13 +240,13 @@ if($timeprint == '1' && $maxtimeshow >= '7'){
         $_SESSION['application_pages'] = $login_details['application_pages'];
     }
 if($timeprint == '1' && $maxtimeshow >= '8'){
-	echo "Application Pages - ".date('m/d/Y h:i:s a')."</br>";
+    echo "Application Pages - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
 if($_SESSION['rolepermisionget'] != '1'){
-	$_SESSION['rolepermisionget'] = '1';
- 	$role_data = $login_details['rolepermission'];
+    $_SESSION['rolepermisionget'] = '1';
+    $role_data = $login_details['rolepermission'];
     $_SESSION['application_no_permission_pages'] = $role_data['application_no_permission_pages'];
-	$_SESSION['role'] = $role_data['role'];
+    $_SESSION['role'] = $role_data['role'];
     $view_navary = array();
     foreach($_SESSION['role'] as $viewnav){
         $view_nav = json_decode($viewnav['view_nav'],1);
@@ -261,13 +260,13 @@ if($_SESSION['rolepermisionget'] != '1'){
     $_SESSION['role_permission_pages'] = $role_data['permission'];
 }
 if($timeprint == '1' && $maxtimeshow >= '9'){
-echo "page Permission - ".date('m/d/Y h:i:s a')."</br>";
+echo "page Permission - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
 if(count((array)$_SESSION['application_menu']) == 0 && !isset($_SESSION['application_menu'])){
 
-		$_SESSION['menu_role_id'] = $login_details['menurole'];
-		$_SESSION['module_setp'] = $login_details['module_setup'];
-		$_SESSION['module_list'] = $login_details['module_id'];
+        $_SESSION['menu_role_id'] = $login_details['menurole'];
+        $_SESSION['module_setp'] = $login_details['module_setup'];
+        $_SESSION['module_list'] = $login_details['module_id'];
         $_SESSION['application_menu'] = $login_details['application_menu'];
         $_SESSION['application_menu_LN'] = toGETNavDetails('LN');
         $_SESSION['application_menu_TN'] = toGETNavDetails('TN');
@@ -278,22 +277,22 @@ if(count((array)$_SESSION['application_menu']) == 0 && !isset($_SESSION['applica
  }
 
 
-	if($timeprint == '1' && $maxtimeshow >= '10'){
-		echo "application menu - ".date('m/d/Y h:i:s a')."</br>";
-	}
+    if($timeprint == '1' && $maxtimeshow >= '10'){
+        echo "application menu - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+    }
     $saidnav = $_SESSION['application_menu_LN'];
     $topnav =  $_SESSION['application_menu_TN'];
     $toplistnav =   $_SESSION['application_menu_TNL'];
     $topnavcenter =  $_SESSION['application_menu_TNC'];
 
 
-	if($timeprint == '1' && $maxtimeshow >= '11'){
-		echo "Status - ".date('m/d/Y h:i:s a')."</br>";
-	}
+    if($timeprint == '1' && $maxtimeshow >= '11'){
+        echo "Status - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+    }
 
-	if($timeprint == '1' && $maxtimeshow >= '12'){
-		echo "security - ".date('m/d/Y h:i:s a')."</br>";
-	}
+    if($timeprint == '1' && $maxtimeshow >= '12'){
+        echo "security - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+    }
     $_SESSION['check_value'] = "";
     $_SESSION['check_value'] = $_SESSION['check'];
     $_SESSION['check'] ='';
@@ -302,9 +301,9 @@ if(count((array)$_SESSION['application_menu']) == 0 && !isset($_SESSION['applica
     if(count((array)$_SESSION['error_message']) == 0){
         $_SESSION['error_message']  = $login_details['error_message'];
     }
-	if($timeprint == '1' && $maxtimeshow >= '13'){
-		echo "Errer - ".date('m/d/Y h:i:s a')."</br>";
-	}
+    if($timeprint == '1' && $maxtimeshow >= '13'){
+        echo "Errer - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+    }
     $error = $_SESSION['error_message'][$_SESSION['check_value']];
     if(count((array)$_SESSION['company']) == 0){
         $_SESSION['company'] = $login_details['companies'];
@@ -312,19 +311,19 @@ if(count((array)$_SESSION['application_menu']) == 0 && !isset($_SESSION['applica
     if(count((array)$_SESSION['user_company']) == 0){
         $_SESSION['user_company'] = $login_details['user_company'];
     }
-	if($timeprint == '1' && $maxtimeshow >= '14'){
-		echo "Comoany details - ".date('m/d/Y h:i:s a')."</br>";
-	}
+    if($timeprint == '1' && $maxtimeshow >= '14'){
+        echo "Comoany details - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+    }
 
     if($_SESSION['emp_id']!=""){
         $clock_data =toGetclockdata();
     }
-	if($timeprint == '1' && $maxtimeshow >= '15'){
-		echo "Clock in out details - ".date('m/d/Y h:i:s a')."</br>";
-	}
-   include_once "includes/controller.php";
+    if($timeprint == '1' && $maxtimeshow >= '15'){
+        echo "Clock in out details - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+    }
+   include_once CONTROLLER_PATH;
    if($timeprint == '1' && $maxtimeshow >= '16'){
-	   echo "control page include - ".date('m/d/Y h:i:s a')."</br>";
+       echo "control page include - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
    }
 }
 
@@ -334,14 +333,14 @@ $_SESSION['apply_js'] = array();
 
 $wizardary = array('COM_INSERT_ONBOARDING_EMPLOYEES','COM_INSERT_EMPLOYEES','COM_INSERT_CANDIDATE','COM_VIEW_AUDITTRAILS','COM_INSERT_VENDOR_REGISTERS','COM_INSERT_NEW_EMPLOYEE_FULL_DETAILS');
 if(in_array($_GET['option'],(array)$wizardary) || in_array($_GET['PAGENAME'],(array)$wizardary) || $_SESSION['work_module_setup_id'] =='28'){
-	$_SESSION['apply_css']['wizardcss'] = 1;
+    $_SESSION['apply_css']['wizardcss'] = 1;
 }
 
 $calendorarray = array('676','563','566','759','560');
 $calendorpagearray = array('COM_INSERT_LEAVE_REQUEST','COM_INSERT_APPROVAL_LEAVE');
 if(in_array($_GET['NI'],(array)$calendorarray) || in_array($_GET['option'],(array)$calendorpagearray)){
-	$_SESSION['apply_js']['calender']='1';
-	$_SESSION['apply_css']['calendercss'] = '1';
+    $_SESSION['apply_js']['calender']='1';
+    $_SESSION['apply_css']['calendercss'] = '1';
 }
 
 $cropcss = array('COM_INSERT_BUILDING_FLOORS','COM_VIEW_OFFICE_MANAGEMENT');
@@ -356,10 +355,10 @@ $_SESSION['apply_css']['calendercss'] = '1';
 /*rohan added*/
 
 
-	if($_GET['option'] == "" || $_GET['NI']=='555' ||  $pass_module['0']['page'] == 'hr_admin_dashboard' || $pass_module['0']['page'] == 'hr_employee_dashboard' || $_GET['option'] == "COM_INSERT_CANDIDATE" || $_GET['option'] == "COM_VIEW_ESOP_ADMIN_DASHBOARD"){
-		$_SESSION['apply_css']['widgetcss'] = '1';
-		$_SESSION['apply_css']['radialcss'] = '1';
-	}
+    if($_GET['option'] == "" || $_GET['NI']=='555' ||  $pass_module['0']['page'] == 'hr_admin_dashboard' || $pass_module['0']['page'] == 'hr_employee_dashboard' || $_GET['option'] == "COM_INSERT_CANDIDATE" || $_GET['option'] == "COM_VIEW_ESOP_ADMIN_DASHBOARD"){
+        $_SESSION['apply_css']['widgetcss'] = '1';
+        $_SESSION['apply_css']['radialcss'] = '1';
+    }
     if(!isset($_SESSION['admin_dash_list']) && count((array)$_SESSION['admin_dash_list'])<1){
      $_SESSION['admin_dash_list'] = dashviewlisthr();
     }
@@ -384,7 +383,7 @@ $html_dir = (isset($_SESSION['selected_application_languages']) && $_SESSION['se
 <title>InfiSuite | Home</title>
 <?php  include_once "partials/_head.php";
 if($timeprint == '1' && $maxtimeshow >= '17'){
-	echo "CSS Ending - ".date('m/d/Y h:i:s a')."</br>";
+    echo "CSS Ending - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
 ?>
 </head>
@@ -397,24 +396,24 @@ if($timeprint == '1' && $maxtimeshow >= '17'){
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
-	 <?php
-		if($timeprint == '1' && $maxtimeshow >= '18'){	echo "before Header - ".date('m/d/Y h:i:s a')."</br>";
-		}
-		include_once "partials/_header.php";
+     <?php
+        if($timeprint == '1' && $maxtimeshow >= '18'){  echo "before Header - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+        }
+        include_once "partials/_header.php";
 
-		if($timeprint == '1' && $maxtimeshow >= '18'){	echo "After Header - ".date('m/d/Y h:i:s a')."</br>";
-		}
-	?>
-	<script>
+        if($timeprint == '1' && $maxtimeshow >= '18'){  echo "After Header - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+        }
+    ?>
+    <script>
              var HOST_URL = "https://demo.hrstaq.com/";
-          	  var DateFormate = <?php echo "'".$date_format."'" ?>;
-         	  // console.log("DateFormate"); console.log(DateFormate);
-           	//alert(HOST_URL);
-        	</script>
-	<div class="pcoded-main-container">
+              var DateFormate = <?php echo "'".$date_format."'" ?>;
+              // console.log("DateFormate"); console.log(DateFormate);
+            //alert(HOST_URL);
+            </script>
+    <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-			<?php		$count_nav = count((array)$topnav);
-            			 if($count_nav >0){
+            <?php       $count_nav = count((array)$topnav);
+                         if($count_nav >0){
                                     if($_SESSION['nav_type'] == "LEFT" || $count_nav>8){
                                         include_once "partials/_side_nav.php";
 
@@ -422,11 +421,11 @@ if($timeprint == '1' && $maxtimeshow >= '17'){
                                        include_once "partials/_side_top_nav.php";
 
                                     }
-            			}
+                        }
 
-            			if($timeprint == '1' && $maxtimeshow >= '19'){
-            					echo "After Side nav - ".date('m/d/Y h:i:s a')."</br>";
-            				}
+                        if($timeprint == '1' && $maxtimeshow >= '19'){
+                                echo "After Side nav - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+                            }
                     ?>
                     <div class="pcoded-content ">
 
@@ -448,13 +447,12 @@ if($_SESSION['timesheetalertshow'] != '0' && in_array('11',(array)$_SESSION['mod
                         <!-- [ breadcrumb ] end -->
 
 
-						 <div class="page-header card" style="margin: 15px !important;">
+                         <div class="page-header card" style="margin: 15px !important;">
 
 
      <?php
 if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
      $disptemp = 'views/custom_insert_application_users.php';
-}else{
 }
                         ?>
                         <?php
@@ -462,11 +460,11 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
                         include_once $disptemp;
                          ?>
                         <?php
-						if($timeprint == '1' && $maxtimeshow >= '20'){
-							echo "Page End - ".date('m/d/Y h:i:s a')."</br>";
-						}
-						?>
-						</div>
+                        if($timeprint == '1' && $maxtimeshow >= '20'){
+                            echo "Page End - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
+                        }
+                        ?>
+                        </div>
                     </div>
                     <!-- [ style Customizer ] start -->
                     <div id="styleSelector">
@@ -475,8 +473,8 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
                 </div>
             </div>
         </div>
-	<?php include_once "partials/_footer.php";
-	?>
+    <?php include_once "partials/_footer.php";
+    ?>
     </div>
     <?php
         if(!isset($_SESSION['expiryalert']) && EXPIRY_DOCUMENT_DISPLAY=='Y'){
@@ -485,50 +483,50 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
         }
     ?>
     <!-- Warning Section Ends -->
-<div id="kt_modal_dynamic_popup" class="modal fade" role="dialog" aria-hidden="true">
+<dialog id="kt_modal_dynamic_popup" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" <?php if($_GET['option']=="COM_LIST_JOB_POSTING_CANDIDATE" || $_GET['option']=="COM_INSERT_JOB_POSTING_CANDIDATES" ){ ?> style="max-width: 1200px !important;" <?php } ?> >
         <div class="modal-content"  id="dynamic_popup1" style="border:none;">
 
         </div>
     </div>
-</div>
- <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+</dialog>
+ <dialog id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-lg " >
         <div class="modal-content"  id="popup1" style="border:none;">
 
         </div>
     </div>
-</div>
-<div id="kt_modal_KTDatatable_remotem" class="modal fade" role="dialog" aria-hidden="true">
+</dialog>
+<dialog id="kt_modal_KTDatatable_remotem" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-lg " >
         <div class="modal-content"  id="popupm" style="border:none;">
 
         </div>
     </div>
-</div>
-<div id="kt_modal_dynamic_popup2" class="modal fade" role="dialog" aria-hidden="true">
+</dialog>
+<dialog id="kt_modal_dynamic_popup2" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="max-width: 1200px !important;">
         <div class="modal-content"  id="dynamic_popup11" style="border:none;">
 
         </div>
     </div>
-</div>
-<div id="kt_modal_dynamic_popupxxl" class="modal fade" role="dialog" aria-hidden="true">
+</dialog>
+<dialog id="kt_modal_dynamic_popupxxl" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl"  style="max-width: 98% !important;" >
         <div class="modal-content"  id="dynamic_popupxxl" style="border-radius: 20px;" style="border:none;">
 
         </div>
     </div>
-</div>
+</dialog>
 
-<div id="kt_modal_KTDatatable_remotesq" class="modal fade" role="dialog" aria-hidden="true">
+<dialog id="kt_modal_KTDatatable_remotesq" class="modal fade" aria-hidden="true">
 
     <div class="modal-dialog modal-lg " >
         <div class="modal-content"  id="popupsq" style="border:none;">
 
         </div>
     </div>
-</div>
+</dialog>
 
 <input type="hidden" id="work_module_setup_id" value="<?php echo $_SESSION['work_module_setup_id']; ?>">
 <input type="hidden" id="error_message_json" value='<?php echo json_encode($_SESSION['error_message'], JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS); ?>'>
@@ -580,7 +578,7 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 
     <!-- Chartlist charts -->
     <script src="assets/bower_components/chartist/js/chartist.js"></script>
-	 <!-- Chart js Rohan Added Leave -->
+     <!-- Chart js Rohan Added Leave -->
     <script type="text/javascript" src="assets/bower_components/chart.js/js/Chart.js"></script>
 
     <?php } ?>
@@ -641,91 +639,91 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
     <script src="assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js"></script>
     <?php } ?>
      <!--------- Start wizard js -------------------->
-	<?php if($_SESSION['apply_js']['wizardjs'] == 1){ ?>
-	<!--Forms - Wizard js-->
-	<script src="assets/bower_components/jquery.cookie/js/jquery.cookie.js"></script>
-	<script src="assets/bower_components/jquery.steps/js/jquery.steps.js"></script>
-	<script src="assets/bower_components/jquery-validation/js/jquery.validate.js"></script>
-	<script src="assets/pages/forms-wizard-validation/form-wizard.js"></script>
-	<?php } ?>
+    <?php if($_SESSION['apply_js']['wizardjs'] == 1){ ?>
+    <!--Forms - Wizard js-->
+    <script src="assets/bower_components/jquery.cookie/js/jquery.cookie.js"></script>
+    <script src="assets/bower_components/jquery.steps/js/jquery.steps.js"></script>
+    <script src="assets/bower_components/jquery-validation/js/jquery.validate.js"></script>
+    <script src="assets/pages/forms-wizard-validation/form-wizard.js"></script>
+    <?php } ?>
     <!--------- End wizard js -------------------->
-	<!-- Select 2 js -->
-	<script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>
-	<?php if($_SESSION['apply_js']['multiselest'] == 1){ ?>
-	<!-- Multiselect js -->
-	<script type="text/javascript" src="assets/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
-	<script type="text/javascript" src="assets/bower_components/multiselect/js/jquery.multi-select.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.quicksearch.js"></script>
-	<!-- Custom js -->
-	<script type="text/javascript" src="assets/pages/advance-elements/select2-custom.js"></script>
-	<script type="text/javascript" src="assets/pages/advance-elements/moment-with-locales.min.js"></script>
-	<?php } ?>
-	<!-- Date picker js -->
+    <!-- Select 2 js -->
+    <script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>
+    <?php if($_SESSION['apply_js']['multiselest'] == 1){ ?>
+    <!-- Multiselect js -->
+    <script type="text/javascript" src="assets/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="assets/bower_components/multiselect/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.quicksearch.js"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="assets/pages/advance-elements/select2-custom.js"></script>
+    <script type="text/javascript" src="assets/pages/advance-elements/moment-with-locales.min.js"></script>
+    <?php } ?>
+    <!-- Date picker js -->
     <script type="text/javascript" src="assets/bower_components/moment/js/moment.min.js"></script>
-	<script type="text/javascript" src="assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript" src="assets/js/custom_datepicker.js"></script>
-	<?php if($_SESSION['apply_js']['colorpicker'] == 1){ ?>	  <!-- COlor Picker important -->
-	<!-- Date-range picker js -->
-	<script type="text/javascript" src="assets/bower_components/bootstrap-daterangepicker/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="assets/js/custom_datepicker.js"></script>
+    <?php if($_SESSION['apply_js']['colorpicker'] == 1){ ?>   <!-- COlor Picker important -->
+    <!-- Date-range picker js -->
+    <script type="text/javascript" src="assets/bower_components/bootstrap-daterangepicker/js/daterangepicker.js"></script>
 <?php } ?>
-     	<!-- Date-dropper js -->
-	<script type="text/javascript" src="assets/bower_components/datedropper/js/datedropper.min.js"></script>
+        <!-- Date-dropper js -->
+    <script type="text/javascript" src="assets/bower_components/datedropper/js/datedropper.min.js"></script>
 
-	<?php if($_SESSION['apply_js']['colorpicker'] == '1'){ ?>	 <!--- Color Picker --->
-		<!-- Color picker js -->
-		<script type="text/javascript" src="assets/bower_components/spectrum/js/spectrum.js"></script>
-		<script type="text/javascript" src="assets/bower_components/jscolor/js/jscolor.js"></script>
-		<!-- Mini-color js -->
-		<script type="text/javascript" src="assets/bower_components/jquery-minicolors/js/jquery.minicolors.min.js"></script>
-		<script type="text/javascript" src="assets/pages/advance-elements/custom-picker.js"></script>
-	<?php } ?>
-	<?php if($_SESSION['apply_js']['textediter'] == 1){ ?>	  <!--- Text Editors --->
-		<!-- tinymce js -->
-		<script src="assets/pages/wysiwyg-editor/js/tinymce.min.js"></script>
-		<!-- Editor js -->
-		<script src="assets/pages/wysiwyg-editor/wysiwyg-editor.js"></script>
-		<script src="assets/pages/ckeditor/ckeditor.js"></script>
-		<script type="text/javascript" src="assets/pages/ckeditor/ckeditor-custom.js"></script>
-	<?php } ?>
+    <?php if($_SESSION['apply_js']['colorpicker'] == '1'){ ?>    <!--- Color Picker --->
+        <!-- Color picker js -->
+        <script type="text/javascript" src="assets/bower_components/spectrum/js/spectrum.js"></script>
+        <script type="text/javascript" src="assets/bower_components/jscolor/js/jscolor.js"></script>
+        <!-- Mini-color js -->
+        <script type="text/javascript" src="assets/bower_components/jquery-minicolors/js/jquery.minicolors.min.js"></script>
+        <script type="text/javascript" src="assets/pages/advance-elements/custom-picker.js"></script>
+    <?php } ?>
+    <?php if($_SESSION['apply_js']['textediter'] == 1){ ?>    <!--- Text Editors --->
+        <!-- tinymce js -->
+        <script src="assets/pages/wysiwyg-editor/js/tinymce.min.js"></script>
+        <!-- Editor js -->
+        <script src="assets/pages/wysiwyg-editor/wysiwyg-editor.js"></script>
+        <script src="assets/pages/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="assets/pages/ckeditor/ckeditor-custom.js"></script>
+    <?php } ?>
 
-	<?php if($_SESSION['apply_js']['inputmask'] == 1){ ?>   <!--- inputmask --->
-	<!-- Masking js -->
-	<script src="assets/pages/form-masking/inputmask.js"></script>
-	<script src="assets/pages/form-masking/jquery.inputmask.js"></script>
-	<script src="assets/pages/form-masking/autoNumeric.js"></script>
-	<script src="assets/pages/form-masking/form-mask.js"></script>
-	<?php } ?>
+    <?php if($_SESSION['apply_js']['inputmask'] == 1){ ?>   <!--- inputmask --->
+    <!-- Masking js -->
+    <script src="assets/pages/form-masking/inputmask.js"></script>
+    <script src="assets/pages/form-masking/jquery.inputmask.js"></script>
+    <script src="assets/pages/form-masking/autoNumeric.js"></script>
+    <script src="assets/pages/form-masking/form-mask.js"></script>
+    <?php } ?>
     <?php ?>
-	<!-- Switch component js -->
-	<script type="text/javascript" src="assets/bower_components/switchery/js/switchery.min.js"></script>
-	<script type="text/javascript" src="assets/bower_components/bootstrap-maxlength/js/bootstrap-maxlength.js"></script>
-	<script type="text/javascript" src="assets/pages/advance-elements/swithces.js"></script>
+    <!-- Switch component js -->
+    <script type="text/javascript" src="assets/bower_components/switchery/js/switchery.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/bootstrap-maxlength/js/bootstrap-maxlength.js"></script>
+    <script type="text/javascript" src="assets/pages/advance-elements/swithces.js"></script>
     <?php //} ?>
 <?php if($_SESSION['apply_js']['tagsinput'] == 1){ ?> <!--- To strick out the Task --->
-    <!----- Todo Js --->
+    <!--- Tagsinput JS --->
  <script type="text/javascript" src="assets/pages/advance-elements/tagsinput.js"></script>
     <?php } ?>
 
-	<?php if($_SESSION['apply_js']['todo'] == 1){ ?> <!--- To strick out the Task --->
-	<!----- Todo Js --->
-	<script type="text/javascript" src="assets/pages/todo/todo.js"></script>
-	<?php } ?>
+    <?php if($_SESSION['apply_js']['todo'] == 1){ ?> <!--- To strick out the Task --->
+    <!--- Task list JS --->
+    <script type="text/javascript" src="assets/pages/todo/todo.js"></script>
+    <?php } ?>
 
-	<?php if($_SESSION['apply_js']['dropzone'] == 1){ ?> <!--- File Uploading --->
-	<!-- File Uploading Accordion js -->
-	<script type="text/javascript" src="assets/js/dropzone.js"></script>
-	<script type="text/javascript" src="assets/js/custom_file_uploading.js"></script>
-	<?php } ?>
-	<?php if($_SESSION['apply_js']['tag']==1){ ?>  <!--console errer occure -->
-	<!-- Tags js --->
-	<script type="text/javascript" src="assets/bower_components/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
-	<script src="/assets/js/moment/typeahead.bundle.min.js"></script>
-	<?php } ?>
-	<?php if($_SESSION['apply_js']['ratting']==1){ ?>  <!--ratting js  -->
-	<!-- Star Rating theme js -->
-	<script type="text/javascript" src="assets/bower_components/jquery-bar-rating/js/jquery.barrating.js"></script>
-	<script type="text/javascript" src="assets/js/rating.js"></script>
-	<?php } ?>
+    <?php if($_SESSION['apply_js']['dropzone'] == 1){ ?> <!--- File Uploading --->
+    <!-- File Uploading Accordion js -->
+    <script type="text/javascript" src="assets/js/dropzone.js"></script>
+    <script type="text/javascript" src="assets/js/custom_file_uploading.js"></script>
+    <?php } ?>
+    <?php if($_SESSION['apply_js']['tag']==1){ ?>  <!--console errer occure -->
+    <!-- Tags js --->
+    <script type="text/javascript" src="assets/bower_components/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
+    <script src="/assets/js/moment/typeahead.bundle.min.js"></script>
+    <?php } ?>
+    <?php if($_SESSION['apply_js']['ratting']==1){ ?>  <!--ratting js  -->
+    <!-- Star Rating theme js -->
+    <script type="text/javascript" src="assets/bower_components/jquery-bar-rating/js/jquery.barrating.js"></script>
+    <script type="text/javascript" src="assets/js/rating.js"></script>
+    <?php } ?>
 
     <?php if($_SESSION['apply_js']['rangeslide']==1){ ?>  <!--range slide js  -->
     <!-- Star Rating theme js -->
@@ -734,88 +732,88 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
     <?php if($_SESSION['apply_js']['crop_image']==1){ ?>
         <script src="assets/bower_components/cropper/js/custom_cropper.js"></script>
     <?php } ?>
- 	<!------- Genral item work ------------------------------>
-	 <script> var table_name ='<?php echo $table_name; ?>';  </script>
-	  <script type="text/javascript" src="assets/js/custom.js"></script>
+    <!------- Genral item work ------------------------------>
+     <script> var table_name ='<?php echo $table_name; ?>';  </script>
+      <script type="text/javascript" src="assets/js/custom.js"></script>
 
 <!-- scrollbars modernizr js -->
  <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr-custom.js"></script>
 
-	<!-- modal window POPUP  modalEffects js nifty modal window effects -->
-	<script src="assets/js/classie.js"></script>
-	<script type="text/javascript" src="assets/js/modalEffects.js"></script>
-	<script type="text/javascript" src="assets/pages/accordion/accordion.js"></script>
+    <!-- modal window POPUP  modalEffects js nifty modal window effects -->
+    <script src="assets/js/classie.js"></script>
+    <script type="text/javascript" src="assets/js/modalEffects.js"></script>
+    <script type="text/javascript" src="assets/pages/accordion/accordion.js"></script>
 
-	<?php if($_SESSION['apply_js']['calender']==1){ ?>
-	<!-- calender js -->
-	<script type="text/javascript" src="assets/bower_components/moment/js/moment.min.js"></script>
-	<script type="text/javascript" src="assets/bower_components/fullcalendar/js/fullcalendar.min.js"></script>
-	<script type="text/javascript" src="assets/pages/full-calender/calendar.js"></script>
-	<?php } ?>
-	<?php
-		 if($_SESSION['apply_js']['role']==1){  ?>
-		<script src="assets/js/custom_insert_application_role.js"></script>
-	<?php  } ?>
-	<?php
-		if($_SESSION['apply_js']['jobposting']==1){  ?>
- 		<script src="assets/js/custom_job_post.js"></script>
-	<?php } ?>
-	<?php ?>
+    <?php if($_SESSION['apply_js']['calender']==1){ ?>
+    <!-- calender js -->
+    <script type="text/javascript" src="assets/bower_components/moment/js/moment.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/fullcalendar/js/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="assets/pages/full-calender/calendar.js"></script>
+    <?php } ?>
+    <?php
+         if($_SESSION['apply_js']['role']==1){  ?>
+        <script src="assets/js/custom_insert_application_role.js"></script>
+    <?php  } ?>
+    <?php
+        if($_SESSION['apply_js']['jobposting']==1){  ?>
+        <script src="assets/js/custom_job_post.js"></script>
+    <?php } ?>
+    <?php ?>
 
-	<script type="text/javascript" src="assets/js/bootstrap-growl.min.js"></script>
-	<script type="text/javascript" src="assets/pages/notification/notification.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-growl.min.js"></script>
+    <script type="text/javascript" src="assets/pages/notification/notification.js"></script>
 
-	<?php if($_SESSION['apply_js']['tour']==1){ ?>
-		<script type="text/javascript" src="assets/bower_components/intro.js/js/intro.js"></script>
-	<?php } ?>
-	<?php
-		if($_SESSION['apply_js']['custom_insert_display_attributes']==1){ ?>
-	<script src="assets/js/custom_insert_display_attributes.js"></script>
-	<?php } ?>
-	<?php
-		if($_SESSION['apply_js']['custom_insert_letters']==1){ ?>
-	<script src="assets/js/custom_insert_latter.js"></script>
-	<?php } ?>
-	<?php
-		if($_SESSION['apply_js']['custom_insert_my_reports']==1){ ?>
-	<script src="assets/js/custom_insert_my_reports.js"></script>
-	<?php } ?>
+    <?php if($_SESSION['apply_js']['tour']==1){ ?>
+        <script type="text/javascript" src="assets/bower_components/intro.js/js/intro.js"></script>
+    <?php } ?>
+    <?php
+        if($_SESSION['apply_js']['custom_insert_display_attributes']==1){ ?>
+    <script src="assets/js/custom_insert_display_attributes.js"></script>
+    <?php } ?>
+    <?php
+        if($_SESSION['apply_js']['custom_insert_letters']==1){ ?>
+    <script src="assets/js/custom_insert_latter.js"></script>
+    <?php } ?>
+    <?php
+        if($_SESSION['apply_js']['custom_insert_my_reports']==1){ ?>
+    <script src="assets/js/custom_insert_my_reports.js"></script>
+    <?php } ?>
   <!---------------- Main Chart --------------------------->
-	<?php if($_SESSION['apply_js']['knobchart']==1){ ?>
-		<!-- Knob Chart js -->
-   		<script type="text/javascript" src="assets/pages/chart/knob/knob-custom-chart.js"></script>
-	<?php } ?>
-	<?php
-		if($_SESSION['apply_js']['vendorstaq_admin_dashboarad_new']==1){ ?>
+    <?php if($_SESSION['apply_js']['knobchart']==1){ ?>
+        <!-- Knob Chart js -->
+        <script type="text/javascript" src="assets/pages/chart/knob/knob-custom-chart.js"></script>
+    <?php } ?>
+    <?php
+        if($_SESSION['apply_js']['vendorstaq_admin_dashboarad_new']==1){ ?>
             <script src="assets/pages/widget/amchart/amcharts.js"></script>
             <script src="assets/pages/widget/amchart/serial.js"></script>
             <script src="assets/bower_components/chartist/js/chartist.js"></script>
             <script type="text/javascript" src="assets/pages/widget/vendorstaq_admin_dashboarad.js"></script>
-	<?php } ?>
-	<?php
-		if($_SESSION['apply_js']['employee_leaves']==1){ ?>
-	    <script type="text/javascript" src="assets/pages/widget/leaves_widget.js"></script>
-	<?php } ?>
-	<?php
-		if($_SESSION['apply_js']['bulk_project_timesheet']==1){ ?>
+    <?php } ?>
+    <?php
+        if($_SESSION['apply_js']['employee_leaves']==1){ ?>
+        <script type="text/javascript" src="assets/pages/widget/leaves_widget.js"></script>
+    <?php } ?>
+    <?php
+        if($_SESSION['apply_js']['bulk_project_timesheet']==1){ ?>
 
-	    <script type="text/javascript" src="assets/pages/widget/demo_dashboard4.js"></script>
-	<?php } ?>
-	<?php
-		if($_SESSION['apply_js']['hr_admin_dashboard']==1){ ?>
+        <script type="text/javascript" src="assets/pages/widget/demo_dashboard4.js"></script>
+    <?php } ?>
+    <?php
+        if($_SESSION['apply_js']['hr_admin_dashboard']==1){ ?>
             <script src="assets/pages/widget/amchart/amcharts.js"></script>
             <script src="assets/pages/widget/amchart/serial.js"></script>
             <script src="assets/bower_components/chartist/js/chartist.js"></script>
-    	   <script type="text/javascript" src="assets/pages/widget/hr_admin_dashboard.js"></script><!-- .js -->
-	<?php } ?>
-	<?php if($_SESSION['apply_js']['headcount']==1){ ?>
-   		 <script type="text/javascript" src="assets/bower_components/chart.js/js/Chart.js"></script>
-   		 <script type="text/javascript" src="assets/pages/chart/chartjs/chartjs-custom.js"></script>
-	<?php } ?>
-	<?php if($_SESSION['apply_js']['wavechart']==1){ ?>
-		<script type="text/javascript" src="assets/pages/widget/wave/jquery.wavify.js"></script>
-		<script type="text/javascript" src="assets/pages/widget/wave/TweenMax.min.js"></script>
-	<?php } ?>
+           <script type="text/javascript" src="assets/pages/widget/hr_admin_dashboard.js"></script><!-- .js -->
+    <?php } ?>
+    <?php if($_SESSION['apply_js']['headcount']==1){ ?>
+         <script type="text/javascript" src="assets/bower_components/chart.js/js/Chart.js"></script>
+         <script type="text/javascript" src="assets/pages/chart/chartjs/chartjs-custom.js"></script>
+    <?php } ?>
+    <?php if($_SESSION['apply_js']['wavechart']==1){ ?>
+        <script type="text/javascript" src="assets/pages/widget/wave/jquery.wavify.js"></script>
+        <script type="text/javascript" src="assets/pages/widget/wave/TweenMax.min.js"></script>
+    <?php } ?>
     <?php if($_SESSION['apply_js']['employee_satisfaction']==1){  ?>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="assets/pages/chart/google/js/com_standard_report_employee_satisfaction_charts.js"></script>
@@ -827,19 +825,19 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 <script type="text/javascript" src="assets/pages/chart/google/js/com_view_dash_board_vendor_employee_charts.js"></script>
 <!-- End google chart -->
 <?php } ?>
-	<?php
-		if($_SESSION['apply_js']['googlechart']==1){  ?>
-		<!-- google chart custom_list_candidate_offer-->
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript" src="assets/pages/chart/google/js/custom-google-chart.js"></script><!-- End google chart --->
-	<?php } ?>
-	<?php
-		if($_SESSION['apply_js']['payslipchart']==1){ 	?>
-		<!-- google chart custom_list_candidate_offer-->
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript" src="assets/pages/chart/google/js/com_insert_payslip_charts.js"></script>
-		<!-- End google chart -->
-	<?php } ?>
+    <?php
+        if($_SESSION['apply_js']['googlechart']==1){  ?>
+        <!-- google chart custom_list_candidate_offer-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="assets/pages/chart/google/js/custom-google-chart.js"></script><!-- End google chart --->
+    <?php } ?>
+    <?php
+        if($_SESSION['apply_js']['payslipchart']==1){   ?>
+        <!-- google chart custom_list_candidate_offer-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="assets/pages/chart/google/js/com_insert_payslip_charts.js"></script>
+        <!-- End google chart -->
+    <?php } ?>
     <?php if($_SESSION['apply_js']['project_dashboard']==1){   ?>
         <!-- google chart custom_list_candidate_offer-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -904,9 +902,9 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
         <script type="text/javascript" src="assets/pages/chart/google/js/custom_report_candidate_sourcs.js"></script>
         <!-- End google chart -->
     <?php } ?>
-	<?php if($_SESSION['apply_js']['demo_dashboard4']==1){ ?>
-		<script type="text/javascript" src="assets/pages/widget/demo_dashboard4.js"></script>
-	<?php } ?>
+    <?php if($_SESSION['apply_js']['demo_dashboard4']==1){ ?>
+        <script type="text/javascript" src="assets/pages/widget/demo_dashboard4.js"></script>
+    <?php } ?>
 
     <?php  if($_SESSION['apply_js']['standart_report_bill_vendor']==1){   ?>
         <!-- google chart custom_list_candidate_offer-->
@@ -1092,14 +1090,14 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 <?php if($_SESSION['apply_js']['custom_insert_visitor_logs']==1){ ?>
 <script src="assets/js/custom_insert_visitor_logs.js?v=<?= time() ?>"></script>
 <?php } ?>
-	<script>
-    	$(document).ready(function() {
-       		 $('[data-bs-toggle="tooltip"]').tooltip();
+    <script>
+        $(document).ready(function() {
+             $('[data-bs-toggle="tooltip"]').tooltip();
             /*  var currenttimelogdash = $("#currenttimelogdash").val();
         if(currenttimelogdash!=""){
             startTimerdash();
         }*/
-   	 });
+     });
 
       $(document).ready(function() {
         $('[data-bs-toggle="popover"]').popover({
@@ -1110,25 +1108,25 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
         });
      });
      $(document).ready(function() {
-	var alertcheck = <?php echo $alertcheck; ?>;
-	var error =<?php echo json_encode($error); ?>;
-	var title = ' Infistaq Glow';
-	if(error != '' && error != null && alertcheck != 0){
-	if(alertcheck!='3004'){
-		tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',error,'');
-	}else{
-	tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',error,'');
-	}
-	}
+    var alertcheck = <?php echo $alertcheck; ?>;
+    var error =<?php echo json_encode($error); ?>;
+    var title = ' Infistaq Glow';
+    if(error != '' && error != null && alertcheck != 0){
+    if(alertcheck!='3004'){
+        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',error,'');
+    }else{
+    tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',error,'');
+    }
+    }
      });
 
 </script>
 
 <?php
 if($timeprint == '1' && $maxtimeshow >= '21'){
-	echo "Javascript End - ".date('m/d/Y h:i:s a')."</br>";
+    echo "Javascript End - ".date(DATE_TIME_DEBUG_FORMAT)."</br>";
 }
-						?>
+                        ?>
 
 
 </body>

@@ -1,4 +1,5 @@
 <?php
+const CANDIDATE_LOGIN_DATETIME_FORMAT = 'd M Y H:i:s';
 $_SESSION['apply_js']['todo'] = 1;
 $_SESSION['apply_js']['multiselest'] = '1';
 
@@ -1453,21 +1454,21 @@ $due_date_period_list = $result['period_list'];
         <div class="col-lg-2"><i class="ti-mobile"></i></div>
         <div class="col-lg-10">
           <h5 class="f-w-600 f-14 mb-0">last login on mobile browser</h5>
-          <p><?php echo date("d M Y H:i:s"); ?></p>
+          <p><?php echo date(CANDIDATE_LOGIN_DATETIME_FORMAT); ?></p>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-2"><i class="ti-apple"></i></div>
         <div class="col-lg-10">
           <h5 class="f-w-600 f-14 mb-0">last login on mobile App</h5>
-          <p><?php echo date("d M Y H:i:s"); ?></p>
+          <p><?php echo date(CANDIDATE_LOGIN_DATETIME_FORMAT); ?></p>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-2"><i class="ti-desktop"></i></div>
         <div class="col-lg-10">
           <h5 class="f-w-600 f-14 mb-0">last login on mobile desktop</h5>
-          <p><?php echo date("d M Y H:i:s"); ?></p>
+          <p><?php echo date(CANDIDATE_LOGIN_DATETIME_FORMAT); ?></p>
         </div>
       </div>
     </div>

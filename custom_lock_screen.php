@@ -6,103 +6,101 @@ $_SESSION['userid']="";
 if($_COOKIE['user_email']=="" || !isset($_COOKIE['user_email'])){
      header("location:index.php");
 }
-if(isset($_POST['submit'])){
-    if($_POST['submit']=="Login") {
-     $data = urlencode(json_encode($_POST));
-        $url = API."?mode=login&data=".$data;
-        $response = file_get_contents($url, false, $context);
-        $row = json_decode($response,1);
-        if ($row['id'] !=''){
-            $_SESSION['userid'] = $row['id'];
-            $_SESSION['us_name']=$row['user_name'];
-            $_SESSION['company_id'] = $row['company_id'];
-            $_SESSION['email']=$row['user_email'];
-            $_SESSION['lastlogin']=$row['lastlogin'];
-            $_SESSION['role_id']=$row['role_id'];
-            $_SESSION['DB_NAME']=$row['db'];
-            $_SESSION['lastlogin']=$row['lastlogin'];
-            $_SESSION['reset_password']=$row['reset_password'];
-            $_SESSION['confirmed_basic_ino'] = 1;
-            $_SESSION['admin_access_employee'] ="N"; //rohan added
-            $_SESSION['work_module_setup_id'] = $_POST['work_module_setup_id'];
-            $_SESSION['working_role_short_code'] =  $_POST['working_role_short_code'];
-            if($_POST['option']==""){
-                header("location:index.php");
-            }else{
-                 header("location:index.php?option=".$_POST['option']);
-            }
-        }else {
-            $error = $row['error'];
-             header("location:custom_lock_screen.php?error=$error");
-        }
-        exit;
-    }
-}
-function getBrowser() {
-  $u_agent = $_SERVER['HTTP_USER_AGENT'];
-  $bname = 'Unknown';
-  $platform = 'Unknown';
-  $version= "";
-  //First get the platform?
-  if (preg_match('/linux/i', $u_agent)) {
-    $platform = 'linux';
-  }elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
-    $platform = 'mac';
-  }elseif (preg_match('/windows|win32/i', $u_agent)) {
-    $platform = 'windows';
-  }
-  // Next get the name of the useragent yes seperately and for good reason
-  if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)){
-    $bname = 'Internet Explorer';
-    $ub = "MSIE";
-  }elseif(preg_match('/Firefox/i',$u_agent)){
-    $bname = 'Mozilla Firefox';
-    $ub = "Firefox";
-  }elseif(preg_match('/OPR/i',$u_agent)){
-    $bname = 'Opera';
-    $ub = "Opera";
-  }elseif(preg_match('/Chrome/i',$u_agent) && !preg_match('/Edge/i',$u_agent)){
-    $bname = 'Google Chrome';
-    $ub = "Chrome";
-  }elseif(preg_match('/Safari/i',$u_agent) && !preg_match('/Edge/i',$u_agent)){
-    $bname = 'Apple Safari';
-    $ub = "Safari";
-  }elseif(preg_match('/Netscape/i',$u_agent)){
-    $bname = 'Netscape';
-    $ub = "Netscape";
-  }elseif(preg_match('/Edge/i',$u_agent)){
-    $bname = 'Edge';
-    $ub = "Edge";
-  }elseif(preg_match('/Trident/i',$u_agent)){
-    $bname = 'Internet Explorer';
-    $ub = "MSIE";
-  }
-  // finally get the correct version number
-  $known = array('Version', $ub, 'other');
-  $pattern = '#(?<browser>' . join('|', $known) .
-')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
-  if (!preg_match_all($pattern, $u_agent, $matches)) {
-    // we have no matching number just continue
-  }
-  // see how many we have
-  $i = count($matches['browser']);
-  if ($i != 1) {
-    //we will have two since we are not using 'other' argument yet
-    //see if version is before or after the name
-    if (strripos($u_agent,"Version") < strripos($u_agent,$ub)){
-        $version= $matches['version'][0];
-    }else {
-        $version= $matches['version'][1];
-    }
-  }else {
-    $version= $matches['version'][0];
-  }
-  // check if we have a number
-  if ($version==null || $version=="") {$version="?";
-  }
+const BROWSER_EDGE_PATTERN = '/Edge/i';
 
-  $data = array(  'userAgent' => $u_agent,'name'      => $bname, 'version'   => $version,'platform'  => $platform, 'pattern'    => $pattern);
-  return $data['name'].",".$data['version'];
+if (isset($_POST['submit']) && $_POST['submit'] == "Login") {
+    $data = urlencode(json_encode($_POST));
+    $url = API."?mode=login&data=".$data;
+    $response = file_get_contents($url, false, $context);
+    $row = json_decode($response,1);
+    if ($row['id'] !=''){
+        $_SESSION['userid'] = $row['id'];
+        $_SESSION['us_name']=$row['user_name'];
+        $_SESSION['company_id'] = $row['company_id'];
+        $_SESSION['email']=$row['user_email'];
+        $_SESSION['lastlogin']=$row['lastlogin'];
+        $_SESSION['role_id']=$row['role_id'];
+        $_SESSION['DB_NAME']=$row['db'];
+        $_SESSION['lastlogin']=$row['lastlogin'];
+        $_SESSION['reset_password']=$row['reset_password'];
+        $_SESSION['confirmed_basic_ino'] = 1;
+        $_SESSION['admin_access_employee'] ="N"; //rohan added
+        $_SESSION['work_module_setup_id'] = $_POST['work_module_setup_id'];
+        $_SESSION['working_role_short_code'] =  $_POST['working_role_short_code'];
+        if($_POST['option']==""){
+            header("location:index.php");
+        }else{
+             header("location:index.php?option=".$_POST['option']);
+        }
+    }else {
+        $error = $row['error'];
+         header("location:custom_lock_screen.php?error=$error");
+    }
+    exit;
+}
+function detectPlatform($u_agent) {
+    if (preg_match('/linux/i', $u_agent)) {
+        return 'linux';
+    }
+    if (preg_match('/macintosh|mac os x/i', $u_agent)) {
+        return 'mac';
+    }
+    if (preg_match('/windows|win32/i', $u_agent)) {
+        return 'windows';
+    }
+    return 'Unknown';
+}
+
+function detectBrowserNameAndUb($u_agent) {
+    if ((preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) || preg_match('/Trident/i', $u_agent)) {
+        return ['Internet Explorer', 'MSIE'];
+    }
+    if (preg_match('/Firefox/i', $u_agent)) {
+        return ['Mozilla Firefox', 'Firefox'];
+    }
+    if (preg_match('/OPR/i', $u_agent)) {
+        return ['Opera', 'Opera'];
+    }
+    if (preg_match('/Chrome/i', $u_agent) && !preg_match(BROWSER_EDGE_PATTERN, $u_agent)) {
+        return ['Google Chrome', 'Chrome'];
+    }
+    if (preg_match('/Safari/i', $u_agent) && !preg_match(BROWSER_EDGE_PATTERN, $u_agent)) {
+        return ['Apple Safari', 'Safari'];
+    }
+    if (preg_match('/Netscape/i', $u_agent)) {
+        return ['Netscape', 'Netscape'];
+    }
+    if (preg_match(BROWSER_EDGE_PATTERN, $u_agent)) {
+        return ['Edge', 'Edge'];
+    }
+    return ['Unknown', ''];
+}
+
+function detectBrowserVersion($u_agent, $ub) {
+    $known = array('Version', $ub, 'other');
+    $pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+    $version = "";
+    if (preg_match_all($pattern, $u_agent, $matches)) {
+        $i = count($matches['browser']);
+        if ($i != 1) {
+            $version = (strripos($u_agent, "Version") < strripos($u_agent, $ub))
+                ? $matches['version'][0]
+                : $matches['version'][1];
+        } else {
+            $version = $matches['version'][0];
+        }
+    }
+    if ($version == null || $version == "") {
+        $version = "?";
+    }
+    return $version;
+}
+
+function getBrowser() {
+    $u_agent = $_SERVER['HTTP_USER_AGENT'];
+    list($bname, $ub) = detectBrowserNameAndUb($u_agent);
+    $version = detectBrowserVersion($u_agent, $ub);
+    return $bname . "," . $version;
 }
 function getIPAddress(){
     return $_SERVER['REMOTE_ADDR'];
@@ -114,7 +112,7 @@ function getIPAddress(){
 <head>
       <title>Infistaq | Home</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Admindek Bootstrap admin template made using Bootstrap 5 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
     <meta name="keywords" content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">

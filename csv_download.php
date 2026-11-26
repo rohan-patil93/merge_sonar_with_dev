@@ -6,55 +6,55 @@ include_once 'comm.php';
 $table = $_GET['table'];
 $array = array();
 if($_GET['DISPLAY_ATTRIBUTE']!=""){
-	$pageurl = API."?mode=displayattributesview&fid=application_table_name&view=".$table;
-	$page_response = callAPI($pageurl);
-	$list = json_decode($page_response,1);
-	$lists = json_decode($list['list_attributes'],1);
-	foreach ($lists as  $key=>$value) {
-		if($value['insert_display_list']== 1 ){
-			$array[]  = $key;
-		}
-	}
+    $pageurl = API."?mode=displayattributesview&fid=application_table_name&view=".$table;
+    $page_response = callAPI($pageurl);
+    $list = json_decode($page_response,1);
+    $lists = json_decode($list['list_attributes'],1);
+    foreach ($lists as  $key=>$value) {
+        if($value['insert_display_list']== 1 ){
+            $array[]  = $key;
+        }
+    }
 
 }else{
-	$no_array = array('id','company_id','current_status','status_date','from_date','to_date','created_date','created_by','updated_by','updated_date');
+    $no_array = array('id','company_id','current_status','status_date','from_date','to_date','created_date','created_by','updated_by','updated_date');
 
-	if($table != "salary_template"){
-		if($table=='earnings' || $table=='deductions'){
-			$array[] = 'Employee Number';
-		}
-		$vdata1["where"] = array('is_active'=> '0');
-		$vdata = urlencode(json_encode($vdata1));
-		$vurl = API."?mode=listofTableFieldsonly&table=".$table;
-		$configesponse = callAPI($vurl);
-		$array = json_decode($configesponse,1);
-		$array = array_diff($array,$no_array);
-	}else{
-		$array[] = 'employee_code';
-		$vdata1["where"] = array('is_active'=> '0');
-		$vdata = urlencode(json_encode($vdata1));
-		$vurl = API."?mode=gettabledetailswithconditions&table=earnings&data=".$vdata;
-		$earningsdata = callAPI($vurl);
-		$earningsdata = json_decode($earningsdata,1);
-		foreach ($earningsdata as  $earnings) {
-				$array[]  = $earnings['name'];
-			//}
-		}
-		$array[] ="monthly_ctc";
-		$array[] = "annual_ctc";
-	}
+    if($table != "salary_template"){
+        if($table=='earnings' || $table=='deductions'){
+            $array[] = 'Employee Number';
+        }
+        $vdata1["where"] = array('is_active'=> '0');
+        $vdata = urlencode(json_encode($vdata1));
+        $vurl = API."?mode=listofTableFieldsonly&table=".$table;
+        $configesponse = callAPI($vurl);
+        $array = json_decode($configesponse,1);
+        $array = array_diff($array,$no_array);
+    }else{
+        $array[] = 'employee_code';
+        $vdata1["where"] = array('is_active'=> '0');
+        $vdata = urlencode(json_encode($vdata1));
+        $vurl = API."?mode=gettabledetailswithconditions&table=earnings&data=".$vdata;
+        $earningsdata = callAPI($vurl);
+        $earningsdata = json_decode($earningsdata,1);
+        foreach ($earningsdata as  $earnings) {
+                $array[]  = $earnings['name'];
+            //}
+        }
+        $array[] ="monthly_ctc";
+        $array[] = "annual_ctc";
+    }
 }
 if($table =='employee_other_earnings'){
-	$array = array();
-	$array[] = 'Employee Code';
-	$array[] = 'Component Name';
-	$array[] = 'Claim Amount';
+    $array = array();
+    $array[] = 'Employee Code';
+    $array[] = 'Component Name';
+    $array[] = 'Claim Amount';
 }
 $data = strtoupper(implode(',', $array));
-	//echo $data; exit;
-	//$data = "SLNo,Name,Age,Department,DOB,".$table;
-	//
-	//print_r(expression)
+    //echo $data; exit;
+    //$data = "SLNo,Name,Age,Department,DOB,".$table;
+    //
+    //print_r(expression)
 header('Content-Type: application/csv');
 header('Content-Disposition: attachment; filename="'.$table.'.csv"');
 echo $data; exit;

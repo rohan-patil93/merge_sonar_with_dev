@@ -20,14 +20,14 @@ $viewsal = date('M Y', strtotime($viewdate));
 $new_viewsal = "Salary ".$viewsal;
 
 foreach($empdatas as $empdata){
-	$new_viewsal_code = "Salary ".$viewsal." - ".$empdata['emp_code'];
-	$addarray = array('0'=>'NFT','1'=>$company_details['bank_account'],'2'=>$empdata['bank_link'],'3'=>$empdata['bank_account_no'],'4'=>$empdata['display_name'],'5'=>$empdata['salary_component_actual'],'6'=>$new_viewsal_code,'7'=>$new_viewsal);
-	$data[] = $addarray;
+    $new_viewsal_code = "Salary ".$viewsal." - ".$empdata['emp_code'];
+    $addarray = array('0'=>'NFT','1'=>$company_details['bank_account'],'2'=>$empdata['bank_link'],'3'=>$empdata['bank_account_no'],'4'=>$empdata['display_name'],'5'=>$empdata['salary_component_actual'],'6'=>$new_viewsal_code,'7'=>$new_viewsal);
+    $data[] = $addarray;
 }
 $filename = $new_viewsal." Employee Bank Detais.csv";
-array_to_csv_download($data,$filename);
+arrayToCsvDownload($data,$filename);
 
-function array_to_csv_download($array, $filename = "export.csv", $delimiter=",") {
+function arrayToCsvDownload($array, $filename = "export.csv", $delimiter=",") {
     header('Content-Type: application/csv');
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="'.$filename.'";');
@@ -39,4 +39,3 @@ function array_to_csv_download($array, $filename = "export.csv", $delimiter=",")
         fputcsv($f, $line, $delimiter);
     }
 }
-

@@ -11,7 +11,7 @@
                     <div class="text-left m-l-50 p-l-50 margin-0 mob-pd">
                         <img class="img-200 mt-3" src="<?php echo $image; ?>" alt="" >
                         <h3 class="text-white mt-3 f-24"><?php echo LOGIN_INFO['heding']; ?></h3>
-						<p class="f-14 text-white"><?php echo LOGIN_INFO['text']; ?></p>
+                        <p class="f-14 text-white"><?php echo LOGIN_INFO['text']; ?></p>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                                         <img class="img-200" src="assets/images/sign-in/HRstaq.png" alt="" >
                                     </div>
                                     <h2 class="f-26 f-w-600 mt-4">Sign In</h2>
-									  <?php
+                                      <?php
                             $error = $_GET['error'];
                             $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
                             $dis_error['6002'] = "Incorrect username or password.  Please try again.";
@@ -48,7 +48,7 @@
 
                         <?php }
                         }?>
-										<form class="md-float-material form-material" action="" method="post" novalidate>
+                                        <form class="md-float-material form-material" action="" method="post" novalidate>
 
                                     <div class="text-left mt-5">
 
@@ -62,19 +62,19 @@
                                         </div>
                                         <button type="button" class="float-right f-w-600 text-primary forgot-pwd-open border-0 bg-transparent p-0" style="cursor:pointer;" onclick="fergotpassworddisplay()">Forgot Password?</button>
                                         <div class="form-group">
-										<input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                                        <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                       <input type="hidden" name="submit" value="Login" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4 ">Sign In</button>
                                         </div>
                                         <p class="text-muted f-w-600">Not a Member yet? <button type="button" class="text-primary border-0 bg-transparent p-0 align-baseline" style="font:inherit;cursor:pointer;" onclick="registerform()">Sign up</button></p>
                                     </div>
-									</form>
+                                    </form>
                                 </div>
 
-								<div class="p-5 regsterform" style="display:none">
+                                <div class="p-5 regsterform" style="display:none">
                                     <h2 class="f-26 f-w-600 mt-2 text-center">Sign Up</h2>
-										<form class="md-float-material form-material" action="" method="post" novalidate>
+                                        <form class="md-float-material form-material" action="" method="post" novalidate>
 
                                     <div class="text-left mt-4">
                                         <div class="form-group">
@@ -90,19 +90,19 @@
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
                                              <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>
 
-										</div>
+                                        </div>
                                         <div class="form-group">
-										  <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                                          <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                       <input type="hidden" name="submit" value="signup" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-3">Sign Up</button>
                                         </div>
                                         <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <button type="button" class="text-primary border-0 bg-transparent p-0 align-baseline" style="font:inherit;cursor:pointer;" onclick="loginpagedisplay()">Sign In</button></p>
                                     </div>
-									</form>
+                                    </form>
                                 </div>
                                 <div class="p-5 mt-5 forgotpasswordon" style="display:none">
-									<form class="md-float-material form-material" action="" method="post" novalidate>
+                                    <form class="md-float-material form-material" action="" method="post" novalidate>
 
                                     <div class="">
                                         <h2 class="f-26 f-w-600 mt-2">Forgot Password</h2>
@@ -112,12 +112,12 @@
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="email" name="email" id="forgotEmail" placeholder="Email" aria-label="Email">
                                         </div>
                                         <div class="form-group text-center">
-											<input type="hidden" name="submit" value="forgot" />
-											<button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                            <input type="hidden" name="submit" value="forgot" />
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
                                             <button type="button" class="btn bg-gray waves-effect waves-light" onclick="loginpagedisplay()">Cancel</button>
                                         </div>
                                     </div>
-									</form>
+                                    </form>
                                 </div>
                             </div>
                         </div>

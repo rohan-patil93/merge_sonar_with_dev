@@ -1,4 +1,5 @@
 <?php
+const BROWSER_EDGE_PATTERN = '/Edge/i';
 include_once 'dbconfig.php';
 session_start();
 $session_id = session_id();
@@ -18,103 +19,75 @@ if (count($parts) > 2) {
     $subdomain = $parts[1];
   }
 }
-/*
-    $domainurl = API."?mode=domainverifye&domain_name=".$subdomain."&data_name=".MAINDB;
-    //echo  $domainurl;  exit;
-    $domainres = file_get_contents($domainurl, false, $context);
-    $domainresult = json_decode($domainres,1);
-    //print_r($domainresult); exit;
-    $zqr_connect = $domainresult['zqr_connect'];
-    $domainresult = $domainresult['domain_registrations'];
 
-    $_POST['zqr_connect'] = $zqr_connect;
-    $host = $_SERVER['HTTP_HOST'];
-    $parts = explode('.', $host);
-    // Check if domain has subdomain
-    if (count($parts) > 2) {
-      // Remove subdomain and get main domain
-      $mainDomain = $parts[count($parts)-2] . '.' . $parts[count($parts)-1];
-    } else {
-      // No subdomain, main domain is same as host
-      $mainDomain = $host;
-    }
-    if(!isset($domainresult['id']) || $domainresult['id'] ==""){
-        $httpshttp = isset($_SERVER['HTTPS']) ? 'https' : 'http';
-        header("location:".$httpshttp."://".$mainDomain."/signin");
-    }
-**/
-function getBrowser()
+function detectLoginPlatform($u_agent)
 {
-  $u_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
-  $bname = 'Unknown';
-  $platform = 'Unknown';
-  $version = "";
-  $ub = "Unknown";
-
-  //First get the platform?
   if (preg_match('/linux/i', $u_agent)) {
-    $platform = 'linux';
-  } elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
-    $platform = 'mac';
-  } elseif (preg_match('/windows|win32/i', $u_agent)) {
-    $platform = 'windows';
+    return 'linux';
   }
-
-  // Next get the name of the useragent yes seperately and for good reason
-  if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
-    $bname = 'Internet Explorer';
-    $ub = "MSIE";
-  } elseif (preg_match('/Firefox/i', $u_agent)) {
-    $bname = 'Mozilla Firefox';
-    $ub = "Firefox";
-  } elseif (preg_match('/OPR/i', $u_agent)) {
-    $bname = 'Opera';
-    $ub = "Opera";
-  } elseif (preg_match('/Chrome/i', $u_agent) && !preg_match('/Edge/i', $u_agent)) {
-    $bname = 'Google Chrome';
-    $ub = "Chrome";
-  } elseif (preg_match('/Safari/i', $u_agent) && !preg_match('/Edge/i', $u_agent)) {
-    $bname = 'Apple Safari';
-    $ub = "Safari";
-  } elseif (preg_match('/Netscape/i', $u_agent)) {
-    $bname = 'Netscape';
-    $ub = "Netscape";
-  } elseif (preg_match('/Edge/i', $u_agent)) {
-    $bname = 'Edge';
-    $ub = "Edge";
-  } elseif (preg_match('/Trident/i', $u_agent)) {
-    $bname = 'Internet Explorer';
-    $ub = "MSIE";
+  if (preg_match('/macintosh|mac os x/i', $u_agent)) {
+    return 'mac';
   }
+  if (preg_match('/windows|win32/i', $u_agent)) {
+    return 'windows';
+  }
+  return 'Unknown';
+}
 
-  // finally get the correct version number
+function detectLoginBrowserNameAndUb($u_agent)
+{
+  if ((preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) || preg_match('/Trident/i', $u_agent)) {
+    return ['Internet Explorer', 'MSIE'];
+  }
+  if (preg_match('/Firefox/i', $u_agent)) {
+    return ['Mozilla Firefox', 'Firefox'];
+  }
+  if (preg_match('/OPR/i', $u_agent)) {
+    return ['Opera', 'Opera'];
+  }
+  if (preg_match('/Chrome/i', $u_agent) && !preg_match(BROWSER_EDGE_PATTERN, $u_agent)) {
+    return ['Google Chrome', 'Chrome'];
+  }
+  if (preg_match('/Safari/i', $u_agent) && !preg_match(BROWSER_EDGE_PATTERN, $u_agent)) {
+    return ['Apple Safari', 'Safari'];
+  }
+  if (preg_match('/Netscape/i', $u_agent)) {
+    return ['Netscape', 'Netscape'];
+  }
+  if (preg_match(BROWSER_EDGE_PATTERN, $u_agent)) {
+    return ['Edge', 'Edge'];
+  }
+  return ['Unknown', 'Unknown'];
+}
+
+function detectLoginBrowserVersion($u_agent, $ub)
+{
   $known = array('Version', $ub, 'other');
-  $pattern = '#(?<browser>' . join('|', $known) .
-    ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
-  if (!preg_match_all($pattern, $u_agent, $matches)) {
-    // we have no matching number just continue
-  }
-  // see how many we have
-  $i = count($matches['browser']);
-  if ($i != 1) {
-    //we will have two since we are not using 'other' argument yet
-    //see if version is before or after the name
-    if (strripos($u_agent, "Version") < strripos($u_agent, $ub)) {
-      $version = $matches['version'][0];
+  $pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+  $version = "";
+  if (preg_match_all($pattern, $u_agent, $matches)) {
+    $i = count($matches['browser']);
+    if ($i != 1) {
+      $version = (strripos($u_agent, "Version") < strripos($u_agent, $ub))
+        ? $matches['version'][0]
+        : $matches['version'][1];
     } else {
-      $version = $matches['version'][1];
+      $version = $matches['version'][0];
     }
-  } else {
-    $version = $matches['version'][0];
   }
-
-  // check if we have a number
   if ($version == null || $version == "") {
     $version = "?";
   }
+  return $version;
+}
 
-  $data = array('userAgent' => $u_agent, 'name' => $bname, 'version' => $version, 'platform' => $platform, 'pattern' => $pattern);
-  return $data['name'] . "," . $data['version'];
+function getBrowser()
+{
+  $u_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+  $platform = detectLoginPlatform($u_agent);
+  list($bname, $ub) = detectLoginBrowserNameAndUb($u_agent);
+  $version = detectLoginBrowserVersion($u_agent, $ub);
+  return $bname . "," . $version;
 }
 if (!empty($_SESSION['userid'])) {
   header("location:index.php");
@@ -148,7 +121,7 @@ if (isset($_POST['submit'])) {
     $response = file_get_contents($url, false, $context);
 
     if (is_string($response)) {
-      $response = preg_replace('/^[\xEF\xBB\xBF\r\n\s]+/', '', $response);
+      $response = preg_replace('/^[\xEF\xBB\xBF\s]+/', '', $response);
     }
     $row = json_decode($response, 1);
     if (isset($row['id']) && $row['id'] != '') {
@@ -222,7 +195,7 @@ $dis_error['6007'] = "The Captcha code does not match!";
       <![endif]-->
   <!-- Meta -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="description"
     content="Unlock your business's full potential with affordable ERP software Infistaq. ERP that supports manufacturing, distribution, retail, trading, services, education, non profits and healthcare. Try our customizable ERP solutions today." />
@@ -282,13 +255,13 @@ if (isset(LOGIN_ARRAY[$pageid]) && LOGIN_ARRAY[$pageid] != "") {
 
 ?>
 
-<div id="kt_modal_dynamic_popup2" class="modal fade" role="dialog" aria-hidden="true">
+<dialog id="kt_modal_dynamic_popup2" class="modal fade" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" id="dynamic_popup2" style="border:none;">
 
     </div>
   </div>
-</div>
+</dialog>
 <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="assets/bower_components/popper.js/js/popper.min.js"></script>

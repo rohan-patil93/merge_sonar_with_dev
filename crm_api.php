@@ -9,27 +9,27 @@ $userObj=new userClass();
 $method = $_GET['method'];
 $mode = $_GET['mode'];
 if($method == 'post'){
-	$post_array = array('leadandcontactassigning'=>'leadAndContactAssigning','importcsv' => 'importCSV','createsalesinvoice'=>'createSalesInvoice');
-	if(isset($post_array[$mode])){
-		include_once "model/crm_user.class.php";
-		$crmuserObj=new crmuserClass();
-		$fun = $post_array[$mode];
-		$details = $crmuserObj->$fun($_GET,$_POST);
-		echo json_encode($details);
-	}
+    $post_array = array('leadandcontactassigning'=>'leadAndContactAssigning','importcsv' => 'importCSV','createsalesinvoice'=>'createSalesInvoice');
+    if(isset($post_array[$mode])){
+        include_once "model/crm_user.class.php";
+        $crmuserObj=new crmuserClass();
+        $fun = $post_array[$mode];
+        $details = $crmuserObj->$fun($_GET,$_POST);
+        echo json_encode($details);
+    }
 }else{
-	$check_array = array('getleadandcontactassigned'=>'getLeadAndContactAssigned','testapi'=>'testAPI','getsalesinvoicedynamicdata' => 'getSalesInvoiceDynamicData','getsalesinvoicedynamicexcellist'=> 'getSalesInvoiceDynamicExcelList','getcrmaidashboards'=>'getCRMAIDashboards');
-	if(isset($check_array[$mode])){
-		include_once "model/crm_user.class.php";
-		$crmuserObj=new crmuserClass();
-		$fun = $check_array[$mode];
-		$details = $crmuserObj->$fun($_GET);
-		echo json_encode($details);
-	}
-	if($mode == 'salesInvoiceThroughDeliveryOrderCreated'){
-		$details = $userObj->salesInvoiceThroughDeliveryOrderCreated($_GET);
-		echo json_encode($details);
-	}
+    $check_array = array('getleadandcontactassigned'=>'getLeadAndContactAssigned','testapi'=>'testAPI','getsalesinvoicedynamicdata' => 'getSalesInvoiceDynamicData','getsalesinvoicedynamicexcellist'=> 'getSalesInvoiceDynamicExcelList','getcrmaidashboards'=>'getCRMAIDashboards');
+    if(isset($check_array[$mode])){
+        include_once "model/crm_user.class.php";
+        $crmuserObj=new crmuserClass();
+        $fun = $check_array[$mode];
+        $details = $crmuserObj->$fun($_GET);
+        echo json_encode($details);
+    }
+    if($mode == 'salesInvoiceThroughDeliveryOrderCreated'){
+        $details = $userObj->salesInvoiceThroughDeliveryOrderCreated($_GET);
+        echo json_encode($details);
+    }
 
 
 

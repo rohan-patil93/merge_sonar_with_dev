@@ -126,7 +126,7 @@ document.addEventListener('error', function (e) {
 </script>
   <title>Infistaq | Home</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="description" content="Admindek Bootstrap admin template made using Bootstrap 5 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
   <meta name="keywords" content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
@@ -1292,10 +1292,10 @@ function addslabrows(){
 
            <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center" id="slabtable">
             <tr>
-             <th scope="col"  width="2%"></th>
-             <th scope="col" class="" width="33%"> Start Range</th>
-             <th scope="col" class="thheader" width="32%">End Range</th>
-             <th scope="col" class="thheader" width="33%">Tax Amount</th>
+             <th scope="col" style="width: 2%;"></th>
+             <th scope="col" class="" style="width: 33%;"> Start Range</th>
+             <th scope="col" class="thheader" style="width: 32%;">End Range</th>
+             <th scope="col" class="thheader" style="width: 33%;">Tax Amount</th>
            </tr>
            <tr>
              <td>

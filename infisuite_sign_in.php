@@ -41,9 +41,9 @@
         <div class="login_container">
             <div class="login_left text-center" style="">
                 <div class="ps-5 mob-pd">
-				    <!--  <div class="text-center d-block">
-					   <img class="img-100 mt-3" src="<?php echo $image; ?>" alt="" >
-				    </div> -->
+                    <!--  <div class="text-center d-block">
+                       <img class="img-100 mt-3" src="<?php echo $image; ?>" alt="" >
+                    </div> -->
                 </div>
             </div>
             <div class="login_right text-center">
@@ -53,7 +53,7 @@
                             <div class="p-3 custom-login-on mob-pd">
                                 <img class="mt-3 mb-3" src="<?php echo $image; ?>" alt="" >
                                 <h2 class="f-26 f-w-600 mt-2">Welcome Back</h2>
-								<?php
+                                <?php
                                 if($error !='') {
                                 if($error == '6002' || $error == '6004' || $error == '6005' ){ ?>
 
@@ -70,7 +70,7 @@
                                 <?php }
                                 }?>
 
-							    <form class="md-float-material form-material" action="" method="post" >
+                                <form class="md-float-material form-material" action="" method="post" >
 
                                     <div class="text-left mt-5">
                                         <div class="form-group">
@@ -87,22 +87,22 @@
                                             <input type="text" class="form-control" name="captcha" id="captcha" placeholder="Enter Captcha" aria-label="Enter Captcha" required="required"/>
                                         </div>
                                         <?php } ?>
-										<div class="row text-right">
+                                        <div class="row text-right">
                                             <a class="float-right f-w-600 text-primary forgot-pwd-open" href="#top" onclick="fergotpassworddisplay()" >Forgot Password?</a>
                                         </div>
                                         <div class="form-group">
-									        <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                                            <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                             <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                             <input type="hidden" name="submit" value="Login" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4">Sign In</button>
                                         </div>
                                     </div>
-							    </form>
+                                </form>
                             </div>
-							<div class="p-5 regsterform" style="display:none">
-							    <form class="md-float-material form-material" action="" method="post" >
+                            <div class="p-5 regsterform" style="display:none">
+                                <form class="md-float-material form-material" action="" method="post" >
                                     <img class="img-100 mt-0 rentalji" src="<?php echo $image; ?>" alt="" >
-								    <h2 class="f-26 f-w-600 mt-4">Sign Up</h2>
+                                    <h2 class="f-26 f-w-600 mt-4">Sign Up</h2>
 
                                     <div class="text-left mt-4">
                                         <div class="form-group">
@@ -120,17 +120,17 @@
                                         </div>
 
                                         <div class="form-group">
-									        <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                                            <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                             <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                             <input type="hidden" name="submit" value="signup" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-3">Sign Up</button>
                                         </div>
                                         <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <a class="text-primary" href="#top" onclick="loginpagedisplay()">Sign In</a></p>
                                     </div>
-								</form>
+                                </form>
                             </div>
                             <div class="p-5 forgotpasswordon mt-5" style="display:none">
-							    <form class="md-float-material form-material" action="" method="post" >
+                                <form class="md-float-material form-material" action="" method="post" >
                                     <img class="mt-3 mb-3" src="<?php echo $image; ?>" alt="" >
                                     <div class="">
                                         <h2 class="f-26 f-w-600 mt-2">Forgot Password</h2>
@@ -140,12 +140,12 @@
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="email" name="email" id="forgotEmail" placeholder="Email" required="" aria-label="Email">
                                         </div>
                                         <div class="form-group text-center">
-										    <input type="hidden" name="submit" value="forgot" />
+                                            <input type="hidden" name="submit" value="forgot" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
                                             <button type="button" class="btn bg-gray waves-effect waves-light cancel-forgot-pwd" style="padding: 6px 15px;margin: 0;" onclick="loginpagedisplay()">Cancel</button>
                                         </div>
                                     </div>
-								</form>
+                                </form>
                             </div>
                         </div>
                     </div>
