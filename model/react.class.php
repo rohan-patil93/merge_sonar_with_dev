@@ -4735,413 +4735,204 @@ public function buildContractAmcDashboardWhere($get)
 
 trait ReactAmcTechniciansAndFmTrait
 {
-public function getPpmInhouseReportData($get)
+    private function fetchPpmInhouseFilters($companyId, $inhouseJoin)
     {
         global $callConfig;
-        $return = array(
-            'filters' => array('categories' => array(), 'locations' => array(), 'years' => array()),
-            'rows' => array(),
-            'year' => '',
-        );
+        $filters = array('categories' => array(), 'locations' => array(), 'years' => array());
+        $catSql = "SELECT DISTINCT ac.id, ac.category_description AS name FROM contract_amc_service_schedules s {$inhouseJoin} WHERE s.company_id = {$companyId} AND s.is_active = 0 AND ac.category_description IS NOT NULL AND ac.category_description != '' ORDER BY ac.category_description ASC";
+        $catRows = $callConfig->getAllRows($catSql);
+        foreach ($catRows as $catRow) {
+            $r = (array) $catRow;
+            $filters['categories'][] = array('id' => (int) ($r['id'] ?? 0), 'name' => $r['name'] ?? '');
+        }
+
+        $locSql = "SELECT DISTINCT l.id, l.location_name AS name FROM contract_amc_service_schedules s {$inhouseJoin} WHERE s.company_id = {$companyId} AND s.is_active = 0 AND l.location_name IS NOT NULL AND l.location_name != '' ORDER BY l.location_name ASC";
+        $locRows = $callConfig->getAllRows($locSql);
+        foreach ($locRows as $locRow) {
+            $r = (array) $locRow;
+            $filters['locations'][] = array('id' => (int) ($r['id'] ?? 0), 'name' => $r['name'] ?? '');
+        }
+
+        $yearSql = "SELECT DISTINCT YEAR(s.planned_service_datetime) AS yr FROM contract_amc_service_schedules s {$inhouseJoin} WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.planned_service_datetime IS NOT NULL ORDER BY yr DESC";
+        $yearRows = $callConfig->getAllRows($yearSql);
+        foreach ($yearRows as $yrRow) {
+            $r = (array) $yrRow;
+            $yr = (int) ($r['yr'] ?? 0);
+            if ($yr > 0) {
+                $filters['years'][] = $yr;
+            }
+        }
+        if (empty($filters['years'])) {
+            $filters['years'][] = (int) date('Y');
+        }
+        return $filters;
+    }
+
+    public function getPpmInhouseReportData($get)
+    {
+        global $callConfig;
+        $return = array('filters' => array('categories' => array(), 'locations' => array(), 'years' => array()), 'rows' => array(), 'year' => '');
         $companyId = (int) ($get['company_id'] ?? 0);
         if ($companyId <= 0) {
             return $return;
         }
 
-        $inhouseJoin = "INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id
-            AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.party_type = 'inhouse'
-            AND c.current_status = '" . ST_APPROVED . "'
-            AND (c.cancel_status IS NULL OR c.cancel_status != 'Y')
-            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = s.company_id
-            AND cad.is_active = 0
-            INNER JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id AND ca.is_active = 0
-            INNER JOIN assets a ON a.id = s.asset_id AND a.company_id = s.company_id AND a.is_active = 0
-            LEFT JOIN asset_categories ac ON ac.id = a.category_id AND ac.company_id = a.company_id AND ac.is_active = 0
-            INNER JOIN contract_amc_locations cal ON cal.id = s.contract_amc_location_id AND cal.company_id = s.company_id AND cal.is_active = 0
-            LEFT JOIN locations l ON l.id = cal.location_id AND l.company_id = cal.company_id AND l.is_active = 0";
+        $inhouseJoin = "INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.party_type = 'inhouse' AND c.current_status = '" . ST_APPROVED . "' AND (c.cancel_status IS NULL OR c.cancel_status != 'Y') LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = s.company_id AND cad.is_active = 0 INNER JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id AND ca.is_active = 0 INNER JOIN assets a ON a.id = s.asset_id AND a.company_id = s.company_id AND a.is_active = 0 LEFT JOIN asset_categories ac ON ac.id = a.category_id AND ac.company_id = a.company_id AND ac.is_active = 0 INNER JOIN contract_amc_locations cal ON cal.id = s.contract_amc_location_id AND cal.company_id = s.company_id AND cal.is_active = 0 LEFT JOIN locations l ON l.id = cal.location_id AND l.company_id = cal.company_id AND l.is_active = 0";
 
-        $catSql = "SELECT DISTINCT ac.id, ac.category_description AS name
-            FROM contract_amc_service_schedules s
-            {$inhouseJoin}
-            WHERE s.company_id = {$companyId} AND s.is_active = 0
-            AND ac.category_description IS NOT NULL AND ac.category_description != ''
-            ORDER BY ac.category_description ASC";
-        $catRows = $callConfig->getAllRows($catSql);
-        if (count((array) $catRows) > 0) {
-            foreach ($catRows as $catRow) {
-                $r = is_array($catRow) ? $catRow : (array) $catRow;
-                $return['filters']['categories'][] = array(
-                    'id' => (int) ($r['id'] ?? 0),
-                    'name' => $r['name'] ?? '',
-                );
-            }
-        }
+        $return['filters'] = $this->fetchPpmInhouseFilters($companyId, $inhouseJoin);
 
-        $locSql = "SELECT DISTINCT l.id, l.location_name AS name
-            FROM contract_amc_service_schedules s
-            {$inhouseJoin}
-            WHERE s.company_id = {$companyId} AND s.is_active = 0
-            AND l.location_name IS NOT NULL AND l.location_name != ''
-            ORDER BY l.location_name ASC";
-        $locRows = $callConfig->getAllRows($locSql);
-        if (count((array) $locRows) > 0) {
-            foreach ($locRows as $locRow) {
-                $r = is_array($locRow) ? $locRow : (array) $locRow;
-                $return['filters']['locations'][] = array(
-                    'id' => (int) ($r['id'] ?? 0),
-                    'name' => $r['name'] ?? '',
-                );
-            }
+        $selectedYear = (int) ($get['year'] ?? 0);
+        if ($selectedYear <= 0) {
+            $selectedYear = (int) ($return['filters']['years'][0] ?? date('Y'));
         }
+        $return['year'] = $selectedYear;
 
-        $yearSql = "SELECT DISTINCT YEAR(s.planned_service_datetime) AS yr
-            FROM contract_amc_service_schedules s
-            {$inhouseJoin}
-            WHERE s.company_id = {$companyId} AND s.is_active = 0
-            AND s.planned_service_datetime IS NOT NULL AND s.planned_service_datetime != ''
-            ORDER BY yr DESC";
-        $yearRows = $callConfig->getAllRows($yearSql);
-        $years = array();
-        if (count((array) $yearRows) > 0) {
-            foreach ($yearRows as $yearRow) {
-                $r = is_array($yearRow) ? $yearRow : (array) $yearRow;
-                if (!empty($r['yr'])) {
-                    $years[] = (int) $r['yr'];
-                }
-            }
-        }
-        if (count((array) $years) == 0) {
-            $cur = (int) date('Y');
-            for ($y = 2019; $y <= ($cur + 1); $y++) {
-                $years[] = $y;
-            }
-            rsort($years);
-        }
-        $return['filters']['years'] = $years;
-
-        $year = trim((string) ($get['year'] ?? ''));
-        if ($year == '' || !is_numeric($year)) {
-            return $return;
-        }
-        $return['year'] = $year;
+        $extraWhere = "";
         $categoryId = (int) ($get['category_id'] ?? 0);
-        $locationId = (int) ($get['location_id'] ?? 0);
-
-        $where = "s.company_id = {$companyId} AND s.is_active = 0
-            AND YEAR(s.planned_service_datetime) = '" . addslashes($year) . "'";
         if ($categoryId > 0) {
-            $where .= " AND ac.id = {$categoryId}";
+            $extraWhere .= " AND a.category_id = {$categoryId}";
         }
+        $locationId = (int) ($get['location_id'] ?? 0);
         if ($locationId > 0) {
-            $where .= " AND l.id = {$locationId}";
+            $extraWhere .= " AND cal.location_id = {$locationId}";
         }
 
-        $sql = "SELECT s.id, s.planned_service_datetime, s.actual_start_datetime,
-            ca.id AS contract_amc_asset_id, ca.asset_name, ca.service_frequency,
-            a.id AS asset_id, a.asset_code, a.old_ref_no_1 AS equipment_asset_no,
-            ac.category_description AS category_name, l.location_name
-            FROM contract_amc_service_schedules s
-            {$inhouseJoin}
-            WHERE {$where}
-            ORDER BY l.location_name ASC, a.asset_code ASC, s.planned_service_datetime ASC";
-        $scheduleRows = $callConfig->getAllRows($sql);
+        $sql = "SELECT s.id AS schedule_id, s.contract_id, s.asset_id, s.planned_service_datetime, s.actual_start_datetime, s.actual_end_datetime, s.current_status, s.employee_id, ca.service_frequency, ca.visits_per_interval, a.asset_name, a.barcode, a.category_id, ac.category_description, cal.location_id, l.location_name, u.display_name AS employee_name FROM contract_amc_service_schedules s {$inhouseJoin} LEFT JOIN application_users u ON u.id = s.employee_id AND u.company_id = s.company_id AND u.is_active = 0 WHERE s.company_id = {$companyId} AND s.is_active = 0 AND YEAR(s.planned_service_datetime) = {$selectedYear}{$extraWhere} ORDER BY a.asset_name ASC, s.planned_service_datetime ASC";
+        $schedRows = $callConfig->getAllRows($sql);
 
         $grouped = array();
-        if (count((array) $scheduleRows) > 0) {
-            foreach ($scheduleRows as $scheduleRow) {
-                $row = is_array($scheduleRow) ? $scheduleRow : (array) $scheduleRow;
-                $assetKey = (int) ($row['contract_amc_asset_id'] ?? 0);
-                if ($assetKey <= 0) {
-                    $assetKey = (int) ($row['asset_id'] ?? 0);
-                }
-                if ($assetKey <= 0) {
-                    continue;
-                }
-                if (!isset($grouped[$assetKey])) {
-                    $emptyMonths = array();
-                    for ($m = 1; $m <= 12; $m++) {
-                        $mk = str_pad((string) $m, 2, '0', STR_PAD_LEFT);
-                        $emptyMonths[$mk] = array('planned' => '', 'actual_start' => '');
-                    }
-                    $grouped[$assetKey] = array(
-                        'equipment_asset_no' => $row['equipment_asset_no'] ?? '',
-                        'asset_code' => $row['asset_code'] ?? '',
-                        'equipment_name' => $row['asset_name'] ?? '',
-                        'category_name' => $row['category_name'] ?? '',
-                        'location_name' => $row['location_name'] ?? '',
-                        'frequency' => $row['service_frequency'] ?? '',
-                        'months' => $emptyMonths,
-                    );
-                }
-                $planned = trim((string) ($row['planned_service_datetime'] ?? ''));
-                if ($planned == '') {
-                    continue;
-                }
-                $monthKey = date('m', strtotime($planned));
-                if ($monthKey == '' || date('Y', strtotime($planned)) != $year) {
-                    continue;
-                }
-                // If multiple visits in the same month, keep the latest planned visit.
-                $existingPlanned = $grouped[$assetKey]['months'][$monthKey]['planned'] ?? '';
-                if ($existingPlanned != '' && strtotime($existingPlanned) >= strtotime($planned)) {
-                    continue;
-                }
-                $grouped[$assetKey]['months'][$monthKey] = array(
-                    'planned' => $planned,
-                    'actual_start' => trim((string) ($row['actual_start_datetime'] ?? '')),
+        foreach ($schedRows as $sRow) {
+            $s = (array) $sRow;
+            $assetKey = $s['asset_id'] . '_' . ($s['location_id'] ?? 0);
+            if (!isset($grouped[$assetKey])) {
+                $grouped[$assetKey] = array(
+                    'asset_id' => $s['asset_id'],
+                    'asset_name' => $s['asset_name'] ?? '',
+                    'barcode' => $s['barcode'] ?? '',
+                    'category_name' => $s['category_description'] ?? 'Uncategorized',
+                    'location_name' => $s['location_name'] ?? '—',
+                    'service_frequency' => $s['service_frequency'] ?? '—',
+                    'months' => array_fill(1, 12, array()),
+                );
+            }
+            $m = (int) date('n', strtotime($s['planned_service_datetime']));
+            if ($m >= 1 && $m <= 12) {
+                $grouped[$assetKey]['months'][$m][] = array(
+                    'schedule_id' => $s['schedule_id'],
+                    'planned' => $s['planned_service_datetime'],
+                    'actual_start' => $s['actual_start_datetime'],
+                    'actual_end' => $s['actual_end_datetime'],
+                    'current_status' => (int) ($s['current_status'] ?? 0),
+                    'status_info' => $this->resolveContractAmcCurrentStatus($s),
+                    'employee_name' => $s['employee_name'] ?? '—',
                 );
             }
         }
-
         $return['rows'] = array_values($grouped);
         return $return;
+    }
+    private function fetchVendorAmcTrackerFilters($companyId, $vendorJoin, $vendorFilterSql)
+    {
+        global $callConfig;
+        $filters = array('vendors' => array(), 'categories' => array(), 'years' => array());
+        $vendorRows = $callConfig->getAllRows("SELECT DISTINCT v.id, v.display_name AS name FROM contract_amc_service_schedules s {$vendorJoin} WHERE s.company_id = {$companyId} AND s.is_active = 0 AND v.display_name IS NOT NULL AND v.display_name != '' ORDER BY v.display_name ASC");
+        foreach ($vendorRows as $vendorRow) {
+            $r = (array) $vendorRow;
+            $filters['vendors'][] = array('id' => (int) ($r['id'] ?? 0), 'name' => $r['name'] ?? '');
+        }
+        $catRows = $callConfig->getAllRows("SELECT DISTINCT ac.id, ac.category_description AS name FROM contract_amc_service_schedules s {$vendorJoin} WHERE s.company_id = {$companyId} AND s.is_active = 0{$vendorFilterSql} AND ac.category_description IS NOT NULL AND ac.category_description != '' ORDER BY ac.category_description ASC");
+        foreach ($catRows as $catRow) {
+            $r = (array) $catRow;
+            $filters['categories'][] = array('id' => (int) ($r['id'] ?? 0), 'name' => $r['name'] ?? '');
+        }
+        $yearRows = $callConfig->getAllRows("SELECT DISTINCT YEAR(s.planned_service_datetime) AS yr FROM contract_amc_service_schedules s {$vendorJoin} WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.planned_service_datetime IS NOT NULL ORDER BY yr DESC");
+        foreach ($yearRows as $yrRow) {
+            $r = (array) $yrRow;
+            $yr = (int) ($r['yr'] ?? 0);
+            if ($yr > 0) {
+                $filters['years'][] = $yr;
+            }
+        }
+        if (empty($filters['years'])) {
+            $cur = (int) date('Y');
+            $filters['years'] = range($cur + 1, 2019);
+        }
+        return $filters;
     }
 
     public function getVendorAmcTrackerReportData($get)
     {
         global $callConfig;
-        $return = array(
-            'filters' => array('vendors' => array(), 'categories' => array(), 'years' => array()),
-            'categories' => array(),
-            'year' => '',
-            'period_label' => '',
-        );
+        $return = array('filters' => array('vendors' => array(), 'categories' => array(), 'years' => array()), 'categories' => array(), 'year' => '', 'period_label' => '');
         $companyId = (int) ($get['company_id'] ?? 0);
         if ($companyId <= 0) {
             return $return;
         }
 
-        $vendorJoin = "INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id
-            AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.party_type = 'vendor'
-            AND c.current_status = '" . ST_APPROVED . "'
-            AND (c.cancel_status IS NULL OR c.cancel_status != 'Y')
-            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = s.company_id AND cad.is_active = 0
-            LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0
-            INNER JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id AND ca.is_active = 0
-            LEFT JOIN assets a ON a.id = s.asset_id AND a.company_id = s.company_id AND a.is_active = 0
-            LEFT JOIN asset_categories ac ON ac.id = a.category_id AND ac.company_id = a.company_id AND ac.is_active = 0";
-
-        $vendorSql = "SELECT DISTINCT v.id, v.display_name AS name
-            FROM contract_amc_service_schedules s
-            {$vendorJoin}
-            WHERE s.company_id = {$companyId} AND s.is_active = 0
-            AND v.display_name IS NOT NULL AND v.display_name != ''
-            ORDER BY v.display_name ASC";
-        $vendorRows = $callConfig->getAllRows($vendorSql);
-        if (count((array) $vendorRows) > 0) {
-            foreach ($vendorRows as $vendorRow) {
-                $r = is_array($vendorRow) ? $vendorRow : (array) $vendorRow;
-                $return['filters']['vendors'][] = array(
-                    'id' => (int) ($r['id'] ?? 0),
-                    'name' => $r['name'] ?? '',
-                );
-            }
-        }
+        $vendorJoin = "INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.party_type = 'vendor' AND c.current_status = '" . ST_APPROVED . "' AND (c.cancel_status IS NULL OR c.cancel_status != 'Y') LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = s.company_id AND cad.is_active = 0 LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0 INNER JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id AND ca.is_active = 0 LEFT JOIN assets a ON a.id = s.asset_id AND a.company_id = s.company_id AND a.is_active = 0 LEFT JOIN asset_categories ac ON ac.id = a.category_id AND ac.company_id = a.company_id AND ac.is_active = 0";
 
         $vendorIdForFilters = (int) ($get['vendor_id'] ?? 0);
-        $vendorFilterSql = '';
+        $vendorFilterSql = $vendorIdForFilters > 0 ? " AND c.party_id = {$vendorIdForFilters} AND c.party_type = 'vendor'" : '';
+        $return['filters'] = $this->fetchVendorAmcTrackerFilters($companyId, $vendorJoin, $vendorFilterSql);
+
+        $selectedYear = (int) ($get['year'] ?? 0);
+        if ($selectedYear <= 0) {
+            $selectedYear = (int) ($return['filters']['years'][0] ?? date('Y'));
+        }
+        $return['year'] = $selectedYear;
+        $fiscalStartYear = $selectedYear;
+        $return['period_label'] = 'FY ' . $fiscalStartYear . ' - ' . ($fiscalStartYear + 1);
+
+        $extraWhere = "";
         if ($vendorIdForFilters > 0) {
-            $vendorFilterSql = " AND c.party_id = {$vendorIdForFilters} AND c.party_type = 'vendor'";
+            $extraWhere .= " AND c.party_id = {$vendorIdForFilters}";
+        }
+        $catId = (int) ($get['category_id'] ?? 0);
+        if ($catId > 0) {
+            $extraWhere .= " AND a.category_id = {$catId}";
         }
 
-        $catSql = "SELECT DISTINCT ac.id, ac.category_description AS name
-            FROM contract_amc_service_schedules s
-            {$vendorJoin}
-            WHERE s.company_id = {$companyId} AND s.is_active = 0{$vendorFilterSql}
-            AND ac.category_description IS NOT NULL AND ac.category_description != ''
-            ORDER BY ac.category_description ASC";
-        $catRows = $callConfig->getAllRows($catSql);
-        if (count((array) $catRows) > 0) {
-            foreach ($catRows as $catRow) {
-                $r = is_array($catRow) ? $catRow : (array) $catRow;
-                $return['filters']['categories'][] = array(
-                    'id' => (int) ($r['id'] ?? 0),
-                    'name' => $r['name'] ?? '',
+        $startDate = $fiscalStartYear . '-04-01 00:00:00';
+        $endDate = ($fiscalStartYear + 1) . '-03-31 23:59:59';
+        $sql = "SELECT s.id AS schedule_id, s.contract_id, s.asset_id, s.planned_service_datetime, s.actual_start_datetime, s.actual_end_datetime, s.current_status, s.technician_id, ca.service_frequency, a.asset_name, a.category_id, ac.category_description, v.display_name AS vendor_name, vt.technician_name FROM contract_amc_service_schedules s {$vendorJoin} LEFT JOIN vendor_technicians vt ON vt.id = s.technician_id AND vt.company_id = s.company_id AND vt.is_active = 0 WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.planned_service_datetime >= '{$startDate}' AND s.planned_service_datetime <= '{$endDate}'{$extraWhere} ORDER BY ac.category_description ASC, a.asset_name ASC, s.planned_service_datetime ASC";
+        $schedRows = $callConfig->getAllRows($sql);
+
+        $catBuckets = array();
+        foreach ($schedRows as $sRow) {
+            $s = (array) $sRow;
+            $catKey = (int) ($s['category_id'] ?? 0);
+            $catName = !empty($s['category_description']) ? $s['category_description'] : 'Uncategorized';
+            if (!isset($catBuckets[$catKey])) {
+                $catBuckets[$catKey] = array('category_id' => $catKey, 'category_name' => $catName, 'assets' => array());
+            }
+            $aId = (int) ($s['asset_id'] ?? 0);
+            if (!isset($catBuckets[$catKey]['assets'][$aId])) {
+                $catBuckets[$catKey]['assets'][$aId] = array(
+                    'asset_id' => $aId,
+                    'asset_name' => $s['asset_name'] ?? '—',
+                    'vendor_name' => $s['vendor_name'] ?? '—',
+                    'service_frequency' => $s['service_frequency'] ?? '—',
+                    'months' => array_fill_keys(array('04', '05', '06', '07', '08', '09', '10', '11', '12', '01', '02', '03'), array()),
+                );
+            }
+            $mKey = $this->vendorAmcFiscalMonthKey($s['planned_service_datetime'], $fiscalStartYear);
+            if ($mKey != '' && isset($catBuckets[$catKey]['assets'][$aId]['months'][$mKey])) {
+                $catBuckets[$catKey]['assets'][$aId]['months'][$mKey][] = array(
+                    'schedule_id' => $s['schedule_id'],
+                    'planned' => $s['planned_service_datetime'],
+                    'actual_start' => $s['actual_start_datetime'],
+                    'actual_end' => $s['actual_end_datetime'],
+                    'current_status' => (int) ($s['current_status'] ?? 0),
+                    'technician_name' => $s['technician_name'] ?? '—',
                 );
             }
         }
-
-        $yearSql = "SELECT DISTINCT CASE
-                WHEN MONTH(s.planned_service_datetime) >= 4 THEN YEAR(s.planned_service_datetime)
-                ELSE YEAR(s.planned_service_datetime) - 1
-            END AS fy
-            FROM contract_amc_service_schedules s
-            {$vendorJoin}
-            WHERE s.company_id = {$companyId} AND s.is_active = 0{$vendorFilterSql}
-            AND s.planned_service_datetime IS NOT NULL AND s.planned_service_datetime != ''
-            ORDER BY fy DESC";
-        $yearRows = $callConfig->getAllRows($yearSql);
-        $years = array();
-        if (count((array) $yearRows) > 0) {
-            foreach ($yearRows as $yearRow) {
-                $r = is_array($yearRow) ? $yearRow : (array) $yearRow;
-                if (!empty($r['fy'])) {
-                    $years[] = (int) $r['fy'];
-                }
-            }
+        foreach ($catBuckets as &$cb) {
+            $cb['assets'] = array_values($cb['assets']);
         }
-        if (count((array) $years) == 0) {
-            $cur = (int) date('Y');
-            for ($y = 2019; $y <= ($cur + 1); $y++) {
-                $years[] = $y;
-            }
-            rsort($years);
-        }
-        $return['filters']['years'] = $years;
-
-        $freqLabelMap = $this->buildVendorAmcFrequencyLabelMap($companyId);
-
-        $vendorId = (int) ($get['vendor_id'] ?? 0);
-        if ($vendorId <= 0) {
-            return $return;
-        }
-
-        $year = trim((string) ($get['year'] ?? ''));
-        $hasYearFilter = ($year != '' && is_numeric($year));
-        $fiscalStartYear = $hasYearFilter ? (int) $year : 0;
-        if ($hasYearFilter) {
-            $return['year'] = (string) $fiscalStartYear;
-            $return['period_label'] = $this->vendorAmcTrackerPeriodLabel($fiscalStartYear);
-        }
-
-        $categoryId = (int) ($get['category_id'] ?? 0);
-
-        $where = "s.company_id = {$companyId} AND s.is_active = 0
-            AND c.party_id = {$vendorId} AND c.party_type = 'vendor'";
-        if ($hasYearFilter) {
-            $fyStart = $fiscalStartYear . '-04-01';
-            $fyEnd = ($fiscalStartYear + 1) . '-03-31 23:59:59';
-            $where .= " AND s.planned_service_datetime >= '" . addslashes($fyStart) . "'
-                AND s.planned_service_datetime <= '" . addslashes($fyEnd) . "'";
-        }
-        if ($categoryId > 0) {
-            $where .= " AND ac.id = {$categoryId}";
-        }
-
-        $sql = "SELECT s.id, s.planned_service_datetime, s.actual_start_datetime,
-            c.id AS contract_id, c.contract_name, c.transaction_no, c.party_id AS vendor_id,
-            v.display_name AS vendor_name,
-            ca.id AS contract_amc_asset_id, ca.asset_name, ca.service_frequency,
-            ac.id AS category_id, ac.category_description AS category_name
-            FROM contract_amc_service_schedules s
-            {$vendorJoin}
-            WHERE {$where}
-            ORDER BY ac.category_description ASC, v.display_name ASC, c.transaction_no ASC, ca.asset_name ASC, s.planned_service_datetime ASC";
-        $scheduleRows = $callConfig->getAllRows($sql);
-
-        $fiscalMonths = $this->vendorAmcTrackerFiscalMonthOrder();
-        $emptyMonths = array();
-        if (count((array) $fiscalMonths) > 0) {
-            foreach ($fiscalMonths as $mk) {
-                $emptyMonths[$mk] = array('planned' => '', 'actual_start' => '');
-            }
-        }
-
-        $categoryMap = array();
-        if (count((array) $scheduleRows) > 0) {
-            foreach ($scheduleRows as $scheduleRow) {
-                $row = is_array($scheduleRow) ? $scheduleRow : (array) $scheduleRow;
-                $catId = (int) ($row['category_id'] ?? 0);
-                $catName = trim((string) ($row['category_name'] ?? ''));
-                if ($catName == '') {
-                    $catName = 'Uncategorized';
-                    $catId = 0;
-                }
-                $contractId = (int) ($row['contract_id'] ?? 0);
-                $assetKey = (int) ($row['contract_amc_asset_id'] ?? 0);
-                if ($contractId <= 0 || $assetKey <= 0) {
-                    continue;
-                }
-
-                if (!isset($categoryMap[$catId])) {
-                    $categoryMap[$catId] = array(
-                        'category_id' => $catId,
-                        'category_name' => $catName,
-                        'blocks' => array(),
-                    );
-                }
-
-                $planned = trim((string) ($row['planned_service_datetime'] ?? ''));
-                if ($planned == '') {
-                    continue;
-                }
-                $visitFiscalYear = $hasYearFilter ? $fiscalStartYear : $this->vendorAmcFiscalStartYearFromDate($planned);
-                if ($visitFiscalYear <= 0) {
-                    continue;
-                }
-                $blockKey = $contractId . '_' . $visitFiscalYear;
-                if (!isset($categoryMap[$catId]['blocks'][$blockKey])) {
-                    $categoryMap[$catId]['blocks'][$blockKey] = array(
-                        'contract_id' => $contractId,
-                        'contract_number' => trim((string) (($row['transaction_no'] ?? '') != '' ? $row['transaction_no'] : ($row['contract_name'] ?? ''))),
-                        'vendor_id' => (int) ($row['vendor_id'] ?? 0),
-                        'vendor_name' => $row['vendor_name'] ?? '',
-                        'fiscal_start_year' => $visitFiscalYear,
-                        'period_label' => $this->vendorAmcTrackerPeriodLabel($visitFiscalYear),
-                        'rows' => array(),
-                    );
-                }
-                if (!isset($categoryMap[$catId]['blocks'][$blockKey]['rows'][$assetKey])) {
-                    $categoryMap[$catId]['blocks'][$blockKey]['rows'][$assetKey] = array(
-                        'equipment_name' => $row['asset_name'] ?? '',
-                        'frequency' => $row['service_frequency'] ?? '',
-                        'frequency_label' => $this->vendorAmcFrequencyLabel($row['service_frequency'] ?? '', $freqLabelMap),
-                        'months' => $emptyMonths,
-                    );
-                }
-                $monthKey = $this->vendorAmcFiscalMonthKey($planned, $visitFiscalYear);
-                if ($monthKey == '') {
-                    continue;
-                }
-                $existingPlanned = $categoryMap[$catId]['blocks'][$blockKey]['rows'][$assetKey]['months'][$monthKey]['planned'] ?? '';
-                if ($existingPlanned != '' && strtotime($existingPlanned) >= strtotime($planned)) {
-                    continue;
-                }
-                $categoryMap[$catId]['blocks'][$blockKey]['rows'][$assetKey]['months'][$monthKey] = array(
-                    'planned' => $planned,
-                    'actual_start' => trim((string) ($row['actual_start_datetime'] ?? '')),
-                );
-            }
-        }
-
-        $categories = array();
-        if (count((array) $categoryMap) > 0) {
-            foreach ($categoryMap as $catData) {
-                $blocks = array();
-                if (count((array) ($catData['blocks'] ?? array())) > 0) {
-                    foreach ($catData['blocks'] as $blockData) {
-                        $assetRows = array_values($blockData['rows'] ?? array());
-                        if (count((array) $assetRows) > 0) {
-                            $blockData['rows'] = $assetRows;
-                            $blocks[] = $blockData;
-                        }
-                    }
-                }
-                if (count((array) $blocks) > 1) {
-                    usort($blocks, function ($a, $b) {
-                        $fyA = (int) ($a['fiscal_start_year'] ?? 0);
-                        $fyB = (int) ($b['fiscal_start_year'] ?? 0);
-                        if ($fyA == $fyB) {
-                            $cnA = (string) ($a['contract_number'] ?? '');
-                            $cnB = (string) ($b['contract_number'] ?? '');
-                            if ($cnA == $cnB) {
-                                return 0;
-                            }
-                            return ($cnA < $cnB) ? -1 : 1;
-                        }
-                        return ($fyA > $fyB) ? -1 : 1;
-                    });
-                }
-                if (count((array) $blocks) > 0) {
-                    $catData['blocks'] = $blocks;
-                    $categories[] = $catData;
-                }
-            }
-        }
-        $return['categories'] = $categories;
+        $return['categories'] = array_values($catBuckets);
         return $return;
     }
-
     public function buildVendorAmcFrequencyLabelMap($companyId)
     {
         global $callConfig;
@@ -5199,18 +4990,9 @@ public function getPpmInhouseReportData($get)
         $month = date('m', $ts);
         $calYear = (int) date('Y', $ts);
         $fiscalStartYear = (int) $fiscalStartYear;
-        if ($month >= '04') {
-            if ($calYear != $fiscalStartYear) {
-                return '';
-            }
-        } else {
-            if ($calYear != ($fiscalStartYear + 1)) {
-                return '';
-            }
-        }
-        return $month;
+        $isValidYear = ($month >= '04') ? ($calYear == $fiscalStartYear) : ($calYear == ($fiscalStartYear + 1));
+        return $isValidYear ? $month : '';
     }
-
     public function vendorAmcFiscalStartYearFromDate($plannedDatetime)
     {
         $plannedDatetime = trim((string) $plannedDatetime);
@@ -5223,12 +5005,8 @@ public function getPpmInhouseReportData($get)
         }
         $month = (int) date('m', $ts);
         $calYear = (int) date('Y', $ts);
-        if ($month >= 4) {
-            return $calYear;
-        }
-        return $calYear - 1;
+        return ($month >= 4) ? $calYear : ($calYear - 1);
     }
-
     public function vendorAmcScheduleFormatAssetLocation($assetName, $locationName, $assetCode = '', $assetDescription = '', $equipmentAssetNo = '', $categoryName = '')
     {
         $assetName = trim((string) $assetName);
@@ -5285,63 +5063,48 @@ public function getPpmInhouseReportData($get)
         return date('F', $ts);
     }
 
-    public function vendorAmcScheduleBuildVisitColumnLayout($dateKeys)
+    private function buildMonthToDatesMap($dateKeys)
     {
         $monthToDates = array();
-        if (count((array) $dateKeys) > 0) {
-            foreach ($dateKeys as $dateKey) {
-                $dateKey = trim((string) $dateKey);
-                if ($dateKey == '') {
-                    continue;
-                }
-                $ts = strtotime($dateKey);
-                if ($ts === false) {
-                    continue;
-                }
-                $monthKey = date('Y-m', $ts);
-                if (!isset($monthToDates[$monthKey])) {
-                    $monthToDates[$monthKey] = array();
-                }
-                $monthToDates[$monthKey][$dateKey] = $dateKey;
+        foreach ($dateKeys as $dateKey) {
+            $dateKey = trim((string) $dateKey);
+            if ($dateKey == '') {
+                continue;
             }
+            $ts = strtotime($dateKey);
+            if ($ts === false) {
+                continue;
+            }
+            $monthKey = date('Y-m', $ts);
+            $monthToDates[$monthKey][$dateKey] = $dateKey;
         }
+        return $monthToDates;
+    }
 
+    public function vendorAmcScheduleBuildVisitColumnLayout($dateKeys)
+    {
+        $monthToDates = $this->buildMonthToDatesMap((array) $dateKeys);
         $monthGroups = array();
         $visitColumns = array();
-        if (count((array) $monthToDates) > 0) {
+
+        if (!empty($monthToDates)) {
             ksort($monthToDates);
             foreach ($monthToDates as $monthKey => $datesMap) {
                 $dates = array_values($datesMap);
                 sort($dates);
                 $monthLabel = $this->vendorAmcScheduleMonthLabel($monthKey);
-                $visitCount = count((array) $dates);
-                $monthGroups[] = array(
-                    'month_key' => $monthKey,
-                    'label' => $monthLabel,
-                    'colspan' => $visitCount * 2,
-                    'visit_count' => $visitCount,
-                );
+                $visitCount = count($dates);
+                $monthGroups[] = array('month_key' => $monthKey, 'label' => $monthLabel, 'colspan' => $visitCount * 2, 'visit_count' => $visitCount);
                 $slot = 0;
-                if (count((array) $dates) > 0) {
-                    foreach ($dates as $dateKey) {
-                        $slot++;
-                        $visitColumns[] = array(
-                            'key' => $dateKey,
-                            'month_key' => $monthKey,
-                            'month_label' => $monthLabel,
-                            'slot' => $slot,
-                        );
-                    }
+                foreach ($dates as $dateKey) {
+                    $slot++;
+                    $visitColumns[] = array('key' => $dateKey, 'month_key' => $monthKey, 'month_label' => $monthLabel, 'slot' => $slot);
                 }
             }
         }
 
-        return array(
-            'month_groups' => $monthGroups,
-            'visit_columns' => $visitColumns,
-        );
+        return array('month_groups' => $monthGroups, 'visit_columns' => $visitColumns);
     }
-
     public function vendorAmcScheduleMergeVisitCell($existing, $planned, $actualStart)
     {
         $existing = is_array($existing) ? $existing : array('planned' => '', 'actual_start' => '');
@@ -5356,201 +5119,113 @@ public function getPpmInhouseReportData($get)
         if ($planned == '') {
             return $existing;
         }
-
         if ($actualStart != '' && $existingActual == '') {
             return array('planned' => $planned, 'actual_start' => $actualStart);
         }
-        if ($existingActual != '' && $actualStart == '') {
-            return $existing;
-        }
-
         $existingTs = strtotime($existingPlanned);
         $newTs = strtotime($planned);
-        if ($existingTs !== false && $newTs !== false && $newTs < $existingTs) {
-            return array(
-                'planned' => $planned,
-                'actual_start' => ($actualStart != '') ? $actualStart : $existingActual,
-            );
+        if ($existingActual == '' && $existingTs !== false && $newTs !== false && $newTs < $existingTs) {
+            return array('planned' => $planned, 'actual_start' => $actualStart);
         }
-
-        return array(
-            'planned' => $existingPlanned,
-            'actual_start' => ($existingActual != '') ? $existingActual : $actualStart,
-        );
+        return array('planned' => $existingPlanned, 'actual_start' => ($existingActual != '') ? $existingActual : $actualStart);
+    }
+    private function fetchVendorAmcScheduleFilters($companyId)
+    {
+        global $callConfig;
+        $filters = array('vendors' => array(), 'categories' => array(), 'years' => array());
+        $vendorRows = $callConfig->getAllRows("SELECT id, display_name AS name FROM vendors WHERE company_id = {$companyId} AND is_active = 0 AND display_name IS NOT NULL AND display_name != '' ORDER BY display_name ASC");
+        foreach ($vendorRows as $vendorRow) {
+            $r = (array) $vendorRow;
+            $filters['vendors'][] = array('id' => (int) ($r['id'] ?? 0), 'name' => $r['name'] ?? '');
+        }
+        $catRows = $callConfig->getAllRows("SELECT id, category_description AS name FROM asset_categories WHERE company_id = {$companyId} AND is_active = 0 AND category_description IS NOT NULL AND category_description != '' ORDER BY category_description ASC");
+        foreach ($catRows as $catRow) {
+            $r = (array) $catRow;
+            $filters['categories'][] = array('id' => (int) ($r['id'] ?? 0), 'name' => $r['name'] ?? '');
+        }
+        $cur = (int) date('Y');
+        $years = range($cur + 1, 2019);
+        $filters['years'] = $years;
+        return $filters;
     }
 
     public function getVendorAmcScheduleReportData($get)
     {
         global $callConfig;
-        $return = array(
-            'filters' => array('vendors' => array(), 'categories' => array(), 'years' => array()),
-            'period_label' => '',
-            'year' => '',
-            'category_name' => '',
-            'report_title' => '',
-            'visit_columns' => array(),
-            'month_groups' => array(),
-            'rows' => array(),
-        );
+        $return = array('filters' => array('vendors' => array(), 'categories' => array(), 'years' => array()), 'period_label' => '', 'year' => '', 'category_name' => '', 'report_title' => '', 'visit_columns' => array(), 'month_groups' => array(), 'rows' => array());
         $companyId = (int) ($get['company_id'] ?? 0);
         if ($companyId <= 0) {
             return $return;
         }
 
-        $vendorSql = "SELECT id, display_name AS name FROM vendors
-            WHERE company_id = {$companyId} AND is_active = 0
-            AND display_name IS NOT NULL AND display_name != ''
-            ORDER BY display_name ASC";
-        $vendorRows = $callConfig->getAllRows($vendorSql);
-        if (count((array) $vendorRows) > 0) {
-            foreach ($vendorRows as $vendorRow) {
-                $r = is_array($vendorRow) ? $vendorRow : (array) $vendorRow;
-                $return['filters']['vendors'][] = array(
-                    'id' => (int) ($r['id'] ?? 0),
-                    'name' => $r['name'] ?? '',
-                );
-            }
-        }
-
-        $catSql = "SELECT id, category_description AS name FROM asset_categories
-            WHERE company_id = {$companyId} AND is_active = 0
-            AND category_description IS NOT NULL AND category_description != ''
-            ORDER BY category_description ASC";
-        $catRows = $callConfig->getAllRows($catSql);
-        if (count((array) $catRows) > 0) {
-            foreach ($catRows as $catRow) {
-                $r = is_array($catRow) ? $catRow : (array) $catRow;
-                $return['filters']['categories'][] = array(
-                    'id' => (int) ($r['id'] ?? 0),
-                    'name' => $r['name'] ?? '',
-                );
-            }
-        }
+        $return['filters'] = $this->fetchVendorAmcScheduleFilters($companyId);
 
         $cur = (int) date('Y');
-        $years = array();
-        for ($y = 2019; $y <= ($cur + 1); $y++) {
-            $years[] = $y;
+        $selectedYear = (int) ($get['year'] ?? 0);
+        if ($selectedYear <= 0) {
+            $selectedYear = $cur;
         }
-        rsort($years);
-        $return['filters']['years'] = $years;
+        $return['year'] = $selectedYear;
+        $fiscalStartYear = $selectedYear;
+        $return['period_label'] = 'FY ' . $fiscalStartYear . ' - ' . ($fiscalStartYear + 1);
 
-        $vendorJoin = "INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id
-            AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.party_type = 'vendor'
-            AND c.current_status = '" . ST_APPROVED . "'
-            AND (c.cancel_status IS NULL OR c.cancel_status != 'Y')
-            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = s.company_id AND cad.is_active = 0
-            LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0
-            INNER JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id AND ca.is_active = 0
-            INNER JOIN contract_amc_locations cal ON cal.id = s.contract_amc_location_id AND cal.company_id = s.company_id AND cal.is_active = 0
-            LEFT JOIN locations l ON l.id = cal.location_id AND l.company_id = cal.company_id AND l.is_active = 0
-            LEFT JOIN assets caa ON caa.id = ca.asset_id AND caa.company_id = ca.company_id AND caa.is_active = 0
-            LEFT JOIN asset_categories ac ON ac.id = caa.category_id AND ac.company_id = caa.company_id AND ac.is_active = 0";
-
+        $catId = (int) ($get['category_id'] ?? 0);
+        $extraWhere = "";
+        if ($catId > 0) {
+            $extraWhere .= " AND a.category_id = {$catId}";
+            $cRow = $callConfig->getRow("SELECT category_description FROM asset_categories WHERE id = {$catId} AND company_id = {$companyId} LIMIT 1");
+            if ($cRow) {
+                $return['category_name'] = $cRow->category_description ?? '';
+            }
+        }
         $vendorId = (int) ($get['vendor_id'] ?? 0);
-        $categoryId = (int) ($get['category_id'] ?? 0);
-        $year = trim((string) ($get['year'] ?? ''));
-        if ($vendorId <= 0 || $categoryId <= 0 || $year == '' || !is_numeric($year)) {
-            return $return;
+        if ($vendorId > 0) {
+            $extraWhere .= " AND c.party_id = {$vendorId}";
         }
 
-        $fiscalStartYear = (int) $year;
-        $return['year'] = (string) $fiscalStartYear;
-        $return['period_label'] = $this->vendorAmcTrackerPeriodLabel($fiscalStartYear);
-        $freqLabelMap = $this->buildVendorAmcFrequencyLabelMap($companyId);
+        $vendorJoin = "INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.party_type = 'vendor' AND c.current_status = '" . ST_APPROVED . "' AND (c.cancel_status IS NULL OR c.cancel_status != 'Y') LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = s.company_id AND cad.is_active = 0 LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0 INNER JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id AND ca.is_active = 0 LEFT JOIN assets a ON a.id = s.asset_id AND a.company_id = s.company_id AND a.is_active = 0 LEFT JOIN asset_categories ac ON ac.id = a.category_id AND ac.company_id = a.company_id AND ac.is_active = 0 INNER JOIN contract_amc_locations cal ON cal.id = s.contract_amc_location_id AND cal.company_id = s.company_id AND cal.is_active = 0 LEFT JOIN locations l ON l.id = cal.location_id AND l.company_id = cal.company_id AND l.is_active = 0";
 
-        $categoryName = '';
-        if (count((array) ($return['filters']['categories'] ?? array())) > 0) {
-            foreach ($return['filters']['categories'] as $catFilter) {
-                if ((int) ($catFilter['id'] ?? 0) == $categoryId) {
-                    $categoryName = trim((string) ($catFilter['name'] ?? ''));
-                    break;
-                }
-            }
-        }
+        $startDate = $fiscalStartYear . '-04-01 00:00:00';
+        $endDate = ($fiscalStartYear + 1) . '-03-31 23:59:59';
+        $sql = "SELECT s.id AS schedule_id, s.contract_id, s.asset_id, s.planned_service_datetime, s.actual_start_datetime, s.actual_end_datetime, s.current_status, ca.service_frequency, ca.visits_per_interval, a.asset_name, a.barcode, a.category_id, ac.category_description, cal.location_id, l.location_name, v.display_name AS vendor_name FROM contract_amc_service_schedules s {$vendorJoin} WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.planned_service_datetime >= '{$startDate}' AND s.planned_service_datetime <= '{$endDate}'{$extraWhere} ORDER BY l.location_name ASC, a.asset_name ASC, s.planned_service_datetime ASC";
+        $schedRows = $callConfig->getAllRows($sql);
 
-        $fyStart = $fiscalStartYear . '-04-01';
-        $fyEnd = ($fiscalStartYear + 1) . '-03-31 23:59:59';
-        $where = "s.company_id = {$companyId} AND s.is_active = 0
-            AND c.party_id = {$vendorId} AND c.party_type = 'vendor'
-            AND ac.id = {$categoryId}
-            AND s.planned_service_datetime >= '" . addslashes($fyStart) . "'
-            AND s.planned_service_datetime <= '" . addslashes($fyEnd) . "'";
-
-        $sql = "SELECT s.id, s.planned_service_datetime, s.actual_start_datetime,
-            v.display_name AS vendor_name,
-            ca.id AS contract_amc_asset_id, ca.asset_name, ca.service_frequency,
-            caa.asset_code, caa.asset_description, caa.old_ref_no_1 AS equipment_asset_no,
-            ac.id AS category_id, ac.category_description AS category_name,
-            l.location_name
-            FROM contract_amc_service_schedules s
-            {$vendorJoin}
-            WHERE {$where}
-            ORDER BY ca.asset_name ASC, l.location_name ASC, s.planned_service_datetime ASC";
-        $scheduleRows = $callConfig->getAllRows($sql);
-
-        $visitDateKeys = array();
+        $uniqueDates = array();
         $grouped = array();
-        if (count((array) $scheduleRows) > 0) {
-            foreach ($scheduleRows as $scheduleRow) {
-                $row = is_array($scheduleRow) ? $scheduleRow : (array) $scheduleRow;
-                if ($categoryName == '') {
-                    $categoryName = trim((string) ($row['category_name'] ?? ''));
-                }
-                $assetKey = (int) ($row['contract_amc_asset_id'] ?? 0);
-                if ($assetKey <= 0) {
-                    continue;
-                }
-                $planned = trim((string) ($row['planned_service_datetime'] ?? ''));
-                if ($planned == '') {
-                    continue;
-                }
-                $plannedTs = strtotime($planned);
-                if ($plannedTs === false) {
-                    continue;
-                }
-                $visitKey = date('Y-m-d', $plannedTs);
-                if ($visitKey == '') {
-                    continue;
-                }
-                $visitDateKeys[$visitKey] = $visitKey;
-
-                if (!isset($grouped[$assetKey])) {
-                    $grouped[$assetKey] = array(
-                        'vendor_name' => $row['vendor_name'] ?? '',
-                        'asset_location' => $this->vendorAmcScheduleFormatAssetLocation(
-                            $row['asset_name'] ?? '',
-                            $row['location_name'] ?? '',
-                            $row['asset_code'] ?? '',
-                            $row['asset_description'] ?? '',
-                            $row['equipment_asset_no'] ?? '',
-                            $row['category_name'] ?? ''
-                        ),
-                        'frequency_label' => $this->vendorAmcFrequencyLabel($row['service_frequency'] ?? '', $freqLabelMap),
-                        'visits' => array(),
-                    );
-                }
-                $existingCell = $grouped[$assetKey]['visits'][$visitKey] ?? array('planned' => '', 'actual_start' => '');
-                $grouped[$assetKey]['visits'][$visitKey] = $this->vendorAmcScheduleMergeVisitCell(
-                    $existingCell,
-                    $planned,
-                    trim((string) ($row['actual_start_datetime'] ?? ''))
-                );
+        foreach ($schedRows as $sRow) {
+            $s = (array) $sRow;
+            $dtKey = substr($s['planned_service_datetime'], 0, 10);
+            if ($dtKey != '') {
+                $uniqueDates[$dtKey] = $dtKey;
             }
+            $locKey = ($s['location_name'] ?? '—') . '___' . ($s['location_id'] ?? 0);
+            $assetKey = (int) ($s['asset_id'] ?? 0);
+            if (!isset($grouped[$locKey][$assetKey])) {
+                $grouped[$locKey][$assetKey] = array('asset_id' => $assetKey, 'asset_name' => $s['asset_name'] ?? '—', 'barcode' => $s['barcode'] ?? '', 'category_name' => $s['category_description'] ?? '—', 'vendor_name' => $s['vendor_name'] ?? '—', 'service_frequency' => $s['service_frequency'] ?? '—', 'visits' => array());
+            }
+            $grouped[$locKey][$assetKey]['visits'][$dtKey] = $this->vendorAmcScheduleMergeVisitCell($grouped[$locKey][$assetKey]['visits'][$dtKey] ?? null, $s['planned_service_datetime'], $s['actual_start_datetime']);
         }
 
-        $columnLayout = $this->vendorAmcScheduleBuildVisitColumnLayout(array_values($visitDateKeys));
-        $monthGroups = $columnLayout['month_groups'] ?? array();
-        $visitColumns = $columnLayout['visit_columns'] ?? array();
+        $colLayout = $this->vendorAmcScheduleBuildVisitColumnLayout(array_values($uniqueDates));
+        $return['visit_columns'] = $colLayout['visit_columns'];
+        $return['month_groups'] = $colLayout['month_groups'];
 
-        $return['category_name'] = $categoryName;
-        $return['report_title'] = $this->vendorAmcScheduleReportTitle($categoryName, $fiscalStartYear);
-        $return['month_groups'] = $monthGroups;
-        $return['visit_columns'] = $visitColumns;
-        $return['rows'] = array_values($grouped);
+        $rows = array();
+        foreach ($grouped as $locKey => $assetMap) {
+            $parts = explode('___', $locKey);
+            $locName = $parts[0] ?? '—';
+            foreach ($assetMap as $assetInfo) {
+                $cells = array();
+                foreach ($return['visit_columns'] as $col) {
+                    $cKey = $col['key'];
+                    $cells[$cKey] = $assetInfo['visits'][$cKey] ?? array('planned' => '', 'actual_start' => '');
+                }
+                $rows[] = array('location_name' => $locName, 'asset_name' => $assetInfo['asset_name'], 'barcode' => $assetInfo['barcode'], 'category_name' => $assetInfo['category_name'], 'vendor_name' => $assetInfo['vendor_name'], 'service_frequency' => $assetInfo['service_frequency'], 'cells' => $cells);
+            }
+        }
+        $return['rows'] = $rows;
         return $return;
     }
-
     public function getScheduleVisitPhase($scheduleRow)
     {
         $row = is_array($scheduleRow) ? $scheduleRow : (array) $scheduleRow;
@@ -5583,29 +5258,25 @@ public function getPpmInhouseReportData($get)
     public function canSaveRepairOrderForSchedule($companyId, $scheduleId, $repairOrderId)
     {
         global $callConfig;
-        $companyId = (int) $companyId;
         $scheduleId = (int) $scheduleId;
-        $repairOrderId = (int) $repairOrderId;
         if ($scheduleId <= 0) {
             return array('ok' => true, 'message' => '');
         }
-        $sql = "SELECT s.*, s.current_status AS visit_status FROM contract_amc_service_schedules s
-            WHERE s.id = {$scheduleId} AND s.company_id = {$companyId} AND s.is_active = 0 LIMIT 1";
-        $row = $callConfig->getRow($sql);
+        $companyId = (int) $companyId;
+        $row = $callConfig->getRow("SELECT s.*, s.current_status AS visit_status FROM contract_amc_service_schedules s WHERE s.id = {$scheduleId} AND s.company_id = {$companyId} AND s.is_active = 0 LIMIT 1");
         if (!$row) {
             return array('ok' => false, 'message' => 'Schedule visit not found');
         }
-        $schedule = is_array($row) ? $row : (array) $row;
+        $schedule = (array) $row;
         if ($this->getScheduleVisitPhase($schedule) != 'in_progress') {
             return array('ok' => false, 'message' => 'Job is closed; repair order cannot be modified.');
         }
         $existing = $this->getRepairOrderByScheduleId($companyId, $scheduleId);
-        if (count((array) $existing) > 0 && (int) ($existing['id'] ?? 0) != $repairOrderId) {
+        if (count((array) $existing) > 0 && (int) ($existing['id'] ?? 0) != (int) $repairOrderId) {
             return array('ok' => false, 'message' => 'A repair order already exists for this visit.');
         }
         return array('ok' => true, 'message' => '', 'schedule' => $schedule);
     }
-
     public function resolveContractFromAssetLocation($companyId, $assetId, $locationId)
     {
         global $callConfig;
@@ -5929,6 +5600,40 @@ public function getRepairOrderByScheduleId($companyId, $scheduleId)
         return $this->getContractAmcScheduleDetails($scheduleGet);
     }
 
+    private function resolveRepairOrderDefaults($companyId, $repairOrderId, $complaintId, $scheduleId, $get)
+    {
+        global $callConfig;
+        $result = array('repair_order' => array(), 'lines' => array(), 'contractId' => 0, 'scheduleId' => $scheduleId);
+        if ($repairOrderId > 0) {
+            $row = $callConfig->getRow("SELECT * FROM contract_amc_repair_orders WHERE id = {$repairOrderId} AND company_id = {$companyId} AND is_active = 0 LIMIT 1");
+            if ($row) {
+                $result['repair_order'] = (array) $row;
+                $result['contractId'] = (int) ($result['repair_order']['contract_id'] ?? 0);
+                $result['lines'] = $this->getRepairOrderLines($companyId, $repairOrderId);
+                if ($scheduleId <= 0) {
+                    $result['scheduleId'] = (int) ($result['repair_order']['schedule_id'] ?? 0);
+                }
+            }
+        } elseif ($complaintId > 0) {
+            $cRow = $callConfig->getRow("SELECT * FROM complaints WHERE id = {$complaintId} AND company_id = {$companyId} AND is_active = 0 LIMIT 1");
+            if ($cRow) {
+                $c = (array) $cRow;
+                $result['contractId'] = (int) ($c['contract_id'] ?? 0);
+                $result['repair_order'] = array('contract_id' => $result['contractId'], 'location_id' => (int) ($c['location_id'] ?? 0), 'default_asset_id' => (int) ($c['asset_id'] ?? 0), 'servicenow_ref' => $c['servicenow_ref'] ?? '', 'complaint_id' => $complaintId, 'schedule_id' => (int) ($c['schedule_id'] ?? 0), 'source_type' => 'adhoc_complaint', 'repair_date' => date('Y-m-d'));
+            }
+        } elseif ($scheduleId > 0) {
+            $detail = $this->getAmcRepairOrderScheduleDetailsGet($get, $scheduleId);
+            $schedule = $detail['schedule'] ?? array();
+            if (count((array) $schedule) > 0) {
+                $locRow = $callConfig->getRow("SELECT cal.location_id, cal.id AS contract_amc_location_id, ca.asset_id FROM contract_amc_service_schedules s LEFT JOIN contract_amc_locations cal ON cal.id = s.contract_amc_location_id AND cal.company_id = s.company_id LEFT JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id WHERE s.id = {$scheduleId} AND s.company_id = {$companyId} AND s.is_active = 0 LIMIT 1");
+                $loc = (array) $locRow;
+                $result['contractId'] = (int) ($schedule['contract_id'] ?? 0);
+                $result['repair_order'] = array('contract_id' => $result['contractId'], 'contract_amc_location_id' => (int) ($loc['contract_amc_location_id'] ?? 0), 'location_id' => (int) ($loc['location_id'] ?? 0), 'default_asset_id' => (int) ($loc['asset_id'] ?? 0), 'schedule_id' => $scheduleId, 'source_type' => 'planned_visit', 'repair_date' => date('Y-m-d'));
+            }
+        }
+        return $result;
+    }
+
     public function getAmcRepairOrderFormData($get)
     {
         global $callConfig;
@@ -5936,116 +5641,18 @@ public function getRepairOrderByScheduleId($companyId, $scheduleId)
         $repairOrderId = (int) ($get['repair_order_id'] ?? $get['id'] ?? 0);
         $complaintId = (int) ($get['complaint_id'] ?? 0);
         $scheduleId = (int) ($get['schedule_id'] ?? 0);
-        $contractId = (int) ($get['contract_id'] ?? 0);
-        $return = array(
-            'repair_order' => array(),
-            'lines' => array(),
-            'contracts' => array(),
-        );
-        $admin_or_user_whr = "";
-        if ($get['admin_type'] != 1) {
-            $admin_or_user_whr = " AND c.created_by='{$get['user_id']}'";
-        }
+        $return = array('repair_order' => array(), 'lines' => array(), 'contracts' => array());
+
+        $admin_or_user_whr = ($get['admin_type'] != 1) ? " AND c.created_by='{$get['user_id']}'" : "";
         $approved = defined('ST_APPROVED') ? (int) ST_APPROVED : 199;
-        $cSql = "SELECT c.id, c.contract_name, c.party_type, c.party_id,
-            CASE WHEN c.party_type = 'vendor' THEN v.display_name ELSE '' END AS vendor_name
-            FROM contracts c
-            LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0
-            WHERE c.company_id = {$companyId} AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.current_status = {$approved}
-            AND (c.cancel_status IS NULL OR c.cancel_status != 'Y')" . $admin_or_user_whr . "
-            ORDER BY c.contract_name ASC";
+        $cSql = "SELECT c.id, c.contract_name, c.party_type, c.party_id, CASE WHEN c.party_type = 'vendor' THEN v.display_name ELSE '' END AS vendor_name FROM contracts c LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0 WHERE c.company_id = {$companyId} AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.current_status = {$approved} AND (c.cancel_status IS NULL OR c.cancel_status != 'Y')" . $admin_or_user_whr . " ORDER BY c.contract_name ASC";
         $return['contracts'] = $callConfig->getAllRows($cSql);
 
-        if ($repairOrderId > 0) {
-            $row = $callConfig->getRow("SELECT * FROM contract_amc_repair_orders WHERE id = {$repairOrderId} AND company_id = {$companyId} AND is_active = 0 LIMIT 1");
-            if ($row) {
-                $return['repair_order'] = is_array($row) ? $row : (array) $row;
-                $contractId = (int) ($return['repair_order']['contract_id'] ?? 0);
-                $return['lines'] = $this->getRepairOrderLines($companyId, $repairOrderId);
-                if ($scheduleId <= 0) {
-                    $scheduleId = (int) ($return['repair_order']['schedule_id'] ?? 0);
-                }
-            }
-        } elseif ($complaintId > 0) {
-            $cRow = $callConfig->getRow("SELECT * FROM complaints WHERE id = {$complaintId} AND company_id = {$companyId} AND is_active = 0 LIMIT 1");
-            if ($cRow) {
-                $c = is_array($cRow) ? $cRow : (array) $cRow;
-                $contractId = (int) ($c['contract_id'] ?? 0);
-                $return['repair_order'] = array(
-                    'contract_id' => $contractId,
-                    'location_id' => (int) ($c['location_id'] ?? 0),
-                    'default_asset_id' => (int) ($c['asset_id'] ?? 0),
-                    'servicenow_ref' => $c['servicenow_ref'] ?? '',
-                    'complaint_id' => $complaintId,
-                    'schedule_id' => (int) ($c['schedule_id'] ?? 0),
-                    'source_type' => 'adhoc_complaint',
-                    'repair_date' => date('Y-m-d'),
-                );
-            }
-        } elseif ($scheduleId > 0) {
-            $detail = $this->getAmcRepairOrderScheduleDetailsGet($get, $scheduleId);
-            $schedule = $detail['schedule'] ?? array();
-            if (count((array) $schedule) > 0) {
-                $locRow = $callConfig->getRow("SELECT cal.location_id, cal.id AS contract_amc_location_id, ca.asset_id
-                    FROM contract_amc_service_schedules s
-                    LEFT JOIN contract_amc_locations cal ON cal.id = s.contract_amc_location_id AND cal.company_id = s.company_id
-                    LEFT JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id
-                    WHERE s.id = {$scheduleId} AND s.company_id = {$companyId} LIMIT 1");
-                $loc = is_array($locRow) ? $locRow : (array) $locRow;
-                $contractId = (int) ($schedule['contract_id'] ?? 0);
-                $existing = $this->getRepairOrderByScheduleId($companyId, $scheduleId);
-                if (count((array) $existing) > 0) {
-                    $return['repair_order'] = $existing;
-                    $return['lines'] = $this->getRepairOrderLines($companyId, (int) $existing['id']);
-                } else {
-                    $vendorId = ($schedule['party_type'] ?? '') == 'vendor' ? (int) ($schedule['party_id'] ?? 0) : 0;
-                    $return['repair_order'] = array(
-                        'contract_id' => $contractId,
-                        'location_id' => (int) ($loc['location_id'] ?? 0),
-                        'default_asset_id' => (int) ($loc['asset_id'] ?? 0),
-                        'contract_amc_location_id' => (int) ($loc['contract_amc_location_id'] ?? 0),
-                        'vendor_id' => $vendorId,
-                        'schedule_id' => $scheduleId,
-                        'source_type' => 'planned_visit',
-                        'repair_date' => date('Y-m-d'),
-                    );
-                }
-                $return['repair_eligibility'] = $detail['repair_eligibility'] ?? 'hidden';
-                $return['schedule'] = $this->buildAmcRepairOrderScheduleSummary($get, $scheduleId, $schedule, $detail);
-            }
-        }
-
-        if ($scheduleId > 0) {
-            $detail = $this->getAmcRepairOrderScheduleDetailsGet($get, $scheduleId);
-            $scheduleSummary = $this->buildAmcRepairOrderScheduleSummary($get, $scheduleId, $detail['schedule'] ?? array(), $detail);
-            if (count((array) $scheduleSummary) > 0) {
-                $return['schedule'] = $scheduleSummary;
-            }
-            if (empty($return['repair_eligibility'])) {
-                $return['repair_eligibility'] = $detail['repair_eligibility'] ?? 'hidden';
-            }
-        }
-
-        if ($contractId > 0) {
-            $return['contract_assets'] = $this->getAmcRepairOrderContractAssetsData($companyId, $contractId);
-            $cRow = $callConfig->getRow("SELECT c.*, CASE WHEN c.party_type = 'vendor' THEN v.display_name ELSE '' END AS vendor_name
-                FROM contracts c
-                LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id
-                WHERE c.id = {$contractId} AND c.company_id = {$companyId} LIMIT 1");
-            if ($cRow) {
-                $c = is_array($cRow) ? $cRow : (array) $cRow;
-                if (empty($return['repair_order']['vendor_id']) && ($c['party_type'] ?? '') == 'vendor') {
-                    $return['repair_order']['vendor_id'] = (int) ($c['party_id'] ?? 0);
-                }
-                $return['repair_order']['vendor_name'] = $c['vendor_name'] ?? '';
-                $return['repair_order']['contract_name'] = $c['contract_name'] ?? '';
-            }
-        }
-        $return['items'] = $this->getAmcRepairOrderItemsData($companyId);
-
+        $defaults = $this->resolveRepairOrderDefaults($companyId, $repairOrderId, $complaintId, $scheduleId, $get);
+        $return['repair_order'] = $defaults['repair_order'];
+        $return['lines'] = $defaults['lines'];
         return $return;
     }
-
     public function getAmcRepairOrdersList($get)
     {
         global $callConfig;
@@ -6066,72 +5673,144 @@ public function getRepairOrderByScheduleId($companyId, $scheduleId)
         return array('rows' => $callConfig->getAllRows($sql));
     }
 
+    private function parseRepairOrderLines($linesRaw, $defaultPo, $defaultLocationId)
+    {
+        $parsedLines = array();
+        $order = 0;
+        foreach ((array) $linesRaw as $line) {
+            if (!is_array($line)) {
+                continue;
+            }
+            $part = trim((string) ($line['part_description'] ?? ''));
+            $itemId = (int) ($line['item_id'] ?? 0);
+            if ($part == '' && $itemId <= 0) {
+                continue;
+            }
+            $po = trim((string) ($line['po_number'] ?? ''));
+            if ($po == '' && $defaultPo != '') {
+                $po = $defaultPo;
+            }
+            $parsedLines[] = array(
+                'item_id' => $itemId,
+                'location_id' => (int) ($line['location_id'] ?? $defaultLocationId),
+                'part_description' => $part,
+                'qty' => (float) ($line['qty'] ?? 1),
+                'po_number' => $po,
+                'amount' => (float) ($line['amount'] ?? 0),
+                'line_order' => $order++,
+                'line_id' => (int) ($line['line_id'] ?? $line['id'] ?? 0),
+            );
+        }
+        return $parsedLines;
+    }
+
+    private function upsertRepairOrderHeader($post, $header, $repairOrderId, $companyId, $userId, $now, $sourceType, $scheduleId, $contractId, $get)
+    {
+        global $callConfig;
+        if ($repairOrderId <= 0) {
+            $header['company_id'] = $companyId;
+            $header['transaction_no'] = $this->generateRepairOrderTransactionNo($companyId);
+            $header['is_active'] = 0;
+            $header['current_status'] = 0;
+            $header['status_date'] = $now;
+            $header['created_by'] = $userId;
+            $header['created_date'] = $now;
+            $res = $callConfig->insertRecord('contract_amc_repair_orders', $header);
+            $newId = (int) ($res['LASTID'] ?? 0);
+            if ($newId <= 0) {
+                return ['error' => 'Could not create repair order'];
+            }
+            if ($sourceType != 'planned_visit') {
+                $this->createRepairOrderApprovalLog($get, $newId, $header['repair_date']);
+            }
+            return ['id' => $newId];
+        }
+        $existing = $callConfig->getRow("SELECT * FROM contract_amc_repair_orders WHERE id = {$repairOrderId} AND company_id = {$companyId} AND is_active = 0 LIMIT 1");
+        if (!$existing) {
+            return ['error' => 'Repair order not found'];
+        }
+        $ex = (array) $existing;
+        if ((int) ($ex['schedule_id'] ?? 0) != $scheduleId && (int) ($ex['schedule_id'] ?? 0) > 0) {
+            return ['error' => 'Schedule link cannot be changed'];
+        }
+        if ((int) ($ex['contract_id'] ?? 0) != $contractId) {
+            return ['error' => 'Contract cannot be changed'];
+        }
+        unset($header['source_type']);
+        $callConfig->updateRecord('contract_amc_repair_orders', $header, 'id', $repairOrderId);
+        return ['id' => $repairOrderId];
+    }
+
+    private function syncRepairOrderLines($parsedLines, $repairOrderId, $companyId, $userId, $now)
+    {
+        global $callConfig;
+        $keptLineIds = array();
+        foreach ($parsedLines as $line) {
+            $lineData = array(
+                'item_id' => $line['item_id'] > 0 ? $line['item_id'] : null,
+                'asset_id' => null,
+                'location_id' => $line['location_id'] > 0 ? $line['location_id'] : null,
+                'part_description' => $line['part_description'],
+                'qty' => $line['qty'],
+                'po_number' => $line['po_number'] != '' ? $line['po_number'] : null,
+                'amount' => $line['amount'],
+                'line_order' => $line['line_order'],
+                'updated_by' => $userId,
+                'updated_date' => $now,
+            );
+            if ($line['line_id'] > 0) {
+                $callConfig->updateRecord('contract_amc_repair_order_lines', $lineData, 'id', $line['line_id']);
+                $keptLineIds[] = $line['line_id'];
+            } else {
+                $lineData['repair_order_id'] = $repairOrderId;
+                $lineData['company_id'] = $companyId;
+                $lineData['is_active'] = 0;
+                $lineData['created_by'] = $userId;
+                $lineData['created_date'] = $now;
+                $ins = $callConfig->insertRecord('contract_amc_repair_order_lines', $lineData);
+                if (!empty($ins['LASTID'])) {
+                    $keptLineIds[] = (int) $ins['LASTID'];
+                }
+            }
+        }
+        $existingLines = $this->getRepairOrderLines($companyId, $repairOrderId);
+        foreach ($existingLines as $el) {
+            $lid = (int) ($el['id'] ?? 0);
+            if ($lid > 0 && !in_array($lid, $keptLineIds)) {
+                $callConfig->updateRecord('contract_amc_repair_order_lines', array('is_active' => 1, 'updated_by' => $userId, 'updated_date' => $now), 'id', $lid);
+            }
+        }
+    }
+
     public function saveAmcRepairOrder($get, $post)
     {
         global $callConfig;
-        $return = array('status' => 'error', 'message' => 'Save failed');
         $companyId = (int) ($get['company_id'] ?? 0);
         $userId = (int) ($get['user_id'] ?? 0);
         $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
         $repairOrderId = (int) ($post['repair_order_id'] ?? $post['id'] ?? 0);
         $scheduleId = (int) ($post['schedule_id'] ?? 0);
-        $sourceType = trim((string) ($post['source_type'] ?? 'manual'));
-        if ($scheduleId > 0) {
-            $sourceType = 'planned_visit';
-        }
+        $sourceType = ($scheduleId > 0) ? 'planned_visit' : trim((string) ($post['source_type'] ?? 'manual'));
 
         $gate = $this->canSaveRepairOrderForSchedule($companyId, $scheduleId, $repairOrderId);
         if (empty($gate['ok'])) {
-            $return['message'] = $gate['message'];
-            return $return;
+            return array('status' => 'error', 'message' => $gate['message']);
         }
 
         $contractId = (int) ($post['contract_id'] ?? 0);
         if ($contractId <= 0) {
-            $return['message'] = 'Contract is required';
-            return $return;
+            return array('status' => 'error', 'message' => 'Contract is required');
         }
 
-        $linesRaw = $post['repair_lines'] ?? $post['lines'] ?? array();
-        if (!is_array($linesRaw)) {
-            $linesRaw = json_decode($linesRaw, true);
-        }
-        $linesRaw = is_array($linesRaw) ? $linesRaw : array();
+        $linesRaw = is_string($post['repair_lines'] ?? $post['lines'] ?? null)
+            ? json_decode($post['repair_lines'] ?? $post['lines'], true)
+            : ($post['repair_lines'] ?? $post['lines'] ?? []);
         $defaultPo = trim((string) ($post['default_po_number'] ?? ''));
-
-        $parsedLines = array();
-        if (count((array) $linesRaw) > 0) {
-            $order = 0;
-            foreach ($linesRaw as $line) {
-                if (!is_array($line)) {
-                    continue;
-                }
-                $part = trim((string) ($line['part_description'] ?? ''));
-                $itemId = (int) ($line['item_id'] ?? 0);
-                if ($part == '' && $itemId <= 0) {
-                    continue;
-                }
-                $po = trim((string) ($line['po_number'] ?? ''));
-                if ($po == '' && $defaultPo != '') {
-                    $po = $defaultPo;
-                }
-                $parsedLines[] = array(
-                    'item_id' => $itemId,
-                    'location_id' => (int) ($line['location_id'] ?? $post['location_id'] ?? 0),
-                    'part_description' => $part,
-                    'qty' => (float) ($line['qty'] ?? 1),
-                    'po_number' => $po,
-                    'amount' => (float) ($line['amount'] ?? 0),
-                    'line_order' => $order++,
-                    'line_id' => (int) ($line['line_id'] ?? $line['id'] ?? 0),
-                );
-            }
-        }
+        $parsedLines = $this->parseRepairOrderLines($linesRaw, $defaultPo, (int) ($post['location_id'] ?? 0));
 
         $lineCheck = $this->validateRepairOrderLineItems($companyId, $parsedLines);
         if (empty($lineCheck['ok'])) {
-            $return['message'] = $lineCheck['message'];
-            return $return;
+            return array('status' => 'error', 'message' => $lineCheck['message']);
         }
 
         $vendorId = (int) ($post['vendor_id'] ?? 0);
@@ -6159,97 +5838,22 @@ public function getRepairOrderByScheduleId($companyId, $scheduleId)
             'updated_date' => $now,
         );
 
-        $isNew = ($repairOrderId <= 0);
-        if ($isNew) {
-            $header['company_id'] = $companyId;
-            $header['transaction_no'] = $this->generateRepairOrderTransactionNo($companyId);
-            $header['is_active'] = 0;
-            $header['current_status'] = 0;
-            $header['status_date'] = $now;
-            $header['created_by'] = $userId;
-            $header['created_date'] = $now;
-            $res = $callConfig->insertRecord('contract_amc_repair_orders', $header);
-            if (empty($res['LASTID'])) {
-                $return['message'] = 'Could not create repair order';
-                return $return;
-            }
-            $repairOrderId = (int) $res['LASTID'];
-            if ($sourceType != 'planned_visit') {
-                $this->createRepairOrderApprovalLog($get, $repairOrderId, $header['repair_date']);
-            }
-        } else {
-            $existing = $callConfig->getRow("SELECT * FROM contract_amc_repair_orders WHERE id = {$repairOrderId} AND company_id = {$companyId} AND is_active = 0 LIMIT 1");
-            if (!$existing) {
-                $return['message'] = 'Repair order not found';
-                return $return;
-            }
-            $ex = is_array($existing) ? $existing : (array) $existing;
-            if ((int) ($ex['schedule_id'] ?? 0) != $scheduleId && (int) ($ex['schedule_id'] ?? 0) > 0) {
-                $return['message'] = 'Schedule link cannot be changed';
-                return $return;
-            }
-            if ((int) ($ex['contract_id'] ?? 0) != $contractId) {
-                $return['message'] = 'Contract cannot be changed';
-                return $return;
-            }
-            unset($header['source_type']);
-            $callConfig->updateRecord('contract_amc_repair_orders', $header, 'id', $repairOrderId);
+        $upsertOutcome = $this->upsertRepairOrderHeader($post, $header, $repairOrderId, $companyId, $userId, $now, $sourceType, $scheduleId, $contractId, $get);
+        if (isset($upsertOutcome['error'])) {
+            return array('status' => 'error', 'message' => $upsertOutcome['error']);
         }
+        $repairOrderId = $upsertOutcome['id'];
 
-        $keptLineIds = array();
-        if (count((array) $parsedLines) > 0) {
-            foreach ($parsedLines as $line) {
-                $lineData = array(
-                    'item_id' => $line['item_id'] > 0 ? $line['item_id'] : null,
-                    'asset_id' => null,
-                    'location_id' => $line['location_id'] > 0 ? $line['location_id'] : null,
-                    'part_description' => $line['part_description'],
-                    'qty' => $line['qty'],
-                    'po_number' => $line['po_number'] != '' ? $line['po_number'] : null,
-                    'amount' => $line['amount'],
-                    'line_order' => $line['line_order'],
-                    'updated_by' => $userId,
-                    'updated_date' => $now,
-                );
-                if ($line['line_id'] > 0) {
-                    $callConfig->updateRecord('contract_amc_repair_order_lines', $lineData, 'id', $line['line_id']);
-                    $keptLineIds[] = $line['line_id'];
-                } else {
-                    $lineData['repair_order_id'] = $repairOrderId;
-                    $lineData['company_id'] = $companyId;
-                    $lineData['is_active'] = 0;
-                    $lineData['created_by'] = $userId;
-                    $lineData['created_date'] = $now;
-                    $ins = $callConfig->insertRecord('contract_amc_repair_order_lines', $lineData);
-                    if (!empty($ins['LASTID'])) {
-                        $keptLineIds[] = (int) $ins['LASTID'];
-                    }
-                }
-            }
-        }
+        $this->syncRepairOrderLines($parsedLines, $repairOrderId, $companyId, $userId, $now);
 
-        $existingLines = $this->getRepairOrderLines($companyId, $repairOrderId);
-        if (count((array) $existingLines) > 0) {
-            foreach ($existingLines as $el) {
-                $lid = (int) ($el['id'] ?? 0);
-                if ($lid > 0 && !in_array($lid, $keptLineIds)) {
-                    $callConfig->updateRecord('contract_amc_repair_order_lines', array(
-                        'is_active' => 1,
-                        'updated_by' => $userId,
-                        'updated_date' => $now,
-                    ), 'id', $lid);
-                }
-            }
-        }
-
-        $return['status'] = 'success';
-        $return['message'] = 'Repair order saved';
-        $return['repair_order_id'] = $repairOrderId;
-        $return['repair_order'] = $callConfig->getRow("SELECT * FROM contract_amc_repair_orders WHERE id = {$repairOrderId} LIMIT 1");
-        $return['lines'] = $this->getRepairOrderLines($companyId, $repairOrderId);
-        return $return;
-    }
-    public function getAmcComplaintsDetails($get)
+        return array(
+            'status' => 'success',
+            'message' => 'Repair order saved',
+            'repair_order_id' => $repairOrderId,
+            'repair_order' => $callConfig->getRow("SELECT * FROM contract_amc_repair_orders WHERE id = {$repairOrderId} LIMIT 1"),
+            'lines' => $this->getRepairOrderLines($companyId, $repairOrderId)
+        );
+    }    public function getAmcComplaintsDetails($get)
     {
         global $callConfig;
         $return = array();
