@@ -2592,20 +2592,24 @@ trait ReactContractsApprovalTrait
         if (preg_match('/^\d{4}-\d{2}-\d{2}/', $dateStr)) {
             return substr($dateStr, 0, 10);
         }
+        $result = null;
         $normalized = str_replace('/', '-', $dateStr);
         foreach (array('d-m-Y', 'm-d-Y') as $fmt) {
             $d = DateTime::createFromFormat('!' . $fmt, $normalized);
             if ($d instanceof DateTime) {
                 $errors = DateTime::getLastErrors();
                 if (empty($errors['warning_count']) && empty($errors['error_count'])) {
-                    return $d->format('Y-m-d');
+                    $result = $d->format('Y-m-d');
+                    break;
                 }
             }
         }
-        $ts = strtotime($normalized);
-        return $ts ? date('Y-m-d', $ts) : null;
+        if ($result === null) {
+            $ts = strtotime($normalized);
+            $result = $ts ? date('Y-m-d', $ts) : null;
+        }
+        return $result;
     }
-
 
     private function amcVisitToPlannedDatetime(array $visit)
     {
@@ -2670,32 +2674,27 @@ trait ReactContractsApprovalTrait
             $hour = min(9 + $slotIndex * 3, 21);
             return str_pad((string) $hour, 2, '0', STR_PAD_LEFT) . ':00';
         }
+        $startDay = 1;
+        if ($startYmd) {
+            $d = DateTime::createFromFormat('Y-m-d', $startYmd);
+            $startDay = $d ? (int) $d->format('w') : 1;
+        }
         if ($f == 'weekly') {
-            $startDay = 1;
-            if ($startYmd) {
-                $d = DateTime::createFromFormat('Y-m-d', $startYmd);
-                $startDay = $d ? (int) $d->format('w') : 1;
-            }
             return (string) (($startDay + $slotIndex) % 7);
         }
-        $startDay = 1;
         if ($startYmd) {
             $parts = explode('-', $startYmd);
             $startDay = isset($parts[2]) ? (int) $parts[2] : 1;
         }
+        $val = (string) $startDay;
         if ($f == 'monthly_twice') {
-            if ($slotIndex == 0) {
-                return (string) $startDay;
-            }
-            return (string) min(28, $startDay + 15);
+            $val = ($slotIndex == 0) ? (string) $startDay : (string) min(28, $startDay + 15);
+        } elseif ($interval > 1) {
+            $step = max(1, (int) floor(28 / $interval));
+            $val = (string) min(28, $startDay + $slotIndex * $step);
         }
-        if ($interval <= 1) {
-            return (string) $startDay;
-        }
-        $step = max(1, (int) floor(28 / $interval));
-        return (string) min(28, $startDay + $slotIndex * $step);
-    }
-    private function amcComputeSlotVisit($periodAnchor, $frequency, $slotValue, $slotIndex, $interval, $contractStartYmd)
+        return $val;
+    }    private function amcComputeSlotVisit($periodAnchor, $frequency, $slotValue, $slotIndex, $interval, $contractStartYmd)
     {
         $freq = $this->normalizeAmcServiceOn($frequency);
         $slot = trim((string) $slotValue);
@@ -2733,30 +2732,39 @@ trait ReactContractsApprovalTrait
         if (!$base) {
             return null;
         }
+        $result = null;
         switch ($freq) {
             case 'daily':
                 $base->modify(self::CONST_1_DAY);
-                return $this->amcFormatDateYmd($base);
+                $result = $this->amcFormatDateYmd($base);
+                break;
             case 'weekly':
                 $base->modify(self::CONST_7_DAYS);
-                return $this->amcFormatDateYmd($base);
+                $result = $this->amcFormatDateYmd($base);
+                break;
             case 'monthly':
-                return $this->amcAddMonthsSafeYmd($currentYmd, 1);
+                $result = $this->amcAddMonthsSafeYmd($currentYmd, 1);
+                break;
             case 'monthly_twice':
                 $base->modify('+15 days');
-                return $this->amcFormatDateYmd($base);
+                $result = $this->amcFormatDateYmd($base);
+                break;
             case 'quarterly':
-                return $this->amcAddMonthsSafeYmd($currentYmd, 3);
+                $result = $this->amcAddMonthsSafeYmd($currentYmd, 3);
+                break;
             case 'halfyearly':
-                return $this->amcAddMonthsSafeYmd($currentYmd, 6);
+                $result = $this->amcAddMonthsSafeYmd($currentYmd, 6);
+                break;
             case 'yearly':
                 $base->modify('+1 year');
-                return $this->amcFormatDateYmd($base);
+                $result = $this->amcFormatDateYmd($base);
+                break;
             default:
-                return null;
+                $result = null;
+                break;
         }
-    }
-    private function amcFormatDateYmd(DateTime $d)
+        return $result;
+    }    private function amcFormatDateYmd(DateTime $d)
     {
         return $d->format('Y-m-d');
     }
@@ -2822,17 +2830,10 @@ trait ReactContractsApprovalTrait
         }
         $sessionFormat = $_SESSION['date_formate'] ?? '';
         $dateFormat = ($sessionFormat != '' && $sessionFormat != '0') ? $sessionFormat : 'd-m-Y';
-        $datePart = date($dateFormat, $ts);
-        if ($datePart == '') {
-            $datePart = date('d-m-Y', $ts);
-        }
+        $datePart = date($dateFormat, $ts) ?: date('d-m-Y', $ts);
         $hasTime = date('H:i', $ts) != '00:00';
-        if ($hasTime) {
-            return $datePart . ' ' . date('h:i A', $ts);
-        }
-        return $datePart;
-    }
-    public function getAmcContractAssetCalendarEvents($get)
+        return $hasTime ? ($datePart . ' ' . date('h:i A', $ts)) : $datePart;
+    }    public function getAmcContractAssetCalendarEvents($get)
     {
         global $callConfig;
         $return = array('events' => array());
@@ -3081,25 +3082,21 @@ public function getPartyContractsList($get, $party_type, $party_id)
     public function insertContracts($get, $post)
     {
         global $callConfig;
-        $return = array();
-        $return['post'] = $post;
+        $return = array('post' => $post);
         $insert_array = array('contract_name' => $post['contract_name'], 'transaction_no' => $post['transaction_no'], 'party_id' => $post['party_id'], 'start_date' => $post['start_date'], 'end_date' => $post['end_date'], 'description' => $post['description'], 'additional_notes' => $post['additional_notes'], 'payment_term_id' => $post['payment_term_id'], 'termination_condition' => $post['termination_condition'], 'contract_status' => $post['contract_status'], 'rt_number' => $post['rt_number']);
-        if ($post['Rid'] != "") {
+        if (!empty($post['Rid'])) {
             $insert_array['updated_by'] = $get['user_id'];
             $insert_array['updated_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-            $res = $callConfig->updateRecord('contracts', $insert_array, 'id', $post['Rid']);
-            $return['result'] = $res;
+            $return['result'] = $callConfig->updateRecord('contracts', $insert_array, 'id', $post['Rid']);
         } else {
             $insert_array['company_id'] = $get['company_id'];
             $insert_array['is_active'] = 0;
             $insert_array['created_by'] = $get['user_id'];
             $insert_array['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-            $insert_data = $callConfig->insertRecord('contracts', $insert_array);
-            $return['result'] = $insert_data;
+            $return['result'] = $callConfig->insertRecord('contracts', $insert_array);
         }
         return $return;
-    }
-    private function mergeAmcServiceFrequencyOptions($dbRows)
+    }    private function mergeAmcServiceFrequencyOptions($dbRows)
     {
         $canonical = array(
             'daily' => 'Daily',
@@ -3703,20 +3700,10 @@ public function getContractAmcTechnicians($company_id)
         }
         $techVal = $technicianId > 0 ? $technicianId : 'NULL';
         $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-        $sql = "UPDATE contract_amc_service_schedules SET
-            technician_id = {$techVal},
-            technician_is_override = 0,
-            updated_by = '" . addslashes($userId) . "',
-            updated_date = '{$now}'
-            WHERE company_id = {$companyId}
-            AND contract_amc_asset_id = {$contractAmcAssetId}
-            AND is_active = 0
-            AND current_status = 0
-            AND technician_is_override = 0";
+        $sql = "UPDATE contract_amc_service_schedules SET technician_id = {$techVal}, technician_is_override = 0, updated_by = '" . addslashes($userId) . "', updated_date = '{$now}' WHERE company_id = {$companyId} AND contract_amc_asset_id = {$contractAmcAssetId} AND is_active = 0 AND current_status = 0 AND technician_is_override = 0";
         $callConfig->executeQuery($sql);
         return 1;
     }
-
     public function getContractAmcTechnicianAssignments($get)
     {
         global $callConfig;
@@ -3839,179 +3826,128 @@ public function getContractAmcTechnicians($company_id)
             return $return;
         }
 
-        $contractSql = "SELECT c.*,
-            cad.service_mode, cad.department_id,
-            CASE WHEN c.party_type = 'customer' THEN cu.display_name WHEN c.party_type = 'vendor' THEN v.display_name ELSE '' END AS party_name
-            FROM contracts c
-            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0
-            LEFT JOIN customers cu ON cu.id = c.party_id AND c.party_type = 'customer' AND cu.company_id = c.company_id AND cu.is_active = 0
-            LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0
-            WHERE c.company_id = {$companyId} AND c.id = '" . addslashes($contractId) . self::SQL_COND_AND_C_IS_ACTIVE_0_LIMIT_1;
+        $contractSql = "SELECT c.*, cad.service_mode, cad.department_id, CASE WHEN c.party_type = 'customer' THEN cu.display_name WHEN c.party_type = 'vendor' THEN v.display_name ELSE '' END AS party_name FROM contracts c LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0 LEFT JOIN customers cu ON cu.id = c.party_id AND c.party_type = 'customer' AND cu.company_id = c.company_id AND cu.is_active = 0 LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0 WHERE c.company_id = {$companyId} AND c.id = '" . addslashes($contractId) . self::SQL_COND_AND_C_IS_ACTIVE_0_LIMIT_1;
         $contractRow = $callConfig->getRow($contractSql);
         if (!$contractRow) {
             return $return;
         }
-        $return['contract'] = is_array($contractRow) ? $contractRow : (array) $contractRow;
+        $contractArr = (array) $contractRow;
+        $return['contract'] = $contractArr;
 
-        $checkSql = "SELECT COUNT(id) AS cnt FROM application_check_lists
-            WHERE company_id = '" . addslashes($companyId) . "' AND transaction_id = '" . addslashes($contractId) . "'
-            AND application_tablename = 'contracts' AND is_active = 0";
+        $checkSql = "SELECT COUNT(id) AS cnt FROM application_check_lists WHERE company_id = '" . addslashes($companyId) . "' AND transaction_id = '" . addslashes($contractId) . "' AND application_tablename = 'contracts' AND is_active = 0";
         $checkRow = $callConfig->getRow($checkSql);
-        $cnt = 0;
-        if ($checkRow) {
-            $cr = is_array($checkRow) ? $checkRow : (array) $checkRow;
-            $cnt = (int) ($cr['cnt'] ?? 0);
-        }
+        $cnt = $checkRow ? (int) (((array) $checkRow)['cnt'] ?? 0) : 0;
+
         $return['checklist_is_default'] = ($cnt == 0);
         $return['checklist_items'] = $this->getDefaultContractAmcChecklistItems($companyId, $contractId);
-        $return['can_execute'] = $this->canExecuteContractAmcService($get, $return['contract']);
-        $return['contract_is_approved'] = $this->isContractAmcApprovedForExecution($get, $return['contract']);
+        $return['can_execute'] = $this->canExecuteContractAmcService($get, $contractArr);
+        $return['contract_is_approved'] = $this->isContractAmcApprovedForExecution($get, $contractArr);
         return $return;
+    }
+    private function validateContractAmcChecklistPreconditions($get, $post, $companyId, $contractId)
+    {
+        global $callConfig;
+        if ($contractId <= 0 || $companyId <= 0) {
+            return 'Invalid contract';
+        }
+        $contractSql = "SELECT c.*, cad.service_mode FROM contracts c LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0 WHERE c.company_id = {$companyId} AND c.id = '" . addslashes($contractId) . self::SQL_COND_AND_C_IS_ACTIVE_0_LIMIT_1;
+        $contractRow = $callConfig->getRow($contractSql);
+        if (!$contractRow) {
+            return 'Contract not found';
+        }
+        $contract = (array) $contractRow;
+        if (!$this->isContractAmcApprovedForExecution($get, $contract)) {
+            return 'Contract must be approved before checklist can be saved';
+        }
+        if (!$this->canExecuteContractAmcService($get, $contract)) {
+            return self::SQL_COND_NOT_AUTHORIZED;
+        }
+        $checklistItems = $post['checklist_items'] ?? array();
+        if (!is_array($checklistItems) || empty($checklistItems)) {
+            return 'At least one checklist item is required';
+        }
+        foreach ($checklistItems as $fieldValue) {
+            if (trim((string) $fieldValue) == '') {
+                return 'Checklist item name cannot be empty';
+            }
+        }
+        return null;
+    }
+
+    private function persistChecklistItems($checklistItems, $existingIds, $contractId, $companyId, $userId, $now)
+    {
+        global $callConfig;
+        $saved = 0;
+        foreach ($checklistItems as $i => $fieldValue) {
+            $fieldValue = trim((string) $fieldValue);
+            $checkId = $existingIds[$i] ?? '';
+            if ($checkId != '' && strpos((string) $checkId, 'def_') !== 0 && is_numeric($checkId)) {
+                $update_check_array = array('check_name' => $fieldValue, 'is_active' => '0', 'updated_by' => $userId, 'updated_date' => $now);
+                $res = $callConfig->updateRecord('application_check_lists', $update_check_array, 'id', $checkId);
+            } else {
+                $check_array = array('company_id' => $companyId, 'transaction_id' => $contractId, 'application_tablename' => 'contracts', 'check_name' => $fieldValue, 'current_status' => '0', 'is_active' => '0', 'created_by' => $userId, 'created_date' => $now);
+                $res = $callConfig->insertRecord('application_check_lists', $check_array);
+            }
+            if (($res['status'] ?? '') == 'sucess' || ($res['status'] ?? '') == 'success') {
+                $saved++;
+            }
+        }
+        return $saved;
     }
 
     public function saveContractAmcChecklist($get, $post)
     {
         global $callConfig;
-        $return = array('status' => 'error', 'message' => 'Unable to save checklist');
         $contractId = (int) ($post['contract_id'] ?? 0);
         $companyId = (int) ($get['company_id'] ?? 0);
         $userId = (int) ($get['user_id'] ?? 0);
 
-        if ($contractId <= 0 || $companyId <= 0) {
-            $return['message'] = 'Invalid contract';
-            return $return;
-        }
-
-        $contractSql = "SELECT c.*, cad.service_mode FROM contracts c
-            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0
-            WHERE c.company_id = {$companyId} AND c.id = '" . addslashes($contractId) . self::SQL_COND_AND_C_IS_ACTIVE_0_LIMIT_1;
-        $contractRow = $callConfig->getRow($contractSql);
-        if (!$contractRow) {
-            $return['message'] = 'Contract not found';
-            return $return;
-        }
-        $contract = is_array($contractRow) ? $contractRow : (array) $contractRow;
-        if (!$this->isContractAmcApprovedForExecution($get, $contract)) {
-            $return['message'] = 'Contract must be approved before checklist can be saved';
-            return $return;
-        }
-        if (!$this->canExecuteContractAmcService($get, $contract)) {
-            $return['message'] = self::SQL_COND_NOT_AUTHORIZED;
-            return $return;
-        }
-
-        $checklistItems = $post['checklist_items'] ?? array();
-        if (!is_array($checklistItems) || count((array) $checklistItems) == 0) {
-            $return['message'] = 'At least one checklist item is required';
-            return $return;
-        }
-        if (count((array) $checklistItems) > 0) {
-            foreach ($checklistItems as $fieldValue) {
-                if (trim((string) $fieldValue) == '') {
-                    $return['message'] = 'Checklist item name cannot be empty';
-                    return $return;
-                }
-            }
+        $err = $this->validateContractAmcChecklistPreconditions($get, $post, $companyId, $contractId);
+        if ($err !== null) {
+            return array('status' => 'error', 'message' => $err);
         }
 
         $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-        $query = "UPDATE application_check_lists SET is_active = NULL, updated_by={$userId}, updated_date = '{$now}'
-            WHERE transaction_id = '" . addslashes($contractId) . "' AND application_tablename='contracts'
-            AND company_id={$companyId} AND is_active = 0";
+        $query = "UPDATE application_check_lists SET is_active = NULL, updated_by={$userId}, updated_date = '{$now}' WHERE transaction_id = '" . addslashes($contractId) . "' AND application_tablename='contracts' AND company_id={$companyId} AND is_active = 0";
         $callConfig->executeQuery($query);
 
-        $existingIds = $post['existing_checklist_ids'] ?? array();
-        if (!is_array($existingIds)) {
-            $existingIds = array();
-        }
-
-        $saved = 0;
-        if (count((array) $checklistItems) > 0) {
-            foreach ($checklistItems as $i => $fieldValue) {
-                $fieldValue = trim((string) $fieldValue);
-                $checkId = $existingIds[$i] ?? '';
-                if ($checkId != '' && strpos((string) $checkId, 'def_') !== 0 && is_numeric($checkId)) {
-                    $update_check_array = array(
-                        'check_name' => $fieldValue,
-                        'is_active' => '0',
-                        'updated_by' => $userId,
-                        'updated_date' => $now,
-                    );
-                    $res = $callConfig->updateRecord('application_check_lists', $update_check_array, 'id', $checkId);
-                    if (isset($res['status']) && $res['status'] == 'sucess') {
-                        $saved++;
-                    }
-                } else {
-                    $check_array = array(
-                        'company_id' => $companyId,
-                        'transaction_id' => $contractId,
-                        'application_tablename' => 'contracts',
-                        'check_name' => $fieldValue,
-                        'current_status' => '0',
-                        'is_active' => '0',
-                        'created_by' => $userId,
-                        'created_date' => $now,
-                    );
-                    $res = $callConfig->insertRecord('application_check_lists', $check_array);
-                    if (isset($res['status']) && $res['status'] == 'sucess') {
-                        $saved++;
-                    }
-                }
-            }
-        }
+        $existingIds = is_array($post['existing_checklist_ids'] ?? null) ? $post['existing_checklist_ids'] : [];
+        $saved = $this->persistChecklistItems($post['checklist_items'], $existingIds, $contractId, $companyId, $userId, $now);
 
         if ($saved > 0) {
-            $return['status'] = 'success';
-            $return['message'] = 'Checklist saved';
-            $return['saved_count'] = $saved;
-        } else {
-            $return['message'] = 'No checklist items were saved';
+            return array('status' => 'success', 'message' => 'Checklist saved', 'saved_count' => $saved);
         }
-        return $return;
+        return array('status' => 'error', 'message' => 'No checklist items were saved');
     }
-
-    public function saveContractAmcAssetTechnicians($get, $post)
+    private function validateAssetTechniciansPreconditions($get, $post, $companyId, $contractId)
     {
         global $callConfig;
-        $return = array('status' => 'error', 'message' => 'Unable to save assignments');
-        $contractId = (int) ($post['contract_id'] ?? 0);
-        $companyId = (int) ($get['company_id'] ?? 0);
-        $userId = (int) ($get['user_id'] ?? 0);
-        $propagatePending = !isset($post['propagate_pending']) || $post['propagate_pending'] == '1' || $post['propagate_pending'] == 1;
-
         if ($contractId <= 0 || $companyId <= 0) {
-            $return['message'] = 'Invalid contract';
-            return $return;
+            return ['error' => 'Invalid contract'];
         }
-
-        $contractSql = "SELECT c.*, cad.service_mode FROM contracts c
-            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0
-            WHERE c.company_id = {$companyId} AND c.id = '" . addslashes($contractId) . self::SQL_COND_AND_C_IS_ACTIVE_0_LIMIT_1;
+        $contractSql = "SELECT c.*, cad.service_mode FROM contracts c LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0 WHERE c.company_id = {$companyId} AND c.id = '" . addslashes($contractId) . self::SQL_COND_AND_C_IS_ACTIVE_0_LIMIT_1;
         $contractRow = $callConfig->getRow($contractSql);
         if (!$contractRow) {
-            $return['message'] = 'Contract not found';
-            return $return;
+            return ['error' => 'Contract not found'];
         }
-        $contract = is_array($contractRow) ? $contractRow : (array) $contractRow;
-        $serviceMode = $this->resolveContractAmcServiceMode($contract);
+        $contract = (array) $contractRow;
         if (!$this->isContractAmcApprovedForExecution($get, $contract)) {
-            $return['message'] = 'Contract must be approved before assignments can be saved';
-            return $return;
+            return ['error' => 'Contract must be approved before assignments can be saved'];
         }
         if (!$this->canExecuteContractAmcService($get, $contract)) {
-            $return['message'] = self::SQL_COND_NOT_AUTHORIZED;
-            return $return;
+            return ['error' => self::SQL_COND_NOT_AUTHORIZED];
         }
-
-        $assetAssignments = ($serviceMode == 'inhouse')
-            ? ($post['asset_employees'] ?? array())
-            : ($post['asset_technicians'] ?? array());
-        if (!is_array($assetAssignments) || count((array) $assetAssignments) == 0) {
-            $return['message'] = 'No asset assignments provided';
-            return $return;
+        $serviceMode = $this->resolveContractAmcServiceMode($contract);
+        $assetAssignments = ($serviceMode == 'inhouse') ? ($post['asset_employees'] ?? array()) : ($post['asset_technicians'] ?? array());
+        if (!is_array($assetAssignments) || empty($assetAssignments)) {
+            return ['error' => 'No asset assignments provided'];
         }
+        return ['serviceMode' => $serviceMode, 'assignments' => $assetAssignments];
+    }
 
-        $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
+    private function applyAssetTechnicianUpdates($assetAssignments, $contractId, $companyId, $userId, $serviceMode, $propagatePending, $now)
+    {
+        global $callConfig;
         $updated = 0;
         foreach ($assetAssignments as $assetId => $assigneeId) {
             $assetId = (int) $assetId;
@@ -4019,78 +3955,63 @@ public function getContractAmcTechnicians($company_id)
             if ($assetId <= 0) {
                 continue;
             }
-            $checkSql = "SELECT id FROM contract_amc_assets
-                WHERE id = {$assetId} AND contract_id = '" . addslashes($contractId) . "'
-                AND company_id = {$companyId} AND is_active = 0 LIMIT 1";
-            $checkRow = $callConfig->getRow($checkSql);
+            $checkRow = $callConfig->getRow("SELECT id FROM contract_amc_assets WHERE id = {$assetId} AND contract_id = '" . addslashes($contractId) . "' AND company_id = {$companyId} AND is_active = 0 LIMIT 1");
             if (!$checkRow) {
                 continue;
             }
-            if ($serviceMode == 'inhouse') {
-                $update = array(
-                    'default_employee_id' => $assigneeId > 0 ? $assigneeId : null,
-                    'updated_by' => $userId,
-                    'updated_date' => $now,
-                );
-            } else {
-                $update = array(
-                    'default_technician_id' => $assigneeId > 0 ? $assigneeId : null,
-                    'updated_by' => $userId,
-                    'updated_date' => $now,
-                );
-            }
+            $update = ($serviceMode == 'inhouse')
+                ? ['default_employee_id' => $assigneeId > 0 ? $assigneeId : null, 'updated_by' => $userId, 'updated_date' => $now]
+                : ['default_technician_id' => $assigneeId > 0 ? $assigneeId : null, 'updated_by' => $userId, 'updated_date' => $now];
             $res = $callConfig->updateRecord('contract_amc_assets', $update, 'id', $assetId);
-            if (isset($res['status']) && $res['status'] == 'sucess') {
+            if (($res['status'] ?? '') == 'sucess' || ($res['status'] ?? '') == 'success') {
                 $updated++;
                 if ($propagatePending) {
-                    if ($serviceMode == 'inhouse') {
-                        $this->propagateAssetDefaultEmployeeToPendingSchedules($companyId, $assetId, $assigneeId, $userId);
-                    } else {
-                        $this->propagateAssetDefaultToPendingSchedules($companyId, $assetId, $assigneeId, $userId);
-                    }
+                    $this->propagateAssetDefaultToPendingSchedules($companyId, $assetId, $assigneeId, $userId);
                 }
             }
         }
-
-        if ($updated > 0) {
-            $return['status'] = 'success';
-            $return['message'] = ($serviceMode == 'inhouse') ? 'Employee assignments saved' : 'Technician assignments saved';
-            $return['updated_count'] = $updated;
-        } else {
-            $return['message'] = 'No assignments were updated';
-        }
-        return $return;
+        return $updated;
     }
 
+    public function saveContractAmcAssetTechnicians($get, $post)
+    {
+        $contractId = (int) ($post['contract_id'] ?? 0);
+        $companyId = (int) ($get['company_id'] ?? 0);
+        $userId = (int) ($get['user_id'] ?? 0);
+        $propagatePending = !isset($post['propagate_pending']) || $post['propagate_pending'] == '1' || $post['propagate_pending'] == 1;
+
+        $check = $this->validateAssetTechniciansPreconditions($get, $post, $companyId, $contractId);
+        if (isset($check['error'])) {
+            return array('status' => 'error', 'message' => $check['error']);
+        }
+
+        $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
+        $updated = $this->applyAssetTechnicianUpdates($check['assignments'], $contractId, $companyId, $userId, $check['serviceMode'], $propagatePending, $now);
+
+        if ($updated > 0) {
+            return array('status' => 'success', 'message' => 'Assignments saved', 'updated_count' => $updated);
+        }
+        return array('status' => 'error', 'message' => 'No assignments were updated');
+    }
     public function assignContractAmcTechnician($get, $post)
     {
         global $callConfig;
-        $return = array('status' => 'error', 'message' => 'Unable to assign');
         $scheduleId = (int) ($post['schedule_id'] ?? 0);
         if ($scheduleId <= 0) {
-            $return['message'] = self::CONST_INVALID_SCHEDULE;
-            return $return;
+            return array('status' => 'error', 'message' => self::CONST_INVALID_SCHEDULE);
         }
 
-        $schedSql = "SELECT s.*, s.current_status AS visit_status, c.party_type, c.party_id, c.current_status, c.cancel_status,
-            cad.service_mode, cad.department_id
-            FROM contract_amc_service_schedules s
-            INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0
-            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0
-            WHERE s.id = {$scheduleId} AND s.company_id = '" . addslashes($get['company_id']) . "' AND s.is_active = 0 LIMIT 1";
+        $schedSql = "SELECT s.*, s.current_status AS visit_status, c.party_type, c.party_id, c.current_status, c.cancel_status, cad.service_mode, cad.department_id FROM contract_amc_service_schedules s INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0 WHERE s.id = {$scheduleId} AND s.company_id = '" . addslashes($get['company_id']) . "' AND s.is_active = 0 LIMIT 1";
         $schedRow = $callConfig->getRow($schedSql);
         if (!$schedRow) {
-            $return['message'] = 'Schedule not found';
-            return $return;
+            return array('status' => 'error', 'message' => 'Schedule not found');
         }
-        $sched = is_array($schedRow) ? $schedRow : (array) $schedRow;
+        $sched = (array) $schedRow;
         if (!$this->isContractAmcApprovedForExecution($get, $sched)) {
-            $return['message'] = 'Contract must be approved before service visits can be started or updated';
-            return $return;
+            return array('status' => 'error', 'message' => 'Contract must be approved before service visits can be started or updated');
         }
         if (!$this->canExecuteContractAmcService($get, $sched)) {
-            $return['message'] = self::SQL_COND_NOT_AUTHORIZED;
-            return $return;
+            return array('status' => 'error', 'message' => self::SQL_COND_NOT_AUTHORIZED);
         }
 
         $serviceMode = $this->resolveContractAmcServiceMode($sched);
@@ -4099,40 +4020,23 @@ public function getContractAmcTechnicians($company_id)
         if ($serviceMode == 'inhouse') {
             $employeeId = (int) ($post['employee_id'] ?? 0);
             $assetDefaultId = $this->getContractAmcAssetDefaultEmployeeId($get['company_id'], $sched['contract_amc_asset_id'] ?? 0);
-            if ($resetToDefault) {
-                $employeeId = $assetDefaultId;
-            }
+            $employeeId = $resetToDefault ? $assetDefaultId : $employeeId;
             $overrideFields = $this->resolveAmcScheduleEmployeeOverrideFields($employeeId, $assetDefaultId, $resetToDefault);
-            $update = array(
-                'employee_id' => $overrideFields['employee_id'],
-                'employee_is_override' => $overrideFields['employee_is_override'],
-                'updated_by' => $get['user_id'],
-                'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-            );
+            $update = array('employee_id' => $overrideFields['employee_id'], 'employee_is_override' => $overrideFields['employee_is_override'], 'updated_by' => $get['user_id'], 'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S));
             $successMsg = $resetToDefault ? 'Reset to asset default' : 'Employee assigned';
         } else {
             $technicianId = (int) ($post['technician_id'] ?? 0);
             $assetDefaultId = $this->getContractAmcAssetDefaultTechnicianId($get['company_id'], $sched['contract_amc_asset_id'] ?? 0);
-            if ($resetToDefault) {
-                $technicianId = $assetDefaultId;
-            }
+            $technicianId = $resetToDefault ? $assetDefaultId : $technicianId;
             $overrideFields = $this->resolveAmcScheduleTechnicianOverrideFields($technicianId, $assetDefaultId, $resetToDefault);
-            $update = array(
-                'technician_id' => $overrideFields['technician_id'],
-                'technician_is_override' => $overrideFields['technician_is_override'],
-                'updated_by' => $get['user_id'],
-                'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S),
-            );
+            $update = array('technician_id' => $overrideFields['technician_id'], 'technician_is_override' => $overrideFields['technician_is_override'], 'updated_by' => $get['user_id'], 'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S));
             $successMsg = $resetToDefault ? 'Reset to asset default' : 'Technician assigned';
         }
 
         $res = $callConfig->updateRecord('contract_amc_service_schedules', $update, 'id', $scheduleId);
-        $return['res'] = $res;
-        $return['status'] = (isset($res['status']) && $res['status'] == 'sucess') ? 'success' : 'error';
-        $return['message'] = $return['status'] == 'success' ? $successMsg : self::SQL_UPDATE_UPDATE_FAILED;
-        return $return;
+        $isSuccess = isset($res['status']) && ($res['status'] == 'sucess' || $res['status'] == 'success');
+        return array('res' => $res, 'status' => $isSuccess ? 'success' : 'error', 'message' => $isSuccess ? $successMsg : self::SQL_UPDATE_UPDATE_FAILED);
     }
-
     public function getDefaultContractAmcChecklistItems($company_id, $contract_id)
     {
         global $callConfig;
@@ -4284,42 +4188,33 @@ public function getContractAmcTechnicians($company_id)
     public function updateContractAmcScheduleDetails($get, $post)
     {
         global $callConfig;
-        $return = array('status' => 'error', 'message' => self::SQL_UPDATE_UPDATE_FAILED);
         $scheduleId = (int) ($post['schedule_id'] ?? $post['record_id'] ?? 0);
         $action = strtolower($post['action'] ?? '');
         if ($scheduleId <= 0) {
-            $return['message'] = self::CONST_INVALID_SCHEDULE;
-            return $return;
+            return array('status' => 'error', 'message' => self::CONST_INVALID_SCHEDULE);
         }
 
         $detail = $this->getContractAmcScheduleDetails(array_merge($get, array('schedule_id' => $scheduleId)));
         $schedule = $detail['schedule'] ?? array();
-        if (count((array) $schedule) == 0) {
-            $return['message'] = 'Schedule not found';
-            return $return;
+        if (empty($schedule)) {
+            return array('status' => 'error', 'message' => 'Schedule not found');
         }
         if (!$this->isContractAmcApprovedForExecution($get, $schedule)) {
-            $return['message'] = 'Contract must be approved before service visits can be started or updated';
-            return $return;
+            return array('status' => 'error', 'message' => 'Contract must be approved before service visits can be started or updated');
         }
         if (empty($detail['can_execute'])) {
-            $return['message'] = self::SQL_COND_NOT_AUTHORIZED;
-            return $return;
+            return array('status' => 'error', 'message' => self::SQL_COND_NOT_AUTHORIZED);
         }
 
         $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
-        $update = array(
-            'updated_by' => $get['user_id'],
-            'updated_date' => $now,
-        );
+        $update = array('updated_by' => $get['user_id'], 'updated_date' => $now);
 
         if ($action == 'start') {
             $update['actual_start_datetime'] = $now;
             $update['current_status'] = 1;
         } elseif ($action == 'finish') {
             if (!$this->isContractAmcChecklistComplete($get['company_id'], $scheduleId, $schedule['contract_id'])) {
-                $return['message'] = 'Complete all checklist items before finishing';
-                return $return;
+                return array('status' => 'error', 'message' => 'Complete all checklist items before finishing');
             }
             $update['actual_end_datetime'] = $now;
             $update['current_status'] = 199;
@@ -4327,62 +4222,23 @@ public function getContractAmcTechnicians($company_id)
 
         if (isset($post['technician_id'])) {
             $assetDefaultId = $this->getContractAmcAssetDefaultTechnicianId($get['company_id'], $schedule['contract_amc_asset_id'] ?? 0);
-            $postedTechId = (int) $post['technician_id'];
-            $overrideFields = $this->resolveAmcScheduleTechnicianOverrideFields($postedTechId, $assetDefaultId, false);
+            $overrideFields = $this->resolveAmcScheduleTechnicianOverrideFields((int) $post['technician_id'], $assetDefaultId, false);
             $update['technician_id'] = $overrideFields['technician_id'];
             $update['technician_is_override'] = $overrideFields['technician_is_override'];
         }
 
         if (isset($post['employee_id'])) {
             $assetDefaultEmpId = $this->getContractAmcAssetDefaultEmployeeId($get['company_id'], $schedule['contract_amc_asset_id'] ?? 0);
-            $postedEmpId = (int) $post['employee_id'];
-            $overrideFields = $this->resolveAmcScheduleEmployeeOverrideFields($postedEmpId, $assetDefaultEmpId, false);
+            $overrideFields = $this->resolveAmcScheduleEmployeeOverrideFields((int) $post['employee_id'], $assetDefaultEmpId, false);
             $update['employee_id'] = $overrideFields['employee_id'];
             $update['employee_is_override'] = $overrideFields['employee_is_override'];
         }
+
         $res = $callConfig->updateRecord('contract_amc_service_schedules', $update, 'id', $scheduleId);
-        $return['res'] = $res;
-        $return['resi_scheduleId'] = $scheduleId;
-        if (count((array) $post['checklist_items']) > 0) {
-            foreach ($post['checklist_items'] as $i => $fieldValue) {
-                $check_id = $post['existing_checklist_ids'][$i] ?? ($post['checklist_keys'][$i] ?? '');
-                $check_status = $post['checklist_status'][$check_id] ?? ($post['checklist_status'][$i] ?? '0');
-                $check_remarks = $post['checklist_remarks'][$i] ?? '';
-                $existingId = $post['saved_checklist_row_ids'][$check_id] ?? '';
-
-                if ($existingId != '') {
-                    $check_update_arr = array(
-                        'check_status' => $check_status,
-                        'check_remarks' => $check_remarks,
-                        'updated_by' => $get['user_id'],
-                        'updated_date' => $now,
-                    );
-                    $callConfig->updateRecord('contract_amc_check_list', $check_update_arr, 'id', $existingId);
-                } else {
-                    $appCheckId = (strpos((string) $check_id, 'def_') === 0) ? null : $check_id;
-                    $check_array = array(
-                        'company_id' => $get['company_id'],
-                        'contract_id' => $schedule['contract_id'],
-                        'contract_amc_service_schedule_id' => $scheduleId,
-                        'application_check_list_id' => $appCheckId,
-                        'check_status' => $check_status,
-                        'check_remarks' => $check_remarks,
-                        'check_name' => $fieldValue,
-                        'current_status' => '0',
-                        'is_active' => '0',
-                        'created_by' => $get['user_id'],
-                        'created_date' => $now,
-                    );
-                    $callConfig->insertRecord('contract_amc_check_list', $check_array);
-                }
-            }
-        }
-
-        $return['status'] = (isset($res['status']) && $res['status'] == 'sucess') ? 'success' : 'error';
-        $return['message'] = $return['status'] == 'success' ? 'Saved successfully' : self::SQL_UPDATE_UPDATE_FAILED;
-        return $return;
-    }
-}
+        $isSuccess = isset($res['status']) && ($res['status'] == 'sucess' || $res['status'] == 'success');
+        $msg = $isSuccess ? ($action == 'start' ? 'Visit started' : ($action == 'finish' ? 'Visit finished' : 'Updated')) : self::SQL_UPDATE_UPDATE_FAILED;
+        return array('res' => $res, 'status' => $isSuccess ? 'success' : 'error', 'message' => $msg);
+    }}
 
 
 trait ReactAmcExecutionAndChecklistsTrait
@@ -4431,7 +4287,6 @@ public function buildContractAmcDashboardWhere($get)
         }
         return array('code' => 'due', 'label' => 'Due', 'class' => 'bg-primary');
     }
-
     public function enrichContractAmcFmVisitRow($row)
     {
         global $callConfig;
@@ -4647,72 +4502,45 @@ public function buildContractAmcDashboardWhere($get)
     public function confirmContractAmcFmVisit($get, $post)
     {
         global $callConfig;
-        $return = array('status' => 'error', 'message' => 'Confirmation failed');
         $scheduleId = (int) ($post['schedule_id'] ?? 0);
         if ($scheduleId <= 0) {
-            $return['message'] = self::CONST_INVALID_SCHEDULE;
-            return $return;
+            return array('status' => 'error', 'message' => self::CONST_INVALID_SCHEDULE);
         }
 
         $schedule = $this->getContractAmcFmScheduleRow($get, $scheduleId);
-        if (count((array) $schedule) == 0) {
-            $return['message'] = 'Visit not found';
-            return $return;
+        if (empty($schedule)) {
+            return array('status' => 'error', 'message' => 'Visit not found');
         }
         if (!$this->canConfirmContractAmcFmVisit($get, $schedule)) {
-            $return['message'] = self::SQL_COND_NOT_AUTHORIZED;
-            return $return;
+            return array('status' => 'error', 'message' => self::SQL_COND_NOT_AUTHORIZED);
         }
         if (empty($schedule['can_confirm'])) {
-            $return['message'] = 'Visit is not ready for facility manager confirmation';
-            return $return;
+            return array('status' => 'error', 'message' => 'Visit is not ready for facility manager confirmation');
         }
         if (!empty($schedule['fm_confirmed_datetime'])) {
-            $return['message'] = 'Visit already confirmed';
-            return $return;
+            return array('status' => 'error', 'message' => 'Visit already confirmed');
         }
 
         $remarks = trim((string) ($post['fm_confirmation_remarks'] ?? ''));
         if ($remarks == '') {
-            $return['message'] = 'Remarks are required';
-            return $return;
+            return array('status' => 'error', 'message' => 'Remarks are required');
         }
         $fileName = trim((string) ($post['fm_confirmation_file'] ?? ''));
         if ($fileName == '') {
-            $return['message'] = 'Job done document is required';
-            return $return;
+            return array('status' => 'error', 'message' => 'Job done document is required');
         }
 
         $now = date(self::DATE_FORMAT_Y_M_D_H_I_S);
         $userId = (int) ($get['user_id'] ?? 0);
-        $update = array(
-            'fm_confirmed_datetime' => $now,
-            'fm_confirmed_by' => $userId,
-            'fm_confirmation_remarks' => $remarks,
-            'fm_confirmation_file' => $fileName,
-            'updated_by' => $userId,
-            'updated_date' => $now,
-        );
+        $update = array('fm_confirmed_datetime' => $now, 'fm_confirmed_by' => $userId, 'fm_confirmation_remarks' => $remarks, 'fm_confirmation_file' => $fileName, 'updated_by' => $userId, 'updated_date' => $now);
         $res = $callConfig->updateRecord('contract_amc_service_schedules', $update, 'id', $scheduleId);
-        if (isset($res['status']) && $res['status'] == 'sucess') {
-            $attach = array(
-                'company_id' => $get['company_id'],
-                'application_tablename' => 'contract_amc_service_schedules',
-                'transaction_id' => $scheduleId,
-                'file_name' => $fileName,
-                'is_active' => '0',
-                'created_by' => $userId,
-                'created_date' => $now,
-            );
+        if (isset($res['status']) && ($res['status'] == 'sucess' || $res['status'] == 'success')) {
+            $attach = array('company_id' => $get['company_id'], 'application_tablename' => 'contract_amc_service_schedules', 'transaction_id' => $scheduleId, 'file_name' => $fileName, 'is_active' => '0', 'created_by' => $userId, 'created_date' => $now);
             $callConfig->insertRecord('application_attachments', $attach);
-            $return['status'] = 'success';
-            $return['message'] = 'Visit confirmed successfully';
-        } else {
-            $return['message'] = 'Unable to save confirmation';
+            return array('status' => 'success', 'message' => 'Visit confirmed successfully');
         }
-        return $return;
+        return array('status' => 'error', 'message' => 'Unable to save confirmation');
     }
-
     public function resolvePortalPartyIds($get)
     {
         global $callConfig;
@@ -4823,6 +4651,27 @@ public function buildContractAmcDashboardWhere($get)
         $callConfig->insertRecord('contract_amc_notification_log', $log);
     }
 
+    private function processSingleScheduleReminder($s, $today, $get)
+    {
+        global $callConfig;
+        $days = json_decode($s['reminder_days'] ?? '[]', true);
+        if (!is_array($days) || empty($days)) {
+            return false;
+        }
+        $plannedDate = substr($s['planned_service_datetime'], 0, 10);
+        $diff = (int) ((strtotime($plannedDate) - strtotime($today)) / 86400);
+        if (!in_array($diff, $days)) {
+            return false;
+        }
+        $logSql = "SELECT id FROM contract_amc_notification_log WHERE contract_amc_service_schedule_id = '" . addslashes($s['id']) . "' AND notification_type = 'reminder' AND reminder_day = {$diff} AND is_active = 0 LIMIT 1";
+        if ($callConfig->getRow($logSql)) {
+            return false;
+        }
+        $msg = 'AMC visit reminder: ' . ($s['contract_name'] ?? '') . ' planned on ' . $plannedDate;
+        $this->sendContractAmcNotification($get, $s, 'reminder', $msg, $diff);
+        return true;
+    }
+
     public function runContractAmcReminderCron($get)
     {
         global $callConfig;
@@ -4832,41 +4681,34 @@ public function buildContractAmcDashboardWhere($get)
             return $return;
         }
         $today = date('Y-m-d');
-        $sql = "SELECT s.*, c.contract_name, d.reminder_days
-            FROM contract_amc_service_schedules s
-            INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 AND c.is_amc_contract = 'Y'
-            INNER JOIN contract_amc_details d ON d.contract_id = s.contract_id AND d.company_id = s.company_id AND d.is_active = 0
-            WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.current_status = 0
-            AND DATE(s.planned_service_datetime) >= '{$today}'";
+        $sql = "SELECT s.*, c.contract_name, d.reminder_days FROM contract_amc_service_schedules s INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 AND c.is_amc_contract = 'Y' INNER JOIN contract_amc_details d ON d.contract_id = s.contract_id AND d.company_id = s.company_id AND d.is_active = 0 WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.current_status = 0 AND DATE(s.planned_service_datetime) >= '{$today}'";
         $rows = $callConfig->getAllRows($sql);
-        if (count((array) $rows) > 0) {
-            foreach ($rows as $row) {
-                $s = is_array($row) ? $row : (array) $row;
-                $days = json_decode($s['reminder_days'] ?? '[]', true);
-                if (!is_array($days) || count((array) $days) == 0) {
-                    $return['skipped']++;
-                    continue;
-                }
-                $plannedDate = substr($s['planned_service_datetime'], 0, 10);
-                $diff = (int) ((strtotime($plannedDate) - strtotime($today)) / 86400);
-                if (!in_array($diff, $days)) {
-                    $return['skipped']++;
-                    continue;
-                }
-                $logSql = "SELECT id FROM contract_amc_notification_log
-                    WHERE contract_amc_service_schedule_id = '" . addslashes($s['id']) . "'
-                    AND notification_type = 'reminder' AND reminder_day = {$diff} AND is_active = 0 LIMIT 1";
-                $exists = $callConfig->getRow($logSql);
-                if ($exists) {
-                    $return['skipped']++;
-                    continue;
-                }
-                $msg = 'AMC visit reminder: ' . ($s['contract_name'] ?? '') . ' planned on ' . $plannedDate;
-                $this->sendContractAmcNotification($get, $s, 'reminder', $msg, $diff);
+        foreach ($rows as $row) {
+            $s = (array) $row;
+            if ($this->processSingleScheduleReminder($s, $today, $get)) {
                 $return['sent']++;
+            } else {
+                $return['skipped']++;
             }
         }
         return $return;
+    }
+    private function processSingleScheduleEscalation($s, $get)
+    {
+        global $callConfig;
+        $config = json_decode($s['escalation_config'] ?? '{}', true);
+        $hours = (int) ($config['hours'] ?? $config['not_started_hours'] ?? 4);
+        $plannedTs = strtotime($s['planned_service_datetime']);
+        if ($plannedTs === false || (time() - $plannedTs) < ($hours * 3600)) {
+            return false;
+        }
+        $logSql = "SELECT id FROM contract_amc_notification_log WHERE contract_amc_service_schedule_id = '" . addslashes($s['id']) . "' AND notification_type = 'escalation' AND is_active = 0 LIMIT 1";
+        if ($callConfig->getRow($logSql)) {
+            return false;
+        }
+        $msg = 'AMC visit escalation: ' . ($s['contract_name'] ?? '') . ' not started within ' . $hours . ' hours';
+        $this->sendContractAmcNotification($get, $s, 'escalation', $msg, null);
+        return true;
     }
 
     public function runContractAmcEscalationCron($get)
@@ -4877,42 +4719,18 @@ public function buildContractAmcDashboardWhere($get)
         if ($companyId <= 0) {
             return $return;
         }
-        $sql = "SELECT s.*, c.contract_name, d.escalation_config
-            FROM contract_amc_service_schedules s
-            INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 AND c.is_amc_contract = 'Y'
-            INNER JOIN contract_amc_details d ON d.contract_id = s.contract_id AND d.company_id = s.company_id AND d.is_active = 0
-            WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.current_status = 0
-            AND s.planned_service_datetime < NOW() AND (s.actual_start_datetime IS NULL OR s.actual_start_datetime = '')";
+        $sql = "SELECT s.*, c.contract_name, d.escalation_config FROM contract_amc_service_schedules s INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 AND c.is_amc_contract = 'Y' INNER JOIN contract_amc_details d ON d.contract_id = s.contract_id AND d.company_id = s.company_id AND d.is_active = 0 WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.current_status = 0 AND s.planned_service_datetime < NOW() AND (s.actual_start_datetime IS NULL OR s.actual_start_datetime = '')";
         $rows = $callConfig->getAllRows($sql);
-        if (count((array) $rows) > 0) {
-            foreach ($rows as $row) {
-                $s = is_array($row) ? $row : (array) $row;
-                $config = json_decode($s['escalation_config'] ?? '{}', true);
-                if (!is_array($config)) {
-                    $config = array();
-                }
-                $hours = (int) ($config['hours'] ?? $config['not_started_hours'] ?? 4);
-                $plannedTs = strtotime($s['planned_service_datetime']);
-                if ($plannedTs === false || (time() - $plannedTs) < ($hours * 3600)) {
-                    $return['skipped']++;
-                    continue;
-                }
-                $logSql = "SELECT id FROM contract_amc_notification_log
-                    WHERE contract_amc_service_schedule_id = '" . addslashes($s['id']) . "'
-                    AND notification_type = 'escalation' AND is_active = 0 LIMIT 1";
-                $exists = $callConfig->getRow($logSql);
-                if ($exists) {
-                    $return['skipped']++;
-                    continue;
-                }
-                $msg = 'AMC visit escalation: ' . ($s['contract_name'] ?? '') . ' not started within ' . $hours . ' hours';
-                $this->sendContractAmcNotification($get, $s, 'escalation', $msg, null);
+        foreach ($rows as $row) {
+            $s = (array) $row;
+            if ($this->processSingleScheduleEscalation($s, $get)) {
                 $return['sent']++;
+            } else {
+                $return['skipped']++;
             }
         }
         return $return;
-    }
-}
+    }}
 
 
 trait ReactAmcTechniciansAndFmTrait
