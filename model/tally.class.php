@@ -184,168 +184,141 @@ public function topostmasterdetails($get, $post){
 
     }
 
-    public function getTransactionInvoices($get,$post,$transaction_table=""){
-         global $callConfig;
-         $return = $transaction_entry = $item_trans = $ledger_master = array();
-         $company_id = $get['company_id'];
-         $vendcustarray = array('20003501','1004001');
-         $giveledger_entries = array('goods_receipt_notes','delivery_orders','credit_notes','debit_notes','supplier_bills','purchase_invoices','sales_invoices');
-         $companysql = TallyConstants::SEL_COMPANIES.$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-        $companysres = $callConfig->getAllRows($companysql);
+    private function fetchTransactionLookupMaps($company_id, $transaction_table): array
+    {
+        global $callConfig;
         $companies = array();
-        foreach($companysres as $comp){
+        foreach ($callConfig->getAllRows(TallyConstants::SEL_COMPANIES . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS) as $comp) {
             $companies[$comp->id] = $comp->name;
         }
 
-        $citeissql = "SELECT id, city_name FROM cities WHERE company_id='".$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-        $citeisres = $callConfig->getAllRows($citeissql);
         $cities = array();
-        foreach($citeisres as $comp){
+        foreach ($callConfig->getAllRows("SELECT id, city_name FROM cities WHERE company_id='" . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS) as $comp) {
             $cities[$comp->id] = $comp->city_name;
         }
 
-        $statessql = "SELECT id, state_name FROM states WHERE company_id='".$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-        $statesres = $callConfig->getAllRows($statessql);
         $states = array();
-        foreach($statesres as $stat){
+        foreach ($callConfig->getAllRows("SELECT id, state_name FROM states WHERE company_id='" . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS) as $stat) {
             $states[$stat->id] = $stat->state_name;
         }
 
-        $chartofaccountssql = "SELECT id,company_id, account_name,account_code,account_type, accgro_group_id FROM `chart_of_accounts` WHERE company_id = ".$company_id.TallyConstants::ALLOW_POSTING_0;
-        $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
         $chart_of_accounts = array();
-        foreach($chartofaccountsres as $cca){
+        foreach ($callConfig->getAllRows("SELECT id,company_id, account_name,account_code,account_type, accgro_group_id FROM `chart_of_accounts` WHERE company_id = " . $company_id . TallyConstants::ALLOW_POSTING_0) as $cca) {
             $chart_of_accounts[$cca->account_code] = $cca;
         }
 
-        $account_groupssql = "SELECT id,company_id, group_name FROM `account_groups` WHERE company_id = ".$company_id." AND is_active =0";
-        $account_groupsres = $callConfig->getAllRows($account_groupssql);
         $account_groups = array();
-        foreach($account_groupsres as $cca){
+        foreach ($callConfig->getAllRows("SELECT id,company_id, group_name FROM `account_groups` WHERE company_id = " . $company_id . " AND is_active =0") as $cca) {
             $account_groups[$cca->id] = $cca->group_name;
         }
 
-        if($transaction_table == "sales_invoices" || $transaction_table == "sales_orders" || $transaction_table == "delivery_orders"){
-            $customerssql = "SELECT id, company FROM customers WHERE company_id='".$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-            $customersres = $callConfig->getAllRows($customerssql);
-        }else{
-            $customerssql = "SELECT id, company FROM vendors WHERE company_id='".$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-            $customersres = $callConfig->getAllRows($customerssql);
-        }
-        foreach($customersres as $custre){
+        $customers = array();
+        $isSales = ($transaction_table == "sales_invoices" || $transaction_table == "sales_orders" || $transaction_table == "delivery_orders");
+        $custTable = $isSales ? "customers" : "vendors";
+        foreach ($callConfig->getAllRows("SELECT id, company FROM {$custTable} WHERE company_id='" . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS) as $custre) {
             $customers[$custre->id] = $custre->company;
         }
 
+        return [$companies, $cities, $states, $chart_of_accounts, $account_groups, $customers];
+    }
 
-
-         if($transaction_table !=""){
-            $dmtsql = TallyConstants::SEL_DMT.$get['company_id'].TallyConstants::AND_APP_TABLE.$transaction_table.TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-            $dmtres=$callConfig->getRow($dmtsql);
-
-            if($transaction_table == "credit_notes" || $transaction_table == "debit_notes"){
-                $item_transaction_sql = "SELECT titm.id, titm.company_id, titm.transaction_id, titm.item_id, titm.account_code, titm.item_name, titm.item_name, titm.item_quantity, titm.item_price, titm.item_amount FROM ".$dmtres->item_table." titm WHERE titm.company_id='".$company_id."' AND titm.is_active = '0'";
-
-            }else{
-                $item_transaction_sql = "SELECT titm.id, titm.company_id, titm.transaction_id, titm.item_id, titm.item_name, titm.item_quantity, titm.item_price, titm.item_amount, itm.sku as part_no FROM ".$dmtres->item_table." titm, items itm WHERE titm.company_id='".$company_id."' AND titm.company_id=itm.company_id AND titm.item_id = itm.id AND titm.is_active = itm.is_active AND titm.is_active = '0'";
-            }
-            $item_transaction_res = $callConfig->getAllRows($item_transaction_sql);
-            foreach($item_transaction_res as $itemtrans){
-                $itemtrans->company_id = $companies[$itemtrans->company_id];
-                $item_trans[$itemtrans->transaction_id][] = $itemtrans;
-            }
-
-            $item_tax_transaction_sql = "SELECT id, company_id, transaction_id, transaction_item_id, tax_name, tax_value, tax_id, tax_amount, tax_split_details FROM ".$dmtres->tax_table.TallyConstants::WHERE_COMPANY_ID.$company_id."'  AND is_active = '0' ";
-            $item_tax_transaction_res = $callConfig->getAllRows($item_tax_transaction_sql);
-            foreach($item_tax_transaction_res as $itemtaxtrans){
-                $tax_split_details = json_decode($itemtaxtrans->tax_split_details,1);
-                foreach($tax_split_details as $ttt){
-                    $item_tax_trans[$itemtaxtrans->transaction_id][$ttt['account_code']]['hsn_code'] = $itemtaxtrans->tax_name !=""?$itemtaxtrans->tax_name:"";
-                    $item_tax_trans[$itemtaxtrans->transaction_id][$ttt['account_code']]['tax_name'] = $ttt['tax_name'] !=""?$ttt['tax_name']:"";
-                    $item_tax_trans[$itemtaxtrans->transaction_id][$ttt['account_code']]['amount'] += $ttt['tax_amount'] !=""?$ttt['tax_amount']:0;
-                    $item_tax_trans[$itemtaxtrans->transaction_id][$ttt['account_code']]['account_code'] = $ttt['account_code'] !=""?$ttt['account_code']:"";
-                    $item_tax_trans[$itemtaxtrans->transaction_id][$ttt['account_code']]['tax_percentage'] = $ttt['tax_percentage'] !=""?$ttt['tax_percentage']:"";
-                    $item_tax_trans[$itemtaxtrans->transaction_id][$ttt['account_code']]['account_name'] = $chart_of_accounts[$ttt['account_code']]->account_name !=""?$chart_of_accounts[$ttt['account_code']]->account_name:"";
-
-                    $item_tax_trans[$itemtaxtrans->transaction_id][$ttt['account_code']]['ledger_group_name'] = $account_groups[$chart_of_accounts[$ttt['account_code']]->accgro_group_id] !=""?$account_groups[$chart_of_accounts[$ttt['account_code']]->accgro_group_id]:"";
-
-
-
-
-                }
-            }
-
-
-            $jvsql = "SELECT jv.transaction_number bill_number, DATE_FORMAT(jv.transaction_date, '%d-%m-%Y') AS bill_date , jv.ref_type, jv.ref_id, ijv.account_code, ijv.account_name as ledger_name, ijv.debit_amount, ijv.credit_amount FROM journal_vouchers jv, jv_items ijv WHERE jv.company_id='".$company_id."' AND jv.ref_type = '".$dmtres->application_table_name."' AND jv.company_id = ijv.company_id AND jv.id = ijv.transaction_id AND jv.is_active = ijv.is_active AND jv.is_active = 0";
-            $jvres = $callConfig->getAllRows($jvsql);
-            foreach($jvres as $jv){
-                $jv->amount = ($jv->debit_amount !="0" && $jv->debit_amount !="")?$jv->debit_amount:$jv->credit_amount;
-                $jv->ledger_group_name = $account_groups[$chart_of_accounts[$jv->account_code]->accgro_group_id] !=""?$account_groups[$chart_of_accounts[$jv->account_code]->accgro_group_id]:"";
-                $journal_vouchers[$jv->ref_id][] = $jv;
-
-            }
-
-            $main_transaction_sql = "SELECT id, company_id, transaction_number, DATE_FORMAT(transaction_date, '%d-%m-%Y') AS transaction_date, party_id, party_name, party_email, party_phone, party_address, supplier_state_id, place_of_supply, ref_type, ref_no FROM ".$dmtres->application_table_name.TallyConstants::WHERE_COMPANY_ID.$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-            $main_transaction_res = $callConfig->getAllRows($main_transaction_sql);
-            $transaction_entry = array();
-            foreach($main_transaction_res as $trans){
-                $trans->company_id = $companies[$trans->company_id];
-                $trans->place_of_supply = $cities[$trans->place_of_supply];
-                $trans->supplier_state_id = $states[$trans->supplier_state_id];
-                if($transaction_table != "credit_notes" && $transaction_table != "debit_notes"){
-                    $trans->party_name = $customers[$trans->party_id];
-                }
-
-                if(isset($item_trans[$trans->id]) && ($transaction_table != "credit_notes" && $transaction_table != "debit_notes")){
-                    $trans->item_entries = $item_trans[$trans->id];
-                }else{
-                    $trans->item_entries = array();
-                }
-
-                if(isset($item_tax_trans[$trans->id])){
-                    $itemtaxentry = array();
-                    foreach($item_tax_trans[$trans->id] as $acval){
-                        $itemtaxentry[] = $acval;
-                    }
-                    $trans->item_tax = $itemtaxentry;
-
-                }else{
-                    $trans->item_tax = array();
-                }
-
-                if(in_array($transaction_table, $giveledger_entries)){
-                    if(isset($journal_vouchers[$trans->id])){
-                        $journal_vouchersjvv = array();
-                        foreach($journal_vouchers[$trans->id] as $lfgdetail){
-                            if(!in_array($lfgdetail->account_code, (array)$vendcustarray)){
-                                $journal_vouchersjvv[] = $lfgdetail;
-                            }
-
-
-                        }
-
-                        $trans->ledger_entries = $journal_vouchersjvv;
-                    }else{
-                        $trans->ledger_entries = array();
-                    }
-                }
-                // else{
-                //     if(isset($item_tax_trans[$trans->id])){
-                //         $trans->ledger_entries = $item_tax_trans[$trans->id];
-                //     }else{
-                //         $trans->ledger_entries = array();
-                //     }
-                // }
-                $transaction_entry[] = $trans;
-            }
-            $return['status'] = 200;
-            $return['transaction'] = $transaction_table;
-            $return['result'] = $transaction_entry;
-        }else{
-            $return['status'] = 404;
-            $return['result'] = $ledger_master;
+    private function fetchTransactionItemsAndTaxes($company_id, $transaction_table, $dmtres, array $companies, array $chart_of_accounts, array $account_groups): array
+    {
+        global $callConfig;
+        $item_trans = array();
+        if ($transaction_table == "credit_notes" || $transaction_table == "debit_notes") {
+            $itemSql = "SELECT titm.id, titm.company_id, titm.transaction_id, titm.item_id, titm.account_code, titm.item_name, titm.item_name, titm.item_quantity, titm.item_price, titm.item_amount FROM " . $dmtres->item_table . " titm WHERE titm.company_id='" . $company_id . "' AND titm.is_active = '0'";
+        } else {
+            $itemSql = "SELECT titm.id, titm.company_id, titm.transaction_id, titm.item_id, titm.item_name, titm.item_quantity, titm.item_price, titm.item_amount, itm.sku as part_no FROM " . $dmtres->item_table . " titm, items itm WHERE titm.company_id='" . $company_id . "' AND titm.company_id=itm.company_id AND titm.item_id = itm.id AND titm.is_active = itm.is_active AND titm.is_active = '0'";
         }
-         return $return;
+        foreach ($callConfig->getAllRows($itemSql) as $itemtrans) {
+            $itemtrans->company_id = $companies[$itemtrans->company_id] ?? $itemtrans->company_id;
+            $item_trans[$itemtrans->transaction_id][] = $itemtrans;
+        }
 
+        $item_tax_trans = array();
+        $taxSql = "SELECT id, company_id, transaction_id, transaction_item_id, tax_name, tax_value, tax_id, tax_amount, tax_split_details FROM " . $dmtres->tax_table . TallyConstants::WHERE_COMPANY_ID . $company_id . "'  AND is_active = '0' ";
+        foreach ($callConfig->getAllRows($taxSql) as $itemtaxtrans) {
+            $tax_split_details = json_decode($itemtaxtrans->tax_split_details, 1) ?: array();
+            foreach ($tax_split_details as $ttt) {
+                $code = $ttt['account_code'] ?? '';
+                $item_tax_trans[$itemtaxtrans->transaction_id][$code]['hsn_code'] = $itemtaxtrans->tax_name ?: "";
+                $item_tax_trans[$itemtaxtrans->transaction_id][$code]['tax_name'] = $ttt['tax_name'] ?: "";
+                $item_tax_trans[$itemtaxtrans->transaction_id][$code]['amount'] = ($item_tax_trans[$itemtaxtrans->transaction_id][$code]['amount'] ?? 0) + ($ttt['tax_amount'] ?: 0);
+                $item_tax_trans[$itemtaxtrans->transaction_id][$code]['account_code'] = $code;
+                $item_tax_trans[$itemtaxtrans->transaction_id][$code]['tax_percentage'] = $ttt['tax_percentage'] ?: "";
+                $item_tax_trans[$itemtaxtrans->transaction_id][$code]['account_name'] = isset($chart_of_accounts[$code]) ? $chart_of_accounts[$code]->account_name : "";
+                $groupId = isset($chart_of_accounts[$code]) ? $chart_of_accounts[$code]->accgro_group_id : 0;
+                $item_tax_trans[$itemtaxtrans->transaction_id][$code]['ledger_group_name'] = $account_groups[$groupId] ?? "";
+            }
+        }
+
+        return [$item_trans, $item_tax_trans];
+    }
+
+    private function fetchTransactionJournalVouchers($company_id, $application_table_name, array $chart_of_accounts, array $account_groups): array
+    {
+        global $callConfig;
+        $journal_vouchers = array();
+        $jvsql = "SELECT jv.transaction_number bill_number, DATE_FORMAT(jv.transaction_date, '%d-%m-%Y') AS bill_date , jv.ref_type, jv.ref_id, ijv.account_code, ijv.account_name as ledger_name, ijv.debit_amount, ijv.credit_amount FROM journal_vouchers jv, jv_items ijv WHERE jv.company_id='" . $company_id . "' AND jv.ref_type = '" . $application_table_name . "' AND jv.company_id = ijv.company_id AND jv.id = ijv.transaction_id AND jv.is_active = ijv.is_active AND jv.is_active = 0";
+        foreach ($callConfig->getAllRows($jvsql) as $jv) {
+            $jv->amount = ($jv->debit_amount != "0" && $jv->debit_amount != "") ? $jv->debit_amount : $jv->credit_amount;
+            $groupId = isset($chart_of_accounts[$jv->account_code]) ? $chart_of_accounts[$jv->account_code]->accgro_group_id : 0;
+            $jv->ledger_group_name = $account_groups[$groupId] ?? "";
+            $journal_vouchers[$jv->ref_id][] = $jv;
+        }
+        return $journal_vouchers;
+    }
+
+    public function getTransactionInvoices($get, $transaction_table = "")
+    {
+        global $callConfig;
+        $company_id = $get['company_id'];
+        if ($transaction_table === "") {
+            return array('status' => 404, 'result' => array());
+        }
+
+        list($companies, $cities, $states, $chart_of_accounts, $account_groups, $customers) = $this->fetchTransactionLookupMaps($company_id, $transaction_table);
+
+        $dmtsql = TallyConstants::SEL_DMT . $company_id . TallyConstants::AND_APP_TABLE . $transaction_table . TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
+        $dmtres = $callConfig->getRow($dmtsql);
+
+        list($item_trans, $item_tax_trans) = $this->fetchTransactionItemsAndTaxes($company_id, $transaction_table, $dmtres, $companies, $chart_of_accounts, $account_groups);
+        $journal_vouchers = $this->fetchTransactionJournalVouchers($company_id, $dmtres->application_table_name, $chart_of_accounts, $account_groups);
+
+        $main_transaction_sql = "SELECT id, company_id, transaction_number, DATE_FORMAT(transaction_date, '%d-%m-%Y') AS transaction_date, party_id, party_name, party_email, party_phone, party_address, supplier_state_id, place_of_supply, ref_type, ref_no FROM " . $dmtres->application_table_name . TallyConstants::WHERE_COMPANY_ID . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        $main_transaction_res = $callConfig->getAllRows($main_transaction_sql);
+        $transaction_entry = array();
+        $vendcustarray = array('20003501', '1004001');
+        $giveledger_entries = array('goods_receipt_notes', 'delivery_orders', 'credit_notes', 'debit_notes', 'supplier_bills', 'purchase_invoices', 'sales_invoices');
+
+        foreach ($main_transaction_res as $trans) {
+            $trans->company_id = $companies[$trans->company_id] ?? $trans->company_id;
+            $trans->place_of_supply = $cities[$trans->place_of_supply] ?? $trans->place_of_supply;
+            $trans->supplier_state_id = $states[$trans->supplier_state_id] ?? $trans->supplier_state_id;
+            if ($transaction_table != "credit_notes" && $transaction_table != "debit_notes") {
+                $trans->party_name = $customers[$trans->party_id] ?? $trans->party_name;
+            }
+
+            $trans->item_entries = (isset($item_trans[$trans->id]) && $transaction_table != "credit_notes" && $transaction_table != "debit_notes") ? $item_trans[$trans->id] : array();
+            $trans->item_tax = isset($item_tax_trans[$trans->id]) ? array_values($item_tax_trans[$trans->id]) : array();
+
+            $trans->ledger_entries = array();
+            if (in_array($transaction_table, $giveledger_entries) && isset($journal_vouchers[$trans->id])) {
+                foreach ($journal_vouchers[$trans->id] as $lfgdetail) {
+                    if (!in_array($lfgdetail->account_code, (array)$vendcustarray)) {
+                        $trans->ledger_entries[] = $lfgdetail;
+                    }
+                }
+            }
+            $transaction_entry[] = $trans;
+        }
+
+        return array(
+            'status' => 200,
+            'transaction' => $transaction_table,
+            'result' => $transaction_entry
+        );
     }
     public function getAPIPayments($get){
         global $callConfig;
@@ -608,1058 +581,1160 @@ public function topostmasterdetails($get, $post){
         $return['result'] = $items;
         return $return;
     }
-    public function getAPImastersAPICode($get,$post){
-         global $callConfig;
-         $return = array();
-         $company_id = $get['company_id'];
-         $apimasterssql = TallyConstants::SEL_API_MASTERS.$company_id."' AND api_code = '".$uniquecode.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $apimastersres = $callConfig->getRow($apimasterssql);
-          $api_url = "";
-          if($apimastersres->id !=""){  // api code match
-              $api_master_id = $apimastersres->id;
-              $api_url = $apimastersres->end_point;
-              if($apimastersres->api_type == "S"){
-                  $api_code = $apimastersres->api_code;
-                  if($api_code == "SENDLEDGERMASTER"){   //Start ladger Masters
-                      $return = $this->getLedgerMaster($get,$post);
-                }elseif($api_code == "SENDSALESINVOICES" || $api_code =="SENDSALESORDERS" || $api_code == "SENDPURCHASEORDERS" || $api_code == "SENDPURCHASEINVOICES" || $api_code == "SENDGOODSRECEIPTNOTES" || $api_code == "SENDDEBITNOTES" || $api_code == "SENDCREDITNOTES" || $api_code == "SENDDELIVERYORDERS"){   //Start Sales Invoice
-                    $return = $this->getTransactionInvoices($get,$post,$apimastersres->application_table);
-                }elseif($api_code == "SENDPAYMENTS"){   //Start Sales Invoice
-                    $return = $this->getAPIPayments($get,$post);
-                }elseif($api_code == "SENDRECEIPTS"){   //Start Sales Invoice
-                    $return = $this->getAPIReceipts($get,$post);
-                }elseif($api_code == "SENDJOURNALVOUCHERS"){   //Start Sales Invoice
-                    $return = $this->getAPIJournalVouchers($get,$post);
-                }elseif($api_code == "SENDITEMS"){   //Start Sales Invoice
-                    $return = $this->getAPIItems($get,$post);
-                }else{  //Start dynamic api
+    private function executeDynamicSendApi($get, $apimastersres): array
+    {
+        global $callConfig;
+        $fieldkeywithvalue = array();
+        $response_field_ary = json_decode($apimastersres->api_response_details, 1) ?: array();
+        $getstringlist = "";
+        foreach ($response_field_ary as $responsekey => $fieldname) {
+            if (!empty($fieldname['application_table_field'])) {
+                $getstringlist .= $fieldname['application_table_field'] . " as " . $responsekey . ",";
+            }
+        }
+        $getstringlists = ($getstringlist !== "") ? substr($getstringlist, 0, -1) : "*";
+        $query = "SELECT " . $getstringlists . " FROM " . $apimastersres->application_table . " WHERE company_id =" . $get['company_id'] . TallyConstants::AND_IS_ACTIVE_0;
+        $data = $callConfig->getAllRows($query);
+        if (!empty($data)) {
+            $returnres = array();
+            foreach ($data as $resdata) {
+                $finalresdata = array();
+                foreach ($resdata as $keyfld => $rsdata) {
+                    $finalresdata[$keyfld] = !empty($fieldkeywithvalue[$keyfld][$rsdata]) ? $fieldkeywithvalue[$keyfld][$rsdata] : $rsdata;
+                }
+                $returnres[] = $finalresdata;
+            }
+            return array('status' => 200, 'result' => $returnres);
+        }
+        return array('status' => 404);
+    }
 
-                      //display attributes list
-                      $displayattributessql = TallyConstants::SEL_DISPLAY_ATTR.$get['company_id'].TallyConstants::AND_APP_TABLE.$apimastersres->application_table.TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-                    $fieldkeywithvalue = array();
-                    if($displayattributesres->list_attributes !=""){
-                        $lists = json_decode($displayattributesres->list_attributes,1);
-                        $type_array = array('select','auto_select','multi_select','disable_select','radio','checkbox', 'color_pick','image');
-                        foreach ($lists as $key => $value){
-                            if(in_array($value['type'], (array)$type_array)){
-                                $tablefield = $this->getDyanamicSelectData($apimastersres->application_table, $key);
-                                if($tablefield['type'] != 'function'){
-                                    $fieldkeywithvalue[$key] = $tablefield['res'];
-                                }else{
-                                    $fieldkeywithvalue[$key] =  $tablefield;
-                                }
-                             }
-                        }
-                    }
-                    //echo "<pre>"; print_r($fieldkeywithvalue); echo "</pre>";
-                    //display attributes list
+    private function dispatchSendApiCode($get, $post, $apimastersres): array
+    {
+        $api_code = $apimastersres->api_code;
+        $transactionCodes = array('SENDSALESINVOICES', 'SENDSALESORDERS', 'SENDPURCHASEORDERS', 'SENDPURCHASEINVOICES', 'SENDGOODSRECEIPTNOTES', 'SENDDEBITNOTES', 'SENDCREDITNOTES', 'SENDDELIVERYORDERS');
 
-                      $response_field_ary = json_decode($apimastersres->api_response_details, 1);
-                      $getstringlist = "";
-                      foreach($response_field_ary as $responsekey=>$fieldname){
-                          if($fieldname['application_table_field'] !=""){
-                              $getstringlist .= $fieldname['application_table_field']." as ".$responsekey.",";
-                          }
-                      }
-                      if($getstringlist !=""){
-                          $getstringlists = substr($getstringlist, 0, -1);
-                      }else{
-                          $getstringlists = "*";
-                      }
-                      $query = "SELECT ".$getstringlists." FROM ".$apimastersres->application_table." WHERE company_id =".$get['company_id'].TallyConstants::AND_IS_ACTIVE_0;
-                      $data = $callConfig->getAllRows($query);
-                      if(count((array)$data) != '0'){
-                          $returnres = array();
-                          foreach($data as $resdata){
-                              $finalresdata = array();
-                              foreach($resdata as $keyfld=>$rsdata){
-                                  if($fieldkeywithvalue[$keyfld][$rsdata] !=""){
-                                      $finalresdata[$keyfld] = $fieldkeywithvalue[$keyfld][$rsdata];
-                                  }else{
-                                      $finalresdata[$keyfld] = $rsdata;
-                                  }
-                              }
-                              $returnres[] = $finalresdata;
-                          }
-                          $return['status'] = 200;
-                         $return['result'] = $returnres;
-                     }else{
-                         $return['status'] = 404;
-                     }
-                 } //close dynamic api
-              }else{
-                  //recievd /...................
-                  $return = $post;
+        if ($api_code == "SENDLEDGERMASTER") {
+            return $this->getLedgerMaster($get, $post);
+        }
+        if (in_array($api_code, $transactionCodes)) {
+            return $this->getTransactionInvoices($get, $apimastersres->application_table);
+        }
+        if ($api_code == "SENDPAYMENTS") {
+            return $this->getAPIPayments($get, $post);
+        }
+        if ($api_code == "SENDRECEIPTS") {
+            return $this->getAPIReceipts($get, $post);
+        }
+        if ($api_code == "SENDJOURNALVOUCHERS") {
+            return $this->getAPIJournalVouchers($get, $post);
+        }
+        if ($api_code == "SENDITEMS") {
+            return $this->getAPIItems($get, $post);
+        }
+        return $this->executeDynamicSendApi($get, $apimastersres);
+    }
 
-              }
-          }else{
-              $api_master_id = 0;
-              $return['status'] = 403; // api code not match
-          }
-          $final_status = $return['status']!=""?$return['status']:"200";
-          $api_hits = array('company_id'=>$company_id,'api_url'=>$api_url,'api_master_id'=>$api_master_id,'api_request_parameters'=>urlencode(json_encode((array)$get)),'api_response_details'=>urlencode(json_encode((array)$return)), 'request_date_time'=> date(TallyConstants::DATE_FORMAT_YMD_HIS), 'response_status'=>$final_status, 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
+    public function getAPImastersAPICode($get, $post)
+    {
+        global $callConfig;
+        $company_id = $get['company_id'];
+        $uniquecode = $get['uniquecode'] ?? '';
+        $apimasterssql = TallyConstants::SEL_API_MASTERS . $company_id . "' AND api_code = '" . $uniquecode . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        $apimastersres = $callConfig->getRow($apimasterssql);
+        $api_url = "";
+        $api_master_id = 0;
+
+        if (!empty($apimastersres->id)) {
+            $api_master_id = $apimastersres->id;
+            $api_url = $apimastersres->end_point;
+            if ($apimastersres->api_type == "S") {
+                $return = $this->dispatchSendApiCode($get, $post, $apimastersres);
+            } else {
+                $return = $post;
+            }
+        } else {
+            $return = array('status' => 403);
+        }
+
+        $final_status = !empty($return['status']) ? $return['status'] : "200";
+        $api_hits = array(
+            'company_id' => $company_id,
+            'api_url' => $api_url,
+            'api_master_id' => $api_master_id,
+            'api_request_parameters' => urlencode(json_encode((array)$get)),
+            'api_response_details' => urlencode(json_encode((array)$return)),
+            'request_date_time' => date(TallyConstants::DATE_FORMAT_YMD_HIS),
+            'response_status' => $final_status,
+            'is_active' => 0,
+            'current_status' => 0,
+            'created_by' => $get['user_id']
+        );
         $this->insertAPIHits($api_hits);
-         return $return;
+        return $return;
     }
 }
 
 trait TallyApiInboundTrait
 {
-public function tallyAPIReceiveReceipts($get,$post,$api_hitsres,$apimastersres){
+    private function loadReceiptInboundMasters($company_id, $user_id): array
+    {
         global $callConfig;
-        $checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
-         $company_id = $get['company_id'];
-        //start get masters
-         $application_userssql = TallyConstants::SEL_APP_USERS.$company_id.TallyConstants::AND_ID_APOS.$get['user_id'].TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-        $application_usersres =  $callConfig->getRow($application_userssql);
+        $application_userssql = TallyConstants::SEL_APP_USERS . $company_id . TallyConstants::AND_ID_APOS . $user_id . TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
+        $application_usersres = $callConfig->getRow($application_userssql);
 
-        $chartofaccountssql = TallyConstants::SEL_COA.$company_id.TallyConstants::ALLOW_POSTING_0;
-        $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
         $chart_of_accounts = array();
-        foreach($chartofaccountsres as $cca){
+        $chart_of_accounts_name = array();
+        foreach ($callConfig->getAllRows(TallyConstants::SEL_COA . $company_id . TallyConstants::ALLOW_POSTING_0) as $cca) {
             $chart_of_accounts_name[$cca->account_name] = $cca;
             $chart_of_accounts[$cca->account_code] = $cca;
         }
-        $customerssql = "SELECT ctm.customer_id, ctm.party_name, cust.id, cust.company, cust.account_code FROM customer_tally_mappings ctm, customers cust WHERE ctm.company_id = ".$company_id." AND ctm.company_id = cust.company_id AND ctm.customer_id = cust.id AND ctm.is_active = cust.is_active AND ctm.is_active = 0";
-        $customersres = $callConfig->getAllRows($customerssql);
-        foreach($customersres as $custre){
+
+        $customers = array();
+        $customerssql = "SELECT ctm.customer_id, ctm.party_name, cust.id, cust.company, cust.account_code FROM customer_tally_mappings ctm, customers cust WHERE ctm.company_id = " . $company_id . " AND ctm.company_id = cust.company_id AND ctm.customer_id = cust.id AND ctm.is_active = cust.is_active AND ctm.is_active = 0";
+        foreach ($callConfig->getAllRows($customerssql) as $custre) {
             $customers[$custre->party_name] = $custre;
         }
-        $banckaccountsql = "SELECT id, account_code, bank_account_name, bank_account_number FROM bank_accounts WHERE company_id = '".$company_id.TallyConstants::AND_IS_ACTIVE_0_NO_SPACE;
-        $banckaccountres = $callConfig->getAllRows($banckaccountsql);
-        foreach($banckaccountres as $payres){
+
+        $bank_accounts = array();
+        $banckaccountsql = "SELECT id, account_code, bank_account_name, bank_account_number FROM bank_accounts WHERE company_id = '" . $company_id . TallyConstants::AND_IS_ACTIVE_0_NO_SPACE;
+        foreach ($callConfig->getAllRows($banckaccountsql) as $payres) {
             $bank_accounts[$payres->account_code] = (array)$payres;
         }
-        $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id FROM sales_invoices WHERE company_id = '".$company_id.TallyConstants::AND_IS_ACTIVE_0_NO_SPACE;
-        $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
-        foreach($sales_invoicesres as $si){
+
+        $sales_invoices = array();
+        $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id FROM sales_invoices WHERE company_id = '" . $company_id . TallyConstants::AND_IS_ACTIVE_0_NO_SPACE;
+        foreach ($callConfig->getAllRows($sales_invoicessql) as $si) {
             $sales_invoices[$si->transaction_number] = (array)$si;
         }
 
-        //end get master
-        $api_code = $apimastersres->api_code;
-         $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-        $responsary = $receipt_allocations= array();
-        $getstringlist = '';
-
-        //recept list
-        $receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM receipts WHERE company_id='".$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $receiptsres = $callConfig->getAllRows($receiptssql);
-
-          $receipt_allocationssql = "SELECT id, receipt_id, transaction_no AS bill_transaction_no , total_paid_amonut FROM receipt_allocations WHERE company_id='".$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $receipt_allocationsres = $callConfig->getAllRows($receipt_allocationssql);
-
-          foreach($receipt_allocationsres as $recalcpt){
-            $receipt_allocations[$recalcpt->receipt_id] =  $recalcpt;
+        $receipt_allocations = array();
+        $receipt_allocationssql = "SELECT id, receipt_id, transaction_no AS bill_transaction_no , total_paid_amonut FROM receipt_allocations WHERE company_id='" . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        foreach ($callConfig->getAllRows($receipt_allocationssql) as $recalcpt) {
+            $receipt_allocations[$recalcpt->receipt_id] = $recalcpt;
         }
 
-        foreach($receiptsres as $recpt){
-            $recpt->bll_details = $receipt_allocations[$recpt->id];
-            $receipts[$recpt->transaction_no] =  $recpt; //marge two table data
-         }
-         unset($receipts['REC00016']);
-         foreach($api_hit_api_response_details[$api_code] as $apihitre){
-            $paymentarray = $paymentallocationarrayre = array();
-            if(isset($receipts[$apihitre['VOUCHERNUMBER']])){
-                $stringary['status'] = 1062;
-                $stringary['query'] = $getstringlist;
-                $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
-            }else{
-
-                    //total amount recepts
-                    $recepttotalamt = 0;
-                    $party_id = array();
-                    $payment_date = $this->dateconvertdbformat($apihitre['InvDate']);
-                    $arychunks = array_chunk($apihitre['Ledger_Entries'], 2);
-                    $payment_type = "cash";
-                    $bank_account_id = $account_code="";
-                    foreach($arychunks as $partydetailandtransdetail){
-                        $recepttotalamt += $partydetailandtransdetail[0]['AMOUNT'];
-                        $receptaccountname = $partydetailandtransdetail[1]['Ledger_Name'];
-
-                        if(isset($customers[$partydetailandtransdetail[0]['Party_Name']])){
-                            $custid = $customers[$partydetailandtransdetail[0]['Party_Name']]->id;
-                            $party_id[$custid] = $custid;
-                        }
-                    }
-                    //total amount recepts
-                    if(isset($chart_of_accounts_name[$receptaccountname])){
-                        $payment_account_details = $chart_of_accounts_name[$receptaccountname];
-                        if(isset($bank_accounts[$payment_account_details->account_code])){
-                            $bankaccountdetails = $bank_accounts[$payment_account_details->account_code];
-                            $payment_type = "bank";
-                            $bank_account_id = $bankaccountdetails['id'];
-                            $account_code = $bankaccountdetails['account_code'];
-                        }
-                    }
-                    //payment_type
-
-                    //strat insert transaction
-
-                    $paymentarray = array('company_id'=>$company_id,'transaction_type'=>'customers','transaction_no'=>$transaction_no,'payment_date'=>$payment_date,'party_id'=>json_encode($party_id),'payment_type'=>$payment_type,'bank_account_id'=>$bank_account_id,'account_code'=>$account_code,'amount'=>$recepttotalamt,'ref_no'=>'','due_date'=>$payment_date,'unallocated_amount'=>0,'allocated_amount'=>$recepttotalamt,'remarks'=>'','originator'=>1,'is_active'=>'0','current_status'=>'199','paid_amonut'=>$recepttotalamt,'tds_amount'=>0,'payment_process'=>'NP','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"));
-
-
-                        foreach($arychunks as $partydetailandtransdetail){
-                            $transaction_details = $sales_invoices[$partydetailandtransdetail[0]['Bill_Details']['Bill_NO']];
-                            $paymentallocationarrayre[] = array('company_id'=>$company_id,'receipt_id'=>$receipt_id,'transaction_table'=>'sales_invoices','transaction_id'=>$transaction_details['id'],'transaction_no'=>$transaction_details['transaction_number'],'total_amount'=>$partydetailandtransdetail[0]['AMOUNT'],'pending_amount'=>0,'paid_amonut'=>$partydetailandtransdetail[0]['AMOUNT'],'is_active'=>'0','current_status'=>'0','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"),'tds_amount'=>0,'total_paid_amonut'=>$partydetailandtransdetail[0]['AMOUNT'],'total_tax_split_details'=>'','party_id'=>$transaction_details['party_id']);
-                        }
-                    $popisosichildtablerequirdary = array('transaction_table','transaction_id','transaction_no');
-                    $popisosimaintablerequirdary = array('party_id','payment_type','amount','cost_center','location_id');
-                    foreach($application_usersres as $fieldkey=>$userdetails){
-                        if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
-                            $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                        }
-                    }
-                    //Start VALIDATION PARTS
-                    foreach($paymentarray as $fieldkey=>$fieldval){
-                        if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
-                            $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                        }
-                    }
-                    foreach($paymentallocationarrayre as $itemtble){
-                        foreach ($itemtble as  $fieldkey=>$fieldval) {
-                            if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
-                                $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                            }
-                        }
-                    }
-                    //End VALIDATION PART
-                if($checkstatus == "S" && count((array)$valuenotavailablefieldary) ==0){ // Save
-                    $transaction_no    = $this->toGetApplicationSerialNumber('receipts');
-                    $paymentarray['$transaction_no'] =$transaction_no;
-                    $res = $callConfig->insertRecord('receipts',$paymentarray);
-                    $receipt_id = $res['LASTID'];
-                    $payallocationres = array();
-                    if($res['status'] == 'sucess'){
-                        foreach($paymentallocationarrayre as $paymentallocationarray){
-                            $paymentallocationarray['receipt_id'] = $receipt_id;
-                            $payallocationres[] = $callConfig->insertRecord('receipt_allocations',$paymentallocationarray);
-                        }
-                        $stringary['jvquery'] = $this->insertpaymentstojv($receipt_id,$get,'receipts');
-                    }
-                }
-
-                $stringary['transaction_item_res'] = $payallocationres;
-                $stringary['transaction_item'] = $paymentallocationarrayre;
-                $stringary['status'] = 200;
-                $stringary['query'] = '';
-                $stringary['transaction'] = $paymentarray;
-                $stringary['transaction_res'] = $res;
-                $stringary['error'] = 'success';
-
-            }
-            $apihitre['response'] =$stringary;
-            $apihitre['valuenotavailablefieldary'] =$valuenotavailablefieldary;
-            $responsary[] = $apihitre;
+        $receipts = array();
+        $receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM receipts WHERE company_id='" . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        foreach ($callConfig->getAllRows($receiptssql) as $recpt) {
+            $recpt->bll_details = $receipt_allocations[$recpt->id] ?? null;
+            $receipts[$recpt->transaction_no] = $recpt;
         }
+        unset($receipts['REC00016']);
 
-         return $responsary;
+        return [$application_usersres, $chart_of_accounts, $chart_of_accounts_name, $customers, $bank_accounts, $sales_invoices, $receipts];
     }
 
-    public function tallyAPIReceivePayments($get,$post,$api_hitsres,$apimastersres){
+    private function processSingleReceiptHit($apihitre, $company_id, $checkstatus, $get, array $masters): array
+    {
         global $callConfig;
-        $checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
-         $company_id = $get['company_id'];
+        list($application_usersres, $chart_of_accounts, $chart_of_accounts_name, $customers, $bank_accounts, $sales_invoices, $receipts) = $masters;
+        $valuenotavailablefieldary = array();
+        $stringary = array();
 
-        $application_userssql = TallyConstants::SEL_APP_USERS.$company_id.TallyConstants::AND_ID_APOS.$get['user_id'].TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-        $application_usersres =  $callConfig->getRow($application_userssql);
+        if (isset($receipts[$apihitre['VOUCHERNUMBER']])) {
+            $stringary['status'] = 1062;
+            $stringary['query'] = '';
+            $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
+            $apihitre['response'] = $stringary;
+            $apihitre['valuenotavailablefieldary'] = $valuenotavailablefieldary;
+            return $apihitre;
+        }
 
-        //start get masters
-        $chartofaccountssql = TallyConstants::SEL_COA.$company_id.TallyConstants::ALLOW_POSTING_0;
-        $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
+        $recepttotalamt = 0;
+        $party_id = array();
+        $payment_date = $this->dateconvertdbformat($apihitre['InvDate']);
+        $arychunks = array_chunk($apihitre['Ledger_Entries'], 2);
+        $payment_type = "cash";
+        $bank_account_id = $account_code = "";
+        $receptaccountname = "";
+
+        foreach ($arychunks as $partydetailandtransdetail) {
+            $recepttotalamt += $partydetailandtransdetail[0]['AMOUNT'] ?? 0;
+            $receptaccountname = $partydetailandtransdetail[1]['Ledger_Name'] ?? '';
+            $pName = $partydetailandtransdetail[0]['Party_Name'] ?? '';
+            if (isset($customers[$pName])) {
+                $custid = $customers[$pName]->id;
+                $party_id[$custid] = $custid;
+            }
+        }
+
+        if (isset($chart_of_accounts_name[$receptaccountname])) {
+            $payment_account_details = $chart_of_accounts_name[$receptaccountname];
+            if (isset($bank_accounts[$payment_account_details->account_code])) {
+                $bankaccountdetails = $bank_accounts[$payment_account_details->account_code];
+                $payment_type = "bank";
+                $bank_account_id = $bankaccountdetails['id'];
+                $account_code = $bankaccountdetails['account_code'];
+            }
+        }
+
+        $paymentarray = array(
+            'company_id' => $company_id,
+            'transaction_type' => 'customers',
+            'transaction_no' => '',
+            'payment_date' => $payment_date,
+            'party_id' => json_encode($party_id),
+            'payment_type' => $payment_type,
+            'bank_account_id' => $bank_account_id,
+            'account_code' => $account_code,
+            'amount' => $recepttotalamt,
+            'ref_no' => '',
+            'due_date' => $payment_date,
+            'unallocated_amount' => 0,
+            'allocated_amount' => $recepttotalamt,
+            'remarks' => '',
+            'originator' => 1,
+            'is_active' => '0',
+            'current_status' => '199',
+            'paid_amonut' => $recepttotalamt,
+            'tds_amount' => 0,
+            'payment_process' => 'NP',
+            'created_by' => 1,
+            'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS)
+        );
+
+        $paymentallocationarrayre = array();
+        foreach ($arychunks as $partydetailandtransdetail) {
+            $billNo = $partydetailandtransdetail[0]['Bill_Details']['Bill_NO'] ?? '';
+            $transaction_details = $sales_invoices[$billNo] ?? array('id' => 0, 'transaction_number' => '', 'party_id' => 0);
+            $paymentallocationarrayre[] = array(
+                'company_id' => $company_id,
+                'receipt_id' => 0,
+                'transaction_table' => 'sales_invoices',
+                'transaction_id' => $transaction_details['id'],
+                'transaction_no' => $transaction_details['transaction_number'],
+                'total_amount' => $partydetailandtransdetail[0]['AMOUNT'] ?? 0,
+                'pending_amount' => 0,
+                'paid_amonut' => $partydetailandtransdetail[0]['AMOUNT'] ?? 0,
+                'is_active' => '0',
+                'current_status' => '0',
+                'created_by' => 1,
+                'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS),
+                'tds_amount' => 0,
+                'total_paid_amonut' => $partydetailandtransdetail[0]['AMOUNT'] ?? 0,
+                'total_tax_split_details' => '',
+                'party_id' => $transaction_details['party_id']
+            );
+        }
+
+        $popisosichildtablerequirdary = array('transaction_table', 'transaction_id', 'transaction_no');
+        $popisosimaintablerequirdary = array('party_id', 'payment_type', 'amount', 'cost_center', 'location_id');
+
+        foreach ((array)$application_usersres as $fieldkey => $fieldval) {
+            if (in_array($fieldkey, $popisosimaintablerequirdary) && $fieldval == "") {
+                $valuenotavailablefieldary[$fieldkey] = $fieldval;
+            }
+        }
+        foreach ($paymentarray as $fieldkey => $fieldval) {
+            if (in_array($fieldkey, $popisosimaintablerequirdary) && $fieldval == "") {
+                $valuenotavailablefieldary[$fieldkey] = $fieldval;
+            }
+        }
+        foreach ($paymentallocationarrayre as $itemtble) {
+            foreach ($itemtble as $fieldkey => $fieldval) {
+                if (in_array($fieldkey, $popisosichildtablerequirdary) && $fieldval == "") {
+                    $valuenotavailablefieldary[$fieldkey] = $fieldval;
+                }
+            }
+        }
+
+        $res = array();
+        $payallocationres = array();
+        if ($checkstatus == "S" && count($valuenotavailablefieldary) == 0) {
+            $transaction_no = $this->toGetApplicationSerialNumber('receipts');
+            $paymentarray['transaction_no'] = $transaction_no;
+            $res = $callConfig->insertRecord('receipts', $paymentarray);
+            $receipt_id = $res['LASTID'] ?? 0;
+            if (($res['status'] ?? '') == 'sucess') {
+                foreach ($paymentallocationarrayre as $paymentallocationarray) {
+                    $paymentallocationarray['receipt_id'] = $receipt_id;
+                    $payallocationres[] = $callConfig->insertRecord('receipt_allocations', $paymentallocationarray);
+                }
+                $stringary['jvquery'] = $this->insertpaymentstojv($receipt_id, $get, 'receipts');
+            }
+        }
+
+        $stringary['transaction_item_res'] = $payallocationres;
+        $stringary['transaction_item'] = $paymentallocationarrayre;
+        $stringary['status'] = 200;
+        $stringary['query'] = '';
+        $stringary['transaction'] = $paymentarray;
+        $stringary['transaction_res'] = $res;
+        $stringary['error'] = 'success';
+
+        $apihitre['response'] = $stringary;
+        $apihitre['valuenotavailablefieldary'] = $valuenotavailablefieldary;
+        return $apihitre;
+    }
+
+    public function tallyAPIReceiveReceipts($get, $post, $api_hitsres, $apimastersres)
+    {
+        $checkstatus = !empty($post['checkstatus']) ? $post['checkstatus'] : ($get['checkstatus'] ?? '');
+        $company_id = $get['company_id'];
+        $masters = $this->loadReceiptInboundMasters($company_id, $get['user_id']);
+        $api_code = $apimastersres->api_code;
+        $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details), 1) ?: array();
+        $responsary = array();
+
+        if (!empty($api_hit_api_response_details[$api_code])) {
+            foreach ($api_hit_api_response_details[$api_code] as $apihitre) {
+                $responsary[] = $this->processSingleReceiptHit($apihitre, $company_id, $checkstatus, $get, $masters);
+            }
+        }
+        return $responsary;
+    }
+
+    private function loadPaymentInboundMasters($company_id, $user_id): array
+    {
+        global $callConfig;
+        $application_userssql = TallyConstants::SEL_APP_USERS . $company_id . TallyConstants::AND_ID_APOS . $user_id . TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
+        $application_usersres = $callConfig->getRow($application_userssql);
+
         $chart_of_accounts = array();
-        foreach($chartofaccountsres as $cca){
+        $chart_of_accounts_name = array();
+        foreach ($callConfig->getAllRows(TallyConstants::SEL_COA . $company_id . TallyConstants::ALLOW_POSTING_0) as $cca) {
             $chart_of_accounts_name[$cca->account_name] = $cca;
             $chart_of_accounts[$cca->account_code] = $cca;
         }
-        $customerssql = "SELECT vtm.vendor_id, vtm.party_name, vend.id, vend.company, vend.account_code FROM vendor_tally_mappings vtm, vendors vend WHERE vtm.company_id = ".$company_id." AND vtm.company_id = vend.company_id AND vtm.vendor_id = vend.id AND vtm.is_active = vend.is_active AND vtm.is_active = 0";
-        $customersres = $callConfig->getAllRows($customerssql);
-        foreach($customersres as $custre){
+
+        $customers = array();
+        $customerssql = "SELECT vtm.vendor_id, vtm.party_name, vend.id, vend.company, vend.account_code FROM vendor_tally_mappings vtm, vendors vend WHERE vtm.company_id = " . $company_id . " AND vtm.company_id = vend.company_id AND vtm.vendor_id = vend.id AND vtm.is_active = vend.is_active AND vtm.is_active = 0";
+        foreach ($callConfig->getAllRows($customerssql) as $custre) {
             $customers[$custre->party_name] = $custre;
         }
-        $banckaccountsql = "SELECT id, account_code, bank_account_name, bank_account_number FROM bank_accounts WHERE company_id = '".$company_id.TallyConstants::AND_IS_ACTIVE_0_NO_SPACE;
-        $banckaccountres = $callConfig->getAllRows($banckaccountsql);
-        foreach($banckaccountres as $payres){
+
+        $bank_accounts = array();
+        $banckaccountsql = "SELECT id, account_code, bank_account_name, bank_account_number FROM bank_accounts WHERE company_id = '" . $company_id . TallyConstants::AND_IS_ACTIVE_0_NO_SPACE;
+        foreach ($callConfig->getAllRows($banckaccountsql) as $payres) {
             $bank_accounts[$payres->account_code] = (array)$payres;
         }
-        $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id FROM purchase_invoices WHERE company_id = '".$company_id.TallyConstants::AND_IS_ACTIVE_0_NO_SPACE;
-        $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
-        foreach($sales_invoicesres as $si){
+
+        $purchase_invoices = array();
+        $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id FROM purchase_invoices WHERE company_id = '" . $company_id . TallyConstants::AND_IS_ACTIVE_0_NO_SPACE;
+        foreach ($callConfig->getAllRows($sales_invoicessql) as $si) {
             $purchase_invoices[$si->transaction_number] = (array)$si;
         }
 
-        //end get master
-        $api_code = $apimastersres->api_code;
-         $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-        $responsary = $receipt_allocations= array();
-        $getstringlist = '';
-        $payment_id = '';
-
-        //recept list
-        $receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM payments WHERE company_id='".$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $receiptsres = $callConfig->getAllRows($receiptssql);
-
-          $receipt_allocationssql = "SELECT id, payment_id, transaction_no AS bill_transaction_no , total_paid_amonut FROM payment_allocations WHERE company_id='".$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $receipt_allocationsres = $callConfig->getAllRows($receipt_allocationssql);
-
-          foreach($receipt_allocationsres as $recalcpt){
-            $receipt_allocations[$recalcpt->payment_id] =  $recalcpt;
+        $receipt_allocations = array();
+        $receipt_allocationssql = "SELECT id, payment_id, transaction_no AS bill_transaction_no , total_paid_amonut FROM payment_allocations WHERE company_id='" . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        foreach ($callConfig->getAllRows($receipt_allocationssql) as $recalcpt) {
+            $receipt_allocations[$recalcpt->payment_id] = $recalcpt;
         }
 
-        foreach($receiptsres as $recpt){
-            $recpt->bll_details = $receipt_allocations[$recpt->id];
-            $receipts[$recpt->transaction_no] =  $recpt; //marge two table data
-         }
-         foreach($api_hit_api_response_details[$api_code] as $apihitre){
-            if(isset($receipts[$apihitre['VOUCHERNUMBER']])){
-                $stringary['status'] = 1062;
-                $stringary['query'] = $getstringlist;
-                $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
-            }else{
-
-                    $recepttotalamt = 0;
-                    $party_id = array();
-                    $payment_date = $this->dateconvertdbformat($apihitre['InvDate']);
-                    $arychunks = array_chunk($apihitre['Ledger_Entries'], 2);
-                    $payment_type = "cash";
-                    $bank_account_id = $account_code="";
-                    foreach($arychunks as $partydetailandtransdetail){
-                        $recepttotalamt += $partydetailandtransdetail[0]['AMOUNT'];
-                        $receptaccountname = $partydetailandtransdetail[1]['Ledger_Name'];
-
-                        if(isset($customers[$partydetailandtransdetail[0]['Party_Name']])){
-                            $custid = $customers[$partydetailandtransdetail[0]['Party_Name']]->id;
-                            $party_id[$custid] = $custid;
-                        }
-                    }
-                    //total amount recepts
-                    if(isset($chart_of_accounts_name[$receptaccountname])){
-                        $payment_account_details = $chart_of_accounts_name[$receptaccountname];
-                        if(isset($bank_accounts[$payment_account_details->account_code])){
-                            $bankaccountdetails = $bank_accounts[$payment_account_details->account_code];
-                            $payment_type = "bank";
-                            $bank_account_id = $bankaccountdetails['id'];
-                            $account_code = $bankaccountdetails['account_code'];
-                        }
-                    }
-                    //payment_type
-
-                    //strat insert transaction
-                    $paymentarray = array('company_id'=>$company_id,'transaction_type'=>'customers','transaction_no'=>$transaction_no,'payment_date'=>$payment_date,'party_id'=>json_encode($party_id),'payment_type'=>$payment_type,'bank_account_id'=>$bank_account_id,'account_code'=>$account_code,'amount'=>$recepttotalamt,'ref_no'=>'','due_date'=>$payment_date,'unallocated_amount'=>0,'allocated_amount'=>$recepttotalamt,'remarks'=>'','originator'=>1,'is_active'=>'0','current_status'=>'199','paid_amonut'=>$recepttotalamt,'tds_amount'=>0,'payment_process'=>'NP','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"));
-                    foreach($arychunks as $partydetailandtransdetail){
-                        $transaction_details = $purchase_invoices[$partydetailandtransdetail[0]['Bill_Details']['Bill_NO']];
-                        $paymentallocationarrayre[] = array('company_id'=>$company_id,'payment_id'=>$payment_id,'transaction_table'=>'purchase_invoices','transaction_id'=>$transaction_details['id'],'transaction_no'=>$transaction_details['transaction_number'],'total_amount'=>$partydetailandtransdetail[0]['AMOUNT'],'pending_amount'=>0,'paid_amonut'=>$partydetailandtransdetail[0]['AMOUNT'],'is_active'=>'0','current_status'=>'0','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"),'tds_amount'=>0,'total_paid_amonut'=>$partydetailandtransdetail[0]['AMOUNT'],'total_tax_split_details'=>'','party_id'=>$transaction_details['party_id']);
-                    }
-
-
-                $popisosichildtablerequirdary = array('transaction_table','transaction_id','transaction_no');
-                $popisosimaintablerequirdary = array('party_id','payment_type','amount','cost_center','location_id');
-                foreach($application_usersres as $fieldkey=>$userdetails){
-                    if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
-                        $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                    }
-                }
-                //Start VALIDATION PARTS
-                foreach($paymentarray as $fieldkey=>$fieldval){
-                    if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
-                        $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                    }
-                }
-                foreach($paymentallocationarrayre as $itemtble){
-                    foreach ($itemtble as  $fieldkey=>$fieldval) {
-                        if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
-                            $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                        }
-                    }
-                }
-
-                //End VALIDATION PART
-                if($checkstatus == "S" && count((array)$valuenotavailablefieldary) ==0){ // Save
-                    $transaction_no    = $this->toGetApplicationSerialNumber('receipts');
-                    $paymentarray['$transaction_no'] =$transaction_no;
-                    $res = $callConfig->insertRecord('receipts',$paymentarray);
-                    $receipt_id = $res['LASTID'];
-                    $payallocationres = array();
-                    if($res['status'] == 'sucess'){
-                        foreach($paymentallocationarrayre as $paymentallocationarray){
-                            $paymentallocationarray['receipt_id'] = $receipt_id;
-                            $payallocationres[] = $callConfig->insertRecord('receipt_allocations',$paymentallocationarray);
-                        }
-                        $stringary['jvquery'] = $this->insertpaymentstojv($receipt_id,$get,'receipts');
-                    }
-                }
-
-                $stringary['transaction_item_res'] = $payallocationres;
-                $stringary['transaction_item'] = $paymentallocationarrayre;
-                $stringary['status'] = 200;
-                $stringary['query'] = '';
-                $stringary['transaction'] = $paymentarray;
-                $stringary['transaction_res'] = $res;
-                $stringary['error'] = 'success';
-
-            }
-            $apihitre['response'] =$stringary;
-            $responsary[] = $apihitre;
+        $receipts = array();
+        $receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM payments WHERE company_id='" . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        foreach ($callConfig->getAllRows($receiptssql) as $recpt) {
+            $recpt->bll_details = $receipt_allocations[$recpt->id] ?? null;
+            $receipts[$recpt->transaction_no] = $recpt;
         }
-        $return['responsary'] = $responsary;
-         return $return;
+
+        return [$application_usersres, $chart_of_accounts, $chart_of_accounts_name, $customers, $bank_accounts, $purchase_invoices, $receipts];
     }
-    public function tallyAPIDebitANDCreditNoteTransactions($get,$post,$api_hitsres,$apimastersres){
+
+    private function processSinglePaymentHit($apihitre, $company_id, $checkstatus, $get, array $masters): array
+    {
         global $callConfig;
-        $checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
-         $company_id = $get['company_id'];
-         $api_code = $apimastersres->api_code;
-         $application_table = $apimastersres->application_table;
-         $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-         $responsary = $parties = array();
+        list($application_usersres, $chart_of_accounts, $chart_of_accounts_name, $customers, $bank_accounts, $purchase_invoices, $receipts) = $masters;
+        $valuenotavailablefieldary = array();
+        $stringary = array();
 
-        $popisosichildtablerequirdary = array('account_code','item_name');
-        $popisosimaintablerequirdary = array('cost_center_id','party_id','transaction_location_id','originator_currency_id','originator_state_id');
+        if (isset($receipts[$apihitre['VOUCHERNUMBER']])) {
+            $stringary['status'] = 1062;
+            $stringary['query'] = '';
+            $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
+            $apihitre['response'] = $stringary;
+            return $apihitre;
+        }
 
-         $application_userssql = TallyConstants::SEL_APP_USERS.$company_id.TallyConstants::AND_ID_APOS.$get['user_id'].TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-        $application_usersres =  $callConfig->getRow($application_userssql);
-        $originator_currency_id = $application_usersres->default_currency_id;
-         $originator_state_id = $application_usersres->default_state_id;
+        $recepttotalamt = 0;
+        $party_id = array();
+        $payment_date = $this->dateconvertdbformat($apihitre['InvDate']);
+        $arychunks = array_chunk($apihitre['Ledger_Entries'], 2);
+        $payment_type = "cash";
+        $bank_account_id = $account_code = "";
+        $receptaccountname = "";
 
-        $dmtsql = TallyConstants::SEL_DMT.$get['company_id'].TallyConstants::AND_APP_TABLE.$application_table."' AND item_table !='' AND tax_table !='' AND is_active = 0";
-        $dmtres=$callConfig->getRow($dmtsql);
+        foreach ($arychunks as $partydetailandtransdetail) {
+            $recepttotalamt += $partydetailandtransdetail[0]['AMOUNT'] ?? 0;
+            $receptaccountname = $partydetailandtransdetail[1]['Ledger_Name'] ?? '';
+            $pName = $partydetailandtransdetail[0]['Party_Name'] ?? '';
+            if (isset($customers[$pName])) {
+                $custid = $customers[$pName]->id;
+                $party_id[$custid] = $custid;
+            }
+        }
 
-        $chartofaccountssql = TallyConstants::SEL_COA.$company_id.TallyConstants::ALLOW_POSTING_0;
-        $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
+        if (isset($chart_of_accounts_name[$receptaccountname])) {
+            $payment_account_details = $chart_of_accounts_name[$receptaccountname];
+            if (isset($bank_accounts[$payment_account_details->account_code])) {
+                $bankaccountdetails = $bank_accounts[$payment_account_details->account_code];
+                $payment_type = "bank";
+                $bank_account_id = $bankaccountdetails['id'];
+                $account_code = $bankaccountdetails['account_code'];
+            }
+        }
+
+        $paymentarray = array(
+            'company_id' => $company_id,
+            'transaction_type' => 'customers',
+            'transaction_no' => '',
+            'payment_date' => $payment_date,
+            'party_id' => json_encode($party_id),
+            'payment_type' => $payment_type,
+            'bank_account_id' => $bank_account_id,
+            'account_code' => $account_code,
+            'amount' => $recepttotalamt,
+            'ref_no' => '',
+            'due_date' => $payment_date,
+            'unallocated_amount' => 0,
+            'allocated_amount' => $recepttotalamt,
+            'remarks' => '',
+            'originator' => 1,
+            'is_active' => '0',
+            'current_status' => '199',
+            'paid_amonut' => $recepttotalamt,
+            'tds_amount' => 0,
+            'payment_process' => 'NP',
+            'created_by' => 1,
+            'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS)
+        );
+
+        $paymentallocationarrayre = array();
+        foreach ($arychunks as $partydetailandtransdetail) {
+            $billNo = $partydetailandtransdetail[0]['Bill_Details']['Bill_NO'] ?? '';
+            $transaction_details = $purchase_invoices[$billNo] ?? array('id' => 0, 'transaction_number' => '', 'party_id' => 0);
+            $paymentallocationarrayre[] = array(
+                'company_id' => $company_id,
+                'payment_id' => 0,
+                'transaction_table' => 'purchase_invoices',
+                'transaction_id' => $transaction_details['id'],
+                'transaction_no' => $transaction_details['transaction_number'],
+                'total_amount' => $partydetailandtransdetail[0]['AMOUNT'] ?? 0,
+                'pending_amount' => 0,
+                'paid_amonut' => $partydetailandtransdetail[0]['AMOUNT'] ?? 0,
+                'is_active' => '0',
+                'current_status' => '0',
+                'created_by' => 1,
+                'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS),
+                'tds_amount' => 0,
+                'total_paid_amonut' => $partydetailandtransdetail[0]['AMOUNT'] ?? 0,
+                'total_tax_split_details' => '',
+                'party_id' => $transaction_details['party_id']
+            );
+        }
+
+        $popisosichildtablerequirdary = array('transaction_table', 'transaction_id', 'transaction_no');
+        $popisosimaintablerequirdary = array('party_id', 'payment_type', 'amount', 'cost_center', 'location_id');
+
+        foreach ((array)$application_usersres as $fieldkey => $fieldval) {
+            if (in_array($fieldkey, $popisosimaintablerequirdary) && $fieldval == "") {
+                $valuenotavailablefieldary[$fieldkey] = $fieldval;
+            }
+        }
+        foreach ($paymentarray as $fieldkey => $fieldval) {
+            if (in_array($fieldkey, $popisosimaintablerequirdary) && $fieldval == "") {
+                $valuenotavailablefieldary[$fieldkey] = $fieldval;
+            }
+        }
+        foreach ($paymentallocationarrayre as $itemtble) {
+            foreach ($itemtble as $fieldkey => $fieldval) {
+                if (in_array($fieldkey, $popisosichildtablerequirdary) && $fieldval == "") {
+                    $valuenotavailablefieldary[$fieldkey] = $fieldval;
+                }
+            }
+        }
+
+        $res = array();
+        $payallocationres = array();
+        if ($checkstatus == "S" && count($valuenotavailablefieldary) == 0) {
+            $transaction_no = $this->toGetApplicationSerialNumber('receipts');
+            $paymentarray['transaction_no'] = $transaction_no;
+            $res = $callConfig->insertRecord('receipts', $paymentarray);
+            $receipt_id = $res['LASTID'] ?? 0;
+            if (($res['status'] ?? '') == 'sucess') {
+                foreach ($paymentallocationarrayre as $paymentallocationarray) {
+                    $paymentallocationarray['receipt_id'] = $receipt_id;
+                    $payallocationres[] = $callConfig->insertRecord('receipt_allocations', $paymentallocationarray);
+                }
+                $stringary['jvquery'] = $this->insertpaymentstojv($receipt_id, $get, 'receipts');
+            }
+        }
+
+        $stringary['transaction_item_res'] = $payallocationres;
+        $stringary['transaction_item'] = $paymentallocationarrayre;
+        $stringary['status'] = 200;
+        $stringary['query'] = '';
+        $stringary['transaction'] = $paymentarray;
+        $stringary['transaction_res'] = $res;
+        $stringary['error'] = 'success';
+
+        $apihitre['response'] = $stringary;
+        return $apihitre;
+    }
+
+    public function tallyAPIReceivePayments($get, $post, $api_hitsres, $apimastersres)
+    {
+        $checkstatus = !empty($post['checkstatus']) ? $post['checkstatus'] : ($get['checkstatus'] ?? '');
+        $company_id = $get['company_id'];
+        $masters = $this->loadPaymentInboundMasters($company_id, $get['user_id']);
+        $api_code = $apimastersres->api_code;
+        $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details), 1) ?: array();
+        $responsary = array();
+
+        if (!empty($api_hit_api_response_details[$api_code])) {
+            foreach ($api_hit_api_response_details[$api_code] as $apihitre) {
+                $responsary[] = $this->processSinglePaymentHit($apihitre, $company_id, $checkstatus, $get, $masters);
+            }
+        }
+        return array('responsary' => $responsary);
+    }
+    private function loadDebitCreditMasters($company_id, $application_table, $user_id): array
+    {
+        global $callConfig;
+        $application_userssql = TallyConstants::SEL_APP_USERS . $company_id . TallyConstants::AND_ID_APOS . $user_id . TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
+        $application_usersres = $callConfig->getRow($application_userssql);
+
+        $dmtsql = TallyConstants::SEL_DMT . $company_id . TallyConstants::AND_APP_TABLE . $application_table . "' AND item_table !='' AND tax_table !='' AND is_active = 0";
+        $dmtres = $callConfig->getRow($dmtsql);
+
         $chart_of_accounts = array();
-        foreach($chartofaccountsres as $cca){
+        $chart_of_accounts_name = array();
+        foreach ($callConfig->getAllRows(TallyConstants::SEL_COA . $company_id . TallyConstants::ALLOW_POSTING_0) as $cca) {
             $chart_of_accounts_name[$cca->account_name] = $cca;
             $chart_of_accounts[$cca->account_code] = $cca;
         }
 
-        $displayattributessql = TallyConstants::SEL_DISPLAY_ATTR.$get['company_id'].TallyConstants::AND_APP_TABLE.$application_table.TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-        $customerssql = "SELECT ctm.customer_id, ctm.party_name, cust.id, cust.company, cust.account_code FROM customer_tally_mappings ctm, customers cust WHERE ctm.company_id = ".$company_id." AND ctm.company_id = cust.company_id AND ctm.customer_id = cust.id AND ctm.is_active = cust.is_active AND ctm.is_active = 0";
-        $customersres = $callConfig->getAllRows($customerssql);
-        foreach($customersres as $custre){
+        $parties = array();
+        $customerssql = "SELECT ctm.customer_id, ctm.party_name, cust.id, cust.company, cust.account_code FROM customer_tally_mappings ctm, customers cust WHERE ctm.company_id = " . $company_id . " AND ctm.company_id = cust.company_id AND ctm.customer_id = cust.id AND ctm.is_active = cust.is_active AND ctm.is_active = 0";
+        foreach ($callConfig->getAllRows($customerssql) as $custre) {
             $parties[$custre->party_name] = $custre;
         }
-        $vendorsql = "SELECT vtm.vendor_id, vtm.party_name, vend.id, vend.company, vend.account_code FROM vendor_tally_mappings vtm, vendors vend WHERE vtm.company_id = ".$company_id." AND vtm.company_id = vend.company_id AND vtm.vendor_id = vend.id AND vtm.is_active = vend.is_active AND vtm.is_active = 0";
-        $vendorres = $callConfig->getAllRows($vendorsql);
-        foreach($vendorres as $vend){
+        $vendorsql = "SELECT vtm.vendor_id, vtm.party_name, vend.id, vend.company, vend.account_code FROM vendor_tally_mappings vtm, vendors vend WHERE vtm.company_id = " . $company_id . " AND vtm.company_id = vend.company_id AND vtm.vendor_id = vend.id AND vtm.is_active = vend.is_active AND vtm.is_active = 0";
+        foreach ($callConfig->getAllRows($vendorsql) as $vend) {
             $parties[$vend->party_name] = $vend;
         }
 
-
-
-        $transactionssql = "SELECT id, transaction_date, transaction_number, party_name, party_address, place_of_supply, party_phone, party_email FROM ".$application_table.TallyConstants::WHERE_COMPANY_ID.$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $transactionres = $callConfig->getAllRows($transactionssql);
-        foreach($transactionres as $recpt){
-            $transaction[$recpt->transaction_number] =  $recpt; //marge two table data
-         }
-
-         foreach($api_hit_api_response_details[$api_code] as $apihitre){  //api Hites response fileds
-             $valuenotavailablefieldary = array();
-              $stringary = array();
-              $maintransactionary = $transactionitemsql = $paymentarray = array();
-              $getstringlist = '';
-              if(isset($transaction[$apihitre['VOUCHERNUMBER']])){
-                $stringary['status'] = 1062;
-                $stringary['query'] = $getstringlist;
-                $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
-            }else{
-                $currency_id = "";
-                $party_id = $parties[$apihitre['PARTYNAME']]->id;
-                $party_name = $parties[$apihitre['PARTYNAME']]->company;
-                $mobile_number = $apihitre['mobile_number'] !="N/A"?$apihitre['mobile_number']:"";
-                $email_address = $apihitre['email_address'] !="N/A"?$apihitre['email_address']:"";
-                $maintotal_amount = 0;
-                $tax_state = "I";
-                foreach($apihitre['Item_Entries'] as $itmss){
-                    $maintotal_amount +=$itmss['AMOUNT'];
-                }
-
-                $maintransactionary = array('company_id'=>$company_id,'transaction_number'=>$apihitre['VOUCHERNUMBER'],'transaction_date'=>$this->dateconvertdbformat($apihitre['InvDate']),'cost_center_id'=>$application_usersres->cost_center,'party_name'=>$party_name,'party_id'=>$party_id,'party_address'=>$apihitre['STATE'],'supplier_state_id'=>'','place_of_supply'=>'','party_phone'=>$mobile_number,'party_email'=>$email_address,'amount'=>$maintotal_amount,'tax_amount'=>0,'total_amount'=>$maintotal_amount,'pending_amount'=>$maintotal_amount,'transaction_location_id'=>$application_usersres->location_id, 'transaction_warehouse_id'=>$application_usersres->default_warehouse_id, 'originator_currency_id'=>$originator_currency_id, 'currency_id'=>$currency_id, 'currency_rate'=>'1' ,'originator'=>$get['user_id'], 'originator_state_id'=>$originator_state_id,'payment_terms'=>'','payment_term_history'=>'', 'due_date'=>$this->dateconvertdbformat($apihitre['InvDate']),'tax_state'=>$tax_state,'is_active'=>'0','current_status'=>'199','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"));
-
-                foreach($apihitre['Item_Entries'] as $itementry){
-                    $child_total_amount = $itementry['AMOUNT'];
-                    if(isset($chart_of_accounts_name[$itementry['Stock_Item']])){
-                        $account_code = $chart_of_accounts_name[$itementry['Stock_Item']]->account_code;
-                        $account_name = $chart_of_accounts_name[$itementry['Stock_Item']]->account_name;
-                    }
-                    $transactionitemsql[] = array('company_id'=>$company_id, 'transaction_id'=>$transaction_id, 'item_id'=>0, 'account_code'=>$account_code, 'item_name'=>$account_name, 'description'=>$account_name, 'purchase_uom'=>'UN', 'item_quantity'=>1, 'item_price'=>$child_total_amount, 'item_amount'=>$child_total_amount, 'tax_amount'=>0, 'discount_amount'=>'0', 'total_amount'=>$child_total_amount, 'reason_id'=>'', 'item_st_cost'=>'0','item_fifo_cost'=>'0', 'item_lifo_cost'=>'0', 'item_wa_cost'=>'0', 'approved_quantity'=>1, 'transaction_type'=>'', 'transaction_qty'=>1, 'pending_qty'=>1, 'item_details'=>'', 'tax_deducted_source_id'=>'', 'tds_amount'=>'0', 'is_active'=>'0', 'created_date'=>date("Y-m-d H:i:s"), 'created_by'=>'1');
-                }
-                //Start VALIDATION PARTS
-
-                foreach($maintransactionary as $fieldkey=>$fieldval){
-                    if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
-                        $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                    }
-                }
-                foreach($transactionitemsql as $itemtble){
-                    foreach ($itemtble as  $fieldkey=>$fieldval) {
-                        if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
-                            $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                        }
-                    }
-                }
-                //End VALIDATION PART
-
-                if($checkstatus == "S" && count((array)$valuenotavailablefieldary) ==0){
-                    $maintransactionaryres = $callConfig->insertRecord($dmtres->application_table_name,$maintransactionary);
-                    $transaction_id = $maintransactionaryres['LASTID'];
-                }
-                $transactionitemres = array();
-                if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' && count((array)$valuenotavailablefieldary) ==0){
-                    foreach($transactionitemsql as $transitemarry){
-                        $transitemarry['transaction_id'] = $transaction_id;
-                        $transactionitemres[] = $callConfig->insertRecord($dmtres->item_table,$transitemarry);
-                    }
-                }
-                if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' && count((array)$valuenotavailablefieldary) ==0 && $transaction_id !=""){
-
-                    $get['transaction_table'] = $dmtres->application_table_name;
-                    $this->updateTransactionItemsQty($get,$apihitre,"-");
-
-                    $stringary['payments_result'] = $this->tocreatejounalvoucherbaseallcases($dmtres->application_table_name,$transaction_id);
-                }
-
-                $stringary['transaction_item_res'] = $transactionitemres;
-                $stringary['transaction_item'] = $transactionitemsql;
-                $stringary['status'] = 200;
-                $stringary['query'] = $paymentarray;
-                $stringary['transaction'] = $maintransactionary;
-                $stringary['transaction_res'] = $maintransactionaryres;
-                $stringary['error'] = 'success';
-
-            }
-            //stringary
-            $apihitre['response'] =$stringary;
-            $apihitre['valuenotavailablefieldary'] =$valuenotavailablefieldary;
-            $responsary[] = $apihitre;
+        $transaction = array();
+        $transactionssql = "SELECT id, transaction_date, transaction_number, party_name, party_address, place_of_supply, party_phone, party_email FROM " . $application_table . TallyConstants::WHERE_COMPANY_ID . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        foreach ($callConfig->getAllRows($transactionssql) as $recpt) {
+            $transaction[$recpt->transaction_number] = $recpt;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         return $responsary;
-
-
-
-
-
-
-
-
-
+        return [$application_usersres, $dmtres, $chart_of_accounts, $chart_of_accounts_name, $parties, $transaction];
     }
-    public function tallyAPIReceiveTransactions($get,$post,$api_hitsres,$apimastersres){
+
+    private function processSingleDebitCreditHit($apihitre, $company_id, $checkstatus, $get, array $masters): array
+    {
         global $callConfig;
+        list($application_usersres, $dmtres, $chart_of_accounts, $chart_of_accounts_name, $parties, $transaction) = $masters;
+        $valuenotavailablefieldary = array();
+        $stringary = array();
 
-         $checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
-         $company_id = $get['company_id'];
-         $api_code = $apimastersres->api_code;
-         $application_table = $apimastersres->application_table;
-         $withoutwarehouse = array('RECEIVEPURCHASEORDERS','RECEIVEPURCHASEINVOICES','RECEIVESALESINVOICES','RECEIVESALESORDERS');
-        $withwarehouse = array('RECEIVEGOODSRECEIPTNOTES','RECEIVEDELIVERYORDERS');
-        $popisosichildtablerequirdary = array('item_id','item_name','purchase_uom');
-        if(in_array($api_code, $withoutwarehouse)){
-            $popisosimaintablerequirdary = array('cost_center_id','party_id','transaction_location_id','originator_currency_id','originator_state_id');
-        }elseif(in_array($api_code, $withwarehouse)){
-            $popisosimaintablerequirdary = array('cost_center_id','party_id','transaction_location_id','transaction_warehouse_id','originator_currency_id','originator_state_id');
+        if (isset($transaction[$apihitre['VOUCHERNUMBER']])) {
+            $stringary['status'] = 1062;
+            $stringary['query'] = '';
+            $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
+            $apihitre['response'] = $stringary;
+            $apihitre['valuenotavailablefieldary'] = $valuenotavailablefieldary;
+            return $apihitre;
         }
-         $application_userssql = TallyConstants::SEL_APP_USERS.$company_id.TallyConstants::AND_ID_APOS.$get['user_id'].TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-        $application_usersres =  $callConfig->getRow($application_userssql);
 
-        $dmtsql = TallyConstants::SEL_DMT.$get['company_id'].TallyConstants::AND_APP_TABLE.$application_table."' AND item_table !='' AND tax_table !='' AND is_active = 0";
-        $dmtres=$callConfig->getRow($dmtsql);
+        $party_id = $parties[$apihitre['PARTYNAME']]->id ?? 0;
+        $party_name = $parties[$apihitre['PARTYNAME']]->company ?? '';
+        $mobile_number = ($apihitre['mobile_number'] ?? '') != "N/A" ? ($apihitre['mobile_number'] ?? '') : "";
+        $email_address = ($apihitre['email_address'] ?? '') != "N/A" ? ($apihitre['email_address'] ?? '') : "";
+        $maintotal_amount = 0;
+        foreach (($apihitre['Item_Entries'] ?? array()) as $itmss) {
+            $maintotal_amount += $itmss['AMOUNT'] ?? 0;
+        }
 
-        $itemssql = "SELECT itm.id, itm.sku, itm.item_name, itm.item_description, itm.purchase_uom, itm.sale_uom, itm.hsn_and_sac_code_id, itm.inventory_asset_account, hsnsac.gst, hsnsac.code, hsnsac.tax_authority_id FROM items itm LEFT JOIN hsn_and_sac_codes hsnsac ON itm.company_id = hsnsac.company_id AND itm.hsn_and_sac_code_id = hsnsac.id AND itm.is_active = hsnsac.is_active WHERE itm.company_id='".$company_id."' AND itm.is_active = '0'";
-          $itemsres = $callConfig->getAllRows($itemssql);
-        foreach($itemsres as $itmre){
-            $items[$itmre->sku] =  $itmre; //marge two table data
-         }
-         $originator_currency_id = $application_usersres->default_currency_id;
-         $originator_state_id = $application_usersres->default_state_id;
-         $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
+        $maintransactionary = array(
+            'company_id' => $company_id,
+            'transaction_number' => $apihitre['VOUCHERNUMBER'],
+            'transaction_date' => $this->dateconvertdbformat($apihitre['InvDate']),
+            'cost_center_id' => $application_usersres->cost_center ?? null,
+            'party_name' => $party_name,
+            'party_id' => $party_id,
+            'party_address' => $apihitre['STATE'] ?? '',
+            'supplier_state_id' => '',
+            'place_of_supply' => '',
+            'party_phone' => $mobile_number,
+            'party_email' => $email_address,
+            'amount' => $maintotal_amount,
+            'tax_amount' => 0,
+            'total_amount' => $maintotal_amount,
+            'pending_amount' => $maintotal_amount,
+            'transaction_location_id' => $application_usersres->location_id ?? null,
+            'transaction_warehouse_id' => $application_usersres->default_warehouse_id ?? null,
+            'originator_currency_id' => $application_usersres->default_currency_id ?? null,
+            'currency_id' => '',
+            'currency_rate' => '1',
+            'originator' => $get['user_id'],
+            'originator_state_id' => $application_usersres->default_state_id ?? null,
+            'payment_terms' => '',
+            'payment_term_history' => '',
+            'due_date' => $this->dateconvertdbformat($apihitre['InvDate']),
+            'tax_state' => 'I',
+            'is_active' => '0',
+            'current_status' => '199',
+            'created_by' => 1,
+            'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS)
+        );
+
+        $transactionitemsql = array();
+        foreach (($apihitre['Item_Entries'] ?? array()) as $itementry) {
+            $child_total_amount = $itementry['AMOUNT'] ?? 0;
+            $stockItem = $itementry['Stock_Item'] ?? '';
+            $account_code = isset($chart_of_accounts_name[$stockItem]) ? $chart_of_accounts_name[$stockItem]->account_code : '';
+            $account_name = isset($chart_of_accounts_name[$stockItem]) ? $chart_of_accounts_name[$stockItem]->account_name : '';
+
+            $transactionitemsql[] = array(
+                'company_id' => $company_id,
+                'transaction_id' => 0,
+                'item_id' => 0,
+                'account_code' => $account_code,
+                'item_name' => $account_name,
+                'description' => $account_name,
+                'purchase_uom' => 'UN',
+                'item_quantity' => 1,
+                'item_price' => $child_total_amount,
+                'item_amount' => $child_total_amount,
+                'tax_amount' => 0,
+                'discount_amount' => '0',
+                'total_amount' => $child_total_amount,
+                'reason_id' => '',
+                'item_st_cost' => '0',
+                'item_fifo_cost' => '0',
+                'item_lifo_cost' => '0',
+                'item_wa_cost' => '0',
+                'approved_quantity' => 1,
+                'transaction_type' => '',
+                'transaction_qty' => 1,
+                'pending_qty' => 1,
+                'item_details' => '',
+                'tax_deducted_source_id' => '',
+                'tds_amount' => '0',
+                'is_active' => '0',
+                'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS),
+                'created_by' => '1'
+            );
+        }
+
+        $popisosichildtablerequirdary = array('account_code', 'item_name');
+        $popisosimaintablerequirdary = array('cost_center_id', 'party_id', 'transaction_location_id', 'originator_currency_id', 'originator_state_id');
+
+        foreach ($maintransactionary as $fieldkey => $fieldval) {
+            if (in_array($fieldkey, $popisosimaintablerequirdary) && $fieldval == "") {
+                $valuenotavailablefieldary[$fieldkey] = $fieldval;
+            }
+        }
+        foreach ($transactionitemsql as $itemtble) {
+            foreach ($itemtble as $fieldkey => $fieldval) {
+                if (in_array($fieldkey, $popisosichildtablerequirdary) && $fieldval == "") {
+                    $valuenotavailablefieldary[$fieldkey] = $fieldval;
+                }
+            }
+        }
+
+        $maintransactionaryres = array();
+        $transactionitemres = array();
+        $transaction_id = "";
+
+        if ($checkstatus == "S" && count($valuenotavailablefieldary) == 0 && !empty($dmtres->application_table_name)) {
+            $maintransactionaryres = $callConfig->insertRecord($dmtres->application_table_name, $maintransactionary);
+            $transaction_id = $maintransactionaryres['LASTID'] ?? "";
+            if (($maintransactionaryres['status'] ?? '') == 'sucess') {
+                foreach ($transactionitemsql as $transitemarry) {
+                    $transitemarry['transaction_id'] = $transaction_id;
+                    $transactionitemres[] = $callConfig->insertRecord($dmtres->item_table, $transitemarry);
+                }
+                if ($transaction_id != "") {
+                    $get['transaction_table'] = $dmtres->application_table_name;
+                    $this->updateTransactionItemsQty($get, $apihitre, "-");
+                    $stringary['payments_result'] = $this->tocreatejounalvoucherbaseallcases($dmtres->application_table_name, $transaction_id);
+                }
+            }
+        }
+
+        $stringary['transaction_item_res'] = $transactionitemres;
+        $stringary['transaction_item'] = $transactionitemsql;
+        $stringary['status'] = 200;
+        $stringary['query'] = array();
+        $stringary['transaction'] = $maintransactionary;
+        $stringary['transaction_res'] = $maintransactionaryres;
+        $stringary['error'] = 'success';
+
+        $apihitre['response'] = $stringary;
+        $apihitre['valuenotavailablefieldary'] = $valuenotavailablefieldary;
+        return $apihitre;
+    }
+
+    public function tallyAPIDebitANDCreditNoteTransactions($get, $post, $api_hitsres, $apimastersres)
+    {
+        $checkstatus = !empty($post['checkstatus']) ? $post['checkstatus'] : ($get['checkstatus'] ?? '');
+        $company_id = $get['company_id'];
+        $api_code = $apimastersres->api_code;
+        $application_table = $apimastersres->application_table;
+        $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details), 1) ?: array();
         $responsary = array();
 
-        $displayattributessql = TallyConstants::SEL_DISPLAY_ATTR.$get['company_id'].TallyConstants::AND_APP_TABLE.$application_table.TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-        $fieldkeywithvalue = array();
-        $checklists = array('InvDate'=>'transaction_date', 'VOUCHERNUMBER'=>'transaction_number', 'PARTYNAME'=>'party_name', 'STATE'=>'party_address', 'PLACEOFSUPPLY'=>'place_of_supply', 'mobile_number'=>'party_phone', 'email_address'=>'party_email');
-        $checkfiled = array();
-        foreach($checklists as $checklis){
-            $checkfiled[] = $checklis;
-        }
-        if($displayattributesres->list_attributes !=""){
-            $lists = json_decode($displayattributesres->list_attributes,1);
-            $type_array = array('select','auto_select','multi_select','disable_select','radio','checkbox', 'color_pick','image');
-            $listsechck = array();
-            foreach ($lists as $key => $value){
-                    if(in_array($value['type'], (array)$type_array)){
-                        $listsechck[] = $key;
-                        $tablefield = $this->getDyanamicSelectData($application_table, $key);
-                        if($tablefield['type'] != 'function'){
-                            $reverkeyvaluearay = array();
-                            foreach($tablefield['res'] as $kkey=>$valuu){
-                                $removewhinewline = preg_replace(TallyConstants::REGEX_NEWLINE, '', $valuu);
-                                $reverkeyvaluearay[$removewhinewline] = $kkey;
-                            }
-                            $fieldkeywithvalue[$key] = $reverkeyvaluearay;
-                        }else{
-                            $reverkeyvaluearay = array();
-                            foreach($tablefield as $kkey=>$valuu){
-                                $removewhinewline = preg_replace(TallyConstants::REGEX_NEWLINE, '', $valuu);
-                                $reverkeyvaluearay[$removewhinewline] = $kkey;
-                            }
-                            $fieldkeywithvalue[$key] =  $reverkeyvaluearay;
-                        }
-                     }
-                 //}
+        $masters = $this->loadDebitCreditMasters($company_id, $application_table, $get['user_id']);
+
+        if (!empty($api_hit_api_response_details[$api_code])) {
+            foreach ($api_hit_api_response_details[$api_code] as $apihitre) {
+                $responsary[] = $this->processSingleDebitCreditHit($apihitre, $company_id, $checkstatus, $get, $masters);
             }
         }
-        $transactionssql = "SELECT id, transaction_date, transaction_number, party_name, party_address, place_of_supply, party_phone, party_email FROM ".$application_table.TallyConstants::WHERE_COMPANY_ID.$company_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $transactionres = $callConfig->getAllRows($transactionssql);
-        foreach($transactionres as $recpt){
-            $transaction[$recpt->transaction_number] =  $recpt; //marge two table data
-         }
-         foreach($api_hit_api_response_details[$api_code] as $apihitre){  //api Hites response fileds
-             $valuenotavailablefieldary = array();
-              $stringary = array();
-              $maintransactionary = $transactionitemtaxary = $transactionitemsql = array();
-              if(isset($transaction[$apihitre['VOUCHERNUMBER']])){
+        return $responsary;
+    }
+    private function loadReceiveTransactionMasters($company_id, $application_table, $user_id): array
+    {
+        global $callConfig;
+        $application_userssql = TallyConstants::SEL_APP_USERS . $company_id . TallyConstants::AND_ID_APOS . $user_id . TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
+        $application_usersres = $callConfig->getRow($application_userssql);
+
+        $dmtsql = TallyConstants::SEL_DMT . $company_id . TallyConstants::AND_APP_TABLE . $application_table . "' AND item_table !='' AND tax_table !='' AND is_active = 0";
+        $dmtres = $callConfig->getRow($dmtsql);
+
+        $items = array();
+        $itemssql = "SELECT itm.id, itm.sku, itm.item_name, itm.item_description, itm.purchase_uom, itm.sale_uom, itm.hsn_and_sac_code_id, itm.inventory_asset_account, hsnsac.gst, hsnsac.code, hsnsac.tax_authority_id FROM items itm LEFT JOIN hsn_and_sac_codes hsnsac ON itm.company_id = hsnsac.company_id AND itm.hsn_and_sac_code_id = hsnsac.id AND itm.is_active = hsnsac.is_active WHERE itm.company_id='" . $company_id . "' AND itm.is_active = '0'";
+        foreach ($callConfig->getAllRows($itemssql) as $itmre) {
+            $items[$itmre->sku] = $itmre;
+        }
+
+        $transaction = array();
+        $transactionssql = "SELECT id, transaction_date, transaction_number, party_name, party_address, place_of_supply, party_phone, party_email FROM " . $application_table . TallyConstants::WHERE_COMPANY_ID . $company_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        foreach ($callConfig->getAllRows($transactionssql) as $recpt) {
+            $transaction[$recpt->transaction_number] = $recpt;
+        }
+
+        return [$application_usersres, $dmtres, $items, $transaction];
+    }
+
+    private function processSingleReceiveTransactionHit($apihitre, $company_id, $checkstatus, $get, $popisosimaintablerequirdary, array $masters): array
+    {
+        global $callConfig;
+        list($application_usersres, $dmtres, $items, $transaction) = $masters;
+        $valuenotavailablefieldary = array();
+        $stringary = array();
+        $popisosichildtablerequirdary = array('item_id', 'item_name', 'purchase_uom');
+
+        if (isset($transaction[$apihitre['VOUCHERNUMBER']])) {
+            $stringary['status'] = 1062;
+            $stringary['query'] = '';
+            $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
+            $apihitre['response'] = $stringary;
+            $apihitre['valuenotavailablefieldary'] = $valuenotavailablefieldary;
+            return $apihitre;
+        }
+
+        $party_id = $apihitre['PARTYNAME'] ?? '';
+        $place_of_supply = $apihitre['PLACEOFSUPPLY'] ?? '';
+        $supplier_state_id = $apihitre['STATE'] ?? '';
+        $mobile_number = ($apihitre['mobile_number'] ?? '') != "N/A" ? ($apihitre['mobile_number'] ?? '') : "";
+        $email_address = ($apihitre['email_address'] ?? '') != "N/A" ? ($apihitre['email_address'] ?? '') : "";
+        $tallywiithgstamount = str_replace(",", "", $apihitre['Voucher_Amount'] ?? '0');
+        $maintotal_amount = $mainamount = $maintax_amount_total = 0;
+
+        foreach (($apihitre['Item_Entries'] ?? array()) as $itmss) {
+            $partNo = $itmss['part_no'] ?? '';
+            $amt = $itmss['AMOUNT'] ?? 0;
+            if (isset($items[$partNo]) && $items[$partNo]->gst != "") {
+                $tax_amount = $amt * ($items[$partNo]->gst / 100);
+                $maintax_amount_total += $tax_amount;
+                $maintotal_amount += $amt + $tax_amount;
+            } else {
+                $maintotal_amount += $amt;
+            }
+            $mainamount += $amt;
+        }
+
+        $originator_state_id = $application_usersres->default_state_id ?? '';
+        $tax_state = ($supplier_state_id == $originator_state_id) ? "S" : "I";
+
+        $maintransactionary = array(
+            'company_id' => $company_id,
+            'transaction_number' => $apihitre['VOUCHERNUMBER'],
+            'transaction_date' => $this->dateconvertdbformat($apihitre['InvDate']),
+            'cost_center_id' => $application_usersres->cost_center ?? null,
+            'party_name' => $apihitre['PARTYNAME'] ?? '',
+            'party_id' => $party_id,
+            'party_address' => $apihitre['STATE'] ?? '',
+            'supplier_state_id' => $supplier_state_id,
+            'place_of_supply' => $place_of_supply,
+            'party_phone' => $mobile_number,
+            'party_email' => $email_address,
+            'amount' => $mainamount,
+            'tax_amount' => $maintax_amount_total,
+            'total_amount' => $maintotal_amount,
+            'pending_amount' => $maintotal_amount,
+            'transaction_location_id' => $application_usersres->location_id ?? null,
+            'transaction_warehouse_id' => $application_usersres->default_warehouse_id ?? null,
+            'originator_currency_id' => $application_usersres->default_currency_id ?? null,
+            'currency_id' => '',
+            'currency_rate' => '1',
+            'originator' => $get['user_id'],
+            'originator_state_id' => $originator_state_id,
+            'payment_terms' => '',
+            'payment_term_history' => '',
+            'due_date' => $this->dateconvertdbformat($apihitre['InvDate']),
+            'tax_state' => $tax_state,
+            'is_active' => '0',
+            'current_status' => '199',
+            'created_by' => 1,
+            'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS)
+        );
+
+        $transactionitemsql = array();
+        $transactionitemtaxary = array();
+
+        foreach (($apihitre['Item_Entries'] ?? array()) as $itementry) {
+            $partNo = $itementry['part_no'] ?? '';
+            $amt = $itementry['AMOUNT'] ?? 0;
+            $tax_amount = 0;
+            $total_amount = $amt;
+            $item_id = $account_code = $item_name = $description = $purchase_uom = "";
+
+            if (isset($items[$partNo])) {
+                $item_id = $items[$partNo]->id;
+                $account_code = $items[$partNo]->inventory_asset_account;
+                $item_name = $items[$partNo]->item_name;
+                $description = $items[$partNo]->item_description;
+                $purchase_uom = $items[$partNo]->purchase_uom;
+                $tax_percentage = $items[$partNo]->gst;
+                if ($tax_percentage != "") {
+                    $tax_amount = $amt * ($tax_percentage / 100);
+                    $total_amount += $tax_amount;
+                    $transactionitemtaxary[] = array(
+                        'company_id' => $company_id,
+                        'transaction_id' => 0,
+                        'transaction_item_id' => $item_id,
+                        'tax_name' => $items[$partNo]->code,
+                        'tax_value' => $tax_percentage,
+                        'tax_id' => $items[$partNo]->hsn_and_sac_code_id,
+                        'amount' => $amt,
+                        'tax_amount' => $tax_amount,
+                        'total_amount' => $total_amount,
+                        'tax_type' => $tax_state,
+                        'tax_split_details' => '',
+                        'is_active' => 0,
+                        'current_status' => 0,
+                        'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS),
+                        'created_by' => 0
+                    );
+                }
+            }
+
+            $transactionitemsql[] = array(
+                'company_id' => $company_id,
+                'transaction_id' => 0,
+                'item_id' => $item_id,
+                'account_code' => $account_code,
+                'item_name' => $item_name,
+                'description' => $description,
+                'purchase_uom' => $purchase_uom,
+                'item_quantity' => $itementry['QUANTITY'] ?? 1,
+                'item_price' => $itementry['RATE'] ?? 0,
+                'item_amount' => $amt,
+                'tax_amount' => $tax_amount,
+                'discount_amount' => '0',
+                'total_amount' => $total_amount,
+                'reason_id' => '',
+                'item_st_cost' => '0',
+                'item_fifo_cost' => '0',
+                'item_lifo_cost' => '0',
+                'item_wa_cost' => '0',
+                'approved_quantity' => $itementry['QUANTITY'] ?? 1,
+                'transaction_type' => '',
+                'transaction_qty' => $itementry['QUANTITY'] ?? 1,
+                'pending_qty' => $itementry['QUANTITY'] ?? 1,
+                'item_details' => '',
+                'tax_deducted_source_id' => '',
+                'tds_amount' => '0',
+                'is_active' => '0',
+                'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS),
+                'created_by' => '1'
+            );
+        }
+
+        if (round((float)$tallywiithgstamount, 2) != round($maintotal_amount, 2)) {
+            $valuenotavailablefieldary['total_amount'] = $maintotal_amount;
+        }
+        foreach ($maintransactionary as $fieldkey => $fieldval) {
+            if (in_array($fieldkey, $popisosimaintablerequirdary) && $fieldval == "") {
+                $valuenotavailablefieldary[$fieldkey] = $fieldval;
+            }
+        }
+        foreach ($transactionitemsql as $itemtble) {
+            foreach ($itemtble as $fieldkey => $fieldval) {
+                if (in_array($fieldkey, $popisosichildtablerequirdary) && $fieldval == "") {
+                    $valuenotavailablefieldary[$fieldkey] = $fieldval;
+                }
+            }
+        }
+
+        $maintransactionaryres = array();
+        $transactionitemres = array();
+        $transactionitemtaxres = array();
+        $transaction_id = "";
+
+        if ($checkstatus == "S" && count($valuenotavailablefieldary) == 0 && !empty($dmtres->application_table_name)) {
+            $maintransactionaryres = $callConfig->insertRecord($dmtres->application_table_name, $maintransactionary);
+            $transaction_id = $maintransactionaryres['LASTID'] ?? "";
+            if (($maintransactionaryres['status'] ?? '') == 'sucess') {
+                foreach ($transactionitemsql as $transitemarry) {
+                    $transitemarry['transaction_id'] = $transaction_id;
+                    $transactionitemres[] = $callConfig->insertRecord($dmtres->item_table, $transitemarry);
+                }
+                foreach ($transactionitemtaxary as $transitemtaxarry) {
+                    $transitemtaxarry['transaction_id'] = $transaction_id;
+                    $transactionitemtaxres[] = $callConfig->insertRecord($dmtres->tax_table, $transitemtaxarry);
+                }
+                $get['transaction_table'] = $dmtres->application_table_name;
+                $this->updateTransactionItemsQty($get, $apihitre, "-");
+                $stringary['payments_result'] = $this->tocreatejounalvoucherbaseallcases($dmtres->application_table_name, $transaction_id);
+            }
+        }
+
+        $stringary['transaction_item_res'] = $transactionitemres;
+        $stringary['transaction_item'] = $transactionitemsql;
+        $stringary['transaction_item_tax_ary'] = $transactionitemtaxary;
+        $stringary['transaction_item_tax'] = $transactionitemtaxres;
+        $stringary['status'] = 200;
+        $stringary['query'] = '';
+        $stringary['transaction'] = $maintransactionary;
+        $stringary['transaction_res'] = $maintransactionaryres;
+        $stringary['error'] = 'success';
+
+        $apihitre['response'] = $stringary;
+        $apihitre['valuenotavailablefieldary'] = $valuenotavailablefieldary;
+        return $apihitre;
+    }
+
+    public function tallyAPIReceiveTransactions($get, $post, $api_hitsres, $apimastersres)
+    {
+        $checkstatus = !empty($post['checkstatus']) ? $post['checkstatus'] : ($get['checkstatus'] ?? '');
+        $company_id = $get['company_id'];
+        $api_code = $apimastersres->api_code;
+        $application_table = $apimastersres->application_table;
+
+        $withoutwarehouse = array('RECEIVEPURCHASEORDERS', 'RECEIVEPURCHASEINVOICES', 'RECEIVESALESINVOICES', 'RECEIVESALESORDERS');
+        $withwarehouse = array('RECEIVEGOODSRECEIPTNOTES', 'RECEIVEDELIVERYORDERS');
+
+        $popisosimaintablerequirdary = in_array($api_code, $withoutwarehouse)
+            ? array('cost_center_id', 'party_id', 'transaction_location_id', 'originator_currency_id', 'originator_state_id')
+            : (in_array($api_code, $withwarehouse)
+                ? array('cost_center_id', 'party_id', 'transaction_location_id', 'transaction_warehouse_id', 'originator_currency_id', 'originator_state_id')
+                : array());
+
+        $masters = $this->loadReceiveTransactionMasters($company_id, $application_table, $get['user_id']);
+        $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details), 1) ?: array();
+        $responsary = array();
+
+        if (!empty($api_hit_api_response_details[$api_code])) {
+            foreach ($api_hit_api_response_details[$api_code] as $apihitre) {
+                $responsary[] = $this->processSingleReceiveTransactionHit($apihitre, $company_id, $checkstatus, $get, $popisosimaintablerequirdary, $masters);
+            }
+        }
+        return $responsary;
+    }
+
+    private function syncDynamicInboundApiData($get, $apimastersres, $api_hitsres, $api_hit_id, $checkstatus): array
+    {
+        global $callConfig;
+        $fieldkeywithvalue = array();
+        $api_code = $apimastersres->api_code;
+        $api_mastersr_api_response_details = json_decode($apimastersres->api_response_details ?? '', 1) ?: array();
+        $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details ?? ''), 1) ?: array();
+        $responsary = array();
+
+        foreach (($api_hit_api_response_details[$api_code] ?? array()) as $apihitre) {
+            $sqlfieldstring = $sqlvaluestring = $getstringlist = $alreadyavilablecheck = "";
+            $alreadyavilablesql = "SELECT id FROM " . $apimastersres->application_table . " WHERE ";
+            $getstringlist = "INSERT INTO " . $apimastersres->application_table . " (";
+
+            foreach ($api_mastersr_api_response_details as $valuefield => $tablefield) {
+                if (!empty($tablefield['application_table_field'])) {
+                    $sqlfieldstring .= "`" . $tablefield['application_table_field'] . "`,";
+                }
+            }
+            $sqlfieldstring .= "`is_active`,`current_status`";
+            $getstringlist .= $sqlfieldstring . ") VALUES (";
+
+            foreach ($api_mastersr_api_response_details as $valuefield => $tablefield) {
+                if (!empty($tablefield['application_table_field'])) {
+                    $tfField = $tablefield['application_table_field'];
+                    $hitVal = $apihitre[$valuefield] ?? '';
+                    $valToUse = (!empty($fieldkeywithvalue[$tfField][$hitVal])) ? $fieldkeywithvalue[$tfField][$hitVal] : $hitVal;
+                    $sqlvaluestring .= "'" . $valToUse . "',";
+                    if (($tablefield['uniqueness'] ?? '') == 'Y') {
+                        $alreadyavilablecheck = "Y";
+                        $alreadyavilablesql .= " " . $tfField . "='" . $valToUse . TallyConstants::APOS_AND;
+                    }
+                }
+            }
+
+            if ($alreadyavilablecheck == "Y") {
+                $alreadyavilablesql .= " is_active = 0";
+                $alreadyavilableresult = $callConfig->getRow($alreadyavilablesql);
+            } else {
+                $alreadyavilableresult = (object) array('id' => '');
+            }
+
+            $sqlvaluestring .= "0,0";
+            $getstringlist .= $sqlvaluestring . ")";
+
+            $stringary = array();
+            if (!empty($alreadyavilableresult->id)) {
                 $stringary['status'] = 1062;
                 $stringary['query'] = $getstringlist;
                 $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
-            }else{
-                $currency_id = "";
-                $party_id = $fieldkeywithvalue['party_id'][$apihitre['PARTYNAME']];
-                if(isset($fieldkeywithvalue['place_of_supply'][$apihitre['PLACEOFSUPPLY']])){
-                    $place_of_supply = $fieldkeywithvalue['place_of_supply'][$apihitre['PLACEOFSUPPLY']];
-                }
-                if(isset($fieldkeywithvalue['supplier_state_id'][$apihitre['STATE']])){
-                    $supplier_state_id = $fieldkeywithvalue['supplier_state_id'][$apihitre['STATE']];
-                }
-                $mobile_number = $apihitre['mobile_number'] !="N/A"?$apihitre['mobile_number']:"";
-                $email_address = $apihitre['email_address'] !="N/A"?$apihitre['email_address']:"";
-                $tallywiithgstamount = str_replace(",","",$apihitre['Voucher_Amount']);
-                $maintotal_amount = $mainamount = $maintax_amount_total = 0;
-                foreach($apihitre['Item_Entries'] as $itmss){
-                    if(isset($items[$itmss['part_no']])){
-                        $tax_percentage = $items[$itmss['part_no']]->gst;
-                        if($tax_percentage !=""){
-                            $tax_amount = $itmss['AMOUNT']*($tax_percentage/100);
-                            $maintax_amount_total +=$tax_amount;
-                            $maintotal_amount += $itmss['AMOUNT']+$tax_amount;
-                            $mainamount +=$itmss['AMOUNT'];
-                        }else{
-                            $maintotal_amount += $itmss['AMOUNT'];
-                            $mainamount +=$itmss['AMOUNT'];
-                        }
-                    }else{
-                        $maintotal_amount += $itmss['AMOUNT'];
-                        $mainamount +=$itmss['AMOUNT'];
+            } else {
+                if ($checkstatus == "S") {
+                    $savgdsc = $callConfig->executeQuery($getstringlist);
+                    if (($savgdsc['status'] ?? '') == 'sucess') {
+                        $stringary['status'] = 200;
+                        $stringary['query'] = $getstringlist;
+                        $stringary['error'] = 'success';
+                    } else {
+                        $stringary['status'] = $savgdsc['error_no'] ?? 500;
+                        $stringary['query'] = $getstringlist;
+                        $stringary['error'] = $savgdsc['message'] ?? 'Query failed';
                     }
+                } else {
+                    $stringary = $callConfig->checkExecuteQueryString($getstringlist);
                 }
-                if($supplier_state_id == $originator_state_id){
-                    $tax_state = "S";
-                }else{
-                    $tax_state = "I";
-                }
-                $maintransactionary = array('company_id'=>$company_id,'transaction_number'=>$apihitre['VOUCHERNUMBER'],'transaction_date'=>$this->dateconvertdbformat($apihitre['InvDate']),'cost_center_id'=>$application_usersres->cost_center,'party_name'=>$apihitre['PARTYNAME'],'party_id'=>$party_id,'party_address'=>$apihitre['STATE'],'supplier_state_id'=>$supplier_state_id,'place_of_supply'=>$place_of_supply,'party_phone'=>$mobile_number,'party_email'=>$email_address,'amount'=>$mainamount,'tax_amount'=>$maintax_amount_total,'total_amount'=>$maintotal_amount,'pending_amount'=>$maintotal_amount,'transaction_location_id'=>$application_usersres->location_id, 'transaction_warehouse_id'=>$application_usersres->default_warehouse_id, 'originator_currency_id'=>$originator_currency_id, 'currency_id'=>$currency_id, 'currency_rate'=>'1' ,'originator'=>$get['user_id'], 'originator_state_id'=>$originator_state_id,'payment_terms'=>'','payment_term_history'=>'', 'due_date'=>$this->dateconvertdbformat($apihitre['InvDate']),'tax_state'=>$tax_state,'is_active'=>'0','current_status'=>'199','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"));
-
-                foreach($apihitre['Item_Entries'] as $itementry){
-                    $tax_amount = 0;
-                    $total_amount = $itementry['AMOUNT'];
-                    $tax_id = $tax_name = "";
-                    if(isset($items[$itementry['part_no']])){
-                        $item_id = $items[$itementry['part_no']]->id;
-                        $account_code = $items[$itementry['part_no']]->inventory_asset_account;
-                        $item_name = $items[$itementry['part_no']]->item_name;
-                        $description = $items[$itementry['part_no']]->item_description;
-                        $purchase_uom = $items[$itementry['part_no']]->purchase_uom;
-                        $tax_percentage = $items[$itementry['part_no']]->gst;
-                        if($tax_percentage !=""){
-
-                            $tax_amount = $itementry['AMOUNT']*($tax_percentage/100);
-                            $total_amount = $total_amount+$tax_amount;
-                            $tax_id =$items[$itementry['part_no']]->hsn_and_sac_code_id;
-
-                            $tax_name =$items[$itementry['part_no']]->code;
-
-                            $transactionitemtaxary[] = array('company_id'=>$company_id, 'transaction_id'=>$transaction_id, 'transaction_item_id'=>$item_id, 'tax_name'=>$tax_name, 'tax_value'=>$tax_percentage, 'tax_id'=>$tax_id, 'amount'=>$itementry['AMOUNT'], 'tax_amount'=>$tax_amount, 'total_amount'=>$total_amount, 'tax_type'=>$tax_state, 'tax_split_details'=>'', 'is_active'=>0, 'current_status'=>0, 'created_date'=>date("Y-m-d H:i:s"), 'created_by'=>0);
-
-                        }
-                    }
-                    $transactionitemsql[] = array('company_id'=>$company_id, 'transaction_id'=>$transaction_id, 'item_id'=>$item_id, 'account_code'=>$account_code, 'item_name'=>$item_name, 'description'=>$description, 'purchase_uom'=>$purchase_uom, 'item_quantity'=>$itementry['QUANTITY'], 'item_price'=>$itementry['RATE'], 'item_amount'=>$itementry['AMOUNT'], 'tax_amount'=>$tax_amount, 'discount_amount'=>'0', 'total_amount'=>$total_amount, 'reason_id'=>'', 'item_st_cost'=>'0','item_fifo_cost'=>'0', 'item_lifo_cost'=>'0', 'item_wa_cost'=>'0', 'approved_quantity'=>$itementry['QUANTITY'], 'transaction_type'=>'', 'transaction_qty'=>$itementry['QUANTITY'], 'pending_qty'=>$itementry['QUANTITY'], 'item_details'=>'', 'tax_deducted_source_id'=>'', 'tds_amount'=>'0', 'is_active'=>'0', 'created_date'=>date("Y-m-d H:i:s"), 'created_by'=>'1');
-
-
-                }
-                //VALIDATION PARTS
-
-                if(round($tallywiithgstamount,2) != round($maintotal_amount,2)){
-                    $valuenotavailablefieldary['total_amount'] =$maintotal_amount;
-                }
-                foreach($maintransactionary as $fieldkey=>$fieldval){
-                    if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
-                        $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                    }
-                }
-                foreach($transactionitemsql as $itemtble){
-                    foreach ($itemtble as  $fieldkey=>$fieldval) {
-                        if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
-                            $valuenotavailablefieldary[$fieldkey] =$fieldval;
-                        }
-                    }
-                }
-                //VALIDATION PART
-
-                if($checkstatus == "S" && count((array)$valuenotavailablefieldary) ==0){
-                    $maintransactionaryres = $callConfig->insertRecord($dmtres->application_table_name,$maintransactionary);
-                    $transaction_id = $maintransactionaryres['LASTID'];
-                }
-                $transactionitemres = array();
-                $transactionitemtaxres = array();
-                if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' && count((array)$valuenotavailablefieldary) ==0){
-                    foreach($transactionitemsql as $transitemarry){
-                        $transitemarry['transaction_id'] = $transaction_id;
-                        $transactionitemres[] = $callConfig->insertRecord($dmtres->item_table,$transitemarry);
-                    }
-                    foreach($transactionitemtaxary as $transitemtaxarry){
-                        $transitemtaxarry['transaction_id'] = $transaction_id;
-                        $transactionitemtaxres[] = $callConfig->insertRecord($dmtres->tax_table,$transitemtaxarry);
-                    }
-                }
-
-                if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' && count((array)$valuenotavailablefieldary) ==0){
-                    $get['transaction_table'] = $dmtres->application_table_name;
-                    $this->updateTransactionItemsQty($get,$apihitre,"-");
-
-                    $stringary['payments_result'] = $this->tocreatejounalvoucherbaseallcases($dmtres->application_table_name,$transaction_id);
-                }
-                $stringary['transaction_item_res'] = $transactionitemres;
-                $stringary['transaction_item'] = $transactionitemsql;
-                $stringary['transaction_item_tax_ary'] = $transactionitemtaxary;
-                $stringary['transaction_item_tax'] = $transactionitemtaxres;
-                $stringary['status'] = 200;
-                $stringary['query'] = $paymentarray;
-                $stringary['transaction'] = $maintransactionary;
-                $stringary['transaction_res'] = $maintransactionaryres;
-                $stringary['error'] = 'success';
-
             }
-            //stringary
-            $apihitre['response'] =$stringary;
-            $apihitre['valuenotavailablefieldary'] =$valuenotavailablefieldary;
+            $apihitre['response'] = $stringary;
             $responsary[] = $apihitre;
         }
-         return $responsary;
+
+        if ($checkstatus == "S") {
+            $api_hits_sync = array(
+                'company_id' => $get['company_id'],
+                'api_hit_id' => $api_hit_id,
+                'originator' => $get['user_id'],
+                'application_table' => $apimastersres->application_table,
+                'sync_datetime' => date(TallyConstants::DATE_FORMAT_YMD_HIS),
+                'sync_details' => urlencode(json_encode((array)$responsary)),
+                'is_active' => '0',
+                'current_status' => '0',
+                'created_by' => $get['user_id'],
+                'created_date' => date(TallyConstants::DATE_FORMAT_YMD_HIS)
+            );
+            $callConfig->insertRecord('api_hit_sync_with_db', $api_hits_sync);
+        }
+        return $responsary;
     }
 
-    public function checkAPIDataValidateOrNot($get,$post){
+    public function checkAPIDataValidateOrNot($get, $post)
+    {
         global $callConfig;
-         $return['post'] = $post;
-         $checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
-         $api_hitssql = TallyConstants::SEL_API_HITS.$get['company_id'].TallyConstants::AND_ID_APOS.$api_hit_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $api_hitsres = $callConfig->getRow($api_hitssql);
-          $return['api_hits'] = $api_hitsres;
-          if($api_hitsres->api_master_id !=""){  // api code match
-              $apimasterssql = TallyConstants::SEL_API_MASTERS.$get['company_id'].TallyConstants::AND_ID_APOS.$api_hitsres->api_master_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-              $apimastersres = $callConfig->getRow($apimasterssql);
-              $return['api_masters'] = $apimastersres;
+        $return = array('post' => $post);
+        $checkstatus = !empty($post['checkstatus']) ? $post['checkstatus'] : ($get['checkstatus'] ?? '');
+        $api_hit_id = $get['api_hit_id'] ?? 0;
+        $api_hitssql = TallyConstants::SEL_API_HITS . $get['company_id'] . TallyConstants::AND_ID_APOS . $api_hit_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        $api_hitsres = $callConfig->getRow($api_hitssql);
+        $return['api_hits'] = $api_hitsres;
 
-              $api_code = $apimastersres->api_code;
+        if (empty($api_hitsres->api_master_id)) {
+            $return['status'] = 403;
+            $return['result'] = array();
+            return $return;
+        }
 
-              if($apimastersres->api_type == "S"){
-                //Send /...................
-                  $return['status'] = 4040404;
-            }else{
-                if($api_code == "RECEIVERECEIPTS"){
-                    $responsary = $this->tallyAPIReceiveReceipts($get,$post,$api_hitsres,$apimastersres);
-                }elseif($api_code == "SENDPAYMENTS"){
-                    $responsary = $this->tallyAPIReceivePayments($get,$post,$api_hitsres,$apimastersres);
+        $apimasterssql = TallyConstants::SEL_API_MASTERS . $get['company_id'] . TallyConstants::AND_ID_APOS . $api_hitsres->api_master_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        $apimastersres = $callConfig->getRow($apimasterssql);
+        $return['api_masters'] = $apimastersres;
 
-                }elseif($api_code == "RECEIVEPURCHASEORDERS" || $api_code == "RECEIVEPURCHASEINVOICES" || $api_code == "RECEIVEGOODSRECEIPTNOTES" || $api_code == "RECEIVESALESINVOICES" || $api_code == "RECEIVESALESORDERS" || $api_code == "RECEIVEDELIVERYORDERS"){
-                    $responsary = $this->tallyAPIReceiveTransactions($get,$post,$api_hitsres,$apimastersres);
+        if ($apimastersres->api_type == "S") {
+            $return['status'] = 4040404;
+            $return['result'] = array();
+            return $return;
+        }
 
-                }elseif($api_code == "RECEIVEDEBITNOTES" || $api_code == "RECEIVECREDITNOTES"){
-                    $responsary = $this->tallyAPIDebitANDCreditNoteTransactions($get,$post,$api_hitsres,$apimastersres);
+        $api_code = $apimastersres->api_code;
+        $transactionCodes = array('RECEIVEPURCHASEORDERS', 'RECEIVEPURCHASEINVOICES', 'RECEIVEGOODSRECEIPTNOTES', 'RECEIVESALESINVOICES', 'RECEIVESALESORDERS', 'RECEIVEDELIVERYORDERS');
 
-                }else{
-                    //display attributes list
-                      $displayattributessql = TallyConstants::SEL_DISPLAY_ATTR.$get['company_id'].TallyConstants::AND_APP_TABLE.$apimastersres->application_table.TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-                    $fieldkeywithvalue = array();
-                    if($displayattributesres->list_attributes !=""){
-                        $lists = json_decode($displayattributesres->list_attributes,1);
-                        $type_array = array('select','auto_select','multi_select','disable_select','radio','checkbox', 'color_pick','image');
-                        foreach ($lists as $key => $value){
-                            if(in_array($value['type'], (array)$type_array)){
-                                $tablefield = $this->getDyanamicSelectData($apimastersres->application_table, $key);
-                                if($tablefield['type'] != 'function'){
-                                    $reverkeyvaluearay = array();
-                                    foreach($tablefield['res'] as $kkey=>$valuu){
-                                        $removewhinewline = preg_replace(TallyConstants::REGEX_NEWLINE, '', $valuu);
-                                        $reverkeyvaluearay[$removewhinewline] = $kkey;
-                                    }
-                                    $fieldkeywithvalue[$key] = $reverkeyvaluearay;
-                                }else{
-                                    $reverkeyvaluearay = array();
-                                    foreach($tablefield as $kkey=>$valuu){
-                                        $removewhinewline = preg_replace(TallyConstants::REGEX_NEWLINE, '', $valuu);
-                                        $reverkeyvaluearay[$removewhinewline] = $kkey;
-                                    }
-                                    $fieldkeywithvalue[$key] =  $reverkeyvaluearay;
-                                }
-                             }
-                        }
-                    }
-                    //Display Attributes
-                    //print_r($fieldkeywithvalue);
-                    $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-                    $responsary = array();
-                      foreach($api_hit_api_response_details[$api_code] as $apihitre){  //api Hites response fileds
-                          $sqlfieldstring =$sqlvaluestring  = $getstringlist = $alreadyavilablecheck = "";
-                          $alreadyavilablesql = "SELECT id FROM ".$apimastersres->application_table." WHERE ";
-                          $getstringlist = "INSERT INTO ".$apimastersres->application_table." (";
-                          foreach($api_mastersr_api_response_details as $valuefield=>$tablefield){ //api master response fileds
-                              if($tablefield['application_table_field'] !=""){
-                                  $sqlfieldstring .= "`".$tablefield['application_table_field']."`,";
-                              }
-                          }
-                          $sqlfieldstring .="`is_active`,`current_status`";
-                          $getstringlist .= $sqlfieldstring.") VALUES (";
-                          foreach($api_mastersr_api_response_details as $valuefield=>$tablefield){ //api master response fileds
-                              if($tablefield['application_table_field'] !=""){
-                                  if($fieldkeywithvalue[$tablefield['application_table_field']][$apihitre[$valuefield]] !=""){
-                                      $sqlvaluestring .= "'".$fieldkeywithvalue[$tablefield['application_table_field']][$apihitre[$valuefield]]."',";
+        if ($api_code == "RECEIVERECEIPTS") {
+            $responsary = $this->tallyAPIReceiveReceipts($get, $post, $api_hitsres, $apimastersres);
+        } elseif ($api_code == "SENDPAYMENTS") {
+            $responsary = $this->tallyAPIReceivePayments($get, $post, $api_hitsres, $apimastersres);
+        } elseif (in_array($api_code, $transactionCodes)) {
+            $responsary = $this->tallyAPIReceiveTransactions($get, $post, $api_hitsres, $apimastersres);
+        } elseif ($api_code == "RECEIVEDEBITNOTES" || $api_code == "RECEIVECREDITNOTES") {
+            $responsary = $this->tallyAPIDebitANDCreditNoteTransactions($get, $post, $api_hitsres, $apimastersres);
+        } else {
+            $responsary = $this->syncDynamicInboundApiData($get, $apimastersres, $api_hitsres, $api_hit_id, $checkstatus);
+        }
 
-                                      if($tablefield['uniqueness'] == 'Y'){
-                                          $alreadyavilablecheck = "Y";
-                                          $alreadyavilablesql .= " ".$tablefield['application_table_field']."='".$fieldkeywithvalue[$tablefield['application_table_field']][$apihitre[$valuefield]].TallyConstants::APOS_AND;
-                                      }
-
-                                  }else{
-                                      $sqlvaluestring .= "'".$apihitre[$valuefield]."',";
-                                      if($tablefield['uniqueness'] == 'Y'){
-                                          $alreadyavilablecheck = "Y";
-                                          $alreadyavilablesql .= " ".$tablefield['application_table_field']."='".$apihitre[$valuefield].TallyConstants::APOS_AND;
-                                      }
-                                  }
-                              }
-                          }
-                          if($alreadyavilablecheck =="Y"){
-                              $alreadyavilablesql .= " is_active = 0";
-                              $alreadyavilableresult = $callConfig->getRow($alreadyavilablesql);
-                          }else{
-                              $alreadyavilableresult->id = "";
-                          }
-                          $sqlvaluestring .= "0,0";
-                          $getstringlist .= $sqlvaluestring.")";
-                          if($alreadyavilableresult->id !=""){
-                              $stringary['status'] = 1062;
-                            $stringary['query'] = $getstringlist;
-                            $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
-                          }else{
-                              if($checkstatus == "S"){
-                                  $savgdsc = $callConfig->executeQuery($getstringlist);
-                                  if($savgdsc['status'] == 'sucess'){
-                                      $stringary['status'] = 200;
-                                    $stringary['query'] = $getstringlist;
-                                    $stringary['error'] = 'success';
-                                }else{
-                                    $stringary['status'] = $savgdsc['error_no'];
-                                    $stringary['query'] = $getstringlist;
-                                    $stringary['error'] = $savgdsc['message'];
-                                }
-                              }else{
-                                  $stringary = $callConfig->checkExecuteQueryString($getstringlist);
-                              }
-                          }
-                          $apihitre['response'] =$stringary;
-                          $responsary[] = $apihitre;
-                      }
-
-                      if($checkstatus == "S"){
-                          $api_hits_sync = array('company_id'=>$get['company_id'],'api_hit_id'=>$api_hit_id,'originator'=>$get['user_id'],'application_table'=>$apimastersres->application_table,'sync_datetime'=>date(TallyConstants::DATE_FORMAT_YMD_HIS), 'sync_details'=>urlencode(json_encode((array)$responsary)),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date(TallyConstants::DATE_FORMAT_YMD_HIS));
-                          $callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
-                    }
-
-                }
-
-
-
-
-
-              }
-          }else{
-              $return['status'] = 403; // api code not match
-          }
-          $return['result'] = $responsary;
-         return $return;
+        $return['result'] = $responsary;
+        return $return;
     }
 
-
-    public function toSendItemsToTally($get){
-         global $callConfig;
-         $query = "SELECT company_id, sku, item_name FROM items WHERE company_id =".$get['company_id'].TallyConstants::AND_IS_ACTIVE_0;
-         $data = $callConfig->getAllRows($query);
-         $return['result'] = $data;
-         return $return;
-    }
-    public function tosendCostCentersToTally($get){
-         global $callConfig;
-         $query = "SELECT company_id, cost_center_name FROM cost_centers WHERE company_id =".$get['company_id'].TallyConstants::AND_IS_ACTIVE_0;
-         $data = $callConfig->getAllRows($query);
-         $return['result'] = $data;
-         return $return;
-    }
-    public function toSendUnitOfMeasurementsToTally($get){
-         global $callConfig;
-         $query = "SELECT company_id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id =".$get['company_id'].TallyConstants::AND_IS_ACTIVE_0;
-         $data = $callConfig->getAllRows($query);
-         $return['result'] = $data;
-         return $return;
-    }
-    public function toSendWarehousesToTally($get){
-         global $callConfig;
-         $query = "SELECT company_id, warehouse_short_name, warehouse_name FROM warehouses WHERE company_id =".$get['company_id'].TallyConstants::AND_IS_ACTIVE_0;
-         $data = $callConfig->getAllRows($query);
-         $return['result'] = $data;
-         return $return;
-    }
-
-
-    public function aPIDetailStoretoDatabase($get,$post){
+    public function toSendItemsToTally($get)
+    {
         global $callConfig;
-         $return['post'] = $post;
-         $checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
-         $api_hitssql = TallyConstants::SEL_API_HITS.$get['company_id'].TallyConstants::AND_ID_APOS.$api_hit_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-          $api_hitsres = $callConfig->getRow($api_hitssql);
+        $query = "SELECT company_id, sku, item_name FROM items WHERE company_id =" . $get['company_id'] . TallyConstants::AND_IS_ACTIVE_0;
+        $return['result'] = $callConfig->getAllRows($query);
+        return $return;
+    }
 
-          $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-$return['api_hits'] = $api_hitsres;
-          if($api_hitsres->api_master_id !=""){  // api code match
-              $apimasterssql = TallyConstants::SEL_API_MASTERS.$get['company_id'].TallyConstants::AND_ID_APOS.$api_hitsres->api_master_id.TallyConstants::AND_IS_ACTIVE_0_APOS;
-              $apimastersres = $callConfig->getRow($apimasterssql);
-              $return['api_masters'] = $apimastersres;
+    public function tosendCostCentersToTally($get)
+    {
+        global $callConfig;
+        $query = "SELECT company_id, cost_center_name FROM cost_centers WHERE company_id =" . $get['company_id'] . TallyConstants::AND_IS_ACTIVE_0;
+        $return['result'] = $callConfig->getAllRows($query);
+        return $return;
+    }
 
-              $api_code = $apimastersres->api_code;
-              if($apimastersres->api_type == "S"){
-                //Send /...................
-                  $return['status'] = 4040404;
-            }else{
-                //display attributes list
-                  $displayattributessql = TallyConstants::SEL_DISPLAY_ATTR.$get['company_id'].TallyConstants::AND_APP_TABLE.$apimastersres->application_table.TallyConstants::AND_IS_ACTIVE_0_UNQUOTED;
-                $fieldkeywithvalue = array();
-                if($displayattributesres->list_attributes !=""){
-                    $lists = json_decode($displayattributesres->list_attributes,1);
-                    $type_array = array('select','auto_select','multi_select','disable_select','radio','checkbox', 'color_pick','image');
-                    foreach ($lists as $key => $value){
-                        if(in_array($value['type'], (array)$type_array)){
-                            $tablefield = $this->getDyanamicSelectData($apimastersres->application_table, $key);
-                            if($tablefield['type'] != 'function'){
-                                $reverkeyvaluearay = array();
-                                foreach($tablefield['res'] as $kkey=>$valuu){
-                                    $removewhinewline = preg_replace(TallyConstants::REGEX_NEWLINE, '', $valuu);
-                                    $reverkeyvaluearay[$removewhinewline] = $kkey;
-                                }
-                                $fieldkeywithvalue[$key] = $reverkeyvaluearay;
-                            }else{
-                                $reverkeyvaluearay = array();
-                                foreach($tablefield as $kkey=>$valuu){
-                                    $removewhinewline = preg_replace(TallyConstants::REGEX_NEWLINE, '', $valuu);
-                                    $reverkeyvaluearay[$removewhinewline] = $kkey;
-                                }
-                                $fieldkeywithvalue[$key] =  $reverkeyvaluearay;
-                            }
-                         }
-                    }
-                }
-                //Display Attributes
-                //print_r($fieldkeywithvalue);
-                $api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-                $responsary = array();
-                  foreach($api_hit_api_response_details[$api_code] as $apihitre){  //api Hites response fileds
-                      $sqlfieldstring =$sqlvaluestring  = $getstringlist = $alreadyavilablecheck = "";
-                      $alreadyavilablesql = "SELECT id FROM ".$apimastersres->application_table." WHERE ";
-                      $getstringlist = "INSERT INTO ".$apimastersres->application_table." (";
-                      foreach($api_mastersr_api_response_details as $valuefield=>$tablefield){ //api master response fileds
-                          if($tablefield['application_table_field'] !=""){
-                              $sqlfieldstring .= "`".$tablefield['application_table_field']."`,";
-                          }
-                      }
-                      $sqlfieldstring .="`is_active`,`current_status`";
-                      $getstringlist .= $sqlfieldstring.") VALUES (";
-                      foreach($api_mastersr_api_response_details as $valuefield=>$tablefield){ //api master response fileds
-                          if($tablefield['application_table_field'] !=""){
-                              if($fieldkeywithvalue[$tablefield['application_table_field']][$apihitre[$valuefield]] !=""){
-                                  $sqlvaluestring .= "'".$fieldkeywithvalue[$tablefield['application_table_field']][$apihitre[$valuefield]]."',";
+    public function toSendUnitOfMeasurementsToTally($get)
+    {
+        global $callConfig;
+        $query = "SELECT company_id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id =" . $get['company_id'] . TallyConstants::AND_IS_ACTIVE_0;
+        $return['result'] = $callConfig->getAllRows($query);
+        return $return;
+    }
 
-                                  if($tablefield['uniqueness'] == 'Y'){
-                                      $alreadyavilablecheck = "Y";
-                                      $alreadyavilablesql .= " ".$tablefield['application_table_field']."='".$fieldkeywithvalue[$tablefield['application_table_field']][$apihitre[$valuefield]].TallyConstants::APOS_AND;
-                                  }
+    public function toSendWarehousesToTally($get)
+    {
+        global $callConfig;
+        $query = "SELECT company_id, warehouse_short_name, warehouse_name FROM warehouses WHERE company_id =" . $get['company_id'] . TallyConstants::AND_IS_ACTIVE_0;
+        $return['result'] = $callConfig->getAllRows($query);
+        return $return;
+    }
 
-                              }else{
-                                  $sqlvaluestring .= "'".$apihitre[$valuefield]."',";
-                                  if($tablefield['uniqueness'] == 'Y'){
-                                      $alreadyavilablecheck = "Y";
-                                      $alreadyavilablesql .= " ".$tablefield['application_table_field']."='".$apihitre[$valuefield].TallyConstants::APOS_AND;
-                                  }
-                              }
-                          }
-                      }
-                      if($alreadyavilablecheck =="Y"){
-                          $alreadyavilablesql .= " is_active = 0";
-                          $alreadyavilableresult = $callConfig->getRow($alreadyavilablesql);
-                      }else{
-                          $alreadyavilableresult->id = "";
-                      }
-                      $sqlvaluestring .= "0,0";
-                      $getstringlist .= $sqlvaluestring.")";
-                      if($alreadyavilableresult->id !=""){
-                          $stringary['status'] = 1062;
-                        $stringary['query'] = $getstringlist;
-                        $stringary['error'] = TallyConstants::DUPLICATE_ENTRY;
-                      }else{
-                          if($checkstatus == "S"){
-                              $savgdsc = $callConfig->executeQuery($getstringlist);
-                              if($savgdsc['status'] == 'sucess'){
-                                  $stringary['status'] = 200;
-                                $stringary['query'] = $getstringlist;
-                                $stringary['error'] = 'success';
-                            }else{
-                                $stringary['status'] = $savgdsc['error_no'];
-                                $stringary['query'] = $getstringlist;
-                                $stringary['error'] = $savgdsc['message'];
-                            }
-                          }else{
-                              $stringary = $callConfig->checkExecuteQueryString($getstringlist);
-                          }
-                      }
-                      $apihitre['response'] =$stringary;
-                      $responsary[] = $apihitre;
-                  }
+    public function aPIDetailStoretoDatabase($get, $post)
+    {
+        global $callConfig;
+        $return = array('post' => $post);
+        $checkstatus = !empty($post['checkstatus']) ? $post['checkstatus'] : ($get['checkstatus'] ?? '');
+        $api_hit_id = $get['api_hit_id'] ?? 0;
+        $api_hitssql = TallyConstants::SEL_API_HITS . $get['company_id'] . TallyConstants::AND_ID_APOS . $api_hit_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        $api_hitsres = $callConfig->getRow($api_hitssql);
+        $return['api_hits'] = $api_hitsres;
 
-                  if($checkstatus == "S"){
-                      $api_hits_sync = array('company_id'=>$get['company_id'],'api_hit_id'=>$api_hit_id,'originator'=>$get['user_id'],'application_table'=>$apimastersres->application_table,'sync_datetime'=>date(TallyConstants::DATE_FORMAT_YMD_HIS), 'sync_details'=>urlencode(json_encode((array)$responsary)),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date(TallyConstants::DATE_FORMAT_YMD_HIS));
-                      $callConfig->insertRecord('api_hit_sync_with_db',$api_hits_sync);
-                }
+        if (empty($api_hitsres->api_master_id)) {
+            $return['status'] = 403;
+            $return['result'] = array();
+            return $return;
+        }
 
-              }
-          }else{
-              $return['status'] = 403; // api code not match
-          }
-          $return['result'] = $responsary;
-         return $return;
-         }
+        $apimasterssql = TallyConstants::SEL_API_MASTERS . $get['company_id'] . TallyConstants::AND_ID_APOS . $api_hitsres->api_master_id . TallyConstants::AND_IS_ACTIVE_0_APOS;
+        $apimastersres = $callConfig->getRow($apimasterssql);
+        $return['api_masters'] = $apimastersres;
+
+        if ($apimastersres->api_type == "S") {
+            $return['status'] = 4040404;
+            $return['result'] = array();
+            return $return;
+        }
+
+        $responsary = $this->syncDynamicInboundApiData($get, $apimastersres, $api_hitsres, $api_hit_id, $checkstatus);
+        $return['result'] = $responsary;
+        return $return;
+    }
 
 
 
@@ -1697,9 +1772,12 @@ class TallyClass extends userClass
     use TallyApiOutboundTrait;
     use TallyApiInboundTrait;
 
-    public function tosenditem_categoriestotally($get)
+    public function __call($name, $arguments)
     {
-        return $this->toSendItemCategoriesToTally($get);
+        if (strcasecmp($name, 'tosenditem_categoriestotally') === 0) {
+            return $this->toSendItemCategoriesToTally(...$arguments);
+        }
+        throw new \BadMethodCallException("Method {$name} does not exist");
     }
 }
 if (!class_exists('tallyClass', false)) {
