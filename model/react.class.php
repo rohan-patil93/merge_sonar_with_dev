@@ -870,6 +870,58 @@ public function getuserslistreact($get)
         $return['result'] = $contractsres;
         return $return;
     }
+    private function purgeStaleContractDocuments($post, $processedDocumentTypes, $documentsMeta)
+    {
+        global $callConfig;
+        $deleted = [];
+        foreach ($processedDocumentTypes as $documentTypeId) {
+            $existingQuery = "SELECT id, file_name FROM contract_documents WHERE contract_id = '" . addslashes($post['contract_id']) . "' AND document_list_id = '" . addslashes($documentTypeId) . self::SQL_COND_AND_IS_ACTIVE_0;
+            $existingDocs = $callConfig->getAllRows($existingQuery);
+            $keepDocIds = [];
+            foreach ($documentsMeta as $doc) {
+                if ($doc['document_list_id'] == $documentTypeId && !empty($doc['Rid'])) {
+                    $keepDocIds[] = $doc['Rid'];
+                }
+            }
+            foreach ($existingDocs as $existingDoc) {
+                if (!in_array($existingDoc->id, $keepDocIds)) {
+                    $deleteArray = [
+                        'is_active' => null,
+                        'updated_by' => $post['user_id'],
+                        'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
+                    ];
+                    $deleteRes = $callConfig->updateRecord('contract_documents', $deleteArray, 'id', $existingDoc->id);
+                    $deleted[] = ['id' => $existingDoc->id, 'file_name' => $existingDoc->file_name, 'result' => $deleteRes];
+
+                    $filePath = "./uploads/contracts/" . $existingDoc->file_name;
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+            }
+        }
+        return $deleted;
+    }
+
+    private function processContractDocumentMetaItem($doc, $post, $get, &$return)
+    {
+        global $callConfig;
+        $action = $doc['action'] ?? 'new_upload';
+        $fileName = $doc['file_name'] ?? null;
+        if ($action === 'keep_existing' && !empty($doc['Rid']) && $fileName) {
+            $update_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'updated_by' => $post['user_id'], 'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)];
+            $res = $callConfig->updateRecord('contract_documents', $update_array, 'id', $doc['Rid']);
+            $return['update_results'][] = ['Rid' => $doc['Rid'], 'result' => $res];
+        } elseif ($action === 'new_upload' && $fileName) {
+            $insert_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'company_id' => $post['company_id'], 'is_active' => 0, 'created_by' => $post['user_id'], 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)];
+            $insert_data = $callConfig->insertRecord('contract_documents', $insert_array);
+            $return['insert_results'][] = $insert_data;
+
+            $activity_array = ['company_id' => $get['company_id'] ?? ($post['company_id'] ?? 0), 'activity' => 'Document Upload', 'contract_id' => $post['contract_id'] ?? 0, 'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'is_active' => 0, 'created_by' => $get['user_id'] ?? ($post['user_id'] ?? 0), 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)];
+            $return['activity_results'][] = $callConfig->insertRecord('contract_activity', $activity_array);
+        }
+    }
+
     public function insertdocumnentreact($get, $post, $files)
     {
         if (isset($files)) { /* noop */ }
@@ -877,67 +929,29 @@ public function getuserslistreact($get)
         $return = [];
         $return['get'] = $get;
         $return['post'] = $post;
-        if (!empty($post['documents_meta'])) {
-            $documentsMeta = json_decode($post['documents_meta'], true);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                $return['error'] = "Invalid JSON in documents_meta";
-                return $return;
-            }
-            $processedDocumentTypes = [];
-            if (!empty($post['processed_document_types'])) {
-                $processedDocumentTypes = json_decode($post['processed_document_types'], true) ?: [];
-            }
-            foreach ($processedDocumentTypes as $documentTypeId) {
-                $existingQuery = "SELECT id, file_name FROM contract_documents WHERE contract_id = '" . addslashes($post['contract_id']) . "' AND document_list_id = '" . addslashes($documentTypeId) . self::SQL_COND_AND_IS_ACTIVE_0;
-                $existingDocs = $callConfig->getAllRows($existingQuery);
-                $keepDocIds = [];
-                foreach ($documentsMeta as $doc) {
-                    if ($doc['document_list_id'] == $documentTypeId && !empty($doc['Rid'])) {
-                        $keepDocIds[] = $doc['Rid'];
-                    }
-                }
-                foreach ($existingDocs as $existingDoc) {
-                    if (!in_array($existingDoc->id, $keepDocIds)) {
-                        $deleteArray = [
-                            'is_active' => null,
-                            'updated_by' => $post['user_id'],
-                            'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)
-                        ];
-                        $deleteRes = $callConfig->updateRecord('contract_documents', $deleteArray, 'id', $existingDoc->id);
-                        $return['deleted_results'][] = ['id' => $existingDoc->id, 'file_name' => $existingDoc->file_name, 'result' => $deleteRes];
-
-                        $filePath = "./uploads/contracts/" . $existingDoc->file_name;
-                        if (file_exists($filePath)) {
-                            unlink($filePath);
-                        }
-                    }
-                }
-            }
-            foreach ($documentsMeta as $doc) {
-                $action = $doc['action'] ?? 'new_upload';
-                if ($action === 'keep_existing' && !empty($doc['Rid'])) {
-                    $fileName = $doc['file_name'] ?? null;
-                    if ($fileName) {
-                        $update_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'updated_by' => $post['user_id'], 'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)];
-                        $res = $callConfig->updateRecord('contract_documents', $update_array, 'id', $doc['Rid']);
-                        $return['update_results'][] = ['Rid' => $doc['Rid'], 'result' => $res];
-                    }
-                } elseif ($action === 'new_upload') {
-                    $fileName = $doc['file_name'] ?? null;
-                    if ($fileName) {
-                        $insert_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'company_id' => $post['company_id'], 'is_active' => 0, 'created_by' => $post['user_id'], 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)];
-                        $insert_data = $callConfig->insertRecord('contract_documents', $insert_array);
-                        $return['insert_results'][] = $insert_data;
-
-                        $activity_array = ['company_id' => $get['company_id'] ?? ($post['company_id'] ?? 0), 'activity' => 'Document Upload', 'contract_id' => $post['contract_id'] ?? 0, 'activity_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S), 'is_active' => 0, 'created_by' => $get['user_id'] ?? ($post['user_id'] ?? 0), 'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S)];
-                        $activityRes = $callConfig->insertRecord('contract_activity', $activity_array);
-                        $return['activity_results'][] = $activityRes;
-                    }
-                }
-            }
-        } else {
+        if (empty($post['documents_meta'])) {
             $return['error'] = "No documents_meta found in POST data";
             return $return;
+        }
+
+        $documentsMeta = json_decode($post['documents_meta'], true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $return['error'] = "Invalid JSON in documents_meta";
+            return $return;
+        }
+
+        $processedDocumentTypes = [];
+        if (!empty($post['processed_document_types'])) {
+            $processedDocumentTypes = json_decode($post['processed_document_types'], true) ?: [];
+        }
+
+        $deleted = $this->purgeStaleContractDocuments($post, $processedDocumentTypes, $documentsMeta);
+        if (!empty($deleted)) {
+            $return['deleted_results'] = $deleted;
+        }
+
+        foreach ($documentsMeta as $doc) {
+            $this->processContractDocumentMetaItem($doc, $post, $get, $return);
         }
         return $return;
     }
@@ -3151,31 +3165,26 @@ private function buildAmcPlannedVisits($frequency, $serviceStart, $serviceEnd, $
         $slot = trim((string) $slotValue);
         if ($freq == 'daily') {
             $time = $slot != '' ? $slot : $this->amcGetDefaultSlotValue($freq, $slotIndex, $interval, $contractStartYmd);
-            return array('date' => $periodAnchor, 'time' => $time);
-        }
-        if ($freq == 'weekly') {
+            $result = array('date' => $periodAnchor, 'time' => $time);
+        } elseif ($freq == 'weekly') {
             $weekStart = DateTime::createFromFormat('Y-m-d', $periodAnchor);
             $startDow = (int) $weekStart->format('w');
             $targetDow = is_numeric($slot) ? (int) $slot : (($startDow + $slotIndex) % 7);
-            $delta = $targetDow - $startDow;
-            if ($delta < 0) {
-                $delta += 7;
-            }
+            $delta = ($targetDow - $startDow + 7) % 7;
             $visitDate = clone $weekStart;
             $visitDate->modify('+' . $delta . self::CONST_DAYS);
-            return array('date' => $this->amcFormatDateYmd($visitDate), 'time' => '');
+            $result = array('date' => $this->amcFormatDateYmd($visitDate), 'time' => '');
+        } else {
+            $day = is_numeric($slot) ? (int) $slot : (int) $this->amcGetDefaultSlotValue($freq, $slotIndex, $interval, $contractStartYmd);
+            $day = min(31, max(1, $day));
+            $parts = explode('-', $periodAnchor);
+            $y = (int) $parts[0];
+            $m = (int) $parts[1];
+            $dim = (int) date('t', mktime(0, 0, 0, $m, 1, $y));
+            $day = min($day, $dim);
+            $result = array('date' => sprintf('%04d-%02d-%02d', $y, $m, $day), 'time' => '');
         }
-        $day = is_numeric($slot) ? (int) $slot : (int) $this->amcGetDefaultSlotValue($freq, $slotIndex, $interval, $contractStartYmd);
-        $day = min(31, max(1, $day));
-        $parts = explode('-', $periodAnchor);
-        $y = (int) $parts[0];
-        $m = (int) $parts[1];
-        $dim = (int) date('t', mktime(0, 0, 0, $m, 1, $y));
-        $day = min($day, $dim);
-        return array(
-            'date' => sprintf('%04d-%02d-%02d', $y, $m, $day),
-            'time' => '',
-        );
+        return $result;
     }
     private function amcGetNextPeriodAnchor($currentYmd, $frequency)
     {
@@ -3643,68 +3652,8 @@ public function getPartyContractsList($get, $party_type, $party_id)
         return array('label' => 'Pending', 'class' => 'bg-primary');
     }
 
-    public function getContractAmcScheduleDrilldown($get)
+    private function buildDrilldownSchedulesByAsset($schedRows, $companyId, $serviceMode, $assetDefaults, $assetEmployeeDefaults, $techNameMap, $empNameMap)
     {
-        global $callConfig;
-        $return = array('contract' => array(), 'locations' => array());
-        $companyId = (int) ($get['company_id'] ?? 0);
-        $contractId = (int) ($get['contract_id'] ?? 0);
-        if ($companyId <= 0 || $contractId <= 0) {
-            return $return;
-        }
-
-        $contractSql = "SELECT c.*,
-            cad.service_mode, cad.department_id, cad.default_employee_id,
-            CASE WHEN c.party_type = 'customer' THEN cu.display_name WHEN c.party_type = 'vendor' THEN v.display_name ELSE '' END AS party_name
-            FROM contracts c
-            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0
-            LEFT JOIN customers cu ON cu.id = c.party_id AND c.party_type = 'customer' AND cu.company_id = c.company_id AND cu.is_active = 0
-            LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0
-            WHERE c.company_id = {$companyId} AND c.id = '" . addslashes($contractId) . self::SQL_COND_AND_C_IS_ACTIVE_0_LIMIT_1;
-        $contractRow = $callConfig->getRow($contractSql);
-        if ($contractRow) {
-            $return['contract'] = is_array($contractRow) ? $contractRow : (array) $contractRow;
-        }
-
-        $locSql = "SELECT cal.*, l.location_name
-            FROM contract_amc_locations cal
-            LEFT JOIN locations l ON l.id = cal.location_id AND l.company_id = cal.company_id AND l.is_active = 0
-            WHERE cal.company_id = {$companyId} AND cal.contract_id = '" . addslashes($contractId) . "' AND cal.is_active = 0
-            ORDER BY cal.id ASC";
-        $locRows = $callConfig->getAllRows($locSql);
-
-        $assetSql = "SELECT ca.*, a.asset_code, ac.category_description AS category_name
-            FROM contract_amc_assets ca
-            LEFT JOIN assets a ON a.id = ca.asset_id AND a.company_id = ca.company_id AND a.is_active = 0
-            LEFT JOIN asset_categories ac ON ac.id = a.category_id AND ac.company_id = ca.company_id AND ac.is_active = 0
-            WHERE ca.company_id = {$companyId} AND ca.contract_id = '" . addslashes($contractId) . "' AND ca.is_active = 0
-            ORDER BY ca.id ASC";
-        $assetRows = $callConfig->getAllRows($assetSql);
-        $assetsByLoc = array();
-        $assetDefaults = array();
-        $assetEmployeeDefaults = array();
-        if (count((array) $assetRows) > 0) {
-            foreach ($assetRows as $ar) {
-                $a = is_array($ar) ? $ar : (array) $ar;
-                $locKey = $a['contract_amc_location_id'] ?? 0;
-                if (!isset($assetsByLoc[$locKey])) {
-                    $assetsByLoc[$locKey] = array();
-                }
-                $assetsByLoc[$locKey][] = $a;
-                $assetDefaults[$a['id'] ?? 0] = (int) ($a['default_technician_id'] ?? 0);
-                $assetEmployeeDefaults[$a['id'] ?? 0] = (int) ($a['default_employee_id'] ?? 0);
-            }
-        }
-
-        $serviceMode = $this->resolveContractAmcServiceMode($return['contract']);
-        $techNameMap = $this->getContractAmcTechnicians($companyId);
-        $empNameMap = $this->getContractAmcEmployees($companyId, (int) ($return['contract']['department_id'] ?? 0));
-
-        $schedSql = "SELECT s.*
-            FROM contract_amc_service_schedules s
-            WHERE s.company_id = {$companyId} AND s.contract_id = '" . addslashes($contractId) . "' AND s.is_active = 0
-            ORDER BY s.planned_service_datetime ASC";
-        $schedRows = $callConfig->getAllRows($schedSql);
         $schedByAsset = array();
         if (count((array) $schedRows) > 0) {
             foreach ($schedRows as $sr) {
@@ -3751,14 +3700,12 @@ public function getPartyContractsList($get, $party_type, $party_id)
                 $schedByAsset[$assetKey][] = $s;
             }
         }
+        return $schedByAsset;
+    }
 
-        $assetIds = array();
-        if (count((array) $assetRows) > 0) {
-            foreach ($assetRows as $ar) {
-                $a = is_array($ar) ? $ar : (array) $ar;
-                $assetIds[] = $a['id'];
-            }
-        }
+    private function fetchDrilldownAssetRollups($companyId, $assetIds)
+    {
+        global $callConfig;
         $assetRollups = array();
         if (count((array) $assetIds) > 0) {
             $idList = implode(',', array_map('intval', $assetIds));
@@ -3778,6 +3725,72 @@ public function getPartyContractsList($get, $party_type, $party_id)
                 }
             }
         }
+        return $assetRollups;
+    }
+
+    public function getContractAmcScheduleDrilldown($get)
+    {
+        global $callConfig;
+        $return = array('contract' => array(), 'locations' => array());
+        $companyId = (int) ($get['company_id'] ?? 0);
+        $contractId = (int) ($get['contract_id'] ?? 0);
+        if ($companyId <= 0 || $contractId <= 0) {
+            return $return;
+        }
+
+        $contractSql = "SELECT c.*,
+            cad.service_mode, cad.department_id, cad.default_employee_id,
+            CASE WHEN c.party_type = 'customer' THEN cu.display_name WHEN c.party_type = 'vendor' THEN v.display_name ELSE '' END AS party_name
+            FROM contracts c
+            LEFT JOIN contract_amc_details cad ON cad.contract_id = c.id AND cad.company_id = c.company_id AND cad.is_active = 0
+            LEFT JOIN customers cu ON cu.id = c.party_id AND c.party_type = 'customer' AND cu.company_id = c.company_id AND cu.is_active = 0
+            LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0
+            WHERE c.company_id = {$companyId} AND c.id = '" . addslashes($contractId) . self::SQL_COND_AND_C_IS_ACTIVE_0_LIMIT_1;
+        $contractRow = $callConfig->getRow($contractSql);
+        if ($contractRow) {
+            $return['contract'] = is_array($contractRow) ? $contractRow : (array) $contractRow;
+        }
+
+        $locSql = "SELECT cal.*, l.location_name
+            FROM contract_amc_locations cal
+            LEFT JOIN locations l ON l.id = cal.location_id AND l.company_id = cal.company_id AND l.is_active = 0
+            WHERE cal.company_id = {$companyId} AND cal.contract_id = '" . addslashes($contractId) . "' AND cal.is_active = 0
+            ORDER BY cal.id ASC";
+        $locRows = $callConfig->getAllRows($locSql);
+
+        $assetSql = "SELECT ca.*, a.asset_code, ac.category_description AS category_name
+            FROM contract_amc_assets ca
+            LEFT JOIN assets a ON a.id = ca.asset_id AND a.company_id = ca.company_id AND a.is_active = 0
+            LEFT JOIN asset_categories ac ON ac.id = a.category_id AND ac.company_id = ca.company_id AND ac.is_active = 0
+            WHERE ca.company_id = {$companyId} AND ca.contract_id = '" . addslashes($contractId) . "' AND ca.is_active = 0
+            ORDER BY ca.id ASC";
+        $assetRows = $callConfig->getAllRows($assetSql);
+        $assetsByLoc = array();
+        $assetDefaults = array();
+        $assetEmployeeDefaults = array();
+        $assetIds = array();
+        if (count((array) $assetRows) > 0) {
+            foreach ($assetRows as $ar) {
+                $a = is_array($ar) ? $ar : (array) $ar;
+                $locKey = $a['contract_amc_location_id'] ?? 0;
+                $assetsByLoc[$locKey][] = $a;
+                $assetDefaults[$a['id'] ?? 0] = (int) ($a['default_technician_id'] ?? 0);
+                $assetEmployeeDefaults[$a['id'] ?? 0] = (int) ($a['default_employee_id'] ?? 0);
+                $assetIds[] = $a['id'];
+            }
+        }
+
+        $serviceMode = $this->resolveContractAmcServiceMode($return['contract']);
+        $techNameMap = $this->getContractAmcTechnicians($companyId);
+        $empNameMap = $this->getContractAmcEmployees($companyId, (int) ($return['contract']['department_id'] ?? 0));
+
+        $schedSql = "SELECT s.*
+            FROM contract_amc_service_schedules s
+            WHERE s.company_id = {$companyId} AND s.contract_id = '" . addslashes($contractId) . "' AND s.is_active = 0
+            ORDER BY s.planned_service_datetime ASC";
+        $schedRows = $callConfig->getAllRows($schedSql);
+        $schedByAsset = $this->buildDrilldownSchedulesByAsset($schedRows, $companyId, $serviceMode, $assetDefaults, $assetEmployeeDefaults, $techNameMap, $empNameMap);
+        $assetRollups = $this->fetchDrilldownAssetRollups($companyId, $assetIds);
 
         if (count((array) $locRows) > 0) {
             foreach ($locRows as $lr) {
@@ -3799,7 +3812,7 @@ public function getPartyContractsList($get, $party_type, $party_id)
 
         $return['can_execute'] = $this->canExecuteContractAmcService($get, $return['contract']);
         $return['contract_is_approved'] = $this->isContractAmcApprovedForExecution($get, $return['contract']);
-        $return['service_mode'] = $this->resolveContractAmcServiceMode($return['contract']);
+        $return['service_mode'] = $serviceMode;
         return $return;
     }
 
@@ -3822,10 +3835,7 @@ public function getPartyContractsList($get, $party_type, $party_id)
             "SELECT current_status FROM contracts WHERE id = {$contractId} AND company_id = '"
             . addslashes((string) $companyId) . "' AND is_active = 0 LIMIT 1"
         );
-        if (!$row) {
-            return '';
-        }
-        return is_array($row) ? ($row['current_status'] ?? '') : ($row->current_status ?? '');
+        return $row ? (is_array($row) ? ($row['current_status'] ?? '') : ($row->current_status ?? '')) : '';
     }
 
     public function isContractAmcApprovedForExecution($get, $contract)
@@ -7866,25 +7876,22 @@ private function mapAmcAdminLandingContractRow($contract)
         $yesterday = date('Y-m-d', strtotime(self::CONST_1_DAY_48));
 
         if ($section == 'overdue' || ($plannedDate != '' && $plannedDate < $today && $status < 199 && $phase != 'closed')) {
-            return array('status_label' => 'Overdue', 'status_class' => 'bg-danger', 'action' => 'view');
-        }
-        if ($phase == 'closed') {
-            return array('status_label' => 'Completed', 'status_class' => 'bg-success', 'action' => 'view');
-        }
-        if ($phase == 'in_progress') {
-            return array('status_label' => self::CONST_IN_PROGRESS, 'status_class' => 'bg-warning', 'action' => 'finish');
-        }
-        if ($section == 'yesterday' && $plannedDate == $yesterday && $status < 199) {
-            return array('status_label' => 'Delayed', 'status_class' => 'bg-danger', 'action' => 'view');
-        }
-        if ($section == 'next_7_days') {
+            $res = array('status_label' => 'Overdue', 'status_class' => 'bg-danger', 'action' => 'view');
+        } elseif ($phase == 'closed') {
+            $res = array('status_label' => 'Completed', 'status_class' => 'bg-success', 'action' => 'view');
+        } elseif ($phase == 'in_progress') {
+            $res = array('status_label' => self::CONST_IN_PROGRESS, 'status_class' => 'bg-warning', 'action' => 'finish');
+        } elseif ($section == 'yesterday' && $plannedDate == $yesterday && $status < 199) {
+            $res = array('status_label' => 'Delayed', 'status_class' => 'bg-danger', 'action' => 'view');
+        } elseif ($section == 'next_7_days') {
             $action = $this->amcAdminLandingVisitHasAssignee($r) ? 'view' : 'assign';
-            return array('status_label' => 'Scheduled', 'status_class' => 'bg-info', 'action' => $action);
+            $res = array('status_label' => 'Scheduled', 'status_class' => 'bg-info', 'action' => $action);
+        } elseif (!$this->amcAdminLandingVisitHasAssignee($r)) {
+            $res = array('status_label' => 'Pending', 'status_class' => 'bg-primary', 'action' => 'assign');
+        } else {
+            $res = array('status_label' => 'Pending', 'status_class' => 'bg-primary', 'action' => 'start');
         }
-        if (!$this->amcAdminLandingVisitHasAssignee($r)) {
-            return array('status_label' => 'Pending', 'status_class' => 'bg-primary', 'action' => 'assign');
-        }
-        return array('status_label' => 'Pending', 'status_class' => 'bg-primary', 'action' => 'start');
+        return $res;
     }
 
     private function buildAmcAdminLandingVisits($get, $allowedContractIds)
