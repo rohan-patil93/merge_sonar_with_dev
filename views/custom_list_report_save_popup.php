@@ -7,7 +7,11 @@ $data = urlencode(json_encode($data12));
 $itemurl = API."?mode=gettabledetailswithconditions&table=my_reports&data=".$data;
 $item_data = callAPI($itemurl);
 $row = json_decode($item_data, 1);
-foreach($row as $rowdata){
+$fld = $fld ?? '';
+$parent_data = array();
+$list_breadcum = array();
+$submain_data = array();
+foreach((array)$row as $rowdata){
     $list_breadcum[$rowdata['id']] = array('parent_id'=>$rowdata['parent_id'],'name'=>$rowdata['page_name'],'id'=>$rowdata['id'],'type'=>'MYR');
     if(($rowdata['parent_id'] == '0' && $fld=="") || ( $fld == $rowdata['parent_id'] && $rowdata['header'] == '')){
         $parent_data[] = $rowdata;
@@ -21,30 +25,27 @@ foreach($row as $rowdata){
     var preport = $('#page_id').val();
     var pagename = $('#ppage_name').val();
     pagename = "'"+pagename+"'";
-    var arr = '<button type="button" class="btn p-0 border-0 bg-transparent ti-angle-left" onclick="listchangebase('+preport+','+pagename+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>';
+    var arr = '<button type="button" class="btn p-0 border-0 bg-transparent ti-angle-left" aria-label="<?= htmlspecialchars(__('Back'), ENT_QUOTES, 'UTF-8'); ?>" onclick="listchangebase('+preport+','+pagename+')"></button>';
          $.ajax({
         url: "ajax.php",
         data:'page=reportfloderlist&report_id='+id+'&page_name='+page_name,
         type: "POST",
         success:function(data){
-            console.log(data);
         document.getElementById('backid').innerHTML = arr;
         document.getElementById('title').innerHTML = page_name;
             document.getElementById('displaylist').innerHTML = data;
         },
-        error:function (){}
+        error:function (){ /* noop */ }
         });
     }
     function submitrom(){
         var  str = '';
          str = 'table=my_reports&fid=parent_id&hid='+$('#report_id').val()+'&rid='+$('#page_id').val();
-          console.log(str);
           $.ajax({
             url: "ajax.php",
             type: "POST",
             data: 'page=updatedynamicfied&'+str,
             success: function(response) {
-                console.log(response);
                 swal.fire({
                     title: <?php echo json_encode(__('Folder is moved successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     type: "success",
@@ -72,7 +73,7 @@ foreach($row as $rowdata){
                 $('#popup1').html(data);
                 $('#kt_modal_KTDatatable_remote').modal("show");
             },
-            error:function (){}
+            error:function (){ /* noop */ }
         });
     }
 </script>
@@ -107,8 +108,9 @@ foreach($row as $rowdata){
                 </div>
             </div>
             <div class="modal-footer pt-4 d-block">
-                <button type="button" class="btn btn-success mr-2 float-left" onclick="createfloder(<?php echo $_POST['report_id']; ?>)" ><i class="ti-plus m-r-5"></i> <?= __('Create Folder'); ?></button>
-                <input type="hidden" name="status" id='report_id' value="<?php echo $_POST['report_id']; ?>">
+                <?php $reportIdVal = htmlspecialchars((string)($_POST['report_id'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>
+                <button type="button" class="btn btn-success mr-2 float-left" onclick="createfloder(<?php echo $reportIdVal; ?>)" ><i class="ti-plus m-r-5"></i> <?= __('Create Folder'); ?></button>
+                <input type="hidden" name="status" id='report_id' value="<?php echo $reportIdVal; ?>">
 
                 <button type="button" class="btn btn-primary mr-2 float-right" onclick="submitrom()" ><?= __('Move To Folder'); ?></button>
             </div>

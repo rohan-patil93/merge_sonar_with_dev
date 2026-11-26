@@ -149,7 +149,6 @@ $onbVars = array_merge($ctx, array(
             data:'emp_id='+encodeURIComponent(emp_id),
             type: "GET",
             success:function(data){
-                console.log("Chelll");
                 $('#popupsq').html(data);
                 $('#kt_modal_KTDatatable_remotesq').modal("show");
             },
@@ -159,7 +158,6 @@ $onbVars = array_merge($ctx, array(
         });
     }
     function employeementtypepopup(emp_id, val) {
-        console.log('emp_id='+emp_id+'&type='+val);
         jQuery.ajax({
             url: "views/custom_insert_employment_type_details.php",
             data:'emp_id='+encodeURIComponent(emp_id)+'&type='+encodeURIComponent(val),
