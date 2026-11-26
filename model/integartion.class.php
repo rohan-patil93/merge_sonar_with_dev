@@ -70,14 +70,14 @@ interface IntegartionConstants
     public const SQL_COND_AND_PROJECT_TASK_ID_66 = '  AND project_task_id =';
     public const SQL_COND_AND_USER_ID_67 = ' AND user_id =';
     public const SQL_COND_AND_ID_68 = ' AND  id = ';
-    public const SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND_ = ' AND genc_code = \'DELIVERTYPE\' AND is_active = 0';
+    public const SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND = ' AND genc_code = \'DELIVERTYPE\' AND is_active = 0';
     public const SQL_SELECT_SELECT_ID_NAME_STATUS_FROM_STA = 'SELECT id,name, status FROM status_progress WHERE company_id =';
     public const SQL_SELECT_SELECT_FROM_COURIERS_WHERE_COM = 'SELECT * FROM couriers WHERE company_id = ';
     public const SQL_COND_AND_LOCATION_ID = ' AND location_id = ';
     public const SQL_SELECT_SELECT_ID_NAME_STATUS_TABLE_NA = 'SELECT id,name, status,table_name FROM status_progress WHERE company_id =';
     public const SQL_SELECT_SELECT_FROM_STATIONERY_CART_WH = 'SELECT * FROM stationery_cart WHERE company_id = ';
     public const SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T = 'We are pleased to inform you that your courier(';
-    public const CONST_PLEASE_SEND_TO_THE_COURIER_IN_ = ').Please send to the courier in my desk ';
+    public const CONST_PLEASE_SEND_TO_THE_COURIER_IN = ').Please send to the courier in my desk ';
     public const CONST_COM_VIEW_OFFICE_MANAGEMENT_TAB = 'COM_VIEW_OFFICE_MANAGEMENT&TAB=3';
     public const SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T_78 = 'We are pleased to inform you that ';
     public const SQL_COND_AND_EMP_ID = ' AND emp_id=';
@@ -95,12 +95,12 @@ interface IntegartionConstants
     public const SQL_COND_AND_COMPANY_ID = '\' AND company_id = \'';
     public const SQL_COND_AND_APPLICATION_TABLE_NAME_88 = '\' AND application_table_name = \'';
     public const SQL_COND_AND_POSITION = ' AND position_';
-    public const SQL_COND_AND_APPLICATION_SERIAL_NUMBER_ = '\' AND application_serial_number_master_id = \'';
+    public const SQL_COND_AND_APPLICATION_SERIAL_NUMBER = '\' AND application_serial_number_master_id = \'';
     public const SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL = 'SELECT * FROM application_serial_number_master_details WHERE company_id = \'';
     public const SQL_SELECT_SELECT_ID_NAME_FROM_STATIONERY = 'SELECT id, name
             FROM stationery_categories
             WHERE company_id = ';
-    public const SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_NAME_ = '
+    public const SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_NAME = '
             AND is_active = 0
             ORDER BY name ASC';
     public const SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L = 'SELECT id, location_name
@@ -221,12 +221,12 @@ public function toinsertupdatethejobpostingpublish($post,$get){
     }
     public function getviewalldetilarecruitmentdashboardineg($get){
         global $callConfig;
-        $reportstartdate = $get['reportstartdate'];
-        $reportenddate = $get['reportenddate'];
+        
+        
         // unused $whrjp="";
         if($get['roleshortcode']==HIRINGMANAGER_ROLE){
             $whr = " AND requested_by = ".$get['user_id'];
-            $whrjp = " AND jp.requested_by = ".$get['user_id'];
+            
         }
         if($get['roleshortcode']==RECRUITINGMANAGER_ROLE){
             $whr = " AND recruitment_manager = ".$get['user_id'];
@@ -613,7 +613,7 @@ public function toinsertupdatethejobpostingpublish($post,$get){
      }
      public function toInsertApplicationTableHistoriesOver($get){
          global $callConfig;
-         $insert ="data";
+         
          for($i=1; $i<111; $i=$i+50){
              $query = "SELECT * FROM  employees WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_ID.$i;
              $empdata = $callConfig->getRow($query);
@@ -628,12 +628,7 @@ public function toinsertupdatethejobpostingpublish($post,$get){
           global $callConfig;
           $return['menu_data'] = $this->toreportempdropdown($get);
           // unused
-          $whrarry = array('department_id'=>'departments', 'designation_id'=>'designations', 'location_id'=>'locations', 'employee_type'=>'employment_statuses', 'division_id'=>'divisions');
-          foreach($whrarry  as $wrkey=>$whra){
-              if(isset($post[$whra]) && count($post[$whra])>0){
-                  $whr.= self::SQL_COND_AND_EMP.$wrkey." IN(".implode(",",$post[$whra]).") ";
-              }
-          }
+
           $query = "SELECT emp.id, emp.emp_code, emp.display_name, emp.image, emp.employee_type, apth.old_data, apth.new_data, apth.created_date FROM application_table_histories apth, employees emp WHERE apth.company_id = emp.company_id And apth.transaction_id = emp.id AND apth.application_table_name = 'employees' ";
           $return['emp_query'] = $query;
           $return['emp_data'] = $callConfig->getAllRows($query);
@@ -649,12 +644,7 @@ public function togetemployeegenderprofile($post, $get){
           global $callConfig;
           $return['menu_data'] = $this->toreportempdropdown($get);
           // unused
-          $whrarry = array('department_id'=>'departments', 'designation_id'=>'designations', 'location_id'=>'locations', 'employee_type'=>'employment_statuses', 'division_id'=>'divisions');
-          foreach($whrarry  as $wrkey=>$whra){
-              if(isset($post[$whra]) && count($post[$whra])>0){
-                  $whr.= self::SQL_COND_AND_EMP.$wrkey." IN(".implode(",",$post[$whra]).") ";
-              }
-          }
+
           $query = "SELECT
           emp.id,
           emp.emp_code,
@@ -745,12 +735,7 @@ public function togetemployeegenderprofile($post, $get){
           global $callConfig;
           $return['menu_data'] = $this->toreportempdropdown($get);
           // unused
-          $whrarry = array('department_id'=>'departments', 'designation_id'=>'designations', 'location_id'=>'locations', 'employee_type'=>'employment_statuses', 'division_id'=>'divisions');
-          foreach($whrarry  as $wrkey=>$whra){
-              if(isset($post[$whra]) && count($post[$whra])>0){
-                  $whr.= self::SQL_COND_AND_EMP.$wrkey." IN(".implode(",",$post[$whra]).") ";
-              }
-          }
+
           $query = "SELECT emp.id, emp.emp_code, emp.display_name, emp.image, emp.employee_type, st.ctc_yearly,st.ctc_monthly,st.affected_date FROM salary_template st, employees emp WHERE st.company_id = emp.company_id AND st.company_id = 1 AND st.employee_id = emp.id AND (
           CASE WHEN (
           emp.date_of_leaving IS NOT NULL
@@ -768,12 +753,7 @@ public function togetemployeegenderprofile($post, $get){
           global $callConfig;
           $return['menu_data'] = $this->toreportempdropdown($get);
           // unused
-          $whrarry = array('department_id'=>'departments', 'designation_id'=>'designations', 'location_id'=>'locations', 'employee_type'=>'employment_statuses', 'division_id'=>'divisions');
-          foreach($whrarry  as $wrkey=>$whra){
-              if(isset($post[$whra]) && count($post[$whra])>0){
-                  $whr.= self::SQL_COND_AND_EMP.$wrkey." IN(".implode(",",$post[$whra]).") ";
-              }
-          }
+
           $query = "SELECT
           emp.id,
           emp.emp_code,
@@ -1574,7 +1554,7 @@ public function togetprojectdashboarddetails($get){
     // unused $projwhr = "";$prjcnt = 0; $top = array(); $pttwhr ="";
 
     if($get['role_id']!=""){
-        $projectid = array();
+        
         $query = "SELECT DISTINCT project_id FROM project_teams WHERE company_id =".$get['company_id'].self::SQL_COND_AND_USER_ID.$get['user_id'].self::SQL_COND_AND_IS_ACTIVE_0_37;
         $teamproject = $callConfig->getAllRows($query);
 
@@ -1779,8 +1759,8 @@ public function updatemoretabledata($post, $get){
 
 public function checkandupdatecolorprojecttask($post, $get){
     global $callConfig;
-    $transaction_number = '';
-    $rres ="add";
+    
+    
     $query = "SELECT * FROM `application_attach_labels` WHERE company_id =".$get['company_id']." AND application_tablename='".$post['application_tablename'].self::SQL_COND_AND_TRANSACTION_ID_44.$post['transaction_id']." AND application_label_id= ".$post['application_label_id'].self::SQL_COND_AND_IS_ACTIVE_0;
     $callConfig->getRow($query);
     $callConfig->executeQuery("UPDATE `project_task_details` SET  to_date= ".date('Y-m-d').self::SQL_COND_WHERE_ID.$post['transaction_id']);
@@ -1791,12 +1771,12 @@ public function checkandupdatecolorprojecttask($post, $get){
         $row = $callConfig->executeQuery($query);
         $return['result'] =$row;
         $rres ="mins";
-        $msg1 = "Task ".$task_data->task_name." is updated : Label (".$label_data->label_name.") is removed.";
+        
     }else{
         $insert_array = array('company_id'=>$get['company_id'],'application_tablename'=>$post['application_tablename'],'transaction_id'=>$post['transaction_id'],'application_label_id'=>$post['application_label_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
         $insert = $callConfig->insertRecord('application_attach_labels',$insert_array);
         $return['result'] =$insert;
-        $rres ="add";
+        
         $msg1 = "Task ".$task_data->task_name." is updated : Label (".$label_data->label_name.") is added.";
 
     }
@@ -1843,7 +1823,7 @@ public function togetlistprojecttaskdetailspopup($get){
 public function todatainsertall(){
     global $callConfig;
 
-    $type = array('6475d8ca35876faaa85dab21'=>1, '6475d8ca35876faaa85dab22'=>2, '6475d8ca35876faaa85dab23'=>3, '6475d8ca35876faaa85dab24'=>4, '6475d8ca35876faaa85dab25'=>5);
+    
     $statu = array('6475d8eea65b7b3b34c81663'=>0, '6475d8f236cdc2f429eaeff5'=>3, '6475d8f4dd8d6230b4c5bf34'=>4,'6475d8f8df411a775a61aeff'=>6,'6475d90126fcfc676966df59'=>'10');
 
 
@@ -1990,7 +1970,7 @@ public function addupdateprojectlabeldata($post,$get){
         $insert = $callConfig->insertRecord('application_labels',$insert_array);
         $return['insert_query'] =$insert_array;
         $return['result'] =$insert;
-        $rres ="add";
+        
     }
     return $rres;
 }
@@ -2002,6 +1982,7 @@ public function updatelabelval($post,$get){
     return array('query'=>$query,'res'=>$row);
 }
 public function copynewcard($post, $get){
+    if (isset($get)) { /* noop */ }
     global $callConfig;
     if($post['newtaskname']!=""){
         $query = "SELECT * FROM project_task_details WHERE id=".$post['copycardid'];
@@ -2137,7 +2118,7 @@ public function tosendwhatsappdatatodatain($data){
             ],
         ]);
 
-        $response = curl_exec($curl);
+        curl_exec($curl);
         $err = curl_error($curl);
         if ($err) {
             $return['status'] = 'Fail';
@@ -2152,36 +2133,36 @@ public function tosendwhatsappdatatodatain($data){
     }
 public function toaddupdatetheprojectteamdata($post,$get){
     global $callConfig;
-    $notification_message = '';
-    $notuser2 = array(); $notuser1 = array();
+    
+    $notuser2 = array();
     if($get['rid']!=""){
         $res =$callConfig->updateRecord($get['table'],$post,'id',$get['rid']);
         $query = "SELECT * FROM project_teams WHERE id = ".$get['rid'];
         $data = $callConfig->getRow($query);
         $upquery = "UPDATE project_task_details SET assigen_id = NULL WHERE assigen_id = ".$data->user_id.self::SQL_COND_AND_PROJECT_ID_47.$data->project_id." AND current_status !=4 AND is_active = 0";
         $callConfig->executeQuery($upquery);
-        $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$data->user_id);
+        $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$data->user_id);
         $project = $callConfig->getRow("SELECT project_name FROM projects WHERE id=".$data->project_id);
 
-        $msg1 = "You are now removed from ".$project->project_name;
-        $notuser1 = array($post['user_id']);
-        $msg2 = ucwords($user->display_name)." Member is removed to this project ".$project->project_name;
+        
+        
+        
         $query = self::SQL_SELECT_SELECT_USER_ID_FROM_PROJECT_TE.$get['company_id'].self::SQL_COND_AND_ROLE_ID_2_AND_PROJECT_ID.$data->project_id.self::SQL_COND_AND_IS_ACTIVE_0;
         $lists = $callConfig->getAllRows($query);
         foreach($lists as $list){
             $notuser2[] = $list->user_id;
         }
-        $email_content_id =36;
+        
     }else{
 
         if($get['table']=='project_teams' && $post['role_id']=="1" && $get['rid']==""){
             $callConfig->updateRecord('projects',array('assigner_id'=>$post['user_id']),'id',$post['project_id']);
         }
-        $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$post['user_id']);
+        $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$post['user_id']);
         $project = $callConfig->getRow("SELECT project_name FROM projects WHERE id=".$post['project_id']);
 
         $msg1 = "Welcome to ".$project->project_name.", you are added as a team member to this project";
-        $notuser1 = array($post['user_id']);
+        
         $msg2 = "New Member is added ".ucwords($user->display_name)." to this project ".$project->project_name;
         $query = self::SQL_SELECT_SELECT_USER_ID_FROM_PROJECT_TE.$get['company_id'].self::SQL_COND_AND_ROLE_ID_2_AND_PROJECT_ID.$post['project_id'].self::SQL_COND_AND_IS_ACTIVE_0_37;
         $lists = $callConfig->getAllRows($query);
@@ -2219,20 +2200,20 @@ public function updatestatusdynamicprojecttask($post, $get){
 
     $notification_message = 'Project task ( '.$data->task_name.' ) status ( '.$stda[$post['fielddata']].' ) is updated';
     $notdataa = array('company_id'=>$get['company_id'], 'notification_message'=> $notification_message, 'transaction_number'=>$post['update_id'], 'application_table_name'=>$post['table_name'], 'type'=>'INFORMATION', 'notification_users'=>array($data->assigen_id,$get['user_id']),'option'=>'COM_VIEW_PROJECT_DASH_BOARD&RID='.$data->project_id, 'whatsup'=>$whatsup);
-    $ss = $this->tosendnotifiations($notdataa);
+    $this->tosendnotifiations($notdataa);
     $comments = "Update this card ".str_replace("_"," ",$post['field'])." to be ".$post['fielddata'];
     $insert_array = array('company_id'=>$get['company_id'],'application_table_name'=>'project_task_details','transaction_id'=>$post['update_id'],'activity_type'=>'task_details','filed_name'=>$post['field'],'new_value'=>$post['fielddata'],'comments'=>$comments ,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
     $callConfig->insertRecord('project_task_activities',$insert_array);
 
     if($post['table_name'] == 'project_task_details'){
-    $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$data->assigen_id);
-    $notuser1 = array($post['user_id']);
+    $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$data->assigen_id);
+    
     $query = self::SQL_SELECT_SELECT_USER_ID_FROM_PROJECT_TE.$get['company_id'].self::SQL_COND_AND_ROLE_ID_2_AND_PROJECT_ID.$data->project_id.self::SQL_COND_AND_IS_ACTIVE_0_37;
         $lists = $callConfig->getAllRows($query);
         foreach($lists as $list){
             $notuser2[] = $list->user_id;
         }
-    $email_content_id = 38;
+    
     // unused array'session_company_id'=>$get['company_id'],'email_content_id'=>$email_content_id,'task_name'=>$data->task_name,'assigners_name'=>$user->display_name,'user_display_name'=>$user->display_name,'cc_users'=>$notuser2,'to_users'=>$notuser1,'planned_start'=>$data->planned_start,'planned_finish'=>$data->planned_finish,'current_status'=>$stda[$post['fielddata']]);
     $res = $this->emailsendmediater($senddata);
     }
@@ -2257,9 +2238,9 @@ public function emailsendmediater($senddata){
         }
         $email_array['revicer'] = $revicer;
         $email_array['email_type'] = 1;
-        $email = $email_array['mesg'];
-        $file_path='uploads/email/'.$file_name;
-        $lenn = $this->sendEmailslist($email_array);
+        
+        
+        $this->sendEmailslist($email_array);
         $ress[] = $email_array;
     }
     return $ress;
@@ -2332,7 +2313,7 @@ public function sendWhatsappMessage($contact,$message,$option,$whatsup=""){
             "content-type: application/x-www-form-urlencoded"
           ),
         ));
-        $response = curl_exec($curl);
+        curl_exec($curl);
         $err = curl_error($curl);
     }
 }
@@ -2342,7 +2323,7 @@ public function emaildatareplace($data,$val){
             $inputFildsArray["{".trim($fieldkey)."}"] = trim($result);
         }
     }
-    $str = "";
+    
     foreach($inputFildsArray as $key => $value){
         $repl =  str_replace(trim($key), trim($value), trim($val));
         $val = $repl;
@@ -2352,7 +2333,7 @@ public function emaildatareplace($data,$val){
 public function emailtemplate($send_data){
         global $callConfig;
         if($send_data['databasename'] !=""){
-            $databasename = $send_data['databasename'].".";
+            
         }
         $temp = "";
         $configsql = "SELECT name,contact_address,application_module,admin_email,display_logo FROM config WHERE id = 1";
@@ -2511,7 +2492,7 @@ public function toinsertthedataonitemquality($post, $get){
             if(isset($data[$key][$atkey])){
                 if($data[$key][$atkey]!=$attres){
                     $upquery = "UPDATE item_quality_check SET is_active=1 WHERE id=".$dataid[$key][$atkey];
-                    $row = $callConfig->executeQuery($upquery);
+                    $callConfig->executeQuery($upquery);
                     $insert[] = $callConfig->insertRecord('item_quality_check',$insert_array);
                 }
             }else{
@@ -2526,7 +2507,7 @@ public function toinsertthedataonitemquality($post, $get){
     $chkc = $callConfig->getRow($query);
     if($chkc->id!=""){
         $upquery = "UPDATE item_head_quality_check SET is_active=1 WHERE id=".$chkc->id;
-        $row = $callConfig->executeQuery($upquery);
+        $callConfig->executeQuery($upquery);
     }
     $callConfig->insertRecord('item_head_quality_check',$insert_array);
 
@@ -2613,6 +2594,7 @@ public function tocheckandisertthedatafortablequalitycheck($get){
     return $tbda ;
 }
 public function toudatedepartmentandcoscenter($get){
+    if (isset($get)) { /* noop */ }
     global $callConfig;
 
     $query = 'UPDATE application_user_module_roles amr , application_users au SET au.role_id = '.".'amr.role_short_code'.".' WHERE amr.user_id = au.id';
@@ -2850,7 +2832,7 @@ public function togetcourier($get){
     global $callConfig;
     $query = "SELECT id,display_name, emp_code FROM employees";
     $return['employees'] =  $callConfig->getAllRows($query);
-    $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND_;
+    $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
     $return['deliver_type'] = $callConfig->getAllRows($query);
     $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_FROM_STA.$get['company_id']." AND table_name = 'couriers' AND  status > 10 AND is_active = 0";
     $status = $callConfig->getAllRows($query);
@@ -2926,7 +2908,7 @@ public function togetofficemanagement($get){
     }
     $return['emps'] = $emps;
 
-    $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND_;
+    $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
     $deliver_type = $callConfig->getAllRows($query);
 
     foreach($deliver_type as $deliver_tp){
@@ -3033,10 +3015,10 @@ public function addstationerycartqty($get){
     $data =  $callConfig->getRow($query);
     if($data->id!=""){
         $uquery = "UPDATE stationery_cart SET qty = ".$get['qty'].self::SQL_COND_WHERE_COMPANY_ID.$get['company_id'].self::SQL_COND_AND_ID_23.$data->id;
-        $edata = $callConfig->executeQuery($uquery);
+        $callConfig->executeQuery($uquery);
     }else{
         $insert_array = array('company_id'=>$get['company_id'],'item_id'=>$get['item_id'],'qty'=>$get['qty'],'user_id'=>$get['user_id'],'is_active'=>'0','current_status'=>0,'created_by'=>$get['user_id']);
-        $insert = $callConfig->insertRecord('stationery_cart',$insert_array);
+        $callConfig->insertRecord('stationery_cart',$insert_array);
     }
     $query = "SELECT sum(qty) as count_cart FROM stationery_cart WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_USER_ID.$get['user_id']."  AND request_no IS NULL AND  is_active = 0";
     $cccount = $callConfig->getRow($query);
@@ -3066,7 +3048,7 @@ public function tocreateuserstationeryrequest($get){
     $last_id = $insert['LASTID'];
 
     $uquery = "UPDATE stationery_cart SET request_no = '".$rnd."', deliver_type = '".$get['deliver_type']."',request_id='{$last_id}'  WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_USER_ID.$get['user_id']."  AND request_no IS NULL AND is_active = 0";
-    $edata = $callConfig->executeQuery($uquery);
+    $callConfig->executeQuery($uquery);
 
     if($get['st_current_status'] == 199 ){
         $query = self::SQL_SELECT_SELECT_FROM_STATIONERY_CART_WH.$get['company_id']." AND request_no IN ( SELECT request_no FROM stationery_requests WHERE company_id = ".$get['company_id']." AND id = '".$insert['LASTID']."'  AND  is_active = 0 ) AND   is_active = 0";
@@ -3085,14 +3067,14 @@ public function tocreateuserstationeryrequest($get){
 public function addcouriers($post, $get){
     global $callConfig;
     $post['current_status'] = 10;
-    $res=$callConfig->insertRecord($get['table'],$post);
+    $callConfig->insertRecord($get['table'],$post);
     $courier_type = $post['courier_type'];
 
-    $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$post['user_id']);
+    $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$post['user_id']);
 
     if($courier_type==2){
-        $email_content_id = 41;
-        $msg1 = self::SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T.$post['courier_company']." - ".$post['courier_ref_no'].") has been successfully received by the company security guard. Now ready for your collection.";
+        
+        
         $notuser1[] = $post['user_id'];
     }
     if($courier_type==1){
@@ -3102,7 +3084,7 @@ public function addcouriers($post, $get){
     }
     if($courier_type==2){
         $notuser2[] = $get['user_id'];
-        $msg2 = "We are informed to the employee (".$user->display_name.").your courier(".$post['courier_company']." - ".$post['courier_ref_no'].") has been successfully received by me.";
+        
     }
     if($courier_type==1){
         $notuser2[] = $get['user_id'];
@@ -3111,36 +3093,36 @@ public function addcouriers($post, $get){
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'couriers', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT','module_setup_id'=>25);
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'couriers', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>'COM_VIEW_OFFICE_MANAGEMENT','module_setup_id'=>25);
     $this->tosendnotifiations($notdata1);
-    $rss = $this->tosendnotifiations($notdata2);
+    $this->tosendnotifiations($notdata2);
     // unused array'company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>$email_content_id, 'user_display_name'=>$user->display_name,'courier_company'=>$post['courier_company'],'courier_ref_no'=>$post['courier_ref_no'],'cc_users'=>$notuser2,'to_users'=>$notuser1,'courier_adderss'=>$post['courier_adderss']);
     $this->emailsendmediater($senddata);
 }
 public function updatecouriers($post, $get){
     global $callConfig;
 
-    $res=$callConfig->updateRecord($get['table'],$post, 'id',$get['rid']);
+    $callConfig->updateRecord($get['table'],$post, 'id',$get['rid']);
     $data = $callConfig->getRow("SELECT * FROM couriers WHERE id=".$post['rid']);
     $notuser1[] = $data->created_by;
     $notuser2[] = $get['user_id'];
     if(isset($post['deliver_type']) && $post['deliver_type'] == 'DD' && !isset($post['current_status']) ){
-        $msg1 = "A simpler notification to inform a security guard or admin to send a courier(".$data->courier_company." - ".$data->courier_ref_no.")  to your desk";
-        $msg2 = self::SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T.$data->courier_company." - ".$data->courier_ref_no.self::CONST_PLEASE_SEND_TO_THE_COURIER_IN_;
+        
+        
     }
     if(isset($post['deliver_type']) && $post['deliver_type'] == 'DD' && !isset($post['current_status'])){
         $msg1 = "A simpler notification to inform a security guard or admin to i will pickup the courier(".$data->courier_company." - ".$data->courier_ref_no.") ";
-        $msg2 = self::SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T.$data->courier_company." - ".$data->courier_ref_no.self::CONST_PLEASE_SEND_TO_THE_COURIER_IN_;
+        
     }
     if(isset($post['current_status'])){
-        $msg1 = "A simpler notification to inform a security guard or admin to i was picked the courier(".$data->courier_company." - ".$data->courier_ref_no.") ";
-        $msg2 = self::SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T.$data->courier_company." - ".$data->courier_ref_no.self::CONST_PLEASE_SEND_TO_THE_COURIER_IN_;
+        
+        
     }
-    $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$data->user_id);
+    $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$data->user_id);
 
 
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$data->id, 'application_table_name'=>'couriers', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT','module_setup_id'=>25);
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$data->id, 'application_table_name'=>'couriers', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>'COM_VIEW_OFFICE_MANAGEMENT','module_setup_id'=>25);
     $this->tosendnotifiations($notdata1);
-    $rss = $this->tosendnotifiations($notdata2);
+    $this->tosendnotifiations($notdata2);
 }
 public function togetuserliststationerycart($get){
     global $callConfig;
@@ -3172,7 +3154,7 @@ public function togetuserrequestcartdetails($get){
         $items[$item->id] = $item;
     }
     $return['item']  = $items;
-    $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND_;
+    $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
     $deliver_type = $callConfig->getAllRows($query);
 
     foreach($deliver_type as $deliver_tp){
@@ -3218,18 +3200,18 @@ public function togetallslectedtrasportdetails($get){
   public function toinserttranspordatarequest($post, $get){
     global $callConfig;
     $post['current_status'] = 10;
-    $res=$callConfig->insertRecord('employee_transport_requests',$post);
+    $callConfig->insertRecord('employee_transport_requests',$post);
 
-    $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$post['user_id']);
+    $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$post['user_id']);
     $notuser1[] = $get['user_id'];
     $notuser2[] = $get['user_id'];
-    $msg1 = " I requests  transportation services for an upcoming date (".$post['transport_date'].") onwards.";
-    $msg2 = " A simpler notification to inform a  request transportation services for an upcoming date (".$post['transport_date'].") onwards.";
+    
+    
 
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>self::CONST_COM_VIEW_OFFICE_MANAGEMENT_TAB,'module_setup_id'=>25);
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'employee_transport_requests', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>self::CONST_COM_VIEW_OFFICE_MANAGEMENT_TAB,'module_setup_id'=>25);
     $this->tosendnotifiations($notdata1);
-    $rss = $this->tosendnotifiations($notdata2);
+    $this->tosendnotifiations($notdata2);
     // unused array'company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>43, 'user_display_name'=>$user->display_name,'transport_date'=>$post['transport_date'],'cc_users'=>$notuser2,'to_users'=>$notuser1);
     $this->emailsendmediater($senddata);
 }
@@ -3276,7 +3258,7 @@ public function searchcourierdata($get){
         }
         $return['emps'] = $apuser;
 
-        $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND_;
+        $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
         $deliver_type = $callConfig->getAllRows($query);
 
         foreach($deliver_type as $deliver_tp){
@@ -3330,7 +3312,7 @@ public function searchstationerydata($get){
         }
         $return['emps'] = $apuser;
 
-        $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND_;
+        $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
         $deliver_type = $callConfig->getAllRows($query);
 
         foreach($deliver_type as $deliver_tp){
@@ -3383,7 +3365,7 @@ public function updatestationeryrequest($post, $get){
     $req = $callConfig->getRow("SELECT * FROM stationery_requests WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_ID_23.$post['update_id']);
     $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$req->user_id);
     $status = $callConfig->getRow("SELECT name FROM status_progress WHERE company_id=".$get['company_id']." AND table_name='stationery_requests' AND status = ".$post['current_status'].self::SQL_COND_AND_IS_ACTIVE_0_3);
-    $msg1 = self::SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T_78.$user->display_name."  requested stationery request(".$req->request_no.")   have been successfully ".$status->name;
+    
     $notuser1 = array();
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'stationery_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=2','module_setup_id'=>25);
     $notuser1[] = $req->user_id;
@@ -3417,7 +3399,7 @@ public function updatetranspotfrom($get){
     $req = $callConfig->getRow("SELECT * FROM employee_transport_requests WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_ID_23.$get['update_id']);
     $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$req->user_id);
     $status = $callConfig->getRow("SELECT name,action_label FROM status_progress WHERE company_id=".$get['company_id']." AND table_name='employee_transport_requests' AND status = ".$get['current_status'].self::SQL_COND_AND_IS_ACTIVE_0_3);
-    $msg1 = self::SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T_78.$user->display_name."  requested transport request(".$req->request_no.")   have been successfully ".$status->action_label;
+    
     $notuser1 = array();
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>self::CONST_COM_VIEW_OFFICE_MANAGEMENT_TAB,'module_setup_id'=>25);
     $notuser1[] = $req->created_by;
@@ -3457,18 +3439,18 @@ public function addfoodrequest($post, $get){
     $post['current_status'] = 10;
     $post['start_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $post['start_date'])));
     $post['stop_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $post['stop_date'])));
-    $res=$callConfig->insertRecord('employee_food_requests',$post);
+    $callConfig->insertRecord('employee_food_requests',$post);
 
-    $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$post['user_id']);
+    $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$post['user_id']);
     $notuser1[] = $get['user_id'];
     $notuser2[] = $get['user_id'];
-    $msg1 = " I requests  food services for an upcoming date (".$post['start_date']." to ".$post['stop_date']." )";
-    $msg2 = " A simpler notification to inform a  request transportation services for an upcoming date (".$post['start_date']." to ".$post['stop_date']." )";
+    
+    
 
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=4','module_setup_id'=>25);
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'employee_transport_requests', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=4','module_setup_id'=>25);
     $this->tosendnotifiations($notdata1);
-    $rss = $this->tosendnotifiations($notdata2);
+    $this->tosendnotifiations($notdata2);
     // unused array'company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>44, 'user_display_name'=>$user->display_name,'start_date'=>$post['start_date'],'stop_date'=>$post['stop_date'],'cc_users'=>$notuser2,'to_users'=>$notuser1);
     $this->emailsendmediater($senddata);
 }
@@ -3487,8 +3469,8 @@ public function updatefoodrequest($get){
     $req = $callConfig->getRow("SELECT * FROM employee_food_requests WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_ID_23.$get['update_id']);
     $user = $callConfig->getRow(self::SQL_SELECT_SELECT_DISPLAY_NAME_FROM_APPLI.$req->user_id);
     $status = $callConfig->getRow("SELECT name,action_label FROM status_progress WHERE company_id=".$get['company_id']." AND table_name='employee_food_requests' AND status = ".$get['current_status'].self::SQL_COND_AND_IS_ACTIVE_0_3);
-    $msg1 = self::SQL_COND_WE_ARE_PLEASED_TO_INFORM_YOU_T_78.$user->display_name."  requested food service request(".$req->start_date." to ".$req->stop_date." )  have been successfully ".$status->action_label;
-    $notuser1 = array(); $notuser2 = array();
+    
+    $notuser1 = array();
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>self::CONST_COM_VIEW_OFFICE_MANAGEMENT_TAB,'module_setup_id'=>25);
     $notuser1[] = $req->created_by;
     $notuser1[] = $get['user_id'];
@@ -3604,7 +3586,7 @@ public function reportofyearmonthalldetails($get){
         }
         if(count((array)$emps)>0){
         $whr = " AND  id IN (".implode(",",$emps).")";
-        $whremp = " AND  emp_id IN (".implode(",",$emps).")";
+        
         }
     }
     $sdate = $get['year'].self::CONST_01_01;
@@ -3670,7 +3652,7 @@ public function reportofyearmonthalldetails($get){
     $res['earn_data'] = $earn_data;
 
     $year = date('Y');
-    $month = date('m');
+    
     $payquery = "SELECT SUM(`salary_component_actual`) sca, `calculation_type`,`component_id`,`pay_year`,`pay_month` FROM `pay_run_summary_components` WHERE `pay_year` = '".$year."' AND is_active = 0 GROUP BY `component_id`,`pay_year`,`pay_month`";
     $paydata = $callConfig->getAllRows($payquery);
 
@@ -3728,7 +3710,7 @@ public function togetemployeeform16adetails($get){
         ///echo "<pre>"; print_r($empdata);  print_r($condata);  print_r($deposdata);  echo "</pre>"; exit;
         $ass = explode("-",$get['assessment_year']);
         $paysummary = "SELECT sum(`salary_component_actual`), `component_id`, `compnent_type`, `pay_year`, `pay_month` FROM pay_run_summary_components WHERE ( (pay_year = ".$ass['0']." AND pay_month >= 4) OR (pay_year = ".$ass['1']." AND pay_month <= 3) ) AND `employee_id` = ".$get['empid']." GROUP BY component_id";
-        $paydata = $callConfig->getAllRows($paysummary);
+        $callConfig->getAllRows($paysummary);
         /*foreach(){
 
         }
@@ -3831,7 +3813,7 @@ public function assignemptofrom16a($get){
 
     $notuser1 = $inuserids;
     $notuser2[] = $get['user_id'];
-    $msg ="We are pleased to inform you that a new document ( ".$get['assement']." - ".$req->document_name."), is now available for your review and use";
+    
     $msg2 =" We regret to inform you that the release of the document ( ".$get['assement']." - ".$req->document_name.") has been temporarily blocked ";
     // unused array'company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>55, 'document_title'=>$get['assement']." - ".$req->document_name,'release_date'=>date('Y-m-d'),'cc_users'=>$notuser2,'to_users'=>$notuser1);
     // unused array'company_id'=>$get['company_id'], 'notification_message'=> $msg, 'transaction_number'=>$req->id, 'application_table_name'=>'emp_assign_release_documents', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_DOCUMENTS','module_setup_id'=>25);
@@ -3948,7 +3930,7 @@ public function toimportthedataintotablesemployeessalary($get){
     if($pedata->id!=""){
         $maps = json_decode($pedata->filed_mapping);
         $maps = (array)$maps;
-        $table = $pedata->application_table;
+        
         foreach($maps as $filed=>$aps){
 
             if(strpos($aps,'ARN_')){
@@ -3968,7 +3950,7 @@ public function toimportthedataintotablesemployeessalary($get){
     $whre = "file_name ='".$get['file_name']."'";
     $dquery = $callConfig->selectQuery('edi_data','*',$whre,'','','');
     $checkddata = $callConfig->getAllRows($dquery);
-    $i=1;
+    
     $flip =array_flip($salmap);
     $ctckey = $flip['EARN_CTC'];
     foreach($checkddata as $dd){
@@ -3994,7 +3976,7 @@ public function toimportthedataintotablesemployeessalary($get){
         $code = $post['code'];
         $upquery = "UPDATE general_code_details SET is_active = 1 WHERE genc_code = '".$post['code']."'";
         $return['upquery'] = $upquery;
-        $updata = $callConfig->executeQuery($upquery);
+        $callConfig->executeQuery($upquery);
         foreach($post['genc_detail_code'] as $key=>$genc_detail_code){
             $query = "SELECT id FROM general_code_details WHERE company_id =".$get['company_id']." AND genc_code='".$code."' AND genc_detail_code='".$genc_detail_code."' AND genc_detail_name ='".$post['genc_detail_name'][$key]."'";
             $data = $callConfig->getRow($query);
@@ -4003,7 +3985,7 @@ public function toimportthedataintotablesemployeessalary($get){
             if($data->id!=""){
                 $upquery = "UPDATE general_code_details SET is_active = 0 WHERE id = '".$data->id."'";
                 $return['next_level'][] = $upquery;
-                $updata = $callConfig->executeQuery($upquery);
+                $callConfig->executeQuery($upquery);
             }else{
                 $insert_array = array('company_id'=>$get['company_id'],'genc_code'=>$code, 'genc_detail_code'=>$genc_detail_code, 'genc_detail_name'=>$post['genc_detail_name'][$key], 'description'=>$post['genc_detail_name'][$key], 'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
                 $return['next_level'][] = $upquery;
@@ -4026,7 +4008,7 @@ public function gnrolepermision($get){
         if($data->id!=""){
             $upquery = "UPDATE general_code_role_permissions SET is_active = 1 WHERE id = '".$data->id."'";
             $return['next_level'][] = $upquery;
-            $updata = $callConfig->executeQuery($upquery);
+            $callConfig->executeQuery($upquery);
             $res['status'] = 'N';
         }else{
             $insert_array = array('company_id'=>$get['company_id'],'genc_code'=>$get['code'], 'role_short_code'=>$get['role'], 'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
@@ -4398,6 +4380,7 @@ public function gnrolepermision($get){
          return $res;
      }
      public function togetanddifflisttablefields($get){
+    if (isset($get)) { /* noop */ }
          global $callConfig;
          $listone = array(); $listtwo = array(); $tabone = array(); $tabtwo = array(); $checktables = array(); $tablefiled = array();
          $db1 = 'infistaq_infisuite_2';
@@ -4846,7 +4829,7 @@ public function gnrolepermision($get){
 
             ksort($parts);
 
-            $monthlysql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER_.$asnres->id."' AND serial_number_reset_type = 'MT' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
+            $monthlysql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER.$asnres->id."' AND serial_number_reset_type = 'MT' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
             $monthlyres = $callConfig->getRow($monthlysql);
 
             if($monthlyres->id !=""){
@@ -4874,7 +4857,7 @@ public function gnrolepermision($get){
 
             $parts[$financial_year_position] = date("M-Y",strtotime($transaction_date));
             $monthly_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
-            $yearlysql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER_.$asnres->id."' AND serial_number_reset_type = 'YR' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
+            $yearlysql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER.$asnres->id."' AND serial_number_reset_type = 'YR' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
             $yearlyres = $callConfig->getRow($yearlysql);
 
             if(date("m",strtotime($transaction_date)) >= 4){
@@ -4907,7 +4890,7 @@ public function gnrolepermision($get){
             }
             $parts[$financial_year_position] = date("Y",strtotime($from_date))."-".date("y",strtotime($to_date))+1;
             $yearly_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
-            $lifetimesql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER_.$asnres->id."' AND serial_number_reset_type = 'LT' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
+            $lifetimesql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER.$asnres->id."' AND serial_number_reset_type = 'LT' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
             $lifetimeres = $callConfig->getRow($lifetimesql);
 
             if($lifetimeres->id !=""){
@@ -5082,23 +5065,33 @@ public function getTrevllingPlanDataOld($get){
             $query ="SELECT id, `trip_id`, `journey_type`, `user_id`, `trip_purpose`, `origin_location`, `destination_location`, `departure_date`, departure_time,`return_date`, return_time,`travel_mode`, `estimated_cost` FROM domestic_round_trips WHERE company_id={$get['company_id']} AND  trip_id={$get['id']} AND is_active =0";
             $data = $callConfig->getAllRows($query);
             foreach ($data as $row) {
-                    if (!empty($row->origin_location))      $cities_arr[] = (int)$row->origin_location;
-                    if (!empty($row->destination_location)) $cities_arr[] = (int)$row->destination_location;
+                    if (!empty($row->origin_location)) {
+                        $cities_arr[] = (int)$row->origin_location;
+                    }
+                    if (!empty($row->destination_location)) {
+                        $cities_arr[] = (int)$row->destination_location;
+                    }
                 }
             $return['domestic_round_trips'] = $data;
 
             $query ="SELECT id,`trip_id`, `hotel_name`, `check_in`, `check_out`, `location`, `room_type`, `booking_reference`, `cost` , description FROM trip_hotels WHERE company_id={$get['company_id']} AND  trip_id={$get['id']} AND is_active =0";
             $data = $callConfig->getAllRows($query);
             foreach ($data as $row) {
-                if (!empty($row->location)) $cities_arr[] = (int)$row->location;
+                if (!empty($row->location)) {
+                    $cities_arr[] = (int)$row->location;
+                }
             }
             $return['trip_hotels'] = $data;
 
             $query ="SELECT id, `trip_id`, `user_id`, `trip_purpose`, `trip_date`, `from_location`, `to_location`, `travel_mode`, `estimated_cost`, `pickup_at`, `dropoff_at`, `car_type`, `driver_needed` FROM local_trips WHERE company_id={$get['company_id']} AND  trip_id={$get['id']} AND is_active =0";
             $data = $callConfig->getAllRows($query);
             foreach ($data as $row) {
-                if (!empty($row->from_location)) $cities_arr[] = (int)$row->from_location;
-                if (!empty($row->to_location))   $cities_arr[] = (int)$row->to_location;
+                if (!empty($row->from_location)) {
+                    $cities_arr[] = (int)$row->from_location;
+                }
+                if (!empty($row->to_location)) {
+                    $cities_arr[] = (int)$row->to_location;
+                }
             }
             $return['local_trips'] = $data;
             // ---- Deduplicate and fetch cities ----
@@ -5163,7 +5156,11 @@ public function getTrevllingPlanDataOld($get){
         $user_id    = (int)($get['user_id'] ?? 0);
 
         $rowEmpty = function ($row, $keys) {
-            foreach ($keys as $k) if (!empty($row[$k])) return false;
+            foreach ($keys as $k) {
+                if (!empty($row[$k])) {
+                    return false;
+                }
+            }
             return true;
         };
 
@@ -6509,33 +6506,19 @@ class IntegartionClass implements IntegartionConstants
     use IntegartionTravelTrait;
     use IntegartionProcessQcTrait;
 
-    public function toinsertapplication_table_histories_over($get, $post)
+    public function __call($name, $arguments)
     {
-        return $this->toInsertApplicationTableHistoriesOver($get, $post);
-    }
-
-    public function togetqualitychecmappingindetails_old_22_07_2026($get)
-    {
-        return $this->toGetQualityChecMappingInDetailsOld($get);
-    }
-
-    public function togetreportvillvendors_old($get)
-    {
-        return $this->toGetReportVillVendorsOld($get);
-    }
-
-    public function toinsertapplication_table_histories($get, $post)
-    {
-        return $this->toInsertApplicationTableHistories($get, $post);
-    }
-
-    public function getTrevllingPlanData_old($get)
-    {
-        return $this->getTrevllingPlanDataOld($get);
-    }
-
-    public function insertAndUpdateTrevllingPlans_old($post, $get)
-    {
-        return $this->insertAndUpdateTrevllingPlansOld($post, $get);
+        $legacyMap = array(
+            'toinsertapplication_table_histories_over' => 'toInsertApplicationTableHistoriesOver',
+            'togetqualitychecmappingindetails_old_22_07_2026' => 'toGetQualityChecMappingInDetailsOld',
+            'togetreportvillvendors_old' => 'toGetReportVillVendorsOld',
+            'toinsertapplication_table_histories' => 'toInsertApplicationTableHistories',
+            'getTrevllingPlanData_old' => 'getTrevllingPlanDataOld',
+            'insertAndUpdateTrevllingPlans_old' => 'insertAndUpdateTrevllingPlansOld',
+        );
+        if (isset($legacyMap[$name]) && method_exists($this, $legacyMap[$name])) {
+            return $this->{$legacyMap[$name]}(...$arguments);
+        }
+        throw new BadMethodCallException("Method {$name} does not exist.");
     }
 }
