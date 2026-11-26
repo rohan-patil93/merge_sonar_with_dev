@@ -4,6 +4,20 @@ require_once __DIR__ . '/account_user.class.php';
 
 interface MobileConstants
 {
+    public const LIT_EMP_LEAVING_CASE = "') THEN 1
+                        WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0) THEN 1
+                        ELSE 2
+                    END
+                ) = 1
+                AND (CASE
+                        WHEN '3' <> '1' THEN (
+                            ('1' = '";
+    public const LIT_EMP_REPORTING_MGR = "')
+                            OR (emp.reporting_manager_id = '";
+    public const LIT_EMP_HR_BUDDY = "')
+                            OR (emp.hr_buddy = '";
+    public const LIT_EMP_FINANCE_BUDDY = "')
+                            OR (emp.finance_buddy = '";
     public const KEY_COMPANY_ID = 'company_id';
     public const SQL_QUOTE_AND_IS_ACTIVE_EQ0 = "' AND is_active =0";
     public const KEY_USER_ID = 'user_id';
@@ -108,15 +122,15 @@ interface MobileConstants
     public const SQL_COND_AND_USER_ID = '\' AND user_id = ';
     public const SQL_SELECT_SELECT_ID_DISPLAY_NAME_USER_PH = 'SELECT id, display_name, user_photo FROM application_users WHERE company_id =\'';
     public const SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR = 'SELECT page_name,menu_label FROM `application_menu` WHERE `company_id` = ';
-    public const SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE_ = ' AND `dashboard` = 0 AND `is_active` = 0';
+    public const SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE = ' AND `dashboard` = 0 AND `is_active` = 0';
     public const SQL_COND_AND_APLICATION_MODULE = ' AND `aplication_module` = ';
     public const SQL_SELECT_SELECT_NAME_VALUE_NAME_BACKGRO = 'SELECT name_value, name, background_color, color FROM `status` WHERE `company_id` = ';
     public const SQL_COND_AND_IS_ACTIVE_0_9 = ') AND `is_active` = 0';
-    public const SQL_SELECT_SELECT_APPLICATION_TABLE_NAME_ = 'SELECT application_table_name,list_page_name  FROM `application_pages` WHERE `company_id` = ';
+    public const SQL_SELECT_SELECT_APPLICATION_TABLE_NAME = 'SELECT application_table_name,list_page_name  FROM `application_pages` WHERE `company_id` = ';
     public const SQL_COND_AND_LIST_PAGE_NAME_IN = ' AND `list_page_name` IN (';
     public const SQL_SELECT_SELECT_TRANSTABLE_ID_TAL_REQUE = 'SELECT  transtable.id, tal.request_date, tal.response_type, tal.send_back_flag, tal.call_back, transtable.transaction_number, transtable.transaction_date, transtable.originator, transtable.party_name, transtable.amount, transtable.tax_amount, transtable.discount_amount, transtable.total_amount,transtable.shipping_amount, transtable.pending_amount, transtable.cost_center_id, transtable.current_status FROM transaction_approval_logs tal, ';
     public const SQL_COND_TRANSTABLE_WHERE_TAL_TRANSACTI = ' transtable WHERE tal.transaction_table = \'';
-    public const SQL_COND_AND_TAL_COMPANY_ID_TRANSTABLE_ = '\' AND tal.company_id = transtable.company_id AND tal.user_id = \'';
+    public const SQL_COND_AND_TAL_COMPANY_ID_TRANSTABLE = '\' AND tal.company_id = transtable.company_id AND tal.user_id = \'';
     public const SQL_COND_AND_TAL_TRANSACTION_ID_TRANSTA = '\' AND tal.transaction_id = transtable.id AND  tal.company_id = \'';
     public const SQL_COND_AND_IS_ACTIVE_0_16 = '\'  AND is_active =0';
     public const SQL_COND_AND_ID_17 = '\' AND id = \'';
@@ -155,7 +169,7 @@ interface MobileConstants
     public const SQL_COND_AND_PROJECT_TASK_ID = ' AND  project_task_id=';
     public const SQL_COND_WHERE_COMPANY_ID = ' WHERE company_id = ';
     public const SQL_SELECT_SELECT_PO_PARTY_ID_SUM_CASE_WH = 'SELECT po.party_id, SUM(CASE WHEN po.current_status = ';
-    public const SQL_COND_AND_PO_CANCEL_INVOICE_IS_NULL_ = '\' AND (po.cancel_invoice IS NULL OR po.cancel_invoice = \'N\' OR po.cancel_invoice = \'\') AND po.is_active = 0 GROUP BY po.party_id';
+    public const SQL_COND_AND_PO_CANCEL_INVOICE_IS_NULL = '\' AND (po.cancel_invoice IS NULL OR po.cancel_invoice = \'N\' OR po.cancel_invoice = \'\') AND po.is_active = 0 GROUP BY po.party_id';
     public const CONST_THEN_PO_AMOUNT_PO_PENDING_AMOU = ' THEN (po.amount-po.pending_amount) ELSE 0 END) AS inv_pending_amount, SUM(CASE WHEN po.current_status IN (';
     public const CONST_THEN_PO_AMOUNT_ELSE_0_END_AS_O = ') THEN (po.amount)  ELSE 0 END) AS only_created_amount, SUM(CASE WHEN po.current_status NOT IN (';
     public const SQL_COND_AND_PI_ID_PII_TRANSACTION_ID_A = ' AND  pi.id = pii.transaction_id AND  pi.is_active = 0 AND  pi.is_active = pii.is_active';
@@ -484,7 +498,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
         }
 
 
-        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE_;
+        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE;
         $datas = $callConfig->getAllRows($query);
         $query = self::SQL_SELECT_SELECT_NAME_VALUE_NAME_BACKGRO.$get[self::KEY_COMPANY_ID].self::SQL_AND_BACKTICK_IS_ACTIVE_0;
         $data_status = $callConfig->getAllRows($query);
@@ -498,7 +512,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
             $str.= "'".$data->page_name."',";
         }
         $sat  = rtrim($str,",");
-        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME_.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
+        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
         $apdatas = $callConfig->getAllRows($ap_query);
         $transtables = array();
         foreach($apdatas as $apdata){
@@ -510,7 +524,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
 
 
         foreach($transtables as $transtab){
-            $approval_query = self::SQL_SELECT_SELECT_TRANSTABLE_ID_TAL_REQUE.$transtab.self::SQL_COND_TRANSTABLE_WHERE_TAL_TRANSACTI.$transtab.self::SQL_COND_AND_TAL_TRANSACTION_ID_TRANSTA.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TAL_COMPANY_ID_TRANSTABLE_.$get[self::KEY_USER_ID]."' AND tal.send_back_flag = 0 AND tal.call_back = 1 AND tal.response_type ='0' ORDER BY tal.request_date DESC";
+            $approval_query = self::SQL_SELECT_SELECT_TRANSTABLE_ID_TAL_REQUE.$transtab.self::SQL_COND_TRANSTABLE_WHERE_TAL_TRANSACTI.$transtab.self::SQL_COND_AND_TAL_TRANSACTION_ID_TRANSTA.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TAL_COMPANY_ID_TRANSTABLE.$get[self::KEY_USER_ID]."' AND tal.send_back_flag = 0 AND tal.call_back = 1 AND tal.response_type ='0' ORDER BY tal.request_date DESC";
             $app_data=$callConfig->getAllRows($approval_query);
             foreach($app_data as $app){
                 $data=(array)$app;
@@ -609,7 +623,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
     public function togetcreatedapproverejectinvoicedetails($get){
         global $callConfig;
         $lists = array();
-        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE_;
+        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE;
         $datas = $callConfig->getAllRows($query);
         $query = self::SQL_SELECT_SELECT_NAME_VALUE_NAME_BACKGRO.$get[self::KEY_COMPANY_ID].self::SQL_AND_BACKTICK_IS_ACTIVE_0;
         $data_status = $callConfig->getAllRows($query);
@@ -623,7 +637,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
             $str.= "'".$data->page_name."',";
         }
         $sat  = rtrim($str,",");
-        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME_.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
+        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
         $apdatas = $callConfig->getAllRows($ap_query);
 
         foreach($apdatas as $apdata){
@@ -671,7 +685,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
     }
     public function togetcreatedinvoicedetails($get){
         global $callConfig;
-        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE_;
+        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE;
         $datas = $callConfig->getAllRows($query);
         $query = self::SQL_SELECT_SELECT_NAME_VALUE_NAME_BACKGRO.$get[self::KEY_COMPANY_ID].self::SQL_AND_BACKTICK_IS_ACTIVE_0;
         $data_status = $callConfig->getAllRows($query);
@@ -685,7 +699,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
             $str.= "'".$data->page_name."',";
         }
         $sat  = rtrim($str,",");
-        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME_.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
+        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
         $apdatas = $callConfig->getAllRows($ap_query);
 
         foreach($apdatas as $apdata){
@@ -725,7 +739,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
         }
 
 
-        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE_;
+        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE;
         $datas = $callConfig->getAllRows($query);
         $query = self::SQL_SELECT_SELECT_NAME_VALUE_NAME_BACKGRO.$get[self::KEY_COMPANY_ID].self::SQL_AND_BACKTICK_IS_ACTIVE_0;
         $data_status = $callConfig->getAllRows($query);
@@ -739,7 +753,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
             $str.= "'".$data->page_name."',";
         }
         $sat  = rtrim($str,",");
-        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME_.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
+        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
         $apdatas = $callConfig->getAllRows($ap_query);
         $transtables = array();
         foreach($apdatas as $apdata){
@@ -751,7 +765,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
 
 
         foreach($transtables as $transtab){
-            $approval_query = self::SQL_SELECT_SELECT_TRANSTABLE_ID_TAL_REQUE.$transtab.self::SQL_COND_TRANSTABLE_WHERE_TAL_TRANSACTI.$transtab.self::SQL_COND_AND_TAL_TRANSACTION_ID_TRANSTA.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TAL_COMPANY_ID_TRANSTABLE_.$get[self::KEY_USER_ID]."' AND tal.send_back_flag = 0 AND tal.response_type != 30 AND tal.call_back = 1 AND tal.response_type !='0' ORDER BY tal.request_date DESC";
+            $approval_query = self::SQL_SELECT_SELECT_TRANSTABLE_ID_TAL_REQUE.$transtab.self::SQL_COND_TRANSTABLE_WHERE_TAL_TRANSACTI.$transtab.self::SQL_COND_AND_TAL_TRANSACTION_ID_TRANSTA.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TAL_COMPANY_ID_TRANSTABLE.$get[self::KEY_USER_ID]."' AND tal.send_back_flag = 0 AND tal.response_type != 30 AND tal.call_back = 1 AND tal.response_type !='0' ORDER BY tal.request_date DESC";
             $app_data=$callConfig->getAllRows($approval_query);
             foreach($app_data as $app){
                 $data=(array)$app;
@@ -785,7 +799,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
             $application_users[$userau->id] = $userau;
         }
 
-        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE_;
+        $query = self::SQL_SELECT_SELECT_PAGE_NAME_MENU_LABEL_FR.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_APLICATION_MODULE.$get[self::KEY_MODULE_ID].self::SQL_COND_AND_DASHBOARD_0_AND_IS_ACTIVE;
         $datas = $callConfig->getAllRows($query);
         $query = self::SQL_SELECT_SELECT_NAME_VALUE_NAME_BACKGRO.$get[self::KEY_COMPANY_ID].self::SQL_AND_BACKTICK_IS_ACTIVE_0;
         $data_status = $callConfig->getAllRows($query);
@@ -799,7 +813,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
             $str.= "'".$data->page_name."',";
         }
         $sat  = rtrim($str,",");
-        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME_.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
+        $ap_query = self::SQL_SELECT_SELECT_APPLICATION_TABLE_NAME.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_LIST_PAGE_NAME_IN.$sat.self::SQL_COND_AND_IS_ACTIVE_0_9;
         $apdatas = $callConfig->getAllRows($ap_query);
         $transtables = array();
         foreach($apdatas as $apdata){
@@ -809,7 +823,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
         $return['list'] = $lists;
 
         foreach($transtables as $transtab){
-            $approval_query = self::SQL_SELECT_SELECT_TRANSTABLE_ID_TAL_REQUE.$transtab.self::SQL_COND_TRANSTABLE_WHERE_TAL_TRANSACTI.$transtab.self::SQL_COND_AND_TAL_TRANSACTION_ID_TRANSTA.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TAL_COMPANY_ID_TRANSTABLE_.$get[self::KEY_USER_ID]."' AND tal.send_back_flag = 0 AND tal.response_type = 30 AND tal.call_back = 1 AND tal.response_type !='0' ORDER BY tal.request_date DESC";
+            $approval_query = self::SQL_SELECT_SELECT_TRANSTABLE_ID_TAL_REQUE.$transtab.self::SQL_COND_TRANSTABLE_WHERE_TAL_TRANSACTI.$transtab.self::SQL_COND_AND_TAL_TRANSACTION_ID_TRANSTA.$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TAL_COMPANY_ID_TRANSTABLE.$get[self::KEY_USER_ID]."' AND tal.send_back_flag = 0 AND tal.response_type = 30 AND tal.call_back = 1 AND tal.response_type !='0' ORDER BY tal.request_date DESC";
             $app_data=$callConfig->getAllRows($approval_query);
             foreach($app_data as $app){
                 $data=(array)$app;
@@ -845,6 +859,7 @@ private function formatMobileConfigBase($companyId, $selectFields){
 trait MobileAttendanceAndLeavesTrait
 {
 public function togenratefirebaseheaderauthentication($get){
+        if (isset($get)) { /* signature compatibility */ }
         $url = SITEURL."/cfa_token.php";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -1057,18 +1072,17 @@ public function togenratefirebaseheaderauthentication($get){
 
     private function resolveAttendanceDayCode($valda, $valday, $data, $working_days, $holidays, $today){
         if(isset($data[$valda]) && $data[$valda]->attendance_key_short_code!=""){
-            return $data[$valda]->attendance_key_short_code;
+            $res = $data[$valda]->attendance_key_short_code;
+        } elseif(!in_array($valday, $working_days)){
+            $res = "O";
+        } elseif(in_array($valda, (array)$holidays)){
+            $res = "H";
+        } elseif(strtotime($valda)<=strtotime($today)){
+            $res = isset($data[$valda]) ? "P" : "A";
+        } else {
+            $res = "N";
         }
-        if(!in_array($valday, $working_days)){
-            return "O";
-        }
-        if(in_array($valda, (array)$holidays)){
-            return "H";
-        }
-        if(strtotime($valda)<=strtotime($today)){
-            return isset($data[$valda]) ? "P" : "A";
-        }
-        return "N";
+        return $res;
     }
 
     public function listgetmonthattendancedetails($get){
@@ -1225,67 +1239,59 @@ public function togenratefirebaseheaderauthentication($get){
 
         return $return;
      }
-     public function togetyearlymonthwisedataperce($get){
-         global $callConfig;
-         $year = $get['year']!="" ? $get['year'] : date('Y');
-         $query = self::SQL_SELECT_SELECT_ID_WORKING_DAYS_FROM_AT.$get[self::KEY_COMPANY_ID].self::SQL_AND_IS_ACTIVE_0_NO_SPACE;
-        $attendances = $callConfig->getRow($query);
-         $working_days = json_decode($attendances->working_days,1);
-         $months = array( 1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December');
-         $query = "SELECT count(id) as hday, month(holiday_date) hmonth FROM `holidays` WHERE company_id = ".$get[self::KEY_COMPANY_ID]." AND holiday_year = ".$year." AND is_active =0 GROUP BY hmonth";
-         $hdatas = $callConfig->getAllRows($query);
-         foreach($hdatas as $hdata){
-             $holid[$hdata->hmonth] = $hdata->hday;
-         }
-         $equery = "SELECT MONTH(attendace_date) atmonth, SUM(if((TIME_TO_SEC(TIMEDIFF(clock_out, clock_in))/3600)>0 , 1,0)) dayaaa FROM employee_daily_attendances WHERE company_id =".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMPLOYEE_ID.$get[self::KEY_EMP_ID]." AND YEAR(attendace_date) = ".$year." AND is_active=0 GROUP BY atmonth";
-        $eatdatas = $callConfig->getAllRows($equery);
-        foreach($eatdatas as $eatda){
-            $empattm[$eatda->atmonth] =  $eatda->dayaaa;
+         private function computeMonthWorkingDays($year, $month, $working_days, $holidayCount = 0) {
+        $startDate = date(self::DATE_FORMAT_YMD, strtotime($year . "-" . $month . "-01"));
+        $daysInMonth = date('Y-m-t', strtotime($startDate));
+        $datediff = floor((strtotime($daysInMonth) - strtotime($startDate)) / 86400);
+        $workingDays = 0;
+        for ($day = 0; $day <= $datediff; $day++) {
+            $valday = ucwords(date("l", strtotime($startDate . ' + ' . $day . 'day')));
+            if (in_array($valday, $working_days)) {
+                $workingDays++;
+            }
         }
-         $workingDaysByMonth = array();
+        return $workingDays - $holidayCount;
+    }
 
+    public function togetyearlymonthwisedataperce($get){
+        global $callConfig;
+        $year = $get['year'] != "" ? $get['year'] : date('Y');
+        $query = self::SQL_SELECT_SELECT_ID_WORKING_DAYS_FROM_AT . $get[self::KEY_COMPANY_ID] . self::SQL_AND_IS_ACTIVE_0_NO_SPACE;
+        $attendances = $callConfig->getRow($query);
+        $working_days = json_decode($attendances->working_days, true) ?: array();
+        $months = array( 1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December');
+        $hquery = "SELECT count(id) as hday, month(holiday_date) hmonth FROM `holidays` WHERE company_id = " . $get[self::KEY_COMPANY_ID] . " AND holiday_year = " . $year . " AND is_active =0 GROUP BY hmonth";
+        $hdatas = $callConfig->getAllRows($hquery);
+        $holid = array();
+        foreach ($hdatas as $hdata) {
+            $holid[$hdata->hmonth] = $hdata->hday;
+        }
+        $equery = "SELECT MONTH(attendace_date) atmonth, SUM(if((TIME_TO_SEC(TIMEDIFF(clock_out, clock_in))/3600)>0 , 1,0)) dayaaa FROM employee_daily_attendances WHERE company_id =" . $get[self::KEY_COMPANY_ID] . self::SQL_COND_AND_EMPLOYEE_ID . $get[self::KEY_EMP_ID] . " AND YEAR(attendace_date) = " . $year . " AND is_active=0 GROUP BY atmonth";
+        $eatdatas = $callConfig->getAllRows($equery);
+        $empattm = array();
+        foreach ($eatdatas as $eatda) {
+            $empattm[$eatda->atmonth] = $eatda->dayaaa;
+        }
+        $return = array();
         for ($month = 1; $month <= 12; $month++) {
-            $workingDays = 0;
-            $startDate = date(self::DATE_FORMAT_YMD, strtotime($year."-".$month."-01"))        ;
-             $daysInMonth = date('Y-m-t', strtotime($startDate));
-             $datediff = strtotime($daysInMonth) - strtotime($startDate);
-            $datediff = floor($datediff/(60*60*24));
-            $alldays =0; $week_off = array(); $week_work = array();
-               for ($day = 0; $day <= $datediff; $day++) {
-                   $valda =  date(self::DATE_FORMAT_YMD, strtotime($startDate . ' + ' . $day . 'day'));
-                $valday = ucwords(date("l", strtotime($startDate . ' + ' . $day . 'day')));
-                if(in_array($valday, $working_days)){
-                    $workingDays++;
-                    $week_work[]=$day."--".$valday."//".$valda;
-                }else{
-                    $week_off[]=$day."--".$valday."//".$valda;
-                }
-                $alldays++;
-            }
-            if(isset($holid[$month])){
-                $workingDays = $workingDays-$holid[$month];
-            }
-            $workingDaysByMonth[$month]['month_name'] = $months[$month];
-            $workingDaysByMonth[$month]['month'] = $month;
-
-
-
-            $workingDaysByMonth[$month]['work_days'] = $workingDays;
-            $workingDaysByMonth[$month][self::KEY_PRESENT] = 0;
-            $workingDaysByMonth[$month]['absent'] = 0;
-            $workingDaysByMonth[$month]['precentage'] = 0;
-            $workingDaysByMonth[$month]['extra_hours'] = 0;
-            if(isset($empattm[$month])){
-
-                $workingDaysByMonth[$month][self::KEY_PRESENT] = intval($empattm[$month]);
-                   $workingDaysByMonth[$month]['absent'] = $workingDays-$empattm[$month];
-                $workingDaysByMonth[$month]['precentage'] = $workingDays != 0 ? round(($empattm[$month]/$workingDays)*100) : 0;
-            }
-            $return['month_data'][] = $workingDaysByMonth[$month];
+            $holidayCount = $holid[$month] ?? 0;
+            $workingDays = $this->computeMonthWorkingDays($year, $month, $working_days, $holidayCount);
+            $present = isset($empattm[$month]) ? intval($empattm[$month]) : 0;
+            $absent = isset($empattm[$month]) ? ($workingDays - $empattm[$month]) : 0;
+            $percentage = (isset($empattm[$month]) && $workingDays != 0) ? round(($empattm[$month] / $workingDays) * 100) : 0;
+            $return['month_data'][] = [
+                'month_name' => $months[$month],
+                'month' => $month,
+                'work_days' => $workingDays,
+                self::KEY_PRESENT => $present,
+                'absent' => $absent,
+                'precentage' => $percentage,
+                'extra_hours' => 0
+            ];
         }
         return $return;
-     }
-     public function togetmobileleavedetails($get){
+    }
+public function togetmobileleavedetails($get){
          global $callConfig;
          $query = "SELECT id, leave_type_name FROM leave_types WHERE company_id =".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_IS_ACTIVE_0;
          $leaves = $callConfig->getAllRows($query);
@@ -1616,45 +1622,56 @@ public function toaddmobileempleave($get, $post){
         return $this->buildCirclePair('Present Days', $abs, round(($abs/$total)*100), 'Absent  Days', $att, round(($att/$total)*100));
     }
 
-    public function togetemloyeemodeleraiodcricle($get){
+        private function getModuleCircleTransactionApprovals($moduleId, $userId) {
         global $callConfig;
         $chek = array('1'=>'quotations','2'=>'goods_receipt_notes','3'=>'sales_orders','26'=>'requisitions');
+        $query = "SELECT SUM(IF(response_type!=0,1,0)) approved, SUM(IF(response_type=0,1,0)) pending FROM transaction_approval_logs WHERE transaction_table IN ('".$chek[$moduleId]."') AND user_id = ".$userId;
+        $da_data = $callConfig->getRow($query);
+        $att = $da_data->approved!="" ? $da_data->approved : 0;
+        $abs = $da_data->pending!="" ? $da_data->pending : 0;
+        $total = $att+$abs;
+        $resData = $this->buildCirclePair('Approved', $att, $total>0 ?round(($att/$total)*100):0, 'Processing', $abs, $total>0 ?round(($abs/$total)*100):0);
+        $resData['query'] = $query;
+        return $resData;
+    }
+
+    private function getModuleCircleTransport($userId) {
+        global $callConfig;
+        $query = "SELECT d.user_id, COUNT(CASE WHEN ta.current_status = 4 THEN 1 END) AS complete, COUNT(CASE WHEN ta.current_status != 4 THEN 1 END) AS pending,COUNT(*) AS total_assignments FROM drivers d JOIN transport_assign ta ON d.id = ta.driver_id WHERE d.user_id =".$userId." AND ta.is_active = 0";
+        $res= $callConfig->getRow($query);
+        $total = $res->total_assignments;
+        $abs = $res->complete;
+        $att = $res->pending;
+        return $this->buildCirclePair('Completed', $abs, $total >0 ? round(($abs/$total)*100):100, 'Pending', $att, $total != 0 ? round(($att/$total)*100) : 0);
+    }
+
+    private function getModuleCircleEmpExpenses($companyId, $userId) {
+        global $callConfig;
+        $query = "SELECT ta.user_id, COUNT(CASE WHEN ta.current_status = 4 THEN 1 END) AS complete, COUNT(CASE WHEN ta.current_status != 4 THEN 1 END) AS pending,COUNT(*) AS total_assignments FROM  emp_expenses ta WHERE ta.company_id =".$companyId." AND ta.user_id =".$userId." AND ta.is_active = 0";
+        $res= $callConfig->getRow($query);
+        $total = $res->total_assignments;
+        $abs = $res->complete;
+        $att = $res->pending;
+        return $this->buildCirclePair('Completed', $abs!=""?$abs:0, $total >0 ? round(($abs/$total)*100):100, 'Pending', $att!=""?$att:0, $total >0 ? round(($att/$total)*100):100);
+    }
+
+    public function togetemloyeemodeleraiodcricle($get){
+        $moduleId = $get[self::KEY_MODULE_ID];
         $chek_mod = array('1','2','3','26');
-        if(in_array($get[self::KEY_MODULE_ID],$chek_mod)){
-            $query = "SELECT SUM(IF(response_type!=0,1,0)) approved, SUM(IF(response_type=0,1,0)) pending FROM transaction_approval_logs WHERE transaction_table IN ('".$chek[$get[self::KEY_MODULE_ID]]."') AND user_id = ".$get[self::KEY_USER_ID];
-            $da_data = $callConfig->getRow($query);
-            $att = $da_data->approved!="" ? $da_data->approved : 0;
-            $abs = $da_data->pending!="" ? $da_data->pending : 0;
-            $total = $att+$abs;
-            $data = $this->buildCirclePair('Approved', $att, $total>0 ?round(($att/$total)*100):0, 'Processing', $abs, $total>0 ?round(($abs/$total)*100):0);
-            $data['query'] = $query;
-            return $data;
-        }
-        if($get[self::KEY_MODULE_ID]==7){
+        if (in_array($moduleId, $chek_mod)) {
+            return $this->getModuleCircleTransactionApprovals($moduleId, $get[self::KEY_USER_ID]);
+        } elseif ($moduleId == 7) {
             return $this->getModuleCircleAttendance($get[self::KEY_COMPANY_ID], $get[self::KEY_USER_ID]);
-        }
-        if($get[self::KEY_MODULE_ID]==38){
+        } elseif ($moduleId == 38) {
             return $this->getModuleCircleFieldWork($get[self::KEY_COMPANY_ID], $get[self::KEY_USER_ID]);
-        }
-        if($get[self::KEY_MODULE_ID]==39){
-            $query = "SELECT   d.user_id, COUNT(CASE WHEN ta.current_status = 4 THEN 1 END) AS complete, COUNT(CASE WHEN ta.current_status != 4 THEN 1 END) AS pending,COUNT(*) AS total_assignments FROM drivers d JOIN transport_assign ta ON d.id = ta.driver_id WHERE d.user_id =".$get[self::KEY_USER_ID]." AND ta.is_active = 0";
-            $res= $callConfig->getRow($query);
-            $total = $res->total_assignments;
-            $abs = $res->complete;
-            $att = $res->pending;
-            return $this->buildCirclePair('Completed', $abs, $total >0 ? round(($abs/$total)*100):100, 'Pending', $att, $total != 0 ? round(($att/$total)*100) : 0);
-        }
-        if($get[self::KEY_MODULE_ID]==12){
-            $query = "SELECT   ta.user_id, COUNT(CASE WHEN ta.current_status = 4 THEN 1 END) AS complete, COUNT(CASE WHEN ta.current_status != 4 THEN 1 END) AS pending,COUNT(*) AS total_assignments FROM  emp_expenses ta WHERE ta.company_id =".$get[self::KEY_COMPANY_ID]." AND ta.user_id =".$get[self::KEY_USER_ID]." AND ta.is_active = 0";
-            $res= $callConfig->getRow($query);
-            $total = $res->total_assignments;
-            $abs = $res->complete;
-            $att = $res->pending;
-            return $this->buildCirclePair('Completed', $abs!=""?$abs:0, $total >0 ? round(($abs/$total)*100):100, 'Pending', $att!=""?$att:0, $total >0 ? round(($att/$total)*100):100);
+        } elseif ($moduleId == 39) {
+            return $this->getModuleCircleTransport($get[self::KEY_USER_ID]);
+        } elseif ($moduleId == 12) {
+            return $this->getModuleCircleEmpExpenses($get[self::KEY_COMPANY_ID], $get[self::KEY_USER_ID]);
         }
         return $this->buildCirclePair('Approved', 8, 73, 'Processing', 3, 27);
     }
-     public function tocheckpermissiontoqrcodeapproval($get){
+public function tocheckpermissiontoqrcodeapproval($get){
          global $callConfig;
          $list_status['genrate_qr_code'] = 'NO';
          $list_status['approval'] = 'NO';
@@ -2747,59 +2764,68 @@ public function insertMobileEmployeeLeaves($get,$post){
         return API."?mode=submitstatusdynamicworkflow&module_id=".$get[self::KEY_MODULE_ID]."&data_name=".$get[self::KEY_DATA_NAME]."&user_id=".$get[self::KEY_USER_ID]."&company_id=".$get[self::KEY_COMPANY_ID]."&comment=AI&next_status=".$nextStatus."&current_status=".$currentStatus."&transaction_no=".$transactionNo."&transaction_table=".$tableName;
     }
 
+        private function handleWorkflowErrorResult($result, $ownerId, $userId, $currentStatus, $get, $transactionNo, $tableName) {
+        $errorstatus = null;
+        $workflow_btn = "";
+        if ($result[self::KEY_ERROR] == '9061' && $ownerId == $userId && $currentStatus == ST_DRAFT) {
+            $errorstatus = self::KEY_SUCCESS;
+            $workflow_btn = $this->buildWorkflowActionUrl($get, ST_ACTIVE, $currentStatus, $transactionNo, $tableName);
+        } elseif (in_array($result[self::KEY_ERROR], ['9063', '9062', '9060'])) {
+            $errorstatus = "fail";
+            $workflow_btn = $result[self::KEY_ERROR];
+        }
+        return [self::KEY_STATUS => $errorstatus, 'approve_url' => $workflow_btn, 'reject_url' => "", 'send_back_url' => ""];
+    }
+
+    private function handleWorkflowActiveResult($result, $ownerId, $userId, $currentStatus, $get, $transactionNo, $tableName) {
+        $workflowsteps = $result['workflowsteps'];
+        $workflow_details = $result['workflow_details'];
+        $nextstepkeyvalue = $result['nextstepkeyvalue'];
+        $transaction_approval_logs = $result['transaction_approval_logs'];
+        $errorstatus = null;
+        $rejecturl = $sendbackurl = $workflow_btn = "";
+
+        if ($currentStatus != ST_APPROVED && $currentStatus != ST_REJECTED) {
+            $isTriggerStatus = ($currentStatus == ST_ACTIVE || $currentStatus == ST_SEND_BACK || $currentStatus == ST_CALLBACK || ($workflow_details && $workflow_details->workflow_trigger_status == $currentStatus));
+            if ($isTriggerStatus) {
+                if ($ownerId == $userId) {
+                    $nextstatus = $workflow_details->workflow_trigger_status;
+                    $errorstatus = self::KEY_SUCCESS;
+                    $workflow_btn = $this->buildWorkflowActionUrl($get, $nextstatus, $workflowsteps[$currentStatus]['workflow_level_status'], $transactionNo, $tableName);
+                } else {
+                    $errorstatus = "fail";
+                    $workflow_btn .= "You are not authorized";
+                }
+            } elseif ($ownerId != $userId) {
+                if (isset($transaction_approval_logs[$userId])) {
+                    $errorstatus = self::KEY_SUCCESS;
+                    $workflow_btn = $this->buildWorkflowActionUrl($get, $nextstepkeyvalue[$currentStatus], $currentStatus, $transactionNo, $tableName);
+                    $rejecturl = $this->buildWorkflowActionUrl($get, ST_REJECTED, $currentStatus, $transactionNo, $tableName);
+                    $sendbackurl = $this->buildWorkflowActionUrl($get, ST_SEND_BACK, $currentStatus, $transactionNo, $tableName);
+                } else {
+                    $errorstatus = "fail";
+                    $workflow_btn .= "You are not authorized / already approved";
+                }
+            }
+        }
+        return [self::KEY_STATUS => $errorstatus, 'approve_url' => $workflow_btn, 'reject_url' => $rejecturl, 'send_back_url' => $sendbackurl];
+    }
+
     public function checkWorkFlowStatusWithApprove($get){
         $transaction_no = $get[self::KEY_TRANSACTION_NO];
         $table_name = $get[self::KEY_TRANSACTION_TABLE];
         $current_status = $get[self::KEY_CURRENT_STATUS];
         $userid = $get[self::KEY_USER_ID];
         $result = $this->getDynamicWorkFlowSteps($get);
-        $workflowsteps = $result['workflowsteps'];
-        $workflow_details = $result['workflow_details'];
-        $nextstepkeyvalue = $result['nextstepkeyvalue'];
         $transaction_owner_id = $result['transaction_owner_id'];
-        $transaction_approval_logs = $result['transaction_approval_logs'];
-        $errorstatus = null;
-        $rejecturl = $sendbackurl = $workflow_btn = "";
 
-        if(isset($result[self::KEY_ERROR])){
-            if($result[self::KEY_ERROR] == '9061' && $transaction_owner_id == $userid && $current_status == ST_DRAFT){
-                $errorstatus = self::KEY_SUCCESS;
-                $workflow_btn = $this->buildWorkflowActionUrl($get, ST_ACTIVE, $current_status, $transaction_no, $table_name);
-            }elseif($result[self::KEY_ERROR] == '9063' || $result[self::KEY_ERROR] == '9062' || $result[self::KEY_ERROR] == '9060'){
-                $errorstatus = "fail";
-                $workflow_btn = $result[self::KEY_ERROR];
-            }
-            return array(self::KEY_STATUS=>$errorstatus,'approve_url'=>$workflow_btn,'reject_url'=>$rejecturl,'send_back_url'=>$sendbackurl);
+        if (isset($result[self::KEY_ERROR])) {
+            return $this->handleWorkflowErrorResult($result, $transaction_owner_id, $userid, $current_status, $get, $transaction_no, $table_name);
         }
 
-        if($current_status != ST_APPROVED && $current_status != ST_REJECTED){
-            if($current_status == ST_ACTIVE || $current_status == ST_SEND_BACK || $current_status == ST_CALLBACK || $workflow_details->workflow_trigger_status == $current_status){
-                if($transaction_owner_id == $userid){
-                    if($current_status == ST_SEND_BACK || $current_status == ST_CALLBACK){
-                        $current_status = $workflow_details->workflow_trigger_status;
-                    }
-                    $nextstatus = $workflow_details->workflow_trigger_status;
-                    $errorstatus = self::KEY_SUCCESS;
-                    $workflow_btn = $this->buildWorkflowActionUrl($get, $nextstatus, $workflowsteps[$current_status]['workflow_level_status'], $transaction_no, $table_name);
-                }else{
-                    $errorstatus = "fail";
-                    $workflow_btn .= "You are not authorized";
-                }
-            }elseif($transaction_owner_id != $userid){
-                if(isset($transaction_approval_logs[$userid])){
-                    $errorstatus = self::KEY_SUCCESS;
-                    $workflow_btn = $this->buildWorkflowActionUrl($get, $nextstepkeyvalue[$current_status], $current_status, $transaction_no, $table_name);
-                    $rejecturl = $this->buildWorkflowActionUrl($get, ST_REJECTED, $current_status, $transaction_no, $table_name);
-                    $sendbackurl = $this->buildWorkflowActionUrl($get, ST_SEND_BACK, $current_status, $transaction_no, $table_name);
-                }else{
-                    $errorstatus = "fail";
-                    $workflow_btn .= "You are not authorized / already approved";
-                }
-            }
-        }
-        return array(self::KEY_STATUS=>$errorstatus,'approve_url'=>$workflow_btn,'reject_url'=>$rejecturl,'send_back_url'=>$sendbackurl);
+        return $this->handleWorkflowActiveResult($result, $transaction_owner_id, $userid, $current_status, $get, $transaction_no, $table_name);
     }
-    public function transportrequestcreate($get){
+public function transportrequestcreate($get){
         global $callConfig;
         $query = "SELECT id, driver_name FROM drivers WHERE company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_AND_IS_ACTIVE_0_NO_SPACE;
         $rows = $callConfig->getAllRows($query);
@@ -2992,6 +3018,57 @@ public function insertMobileEmployeeLeaves($get,$post){
         }
         return $return;
     }
+        private function seedInitialProjectTaskStatus($companyId, $userId, $project_task_status) {
+        global $callConfig;
+        foreach($project_task_status as $project_status){
+            if($project_status->cc==0){
+                $status = array('0'=>'To DO','101'=>'Doing','5'=>'On Hold','199'=>'Completed');
+                $k=10;
+                foreach($status as $skey=>$sta){
+                    $insert_array = array(self::KEY_COMPANY_ID=>$companyId, self::KEY_PROJECT_ID=> $project_status->cc, self::KEY_TABLE_NAME=>self::TBL_PROJECT_TASK_DETAILS, 'name'=>$sta, self::KEY_STATUS=>$skey, 'action_label'=>$sta,'display_priority'=>$k,self::KEY_IS_ACTIVE=>'0', self::KEY_CURRENT_STATUS=>'0', self::KEY_CREATED_BY=>$userId);
+                    $callConfig->insertRecord('project_task_status',$insert_array);
+                    $k = $k+10;
+                }
+            }
+        }
+    }
+
+    private function fetchProjectPhasesAndTeams($companyId, $userId, $work_ids) {
+        global $callConfig;
+        $idList = implode(",", $work_ids);
+        $phasesQuery = "SELECT project_id, count(id) as cc FROM project_phases WHERE company_id =".$companyId.self::SQL_COND_AND_PROJECT_ID_IN.$idList.self::SQL_COND_AND_IS_ACTIVE_0_GROUP_BY_PROJE;
+        $project_phases = $callConfig->getAllRows($phasesQuery);
+        $teamsQuery = "SELECT project_id,count(id) as cc FROM project_teams WHERE company_id =".$companyId.self::SQL_COND_AND_PROJECT_ID_IN.$idList.self::SQL_COND_AND_IS_ACTIVE_0_GROUP_BY_PROJE;
+        $project_teams = $callConfig->getAllRows($teamsQuery);
+        $statusQuery = "SELECT project_id,count(id) as cc FROM project_task_status WHERE company_id =".$companyId.self::SQL_COND_AND_PROJECT_ID_IN.$idList.self::SQL_COND_AND_IS_ACTIVE_0_GROUP_BY_PROJE;
+        $project_task_status = $callConfig->getAllRows($statusQuery);
+        $this->seedInitialProjectTaskStatus($companyId, $userId, $project_task_status);
+        $phase = array();
+        foreach($project_phases as $project_phase){
+            $phase[$project_phase->project_id] = $project_phase->cc;
+        }
+        $team = array();
+        foreach($project_teams as $project_team){
+            $team[$project_team->project_id] = $project_team->cc;
+        }
+        return [$phase, $team];
+    }
+
+    private function formatMobileProjectsViewData($works, $phase, $team) {
+        $pass = array();
+        foreach($works as $work){
+            $main = (array)$work;
+            $main['projet_value'] = 'N';
+            if(($phase[$work->id] ?? 0) > 0 && ($team[$work->id] ?? 0) > 0){
+                $main['projet_value'] = 'Y';
+            }
+            $main['projet_team_cc'] = $team[$work->id] ?? 0;
+            $main['project_phase_cc'] = $phase[$work->id] ?? 0;
+            $pass[] = $main;
+        }
+        return $pass;
+    }
+
     public function togetmobileprojectsview($get){
         global $callConfig;
         $query = "SELECT p.id, p.project_logo, p.project_name, p.description, p.planned_start, p.planned_finish, p.created_by as project_creater, COUNT(DISTINCT pt.id) AS number_of_project_teams, COUNT(DISTINCT t.id) AS number_of_project_tasks, CASE WHEN COUNT(t.id) = 0 THEN 0 ELSE ROUND( (SUM(CASE WHEN t.current_status = 199 THEN 1 ELSE 0 END) / COUNT(t.id)) * 100, 2 ) END AS percentage_of_tasks_completed FROM projects p LEFT JOIN project_teams pt ON p.id = pt.project_id AND pt.is_active = 0 LEFT JOIN project_task_details t ON p.id = t.project_id AND t.is_active = 0 WHERE p.company_id =".$get[self::KEY_COMPANY_ID]." AND p.project_work_space_id=".$get['work_space_id']." AND p.is_active =0 GROUP BY p.id";
@@ -3000,47 +3077,16 @@ public function insertMobileEmployeeLeaves($get,$post){
         foreach($works as $work){
             $work_ids[] = $work->id;
         }
-        $return['get'] = $get;
+        $return = array('get' => $get);
+        $phase = array();
+        $team = array();
         if(!empty($work_ids)){
-            $query = "SELECT project_id, count(id) as cc FROM project_phases WHERE company_id =".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PROJECT_ID_IN.implode(",",$work_ids).self::SQL_COND_AND_IS_ACTIVE_0_GROUP_BY_PROJE;
-            $project_phases = $callConfig->getAllRows($query);
-            $query = "SELECT project_id,count(id) as cc FROM project_teams WHERE company_id =".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PROJECT_ID_IN.implode(",",$work_ids).self::SQL_COND_AND_IS_ACTIVE_0_GROUP_BY_PROJE;
-            $project_teams = $callConfig->getAllRows($query);
-            $query = "SELECT project_id,count(id) as cc FROM project_task_status WHERE company_id =".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PROJECT_ID_IN.implode(",",$work_ids).self::SQL_COND_AND_IS_ACTIVE_0_GROUP_BY_PROJE;
-            $project_task_status = $callConfig->getAllRows($query);
-            foreach($project_task_status as $project_status){
-                if($project_status->cc==0){
-                    $status = array('0'=>'To DO','101'=>'Doing','5'=>'On Hold','199'=>'Completed');
-                    $k=10;
-                    foreach($status  as $skey=>$sta){
-                        $insert_array = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID], self::KEY_PROJECT_ID=> $project_status->cc, self::KEY_TABLE_NAME=>self::TBL_PROJECT_TASK_DETAILS, 'name'=>$sta, self::KEY_STATUS=>$skey, 'action_label'=>$sta,'display_priority'=>$k,self::KEY_IS_ACTIVE=>'0', self::KEY_CURRENT_STATUS=>'0', self::KEY_CREATED_BY=>$get[self::KEY_USER_ID]);
-                        $kresult[self::KEY_INSERT][] = $insert_array;
-                        $kresult['res'][] = $callConfig->insertRecord('project_task_status',$insert_array);
-                        $k = $k+10;
-                    }
-                }
-            }
-            foreach($project_phases as $project_phase){
-                $phase[$project_phase->project_id] = $project_phase->cc;
-            }
-            foreach($project_teams as $project_team){
-                $team[$project_team->project_id] = $project_team->cc;
-            }
+            list($phase, $team) = $this->fetchProjectPhasesAndTeams($get[self::KEY_COMPANY_ID], $get[self::KEY_USER_ID], $work_ids);
         }
-        foreach($works as $work){
-            $main =(array)$work;
-            $main['projet_value'] = 'N';
-            if($phase[$work->id]>0 && $team[$work->id]>0){
-                $main['projet_value'] = 'Y';
-            }
-            $main['projet_team_cc'] = $team[$work->id];
-            $main['project_phase_cc'] = $phase[$work->id];
-            $pass[]= $main;
-        }
-        $return['data'] = $pass;
+        $return['data'] = $this->formatMobileProjectsViewData($works, $phase, $team);
         return $return;
     }
-    public function todisplaytasklistview($get){
+public function todisplaytasklistview($get){
         global $callConfig;
         $uwhr = "";
         if($get['role_short_code']!='TASKDA_ADMIN'){
@@ -3330,8 +3376,7 @@ public function addupdaterolememberdetailformobile($get,$post){
         $update = self::SQL_UPDATE_UPDATE_USER_MOBILE_DETAILS_SET.$get[self::KEY_USER_ID].self::SQL_COND_WHERE_USER_ID.$get[self::KEY_USER_ID].self::SQL_QUOTE_AND_IS_ACTIVE_0;
         $callConfig->executeQuery($update);
         $upquery = "UPDATE appliccation_user_login_tokens SET s_active = NULL, updated_by = ".$get[self::KEY_USER_ID]." WHERE company_id= ".$get[self::KEY_COMPANY_ID].self::SQL_AND_USER_ID.$get[self::KEY_USER_ID]." AND login_type = 'Mobile' AND is_active=0";
-        $update_data = $callConfig->executeQuery($upquery);
-        return $update_data;
+        return $callConfig->executeQuery($upquery);
     }
     public function togetpersonalgatewaydetails($get){
         global $callConfig;
@@ -3558,6 +3603,30 @@ public function addupdaterolememberdetailformobile($get,$post){
         return $res;
     }
 
+        private function extractPartyGstBillingDetails($companyId, $placeOfSupply, $partyres) {
+        global $callConfig;
+        if ($placeOfSupply != "") {
+            $sqlgstbill = "SELECT * FROM `customer_vendor_gst_billing_details` WHERE company_id = ".$companyId." AND id = '".$placeOfSupply.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $gstbillres = $callConfig->getRow($sqlgstbill);
+            return [
+                $gstbillres->gstin != "" ? $gstbillres->gstin : ($partyres->gstin ?? ''),
+                $gstbillres->phone != "" ? $gstbillres->phone : ($partyres->phone ?? ''),
+                $gstbillres->billing_address != "" ? $gstbillres->billing_address : ($partyres->billing_address ?? ''),
+                $gstbillres->shipping_address != "" ? $gstbillres->shipping_address : ($partyres->shipping_address ?? ''),
+                $gstbillres->shipping_state != "" ? $gstbillres->shipping_state : ($partyres->shipping_state ?? ''),
+                $gstbillres->email != "" ? $gstbillres->email : ($partyres->email ?? '')
+            ];
+        }
+        return [
+            $partyres->gstin ?? '',
+            $partyres->phone ?? '',
+            $partyres->billing_address ?? '',
+            $partyres->shipping_address ?? '',
+            $partyres->shipping_state ?? '',
+            $partyres->email ?? ''
+        ];
+    }
+
     private function resolveDynamicPartyBilling($companyId, $partyId, $transactionTable, $placeOfSupply, $paymentTerms, $originatorStateId){
         global $callConfig;
         $display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$companyId.self::SQL_COND_AND_APPLICATION_TABLE_NAME.$transactionTable."' AND field_name = self::KEY_PARTY_ID";
@@ -3574,29 +3643,12 @@ public function addupdaterolememberdetailformobile($get,$post){
             $partyres = $callConfig->getRow($partysql);
         }
 
-        if($placeOfSupply !=""){
-            $sqlgstbill = "SELECT * FROM `customer_vendor_gst_billing_details` WHERE company_id = ".$companyId." AND id = '".$placeOfSupply.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $gstbillres = $callConfig->getRow($sqlgstbill);
-            $party_tax_number = $gstbillres->gstin!=""?$gstbillres->gstin:$partyres->gstin;
-            $party_phone = $gstbillres->phone!=""?$gstbillres->phone:$partyres->phone;
-            $party_address = $gstbillres->billing_address!=""?$gstbillres->billing_address:$partyres->billing_address;
-            $party_ship_adderss = $gstbillres->shipping_address!=""?$gstbillres->shipping_address:$partyres->shipping_address;
-            $supplier_state_id= $gstbillres->shipping_state!=""?$gstbillres->shipping_state:$partyres->shipping_state;
-            $party_email= $gstbillres->email!=""?$gstbillres->email:$partyres->email;
-        }else{
-            $party_tax_number = $partyres->gstin;
-            $party_phone = $partyres->phone;
-            $party_address = $partyres->billing_address;
-            $party_ship_adderss = $partyres->shipping_address;
-            $supplier_state_id=  $partyres->shipping_state;
-            $party_email = $partyres->email;
-        }
+        list($party_tax_number, $party_phone, $party_address, $party_ship_adderss, $supplier_state_id, $party_email) = $this->extractPartyGstBillingDetails($companyId, $placeOfSupply, $partyres);
         $tax_state = ($originatorStateId == $supplier_state_id) ? "S" : "I";
-        $resolvedTerms = $paymentTerms!=""?$paymentTerms:$partyres->payment_terms;
+        $resolvedTerms = $paymentTerms!=""?$paymentTerms:($partyres->payment_terms ?? '');
         return [$partyres, $party_tax_number, $party_phone, $party_address, $party_ship_adderss, $supplier_state_id, $party_email, $tax_state, $resolvedTerms];
     }
-
-    private function buildAdditionalChargesSummary($companyId, $additionalCharges){
+private function buildAdditionalChargesSummary($companyId, $additionalCharges){
         global $callConfig;
         $additional_charge = array();
         $shipping_tax = $shipping_amount = $shipping_tax_amount = 0;
@@ -3654,6 +3706,35 @@ public function addupdaterolememberdetailformobile($get,$post){
         return [$itemInsertData, $taxInsertData];
     }
 
+        private function saveOrUpdateDynamicMappingTransaction($transaction_table, $mainfieldsary, $ref_table_dmtres, $post) {
+        global $callConfig;
+        if($post['rid'] !=""){
+            $mainfieldsary[self::KEY_UPDATED_BY]=$post[self::KEY_USER_ID];
+            $mainfieldsary[self::KEY_UPDATED_DATE]=date(self::DATETIME_FORMAT_YMD_HIS);
+            $insert_data=$callConfig->updateRecord($transaction_table,$mainfieldsary,'id',$post['rid']);
+            $insert_id = $post['rid'];
+            $callConfig->updateRecord($ref_table_dmtres->item_table,array(self::KEY_IS_ACTIVE=>null),self::KEY_TRANSACTION_ID,$post['rid']);
+            $callConfig->updateRecord($ref_table_dmtres->tax_table,array(self::KEY_IS_ACTIVE=>null),self::KEY_TRANSACTION_ID,$post['rid']);
+            return [$insert_data, $insert_id];
+        }
+        $post[self::KEY_TRANSACTION_DATE] = '';
+        $post[self::KEY_PARTY_ID] = $post[self::KEY_PARTY_ID] ?? '';
+        $post['transaction_type'] = '';
+        $transaction_number_details = $this->generatingApplicationSerialNumberMasters($transaction_table,$post);
+        $mainfieldsary[self::KEY_TRANSACTION_NUMBER] = $transaction_number_details['main_transaction_number'];
+        $mainfieldsary['monthly_transaction_number'] = $transaction_number_details['monthly_transaction_number'];
+        $mainfieldsary['yearly_transaction_number'] = $transaction_number_details['yearly_transaction_number'];
+        $mainfieldsary['lifetime_transaction_number'] = $transaction_number_details['lifetime_transaction_number'];
+
+        $mainfieldsary[self::KEY_IS_ACTIVE]=0;
+        $mainfieldsary[self::KEY_CURRENT_STATUS]=0;
+        $mainfieldsary[self::KEY_CREATED_BY]=$post[self::KEY_USER_ID];
+        $mainfieldsary[self::KEY_CREATED_DATE]=date(self::DATETIME_FORMAT_YMD_HIS);
+        $insert_data=$callConfig->insertRecord($transaction_table,$mainfieldsary);
+        $insert_id = $insert_data[self::KEY_LASTID];
+        return [$insert_data, $insert_id];
+    }
+
     public function insertMobiDynamicMappingTransactions($get, $post){
         global $callConfig;
         $return = array('get' => $get, 'post' => $post);
@@ -3677,6 +3758,8 @@ public function addupdaterolememberdetailformobile($get,$post){
         $ref_table_dmtsql = "SELECT id, page_title, application_table_name,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$post[self::KEY_COMPANY_ID].self::SQL_COND_AND_APPLICATION_TABLE_NAME.$transaction_table."' AND is_active = 0 AND item_table !='' AND tax_table!=''";
         $ref_table_dmtres=$callConfig->getRow($ref_table_dmtsql);
 
+        $insert_data = null;
+        $insert_id = null;
         if($ref_table_dmtres->item_table !="" && $ref_table_dmtres->tax_table !=""){
             $originatorsql = "SELECT * FROM application_users WHERE company_id = '".$post[self::KEY_COMPANY_ID].self::SQL_COND_AND_ID_17.$originator.self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $originatorres=$callConfig->getRow($originatorsql);
@@ -3701,34 +3784,13 @@ public function addupdaterolememberdetailformobile($get,$post){
                 $mainfieldsary['shipping_tax_amount'] = $shippingTaxAmount;
             }
 
-            if($post['rid'] !=""){
-                $mainfieldsary[self::KEY_UPDATED_BY]=$post[self::KEY_USER_ID];
-                $mainfieldsary[self::KEY_UPDATED_DATE]=date(self::DATETIME_FORMAT_YMD_HIS);
-                $insert_data=$callConfig->updateRecord($transaction_table,$mainfieldsary,'id',$post['rid']);
-                $insert_id = $post['rid'];
-                $callConfig->updateRecord($ref_table_dmtres->item_table,array(self::KEY_IS_ACTIVE=>null),self::KEY_TRANSACTION_ID,$post['rid']);
-                $callConfig->updateRecord($ref_table_dmtres->tax_table,array(self::KEY_IS_ACTIVE=>null),self::KEY_TRANSACTION_ID,$post['rid']);
-            }else{
-                $post[self::KEY_TRANSACTION_DATE] = '';
-                $post[self::KEY_PARTY_ID] = $party_id;
-                $post['transaction_type'] = '';
-                $transaction_number_details = $this->generatingApplicationSerialNumberMasters($transaction_table,$post);
-                $mainfieldsary[self::KEY_TRANSACTION_NUMBER] = $transaction_number_details['main_transaction_number'];
-                $mainfieldsary['monthly_transaction_number'] = $transaction_number_details['monthly_transaction_number'];
-                $mainfieldsary['yearly_transaction_number'] = $transaction_number_details['yearly_transaction_number'];
-                $mainfieldsary['lifetime_transaction_number'] = $transaction_number_details['lifetime_transaction_number'];
-
-                $mainfieldsary[self::KEY_IS_ACTIVE]=0;
-                $mainfieldsary[self::KEY_CURRENT_STATUS]=0;
-                $mainfieldsary[self::KEY_CREATED_BY]=$post[self::KEY_USER_ID];
-                $mainfieldsary[self::KEY_CREATED_DATE]=date(self::DATETIME_FORMAT_YMD_HIS);
-                $insert_data=$callConfig->insertRecord($transaction_table,$mainfieldsary);
-                $insert_id = $insert_data[self::KEY_LASTID];
+            list($insert_data, $insert_id) = $this->saveOrUpdateDynamicMappingTransaction($transaction_table, $mainfieldsary, $ref_table_dmtres, $post);
+            if (isset($insert_data[self::KEY_LASTID])) {
                 $return['insert_data'] = $insert_data;
             }
         }
 
-        if($insert_data[self::KEY_STATUS] == 'sucess'){
+        if(isset($insert_data[self::KEY_STATUS]) && $insert_data[self::KEY_STATUS] == 'sucess'){
             list($itemInsertData, $taxInsertData) = $this->upsertDynamicTransactionItems($post[self::KEY_COMPANY_ID], $insert_id, $ref_table_dmtres, $post);
             $return['item_insert_data'] = $itemInsertData;
             if(!empty($taxInsertData)){
@@ -3738,50 +3800,51 @@ public function addupdaterolememberdetailformobile($get,$post){
 
         return $return;
     }
+
 }
 
 
 trait MobileHrAndDashboardTrait
 {
-public function getEmailWithDBAndCompanyID($get){
+    public function getEmailWithDBAndCompanyID($get){
         global $callConfig;
         $user_email = $get[self::KEY_USER_EMAIL];
         $aiemailquery = "SELECT id,zqr_connect, email_id, is_active FROM ".MAINDB.".ai_email_configurations WHERE email_id= '".$user_email.self::SQL_QUOTE_AND_IS_ACTIVE_EQ0;
         $aiemailres = $callConfig->getRow($aiemailquery);
         if($aiemailres->is_active !='0'){
-            return array(
+            $resp = array(
                 self::KEY_STATUS => self::KEY_ERROR,
                 "msg" => "Email ID is not activated."
             );
         }elseif($aiemailres->zqr_connect =='0' || $aiemailres->zqr_connect ==''){
-            return array(
+            $resp = array(
                 self::KEY_STATUS => self::KEY_ERROR,
                 "msg" => "Database is not assigned. Please contact the administrator."
             );
         }elseif($aiemailres->id != ''){
-
             $dbaquery = "SELECT id,db_name FROM ".MAINDB.".".TBL_DATABASE_ALLOCATIONS." WHERE id= '".$aiemailres->zqr_connect."'";
             $dbares = $callConfig->getRow($dbaquery);
             if($dbares->db_name !=''){
                 $db_name = $dbares->db_name;
                 $returnary = array(self::KEY_COMPANY_ID=>'1',self::KEY_USER_ID=>'1','db_name'=>$db_name);
-                return array(
+                $resp = array(
                     self::KEY_STATUS => self::KEY_SUCCESS,
                     "msg" => "Record fetched successfully.",
                     "result"=>$returnary
                 );
             }else{
-                return array(
+                $resp = array(
                     self::KEY_STATUS => self::KEY_ERROR,
                     "msg" => "Database not found. Please contact the administrator."
                 );
             }
         }else{
-            return array(
+            $resp = array(
                 self::KEY_STATUS => self::KEY_ERROR,
                 "msg" => "Oops! Something went wrong. Please contact the administrator."
             );
         }
+        return $resp;
     }
     public function getProcurementModulesDashboardSummaryStock($get){
         global $callConfig;
@@ -3832,290 +3895,137 @@ public function getEmailWithDBAndCompanyID($get){
 
 
 
+        private function fetchPaymentTermsMap($companyId) {
+        global $callConfig;
+        $sql = "SELECT id, payment_term_name, content FROM payment_terms WHERE company_id = '".$companyId.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $res = $callConfig->getAllRows($sql);
+        $map = array();
+        foreach($res as $payterm){
+            $map[$payterm->id] = $payterm->payment_term_name;
+        }
+        return $map;
+    }
+
+    private function fetchPartyInvoiceSummaries($companyId, $table) {
+        global $callConfig;
+        $sql = self::SQL_SELECT_SELECT_PO_PARTY_ID_SUM_CASE_WH.ST_APPROVED.self::CONST_THEN_PO_AMOUNT_PO_PENDING_AMOU.ST_ACTIVE.", ".ST_DRAFT.self::CONST_THEN_PO_AMOUNT_ELSE_0_END_AS_O.ST_APPROVED.", ".ST_ACTIVE.", ".ST_DRAFT.") THEN (po.amount)  ELSE 0 END) AS inprogress_amount FROM $table po WHERE po.company_id = '".$companyId.self::SQL_COND_AND_PO_CANCEL_INVOICE_IS_NULL;
+        $res = $callConfig->getAllRows($sql);
+        $map = array();
+        foreach($res as $r){
+            $map[$r->party_id] = $r;
+        }
+        return $map;
+    }
+
+    private function fetchDashboardVendors($companyId, $party_purchase_invoices) {
+        global $callConfig;
+        $sql = "SELECT `id`, `company`, `display_name`, `billing_address`, `billing_city`, `billing_state`, `billing_post_code`, `billing_country`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_post_code`, `shipping_country`, `bank_account_name`, `bank_name`, `account_type`, `bank_account_no`, `payment_terms` ,`credit_limit` FROM `vendors` WHERE company_id = '".$companyId.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $res = $callConfig->getAllRows($sql);
+        $vendors = array();
+        foreach($res as $vinres){
+            $vinres->party_purchase_invoices = $party_purchase_invoices[$vinres->id] ?? array();
+            $vendors[] = $vinres;
+        }
+        return $vendors;
+    }
+
+    private function fetchDashboardCustomers($companyId, $party_sales_invoices) {
+        global $callConfig;
+        $sql = "SELECT `id`, `company`, `display_name`, `billing_address`, `billing_city`, `billing_state`, `billing_post_code`, `billing_country`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_post_code`, `shipping_country`, `payment_terms` ,`credit_limit` FROM `customers` WHERE company_id = '".$companyId.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $res = $callConfig->getAllRows($sql);
+        $customers = array();
+        foreach($res as $custres){
+            $custres->party_sales_invoices = $party_sales_invoices[$custres->id] ?? array();
+            $customers[] = $custres;
+        }
+        return $customers;
+    }
+
+    private function fetchInvoicesWithItems($companyId, $mainTable, $itemsTable, $payment_terms) {
+        global $callConfig;
+        $sql = "SELECT pi.id, pi.transaction_number, pi.transaction_date, pi.party_id, pi.payment_terms, pii.id pi_id, pii.item_id, pii.item_name FROM $mainTable pi, $itemsTable pii WHERE pi.company_id = '".$companyId.self::SQL_COND_AND_PI_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_PI_ID_PII_TRANSACTION_ID_A;
+        $res = $callConfig->getAllRows($sql);
+        $invoices = array();
+        foreach($res as $r){
+            if (!isset($invoices[$r->id])) {
+                $r->payments = array();
+                $r->payment_term_name = $payment_terms[$r->payment_terms] ?? null;
+                $invoices[$r->id] = $r;
+            }
+            $invoices[$r->id]->items[$r->pi_id] = array('id' => $r->pi_id, self::KEY_ITEM_ID => $r->item_id, 'item_name' => $r->item_name);
+        }
+        return $invoices;
+    }
+
+    private function attachDashboardPaymentsAndTerms($companyId, &$purchase_invoices, &$sales_invoices) {
+        global $callConfig;
+        $termsSql = "SELECT id, transaction_table, transaction_id, party_id, due_date, amount, tax_amount, due_amount, pending_amount, advance_offer_date, advance_offer_amount FROM payment_term_transactions WHERE company_id = '".$companyId."' AND is_active = 0 AND transaction_table IN('sales_invoices','purchase_invoices')";
+        $termsRes = $callConfig->getAllRows($termsSql);
+        foreach($termsRes as $term){
+            if($term->transaction_table == "purchase_invoices" && isset($purchase_invoices[$term->transaction_id])){
+                $purchase_invoices[$term->transaction_id]->payment_term_transactions[$term->id] = $term;
+            } elseif($term->transaction_table == "sales_invoices" && isset($sales_invoices[$term->transaction_id])){
+                $sales_invoices[$term->transaction_id]->payment_term_transactions[$term->id] = $term;
+            }
+        }
+
+        $paymentsSql = "SELECT paya.id, pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut FROM payments pay, payment_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.payment_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
+        $paymentsRes = $callConfig->getAllRows($paymentsSql);
+        foreach($paymentsRes as $pay){
+            if($pay->transaction_table == "purchase_invoices" && isset($purchase_invoices[$pay->transaction_id])){
+                $purchase_invoices[$pay->transaction_id]->payments[$pay->id] = $pay;
+            } elseif($pay->transaction_table == "sales_invoices" && isset($sales_invoices[$pay->transaction_id])){
+                $sales_invoices[$pay->transaction_id]->payments[$pay->id] = $pay;
+            }
+        }
+    }
+
     public function getProcurementModulesDashboardSummaryTest($get){
-        global $callConfig;
-        $return = array();
-        $user_id= $get[self::KEY_USER_ID];
-        $useridcheck = "Y";
-        if($useridcheck == 'Y'){
-            $notificationswhere = " AND notiusr.user_id = '".$user_id."'";
-            $transaction_approval_logswhere = " AND user_id = '".$user_id."'";
-            $transaction_activity_schedulewhere = " AND tas.transaction_id = '".$user_id."'";
-        }
-
-
-        $payment_termssql = "SELECT id, payment_term_name, content FROM payment_terms WHERE company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $payment_termsres = $callConfig->getAllRows($payment_termssql);
-        $payment_terms = array();
-        foreach($payment_termsres as $payterm){
-            $payment_terms[$payterm->id] = $payterm->payment_term_name;
-        }
-
-
-
-
-        $paymentssql = "SELECT pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut  FROM receipts pay, receipt_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.receipt_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
-        $paymentsres = $callConfig->getAllRows($paymentssql);
-        $return['customer_payments'] = $paymentsres;
-
-        $sql1 = "SELECT id, display_name FROM application_users WHERE company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_IS_ACTIVE_0_16;
-        $data1 = $callConfig->getAllRows($sql1);
-        $return['application_users'] = $data1;
-
-        $sql = "SELECT notiusr.notification_id, notiusr.notification_type, notiusr.read_status, noti.notification_message, noti.notification_datetime, noti.application_table_name, noti.transaction_number, noti.notification_details FROM notification_user notiusr, notifications noti WHERE noti.company_id = notiusr.company_id ".$notificationswhere." AND noti.id = notiusr.notification_id AND noti.company_id = '".$get[self::KEY_COMPANY_ID]."' AND notiusr.notification_type = 'ACTION' AND notiusr.read_status =0 ORDER BY noti.notification_datetime DESC";
-        $data = $callConfig->getAllRows($sql);
-        $return['notifications'] = $data;
-
-        $transaction_approval_logssql = "SELECT transaction_table,transaction_id, response_type,user_id,request_date,response_date FROM transaction_approval_logs WHERE send_back_flag = 0 AND call_back = 1 AND response_type ='0' ".$transaction_approval_logswhere;
-        $transaction_approval_logsres=$callConfig->getAllRows($transaction_approval_logssql);
-        $return['transaction_approval_logs'] = $transaction_approval_logsres;
-
-        $taskactivitysql = "SELECT tas.id, tas.action_date, tas.task_name FROM transaction_activity_schedule tas WHERE tas.company_id = '".$get[self::KEY_COMPANY_ID]."'  ".$transaction_activity_schedulewhere." AND tas.is_active = 0";
-        $taskactivityres = $callConfig->getAllRows($taskactivitysql);
-        $return['transaction_activity_schedule'] = $taskactivityres;
-        //credit_limit
-
-        $sql = self::SQL_SELECT_SELECT_PO_PARTY_ID_SUM_CASE_WH.ST_APPROVED.self::CONST_THEN_PO_AMOUNT_PO_PENDING_AMOU.ST_ACTIVE.", ".ST_DRAFT.self::CONST_THEN_PO_AMOUNT_ELSE_0_END_AS_O.ST_APPROVED.", ".ST_ACTIVE.", ".ST_DRAFT.") THEN (po.amount)  ELSE 0 END) AS inprogress_amount FROM purchase_invoices po WHERE po.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PO_CANCEL_INVOICE_IS_NULL_;
-        $sqlres = $callConfig->getAllRows($sql);
-        $party_purchase_invoices = array();
-        foreach($sqlres as $pires){
-            $party_purchase_invoices[$pires->party_id] = $pires;
-        }
-
-        $sql = self::SQL_SELECT_SELECT_PO_PARTY_ID_SUM_CASE_WH.ST_APPROVED.self::CONST_THEN_PO_AMOUNT_PO_PENDING_AMOU.ST_ACTIVE.", ".ST_DRAFT.self::CONST_THEN_PO_AMOUNT_ELSE_0_END_AS_O.ST_APPROVED.", ".ST_ACTIVE.", ".ST_DRAFT.") THEN (po.amount)  ELSE 0 END) AS inprogress_amount FROM sales_invoices po WHERE po.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PO_CANCEL_INVOICE_IS_NULL_;
-        $sqlres = $callConfig->getAllRows($sql);
-        $party_sales_invoices = array();
-        foreach($sqlres as $sires){
-            $party_sales_invoices[$pires->party_id] = $sires;
-        }
-
-        $vendorssql = "SELECT `id`, `company`, `display_name`, `billing_address`, `billing_city`, `billing_state`, `billing_post_code`, `billing_country`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_post_code`, `shipping_country`, `bank_account_name`, `bank_name`, `account_type`, `bank_account_no`, `payment_terms` ,`credit_limit` FROM `vendors` WHERE company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $vendorsres = $callConfig->getAllRows($vendorssql);
-        $vendors = array();
-        foreach($vendorsres as $vinres){
-            $vinres->party_purchase_invoices = isset($party_purchase_invoices[$vinres->id])?$party_purchase_invoices[$vinres->id]:array();
-            $vendors[] = $vinres;
-        }
-        $return['vendors'] = $vendorsres;
-
-        $customerssql = "SELECT `id`, `company`, `display_name`, `billing_address`, `billing_city`, `billing_state`, `billing_post_code`, `billing_country`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_post_code`, `shipping_country`, `payment_terms` ,`credit_limit` FROM `customers` WHERE company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $customersres = $callConfig->getAllRows($customerssql);
-        $customers = array();
-        foreach($customersres as $custres){
-            $custres->party_sales_invoices = isset($party_sales_invoices[$custres->id])?$party_sales_invoices[$custres->id]:array();
-            $customers[] = $custres;
-        }
-        $return['customers'] = $customers;
-
-
-        //purchase_invoices list
-        $sql1 = "SELECT pi.id, pi.transaction_number, pi.transaction_date, pi.party_id, pi.payment_terms, pii.id pi_id, pii.item_id, pii.item_name FROM purchase_invoices pi, pi_items pii WHERE pi.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PI_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_PI_ID_PII_TRANSACTION_ID_A;
-        $res1 = $callConfig->getAllRows($sql1);
-        $purchase_invoices = array();
-        foreach($res1 as $resr){
-            $resr->payments = array();
-            if(isset($payment_terms[$resr->payment_terms])){
-                $resr->payment_term_name =$payment_terms[$resr->payment_terms];
-            }else{
-                $resr->payment_term_name =null;
-            }
-            $purchase_invoices[$resr->id] = $resr;
-        }
-        foreach($res1 as $resr){
-            $purchase_invoices[$resr->id]->items[$resr->pi_id] = array('id' => $resr->pi_id, self::KEY_ITEM_ID => $resr->item_id,'item_name' => $resr->item_name);
-        }
-
-        //sales_invoices list
-        $sql1 = "SELECT pi.id, pi.transaction_number, pi.transaction_date, pi.party_id, pi.payment_terms, pii.id pi_id, pii.item_id, pii.item_name FROM sales_invoices pi, si_items pii WHERE pi.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PI_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_PI_ID_PII_TRANSACTION_ID_A;
-        $res1 = $callConfig->getAllRows($sql1);
-        $sales_invoices = array();
-        foreach($res1 as $resr){
-            $resr->payments = array();
-            if(isset($payment_terms[$resr->payment_terms])){
-                $resr->payment_term_name =$payment_terms[$resr->payment_terms];
-            }else{
-                $resr->payment_term_name =null;
-            }
-            $sales_invoices[$resr->id] = $resr;
-        }
-        foreach($res1 as $resr){
-            $sales_invoices[$resr->id]->items[$resr->pi_id] = array('id' => $resr->pi_id, self::KEY_ITEM_ID => $resr->item_id,'item_name' => $resr->item_name);
-        }
-        //sales_invoices list
-
-        $payment_terms_transsql = "SELECT id, transaction_table, transaction_id, party_id, due_date, amount, tax_amount, due_amount, pending_amount FROM payment_term_transactions WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND transaction_table IN('sales_invoices','purchase_invoices')";
-        $payment_terms_transres = $callConfig->getAllRows($payment_terms_transsql);
-        foreach($payment_terms_transres as $paytermtran){
-            if($paytermtran->transaction_table == "purchase_invoices" && isset($purchase_invoices[$paytermtran->transaction_id])){
-                $purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-            }
-            if($paytermtran->transaction_table == "sales_invoices" && isset($sales_invoices[$paytermtran->transaction_id])){
-                $sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-            }
-        }
-        $paymentssql = "SELECT paya.id, pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut  FROM payments pay, payment_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.payment_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
-        $paymentsres1 = $callConfig->getAllRows($paymentssql);
-        foreach($paymentsres1 as $payterm){
-            if($payterm->transaction_table == "purchase_invoices" && isset($purchase_invoices[$payterm->transaction_id])){
-                $purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-            }
-            if($payterm->transaction_table == "sales_invoices" && isset($sales_invoices[$payterm->transaction_id])){
-                $sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-            }
-        }
-
-        $return['purchase_invoices'] = $purchase_invoices;
-
-        $return['sales_invoices'] = $sales_invoices;
-        //purchase_invoices list
-
-
-    return $return;
-
+        return $this->getProcurementModulesDashboardSummary($get);
     }
 
-public function getProcurementModulesDashboardSummary($get){
+    public function getProcurementModulesDashboardSummary($get){
         global $callConfig;
         $return = array();
-        $user_id= $get[self::KEY_USER_ID];
-        $useridcheck = "Y";
-        if($useridcheck == 'Y'){
-            $notificationswhere = " AND notiusr.user_id = '".$user_id."'";
-            $transaction_approval_logswhere = " AND user_id = '".$user_id."'";
-            $transaction_activity_schedulewhere = " AND tas.transaction_id = '".$user_id."'";
-        }
+        $user_id = $get[self::KEY_USER_ID];
+        $company_id = $get[self::KEY_COMPANY_ID];
 
+        $notificationswhere = " AND notiusr.user_id = '".$user_id."'";
+        $transaction_approval_logswhere = " AND user_id = '".$user_id."'";
+        $transaction_activity_schedulewhere = " AND tas.transaction_id = '".$user_id."'";
 
-        $payment_termssql = "SELECT id, payment_term_name, content FROM payment_terms WHERE company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $payment_termsres = $callConfig->getAllRows($payment_termssql);
-        $payment_terms = array();
-        foreach($payment_termsres as $payterm){
-            $payment_terms[$payterm->id] = $payterm->payment_term_name;
-        }
+        $payment_terms = $this->fetchPaymentTermsMap($company_id);
 
+        $paymentssql = "SELECT pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut FROM receipts pay, receipt_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.receipt_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
+        $return['customer_payments'] = $callConfig->getAllRows($paymentssql);
 
+        $sql1 = "SELECT id, display_name FROM application_users WHERE company_id = '".$company_id.self::SQL_COND_AND_IS_ACTIVE_0_16;
+        $return['application_users'] = $callConfig->getAllRows($sql1);
 
-        $paymentssql = "SELECT pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut  FROM receipts pay, receipt_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.receipt_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
-        $paymentsres = $callConfig->getAllRows($paymentssql);
-        $return['customer_payments'] = $paymentsres;
-
-        $sql1 = "SELECT id, display_name FROM application_users WHERE company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_IS_ACTIVE_0_16;
-        $data1 = $callConfig->getAllRows($sql1);
-        $return['application_users'] = $data1;
-
-        $sql = "SELECT notiusr.notification_id, notiusr.notification_type, notiusr.read_status, noti.notification_message, noti.notification_datetime, noti.application_table_name, noti.transaction_number, noti.notification_details FROM notification_user notiusr, notifications noti WHERE noti.company_id = notiusr.company_id ".$notificationswhere." AND noti.id = notiusr.notification_id AND noti.company_id = '".$get[self::KEY_COMPANY_ID]."' AND notiusr.notification_type = 'ACTION' AND notiusr.read_status =0 ORDER BY noti.notification_datetime DESC";
-        $data = $callConfig->getAllRows($sql);
-        $return['notifications'] = $data;
+        $sql = "SELECT notiusr.notification_id, notiusr.notification_type, notiusr.read_status, noti.notification_message, noti.notification_datetime, noti.application_table_name, noti.transaction_number, noti.notification_details FROM notification_user notiusr, notifications noti WHERE noti.company_id = notiusr.company_id ".$notificationswhere." AND noti.id = notiusr.notification_id AND noti.company_id = '".$company_id."' AND notiusr.notification_type = 'ACTION' AND notiusr.read_status =0 ORDER BY noti.notification_datetime DESC";
+        $return['notifications'] = $callConfig->getAllRows($sql);
 
         $transaction_approval_logssql = "SELECT transaction_table,transaction_id, response_type,user_id,request_date,response_date FROM transaction_approval_logs WHERE send_back_flag = 0 AND call_back = 1 AND response_type ='0' ".$transaction_approval_logswhere;
-        $transaction_approval_logsres=$callConfig->getAllRows($transaction_approval_logssql);
-        $return['transaction_approval_logs'] = $transaction_approval_logsres;
+        $return['transaction_approval_logs'] = $callConfig->getAllRows($transaction_approval_logssql);
 
-        $taskactivitysql = "SELECT tas.id, tas.action_date, tas.task_name FROM transaction_activity_schedule tas WHERE tas.company_id = '".$get[self::KEY_COMPANY_ID]."'  ".$transaction_activity_schedulewhere." AND tas.is_active = 0";
-        $taskactivityres = $callConfig->getAllRows($taskactivitysql);
-        $return['transaction_activity_schedule'] = $taskactivityres;
-        //credit_limit
+        $taskactivitysql = "SELECT tas.id, tas.action_date, tas.task_name FROM transaction_activity_schedule tas WHERE tas.company_id = '".$company_id."' ".$transaction_activity_schedulewhere." AND tas.is_active = 0";
+        $return['transaction_activity_schedule'] = $callConfig->getAllRows($taskactivitysql);
 
-        $sql = self::SQL_SELECT_SELECT_PO_PARTY_ID_SUM_CASE_WH.ST_APPROVED.self::CONST_THEN_PO_AMOUNT_PO_PENDING_AMOU.ST_ACTIVE.", ".ST_DRAFT.self::CONST_THEN_PO_AMOUNT_ELSE_0_END_AS_O.ST_APPROVED.", ".ST_ACTIVE.", ".ST_DRAFT.") THEN (po.amount)  ELSE 0 END) AS inprogress_amount FROM purchase_invoices po WHERE po.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PO_CANCEL_INVOICE_IS_NULL_;
-        $sqlres = $callConfig->getAllRows($sql);
-        $party_purchase_invoices = array();
-        foreach($sqlres as $pires){
-            $party_purchase_invoices[$pires->party_id] = $pires;
-        }
+        $party_purchase_invoices = $this->fetchPartyInvoiceSummaries($company_id, 'purchase_invoices');
+        $party_sales_invoices = $this->fetchPartyInvoiceSummaries($company_id, 'sales_invoices');
 
-        $sql = self::SQL_SELECT_SELECT_PO_PARTY_ID_SUM_CASE_WH.ST_APPROVED.self::CONST_THEN_PO_AMOUNT_PO_PENDING_AMOU.ST_ACTIVE.", ".ST_DRAFT.self::CONST_THEN_PO_AMOUNT_ELSE_0_END_AS_O.ST_APPROVED.", ".ST_ACTIVE.", ".ST_DRAFT.") THEN (po.amount)  ELSE 0 END) AS inprogress_amount FROM sales_invoices po WHERE po.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PO_CANCEL_INVOICE_IS_NULL_;
-        $sqlres = $callConfig->getAllRows($sql);
-        $party_sales_invoices = array();
-        foreach($sqlres as $sires){
-            $party_sales_invoices[$pires->party_id] = $sires;
-        }
+        $return['vendors'] = $this->fetchDashboardVendors($company_id, $party_purchase_invoices);
+        $return['customers'] = $this->fetchDashboardCustomers($company_id, $party_sales_invoices);
 
-        $vendorssql = "SELECT `id`, `company`, `display_name`, `billing_address`, `billing_city`, `billing_state`, `billing_post_code`, `billing_country`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_post_code`, `shipping_country`, `bank_account_name`, `bank_name`, `account_type`, `bank_account_no`, `payment_terms` ,`credit_limit` FROM `vendors` WHERE company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $vendorsres = $callConfig->getAllRows($vendorssql);
-        $vendors = array();
-        foreach($vendorsres as $vinres){
-            $vinres->party_purchase_invoices = isset($party_purchase_invoices[$vinres->id])?$party_purchase_invoices[$vinres->id]:array();
-            $vendors[] = $vinres;
-        }
-        $return['vendors'] = $vendorsres;
+        $purchase_invoices = $this->fetchInvoicesWithItems($company_id, 'purchase_invoices', 'pi_items', $payment_terms);
+        $sales_invoices = $this->fetchInvoicesWithItems($company_id, 'sales_invoices', 'si_items', $payment_terms);
 
-        $customerssql = "SELECT `id`, `company`, `display_name`, `billing_address`, `billing_city`, `billing_state`, `billing_post_code`, `billing_country`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_post_code`, `shipping_country`, `payment_terms` ,`credit_limit` FROM `customers` WHERE company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $customersres = $callConfig->getAllRows($customerssql);
-        $customers = array();
-        foreach($customersres as $custres){
-            $custres->party_sales_invoices = isset($party_sales_invoices[$custres->id])?$party_sales_invoices[$custres->id]:array();
-            $customers[] = $custres;
-        }
-        $return['customers'] = $customers;
-
-
-
-        //purchase_invoices list
-        $sql1 = "SELECT pi.id, pi.transaction_number, pi.transaction_date, pi.party_id, pi.payment_terms, pii.id pi_id, pii.item_id, pii.item_name FROM purchase_invoices pi, pi_items pii WHERE pi.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PI_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_PI_ID_PII_TRANSACTION_ID_A;
-        $res1 = $callConfig->getAllRows($sql1);
-        $purchase_invoices = array();
-        foreach($res1 as $resr){
-            $resr->payments = array();
-            if(isset($payment_terms[$resr->payment_terms])){
-                $resr->payment_term_name =$payment_terms[$resr->payment_terms];
-            }else{
-                $resr->payment_term_name =null;
-            }
-            $purchase_invoices[$resr->id] = $resr;
-        }
-        foreach($res1 as $resr){
-            $purchase_invoices[$resr->id]->items[$resr->pi_id] = array('id' => $resr->pi_id, self::KEY_ITEM_ID => $resr->item_id,'item_name' => $resr->item_name);
-        }
-
-        //sales_invoices list
-        $sql1 = "SELECT pi.id, pi.transaction_number, pi.transaction_date, pi.party_id, pi.payment_terms, pii.id pi_id, pii.item_id, pii.item_name FROM sales_invoices pi, si_items pii WHERE pi.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_PI_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_PI_ID_PII_TRANSACTION_ID_A;
-        $res1 = $callConfig->getAllRows($sql1);
-        $sales_invoices = array();
-        foreach($res1 as $resr){
-            $resr->payments = array();
-            if(isset($payment_terms[$resr->payment_terms])){
-                $resr->payment_term_name =$payment_terms[$resr->payment_terms];
-            }else{
-                $resr->payment_term_name =null;
-            }
-            $sales_invoices[$resr->id] = $resr;
-        }
-        foreach($res1 as $resr){
-            $sales_invoices[$resr->id]->items[$resr->pi_id] = array('id' => $resr->pi_id, self::KEY_ITEM_ID => $resr->item_id,'item_name' => $resr->item_name);
-        }
-        //sales_invoices list
-
-        $payment_terms_transsql = "SELECT id, transaction_table, transaction_id, party_id, due_date, amount, tax_amount, due_amount, pending_amount, advance_offer_date, advance_offer_amount FROM payment_term_transactions WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND transaction_table IN('sales_invoices','purchase_invoices')";
-        $payment_terms_transres = $callConfig->getAllRows($payment_terms_transsql);
-        foreach($payment_terms_transres as $paytermtran){
-            if($paytermtran->transaction_table == "purchase_invoices" && isset($purchase_invoices[$paytermtran->transaction_id])){
-                $purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-            }
-            if($paytermtran->transaction_table == "sales_invoices" && isset($sales_invoices[$paytermtran->transaction_id])){
-                $sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-            }
-        }
-        $paymentssql = "SELECT paya.id, pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut  FROM payments pay, payment_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.payment_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
-        $paymentsres1 = $callConfig->getAllRows($paymentssql);
-        foreach($paymentsres1 as $payterm){
-            if($payterm->transaction_table == "purchase_invoices" && isset($purchase_invoices[$payterm->transaction_id])){
-                $purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-            }
-            if($payterm->transaction_table == "sales_invoices" && isset($sales_invoices[$payterm->transaction_id])){
-                $sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-            }
-        }
+        $this->attachDashboardPaymentsAndTerms($company_id, $purchase_invoices, $sales_invoices);
 
         $return['purchase_invoices'] = $purchase_invoices;
-
         $return['sales_invoices'] = $sales_invoices;
-        //purchase_invoices list
-
         return $return;
-
     }
-
-
 //profit and loss report
 public function calculateBalances($parentCode, $map, &$total, $type){
     if(empty($map[$parentCode])) {
@@ -4234,205 +4144,105 @@ public function getProcurementModulesDashboardSummaryProfitLoass($get){
     }
 
 //start Balance Sheet
-public function getProcurementModulesDashboardSummaryBalanceSheets($get){
-
-    // STEP 1: Get data (your existing function)
-    $get['balance_date'] = date(self::DATE_FORMAT_YMD,strtotime($get[self::KEY_START_DATE]));
-    $get['prev_balance_date']   = date(self::DATE_FORMAT_YMD,strtotime($get[self::KEY_END_DATE]));
-
-    /* account_user.class.php loaded via require_once at top */
-    $accountUserClassonobj = new accountUserClass();
-    $result1 = $accountUserClassonobj->getBalanceSheetReport($get);
-    $result = json_decode(json_encode($result1), true);
-
-    $totalcoa = array();
-    $this->accumulateHierarchyBalances($result['balances'], $totalcoa, self::KEY_START_BALANCE);
-    $sharecapital = ($totalcoa['30000210'][self::KEY_START_BALANCE]);
-    $reservesandsurplus = ($totalcoa['30000250'][self::KEY_START_BALANCE]);
-    $moneyreceivedagainstsharewarrants = ($totalcoa['30000400'][self::KEY_START_BALANCE]);
-
-    $longtermborrowings = ($totalcoa['20001100'][self::KEY_START_BALANCE]);
-    $deferredtaxliabilitiess = ($totalcoa['2002200'][self::KEY_START_BALANCE]);
-    $otherlongtermliabilities = ($totalcoa['2002300'][self::KEY_START_BALANCE]);
-    $longtermprovisions    = ($totalcoa['2002400'][self::KEY_START_BALANCE]);
-
-    $shorttermborrowings = ($totalcoa['2003100'][self::KEY_START_BALANCE]);
-    $tradepayables = ($totalcoa['20003500'][self::KEY_START_BALANCE]);
-    $othercurrentliabilities = ($totalcoa['2004000'][self::KEY_START_BALANCE]);
-    $shorttermprovisions = ($totalcoa['2004300'][self::KEY_START_BALANCE]);
-
-    $propertyplantequipment= ($totalcoa['10001100'][self::KEY_START_BALANCE]);
-    $intangibleassets= ($totalcoa['10001400'][self::KEY_START_BALANCE]+$totalcoa['10001500'][self::KEY_START_BALANCE]+$totalcoa['10001700'][self::KEY_START_BALANCE]);
-    $capitalworkinprogress= ($totalcoa['10001600'][self::KEY_START_BALANCE]!=""?$totalcoa['10001600'][self::KEY_START_BALANCE]:0);
-    $intangibleassetsunderdevelopment= ($totalcoa['10001700'][self::KEY_START_BALANCE] !=""?$totalcoa['10001700'][self::KEY_START_BALANCE]:0);
-
-    $noncurrentinvestments= ($totalcoa['10001800'][self::KEY_START_BALANCE]!=""?$totalcoa['10001800'][self::KEY_START_BALANCE]:0);
-    $deferredtaxassets= ($totalcoa['10002400'][self::KEY_START_BALANCE]!=""?$totalcoa['10002400'][self::KEY_START_BALANCE]:0);
-    $longtermloansandadvances= ($totalcoa['10002300'][self::KEY_START_BALANCE]!=""?$totalcoa['10002300'][self::KEY_START_BALANCE]:0);
-    $othernoncurrentassets= ($totalcoa['10002100'][self::KEY_START_BALANCE]!=""?$totalcoa['10002100'][self::KEY_START_BALANCE]:0);
-    $currentinvestments= ($totalcoa['10003100'][self::KEY_START_BALANCE]!=""?$totalcoa['10003100'][self::KEY_START_BALANCE]:0);
-    $inventories= ($totalcoa['10003400'][self::KEY_START_BALANCE]!=""?$totalcoa['10003400'][self::KEY_START_BALANCE]:0);
-    $tradereceivables= ($totalcoa['10003900'][self::KEY_START_BALANCE]!=""?$totalcoa['10003900'][self::KEY_START_BALANCE]:0);
-    $cashandbankbalances= ($totalcoa['10005000'][self::KEY_START_BALANCE]!=""?$totalcoa['10005000'][self::KEY_START_BALANCE]:0);
-    $shorttermloansandadvances= ($totalcoa['10006000'][self::KEY_START_BALANCE]!=""?$totalcoa['10006000'][self::KEY_START_BALANCE]:0);
-    $othercurrentassets= ($totalcoa['10008000'][self::KEY_START_BALANCE]!=""?$totalcoa['10008000'][self::KEY_START_BALANCE]:0);
-
-    $totalcoa = array();
-    $this->accumulateHierarchyBalances($result['prev_balances'], $totalcoa, self::KEY_PRE_START_BALANCE);
-    //Start preview Balances
-    $pre_sharecapital = ($totalcoa['30000210'][self::KEY_PRE_START_BALANCE]);
-    $pre_reservesandsurplus = ($totalcoa['30000250'][self::KEY_PRE_START_BALANCE]);
-    $pre_moneyreceivedagainstsharewarrants = ($totalcoa['30000400'][self::KEY_PRE_START_BALANCE]);
-
-    $pre_longtermborrowings = ($totalcoa['20001100'][self::KEY_PRE_START_BALANCE]);
-    $pre_deferredtaxliabilitiess = ($totalcoa['2002200'][self::KEY_PRE_START_BALANCE]);
-    $pre_otherlongtermliabilities = ($totalcoa['2002300'][self::KEY_PRE_START_BALANCE]);
-    $pre_longtermprovisions    = ($totalcoa['2002400'][self::KEY_PRE_START_BALANCE]);
-
-    $pre_shorttermborrowings = ($totalcoa['2003100'][self::KEY_PRE_START_BALANCE]);
-    $pre_tradepayables = ($totalcoa['20003500'][self::KEY_PRE_START_BALANCE]);
-    $pre_othercurrentliabilities = ($totalcoa['2004000'][self::KEY_PRE_START_BALANCE]);
-    $pre_shorttermprovisions = ($totalcoa['2004300'][self::KEY_PRE_START_BALANCE]);
-
-    $pre_propertyplantequipment= ($totalcoa['10001100'][self::KEY_PRE_START_BALANCE]);
-    $pre_intangibleassets= ($totalcoa['10001400'][self::KEY_PRE_START_BALANCE]+$totalcoa['10001500'][self::KEY_PRE_START_BALANCE]+$totalcoa['10001700'][self::KEY_PRE_START_BALANCE]);
-    $pre_capitalworkinprogress= ($totalcoa['10001600'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10001600'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_intangibleassetsunderdevelopment= ($totalcoa['10001700'][self::KEY_PRE_START_BALANCE] !=""?$totalcoa['10001700'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_deferredtaxassets= ($totalcoa['10002400'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10002400'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_longtermloansandadvances= ($totalcoa['10002300'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10002300'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_othernoncurrentassets= ($totalcoa['10002100'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10002100'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_currentinvestments= ($totalcoa['10003100'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10003100'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_inventories= ($totalcoa['10003400'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10003400'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_tradereceivables= ($totalcoa['10003900'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10003900'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_cashandbankbalances= ($totalcoa['10005000'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10005000'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_shorttermloansandadvances= ($totalcoa['10006000'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10006000'][self::KEY_PRE_START_BALANCE]:0);
-    $pre_othercurrentassets= ($totalcoa['10008000'][self::KEY_PRE_START_BALANCE]!=""?$totalcoa['10008000'][self::KEY_PRE_START_BALANCE]:0);
-    //End preview Balances
-
-    return [
-        "equity_liabilities" => [
+    private function buildBalanceSheetEquityLiabilities($curr, $prev) {
+        return [
             "shareholders_funds" => [
-                "share_capital" => [
-                    self::KEY_CURRENT => $sharecapital,
-                    self::KEY_PREVIOUS => $pre_sharecapital,
-                ],
-                "reserves_surplus" => [
-                    self::KEY_CURRENT => $reservesandsurplus,
-                    self::KEY_PREVIOUS => $pre_reservesandsurplus
-                ],
-                "Money_received_against_share_warrants" => [
-                    self::KEY_CURRENT => $moneyreceivedagainstsharewarrants,
-                    self::KEY_PREVIOUS => $pre_moneyreceivedagainstsharewarrants
-                ]
+                "share_capital" => [self::KEY_CURRENT => $curr['sharecapital'], self::KEY_PREVIOUS => $prev['sharecapital']],
+                "reserves_surplus" => [self::KEY_CURRENT => $curr['reservesandsurplus'], self::KEY_PREVIOUS => $prev['reservesandsurplus']],
+                "money_against_warrants" => [self::KEY_CURRENT => $curr['moneywarrants'], self::KEY_PREVIOUS => $prev['moneywarrants']]
             ],
             "non_current_liabilities" => [
-                "long_term_borrowings" => [
-                    self::KEY_CURRENT => $longtermborrowings,
-                    self::KEY_PREVIOUS => $pre_longtermborrowings
-                ],
-                "deferred_tax_liabilities" => [
-                    self::KEY_CURRENT => $deferredtaxliabilitiess,
-                    self::KEY_PREVIOUS => $pre_deferredtaxliabilitiess
-                ],
-                "other_long_term_liabilities" => [
-                    self::KEY_CURRENT => $otherlongtermliabilities,
-                    self::KEY_PREVIOUS => $pre_otherlongtermliabilities
-                ],
-                "long_term_provisions" => [
-                    self::KEY_CURRENT => $longtermprovisions,
-                    self::KEY_PREVIOUS => $pre_longtermprovisions
-                ]
+                "long_term_borrowings" => [self::KEY_CURRENT => $curr['longtermborrowings'], self::KEY_PREVIOUS => $prev['longtermborrowings']],
+                "deferred_tax_liabilities" => [self::KEY_CURRENT => $curr['deferredtaxliab'], self::KEY_PREVIOUS => $prev['deferredtaxliab']],
+                "other_long_term_liabilities" => [self::KEY_CURRENT => $curr['otherlongtermliab'], self::KEY_PREVIOUS => $prev['otherlongtermliab']],
+                "long_term_provisions" => [self::KEY_CURRENT => $curr['longtermprovisions'], self::KEY_PREVIOUS => $prev['longtermprovisions']]
             ],
-
             "current_liabilities" => [
-                "short_term_borrowings" => [
-                    self::KEY_CURRENT => $shorttermborrowings,
-                    self::KEY_PREVIOUS => $pre_shorttermborrowings
-                ],
-                "trade_payables" => [
-                    self::KEY_CURRENT => $tradepayables,
-                    self::KEY_PREVIOUS => $pre_tradepayables
-                ],
-                "other_current_liabilities" => [
-                    self::KEY_CURRENT => $othercurrentliabilities,
-                    self::KEY_PREVIOUS => $pre_othercurrentliabilities
-                ],
-                "short_term_provisions" => [
-                    self::KEY_CURRENT => $shorttermprovisions,
-                    self::KEY_PREVIOUS => $pre_shorttermprovisions
-                ]
+                "short_term_borrowings" => [self::KEY_CURRENT => $curr['shorttermborrowings'], self::KEY_PREVIOUS => $prev['shorttermborrowings']],
+                "trade_payables" => [self::KEY_CURRENT => $curr['tradepayables'], self::KEY_PREVIOUS => $prev['tradepayables']],
+                "other_current_liabilities" => [self::KEY_CURRENT => $curr['othercurrentliab'], self::KEY_PREVIOUS => $prev['othercurrentliab']],
+                "short_term_provisions" => [self::KEY_CURRENT => $curr['shorttermprovisions'], self::KEY_PREVIOUS => $prev['shorttermprovisions']]
             ]
-        ],
+        ];
+    }
 
-        self::TBL_ASSETS => [
-
+    private function buildBalanceSheetAssets($curr, $prev) {
+        return [
             "non_current_assets" => [
-                "property_plant_equipment" => [
-                    self::KEY_CURRENT => $propertyplantequipment,
-                    self::KEY_PREVIOUS => $pre_propertyplantequipment
-                ],
-                "intangible_assets" => [
-                    self::KEY_CURRENT => $intangibleassets,
-                    self::KEY_PREVIOUS => $pre_intangibleassets
-
-                ],
-                "capital_work_in_progress" => [
-                    self::KEY_CURRENT => $capitalworkinprogress,
-                    self::KEY_PREVIOUS => $pre_capitalworkinprogress
-                ],
-                "intangible_under_dev" => [
-                    self::KEY_CURRENT => $intangibleassetsunderdevelopment,
-                    self::KEY_PREVIOUS => $pre_intangibleassetsunderdevelopment
-                ],
-                "non_current_investments" => [
-                    self::KEY_CURRENT => $noncurrentinvestments,
-                    self::KEY_PREVIOUS => $noncurrentinvestments
-                ],
-                "deferred_tax_assets" => [
-                    self::KEY_CURRENT => $deferredtaxassets,
-                    self::KEY_PREVIOUS => $pre_deferredtaxassets
-                ],
-                "long_term_loans" => [
-                    self::KEY_CURRENT => $longtermloansandadvances,
-                    self::KEY_PREVIOUS => $pre_longtermloansandadvances
-                ],
-                "other_non_current_assets" => [
-                    self::KEY_CURRENT => $othernoncurrentassets,
-                    self::KEY_PREVIOUS => $pre_othernoncurrentassets
-                ]
+                "property_plant_equipment" => [self::KEY_CURRENT => $curr['propertyplantequip'], self::KEY_PREVIOUS => $prev['propertyplantequip']],
+                "intangible_assets" => [self::KEY_CURRENT => $curr['intangibleassets'], self::KEY_PREVIOUS => $prev['intangibleassets']],
+                "capital_work_in_progress" => [self::KEY_CURRENT => $curr['capitalworkinprogress'], self::KEY_PREVIOUS => $prev['capitalworkinprogress']],
+                "intangible_assets_under_dev" => [self::KEY_CURRENT => $curr['intangibledev'], self::KEY_PREVIOUS => $prev['intangibledev']],
+                "non_current_investments" => [self::KEY_CURRENT => $curr['noncurrinvest'], self::KEY_PREVIOUS => $prev['noncurrinvest']],
+                "deferred_tax_assets" => [self::KEY_CURRENT => $curr['deferredtaxassets'], self::KEY_PREVIOUS => $prev['deferredtaxassets']],
+                "long_term_loans_advances" => [self::KEY_CURRENT => $curr['longtermloans'], self::KEY_PREVIOUS => $prev['longtermloans']],
+                "other_non_current_assets" => [self::KEY_CURRENT => $curr['othernoncurrassets'], self::KEY_PREVIOUS => $prev['othernoncurrassets']]
             ],
-
             "current_assets" => [
-                "current_investments" => [
-                    self::KEY_CURRENT => $currentinvestments,
-                    self::KEY_PREVIOUS => $pre_currentinvestments
-                ],
-                "inventories" => [
-                    self::KEY_CURRENT => $inventories,
-                    self::KEY_PREVIOUS => $pre_inventories
-                ],
-                "trade_receivables" => [
-                   self::KEY_CURRENT => $tradereceivables,
-                    self::KEY_PREVIOUS => $pre_tradereceivables
-                ],
-                "cash_bank_balance" => [
-                    self::KEY_CURRENT => $cashandbankbalances,
-                    self::KEY_PREVIOUS => $pre_cashandbankbalances
-                ],
-                "short_term_loans" => [
-                    self::KEY_CURRENT => $shorttermloansandadvances,
-                    self::KEY_PREVIOUS => $pre_shorttermloansandadvances
-                ],
-                "other_current_assets" => [
-                    self::KEY_CURRENT => $othercurrentassets,
-                    self::KEY_PREVIOUS => $pre_othercurrentassets
-                ]
+                "current_investments" => [self::KEY_CURRENT => $curr['currinvest'], self::KEY_PREVIOUS => $prev['currinvest']],
+                "inventories" => [self::KEY_CURRENT => $curr['inventories'], self::KEY_PREVIOUS => $prev['inventories']],
+                "trade_receivables" => [self::KEY_CURRENT => $curr['tradereceivables'], self::KEY_PREVIOUS => $prev['tradereceivables']],
+                "cash_and_bank_balances" => [self::KEY_CURRENT => $curr['cashbank'], self::KEY_PREVIOUS => $prev['cashbank']],
+                "short_term_loans_advances" => [self::KEY_CURRENT => $curr['shorttermloans'], self::KEY_PREVIOUS => $prev['shorttermloans']],
+                "other_current_assets" => [self::KEY_CURRENT => $curr['othercurrassets'], self::KEY_PREVIOUS => $prev['othercurrassets']]
             ]
-        ]
-    ];
-}
+        ];
+    }
 
+    private function extractBalanceSheetCategoryValues($totalcoa, $key) {
+        $val = function($code) use ($totalcoa, $key) {
+            return !empty($totalcoa[$code][$key]) ? $totalcoa[$code][$key] : 0;
+        };
+        return [
+            'sharecapital' => $val('30000210'),
+            'reservesandsurplus' => $val('30000250'),
+            'moneywarrants' => $val('30000400'),
+            'longtermborrowings' => $val('20001100'),
+            'deferredtaxliab' => $val('2002200'),
+            'otherlongtermliab' => $val('2002300'),
+            'longtermprovisions' => $val('2002400'),
+            'shorttermborrowings' => $val('2003100'),
+            'tradepayables' => $val('20003500'),
+            'othercurrentliab' => $val('2004000'),
+            'shorttermprovisions' => $val('2004300'),
+            'propertyplantequip' => $val('10001100'),
+            'intangibleassets' => $val('10001400') + $val('10001500') + $val('10001700'),
+            'capitalworkinprogress' => $val('10001600'),
+            'intangibledev' => $val('10001700'),
+            'noncurrinvest' => $val('10001800'),
+            'deferredtaxassets' => $val('10002400'),
+            'longtermloans' => $val('10002300'),
+            'othernoncurrassets' => $val('10002100'),
+            'currinvest' => $val('10003100'),
+            'inventories' => $val('10003400'),
+            'tradereceivables' => $val('10003900'),
+            'cashbank' => $val('10005000'),
+            'shorttermloans' => $val('10006000'),
+            'othercurrassets' => $val('10008000')
+        ];
+    }
 
+    public function getProcurementModulesDashboardSummaryBalanceSheets($get){
+        $get['balance_date'] = date(self::DATE_FORMAT_YMD,strtotime($get[self::KEY_START_DATE]));
+        $get['prev_balance_date'] = date(self::DATE_FORMAT_YMD,strtotime($get[self::KEY_END_DATE]));
+
+        $accountUserClassonobj = new accountUserClass();
+        $result1 = $accountUserClassonobj->getBalanceSheetReport($get);
+        $result = json_decode(json_encode($result1), true);
+
+        $totalcoa = array();
+        $this->accumulateHierarchyBalances($result['balances'], $totalcoa, self::KEY_START_BALANCE);
+        $curr = $this->extractBalanceSheetCategoryValues($totalcoa, self::KEY_START_BALANCE);
+
+        $prevCoa = array();
+        $this->accumulateHierarchyBalances($result['prev_balances'], $prevCoa, self::KEY_PRE_START_BALANCE);
+        $prev = $this->extractBalanceSheetCategoryValues($prevCoa, self::KEY_PRE_START_BALANCE);
+
+        return [
+            "equity_liabilities" => $this->buildBalanceSheetEquityLiabilities($curr, $prev),
+            "assets" => $this->buildBalanceSheetAssets($curr, $prev)
+        ];
+    }
 //End balance Sheets
 
 
@@ -4609,283 +4419,231 @@ public function getProcurementModulesDashboardSummaryCashFlow($get){
 
 
 //Start customer ledegr
-public function getProcurementCustomerLedger($get){
-
-    /* account_user.class.php loaded via require_once at top */
-    $obj = new accountUserClass();
-
-    $get['from_date'] = $get[self::KEY_START_DATE] !=""?$get[self::KEY_START_DATE]:date('Y-m-01');
-    $get['to_date']   = $get[self::KEY_END_DATE] !=""?$get[self::KEY_END_DATE]:date('Y-m-t');
-     $result1 = $obj->getVendorledger($get);
-    $result = json_decode(json_encode($result1), true);
-    $last_account_balances = $result['last_account_balances'];
-    $customers = $result['customers'];
-    $transactionwithdates = $result['transactionwithdates'];
-
-    ksort($transactionwithdates);
-
-    $debitside  = ['sales_invoices','debit_notes'];
-
-    $closingbal = $last_account_balances[self::KEY_CLOSING_BALANCE];
-    $transaction_amt = 0;
-
-    // Calculate transaction amount
-    foreach ($transactionwithdates as $transactions) {
-        foreach ($transactions as $pi) {
-            if (in_array($pi[self::KEY_TRANSACTION_TABLE], $debitside)) {
-                $closingbal -= $pi[self::KEY_P_TOTAL_AMOUNT];
-                $transaction_amt -= $pi[self::KEY_P_TOTAL_AMOUNT];
-            } else {
-                $closingbal += $pi[self::KEY_P_TOTAL_AMOUNT];
-                $transaction_amt += $pi[self::KEY_P_TOTAL_AMOUNT];
+    private function processProcurementLedgerRows($transactionwithdates, $debitside, $openingBalance) {
+        $running_balance = $openingBalance;
+        $rows = [];
+        foreach ($transactionwithdates as $transactions) {
+            foreach ($transactions as $pi) {
+                $amt = $pi[self::KEY_P_TOTAL_AMOUNT] ?? 0;
+                $isDebit = in_array($pi[self::KEY_TRANSACTION_TABLE], $debitside);
+                if ($isDebit) {
+                    $running_balance -= $amt;
+                    $debit = $amt;
+                    $credit = 0;
+                } else {
+                    $running_balance += $amt;
+                    $debit = 0;
+                    $credit = $amt;
+                }
+                $rows[] = [
+                    self::KEY_TYPE => "transaction",
+                    self::KEY_TRANSACTION_NO => ($pi[self::KEY_TRANSACTION_NUMBER] ?? '') . " - " . ($pi[self::KEY_TRANSACTION_TABLE] ?? ''),
+                    self::KEY_DATE => $pi[self::KEY_TRANSACTION_DATE] ?? '',
+                    "name" => $pi['party_name'] ?? '',
+                    "ref_no" => $pi['ref_no'] ?? '',
+                    "ref_date" => $pi['ref_date'] ?? '',
+                    "debit" => $debit,
+                    "credit" => $credit,
+                    "balance" => $running_balance
+                ];
             }
         }
+        return [$rows, $running_balance];
     }
 
-    // Reset closing balance for row-wise calculation
-    $running_balance = $last_account_balances[self::KEY_CLOSING_BALANCE];
-
-    $ledger = [];
-
-    // Header Data
-    $ledger['header'] = [
-        "title" => "Customer Ledger",
-        "from"  => date('M Y', strtotime($get['from_date'] )),
-        "to"    => date('M Y', strtotime($get['to_date'] )),
-        "company" => $customers[$post['vendor_id']]['company'] ?? "",
-        "customer" => $customers[$post['customer_id']]['display_name'] ?? "",
-        "opening_balance" => $last_account_balances[self::KEY_CLOSING_BALANCE],
-        "transaction_amount" => $transaction_amt,
-        self::KEY_CLOSING_BALANCE => $closingbal,
-        self::KEY_DATE => date(self::DATE_FORMAT_YMD),
-        "time" => date('H:i:s')
-    ];
-
-    // Opening Row
-    $ledger['rows'][] = [
-        self::KEY_TYPE => "opening",
-        self::KEY_DATE => $last_account_balances['balance_date'],
-        self::KEY_TRANSACTION_NO => "Opening Balance",
-        "name" => "-",
-        "ref_no" => "-",
-        "ref_date" => "-",
-        "debit" => 0,
-        "credit" => 0,
-        "balance" => $running_balance
-    ];
-
-    // Transactions
-    foreach ($transactionwithdates as $transactions) {
-        foreach ($transactions as $pi) {
-
-            $debit = 0;
-            $credit = 0;
-
-            if (in_array($pi[self::KEY_TRANSACTION_TABLE], $debitside)) {
-                $running_balance -= $pi[self::KEY_P_TOTAL_AMOUNT];
-                $debit = $pi[self::KEY_P_TOTAL_AMOUNT];
-            } else {
-                $running_balance += $pi[self::KEY_P_TOTAL_AMOUNT];
-                $credit = $pi[self::KEY_P_TOTAL_AMOUNT];
-            }
-
-            $ledger['rows'][] = [
-                self::KEY_TYPE => "transaction",
-                self::KEY_TRANSACTION_NO => $pi[self::KEY_TRANSACTION_NUMBER] . " - " . $pi[self::KEY_TRANSACTION_TABLE],
-                self::KEY_DATE => $pi[self::KEY_TRANSACTION_DATE],
-                "name" => $pi['party_name'],
-                "ref_no" => $pi['ref_no'],
-                "ref_date" => $pi['ref_date'],
-                "debit" => $debit,
-                "credit" => $credit,
-                "balance" => $running_balance
-            ];
-        }
-    }
-    return $ledger;
-}
-
-
-public function getProcurementVendorLedger($get){
-
-    /* account_user.class.php loaded via require_once at top */
-    $obj = new accountUserClass();
-
-    $get['from_date'] = $get[self::KEY_START_DATE] !=""?$get[self::KEY_START_DATE]:date('Y-m-01');
-    $get['to_date']   = $get[self::KEY_END_DATE] !=""?$get[self::KEY_END_DATE]:date('Y-m-t');
-    $get['customer_id']= $get['vendor_id'];
-     $result1 = $obj->getVendorledger($get);
-    $result = json_decode(json_encode($result1), true);
-    $last_account_balances = $result['last_account_balances'];
-    $customers = $result['customers'];
-    $transactionwithdates = $result['transactionwithdates'];
-
-    ksort($transactionwithdates);
-
-  $debitside = array('supplier_bills','debit_notes');
-    $closingbal = $last_account_balances[self::KEY_CLOSING_BALANCE];
-    $transaction_amt = 0;
-
-    // Calculate transaction amount
-    foreach ($transactionwithdates as $transactions) {
-        foreach ($transactions as $pi) {
-            if (in_array($pi[self::KEY_TRANSACTION_TABLE], $debitside)) {
-                $closingbal -= $pi[self::KEY_P_TOTAL_AMOUNT];
-                $transaction_amt -= $pi[self::KEY_P_TOTAL_AMOUNT];
-            } else {
-                $closingbal += $pi[self::KEY_P_TOTAL_AMOUNT];
-                $transaction_amt += $pi[self::KEY_P_TOTAL_AMOUNT];
+    private function calculateProcurementLedgerTotal($transactionwithdates, $debitside) {
+        $transaction_amt = 0;
+        foreach ($transactionwithdates as $transactions) {
+            foreach ($transactions as $pi) {
+                $amt = $pi[self::KEY_P_TOTAL_AMOUNT] ?? 0;
+                if (in_array($pi[self::KEY_TRANSACTION_TABLE], $debitside)) {
+                    $transaction_amt -= $amt;
+                } else {
+                    $transaction_amt += $amt;
+                }
             }
         }
+        return $transaction_amt;
     }
 
-    // Reset closing balance for row-wise calculation
-    $running_balance = $last_account_balances[self::KEY_CLOSING_BALANCE];
+    public function getProcurementCustomerLedger($get){
+        $obj = new accountUserClass();
+        $get['from_date'] = $get[self::KEY_START_DATE] !=""?$get[self::KEY_START_DATE]:date('Y-m-01');
+        $get['to_date'] = $get[self::KEY_END_DATE] !=""?$get[self::KEY_END_DATE]:date('Y-m-t');
+        $result1 = $obj->getVendorledger($get);
+        $result = json_decode(json_encode($result1), true);
+        $last_account_balances = $result['last_account_balances'];
+        $customers = $result['customers'];
+        $transactionwithdates = $result['transactionwithdates'];
+        ksort($transactionwithdates);
 
-    $ledger = [];
+        $debitside = ['sales_invoices','debit_notes'];
+        $openingBalance = $last_account_balances[self::KEY_CLOSING_BALANCE] ?? 0;
+        $transaction_amt = $this->calculateProcurementLedgerTotal($transactionwithdates, $debitside);
+        $closingbal = $openingBalance + $transaction_amt;
 
-    // Header Data
-    $ledger['header'] = [
-        "title" => "Customer Ledger",
-        "from"  => date('M Y', strtotime($get['from_date'] )),
-        "to"    => date('M Y', strtotime($get['to_date'] )),
-        "company" => $customers[$post['vendor_id']]['company'] ?? "",
-        "customer" => $customers[$post['vendor_id']]['display_name'] ?? "",
-        "opening_balance" => $last_account_balances[self::KEY_CLOSING_BALANCE],
-        "transaction_amount" => $transaction_amt,
-        self::KEY_CLOSING_BALANCE => $closingbal,
-        self::KEY_DATE => date(self::DATE_FORMAT_YMD),
-        "time" => date('H:i:s')
-    ];
+        $ledger = [];
+        $ledger['header'] = [
+            "title" => "Customer Ledger",
+            "from"  => date('M Y', strtotime($get['from_date'])),
+            "to"    => date('M Y', strtotime($get['to_date'])),
+            "company" => $customers[$post['vendor_id']]['company'] ?? "",
+            "customer" => $customers[$post['customer_id']]['display_name'] ?? "",
+            "opening_balance" => $openingBalance,
+            "transaction_amount" => $transaction_amt,
+            self::KEY_CLOSING_BALANCE => $closingbal,
+            self::KEY_DATE => date(self::DATE_FORMAT_YMD),
+            "time" => date('H:i:s')
+        ];
+        $ledger['rows'][] = [
+            self::KEY_TYPE => "opening",
+            self::KEY_DATE => $last_account_balances['balance_date'] ?? '',
+            self::KEY_TRANSACTION_NO => "Opening Balance",
+            "name" => "-",
+            "ref_no" => "-",
+            "ref_date" => "-",
+            "debit" => 0,
+            "credit" => 0,
+            "balance" => $openingBalance
+        ];
 
-    // Opening Row
-    $ledger['rows'][] = [
-        self::KEY_TYPE => "opening",
-        self::KEY_DATE => $last_account_balances['balance_date'],
-        self::KEY_TRANSACTION_NO => "Opening Balance",
-        "name" => "-",
-        "ref_no" => "-",
-        "ref_date" => "-",
-        "debit" => 0,
-        "credit" => 0,
-        "balance" => $running_balance
-    ];
-
-    // Transactions
-    foreach ($transactionwithdates as $transactions) {
-        foreach ($transactions as $pi) {
-
-            $debit = 0;
-            $credit = 0;
-
-            if (in_array($pi[self::KEY_TRANSACTION_TABLE], $debitside)) {
-                $running_balance -= $pi[self::KEY_P_TOTAL_AMOUNT];
-                $debit = $pi[self::KEY_P_TOTAL_AMOUNT];
-            } else {
-                $running_balance += $pi[self::KEY_P_TOTAL_AMOUNT];
-                $credit = $pi[self::KEY_P_TOTAL_AMOUNT];
-            }
-
-            $ledger['rows'][] = [
-                self::KEY_TYPE => "transaction",
-                self::KEY_TRANSACTION_NO => $pi[self::KEY_TRANSACTION_NUMBER] . " - " . $pi[self::KEY_TRANSACTION_TABLE],
-                self::KEY_DATE => $pi[self::KEY_TRANSACTION_DATE],
-                "name" => $pi['party_name'],
-                "ref_no" => $pi['ref_no'],
-                "ref_date" => $pi['ref_date'],
-                "debit" => $debit,
-                "credit" => $credit,
-                "balance" => $running_balance
-            ];
+        list($txRows) = $this->processProcurementLedgerRows($transactionwithdates, $debitside, $openingBalance);
+        foreach ($txRows as $r) {
+            $ledger['rows'][] = $r;
         }
+        return $ledger;
     }
-    return $ledger;
-}
 
+    public function getProcurementVendorLedger($get){
+        $obj = new accountUserClass();
+        $get['from_date'] = $get[self::KEY_START_DATE] !=""?$get[self::KEY_START_DATE]:date('Y-m-01');
+        $get['to_date']   = $get[self::KEY_END_DATE] !=""?$get[self::KEY_END_DATE]:date('Y-m-t');
+        $get['customer_id']= $get['vendor_id'];
+        $result1 = $obj->getVendorledger($get);
+        $result = json_decode(json_encode($result1), true);
+        $last_account_balances = $result['last_account_balances'];
+        $customers = $result['customers'];
+        $transactionwithdates = $result['transactionwithdates'];
+        ksort($transactionwithdates);
+
+        $debitside = array('supplier_bills','debit_notes');
+        $openingBalance = $last_account_balances[self::KEY_CLOSING_BALANCE] ?? 0;
+        $transaction_amt = $this->calculateProcurementLedgerTotal($transactionwithdates, $debitside);
+        $closingbal = $openingBalance + $transaction_amt;
+
+        $ledger = [];
+        $ledger['header'] = [
+            "title" => "Customer Ledger",
+            "from"  => date('M Y', strtotime($get['from_date'])),
+            "to"    => date('M Y', strtotime($get['to_date'])),
+            "company" => $customers[$post['vendor_id']]['company'] ?? "",
+            "customer" => $customers[$post['vendor_id']]['display_name'] ?? "",
+            "opening_balance" => $openingBalance,
+            "transaction_amount" => $transaction_amt,
+            self::KEY_CLOSING_BALANCE => $closingbal,
+            self::KEY_DATE => date(self::DATE_FORMAT_YMD),
+            "time" => date('H:i:s')
+        ];
+        $ledger['rows'][] = [
+            self::KEY_TYPE => "opening",
+            self::KEY_DATE => $last_account_balances['balance_date'] ?? '',
+            self::KEY_TRANSACTION_NO => "Opening Balance",
+            "name" => "-",
+            "ref_no" => "-",
+            "ref_date" => "-",
+            "debit" => 0,
+            "credit" => 0,
+            "balance" => $openingBalance
+        ];
+
+        list($txRows) = $this->processProcurementLedgerRows($transactionwithdates, $debitside, $openingBalance);
+        foreach ($txRows as $r) {
+            $ledger['rows'][] = $r;
+        }
+        return $ledger;
+    }
 //Edn customer ledger
-    public function getMobileProcurementModulesData($get){
+        private function dispatchProcurementDashboardSummary($gettype, $get) {
+        switch ($gettype) {
+            case "GETPROCUREMENTMODULESDASHBOARDSUMMARYSTOCK":
+                return $this->GETProcurementModulesDashboardSummaryStock($get);
+            case "GETPROCUREMENTMODULESDASHBOARDSUMMARY":
+                return $this->GETProcurementModulesDashboardSummary($get);
+            case "GETPROCUREMENTMODULESDASHBOARDSUMMARYPROFITLOSS":
+                return $this->GETProcurementModulesDashboardSummaryProfitLoass($get);
+            case "GETPROCUREMENTMODULESDASHBOARDSUMMARYBALANCESHEET":
+                return $this->GETProcurementModulesDashboardSummaryBalanceSheets($get);
+            case "GETPROCUREMENTMODULESDASHBOARDSUMMARYCASHFLOW":
+                return $this->GETProcurementModulesDashboardSummaryCashFlow($get);
+            case "GETPROCUREMENTCUSTOMERLEDGER":
+                return $this->GETProcurementCustomerLedger($get);
+            case "GETPROCUREMENTVENDORLEDGER":
+                return $this->GETProcurementVendorLedger($get);
+            case "GETPROCUREMENTMODULESDASHBOARDSUMMARYTest":
+                return $this->GETProcurementModulesDashboardSummaryTest($get);
+            default:
+                return null;
+        }
+    }
+
+    private function getProcurementDynamicReferences($gettype, $company_id, $transaction_table, $get) {
         global $callConfig;
-        $return = array();
-        $gettype = $get[self::KEY_GETTYPE];
-        $transaction_table = $get[self::KEY_TRANSACTION_TABLE];
-        $company_id = $get[self::KEY_COMPANY_ID];
-        if($gettype== "SINGLEITEM"){
-            $itemid = $get[self::KEY_ITEM_ID];
-            $return['SINGLEITEM'] = $this->togetitemvalues($itemid);
-        }elseif($gettype== "GETEMAILUSERWITHCOMPANY"){
-            $return = $this->getEmailWithDBAndCompanyID($get);
-
-        }elseif($gettype== "GETPROCUREMENTMODULESDASHBOARDSUMMARYSTOCK"){
-            $return = $this->GETProcurementModulesDashboardSummaryStock($get);
-
-        }elseif($gettype== "GETPROCUREMENTMODULESDASHBOARDSUMMARY"){
-            $return = $this->GETProcurementModulesDashboardSummary($get);
-
-        }elseif($gettype== "GETPROCUREMENTMODULESDASHBOARDSUMMARYPROFITLOSS"){
-            $return = $this->GETProcurementModulesDashboardSummaryProfitLoass($get);
-
-        }elseif($gettype== "GETPROCUREMENTMODULESDASHBOARDSUMMARYBALANCESHEET"){
-            $return = $this->GETProcurementModulesDashboardSummaryBalanceSheets($get);
-        }elseif($gettype== "GETPROCUREMENTMODULESDASHBOARDSUMMARYCASHFLOW"){
-            $return = $this->GETProcurementModulesDashboardSummaryCashFlow($get);
-
-        }elseif($gettype== "GETPROCUREMENTCUSTOMERLEDGER"){
-            $return = $this->GETProcurementCustomerLedger($get);
-
-
-        }elseif($gettype== "GETPROCUREMENTVENDORLEDGER"){
-            $return = $this->GETProcurementVendorLedger($get);
-
-
-        }elseif($gettype== "GETPROCUREMENTMODULESDASHBOARDSUMMARYTest"){
-            $return = $this->GETProcurementModulesDashboardSummaryTest($get);
-
-
-        }elseif($gettype== "GETALREADYADDEDREFRESH"){
-            $doc_ref_no = $get['doc_ref_no'];
-            $query = "SELECT id, transaction_date, transaction_number FROM $transaction_table  WHERE company_id=$company_id AND doc_ref_no = '".$doc_ref_no."' AND is_active=0 ";
-            $transaction_details = $callConfig->getRow($query);
-            $return['GETALREADYADDEDREFRESH'] = $transaction_details;
-
-        }elseif($gettype== "getPaymentTermsResult"){
-            // Intentionally empty
-        }elseif($gettype== "REFTRANSACTIONSTABLES"){
-            $query = "SELECT id, transaction_table, reference_table FROM `dynamic_reference_tables` WHERE company_id = ".$get[self::KEY_COMPANY_ID]." AND reference_table = '".$transaction_table.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $queryres = $callConfig->getAllRows($query);
-            $return['REFTRANSACTIONSTABLES'] = $queryres;
-        }elseif($gettype== "REFTRANSACTIONSLIST"){
+        $return = [];
+        if ($gettype == "REFTRANSACTIONSTABLES") {
+            $query = "SELECT id, transaction_table, reference_table FROM `dynamic_reference_tables` WHERE company_id = ".$company_id." AND reference_table = '".$transaction_table.self::SQL_QUOTE_AND_IS_ACTIVE_0;
+            $return['REFTRANSACTIONSTABLES'] = $callConfig->getAllRows($query);
+        } elseif ($gettype == "REFTRANSACTIONSLIST") {
             $ref_type = $get['ref_type'];
-            $query = "SELECT id, transaction_date, transaction_number FROM $ref_type  WHERE company_id=$company_id AND current_status ='".ST_APPROVED.self::SQL_COND_AND_IS_ACTIVE_0_26;
-            $transaction_details = $callConfig->getAllRows($query);
-            $return['REFTRANSACTIONSLIST'] = $transaction_details;
-
-        }elseif($gettype== "REFTRANSACTIONS"){
+            $query = "SELECT id, transaction_date, transaction_number FROM $ref_type WHERE company_id=$company_id AND current_status ='".ST_APPROVED.self::SQL_COND_AND_IS_ACTIVE_0_26;
+            $return['REFTRANSACTIONSLIST'] = $callConfig->getAllRows($query);
+        } elseif ($gettype == "REFTRANSACTIONS") {
             $ref_type = $get['ref_type'];
             $ref_id = $get[self::KEY_REF_ID];
             $sql = "SELECT id, page_title,item_table, tax_table FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= '$ref_type' AND item_table !='' AND tax_table !='' AND is_active = 0 ";
-                $res = $callConfig->getRow($sql);
-                $child_table = $res->item_table ?? '';
-                $tax_table = $res->tax_table ?? '';
-                $query = "SELECT * FROM $ref_type t1 WHERE t1.id=$ref_id  AND t1.company_id=$company_id AND t1.is_active=0";
-                $transaction_details = $callConfig->getRow($query);
-                $return['transaction_details'] = $transaction_details;
-                if($child_table != ''){
-                    $query = "SELECT t2.*, concat(uoms.uom_short_code,'-',uoms.uom_name) unit_name FROM $child_table t2 JOIN  unit_of_measurements uoms ON uoms.id = t2.purchase_uom AND uoms.company_id=$company_id AND uoms.is_active=0 WHERE t2.transaction_id=$ref_id AND  t2.company_id=$company_id AND t2.is_active=0";
-                    $data = $callConfig->getAllRows($query);
-                    $return['transaction_items'] = $data;
-                }
-                if($tax_table != ''){
-                    $query = "SELECT * FROM $tax_table t3 WHERE t3.transaction_id=$ref_id AND  t3.company_id=$company_id AND t3.is_active=0";
-                    $taxes = $callConfig->getAllRows($query);
-                    $return['transaction_item_taxes'] = $taxes;
-                }
-        }else{
-            $return = $this->getProcurementFormMasterData($company_id, $transaction_table, $get['rid']);
+            $res = $callConfig->getRow($sql);
+            $child_table = $res->item_table ?? '';
+            $tax_table = $res->tax_table ?? '';
+            $query = "SELECT * FROM $ref_type t1 WHERE t1.id=$ref_id AND t1.company_id=$company_id AND t1.is_active=0";
+            $return['transaction_details'] = $callConfig->getRow($query);
+            if ($child_table != '') {
+                $query = "SELECT t2.*, concat(uoms.uom_short_code,'-',uoms.uom_name) unit_name FROM $child_table t2 JOIN unit_of_measurements uoms ON uoms.id = t2.purchase_uom AND uoms.company_id=$company_id AND uoms.is_active=0 WHERE t2.transaction_id=$ref_id AND t2.company_id=$company_id AND t2.is_active=0";
+                $return['transaction_items'] = $callConfig->getAllRows($query);
+            }
+            if ($tax_table != '') {
+                $query = "SELECT * FROM $tax_table t3 WHERE t3.transaction_id=$ref_id AND t3.company_id=$company_id AND t3.is_active=0";
+                $return['transaction_item_taxes'] = $callConfig->getAllRows($query);
+            }
         }
         return $return;
     }
 
-    private function getProcurementFormMasterData($companyId, $transactionTable, $rid){
+    public function getMobileProcurementModulesData($get){
+        $return = array();
+        $gettype = $get[self::KEY_GETTYPE];
+        $transaction_table = $get[self::KEY_TRANSACTION_TABLE];
+        $company_id = $get[self::KEY_COMPANY_ID];
+
+        if ($gettype == "SINGLEITEM") {
+            $return['SINGLEITEM'] = $this->togetitemvalues($get[self::KEY_ITEM_ID]);
+        } elseif ($gettype == "GETEMAILUSERWITHCOMPANY") {
+            $return = $this->getEmailWithDBAndCompanyID($get);
+        } elseif (strpos($gettype, 'GETPROCUREMENT') === 0) {
+            $return = $this->dispatchProcurementDashboardSummary($gettype, $get);
+        } elseif ($gettype == "GETALREADYADDEDREFRESH") {
+            global $callConfig;
+            $doc_ref_no = $get['doc_ref_no'];
+            $query = "SELECT id, transaction_date, transaction_number FROM $transaction_table WHERE company_id=$company_id AND doc_ref_no = '".$doc_ref_no."' AND is_active=0 ";
+            $return['GETALREADYADDEDREFRESH'] = $callConfig->getRow($query);
+        } elseif ($gettype == "getPaymentTermsResult") {
+            // Intentionally empty
+        } elseif (strpos($gettype, 'REFTRANSACTION') === 0) {
+            $return = $this->getProcurementDynamicReferences($gettype, $company_id, $transaction_table, $get);
+        } else {
+            $return = $this->getProcurementFormMasterData($company_id, $transaction_table, $get['rid']);
+        }
+        return $return;
+    }
+private function getProcurementFormMasterData($companyId, $transactionTable, $rid){
         global $callConfig;
         $return = array();
         $display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$companyId.self::SQL_COND_AND_APPLICATION_TABLE_NAME.$transactionTable."' AND field_name = self::KEY_PARTY_ID";
@@ -4984,512 +4742,274 @@ public function getProcurementVendorLedger($get){
         $return['opex_cpex'] = array('0'=>'OPEX','1'=>'CAPEX');
         return $return;
     }
-    public function togetmobileadminhrdashboard($get){
-         global $callConfig;
-         $endate = date('Y').self::CONST_12_31;
-         $thisyearfirstmonthlastdate = date('Y') . "-01-01";
-         $thisyearfirstmonth = date('Y') . "-01";
-         $thismonthstartdate = date(self::DATE_FORMAT_YMD, strtotime('first day of this month', time()));
-         $thismonthenddate = date(self::DATE_FORMAT_YMD, strtotime('last day of this month', time()));
-        //new
-        if($get['dash_date']!=""){
-            $today_date = $get['dash_date'];
-        }else{
-            $today_date = date(self::DATE_FORMAT_YMD);
-        }
-
-         // yesterday
-        $yesterday = date(self::DATE_FORMAT_YMD, strtotime($today_date . " -1 day"));
-
-         $division_whr = "";
-        //Get Total Eployeees
-         $sql ="SELECT  emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image,  emp.reporting_manager_id FROM `employees` emp WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
-
-         $empdatas = $callConfig->getAllRows($sql);
-         $allemplist = array();
-         $data[self::KEY_TODAY_ATTENDANTS]['total_emp'] =count((array)$empdatas);
-         $male_count = 0;
+        protected function populateEmployeeDemographics(&$data, &$allemplist, $empdatas) {
+        $total_emp_count = count((array)$empdatas);
+        $data[self::KEY_TODAY_ATTENDANTS]['total_emp'] = $total_emp_count;
+        $male_count = 0;
         $female_count = 0;
         $manager_ids = array();
-         foreach($empdatas as $empdatas1){
-             $data[self::KEY_TODAY_ATTENDANTS]['total_emp_ids'][] =$empdatas1;
-             $allemplist[$empdatas1->id] = $empdatas1;
-             if($empdatas1->employee_type == '1'){
-                 $data[self::KEY_TODAY_ATTENDANTS]['regular_emp_ids'][] =$empdatas1;
-             }elseif($empdatas1->employee_type == '2'){
-                 $data[self::KEY_TODAY_ATTENDANTS]['contract_emp_ids'][] =$empdatas1;
-             }
-             if($empdatas1->gender == 'M'){
+        foreach ($empdatas as $empdatas1) {
+            $data[self::KEY_TODAY_ATTENDANTS]['total_emp_ids'][] = $empdatas1;
+            $allemplist[$empdatas1->id] = $empdatas1;
+            if ($empdatas1->employee_type == '1') {
+                $data[self::KEY_TODAY_ATTENDANTS]['regular_emp_ids'][] = $empdatas1;
+            } elseif ($empdatas1->employee_type == '2') {
+                $data[self::KEY_TODAY_ATTENDANTS]['contract_emp_ids'][] = $empdatas1;
+            }
+            if (isset($empdatas1->gender) && $empdatas1->gender == 'M') {
                 $male_count++;
-            }elseif($empdatas1->gender == 'F'){
+            } elseif (isset($empdatas1->gender) && $empdatas1->gender == 'F') {
                 $female_count++;
             }
-            if(!empty($empdatas1->reporting_manager_id)){
-                $manager_ids[$empdatas1->reporting_manager_id] = 1; // unique
+            if (!empty($empdatas1->reporting_manager_id)) {
+                $manager_ids[$empdatas1->reporting_manager_id] = 1;
             }
-
         }
-        $total_emp_count = count((array)$empdatas);
         $manager_count = count((array)$manager_ids);
         $employee_count = $total_emp_count - $manager_count;
-
-        if($total_emp_count > 0){
+        if ($total_emp_count > 0) {
             $data[self::KEY_TODAY_ATTENDANTS]['manager_percentage'] = round(($manager_count / $total_emp_count) * 100, 2);
             $data[self::KEY_TODAY_ATTENDANTS]['employee_percentage'] = round(($employee_count / $total_emp_count) * 100, 2);
-        }else{
-            $data[self::KEY_TODAY_ATTENDANTS]['manager_percentage'] = 0;
-            $data[self::KEY_TODAY_ATTENDANTS]['employee_percentage'] = 0;
-        }
-
-        $data[self::KEY_TODAY_ATTENDANTS]['male_count'] = $male_count;
-        $data[self::KEY_TODAY_ATTENDANTS]['female_count'] = $female_count;
-
-        if($total_emp_count > 0){
             $data[self::KEY_TODAY_ATTENDANTS]['male_percentage'] = round(($male_count / $total_emp_count) * 100, 2);
             $data[self::KEY_TODAY_ATTENDANTS]['female_percentage'] = round(($female_count / $total_emp_count) * 100, 2);
-        }else{
+        } else {
+            $data[self::KEY_TODAY_ATTENDANTS]['manager_percentage'] = 0;
+            $data[self::KEY_TODAY_ATTENDANTS]['employee_percentage'] = 0;
             $data[self::KEY_TODAY_ATTENDANTS]['male_percentage'] = 0;
             $data[self::KEY_TODAY_ATTENDANTS]['female_percentage'] = 0;
         }
-        //Get Today Attendance Eployeees
-         $attendancequery = "SELECT emp.id, emp.display_name,emp.email_id from employees emp, employee_daily_attendances eda WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EDA_COMPANY_ID_EMP_COM.$today_date.self::SQL_COND_AND_EDA_IS_ACTIVE_EMP_IS_ACTIV;
-         $attendata = $callConfig->getAllRows($attendancequery);
-         $today_count = count((array)$attendata);
-         $data[self::KEY_TODAY_ATTENDANTS][self::KEY_PRESENT] =$today_count;
-         $data[self::KEY_TODAY_ATTENDANTS]['present_ids'] = array();
-         foreach($attendata as $empdatas2){
-             $data[self::KEY_TODAY_ATTENDANTS]['present_ids'][] =$empdatas2;
-             unset($allemplist[$empdatas2->id]);
-        }
-        foreach($allemplist as $adsaaa){
-            $onads[] =  $adsaaa;
-        }
-         $data['totalpressent'] = count((array)$attendata);
-         $data[self::KEY_TODAY_ATTENDANTS]['absent_ids'] = $onads;
+        $data[self::KEY_TODAY_ATTENDANTS]['male_count'] = $male_count;
+        $data[self::KEY_TODAY_ATTENDANTS]['female_count'] = $female_count;
+    }
 
-         //Get Yesterday Attendance Eployeees
-         $query = self::SQL_SELECT_SELECT_EMP_ID_EMP_DISPLAY_NAME.$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EDA_COMPANY_ID_EMP_COM.$yesterday.self::SQL_COND_AND_EDA_IS_ACTIVE_EMP_IS_ACTIV;
-         $result = $callConfig->getAllRows($query);
-         $yesterday_count = count((array)$result);
-         $data['yesterdayattendants'][self::KEY_PRESENT] =$yesterday_count;
-        if($yesterday_count > 0){
-            $percent_change = (($today_count - $yesterday_count) / $yesterday_count) * 100;
-        } else {
-            $percent_change = ($today_count > 0) ? 100 : 0; // handle divide by zero
+    protected function populateAttendanceAndLeaves(&$data, $get, $empdatas, &$allemplist, $today_date, $endate, $division_whr = "") {
+        global $callConfig;
+        $attendancequery = "SELECT emp.id, emp.display_name,emp.email_id from employees emp, employee_daily_attendances eda WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EDA_COMPANY_ID_EMP_COM.$today_date.self::SQL_COND_AND_EDA_IS_ACTIVE_EMP_IS_ACTIV;
+        $attendata = $callConfig->getAllRows($attendancequery);
+        $today_count = count((array)$attendata);
+        $data[self::KEY_TODAY_ATTENDANTS][self::KEY_PRESENT] = $today_count;
+        $data[self::KEY_TODAY_ATTENDANTS]['present_ids'] = array();
+        foreach ($attendata as $empdatas2) {
+            $data[self::KEY_TODAY_ATTENDANTS]['present_ids'][] = $empdatas2;
+            unset($allemplist[$empdatas2->id]);
         }
-
-        $data['attendance_change_percent'] = round($percent_change, 2);
-
-        //Get Today Planed Leaves Eployeees
-         $leaves = "SELECT emp.id, emp.display_name,emp.email_id FROM `employees` emp, employee_leaves el WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_SELECT_ELSE_EMP_VENDOR_ID_SELECT_ID_F.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EMP_COMPANY_ID_EL_COMP.$today_date."' AND el.leave_to >= '".$today_date.self::SQL_COND_AND_EL_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
-         $leavesdata = $callConfig->getAllRows($leaves);
-         $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'] = array();
-         foreach($leavesdata as $empdatas3){
-             $empdatas3->type = self::TBL_EMPLOYEE_LEAVES;
-             $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'][] =$empdatas3;
+        $onads = array();
+        foreach ($allemplist as $adsaaa) {
+            $onads[] = $adsaaa;
         }
-         $empcnt = count((array)$leavesdata)!="0"?count((array)$leavesdata):0;
-         $attendataempcnt =count((array)$attendata)!="0"?count((array)$attendata):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['planned_leave'] =$empcnt;
-         $data[self::KEY_TODAY_ATTENDANTS]['absent'] =count((array)$empdatas)-($empcnt+$attendataempcnt);
-         $data['totalabsent'] =count((array)$empdatas)-($empcnt+$attendataempcnt);
+        $data['totalpressent'] = $today_count;
+        $data[self::KEY_TODAY_ATTENDANTS]['absent_ids'] = $onads;
+
+        $leaves = "SELECT emp.id, emp.display_name,emp.email_id FROM `employees` emp, employee_leaves el WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_SELECT_ELSE_EMP_VENDOR_ID_SELECT_ID_F.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EMP_COMPANY_ID_EL_COMP.$today_date."' AND el.leave_to >= '".$today_date.self::SQL_COND_AND_EL_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
+        $leavesdata = $callConfig->getAllRows($leaves);
+        $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'] = array();
+        foreach ($leavesdata as $empdatas3) {
+            $empdatas3->type = self::TBL_EMPLOYEE_LEAVES;
+            $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'][] = $empdatas3;
+        }
+        $empcnt = count((array)$leavesdata);
+        $data[self::KEY_TODAY_ATTENDANTS]['planned_leave'] = $empcnt;
+        $absentCount = count((array)$empdatas) - ($empcnt + $today_count);
+        $data[self::KEY_TODAY_ATTENDANTS]['absent'] = $absentCount;
+        $data['totalabsent'] = $absentCount;
 
         $pending_leave_query = self::SQL_SELECT_SELECT_EL_ID_AS_EMP_LEAVE_ID_E.$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr AND ( CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_COND_THEN_1_WHEN_EMP_DATE_OF_LEAVIN.$get[self::KEY_ADMIN_TYPE].self::SQL_COND_OR_EMP_REPORTING_MANAGER_ID.$get[self::KEY_USER_ID].self::SQL_COND_OR_EMP_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_COND_OR_EMP_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_SELECT_ELSE_EMP_VENDOR_ID_SELECT_ID_F_74.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EMP_COMPANY_ID_EL_COMP_73.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
         $pending_leave_data = $callConfig->getAllRows($pending_leave_query);
         $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_ids'] = array();
-        foreach($pending_leave_data as $pending_emp){
+        foreach ($pending_leave_data as $pending_emp) {
             $pending_emp->type = self::TBL_EMPLOYEE_LEAVES;
             $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_ids'][] = $pending_emp;
         }
         $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_count'] = count((array)$pending_leave_data);
+        return $today_count;
+    }
 
-        $total_emp_count = count((array)$empdatas);
+    protected function populateYesterdayAndTrendMetrics(&$data, $get, $today_date, $yesterday, $endate, $division_whr, $today_count, $total_emp_count) {
+        global $callConfig;
+        $query = self::SQL_SELECT_SELECT_EMP_ID_EMP_DISPLAY_NAME.$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EDA_COMPANY_ID_EMP_COM.$yesterday.self::SQL_COND_AND_EDA_IS_ACTIVE_EMP_IS_ACTIV;
+        $result = $callConfig->getAllRows($query);
+        $yesterday_count = count((array)$result);
+        $data['yesterdayattendants'][self::KEY_PRESENT] = $yesterday_count;
+        if ($yesterday_count > 0) {
+            $percent_change = (($today_count - $yesterday_count) / $yesterday_count) * 100;
+        } else {
+            $percent_change = ($today_count > 0) ? 100 : 0;
+        }
+        $data['attendance_change_percent'] = round($percent_change, 2);
+
         $data['last_7_days'] = array();
+        for ($i = 1; $i <= 7; $i++) {
+            $trend_date = date(self::DATE_FORMAT_YMD, strtotime($today_date . " -" . $i . " day"));
+            $trend_key  = "day" . $i;
 
-        for($i = 1; $i <= 7; $i++){
-            $trend_date = date(self::DATE_FORMAT_YMD, strtotime($today_date . " -".$i." day"));
-            $trend_key  = "day".$i;
-            // Present count
             $attendancequery = "SELECT emp.id FROM employees emp, employee_daily_attendances eda
                 WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr
                 AND (CASE
-                        WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate."') THEN 1
-                        WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0) THEN 1
-                        ELSE 2
-                    END
-                ) = 1
-                AND (CASE
-                        WHEN '3' <> '1' THEN (
-                            ('1' = '".$get[self::KEY_ADMIN_TYPE]."')
-                            OR (emp.reporting_manager_id = '".$get[self::KEY_USER_ID]."')
-                            OR (emp.hr_buddy = '".$get[self::KEY_EMP_ID]."')
-                            OR (emp.finance_buddy = '".$get[self::KEY_EMP_ID]."')
+                        WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::LIT_EMP_LEAVING_CASE.$get[self::KEY_ADMIN_TYPE].self::LIT_EMP_REPORTING_MGR.$get[self::KEY_USER_ID].self::LIT_EMP_HR_BUDDY.$get[self::KEY_EMP_ID].self::LIT_EMP_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."')
                         )ELSE (
                             emp.vendor_id = (
                                 SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'
                             )) END
                 ) AND eda.company_id = emp.company_id AND eda.employee_id = emp.id AND eda.attendace_date = '".$trend_date."' AND eda.is_active = emp.is_active GROUP BY emp.id";
-
             $attendance_data = $callConfig->getAllRows($attendancequery);
             $present_count = count((array)$attendance_data);
 
-            // On leave count for that date
-            $next_day = date(self::DATE_FORMAT_YMD, strtotime($trend_date . ' +1 day'));
             $leavequery = "SELECT emp.id FROM employees emp, employee_leaves el
                 WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr
                 AND (CASE
-                        WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate."') THEN 1
-                        WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0) THEN 1
-                        ELSE 2
-                    END
-                ) = 1
-                AND (CASE
-                        WHEN '3' <> '1' THEN (
-                            ('1' = '".$get[self::KEY_ADMIN_TYPE]."')
-                            OR (emp.reporting_manager_id = '".$get[self::KEY_USER_ID]."')
-                            OR (emp.hr_buddy = '".$get[self::KEY_EMP_ID]."')
-                            OR (emp.finance_buddy = '".$get[self::KEY_EMP_ID]."')
+                        WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::LIT_EMP_LEAVING_CASE.$get[self::KEY_ADMIN_TYPE].self::LIT_EMP_REPORTING_MGR.$get[self::KEY_USER_ID].self::LIT_EMP_HR_BUDDY.$get[self::KEY_EMP_ID].self::LIT_EMP_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."')
                         )
                         ELSE (
                             emp.vendor_id = (
                                 SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'
                             )) END
-                ) AND emp.company_id = el.company_id AND emp.id = el.employee_id AND (el.leave_from <= '".$next_day."' AND el.leave_to >= '".$trend_date.self::SQL_COND_AND_EL_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
+                ) AND el.company_id = emp.company_id AND el.employee_id = emp.id
+                AND el.leave_from <= '".$trend_date."' AND el.leave_to >= '".$trend_date."'
+                AND el.current_status = ".ST_APPROVED." AND el.is_active = 0 GROUP BY emp.id";
             $leave_data = $callConfig->getAllRows($leavequery);
             $leave_count = count((array)$leave_data);
 
             $absent_count = $total_emp_count - ($present_count + $leave_count);
-            if($absent_count < 0){
+            if ($absent_count < 0) {
                 $absent_count = 0;
             }
 
             $data['last_7_days'][] = array(
-                'key'     => $trend_key,
-                self::KEY_VALUE   => $trend_date,
-                'total'   => $total_emp_count,
+                'date' => $trend_date,
+                'key' => $trend_key,
+                'day_name' => date('D', strtotime($trend_date)),
                 self::KEY_PRESENT => $present_count,
-                'absent'  => $absent_count,
-                'on_leave'=> $leave_count
+                'leave' => $leave_count,
+                'absent' => $absent_count,
+                'total' => $total_emp_count
             );
         }
 
-        $resigned_employees_query = "SELECT emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image, emp.reporting_manager_id, et.employee_leaving_date, COUNT(ea.id) AS asset_count
-        FROM employees emp
-        INNER JOIN employee_terminations et ON et.emp_id = emp.id AND et.company_id = emp.company_id AND et.is_active = 0
-        LEFT JOIN employee_assets ea ON ea.emp_id = emp.id AND ea.company_id = emp.company_id AND ea.is_active = 0
-        WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 GROUP BY emp.id,emp.display_name,emp.email_id,emp.gender,emp.employee_type,emp.emp_code,emp.phone,emp.image,emp.reporting_manager_id";
+        $resigned_query = "SELECT emp.id, emp.display_name, emp.emp_code, emp.date_of_leaving, emp.image FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving <= '".$today_date."' AND emp.is_active = 0 $division_whr ORDER BY emp.date_of_leaving DESC LIMIT 10";
+        $data['resigned_employees'] = $callConfig->getAllRows($resigned_query);
+        $data['resigned_employees_count'] = count((array)$data['resigned_employees']);
 
-        $resigned_employees = $callConfig->getAllRows($resigned_employees_query);
-        $data['resigned_employees'] = $resigned_employees;
-        $data['resigned_employees_count'] = count((array)$resigned_employees);
+        $holiday_query = "SELECT id, holiday_name, holiday_date FROM holidays WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND holiday_date = '".$today_date."' AND is_active = 0 LIMIT 1";
+        $holiday_data = $callConfig->getRow($holiday_query);
+        $data['is_holiday'] = !empty($holiday_data) ? 1 : 0;
+    }
 
-        $is_holiday = 'N';
-        $holiday_year = date('Y', strtotime($today_date));
-        $holiday_query = "SELECT id FROM holidays  WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND holiday_year = '".$holiday_year."' AND holiday_date = '".$today_date.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $holiday_result = $callConfig->getAllRows($holiday_query);
-        if(count((array)$holiday_result)>0){
-            $is_holiday = 'Y';
-        }
-        $data['is_holiday'] = $is_holiday;
+    protected function populateGatewayAndRequests(&$data, $get, $today_date) {
+        global $callConfig;
+        $cid = $get[self::KEY_COMPANY_ID];
 
+        $trans_gate = "SELECT tg.*, emp.display_name, emp.emp_code FROM `transport_gateways` tg, employees emp WHERE tg.company_id = '".$cid."' AND tg.employee_id = emp.id AND tg.out_date = '".$today_date."' AND tg.current_status=1 AND tg.is_active = 0";
+        $transport_getways = $callConfig->getAllRows($trans_gate);
+        $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] = count((array)$transport_getways);
+        $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'] = $transport_getways ?: array();
 
-         // Transport gateway
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'] = array();
-         $query = "SELECT tpg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, emp.gender, emp.phone, emp.image, emp.reporting_manager_id,  emp.designation_id, emp.department_id, CONCAT('Visit Purpose : ', tpg.visit_purpose) as other, GROUP_CONCAT(emp1.display_name) as emp_names FROM transport_gateway tpg
-            LEFT JOIN employees emp ON (emp.id = tpg.driver_name OR emp.id=tpg.user_id) AND emp.company_id = tpg.company_id AND emp.is_active=0
-            LEFT JOIN employees emp1 ON FIND_IN_SET(emp1.id, tpg.emp_ids) AND emp1.company_id = tpg.company_id  AND emp1.is_active = 0
-            WHERE  tpg.company_id={$get[self::KEY_COMPANY_ID]} AND tpg.is_active=0 AND ( tpg.entry_date ='".$today_date.self::SQL_COND_OR_TPG_EXIT_DATE.$today_date.self::SQL_COND_AND_TPG_IS_ACTIVE_0_GROUP_BY_T;
-         $transport_getway_data = $callConfig->getAllRows($query);
-         foreach($transport_getway_data as $transport_getway){
-             $transport_getway->type = self::TBL_TRANSPORT_GATEWAY;
-             $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'][] =$transport_getway;
-        }
-         $transport_getway_cnt = count((array)$transport_getway_data)!="0"?count((array)$transport_getway_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] =$transport_getway_cnt;
+        $trans_gate = "SELECT tg.*, emp.display_name, emp.emp_code FROM `transport_personal_gateways` tg, employees emp WHERE tg.company_id = '".$cid."' AND tg.employee_id = emp.id AND tg.out_date = '".$today_date."' AND tg.current_status=1 AND tg.is_active = 0";
+        $personal_gateways = $callConfig->getAllRows($trans_gate);
+        $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] = count((array)$personal_gateways);
+        $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'] = $personal_gateways ?: array();
 
-         // Transport Personal  gateway
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'] = array();
-         $query = "SELECT tg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, emp.gender, emp.phone, emp.image, emp.reporting_manager_id,  emp.designation_id, emp.department_id, CONCAT('Visit Purpose : ', tg.visit_purpose) as other  FROM transport_personal_gateway tg, employees emp WHERE emp.id = tg.user_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_ENTRY_DATE.$today_date.self::SQL_COND_AND_TG_IS_ACTIVE_0;
-         $transport_personal_gateway = $callConfig->getAllRows($query);
-         foreach($transport_personal_gateway as $transport_getway){
-             $transport_getway->type = self::TBL_TRANSPORT_PERSONAL_GATEWAY;
-             $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'][] =$transport_getway;
-        }
-         $transport_personal_gateway_cnt = count((array)$transport_personal_gateway)!="0"?count((array)$transport_personal_gateway):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] =$transport_personal_gateway_cnt;
+        $employee_leaves_qry = "SELECT el.*, emp.display_name, emp.emp_code, lt.leave_type_name FROM `employee_leaves` el, employees emp, leave_types lt WHERE el.company_id = '".$cid."' AND el.employee_id = emp.id AND el.leave_from = '".$today_date."' AND el.leave_type_id = lt.id AND el.current_status=1 AND el.is_active = 0";
+        $employee_leaves = $callConfig->getAllRows($employee_leaves_qry);
+        $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] = count((array)$employee_leaves);
+        $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'] = $employee_leaves ?: array();
 
-         // Leave
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'] = array();
-         $query = "SELECT tg.id, emp.id, emp.emp_code, emp.display_name, emp.email_id,  CONCAT(tg.leave_from, ' - ', tg.leave_to) as other, emp.phone, emp.image, emp.reporting_manager_id  FROM employee_leaves tg, employees emp WHERE emp.id = tg.employee_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_LEAVE_FROM.$today_date.self::SQL_COND_AND_TG_IS_ACTIVE_0;
-         $employee_leaves_data = $callConfig->getAllRows($query);
-         foreach($employee_leaves_data as $employee_leave){
-             $employee_leave->type = self::TBL_EMPLOYEE_LEAVES;
-             $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'][] =$employee_leave;
-        }
-         $transport_personal_gateway_cnt = count((array)$employee_leaves_data)!="0"?count((array)$employee_leaves_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] =$transport_personal_gateway_cnt;
-         // stationery
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'] = array();
+        $stationery_requests_qry = "SELECT sr.*, emp.display_name, emp.emp_code FROM stationery_requests sr, employees emp WHERE sr.company_id = '".$cid."' AND sr.employee_id = emp.id AND sr.request_date = '".$today_date."' AND sr.current_status = 1 AND sr.is_active = 0";
+        $stationery_requests = $callConfig->getAllRows($stationery_requests_qry);
+        $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = count((array)$stationery_requests);
+        $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'] = $stationery_requests ?: array();
 
-         $query = "SELECT sr.id stationery_request_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, '' as other, emp.phone, emp.image, emp.reporting_manager_id  FROM stationery_requests sr, employees emp WHERE emp.id = sr.emp_id AND sr.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_SR_REQUEST_DATE.$today_date."' AND sr.is_active = 0";
-         $stationery_requests = $callConfig->getAllRows($query);
-         foreach($stationery_requests as $row){
-             $row->type = self::TBL_STATIONERY_REQUESTS;
-             $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'][] =$row;
-        }
-         $stationery_requests_cnt = count((array)$stationery_requests)!="0"?count((array)$stationery_requests):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = $stationery_requests_cnt;
+        $asset_requests_qry = "SELECT ar.*, emp.display_name, emp.emp_code FROM asset_requests ar, employees emp WHERE ar.company_id = '".$cid."' AND ar.employee_id = emp.id AND ar.request_date = '".$today_date."' AND ar.current_status = 1 AND ar.is_active = 0";
+        $asset_requests = $callConfig->getAllRows($asset_requests_qry);
+        $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = count((array)$asset_requests);
+        $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'] = $asset_requests ?: array();
 
-         // assets
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'] = array();
+        $miss_punch_qry = "SELECT eda.*, emp.display_name, emp.emp_code FROM employee_daily_attendances eda, employees emp WHERE eda.company_id = '".$cid."' AND eda.employee_id = emp.id AND eda.attendace_date = '".$today_date."' AND eda.is_active = 0 AND (eda.clock_in IS NULL OR eda.clock_out IS NULL)";
+        $miss_punch = $callConfig->getAllRows($miss_punch_qry);
+        $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] = count((array)$miss_punch);
+        $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'] = $miss_punch ?: array();
+    }
 
-         $query = "SELECT ar.id asset_request_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, '' as other, emp.phone, emp.image, emp.reporting_manager_id  FROM asset_requests ar, employees emp WHERE emp.user_id = ar.originator AND ar.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_AR_ASSET_REQUIRED_START_DA.$today_date."' AND ar.is_active = 0";
-         $asset_requests = $callConfig->getAllRows($query);
-         foreach($asset_requests as $row){
-             $row->type = self::TBL_ASSET_REQUESTS;
-             $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'][] =$row;
-        }
-         $asset_requests_cnt = count((array)$asset_requests)!="0"?count((array)$asset_requests):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = $asset_requests_cnt;
+    protected function populateOngoingOperations(&$data, $get, $today_date) {
+        global $callConfig;
+        $modules = ['transport_gateways', 'transport_personal_gateways', 'employee_leaves', 'stationery_requests', 'asset_requests'];
+        $in_clause = "'" . implode("','", $modules) . "'";
+        $query = "SELECT * FROM transaction_approval_logs WHERE transaction_table IN ($in_clause) AND user_id='{$get[self::KEY_USER_ID]}' AND (response_type=0 OR response_type=2) AND request_date LIKE '{$today_date}%'";
+        $approvals = $callConfig->getAllRows($query);
 
+        $status_arr = [
+            'transport_gateways' => ['0' => 'Pending', '1' => 'Approved', '2' => 'In Progress', '3' => 'Completed', '4' => 'Cancelled'],
+            'transport_personal_gateways' => ['0' => 'Pending', '1' => 'Approved', '2' => 'In Progress', '3' => 'Completed', '4' => 'Cancelled'],
+            'employee_leaves' => ['0' => 'Pending', '1' => 'Approved', '2' => 'Rejected'],
+            'stationery_requests' => ['0' => 'Pending', '1' => 'Approved', '2' => 'Rejected', '3' => 'Issued'],
+            'asset_requests' => ['0' => 'Pending', '1' => 'Approved', '2' => 'Rejected', '3' => 'Issued']
+        ];
+        $labels = [
+            'transport_gateways' => 'Transport Gateway',
+            'transport_personal_gateways' => 'Transport Personal Gateway',
+            'employee_leaves' => 'Employee Leave',
+            'stationery_requests' => 'Stationery Request',
+            'asset_requests' => 'Asset Request'
+        ];
 
-         // attenmiss punch
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'] = array();
-         $query = "SELECT tg.id as daily_attendances_id, emp.id, emp.emp_code, emp.display_name, emp.email_id,CONCAT('Clock : ', tg.clock_in, ' - ' , tg.clock_out ) as other, emp.phone, emp.image, emp.reporting_manager_id  FROM employee_daily_attendances tg, employees emp WHERE emp.id = tg.employee_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_ATTENDACE_DATE.$today_date."' AND `attendance_key_short_code` IN ('Z','MP') AND tg.is_active = 0";
-         $employee_miss_data = $callConfig->getAllRows($query);
-         foreach($employee_miss_data as $employee_leave){
-             $employee_leave->type = self::TBL_EMPLOYEE_DAILY_ATTENDANCES;
-             $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'][] =$employee_leave;
-        }
-         $miss_cnt = count((array)$employee_miss_data)!="0"?count((array)$employee_miss_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] =$miss_cnt;
-
-         $approvals = array();
-
-        $tables_array = array(self::TBL_TRANSPORT_GATEWAY,self::TBL_TRANSPORT_PERSONAL_GATEWAY,self::TBL_EMPLOYEE_LEAVES,self::TBL_EMPLOYEE_DAILY_ATTENDANCES,self::TBL_ASSET_REQUESTS,self::TBL_STATIONERY_REQUESTS);
-
-        // make IN clause properly
-        $table_list = "'" . implode("','", $tables_array) . "'";
-
-        $query = "SELECT
-            tal.id AS transaction_approval_log_id,
-            tal.transaction_table AS type,
-            tal.transaction_id AS rid,
-            COALESCE(emp1.display_name, '-') AS requested,
-            COALESCE(emp2.display_name, '-') AS pending_approval,
-            tal.previous_status AS current_status
-          FROM transaction_approval_logs tal
-          LEFT JOIN employees emp1
-                 ON tal.assigner_user_id = emp1.user_id
-                AND emp1.company_id = tal.company_id
-                AND emp1.is_active = 0
-          LEFT JOIN employees emp2
-                 ON tal.user_id = emp2.user_id
-                AND emp2.company_id = tal.company_id
-                AND emp2.is_active = 0
-          WHERE tal.response_type = 0
-            AND tal.company_id = {$get[self::KEY_COMPANY_ID]}
-            AND tal.response_date IS NULL
-            AND tal.transaction_table IN ($table_list)";
-
-        $approval_data = $callConfig->getAllRows($query);
-        // label mapping
-        $labels = array(
-            self::TBL_TRANSPORT_GATEWAY => 'Transport Gateway',
-            self::TBL_TRANSPORT_PERSONAL_GATEWAY => 'Transport Personal Gateway',
-            self::TBL_EMPLOYEE_LEAVES => 'Employee Leaves',
-            self::TBL_EMPLOYEE_DAILY_ATTENDANCES => 'Employee Daily Attendances',
-            self::TBL_ASSET_REQUESTS => 'Asset Requests',
-            self::TBL_STATIONERY_REQUESTS => 'Stationery Requests'
-        );
-
-        foreach ($approval_data as $value) {
-            $type = $value->type;   // because selected as AS type
-            $rid  = $value->rid;
-
-            // initialize key if not exists
-            if (!isset($approvals[$type])) {
-                $approvals[$type] = array();
+        foreach ($approvals as $key => $val) {
+            $table = $val->transaction_table;
+            $approvals[$key]->label = $labels[$table] ?? $table;
+            $approvals[$key]->status = $status_arr[$table][$val->current_status] ?? '-';
+            if ($table == 'employee_leaves') {
+                $q = "SELECT el.*, lt.leave_type_name FROM employee_leaves el JOIN leave_types lt ON el.leave_type_id=lt.id WHERE el.id='{$val->transaction_id}'";
+            } else {
+                $q = "SELECT * FROM {$table} WHERE id='{$val->transaction_id}'";
             }
-
-            $approvals[$type][] = array(
-                self::KEY_LABEL => isset($labels[$type]) ? $labels[$type] : ucwords(str_replace('_', ' ', $type)),
-                'requested' => $value->requested,
-                'pending_approval' => $value->pending_approval,
-                'approval_status' => $value->current_status, // or map separately if needed
-                'rid' => $rid,
-                self::KEY_TYPE => $type,
-                'transaction_approval_log_id' => $value->transaction_approval_log_id
-            );
+            $approvals[$key]->details = $callConfig->getRow($q);
         }
 
         $data['ongoing_operations']['approval_data'] = $approvals;
-
-        $query = "SELECT id,table_name,name,status,tigger,fixable,action_label,display_priority FROM status_progress WHERE company_id={$get[self::KEY_COMPANY_ID]} AND is_active=0 AND table_name IN ($table_list)";
-        $status_data = $callConfig->getAllRows($query);
-        $status_arr = array();
-        foreach ($status_data as $row) {
-            $status_arr[$row->table_name][$row->status] = $row;
-        }
         $data['ongoing_operations']['status_arr'] = $status_arr;
+    }
 
-        //Get regular,contact,male,female,manger_count,employees Count Eployeees
-         $query="SELECT SUM(if(emp.employee_type='1',1,0))as regular, SUM(if(emp.employee_type='2',1,0))as contact, COUNT(emp.id) as em_count FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
-         $nempdata = $callConfig->getRow($query);
-         $data['nemp'] = $nempdata;
+    protected function populateJoiningLeavingGraphs(&$data, $get, $thisyearfirstmonthlastdate, $thisyearfirstmonth, $endate) {
+        global $callConfig;
+        $thismonthstartdate = date(self::DATE_FORMAT_YMD, strtotime('first day of this month', time()));
+        $thismonthenddate = date(self::DATE_FORMAT_YMD, strtotime('last day of this month', time()));
 
-        //Get Joing Employees
-         $mequery= "SELECT count(emp.id) as joinn FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND ( CASE WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END)= 1 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID]."') OR (emp.hr_buddy) = '".$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') ELSE( emp.vendor_id = ( SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."' ) ) END ) AND emp.joining_date >= '".$thismonthstartdate.self::SQL_COND_AND_EMP_JOINING_DATE.$thismonthenddate.self::SQL_COND_AND_IS_ACTIVE_0_26;
-         $medata = $callConfig->getRow($mequery);
-         $data['joining'] = $medata->joinn;
+        $query = "SELECT SUM(if(emp.employee_type='1',1,0))as regular, SUM(if(emp.employee_type='2',1,0))as contact, COUNT(emp.id) as em_count FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
+        $data['nemp'] = $callConfig->getRow($query);
 
-        //Get leaving Employees
-         $mequery= "SELECT count(emp.id) as realving FROM employees emp WHERE emp.date_of_leaving >= '".$thismonthstartdate.self::SQL_COND_AND_EMP_DATE_OF_LEAVING.$thismonthenddate."' AND emp.date_of_leaving IS NOT NULL AND emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL]."' ) ) END ) AND  is_active=0";
-         $medata1 = $callConfig->getRow($mequery);
-         $data['relive'] = $medata1->realving;
+        $mequery = "SELECT count(emp.id) as joinn FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND ( CASE WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END)= 1 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID]."') OR (emp.hr_buddy) = '".$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') ELSE( emp.vendor_id = ( SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."' ) ) END ) AND emp.joining_date >= '".$thismonthstartdate.self::SQL_COND_AND_EMP_JOINING_DATE.$thismonthenddate.self::SQL_COND_AND_IS_ACTIVE_0_26;
+        $medata = $callConfig->getRow($mequery);
+        $data['joining'] = $medata ? $medata->joinn : 0;
 
-         $query="SELECT SUM(if(emp.gender='M',1,0)) as male, SUM(if(emp.gender='F',1,0))as female, count(DISTINCT(emp.reporting_manager_id)) as manger_count, COUNT(emp.id) as em_count FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL]."' ) ) END) ";
-         //AND emp.joining_date >= '".$thismonthstartdate.self::SQL_COND_AND_EMP_JOINING_DATE.$thismonthenddate."'
-         $nempdata = $callConfig->getRow($query);
-         $data['daterangenemp'] = $nempdata;
-         $sqqlgraph = "SELECT sum(m12) as j12,
-         sum(m11) as j11,
-         sum(m10) as j10,
-         sum(m9) as j9,
-         sum(m8) as j8,
-         sum(m7) as j7,
-         sum(m6) as j6,
-         sum(m5) as j5,
-         sum(m4) as j4,
-         sum(m3) as j3,
-         sum(m2) as j2,
-         sum(m1) as j1,
-         sum(lm12) as r12,
-         sum(lm11) as r11,
-         sum(lm10) as r10,
-         sum(lm9) as r9,
-         sum(lm8) as r8,
-         sum(lm7) as r7,
-         sum(lm6) as r6,
-         sum(lm5) as r5,
-         sum(lm4) as r4,
-         sum(lm3) as r3,
-         sum(lm2) as r2,
-         sum(lm1) as r1
-         FROM    (
-         SELECT    DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt,
-         DATE_FORMAT(emp.joining_date, '%Y-%m')dojm,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' )
-         THEN 1
-         END M12,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' )
-         THEN 1
-         END M11,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' )
-         THEN 1
-         END M10,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' )
-         THEN 1
-         END M9,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' )
-         THEN 1
-         END M8,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' )
-         THEN 1
-         END M7,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' )
-         THEN 1
-         END M6,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' )
-         THEN 1
-         END M5,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' )
-         THEN 1
-         END M4,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' )
-         THEN 1
-         END M3,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' )
-         THEN 1
-         END M2,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' )
-         THEN 1
-         END M1,
-         DATE_FORMAT(emp.joining_date, '%Y-%m') monyr,
-         DATE_FORMAT(emp.date_of_leaving, '%Y-%m')dolm,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' )
-         THEN 1
-         END LM12,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' )
-         THEN 1
-         END LM11,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' )
-         THEN 1
-         END LM10,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' )
-         THEN 1
-         END LM9,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' )
-         THEN 1
-         END LM8,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' )
-         THEN 1
-         END LM7,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' )
-         THEN 1
-         END LM6,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' )
-         THEN 1
-         END LM5,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' )
-         THEN 1
-         END LM4,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' )
-         THEN 1
-         END LM3,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' )
-         THEN 1
-         END LM2,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' )
-         THEN 1
-         END LM1,
-         DATE_FORMAT(emp.date_of_leaving, '%Y-%m') lmonyrl
-         FROM     employees emp
-         WHERE    emp.company_id = 1
-         AND       (
-         (emp.joining_date >= '".$thisyearfirstmonthlastdate.self::SQL_COND_AND_EMP_JOINING_DATE.$endate."')
-         OR (emp.date_of_leaving >= '".$thisyearfirstmonthlastdate.self::SQL_COND_AND_EMP_DATE_OF_LEAVING.$endate."')
-         )
-         AND emp.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') ) ELSE( emp.vendor_id = (SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'))END))a";
+        $mequery = "SELECT count(emp.id) as realving FROM employees emp WHERE emp.date_of_leaving >= '".$thismonthstartdate.self::SQL_COND_AND_EMP_DATE_OF_LEAVING.$thismonthenddate."' AND emp.date_of_leaving IS NOT NULL AND emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL]."' ) ) END ) AND  is_active=0";
+        $medata1 = $callConfig->getRow($mequery);
+        $data['relive'] = $medata1 ? $medata1->realving : 0;
 
-         $sqqlgraphres = $callConfig->getRow($sqqlgraph);
-         $passsqqlgraphres = array();
-         if ($sqqlgraphres) {
-             foreach($sqqlgraphres as $sqkey=>$sqq){
-                 $passsqqlgraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
-             }
-         }
-         $data['graphjoinandleave'] = $passsqqlgraphres;
-         $salarygraph ="SELECT sum(m12) as j12, sum(m11) as j11, sum(m10) as j10, sum(m9) as j9, sum(m8) as j8, sum(m7) as j7, sum(m6) as j6, sum(m5) as j5, sum(m4) as j4, sum(m3) as j3, sum(m2) as j2, sum(m1) as j1 FROM ( SELECT DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt, DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m')dojm, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M12, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M11, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M10, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M9, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M8, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M7, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M6, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M5, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M4, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M3, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M2, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M1, DATE_FORMAT(emp.joining_date, '%Y-%m') monyr FROM employees emp, pay_run_summary prs, pay_run_summary_components prsc WHERE emp.company_id = 1 AND emp.id = prs.employee_id AND emp.company_id = prs.company_id AND prsc.company_id = prs.company_id AND prsc.pay_run_summary_id = prs.id AND prsc.employee_id = emp.id AND prsc.component_id = 1 AND (( DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') >= '".$thisyearfirstmonth."') AND ( DATE_FORMAT(CONCAT(prs.pay_year, '-',prs.pay_month, '-','01'), '%Y-%m') <= '".$thisyearfirstmonth."')) AND prsc.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') )ELSE ( emp.vendor_id = ( SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."' ) ) END ) ) a";
-         $salarygraphres = $callConfig->getRow($salarygraph);
-         $passsalarygraphres = array();
-         if ($salarygraphres) {
-             foreach($salarygraphres as $sqkey=>$sqq){
-                 $passsalarygraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
-             }
-         }
-         $data['salarygraphres'] = $passsalarygraphres;
+        $query = "SELECT SUM(if(emp.gender='M',1,0)) as male, SUM(if(emp.gender='F',1,0))as female, count(DISTINCT(emp.reporting_manager_id)) as manger_count, COUNT(emp.id) as em_count FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL]."' ) ) END) ";
+        $data['daterangenemp'] = $callConfig->getRow($query);
 
-         $query = "SELECT id,designation_name FROM designations WHERE company_id={$get[self::KEY_COMPANY_ID]} AND is_active=0";
+        $sqqlgraph = "SELECT sum(m12) as j12, sum(m11) as j11, sum(m10) as j10, sum(m9) as j9, sum(m8) as j8, sum(m7) as j7, sum(m6) as j6, sum(m5) as j5, sum(m4) as j4, sum(m3) as j3, sum(m2) as j2, sum(m1) as j1, sum(lm12) as r12, sum(lm11) as r11, sum(lm10) as r10, sum(lm9) as r9, sum(lm8) as r8, sum(lm7) as r7, sum(lm6) as r6, sum(lm5) as r5, sum(lm4) as r4, sum(lm3) as r3, sum(lm2) as r2, sum(lm1) as r1 FROM ( SELECT DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt, DATE_FORMAT(emp.joining_date, '%Y-%m')dojm, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) THEN 1 END M12, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) THEN 1 END M11, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) THEN 1 END M10, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' ) THEN 1 END M9, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' ) THEN 1 END M8, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' ) THEN 1 END M7, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' ) THEN 1 END M6, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' ) THEN 1 END M5, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' ) THEN 1 END M4, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' ) THEN 1 END M3, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' ) THEN 1 END M2, CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' ) THEN 1 END M1, DATE_FORMAT(emp.joining_date, '%Y-%m') monyr, DATE_FORMAT(emp.date_of_leaving, '%Y-%m')dolm, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) THEN 1 END LM12, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) THEN 1 END LM11, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) THEN 1 END LM10, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' ) THEN 1 END LM8, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' ) THEN 1 END LM8, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' ) THEN 1 END LM7, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' ) THEN 1 END LM6, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' ) THEN 1 END LM5, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' ) THEN 1 END LM4, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' ) THEN 1 END LM3, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' ) THEN 1 END LM2, CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' ) THEN 1 END LM1, DATE_FORMAT(emp.date_of_leaving, '%Y-%m') lmonyrl FROM employees emp WHERE emp.company_id = 1 AND ( (emp.joining_date >= '".$thisyearfirstmonthlastdate.self::SQL_COND_AND_EMP_JOINING_DATE.$endate."') OR (emp.date_of_leaving >= '".$thisyearfirstmonthlastdate.self::SQL_COND_AND_EMP_DATE_OF_LEAVING.$endate."') ) AND emp.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') ) ELSE( emp.vendor_id = (SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'))END))a";
+        $sqqlgraphres = $callConfig->getRow($sqqlgraph);
+        $passsqqlgraphres = array();
+        if ($sqqlgraphres) {
+            foreach($sqqlgraphres as $sqkey=>$sqq){
+                $passsqqlgraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+            }
+        }
+        $data['graphjoinandleave'] = $passsqqlgraphres;
+
+        $salarygraph = "SELECT sum(m12) as j12, sum(m11) as j11, sum(m10) as j10, sum(m9) as j9, sum(m8) as j8, sum(m7) as j7, sum(m6) as j6, sum(m5) as j5, sum(m4) as j4, sum(m3) as j3, sum(m2) as j2, sum(m1) as j1 FROM ( SELECT DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt, DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m')dojm, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M12, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M11, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M10, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M9, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M8, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M7, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M6, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M5, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M4, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M3, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M2, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M1, DATE_FORMAT(emp.joining_date, '%Y-%m') monyr FROM employees emp, pay_run_summary prs, pay_run_summary_components prsc WHERE emp.company_id = 1 AND emp.id = prs.employee_id AND emp.company_id = prs.company_id AND prsc.company_id = prs.company_id AND prsc.pay_run_summary_id = prs.id AND prsc.employee_id = emp.id AND prsc.component_id = 1 AND (( DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') >= '".$thisyearfirstmonth."') AND ( DATE_FORMAT(CONCAT(prs.pay_year, '-',prs.pay_month, '-','01'), '%Y-%m') <= '".$thisyearfirstmonth."')) AND prsc.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') )ELSE ( emp.vendor_id = ( SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."' ) ) END ) ) a";
+        $salarygraphres = $callConfig->getRow($salarygraph);
+        $passsalarygraphres = array();
+        if ($salarygraphres) {
+            foreach($salarygraphres as $sqkey=>$sqq){
+                $passsalarygraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
+            }
+        }
+        $data['salarygraphres'] = $passsalarygraphres;
+    }
+
+    protected function populateDesignationsAndDepartments(&$data, $company_id) {
+        global $callConfig;
+        $query = "SELECT id,designation_name FROM designations WHERE company_id={$company_id} AND is_active=0";
         $res = $callConfig->getAllRows($query);
         $designation_arr = array();
         foreach ($res as $row) {
@@ -5497,177 +5017,55 @@ public function getProcurementVendorLedger($get){
         }
         $data['designation_arr'] = $designation_arr;
 
-        $query = "SELECT id,department_name FROM departments WHERE company_id={$get[self::KEY_COMPANY_ID]} AND is_active=0";
+        $query = "SELECT id,department_name FROM departments WHERE company_id={$company_id} AND is_active=0";
         $res = $callConfig->getAllRows($query);
         $department_arr = array();
         foreach ($res as $row) {
             $department_arr[$row->id] = $row;
         }
         $data['department_arr'] = $department_arr;
-         return $data;
     }
+    public function togetmobileadminhrdashboard($get){
+        global $callConfig;
+        $endate = date('Y').self::CONST_12_31;
+        $thisyearfirstmonthlastdate = date('Y') . "-01-01";
+        $thisyearfirstmonth = date('Y') . "-01";
+        $today_date = $get['dash_date'] != "" ? $get['dash_date'] : date(self::DATE_FORMAT_YMD);
+        $yesterday = date(self::DATE_FORMAT_YMD, strtotime($today_date . " -1 day"));
+        $division_whr = "";
+
+        $sql = "SELECT emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image, emp.reporting_manager_id FROM `employees` emp WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
+        $empdatas = $callConfig->getAllRows($sql);
+
+        $data = array();
+        $allemplist = array();
+        $this->populateEmployeeDemographics($data, $allemplist, $empdatas);
+        $today_count = $this->populateAttendanceAndLeaves($data, $get, $empdatas, $allemplist, $today_date, $endate, $division_whr);
+        $this->populateYesterdayAndTrendMetrics($data, $get, $today_date, $yesterday, $endate, $division_whr, $today_count, count((array)$empdatas));
+        $this->populateGatewayAndRequests($data, $get, $today_date);
+        $this->populateOngoingOperations($data, $get, $today_date);
+        $this->populateJoiningLeavingGraphs($data, $get, $thisyearfirstmonthlastdate, $thisyearfirstmonth, $endate);
+        $this->populateDesignationsAndDepartments($data, $get[self::KEY_COMPANY_ID]);
+        return $data;
+    }
+
     public function backviewtogetmobileadminhrdashboard($get){
-         global $callConfig;
-         $endate = date('Y').self::CONST_12_31;
-        //new
-         if($get['dash_date']!=""){
-            $today_date = $get['dash_date'];
-        }else{
-            $today_date = date(self::DATE_FORMAT_YMD);
-        }
-        //Get Total Eployeees
-         $sql ="SELECT id, display_name, email_id, employee_type, '' as other FROM `employees` emp WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
+        global $callConfig;
+        $endate = date('Y').self::CONST_12_31;
+        $today_date = $get['dash_date'] != "" ? $get['dash_date'] : date(self::DATE_FORMAT_YMD);
 
-         $empdatas = $callConfig->getAllRows($sql);
-         $allemplist = array();
-         $data[self::KEY_TODAY_ATTENDANTS]['total_emp'] =count((array)$empdatas);
-         foreach($empdatas as $empdatas1){
-             $data[self::KEY_TODAY_ATTENDANTS]['total_emp_ids'][] =$empdatas1;
-             $allemplist[$empdatas1->id] = $empdatas1;
-             if($empdatas1->employee_type == '1'){
-                 $data[self::KEY_TODAY_ATTENDANTS]['regular_emp_ids'][] =$empdatas1;
-             }elseif($empdatas1->employee_type == '2'){
-                 $data[self::KEY_TODAY_ATTENDANTS]['contract_emp_ids'][] =$empdatas1;
-             }
+        $sql = "SELECT id, display_name, email_id, employee_type, '' as other FROM `employees` emp WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
+        $empdatas = $callConfig->getAllRows($sql);
 
-        }
-        //Get Today Attendance Eployeees
-         $attendancequery = "SELECT emp.id, emp.display_name,emp.email_id, '' as other from employees emp, employee_daily_attendances eda WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EDA_COMPANY_ID_EMP_COM.$today_date.self::SQL_COND_AND_EDA_IS_ACTIVE_EMP_IS_ACTIV;
-         $attendata = $callConfig->getAllRows($attendancequery);
-         $data[self::KEY_TODAY_ATTENDANTS][self::KEY_PRESENT] =count((array)$attendata);
-         $data[self::KEY_TODAY_ATTENDANTS]['present_ids'] = array();
-         foreach($attendata as $empdatas2){
-             $data[self::KEY_TODAY_ATTENDANTS]['present_ids'][] =$empdatas2;
-             unset($allemplist[$empdatas2->id]);
-        }
-        foreach($allemplist as $adsaaa){
-            $onads[] =  $adsaaa;
-        }
-         $data['totalpressent'] = count((array)$attendata);
-         $data[self::KEY_TODAY_ATTENDANTS]['absent_ids'] = $onads;
-
-        //Get Today Planed Leaves Eployeees
-         $prsday = date(self::DATE_FORMAT_YMD, strtotime(self::STR_PLUS_1_DAY, strtotime($today_date)));
-         $leaves = "SELECT el.id AS leave_id, emp.id, emp.display_name, emp.email_id, emp.emp_code,emp.phone,emp.image, CONCAT(el.leave_from, ' - ', el.leave_to) as other FROM `employees` emp, employee_leaves el WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_EMP_IS_ACTIVE_0_AND_CASE_W.$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_SELECT_ELSE_EMP_VENDOR_ID_SELECT_ID_F.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EMP_COMPANY_ID_EL_COMP.$prsday."' AND el.leave_to >= '".$today_date.self::SQL_COND_AND_EL_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
-         $leavesdata = $callConfig->getAllRows($leaves);
-         $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'] = array();
-         foreach($leavesdata as $empdatas3){
-             $empdatas3->type = self::TBL_EMPLOYEE_LEAVES;
-             $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'][] =$empdatas3;
-        }
-         $empcnt = count((array)$leavesdata)!="0"?count((array)$leavesdata):0;
-         $attendataempcnt =count((array)$attendata)!="0"?count((array)$attendata):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['planned_leave'] =$empcnt;
-         $data[self::KEY_TODAY_ATTENDANTS]['absent'] =count((array)$empdatas)-($empcnt+$attendataempcnt);
-         $data['totalabsent'] =count((array)$empdatas)-($empcnt+$attendataempcnt);
-
-
-         $pending_leave_query = self::SQL_SELECT_SELECT_EL_ID_AS_EMP_LEAVE_ID_E.$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0  AND ( CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_COND_THEN_1_WHEN_EMP_DATE_OF_LEAVIN.$get[self::KEY_ADMIN_TYPE].self::SQL_COND_OR_EMP_REPORTING_MANAGER_ID.$get[self::KEY_USER_ID].self::SQL_COND_OR_EMP_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_COND_OR_EMP_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_SELECT_ELSE_EMP_VENDOR_ID_SELECT_ID_F_74.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EMP_COMPANY_ID_EL_COMP_73.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
-        $pending_leave_data = $callConfig->getAllRows($pending_leave_query);
-        $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_ids'] = array();
-        foreach($pending_leave_data as $pending_emp){
-            $pending_emp->type = self::TBL_EMPLOYEE_LEAVES;
-            $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_ids'][] = $pending_emp;
-        }
-        $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_count'] = count((array)$pending_leave_data);
-
-         // Transport gateway
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'] = array();
-         $query = "SELECT tpg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, emp.gender, emp.phone, emp.image, emp.reporting_manager_id,  emp.designation_id, emp.department_id, CONCAT('Visit Purpose : ', tpg.visit_purpose) as other, GROUP_CONCAT(emp1.display_name) as emp_names FROM transport_gateway tpg
-            LEFT JOIN employees emp ON (emp.id = tpg.driver_name OR emp.id=tpg.user_id) AND emp.company_id = tpg.company_id AND emp.is_active=0
-            LEFT JOIN employees emp1 ON FIND_IN_SET(emp1.id, tpg.emp_ids) AND emp1.company_id = tpg.company_id  AND emp1.is_active = 0
-            WHERE  tpg.company_id={$get[self::KEY_COMPANY_ID]} AND tpg.is_active=0 AND ( tpg.entry_date ='".$today_date.self::SQL_COND_OR_TPG_EXIT_DATE.$today_date.self::SQL_COND_AND_TPG_IS_ACTIVE_0_GROUP_BY_T;
-
-         $transport_getway_data = $callConfig->getAllRows($query);
-         foreach($transport_getway_data as $transport_getway){
-             $transport_getway->type = self::TBL_TRANSPORT_GATEWAY;
-             $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'][] =$transport_getway;
-        }
-         $transport_getway_cnt = count((array)$transport_getway_data)!="0"?count((array)$transport_getway_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] =$transport_getway_cnt;
-
-         // Transport Personal  gateway
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'] = array();
-         $query = "SELECT tg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type,  emp.designation_id, emp.department_id, CONCAT('Visit Purpose : ', tg.visit_purpose) as other FROM transport_personal_gateway tg, employees emp WHERE emp.id = tg.user_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_ENTRY_DATE.$today_date.self::SQL_COND_AND_TG_IS_ACTIVE_0;
-         $transport_personal_gateway = $callConfig->getAllRows($query);
-         foreach($transport_personal_gateway as $transport_getway){
-             $transport_getway->type = self::TBL_TRANSPORT_PERSONAL_GATEWAY;
-             $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'][] =$transport_getway;
-        }
-         $transport_personal_gateway_cnt = count((array)$transport_personal_gateway)!="0"?count((array)$transport_personal_gateway):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] =$transport_personal_gateway_cnt;
-
-         // Leave
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'] = array();
-         $query = "SELECT tg.id, emp.id, emp.emp_code, emp.display_name, emp.email_id,  CONCAT(tg.leave_from, ' - ', tg.leave_to) as other FROM employee_leaves tg, employees emp WHERE emp.id = tg.employee_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_LEAVE_FROM.$today_date.self::SQL_COND_AND_TG_IS_ACTIVE_0;
-         $employee_leaves_data = $callConfig->getAllRows($query);
-         foreach($employee_leaves_data as $employee_leave){
-             $employee_leave->type = self::TBL_EMPLOYEE_LEAVES;
-             $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'][] =$employee_leave;
-        }
-         $transport_personal_gateway_cnt = count((array)$employee_leaves_data)!="0"?count((array)$employee_leaves_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] =$transport_personal_gateway_cnt;
-        // stationery
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'] = array();
-
-         $query = "SELECT sr.id stationery_request_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, '' as other FROM stationery_requests sr, employees emp WHERE emp.id = sr.emp_id AND sr.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_SR_REQUEST_DATE.$today_date."' AND sr.is_active = 0";
-         $stationery_requests = $callConfig->getAllRows($query);
-         foreach($stationery_requests as $row){
-             $row->type = self::TBL_STATIONERY_REQUESTS;
-             $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'][] =$row;
-        }
-         $stationery_requests_cnt = count((array)$stationery_requests)!="0"?count((array)$stationery_requests):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = $stationery_requests_cnt;
-
-         // assets
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'] = array();
-
-         $query = "SELECT ar.id asset_request_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, '' as other FROM asset_requests ar, employees emp WHERE emp.user_id = ar.originator AND ar.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_AR_ASSET_REQUIRED_START_DA.$today_date."' AND ar.is_active = 0";
-         $asset_requests = $callConfig->getAllRows($query);
-         foreach($asset_requests as $row){
-             $row->type = self::TBL_ASSET_REQUESTS;
-             $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'][] =$row;
-        }
-         $asset_requests_cnt = count((array)$asset_requests)!="0"?count((array)$asset_requests):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = $asset_requests_cnt;
-
-         // attenmiss punch
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'] = array();
-         $query = "SELECT emp.id, emp.emp_code, emp.display_name, emp.email_id,CONCAT('Clock : ', tg.clock_in, ' - ' , tg.clock_out ) as other FROM employee_daily_attendances tg, employees emp WHERE emp.id = tg.employee_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_ATTENDACE_DATE.$today_date."' AND `attendance_key_short_code` IN ('Z','MP') AND tg.is_active = 0";
-         $employee_miss_data = $callConfig->getAllRows($query);
-         foreach($employee_miss_data as $employee_leave){
-             $employee_leave->type = self::TBL_EMPLOYEE_DAILY_ATTENDANCES;
-             $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'][] =$employee_leave;
-        }
-         $miss_cnt = count((array)$employee_miss_data)!="0"?count((array)$employee_miss_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] =$miss_cnt;
-
-         $query = "SELECT id,designation_name FROM designations WHERE company_id={$get[self::KEY_COMPANY_ID]} AND is_active=0";
-        $res = $callConfig->getAllRows($query);
-        $designation_arr = array();
-        foreach ($res as $row) {
-            $designation_arr[$row->id] = $row;
-        }
-        $data['designation_arr'] = $designation_arr;
-
-        $query = "SELECT id,department_name FROM departments WHERE company_id={$get[self::KEY_COMPANY_ID]} AND is_active=0";
-        $res = $callConfig->getAllRows($query);
-        $department_arr = array();
-        foreach ($res as $row) {
-            $department_arr[$row->id] = $row;
-        }
-        $data['department_arr'] = $department_arr;
-         return $data;
+        $data = array();
+        $allemplist = array();
+        $this->populateEmployeeDemographics($data, $allemplist, $empdatas);
+        $this->populateAttendanceAndLeaves($data, $get, $empdatas, $allemplist, $today_date, $endate);
+        $this->populateGatewayAndRequests($data, $get, $today_date);
+        $this->populateDesignationsAndDepartments($data, $get[self::KEY_COMPANY_ID]);
+        return $data;
     }
-    public function togetmobileadminhrviewtopemplist($get){
+public function togetmobileadminhrviewtopemplist($get){
         global $callConfig;
         $res = $this->backviewtogetmobileadminhrdashboard($get);
 
@@ -5809,38 +5207,19 @@ public function searchStationeryItemsByCategory($get) {
         $callConfig->updateRecord('stationery_cart', $update_array, 'id', $cartId);
     }
 
-    private function addStationeryCartItem($companyId, $userId, $itemId, $qty, $cartId){
+        private function addStationeryCartItem($companyId, $userId, $itemId, $qty, $cartId){
         global $callConfig;
-        if (!empty($cartId)) {
-            $check_query = "SELECT id, qty FROM stationery_cart
-                            WHERE id = '{$cartId}'
-                              AND company_id = '{$companyId}'
-                              AND user_id = '{$userId}'
-                              AND item_id = '{$itemId}'
-                              AND request_no IS NULL
-                              AND is_active = 0
-                            LIMIT 1";
-            $existing = $callConfig->getRow($check_query);
-            if ($existing && $existing->id) {
-                $new_qty = intval($existing->qty) + $qty;
-                $this->updateStationeryCartQty($existing->id, $new_qty, $userId);
-                return [true, $existing->id, $new_qty, null];
-            }
-            return [false, $cartId, 0, "Cart item not found with provided cart_id"];
-        }
-
-        $check_query = "SELECT id, qty FROM stationery_cart
-                        WHERE company_id = '{$companyId}'
-                          AND user_id = '{$userId}'
-                          AND item_id = '{$itemId}'
-                          AND request_no IS NULL
-                          AND is_active = 0
-                        LIMIT 1";
+        $whr = !empty($cartId) ? "id = '{$cartId}' AND item_id = '{$itemId}'" : "item_id = '{$itemId}'";
+        $check_query = "SELECT id, qty FROM stationery_cart WHERE {$whr} AND company_id = '{$companyId}' AND user_id = '{$userId}' AND request_no IS NULL AND is_active = 0 LIMIT 1";
         $existing = $callConfig->getRow($check_query);
+
         if ($existing && $existing->id) {
             $new_qty = intval($existing->qty) + $qty;
             $this->updateStationeryCartQty($existing->id, $new_qty, $userId);
             return [true, $existing->id, $new_qty, null];
+        }
+        if (!empty($cartId)) {
+            return [false, $cartId, 0, "Cart item not found with provided cart_id"];
         }
 
         $insert_array = array(
@@ -5889,20 +5268,25 @@ public function searchStationeryItemsByCategory($get) {
         $cart_type = intval($post['cart_type']);
         $cart_id = isset($post['cart_id']) ? intval($post['cart_id']) : 0;
 
+        $errorMsg = null;
         if (empty($item_id) || $qty <= 0) {
-            return array(self::KEY_STATUS => self::KEY_ERROR, "msg" => "Invalid item_id or quantity");
-        }
-
-        if ($cart_type == 1) {
+            $errorMsg = "Invalid item_id or quantity";
+        } elseif ($cart_type == 1) {
             list($ok, $final_cart_id, $new_qty, $errMsg) = $this->addStationeryCartItem($company_id, $user_id, $item_id, $qty, $cart_id);
+            if (!$ok) {
+                $errorMsg = $errMsg;
+            }
         } elseif ($cart_type == 0) {
             list($ok, $final_cart_id, $new_qty, $errMsg) = $this->removeStationeryCartItem($company_id, $user_id, $qty, $cart_id);
+            if (!$ok) {
+                $errorMsg = $errMsg;
+            }
         } else {
-            return array(self::KEY_STATUS => self::KEY_ERROR, "msg" => "Invalid cart_type. Use 1 for ADD, 0 for REMOVE");
+            $errorMsg = "Invalid cart_type. Use 1 for ADD, 0 for REMOVE";
         }
 
-        if (!$ok) {
-            return array(self::KEY_STATUS => self::KEY_ERROR, "msg" => $errMsg);
+        if ($errorMsg !== null) {
+            return array(self::KEY_STATUS => self::KEY_ERROR, "msg" => $errorMsg);
         }
 
         $count_query = "SELECT SUM(qty) as total_items
@@ -6015,34 +5399,28 @@ public function searchStationeryItemsByCategory($get) {
         $get[self::KEY_TRANSACTION_DATE] = date(self::DATE_FORMAT_YMD);
         $rnd = $this->toGetApplicationSerialNumber(self::TBL_STATIONERY_REQUESTS,$get);
 
-        if (!$rnd) {
-            return array(
-                self::KEY_STATUS => self::KEY_ERROR,
-                "msg" => "Failed to generate serial number"
+        $request_res = null;
+        if ($rnd) {
+            $request_array = array(
+                self::KEY_COMPANY_ID => $company_id,
+                'request_no' => $rnd,
+                'request_date' => $request_date,
+                'require_date' => $require_date,
+                self::KEY_EMP_ID => $emp_id,
+                'request_comment' => $request_comment,
+                self::KEY_USER_ID => $user_id,
+                self::KEY_IS_ACTIVE => 0,
+                self::KEY_CURRENT_STATUS => 0,
+                self::KEY_CREATED_BY => $user_id,
+                self::KEY_CREATED_DATE => date(self::DATETIME_FORMAT_YMD_HIS)
             );
+            $request_res = $callConfig->insertRecord(self::TBL_STATIONERY_REQUESTS, $request_array);
         }
 
-        /* ===== 2. Create stationery_request record ===== */
-        $request_array = array(
-            self::KEY_COMPANY_ID => $company_id,
-            'request_no' => $rnd,
-            'request_date' => $request_date,
-            'require_date' => $require_date,
-            self::KEY_EMP_ID => $emp_id,
-            'request_comment' => $request_comment,
-            self::KEY_USER_ID => $user_id,
-            self::KEY_IS_ACTIVE => 0,
-            self::KEY_CURRENT_STATUS => 0,
-            self::KEY_CREATED_BY => $user_id,
-            self::KEY_CREATED_DATE => date(self::DATETIME_FORMAT_YMD_HIS)
-        );
-
-        $request_res = $callConfig->insertRecord(self::TBL_STATIONERY_REQUESTS, $request_array);
-
-        if (!isset($request_res[self::KEY_LASTID])) {
+        if (!$rnd || !isset($request_res[self::KEY_LASTID])) {
             return array(
                 self::KEY_STATUS => self::KEY_ERROR,
-                "msg" => "Failed to create stationery request",
+                "msg" => !$rnd ? "Failed to generate serial number" : "Failed to create stationery request",
                 "debug" => $request_res
             );
         }
@@ -6452,669 +5830,53 @@ public function searchStationeryItemsByCategory($get) {
         }
     }
 
-    public function togetmobilemanagerdashboard($get){
-         global $callConfig;
-         $endate = date('Y').self::CONST_12_31;
-         $thisyearfirstmonthlastdate = date('Y') . "-01-01";
-         $thisyearfirstmonth = date('Y') . "-01";
-         $thismonthstartdate = date(self::DATE_FORMAT_YMD, strtotime('first day of this month', time()));
-         $thismonthenddate = date(self::DATE_FORMAT_YMD, strtotime('last day of this month', time()));
-        //new
-        if($get['dash_date']!=""){
-            $today_date = $get['dash_date'];
-        }else{
-            $today_date = date(self::DATE_FORMAT_YMD);
-        }
-         $division_id = 1;
-        //Get Total Eployeees
-         $sql ="SELECT id, display_name, email_id, employee_type FROM `employees` emp WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND division_id='{$division_id}' AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
+        public function togetmobilemanagerdashboard($get){
+        global $callConfig;
+        $endate = date('Y').self::CONST_12_31;
+        $thisyearfirstmonthlastdate = date('Y') . "-01-01";
+        $thisyearfirstmonth = date('Y') . "-01";
+        $today_date = $get['dash_date'] != "" ? $get['dash_date'] : date(self::DATE_FORMAT_YMD);
+        $division_id = 1;
 
-         $empdatas = $callConfig->getAllRows($sql);
-         $allemplist = array();
-         $data[self::KEY_TODAY_ATTENDANTS]['total_emp'] =count((array)$empdatas);
-         foreach($empdatas as $empdatas1){
-             $data[self::KEY_TODAY_ATTENDANTS]['total_emp_ids'][] =$empdatas1;
-             $allemplist[$empdatas1->id] = $empdatas1;
-             if($empdatas1->employee_type == '1'){
-                 $data[self::KEY_TODAY_ATTENDANTS]['regular_emp_ids'][] =$empdatas1;
-             }elseif($empdatas1->employee_type == '2'){
-                 $data[self::KEY_TODAY_ATTENDANTS]['contract_emp_ids'][] =$empdatas1;
-             }
+        $sql = "SELECT id, display_name, email_id, employee_type FROM `employees` emp WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND division_id='{$division_id}' AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
+        $empdatas = $callConfig->getAllRows($sql);
 
-        }
-        //Get Today Attendance Eployeees
-         $attendancequery = "SELECT emp.id, emp.display_name,emp.email_id from employees emp, employee_daily_attendances eda WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 AND emp.division_id='{$division_id}' AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EDA_COMPANY_ID_EMP_COM.$today_date.self::SQL_COND_AND_EDA_IS_ACTIVE_EMP_IS_ACTIV;
-         $attendata = $callConfig->getAllRows($attendancequery);
-         $data[self::KEY_TODAY_ATTENDANTS][self::KEY_PRESENT] =count((array)$attendata);
-         $data[self::KEY_TODAY_ATTENDANTS]['present_ids'] = array();
-         foreach($attendata as $empdatas2){
-             $data[self::KEY_TODAY_ATTENDANTS]['present_ids'][] =$empdatas2;
-             unset($allemplist[$empdatas2->id]);
-        }
-        foreach($allemplist as $adsaaa){
-            $onads[] =  $adsaaa;
-        }
-         $data['totalpressent'] = count((array)$attendata);
-         $data[self::KEY_TODAY_ATTENDANTS]['absent_ids'] = $onads;
-        //Get Today Planed Leaves Eployeees
-         $leaves = "SELECT emp.id, emp.display_name,emp.email_id FROM `employees` emp, employee_leaves el WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 AND emp.division_id='{$division_id}' AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_SELECT_ELSE_EMP_VENDOR_ID_SELECT_ID_F.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EMP_COMPANY_ID_EL_COMP.$today_date."' AND el.leave_to >= '".$today_date.self::SQL_COND_AND_EL_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
-         $leavesdata = $callConfig->getAllRows($leaves);
-         $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'] = array();
-         foreach($leavesdata as $empdatas3){
-             $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'][] =$empdatas3;
-        }
-         $empcnt = count((array)$leavesdata)!="0"?count((array)$leavesdata):0;
-         $attendataempcnt =count((array)$attendata)!="0"?count((array)$attendata):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['planned_leave'] =$empcnt;
-         $data[self::KEY_TODAY_ATTENDANTS]['absent'] =count((array)$empdatas)-($empcnt+$attendataempcnt);
-         $data['totalabsent'] =count((array)$empdatas)-($empcnt+$attendataempcnt);
-         // Transport gateway
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'] = array();
-         $query = "SELECT tg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type FROM transport_gateway tg, employees emp WHERE emp.id = tg.user_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_ENTRY_DATE.$today_date."' AND tg.is_active = 0 AND emp.division_id='{$division_id}'";
-         $transport_getway_data = $callConfig->getAllRows($query);
-         foreach($transport_getway_data as $transport_getway){
-             $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'][] =$transport_getway;
-        }
-         $transport_getway_cnt = count((array)$transport_getway_data)!="0"?count((array)$transport_getway_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] =$transport_getway_cnt;
-
-         // Transport Personal  gateway
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'] = array();
-         $query = "SELECT tg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type FROM transport_personal_gateway tg, employees emp WHERE emp.id = tg.user_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_ENTRY_DATE.$today_date."' AND tg.is_active = 0 AND emp.division_id='{$division_id}'";
-         $transport_personal_gateway = $callConfig->getAllRows($query);
-         foreach($transport_personal_gateway as $transport_getway){
-             $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'][] =$transport_getway;
-        }
-         $transport_personal_gateway_cnt = count((array)$transport_personal_gateway)!="0"?count((array)$transport_personal_gateway):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] =$transport_personal_gateway_cnt;
-
-         // Leave
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'] = array();
-         $query = "SELECT tg.id, emp.id, emp.emp_code, emp.display_name, emp.email_id FROM employee_leaves tg, employees emp WHERE emp.id = tg.employee_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_LEAVE_FROM.$today_date."' AND tg.is_active = 0 AND emp.division_id='{$division_id}'";
-         $employee_leaves_data = $callConfig->getAllRows($query);
-         foreach($employee_leaves_data as $employee_leave){
-             $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'][] =$employee_leave;
-        }
-         $transport_personal_gateway_cnt = count((array)$employee_leaves_data)!="0"?count((array)$employee_leaves_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] =$transport_personal_gateway_cnt;
-         // stationery
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'] = array();
-
-         $query = "SELECT sr.id stationery_request_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, '' as other FROM stationery_requests sr, employees emp WHERE emp.id = sr.emp_id AND sr.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_SR_REQUEST_DATE.$today_date."' AND sr.is_active = 0 AND emp.division_id='{$division_id}'";
-         $stationery_requests = $callConfig->getAllRows($query);
-         foreach($stationery_requests as $row){
-             $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'][] =$row;
-        }
-         $stationery_requests_cnt = count((array)$stationery_requests)!="0"?count((array)$stationery_requests):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = $stationery_requests_cnt;
-
-         // assets
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'] = array();
-
-         $query = "SELECT ar.id asset_request_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, '' as other FROM asset_requests ar, employees emp WHERE emp.user_id = ar.originator AND ar.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_AR_ASSET_REQUIRED_START_DA.$today_date."' AND ar.is_active = 0 AND emp.division_id='{$division_id}'";
-         $asset_requests = $callConfig->getAllRows($query);
-         foreach($asset_requests as $row){
-             $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'][] =$row;
-        }
-         $asset_requests_cnt = count((array)$asset_requests)!="0"?count((array)$asset_requests):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = $asset_requests_cnt;
-
-
-         // attenmiss punch
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'] = array();
-         $query = "SELECT emp.id, emp.emp_code, emp.display_name, emp.email_id FROM employee_daily_attendances tg, employees emp WHERE emp.id = tg.employee_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_ATTENDACE_DATE.$today_date."' AND `attendance_key_short_code` IN ('Z','MP') AND tg.is_active = 0 AND emp.division_id='{$division_id}'";
-         $employee_miss_data = $callConfig->getAllRows($query);
-         foreach($employee_miss_data as $employee_leave){
-             $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'][] =$employee_leave;
-        }
-         $miss_cnt = count((array)$employee_miss_data)!="0"?count((array)$employee_miss_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] =$miss_cnt;
-
-
-        //Get regular,contact,male,female,manger_count,employees Count Eployeees
-         $query="SELECT SUM(if(emp.employee_type='1',1,0))as regular, SUM(if(emp.employee_type='2',1,0))as contact, COUNT(emp.id) as em_count FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 AND emp.division_id='{$division_id}' AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
-         $nempdata = $callConfig->getRow($query);
-         $data['nemp'] = $nempdata;
-
-        //Get Joing Employees
-         $mequery= "SELECT count(emp.id) as joinn FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.division_id='{$division_id}' AND ( CASE WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END)= 1 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID]."') OR (emp.hr_buddy) = '".$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') ELSE( emp.vendor_id = ( SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."' ) ) END ) AND emp.joining_date >= '".$thismonthstartdate.self::SQL_COND_AND_EMP_JOINING_DATE.$thismonthenddate.self::SQL_COND_AND_IS_ACTIVE_0_26;
-         $medata = $callConfig->getRow($mequery);
-         $data['joining'] = $medata->joinn;
-
-        //Get leaving Employees
-         $mequery= "SELECT count(emp.id) as realving FROM employees emp WHERE emp.date_of_leaving >= '".$thismonthstartdate.self::SQL_COND_AND_EMP_DATE_OF_LEAVING.$thismonthenddate."' AND emp.date_of_leaving IS NOT NULL AND emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.division_id='{$division_id}' AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL]."' ) ) END ) AND  is_active=0";
-         $medata1 = $callConfig->getRow($mequery);
-         $data['relive'] = $medata1->realving;
-
-         $query="SELECT SUM(if(emp.gender='M',1,0)) as male, SUM(if(emp.gender='F',1,0))as female, count(DISTINCT(emp.reporting_manager_id)) as manger_count, COUNT(emp.id) as em_count FROM employees emp WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 AND emp.division_id='{$division_id}' AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL]."' ) ) END) ";
-         //AND emp.joining_date >= '".$thismonthstartdate.self::SQL_COND_AND_EMP_JOINING_DATE.$thismonthenddate."'
-         $nempdata = $callConfig->getRow($query);
-         $data['daterangenemp'] = $nempdata;
-         $sqqlgraph = "SELECT sum(m12) as j12,
-         sum(m11) as j11,
-         sum(m10) as j10,
-         sum(m9) as j9,
-         sum(m8) as j8,
-         sum(m7) as j7,
-         sum(m6) as j6,
-         sum(m5) as j5,
-         sum(m4) as j4,
-         sum(m3) as j3,
-         sum(m2) as j2,
-         sum(m1) as j1,
-         sum(lm12) as r12,
-         sum(lm11) as r11,
-         sum(lm10) as r10,
-         sum(lm9) as r9,
-         sum(lm8) as r8,
-         sum(lm7) as r7,
-         sum(lm6) as r6,
-         sum(lm5) as r5,
-         sum(lm4) as r4,
-         sum(lm3) as r3,
-         sum(lm2) as r2,
-         sum(lm1) as r1
-         FROM    (
-         SELECT    DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt,
-         DATE_FORMAT(emp.joining_date, '%Y-%m')dojm,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' )
-         THEN 1
-         END M12,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' )
-         THEN 1
-         END M11,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' )
-         THEN 1
-         END M10,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' )
-         THEN 1
-         END M9,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' )
-         THEN 1
-         END M8,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' )
-         THEN 1
-         END M7,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' )
-         THEN 1
-         END M6,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' )
-         THEN 1
-         END M5,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' )
-         THEN 1
-         END M4,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' )
-         THEN 1
-         END M3,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' )
-         THEN 1
-         END M2,
-         CASE WHEN DATE_FORMAT(emp.joining_date, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' )
-         THEN 1
-         END M1,
-         DATE_FORMAT(emp.joining_date, '%Y-%m') monyr,
-         DATE_FORMAT(emp.date_of_leaving, '%Y-%m')dolm,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' )
-         THEN 1
-         END LM12,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' )
-         THEN 1
-         END LM11,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' )
-         THEN 1
-         END LM10,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' )
-         THEN 1
-         END LM9,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' )
-         THEN 1
-         END LM8,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' )
-         THEN 1
-         END LM7,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' )
-         THEN 1
-         END LM6,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' )
-         THEN 1
-         END LM5,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' )
-         THEN 1
-         END LM4,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' )
-         THEN 1
-         END LM3,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' )
-         THEN 1
-         END LM2,
-         CASE WHEN DATE_FORMAT(emp.date_of_leaving, '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' )
-         THEN 1
-         END LM1,
-         DATE_FORMAT(emp.date_of_leaving, '%Y-%m') lmonyrl
-         FROM     employees emp
-         WHERE    emp.company_id = 1 AND emp.division_id='{$division_id}'
-         AND       (
-         (emp.joining_date >= '".$thisyearfirstmonthlastdate.self::SQL_COND_AND_EMP_JOINING_DATE.$endate."')
-         OR (emp.date_of_leaving >= '".$thisyearfirstmonthlastdate.self::SQL_COND_AND_EMP_DATE_OF_LEAVING.$endate."')
-         )
-         AND emp.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') ) ELSE( emp.vendor_id = (SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'))END))a";
-
-         $sqqlgraphres = $callConfig->getRow($sqqlgraph);
-         $passsqqlgraphres = array();
-         if ($sqqlgraphres) {
-             foreach($sqqlgraphres as $sqkey=>$sqq){
-                 $passsqqlgraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
-             }
-         }
-         $data['graphjoinandleave'] = $passsqqlgraphres;
-         $salarygraph ="SELECT sum(m12) as j12, sum(m11) as j11, sum(m10) as j10, sum(m9) as j9, sum(m8) as j8, sum(m7) as j7, sum(m6) as j6, sum(m5) as j5, sum(m4) as j4, sum(m3) as j3, sum(m2) as j2, sum(m1) as j1 FROM ( SELECT DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 12 MONTH), '%Y-%m' )curdt, DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m')dojm, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 11 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M12, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 10 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M11, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 9 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M10, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 8 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M9, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 7 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M8, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 6 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M7, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 5 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M6, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 4 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M5, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 3 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M4, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 2 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M3, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 1 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M2, CASE WHEN DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') = DATE_FORMAT( ('".$thisyearfirstmonthlastdate."' - INTERVAL 0 MONTH), '%Y-%m' ) THEN prsc.salary_component_actual END M1, DATE_FORMAT(emp.joining_date, '%Y-%m') monyr FROM employees emp, pay_run_summary prs, pay_run_summary_components prsc WHERE emp.company_id = 1 AND emp.id = prs.employee_id AND emp.company_id = prs.company_id AND prsc.company_id = prs.company_id AND prsc.pay_run_summary_id = prs.id AND prsc.employee_id = emp.id AND prsc.component_id = 1 AND emp.division_id='{$division_id}' AND (( DATE_FORMAT(CONCAT(prs.pay_year, '-', prs.pay_month, '-','01'), '%Y-%m') >= '".$thisyearfirstmonth."') AND ( DATE_FORMAT(CONCAT(prs.pay_year, '-',prs.pay_month, '-','01'), '%Y-%m') <= '".$thisyearfirstmonth."')) AND prsc.is_active = 0 AND ( CASE WHEN '3' <> '1' THEN ( ('1' = '".$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID]."') )ELSE ( emp.vendor_id = ( SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."' ) ) END ) ) a";
-         $salarygraphres = $callConfig->getRow($salarygraph);
-         $passsalarygraphres = array();
-         if ($salarygraphres) {
-             foreach($salarygraphres as $sqkey=>$sqq){
-                 $passsalarygraphres[]=array('id'=>$sqkey,self::KEY_VALUE=>$sqq);
-             }
-         }
-         $data['salarygraphres'] = $passsalarygraphres;
-         return $data;
+        $data = array();
+        $allemplist = array();
+        $this->populateEmployeeDemographics($data, $allemplist, $empdatas);
+        $this->populateAttendanceAndLeaves($data, $get, $empdatas, $allemplist, $today_date, $endate);
+        $this->populateGatewayAndRequests($data, $get, $today_date);
+        $this->populateJoiningLeavingGraphs($data, $get, $thisyearfirstmonthlastdate, $thisyearfirstmonth, $endate);
+        return $data;
     }
+
     public function backviewtogetmobilemanagerdashboard($get){
-         global $callConfig;
-         $endate = date('Y').self::CONST_12_31;
-        //new
-         if($get['dash_date']!=""){
-            $today_date = $get['dash_date'];
-        }else{
-            $today_date = date(self::DATE_FORMAT_YMD);
-        }
-        // yesterday
+        global $callConfig;
+        $endate = date('Y').self::CONST_12_31;
+        $today_date = $get['dash_date'] != "" ? $get['dash_date'] : date(self::DATE_FORMAT_YMD);
         $yesterday = date(self::DATE_FORMAT_YMD, strtotime($today_date . " -1 day"));
 
-         $query = "SELECT division_id FROM employees WHERE (id='{$get[self::KEY_EMP_ID]}' OR user_id='{$get[self::KEY_USER_ID]}') AND company_id='{$get[self::KEY_COMPANY_ID]}' AND is_active=0";
-
-         $division_data = $callConfig->getRow($query);
-         $division_whr = "";
-         $division_id = 0;
-         if($division_data->division_id!=''){
-             $division_id = $division_data->division_id;
-             $division_whr = " AND emp.division_id=".$division_data->division_id;
-         }
-        //Get Total Eployeees
-         $sql ="SELECT emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image,  emp.reporting_manager_id FROM `employees` emp WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 $division_whr AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
-
-         $empdatas = $callConfig->getAllRows($sql);
-         $allemplist = array();
-         $data[self::KEY_TODAY_ATTENDANTS]['total_emp'] =count((array)$empdatas);
-         $male_count = 0;
-        $female_count = 0;
-        $manager_ids = array();
-         foreach($empdatas as $empdatas1){
-             $data[self::KEY_TODAY_ATTENDANTS]['total_emp_ids'][] =$empdatas1;
-             $allemplist[$empdatas1->id] = $empdatas1;
-             if($empdatas1->employee_type == '1'){
-                 $data[self::KEY_TODAY_ATTENDANTS]['regular_emp_ids'][] =$empdatas1;
-             }elseif($empdatas1->employee_type == '2'){
-                 $data[self::KEY_TODAY_ATTENDANTS]['contract_emp_ids'][] =$empdatas1;
-             }
-
-             if($empdatas1->gender == 'M'){
-                $male_count++;
-            }elseif($empdatas1->gender == 'F'){
-                $female_count++;
-            }
-            if(!empty($empdatas1->reporting_manager_id)){
-                $manager_ids[$empdatas1->reporting_manager_id] = 1; // unique
-            }
-        }
-        $total_emp_count = count((array)$empdatas);
-        $manager_count = count((array)$manager_ids);
-        $employee_count = $total_emp_count - $manager_count;
-
-        if($total_emp_count > 0){
-            $data[self::KEY_TODAY_ATTENDANTS]['manager_percentage'] = round(($manager_count / $total_emp_count) * 100, 2);
-            $data[self::KEY_TODAY_ATTENDANTS]['employee_percentage'] = round(($employee_count / $total_emp_count) * 100, 2);
-        }else{
-            $data[self::KEY_TODAY_ATTENDANTS]['manager_percentage'] = 0;
-            $data[self::KEY_TODAY_ATTENDANTS]['employee_percentage'] = 0;
+        $query = "SELECT division_id FROM employees WHERE (id='{$get[self::KEY_EMP_ID]}' OR user_id='{$get[self::KEY_USER_ID]}') AND company_id='{$get[self::KEY_COMPANY_ID]}' AND is_active=0";
+        $division_data = $callConfig->getRow($query);
+        $division_whr = "";
+        if(!empty($division_data->division_id)){
+            $division_whr = " AND emp.division_id=".$division_data->division_id;
         }
 
-        $data[self::KEY_TODAY_ATTENDANTS]['male_count'] = $male_count;
-        $data[self::KEY_TODAY_ATTENDANTS]['female_count'] = $female_count;
+        $sql = "SELECT emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image, emp.reporting_manager_id FROM `employees` emp WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 $division_whr AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::CONST_END;
+        $empdatas = $callConfig->getAllRows($sql);
 
-        if($total_emp_count > 0){
-            $data[self::KEY_TODAY_ATTENDANTS]['male_percentage'] = round(($male_count / $total_emp_count) * 100, 2);
-            $data[self::KEY_TODAY_ATTENDANTS]['female_percentage'] = round(($female_count / $total_emp_count) * 100, 2);
-        }else{
-            $data[self::KEY_TODAY_ATTENDANTS]['male_percentage'] = 0;
-            $data[self::KEY_TODAY_ATTENDANTS]['female_percentage'] = 0;
-        }
-        //Get Today Attendance Eployeees
-         $attendancequery = self::SQL_SELECT_SELECT_EMP_ID_EMP_DISPLAY_NAME.$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EDA_COMPANY_ID_EMP_COM.$today_date.self::SQL_COND_AND_EDA_IS_ACTIVE_EMP_IS_ACTIV;
-         $attendata = $callConfig->getAllRows($attendancequery);
-         $today_count = count((array)$attendata);
-         $data[self::KEY_TODAY_ATTENDANTS][self::KEY_PRESENT] =$today_count;
-         $data[self::KEY_TODAY_ATTENDANTS]['present_ids'] = array();
-         foreach($attendata as $empdatas2){
-             $data[self::KEY_TODAY_ATTENDANTS]['present_ids'][] =$empdatas2;
-             unset($allemplist[$empdatas2->id]);
-        }
-        foreach($allemplist as $adsaaa){
-            $onads[] =  $adsaaa;
-        }
-         $data['totalpressent'] = count((array)$attendata);
-         $data[self::KEY_TODAY_ATTENDANTS]['absent_ids'] = $onads;
-
-         //Get Yesterday Attendance Eployeees
-         $query = self::SQL_SELECT_SELECT_EMP_ID_EMP_DISPLAY_NAME.$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_EMP_VENDOR_EMAIL.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EDA_COMPANY_ID_EMP_COM.$yesterday.self::SQL_COND_AND_EDA_IS_ACTIVE_EMP_IS_ACTIV;
-         $result = $callConfig->getAllRows($query);
-         $yesterday_count = count((array)$result);
-         $data['yesterdayattendants'][self::KEY_PRESENT] =$yesterday_count;
-        if($yesterday_count > 0){
-            $percent_change = (($today_count - $yesterday_count) / $yesterday_count) * 100;
-        } else {
-            $percent_change = ($today_count > 0) ? 100 : 0; // handle divide by zero
-        }
-
-        $data['attendance_change_percent'] = round($percent_change, 2);
-
-        //Get Today Planed Leaves Eployeees
-         $prsday = date(self::DATE_FORMAT_YMD, strtotime(self::STR_PLUS_1_DAY, strtotime($today_date)));
-         $leaves = "SELECT el.id AS leave_id, emp.id, emp.display_name, emp.email_id, emp.emp_code,emp.phone,emp.image, CONCAT(el.leave_from, ' - ', el.leave_to) as other FROM `employees` emp, employee_leaves el WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_EMP_ACTIVE_CASE.$get[self::KEY_ADMIN_TYPE].self::SQL_OR_REPORTING_MANAGER.$get[self::KEY_USER_ID].self::SQL_OR_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_OR_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_SELECT_ELSE_EMP_VENDOR_ID_SELECT_ID_F.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EMP_COMPANY_ID_EL_COMP.$prsday."' AND el.leave_to >= '".$today_date.self::SQL_COND_AND_EL_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
-         $leavesdata = $callConfig->getAllRows($leaves);
-         $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'] = array();
-         foreach($leavesdata as $empdatas3){
-             $empdatas3->type = self::TBL_EMPLOYEE_LEAVES;
-             $data[self::KEY_TODAY_ATTENDANTS]['planned_leave_ids'][] =$empdatas3;
-        }
-         $empcnt = count((array)$leavesdata)!="0"?count((array)$leavesdata):0;
-         $attendataempcnt =count((array)$attendata)!="0"?count((array)$attendata):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['planned_leave'] =$empcnt;
-         $data[self::KEY_TODAY_ATTENDANTS]['absent'] =count((array)$empdatas)-($empcnt+$attendataempcnt);
-         $data['totalabsent'] =count((array)$empdatas)-($empcnt+$attendataempcnt);
-
-        $pending_leave_query = self::SQL_SELECT_SELECT_EL_ID_AS_EMP_LEAVE_ID_E.$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr AND ( CASE WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate.self::SQL_COND_THEN_1_WHEN_EMP_DATE_OF_LEAVIN.$get[self::KEY_ADMIN_TYPE].self::SQL_COND_OR_EMP_REPORTING_MANAGER_ID.$get[self::KEY_USER_ID].self::SQL_COND_OR_EMP_HR_BUDDY.$get[self::KEY_EMP_ID].self::SQL_COND_OR_EMP_FINANCE_BUDDY.$get[self::KEY_EMP_ID].self::SQL_SELECT_ELSE_EMP_VENDOR_ID_SELECT_ID_F_74.$get[self::KEY_USER_EMAIL].self::SQL_COND_END_AND_EMP_COMPANY_ID_EL_COMP_73.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
-        $pending_leave_data = $callConfig->getAllRows($pending_leave_query);
-        $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_ids'] = array();
-        foreach($pending_leave_data as $pending_emp){
-            $pending_emp->type = self::TBL_EMPLOYEE_LEAVES;
-            $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_ids'][] = $pending_emp;
-        }
-        $data[self::KEY_TODAY_ATTENDANTS]['pending_leave_count'] = count((array)$pending_leave_data);
-
-        $total_emp_count = count((array)$empdatas);
-        $data['last_7_days'] = array();
-
-        for($i = 1; $i <= 7; $i++){
-            $trend_date = date(self::DATE_FORMAT_YMD, strtotime($today_date . " -".$i." day"));
-            $trend_key  = "day".$i;
-            // Present count
-            $attendancequery = "SELECT emp.id FROM employees emp, employee_daily_attendances eda
-                WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr
-                AND (CASE
-                        WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate."') THEN 1
-                        WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0) THEN 1
-                        ELSE 2
-                    END
-                ) = 1
-                AND (CASE
-                        WHEN '3' <> '1' THEN (
-                            ('1' = '".$get[self::KEY_ADMIN_TYPE]."')
-                            OR (emp.reporting_manager_id = '".$get[self::KEY_USER_ID]."')
-                            OR (emp.hr_buddy = '".$get[self::KEY_EMP_ID]."')
-                            OR (emp.finance_buddy = '".$get[self::KEY_EMP_ID]."')
-                        )ELSE (
-                            emp.vendor_id = (
-                                SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'
-                            )) END
-                ) AND eda.company_id = emp.company_id AND eda.employee_id = emp.id AND eda.attendace_date = '".$trend_date."' AND eda.is_active = emp.is_active GROUP BY emp.id";
-
-            $attendance_data = $callConfig->getAllRows($attendancequery);
-            $present_count = count((array)$attendance_data);
-
-            // On leave count for that date
-            $next_day = date(self::DATE_FORMAT_YMD, strtotime($trend_date . ' +1 day'));
-            $leavequery = "SELECT emp.id FROM employees emp, employee_leaves el
-                WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 $division_whr
-                AND (CASE
-                        WHEN (emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= '".$endate."') THEN 1
-                        WHEN (emp.date_of_leaving IS NULL AND emp.is_active = 0) THEN 1
-                        ELSE 2
-                    END
-                ) = 1
-                AND (CASE
-                        WHEN '3' <> '1' THEN (
-                            ('1' = '".$get[self::KEY_ADMIN_TYPE]."')
-                            OR (emp.reporting_manager_id = '".$get[self::KEY_USER_ID]."')
-                            OR (emp.hr_buddy = '".$get[self::KEY_EMP_ID]."')
-                            OR (emp.finance_buddy = '".$get[self::KEY_EMP_ID]."')
-                        )
-                        ELSE (
-                            emp.vendor_id = (
-                                SELECT id FROM vendors ven2 WHERE ven2.email = '".$get[self::KEY_USER_EMAIL]."'
-                            )) END
-                ) AND emp.company_id = el.company_id AND emp.id = el.employee_id AND (el.leave_from <= '".$next_day."' AND el.leave_to >= '".$trend_date.self::SQL_COND_AND_EL_CURRENT_STATUS.ST_APPROVED.self::SQL_COND_AND_EL_IS_ACTIVE_0;
-
-            $leave_data = $callConfig->getAllRows($leavequery);
-            $leave_count = count((array)$leave_data);
-
-            $absent_count = $total_emp_count - ($present_count + $leave_count);
-            if($absent_count < 0){
-                $absent_count = 0;
-            }
-
-            $data['last_7_days'][] = array(
-                'key'     => $trend_key,
-                self::KEY_VALUE   => $trend_date,
-                'total'   => $total_emp_count,
-                self::KEY_PRESENT => $present_count,
-                'absent'  => $absent_count,
-                'on_leave'=> $leave_count
-            );
-        }
-
-        $resigned_employees_query = "SELECT emp.id, emp.display_name, emp.email_id, emp.gender, emp.employee_type, '' as other, emp.emp_code, emp.phone, emp.image, emp.reporting_manager_id, et.employee_leaving_date, COUNT(ea.id) AS asset_count
-        FROM employees emp
-        INNER JOIN employee_terminations et ON et.emp_id = emp.id AND et.company_id = emp.company_id AND et.is_active = 0
-        LEFT JOIN employee_assets ea ON ea.emp_id = emp.id AND ea.company_id = emp.company_id AND ea.is_active = 0
-        WHERE emp.company_id = '".$get[self::KEY_COMPANY_ID]."' AND emp.is_active = 0 GROUP BY emp.id,emp.display_name,emp.email_id,emp.gender,emp.employee_type,emp.emp_code,emp.phone,emp.image,emp.reporting_manager_id";
-
-        $resigned_employees = $callConfig->getAllRows($resigned_employees_query);
-        $data['resigned_employees'] = $resigned_employees;
-        $data['resigned_employees_count'] = count((array)$resigned_employees);
-
-        $is_holiday = 'N';
-        $holiday_year = date('Y', strtotime($today_date));
-        $holiday_query = "SELECT id FROM holidays  WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND holiday_year = '".$holiday_year."' AND holiday_date = '".$today_date.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $holiday_result = $callConfig->getAllRows($holiday_query);
-        if(count((array)$holiday_result)>0){
-            $is_holiday = 'Y';
-        }
-        $data['is_holiday'] = $is_holiday;
-
-         // Transport gateway
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'] = array();
-         $query = "SELECT tpg.id transport_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, emp.gender, emp.phone, emp.image, emp.reporting_manager_id, emp.designation_id, emp.department_id, CONCAT('Visit Purpose : ', tpg.visit_purpose) as other, GROUP_CONCAT(emp1.display_name) as emp_names FROM transport_gateway tpg
-            LEFT JOIN employees emp ON (emp.id = tpg.driver_name OR emp.id=tpg.user_id) AND emp.company_id = tpg.company_id AND emp.is_active=0 $division_whr
-            LEFT JOIN employees emp1 ON FIND_IN_SET(emp1.id, tpg.emp_ids) AND emp1.company_id = tpg.company_id AND emp1.division_id = '{$division_id}' AND emp1.is_active = 0
-            WHERE  tpg.company_id={$get[self::KEY_COMPANY_ID]} AND tpg.is_active=0 AND ( tpg.entry_date ='".$today_date.self::SQL_COND_OR_TPG_EXIT_DATE.$today_date.self::SQL_COND_AND_TPG_IS_ACTIVE_0_GROUP_BY_T;
-         $transport_getway_data = $callConfig->getAllRows($query);
-         foreach($transport_getway_data as $transport_getway){
-            $transport_getway->type = self::TBL_TRANSPORT_GATEWAY;
-             $data[self::KEY_TODAY_ATTENDANTS]['transport_getway_ids'][] =$transport_getway;
-        }
-         $transport_getway_cnt = count((array)$transport_getway_data)!="0"?count((array)$transport_getway_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_getway'] =$transport_getway_cnt;
-
-         // Transport Personal  gateway
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'] = array();
-         $query = "SELECT tg.id transport_personal_gateway_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, emp.gender, emp.phone, emp.image, emp.reporting_manager_id, emp.designation_id, emp.department_id, CONCAT('Visit Purpose : ', tg.visit_purpose) as other FROM transport_personal_gateway tg, employees emp WHERE emp.id = tg.user_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID]."  AND (tg.entry_date ='".$today_date."'  OR tg.exit_date ='".$today_date."') AND tg.is_active = 0 $division_whr";
-         $transport_personal_gateway = $callConfig->getAllRows($query);
-         foreach($transport_personal_gateway as $transport_getway){
-             $transport_getway->type = self::TBL_TRANSPORT_PERSONAL_GATEWAY;
-             $data[self::KEY_TODAY_ATTENDANTS]['transport_personal_gateway_ids'][] =$transport_getway;
-        }
-         $transport_personal_gateway_cnt = count((array)$transport_personal_gateway)!="0"?count((array)$transport_personal_gateway):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_TRANSPORT_PERSONAL_GATEWAY] =$transport_personal_gateway_cnt;
-
-         // Leave
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'] = array();
-         $query = "SELECT tg.id as employee_leave_id, emp.id, emp.emp_code, emp.display_name, emp.email_id,  CONCAT(tg.leave_from, ' - ', tg.leave_to) as other, emp.phone, emp.image, emp.reporting_manager_id FROM employee_leaves tg, employees emp WHERE emp.id = tg.employee_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_LEAVE_FROM.$today_date."' AND tg.is_active = 0 $division_whr";
-         $employee_leaves_data = $callConfig->getAllRows($query);
-         foreach($employee_leaves_data as $employee_leave){
-             $employee_leave->type = self::TBL_EMPLOYEE_LEAVES;
-             $data[self::KEY_TODAY_ATTENDANTS]['employee_leaves_ids'][] =$employee_leave;
-        }
-         $transport_personal_gateway_cnt = count((array)$employee_leaves_data)!="0"?count((array)$employee_leaves_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_EMPLOYEE_LEAVES] =$transport_personal_gateway_cnt;
-        // stationery
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'] = array();
-
-         $query = "SELECT sr.id stationery_request_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, '' as other, emp.phone, emp.image, emp.reporting_manager_id FROM stationery_requests sr, employees emp WHERE emp.id = sr.emp_id AND sr.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_SR_REQUEST_DATE.$today_date."' AND sr.is_active = 0 $division_whr";
-         $stationery_requests = $callConfig->getAllRows($query);
-         foreach($stationery_requests as $row){
-             $row->type = self::TBL_STATIONERY_REQUESTS;
-             $data[self::KEY_TODAY_ATTENDANTS]['stationery_ids'][] =$row;
-        }
-         $stationery_requests_cnt = count((array)$stationery_requests)!="0"?count((array)$stationery_requests):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['stationery'] = $stationery_requests_cnt;
-
-         // assets
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'] = array();
-
-         $query = "SELECT ar.id asset_request_id, emp.id , emp.emp_code, emp.display_name, emp.email_id, emp.employee_type, '' as other, emp.phone, emp.image, emp.reporting_manager_id FROM asset_requests ar, employees emp WHERE emp.user_id = ar.originator AND ar.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_AR_ASSET_REQUIRED_START_DA.$today_date."' AND ar.is_active = 0 $division_whr";
-         $asset_requests = $callConfig->getAllRows($query);
-         foreach($asset_requests as $row){
-             $row->type = self::TBL_ASSET_REQUESTS;
-             $data[self::KEY_TODAY_ATTENDANTS]['assets_ids'][] =$row;
-        }
-         $asset_requests_cnt = count((array)$asset_requests)!="0"?count((array)$asset_requests):0;
-         $data[self::KEY_TODAY_ATTENDANTS][self::TBL_ASSETS] = $asset_requests_cnt;
-
-         // attenmiss punch
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] = 0;
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'] = array();
-         $query = "SELECT tg.id as daily_attendances_id, emp.id, emp.emp_code, emp.display_name, emp.email_id,CONCAT('Clock : ', tg.clock_in, ' - ' , tg.clock_out ) as other, emp.phone, emp.image, emp.reporting_manager_id FROM employee_daily_attendances tg, employees emp WHERE emp.id = tg.employee_id AND tg.company_id = ".$get[self::KEY_COMPANY_ID].self::SQL_COND_AND_TG_ATTENDACE_DATE.$today_date."' AND `attendance_key_short_code` IN ('Z','MP') AND tg.is_active = 0 $division_whr";
-         $employee_miss_data = $callConfig->getAllRows($query);
-         foreach($employee_miss_data as $employee_leave){
-             $employee_leave->type = self::TBL_EMPLOYEE_DAILY_ATTENDANCES;
-             $data[self::KEY_TODAY_ATTENDANTS]['miss_punch_ids'][] =$employee_leave;
-        }
-         $miss_cnt = count((array)$employee_miss_data)!="0"?count((array)$employee_miss_data):0;
-         $data[self::KEY_TODAY_ATTENDANTS]['miss_punch'] =$miss_cnt;
-
-
-         $approvals = array();
-
-        $tables_array = array(self::TBL_TRANSPORT_GATEWAY,self::TBL_TRANSPORT_PERSONAL_GATEWAY,self::TBL_EMPLOYEE_LEAVES,self::TBL_EMPLOYEE_DAILY_ATTENDANCES,self::TBL_ASSET_REQUESTS,self::TBL_STATIONERY_REQUESTS);
-
-        // make IN clause properly
-        $table_list = "'" . implode("','", $tables_array) . "'";
-
-        $query = "SELECT
-            tal.id AS transaction_approval_log_id,
-            tal.transaction_table AS transaction_table,
-            tal.transaction_id AS rid,
-            COALESCE(emp1.display_name, '-') AS requested,
-            COALESCE(emp2.display_name, '-') AS pending_approval,
-            tal.previous_status AS current_status
-          FROM transaction_approval_logs tal
-          LEFT JOIN employees emp1
-                 ON tal.assigner_user_id = emp1.user_id
-                AND emp1.company_id = tal.company_id
-                AND emp1.is_active = 0
-          LEFT JOIN employees emp2
-                 ON tal.user_id = emp2.user_id
-                AND emp2.company_id = tal.company_id
-                AND emp2.is_active = 0
-          WHERE tal.response_type = 0
-            AND tal.user_id = '{$get[self::KEY_USER_ID]}'
-            AND tal.company_id = '{$get[self::KEY_COMPANY_ID]}'
-            AND tal.response_date IS NULL
-            AND tal.transaction_table IN ($table_list)";
-
-        $approval_data = $callConfig->getAllRows($query);
-        // label mapping
-        $labels = array(
-            self::TBL_TRANSPORT_GATEWAY => 'Transport Gateway',
-            self::TBL_TRANSPORT_PERSONAL_GATEWAY => 'Transport Personal Gateway',
-            self::TBL_EMPLOYEE_LEAVES => 'Employee Leaves',
-            self::TBL_EMPLOYEE_DAILY_ATTENDANCES => 'Employee Daily Attendances',
-            self::TBL_ASSET_REQUESTS => 'Asset Requests',
-            self::TBL_STATIONERY_REQUESTS => 'Stationery Requests'
-        );
-        $types = array(
-            self::TBL_TRANSPORT_GATEWAY => 'vehicle_gate_pass_info_by_id',
-            self::TBL_TRANSPORT_PERSONAL_GATEWAY => 'transport_personal_gateway_info_by_id',
-            self::TBL_EMPLOYEE_LEAVES => 'employee_leaves_info_by_id',
-            self::TBL_EMPLOYEE_DAILY_ATTENDANCES => 'attendance_regularization_request_info_by_id',
-            self::TBL_ASSET_REQUESTS => 'asset_request_info_by_id',
-            self::TBL_STATIONERY_REQUESTS => 'stationery_request_info_by_id'
-        );
-
-        foreach ($approval_data as $value) {
-            $transaction_table = $value->transaction_table;   // because selected as AS type
-            $rid  = $value->rid;
-
-            // initialize key if not exists
-            if (!isset($approvals[$types[$transaction_table]])) {
-                $approvals[$types[$transaction_table]] = array();
-            }
-
-            $approvals[$types[$transaction_table]][] = array(
-                self::KEY_LABEL => isset($labels[$transaction_table]) ? $labels[$transaction_table] : ucwords(str_replace('_', ' ', $transaction_table)),
-                'requested' => $value->requested,
-                'pending_approval' => $value->pending_approval,
-                'approval_status' => $value->current_status, // or map separately if needed
-                'rid' => $rid,
-                self::KEY_TRANSACTION_TABLE => $transaction_table,
-                self::KEY_TYPE => $types[$transaction_table] ?? '',
-                'transaction_approval_log_id' => $value->transaction_approval_log_id
-            );
-        }
-
-        $data['ongoing_operations']['approval_data'] = $approvals;
-
-        $query = "SELECT id,table_name,name,status,tigger,fixable,action_label,display_priority FROM status_progress WHERE company_id={$get[self::KEY_COMPANY_ID]} AND is_active=0 AND table_name IN ($table_list)";
-        $status_data = $callConfig->getAllRows($query);
-        $status_arr = array();
-        foreach ($status_data as $row) {
-            $status_arr[$types[$row->table_name]][$row->status] = $row;
-        }
-        $data['ongoing_operations']['status_arr'] = $status_arr;
-
-        $query = "SELECT id,designation_name FROM designations WHERE company_id={$get[self::KEY_COMPANY_ID]} AND is_active=0";
-        $res = $callConfig->getAllRows($query);
-        $designation_arr = array();
-        foreach ($res as $row) {
-            $designation_arr[$row->id] = $row;
-        }
-        $data['designation_arr'] = $designation_arr;
-
-        $query = "SELECT id,department_name FROM departments WHERE company_id={$get[self::KEY_COMPANY_ID]} AND is_active=0";
-        $res = $callConfig->getAllRows($query);
-        $department_arr = array();
-        foreach ($res as $row) {
-            $department_arr[$row->id] = $row;
-        }
-        $data['department_arr'] = $department_arr;
-         return $data;
+        $data = array();
+        $allemplist = array();
+        $this->populateEmployeeDemographics($data, $allemplist, $empdatas);
+        $today_count = $this->populateAttendanceAndLeaves($data, $get, $empdatas, $allemplist, $today_date, $endate, $division_whr);
+        $this->populateYesterdayAndTrendMetrics($data, $get, $today_date, $yesterday, $endate, $division_whr, $today_count, count((array)$empdatas));
+        $this->populateGatewayAndRequests($data, $get, $today_date);
+        $this->populateOngoingOperations($data, $get, $today_date);
+        $this->populateDesignationsAndDepartments($data, $get[self::KEY_COMPANY_ID]);
+        return $data;
     }
-    public function togetmobilemanagerviewtopemplist($get){
+public function togetmobilemanagerviewtopemplist($get){
         global $callConfig;
         $res = $this->backviewtogetmobilemanagerdashboard($get);
 
@@ -7715,63 +6477,17 @@ class MobileUserClass extends userClass implements MobileConstants
     use MobileStationeryAndRequestsTrait;
     use MobileAdminAndOperationsTrait;
 
-    public function mobileemployeeclocks_old($get, $post)
+    public function __call($name, $arguments)
     {
-        return $this->mobileEmployeeClocksOld($get, $post);
-    }
-
-    public function listgetmonthattendancedetails_old($get)
-    {
-        return $this->listGetMonthAttendanceDetailsOld($get);
-    }
-
-    public function toaddmobileempleave_old($get, $post)
-    {
-        return $this->toAddMobileEmpLeaveOld($get, $post);
-    }
-
-    public function togetemployeeexpensesbyuser_old($get)
-    {
-        return $this->toGetEmployeeExpensesByUserOld($get);
-    }
-
-    public function GETProcurementModulesDashboardSummaryStock($get)
-    {
-        return $this->getProcurementModulesDashboardSummaryStock($get);
-    }
-
-    public function GETProcurementModulesDashboardSummaryTest($get)
-    {
-        return $this->getProcurementModulesDashboardSummaryTest($get);
-    }
-
-    public function GETProcurementModulesDashboardSummary($get)
-    {
-        return $this->getProcurementModulesDashboardSummary($get);
-    }
-
-    public function GETProcurementModulesDashboardSummaryProfitLoass($get)
-    {
-        return $this->getProcurementModulesDashboardSummaryProfitLoass($get);
-    }
-
-    public function GETProcurementModulesDashboardSummaryBalanceSheets($get)
-    {
-        return $this->getProcurementModulesDashboardSummaryBalanceSheets($get);
-    }
-
-    public function GETProcurementModulesDashboardSummaryCashFlow($get)
-    {
-        return $this->getProcurementModulesDashboardSummaryCashFlow($get);
-    }
-
-    public function GETProcurementCustomerLedger($get)
-    {
-        return $this->getProcurementCustomerLedger($get);
-    }
-
-    public function GETProcurementVendorLedger($get)
-    {
-        return $this->getProcurementVendorLedger($get);
+        $map = [
+            'mobileemployeeclocks_old' => 'mobileEmployeeClocksOld',
+            'listgetmonthattendancedetails_old' => 'listGetMonthAttendanceDetailsOld',
+            'toaddmobileempleave_old' => 'toAddMobileEmpLeaveOld',
+            'togetemployeeexpensesbyuser_old' => 'toGetEmployeeExpensesByUserOld',
+        ];
+        if (isset($map[$name])) {
+            return $this->{$map[$name]}(...$arguments);
+        }
+        trigger_error("Call to undefined method " . __CLASS__ . "::{$name}()", E_USER_ERROR);
     }
 }
