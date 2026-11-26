@@ -1,5 +1,19 @@
 <?php
 
+final class CrmConstants {
+    public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
+    public const AND_IS_ACTIVE_0_APOS = "' AND is_active = 0";
+    public const AND_IS_ACTIVE_0 = " AND is_active = 0";
+    public const AND_ID_APOS = "' AND id = '";
+    public const AND_COMPANY_ID_EQ = " AND company_id=";
+    public const AND_IS_ACTIVE_0_NO_SPACE = " AND is_active=0";
+    public const COMPANY_ID_EQ = " company_id=";
+    public const AND_ID_EQ = "' AND id = ";
+    public const AND_POSITION = " AND position_";
+    public const AND_APP_SERIAL_MASTER_ID = "' AND application_serial_number_master_id = '";
+    public const SEL_APP_SERIAL_MASTER_DETAILS = "SELECT * FROM application_serial_number_master_details WHERE company_id = '";
+}
+
 trait CrmSalesAndImportsTrait {
     public function importCSV($get, $post){
         global $callConfig;
@@ -12,7 +26,7 @@ trait CrmSalesAndImportsTrait {
             'company_id' => $get['company_id'],
             'current_status' => '0',
             'is_active' => '0',
-            'created_date' => date('Y-m-d H:i:s'),
+            'created_date' => date(CrmConstants::DATE_TIME_FORMAT),
             'created_by' => $get['user_id'],
             'import_date' =>$this->dateconvertdbformat($post['import_date']),
             'invoice_from_date' =>$this->dateconvertdbformat($post['invoice_from_date']),
@@ -77,7 +91,7 @@ trait CrmSalesAndImportsTrait {
                 $insert_array['company_id'] = $get['company_id'];
                 $insert_array['current_status'] = '0';
                 $insert_array['is_active'] = '0';
-                $insert_array['created_date'] = date('Y-m-d H:i:s');
+                $insert_array['created_date'] = date(CrmConstants::DATE_TIME_FORMAT);
                 $insert_array['created_by'] = $get['user_id'];
 
                 $res1 = $callConfig->insertRecord('sales_invoice_data_excel', $insert_array);
@@ -100,7 +114,7 @@ trait CrmSalesAndImportsTrait {
 
     public function toMySQLDateTime($dateTimeString) {
         $date = DateTime::createFromFormat('d-m-Y H:i:s', trim($dateTimeString));
-        return $date ? $date->format('Y-m-d H:i:s') : null;
+        return $date ? $date->format(CrmConstants::DATE_TIME_FORMAT) : null;
     }
 
     public function getSalesInvoiceDynamicData($get){
@@ -166,281 +180,324 @@ trait CrmSalesAndImportsTrait {
 
     }
 
+    private function resolveOrCreateCustomer($post, $first, array &$customerscompany, array &$customersdisplay_name)
+    {
+        global $callConfig;
+        if (isset($customerscompany[$first->party_name])) {
+            return $customerscompany[$first->party_name];
+        }
+        if (isset($customersdisplay_name[$first->party_name])) {
+            return $customersdisplay_name[$first->party_name];
+        }
+        $insertcustomersary = array(
+            'company_id' => $post['company_id'],
+            'company' => $first->party_name,
+            'display_name' => $first->party_name,
+            'email' => '',
+            'billing_address' => $first->address,
+            'shipping_address' => $first->address,
+            'billing_post_code' => $first->pin_code,
+            'shipping_post_code' => $first->pin_code,
+            'phone' => $first->mobile_no,
+            'contact_person' => $first->user_name,
+            'is_active' => 0,
+            'current_status' => 0,
+            'created_date' => date(CrmConstants::DATE_TIME_FORMAT),
+            'created_by' => $post['user_id']
+        );
+        $customerres = $callConfig->insertRecord('customers', $insertcustomersary);
+        $custdeatilary = array(
+            'id' => $customerres['LASTID'],
+            'company' => $first->party_name,
+            'display_name' => $first->party_name,
+            'email' => '',
+            'billing_address' => $first->address,
+            'shipping_address' => $first->address,
+            'billing_post_code' => $first->pin_code,
+            'shipping_post_code' => $first->pin_code,
+            'phone' => $first->mobile_no
+        );
+        $custdeatil = (object) $custdeatilary;
+        $customerscompany[$first->party_name] = $custdeatil;
+        return $custdeatil;
+    }
+
+    private function calculateBillTaxAndTotals(array $billitems, $post, $tax_authorities_rates_splitres1, array &$return): array
+    {
+        $saleinvitem = array('amount' => 0, 'total_amount' => 0, 'total_tax_amount' => 0, 'discount_amount' => 0);
+        $txvalc1 = $txvalc2 = $txperc1 = $txperc2 = $split_1 = $split_2 = 0;
+        $tax_flag = "S";
+        $split_1_name = $split_2_name = $split_1_gl_account_code = $split_2_gl_account_code = '';
+
+        foreach ($billitems as $key => $itmlist) {
+            $saleinvitem['amount'] += $itmlist->plan_amount;
+            $saleinvitem['total_amount'] += $itmlist->bill_amount;
+            $cgstamt = ($itmlist->cgst != "") ? $itmlist->cgst : 0;
+            $sgstamt = ($itmlist->sgst != "") ? $itmlist->sgst : 0;
+            $totaltax = $cgstamt + $sgstamt;
+            $saleinvitem['total_tax_amount'] += $totaltax;
+            $saleinvitem['discount_amount'] += $itmlist->discount_amount;
+
+            if (count((array) $tax_authorities_rates_splitres1) != 0) {
+                $tax_authorities_rates_splitres = json_decode(json_encode($tax_authorities_rates_splitres1), true);
+                $return['tax_authorities_rates_splitres'] = $tax_authorities_rates_splitres;
+                $split_1_name = $tax_authorities_rates_splitres[0]['split_name'];
+                $split_2_name = $tax_authorities_rates_splitres[1]['split_name'];
+                $split_1 = $tax_authorities_rates_splitres[0]['tax_rate'];
+                $split_2 = $tax_authorities_rates_splitres[1]['tax_rate'];
+                $split_1_gl_account_code = $tax_authorities_rates_splitres[0]['account_code'];
+                $split_2_gl_account_code = $tax_authorities_rates_splitres[1]['account_code'];
+                $return['split_1_name'] = $split_1_name;
+                $return['split_1'] = $split_1;
+            }
+
+            if ($itmlist->sgst != '0' && $itmlist->sgst != '') {
+                if ($tax_flag == "S") {
+                    $perc = ($totaltax / $itmlist->plan_amount) * 100;
+                    $txperc1 = $perc * $split_1;
+                    $txvalc1 += $totaltax * $split_1;
+                    $txperc2 = $perc * $split_2;
+                    $txvalc2 += $totaltax * $split_2;
+                } else {
+                    $txperc1 = ($post['tax'][$key] ?? 0) * $split_1;
+                    $txvalc1 += ($post['ptax_amount'][$key] ?? 0) * $split_1;
+                }
+            }
+        }
+
+        $total_tax_split_details = ($tax_flag == "S")
+            ? array(array('tax_name' => $split_1_name, 'tax_percentage' => $txperc1, 'tax_amount' => $txvalc1, 'account_code' => $split_1_gl_account_code), array('tax_name' => $split_2_name, 'tax_percentage' => $txperc2, 'tax_amount' => $txvalc2, 'account_code' => $split_2_gl_account_code))
+            : array(array('tax_name' => $split_1_name, 'tax_percentage' => $txperc1, 'tax_amount' => $txvalc1, 'account_code' => $split_1_gl_account_code));
+
+        $return['total_tax_split_details'] = $total_tax_split_details;
+        $taxConfig = compact('tax_flag', 'split_1', 'split_2', 'split_1_name', 'split_2_name', 'split_1_gl_account_code', 'split_2_gl_account_code');
+        return [$saleinvitem, $total_tax_split_details, $taxConfig];
+    }
+
+    private function insertSalesInvoiceItemsAndTaxes($post, array $billitems, $sales_invoice_id, array $hsnary, array &$itemssku, array &$itemsitemname, array $taxConfig, array &$return): void
+    {
+        global $callConfig;
+        $split_1 = $taxConfig['split_1'];
+        $split_2 = $taxConfig['split_2'];
+        $split_1_name = $taxConfig['split_1_name'];
+        $split_2_name = $taxConfig['split_2_name'];
+        $split_1_gl_account_code = $taxConfig['split_1_gl_account_code'];
+        $split_2_gl_account_code = $taxConfig['split_2_gl_account_code'];
+        $tax_flag = $taxConfig['tax_flag'];
+
+        foreach ($billitems as $key => $itmlist) {
+            if (!empty($itemssku[$itmlist->plan_name])) {
+                $itemdetail = $itemssku[$itmlist->plan_name];
+            } elseif (!empty($itemsitemname[$itmlist->plan_name])) {
+                $itemdetail = $itemsitemname[$itmlist->plan_name];
+            } else {
+                $insertitemary = array('company_id' => $post['company_id'], 'sku' => $itmlist->plan_name, 'item_name' => $itmlist->plan_name, 'is_active' => 0, 'current_status' => 0, 'created_date' => date(CrmConstants::DATE_TIME_FORMAT), 'created_by' => $post['user_id']);
+                $itemsres = $callConfig->insertRecord('items', $insertitemary);
+                $itmary = array('id' => $itemsres['LASTID'], 'item_name' => $itmlist->plan_name);
+                $itemdetail = (object) $itmary;
+                $itemssku[$itmlist->plan_name] = $itemdetail;
+            }
+
+            $descriptions = $itmlist->site . " " . $itmlist->building_name . " " . $itmlist->zone_name . " " . $itmlist->operator_name . " " . $itmlist->franchisee_name . " Plan Activation Date - " . $itmlist->plan_activation_date . " To " . $itmlist->expiry_date;
+            $itemfieldnames = array('company_id' => $post['company_id'], 'transaction_id' => $sales_invoice_id, 'item_id' => $itemdetail->id, 'item_name' => $itemdetail->item_name, 'description' => $descriptions, 'purchase_uom' => 31, 'item_quantity' => 1, 'item_price' => $itmlist->plan_amount, 'item_amount' => $itmlist->plan_amount, 'tax_amount' => ($itmlist->sgst + $itmlist->cgst), 'total_amount' => $itmlist->bill_amount, 'discount_amount' => $itmlist->discount_amount, 'req_date' => '', 'account_code' => '', 'item_wa_cost' => 0, 'item_fifo_cost' => 0, 'item_lifo_cost' => 0, 'pending_qty' => 1, 'is_active' => '0', 'current_status' => '0', 'ref_transaction_item_table_id' => '');
+            $res2 = $callConfig->insertRecord('si_items', $itemfieldnames);
+            $return['res_item'][] = $res2;
+
+            if ($itmlist->sgst != '0' && $itmlist->sgst != '') {
+                $perc = (($itmlist->sgst + $itmlist->cgst) / $itmlist->plan_amount) * 100;
+                $minDiff = PHP_INT_MAX;
+                $nearest = 18;
+                foreach ([5, 8, 12, 18, 28] as $value) {
+                    $diff = abs($value - $perc);
+                    if ($diff < $minDiff) {
+                        $minDiff = $diff;
+                        $nearest = $value;
+                    }
+                }
+                $hsnnearest = $hsnary[$nearest] ?? $hsnary['18'];
+                $taxfield = array('company_id' => $post['company_id'], 'transaction_id' => $sales_invoice_id, 'transaction_item_id' => $itemdetail->id, 'tax_id' => $hsnnearest['hsn_id'], 'tax_name' => $hsnnearest['hsn_name'], 'amount' => $itmlist->plan_amount, 'tax_amount' => ($itmlist->sgst + $itmlist->cgst), 'total_amount' => $itmlist->bill_amount, 'tax_type' => $tax_flag, 'tax_value' => $hsnnearest['percentage'], 'is_active' => '0', 'current_status' => '0', 'transaction_item_row_id' => $res2['LASTID']);
+
+                if ($tax_flag == "S") {
+                    $txper1 = $perc * $split_1;
+                    $txval1 = ($itmlist->sgst + $itmlist->cgst) * $split_1;
+                    $txper2 = $perc * $split_2;
+                    $txval2 = ($itmlist->sgst + $itmlist->cgst) * $split_2;
+                    $tax_split_details = array(array('tax_name' => $split_1_name, 'tax_percentage' => $txper1, 'tax_amount' => $txval1, 'account_code' => $split_1_gl_account_code), array('tax_name' => $split_2_name, 'tax_percentage' => $txper2, 'tax_amount' => $txval2, 'account_code' => $split_2_gl_account_code));
+                } else {
+                    $txper1 = ($post['tax'][$key] ?? 0) * $split_1;
+                    $txval1 = ($itmlist->sgst + $itmlist->cgst) * $split_1;
+                    $tax_split_details = array(array('tax_name' => $split_1_name, 'tax_percentage' => $txper1, 'tax_amount' => $txval1, 'account_code' => $split_1_gl_account_code));
+                }
+                $taxfield['tax_split_details'] = json_encode($tax_split_details);
+                $callConfig->insertRecord('si_item_taxes', $taxfield);
+                $return['res_itm_tax'][] = $taxfield;
+            }
+        }
+    }
+
+    private function processSingleSalesInvoiceBill($get, $post, array $billitems, array &$customerscompany, array &$customersdisplay_name, array &$itemssku, array &$itemsitemname, $tax_authorities_rates_splitres1, array $hsnary, array &$return): void
+    {
+        global $callConfig;
+        $first = $billitems[0];
+        $custdeatil = $this->resolveOrCreateCustomer($post, $first, $customerscompany, $customersdisplay_name);
+        list($saleinvitem, $total_tax_split_details, $taxConfig) = $this->calculateBillTaxAndTotals($billitems, $post, $tax_authorities_rates_splitres1, $return);
+
+        $totaltax = $saleinvitem['total_tax_amount'];
+        $payment_term_history = json_encode(array(
+            array('amount' => $saleinvitem['total_amount'], 'due_date' => $this->dateconvertdbformat($first->bill_date), 'extra_amt' => '0', 'extra_date' => '', 'percentage' => '100', 'tax_amount' => $totaltax, 'without_tax_amount' => $saleinvitem['amount'])
+        ));
+        $party_additional_details = json_encode(array('gstin' => $first->client_gst, 'pan_no' => $custdeatil->pan_no));
+
+        $sales_invoice_data = array(
+            'transaction_number' => $this->toGetApplicationSerialNumber('sales_invoices'),
+            'transaction_date' => $this->dateconvertdbformat($first->bill_date),
+            'currency_id' => 93,
+            'currency_rate' => 1,
+            'originator' => $post['user_id'],
+            'party_id' => $custdeatil->id,
+            'salesmen_id' => null,
+            'party_name' => $custdeatil->company,
+            'party_email' => $custdeatil->email,
+            'party_phone' => $first->mobile_no,
+            'party_address' => $custdeatil->shipping_address,
+            'party_ship_adderss' => $custdeatil->shipping_address,
+            'originator_state_id' => 4008,
+            'supplier_state_id' => 4008,
+            'amount' => $saleinvitem['amount'],
+            'tax_amount' => $saleinvitem['total_tax_amount'],
+            'discount_amount' => $saleinvitem['discount_amount'],
+            'total_amount' => $saleinvitem['total_amount'],
+            'due_date' => $this->dateconvertdbformat($first->bill_date),
+            'pending_amount' => $saleinvitem['total_amount'],
+            'company_id' => $get['company_id'],
+            'current_status' => ST_APPROVED,
+            'is_active' => '0',
+            'created_date' => date(CrmConstants::DATE_TIME_FORMAT),
+            'created_by' => $get['user_id'],
+            'total_tax_split_details' => json_encode($total_tax_split_details),
+            'payment_term_history' => $payment_term_history,
+            'party_additional_details' => $party_additional_details,
+            'doc_ref_no' => $first->bill_no,
+            'doc_ref_date' => $this->dateconvertdbformat($first->bill_date),
+            'ref_type' => 'sales_invoice_data_parent',
+            'ref_id' => $first->id,
+            'ref_no' => $first->bill_no,
+            'ref_date' => $this->dateconvertdbformat($first->bill_date),
+            'payment_terms' => 1
+        );
+
+        $return['sales_invoice_data'][] = $sales_invoice_data;
+        $res1 = $callConfig->insertRecord('sales_invoices', $sales_invoice_data);
+        $return['res'] = $res1;
+
+        if ($res1['status'] == 'sucess') {
+            $this->insertSalesInvoiceItemsAndTaxes($post, $billitems, $res1['LASTID'], $hsnary, $itemssku, $itemsitemname, $taxConfig, $return);
+        }
+
+        $query4 = "UPDATE sales_invoice_data_excel SET table_name ='sales_invoices', table_id = '" . $res1['LASTID'] . "',comments = '',current_status=" . ST_APPROVED . " WHERE bill_no = '" . $first->bill_no . "'";
+        $callConfig->executeQuery($query4);
+    }
+
     public function createSalesInvoice($get, $post) {
         global $callConfig;
-        $return =  array();
-        $table = '';
+        $return = array();
         $return['post'] = $post;
         $selected_ids = $post['selected_ids'];
-        $sales_tables = array('enquiries','estimates','delivery_orders','sales_orders','sales_returns');
-        $hsnary = array('5'=>array('hsn_id'=>141,'hsn_name'=>'0303.00.00','percentage'=>5),'12'=>array('hsn_id'=>5,'hsn_name'=>'0101.21.00','percentage'=>12),'18'=>array('hsn_id'=>245,'hsn_name'=>'0402.91.10','percentage'=>18),'28'=>array('hsn_id'=>1086,'hsn_name'=>'1703.00.00','percentage'=>28));
-        if(count((array)$selected_ids)!= 0){
-            $bill_no_array = $customerscompany = $customersdisplay_name = array();
-            $implodeid = implode("','",$selected_ids);
-            $query = "SELECT * FROM sales_invoice_data_excel WHERE bill_no IN ('".$implodeid."') AND company_id = ".$get['company_id']." AND parent_id = '".$post['sales_invoice_data_parent_id']."' AND is_active = 0";
-            $query_result = $callConfig->getAllRows($query);
-            foreach($query_result as $side){
+        $hsnary = array('5' => array('hsn_id' => 141, 'hsn_name' => '0303.00.00', 'percentage' => 5), '12' => array('hsn_id' => 5, 'hsn_name' => '0101.21.00', 'percentage' => 12), '18' => array('hsn_id' => 245, 'hsn_name' => '0402.91.10', 'percentage' => 18), '28' => array('hsn_id' => 1086, 'hsn_name' => '1703.00.00', 'percentage' => 28));
+
+        if (!empty($selected_ids) && is_array($selected_ids)) {
+            $bill_no_array = $customerscompany = $customersdisplay_name = $itemssku = $itemsitemname = array();
+            $implodeid = implode("','", $selected_ids);
+            $query = "SELECT * FROM sales_invoice_data_excel WHERE bill_no IN ('" . $implodeid . "') AND company_id = " . $get['company_id'] . " AND parent_id = '" . $post['sales_invoice_data_parent_id'] . CrmConstants::AND_IS_ACTIVE_0_APOS;
+            foreach ($callConfig->getAllRows($query) as $side) {
                 $bill_no_array[$side->bill_no][] = $side;
             }
             $return['bill_no_array'] = $bill_no_array;
-            $custquery = "SELECT id, company, display_name,email, phone, mobile, billing_address, shipping_address, payment_terms, gstin, pan_no FROM customers WHERE company_id = ".$get['company_id']." AND is_active = 0";
-            $custres = $callConfig->getAllRows($custquery);
-            foreach($custres as $custrs){
+
+            $custquery = "SELECT id, company, display_name,email, phone, mobile, billing_address, shipping_address, payment_terms, gstin, pan_no FROM customers WHERE company_id = " . $get['company_id'] . CrmConstants::AND_IS_ACTIVE_0;
+            foreach ($callConfig->getAllRows($custquery) as $custrs) {
                 $customerscompany[$custrs->company] = $custrs;
                 $customersdisplay_name[$custrs->display_name] = $custrs;
             }
 
-            $itemquery = "SELECT id, sku, item_name, sale_uom FROM items WHERE company_id = ".$get['company_id']." AND is_active = 0";
-            $itemres = $callConfig->getAllRows($itemquery);
-            foreach($itemres as $itemre){
+            $itemquery = "SELECT id, sku, item_name, sale_uom FROM items WHERE company_id = " . $get['company_id'] . CrmConstants::AND_IS_ACTIVE_0;
+            foreach ($callConfig->getAllRows($itemquery) as $itemre) {
                 $itemssku[$itemre->sku] = $itemre;
                 $itemsitemname[$itemre->item_name] = $itemre;
             }
 
-            $tax_authorities_rates_splitsql = "SELECT id, split_name, (tax_rate/100) as tax_rate, account_code, split_type, sales_account_code FROM `tax_authorities_rates_split` WHERE company_id = '".$post['company_id']."' AND is_active =0";
+            $tax_authorities_rates_splitsql = "SELECT id, split_name, (tax_rate/100) as tax_rate, account_code, split_type, sales_account_code FROM `tax_authorities_rates_split` WHERE company_id = '" . $post['company_id'] . "' AND is_active =0";
             $tax_authorities_rates_splitres1 = $callConfig->getAllRows($tax_authorities_rates_splitsql);
-            foreach($bill_no_array as $billitems){
-                $first = $billitems[0];
 
-
-                   $salemannameid = null;
-
-
-                if(isset($customerscompany[$first->party_name])){
-                    $custdeatil = $customerscompany[$first->party_name];
-                }elseif(isset($customersdisplay_name[$first->party_name])){
-                    $custdeatil = $customersdisplay_name[$first->party_name];
-                }else{
-                    $insertcustomersary = array('company_id'=>$post['company_id'],'company'=>$first->party_name,'display_name'=>$first->party_name,'email'=>'','billing_address'=>$first->address,'shipping_address'=>$first->address,'billing_post_code'=>$first->pin_code,'shipping_post_code'=>$first->pin_code,'phone'=>$first->mobile_no,'contact_person'=>$first->user_name,'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$post['user_id']);
-                    $customerres = $callConfig->insertRecord('customers', $insertcustomersary);
-
-                    $custdeatilary = array('id'=>$customerres['LASTID'],'company'=>$first->party_name,'display_name'=>$first->party_name,'email'=>'','billing_address'=>$first->address,'shipping_address'=>$first->address,'billing_post_code'=>$first->pin_code,'shipping_post_code'=>$first->pin_code,'phone'=>$first->mobile_no);
-                    $custdeatil = (object)$custdeatilary;
-                    $customerscompany[$first->party_name] = $custdeatil;
-                }
-
-
-                   $saleinvitem = array('amount'=>0,'total_amount'=>0,'total_tax_amount'=>0,'discount_amount'=>0);
-                   $txvalc1 = 0;
-                   $txvalc2 = 0;
-                   $txperc1 = 0;
-                   $txperc2 = 0;
-                   $split_1 = 0;
-                   $split_2 = 0;
-                   foreach($billitems as $key => $itmlist){
-                       $saleinvitem['amount'] += $itmlist->plan_amount;
-                       $saleinvitem['total_amount'] += $itmlist->bill_amount;
-                       $cgstamt = ($itmlist->cgst !="")?$itmlist->cgst:0;
-                       $sgstamt = ($itmlist->sgst !="")?$itmlist->sgst:0;
-                       $totaltax = $cgstamt+$sgstamt;
-                       $saleinvitem['total_tax_amount'] += $totaltax;
-                       $saleinvitem['discount_amount'] += $itmlist->discount_amount;
-
-                       if(count((array)$tax_authorities_rates_splitres1) !=0){
-                           $tax_authorities_rates_splitres = json_decode(json_encode($tax_authorities_rates_splitres1), true);
-                        $return['tax_authorities_rates_splitres'] = $tax_authorities_rates_splitres;
-
-                            $tax_flag = "S";
-                            $split_1_name = $tax_authorities_rates_splitres[0]['split_name'];
-                            $split_2_name = $tax_authorities_rates_splitres[1]['split_name'];
-                            $split_1 = $tax_authorities_rates_splitres[0]['tax_rate'];
-                            $split_2 = $tax_authorities_rates_splitres[1]['tax_rate'];
-                            if(in_array($table, (array)$sales_tables)){
-                                $split_1_gl_account_code =  $tax_authorities_rates_splitres[0]['sales_account_code'];
-                                $split_2_gl_account_code =  $tax_authorities_rates_splitres[1]['sales_account_code'];
-                            }else{
-                                $split_1_gl_account_code =  $tax_authorities_rates_splitres[0]['account_code'];
-                                $split_2_gl_account_code =  $tax_authorities_rates_splitres[1]['account_code'];
-                            }
-                        /**}else{
-                            $tax_flag = "I";
-                            $split_1_name = $tax_authorities_rates_splitres[2]['split_name'];
-                            $split_1 = $tax_authorities_rates_splitres[2]['tax_rate'];
-                            if(in_array($table, (array)$sales_tables)){
-                                $split_1_gl_account_code =  $tax_authorities_rates_splitres[2]['sales_account_code'];
-                            }else{
-                                $split_1_gl_account_code =  $tax_authorities_rates_splitres[2]['account_code'];
-                            }
-                        } **/
-                        $return['split_1_name'] = $split_1_name;
-                        $return['split_1'] = $split_1;
-                    }
-
-                       if($itmlist->sgst !='0' && $itmlist->sgst!=''){
-                        if($tax_flag == "S"){
-                            $perc = ($totaltax/$itmlist->plan_amount)*100;
-                            $txperc1 = $perc*$split_1;
-                            $txvalc1 += $totaltax*$split_1;
-                            $txperc2 = $perc*$split_2;
-                            $txvalc2 += $totaltax*$split_2;
-                        }else{
-                            $txperc1 = $post['tax'][$key]*$split_1;
-                            $txvalc1 += $post['ptax_amount'][$key]*$split_1;
-                        }
-                    }
-                   }
-
-
-                $total_tax_split_details = array();
-                    if($tax_flag == "S"){
-                        $total_tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code),array('tax_name'=>$split_2_name,'tax_percentage'=>$txperc2,'tax_amount'=>$txvalc2,'account_code'=>$split_2_gl_account_code));
-                    }else{
-                        $total_tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code));
-                    }
-                //}
-                $return['total_tax_split_details'] = $total_tax_split_details;
-
-                $total_tax_split_details_json = json_encode($total_tax_split_details);
-
-                $payment_term_historyary = array();
-                $payment_term_historyary[] = array('amount'=>$saleinvitem['total_amount'],'due_date'=>$this->dateconvertdbformat($first->bill_date),'extra_amt'=>'0','extra_date'=>'','percentage'=>'100','tax_amount'=>$totaltax,'without_tax_amount'=>$saleinvitem['amount']);
-
-                $payment_term_history = json_encode($payment_term_historyary);
-
-                $party_additional_detail = array('gstin'=>$first->client_gst,'pan_no'=>$custdeatil->pan_no);
-                $party_additional_details = json_encode((array)$party_additional_detail);
-
-                   $sales_invoice_data = array();
-                $sales_invoice_data['transaction_number'] = $this->toGetApplicationSerialNumber('sales_invoices');
-                $sales_invoice_data['transaction_date'] = $this->dateconvertdbformat($first->bill_date);
-                $sales_invoice_data['currency_id'] = 93;
-                $sales_invoice_data['currency_rate'] = 1;
-                $sales_invoice_data['originator'] = $post['user_id'];
-                $sales_invoice_data['party_id'] = $custdeatil->id;
-                $sales_invoice_data['salesmen_id'] =$salemannameid;
-                $sales_invoice_data['party_name'] = $custdeatil->company;
-                $sales_invoice_data['party_email'] = $custdeatil->email;
-                $sales_invoice_data['party_phone'] = $first->mobile_no;
-                $sales_invoice_data['party_address'] = $custdeatil->shipping_address;
-                $sales_invoice_data['party_ship_adderss'] = $custdeatil->shipping_address;
-                $sales_invoice_data['originator_state_id'] = 4008;
-                $sales_invoice_data['supplier_state_id'] = 4008;
-                $sales_invoice_data['amount'] = $saleinvitem['amount'];
-                $sales_invoice_data['tax_amount'] = $saleinvitem['total_tax_amount'];
-                $sales_invoice_data['discount_amount'] = $saleinvitem['discount_amount'];
-                $sales_invoice_data['total_amount'] = $saleinvitem['total_amount'];
-                $sales_invoice_data['due_date'] = $this->dateconvertdbformat($first->bill_date);
-                $sales_invoice_data['pending_amount'] = $saleinvitem['total_amount'];
-                $sales_invoice_data['company_id'] = $get['company_id'];
-                $sales_invoice_data['current_status'] = ST_APPROVED;
-                $sales_invoice_data['is_active'] = '0';
-                $sales_invoice_data['created_date'] = date('Y-m-d H:i:s');
-                $sales_invoice_data['created_by'] = $get['user_id'];
-                $sales_invoice_data['total_tax_split_details'] = $total_tax_split_details_json;
-                $sales_invoice_data['payment_term_history'] = $payment_term_history;
-                $sales_invoice_data['party_additional_details'] = $party_additional_details;
-                $sales_invoice_data['doc_ref_no'] = $first->bill_no;
-                $sales_invoice_data['doc_ref_date'] = $this->dateconvertdbformat($first->bill_date);
-                $sales_invoice_data['ref_type'] = 'sales_invoice_data_parent';
-                $sales_invoice_data['ref_id'] = $first->id;
-                $sales_invoice_data['ref_no'] = $first->bill_no;
-                $sales_invoice_data['ref_date'] = $this->dateconvertdbformat($first->bill_date);
-
-                $sales_invoice_data['payment_terms'] = 1;
-                $return['sales_invoice_data'][] = $sales_invoice_data;
-                // Insert sales invoice
-                   $res1 = $callConfig->insertRecord('sales_invoices', $sales_invoice_data);
-                   $return['res'] = $res1;
-
-
-
-                   if($res1['status'] == 'sucess'){
-                      foreach($billitems as $itmlist){
-
-                              if($itemssku[$itmlist->plan_name]!=""){
-                            $itemdetail = $itemssku[$itmlist->plan_name];
-                        }elseif($itemsitemname[$itmlist->plan_name]!=""){
-                            $itemdetail = $itemsitemname[$itmlist->plan_name];
-                        }else{
-                            $insertitemary = array('company_id'=>$post['company_id'],'sku'=>$itmlist->plan_name,'item_name'=>$itmlist->plan_name,'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$post['user_id']);
-                            $itemsres = $callConfig->insertRecord('items', $insertitemary);
-
-                            $itmary = array('id'=>$itemsres['LASTID'],'item_name'=>$itmlist->plan_name);
-                            $itemdetail = (object)$itmary;
-
-                            $itemssku[$itmlist->plan_name] = $itemdetail;
-                        }
-
-
-
-                        $req_date = '';
-                        $wa_day_rate = 0;
-                        $fifo_day_rate = 0;
-                        $lifo_day_rate = 0;
-                        $descriptions = $itmlist->site." ".$itmlist->building_name." ".$itmlist->zone_name." ".$itmlist->operator_name." ".$itmlist->franchisee_name." Plan Activation Date - ".$itmlist->plan_activation_date." To ".$itmlist->expiry_date;
-                        $itemfieldnames=array('company_id'=>$post['company_id'],'transaction_id'=>$res1['LASTID'],'item_id'=>$itemdetail->id,'item_name'=>$itemdetail->item_name,'description'=>$descriptions,'purchase_uom'=>31,'item_quantity'=>1,'item_price'=>$itmlist->plan_amount,'item_amount'=>$itmlist->plan_amount,'tax_amount'=>($itmlist->sgst + $itmlist->cgst),'total_amount'=>$itmlist->bill_amount,'discount_amount'=>$itmlist->discount_amount,'req_date'=>$req_date,'account_code'=>'','item_wa_cost'=>$wa_day_rate,'item_fifo_cost'=>$fifo_day_rate,'item_lifo_cost'=>$lifo_day_rate,'pending_qty'=>1,'is_active'=>'0','current_status'=>'0','ref_transaction_item_table_id'=>'');
-                        $res2 = $callConfig->insertRecord('si_items', $itemfieldnames);
-                        $return['res_item'][] = $res2;
-
-
-                        if($itmlist->sgst !='0' && $itmlist->sgst!=''){
-                            $perc = (($itmlist->sgst + $itmlist->cgst)/$itmlist->plan_amount)*100;
-
-
-                            $minDiff = PHP_INT_MAX;
-                            $array = [5, 8, 12, 18, 28];
-                            foreach ($array as $value) {
-                                $diff = abs($value - $perc);
-                                if ($diff < $minDiff) {
-                                    $minDiff = $diff;
-                                    $nearest = $value;
-                                }
-                            }
-                            $hsnnearest = $hsnary[$nearest];
-
-                            $taxfield=array('company_id'=>$post['company_id'],'transaction_id'=>$res1['LASTID'],'transaction_item_id'=>$itemdetail->id,'tax_id'=>$hsnnearest['hsn_id'],'tax_name'=>$hsnnearest['hsn_name'],'amount'=>$itmlist->plan_amount,'tax_amount'=>($itmlist->sgst + $itmlist->cgst),'total_amount'=>$itmlist->bill_amount,'tax_type'=>$tax_flag,'tax_value'=>$hsnnearest['percentage'],'is_active'=>'0','current_status'=>'0','transaction_item_row_id'=>$res2['LASTID']);
-
-                            //$hsnary
-                            if($tax_flag == "S"){
-                                $txper1 = $perc*$split_1;
-                                $txval1 = ($itmlist->sgst + $itmlist->cgst)*$split_1;
-                                $txper2 = $perc*$split_2;
-                                $txval2 = ($itmlist->sgst + $itmlist->cgst)*$split_2;
-                                $tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txper1,'tax_amount'=>$txval1,'account_code'=>$split_1_gl_account_code),array('tax_name'=>$split_2_name,'tax_percentage'=>$txper2,'tax_amount'=>$txval2,'account_code'=>$split_2_gl_account_code));
-                                $taxfield['tax_split_details'] = json_encode($tax_split_details);
-                            }else{
-                                $txper1 = $post['tax'][$key]*$split_1;
-                                $txval1 = ($itmlist->sgst + $itmlist->cgst)*$split_1;
-                                $tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txper1,'tax_amount'=>$txval1,'account_code'=>$split_1_gl_account_code));
-                                $taxfield['tax_split_details'] = json_encode($tax_split_details);
-                            }
-                            $callConfig->insertRecord('si_item_taxes',$taxfield);
-                            $return['res_itm_tax'][] = $taxfield;
-                        }
-
-                    }
-                 }
-
-                 $query4 = "UPDATE sales_invoice_data_excel SET table_name ='sales_invoices', table_id = '".$res1['LASTID']."',comments = '',current_status=".ST_APPROVED." WHERE bill_no = '".$first->bill_no."'";
-                $callConfig->executeQuery($query4);
-
+            foreach ($bill_no_array as $billitems) {
+                $this->processSingleSalesInvoiceBill($get, $post, $billitems, $customerscompany, $customersdisplay_name, $itemssku, $itemsitemname, $tax_authorities_rates_splitres1, $hsnary, $return);
             }
         }
         return $return;
     }
     //Koteswar End
     //OOmkar Data uploaded - 23-06-2025
+    private function saveLeadContactImportRow(array $columns, $parent_id, $get, array &$seenPhones, &$inserted, &$duplicates, &$failed): void
+    {
+        global $callConfig;
+        $phone = trim($columns[3]);
+        $officePhone = trim($columns[4]);
+        $is_duplicate = (in_array($phone, $seenPhones) || in_array($officePhone, $seenPhones)) ? 1 : 0;
+
+        if (!empty($phone)) {
+            $seenPhones[] = $phone;
+        }
+        if (!empty($officePhone)) {
+            $seenPhones[] = $officePhone;
+        }
+        if ($is_duplicate) {
+            $duplicates++;
+        }
+
+        $insert_array = array(
+            'first_name' => trim($columns[0]),
+            'last_name' => trim($columns[1]),
+            'display_name' => trim($columns[0] . ' ' . $columns[1]),
+            'email' => trim($columns[2]),
+            'phone' => $phone,
+            'office_phone' => $officePhone,
+            'address' => trim($columns[5]),
+            'company_name' => trim($columns[6]),
+            'campaign_name' => trim($columns[7]),
+            'crm_import_file_id' => $parent_id,
+            'company_id' => $get['company_id'],
+            'current_status' => '0',
+            'is_active' => '0',
+            'is_duplicate' => $is_duplicate,
+            'created_date' => date(CrmConstants::DATE_TIME_FORMAT),
+            'created_by' => $get['user_id']
+        );
+
+        $res1 = $callConfig->insertRecord('crm_lead_and_contact_import_items', $insert_array);
+        if (isset($res1['LASTID']) && $res1['LASTID'] > 0) {
+            $inserted++;
+        } else {
+            $failed++;
+        }
+    }
+
     public function importleadcontactCSV($get, $post)
     {
         global $callConfig;
-        $return = array();
-        $return['get'] = $get;
-        $return['post'] = $post;
-        $data = array('file_name' => $post['file_name'],'import_type' => $post['import_type'],'original_file_name' => $post['original_file_name'],'company_id' => $get['company_id'],'source_type' => $post['source_type'],'current_status' => '0','is_active' => '0','created_date' => date('Y-m-d H:i:s'),'created_by' => $get['user_id']);
+        $return = array('get' => $get, 'post' => $post);
+        $data = array('file_name' => $post['file_name'], 'import_type' => $post['import_type'], 'original_file_name' => $post['original_file_name'], 'company_id' => $get['company_id'], 'source_type' => $post['source_type'], 'current_status' => '0', 'is_active' => '0', 'created_date' => date(CrmConstants::DATE_TIME_FORMAT), 'created_by' => $get['user_id']);
         $res = $callConfig->insertRecord('crm_lead_and_contact_imports', $data);
         $parent_id = $res['LASTID'];
         if (!$parent_id) {
-            return ['status' => 'error','message' => 'Failed to create import file record.'];
+            return ['status' => 'error', 'message' => 'Failed to create import file record.'];
         }
-        // Read and process CSV
+
         $csvData = base64_decode($post['filedata']);
         $rows = explode("\n", $csvData);
         $headerSkipped = false;
         $seenPhones = [];
-        // Counters
-        $inserted = 0;
-        $duplicates = 0;
-        $failed = 0;
+        $inserted = $duplicates = $failed = 0;
+
         foreach ($rows as $line) {
             if (!$headerSkipped) {
                 $headerSkipped = true;
@@ -450,32 +507,9 @@ trait CrmSalesAndImportsTrait {
             if (count($columns) < 8 || count(array_filter($columns)) === 0) {
                 continue;
             }
-            $phone = trim($columns[3]);
-            $officePhone = trim($columns[4]);
-
-            // Check if it's a duplicate (within this file)
-            $is_duplicate = (in_array($phone, $seenPhones) || in_array($officePhone, $seenPhones)) ? 1 : 0;
-
-            if (!empty($phone))
-                $seenPhones[] = $phone;
-            if (!empty($officePhone))
-                $seenPhones[] = $officePhone;
-
-            if ($is_duplicate)
-                $duplicates++;
-
-            $insert_array = array(
-                'first_name' => trim($columns[0]), 'last_name' => trim($columns[1]), 'display_name' => trim($columns[0] . ' ' . $columns[1]), 'email' => trim($columns[2]), 'phone' => $phone, 'office_phone' => $officePhone, 'address' => trim($columns[5]), 'company_name' => trim($columns[6]), 'campaign_name' => trim($columns[7]), 'crm_import_file_id' => $parent_id, 'company_id' => $get['company_id'], 'current_status' => '0', 'is_active' => '0', 'is_duplicate' => $is_duplicate, 'created_date' => date('Y-m-d H:i:s'), 'created_by' => $get['user_id']
-            );
-
-            $res1 = $callConfig->insertRecord('crm_lead_and_contact_import_items', $insert_array);
-
-            if (isset($res1['LASTID']) && $res1['LASTID'] > 0) {
-                $inserted++;
-            } else {
-                $failed++;
-            }
+            $this->saveLeadContactImportRow($columns, $parent_id, $get, $seenPhones, $inserted, $duplicates, $failed);
         }
+
         $return['status'] = 'success';
         $return['message'] = "Data import complete.";
         $return['rid'] = $parent_id;
@@ -487,10 +521,10 @@ trait CrmSalesAndImportsTrait {
         global $callConfig;
         $return['get'] = $get;
 
-        $query = "SELECT id, file_name, import_type, original_file_name, source_type FROM crm_lead_and_contact_imports WHERE company_id = '" . $get['company_id'] . "' AND id = '" . $get['rid'] . "' AND is_active = 0";
+        $query = "SELECT id, file_name, import_type, original_file_name, source_type FROM crm_lead_and_contact_imports WHERE company_id = '" . $get['company_id'] . CrmConstants::AND_ID_APOS . $get['rid'] . CrmConstants::AND_IS_ACTIVE_0_APOS;
         $data = $callConfig->getAllRows($query);
         $return['crm_import_files'] = $data;
-        $query = "SELECT id, crm_import_file_id, display_name, first_name, last_name, email, phone, office_phone, address, company_name, campaign_name, is_duplicate FROM crm_lead_and_contact_import_items WHERE company_id = '" . $get['company_id'] . "' AND crm_import_file_id = '" . $get['rid'] . "' AND is_active = 0";
+        $query = "SELECT id, crm_import_file_id, display_name, first_name, last_name, email, phone, office_phone, address, company_name, campaign_name, is_duplicate FROM crm_lead_and_contact_import_items WHERE company_id = '" . $get['company_id'] . "' AND crm_import_file_id = '" . $get['rid'] . CrmConstants::AND_IS_ACTIVE_0_APOS;
         $data = $callConfig->getAllRows($query);
         $return['crm_import_file_rows'] = $data;
         return $return;
@@ -517,7 +551,7 @@ trait CrmSalesAndImportsTrait {
             if ($is_duplicate) {
                 $duplicates++;
             }
-            $contact = ['company_id' => $get['company_id'], 'first_name' => $row['first_name'] ?? '', 'middle_name' => '', 'last_name' => $row['last_name'] ?? '','display_name' => $row['display_name'] ?? '', 'email_id' => $row['email'] ?? '', 'phone' => $phone, 'office_phone' => $officePhone, 'address' => $row['address'] ?? '', 'company_name' => $row['company_name'] ?? '', 'originator' => $get['user_id'], 'contact_source' => $files['source_type'] ?? '', 'image' => null, 'is_active' => '0', 'current_status' => '0', 'created_date' => date('Y-m-d H:i:s'), 'created_by' => $get['user_id']];
+            $contact = ['company_id' => $get['company_id'], 'first_name' => $row['first_name'] ?? '', 'middle_name' => '', 'last_name' => $row['last_name'] ?? '','display_name' => $row['display_name'] ?? '', 'email_id' => $row['email'] ?? '', 'phone' => $phone, 'office_phone' => $officePhone, 'address' => $row['address'] ?? '', 'company_name' => $row['company_name'] ?? '', 'originator' => $get['user_id'], 'contact_source' => $files['source_type'] ?? '', 'image' => null, 'is_active' => '0', 'current_status' => '0', 'created_date' => date(CrmConstants::DATE_TIME_FORMAT), 'created_by' => $get['user_id']];
             $result = $callConfig->insertRecord('crm_contacts', $contact);
             if (isset($result['LASTID']) && $result['LASTID'] > 0) {
                 $inserted++;
@@ -541,13 +575,16 @@ trait CrmSalesAndImportsTrait {
             $phone = trim($row['phone']);
             $officePhone = trim($row['office_phone']);
             $is_duplicate = (in_array($phone, $seenPhones) || in_array($officePhone, $seenPhones)) ? 1 : 0;
-            if (!empty($phone))
+            if (!empty($phone)) {
                 $seenPhones[] = $phone;
-            if (!empty($officePhone))
+            }
+            if (!empty($officePhone)) {
                 $seenPhones[] = $officePhone;
-            if ($is_duplicate)
+            }
+            if ($is_duplicate) {
                 $duplicates++;
-            $lead = ['company_id' => $get['company_id'], 'first_name' => $row['first_name'] ?? '', 'middle_name' => '', 'last_name' => $row['last_name'] ?? '', 'display_name' => $row['display_name'] ?? '', 'email_id' => $row['email'] ?? '', 'phone' => $phone, 'office_phone' => $officePhone, 'address' => $row['address'] ?? '', 'company_name' => $row['company_name'] ?? '', 'originator' => $get['user_id'], 'contact_source' => $files['source_type'] ?? '', 'image' => null, 'is_active' => '0', 'current_status' => '0', 'created_date' => date('Y-m-d H:i:s'), 'created_by' => $get['user_id']];
+            }
+            $lead = ['company_id' => $get['company_id'], 'first_name' => $row['first_name'] ?? '', 'middle_name' => '', 'last_name' => $row['last_name'] ?? '', 'display_name' => $row['display_name'] ?? '', 'email_id' => $row['email'] ?? '', 'phone' => $phone, 'office_phone' => $officePhone, 'address' => $row['address'] ?? '', 'company_name' => $row['company_name'] ?? '', 'originator' => $get['user_id'], 'contact_source' => $files['source_type'] ?? '', 'image' => null, 'is_active' => '0', 'current_status' => '0', 'created_date' => date(CrmConstants::DATE_TIME_FORMAT), 'created_by' => $get['user_id']];
             $result = $callConfig->insertRecord('crm_leads', $lead);
             if (isset($result['LASTID']) && $result['LASTID'] > 0) {
                 $inserted++;
@@ -571,276 +608,246 @@ trait CrmSalesAndImportsTrait {
 }
 
 trait CrmFeasibilityAndCustomerTrait {
+    private function loadFeasibilityEvaluationDetails($company_id, $feasibility_id, array &$return): void
+    {
+        global $callConfig;
+        $whr = " feasibility_id = " . intval($feasibility_id) . " AND ";
+        $query = "SELECT * FROM lead_feasibility_evaluations WHERE " . $whr . CrmConstants::COMPANY_ID_EQ . $company_id . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE;
+        $return['feasibility_evaluation_res'] = $callConfig->getRow($query);
+
+        $query = "SELECT * FROM lead_feasibility_boms WHERE " . $whr . CrmConstants::COMPANY_ID_EQ . $company_id . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE;
+        $return['feasibility_bom_res'] = $callConfig->getAllRows($query);
+
+        $query = "SELECT * FROM lead_feasibility_checklists WHERE " . $whr . CrmConstants::COMPANY_ID_EQ . $company_id . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE;
+        $return['feasibility_checklist_res'] = $callConfig->getAllRows($query);
+    }
+
+    private function loadFeasibilityMasterLookups($company_id, array &$return): void
+    {
+        global $callConfig;
+        $users_res = array();
+        foreach ($callConfig->getAllRows("SELECT id,display_name FROM application_users WHERE " . CrmConstants::COMPANY_ID_EQ . $company_id . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE) as $row) {
+            $users_res[$row->id] = $row->display_name;
+        }
+        $return['users_res'] = $users_res;
+
+        $feasibility_types_res = array();
+        foreach ($callConfig->getAllRows("SELECT id,type_name FROM feasibility_types WHERE company_id=" . $company_id . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE) as $row) {
+            $feasibility_types_res[$row->id] = $row->type_name;
+        }
+        $return['feasibility_types_res'] = $feasibility_types_res;
+
+        $uom_res = array();
+        foreach ($callConfig->getAllRows("SELECT id,uom_name, uom_short_code FROM unit_of_measurements WHERE " . CrmConstants::COMPANY_ID_EQ . $company_id . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE) as $row) {
+            $uom_res[$row->id] = $row;
+        }
+        $return['uom_res'] = $uom_res;
+
+        $items_res = array();
+        foreach ($callConfig->getAllRows("SELECT id,item_name, purchase_uom, purchase_price FROM items WHERE " . CrmConstants::COMPANY_ID_EQ . $company_id . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE) as $row) {
+            $items_res[$row->id] = $row;
+        }
+        $return['items_res'] = $items_res;
+    }
+
     public function getFeasiblityData($get){
         global $callConfig;
         $return = array();
         $id = $get['rid'] ?? '';
         $lead_id = $get['lead_id'] ?? '';
         $feasibility_id = $get['feasibility_id'] ?? '';
+
         if (empty($id) && !empty($lead_id)) {
-            // Lookup feasibility ID using lead_id
-            $query = "SELECT id FROM feasibility_requirements
-                    WHERE lead_id = {$lead_id} AND company_id = {$get['company_id']} AND is_active = 0
-                    ORDER BY id DESC LIMIT 1";
-                    $return['feasibility_types_query'] = $query;
+            $query = "SELECT id FROM feasibility_requirements WHERE lead_id = {$lead_id} AND company_id = {$get['company_id']} AND is_active = 0 ORDER BY id DESC LIMIT 1";
+            $return['feasibility_types_query'] = $query;
             $row = $callConfig->getRow($query);
             if (!empty($row)) {
                 $id = $row->id;
             }
         }
-        if (isset($id) && $id != '') {
-            $query = "SELECT * FROM feasibility_requirements WHERE id = ".$id." AND company_id=".$get['company_id']." AND is_active=0";
-            $feasibility_requirement_res = $callConfig->getRow($query);
-            $return['feasibility_requirement_res'] = $feasibility_requirement_res;
+        if (!empty($id)) {
+            $query = "SELECT * FROM feasibility_requirements WHERE id = " . intval($id) . CrmConstants::AND_COMPANY_ID_EQ . $get['company_id'] . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE;
+            $return['feasibility_requirement_res'] = $callConfig->getRow($query);
         }
-        if (isset($feasibility_id) && $feasibility_id != '') {
-            $query = "SELECT * FROM feasibility_requirements WHERE id = ".$feasibility_id." AND company_id=".$get['company_id']." AND is_active=0";
-            $feasibility_requirement_res = $callConfig->getRow($query);
-            $return['feasibility_requirement_res'] = $feasibility_requirement_res;
+        if (!empty($feasibility_id)) {
+            $query = "SELECT * FROM feasibility_requirements WHERE id = " . intval($feasibility_id) . CrmConstants::AND_COMPANY_ID_EQ . $get['company_id'] . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE;
+            $return['feasibility_requirement_res'] = $callConfig->getRow($query);
+            $this->loadFeasibilityEvaluationDetails($get['company_id'], $feasibility_id, $return);
+        }
 
-            $whr = '';
-            if($feasibility_id != ''){
-                $whr = "  feasibility_id = ".$feasibility_id." AND ";
-            }
-            $query = "SELECT * FROM lead_feasibility_evaluations WHERE ".$whr." company_id=".$get['company_id']." AND is_active=0";
-            $data = $callConfig->getRow($query);
-            $return['feasibility_evaluation_res'] = $data;
-            $query = "SELECT * FROM lead_feasibility_boms WHERE ".$whr." company_id=".$get['company_id']." AND is_active=0";
-            $data = $callConfig->getAllRows($query);
-            $feasibility_bom_res = array();
-            foreach ($data as $row) {
-                $feasibility_bom_res[] = $row;
-            }
-            $return['feasibility_bom_res'] = $feasibility_bom_res;
-            $query = "SELECT * FROM lead_feasibility_checklists WHERE ".$whr." company_id=".$get['company_id']." AND is_active=0";
-            $data = $callConfig->getAllRows($query);
-            $feasibility_checklist_res = array();
-            foreach ($data as $row) {
-                $feasibility_checklist_res[] = $row;
-            }
-            $return['feasibility_checklist_res'] = $feasibility_checklist_res;
-        }
-        $query = "SELECT id,display_name FROM application_users WHERE  company_id=".$get['company_id']." AND is_active=0";
-        $data = $callConfig->getAllRows($query);
-        $users_res = array();
-        foreach ($data as $row) {
-            $users_res[$row->id] = $row->display_name;
-        }
-        $return['users_res'] = $users_res;
-
-        $query = "SELECT id,type_name FROM feasibility_types WHERE company_id=".$get['company_id']." AND is_active=0";
-        $data = $callConfig->getAllRows($query);
-        $feasibility_types_res = array();
-        foreach ($data as $row) {
-            $feasibility_types_res[$row->id] = $row->type_name;
-        }
-        $return['feasibility_types_res'] = $feasibility_types_res;
-
-        $query = "SELECT id,uom_name, uom_short_code FROM unit_of_measurements WHERE  company_id=".$get['company_id']." AND is_active=0";
-        $data = $callConfig->getAllRows($query);
-        $uom_res = array();
-        foreach ($data as $row) {
-            $uom_res[$row->id] = $row;
-        }
-        $return['uom_res'] = $uom_res;
-
-        $query = "SELECT id,item_name, purchase_uom, purchase_price FROM items WHERE  company_id=".$get['company_id']." AND is_active=0";
-        $data = $callConfig->getAllRows($query);
-        $items_res = array();
-        foreach ($data as $row) {
-            $items_res[$row->id] = $row;
-        }
-        $return['items_res'] = $items_res;
-
+        $this->loadFeasibilityMasterLookups($get['company_id'], $return);
         return $return;
     }
+    private function renderFeasibilityFieldHtml(array $row): string
+    {
+        $label = $row['field_label'] ?? '';
+        $code = $row['code'] ?? '';
+        $type = $row['field_type'] ?? '';
+        $length = $row['field_length'] ?? 'col-md-6';
+        $values = json_decode($row['field_value'] ?? '[]', true) ?: array();
+        $class = ($type === 'number') ? 'text-right' : '';
+        $mandatory = isset($row['mandatory']) ? (int) $row['mandatory'] : 0;
+        $star = ($mandatory === 0) ? " <span class='text-danger'>*</span>" : '';
+        $requiredAttr = ($mandatory === 0) ? 'required' : '';
+        $html = "<div class='$length mb-3'><label class='form-label'>$label $star </label>";
+
+        if ($type === 'text' || $type === 'number' || $type === 'date') {
+            $html .= "<input type='$type' name='$code' class='form-control $class' $requiredAttr>";
+        } elseif ($type === 'select') {
+            $html .= "<select name='$code' class='form-select' $requiredAttr>";
+            foreach ($values as $v) {
+                $html .= "<option value='$v'>$v</option>";
+            }
+            $html .= "</select>";
+        } elseif ($type === 'radio') {
+            $isFirst = true;
+            foreach ($values as $v) {
+                $required = ($mandatory === 0 && $isFirst) ? 'checked' : '';
+                $html .= "<div class='form-check'><input class='form-check-input' type='radio' name='$code' value='$v' id='{$code}_$v' $required><label class='form-check-label' for='{$code}_$v'>$v</label></div>";
+                $isFirst = false;
+            }
+        }
+        $html .= "</div>";
+        return $html;
+    }
+
     public function getFeasibilityFields($get){
         global $callConfig;
-        if(isset($get['rid']) && $get['rid'] != ''){
-            $query = "SELECT * FROM feasibility_fields WHERE feasibility_type_id = ".$get['rid']." AND company_id=".$get['company_id']." AND is_active=0";
-            $data = $callConfig->getAllRows($query);
-            $html = "";
-
-            foreach ($data as $row) {
-                $row = (array) $row; // Convert stdClass to array
-                // Prepare HTML for each field
-                $label = $row['field_label'];
-                $code = $row['code'];
-                $type = $row['field_type'];
-                $length = $row['field_length'];
-                $values = json_decode($row['field_value'], true);
-                $class = '';
-                if($type === 'number'){
-                    $class = 'text-right';
-                }
-                $mandatory = isset($row['mandatory']) ? (int)$row['mandatory'] : 0;
-                $star = $mandatory === 0 ? " <span class='text-danger'>*</span>" : '';
-                $requiredAttr = $mandatory === 0 ? 'required' : '';
-                $html .= "<div class='$length mb-3'><label class='form-label'>$label $star </label>";
-
-
-                if ($type === 'text' || $type === 'number' || $type === 'date') {
-
-                    $html .= "<input type='$type' name='$code' class='form-control $class' $requiredAttr>";
-                } elseif ($type === 'select') {
-                    $html .= "<select name='$code' class='form-select' $requiredAttr>";
-                    foreach ($values as $v) {
-                    $html .= "<option value='$v'>$v</option>";
-                    }
-                    $html .= "</select>";
-                } elseif ($type === 'radio') {
-                    $isFirst = true;
-                    foreach ($values as $v) {
-                    $required = ($mandatory === 0 && $isFirst) ? 'checked' : '';
-                    $html .= "<div class='form-check '>
-                                <input class='form-check-input' type='radio' name='$code' value='$v' id='{$code}_$v' $required>
-                                <label class='form-check-label' for='{$code}_$v'>$v</label>
-                                </div>";
-                    $isFirst = false;
-                    }
-                }
-                $html .= "</div>";
+        $html = "";
+        if (!empty($get['rid'])) {
+            $query = "SELECT * FROM feasibility_fields WHERE feasibility_type_id = " . intval($get['rid']) . CrmConstants::AND_COMPANY_ID_EQ . $get['company_id'] . CrmConstants::AND_IS_ACTIVE_0_NO_SPACE;
+            foreach ($callConfig->getAllRows($query) as $row) {
+                $html .= $this->renderFeasibilityFieldHtml((array) $row);
             }
         }
         return $html;
     }
-    public function insertFeasibilityBomAndChecklist($get, $post){
+    private function saveLeadFeasibilityBoms($get, $post, array &$return): void
+    {
         global $callConfig;
-        $return = array();
         $feasibility_id = $post['feasibility_id'];
-        $updated_date = date("Y-m-d H:i:s");
+        $updated_date = date(CrmConstants::DATE_TIME_FORMAT);
         $updated_by = $get['user_id'];
-        if ($post['table_name'] == 'lead_feasibility_boms') {
-            // Loop through the items
-            $item_name_arr = $post['item_name'];
-            $bom_row_id_arr = $post['bom_row_id'];  // Get the bom_row_id array
+        $item_name_arr = $post['item_name'] ?? array();
+        $bom_row_id_arr = $post['bom_row_id'] ?? array();
 
-            foreach ($item_name_arr as $i => $item_name) {
-                // Check if item_name is "others"
-                if ($item_name == 'others') {
-                    // Insert the new item into the items table
-                    $newItemName = $post['new_item_name'][$i];  // Get the custom item name entered by the user
-                    if ($newItemName) {
-                        $insert_item_array = array(
-                            'company_id' => $get['company_id'],
-                            'item_name' => $newItemName,
-                            'purchase_uom' => $post['unit'][$i],
-                            'sale_uom' => $post['unit'][$i],
-                            'purchase_base_uom' => $post['unit'][$i],
-                            'sale_base_uom' => $post['unit'][$i],
-                            'purchase_price' => $post['cost'][$i],
-                            'sale_price' => $post['cost'][$i],
-                            'item_type' => 1,
-                            'is_active' => 0,
-                            'current_status' => 0,
-                            'status_date' => date("Y-m-d H:i:s"),
-                            'created_by' => $get['user_id'],
-                            'created_date' => date("Y-m-d H:i:s")
-                        );
-                        // Insert the new item and get the LASTID
-                        $insertItemResult = $callConfig->insertRecord('items', $insert_item_array);
-                        $newItemId = $insertItemResult['LASTID'];  // Get the last inserted item ID
-                    }
-                } else {
-                    // Use the existing item ID for non-"others" items
-                    $newItemId = $item_name;
-                }
-
-                // Check if bom_row_id exists for update, otherwise insert new record
-                $bom_row_id = $bom_row_id_arr[$i];
-                if ($bom_row_id) {
-                    // Prepare the data for updating the record
-                    $update_array = array(
-                        'item_id' => $newItemId,
-                        'item_quantity' => $post['quantity'][$i],
-                        'unit' => $post['unit'][$i],
-                        'item_price' => $post['cost'][$i],
-                        'total_amount' => $post['total_cost'][$i],
-                        'planned_request_by' => $this->dateconvertdbformat($post['planned_request_by'][$i]),
-                        'planned_return_by' => $this->dateconvertdbformat($post['planned_return_by'][$i]),
-                        'actual_request_by' => $this->dateconvertdbformat($post['actual_request_by'][$i]),
-                        'actual_return_by' => $this->dateconvertdbformat($post['actual_return_by'][$i]),
-                        'updated_date' => $updated_date,
-                        'updated_by' => $updated_by
-                    );
-
-                    // Call the default function to update the record, passing the table name, the data array, and the condition (WHERE id = bom_row_id)
-                    $res = $callConfig->updateRecord('lead_feasibility_boms', $update_array, "id", $bom_row_id);
-                    $return['update_res'] = $res;
-
-                } else {
-                    // Insert a new record if no bom_row_id exists
-                    $insert_array = array(
+        foreach ($item_name_arr as $i => $item_name) {
+            if ($item_name == 'others') {
+                $newItemName = $post['new_item_name'][$i] ?? '';
+                if ($newItemName) {
+                    $insert_item_array = array(
                         'company_id' => $get['company_id'],
-                        'feasibility_id' => $feasibility_id,
-                        'item_id' => $newItemId,
-                        'item_quantity' => $post['quantity'][$i],
-                        'unit' => $post['unit'][$i],
-                        'item_price' => $post['cost'][$i],
-                        'total_amount' => $post['total_cost'][$i],
-                        'planned_request_by' => $this->dateconvertdbformat($post['planned_request_by'][$i]),
-                        'planned_return_by' => $this->dateconvertdbformat($post['planned_return_by'][$i]),
-                        'actual_request_by' => $this->dateconvertdbformat($post['actual_request_by'][$i]),
-                        'actual_return_by' => $this->dateconvertdbformat($post['actual_return_by'][$i]),
+                        'item_name' => $newItemName,
+                        'purchase_uom' => $post['unit'][$i],
+                        'sale_uom' => $post['unit'][$i],
+                        'purchase_base_uom' => $post['unit'][$i],
+                        'sale_base_uom' => $post['unit'][$i],
+                        'purchase_price' => $post['cost'][$i],
+                        'sale_price' => $post['cost'][$i],
+                        'item_type' => 1,
                         'is_active' => 0,
                         'current_status' => 0,
-                        'status_date' => date("Y-m-d H:i:s"),
-                        'created_date' => date("Y-m-d H:i:s"),
-                        'created_by' => $get['user_id']
+                        'status_date' => date(CrmConstants::DATE_TIME_FORMAT),
+                        'created_by' => $get['user_id'],
+                        'created_date' => date(CrmConstants::DATE_TIME_FORMAT)
                     );
-                    $res = $callConfig->insertRecord('lead_feasibility_boms', $insert_array);
-                    $return['insert_res'] = $res;
+                    $insertItemResult = $callConfig->insertRecord('items', $insert_item_array);
+                    $newItemId = $insertItemResult['LASTID'];
+                } else {
+                    $newItemId = 0;
                 }
+            } else {
+                $newItemId = $item_name;
             }
-        }elseif ($post['table_name'] == 'lead_feasibility_checklists') {
-            $return = array();
-            $updated_date = date("Y-m-d H:i:s");
-            $updated_by = $get['user_id'];
-            $feasibility_id = $post['feasibility_id'];
 
-            // Loop through the checklist items
-            $checklist_item_name_arr = $post['checklist_item_name'];
-            $check_row_id_arr = $post['check_row_id'];  // Get the check_row_id array for checking the record ID
-
-            foreach ($checklist_item_name_arr as $i => $item_name) {
-                // Check if a check_row_id is available, if yes, perform an update
-                $check_row_id = $check_row_id_arr[$i];
-
-                // Prepare the data for the checklist update
+            $bom_row_id = $bom_row_id_arr[$i] ?? null;
+            if ($bom_row_id) {
                 $update_array = array(
+                    'item_id' => $newItemId,
+                    'item_quantity' => $post['quantity'][$i],
+                    'unit' => $post['unit'][$i],
+                    'item_price' => $post['cost'][$i],
+                    'total_amount' => $post['total_cost'][$i],
+                    'planned_request_by' => $this->dateconvertdbformat($post['planned_request_by'][$i]),
+                    'planned_return_by' => $this->dateconvertdbformat($post['planned_return_by'][$i]),
+                    'actual_request_by' => $this->dateconvertdbformat($post['actual_request_by'][$i]),
+                    'actual_return_by' => $this->dateconvertdbformat($post['actual_return_by'][$i]),
+                    'updated_date' => $updated_date,
+                    'updated_by' => $updated_by
+                );
+                $return['update_res'] = $callConfig->updateRecord('lead_feasibility_boms', $update_array, "id", $bom_row_id);
+            } else {
+                $insert_array = array(
+                    'company_id' => $get['company_id'],
+                    'feasibility_id' => $feasibility_id,
+                    'item_id' => $newItemId,
+                    'item_quantity' => $post['quantity'][$i],
+                    'unit' => $post['unit'][$i],
+                    'item_price' => $post['cost'][$i],
+                    'total_amount' => $post['total_cost'][$i],
+                    'planned_request_by' => $this->dateconvertdbformat($post['planned_request_by'][$i]),
+                    'planned_return_by' => $this->dateconvertdbformat($post['planned_return_by'][$i]),
+                    'actual_request_by' => $this->dateconvertdbformat($post['actual_request_by'][$i]),
+                    'actual_return_by' => $this->dateconvertdbformat($post['actual_return_by'][$i]),
+                    'is_active' => 0,
+                    'current_status' => 0,
+                    'status_date' => date(CrmConstants::DATE_TIME_FORMAT),
+                    'created_date' => date(CrmConstants::DATE_TIME_FORMAT),
+                    'created_by' => $get['user_id']
+                );
+                $return['insert_res'] = $callConfig->insertRecord('lead_feasibility_boms', $insert_array);
+            }
+        }
+    }
+
+    private function saveLeadFeasibilityChecklists($get, $post, array &$return): void
+    {
+        global $callConfig;
+        $updated_date = date(CrmConstants::DATE_TIME_FORMAT);
+        $updated_by = $get['user_id'];
+        $checklist_item_name_arr = $post['checklist_item_name'] ?? array();
+        $check_row_id_arr = $post['check_row_id'] ?? array();
+
+        foreach ($checklist_item_name_arr as $i => $item_name) {
+            $check_row_id = $check_row_id_arr[$i] ?? null;
+            $update_array = array(
+                'item_name' => $item_name,
+                'item_type' => $post['checklist_type'][$i],
+                'is_done' => $post['checklist_is_done'][$i],
+                'comment' => $post['checklist_comment'][$i],
+                'is_active' => 0,
+                'current_status' => 0,
+                'status_date' => date(CrmConstants::DATE_TIME_FORMAT),
+                'updated_date' => $updated_date,
+                'updated_by' => $updated_by
+            );
+            if ($check_row_id) {
+                $return['update_res'] = $callConfig->updateRecord('lead_feasibility_checklists', $update_array, "id", $check_row_id);
+            } else {
+                $insert_array = array(
+                    'company_id' => $get['company_id'],
+                    'feasibility_id' => $post['feasibility_id'],
                     'item_name' => $item_name,
                     'item_type' => $post['checklist_type'][$i],
                     'is_done' => $post['checklist_is_done'][$i],
                     'comment' => $post['checklist_comment'][$i],
                     'is_active' => 0,
                     'current_status' => 0,
-                    'status_date' => date("Y-m-d H:i:s"),
-                    'updated_date' => $updated_date,
-                    'updated_by' => $updated_by
+                    'status_date' => date(CrmConstants::DATE_TIME_FORMAT),
+                    'created_date' => date(CrmConstants::DATE_TIME_FORMAT),
+                    'created_by' => $get['user_id']
                 );
-                if ($check_row_id) {
-                    // If check_row_id exists, update the record
-                    $res = $callConfig->updateRecord('lead_feasibility_checklists', $update_array, "id", $check_row_id);
-                    $return['update_res'] = $res;
-                } else {
-                    // If check_row_id does not exist, insert a new record
-                    $insert_array = array(
-                        'company_id' => $get['company_id'],
-                        'feasibility_id' => $feasibility_id,
-                        'item_name' => $item_name,
-                        'item_type' => $post['checklist_type'][$i],
-                        'is_done' => $post['checklist_is_done'][$i],
-                        'comment' => $post['checklist_comment'][$i],
-                        'is_active' => 0,
-                        'current_status' => 0,
-                        'status_date' => date("Y-m-d H:i:s"),
-                        'created_date' => date("Y-m-d H:i:s"),
-                        'created_by' => $updated_by
-                    );
-                    $res = $callConfig->insertRecord('lead_feasibility_checklists', $insert_array);
-                    $return['insert_res'] = $res;
-                }
+                $return['insert_res'] = $callConfig->insertRecord('lead_feasibility_checklists', $insert_array);
             }
+        }
+    }
+
+    public function insertFeasibilityBomAndChecklist($get, $post){
+        $return = array();
+        if (($post['table_name'] ?? '') == 'lead_feasibility_boms') {
+            $this->saveLeadFeasibilityBoms($get, $post, $return);
+        } elseif (($post['table_name'] ?? '') == 'lead_feasibility_checklists') {
+            $this->saveLeadFeasibilityChecklists($get, $post, $return);
         }
         return $return;
     }
@@ -921,7 +928,7 @@ trait CrmFeasibilityAndCustomerTrait {
     }
     public function closeFeasibility($get){
         global $callConfig;
-        $updated_date = date("Y-m-d H:i:s");
+        $updated_date = date(CrmConstants::DATE_TIME_FORMAT);
         $updated_by = $get['user_id'];
         $fid = $get['feasibility_id'];
         $query = "UPDATE feasibility_requirements SET current_status = ".ST_APPROVED.", updated_date = '{$updated_date}', updated_by={$updated_by}  WHERE id = $fid";
@@ -951,7 +958,7 @@ trait CrmFeasibilityAndCustomerTrait {
     }
     public function updateReturnDate($get){
         global $callConfig;
-        $updated_date = date("Y-m-d H:i:s");
+        $updated_date = date(CrmConstants::DATE_TIME_FORMAT);
         $updated_by = $get['user_id'];
         $bom_id = $get['bom_id'] ?? '';
         $actual_return_by = $get['actual_return_by'] ?? '';
@@ -960,103 +967,61 @@ trait CrmFeasibilityAndCustomerTrait {
         $update_sql = "UPDATE lead_feasibility_boms SET actual_return_by = '{$actual_return_by}', updated_date = '{$updated_date}', updated_by={$updated_by} WHERE id = $bom_id";
         return $callConfig->executeQuery($update_sql);
     }
-    public function getFeasibilityTableAndFields($get) {
-        global $callConfig;
+    private function renderFeasibilityTableRow(array $row): string
+    {
+        $isSelectable = in_array($row['field_type'], ['select', 'radio']);
+        $mandatory = isset($row['mandatory']) ? (int) $row['mandatory'] : 0;
+        $mandatoryBtnClass = $mandatory ? 'btn-success' : 'btn-warning';
+        $mandatoryBtnText = $mandatory ? 'Unmandatory' : 'Mandatory';
+        $mandatoryBtnData = $mandatory ? 1 : 0;
 
-        $html = "";
-        if (isset($get['rid']) && $get['rid'] != '') {
-            $query = "SELECT * FROM feasibility_fields WHERE feasibility_type_id = " . $get['rid'] . " AND company_id = " . $get['company_id'] . " AND is_active = 0";
-            $data = $callConfig->getAllRows($query);
+        $lengthOptions = '';
+        for ($i = 1; $i <= 12; $i++) {
+            $val = "col-md-$i";
+            $sel = ($row['field_length'] == $val) ? 'selected' : '';
+            $lengthOptions .= "<option value='$val' $sel>$val</option>";
+        }
 
-            if (!empty($data)) {
-                $html .= "<div class='table-responsive mb-3'>
-        <table class='table table-striped' id='feasibilityFieldsTable'>
-        <thead><tr>
-            <th scope=\"col\" width='20%'>Label</th>
-            <th scope=\"col\" width='20%'>Type</th>
-            <th scope=\"col\" width='20%'>Values (JSON)</th>
-            <th scope=\"col\" width='20%'>Length (col)</th>
-            <th scope=\"col\" width='10%'>Mandatory</th>
-            <thwidth='0%'>Action</th>
-        </tr></thead><tbody>";
+        $typeOptions = '';
+        foreach (['text' => 'Text', 'number' => 'Number', 'date' => 'Date', 'select' => 'Select', 'radio' => 'Radio'] as $optVal => $optLabel) {
+            $sel = ($row['field_type'] == $optVal) ? 'selected' : '';
+            $typeOptions .= "<option value='$optVal' $sel>$optLabel</option>";
+        }
 
-                foreach ($data as $row) {
-                    $row = (array) $row;
-                    $isSelectable = in_array($row['field_type'], ['select', 'radio']);
-                    $mandatory = isset($row['mandatory']) ? (int) $row['mandatory'] : 0;
-                    $mandatoryBtnClass = $mandatory ? 'btn-success' : 'btn-warning';
-                    $mandatoryBtnText = $mandatory ? 'Unmandatory' : 'Mandatory';
-                    $mandatoryBtnData = $mandatory ? 1 : 0;
+        return "<tr>
+            <td width='20%'>
+                <input type='text' class='form-control' name='field_label[]' value='" . htmlspecialchars($row['field_label']) . "'>
+                <input type='hidden' name='code[]' value='" . htmlspecialchars($row['code']) . "'>
+                <input type='hidden' name='is_active[]' value='" . htmlspecialchars($row['is_active']) . "'>
+            </td>
+            <td width='20%'><select class='form-select' name='field_type[]' onchange='handleFieldTypeChange(this);'>$typeOptions</select></td>
+            <td width='20%'>
+                <input type='text' class='form-control field-value-input' name='field_value[]' value='" . htmlspecialchars($row['field_value']) . "' " . ($isSelectable ? 'readonly' : '') . ">
+                <button type='button' class='btn btn-sm btn-success mt-3 add-options-btn' style='" . ($isSelectable ? '' : 'display:none;') . " z-index:2;' onclick='openOptionsModal(this)'>Edit Options</button>
+            </td>
+            <td width='20%'><select class='form-select js-example-basic-single' name='field_length[]'>$lengthOptions</select></td>
+            <td width='10%'>
+                <button type='button' class='btn $mandatoryBtnClass btn-sm toggle-mandatory-btn' onclick='toggleMandatory(this)' data-mandatory='$mandatoryBtnData'>$mandatoryBtnText</button>
+                <input type='hidden' name='mandatory[]' value='$mandatory'>
+            </td>
+            <td width='10%'><button type='button' class='btn btn-danger btn-sm' onclick='removeFieldRow(this)'><i class='fa fa-trash'></i></button></td>
+        </tr>";
+    }
 
-                    $html .= "<tr>
-        <td width='20%'>
-            <input type='text' class='form-control' name='field_label[]' value='" . htmlspecialchars($row['field_label']) . "'>
-            <input type='hidden' name='code[]' value='" . htmlspecialchars($row['code']) . "'>
-            <input type='hidden' name='is_active[]' value='" . htmlspecialchars($row['is_active']) . "'>
-        </td>
-        <td width='20%'>
-            <select class='form-select' name='field_type[]' onchange='handleFieldTypeChange(this);'>
-                <option value='text' " . ($row['field_type'] == 'text' ? 'selected' : '') . ">Text</option>
-                <option value='number' " . ($row['field_type'] == 'number' ? 'selected' : '') . ">Number</option>
-                <option value='date' " . ($row['field_type'] == 'date' ? 'selected' : '') . ">Date</option>
-                <option value='select' " . ($row['field_type'] == 'select' ? 'selected' : '') . ">Select</option>
-                <option value='radio' " . ($row['field_type'] == 'radio' ? 'selected' : '') . ">Radio</option>
-            </select>
-        </td>
-        <td width='20%'>
-            <input type='text' class='form-control field-value-input' name='field_value[]' value='" . htmlspecialchars($row['field_value']) . "' " . ($isSelectable ? 'readonly' : '') . ">
-            <button type='button' class='btn btn-sm btn-success mt-3 add-options-btn' style='" . ($isSelectable ? '' : 'display:none;') . " z-index:2;' onclick='openOptionsModal(this)'>Edit Options</button>
-        </td>
-        <td width='20%'>
-            <select class='form-select js-example-basic-single' name='field_length[]'>
-                <option value='col-md-1' " . ($row['field_length'] == 'col-md-1' ? 'selected' : '') . ">col-md-1</option>
-                <option value='col-md-2' " . ($row['field_length'] == 'col-md-2' ? 'selected' : '') . ">col-md-2</option>
-                <option value='col-md-3' " . ($row['field_length'] == 'col-md-3' ? 'selected' : '') . ">col-md-3</option>
-                <option value='col-md-4' " . ($row['field_length'] == 'col-md-4' ? 'selected' : '') . ">col-md-4</option>
-                <option value='col-md-5' " . ($row['field_length'] == 'col-md-5' ? 'selected' : '') . ">col-md-5</option>
-                <option value='col-md-6' " . ($row['field_length'] == 'col-md-6' ? 'selected' : '') . ">col-md-6</option>
-                <option value='col-md-7' " . ($row['field_length'] == 'col-md-7' ? 'selected' : '') . ">col-md-7</option>
-                <option value='col-md-8' " . ($row['field_length'] == 'col-md-8' ? 'selected' : '') . ">col-md-8</option>
-                <option value='col-md-9' " . ($row['field_length'] == 'col-md-9' ? 'selected' : '') . ">col-md-9</option>
-                <option value='col-md-10' " . ($row['field_length'] == 'col-md-10' ? 'selected' : '') . ">col-md-10</option>
-                <option value='col-md-11' " . ($row['field_length'] == 'col-md-11' ? 'selected' : '') . ">col-md-11</option>
-                <option value='col-md-12' " . ($row['field_length'] == 'col-md-12' ? 'selected' : '') . ">col-md-12</option>
-            </select>
-        </td>
-        <td width='10%'>
-            <button type='button' class='btn $mandatoryBtnClass btn-sm toggle-mandatory-btn' onclick='toggleMandatory(this)' data-mandatory='$mandatoryBtnData'>$mandatoryBtnText</button>
-            <input type='hidden' name='mandatory[]' value='$mandatory'>
-        </td>
-        <td width='10%'><button type='button' class='btn btn-danger btn-sm' onclick='removeFieldRow(this)'><i class='fa fa-trash'></i></button></td>
-    </tr>";
-                }
-
-                $html .= "</tbody></table>
-                        <div class='d-flex justify-content-between mt-3'>
-                            <button type='button' class='btn btn-success mt-2' onclick='addNewFieldRow()'>+ Add New Field</button>
-                            <button type='button' class='btn btn-success mt-2' onclick='saveCustomFields()'>Save Fields</button>
-                        </div>
-                    </div>";
-
-                // Field preview section (unchanged)
-                $html .= "<div class='row' id='dynamic_preview'>";
-
-
-    foreach ($data as $row) {
-        $row = (array) $row;
-        $label = $row['field_label'];
-        $code = $row['code'];
-        $type = $row['field_type'];
-        $length = $row['field_length'];
-        $values = json_decode($row['field_value'], true);
+    private function renderFeasibilityFieldPreview(array $row): string
+    {
+        $label = $row['field_label'] ?? '';
+        $code = $row['code'] ?? '';
+        $type = $row['field_type'] ?? '';
+        $length = $row['field_length'] ?? 'col-md-6';
+        $values = json_decode($row['field_value'] ?? '[]', true) ?: array();
         $class = ($type === 'number') ? 'text-right' : '';
-        $mandatory = isset($row['mandatory']) ? (int)$row['mandatory'] : 0;
+        $mandatory = isset($row['mandatory']) ? (int) $row['mandatory'] : 0;
         $isRequired = ($mandatory === 0);
         $star = $isRequired ? " <span class='text-danger'>*</span>" : '';
         $requiredAttr = $isRequired ? 'required' : '';
 
-        $html .= "<div class='$length mb-3'><label class='form-label'>$label$star</label>";
-
+        $html = "<div class='$length mb-3'><label class='form-label'>$label$star</label>";
         if (in_array($type, ['text', 'number', 'date'])) {
             $html .= "<input type='$type' name='$code' class='form-control $class' $requiredAttr>";
         } elseif ($type === 'select') {
@@ -1068,23 +1033,36 @@ trait CrmFeasibilityAndCustomerTrait {
         } elseif ($type === 'radio') {
             $isFirst = true;
             foreach ($values as $v) {
-            $required = ($mandatory === 0 && $isFirst) ? 'checked' : '';
-
-                $html .= "<div class='form-check'>
-                    <input class='form-check-input' type='radio' name='$code' value='$v' id='{$code}_$v' $required>
-                    <label class='form-check-label' for='{$code}_$v'>$v</label>
-                </div>";
+                $required = ($mandatory === 0 && $isFirst) ? 'checked' : '';
+                $html .= "<div class='form-check'><input class='form-check-input' type='radio' name='$code' value='$v' id='{$code}_$v' $required><label class='form-check-label' for='{$code}_$v'>$v</label></div>";
                 $isFirst = false;
             }
         }
         $html .= "</div>";
+        return $html;
     }
-$html .= "</div>";
+
+    public function getFeasibilityTableAndFields($get) {
+        global $callConfig;
+        $html = "";
+        if (!empty($get['rid'])) {
+            $query = "SELECT * FROM feasibility_fields WHERE feasibility_type_id = " . intval($get['rid']) . " AND company_id = " . intval($get['company_id']) . CrmConstants::AND_IS_ACTIVE_0;
+            $data = $callConfig->getAllRows($query);
+
+            if (!empty($data)) {
+                $html .= "<div class='table-responsive mb-3'><table class='table table-striped' id='feasibilityFieldsTable'><thead><tr><th scope=\"col\" width='20%'>Label</th><th scope=\"col\" width='20%'>Type</th><th scope=\"col\" width='20%'>Values (JSON)</th><th scope=\"col\" width='20%'>Length (col)</th><th scope=\"col\" width='10%'>Mandatory</th><th width='0%'>Action</th></tr></thead><tbody>";
+                foreach ($data as $row) {
+                    $html .= $this->renderFeasibilityTableRow((array) $row);
+                }
+                $html .= "</tbody></table><div class='d-flex justify-content-between mt-3'><button type='button' class='btn btn-success mt-2' onclick='addNewFieldRow()'>+ Add New Field</button><button type='button' class='btn btn-success mt-2' onclick='saveCustomFields()'>Save Fields</button></div></div><div class='row' id='dynamic_preview'>";
+                foreach ($data as $row) {
+                    $html .= $this->renderFeasibilityFieldPreview((array) $row);
+                }
+                $html .= "</div>";
             } else {
                 $html .= "<div class='alert alert-warning'>No fields found for this feasibility type.</div>";
             }
         }
-
         return $html;
     }
     public function insertFeasibilityfeildslist($get, $post) {
@@ -1096,7 +1074,7 @@ $html .= "</div>";
         $feasibility_id = $post['feasibility_id'];
         $company_id = $get['company_id'];
         $user_id = $get['user_id'];
-        $updated_date = date("Y-m-d H:i:s");
+        $updated_date = date(CrmConstants::DATE_TIME_FORMAT);
 
         $fields = json_decode($post['fields_data'], true);
 
@@ -1158,7 +1136,7 @@ $html .= "</div>";
 
     public function reOpenFeasibility($get){
         global $callConfig;
-        $updated_date = date("Y-m-d H:i:s");
+        $updated_date = date(CrmConstants::DATE_TIME_FORMAT);
         $updated_by = $get['user_id'];
         $feasibility_id = $get['feasibility_id'] ?? '';
         $update_sql = "UPDATE feasibility_requirements SET current_status = " . ST_ACTIVE .", updated_date = '{$updated_date}', updated_by={$updated_by} WHERE id = $feasibility_id";
@@ -1174,16 +1152,16 @@ $html .= "</div>";
         $return = array();
         $feasibility_id = $get['feasibility_id'];
         $crm_contact_id = $get['crm_contact_id'];
-        $frsql = "SELECT * FROM feasibility_requirements WHERE company_id = '".$get['company_id']."' AND id = ".$feasibility_id." AND sales_order_id IS NULL AND is_active = 0";
+        $frsql = "SELECT * FROM feasibility_requirements WHERE company_id = '".$get['company_id'].CrmConstants::AND_ID_EQ.$feasibility_id." AND sales_order_id IS NULL AND is_active = 0";
         $frres = $callConfig->getRow($frsql);
         $return['feasibility_requirements'] = $frres;
 
-        $crm_contactssql = "SELECT * FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND id = ".$crm_contact_id." AND is_active = 0";
+        $crm_contactssql = "SELECT * FROM crm_contacts WHERE company_id = '".$get['company_id'].CrmConstants::AND_ID_EQ.$crm_contact_id.CrmConstants::AND_IS_ACTIVE_0;
         $crm_contactsres = $callConfig->getRow($crm_contactssql);
         $return['crm_contacts'] = $crm_contactsres;
 
         if($crm_contactsres->crm_company_id !=""){
-            $crm_companiessql = "SELECT * FROM crm_companies WHERE company_id = '".$get['company_id']."' AND id = ".$crm_contactsres->crm_company_id." AND is_active = 0";
+            $crm_companiessql = "SELECT * FROM crm_companies WHERE company_id = '".$get['company_id'].CrmConstants::AND_ID_EQ.$crm_contactsres->crm_company_id.CrmConstants::AND_IS_ACTIVE_0;
             $crm_companiesres = $callConfig->getRow($crm_companiessql);
             $return['crm_companies'] = $crm_companiesres;
             if($crm_companiesres->customer_id !=""){
@@ -1200,12 +1178,12 @@ $html .= "</div>";
             $return['insert_customers'] = $insertcust;
             $customer_id = $insertcust['customers']['LASTID'];
         }
-        $customersql = "SELECT * FROM customers WHERE company_id = '".$get['company_id']."' AND id = '".$customer_id."' AND is_active = 0";
+        $customersql = "SELECT * FROM customers WHERE company_id = '".$get['company_id'].CrmConstants::AND_ID_APOS.$customer_id.CrmConstants::AND_IS_ACTIVE_0_APOS;
         $customerres = $callConfig->getRow($customersql);
         $return['customers'] = $customerres;
 
 
-        $lfbsql = "SELECT * FROM lead_feasibility_boms WHERE company_id = '".$get['company_id']."' AND feasibility_id = '".$feasibility_id."' AND is_active = 0";
+        $lfbsql = "SELECT * FROM lead_feasibility_boms WHERE company_id = '".$get['company_id']."' AND feasibility_id = '".$feasibility_id.CrmConstants::AND_IS_ACTIVE_0_APOS;
         $lfbres = $callConfig->getAllRows($lfbsql);
         $return['lead_feasibility_boms'] = $lfbres;
         $total_amount = 0;
@@ -1227,18 +1205,18 @@ $html .= "</div>";
         $currency_id = 93;
         $cost_center_id = 1;
         $transaction_date = $due_date = date("Y-m-d");
-        $fieldnames=array('company_id'=>$get['company_id'],'transaction_number'=>$transaction_number,'transaction_date'=>$transaction_date,'currency_id'=>$currency_id,'currency_rate'=>1,'originator'=>$get['user_id'],'party_id'=>$customerres->id,'party_name'=>$customerres->company,'party_email'=>$customerres->email,'party_phone'=>$customerres->phone,'party_address'=>$customerres->billing_address,'party_ship_adderss'=>$customerres->shipping_address,'place_of_supply'=>'','payment_terms'=>$customerres->payment_terms,'amount'=>$total_amount,'tax_amount'=>0,'total_amount'=>$total_amount,'ref_type'=>'crm_contacts','ref_id'=>$crm_contact_id,'cost_center_id'=>$cost_center_id,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'originator_currency_id'=>$currency_id,'originator_state_id'=>$customerres->shipping_state,'supplier_state_id'=>$customerres->shipping_state,'due_date'=>$due_date, 'pending_amount'=>$total_amount,'is_active'=>'0');
+        $fieldnames=array('company_id'=>$get['company_id'],'transaction_number'=>$transaction_number,'transaction_date'=>$transaction_date,'currency_id'=>$currency_id,'currency_rate'=>1,'originator'=>$get['user_id'],'party_id'=>$customerres->id,'party_name'=>$customerres->company,'party_email'=>$customerres->email,'party_phone'=>$customerres->phone,'party_address'=>$customerres->billing_address,'party_ship_adderss'=>$customerres->shipping_address,'place_of_supply'=>'','payment_terms'=>$customerres->payment_terms,'amount'=>$total_amount,'tax_amount'=>0,'total_amount'=>$total_amount,'ref_type'=>'crm_contacts','ref_id'=>$crm_contact_id,'cost_center_id'=>$cost_center_id,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date(CrmConstants::DATE_TIME_FORMAT),'originator_currency_id'=>$currency_id,'originator_state_id'=>$customerres->shipping_state,'supplier_state_id'=>$customerres->shipping_state,'due_date'=>$due_date, 'pending_amount'=>$total_amount,'is_active'=>'0');
         $insert_data=$callConfig->insertRecord('sales_orders',$fieldnames);
         $return['main'] = $insert_data;
         if($insert_data['status'] == 'sucess'){
             $insert_id = $insert_data['LASTID'];
             foreach($lfbres as $item_data){
-                $itemfieldnames=array('company_id'=>$item_data->company_id,'transaction_id'=>$insert_id,'item_id'=>$item_data->item_id,'item_name'=>$itemsdetail[$item_data->item_id],'description'=>'','purchase_uom'=>$item_data->unit,'item_quantity'=>$item_data->item_quantity,'item_price'=>$item_data->item_price,'item_amount'=>$item_data->total_amount,'tax_amount'=>0,'discount_amount'=>0,'total_amount'=>$item_data->total_amount,'pending_qty'=>$item_data->item_quantity,'transaction_qty'=>$item_data->item_quantity,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'is_active'=>'0');
+                $itemfieldnames=array('company_id'=>$item_data->company_id,'transaction_id'=>$insert_id,'item_id'=>$item_data->item_id,'item_name'=>$itemsdetail[$item_data->item_id],'description'=>'','purchase_uom'=>$item_data->unit,'item_quantity'=>$item_data->item_quantity,'item_price'=>$item_data->item_price,'item_amount'=>$item_data->total_amount,'tax_amount'=>0,'discount_amount'=>0,'total_amount'=>$item_data->total_amount,'pending_qty'=>$item_data->item_quantity,'transaction_qty'=>$item_data->item_quantity,'created_by'=>$get['user_id'],'created_date'=>date(CrmConstants::DATE_TIME_FORMAT),'is_active'=>'0');
                 $item_id=$callConfig->insertRecord('so_items',$itemfieldnames);
                 $return['child'][] = $item_id;
             }
 
-            $insertary1['updated_date']=date('Y-m-d H:i:s');
+            $insertary1['updated_date']=date(CrmConstants::DATE_TIME_FORMAT);
             $insertary1['updated_by']=$get['user_id'];
             $insertary1['sales_order_id']=$insert_id;
             $callConfig->updateRecord("feasibility_requirements",$insertary1,'id',$feasibility_id);
@@ -1251,24 +1229,24 @@ $html .= "</div>";
         $post = array();
         $crecustom = "INSERT INTO customers(company_id, first_name, middle_name, last_name, display_name, email, phone, mobile, fax, website_url, billing_address, shipping_address,billing_post_code, shipping_post_code, billing_country, shipping_country, billing_state, shipping_state, billing_city, shipping_city,  company, is_active, current_Status, Created_By, Created_Date, image, pan_no)";
         if($crm_company_id !=""){
-            $crecustom .="SELECT ".$get['company_id'].",cc.first_name, cc.middle_name, cc.last_name, cc.display_name, cc.email_id, cc.phone, cc.office_phone, cc.fax, ccomp.website_url, ccomp.address, ccomp.address, ccomp.post_code, ccomp.post_code, ccomp.country_id, ccomp.country_id, ccomp.state_id, ccomp.state_id, ccomp.city_id, ccomp.city_id, ccomp.company_name ,0,0,'".$get['user_id']."','".date("Y-m-d H:i:s")."', ccomp.image, ccomp.pan_no FROM crm_contacts cc, crm_companies ccomp WHERE cc.id = '".$crm_lead_contact_id."' AND ccomp.id = '".$crm_company_id."' AND cc.is_active = ccomp.is_active";
+            $crecustom .="SELECT ".$get['company_id'].",cc.first_name, cc.middle_name, cc.last_name, cc.display_name, cc.email_id, cc.phone, cc.office_phone, cc.fax, ccomp.website_url, ccomp.address, ccomp.address, ccomp.post_code, ccomp.post_code, ccomp.country_id, ccomp.country_id, ccomp.state_id, ccomp.state_id, ccomp.city_id, ccomp.city_id, ccomp.company_name ,0,0,'".$get['user_id']."','".date(CrmConstants::DATE_TIME_FORMAT)."', ccomp.image, ccomp.pan_no FROM crm_contacts cc, crm_companies ccomp WHERE cc.id = '".$crm_lead_contact_id."' AND ccomp.id = '".$crm_company_id."' AND cc.is_active = ccomp.is_active";
         }else{ // crm contact
-            $crecustom .="SELECT ".$get['company_id'].", first_name, middle_name, last_name, display_name, email_id, phone, office_phone, fax, website, address, address, post_code, post_code, country_id, country_id, state_id, state_id, city_id, city_id, company_name , 0, 0, ".$get['user_id'].", '".date('Y-m-d H:i:s')."','','' FROM crm_contacts WHERE id = ".$crm_lead_contact_id;
+            $crecustom .="SELECT ".$get['company_id'].", first_name, middle_name, last_name, display_name, email_id, phone, office_phone, fax, website, address, address, post_code, post_code, country_id, country_id, state_id, state_id, city_id, city_id, company_name , 0, 0, ".$get['user_id'].", '".date(CrmConstants::DATE_TIME_FORMAT)."','','' FROM crm_contacts WHERE id = ".$crm_lead_contact_id;
 
         }
         $res = $callConfig->executeQuery($crecustom);
         if($res['status'] == 'sucess'){
             if($crm_company_id !=""){
-                $insertary['updated_date']=date('Y-m-d H:i:s');
+                $insertary['updated_date']=date(CrmConstants::DATE_TIME_FORMAT);
                 $insertary['updated_by']=$get['user_id'];
                 $insertary['customer_id']=$res['LASTID'];
                 $callConfig->updateRecord("crm_companies",$insertary,'id',$crm_company_id);
             }else{
-                $insertary=array('company_id'=>$get['company_id'], 'default_crm_contact_id'=>$crm_lead_contact_id, 'company_name'=>$crm_contactsres->company_name, 'customer_id'=> $res['LASTID'], 'website_url'=>$crm_contactsres->website, 'address'=>$crm_contactsres->address, 'post_code'=>$crm_contactsres->post_code, 'country_id'=>$crm_contactsres->country_id, 'state_id'=>$crm_contactsres->state_id, 'city_id'=>$crm_contactsres->city_id, 'is_active'=>'0', 'current_status'=>'0','created_by'=>$post['user_id'], 'created_date'=>date("Y-m-d H:i:s"));
+                $insertary=array('company_id'=>$get['company_id'], 'default_crm_contact_id'=>$crm_lead_contact_id, 'company_name'=>$crm_contactsres->company_name, 'customer_id'=> $res['LASTID'], 'website_url'=>$crm_contactsres->website, 'address'=>$crm_contactsres->address, 'post_code'=>$crm_contactsres->post_code, 'country_id'=>$crm_contactsres->country_id, 'state_id'=>$crm_contactsres->state_id, 'city_id'=>$crm_contactsres->city_id, 'is_active'=>'0', 'current_status'=>'0','created_by'=>$post['user_id'], 'created_date'=>date(CrmConstants::DATE_TIME_FORMAT));
                 $crmleaddetails = $callConfig->insertRecord('crm_companies',$insertary);
 
                 $insertary1 = array();
-                $insertary1['updated_date']=date('Y-m-d H:i:s');
+                $insertary1['updated_date']=date(CrmConstants::DATE_TIME_FORMAT);
                 $insertary1['updated_by']=$get['user_id'];
                 $insertary1['crm_company_id']=$crmleaddetails['LASTID'];
                 $callConfig->updateRecord("crm_contacts",$insertary1,'id',$crm_lead_contact_id);
@@ -1289,22 +1267,23 @@ $html .= "</div>";
     }
 
     // start Data comparision by koti
-    public function compareDatabaseSchemas($get) {
-        $dbName1 = $get['db1']; // e.g., 'db_reference'
-        $dbName2 = $get['db2']; // e.g., 'db_target'
-        $db1 = $this->connectToDatabaseByName($dbName1);
-        $db2 = $this->connectToDatabaseByName($dbName2);
-        function getTablesDB($db) {
-            $tables = [];
-            $result = $db->query("SHOW TABLES");
+    private function getDatabaseTables($db): array
+    {
+        $tables = [];
+        $result = $db->query("SHOW TABLES");
+        if ($result) {
             while ($row = $result->fetch_array()) {
                 $tables[] = $row[0];
             }
-            return $tables;
         }
-        function getFieldsDB($db, $table) {
-            $fields = [];
-            $result = $db->query("SHOW COLUMNS FROM `$table`");
+        return $tables;
+    }
+
+    private function getDatabaseTableFields($db, $table): array
+    {
+        $fields = [];
+        $result = $db->query("SHOW COLUMNS FROM `$table`");
+        if ($result) {
             while ($row = $result->fetch_assoc()) {
                 $fields[$row['Field']] = [
                     'Type' => $row['Type'],
@@ -1313,79 +1292,74 @@ $html .= "</div>";
                     'Extra' => $row['Extra']
                 ];
             }
-            return $fields;
         }
-        function getCreateTableSQL($db, $table) {
-            $result = $db->query("SHOW CREATE TABLE `$table`");
-            $row = $result->fetch_assoc();
-            return $row['Create Table'] . ";";
+        return $fields;
+    }
+
+    private function compareTableColumns($db2, $table, $dbName2, array $fields1, array $fields2, array &$report): void
+    {
+        $allFields = array_unique(array_merge(array_keys($fields1), array_keys($fields2)));
+        foreach ($allFields as $field) {
+            $in1 = array_key_exists($field, $fields1);
+            $in2 = array_key_exists($field, $fields2);
+
+            if (!$in2 && $in1) {
+                $f = $fields1[$field];
+                $null = ($f['Null'] === 'NO') ? "NOT NULL" : "NULL";
+                $default = ($f['Default'] !== null) ? "DEFAULT '" . $f['Default'] . "'" : "";
+                $extra = $f['Extra'];
+                $columnBefore = null;
+                $columnOrder = array_keys($fields2);
+                $index = array_search('is_active', $columnOrder);
+                if ($index !== false && $index > 0) {
+                    $columnBefore = $columnOrder[$index - 1];
+                }
+                $sql = $columnBefore
+                    ? "ALTER TABLE `$table` ADD COLUMN `$field` {$f['Type']} $null $default $extra AFTER `$columnBefore`;"
+                    : "ALTER TABLE `$table` ADD COLUMN `$field` {$f['Type']} $null $default $extra;";
+                $result = $db2->query($sql);
+                $report['actions'][] = ['direction' => 'to_db2:' . $dbName2, 'type' => 'add_column', 'query' => $sql, 'result' => $result];
+            } elseif ($in1 && $in2 && $fields1[$field]['Type'] !== $fields2[$field]['Type']) {
+                $f1 = $fields1[$field];
+                $null1 = ($f1['Null'] === 'NO') ? "NOT NULL" : "NULL";
+                $default1 = ($f1['Default'] !== null) ? "DEFAULT '" . $f1['Default'] . "'" : "";
+                $extra1 = $f1['Extra'];
+                $sql1 = "ALTER TABLE `$table` MODIFY COLUMN `$field` {$f1['Type']} $null1 $default1 $extra1;";
+                $result = $db2->query($sql1);
+                $report['actions'][] = ['direction' => 'to_db2:' . $dbName2, 'type' => 'modify_column', 'query' => $sql1, 'result' => $result];
+            }
         }
-        $tables1 = getTablesDB($db1);
-        $tables2 = getTablesDB($db2);
+    }
+
+    public function compareDatabaseSchemas($get) {
+        $dbName1 = $get['db1'];
+        $dbName2 = $get['db2'];
+        $db1 = $this->connectToDatabaseByName($dbName1);
+        $db2 = $this->connectToDatabaseByName($dbName2);
+
+        $tables1 = $this->getDatabaseTables($db1);
+        $tables2 = $this->getDatabaseTables($db2);
         $allTables = array_unique(array_merge($tables1, $tables2));
         $output = [];
+
         foreach ($allTables as $table) {
-            $report = [
-                'table' => $table,
-                'status' => [],
-                'actions' => []
-            ];
+            $report = ['table' => $table, 'status' => [], 'actions' => []];
             $existsInDb1 = in_array($table, $tables1);
             $existsInDb2 = in_array($table, $tables2);
 
-            // Table missing in DB2
             if (!$existsInDb2 && $existsInDb1) {
-                $report['status'][] = 'missing_in_db2:'.$dbName2;
-                $sql = getCreateTableSQL($db1, $table);
+                $report['status'][] = 'missing_in_db2:' . $dbName2;
+                $row = $db1->query("SHOW CREATE TABLE `$table`")->fetch_assoc();
+                $sql = ($row['Create Table'] ?? '') . ";";
                 $result = $db2->query($sql);
                 $report['actions'][] = ['direction' => 'to_db2', 'type' => 'create_table', 'query' => $sql, 'result' => $result];
-            }
-            // Compare fields if table exists in both
-            if ($existsInDb1 && $existsInDb2) {
+            } elseif ($existsInDb1 && $existsInDb2) {
                 $report['status'][] = 'exists_in_both';
-                $fields1 = getFieldsDB($db1, $table);
-                $fields2 = getFieldsDB($db2, $table);
-                $allFields = array_unique(array_merge(array_keys($fields1), array_keys($fields2)));
-                foreach ($allFields as $field) {
-                    $in1 = array_key_exists($field, $fields1);
-                    $in2 = array_key_exists($field, $fields2);
-                    // Field missing in DB2
-                    if (!$in2 && $in1) {
-                        $f = $fields1[$field];
-                        $null = ($f['Null'] === 'NO') ? "NOT NULL" : "NULL";
-                        $default = ($f['Default'] !== null) ? "DEFAULT '" . $f['Default'] . "'" : "";
-                        $extra = $f['Extra'];
-                        $columnBefore = null;
-                        $columnOrder = array_keys($fields2); // this preserves order from SHOW COLUMNS
-                        $index = array_search('is_active', $columnOrder);
-                        if ($index !== false && $index > 0) {
-                            $columnBefore = $columnOrder[$index - 1];
-                        }
-                        if ($columnBefore) {
-                            $sql = "ALTER TABLE `$table` ADD COLUMN `$field` {$f['Type']} $null $default $extra AFTER `$columnBefore`;";
-                        } else {
-                            // fallback: just add to end
-                            $sql = "ALTER TABLE `$table` ADD COLUMN `$field` {$f['Type']} $null $default $extra;";
-                        }
-                        $result = $db2->query($sql);
-                        $report['actions'][] = ['direction' => 'to_db2:'.$dbName2, 'type' => 'add_column', 'query' => $sql, 'result' => $result];
-                    }
-
-                    // Field type mismatch
-                    if ($in1 && $in2 && $fields1[$field]['Type'] !== $fields2[$field]['Type']) {
-                        // Fix DB2 to match DB1
-                        $f1 = $fields1[$field];
-                        $null1 = ($f1['Null'] === 'NO') ? "NOT NULL" : "NULL";
-                        $default1 = ($f1['Default'] !== null) ? "DEFAULT '" . $f1['Default'] . "'" : "";
-                        $extra1 = $f1['Extra'];
-                        $sql1 = "ALTER TABLE `$table` MODIFY COLUMN `$field` {$f1['Type']} $null1 $default1 $extra1;";
-                        $result = $db2->query($sql1);
-                        $report['actions'][] = ['direction' => 'to_db2:'.$dbName2, 'type' => 'modify_column', 'query' => $sql1, 'result' => $result];
-                    }
-                }
+                $fields1 = $this->getDatabaseTableFields($db1, $table);
+                $fields2 = $this->getDatabaseTableFields($db2, $table);
+                $this->compareTableColumns($db2, $table, $dbName2, $fields1, $fields2, $report);
             }
 
-            // Add to output only if there's something meaningful
             if (!empty($report['status']) || !empty($report['actions'])) {
                 $output[] = $report;
             }
@@ -1393,7 +1367,6 @@ $html .= "</div>";
         echo "<pre>";
         print_r($output);
         echo "</pre>";
-
     }
 
     public function connectToDatabaseByName($dbName) {
@@ -1410,262 +1383,188 @@ $html .= "</div>";
 
 
 
-    public function generatingApplicationSerialNumberMastersTst($transaction_table,$get){
+    private function buildSerialDynamicParts($asnres, $get, $partytable, $party_id, $transaction_type, array $checksequincerow, array &$parts, array &$insertwithconditionary): string
+    {
+        global $callConfig;
+        $additional_conditions = "";
+        foreach ($checksequincerow as $seq_key => $seq_val) {
+            if ($seq_val == "PARTY_NAME") {
+                if ($partytable != "" && $party_id != "") {
+                    $partysql = "SELECT id, short_name FROM " . $partytable . " WHERE company_id = " . $get['company_id'] . " AND id = " . $party_id . CrmConstants::AND_IS_ACTIVE_0;
+                    $partyres = $callConfig->getRow($partysql);
+                    $val = !empty($partyres->short_name) ? $partyres->short_name : $seq_val;
+                } else {
+                    $val = $seq_val;
+                }
+            } elseif ($seq_val == "TRANSACTION_TYPE") {
+                $val = ($transaction_type != "") ? $transaction_type : $seq_val;
+            } elseif ($seq_val == "TRANSACTION_LOCATION") {
+                $locationsql = "SELECT prty.id, loc.short_name FROM " . $partytable . " as prty, locations as loc WHERE prty.company_id = " . $get['company_id'] . " AND prty.company_id = loc.company_id AND prty.location_id = loc.id AND prty.is_active = loc.is_active AND prty.id = " . $party_id . CrmConstants::AND_IS_ACTIVE_0;
+                $locationres = $callConfig->getRow($locationsql);
+                $val = !empty($locationres->short_name) ? $locationres->short_name : $seq_val;
+            } else {
+                $val = $seq_val;
+            }
+            $additional_conditions .= CrmConstants::AND_POSITION . $seq_key . " = '" . $val . "'";
+            $insertwithconditionary["position_" . $seq_key] = $val;
+            $parts[$seq_key] = $val;
+        }
+        return $additional_conditions;
+    }
+
+    private function resolveResetSerialNumber($get, $asnres, $reset_type, $from_date, $to_date, $additional_conditions, array $insertwithconditionary, $numLength, array &$return): string
+    {
+        global $callConfig;
+        $sql = CrmConstants::SEL_APP_SERIAL_MASTER_DETAILS . $get['company_id'] . CrmConstants::AND_APP_SERIAL_MASTER_ID . $asnres->id . "' AND serial_number_reset_type = '{$reset_type}' AND from_date <= '{$from_date}' AND to_date >= '{$to_date}'" . CrmConstants::AND_IS_ACTIVE_0 . $additional_conditions;
+        $row = $callConfig->getRow($sql);
+        if (!empty($row->id)) {
+            $serial_number = $row->serial_number + 1;
+            $callConfig->updateRecord('application_serial_number_master_details', array('serial_number' => $serial_number), 'id', $row->id);
+        } else {
+            $serial_number = 1;
+            $insertary = array('company_id' => $get['company_id'], 'application_serial_number_master_id' => $asnres->id, 'serial_number_reset_type' => $reset_type, 'from_date' => $from_date, 'to_date' => $to_date, 'serial_number' => 1, 'created_by' => $get['user_id'], 'created_date' => date(CrmConstants::DATE_TIME_FORMAT), 'current_status' => 0, 'is_active' => 0);
+            foreach ($insertwithconditionary as $k => $v) {
+                $insertary[$k] = $v;
+            }
+            $return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
+        }
+        return str_pad((string) $serial_number, $numLength, '0', STR_PAD_LEFT);
+    }
+
+    public function generatingApplicationSerialNumberMastersTst($transaction_table, $get){
         global $callConfig;
         $return = array();
-        $transaction_date = $get['transaction_date'];
-        $party_id =  $get['party_id'];
-        $transaction_type =  $get['transaction_type'];
+        $transaction_date = $get['transaction_date'] ?? date('Y-m-d');
+        $transdate = !empty($transaction_date) ? $this->dateconvertdbformat($transaction_date) : date('Y-m-d');
+        $party_id = $get['party_id'] ?? '';
+        $transaction_type = $get['transaction_type'] ?? '';
 
-        $asnsql = "SELECT * FROM application_serial_number_masters WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND is_active = 0";
+        $asnsql = "SELECT * FROM application_serial_number_masters WHERE company_id = '" . $get['company_id'] . "' AND application_table_name = '" . $transaction_table . CrmConstants::AND_IS_ACTIVE_0_APOS;
         $asnres = $callConfig->getRow($asnsql);
+        $main_transaction_no_type = '';
+        $monthly_transaction_number = '';
+        $yearly_transaction_number = '';
+        $lifetime_transaction_number = '';
 
-        if($asnres->id !=""){
+        if (!empty($asnres->id)) {
             $main_transaction_no_type = $asnres->reset_type;
             $serial_number_position = $asnres->serial_number_position;
             $financial_year_position = $asnres->financial_year_position;
-            $numLength   = !empty($asnres->doc_no_length) ? (int)$asnres->doc_no_length : 3;
+            $numLength = !empty($asnres->doc_no_length) ? (int) $asnres->doc_no_length : 3;
 
-            $display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND field_name = 'party_id'";
+            $display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '" . $get['company_id'] . "' AND application_table_name = '" . $transaction_table . "' AND field_name = 'party_id'";
             $parttable_name = $callConfig->getRow($display_attribute_typessql);
-            $qquery = urldecode($parttable_name->content);
-            $explosql = explode("FROM", $qquery); // splite from to get table name and other part get
-            if(isset($explosql[1])){
-                $explosql = explode(" ", trim($explosql[1])); //splite to space only get table name
-            }
-            $partytable = trim($explosql[0]); //get Table name
+            $explosql = explode("FROM", urldecode($parttable_name->content ?? ''));
+            $partytable = isset($explosql[1]) ? trim(explode(" ", trim($explosql[1]))[0]) : '';
 
-            $checksequincerow = array();
-            $transdate = $transaction_date !=""?$this->dateconvertdbformat($transaction_date):date('Y-m-d');
-            $finyaer = date("m",strtotime($transdate)) >= 4 ? date("Y",strtotime($transdate)). '-' . (date("y",strtotime($transdate))+1) : (date("Y",strtotime($transdate)) - 1). '-' . date("y",strtotime($transdate));
-
-            $additional_settings = json_decode($asnres->additional_settings,1);
+            $finyaer = date("m", strtotime($transdate)) >= 4 ? date("Y", strtotime($transdate)) . '-' . (date("y", strtotime($transdate)) + 1) : (date("Y", strtotime($transdate)) - 1) . '-' . date("y", strtotime($transdate));
+            $additional_settings = json_decode($asnres->additional_settings, 1) ?: array();
             $position_with_val = array();
-            foreach($additional_settings as $adsetting){
+            foreach ($additional_settings as $adsetting) {
                 $position_with_val[$adsetting['positions']] = $adsetting;
             }
 
             $parts = [];
-            $serial = '';
+            $checksequincerow = array();
             for ($m = 1; $m <= 10; $m++) {
-                if (!empty($asnres->serial_number) && $serial_number_position == $m){
-                    $parts[$m] = $serial;
+                if (!empty($asnres->serial_number) && $serial_number_position == $m) {
+                    $parts[$m] = '';
                 }
-                if (!empty($finyaer) && $asnres->financial_year_check == "Y" && $financial_year_position == $m){
+                if (!empty($finyaer) && $asnres->financial_year_check == "Y" && $financial_year_position == $m) {
                     $parts[$m] = $finyaer;
                 }
-                if (isset($position_with_val[$m]) && $position_with_val[$m]['display_type'] == "STATIC" && $position_with_val[$m]['static_value'] != "") {
-                    $checksequincerow[$m] = $position_with_val[$m]['static_value'];
-                } elseif (isset($position_with_val[$m]) && $position_with_val[$m]['display_type'] == "DYNAMIC" && $position_with_val[$m]['dynamic_value'] != "") {
-                    $checksequincerow[$m] = $position_with_val[$m]['dynamic_value'];
+                if (isset($position_with_val[$m])) {
+                    $p = $position_with_val[$m];
+                    if ($p['display_type'] == "STATIC" && $p['static_value'] != "") {
+                        $checksequincerow[$m] = $p['static_value'];
+                    } elseif ($p['display_type'] == "DYNAMIC" && $p['dynamic_value'] != "") {
+                        $checksequincerow[$m] = $p['dynamic_value'];
+                    }
                 }
             }
 
             $insertwithconditionary = array();
-            $additional_conditions = "";
-            foreach($checksequincerow as $seq_key=>$seq_val){
-
-                if($seq_val == "PARTY_NAME"){
-
-                    if($partytable !="" && $party_id !=""){
-                        $partysql = "SELECT id, short_name FROM ".$partytable." WHERE company_id = ".$get['company_id']." AND id = ".$party_id." AND is_active = 0";
-                        $partyres = $callConfig->getRow($partysql);
-                        if($partyres->short_name !=""){
-                            $additional_conditions .= " AND position_".$seq_key." = '".$partyres->short_name."'";
-                            $insertwithconditionary["position_".$seq_key] = $partyres->short_name;
-                            $parts[$seq_key] = $partyres->short_name;
-                        }else{
-                            $additional_conditions .= " AND position_".$seq_key." = '".$seq_val."'";
-                            $insertwithconditionary["position_".$seq_key] = $seq_val;
-                            $parts[$seq_key] = $seq_val;
-                        }
-                    }else{
-                        $additional_conditions .= " AND position_".$seq_key." = '".$seq_val."'";
-                        $insertwithconditionary["position_".$seq_key] = $seq_val;
-                        $parts[$seq_key] = $seq_val;
-                    }
-
-                }elseif($seq_val == "TRANSACTION_TYPE"){
-                    if($transaction_type !=""){
-                        $additional_conditions .= " AND position_".$seq_key." = '".$transaction_type."'";
-                        $insertwithconditionary["position_".$seq_key] = $transaction_type;
-                        $parts[$seq_key] = $transaction_type;
-                    }else{
-                        $additional_conditions .= " AND position_".$seq_key." = '".$seq_val."'";
-                        $insertwithconditionary["position_".$seq_key] = $seq_val;
-                        $parts[$seq_key] = $seq_val;
-                    }
-
-                }elseif($seq_val == "TRANSACTION_LOCATION"){
-
-                    $locationsql = "SELECT prty.id, loc.short_name FROM ".$partytable." as prty, locations as loc WHERE prty.company_id = ".$get['company_id']." AND prty.company_id = loc.company_id AND prty.location_id = loc.id AND prty.is_active = loc.is_active AND prty.id = ".$party_id." AND prty.is_active = 0";
-                    $locationres = $callConfig->getRow($locationsql);
-                    if($locationres->short_name){
-                        $additional_conditions .= " AND position_".$seq_key." = '".$locationres->short_name."'";
-                        $insertwithconditionary["position_".$seq_key] = $locationres->short_name;
-                        $parts[$seq_key] = $locationres->short_name;
-                    }else{
-                        $additional_conditions .= " AND position_".$seq_key." = '".$seq_val."'";
-                        $insertwithconditionary["position_".$seq_key] = $seq_val;
-                        $parts[$seq_key] = $seq_val;
-                    }
-                }else{
-                    $additional_conditions .= " AND position_".$seq_key." = '".$seq_val."'";
-                    $insertwithconditionary["position_".$seq_key] = $seq_val;
-                    $parts[$seq_key] = $seq_val;
-                }
-            }
-
+            $additional_conditions = $this->buildSerialDynamicParts($asnres, $get, $partytable, $party_id, $transaction_type, $checksequincerow, $parts, $insertwithconditionary);
             ksort($parts);
 
-            $monthlysql = "SELECT * FROM application_serial_number_master_details WHERE company_id = '".$get['company_id']."' AND application_serial_number_master_id = '".$asnres->id."' AND serial_number_reset_type = 'MT' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date)."' AND is_active = 0".$additional_conditions;
-            $monthlyres = $callConfig->getRow($monthlysql);
+            // MT
+            $m_from = date("Y-m-01", strtotime($transdate));
+            $m_to = date("Y-m-t", strtotime($transdate));
+            $parts[$serial_number_position] = $this->resolveResetSerialNumber($get, $asnres, 'MT', $m_from, $m_to, $additional_conditions, $insertwithconditionary, $numLength, $return);
+            $parts[$financial_year_position] = date("M-Y", strtotime($transdate));
+            $monthly_transaction_number = trim(implode($asnres->separator_symbols, (array) $parts));
 
-            if($monthlyres->id !=""){
-                    $serial_number = $monthlyres->serial_number+1;
+            // YR
+            $mNum = (int) date("m", strtotime($transdate));
+            $yrStart = ($mNum >= 4) ? date("Y", strtotime($transdate)) : (date("Y", strtotime($transdate)) - 1);
+            $yrEnd = ($mNum >= 4) ? (date("Y", strtotime($transdate)) + 1) : date("Y", strtotime($transdate));
+            $y_from = $yrStart . "-04-01";
+            $y_to = $yrEnd . "-03-31";
+            $parts[$serial_number_position] = $this->resolveResetSerialNumber($get, $asnres, 'YR', $y_from, $y_to, $additional_conditions, $insertwithconditionary, $numLength, $return);
+            $parts[$financial_year_position] = date("Y", strtotime($y_from)) . "-" . date("y", strtotime($y_to));
+            $yearly_transaction_number = trim(implode($asnres->separator_symbols, (array) $parts));
 
-
-                    $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                    $parts[$serial_number_position] = $serial;
-                    $callConfig->updateRecord('application_serial_number_master_details',array('serial_number' =>$serial_number),'id',$monthlyres->id);
-            }else{
-
-                $from_date = date("Y-m-01",strtotime($transaction_date));
-                $to_date = date("Y-m-t",strtotime($transaction_date));
-
-                $serial_number = 1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'MT','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'current_status'=>0, 'is_active'=>0);
-                foreach($insertwithconditionary as $fieldkey=>$filedval){
-                    $insertary[$fieldkey] = $filedval;
-                }
-                $return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
-
-            }
-
-            $parts[$financial_year_position] = date("M-Y",strtotime($transaction_date));
-            $monthly_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
-            $yearlysql = "SELECT * FROM application_serial_number_master_details WHERE company_id = '".$get['company_id']."' AND application_serial_number_master_id = '".$asnres->id."' AND serial_number_reset_type = 'YR' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date)."' AND is_active = 0".$additional_conditions;
-            $yearlyres = $callConfig->getRow($yearlysql);
-
-            if(date("m",strtotime($transaction_date)) >= 4){
-                $startyear = date("Y",strtotime($transaction_date));
-                $endyear = (date("Y",strtotime($transaction_date))+1);
-                $from_date = $startyear."-04-01";
-                $to_date = $endyear."-03-31";
-            }else{
-                $startyear = (date("Y",strtotime($transaction_date)) - 1);
-                $endyear = date("Y",strtotime($transaction_date));
-                $from_date = $startyear."-04-01";
-                $to_date = $endyear."-03-31";
-            }
-
-            if($yearlyres->id !=""){
-                $serial_number = $yearlyres->serial_number+1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $callConfig->updateRecord('application_serial_number_master_details',array('serial_number' =>$serial_number),'id',$yearlyres->id);
-            }else{
-                $serial_number = 1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'YR','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'current_status'=>0, 'is_active'=>0);
-                foreach($insertwithconditionary as $fieldkey=>$filedval){
-                    $insertary[$fieldkey] = $filedval;
-                }
-                $return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
-
-            }
-            $parts[$financial_year_position] = date("Y",strtotime($from_date))."-".date("y",strtotime($to_date));
-            $yearly_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
-            $lifetimesql = "SELECT * FROM application_serial_number_master_details WHERE company_id = '".$get['company_id']."' AND application_serial_number_master_id = '".$asnres->id."' AND serial_number_reset_type = 'LT' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date)."' AND is_active = 0".$additional_conditions;
-            $lifetimeres = $callConfig->getRow($lifetimesql);
-
-            if($lifetimeres->id !=""){
-                $serial_number = $lifetimeres->serial_number+1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $callConfig->updateRecord('application_serial_number_master_details',array('serial_number' =>$serial_number),'id',$lifetimeres->id);
-            }else{
-
-                $from_date = "2020-04-01";
-                $to_date = "3020-03-31";
-                $serial_number = 1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'LT','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'current_status'=>0, 'is_active'=>0);
-                foreach($insertwithconditionary as $fieldkey=>$filedval){
-                    $insertary[$fieldkey] = $filedval;
-                }
-                $return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
-            }
-
-            if($asnres->financial_year_check == "Y"){
-                $parts[$financial_year_position] = date("Y",strtotime($transaction_date));
-            }else{
-                unset($parts[$financial_year_position]);
-            }
-            $lifetime_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
-
-
+            // LT
+            $parts[$serial_number_position] = $this->resolveResetSerialNumber($get, $asnres, 'LT', '2020-04-01', '3020-03-31', $additional_conditions, $insertwithconditionary, $numLength, $return);
+            $lifetime_transaction_number = trim(implode($asnres->separator_symbols, (array) $parts));
         }
+
         $main_transaction_number = random_int(1, PHP_INT_MAX);
-        $monthly_transaction_number = $monthly_transaction_number !=""?$monthly_transaction_number:random_int(1, PHP_INT_MAX);
-        $yearly_transaction_number = $yearly_transaction_number !=""?$yearly_transaction_number:random_int(1, PHP_INT_MAX);
-        $lifetime_transaction_number = $lifetime_transaction_number !=""?$lifetime_transaction_number:random_int(1, PHP_INT_MAX);
-        if($main_transaction_no_type=="MT"){
+        $monthly_transaction_number = !empty($monthly_transaction_number) ? $monthly_transaction_number : random_int(1, PHP_INT_MAX);
+        $yearly_transaction_number = !empty($yearly_transaction_number) ? $yearly_transaction_number : random_int(1, PHP_INT_MAX);
+        $lifetime_transaction_number = !empty($lifetime_transaction_number) ? $lifetime_transaction_number : random_int(1, PHP_INT_MAX);
+        if ($main_transaction_no_type == "MT") {
             $main_transaction_number = $monthly_transaction_number;
-        }elseif($main_transaction_no_type=="YR"){
+        } elseif ($main_transaction_no_type == "YR") {
             $main_transaction_number = $yearly_transaction_number;
-        }elseif($main_transaction_no_type=="LT"){
+        } elseif ($main_transaction_no_type == "LT") {
             $main_transaction_number = $lifetime_transaction_number;
         }
-        return array('main_transaction_number'=>$main_transaction_number,'monthly_transaction_number'=>$monthly_transaction_number, 'yearly_transaction_number'=>$yearly_transaction_number, 'lifetime_transaction_number'=>$lifetime_transaction_number);
+        return array('main_transaction_number' => $main_transaction_number, 'monthly_transaction_number' => $monthly_transaction_number, 'yearly_transaction_number' => $yearly_transaction_number, 'lifetime_transaction_number' => $lifetime_transaction_number);
     }
     public function getCRMAIDashboards($get){
         global $callConfig;
         $originatercondition = '';
-        $crm_leadssql = "SELECT id, type_name, type, created_date, created_by FROM crm_activity_types WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
+        $crm_leadssql = "SELECT id, type_name, type, created_date, created_by FROM crm_activity_types WHERE company_id = '".$get['company_id']."' ".$originatercondition.CrmConstants::AND_IS_ACTIVE_0;
         $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
         $return['crm_activity_types'] = $crm_leadsres;
 
-        $crm_leadssql = "SELECT id, originator, campaign_name, crm_campaign_type, campaign_start_date, campaign_end_date, total_budget, created_date FROM crm_campaigns WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
+        $crm_leadssql = "SELECT id, originator, campaign_name, crm_campaign_type, campaign_start_date, campaign_end_date, total_budget, created_date FROM crm_campaigns WHERE company_id = '".$get['company_id']."' ".$originatercondition.CrmConstants::AND_IS_ACTIVE_0;
         $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
         $return['crm_campaigns'] = $crm_leadsres;
 
-        $crm_leadssql = "SELECT id, originator, company_name, default_crm_contact_id, created_date FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
+        $crm_leadssql = "SELECT id, originator, company_name, default_crm_contact_id, created_date FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition.CrmConstants::AND_IS_ACTIVE_0;
         $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
         $return['crm_companies'] = $crm_leadsres;
 
-        $crm_leadssql = "SELECT id, originator, display_name, post_code, country_id, state_id,city_id, created_date FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
+        $crm_leadssql = "SELECT id, originator, display_name, post_code, country_id, state_id,city_id, created_date FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition.CrmConstants::AND_IS_ACTIVE_0;
         $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
         $return['crm_contacts'] = $crm_leadsres;
 
-        $crm_leadssql = "SELECT id, originator, deal_name, crm_company_id, crm_contact_id, due_date, expected_close_date, originator, crm_status, created_date FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
+        $crm_leadssql = "SELECT id, originator, deal_name, crm_company_id, crm_contact_id, due_date, expected_close_date, originator, crm_status, created_date FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition.CrmConstants::AND_IS_ACTIVE_0;
         $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
         $return['crm_deals'] = $crm_leadsres;
 
-        $crm_leadssql = "SELECT id, transaction_table, `transaction_id`, `lead_type`, `date`, `time`, `address`, `country_id`, `state_id`, `city_id`, `post_code`, `phone`, `sms_text`, `email_content_id`, `recipient_email_id`, `member`, `comment`, `originator`, `section_id`, `division_id`, `job_grade_id`, `completion_datetime`, `completion_note`, created_date, created_by FROM crm_histories WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
+        $crm_leadssql = "SELECT id, transaction_table, `transaction_id`, `lead_type`, `date`, `time`, `address`, `country_id`, `state_id`, `city_id`, `post_code`, `phone`, `sms_text`, `email_content_id`, `recipient_email_id`, `member`, `comment`, `originator`, `section_id`, `division_id`, `job_grade_id`, `completion_datetime`, `completion_note`, created_date, created_by FROM crm_histories WHERE company_id = '".$get['company_id']."' ".$originatercondition.CrmConstants::AND_IS_ACTIVE_0;
         $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
         $return['crm_histories'] = $crm_leadsres;
 
-        $crm_leadssql = "SELECT id, display_name, post_code, country_id, state_id,city_id, created_date, created_by FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
+        $crm_leadssql = "SELECT id, display_name, post_code, country_id, state_id,city_id, created_date, created_by FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition.CrmConstants::AND_IS_ACTIVE_0;
         $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
         $return['crm_leads'] = $crm_leadsres;
 
-        $project_task_statussql = "SELECT id, table_name, name, status, action_label, created_date, created_by FROM project_task_status WHERE company_id = '".$get['company_id']."' AND is_active = 0";
+        $project_task_statussql = "SELECT id, table_name, name, status, action_label, created_date, created_by FROM project_task_status WHERE company_id = '".$get['company_id'].CrmConstants::AND_IS_ACTIVE_0_APOS;
         $project_task_statusres = $callConfig->getAllRows($project_task_statussql);
         $return['project_task_status'] = $project_task_statusres;
 
-        $crm_general_codessql = "SELECT id, code, value, label, created_date, created_by FROM crm_general_codes WHERE company_id = '".$get['company_id']."' AND is_active = 0";
+        $crm_general_codessql = "SELECT id, code, value, label, created_date, created_by FROM crm_general_codes WHERE company_id = '".$get['company_id'].CrmConstants::AND_IS_ACTIVE_0_APOS;
         $crm_general_codesres=$callConfig->getAllRows($crm_general_codessql);
         foreach($crm_general_codesres as $crmcode){
             $crm_general_codes[$crmcode->code][] =$crmcode;
         }
         $return['crm_general_codes'] = $crm_general_codes;
 
-        $query = "SELECT id, display_name, created_date, created_by FROM application_users WHERE  company_id=".$get['company_id']." AND is_active=0";
+        $query = "SELECT id, display_name, created_date, created_by FROM application_users WHERE  company_id=".$get['company_id'].CrmConstants::AND_IS_ACTIVE_0_NO_SPACE;
         $data = $callConfig->getAllRows($query);
          $return['users_res'] = $data;
 
@@ -1680,11 +1579,11 @@ class CrmUserClass extends userClass {
     use CrmSalesAndImportsTrait;
     use CrmFeasibilityAndCustomerTrait;
 
-    public const DATE_FORMAT_HIS = "Y-m-d H:i:s";
+    public const DATE_FORMAT_HIS = CrmConstants::DATE_TIME_FORMAT;
     public const DATE_FORMAT_LOWER_HIS = "Y-m-d h:i:s";
-    public const SQL_AND_IS_ACTIVE_0 = " AND is_active = 0";
-    public const SQL_AND_IS_ACTIVE_0_NOSPACE = " AND is_active=0";
-    public const SQL_QUOTE_AND_IS_ACTIVE_0 = "' AND is_active = 0";
+    public const SQL_AND_IS_ACTIVE_0 = CrmConstants::AND_IS_ACTIVE_0;
+    public const SQL_AND_IS_ACTIVE_0_NOSPACE = CrmConstants::AND_IS_ACTIVE_0_NO_SPACE;
+    public const SQL_QUOTE_AND_IS_ACTIVE_0 = CrmConstants::AND_IS_ACTIVE_0_APOS;
     public const SQL_AND_IS_ACTIVE_0_GROUP_STATUS = " AND is_active = 0 GROUP BY crm_status";
     public const SQL_WHERE_COMPANY_ID_EQ_QUOTE = " WHERE company_id = '";
     public const SQL_SEL_CRM_CONTACTS = "SELECT * FROM crm_contacts WHERE company_id = '";
@@ -1693,452 +1592,251 @@ class CrmUserClass extends userClass {
     public const SQL_AND_ORIGINATOR_EQ = " AND originator = '";
     public const SQL_ZERO_TIME_AND = " 00:00:00' AND '";
     public const SQL_QUOTE_AND_ID_IN = "' AND id IN(";
-    public const SQL_QUOTE_AND_ID_EQ = "' AND id = '";
-    public const SQL_QUOTE_AND_ID_EQ_NUM = "' AND id = ";
+    public const SQL_QUOTE_AND_ID_EQ = CrmConstants::AND_ID_APOS;
+    public const SQL_QUOTE_AND_ID_EQ_NUM = CrmConstants::AND_ID_EQ;
     public const SQL_QUOTE_AND_CRM_COMPANY_ID = "' AND crm_company_id = '";
-    public const SQL_AND_POSITION_PREFIX = " AND position_";
-    public const SQL_AND_COMPANY_ID_EQ = " AND company_id=";
-    public const SQL_SPACE_COMPANY_ID_EQ = " company_id=";
-    public const SQL_QUOTE_AND_APP_SERIAL_ID = "' AND application_serial_number_master_id = '";
-    public const SQL_SEL_APP_SERIAL_MASTER_DETAILS = "SELECT * FROM application_serial_number_master_details WHERE company_id = '";
+    public const SQL_AND_POSITION_PREFIX = CrmConstants::AND_POSITION;
+    public const SQL_AND_COMPANY_ID_EQ = CrmConstants::AND_COMPANY_ID_EQ;
+    public const SQL_SPACE_COMPANY_ID_EQ = CrmConstants::COMPANY_ID_EQ;
+    public const SQL_QUOTE_AND_APP_SERIAL_ID = CrmConstants::AND_APP_SERIAL_MASTER_ID;
+    public const SQL_SEL_APP_SERIAL_MASTER_DETAILS = CrmConstants::SEL_APP_SERIAL_MASTER_DETAILS;
 
+
+    private function loadCRMDashboardData($get, $originatercondition, $prooriginatercondition, $feasibiltycondition, array &$return): void
+    {
+        global $callConfig;
+        $todaydate = date("Y-m-d");
+        $datecondition = " AND created_date BETWEEN '" . $todaydate . self::SQL_ZERO_TIME_AND . $todaydate . " 23:59:59'";
+        $othercondition = self::SQL_WHERE_COMPANY_ID_EQ_QUOTE . $get['company_id'] . self::SQL_QUOTE_AND_IS_ACTIVE_0;
+        $crm_leadssql = "SELECT (SELECT COUNT(id) as cnt FROM crm_leads " . $othercondition . $datecondition . $originatercondition . ") as today_crm_lead_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts " . $othercondition . $datecondition . $originatercondition . ") as today_crm_contacts_cnt, (SELECT COUNT(id) as cnt FROM crm_deals " . $othercondition . $datecondition . $originatercondition . ") as today_crm_deals_cnt, (SELECT COUNT(id) as cnt FROM crm_leads " . $othercondition . $originatercondition . ") as crm_lead_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts " . $othercondition . $originatercondition . ") as crm_contacts_cnt, (SELECT COUNT(id) as cnt FROM crm_companies " . $othercondition . $originatercondition . ") as crm_companies_cnt, (SELECT COUNT(id) as cnt FROM crm_campaigns " . $othercondition . $originatercondition . ") as crm_campaigns_cnt, (SELECT COUNT(id) as cnt FROM crm_deals " . $othercondition . $originatercondition . ") as crm_deals_cnt, (SELECT COUNT(id) as cnt FROM projects " . $othercondition . $prooriginatercondition . ") as projects_cnt";
+        $return['dashboard_sql'] = $crm_leadssql;
+        $return['dashboard_cnt'] = $callConfig->getRow($crm_leadssql);
+
+        $return['crm_leads'] = $callConfig->getAllRows("SELECT * FROM crm_leads WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . " ORDER BY created_date DESC limit 5");
+        $return['crm_leads_graph'] = $callConfig->getAllRows("SELECT count(id) as cnt, crm_status FROM crm_leads WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS);
+
+        $return['crm_contacts'] = $callConfig->getAllRows(self::SQL_SEL_CRM_CONTACTS . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . " ORDER BY created_date DESC limit 5");
+        $return['crm_contacts_graph'] = $callConfig->getAllRows("SELECT count(id) as cnt, crm_status FROM crm_contacts WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS);
+
+        $return['crm_deals'] = $callConfig->getAllRows(self::SQL_SEL_CRM_DEALS . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . " ORDER BY created_date DESC limit 5");
+        $return['crm_deals_graph'] = $callConfig->getAllRows("SELECT count(id) as cnt, crm_status FROM crm_deals WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS);
+
+        $crm_companies = array();
+        foreach ($callConfig->getAllRows(self::SQL_SEL_CRM_COMPANIES . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0) as $crmlead) {
+            $crm_companies[$crmlead->id] = $crmlead->company_name;
+        }
+        $return['crm_companies_id_name'] = $crm_companies;
+        $return['crm_activity_types'] = $callConfig->getAllRows("SELECT id,type_name,type, icon FROM crm_activity_types WHERE company_id = '" . $get['company_id'] . self::SQL_QUOTE_AND_IS_ACTIVE_0);
+
+        $crm_lead_detailsres = $callConfig->getAllRows("SELECT id, transaction_table, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, created_date FROM crm_histories WHERE company_id = '" . $get['company_id'] . "' AND lead_type IN(2,3,6,7,8) AND(originator = '" . $get['user_id'] . "' OR JSON_SEARCH(member, 'one', '" . $get['user_id'] . "') IS NOT NULL) AND current_status = 0 AND is_active = 0");
+        $return['crm_pendding_tasks'] = $crm_lead_detailsres;
+
+        $tasktabd = array();
+        foreach ($crm_lead_detailsres as $hist) {
+            $tasktabd[$hist->transaction_table][$hist->transaction_id] = $hist->transaction_id;
+        }
+        foreach ($tasktabd as $transtable => $ids) {
+            $crm_leadssql = "SELECT id,display_name,phone FROM " . $transtable . self::SQL_WHERE_COMPANY_ID_EQ_QUOTE . $get['company_id'] . self::SQL_QUOTE_AND_ID_IN . implode(',', (array) $ids) . ") " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0;
+            foreach ($callConfig->getAllRows($crm_leadssql) as $crmdet) {
+                $return['crm_pendding_task_details'][$transtable][$crmdet->id] = $crmdet;
+            }
+        }
+
+        $return['feasibility_requirements'] = $callConfig->getAllRows("SELECT fr.id as feasibility_id, cc.id as crm_contact_id, cc.display_name, cc.email_id, cc.phone, cc.company_name, cc.crm_company_id FROM feasibility_requirements fr, crm_contacts cc WHERE fr.company_id = '" . $get['company_id'] . "' AND fr.company_id = cc.company_id AND fr.lead_id = cc.id AND fr.is_active = cc.is_active AND fr.is_active = 0 AND fr.sales_order_id IS NULL AND fr.current_status = '" . ST_APPROVED . "'" . $feasibiltycondition);
+        $return['feasibility_requirements_expiry_days'] = $callConfig->getAllRows("SELECT fr.id AS feasibility_id, fr.current_status, fr.lead_id AS lead_id, ft.type_name AS feasibility_type, fe.end_date AS evaluation_end_date, crmcon.display_name FROM feasibility_requirements fr LEFT JOIN feasibility_types ft ON fr.feasibility_type_id = ft.id AND ft.company_id = " . $get['company_id'] . " AND ft.is_active = 0 LEFT JOIN lead_feasibility_evaluations fe ON fr.id = fe.feasibility_id AND fe.company_id = " . $get['company_id'] . " AND fe.is_active = 0 LEFT JOIN crm_contacts crmcon ON fr.company_id = crmcon.company_id AND fr.lead_id = crmcon.id WHERE fr.company_id = " . $get['company_id'] . " AND fr.current_status != " . ST_APPROVED . " AND fr.is_active = 0 ");
+    }
+
+    private function loadCRMListData($get, $originatercondition, array &$return): void
+    {
+        global $callConfig;
+        $from_date = $this->dateconvertdbformat($get['from_date']);
+        $to_date = $this->dateconvertdbformat($get['to_date']);
+        $datecondition = " AND created_date BETWEEN '" . $from_date . self::SQL_ZERO_TIME_AND . $to_date . " 23:59:59'";
+        $tableList = $get['transaction_table_list'] ?? '';
+
+        if ($tableList == "crm_leads") {
+            $return['crm_leads'] = $callConfig->getAllRows("SELECT * FROM crm_leads WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . $datecondition);
+            $return['crm_leads_graph'] = $callConfig->getAllRows("SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,display_name, phone,image) SEPARATOR ',') AS group_values FROM crm_leads WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . " GROUP BY crm_status");
+        } elseif ($tableList == "crm_contacts") {
+            $return['crm_contacts'] = $callConfig->getAllRows("SELECT * FROM crm_contacts WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . $datecondition);
+            $return['crm_contacts_graph'] = $callConfig->getAllRows("SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,display_name, phone,image) SEPARATOR ',') AS group_values FROM crm_contacts WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . " GROUP BY crm_status");
+        } elseif ($tableList == "crm_deals") {
+            $return['crm_deals'] = $callConfig->getAllRows("SELECT * FROM crm_deals WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . $datecondition);
+            $return['crm_deals_graph'] = $callConfig->getAllRows("SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,deal_name, total_budget,image) SEPARATOR ',') AS group_values FROM crm_deals WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . " GROUP BY crm_status");
+        } elseif ($tableList == "crm_companies") {
+            $return['crm_companies'] = $callConfig->getAllRows("SELECT * FROM crm_companies WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . $datecondition);
+        } elseif ($tableList == "crm_campaigns") {
+            $return['crm_campaigns'] = $callConfig->getAllRows("SELECT * FROM crm_campaigns WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0 . $datecondition);
+        }
+    }
+
+    private function loadCRMSingleLeadData($get, $originatercondition, array &$return): void
+    {
+        global $callConfig;
+        $return['crm_leads'] = $callConfig->getAllRows(self::SQL_SEL_CRM_LEADS . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0);
+        $return['crm_contacts'] = $callConfig->getAllRows(self::SQL_SEL_CRM_CONTACTS . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0);
+        $return['crm_companies'] = $callConfig->getAllRows(self::SQL_SEL_CRM_COMPANIES . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0);
+        $return['crm_campaigns'] = $callConfig->getAllRows(self::SQL_SEL_CRM_CAMPAIGNS . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0);
+        $return['crm_deals'] = $callConfig->getAllRows(self::SQL_SEL_CRM_DEALS . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0);
+        $return['projects'] = $callConfig->getAllRows("SELECT id, project_name, current_status FROM projects WHERE company_id = '" . $get['company_id'] . "' " . $originatercondition . CrmConstants::AND_IS_ACTIVE_0);
+
+        if (!empty($get['rid'])) {
+            $return['crm_leads_details'] = $callConfig->getRow("SELECT * FROM " . $get['transaction_table'] . " WHERE company_id = '" . $get['company_id'] . CrmConstants::AND_ID_APOS . $get['rid'] . CrmConstants::AND_IS_ACTIVE_0_APOS);
+            if ($get['transaction_table'] == "crm_companies") {
+                $customersql = "SELECT * FROM customers WHERE company_id = '" . $get['company_id'] . CrmConstants::AND_ID_APOS . ($return['crm_leads_details']->customer_id ?? 0) . CrmConstants::AND_IS_ACTIVE_0_APOS;
+                $return['customers'] = $callConfig->getRow($customersql);
+            }
+            if ($get['transaction_table'] == "projects") {
+                $return['project_teams'] = $callConfig->getAllRows("SELECT id, user_id FROM `project_teams` WHERE company_id = '" . $get['company_id'] . "' AND project_id = '" . $get['rid'] . self::SQL_QUOTE_AND_IS_ACTIVE_0);
+            }
+        }
+    }
 
     public function getCRMLeads($get){
-        global $callConfig;
-        $return = array();
-        $return['get'] = $get;
-        $todaydate = date("Y-m-d");
-        if($get['admin_type'] != 1){
-            $originatercondition = self::SQL_AND_ORIGINATOR_EQ.$get['user_id']."'";
-            $prooriginatercondition = " AND assigner_id = '".$get['user_id']."'";
-            $feasibiltycondition = " AND fr.created_by = '".$get['user_id']."'";
-
-        }
-        if($get['dashboard'] == "Y"){
-            $datecondition = " AND created_date BETWEEN '".$todaydate.self::SQL_ZERO_TIME_AND.$todaydate." 23:59:59'";
-            $othercondition  =self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $crm_leadssql = "SELECT (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition.$datecondition.$originatercondition.") as today_crm_lead_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition.$datecondition.$originatercondition.") as today_crm_contacts_cnt, (SELECT COUNT(id) as cnt FROM crm_deals ".$othercondition.$datecondition.$originatercondition.") as today_crm_deals_cnt, (SELECT COUNT(id) as cnt FROM crm_leads ".$othercondition.$originatercondition.") as crm_lead_cnt, (SELECT COUNT(id) as cnt FROM crm_contacts ".$othercondition.$originatercondition.") as crm_contacts_cnt, (SELECT COUNT(id) as cnt FROM crm_companies ".$othercondition.$originatercondition.") as crm_companies_cnt, (SELECT COUNT(id) as cnt FROM crm_campaigns ".$othercondition.$originatercondition.") as crm_campaigns_cnt, (SELECT COUNT(id) as cnt FROM crm_deals ".$othercondition.$originatercondition.") as crm_deals_cnt, (SELECT COUNT(id) as cnt FROM projects ".$othercondition.$prooriginatercondition.") as projects_cnt";
-            $crm_leadsres=$callConfig->getRow($crm_leadssql);
-            $return['dashboard_sql'] = $crm_leadssql;
-            $return['dashboard_cnt'] = $crm_leadsres;
-
-            $crm_leadssql = "SELECT * FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  ORDER BY created_date DESC limit 5";
-            $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-            $return['crm_leads'] = $crm_leadsres;
-
-            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
-            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
-            $return['crm_leads_graph'] = $crm_leadsgraphres;
-
-            $crm_leadssql = self::SQL_SEL_CRM_CONTACTS.$get['company_id']."' ".$originatercondition." AND is_active = 0 ORDER BY created_date DESC limit 5";
-            $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-            $return['crm_contacts'] = $crm_leadsres;
-
-            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
-            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
-            $return['crm_contacts_graph'] = $crm_leadsgraphres;
-
-            $crm_dealssql = self::SQL_SEL_CRM_DEALS.$get['company_id']."' ".$originatercondition." AND is_active = 0 ORDER BY created_date DESC limit 5";
-            $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-            $return['crm_deals'] = $crm_dealsres;
-
-            $crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
-            $crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
-            $return['crm_deals_graph'] = $crm_leadsgraphres;
-
-            $crm_companiessql = self::SQL_SEL_CRM_COMPANIES.$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0;
-            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-            $crm_companies = array();
-            foreach($crm_companiesres as $crmlead){
-                $crm_companies[$crmlead->id] = $crmlead->company_name;
-            }
-            $return['crm_companies_id_name'] = $crm_companies;
-
-
-            $crm_lead_typessql = "SELECT id,type_name,type, icon FROM crm_activity_types WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $crm_lead_typesres=$callConfig->getAllRows($crm_lead_typessql);
-            $return['crm_activity_types'] = $crm_lead_typesres;
-
-            $crm_lead_detailssql = "SELECT id, transaction_table, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, created_date FROM crm_histories WHERE company_id = '".$get['company_id']."' AND lead_type IN(2,3,6,7,8) AND(originator = '".$get['user_id']."' OR JSON_SEARCH(member, 'one', '".$get['user_id']."') IS NOT NULL) AND  current_status = 0 AND is_active = 0";
-            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
-            $return['crm_pendding_tasks'] = $crm_lead_detailsres;
-            $tasktabd = array();
-            foreach($crm_lead_detailsres as $hist){
-                $tasktabd[$hist->transaction_table][$hist->transaction_id] = $hist->transaction_id;
-            }
-            foreach($tasktabd as $transtable=>$ids){
-                $crm_leadssql = "SELECT id,display_name,phone FROM ".$transtable.self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_ID_IN.implode(',', (array)$ids).") ".$originatercondition.self::SQL_AND_IS_ACTIVE_0;
-                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-                foreach($crm_leadsres as $crmdet){
-                    $return['crm_pendding_task_details'][$transtable][$crmdet->id] = $crmdet;
-                }
-            }
-
-            $frsql =  "SELECT fr.id as feasibility_id, cc.id as crm_contact_id, cc.display_name, cc.email_id, cc.phone, cc.company_name, cc.crm_company_id FROM feasibility_requirements fr, crm_contacts cc WHERE fr.company_id = '".$get['company_id']."' AND fr.company_id = cc.company_id AND fr.lead_id = cc.id AND fr.is_active = cc.is_active  AND fr.is_active = 0 AND fr.sales_order_id IS NULL AND fr.current_status = '".ST_APPROVED."'".$feasibiltycondition;
-            $frres=$callConfig->getAllRows($frsql);
-            $return['feasibility_requirements'] = $frres;
-
-
-            $query = "SELECT fr.id AS feasibility_id, fr.current_status, fr.lead_id AS lead_id, ft.type_name AS feasibility_type, fe.end_date AS evaluation_end_date, crmcon.display_name FROM feasibility_requirements fr LEFT JOIN feasibility_types ft ON fr.feasibility_type_id = ft.id AND ft.company_id = " . $get['company_id'] . " AND ft.is_active = 0 LEFT JOIN lead_feasibility_evaluations fe ON fr.id = fe.feasibility_id  AND fe.company_id = " . $get['company_id'] . " AND fe.is_active = 0 LEFT JOIN crm_contacts crmcon  ON fr.company_id  = crmcon.company_id AND fr.lead_id = crmcon.id WHERE fr.company_id = " . $get['company_id'] . " AND fr.current_status != " . ST_APPROVED ." AND fr.is_active = 0  " ;
-            $data11 = $callConfig->getAllRows($query);
-            $return['feasibility_requirements_expiry_days'] = $data11;
-
-
-        }elseif($get['list'] == "Y"){
-            $from_date = $this->dateconvertdbformat($get['from_date']);
-            $to_date = $this->dateconvertdbformat($get['to_date']);
-            $datecondition = " AND created_date BETWEEN '".$from_date.self::SQL_ZERO_TIME_AND.$to_date." 23:59:59'";
-            if($get['transaction_table_list']=="crm_leads"){
-                $crm_leadssql = "SELECT * FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
-                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-                $return['crm_leads'] = $crm_leadsres;
-
-                $crm_leadssql1 = "SELECT count(id) as cnt, crm_status,  GROUP_CONCAT(CONCAT_WS('|', id,display_name, phone,image) SEPARATOR ',') AS group_values   FROM crm_leads WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  GROUP BY crm_status";
-                $crm_leadsres1=$callConfig->getAllRows($crm_leadssql1);
-                $return['crm_leads_graph'] = $crm_leadsres1;
-
-
-            }elseif($get['transaction_table_list']=="crm_contacts"){
-                $crm_leadssql = self::SQL_SEL_CRM_CONTACTS.$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
-                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-                $return['crm_contacts'] = $crm_leadsres;
-
-                $feasibilitycrmcontactid = array();
-                foreach($crm_leadsres as $crml){
-                    if($crml->feasibility_check == "Y"){
-                        $feasibilitycrmcontactid[$crml->id] = $crml->id;
-                    }
-                }
-                if(count((array)$feasibilitycrmcontactid) !="0"){
-                    $feasibility_requirementssql = "SELECT id, lead_id, sales_order_id, current_status FROM feasibility_requirements WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
-                    $feasibility_requirementsres=$callConfig->getAllRows($feasibility_requirementssql);
-                    foreach($feasibility_requirementsres as $feasl){
-                        $feasibility_requirements[$feasl->lead_id] = $feasl;
-                    }
-                    $return['feasibility_requirements'] = $feasibility_requirements;
-                }
-
-
-
-                $crm_leadssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,display_name, phone,image) SEPARATOR ',') AS group_values  FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0  GROUP BY crm_status";
-                $crm_leadsres=$callConfig->getAllRows($crm_leadssql);
-                $return['crm_contacts_graph'] = $crm_leadsres;
-
-
-            }elseif($get['transaction_table_list']=="crm_companies"){
-                $crm_companiessql = "SELECT * FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
-                $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-                $return['crm_companies'] = $crm_companiesres;
-
-                $crm_companiessql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,company_name, company_registration_number,image) SEPARATOR ',') AS group_values  FROM crm_companies WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
-                $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-                $return['crm_companies_graph'] = $crm_companiesres;
-
-            }elseif($get['transaction_table_list']=="crm_campaigns"){
-                $crm_campaignssql = "SELECT * FROM crm_campaigns WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
-                $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
-                $return['crm_campaigns'] = $crm_campaignsres;
-
-                $crm_campaignssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,campaign_name, total_budget,image) SEPARATOR ',') AS group_values  FROM crm_campaigns WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
-                $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
-                $return['crm_campaigns_graph'] = $crm_campaignsres;
-            }elseif($get['transaction_table_list']=="crm_deals"){
-                $crm_dealssql = self::SQL_SEL_CRM_DEALS.$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0.$datecondition;
-                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-                $return['crm_deals'] = $crm_dealsres;
-
-                $crm_dealssql = "SELECT count(id) as cnt, crm_status, GROUP_CONCAT(CONCAT_WS('|', id,deal_name, total_budget,image) SEPARATOR ',') AS group_values FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition.self::SQL_AND_IS_ACTIVE_0_GROUP_STATUS;
-                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-                $return['crm_deals_graph'] = $crm_dealsres;
-            }elseif($get['transaction_table_list']=="crm_projects"){
-                $crm_dealssql = "SELECT * FROM projects WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0.$datecondition;
-                $crm_dealsres=$callConfig->getAllRows($crm_dealssql);
-                $return['crm_projects'] = $crm_dealsres;
-            }elseif($get['transaction_table_list']=="crm_feasibilities"){
-                $query = "SELECT fr.id AS feasibility_id,fr.lead_id AS lead_id,ft.type_name AS feasibility_type,
-                    crm_con.display_name,fr.current_status,fr.sales_order_id,crm_con.phone,fr.updated_date
-                FROM feasibility_requirements fr
-                LEFT JOIN feasibility_types ft  ON fr.feasibility_type_id = ft.id AND ft.company_id = fr.company_id AND  ft.is_active = 0
-                LEFT JOIN crm_contacts crm_con ON fr.lead_id = crm_con.id AND crm_con.company_id = fr.company_id AND  crm_con.is_active = 0
-                WHERE fr.company_id = " .$get['company_id']." AND fr.created_date BETWEEN '".$from_date.self::SQL_ZERO_TIME_AND.$to_date." 23:59:59' AND fr.is_active = 0";
-            $crm_feasibilities = $callConfig->getAllRows($query);
-            $return['crm_feasibilities'] = $crm_feasibilities;
-
+        $return = array('get' => $get);
+        $originatercondition = $prooriginatercondition = $feasibiltycondition = "";
+        if (($get['admin_type'] ?? 0) != 1) {
+            $originatercondition = self::SQL_AND_ORIGINATOR_EQ . $get['user_id'] . "'";
+            $prooriginatercondition = " AND assigner_id = '" . $get['user_id'] . "'";
+            $feasibiltycondition = " AND fr.created_by = '" . $get['user_id'] . "'";
         }
 
-
-            $todaycrmleadssql = "SELECT crmp.id, crmp.transaction_table, crmp.transaction_id, crmp.lead_type, crmp.date, crmp.time, crmp.address, crmp.country_id, crmp.state_id, crmp.city_id, crmp.post_code, crmp.phone, crmp.sms_text, crmp.email_content_id, crmp.recipient_email_id, crmp.member, crmp.comment, crmp.created_date FROM crm_histories crmp WHERE crmp.company_id = '".$get['company_id']."' AND crmp.is_active = 0 AND crmp.id IN(SELECT MAX(id) as id FROM crm_histories crmc WHERE crmc.company_id = crmp.company_id AND crmc.is_active = crmp.is_active AND crmc.transaction_table = crmp.transaction_table AND crmc.transaction_id = crmp.transaction_id GROUP BY crmc.transaction_table, crmc.transaction_id)";
-            $todaycrmleadsres=$callConfig->getAllRows($todaycrmleadssql);
-            $return['crm_histories'] = $todaycrmleadsres;
-
-
-            $crm_companiessql = self::SQL_SEL_CRM_COMPANIES.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-            $crm_companies = array();
-            foreach($crm_companiesres as $crmlead){
-                $crm_companies[$crmlead->id] = $crmlead->company_name;
-            }
-            $return['crm_companies_id_name'] = $crm_companies;
-
-
-
-
-        }elseif($get['rid'] !=0 && $get['rid'] !="" && $get['transaction_table'] !=""){
-            //* requird please don't add filed list
-            $crm_leadssql = "SELECT * FROM ".$get['transaction_table'].self::SQL_WHERE_COMPANY_ID_EQ_QUOTE.$get['company_id'].self::SQL_QUOTE_AND_ID_EQ.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $crm_leadsres=$callConfig->getRow($crm_leadssql);
-            $return['transaction'] = $crm_leadsres;
-            if($crm_leadsres->country_id !=""){
-                $statessql = "SELECT id,state_name FROM states WHERE company_id = '".$get['company_id']."' AND country_id = '".$crm_leadsres->country_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-                $statesres=$callConfig->getAllRows($statessql);
-                $return['states'] = $statesres;
-            }
-            if($crm_leadsres->state_id !=""){
-                $citiessql = "SELECT id,city_name FROM cities WHERE company_id = '".$get['company_id']."' AND state_id = '".$crm_leadsres->state_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-                $citiesres=$callConfig->getAllRows($citiessql);
-                $return['cities'] = $citiesres;
-            }
-            $crm_lead_detailssql = "SELECT id, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, created_date FROM crm_histories WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$get['rid']."' AND transaction_table = '".$get['transaction_table'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
-            $return['crm_lead_details_sql'] = $crm_lead_detailssql;
-            $return['crm_lead_details'] = $crm_lead_detailsres;
-
-            $email_contentsql = "SELECT template_reference_id,template_name FROM email_content WHERE company_id = '".$get['company_id']."' AND application_module = '29' AND template_reference_id = 73 AND is_active = 0";
-            $email_contentres=$callConfig->getAllRows($email_contentsql);
-            $return['email_content'] = $email_contentres;
-
-            if($get['transaction_table'] == "crm_companies"){ //only use for company with contacts
-                $crm_leadssql1 = self::SQL_SEL_CRM_CONTACTS.$get['company_id'].self::SQL_QUOTE_AND_CRM_COMPANY_ID.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-                $crm_leadsres1=$callConfig->getAllRows($crm_leadssql1);
-                $return['company_with_contacts'] = $crm_leadsres1;
-
-                $company_with_dealssql = self::SQL_SEL_CRM_DEALS.$get['company_id'].self::SQL_QUOTE_AND_CRM_COMPANY_ID.$get['rid'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-                $company_with_dealsres=$callConfig->getAllRows($company_with_dealssql);
-                $return['company_with_deals'] = $company_with_dealsres;
-
-            }elseif($get['transaction_table'] == "crm_deals"){ //only use for company with contacts
-                $crm_contactssql = "SELECT id, display_name, phone, originator FROM crm_contacts WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_CRM_COMPANY_ID.$crm_leadsres->crm_company_id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-                $crm_contactsres=$callConfig->getAllRows($crm_contactssql);
-                $return['deal_with_contacts'] = $crm_contactsres;
-            }elseif($get['transaction_table'] == "projects"){ //only use for company with contacts
-                $projctteamsql = "SELECT id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND project_id = '".$crm_leadsres->id.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-                $projctteamres=$callConfig->getAllRows($projctteamsql);
-                $return['project_teams'] = $projctteamres;
-            }
-
-            $application_userssql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', 'CRM_USER') IS NOT NULL";
-            $application_usersres=$callConfig->getAllRows($application_userssql);
-            $return['application_users_role'] = $application_usersres;
-
+        if (($get['dashboard'] ?? '') == "Y") {
+            $this->loadCRMDashboardData($get, $originatercondition, $prooriginatercondition, $feasibiltycondition, $return);
+        } elseif (($get['list'] ?? '') == "Y") {
+            $this->loadCRMListData($get, $originatercondition, $return);
+        } else {
+            $this->loadCRMSingleLeadData($get, $originatercondition, $return);
         }
-        $crm_general_codessql = "SELECT id, code, value, label FROM crm_general_codes WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $crm_general_codesres=$callConfig->getAllRows($crm_general_codessql);
-        foreach($crm_general_codesres as $crmcode){
-            $crm_general_codes[$crmcode->code][] =$crmcode;
-        }
-        $return['crm_general_codes'] = $crm_general_codes;
 
-        $application_userssql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $application_usersres=$callConfig->getAllRows($application_userssql);
-        $return['application_users'] = $application_usersres;
-
-        $countriessql = "SELECT id,country_name FROM countries WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $countriesres=$callConfig->getAllRows($countriessql);
-        $return['countries'] = $countriesres;
-
-        $crm_lead_typessql = "SELECT id,type_name,type, icon FROM crm_activity_types WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $crm_lead_typesres=$callConfig->getAllRows($crm_lead_typessql);
-        $return['crm_lead_types'] = $crm_lead_typesres;
-
-        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $company_typesres = $callConfig->getAllRows($company_typessql);
-        $return['company_types'] = $company_typesres;
-
-        $project_task_statussql = "SELECT  id, table_name, name, status, action_label FROM project_task_status WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-        $project_task_statusres = $callConfig->getAllRows($project_task_statussql);
-        $project_task_status = array();
-        foreach($project_task_statusres as $aulres){
-            $project_task_status[$aulres->table_name][$aulres->status]= $aulres;
-        }
-        $return['project_task_status'] = $project_task_status;
-        if($get['transaction_table'] =="crm_companies"){
-            $crm_lead_detailssql = "SELECT id, display_name FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND (crm_company_id IN ('".$get['rid']."') OR crm_company_id IS NULL) AND is_active = 0";
-            $crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
-            $return['company_crm_contacts'] = $crm_lead_detailsres;
-
-            $crm_all_pending_contactsql = "SELECT id, display_name FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND (crm_company_id ='' OR crm_company_id IS NULL) AND is_active = 0";
-            $crm_all_pending_contactres=$callConfig->getAllRows($crm_all_pending_contactsql);
-            $return['without_company_contacts'] = $crm_all_pending_contactres;
-
-        }elseif($get['transaction_table'] =="crm_deals" || $get['transaction_table'] =="crm_contacts"){
-            $crm_companiessql = self::SQL_SEL_CRM_COMPANIES.$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $crm_companiesres=$callConfig->getAllRows($crm_companiessql);
-            $return['crm_companies'] = $crm_companiesres;
-        }elseif($get['transaction_table'] =="projects" || $get['transaction_table'] =="crm_projects"){
-            $customerssql = "SELECT id, display_name, company FROM customers WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $customersres=$callConfig->getAllRows($customerssql);
-            $return['customers'] = $customersres;
-        }
-        if($get['transaction_table'] =="crm_leads" || $get['transaction_table'] =="crm_contacts"){
-            $crm_campaignssql = "SELECT id, campaign_name FROM crm_campaigns WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_IS_ACTIVE_0;
-            $crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
-            $return['crm_campaigns'] = $crm_campaignsres;
-        }
         return $return;
     }
-    public function insertCRMLeads($get,$post){
+    private function buildCrmEntityInsertArray($transaction_table, $post, array &$return): array
+    {
         global $callConfig;
-        $return = array();
-        $return['post'] = $post;
-        $transaction_table = $post['transaction_table'];
-        $display_name = $post['first_name']." ".$post['last_name'];
-        $insertary=array('company_id'=>$post['company_id'],'first_name'=>$post['first_name'],'middle_name'=>$post['middle_name'],'last_name'=>$post['last_name'],'display_name'=>$display_name,'phone'=>$post['phone'],'office_phone'=>$post['office_phone'],'fax'=>$post['fax'],'website'=>$post['website'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'contact_source'=>$post['contact_source'],'remark'=>$post['remark'],'email_id'=>$post['email_id'],'image'=>$post['image']);
-        if($transaction_table== "crm_leads"){
+        $display_name = $post['first_name'] . " " . $post['last_name'];
+        $insertary = array('company_id' => $post['company_id'], 'first_name' => $post['first_name'], 'middle_name' => $post['middle_name'], 'last_name' => $post['last_name'], 'display_name' => $display_name, 'phone' => $post['phone'], 'office_phone' => $post['office_phone'], 'fax' => $post['fax'], 'website' => $post['website'], 'address' => $post['address'], 'post_code' => $post['post_code'], 'country_id' => $post['country_id'], 'state_id' => $post['state_id'], 'city_id' => $post['city_id'], 'originator' => $post['originator'], 'contact_source' => $post['contact_source'], 'remark' => $post['remark'], 'email_id' => $post['email_id'], 'image' => $post['image']);
+
+        if ($transaction_table == "crm_leads") {
             $insertary['company_name'] = $post['company_name'];
             $insertary['crm_status'] = $post['crm_status'];
             $insertary['crm_campaign_id'] = $post['crm_campaign_id'];
-
-        }elseif($transaction_table== "crm_contacts"){
+        } elseif ($transaction_table == "crm_contacts") {
             $insertary['crm_company_id'] = $post['crm_company_id'];
             $insertary['crm_campaign_id'] = $post['crm_campaign_id'];
-            $insertary['feasibility_check'] = $post['feasibility_check'] =="Y"?"Y":"N";
-        }elseif($transaction_table =="crm_companies"){
-
-            $insertary=array('company_id'=>$post['company_id'],'company_name'=>$post['company_name'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'gstin'=>$post['gstin'],'fax'=>$post['fax'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
-
-                $insertary1=array('company_id'=>$post['company_id'],'display_name'=>$post['company_name'],'company'=>$post['company_name'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'billing_address'=>$post['address'], 'shipping_address'=>$post['address'],'billing_post_code'=>$post['post_code'], 'shipping_post_code'=>$post['post_code'], 'billing_country'=>$post['country_id'], 'shipping_country'=>$post['country_id'], 'billing_state'=>$post['state_id'], 'shipping_state'=>$post['state_id'], 'billing_city'=>$post['city_id'], 'shipping_city'=>$post['city_id'],'image'=>$post['image'],'updated_by'=>$post['user_id'],'updated_date'=>date(self::DATE_FORMAT_HIS),'gstin'=>$post['gstin'],'fax'=>$post['fax']);
-
-                if($post['crm_customer_id'] !=""){
-                    $return['customer'] = $callConfig->updateRecord('customers',$insertary1,'id',$post['crm_customer_id']);
-                }else{
-                    $customerinsert =$callConfig->insertRecord('customers',$insertary1);
-                    $return['customer'] = $customerinsert;
-                    $insertary['customer_id'] = $customerinsert['LASTID'];
-                }
-
-
-        }elseif($transaction_table =="crm_campaigns"){
-            $insertary=array('company_id'=>$post['company_id'],'campaign_name'=>$post['campaign_name'],'crm_campaign_type'=>$post['crm_campaign_type'],'campaign_objective'=>$post['campaign_objective'],'campaign_start_date'=>$this->dateconvertdbformat($post['campaign_start_date']),'campaign_end_date'=>$this->dateconvertdbformat($post['campaign_end_date']),'total_budget'=>$post['total_budget'],'redirect_url'=>$post['redirect_url'],'contact_email_id'=>$post['contact_email_id'],'contact_no'=>$post['contact_no'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
-        }elseif($transaction_table =="crm_deals"){
-            $insertary=array('company_id'=>$post['company_id'],'deal_name'=>$post['deal_name'],'source_type'=>$post['source_type'],'crm_company_id'=>$post['crm_company_id'],'crm_contact_id'=>$post['crm_contact_id'],'total_budget'=>$post['total_budget'],'due_date'=>$this->dateconvertdbformat($post['due_date']),'expected_close_date'=>$this->dateconvertdbformat($post['expected_close_date']),'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
-        }elseif($transaction_table =="projects"){
-            $insertary=array('company_id'=>$post['company_id'],'project_name'=>$post['project_name'],'customer_id'=>$post['customer_id'],'project_cost'=>$post['project_cost'],'planned_start'=>$this->dateconvertdbformat($post['planned_start']),'planned_finish'=>$this->dateconvertdbformat($post['planned_finish']),'assigner_id'=>$post['originator'],'description'=>$post['description'],'assigner_id'=>$post['originator'],'project_logo'=>$post['image']);
+            $insertary['feasibility_check'] = ($post['feasibility_check'] == "Y") ? "Y" : "N";
+        } elseif ($transaction_table == "crm_companies") {
+            $insertary = array('company_id' => $post['company_id'], 'company_name' => $post['company_name'], 'website_url' => $post['website_url'], 'pan_no' => $post['pan_no'], 'gstin' => $post['gstin'], 'fax' => $post['fax'], 'address' => $post['address'], 'post_code' => $post['post_code'], 'country_id' => $post['country_id'], 'state_id' => $post['state_id'], 'city_id' => $post['city_id'], 'originator' => $post['originator'], 'remark' => $post['remark'], 'image' => $post['image']);
+            $insertary1 = array('company_id' => $post['company_id'], 'display_name' => $post['company_name'], 'company' => $post['company_name'], 'website_url' => $post['website_url'], 'pan_no' => $post['pan_no'], 'billing_address' => $post['address'], 'shipping_address' => $post['address'], 'billing_post_code' => $post['post_code'], 'shipping_post_code' => $post['post_code'], 'billing_country' => $post['country_id'], 'shipping_country' => $post['country_id'], 'billing_state' => $post['state_id'], 'shipping_state' => $post['state_id'], 'billing_city' => $post['city_id'], 'shipping_city' => $post['city_id'], 'image' => $post['image'], 'updated_by' => $post['user_id'], 'updated_date' => date(self::DATE_FORMAT_HIS), 'gstin' => $post['gstin'], 'fax' => $post['fax']);
+            if ($post['crm_customer_id'] != "") {
+                $return['customer'] = $callConfig->updateRecord('customers', $insertary1, 'id', $post['crm_customer_id']);
+            } else {
+                $customerinsert = $callConfig->insertRecord('customers', $insertary1);
+                $return['customer'] = $customerinsert;
+                $insertary['customer_id'] = $customerinsert['LASTID'];
+            }
+        } elseif ($transaction_table == "crm_campaigns") {
+            $insertary = array('company_id' => $post['company_id'], 'campaign_name' => $post['campaign_name'], 'crm_campaign_type' => $post['crm_campaign_type'], 'campaign_objective' => $post['campaign_objective'], 'campaign_start_date' => $this->dateconvertdbformat($post['campaign_start_date']), 'campaign_end_date' => $this->dateconvertdbformat($post['campaign_end_date']), 'total_budget' => $post['total_budget'], 'redirect_url' => $post['redirect_url'], 'contact_email_id' => $post['contact_email_id'], 'contact_no' => $post['contact_no'], 'originator' => $post['originator'], 'remark' => $post['remark'], 'image' => $post['image']);
+        } elseif ($transaction_table == "crm_deals") {
+            $insertary = array('company_id' => $post['company_id'], 'deal_name' => $post['deal_name'], 'source_type' => $post['source_type'], 'crm_company_id' => $post['crm_company_id'], 'crm_contact_id' => $post['crm_contact_id'], 'total_budget' => $post['total_budget'], 'due_date' => $this->dateconvertdbformat($post['due_date']), 'expected_close_date' => $this->dateconvertdbformat($post['expected_close_date']), 'originator' => $post['originator'], 'remark' => $post['remark'], 'image' => $post['image']);
+        } elseif ($transaction_table == "projects") {
+            $insertary = array('company_id' => $post['company_id'], 'project_name' => $post['project_name'], 'customer_id' => $post['customer_id'], 'project_cost' => $post['project_cost'], 'planned_start' => $this->dateconvertdbformat($post['planned_start']), 'planned_finish' => $this->dateconvertdbformat($post['planned_finish']), 'assigner_id' => $post['originator'], 'description' => $post['description'], 'project_logo' => $post['image']);
         }
-         if($post['rid'] !="" && $post['rid'] !="0"){
-            $insertary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
-            $insertary['updated_by']=$post['user_id'];
-            $return['res'] = $callConfig->updateRecord($transaction_table,$insertary,'id',$post['rid']);
-            $lastid = $post['rid'];
+        return $insertary;
+    }
 
-            if($transaction_table == "projects"){
-                $projctteamsql = "SELECT id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND project_id = '".$lastid.self::SQL_QUOTE_AND_IS_ACTIVE_0;
-                $projctteamres=$callConfig->getAllRows($projctteamsql);
-                $project_teamsuserid = array();
-                foreach($projctteamres as $prteam){
-                    $project_teamsuserid[$prteam->user_id] = $prteam->id;
-                }
-                $callConfig->updateRecord('project_teams',array('is_active'=>null),'id',$lastid);
-                if(count((array)$post['project_team_user_id']) != '0'){
-                    foreach($post['project_team_user_id'] as $userid){
-                        if($project_teamsuserid[$userid] !=""){
-                            $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
-                            $return['project_teams_up'][] = $callConfig->updateRecord('project_teams',$insertary1,'id',$project_teamsuserid[$userid]);
-                        }else{
-                            $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
-                            $return['project_teams'][] = $callConfig->insertRecord('project_teams',$insertary1);
-                        }
+    private function syncProjectTeams($get, $post, $project_id, $isUpdate, array &$return): void
+    {
+        global $callConfig;
+        if ($isUpdate) {
+            $projctteamres = $callConfig->getAllRows("SELECT id, user_id FROM `project_teams` WHERE company_id = '" . $get['company_id'] . "' AND project_id = '" . $project_id . self::SQL_QUOTE_AND_IS_ACTIVE_0);
+            $project_teamsuserid = array();
+            foreach ($projctteamres as $prteam) {
+                $project_teamsuserid[$prteam->user_id] = $prteam->id;
+            }
+            $callConfig->updateRecord('project_teams', array('is_active' => null), 'id', $project_id);
+            if (!empty($post['project_team_user_id']) && is_array($post['project_team_user_id'])) {
+                foreach ($post['project_team_user_id'] as $userid) {
+                    $insertary1 = array('company_id' => $post['company_id'], 'project_id' => $project_id, 'user_id' => $userid, 'is_active' => '0', 'created_by' => $post['user_id'], 'created_date' => date(self::DATE_FORMAT_HIS));
+                    if (!empty($project_teamsuserid[$userid])) {
+                        $return['project_teams_up'][] = $callConfig->updateRecord('project_teams', $insertary1, 'id', $project_teamsuserid[$userid]);
+                    } else {
+                        $return['project_teams'][] = $callConfig->insertRecord('project_teams', $insertary1);
                     }
                 }
             }
-
-        }else{
-            $return['insertary---'] = $insertary;
-            $insertary['created_by']=$post['user_id'];
-            $insertary['created_date']=date(self::DATE_FORMAT_HIS);
-            $insertary['is_active']='0';
-            $insertary['current_status']='0';
-            $tapres = $callConfig->insertRecord($transaction_table,$insertary);
-            $return['res'] =$tapres;
-            $lastid = $tapres['LASTID'];
-
-            if($tapres['status'] == 'sucess' && $transaction_table == "projects" && !empty($post['project_team_user_id'])){
-                foreach($post['project_team_user_id'] as $userid){
-                    $insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS));
-                    $return['project_teams'][] = $callConfig->insertRecord('project_teams',$insertary1);
-                }
+        } elseif (!empty($post['project_team_user_id']) && is_array($post['project_team_user_id'])) {
+            foreach ($post['project_team_user_id'] as $userid) {
+                $insertary1 = array('company_id' => $post['company_id'], 'project_id' => $project_id, 'user_id' => $userid, 'is_active' => '0', 'created_by' => $post['user_id'], 'created_date' => date(self::DATE_FORMAT_HIS));
+                $return['project_teams'][] = $callConfig->insertRecord('project_teams', $insertary1);
             }
         }
-
-        return $return;
     }
-    public function insertCRMLeadDetails($get,$post){
+
+    private function handleContactFeasibilitySync($post, $contact_id, array &$return): void
+    {
         global $callConfig;
-        $return = array();
-        if($post['rid'] !=""){ // updatre status
-            $insertary1=array('company_id'=>$post['company_id'],'completion_datetime'=>date(self::DATE_FORMAT_HIS),'completion_note'=>$post['comment'],'current_status'=>ST_APPROVED,'updated_by'=>$post['user_id'],'updated_date'=>date(self::DATE_FORMAT_HIS));
-            $crmleaddetails = $callConfig->updateRecord('crm_histories',$insertary1,'id',$post['rid']);
-        }else{
-             $insertary=array('company_id'=>$post['company_id'],'transaction_id'=>$post['transaction_id'],'transaction_table'=>$post['transaction_table'],'lead_type'=>$post['lead_type'],'date'=>$this->dateconvertdbformat($post['date']),'time'=>$post['time'],'address'=>$post['address'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'post_code'=>$post['post_code'],'email_id'=>$post['email_id'],'phone'=>$post['phone'],'sms_text'=>$post['sms_text'],'email_content_id'=>$post['email_content_id'],'recipient_email_id'=>$post['recipient_email_id'],'member'=>json_encode((array)$post['member']),'comment'=>$post['comment'],'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date(self::DATE_FORMAT_HIS),'originator'=>$post['user_id']);
-            $crmleaddetails = $callConfig->insertRecord('crm_histories',$insertary);
+        if (($post['feasibility_check'] ?? '') != "Y") {
+            return;
         }
-        if($crmleaddetails['status'] == "sucess"){
-            if($post['lead_type'] == '6' || $post['lead_type'] == '7'){
-                $aulist = "SELECT id, display_name FROM application_users WHERE company_id = '".$get['company_id'].self::SQL_QUOTE_AND_ID_IN.implode(',',(array)$post['member']).") AND is_active = 0";
-                $aulres=$callConfig->getAllRows($aulist);
-                $assign_user_list = "";
-                foreach($aulres as $aulres){
-                    $assign_user_list .= $aulres->display_name.", ";
-                }
-            }
-            $touserarray = $post['member'];
-            $ccuserarray = array();
-            $ccuserarray[] = $post['user_id'];
-            if($post['lead_type'] == '6'){
-                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>'28','to_users'=>$touserarray,'cc_users'=>$ccuserarray);
-                $senddata['lead_date_time'] = $this->dateconvertdbformat($post['date'])." ".$post['time'];
-                $senddata['lead_Task'] = $post['comment'];
-                $senddata['assign_user_list'] = $assign_user_list;
-                $this->emailsendmediaternew($senddata);
+        $lead_id = $contact_id;
+        $feasibility_id = $post['feasibility_id'] ?? '';
+        $feasibility_type_id = $post['feasibility_type_id'] ?? '';
+        $company_id = $post['company_id'];
+        $user_id = $post['user_id'];
+        $feasibility_types_query = "SELECT * FROM feasibility_types WHERE company_id = {$company_id} AND id = {$feasibility_type_id} AND is_active = 0";
+        $feasibility_types_res = $callConfig->getRow($feasibility_types_query);
 
-                $msg = "New Task Assign For You :".$post['comment'];
-                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $this->tosendnotifiations($notdataa);
-                $notdataa['notification_message'] = "New Task Assign Successfully";
-                $notdataa['notification_users'] = $ccuserarray;
-                $notdataa['type'] = "INFORMATION";
-                $this->tosendnotifiations($notdataa);
-
-            }
-            if($post['lead_type'] == '7'){
-                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>'29','to_users'=>$touserarray,'cc_users'=>$ccuserarray);
-                $senddata['lead_date_time'] = $this->dateconvertdbformat($post['date'])." ".$post['time'];
-                $senddata['lead_Task'] = $post['comment'];
-                $senddata['assign_user_list'] = $assign_user_list;
-                $this->emailsendmediaternew($senddata);
-
-                $msg = "New Meeting Assign For You :".$post['comment'];
-                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $this->tosendnotifiations($notdataa);
-                $notdataa['notification_message'] = "New Meeting Assign Successfully";
-                $notdataa['notification_users'] = $ccuserarray;
-                $notdataa['type'] = "INFORMATION";
-                $this->tosendnotifiations($notdataa);
-            }
-            if($post['lead_type'] == '5'){
-                $senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>$post['email_content_id'],'to_users'=>$ccuserarray,'cc_users'=>array(),'recipient_email_id'=>array($post['recipient_email_id']));
-                $this->emailsendmediaternew($senddata);
-                $msg = "Email Send Successfully";
-                $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'INFORMATION', 'notification_users'=>$ccuserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
-                $this->tosendnotifiations($notdataa);
+        if (!empty($feasibility_types_res)) {
+            $checklist = $feasibility_types_res->checklist_id;
+            $checklist_query = "SELECT * FROM feasibility_checklists WHERE company_id = {$company_id} AND id IN ($checklist) AND is_active = 0";
+            $checklist_res = $callConfig->getAllRows($checklist_query);
+            foreach ($checklist_res as $item) {
+                $insert_array = array('company_id' => $company_id, 'feasibility_id' => $feasibility_id, 'item_name' => $item->checklist_name, 'item_type' => $item->type, 'is_done' => 0, 'comment' => '', 'is_active' => 0, 'current_status' => 0, 'status_date' => date(CrmConstants::DATE_TIME_FORMAT), 'created_date' => date(CrmConstants::DATE_TIME_FORMAT), 'created_by' => $user_id);
+                $return['insert_res'][] = $callConfig->insertRecord('lead_feasibility_checklists', $insert_array);
             }
         }
+    }
+
+    public function insertCRMLeads($get,$post){
+        global $callConfig;
+        $return = array('post' => $post);
+        $transaction_table = $post['transaction_table'];
+        $insertary = $this->buildCrmEntityInsertArray($transaction_table, $post, $return);
+
+        if (!empty($post['rid'])) {
+            $insertary['updated_date'] = date(self::DATE_FORMAT_LOWER_HIS);
+            $insertary['updated_by'] = $post['user_id'];
+            $return['res'] = $callConfig->updateRecord($transaction_table, $insertary, 'id', $post['rid']);
+            $lastid = $post['rid'];
+            if ($transaction_table == "projects") {
+                $this->syncProjectTeams($get, $post, $lastid, true, $return);
+            }
+        } else {
+            $return['insertary---'] = $insertary;
+            $insertary['created_by'] = $post['user_id'];
+            $insertary['created_date'] = date(self::DATE_FORMAT_HIS);
+            $insertary['is_active'] = '0';
+            $insertary['current_status'] = '0';
+            $tapres = $callConfig->insertRecord($transaction_table, $insertary);
+            $return['res'] = $tapres;
+            $lastid = $tapres['LASTID'] ?? 0;
+            if (($tapres['status'] ?? '') == 'sucess' && $transaction_table == "projects") {
+                $this->syncProjectTeams($get, $post, $lastid, false, $return);
+            }
+        }
+
+        if ($transaction_table == "crm_contacts") {
+            $this->handleContactFeasibilitySync($post, $lastid, $return);
+        }
+
+        $crmleaddetails = $callConfig->getRow("SELECT * FROM " . $transaction_table . " WHERE company_id = '" . $post['company_id'] . CrmConstants::AND_ID_APOS . $lastid . CrmConstants::AND_IS_ACTIVE_0_APOS);
         $return['res'] = $crmleaddetails;
         return $return;
     }
     public function dynamicUpdateStatus($get,$post){
         global $callConfig;
-        $return = array();
-        $return['post'] = $post;
+        $return = array('get' => $get, 'post' => $post);
         $updateary['updated_date']=date(self::DATE_FORMAT_LOWER_HIS);
         $updateary['updated_by']=$post['user_id'];
         $updateary['current_status'] = $post['current_status'];
@@ -2290,6 +1988,7 @@ class CrmUserClass extends userClass {
 
     public function setStateCity($get){
         global $callConfig;
+        $return = array('get' => $get);
         $citiessql = "SELECT id,city_name FROM cities";
         $citiesres=$callConfig->getAllRows($citiessql);
         foreach($citiesres as $citt){
@@ -2335,6 +2034,7 @@ class CrmUserClass extends userClass {
             $insertary['crm_contact_id']=$transaction_id;
             $callConfig->updateRecord("crm_leads",$insertary,'id',$transaction_id);
         }
+        $res['get'] = $get;
         return $res;
 
     }
@@ -2433,7 +2133,7 @@ class CrmUserClass extends userClass {
     }
     public function testAPI($get){
         global $callConfig;
-        $return = array();
+        $return = array('get' => $get);
         echo "Working<pre>"; print_r($return);
 
     }
