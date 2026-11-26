@@ -5,16 +5,16 @@
         $url = API."?mode=insertcandidateschedule&method=post&data_name=".base64_decode($_POST['softversion']);
         $response = file_post_contents($url, $_POST, 'insert');
         $response = json_decode($response,1);
-       	?>
-       	<script type="text/javascript">
-			document.onreadystatechange = function () {
-			  if (document.readyState == "complete") {
-			    var mesg = "Time Slot Succesfully Book";
-			    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',mesg,'');
-			  }
-			}
-		</script>
-       	<?php
+        ?>
+        <script type="text/javascript">
+            document.onreadystatechange = function () {
+              if (document.readyState == "complete") {
+                var mesg = "Time Slot Succesfully Book";
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',mesg,'');
+              }
+            }
+        </script>
+        <?php
   }
   $candidate_details= json_decode(base64_decode($_GET['OPTION']),1);
   $timezonelist = array();
@@ -25,11 +25,11 @@ $getresponse = $getreturnresponse['candidate_interview_schedule'];
 $countries = $getreturnresponse['countries'];
 
   foreach($countries as $tzlist1){
-  		$timezonelists = json_decode($tzlist1['time_zones'],1);
-  	foreach($timezonelists as $timezonelists1){
-  		$explode = explode("/",$timezonelists1['zoneName']);
-  		$timezonelist[$explode[0]][$timezonelists1['zoneName']] = gettTimeZone('',$timezonelists1['zoneName']);
-	}
+        $timezonelists = json_decode($tzlist1['time_zones'],1);
+    foreach($timezonelists as $timezonelists1){
+        $explode = explode("/",$timezonelists1['zoneName']);
+        $timezonelist[$explode[0]][$timezonelists1['zoneName']] = gettTimeZone('',$timezonelists1['zoneName']);
+    }
   }
 
 
@@ -39,7 +39,7 @@ $countries = $getreturnresponse['countries'];
 <head>
   <title>Recruitstaq | Candidate Schedule</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Bootstrap admin template made using Bootstrap 5 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
@@ -134,13 +134,13 @@ $countries = $getreturnresponse['countries'];
                                   <span class="f-w-700"><?php echo CANDIDATE_TIMESLOT_MINUTS; ?> Minutes</span>
                               </div>
                               <div class="mt-2">
-                              	<?php if($getresponse['schedule_type'] == "1"){ ?>
+                                <?php if($getresponse['schedule_type'] == "1"){ ?>
                                   <i class="ti-mobile"></i>
                                   <span class="f-w-700">Telephonic Interview</span>
-                              	<?php }else{ ?>
-                              		<i class="ti-user"></i>
-                                  	<span class="f-w-700">Face To Tace Interview</span>
-                              	<?php } ?>
+                                <?php }else{ ?>
+                                    <i class="ti-user"></i>
+                                    <span class="f-w-700">Face To Tace Interview</span>
+                                <?php } ?>
                               </div>
                           </div>
                           <div class="col-lg-8">
@@ -153,11 +153,11 @@ $countries = $getreturnresponse['countries'];
                                   <select class="form-control js-example-basic-single" name="timezone" id="time_zone" onchange="selectTimezone()" required>
                                     <?php foreach($timezonelist as $timezonekey=>$timezonedetail){ ?>
 
-										<optgroup label="<?php echo $timezonekey; ?>" >
-										    <?php foreach($timezonedetail as $timezonekey1=>$timezonedetail1){ ?>
-										    	<option value="<?php echo $timezonekey1; ?>" ><?php echo $timezonekey1." (".$timezonedetail1['timezonetime12'].")"; ?></option>
-										    <?php } ?>
-										</optgroup>
+                                        <optgroup label="<?php echo $timezonekey; ?>" >
+                                            <?php foreach($timezonedetail as $timezonekey1=>$timezonedetail1){ ?>
+                                                <option value="<?php echo $timezonekey1; ?>" ><?php echo $timezonekey1." (".$timezonedetail1['timezonetime12'].")"; ?></option>
+                                            <?php } ?>
+                                        </optgroup>
                                     <?php } ?>
                                   </select>
                               </div>
@@ -175,12 +175,12 @@ $countries = $getreturnresponse['countries'];
 
                 </form>
             <?php }else{ ?>
-            	<div class="card-px text-center py-20 m-t-30">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Already Scheduled Time</p>
-					<div class="text-center px-4">
-						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-					</div>
-				</div>
+                <div class="card-px text-center py-20 m-t-30">
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Already Scheduled Time</p>
+                    <div class="text-center px-4">
+                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
+                    </div>
+                </div>
             <?php } ?>
             </div>
           </div>

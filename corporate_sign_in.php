@@ -25,7 +25,7 @@
             <div class="p-4 custom-login-on">
                 <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 <h2 class="f-26 f-w-600 mt-4">Sign In</h2>
-				  <?php
+                  <?php
                             $error = $_GET['error'];
                             $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
                             $dis_error['6002'] = "Incorrect username or password.  Please try again.";
@@ -49,7 +49,7 @@
 
                         <?php }
                         }?>
-					<form class="md-float-material form-material" action="" method="post" novalidate>
+                    <form class="md-float-material form-material" action="" method="post" novalidate>
 
                 <div class="width-60 text-left mt-3">
                     <div class="form-group">
@@ -62,18 +62,18 @@
                     </div>
                     <a href="#top" class="float-right f-w-600 text-primary forgot-pwd-open" onclick="fergotpassworddisplay()">Forgot Password?</a>
                     <div class="form-group mt-4">
-					<input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                    <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                       <input type="hidden" name="submit" value="Login" />
                         <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4 btn-custom-color" style="">Sign In</button>
                     </div>
                 </div>
-				</form>
+                </form>
             </div>
-			<div class="p-2 regsterform" style="display:none">
+            <div class="p-2 regsterform" style="display:none">
                 <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 <h2 class="f-26 f-w-600 mt-2 text-center">Sign Up</h2>
-					<form class="md-float-material form-material" action="" method="post" novalidate>
+                    <form class="md-float-material form-material" action="" method="post" novalidate>
 
                 <div class="width-60 text-left mt-4">
                     <div class="form-group">
@@ -88,19 +88,19 @@
                         <label for="regPassword" class="visually-hidden">Password</label>
                         <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
 
-					</div>
+                    </div>
                     <div class="form-group">
-					  <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                      <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                       <input type="hidden" name="submit" value="signup" />
                         <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-3" >Sign Up</button>
                     </div>
                     <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <a class="text-primary" href="#top" onclick="loginpagedisplay()">Sign In</a></p>
                 </div>
-				</form>
+                </form>
             </div>
             <div class="p-3 forgotpasswordon" style="display:none">
-				<form class="md-float-material form-material" action="" method="post" novalidate>
+                <form class="md-float-material form-material" action="" method="post" novalidate>
 
                 <div class="width-60">
                     <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
@@ -111,13 +111,13 @@
                         <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="email" name="email" id="forgotEmail" placeholder="Email" aria-label="Email">
                     </div>
                     <div class="form-group text-center">
-									<input type="hidden" name="submit" value="forgot" />
+                                    <input type="hidden" name="submit" value="forgot" />
 
                         <button class="btn btn-primary waves-effect waves-light" type="submit">Submit</button>
                         <button  type="button" class="btn bg-gray waves-effect waves-light cancel-forgot-pwd" style="padding:6px 15px; margin: 0;" onclick="loginpagedisplay()">Cancel</button>
                     </div>
                 </div>
-				</form>
+                </form>
             </div>
             <div class="p-4">
                 <div class="width-60">

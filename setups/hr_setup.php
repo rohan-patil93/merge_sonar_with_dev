@@ -1,4 +1,5 @@
 <?php
+defined('ATTR_STYLE_DISPLAY_NONE') || define('ATTR_STYLE_DISPLAY_NONE', 'style="display:none;"');
 $weekdays = array('Sunday'=>'Sunday','Monday'=>'Monday','Tuesday'=>'Tuesday','Wednesday'=>'Wednesday','Thursday'=>'Thursday','Friday'=>'Friday','Saturday'=>'Saturday');
 $deduction_cycle = array('M'=>'Monthly','Q'=>'Quaterly','H'=>'Half Yearly','Y'=>'Yearly');
 $statelist = $result['states'];
@@ -24,7 +25,7 @@ $locations = $result['locations'];
 
 
 </script>
-<div id="setup<?php echo $pagedetail[0]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[0]['sequence'])?'':'style="display:none;"'; ?>>
+<div id="setup<?php echo $pagedetail[0]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[0]['sequence']) ? '' : ATTR_STYLE_DISPLAY_NONE; ?>>
     <div class="row align-items-center">
         <div class="col-lg-6 bg-white" style="">
             <div class="center-sec" style="">
@@ -68,7 +69,7 @@ $locations = $result['locations'];
         </div>
     </div>
 </div>
-<div id="setup<?php echo $pagedetail[1]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[1]['sequence'])?'':'style="display:none;"'; ?> >
+<div id="setup<?php echo $pagedetail[1]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[1]['sequence']) ? '' : ATTR_STYLE_DISPLAY_NONE; ?> >
     <div class="taskda-bg">
         <div class="row align-items-center">
             <div class="col-lg-6 p-l-50 p-r-50 bg-white">
@@ -157,7 +158,7 @@ $locations = $result['locations'];
         </div>
     </div>
 </div>
-<div id="setup<?php echo $pagedetail[2]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[2]['sequence'])?'':'style="display:none;"'; ?>>
+<div id="setup<?php echo $pagedetail[2]['sequence']; ?>" class="setuphide" <?php echo ($lastsetup_page_id == $pagedetail[2]['sequence']) ? '' : ATTR_STYLE_DISPLAY_NONE; ?>>
     <div class="taskda-bg">
         <div class="row align-items-center">
             <div class="col-lg-6 p-l-50 p-r-50 bg-white">
@@ -188,7 +189,7 @@ $locations = $result['locations'];
                             <textarea aria-label="Vertical Description[]" class="form-control" name="vertical_description[]"><?php echo $wareh['vertical_description']; ?></textarea>
                         </div>
                         <div class="col-lg-1 ">
-                            <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeorganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></div>
+                            <button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeorganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div>
                     </div>
                 <?php $im++;
 } ?>

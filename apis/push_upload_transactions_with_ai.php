@@ -190,7 +190,7 @@ function transactionValidationTablesUI($matchValidationErrors, $validationWarnin
 }
 
 function transactionSummaryRowsUI($retres){
-    $html = '<div class="row mt-4">
+    return '<div class="row mt-4">
                 <div class="col-2 b-l-default text-center">
                     <div class="s-cont d-inline-block">
                         <h5 class="f-w-600 m-b-0">Document Type</h5>
@@ -266,7 +266,6 @@ function transactionSummaryRowsUI($retres){
                     </div>
                 </div>
             </div>';
-    return $html;
 }
 
 function transactionLineItemsTableUI($lineItems){

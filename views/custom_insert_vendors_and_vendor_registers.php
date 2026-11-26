@@ -276,20 +276,6 @@ if ($vendordetail['image'] != '') {
 
 $profilereadiness = array("Business Information" => array('company', 'website_url', 'company_trading_name', 'company_subsidiary_division', 'first_name', 'middle_name', 'last_name', 'phone', 'email', 'phone', 'billing_address', 'billing_country', 'billing_state', 'billing_city', 'billing_post_code', 'contact_person', 'mobile', 'shipping_address', 'shipping_country', 'shipping_state', 'shipping_city', 'shipping_post_code'), "Company Information" => array('vendor_tax_reg_no', 'business_type', 'duns_no', 'company_registration_number', 'company_registration_country', 'payment_terms', 'gstin', 'pan_no', 'tan_number', 'incoterm_id', 'image', 'msme_number'), "Banking Information" => array('bank_name', 'bank_address', 'bank_country', 'bank_state', 'bank_city', 'bank_post_code', 'bank_beneficiary_name', 'bank_account_no', 'account_type', 'routing_aba_dfi_ach', 'routing_wire_Code', 'swift_bic_code', 'iban_code', 'bank_query_person_name', 'bank_query_contact_no', 'bank_query_email_id', 'ifsc_code'), "Note" => array('vendor_po_notes', 'vendor_other_notes'));
 
-$company_types = array();
-foreach ($result['company_types'] as $ctype) {
-    $company_types[$ctype['id']] = $ctype;
-}
-
-$payment_terms = array();
-foreach ($result['payment_terms'] as $payt) {
-    $payment_terms[$payt['id']] = $payt; //payment_term_name
-}
-$incoterms = array();
-foreach ($result['incoterms'] as $payt) {
-    $incoterms[$payt['id']] = $payt; //incoterm_name
-}
-$vendor_questions = json_decode($vendordetail['vendor_questions'], 1);
 $verification_profile_users = json_decode($vendordetail['verification_profile_users'], 1);
 $transaction_activity_schedule_cnt = $result['transaction_activity_schedule_cnt'];
 $vendor_verifications = json_decode($vendordetail['vendor_verifications'], 1);
@@ -308,6 +294,7 @@ if($_SESSION['insert_msg'] !=""){
 <?php
 }
 
+$isAdd = empty($vendor_id);
 ?>
 
 <script type="text/javascript" src="../assets/js/custom_insert_vendors_and_vendor_registers.js"></script>
@@ -334,7 +321,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
     <div class="card mb-1 mb-xl-10">
         <div class="card-body pt-9 pb-0">
             <div class="banner">
-                <img src="assets/images/user-profile/bg-img1.jpg" class="w-100 b-radius-20" alt="">
+                <img src="assets/images/user-profile/bg-img1.jpg" class="w-100 b-radius-20" alt="<?= htmlspecialchars(__('Profile Banner'), ENT_QUOTES, 'UTF-8'); ?>">
             </div>
         </div>
         <div class="profile-img" style="margin:-40px 0 0 0;">
@@ -348,7 +335,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                 <input aria-label="<?= htmlspecialchars(__('Profile Pic File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg" onchange="updateProfilePic()" />
                             </label>
                             <?php if ($vendordetail['image'] != "") { ?>
-                                <img src="<?php echo $image; ?>" class="img-radius img-90" alt="">
+                                <img src="<?php echo $image; ?>" class="img-radius img-90" alt="<?= htmlspecialchars(__('Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php  } else { ?>
                                 <div class="symbol symbol-50 symbol-lg-120 symbol-primary ">
                                     <span class="font-size-h3 symbol-label font-weight-boldest img-90 p-20 f-40" style=" border-radius: 50%; line-height: 1.1;"><?php echo $vendordetail['display_name'] != "" ? initials($vendordetail['display_name']) : "NA"; ?></span>
@@ -370,11 +357,11 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                         </div>
                         <?php if ($vendordetail['email'] != "") { ?>
                             <a href="mailto:<?php echo $vendordetail['email']; ?>" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5" aria-label="<?= htmlspecialchars(__('Email: ') . $vendordetail['email'], ENT_QUOTES, 'UTF-8'); ?>">
-                                <i class="ti-email f-14 text-primary"></i> <span class="d-none"><?= __('Email'); ?></span>&nbsp;<?php echo $vendordetail['email']; ?></a>
+                                <i class="ti-email f-14 text-primary"></i> <span class="visually-hidden"><?= __('Email'); ?></span>&nbsp;<?php echo $vendordetail['email']; ?></a>
                         <?php }
                         if ($vendordetail['phone'] != "") {  ?>
                             <a href="tel:<?php echo $vendordetail['phone']; ?>" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 m-l-5" aria-label="<?= htmlspecialchars(__('Phone: ') . DynamicPhoneNumberFormt($vendordetail['phone']), ENT_QUOTES, 'UTF-8'); ?>">
-                                <i class="fa fa-phone f-14 text-primary"></i> <span class="d-none"><?= __('Phone'); ?></span>&nbsp;<?php echo DynamicPhoneNumberFormt($vendordetail['phone']); ?></a>
+                                <i class="fa fa-phone f-14 text-primary"></i> <span class="visually-hidden"><?= __('Phone'); ?></span>&nbsp;<?php echo DynamicPhoneNumberFormt($vendordetail['phone']); ?></a>
                         <?php }  ?>
                         <?php if ($vendordetail['billing_address'] != "") { ?>
                             <span class="font-weight-bold text-dark-50 d-block mb-2 mt-2"><i class="ti-location-pin text-primary f-18"></i>&nbsp;<?php echo $vendordetail['billing_address'] . " " . $vendordetail['post_code']; ?> </span>
@@ -437,10 +424,10 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                         <span class="text-danger d-none" id="profile_review_comments_error" ><?= __('Please Enter Comment'); ?></span>
                                     </div>
                                     <div class="col-lg-2">
-                                        <button class="btn btn-warning waves-effect waves-light mt-4 vendorProfileUpdateStatus" > <?= __('Save'); ?></button>
+                                        <button type="button" class="btn btn-warning waves-effect waves-light mt-4 vendorProfileUpdateStatus"> <?= __('Save'); ?></button>
                                     </div>
                                     <div class="col-lg-2">
-                                        <button class="btn btn-danger waves-effect waves-light mt-4 cancelComment"> <?= __('Cancel'); ?></button>
+                                        <button type="button" class="btn btn-danger waves-effect waves-light mt-4 cancelComment"> <?= __('Cancel'); ?></button>
                                     </div>
                                 </div>
 
@@ -477,7 +464,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                 }
 
                         ?>
-                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round f-12 text-center <?php echo $bgcolor; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $label_title; ?>"><?php echo initials($_SESSION['users'][$uidkey]); ?></span>
+                                <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round f-12 text-center <?php echo $bgcolor; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $label_title; ?>"><?php echo initials($_SESSION['users'][$uidkey]); ?></span>
                         <?php }
                             echo "</div>";
                         } ?>
@@ -513,11 +500,11 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                 <div class="col-lg-6 text-right">
                     <?php
                     if (($vendordetail['user_id'] == $_SESSION['userid'] || $vendordetail['originator'] == $_SESSION['userid']) && $vendordetail['send_verification_profile_status'] == "N" && $transaction_table == "vendor_registers"){ ?>
-                        <button class="btn btn-danger waves-effect waves-light SubmitForVendorCreation" ><i class="ti-thumb-up"></i> <?= __('Submit For Approval'); ?></button>
+                        <button type="button" class="btn btn-danger waves-effect waves-light SubmitForVendorCreation"><i class="ti-thumb-up"></i> <?= __('Submit For Approval'); ?></button>
                     <?php } ?>
 
                     <?php if (($vendor_id !="" && $vendordetail['vendor_id'] == "" && $_SESSION['admin_type'] == '1' && $totalapprovedtask == $totaltasks && $transaction_table == "vendor_registers" && $vendordetail['send_verification_profile_status'] == "Y" && $allaproveprofile == '0' && $vendordetail['vendor_type_id'] == "1") || ($vendordetail['vendor_type_id'] != "1" && $vendordetail['vendor_id'] == "" && ($vendor_id !="" && $_SESSION['admin_type'] == '1' || $vendordetail['originator'] == $_SESSION['userid'])) && $transaction_table == "vendor_registers") { ?>
-                        <button class="btn btn-primary waves-effect waves-light createVendorRegisterToVendor" ><i class="ti ti-user"></i> <?= __('Create Vendor'); ?></button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light createVendorRegisterToVendor"><i class="ti ti-user"></i> <?= __('Create Vendor'); ?></button>
                     <?php } ?>
                 </div>
             </div>
@@ -540,8 +527,8 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                     <?php foreach ($profilereadiness as $keylabel => $profilereadines) {
                                         $complete_field =  $total_field = 0;
                                         $total_field = count((array)$profilereadines);
-                                        foreach ($profilereadines as $profilereadines) {
-                                            if ($vendordetail[$profilereadines] != "") {
+                                        foreach ($profilereadines as $fieldKey) {
+                                            if ($vendordetail[$fieldKey] != "") {
                                                 $complete_field++;
                                             }
                                         }
@@ -578,12 +565,9 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                             <div class="card-header-right" id="chnagebtndiv">
 
                                 <?php
-
-// )
-// ) {
     if(($vendor_id == "" || $vendordetail['send_verification_profile_status'] == "N") && ($vendordetail['originator'] == $_SESSION['userid'] || $vendordetail['user_id'] == $_SESSION['userid'] || $vendordetail['created_by'] == $_SESSION['userid']) || $transaction_table == "vendors"){
                                 ?>
-                                    <button class="btn btn-primary editVendorProfile" data-functiontype = "EDIT"><i class="ti-pencil text-white"></i> <?= __('Edit'); ?></button>
+                                    <button type="button" class="btn btn-primary editVendorProfile" data-functiontype="EDIT"><i class="ti-pencil text-white"></i> <?= __('Edit'); ?></button>
                                 <?php } ?>
                             </div>
                         </div>
@@ -595,7 +579,6 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
             </div>
         </div>
         <div class="tab-pane <?php echo $_GET['T1'] == 'task_tab' ? "active" : ""; ?>" id="task_tab" role="tabpanel">
-            ?>
         </div>
     </div>
 <?php } ?>

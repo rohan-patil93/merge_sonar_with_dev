@@ -7,8 +7,8 @@ $data .= strtoupper( $_SESSION['config']['name']).chr(26)."\n";
 $data .= strtoupper(implode(',', $_SESSION['head_data']));
 $i=1;
 foreach($array_data as $array){
-	$data .="\n";
-	$data .= $i.",".strtoupper(implode(',', $array));
+    $data .="\n";
+    $data .= $i.",".strtoupper(implode(',', $array));
 $i++;
 }
 

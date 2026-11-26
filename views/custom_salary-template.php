@@ -137,7 +137,7 @@ $data = json_decode($data,1);
         htmlRows += '<td><div class="form-group col-lg-12" ><input aria-label="Name[]" type="text" class="form-control itemRow" readonly value="'+data.name+'" name="name[]"><input type="hidden" class="form-control itemRow" readonly value="'+data.id+'" name="id[]"></div></td>';
         htmlRows += '<td><div class="form-group col-lg-12">  <div class="input-group"> <input aria-label="Calucation[]" type="text" onblur="monthlytoyearlycat(this.value,'+count+')" class="form-control text-right" value="'+data.calculation_number+'" name="calucation[]" aria-describedby="basic-addon2"/>   <div class="input-group-append"><span class="input-group-text">'+codedetail+'</span></div> </div></div> </td>';
       htmlRows += '<td><div class="form-group col-lg-12"><input aria-label="0.00" type="text" class="form-control text-right" readonly placeholder="0.00" name="monthly_amount[]" value ="'+month_amount+'"  id="m_amount_'+count+'"></div> <input type="hidden" name="cat_type[]" value="'+data.calculation_type+'" id="cat_type_'+count+'">  <input type="hidden" name="cat_code[]" value="'+data.code+'" id="cat_code_'+count+'">     <input type="hidden" name="cat_cat[]" value="'+data.calculation_category+'" id="cat_cat_'+count+'"> <input type="hidden" name="cat_num[]" value="'+data.calculation_number+'" id="cat_num_'+count+'"></td>';
-        htmlRows += '<td><div class="form-group col-lg-12"><div class="input-group"> <input type="hidden" name="'+data.code+'" value="'+month_amount+'" id="'+data.code+'"><input aria-label="0.00" type="text" readonly id="y_amount_'+count+'" name="yearly_amount[]"  value ="'+month_amount*12+'" class="form-control text-right" placeholder="0.00"><button type="button" class="mt-6" onclick="dynamicinformationopup('+encodeURI(note)+')">&nbsp;<i class="icon-2x text-dark-50 flaticon-information "> </i> </button></div> </div></td>';
+        htmlRows += '<td><div class="form-group col-lg-12"><div class="input-group"> <input type="hidden" name="'+data.code+'" value="'+month_amount+'" id="'+data.code+'"><input aria-label="0.00" type="text" readonly id="y_amount_'+count+'" name="yearly_amount[]"  value ="'+month_amount*12+'" class="form-control text-right" placeholder="0.00"><button type="button" class="mt-6" aria-label="<?= htmlspecialchars(__('Information'), ENT_QUOTES, 'UTF-8'); ?>" onclick="dynamicinformationopup('+encodeURI(note)+')">&nbsp;<i class="icon-2x text-dark-50 flaticon-information "> </i> </button></div> </div></td>';
         htmlRows += '</tr>';
         $("#invoiceItem"+data.category_id).css("display", "block");
         $('#invoiceItem'+data.category_id).append(htmlRows);
@@ -203,7 +203,7 @@ $data = json_decode($data,1);
                                             <label class="checkbox float-right">
                                             <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
                                             <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="0">
-                                                <input aria-label="<?= htmlspecialchars(__('Checkboxes1'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)" onkeydown=""><span></span>
+                                                <input aria-label="<?= htmlspecialchars(__('Checkboxes1'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)"><span></span>
                                             </label>
                                         </div>
                                     <?php } ?>
@@ -215,7 +215,6 @@ $data = json_decode($data,1);
 
                         </div>
                     </div>
-                    <?php $inn = "Basic salary Amount";?>
                     <div class="col-md-9">
                         <form class="form" method="post" action="">
                             <div class="card card-custom gutter-b">
@@ -229,15 +228,15 @@ $data = json_decode($data,1);
                                 <div class="card-body">
                                     <div class="form-group row">
                                         <div class="col-lg-4">
-                                            <span><?= __('Employee'); ?> </span>
-                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>">
+                                            <label for="employee_select"><?= __('Employee'); ?> </label>
+                                            <select id="employee_select" aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <option> <?= __('Select Any One'); ?></option>
                                             </select>
 
                                         </div>
                                         <div class="col-lg-4">
                                             <label for="kt_autosize_2"><?= __('Description'); ?>:</label>
-                                            <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 40px;">Max 5000 characters</textarea>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 40px;" placeholder="<?= htmlspecialchars(__('Max 5000 characters'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                                         </div>
                                         <div class="col-lg-4">
                                             <label for="kt_autosize_2_2"><?= __('Notes'); ?>:</label>
@@ -248,7 +247,7 @@ $data = json_decode($data,1);
                                 <!--end::Header-->
                                 <div class="card-body row pl-5 py-0">
                                     <div class="col-md-2 mt-3">
-                                        <span><?= __('Annual CTC'); ?></span>
+                                        <label for="ctc_y"><?= __('Annual CTC'); ?></label>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -418,7 +417,7 @@ $datacat["where"] = array('is_active'=> '0');
                     <td style="text-align: center;border:1px solid #000;padding: 5px;"><?php echo customeummarmonyformate($salarydata['company_cost_yearly']);?></td>
                 </tr>
                 <tr style="border: 1px solid #000;" >
-                    <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  <?= __('Notes'); ?>: </br>
+                    <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  <?= __('Notes'); ?>: <br />
                         <p style="padding: 0px 5%;"><?php echo  $salarydata['note']; ?></p>
                     </td>
 

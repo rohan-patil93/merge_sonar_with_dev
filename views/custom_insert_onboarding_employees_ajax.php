@@ -149,7 +149,6 @@ $onbVars = array_merge($ctx, array(
             data:'emp_id='+encodeURIComponent(emp_id),
             type: "GET",
             success:function(data){
-                console.log("Chelll");
                 $('#popupsq').html(data);
                 $('#kt_modal_KTDatatable_remotesq').modal("show");
             },
@@ -159,7 +158,6 @@ $onbVars = array_merge($ctx, array(
         });
     }
     function employeementtypepopup(emp_id, val) {
-        console.log('emp_id='+emp_id+'&type='+val);
         jQuery.ajax({
             url: "views/custom_insert_employment_type_details.php",
             data:'emp_id='+encodeURIComponent(emp_id)+'&type='+encodeURIComponent(val),
@@ -383,30 +381,48 @@ function renderOnbViewPersonalBioFields($fieldaccesright, $data, $agecalc, $mari
 }
 }
 
-if (!function_exists('renderOnbViewPersonalOtherFields')) {
-function renderOnbViewPersonalOtherFields($fieldaccesright, $data, $yesno) {
-    if($fieldaccesright['field']['disability']!="NA"){
-        renderOnbViewField('Disability', $data['disability'] !=""?$yesno[$data['disability']]:"-");
+if (!function_exists('renderOnbViewPersonalDisabilityFields')) {
+function renderOnbViewPersonalDisabilityFields($fieldaccesright, $data, $yesno) {
+    if ($fieldaccesright['field']['disability'] != "NA") {
+        renderOnbViewField('Disability', $data['disability'] != "" ? $yesno[$data['disability']] : "-");
     }
-    if($fieldaccesright['field']['disability_percentage']!="NA"){
+    if ($fieldaccesright['field']['disability_percentage'] != "NA") {
         $disabilityStyle = $data['disability'] == "0" ? "" : CSS_DISPLAY_NONE;
-        renderOnbViewField('Disability percentage', $data['disability_percentage'] !=""?$data['disability_percentage']:"-", $disabilityStyle);
+        renderOnbViewField('Disability percentage', $data['disability_percentage'] != "" ? $data['disability_percentage'] : "-", $disabilityStyle);
     }
-    if($fieldaccesright['field']['work_textile_industry']!="NA"){
-        renderOnbViewField('Working In Textile Industry', $data['work_textile_industry'] !=""?$yesno[$data['work_textile_industry']]:"-");
+}
+}
+
+if (!function_exists('renderOnbViewPersonalIndustryFields')) {
+function renderOnbViewPersonalIndustryFields($fieldaccesright, $data, $yesno) {
+    if ($fieldaccesright['field']['work_textile_industry'] != "NA") {
+        renderOnbViewField('Working In Textile Industry', $data['work_textile_industry'] != "" ? $yesno[$data['work_textile_industry']] : "-");
     }
-    if($fieldaccesright['field']['physically_challenged_children']!="NA"){
-        renderOnbViewField('Physically Challenged Children', $data['physically_challenged_children'] !=""?$yesno[$data['physically_challenged_children']]:"-");
+    if ($fieldaccesright['field']['physically_challenged_children'] != "NA") {
+        renderOnbViewField('Physically Challenged Children', $data['physically_challenged_children'] != "" ? $yesno[$data['physically_challenged_children']] : "-");
     }
-    if($fieldaccesright['field']['soc_facebook']!="NA"){
+}
+}
+
+if (!function_exists('renderOnbViewPersonalSocialFields')) {
+function renderOnbViewPersonalSocialFields($fieldaccesright, $data) {
+    if ($fieldaccesright['field']['soc_facebook'] != "NA") {
         renderOnbViewField('Facebook Link', emptytextdashShow($data['soc_facebook']));
     }
-    if($fieldaccesright['field']['soc_twitter']!="NA"){
+    if ($fieldaccesright['field']['soc_twitter'] != "NA") {
         renderOnbViewField('Twitter Link', emptytextdashShow($data['soc_twitter']));
     }
-    if($fieldaccesright['field']['soc_linkedin']!="NA"){
+    if ($fieldaccesright['field']['soc_linkedin'] != "NA") {
         renderOnbViewField('Linkedin Link', emptytextdashShow($data['soc_linkedin']));
     }
+}
+}
+
+if (!function_exists('renderOnbViewPersonalOtherFields')) {
+function renderOnbViewPersonalOtherFields($fieldaccesright, $data, $yesno) {
+    renderOnbViewPersonalDisabilityFields($fieldaccesright, $data, $yesno);
+    renderOnbViewPersonalIndustryFields($fieldaccesright, $data, $yesno);
+    renderOnbViewPersonalSocialFields($fieldaccesright, $data);
 }
 }
 
@@ -700,6 +716,24 @@ function renderOnbViewEmployeeContacts($vars) {
 }
 }
 
+if (!function_exists('renderOnbViewBuddyList')) {
+function renderOnbViewBuddyList($fieldaccesright, $data, $all_employees) {
+    $buddies = array(
+        'admin_buddy' => 'Admin Buddy',
+        'hr_buddy' => 'HR Buddy',
+        'finance_buddy' => 'Finance Buddy',
+        'project_buddy' => 'Project Buddy',
+        'loc_buddy' => 'Location Buddy',
+    );
+    foreach ($buddies as $fieldKey => $label) {
+        if ($fieldaccesright['field'][$fieldKey] != "NA") {
+            $val = $all_employees[$data[$fieldKey]]['display_name'] != "" ? $all_employees[$data[$fieldKey]]['display_name'] : "-";
+            renderOnbViewField($label, $val);
+        }
+    }
+}
+}
+
 if (!function_exists('renderOnbViewEmployeeBuddies')) {
 function renderOnbViewEmployeeBuddies($vars) {
     $vafield = $vars['vafield'] ?? null;
@@ -716,21 +750,8 @@ function renderOnbViewEmployeeBuddies($vars) {
               if($fieldaccesright['field']['reporting_manager_id']!="NA"){
                 renderOnbViewField('Repoting To', $application_users[$data['reporting_manager_id']]['display_name']!=""?$application_users[$data['reporting_manager_id']]['display_name']:"-");
               }
-              if($fieldaccesright['field']['admin_buddy']!="NA"){
-                renderOnbViewField('Admin Buddy', $all_employees[$data['admin_buddy']]['display_name']!=""?$all_employees[$data['admin_buddy']]['display_name']:"-");
-              }
-              if($fieldaccesright['field']['hr_buddy']!="NA"){
-                renderOnbViewField('HR Buddy', $all_employees[$data['hr_buddy']]['display_name']!=""?$all_employees[$data['hr_buddy']]['display_name']:"-");
-              }
-              if($fieldaccesright['field']['finance_buddy']!="NA"){
-                renderOnbViewField('Finance Buddy', $all_employees[$data['finance_buddy']]['display_name']!=""?$all_employees[$data['finance_buddy']]['display_name']:"-");
-              }
-              if($fieldaccesright['field']['project_buddy']!="NA"){
-                renderOnbViewField('Project Buddy', $all_employees[$data['project_buddy']]['display_name']!=""?$all_employees[$data['project_buddy']]['display_name']:"-");
-              }
-              if($fieldaccesright['field']['loc_buddy']!="NA"){
-                renderOnbViewField('Location Buddy', $all_employees[$data['loc_buddy']]['display_name']!=""?$all_employees[$data['loc_buddy']]['display_name']:"-");
-              } ?>
+              renderOnbViewBuddyList($fieldaccesright, $data, $all_employees);
+              ?>
         </div>
 
 <!-- added by koti start -->
@@ -1213,169 +1234,199 @@ function renderOnbEditWorkDetails($vars) {
 }
 }
 
-if (!function_exists('renderOnbEditPersonalDetails')) {
-function renderOnbEditPersonalDetails($vars) {
-    $vafield = $vars['vafield'] ?? null;
-    $data = $vars['data'] ?? null;
-    $marital_statuses = $vars['marital_statuses'] ?? null;
-    $fieldaccesright = $vafield['personal_details'];
-    ?>
-    <div class="row">
-     <?php if($fieldaccesright['field']['date_of_birth']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'date_of_birth'); ?>
+if (!function_exists('renderOnbEditPersonalBioFields')) {
+function renderOnbEditPersonalBioFields($fieldaccesright, $data, $marital_statuses, $gender_details, $blood_groups, $text_color_gen) {
+    if($fieldaccesright['field']['date_of_birth']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'date_of_birth'); ?>
         <div class="col-xl-6 mt-2" >
             <span class="form-label d-inline-block fw-bold"><?php echo __('Date of Birth'); ?> </span>
             <div class="<?php echo $readonlycheck; ?>">
                 <input aria-label="<?= htmlspecialchars(__('Date of birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg datepicker"  value="<?php echo onbFormatDate($data['date_of_birth']); ?>"  name="date_of_birth" placeholder="<?php echo __('Enter Date of Birth'); ?>" onchange="selectdateOfBirth(this.value)" />
             </div>
         </div>
-        <?php } // Age field handled in employee profile details ?>
-        <?php if($fieldaccesright['field']['marital_status']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'marital_status'); ?>
+    <?php } // Age field handled in employee profile details ?>
+    <?php if($fieldaccesright['field']['marital_status']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'marital_status'); ?>
         <div class="col-xl-6 mt-2" >
             <span class="form-label d-inline-block fw-bold"><?php echo __('Marital Status'); ?></span>
             <div class="form-radio <?php echo $readonlycheck; ?>">
             <?php
-                   foreach ($marital_statuses as $marital_stat) {
-             ?>
+            foreach ($marital_statuses as $marital_stat) {
+            ?>
                 <div class="radio radio-inline">
-                     <label class="form-label">
-                           <input aria-label="Marital Status" onclick="showmarriagedate(this.value);" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" type="radio" name="marital_status" <?php if($data['marital_status'] == $marital_stat['id']) {?> checked="checked" <?php } ?> value="<?php echo $marital_stat['id']; ?>" style="display:none"/>
-                           <i class="helper"></i>
-                           <?php echo $marital_stat['marital_status_name']; ?>
-                     </label>
-                   </div>
-             <?php } ?>
+                    <label class="form-label">
+                        <input aria-label="Marital Status" onclick="showmarriagedate(this.value);" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" type="radio" name="marital_status" <?php if($data['marital_status'] == $marital_stat['id']) {?> checked="checked" <?php } ?> value="<?php echo $marital_stat['id']; ?>" style="display:none"/>
+                        <i class="helper"></i>
+                        <?php echo $marital_stat['marital_status_name']; ?>
+                    </label>
+                </div>
+            <?php } ?>
             </div>
         </div>
-        <?php }
-        if($fieldaccesright['field']['wedding_date']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'wedding_date'); ?>
+    <?php }
+    if($fieldaccesright['field']['wedding_date']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'wedding_date'); ?>
         <div class="col-lg-6 " style="<?php echo $data['marital_status'] =="2"?"":CSS_DISPLAY_NONE; ?>"  id="marriagedateshow">
             <div class="mt-2" id="marriagedateshow1">
-                  <span  class="form-label d-inline-block fw-bold"><?php echo __('Marrige Date'); ?></span>
-                  <div class="<?php echo $readonlycheck; ?>">
-                      <input aria-label="<?= htmlspecialchars(__('Wedding date'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control datepicker" name="wedding_date" id="wedding_date" value="<?php echo onbFormatDate($data['wedding_date']); ?>" placeholder="<?php echo __('Enter Marrige Date'); ?>"/>
+                <span  class="form-label d-inline-block fw-bold"><?php echo __('Marrige Date'); ?></span>
+                <div class="<?php echo $readonlycheck; ?>">
+                    <input aria-label="<?= htmlspecialchars(__('Wedding date'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control datepicker" name="wedding_date" id="wedding_date" value="<?php echo onbFormatDate($data['wedding_date']); ?>" placeholder="<?php echo __('Enter Marrige Date'); ?>"/>
                 </div>
             </div>
         </div>
-        <?php }
-        if($fieldaccesright['field']['gender']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'gender'); ?>
+    <?php }
+    if($fieldaccesright['field']['gender']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'gender'); ?>
         <div class="col-xl-6 mt-2" >
             <span class="form-label d-inline-block fw-bold"><?php echo __('Gender'); ?></span>
             <div class="form-radio <?php echo $readonlycheck; ?>">
-                   <?php
-                       foreach ($gender_details as $gender_data) {
-                ?>
+            <?php
+            foreach ($gender_details as $gender_data) {
+            ?>
                 <div class="radio radio-inline">
-                     <label class="form-label <?php echo $text_color_gen; ?>">
-                       <input aria-label="Gender"  type="radio" name="gender" <?php if($data['gender'] == $gender_data['genc_detail_code']){ ?>  checked="checked" <?php } ?> value="<?php echo $gender_data['genc_detail_code'];?>" style="display:none"/>
-                       <i class="helper"></i>
-                       <?php echo __($gender_data['genc_detail_name']); ?>
-                     </label>
-               </div>
-             <?php } ?>
+                    <label class="form-label <?php echo $text_color_gen; ?>">
+                        <input aria-label="Gender"  type="radio" name="gender" <?php if($data['gender'] == $gender_data['genc_detail_code']){ ?>  checked="checked" <?php } ?> value="<?php echo $gender_data['genc_detail_code'];?>" style="display:none"/>
+                        <i class="helper"></i>
+                        <?php echo __($gender_data['genc_detail_name']); ?>
+                    </label>
+                </div>
+            <?php } ?>
             </div>
         </div>
-        <?php }
-        if($fieldaccesright['field']['blood_group']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'blood_group'); ?>
+    <?php }
+    if($fieldaccesright['field']['blood_group']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'blood_group'); ?>
         <div class="col-xl-6 mt-2" >
             <span class="form-label d-inline-block fw-bold"><?php echo __('Blood Group'); ?></span>
             <div class="<?php echo $readonlycheck; ?>">
                 <select aria-label="<?= htmlspecialchars(__('Blood group'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-select js-example-basic-single" name="blood_group">
-                      <option value=""><?php echo __(ONB_SELECT_ANY_ONE); ?></option>
-                      <?php renderOnbSelectOptions($blood_groups, $data['blood_group'], 'id', 'blood_group', false); ?>
+                    <option value=""><?php echo __(ONB_SELECT_ANY_ONE); ?></option>
+                    <?php renderOnbSelectOptions($blood_groups, $data['blood_group'], 'id', 'blood_group', false); ?>
                 </select>
             </div>
         </div>
-        <?php }
-        if($fieldaccesright['field']['disability']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'disability'); ?>
+    <?php }
+}
+}
+
+if (!function_exists('renderOnbEditPersonalDisabilityFields')) {
+function renderOnbEditPersonalDisabilityFields($fieldaccesright, $data, $yesno) {
+    if($fieldaccesright['field']['disability']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'disability'); ?>
         <div class="col-xl-6 mt-2" >
             <span class="form-label d-inline-block fw-bold"><?php echo __('Disability'); ?></span>
             <div  class="form-radio <?php echo $readonlycheck; ?>">
-               <?php
-               foreach ($yesno as $ynkey=>$yn) {
-                ?>
+            <?php
+            foreach ($yesno as $ynkey=>$yn) {
+            ?>
                 <div class="radio radio-inline">
-                     <label class="form-label">
-                       <input type="radio" name="disability" id="disability" onclick="selectDisability()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php if($data['disability'] == $ynkey || ($data['disability'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
-                       <i class="helper"></i>
-                       <?php echo $yn; ?>
-                     </label>
-                   </div>
-             <?php } ?>
+                    <label class="form-label">
+                        <input type="radio" name="disability" id="disability" onclick="selectDisability()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php if($data['disability'] == $ynkey || ($data['disability'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+                        <i class="helper"></i>
+                        <?php echo $yn; ?>
+                    </label>
+                </div>
+            <?php } ?>
             </div>
         </div>
-        <?php }
-        if($fieldaccesright['field']['disability_percentage']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'disability_percentage'); ?>
+    <?php }
+    if($fieldaccesright['field']['disability_percentage']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'disability_percentage'); ?>
         <div class="col-xl-6 mt-2" id="disabilitypercentage_id" style="<?php echo $data['disability'] =="0"?"":CSS_DISPLAY_NONE; ?>">
             <label class="form-label"><?php echo __('Disability percentage'); ?></label>
             <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="" name="disability_percentage" value="<?php echo $data['disability_percentage']; ?>"/>
         </div>
-        <?php }
-        if($fieldaccesright['field']['work_textile_industry']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'work_textile_industry'); ?>
+    <?php }
+}
+}
+
+if (!function_exists('renderOnbEditPersonalIndustryFields')) {
+function renderOnbEditPersonalIndustryFields($fieldaccesright, $data, $yesno) {
+    if($fieldaccesright['field']['work_textile_industry']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'work_textile_industry'); ?>
         <div class="col-xl-6 mt-2" >
             <label class="form-label"><?php echo __('Working In Textile Industry'); ?></label>
             <div  class="form-radio <?php echo $readonlycheck; ?>">
-               <?php
-                   foreach ($yesno as $ynkey=>$yn) {
-                ?>
+            <?php
+            foreach ($yesno as $ynkey=>$yn) {
+            ?>
                 <div class="radio radio-inline">
-                     <label class="form-label">
-                       <input aria-label="Work Textile Industry"   type="radio" name="work_textile_industry" <?php if($data['work_textile_industry '] == $ynkey || ($data['work_textile_industry'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
-                       <i class="helper"></i>
-                       <?php echo $yn; ?>
+                    <label class="form-label">
+                        <input aria-label="Work Textile Industry"   type="radio" name="work_textile_industry" <?php if($data['work_textile_industry '] == $ynkey || ($data['work_textile_industry'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+                        <i class="helper"></i>
+                        <?php echo $yn; ?>
                     </label>
-                   </div>
-                 <?php } ?>
+                </div>
+            <?php } ?>
             </div>
         </div>
-        <?php }
-        if($fieldaccesright['field']['physically_challenged_children']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'physically_challenged_children'); ?>
+    <?php }
+    if($fieldaccesright['field']['physically_challenged_children']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'physically_challenged_children'); ?>
         <div class="col-xl-6 mt-2" >
             <label class="form-label"><?php echo __('Physically Challenged Children'); ?></label>
             <div  class="form-radio <?php echo $readonlycheck; ?>">
-               <?php
-               foreach ($yesno as $ynkey=>$yn) {
-                ?>
+            <?php
+            foreach ($yesno as $ynkey=>$yn) {
+            ?>
                 <div class="radio radio-inline">
-                     <label class="form-label">
-                       <input aria-label="Physically Challenged Children"   type="radio" name="physically_challenged_children" <?php if($data['physically_challenged_children'] == $ynkey || ($data['work_textile_industry'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
-                       <i class="helper"></i>
-                       <?php echo $yn; ?>
-                     </label>
-               </div>
-             <?php } ?>
+                    <label class="form-label">
+                        <input aria-label="Physically Challenged Children"   type="radio" name="physically_challenged_children" <?php if($data['physically_challenged_children'] == $ynkey || ($data['work_textile_industry'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+                        <i class="helper"></i>
+                        <?php echo $yn; ?>
+                    </label>
+                </div>
+            <?php } ?>
             </div>
         </div>
-        <?php }
-        if($fieldaccesright['field']['soc_facebook']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'soc_facebook'); ?>
+    <?php }
+}
+}
+
+if (!function_exists('renderOnbEditPersonalSocialFields')) {
+function renderOnbEditPersonalSocialFields($fieldaccesright, $data) {
+    if($fieldaccesright['field']['soc_facebook']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'soc_facebook'); ?>
         <div class="col-lg-6 mt-2" >
             <label  class="form-label"><?php echo __('Facebook Link'); ?></label>
             <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Facebook URL'); ?>" name="soc_facebook" value="<?php echo $data['soc_facebook']; ?>"/>
         </div>
-        <?php }
-        if($fieldaccesright['field']['soc_twitter']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'soc_twitter'); ?>
+    <?php }
+    if($fieldaccesright['field']['soc_twitter']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'soc_twitter'); ?>
         <div class="col-lg-6 mt-2" >
             <label  class="form-label"><?php echo __('Twitter Link'); ?></label>
             <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Twitter URL'); ?>" name="soc_twitter" value="<?php echo $data['soc_twitter']; ?>"/>
         </div>
-        <?php }
-        if($fieldaccesright['field']['soc_linkedin']!="NA"){
-              $readonlycheck = onbReadonlyClass($fieldaccesright, 'soc_linkedin'); ?>
+    <?php }
+    if($fieldaccesright['field']['soc_linkedin']!="NA"){
+        $readonlycheck = onbReadonlyClass($fieldaccesright, 'soc_linkedin'); ?>
         <div class="col-lg-6 mt-2" >
             <label  class="form-label"><?php echo __('Linkedin Link'); ?></label>
             <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter LinkedIn URL'); ?>" name="soc_linkedin" value="<?php echo $data['soc_linkedin']; ?>"/>
         </div>
-        <?php } ?>
+    <?php }
+}
+}
+
+if (!function_exists('renderOnbEditPersonalDetails')) {
+function renderOnbEditPersonalDetails($vars) {
+    $vafield = $vars['vafield'] ?? null;
+    $data = $vars['data'] ?? null;
+    $marital_statuses = $vars['marital_statuses'] ?? null;
+    $gender_details = $vars['gender_details'] ?? null;
+    $blood_groups = $vars['blood_groups'] ?? null;
+    $yesno = $vars['yesno'] ?? null;
+    $text_color_gen = $vars['text_color_gen'] ?? '';
+    $fieldaccesright = $vafield['personal_details'];
+    ?>
+    <div class="row">
+        <?php
+        renderOnbEditPersonalBioFields($fieldaccesright, $data, $marital_statuses, $gender_details, $blood_groups, $text_color_gen);
+        renderOnbEditPersonalDisabilityFields($fieldaccesright, $data, $yesno);
+        renderOnbEditPersonalIndustryFields($fieldaccesright, $data, $yesno);
+        renderOnbEditPersonalSocialFields($fieldaccesright, $data);
+        ?>
     </div>
 <?php
 }
