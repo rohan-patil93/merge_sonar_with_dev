@@ -217,53 +217,43 @@ public function toinsertupdatethejobpostingpublish($post,$get){
         $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS,array('serial_number' =>$res->serial_number+1),'id',$res->id);
         return trim($data);
     }
-    public function getviewalldetilarecruitmentdashboardineg($get){
-        global $callConfig;
-        
-        
-        // unused $whrjp="";
-        if($get['roleshortcode']==HIRINGMANAGER_ROLE){
-            $whr = " AND requested_by = ".$get['user_id'];
-            
+
+    protected function buildRecruitmentDashboardWhere($roleshortcode, $userId) {
+        $whr = "";
+        if ($roleshortcode == HIRINGMANAGER_ROLE) {
+            $whr = " AND requested_by = " . $userId;
+        } elseif ($roleshortcode == RECRUITINGMANAGER_ROLE) {
+            $whr = " AND recruitment_manager = " . $userId;
         }
-        if($get['roleshortcode']==RECRUITINGMANAGER_ROLE){
-            $whr = " AND recruitment_manager = ".$get['user_id'];
-            $whrjp = " AND jp.recruitment_manager = ".$get['user_id'];
-        }
-        if($get['type']=='ACTIVE'){
-            $job_postingssql = "SELECT id, requested_date, job_number, job_name, job_status, no_of_resources, required_date,required_date, current_status FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND requested_date <= '".date('Y-m-d')."' AND current_status=0 AND is_active = 0 ";
-            $job_postingsres = $callConfig->getAllRows($job_postingssql);
+        return $whr;
+    }
+
+    protected function fetchRecruitmentDashboardData($callConfig, $companyId, $whr, $type) {
+        $return = [];
+        if ($type == 'ACTIVE') {
+            $query = "SELECT id, requested_date, job_number, job_name, job_status, no_of_resources, required_date,required_date, current_status FROM `job_postings` WHERE company_id = '" . $companyId . "' " . $whr . " AND requested_date <= '" . date('Y-m-d') . "' AND current_status=0 AND is_active = 0 ";
             $return['name'] = "Active Job Postings";
-            $return['data'] = $job_postingsres;
-        }
-        /*--------- All Yet to submit  3 Job Details ---------------- */
-        if($get['type']=='YET'){
-            if($get['roleshortcode']==HIRINGMANAGER_ROLE){
-                $job_postingssql = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status=51 AND job_status !='1' AND is_active = 0 ";
-                $return['name'] = "Jobs Yet to Publish";
-
-            }
-            if($get['roleshortcode']==RECRUITINGMANAGER_ROLE){
-                $job_postingssql = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status=51 AND job_status !='1' AND  is_active = 0";
-                $return['name'] = "Jobs Yet to Publish";
-
-            }
-            $return['data'] =  $callConfig->getAllRows($job_postingssql);
-        }
-        if($get['type']=='PUBLISH'){
-            $recent_publishsql = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date  FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status = ".ST_PUBLISH." AND job_status !='1' AND is_active = 0";
+            $return['data'] = $callConfig->getAllRows($query);
+        } elseif ($type == 'YET') {
+            $query = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date FROM `job_postings` WHERE company_id = '" . $companyId . "' " . $whr . " AND current_status=51 AND job_status !='1' AND is_active = 0 ";
+            $return['name'] = "Jobs Yet to Publish";
+            $return['data'] = $callConfig->getAllRows($query);
+        } elseif ($type == 'PUBLISH') {
+            $query = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date FROM `job_postings` WHERE company_id = '" . $companyId . "' " . $whr . " AND current_status = " . ST_PUBLISH . " AND job_status !='1' AND is_active = 0";
             $return['name'] = "Recently Published";
-            $recent_publish = $callConfig->getAllRows($recent_publishsql);
-            $return['data'] = $recent_publish;
-        }
-        $recent_unpublish = array();
-        if($get['type']=='UNPUBLISH'){
-            $recent_unpublishsql = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date  FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status = ".ST_UNPUBLISH." AND job_status !='1' AND is_active = 0";
+            $return['data'] = $callConfig->getAllRows($query);
+        } elseif ($type == 'UNPUBLISH') {
+            $query = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date FROM `job_postings` WHERE company_id = '" . $companyId . "' " . $whr . " AND current_status = " . ST_UNPUBLISH . " AND job_status !='1' AND is_active = 0";
             $return['name'] = "Recently Un-Published";
-            $recent_unpublish = $callConfig->getAllRows($recent_unpublishsql);
-            $return['data'] = $recent_unpublish;
+            $return['data'] = $callConfig->getAllRows($query);
         }
         return $return;
+    }
+
+    public function getviewalldetilarecruitmentdashboardineg($get){
+        global $callConfig;
+        $whr = $this->buildRecruitmentDashboardWhere($get['roleshortcode'] ?? '', $get['user_id'] ?? 0);
+        return $this->fetchRecruitmentDashboardData($callConfig, $get['company_id'] ?? '', $whr, $get['type'] ?? '');
     }
     public function togetmyreportswithdetails($get){
         global $callConfig;
@@ -1546,115 +1536,153 @@ public function passprojectTaskid($post,$get,$task_id){
     //}
     return $return;
 }
-public function togetprojectdashboarddetails($get){
-    global $callConfig;
-    $return['get'] = $get;
-    // unused $projwhr = "";$prjcnt = 0; $top = array(); $pttwhr ="";
-
-    if($get['role_id']!=""){
-        
-        $query = "SELECT DISTINCT project_id FROM project_teams WHERE company_id =".$get['company_id'].self::SQL_COND_AND_USER_ID.$get['user_id'].self::SQL_COND_AND_IS_ACTIVE_0_37;
+    protected function buildProjectDashboardFilters($callConfig, $companyId, $userId, $roleId) {
+        $filters = ['ptwhr' => '', 'projwhr' => '', 'pttwhr' => ''];
+        if ($roleId == "") {
+            return $filters;
+        }
+        $query = "SELECT DISTINCT project_id FROM project_teams WHERE company_id =" . $companyId . self::SQL_COND_AND_USER_ID . $userId . self::SQL_COND_AND_IS_ACTIVE_0_37;
         $teamproject = $callConfig->getAllRows($query);
-
-        foreach($teamproject as $teampro){
+        $pps = [];
+        foreach ($teamproject as $teampro) {
             $pps[] = $teampro->project_id;
         }
-        if(count((array)$pps)>0){
-            $ptwhr = self::SQL_COND_AND_ID_IN.implode(",",$pps).")";
-            $projwhr =  " AND proj.id IN (".implode(",",$pps).")";
-            $pttwhr = " AND project_id IN (".implode(",",$pps).")";
-        }else{
-            $ptwhr = " AND id IN ('0')";
-            $projwhr =  " AND proj.id IN ('0')";
-            $pttwhr = " AND project_id IN (0)";
+        if (count($pps) > 0) {
+            $filters['ptwhr'] = self::SQL_COND_AND_ID_IN . implode(",", $pps) . ")";
+            $filters['projwhr'] = " AND proj.id IN (" . implode(",", $pps) . ")";
+            $filters['pttwhr'] = " AND project_id IN (" . implode(",", $pps) . ")";
+        } else {
+            $filters['ptwhr'] = " AND id IN ('0')";
+            $filters['projwhr'] = " AND proj.id IN ('0')";
+            $filters['pttwhr'] = " AND project_id IN (0)";
         }
+        return $filters;
     }
-    $query = "SELECT id,project_name,project_logo,assigner_id,planned_start,  planned_finish, project_logo, created_date, current_status  FROM projects WHERE company_id ='".$get['company_id']."'".$ptwhr.self::SQL_COND_AND_IS_ACTIVE_0;
-    $projectdata = $callConfig->getAllRows($query);
-    $return['project_query'] = $query;
-    $return['kanprojects'] = $projectdata;
-    foreach($projectdata as $res){
-        $prjcnt++;
-        $top[$res->current_status] = $top[$res->current_status]+1;
-    }
-    if($get['role_id']!=""){
-    $wquery = "SELECT DISTINCT pws.id, pws.name, pws.created_date FROM  project_work_spaces pws, projects proj WHERE pws.company_id = ".$get['company_id']." AND proj.company_id = pws.company_id AND pws.id = proj.project_work_space_id".$projwhr;
-    }else{
-        $wquery = "SELECT  pws.id, pws.name, pws.created_date FROM  project_work_spaces pws WHERE pws.company_id = ".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-    }
-    $return['worksopace_query'] = $wquery;
-    $return['workspace'] = $callConfig->getAllRows($wquery);
-    $top['total'] = $prjcnt;
-    $return['toptotal'] = $top;
 
-    foreach($projectdata as $listdata){
-        if($listdata->current_status==0){
-            $return['recentlycreated'][] = $listdata;
-        }elseif($listdata->current_status==4){
-            $return['recentlycompleted'][] = $listdata;
-        }else{
-            $return['recentlyinprogress'][] = $listdata;
+    protected function bucketProjectDashboardProjects($projectdata) {
+        $top = [];
+        $prjcnt = 0;
+        $recentlycreated = [];
+        $recentlycompleted = [];
+        $recentlyinprogress = [];
+        $project_assign = [];
+        $projects = [];
+
+        foreach ($projectdata as $res) {
+            $prjcnt++;
+            $statusKey = $res->current_status;
+            $top[$statusKey] = ($top[$statusKey] ?? 0) + 1;
+            if ($statusKey == 0) {
+                $recentlycreated[] = $res;
+            } elseif ($statusKey == 4) {
+                $recentlycompleted[] = $res;
+            } else {
+                $recentlyinprogress[] = $res;
+            }
+            $project_assign[$res->id] = $res->assigner_id;
+            $projects[] = $res;
         }
-        $project_assign[$listdata->id] = $listdata->assigner_id;
-        $return['projects'][] = $listdata;
+        $top['total'] = $prjcnt;
+        return [
+            'top' => $top,
+            'recentlycreated' => $recentlycreated,
+            'recentlycompleted' => $recentlycompleted,
+            'recentlyinprogress' => $recentlyinprogress,
+            'project_assign' => $project_assign,
+            'projects' => $projects
+        ];
     }
 
-    $return['project_assign'] = $project_assign;
-    $query = "SELECT id, project_id, customer_id, task_name, planned_finish ,created_date,assigen_id, current_status FROM `project_task_details` WHERE company_id ='".$get['company_id']."' ".$pttwhr.self::SQL_COND_AND_IS_ACTIVE_0_37;
-    $ptasks  = $callConfig->getAllRows($query);
+    public function togetprojectdashboarddetails($get){
+        global $callConfig;
+        $return['get'] = $get;
+        $roleId = $get['role_id'] ?? '';
+        $filters = $this->buildProjectDashboardFilters($callConfig, $get['company_id'], $get['user_id'], $roleId);
+        $ptwhr = $filters['ptwhr'];
+        $projwhr = $filters['projwhr'];
+        $pttwhr = $filters['pttwhr'];
 
-    foreach($ptasks as $ptask){
-        $task[$ptask->project_id][] = $ptask;
-        $emptask[$ptask->assigen_id][] = $ptask;
-    }
-    $return['tasksql'] = $query;
-    $return['task'] = $task;
+        $query = "SELECT id,project_name,project_logo,assigner_id,planned_start,  planned_finish, project_logo, created_date, current_status  FROM projects WHERE company_id ='".$get['company_id']."'".$ptwhr.self::SQL_COND_AND_IS_ACTIVE_0;
+        $projectdata = $callConfig->getAllRows($query);
+        $return['project_query'] = $query;
+        $return['kanprojects'] = $projectdata;
 
-    $query = "SELECT id, project_id, user_id, role_id FROM project_teams WHERE company_id = '".$get['company_id']."'".$pttwhr.self::SQL_COND_AND_IS_ACTIVE_0_31;
-    $teamsdata = $callConfig->getAllRows($query);
-    foreach($teamsdata as $teamsdat){
-        $projcetroleuser[$teamsdat->project_id][$teamsdat->role_id][] = $teamsdat->user_id;
-    }
-    $return['projcetroleuser'] = $projcetroleuser;
-    $query = "SELECT id,user_name,display_name, user_email as email_id,user_photo image FROM application_users WHERE id IN ( SELECT DISTINCT(`assigen_id`) emps FROM `project_task_details` WHERE company_id =".$get['company_id']." AND assigen_id !='' ".$ptwhr." AND is_active =0 ) ";
-    $return['project_employees'] =  $callConfig->getAllRows($query);
-    $return['emloyee_tasks'] = $emptask;
-    $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_ACTION_L.$get['company_id'].self::SQL_COND_AND_TABLE_NAME.TBL_PROJECT_TASK_DETAILS.self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_DISPL;
-    $return['statusprogress']  = $callConfig->getAllRows($query);
-    $query = "SELECT id, task_name, planned_start, planned_finish, created_date, current_status FROM `project_task_details` WHERE company_id ='".$get['company_id']."' ".$ptwhr.self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_CREAT;
-    $return['allprojects'] = $callConfig->getAllRows($query);
-    $query = self::SQL_SELECT_SELECT_ID_DISPLAY_NAME_USER_EM;
-    $employs = $callConfig->getAllRows($query);
-    foreach($employs as $empl){
-        $emps[$empl->id] = $empl;
-    }
-    $return['emps'] = $emps;
-    $query = "SELECT * FROM application_users WHERE id NOT IN ( SELECT `assigen_id` FROM `project_task_details` WHERE current_status != ".ST_APPROVED." AND assigen_id is NOT NULL AND is_active = 0) AND role_id LIKE '%TASKDA_%' AND is_active =0";
-    $unassigndata = $callConfig->getAllRows($query);
-    $return['unassign'] = $unassigndata;
-    $query = "SELECT * FROM application_users WHERE id  IN ( SELECT `assigen_id` FROM `project_task_details` WHERE current_status !=".ST_APPROVED." AND assigen_id is NOT NULL AND is_active = 0) AND role_id LIKE '%TASKDA%' AND is_active =0";
-    $return['assign'] = $callConfig->getAllRows($query);
+        $bucketed = $this->bucketProjectDashboardProjects($projectdata);
+        $return['toptotal'] = $bucketed['top'];
+        $return['recentlycreated'] = $bucketed['recentlycreated'];
+        $return['recentlycompleted'] = $bucketed['recentlycompleted'];
+        $return['recentlyinprogress'] = $bucketed['recentlyinprogress'];
+        $return['project_assign'] = $bucketed['project_assign'];
+        $return['projects'] = $bucketed['projects'];
 
-    $query = "SELECT DISTINCT project_id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND is_active = 0 ";
-    $userprojects = $callConfig->getAllRows($query);
-    foreach( $userprojects as $userproject){
-        $userprojec[$userproject->user_id][$userproject->project_id] = $userproject;
+        if($roleId != ""){
+            $wquery = "SELECT DISTINCT pws.id, pws.name, pws.created_date FROM  project_work_spaces pws, projects proj WHERE pws.company_id = ".$get['company_id']." AND proj.company_id = pws.company_id AND pws.id = proj.project_work_space_id".$projwhr;
+        }else{
+            $wquery = "SELECT  pws.id, pws.name, pws.created_date FROM  project_work_spaces pws WHERE pws.company_id = ".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
+        }
+        $return['worksopace_query'] = $wquery;
+        $return['workspace'] = $callConfig->getAllRows($wquery);
+
+        $query = "SELECT id, project_id, customer_id, task_name, planned_finish ,created_date,assigen_id, current_status FROM `project_task_details` WHERE company_id ='".$get['company_id']."' ".$pttwhr.self::SQL_COND_AND_IS_ACTIVE_0_37;
+        $ptasks  = $callConfig->getAllRows($query);
+        $task = [];
+        $emptask = [];
+        foreach($ptasks as $ptask){
+            $task[$ptask->project_id][] = $ptask;
+            $emptask[$ptask->assigen_id][] = $ptask;
+        }
+        $return['tasksql'] = $query;
+        $return['task'] = $task;
+
+        $query = "SELECT id, project_id, user_id, role_id FROM project_teams WHERE company_id = '".$get['company_id']."'".$pttwhr.self::SQL_COND_AND_IS_ACTIVE_0_31;
+        $teamsdata = $callConfig->getAllRows($query);
+        $projcetroleuser = [];
+        foreach($teamsdata as $teamsdat){
+            $projcetroleuser[$teamsdat->project_id][$teamsdat->role_id][] = $teamsdat->user_id;
+        }
+        $return['projcetroleuser'] = $projcetroleuser;
+        $query = "SELECT id,user_name,display_name, user_email as email_id,user_photo image FROM application_users WHERE id IN ( SELECT DISTINCT(`assigen_id`) emps FROM `project_task_details` WHERE company_id =".$get['company_id']." AND assigen_id !='' ".$ptwhr." AND is_active =0 ) ";
+        $return['project_employees'] =  $callConfig->getAllRows($query);
+        $return['emloyee_tasks'] = $emptask;
+        $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_ACTION_L.$get['company_id'].self::SQL_COND_AND_TABLE_NAME.TBL_PROJECT_TASK_DETAILS.self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_DISPL;
+        $return['statusprogress']  = $callConfig->getAllRows($query);
+        $query = "SELECT id, task_name, planned_start, planned_finish, created_date, current_status FROM `project_task_details` WHERE company_id ='".$get['company_id']."' ".$ptwhr.self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_CREAT;
+        $return['allprojects'] = $callConfig->getAllRows($query);
+        $query = self::SQL_SELECT_SELECT_ID_DISPLAY_NAME_USER_EM;
+        $employs = $callConfig->getAllRows($query);
+        $emps = [];
+        foreach($employs as $empl){
+            $emps[$empl->id] = $empl;
+        }
+        $return['emps'] = $emps;
+        $query = "SELECT * FROM application_users WHERE id NOT IN ( SELECT `assigen_id` FROM `project_task_details` WHERE current_status != ".ST_APPROVED." AND assigen_id is NOT NULL AND is_active = 0) AND role_id LIKE '%TASKDA_%' AND is_active =0";
+        $return['unassign'] = $callConfig->getAllRows($query);
+        $query = "SELECT * FROM application_users WHERE id  IN ( SELECT `assigen_id` FROM `project_task_details` WHERE current_status !=".ST_APPROVED." AND assigen_id is NOT NULL AND is_active = 0) AND role_id LIKE '%TASKDA%' AND is_active =0";
+        $return['assign'] = $callConfig->getAllRows($query);
+
+        $query = "SELECT DISTINCT project_id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND is_active = 0 ";
+        $userprojects = $callConfig->getAllRows($query);
+        $userprojec = [];
+        foreach( $userprojects as $userproject){
+            $userprojec[$userproject->user_id][$userproject->project_id] = $userproject;
+        }
+        $return['userprojects'] = $userprojec;
+        $query = "SELECT id,name,status,action_label,display_priority,project_id FROM  project_task_status WHERE company_id =".$get['company_id'].self::SQL_COND_AND_TABLE_NAME.TBL_PROJECT_TASK_DETAILS.self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_DISPL;
+        $status  = $callConfig->getAllRows($query);
+        $project_task_status = [];
+        foreach($status as $statu){
+            $project_task_status[$statu->project_id][$statu->status] = $statu;
+        }
+        $return['project_task_status'] = $project_task_status;
+        $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_ACTION_L_41.$get['company_id']." AND table_name = 'projects' AND is_active = 0 ORDER BY display_priority ASC";
+        $pstatuss = $callConfig->getAllRows($query);
+        $proctt = [];
+        foreach($pstatuss as $ptstatus){
+            $proctt[$ptstatus->status] = $ptstatus;
+        }
+        $return['project_status'] = $proctt;
+        return $return;
     }
-    $return['userprojects'] = $userprojec;
-    $query = "SELECT id,name,status,action_label,display_priority,project_id FROM  project_task_status WHERE company_id =".$get['company_id'].self::SQL_COND_AND_TABLE_NAME.TBL_PROJECT_TASK_DETAILS.self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_DISPL;
-    $status  = $callConfig->getAllRows($query);
-    foreach($status as $statu){
-        $project_task_status[$statu->project_id][$statu->status] = $statu;
-    }
-    $return['project_task_status'] = $project_task_status;
-    $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_ACTION_L_41.$get['company_id']." AND table_name = 'projects' AND is_active = 0 ORDER BY display_priority ASC";
-    $pstatuss = $callConfig->getAllRows($query);
-    foreach($pstatuss as $ptstatus){
-        $proctt[$ptstatus->status] = $ptstatus;
-    }
-    $return['project_status'] = $proctt;
-    return $return;
-}
 
 public function togetprojectdashboarddetailsold($get){
     global $callConfig;
@@ -2844,169 +2872,203 @@ public function togetcourier($get){
     }
     return $return;
 }
-public function togetofficemanagement($get){
-    global $callConfig;
-    $return['get']  = $get;
-    $query = "SELECT id, name FROM stationery_categories WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0_3;
-    $return['stationery_categories'] =  $callConfig->getAllRows($query);
-    $loc_query = "SELECT id, location_name FROM locations WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0_3;
-    $return['loc_data'] =  $callConfig->getAllRows($loc_query);
-    // unused
-    if($get['cat_id']!=""){
-        $whr.=" AND category_id=".$get['cat_id'];
+    protected function fetchOfficeCourierData($callConfig, $companyId, $locationId, $userId, $adminType) {
+        $whr = self::SQL_COND_AND_USER_ID . $userId;
+        $all = $callConfig->getRow("SELECT SUM(if(courier_type=1,1,0)) as send, SUM(if(courier_type=2,1,0)) as receive FROM couriers WHERE company_id = " . $companyId . self::SQL_COND_AND_LOCATION_ID . $locationId . self::SQL_COND_AND_IS_ACTIVE_0_48 . $whr);
+        $seven = $callConfig->getRow("SELECT SUM(if(courier_type=1,1,0)) as send, SUM(if(courier_type=2,1,0)) as receive FROM couriers WHERE company_id = " . $companyId . self::SQL_COND_AND_LOCATION_ID . $locationId . " AND is_active = 0 AND courier_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) " . $whr);
+        $hwr = ($adminType != 1) ? self::SQL_COND_AND_USER_ID . $userId : "";
+        $sidein = $callConfig->getAllRows(self::SQL_SELECT_SELECT_FROM_COURIERS_WHERE_COM . $companyId . "  AND courier_type = 2 " . $hwr . "  AND location_id = " . $locationId . " AND is_active = 0 ORDER BY id LIMIT 0,5 ");
+        $sideout = $callConfig->getAllRows(self::SQL_SELECT_SELECT_FROM_COURIERS_WHERE_COM . $companyId . " AND courier_type = 1  AND location_id = " . $locationId . " AND " . $hwr . " is_active = 0 ORDER BY id LIMIT 0,5 ");
+        $down = $callConfig->getAllRows(self::SQL_SELECT_SELECT_FROM_COURIERS_WHERE_COM . $companyId . "  AND location_id = " . $locationId . self::SQL_COND_AND_IS_ACTIVE_0_48 . $whr . " ORDER BY id DESC");
+        return [
+            'all' => $all,
+            'seven' => $seven,
+            'sidein' => $sidein,
+            'sideout' => $sideout,
+            'down' => $down
+        ];
     }
-    if($get['search']!=""){
-        $whr.=" AND item_name LIKE '%".$get['search']."%' ";
-    }
-    $query = "SELECT id, item_name, description, image, available_qty FROM stationery_items WHERE company_id =".$get['company_id'].self::SQL_COND_AND_LOCATION_ID.$get['location_id'].self::SQL_COND_AND_IS_ACTIVE_0_3.$whr;
-    $return['stationery_items'] =  $callConfig->getAllRows($query);
 
-    $query = "SELECT * FROM stationery_item_ledger WHERE company_id = ".$get['company_id']." AND item_id (SELECT id, item_name, description, image, available_qty FROM stationery_items WHERE company_id =".$get['company_id'].self::SQL_COND_AND_LOCATION_ID.$get['location_id']." AND is_active =0)  AND is_active = 0 ";
-    $stationery_ledgers =  $callConfig->getAllRows($query);
-    foreach($stationery_ledgers as $stationery_ledger){
-        $stationery_item_ledger[$stationery_ledger->item_id][] = $stationery_ledger;
-    }
-    $return['stationery_item_ledger'] =  $stationery_item_ledger;
-
-    $query = "SELECT sum(qty) as count_cart FROM stationery_cart WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_USER_ID.$get['user_id']." AND  request_no IS NULL AND  is_active = 0";
-    $cccount = $callConfig->getRow($query);
-    $return['cart_count'] =  $cccount->count_cart;
-    if($cccount->count_cart!=0){
-        $query = "SELECT id, qty,item_id FROM stationery_cart WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_USER_ID.$get['user_id']." AND  request_no IS NULL AND  is_active = 0";
-        $alldatas =  $callConfig->getAllRows($query);
-        foreach($alldatas as $alldata){
-            $sitem[$alldata->item_id] = $alldata->qty;
+    protected function fetchOfficeTransportAndFoodData($callConfig, $companyId, $userId, $adminType) {
+        $buses = $callConfig->getAllRows("SELECT * FROM company_transports WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0);
+        $bus = [];
+        foreach ($buses as $buse) {
+            $bus[$buse->id] = $buse;
         }
-        $return['sitem'] =  $sitem;
-    }
-    $whr = self::SQL_COND_AND_USER_ID.$get['user_id'];
-    if( isset($get['type']) && $get['type']==SECURITYGUARD_ROLE){
-        // unused
-    }
-     $query = "SELECT SUM(if(courier_type=1,1,0)) as send, SUM(if(courier_type=2,1,0)) as receive FROM couriers WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_LOCATION_ID.$get['location_id'].self::SQL_COND_AND_IS_ACTIVE_0_48.$whr;
-    $return['all'] =  $callConfig->getRow($query);
-    $query = "SELECT SUM(if(courier_type=1,1,0)) as send, SUM(if(courier_type=2,1,0)) as receive FROM couriers WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_LOCATION_ID.$get['location_id']." AND is_active = 0 AND courier_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) ".$whr;
-    $return['seven'] =  $callConfig->getRow($query);
-    $hwr = "";
-    if($get['admin_type']!=1){
-        $hwr = self::SQL_COND_AND_USER_ID.$get['user_id'];
-    }
-    $query = self::SQL_SELECT_SELECT_FROM_COURIERS_WHERE_COM.$get['company_id']."  AND courier_type = 2 ".$hwr."  AND location_id = ".$get['location_id']." AND is_active = 0 ORDER BY id LIMIT 0,5 ";
-    $return['sidein'] =  $callConfig->getAllRows($query);
 
-    $query = self::SQL_SELECT_SELECT_FROM_COURIERS_WHERE_COM.$get['company_id']." AND courier_type = 1  AND location_id = ".$get['location_id']." AND ".$hwr." is_active = 0 ORDER BY id LIMIT 0,5 ";
-    $return['sideout'] =  $callConfig->getAllRows($query);
-
-    $query = self::SQL_SELECT_SELECT_FROM_COURIERS_WHERE_COM.$get['company_id']."  AND location_id = ".$get['location_id'].self::SQL_COND_AND_IS_ACTIVE_0_48.$whr." ORDER BY id DESC";
-    $return['down'] =  $callConfig->getAllRows($query);
-    $query = "SELECT id,display_name,email_id, image, emp_code  FROM employees WHERE company_id =  ".$get['company_id']."   AND is_active = 0";
-    $employs = $callConfig->getAllRows($query);
-    foreach($employs as $empl){
-        $emps[$empl->id] = $empl;
-    }
-    $return['emps'] = $emps;
-
-    $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
-    $deliver_type = $callConfig->getAllRows($query);
-
-    foreach($deliver_type as $deliver_tp){
-        $deliver_types[$deliver_tp->genc_detail_code] = $deliver_tp->genc_detail_name;
-    }
-    $return['deliver_types'] = $deliver_types;
-
-    $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_TABLE_NA.$get['company_id']." AND table_name IN( 'couriers','employee_transport_requests', 'employee_food_requests', 'stationery_requests')  AND is_active = 0";
-    $status = $callConfig->getAllRows($query);
-    foreach($status as $statu){
-        $sts[$statu->table_name][$statu->status] = $statu->name;
-    }
-    $return['status'] = $sts;
-
-
-    if( isset($get['admin_type'])&& $get['admin_type']==1){
-        $query = "SELECT * FROM stationery_requests WHERE company_id =".$get['company_id']." AND  location_id = ".$get['location_id']." AND is_active = 0 ORDER BY id DESC ";
-        $return['all_stationery_requests']= $callConfig->getAllRows($query);
-        $return['all_stationery_requests_query']= $query;
-    }
-
-    $query = "SELECT * FROM stationery_requests WHERE company_id =".$get['company_id'].self::SQL_COND_AND_USER_ID.$get['user_id']." AND is_active = 0 ORDER BY id DESC ";
-    $return['my_stationery_requests']= $callConfig->getAllRows($query);
-    $return['my_stationery_requests_query']= $query;
-
-
-    $query = "SELECT * FROM company_transports WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-    $buses = $callConfig->getAllRows($query);
-    foreach($buses as $buse){
-        $bus[$buse->id] = $buse;
-    }
-    $return['bus'] = $bus;
-
-    $query = "SELECT * FROM transport_routes WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-    $return['routes']= $callConfig->getAllRows($query);
-
-    $query = "SELECT * FROM transport_schedule WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-    $transport_schedules = $callConfig->getAllRows($query);
-    foreach((array)$transport_schedules as $transport_schedule){
-        $tschedule[$transport_schedule->route_id][] = $transport_schedule;
-        $listschedlue[] = $transport_schedule->stop_name;
-    }
-    $return['transport_schedule'] = $tschedule;
-    $return['listschedlue'] = array_unique((array)$listschedlue);
-
-    $query = "SELECT * FROM employee_transport_requests WHERE company_id =".$get['company_id'].self::SQL_COND_AND_USER_ID_67.$get['user_id'].self::SQL_COND_AND_IS_ACTIVE_0 ;
-    $return['user_transport_schedule'] = $callConfig->getAllRows($query);
-
-    $query = "SELECT * FROM food_options WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-    $return['food_options']= $callConfig->getAllRows($query);
-
-    $query = "SELECT * FROM employee_food_requests WHERE company_id =".$get['company_id'].self::SQL_COND_AND_USER_ID_67.$get['user_id'] ;
-    $employee_food_requests = $callConfig->getAllRows($query);
-
-
-    $return['employee_food_requests']= $employee_food_requests;
-    $return['employee_food_requests_query']= $query;
-    foreach($employee_food_requests as $employee_food){
-        if($employee_food->is_active == 0 && $employee_food->current_status == 199){
-            $food[]= $employee_food->food_options;
+        $routes = $callConfig->getAllRows("SELECT * FROM transport_routes WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0);
+        $transport_schedules = $callConfig->getAllRows("SELECT * FROM transport_schedule WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0);
+        $tschedule = [];
+        $listschedlue = [];
+        foreach ((array)$transport_schedules as $transport_schedule) {
+            $tschedule[$transport_schedule->route_id][] = $transport_schedule;
+            $listschedlue[] = $transport_schedule->stop_name;
         }
-    }
-    $return['food']= $food;
-    if( isset($get['admin_type'])&& $get['admin_type']==1){
-        $query = "SELECT * FROM employee_transport_requests WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-        $return['all_transport_schedule'] = $callConfig->getAllRows($query);
-        $query = "SELECT * FROM employee_food_requests WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0 ;
-        $return['all_employee_food_requests']= $callConfig->getAllRows($query);
-    }
 
-    $query = "SELECT * FROM meeting_room_bookings WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-    $return['all_metting'] = $callConfig->getAllRows($query);
-
-    $query = "SELECT id,display_name, user_photo FROM application_users WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0 ;
-    $users = $callConfig->getAllRows($query);
-    foreach($users as $user){
-        $aluser[$user->id]['display_name'] = $user->display_name;
-        $aluser[$user->id]['image'] = $user->user_photo;
-    }
-    $return['all_users']= $aluser;
-    $query ="SELECT id,cabin_name FROM building_floor_spaces WHERE company_id = {$get['company_id']} AND space_type_id IN (SELECT id FROM space_types WHERE company_id =  {$get['company_id']} AND short_code = 'METTING_ROOM' AND is_active =0)";
-    $data = $callConfig->getAllRows($query);
-    $cabin_res = array();
-    foreach ($data as $row) {
-        $cabin_res[$row->id] = $row->cabin_name;
-    }
-    $return['cabin_res'] = $cabin_res;
-
-    $query = "SELECT id, building_name FROM buildings WHERE company_id =".$get['company_id'].self::SQL_COND_AND_LOCATION_ID.$get['location_id'].self::SQL_COND_AND_IS_ACTIVE_0_52;
-    $return['buildings']  = $callConfig->getAllRows($query);
-    if($get['admin_type']!=1){
-        $query = "SELECT * FROM role_permissions WHERE company_id =".$get['company_id']." AND page_name IN ('COM_LIST_COURIERS', 'COM_LIST_STATIONERY', 'COM_INSERT_STATIONERY', 'COM_LIST_SEATING_POOLS' ) AND role_short_code ='working_role_short_code' AND is_active =0";
-        $wdata = $callConfig->getAllRows($query);
-        foreach((array)$wdata as $wa){
-            $worksub[]=$wa->page_name;
+        $user_transport_schedule = $callConfig->getAllRows("SELECT * FROM employee_transport_requests WHERE company_id =" . $companyId . self::SQL_COND_AND_USER_ID_67 . $userId . self::SQL_COND_AND_IS_ACTIVE_0);
+        $food_options = $callConfig->getAllRows("SELECT * FROM food_options WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0);
+        $queryFood = "SELECT * FROM employee_food_requests WHERE company_id =" . $companyId . self::SQL_COND_AND_USER_ID_67 . $userId;
+        $employee_food_requests = $callConfig->getAllRows($queryFood);
+        $food = [];
+        foreach ($employee_food_requests as $employee_food) {
+            if ($employee_food->is_active == 0 && $employee_food->current_status == 199) {
+                $food[] = $employee_food->food_options;
+            }
         }
+
+        $res = [
+            'bus' => $bus,
+            'routes' => $routes,
+            'transport_schedule' => $tschedule,
+            'listschedlue' => array_unique((array)$listschedlue),
+            'user_transport_schedule' => $user_transport_schedule,
+            'food_options' => $food_options,
+            'employee_food_requests' => $employee_food_requests,
+            'employee_food_requests_query' => $queryFood,
+            'food' => $food,
+            'all_transport_schedule' => null,
+            'all_employee_food_requests' => null
+        ];
+
+        if ($adminType == 1) {
+            $res['all_transport_schedule'] = $callConfig->getAllRows("SELECT * FROM employee_transport_requests WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0);
+            $res['all_employee_food_requests'] = $callConfig->getAllRows("SELECT * FROM employee_food_requests WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0);
+        }
+        return $res;
     }
-    $return['worksub']  = $worksub;
-    return $return;
-}
+
+    public function togetofficemanagement($get){
+        global $callConfig;
+        $return['get']  = $get;
+        $companyId = $get['company_id'];
+        $locationId = $get['location_id'] ?? 0;
+        $userId = $get['user_id'] ?? 0;
+        $adminType = $get['admin_type'] ?? 0;
+
+        $query = "SELECT id, name FROM stationery_categories WHERE company_id =".$companyId.self::SQL_COND_AND_IS_ACTIVE_0_3;
+        $return['stationery_categories'] =  $callConfig->getAllRows($query);
+        $loc_query = "SELECT id, location_name FROM locations WHERE company_id =".$companyId.self::SQL_COND_AND_IS_ACTIVE_0_3;
+        $return['loc_data'] =  $callConfig->getAllRows($loc_query);
+        
+        $whr = "";
+        if(!empty($get['cat_id'])){
+            $whr.=" AND category_id=".$get['cat_id'];
+        }
+        if(!empty($get['search'])){
+            $whr.=" AND item_name LIKE '%".$get['search']."%' ";
+        }
+        $query = "SELECT id, item_name, description, image, available_qty FROM stationery_items WHERE company_id =".$companyId.self::SQL_COND_AND_LOCATION_ID.$locationId.self::SQL_COND_AND_IS_ACTIVE_0_3.$whr;
+        $return['stationery_items'] =  $callConfig->getAllRows($query);
+
+        $query = "SELECT * FROM stationery_item_ledger WHERE company_id = ".$companyId." AND item_id (SELECT id, item_name, description, image, available_qty FROM stationery_items WHERE company_id =".$companyId.self::SQL_COND_AND_LOCATION_ID.$locationId." AND is_active =0)  AND is_active = 0 ";
+        $stationery_ledgers =  $callConfig->getAllRows($query);
+        $stationery_item_ledger = [];
+        foreach($stationery_ledgers as $stationery_ledger){
+            $stationery_item_ledger[$stationery_ledger->item_id][] = $stationery_ledger;
+        }
+        $return['stationery_item_ledger'] =  $stationery_item_ledger;
+
+        $query = "SELECT sum(qty) as count_cart FROM stationery_cart WHERE company_id = ".$companyId.self::SQL_COND_AND_USER_ID.$userId." AND  request_no IS NULL AND  is_active = 0";
+        $cccount = $callConfig->getRow($query);
+        $return['cart_count'] =  $cccount->count_cart;
+        if($cccount->count_cart!=0){
+            $query = "SELECT id, qty,item_id FROM stationery_cart WHERE company_id = ".$companyId.self::SQL_COND_AND_USER_ID.$userId." AND  request_no IS NULL AND  is_active = 0";
+            $alldatas =  $callConfig->getAllRows($query);
+            $sitem = [];
+            foreach($alldatas as $alldata){
+                $sitem[$alldata->item_id] = $alldata->qty;
+            }
+            $return['sitem'] =  $sitem;
+        }
+
+        $courierData = $this->fetchOfficeCourierData($callConfig, $companyId, $locationId, $userId, $adminType);
+        $return['all'] = $courierData['all'];
+        $return['seven'] = $courierData['seven'];
+        $return['sidein'] = $courierData['sidein'];
+        $return['sideout'] = $courierData['sideout'];
+        $return['down'] = $courierData['down'];
+
+        $query = "SELECT id,display_name,email_id, image, emp_code  FROM employees WHERE company_id =  ".$companyId."   AND is_active = 0";
+        $employs = $callConfig->getAllRows($query);
+        $emps = [];
+        foreach($employs as $empl){
+            $emps[$empl->id] = $empl;
+        }
+        $return['emps'] = $emps;
+
+        $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$companyId.self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
+        $deliver_type = $callConfig->getAllRows($query);
+        $deliver_types = [];
+        foreach($deliver_type as $deliver_tp){
+            $deliver_types[$deliver_tp->genc_detail_code] = $deliver_tp->genc_detail_name;
+        }
+        $return['deliver_types'] = $deliver_types;
+
+        $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_TABLE_NA.$companyId." AND table_name IN( 'couriers','employee_transport_requests', 'employee_food_requests', 'stationery_requests')  AND is_active = 0";
+        $status = $callConfig->getAllRows($query);
+        $sts = [];
+        foreach($status as $statu){
+            $sts[$statu->table_name][$statu->status] = $statu->name;
+        }
+        $return['status'] = $sts;
+
+        if($adminType == 1){
+            $query = "SELECT * FROM stationery_requests WHERE company_id =".$companyId." AND  location_id = ".$locationId." AND is_active = 0 ORDER BY id DESC ";
+            $return['all_stationery_requests']= $callConfig->getAllRows($query);
+            $return['all_stationery_requests_query']= $query;
+        }
+
+        $query = "SELECT * FROM stationery_requests WHERE company_id =".$companyId.self::SQL_COND_AND_USER_ID.$userId." AND is_active = 0 ORDER BY id DESC ";
+        $return['my_stationery_requests']= $callConfig->getAllRows($query);
+        $return['my_stationery_requests_query']= $query;
+
+        $transFood = $this->fetchOfficeTransportAndFoodData($callConfig, $companyId, $userId, $adminType);
+        $return['bus'] = $transFood['bus'];
+        $return['routes'] = $transFood['routes'];
+        $return['transport_schedule'] = $transFood['transport_schedule'];
+        $return['listschedlue'] = $transFood['listschedlue'];
+        $return['user_transport_schedule'] = $transFood['user_transport_schedule'];
+        $return['food_options'] = $transFood['food_options'];
+        $return['employee_food_requests'] = $transFood['employee_food_requests'];
+        $return['employee_food_requests_query'] = $transFood['employee_food_requests_query'];
+        $return['food'] = $transFood['food'];
+        if($adminType == 1){
+            $return['all_transport_schedule'] = $transFood['all_transport_schedule'];
+            $return['all_employee_food_requests'] = $transFood['all_employee_food_requests'];
+        }
+
+        $query = "SELECT * FROM meeting_room_bookings WHERE company_id =".$companyId.self::SQL_COND_AND_IS_ACTIVE_0;
+        $return['all_metting'] = $callConfig->getAllRows($query);
+
+        $query = "SELECT id,display_name, user_photo FROM application_users WHERE company_id =".$companyId.self::SQL_COND_AND_IS_ACTIVE_0 ;
+        $users = $callConfig->getAllRows($query);
+        $aluser = [];
+        foreach($users as $user){
+            $aluser[$user->id]['display_name'] = $user->display_name;
+            $aluser[$user->id]['image'] = $user->user_photo;
+        }
+        $return['all_users']= $aluser;
+        $query ="SELECT id,cabin_name FROM building_floor_spaces WHERE company_id = {$companyId} AND space_type_id IN (SELECT id FROM space_types WHERE company_id =  {$companyId} AND short_code = 'METTING_ROOM' AND is_active =0)";
+        $data = $callConfig->getAllRows($query);
+        $cabin_res = array();
+        foreach ($data as $row) {
+            $cabin_res[$row->id] = $row->cabin_name;
+        }
+        $return['cabin_res'] = $cabin_res;
+
+        $query = "SELECT id, building_name FROM buildings WHERE company_id =".$companyId.self::SQL_COND_AND_LOCATION_ID.$locationId.self::SQL_COND_AND_IS_ACTIVE_0_52;
+        $return['buildings']  = $callConfig->getAllRows($query);
+        $worksub = [];
+        if($adminType != 1){
+            $query = "SELECT * FROM role_permissions WHERE company_id =".$companyId." AND page_name IN ('COM_LIST_COURIERS', 'COM_LIST_STATIONERY', 'COM_INSERT_STATIONERY', 'COM_LIST_SEATING_POOLS' ) AND role_short_code ='working_role_short_code' AND is_active =0";
+            $wdata = $callConfig->getAllRows($query);
+            foreach((array)$wdata as $wa){
+                $worksub[]=$wa->page_name;
+            }
+        }
+        $return['worksub']  = $worksub;
+        return $return;
+    }
 public function addstationerycartqty($get){
     global $callConfig;
     $query = "SELECT id FROM stationery_cart WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_USER_ID.$get['user_id']."  AND request_no IS NULL AND item_id = ".$get['item_id'].self::SQL_COND_AND_IS_ACTIVE_0;
@@ -3213,65 +3275,77 @@ public function togetallslectedtrasportdetails($get){
     // unused array'company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>43, 'user_display_name'=>$user->display_name,'transport_date'=>$post['transport_date'],'cc_users'=>$notuser2,'to_users'=>$notuser1);
     $this->emailsendmediater($senddata);
 }
-public function searchcourierdata($get){
-    global $callConfig;
-    // unused
-    if($get['courier_type']!=""){
-        $whr.= " AND courier_type = '".$get['courier_type']."'";
-    }
-    if($get['courier_user_id']!=""){
-        $whr.= " AND user_id = '".$get['courier_user_id']."'";
-    }
-    if($get['courier_ref_no']!=""){
-        $whr.= " AND courier_ref_no LIKE '%".$get['courier_ref_no']."%'";
-    }
-    if($get['courier_company']!=""){
-        $whr.= " AND courier_company LIKE '%".$get['courier_company']."%'";
-    }
-    if($get['courier_date']!="" && $get['courier_to_date']!=""){
-        $whr.= " AND courier_date >= '".$get['courier_date']."' AND courier_date >= '".$get['courier_date']."'";
-    }
-
-    if($get['from_detail']!=""){
-        $whr.= " AND from_detail LIKE '%".$get['from_detail']."%'";
-    }
-    if($get['to_detail']!=""){
-        $whr.= " AND to_detail LIKE '%".$get['to_detail']."%'";
-    }
-    $query = "SELECT * FROM `couriers` WHERE company_id = ".$get['company_id']." ".$whr.self::SQL_COND_AND_IS_ACTIVE_0_3;
-    $return['courier_query'] = $query;
-    $courier = $callConfig->getAllRows($query);
-    $return['courier'] = $courier;
-
-    if(count((array)$courier)>0){
-        foreach($courier as $cour){
-            $allusers[] = $cour->requested_by;
+    protected function buildCourierSearchWhere($get) {
+        $whr = "";
+        if (!empty($get['courier_type'])) {
+            $whr .= " AND courier_type = '" . $get['courier_type'] . "'";
         }
+        if (!empty($get['courier_user_id'])) {
+            $whr .= " AND user_id = '" . $get['courier_user_id'] . "'";
+        }
+        if (!empty($get['courier_ref_no'])) {
+            $whr .= " AND courier_ref_no LIKE '%" . $get['courier_ref_no'] . "%'";
+        }
+        if (!empty($get['courier_company'])) {
+            $whr .= " AND courier_company LIKE '%" . $get['courier_company'] . "%'";
+        }
+        if (!empty($get['courier_date']) && !empty($get['courier_to_date'])) {
+            $whr .= " AND courier_date >= '" . $get['courier_date'] . "' AND courier_date >= '" . $get['courier_date'] . "'";
+        }
+        if (!empty($get['from_detail'])) {
+            $whr .= " AND from_detail LIKE '%" . $get['from_detail'] . "%'";
+        }
+        if (!empty($get['to_detail'])) {
+            $whr .= " AND to_detail LIKE '%" . $get['to_detail'] . "%'";
+        }
+        return $whr;
+    }
 
-        $query = "SELECT id,display_name,email_id, image, emp_code  FROM employees WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0_37;
+    protected function fetchCourierLookupMetadata($callConfig, $companyId) {
+        $query = "SELECT id,display_name,email_id, image, emp_code  FROM employees WHERE company_id =" . $companyId . self::SQL_COND_AND_IS_ACTIVE_0_37;
         $users = $callConfig->getAllRows($query);
-
-        foreach($users as $suser){
+        $apuser = [];
+        foreach ($users as $suser) {
             $apuser[$suser->id] = $suser;
         }
-        $return['emps'] = $apuser;
 
-        $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI.$get['company_id'].self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
+        $query = self::SQL_SELECT_SELECT_ID_GENC_CODE_GENC_DETAI . $companyId . self::SQL_COND_AND_GENC_CODE_DELIVERTYPE_AND;
         $deliver_type = $callConfig->getAllRows($query);
-
-        foreach($deliver_type as $deliver_tp){
+        $deliver_types = [];
+        foreach ($deliver_type as $deliver_tp) {
             $deliver_types[$deliver_tp->genc_detail_code] = $deliver_tp->genc_detail_name;
         }
-        $return['deliver_types'] = $deliver_types;
-        $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_TABLE_NA.$get['company_id']." AND table_name IN( 'couriers')  AND is_active = 0";
+
+        $query = self::SQL_SELECT_SELECT_ID_NAME_STATUS_TABLE_NA . $companyId . " AND table_name IN( 'couriers')  AND is_active = 0";
         $status = $callConfig->getAllRows($query);
-        foreach($status as $statu){
+        $sts = [];
+        foreach ($status as $statu) {
             $sts[$statu->table_name][$statu->status] = $statu->name;
         }
-        $return['status'] = $sts;
+
+        return [
+            'emps' => $apuser,
+            'deliver_types' => $deliver_types,
+            'status' => $sts
+        ];
     }
-    return $return;
-}
+
+    public function searchcourierdata($get){
+        global $callConfig;
+        $whr = $this->buildCourierSearchWhere($get);
+        $query = "SELECT * FROM `couriers` WHERE company_id = " . $get['company_id'] . " " . $whr . self::SQL_COND_AND_IS_ACTIVE_0_3;
+        $return['courier_query'] = $query;
+        $courier = $callConfig->getAllRows($query);
+        $return['courier'] = $courier;
+
+        if (count((array)$courier) > 0) {
+            $meta = $this->fetchCourierLookupMetadata($callConfig, $get['company_id']);
+            $return['emps'] = $meta['emps'];
+            $return['deliver_types'] = $meta['deliver_types'];
+            $return['status'] = $meta['status'];
+        }
+        return $return;
+    }
 public function searchstationerydata($get){
     global $callConfig;
     // unused
@@ -3691,85 +3765,98 @@ public function reportofyearmonthalldetails($get){
     $res['paydata'] = $payvalue;
     return $res;
 }
-public function togetemployeeform16adetails($get){
-    global $callConfig;
-    $query = "SELECT * FROM emp_it_form_16a WHERE company_id =".$get['company_id'].self::SQL_COND_AND_EMP_ID.$get['empid'].self::SQL_COND_AND_ASSESSMENT_YEAR.$get['assessment_year'].self::SQL_COND_AND_IS_ACTIVE_0_81;
-    $data = $callConfig->getRow($query);
-    if(count((array)$data)==0){
-        $empquery = "SELECT emp.id, emp.display_name, emp.father_name, emp.address, emp.pan_number,( SELECT de.designation_name FROM designations de WHERE de.id = emp.band_id AND de.company_id = emp.company_id ) designation_name, ( SELECT le.location_name FROM locations le WHERE le.id = emp.location_id AND le.company_id = emp.company_id) location_name FROM employees emp WHERE company_id =".$get['company_id']."  AND id=".$get['empid'];
+    protected function computeForm16aQuarterlyDeductions($deposdata) {
+        $h = 1;
+        $q1 = ['code' => null, 'taxble_amount' => 0, 'tax_deducted' => 0, 'tax_deposited' => 0];
+        $q2 = ['code' => null, 'taxble_amount' => 0, 'tax_deducted' => 0, 'tax_deposited' => 0];
+        $q3 = ['code' => null, 'taxble_amount' => 0, 'tax_deducted' => 0, 'tax_deposited' => 0];
+        $q4 = ['code' => null, 'taxble_amount' => 0, 'tax_deducted' => 0, 'tax_deposited' => 0];
+        $all = [];
+        $certificate_no = '';
+        $certificate_last_update_on = '';
+        $period_from = '';
+        $period_to = '';
 
-        $emp= $callConfig->getRow($empquery);
-
-        $conquery = "SELECT id, name, admin_email, tan_number, pan_number, contact_address, display_logo, cit_address   FROM config WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0_31;
-        $condata = $callConfig->getRow($conquery);
-
-        $deposquery = "SELECT * FROM emp_tax_deposit_respect WHERE company_id =".$get['company_id'].self::SQL_COND_AND_EMP_ID.$get['empid'].self::SQL_COND_AND_ASSESSMENT_YEAR.$get['assessment_year']."' AND is_active=0 ORDER BY deposit_amont_date ASC";
-        $deposdata = $callConfig->getAllRows($deposquery);
-        ///echo "<pre>"; print_r($empdata);  print_r($condata);  print_r($deposdata);  echo "</pre>"; exit;
-        $ass = explode("-",$get['assessment_year']);
-        $paysummary = "SELECT sum(`salary_component_actual`), `component_id`, `compnent_type`, `pay_year`, `pay_month` FROM pay_run_summary_components WHERE ( (pay_year = ".$ass['0']." AND pay_month >= 4) OR (pay_year = ".$ass['1']." AND pay_month <= 3) ) AND `employee_id` = ".$get['empid']." GROUP BY component_id";
-        $callConfig->getAllRows($paysummary);
-        /*foreach(){
-
-        }
-*/
-        $h=1;
-        foreach($deposdata as $res){
+        foreach ($deposdata as $res) {
             $certificate_no = $res->certificate_no;
             $certificate_last_update_on = $res->certificate_date;
             $mont = date('m', strtotime($res->deposit_amont_date));
-            if($h==1){
+            if ($h == 1) {
                 $period_from = $res->deposit_amont_date;
             }
             $period_to = $res->deposit_amont_date;
-            if(in_array($mont,array('6','4','5'))){
+            if (in_array($mont, ['6', '4', '5'])) {
                 $q1['code'] = $res->quarterly_receipt_no;
-                $q1['taxble_amount'] = $q1['taxble_amount'] + $res->taxble_amount;
-                $q1['tax_deducted'] = $q1['tax_deducted'] + $res->tax_deducted;
-                $q1['tax_deposited'] = $q1['tax_deposited'] + $res->tax_deposited;
-
-            }
-
-            if(in_array($mont,array('7','8','9'))){
+                $q1['taxble_amount'] += $res->taxble_amount;
+                $q1['tax_deducted'] += $res->tax_deducted;
+                $q1['tax_deposited'] += $res->tax_deposited;
+            } elseif (in_array($mont, ['7', '8', '9'])) {
                 $q2['code'] = $res->quarterly_receipt_no;
-                $q2['taxble_amount'] = $q2['taxble_amount'] + $res->taxble_amount;
-                $q2['tax_deducted'] = $q2['tax_deducted'] + $res->tax_deducted;
-                $q2['tax_deposited'] = $q2['tax_deposited'] + $res->tax_deposited;
-            }
-            if(in_array($mont,array('10','11','12'))){
+                $q2['taxble_amount'] += $res->taxble_amount;
+                $q2['tax_deducted'] += $res->tax_deducted;
+                $q2['tax_deposited'] += $res->tax_deposited;
+            } elseif (in_array($mont, ['10', '11', '12'])) {
                 $q3['code'] = $res->quarterly_receipt_no;
-                $q3['taxble_amount'] = $q3['taxble_amount'] + $res->taxble_amount;
-                $q3['tax_deducted'] = $q3['tax_deducted'] + $res->tax_deducted;
-                $q3['tax_deposited'] = $q3['tax_deposited'] + $res->tax_deposited;
-            }
-            if(in_array($mont,array('1','2','3'))){
+                $q3['taxble_amount'] += $res->taxble_amount;
+                $q3['tax_deducted'] += $res->tax_deducted;
+                $q3['tax_deposited'] += $res->tax_deposited;
+            } elseif (in_array($mont, ['1', '2', '3'])) {
                 $q4['code'] = $res->quarterly_receipt_no;
-                $q4['taxble_amount']= $q4['taxble_amount'] + $res->taxble_amount;
-                $q4['tax_deducted'] = $q4['tax_deducted'] + $res->tax_deducted;
-                $q4['tax_deposited']= $q4['tax_deposited'] + $res->tax_deposited;
+                $q4['taxble_amount'] += $res->taxble_amount;
+                $q4['tax_deducted'] += $res->tax_deducted;
+                $q4['tax_deposited'] += $res->tax_deposited;
             }
-            $all[]= $res; $h++;
+            $all[] = $res;
+            $h++;
         }
+        $qqq = ['0' => $q1, '1' => $q2, '2' => $q3, '3' => $q4];
+        return [
+            'period_from' => $period_from,
+            'period_to' => $period_to,
+            'certificate_no' => $certificate_no,
+            'certificate_last_update_on' => $certificate_last_update_on,
+            'quarterly_deduction' => json_encode($qqq, 1),
+            'tax_deposited_respect_challan' => json_encode($all, 1)
+        ];
+    }
 
-        $employee_reference_no = "";
-        $qqq = array('0'=>$q1,'1'=>$q2,'2'=>$q3,'3'=>$q4);
-
-        $quarterly_deduction = json_encode($qqq,1);
-        $tax_deposited_respect_challan = json_encode($all,1);
-
-
-
-        $insert_array = array('company_id'=>$get['company_id'], 'emp_id'=>$get['empid'], 'assessment_year'=>$get['assessment_year'], 'employee_name'=>$emp->display_name, 'designation'=>$emp->designation_name , 'garden'=>$emp->father_name , 'employee_address'=>$emp->address, 'certificate_no'=>$certificate_no,'certificate_last_update_on'=>$certificate_last_update_on,'employer_address'=>$emp->address, 'pan_deductor'=>$condata->pan_number, 'tan_deductor'=>$condata->tan_number , 'pan_employee'=>$emp->pan_number ,'employee_reference_no'=>$employee_reference_no, 'cit_details'=>$condata->cit_address,'period_from'=>$period_from, 'period_to'=>$period_to, 'quarterly_deduction'=>$quarterly_deduction, 'tax_deposited_respect_adjustment'=>'', 'tax_deposited_respect_challan'=>$tax_deposited_respect_challan, 'place'=>$emp->location_name, 'place_date'=>$certificate_last_update_on, 'is_active'=>'0','current_status'=>'0', 'created_by'=>$get['user_id']);
-        $callConfig->insertRecord('emp_it_form_16a',$insert_array);
+    public function togetemployeeform16adetails($get){
+        global $callConfig;
         $query = "SELECT * FROM emp_it_form_16a WHERE company_id =".$get['company_id'].self::SQL_COND_AND_EMP_ID.$get['empid'].self::SQL_COND_AND_ASSESSMENT_YEAR.$get['assessment_year'].self::SQL_COND_AND_IS_ACTIVE_0_81;
         $data = $callConfig->getRow($query);
+        if(count((array)$data)==0){
+            $empquery = "SELECT emp.id, emp.display_name, emp.father_name, emp.address, emp.pan_number,( SELECT de.designation_name FROM designations de WHERE de.id = emp.band_id AND de.company_id = emp.company_id ) designation_name, ( SELECT le.location_name FROM locations le WHERE le.id = emp.location_id AND le.company_id = emp.company_id) location_name FROM employees emp WHERE company_id =".$get['company_id']."  AND id=".$get['empid'];
+            $emp= $callConfig->getRow($empquery);
 
+            $conquery = "SELECT id, name, admin_email, tan_number, pan_number, contact_address, display_logo, cit_address   FROM config WHERE company_id =".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0_31;
+            $condata = $callConfig->getRow($conquery);
 
+            $deposquery = "SELECT * FROM emp_tax_deposit_respect WHERE company_id =".$get['company_id'].self::SQL_COND_AND_EMP_ID.$get['empid'].self::SQL_COND_AND_ASSESSMENT_YEAR.$get['assessment_year']."' AND is_active=0 ORDER BY deposit_amont_date ASC";
+            $deposdata = $callConfig->getAllRows($deposquery);
 
+            $ass = explode("-",$get['assessment_year']);
+            $paysummary = "SELECT sum(`salary_component_actual`), `component_id`, `compnent_type`, `pay_year`, `pay_month` FROM pay_run_summary_components WHERE ( (pay_year = ".$ass['0']." AND pay_month >= 4) OR (pay_year = ".$ass['1']." AND pay_month <= 3) ) AND `employee_id` = ".$get['empid']." GROUP BY component_id";
+            $callConfig->getAllRows($paysummary);
+
+            $qRes = $this->computeForm16aQuarterlyDeductions($deposdata);
+
+            $insert_array = array(
+                'company_id'=>$get['company_id'], 'emp_id'=>$get['empid'], 'assessment_year'=>$get['assessment_year'], 
+                'employee_name'=>$emp->display_name, 'designation'=>$emp->designation_name , 'garden'=>$emp->father_name , 
+                'employee_address'=>$emp->address, 'certificate_no'=>$qRes['certificate_no'],'certificate_last_update_on'=>$qRes['certificate_last_update_on'],
+                'employer_address'=>$emp->address, 'pan_deductor'=>$condata->pan_number, 'tan_deductor'=>$condata->tan_number , 
+                'pan_employee'=>$emp->pan_number ,'employee_reference_no'=>'', 'cit_details'=>$condata->cit_address,
+                'period_from'=>$qRes['period_from'], 'period_to'=>$qRes['period_to'], 'quarterly_deduction'=>$qRes['quarterly_deduction'], 
+                'tax_deposited_respect_adjustment'=>'', 'tax_deposited_respect_challan'=>$qRes['tax_deposited_respect_challan'], 
+                'place'=>$emp->location_name, 'place_date'=>$qRes['certificate_last_update_on'], 'is_active'=>'0','current_status'=>'0', 'created_by'=>$get['user_id']
+            );
+            $callConfig->insertRecord('emp_it_form_16a',$insert_array);
+            $query = "SELECT * FROM emp_it_form_16a WHERE company_id =".$get['company_id'].self::SQL_COND_AND_EMP_ID.$get['empid'].self::SQL_COND_AND_ASSESSMENT_YEAR.$get['assessment_year'].self::SQL_COND_AND_IS_ACTIVE_0_81;
+            $data = $callConfig->getRow($query);
+        }
+        $return['data'] = $data;
+        return $return;
     }
-    $return['data'] = $data;
-    return $return;
-}
 public function assignemptofrom16a($get){
     global $callConfig;
 
@@ -4368,133 +4455,162 @@ public function gnrolepermision($get){
          }
          return $res;
      }
+     protected function fetchTableFieldList($callConfig, $db, $tab) {
+         $fields = [];
+         $fdetails = $callConfig->getAllRows("DESCRIBE " . $db . "." . $tab);
+         foreach ($fdetails as $ffield) {
+             $fields[] = $ffield->Field;
+         }
+         return $fields;
+     }
+
+     protected function compareTableFields($callConfig, $db1, $db2, array $commonTables) {
+         $tablefiled = [];
+         $checktables = [];
+         foreach ($commonTables as $tab) {
+             $onefileld = $this->fetchTableFieldList($callConfig, $db1, $tab);
+             $twofileld = $this->fetchTableFieldList($callConfig, $db2, $tab);
+
+             foreach ($onefileld as $fone) {
+                 if (!in_array($fone, (array)$twofileld)) {
+                     $tablefiled[$tab]['inf_extra'][] = $fone;
+                 }
+                 $checktables[$tab]['filed'][] = $fone;
+             }
+             foreach ($twofileld as $fone) {
+                 if (!in_array($fone, (array)$onefileld)) {
+                     $tablefiled[$tab]['vms_extra'][] = $fone;
+                 }
+             }
+         }
+         return ['tablefiled' => $tablefiled, 'checktables' => $checktables];
+     }
+
+     protected function renderTableDiffHtml(array $tablefiled) {
+         echo "<table>";
+         foreach ($tablefiled as $key => $table) {
+             if (count((array)($table['vms_extra'] ?? [])) > 0) {
+                 echo "<tr><td>" . $key . "</td><td></td></tr>";
+                 foreach ($table['vms_extra'] as $inf_extra) {
+                     echo "<tr> <td></td><td>" . $inf_extra . "</td></tr>";
+                 }
+             }
+         }
+         echo "</table>";
+     }
+
      public function togetanddifflisttablefields($get){
-    if (isset($get)) { /* noop */ }
+         if (isset($get)) { /* noop */ }
          global $callConfig;
-         $listone = array(); $listtwo = array(); $tabone = array(); $tabtwo = array(); $checktables = array(); $tablefiled = array();
          $db1 = 'infistaq_infisuite_2';
          $db2 = 'infistaq_infisuite_live_vms';
-         $query = "SHOW TABLES FROM ".$db1;
-         $data = $callConfig->getAllRows($query);
-         $ff = "Tables_in_".$db1;
-         foreach($data as $dd){
-             $tabone[] = $dd->$ff;
+         
+         $data1 = $callConfig->getAllRows("SHOW TABLES FROM " . $db1);
+         $ff1 = "Tables_in_" . $db1;
+         $tabone = [];
+         foreach ($data1 as $dd) {
+             $tabone[] = $dd->$ff1;
          }
 
-        $query = "SHOW TABLES FROM ".$db2;
-         $data = $callConfig->getAllRows($query);
-         $ff = "Tables_in_".$db2;
-         foreach($data as $dd){
-             $tabtwo[] = $dd->$ff;
+         $data2 = $callConfig->getAllRows("SHOW TABLES FROM " . $db2);
+         $ff2 = "Tables_in_" . $db2;
+         $tabtwo = [];
+         foreach ($data2 as $dd) {
+             $tabtwo[] = $dd->$ff2;
          }
-         foreach($tabone as $tab){
-             if(in_array($tab,(array)$tabtwo)){
-                 $onefileld = array();
-                 $twofileld = array();
-                 $fff = "DESCRIBE ".$db1.".".$tab;
-                 $fdetails = $callConfig->getAllRows($fff);
-                 foreach($fdetails as $ffield){
-                     $onefileld[] = $ffield->Field;
-                 }
-                 $fff = "DESCRIBE ".$db2.".".$tab;
-                 $fdetails = $callConfig->getAllRows($fff);
-                 foreach($fdetails as $ffield){
-                     $twofileld[] = $ffield->Field;
-                 }
 
-                 foreach($onefileld as $fone){
-                     if(!in_array($fone, (array)$twofileld)){
-                         $tablefiled[$tab]['inf_extra'][]=$fone;
-                     }
-                     $checktables[$tab]['filed'][] = $fone;
+         $commonTables = array_intersect($tabone, $tabtwo);
+         $compared = $this->compareTableFields($callConfig, $db1, $db2, $commonTables);
+         $tablefiled = $compared['tablefiled'];
+         $checktables = $compared['checktables'];
 
-                 }
-                 foreach($twofileld as $fone){
-                     if(!in_array($fone, (array)$onefileld)){
-                         $tablefiled[$tab]['vms_extra'][]=$fone;
-                     }
-                 }
-
-             }
-         }
-         echo "<table>";
-         foreach($tablefiled as $key=>$table){
-             if(count((array)$table['vms_extra'])>0){
-             echo "<tr>";
-             echo "<td>";
-             echo  $key;
-             echo "</td><td></td>";
-             echo "</tr>";
-             foreach($table['vms_extra'] as $inf_extra){
-             echo "<tr> <td></td>";
-             echo "<td >";
-             echo  $inf_extra;
-             echo "</td>";
-             echo "</tr>";
-             }
-             }
-         }
-         echo "</table>"; exit;
-         return array('dbone'=>$tabone,'dbtwo'=>$tabtwo, 'listone'=>$listone, 'listtwo'=>$listtwo, 'checktables'=>$checktables, 'tablefiled'=> $tablefiled);
+         $this->renderTableDiffHtml($tablefiled);
+         exit;
+         return array('dbone'=>$tabone,'dbtwo'=>$tabtwo, 'listone'=>[], 'listtwo'=>[], 'checktables'=>$checktables, 'tablefiled'=> $tablefiled);
      }
+     protected function buildEmpPtExemptionWhereClause($post) {
+         $whr = "";
+         $whrarry = [
+             'department_id' => 'departments',
+             'designation_id' => 'designations',
+             'location_id' => 'locations',
+             'employee_type' => 'employment_statuses',
+             'division_id' => 'divisions'
+         ];
+         foreach ($whrarry as $wrkey => $whra) {
+             if (isset($post[$whra]) && count($post[$whra]) > 0) {
+                 $whr .= self::SQL_COND_AND_EMP . $wrkey . " IN(" . implode(",", $post[$whra]) . ") ";
+             }
+         }
+         return $whr;
+     }
+
+     protected function buildPtExemptionRangeCondition($ptex) {
+         if ($ptex->range_type == 'yes_no') {
+             return self::SQL_COND_AND_EMP . $ptex->employee_field_name . " = 0";
+         }
+         if ($ptex->range_type == 'age') {
+             return self::SQL_COND_AND_EMP . $ptex->employee_field_name . " < DATE_SUB(CURDATE(), INTERVAL " . $ptex->minmum_range . " YEAR)";
+         }
+         if ($ptex->range_type == 'percentage') {
+             return self::SQL_COND_AND_EMP . $ptex->employee_field_name . " > " . $ptex->minmum_range;
+         }
+         return "";
+     }
+
+     protected function fetchPtExemptionEmployeeList($callConfig, $companyId, $ptexdata, $baseWhr) {
+         $list = [];
+         $list_query = [];
+         foreach ($ptexdata as $ptex) {
+             $whrs = $this->buildPtExemptionRangeCondition($ptex);
+             $query = "SELECT emp.id, emp.display_name, emp.image, emp.emp_code, emp.location_id, emp.joining_date FROM employees emp WHERE emp.company_id = " . $companyId . " " . $whrs . self::SQL_COND_AND_IS_ACTIVE_0 . $baseWhr;
+             $list_query[] = $query;
+             $emp_data = $callConfig->getAllRows($query);
+             foreach ($emp_data as $empdata) {
+                 $list[$ptex->id][$empdata->location_id][] = $empdata;
+             }
+         }
+         return ['list' => $list, 'list_query' => $list_query];
+     }
+
      public function togetemployeeprofessionaltaxexemptions($post,$get){
-        global $callConfig;
-        $return['menu_data'] = $this->toreportempdropdown($get);
-        // unused
-        $whrarry = array('department_id'=>'departments', 'designation_id'=>'designations', 'location_id'=>'locations', 'employee_type'=>'employment_statuses', 'division_id'=>'divisions');
-        foreach($whrarry  as $wrkey=>$whra){
-            if(isset($post[$whra]) && count($post[$whra])>0){
-                $whr.= self::SQL_COND_AND_EMP.$wrkey." IN(".implode(",",$post[$whra]).") ";
-            }
-        }
-        $query = "SELECT * FROM professional_tax WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-        $data =  $callConfig->getAllRows($query);
-        $return['professional_tax'] = $data;
-        foreach($data as $data_pt){
-            $stateids[] = $data_pt->state_id;
-            $loctionids[] = $data_pt->work_location_id;
-        }
+         global $callConfig;
+         $companyId = $get['company_id'];
+         $return['menu_data'] = $this->toreportempdropdown($get);
+         $whr = $this->buildEmpPtExemptionWhereClause($post);
 
+         $query = "SELECT * FROM professional_tax WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0;
+         $data = $callConfig->getAllRows($query);
+         $return['professional_tax'] = $data;
+         $stateids = [];
+         $loctionids = [];
+         foreach ($data as $data_pt) {
+             $stateids[] = $data_pt->state_id;
+             $loctionids[] = $data_pt->work_location_id;
+         }
 
-        $query = "SELECT * FROM professional_tax_exemptions WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_IS_ACTIVE_0;
-        $ptexdata =  $callConfig->getAllRows($query);
-        $return['ptexdata'] = $ptexdata;
+         $query = "SELECT * FROM professional_tax_exemptions WHERE company_id = " . $companyId . self::SQL_COND_AND_IS_ACTIVE_0;
+         $ptexdata = $callConfig->getAllRows($query);
+         $return['ptexdata'] = $ptexdata;
 
-        $query = "SELECT id, state_name FROM states WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_ID_IN.implode(",",$stateids).self::SQL_COND_AND_IS_ACTIVE_0_29;
-        $states =  $callConfig->getAllRows($query);
-        foreach($states as $state){
-            $list_state[$state->id] = $state->state_name;
-        }
-        $return['states'] = $list_state;
-        $query = "SELECT id, location_name FROM locations WHERE company_id = ".$get['company_id'].self::SQL_COND_AND_ID_IN.implode(",",$loctionids).self::SQL_COND_AND_IS_ACTIVE_0_29;
-        $locations =  $callConfig->getAllRows($query);
-        foreach($locations as $location){
-            $list_location[$location->id] = $location->location_name;
-        }
-        $return['locations'] = $list_location;
-        foreach($ptexdata as $ptex){
-            $whrs = "";
-            if($ptex->range_type=='yes_no'){
-                $whrs.= self::SQL_COND_AND_EMP.$ptex->employee_field_name." = 0";
-            }
-            if($ptex->range_type=='age'){
-                $whrs.= self::SQL_COND_AND_EMP.$ptex->employee_field_name." < DATE_SUB(CURDATE(), INTERVAL ".$ptex->minmum_range." YEAR)";
-            }
-            if($ptex->range_type=='percentage'){
-                $whrs.= self::SQL_COND_AND_EMP.$ptex->employee_field_name." > ".$ptex->minmum_range;
-            }
-            $query = "SELECT emp.id, emp.display_name, emp.image, emp.emp_code, emp.location_id, emp.joining_date FROM employees emp WHERE emp.company_id = ".$get['company_id']." ".$whrs.self::SQL_COND_AND_IS_ACTIVE_0.$whr;
-            $list_query[] = $query;
-            $emp_data =  $callConfig->getAllRows($query);
-            foreach($emp_data as $empdata){
-                $list[$ptex->id][$empdata->location_id][] = $empdata;
-            }
-        }
+         $states = $callConfig->getAllRows("SELECT id, state_name FROM states WHERE company_id = " . $companyId . self::SQL_COND_AND_ID_IN . implode(",", $stateids) . self::SQL_COND_AND_IS_ACTIVE_0_29);
+         $list_state = [];
+         foreach ($states as $state) {
+             $list_state[$state->id] = $state->state_name;
+         }
+         $return['states'] = $list_state;
 
+         $locations = $callConfig->getAllRows("SELECT id, location_name FROM locations WHERE company_id = " . $companyId . self::SQL_COND_AND_ID_IN . implode(",", $loctionids) . self::SQL_COND_AND_IS_ACTIVE_0_29);
+         $list_location = [];
+         foreach ($locations as $location) {
+             $list_location[$location->id] = $location->location_name;
+         }
+         $return['locations'] = $list_location;
 
-        $return['list'] = $list;
-        $return['list_query'] = $list_query;
-          return  $return;
+         $empRes = $this->fetchPtExemptionEmployeeList($callConfig, $companyId, $ptexdata, $whr);
+         $return['list'] = $empRes['list'];
+         $return['list_query'] = $empRes['list_query'];
+         return $return;
      }
      //Omkar Code added - 18-06-2025
      public function getmoduleprocesslist($get){
@@ -4518,167 +4634,183 @@ public function gnrolepermision($get){
 
         return $return;
     }
+    protected function nullifyModuleProcessAndPages($callConfig, $moduleId, $companyId, $userId) {
+        $nullProcessData = array(
+            'is_active' => null,
+            'updated_by' => $userId,
+            'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
+        );
+        $whrProcess = "module_setup_id = '" . $moduleId . self::SQL_COND_AND_COMPANY_ID . $companyId . "'";
+        $nullProcessResult = $callConfig->updateRecord('application_process', $nullProcessData, '', '', $whrProcess);
+        
+        $allProcessQuery = "SELECT id FROM application_process WHERE module_setup_id = '" . $moduleId . self::SQL_COND_AND_COMPANY_ID . $companyId . "'";
+        $allProcessResult = $callConfig->getAllRows($allProcessQuery);
+        $allProcessIds = array();
+        foreach ($allProcessResult as $proc) {
+            $allProcessIds[] = $proc->id;
+        }
+        $nullPageResult = null;
+        if (!empty($allProcessIds)) {
+            $nullPageData = array(
+                'is_active' => null,
+                'updated_by' => $userId,
+                'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
+            );
+            $whrPages = "application_process_id IN ('" . implode("','", $allProcessIds) . "') AND company_id = '" . $companyId . "'";
+            $nullPageResult = $callConfig->updateRecord('application_process_pages', $nullPageData, '', '', $whrPages);
+        }
+        return [
+            'null_all_processes' => $nullProcessResult,
+            'null_all_pages' => $nullPageResult
+        ];
+    }
+
+    protected function saveSingleModuleProcessItem($callConfig, $process, $moduleId, $companyId, $userId) {
+        $process_name = $process['name'];
+        $process_id = isset($process['id']) ? $process['id'] : '';
+        $processData = array(
+            'process_name' => $process_name,
+            'module_setup_id' => $moduleId,
+            'company_id' => $companyId,
+            'is_active' => 0
+        );
+        if (!empty($process_id)) {
+            $processData['updated_by'] = $userId;
+            $processData['updated_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
+            $processResult = $callConfig->updateRecord('application_process', $processData, 'id', $process_id);
+            $current_process_id = $process_id;
+            $action = 'update';
+        } else {
+            $processData['created_by'] = $userId;
+            $processData['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
+            $processData['current_status'] = 0;
+            $processResult = $callConfig->insertRecord('application_process', $processData);
+            $current_process_id = $processResult['LASTID'];
+            $action = 'insert';
+        }
+        return [
+            'id' => $current_process_id,
+            'name' => $process_name,
+            'action' => $action,
+            'result' => $processResult,
+            'processData' => $processData
+        ];
+    }
+
+    protected function syncModuleProcessPages($callConfig, $processId, array $pages, $companyId, $userId) {
+        $processed_pages = [];
+        $pageDataList = [];
+        $lastPageData = null;
+        foreach ($pages as $page) {
+            $page_name = $page['name'];
+            $page_id = isset($page['id']) ? $page['id'] : '';
+            $page_type = isset($page['type']) ? $page['type'] : '';
+            $page_custom = isset($page['custom']) ? $page['custom'] : '';
+            if (empty($page_name)) {
+                continue;
+            }
+            $pageData = array(
+                'application_process_id' => $processId,
+                'name' => $page_name,
+                'application_page_name' => ($page_type === 'other' && !empty($page_custom)) ? $page_custom : $page_type,
+                'company_id' => $companyId,
+                'is_active' => 0
+            );
+            if (isset($page_id) && $page_id !== '' && $page_id !== '0') {
+                $pageData['updated_by'] = $userId;
+                $pageData['updated_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
+                $pageResult = $callConfig->updateRecord('application_process_pages', $pageData, 'id', $page_id);
+                $page_action = 'update';
+            } else {
+                $pageData['created_by'] = $userId;
+                $pageData['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
+                $pageData['current_status'] = 0;
+                $pageResult = $callConfig->insertRecord('application_process_pages', $pageData);
+                $page_action = 'insert';
+            }
+            $lastPageData = $pageData;
+            $pageDataList[] = $pageData;
+            $processed_pages[] = array(
+                'id' => !empty($page_id) ? $page_id : $pageResult['LASTID'],
+                'name' => $page_name,
+                'process_id' => $processId,
+                'action' => $page_action,
+                'result' => $pageResult
+            );
+        }
+        return [
+            'processed_pages' => $processed_pages,
+            'pageDataList' => $pageDataList,
+            'lastPageData' => $lastPageData
+        ];
+    }
+
     public function insertmoduleprocess($post ,$get){
         global $callConfig;
         $return = array();
         $return['post'] = $post;
-        $module_id = $post['module_id'];
-        $processes = $post['processes'];
+        $module_id = $post['module_id'] ?? '';
+        $processes = $post['processes'] ?? [];
         if (empty($module_id)) {
             return array('status' => 'error', 'message' => 'Module ID is required');
         }
         if (empty($processes)) {
             return array('status' => 'error', 'message' => 'No processes provided');
         }
-        $nullProcessData = array(
-            'is_active' => null,
-            'updated_by' => $get['user_id'],
-            'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
-        );
-        $whrProcess = "module_setup_id = '" . $module_id . self::SQL_COND_AND_COMPANY_ID . $get['company_id'] . "'";
-        $nullProcessResult = $callConfig->updateRecord('application_process', $nullProcessData, '', '', $whrProcess);
-        $return['null_all_processes'] = $nullProcessResult;
-        $allProcessQuery = "SELECT id FROM application_process WHERE module_setup_id = '" . $module_id . self::SQL_COND_AND_COMPANY_ID . $get['company_id'] . "'";
-        $allProcessResult = $callConfig->getAllRows($allProcessQuery);
-        $allProcessIds = array();
-        foreach ($allProcessResult as $proc) {
-            $allProcessIds[] = $proc->id;
-        }
-        if (!empty($allProcessIds)) {
-            $nullPageData = array(
-                'is_active' => null,
-                'updated_by' => $get['user_id'],
-                'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
-            );
-            $whrPages = "application_process_id IN ('" . implode("','", $allProcessIds) . "') AND company_id = '" . $get['company_id'] . "'";
-            $nullPageResult = $callConfig->updateRecord('application_process_pages', $nullPageData, '', '', $whrPages);
-            $return['null_all_pages'] = $nullPageResult;
+        $companyId = $get['company_id'];
+        $userId = $get['user_id'];
+
+        $nullRes = $this->nullifyModuleProcessAndPages($callConfig, $module_id, $companyId, $userId);
+        $return['null_all_processes'] = $nullRes['null_all_processes'];
+        if ($nullRes['null_all_pages'] !== null) {
+            $return['null_all_pages'] = $nullRes['null_all_pages'];
         }
 
-        $existingProcessesQuery = "SELECT id FROM application_process WHERE module_setup_id = '" . $module_id . self::SQL_COND_AND_COMPANY_ID . $get['company_id'] . "'";
-        $existingProcessesResult = $callConfig->getAllRows($existingProcessesQuery);
-        $existingProcessIds = array();
-        foreach ($existingProcessesResult as $proc) {
-            $existingProcessIds[] = $proc->id;
-        }
-
-        $submittedProcessIds = array();
-        foreach ($processes as $process) {
-            if (isset($process['id']) && !empty($process['id'])) {
-                $submittedProcessIds[] = $process['id'];
-            }
-        }
         $processed_processes = array();
         $processed_pages = array();
+        $lastPageData = null;
+
         foreach ($processes as $process) {
-            $process_name = $process['name'];
-            $process_id = isset($process['id']) ? $process['id'] : '';
-            if (empty($process_name)) {
+            if (empty($process['name'] ?? '')) {
                 continue;
             }
-            $processData = array(
-                'process_name' => $process_name,
-                'module_setup_id' => $module_id,
-                'company_id' => $get['company_id'],
-                'is_active' => 0
-            );
-            if (!empty($process_id)) {
-                $processData['updated_by'] = $get['user_id'];
-                $processData['updated_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
-                $return['processData'][] = $processData;
-                $processResult = $callConfig->updateRecord('application_process', $processData, 'id', $process_id);
-                $current_process_id = $process_id;
+            $procRes = $this->saveSingleModuleProcessItem($callConfig, $process, $module_id, $companyId, $userId);
+            $current_process_id = $procRes['id'];
+            if ($procRes['action'] === 'update') {
+                $return['processData'][] = $procRes['processData'];
                 $return['process_updated'][] = 'Update';
-                $action = 'update';
             } else {
-                $processData['created_by'] = $get['user_id'];
-                $processData['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
-                $processData['current_status'] = 0;
-                $return['processData'] = $processData;
-                $processResult = $callConfig->insertRecord('application_process', $processData);
-                $current_process_id = $processResult['LASTID'];
+                $return['processData'] = $procRes['processData'];
                 $return['process_insert'][] = 'insert';
-                $action = 'insert';
             }
-
             $processed_processes[] = array(
                 'id' => $current_process_id,
-                'name' => $process_name,
-                'action' => $action,
-                'result' => $processResult
+                'name' => $procRes['name'],
+                'action' => $procRes['action'],
+                'result' => $procRes['result']
             );
 
-            $existingPagesQuery = "SELECT id FROM application_process_pages WHERE application_process_id = '" . $current_process_id . self::SQL_COND_AND_COMPANY_ID . $get['company_id'] . "'";
-            $existingPagesResult = $callConfig->getAllRows($existingPagesQuery);
-            $existingPageIds = array();
-            foreach ($existingPagesResult as $page) {
-                $existingPageIds[] = $page->id;
-            }
-
-            $submittedPageIds = array();
             if (isset($process['pages']) && !empty($process['pages'])) {
-                foreach ($process['pages'] as $page) {
-                    if (isset($page['id']) && !empty($page['id'])) {
-                        $submittedPageIds[] = $page['id'];
-                    }
+                $pageRes = $this->syncModuleProcessPages($callConfig, $current_process_id, $process['pages'], $companyId, $userId);
+                foreach ($pageRes['pageDataList'] as $pd) {
+                    $return['pageData'][] = $pd;
                 }
-            }
-
-            if (isset($process['pages']) && !empty($process['pages'])) {
-                $pages = $process['pages'];
-
-                // Now process each page
-                foreach ($pages as $page) {
-                    $page_name = $page['name'];
-                    $page_id = isset($page['id']) ? $page['id'] : '';
-                    $page_type = isset($page['type']) ? $page['type'] : '';
-                    $page_custom = isset($page['custom']) ? $page['custom'] : '';
-
-                    if (empty($page_name)) {
-                        continue;
-                    }
-
-                    $pageData = array(
-                        'application_process_id' => $current_process_id,
-                        'name' => $page_name,
-                        'application_page_name' => ($page_type === 'other' && !empty($page_custom)) ? $page_custom : $page_type,
-                        'company_id' => $get['company_id'],
-                        'is_active' => 0
-                    );
-
-
-                    if (isset($page_id) && $page_id !== '' && $page_id !== '0') {
-                        $pageData['updated_by'] = $get['user_id'];
-                        $pageData['updated_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
-                        $return['pageData'][] = $pageData;
-                        $pageResult = $callConfig->updateRecord('application_process_pages', $pageData, 'id', $page_id);
-                        $page_action = 'update';
-                    } else {
-                        $pageData['created_by'] = $get['user_id'];
-                        $pageData['created_date'] = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
-                        $pageData['current_status'] = 0;
-                        $return['pageData'][] = $pageData;
-                        $pageResult = $callConfig->insertRecord('application_process_pages', $pageData);
-                        $page_action = 'insert';
-                    }
-
-                    $processed_pages[] = array(
-                        'id' => !empty($page_id) ? $page_id : $pageResult['LASTID'],
-                        'name' => $page_name,
-                        'process_id' => $current_process_id,
-                        'action' => $page_action,
-                        'result' => $pageResult
-                    );
+                foreach ($pageRes['processed_pages'] as $pp) {
+                    $processed_pages[] = $pp;
+                }
+                if ($pageRes['lastPageData'] !== null) {
+                    $lastPageData = $pageRes['lastPageData'];
                 }
             } else {
-
-                if (!empty($existingPageIds)) {
+                $existingPagesQuery = "SELECT id FROM application_process_pages WHERE application_process_id = '" . $current_process_id . self::SQL_COND_AND_COMPANY_ID . $companyId . "'";
+                $existingPagesResult = $callConfig->getAllRows($existingPagesQuery);
+                if (!empty($existingPagesResult)) {
                     $activatePageData = array(
                         'is_active' => 0,
-                        'updated_by' => $get['user_id'],
+                        'updated_by' => $userId,
                         'updated_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
                     );
-                    $whrExistingPages = "application_process_id = '" . $current_process_id . self::SQL_COND_AND_COMPANY_ID . $get['company_id'] . "'";
+                    $whrExistingPages = "application_process_id = '" . $current_process_id . self::SQL_COND_AND_COMPANY_ID . $companyId . "'";
                     $activatePageResult = $callConfig->updateRecord('application_process_pages', $activatePageData, '', '', $whrExistingPages);
                     $return['activate_existing_pages'][] = array(
                         'process_id' => $current_process_id,
@@ -4693,7 +4825,7 @@ public function gnrolepermision($get){
         $return['module_id'] = $module_id;
         $return['processes'] = $processed_processes;
         $return['pages'] = $processed_pages;
-        $return['pagedeta'][] = $pageData;
+        $return['pagedeta'][] = $lastPageData;
 
         return $return;
     }
@@ -4706,46 +4838,112 @@ public function gnrolepermision($get){
         return $dateformat;
     }
 
+    protected function extractPartyTableFromDisplayAttributes($callConfig, $companyId, $transactionTable) {
+        $display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '" . $companyId . self::SQL_COND_AND_APPLICATION_TABLE_NAME_88 . $transactionTable . "' AND field_name = 'party_id'";
+        $parttable_name = $callConfig->getRow($display_attribute_typessql);
+        $qquery = urldecode($parttable_name->content ?? '');
+        $explosql = explode("FROM", $qquery);
+        if (isset($explosql[1])) {
+            $explosql = explode(" ", trim($explosql[1]));
+        }
+        return trim($explosql[0] ?? '');
+    }
+
+    protected function resolveSerialNumberPositionCondition($callConfig, $companyId, $partytable, $partyId, $transactionType, $seqKey, $seqVal) {
+        $val = $seqVal;
+        if ($seqVal == "PARTY_NAME") {
+            if ($partytable != "" && $partyId != "") {
+                $partysql = "SELECT id, short_name FROM " . $partytable . self::SQL_COND_WHERE_COMPANY_ID . $companyId . self::SQL_COND_AND_ID_23 . $partyId . self::SQL_COND_AND_IS_ACTIVE_0;
+                $partyres = $callConfig->getRow($partysql);
+                if (!empty($partyres->short_name)) {
+                    $val = $partyres->short_name;
+                }
+            }
+        } elseif ($seqVal == "TRANSACTION_TYPE") {
+            if ($transactionType != "") {
+                $val = $transactionType;
+            }
+        } elseif ($seqVal == "TRANSACTION_LOCATION") {
+            $locationsql = "SELECT prty.id, loc.short_name FROM " . $partytable . " as prty, locations as loc WHERE prty.company_id = " . $companyId . " AND prty.company_id = loc.company_id AND prty.location_id = loc.id AND prty.is_active = loc.is_active AND prty.id = " . $partyId . " AND prty.is_active = 0";
+            $locationres = $callConfig->getRow($locationsql);
+            if (!empty($locationres->short_name)) {
+                $val = $locationres->short_name;
+            }
+        }
+        return [
+            'condition' => self::SQL_COND_AND_POSITION . $seqKey . " = '" . $val . "'",
+            'insert_key' => "position_" . $seqKey,
+            'insert_val' => $val,
+            'part_val' => $val
+        ];
+    }
+
+    protected function processSerialNumberForResetType($callConfig, $companyId, $userId, $asnId, $resetType, $fromDate, $toDate, $transDate, $additionalConditions, array $insertwithconditionary, $numLength) {
+        $sql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL . $companyId . self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER . $asnId . "' AND serial_number_reset_type = '" . $resetType . "' AND from_date <= '" . $transDate . "' AND to_date >= '" . $transDate . self::SQL_COND_AND_IS_ACTIVE_0_49 . $additionalConditions;
+        $row = $callConfig->getRow($sql);
+        if (!empty($row->id)) {
+            $serialNumber = $row->serial_number + 1;
+            $callConfig->updateRecord('application_serial_number_master_details', array('serial_number' => $serialNumber), 'id', $row->id);
+        } else {
+            $serialNumber = 1;
+            $insertary = array(
+                'company_id' => $companyId,
+                'application_serial_number_master_id' => $asnId,
+                'serial_number_reset_type' => $resetType,
+                'from_date' => $fromDate,
+                'to_date' => $toDate,
+                'serial_number' => 1,
+                'created_by' => $userId,
+                'created_date' => date(self::DATE_FORMAT_Y_M_D_H_I_S_56),
+                'current_status' => 0,
+                'is_active' => 0
+            );
+            foreach ($insertwithconditionary as $k => $v) {
+                $insertary[$k] = $v;
+            }
+            $callConfig->insertRecord('application_serial_number_master_details', $insertary);
+        }
+        return str_pad((string)$serialNumber, $numLength, '0', STR_PAD_LEFT);
+    }
+
     public function generatingApplicationSerialNumberMasters($transaction_table,$get){
         global $callConfig;
-        $return = array();
-        $transaction_date = $get['transaction_date'];
-        $party_id =  $get['party_id'];
-        $transaction_type =  $get['transaction_type'];
+        $transaction_date = $get['transaction_date'] ?? '';
+        $party_id = $get['party_id'] ?? '';
+        $transaction_type = $get['transaction_type'] ?? '';
+        $company_id = $get['company_id'];
+        $user_id = $get['user_id'] ?? 0;
 
-        $asnsql = "SELECT * FROM application_serial_number_masters WHERE company_id = '".$get['company_id'].self::SQL_COND_AND_APPLICATION_TABLE_NAME_88.$transaction_table.self::SQL_COND_AND_IS_ACTIVE_0_49;
+        $asnsql = "SELECT * FROM application_serial_number_masters WHERE company_id = '".$company_id.self::SQL_COND_AND_APPLICATION_TABLE_NAME_88.$transaction_table.self::SQL_COND_AND_IS_ACTIVE_0_49;
         $asnres = $callConfig->getRow($asnsql);
 
-        if($asnres->id !=""){
+        $main_transaction_no_type = "";
+        $monthly_transaction_number = "";
+        $yearly_transaction_number = "";
+        $lifetime_transaction_number = "";
+
+        if(!empty($asnres->id)){
             $main_transaction_no_type = $asnres->reset_type;
             $serial_number_position = $asnres->serial_number_position;
             $financial_year_position = $asnres->financial_year_position;
-            $numLength   = !empty($asnres->doc_no_length) ? (int)$asnres->doc_no_length : 3;
+            $numLength = !empty($asnres->doc_no_length) ? (int)$asnres->doc_no_length : 3;
 
-            $display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$get['company_id'].self::SQL_COND_AND_APPLICATION_TABLE_NAME_88.$transaction_table."' AND field_name = 'party_id'";
-            $parttable_name = $callConfig->getRow($display_attribute_typessql);
-            $qquery = urldecode($parttable_name->content);
-            $explosql = explode("FROM", $qquery); // splite from to get table name and other part get
-            if(isset($explosql[1])){
-                $explosql = explode(" ", trim($explosql[1])); //splite to space only get table name
-            }
-            $partytable = trim($explosql[0]); //get Table name
+            $partytable = $this->extractPartyTableFromDisplayAttributes($callConfig, $company_id, $transaction_table);
 
-            $checksequincerow = array();
-            $transdate = $transaction_date !=""?$this->dateconvertdbformat($transaction_date):date('Y-m-d');
+            $transdate = $transaction_date !="" ? $this->dateconvertdbformat($transaction_date) : date('Y-m-d');
             $finyaer = date("m",strtotime($transdate)) >= 4 ? date("Y",strtotime($transdate)). '-' . (date("y",strtotime($transdate))+1) : (date("Y",strtotime($transdate)) - 1). '-' . date("y",strtotime($transdate));
 
-            $additional_settings = json_decode($asnres->additional_settings,1);
+            $additional_settings = json_decode($asnres->additional_settings, 1) ?? [];
             $position_with_val = array();
             foreach($additional_settings as $adsetting){
                 $position_with_val[$adsetting['positions']] = $adsetting;
             }
 
             $parts = [];
-            $serial = '';
+            $checksequincerow = array();
             for ($m = 1; $m <= 10; $m++) {
                 if (!empty($asnres->serial_number) && $serial_number_position == $m){
-                    $parts[$m] = $serial;
+                    $parts[$m] = '';
                 }
                 if (!empty($finyaer) && $asnres->financial_year_check == "Y" && $financial_year_position == $m){
                     $parts[$m] = $finyaer;
@@ -4764,149 +4962,53 @@ public function gnrolepermision($get){
             $insertwithconditionary = array();
             $additional_conditions = "";
             foreach($checksequincerow as $seq_key=>$seq_val){
-
-                if($seq_val == "PARTY_NAME"){
-
-                    if($partytable !="" && $party_id !=""){
-                        $partysql = "SELECT id, short_name FROM ".$partytable.self::SQL_COND_WHERE_COMPANY_ID.$get['company_id'].self::SQL_COND_AND_ID_23.$party_id.self::SQL_COND_AND_IS_ACTIVE_0;
-                        $partyres = $callConfig->getRow($partysql);
-                        if($partyres->short_name !=""){
-                            $additional_conditions .= self::SQL_COND_AND_POSITION.$seq_key." = '".$partyres->short_name."'";
-                            $insertwithconditionary["position_".$seq_key] = $partyres->short_name;
-                            $parts[$seq_key] = $partyres->short_name;
-                        }else{
-                            $additional_conditions .= self::SQL_COND_AND_POSITION.$seq_key." = '".$seq_val."'";
-                            $insertwithconditionary["position_".$seq_key] = $seq_val;
-                            $parts[$seq_key] = $seq_val;
-                        }
-                    }else{
-                        $additional_conditions .= self::SQL_COND_AND_POSITION.$seq_key." = '".$seq_val."'";
-                        $insertwithconditionary["position_".$seq_key] = $seq_val;
-                        $parts[$seq_key] = $seq_val;
-                    }
-
-                }elseif($seq_val == "TRANSACTION_TYPE"){
-                    if($transaction_type !=""){
-                        $additional_conditions .= self::SQL_COND_AND_POSITION.$seq_key." = '".$transaction_type."'";
-                        $insertwithconditionary["position_".$seq_key] = $transaction_type;
-                        $parts[$seq_key] = $transaction_type;
-                    }else{
-                        $additional_conditions .= self::SQL_COND_AND_POSITION.$seq_key." = '".$seq_val."'";
-                        $insertwithconditionary["position_".$seq_key] = $seq_val;
-                        $parts[$seq_key] = $seq_val;
-                    }
-
-                }elseif($seq_val == "TRANSACTION_LOCATION"){
-
-                    $locationsql = "SELECT prty.id, loc.short_name FROM ".$partytable." as prty, locations as loc WHERE prty.company_id = ".$get['company_id']." AND prty.company_id = loc.company_id AND prty.location_id = loc.id AND prty.is_active = loc.is_active AND prty.id = ".$party_id." AND prty.is_active = 0";
-                    $locationres = $callConfig->getRow($locationsql);
-                    if($locationres->short_name){
-                        $additional_conditions .= self::SQL_COND_AND_POSITION.$seq_key." = '".$locationres->short_name."'";
-                        $insertwithconditionary["position_".$seq_key] = $locationres->short_name;
-                        $parts[$seq_key] = $locationres->short_name;
-                    }else{
-                        $additional_conditions .= self::SQL_COND_AND_POSITION.$seq_key." = '".$seq_val."'";
-                        $insertwithconditionary["position_".$seq_key] = $seq_val;
-                        $parts[$seq_key] = $seq_val;
-                    }
-                }else{
-                    $additional_conditions .= self::SQL_COND_AND_POSITION.$seq_key." = '".$seq_val."'";
-                    $insertwithconditionary["position_".$seq_key] = $seq_val;
-                    $parts[$seq_key] = $seq_val;
-                }
+                $condRes = $this->resolveSerialNumberPositionCondition($callConfig, $company_id, $partytable, $party_id, $transaction_type, $seq_key, $seq_val);
+                $additional_conditions .= $condRes['condition'];
+                $insertwithconditionary[$condRes['insert_key']] = $condRes['insert_val'];
+                $parts[$seq_key] = $condRes['part_val'];
             }
-
             ksort($parts);
 
-            $monthlysql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER.$asnres->id."' AND serial_number_reset_type = 'MT' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
-            $monthlyres = $callConfig->getRow($monthlysql);
+            // MT
+            $mtParts = $parts;
+            $fromDateMt = date("Y-m-01", strtotime($transaction_date));
+            $toDateMt = date("Y-m-t", strtotime($transaction_date));
+            $serialMt = $this->processSerialNumberForResetType($callConfig, $company_id, $user_id, $asnres->id, 'MT', $fromDateMt, $toDateMt, $this->dateconvertdbformat($transaction_date), $additional_conditions, $insertwithconditionary, $numLength);
+            $mtParts[$serial_number_position] = $serialMt;
+            $mtParts[$financial_year_position] = date("M-Y", strtotime($transaction_date));
+            $monthly_transaction_number = trim(implode($asnres->separator_symbols, (array)$mtParts));
 
-            if($monthlyres->id !=""){
-                    $serial_number = $monthlyres->serial_number+1;
-
-
-                    $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                    $parts[$serial_number_position] = $serial;
-                    $callConfig->updateRecord('application_serial_number_master_details',array('serial_number' =>$serial_number),'id',$monthlyres->id);
+            // YR
+            $yrParts = $parts;
+            if(date("m", strtotime($transaction_date)) >= 4){
+                $startyear = date("Y", strtotime($transaction_date));
+                $endyear = (date("Y", strtotime($transaction_date)) + 1);
             }else{
-
-                $from_date = date("Y-m-01",strtotime($transaction_date));
-                $to_date = date("Y-m-t",strtotime($transaction_date));
-
-                $serial_number = 1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'MT','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56),'current_status'=>0, 'is_active'=>0);
-                foreach($insertwithconditionary as $fieldkey=>$filedval){
-                    $insertary[$fieldkey] = $filedval;
-                }
-                $return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
-
+                $startyear = (date("Y", strtotime($transaction_date)) - 1);
+                $endyear = date("Y", strtotime($transaction_date));
             }
+            $fromDateYr = $startyear . "-04-01";
+            $toDateYr = $endyear . "-03-31";
+            $serialYr = $this->processSerialNumberForResetType($callConfig, $company_id, $user_id, $asnres->id, 'YR', $fromDateYr, $toDateYr, $this->dateconvertdbformat($transaction_date), $additional_conditions, $insertwithconditionary, $numLength);
+            $yrParts[$serial_number_position] = $serialYr;
+            $yrParts[$financial_year_position] = date("Y", strtotime($fromDateYr)) . "-" . (date("y", strtotime($toDateYr)) + 1);
+            $yearly_transaction_number = trim(implode($asnres->separator_symbols, (array)$yrParts));
 
-            $parts[$financial_year_position] = date("M-Y",strtotime($transaction_date));
-            $monthly_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
-            $yearlysql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER.$asnres->id."' AND serial_number_reset_type = 'YR' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
-            $yearlyres = $callConfig->getRow($yearlysql);
-
-            if(date("m",strtotime($transaction_date)) >= 4){
-                $startyear = date("Y",strtotime($transaction_date));
-                $endyear = (date("Y",strtotime($transaction_date))+1);
-                $from_date = $startyear."-04-01";
-                $to_date = $endyear."-03-31";
-            }else{
-                $startyear = (date("Y",strtotime($transaction_date)) - 1);
-                $endyear = date("Y",strtotime($transaction_date));
-                $from_date = $startyear."-04-01";
-                $to_date = $endyear."-03-31";
-            }
-
-            if($yearlyres->id !=""){
-                $serial_number = $yearlyres->serial_number+1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $callConfig->updateRecord('application_serial_number_master_details',array('serial_number' =>$serial_number),'id',$yearlyres->id);
-            }else{
-                $serial_number = 1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'YR','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56),'current_status'=>0, 'is_active'=>0);
-                foreach($insertwithconditionary as $fieldkey=>$filedval){
-                    $insertary[$fieldkey] = $filedval;
-                }
-                $return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
-
-            }
-            $parts[$financial_year_position] = date("Y",strtotime($from_date))."-".date("y",strtotime($to_date))+1;
-            $yearly_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
-            $lifetimesql = self::SQL_SELECT_SELECT_FROM_APPLICATION_SERIAL.$get['company_id'].self::SQL_COND_AND_APPLICATION_SERIAL_NUMBER.$asnres->id."' AND serial_number_reset_type = 'LT' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date).self::SQL_COND_AND_IS_ACTIVE_0_49.$additional_conditions;
-            $lifetimeres = $callConfig->getRow($lifetimesql);
-
-            if($lifetimeres->id !=""){
-                $serial_number = $lifetimeres->serial_number+1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $callConfig->updateRecord('application_serial_number_master_details',array('serial_number' =>$serial_number),'id',$lifetimeres->id);
-            }else{
-
-                $from_date = "2020-04-01";
-                $to_date = "3020-03-31";
-                $serial_number = 1;
-                $serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
-                $parts[$serial_number_position] = $serial;
-                $insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'LT','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56),'current_status'=>0, 'is_active'=>0);
-                foreach($insertwithconditionary as $fieldkey=>$filedval){
-                    $insertary[$fieldkey] = $filedval;
-                }
-                $return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
-            }
-            $parts[$financial_year_position] = date("Y",strtotime($transaction_date));
-            $lifetime_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
+            // LT
+            $ltParts = $parts;
+            $fromDateLt = "2020-04-01";
+            $toDateLt = "3020-03-31";
+            $serialLt = $this->processSerialNumberForResetType($callConfig, $company_id, $user_id, $asnres->id, 'LT', $fromDateLt, $toDateLt, $this->dateconvertdbformat($transaction_date), $additional_conditions, $insertwithconditionary, $numLength);
+            $ltParts[$serial_number_position] = $serialLt;
+            $ltParts[$financial_year_position] = date("Y", strtotime($transaction_date));
+            $lifetime_transaction_number = trim(implode($asnres->separator_symbols, (array)$ltParts));
         }
+
         $main_transaction_number = random_int(1, PHP_INT_MAX);
-        $monthly_transaction_number = $monthly_transaction_number !=""?$monthly_transaction_number:random_int(1, PHP_INT_MAX);
-        $yearly_transaction_number = $yearly_transaction_number !=""?$yearly_transaction_number:random_int(1, PHP_INT_MAX);
-        $lifetime_transaction_number = $lifetime_transaction_number !=""?$lifetime_transaction_number:random_int(1, PHP_INT_MAX);
+        $monthly_transaction_number = $monthly_transaction_number !="" ? $monthly_transaction_number : random_int(1, PHP_INT_MAX);
+        $yearly_transaction_number = $yearly_transaction_number !="" ? $yearly_transaction_number : random_int(1, PHP_INT_MAX);
+        $lifetime_transaction_number = $lifetime_transaction_number !="" ? $lifetime_transaction_number : random_int(1, PHP_INT_MAX);
+
         if($main_transaction_no_type=="MT"){
             $main_transaction_number = $monthly_transaction_number;
         }elseif($main_transaction_no_type=="YR"){
@@ -5042,87 +5144,85 @@ public function gnrolepermision($get){
 
 trait IntegartionTravelTrait
 {
-public function getTrevllingPlanDataOld($get){
-        global $callConfig;
-        $return = array();
-        $cities_arr = array();
-        if(isset($get['id']) && $get['id'] != ''){
-            $query = "SELECT id,  `trip_name`, transaction_no,  transaction_date, `trip_type`, `trip_purpose`, `project_id`, `customer_id`, `budget_amount`, `final_amount` FROM trips  WHERE  id={$get['id']} AND  company_id={$get['company_id']} AND is_active=0";
-            $data = $callConfig->getRow($query);
-            $return['trip'] = $data;
+    protected function fetchTravellingPlanTripDetails($callConfig, $companyId, $tripId) {
+        $cities_arr = [];
+        $query = "SELECT id, `trip_name`, transaction_no, transaction_date, `trip_type`, `trip_purpose`, `project_id`, `customer_id`, `budget_amount`, `final_amount` FROM trips WHERE id={$tripId} AND company_id={$companyId} AND is_active=0";
+        $trip = $callConfig->getRow($query);
 
-            $query ="SELECT id, `trip_id`, `journey_type`, `user_id`, `trip_purpose`, `origin_location`, `destination_location`, `departure_date`, departure_time,`return_date`, return_time,`travel_mode`, `estimated_cost` FROM domestic_round_trips WHERE company_id={$get['company_id']} AND  trip_id={$get['id']} AND is_active =0";
-            $data = $callConfig->getAllRows($query);
-            foreach ($data as $row) {
-                    if (!empty($row->origin_location)) {
-                        $cities_arr[] = (int)$row->origin_location;
-                    }
-                    if (!empty($row->destination_location)) {
-                        $cities_arr[] = (int)$row->destination_location;
-                    }
-                }
-            $return['domestic_round_trips'] = $data;
-
-            $query ="SELECT id,`trip_id`, `hotel_name`, `check_in`, `check_out`, `location`, `room_type`, `booking_reference`, `cost` , description FROM trip_hotels WHERE company_id={$get['company_id']} AND  trip_id={$get['id']} AND is_active =0";
-            $data = $callConfig->getAllRows($query);
-            foreach ($data as $row) {
-                if (!empty($row->location)) {
-                    $cities_arr[] = (int)$row->location;
-                }
+        $query = "SELECT id, `trip_id`, `journey_type`, `user_id`, `trip_purpose`, `origin_location`, `destination_location`, `departure_date`, departure_time, `return_date`, return_time, `travel_mode`, `estimated_cost` FROM domestic_round_trips WHERE company_id={$companyId} AND trip_id={$tripId} AND is_active =0";
+        $domestic = $callConfig->getAllRows($query);
+        foreach ($domestic as $row) {
+            if (!empty($row->origin_location)) {
+                $cities_arr[] = (int)$row->origin_location;
             }
-            $return['trip_hotels'] = $data;
-
-            $query ="SELECT id, `trip_id`, `user_id`, `trip_purpose`, `trip_date`, `from_location`, `to_location`, `travel_mode`, `estimated_cost`, `pickup_at`, `dropoff_at`, `car_type`, `driver_needed` FROM local_trips WHERE company_id={$get['company_id']} AND  trip_id={$get['id']} AND is_active =0";
-            $data = $callConfig->getAllRows($query);
-            foreach ($data as $row) {
-                if (!empty($row->from_location)) {
-                    $cities_arr[] = (int)$row->from_location;
-                }
-                if (!empty($row->to_location)) {
-                    $cities_arr[] = (int)$row->to_location;
-                }
+            if (!empty($row->destination_location)) {
+                $cities_arr[] = (int)$row->destination_location;
             }
-            $return['local_trips'] = $data;
-            // ---- Deduplicate and fetch cities ----
-            $cities_arr = array_unique(array_filter($cities_arr));
-            if (!empty($cities_arr)) {
-                $ids = implode(',', $cities_arr);
-                $query = "SELECT id, city_name FROM cities WHERE id IN ($ids)";
-                $return['cities'] = $callConfig->getAllRows($query);
-            } else {
-                $return['cities'] = [];
-            }
-
-
         }
 
+        $query = "SELECT id, `trip_id`, `hotel_name`, `check_in`, `check_out`, `location`, `room_type`, `booking_reference`, `cost`, description FROM trip_hotels WHERE company_id={$companyId} AND trip_id={$tripId} AND is_active =0";
+        $hotels = $callConfig->getAllRows($query);
+        foreach ($hotels as $row) {
+            if (!empty($row->location)) {
+                $cities_arr[] = (int)$row->location;
+            }
+        }
 
-        $query ="SELECT id, project_name FROM projects WHERE company_id =  {$get['company_id']} AND is_active =0";
-        $data = $callConfig->getAllRows($query);
-        $return['projects'] = $data;
+        $query = "SELECT id, `trip_id`, `user_id`, `trip_purpose`, `trip_date`, `from_location`, `to_location`, `travel_mode`, `estimated_cost`, `pickup_at`, `dropoff_at`, `car_type`, `driver_needed` FROM local_trips WHERE company_id={$companyId} AND trip_id={$tripId} AND is_active =0";
+        $locals = $callConfig->getAllRows($query);
+        foreach ($locals as $row) {
+            if (!empty($row->from_location)) {
+                $cities_arr[] = (int)$row->from_location;
+            }
+            if (!empty($row->to_location)) {
+                $cities_arr[] = (int)$row->to_location;
+            }
+        }
 
-        $query ="SELECT id, display_name FROM customers WHERE company_id =  {$get['company_id']} AND is_active =0";
-        $data = $callConfig->getAllRows($query);
-        $return['clients'] = $data;
+        $cities = [];
+        $cities_arr = array_unique(array_filter($cities_arr));
+        if (!empty($cities_arr)) {
+            $ids = implode(',', $cities_arr);
+            $query = "SELECT id, city_name FROM cities WHERE id IN ($ids)";
+            $cities = $callConfig->getAllRows($query);
+        }
 
-        $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id =  {$get['company_id']} AND  genc_code='TRIP_LOCAL_VEHICLE' AND is_active =0";
-        $data = $callConfig->getAllRows($query);
-        $return['local_modes'] = $data;
+        return [
+            'trip' => $trip,
+            'domestic_round_trips' => $domestic,
+            'trip_hotels' => $hotels,
+            'local_trips' => $locals,
+            'cities' => $cities
+        ];
+    }
 
-        $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id =  {$get['company_id']} AND  genc_code='TRIP_DOMESTIC_VEHICL' AND is_active =0";
-        $data = $callConfig->getAllRows($query);
-        $return['domestic_modes'] = $data;
+    public function getTrevllingPlanDataOld($get){
+        global $callConfig;
+        $return = array();
+        if(isset($get['id']) && $get['id'] != ''){
+            $tripData = $this->fetchTravellingPlanTripDetails($callConfig, $get['company_id'], $get['id']);
+            $return = array_merge($return, $tripData);
+        }
 
-        $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id =  {$get['company_id']} AND  genc_code='TRIP_DOMESTIC_TYPE' AND is_active =0 ORDER BY genc_detail_code ASC ";
-        $data = $callConfig->getAllRows($query);
-        $return['journey_types'] = $data;
+        $query ="SELECT id, project_name FROM projects WHERE company_id = {$get['company_id']} AND is_active =0";
+        $return['projects'] = $callConfig->getAllRows($query);
 
-        $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id =  {$get['company_id']} AND  genc_code='TRIP_TYPE' AND is_active =0";
-        $data = $callConfig->getAllRows($query);
-        $return['trip_types'] = $data;
+        $query ="SELECT id, display_name FROM customers WHERE company_id = {$get['company_id']} AND is_active =0";
+        $return['clients'] = $callConfig->getAllRows($query);
+
+        $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = {$get['company_id']} AND genc_code='TRIP_LOCAL_VEHICLE' AND is_active =0";
+        $return['local_modes'] = $callConfig->getAllRows($query);
+
+        $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = {$get['company_id']} AND genc_code='TRIP_DOMESTIC_VEHICL' AND is_active =0";
+        $return['domestic_modes'] = $callConfig->getAllRows($query);
+
+        $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = {$get['company_id']} AND genc_code='TRIP_DOMESTIC_TYPE' AND is_active =0 ORDER BY genc_detail_code ASC ";
+        $return['journey_types'] = $callConfig->getAllRows($query);
+
+        $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = {$get['company_id']} AND genc_code='TRIP_TYPE' AND is_active =0";
+        $return['trip_types'] = $callConfig->getAllRows($query);
 
         return $return;
-
     }
 
     public function getDynamicCities($get){
@@ -5137,28 +5237,102 @@ public function getTrevllingPlanDataOld($get){
         return $return;
     }
 
+    protected function filterNonEmptyTripRows(array $rows, array $required): array {
+        return array_values(array_filter($rows, function($row) use ($required) {
+            foreach ($required as $k) {
+                if (!empty($row[$k])) {
+                    return true;
+                }
+            }
+            return false;
+        }));
+    }
+
+    protected function persistTripChildren($callConfig, $companyId, $tripId, $userId, $post, $now) {
+        $journey_type = $post['journey_type'] ?? '';
+        $itins = (array)($post['itinerary'] ?? []);
+        $hotels = (array)($post['hotel'] ?? []);
+        $cars = (array)($post['car'] ?? []);
+
+        foreach ($this->filterNonEmptyTripRows($itins, ['travel_mode', 'origin_location', 'destination_location', 'departure_date', 'departure_time', 'trip_purpose', 'return_date', 'return_time']) as $row) {
+            $rec = [
+                'company_id'           => $companyId,
+                'trip_id'              => $tripId,
+                'journey_type'         => $journey_type,
+                'user_id'              => $userId,
+                'trip_purpose'         => $row['trip_purpose'] ?? null,
+                'origin_location'      => $row['origin_location'] ?? null,
+                'destination_location' => $row['destination_location'] ?? null,
+                'departure_date'       => !empty($row['departure_date']) ? date('Y-m-d', strtotime($row['departure_date'])) : null,
+                'departure_time'       => $row['departure_time'] ?? null,
+                'return_date'          => !empty($row['return_date']) ? date('Y-m-d', strtotime($row['return_date'])) : null,
+                'return_time'          => $row['return_time'] ?? null,
+                'travel_mode'          => $row['travel_mode'] ?? null,
+                'estimated_cost'       => null,
+                'is_active'            => 0,
+                'current_status'       => 0,
+                'status_date'          => $now,
+                'created_by'           => $userId,
+                'created_date'         => $now,
+            ];
+            $callConfig->insertRecord('domestic_round_trips', $rec);
+        }
+
+        foreach ($this->filterNonEmptyTripRows($hotels, ['hotel_name', 'location', 'check_in', 'check_out', 'description']) as $h) {
+            $rec = [
+                'company_id'     => $companyId,
+                'trip_id'        => $tripId,
+                'hotel_name'          => $h['hotel_name'] ?? null,
+                'check_in'            => !empty($h['check_in']) ? date('Y-m-d', strtotime($h['check_in'])) : null,
+                'check_out'           => !empty($h['check_out']) ? date('Y-m-d', strtotime($h['check_out'])) : null,
+                'location'            => $h['location'] ?? null,
+                'room_type'           => null,
+                'booking_reference'   => null,
+                'cost'                => null,
+                'description'         => $h['description'] ?? null,
+                'is_active'      => 0,
+                'current_status' => 0,
+                'status_date'    => $now,
+                'created_by'     => $userId,
+                'created_date'   => $now,
+            ];
+            $callConfig->insertRecord('trip_hotels', $rec);
+        }
+
+        foreach ($this->filterNonEmptyTripRows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose']) as $c) {
+            $rec = [
+                'company_id'     => $companyId,
+                'trip_id'        => $tripId,
+                'user_id'        => $userId,
+                'trip_purpose'   => $c['trip_purpose'] ?? null,
+                'trip_date'      => !empty($c['pickup_at']) ? date('Y-m-d', strtotime($c['pickup_at'])) : null,
+                'from_location'  => $c['from_location'] ?? null,
+                'to_location'    => $c['to_location'] ?? null,
+                'travel_mode'    => $c['travel_mode'] ?? null,
+                'estimated_cost' => null,
+                'pickup_at'      => !empty($c['pickup_at']) ? date(self::DATE_FORMAT_Y_M_D_H_I_S_56, strtotime($c['pickup_at'])) : null,
+                'dropoff_at'     => !empty($c['dropoff_at']) ? date(self::DATE_FORMAT_Y_M_D_H_I_S_56, strtotime($c['dropoff_at'])) : null,
+                'car_type'       => $c['car_type'] ?? null,
+                'driver_needed'  => $c['driver_needed'] ?? null,
+                'is_active'      => 0,
+                'current_status' => 0,
+                'status_date'    => $now,
+                'created_by'     => $userId,
+                'created_date'   => $now,
+            ];
+            $callConfig->insertRecord('local_trips', $rec);
+        }
+    }
+
     public function insertAndUpdateTrevllingPlansOld($post, $get){
         global $callConfig;
         $return = array();
         $now        = date(self::DATE_FORMAT_Y_M_D_H_I_S_56);
         $company_id = (int)($get['company_id'] ?? 0);
         $user_id    = (int)($get['user_id'] ?? 0);
+        $trip_id    = $post['trip_id'] ?? '';
 
-        $rowEmpty = function ($row, $keys) {
-            foreach ($keys as $k) {
-                if (!empty($row[$k])) {
-                    return false;
-                }
-            }
-            return true;
-        };
-
-        $non_empty_rows = function(array $rows, array $required) use ($rowEmpty): array {
-            return array_values(array_filter($rows, fn($r) => !$rowEmpty($r, $required)));
-        };
-        $trip_id = $post['trip_id'] ?? '';
-        // 2) if trip_id present, update trip and mark existing children as inactive
-        if ($trip_id && $trip_id != '') {
+        if (!empty($trip_id)) {
             $trip_id = (int)$trip_id;
             $trip = [
                 'trip_name'      => trim($post['trip_name'] ?? ''),
@@ -5171,94 +5345,19 @@ public function getTrevllingPlanDataOld($get){
                 'updated_by'     => $user_id,
                 'updated_date'   => $now,
             ];
-            $res = $callConfig->updateRecord('trips', $trip, 'id', $trip_id);
-            $return['trip_update'] = $res;
+            $return['trip_update'] = $callConfig->updateRecord('trips', $trip, 'id', $trip_id);
 
             foreach (['domestic_round_trips', 'trip_hotels', 'local_trips'] as $tbl) {
                 $upd = ['is_active' => 1, 'updated_by' => $user_id, 'updated_date' => $now];
                 $callConfig->updateRecord($tbl, $upd, 'trip_id', $trip_id);
             }
 
-            // 3) reinsert current POST children
-            $journey_type = $post['journey_type'];
-            $itins  = (array)($post['itinerary'] ?? []);
-            $hotels = (array)($post['hotel'] ?? []);
-            $cars   = (array)($post['car'] ?? []);
-
-            foreach ($non_empty_rows($itins, ['travel_mode', 'origin_location', 'destination_location', 'departure_date', 'departure_time', 'trip_purpose', 'return_date', 'return_time']) as $row) {
-                $rec = [
-                    'company_id'           => $company_id,
-                    'trip_id'              => $trip_id,
-                    'journey_type'         => $journey_type,
-                    'user_id'              => $user_id,
-                    'trip_purpose'         => $row['trip_purpose'] ?? null,
-                    'origin_location'      => $row['origin_location'] ?? null,
-                    'destination_location' => $row['destination_location'] ?? null,
-                    'departure_date'       => $row['departure_date'] ? date('Y-m-d', strtotime($row['departure_date'])) : null,
-                    'departure_time'       => $row['departure_time'] ?? null,
-                    'return_date'          => $row['return_date'] ? date('Y-m-d', strtotime($row['return_date'])) : null,
-                    'return_time'          => $row['return_time'] ?? null,
-                    'travel_mode'          => $row['travel_mode'] ?? null,
-                    'estimated_cost'       => null,
-                    'is_active'            => 0,
-                    'current_status'       => 0,
-                    'status_date'          => $now,
-                    'created_by'           => $user_id,
-                    'created_date'         => $now,
-                ];
-                $callConfig->insertRecord('domestic_round_trips', $rec);
-            }
-
-                // --- Trip Hotels ---
-            foreach ($non_empty_rows($hotels, ['hotel_name', 'location', 'check_in', 'check_out', 'description']) as $h) {
-                $rec = [
-                    'company_id'     => $company_id,
-                    'trip_id'        => $trip_id,
-                    'hotel_name'          => $h['hotel_name'] ?? null,
-                    'check_in'            => $h['check_in'] ? date('Y-m-d', strtotime($h['check_in'])) : null,
-                    'check_out'           => $h['check_out'] ? date('Y-m-d', strtotime($h['check_out'])) : null,
-                    'location'            => $h['location'] ?? null,
-                    'room_type'           => null,
-                    'booking_reference'   => null,
-                    'cost'                => null,
-                    'description'         => $h['description'] ?? null,
-                    'is_active'      => 0,
-                    'current_status' => 0,
-                    'status_date'    => $now,
-                    'created_by'     => $user_id,
-                    'created_date'   => $now,
-                ];
-                $callConfig->insertRecord('trip_hotels', $rec);
-            }
-            foreach ($non_empty_rows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose']) as $c) {
-                $rec = [
-                    'company_id'     => $company_id,
-                    'trip_id'        => $trip_id,
-                    'user_id'        => $user_id,
-                    'trip_purpose'   => $c['trip_purpose'] ?? null,
-                    'trip_date'      => $c['pickup_at'] ? date('Y-m-d', strtotime($c['pickup_at'])) : null,
-                    'from_location'  => $c['from_location'] ?? null,
-                    'to_location'    => $c['to_location'] ?? null,
-                    'travel_mode'    => $c['travel_mode'] ?? null,
-                    'estimated_cost' => null,
-                    'pickup_at'      => $c['pickup_at'] ? date(self::DATE_FORMAT_Y_M_D_H_I_S_56, strtotime($c['pickup_at'])) : null,
-                    'dropoff_at'     => $c['dropoff_at'] ? date(self::DATE_FORMAT_Y_M_D_H_I_S_56, strtotime($c['dropoff_at'])) : null,
-                    'car_type'       => $c['car_type'] ?? null,
-                    'driver_needed'  => $c['driver_needed'] ?? null,
-                    'is_active'      => 0,
-                    'current_status' => 0,
-                    'status_date'    => $now,
-                    'created_by'     => $user_id,
-                    'created_date'   => $now,
-                ];
-                $callConfig->insertRecord('local_trips', $rec);
-            }
-        }else{
-            $serial = $this->toGetApplicationSerialNumber('trips',$get);
-
+            $this->persistTripChildren($callConfig, $company_id, $trip_id, $user_id, $post, $now);
+        } else {
+            $serial = $this->toGetApplicationSerialNumber('trips', $get);
             $trip = [
                 'company_id'     => $company_id,
-                'user_id'         => $user_id,
+                'user_id'        => $user_id,
                 'transaction_no' => $serial,
                 'transaction_date'=> date('Y-m-d'),
                 'trip_name'      => trim($post['trip_name'] ?? ''),
@@ -5278,81 +5377,8 @@ public function getTrevllingPlanDataOld($get){
             $return['trip_insert'] = $res;
             $trip_id = $res['LASTID'] ?? '';
 
-            $journey_type = $post['journey_type'];
-            $itins  = (array)($post['itinerary'] ?? []);
-            $hotels = (array)($post['hotel'] ?? []);
-            $cars   = (array)($post['car'] ?? []);
-
-            // --- Domestic Round Trips ---
-            if($trip_id != ''){
-                foreach ($non_empty_rows($itins, ['travel_mode', 'origin_location', 'destination_location', 'departure_date', 'departure_time','trip_purpose', 'return_date', 'return_time']) as $row) {
-                    $rec = [
-                        'company_id'           => $company_id,
-                        'trip_id'              => $trip_id,
-                        'journey_type'         => $journey_type,
-                        'user_id'              => $user_id,
-                        'trip_purpose'         => $row['trip_purpose'] ?? null,
-                        'origin_location'      => $row['origin_location'] ?? null,
-                        'destination_location' => $row['destination_location'] ?? null,
-                        'departure_date'       => $row['departure_date'] ? date('Y-m-d', strtotime($row['departure_date'])) : null,
-                        'departure_time'       => $row['departure_time'] ?? null,
-                        'return_date'          => $row['return_date'] ? date('Y-m-d', strtotime($row['return_date'])) : null,
-                        'return_time'          => $row['return_time'] ?? null,
-                        'travel_mode'          => $row['travel_mode'] ?? null,
-                        'estimated_cost'       => null,
-                        'is_active'            => 0,
-                        'current_status'       => 0,
-                        'status_date'          => $now,
-                        'created_by'           => $user_id,
-                        'created_date'         => $now,
-                    ];
-                    $callConfig->insertRecord('domestic_round_trips', $rec);
-                }
-
-                // --- Trip Hotels ---
-                foreach ($non_empty_rows($hotels, ['hotel_name', 'location', 'check_in', 'check_out', 'description']) as $h) {
-                    $rec = [
-                        'company_id'     => $company_id,
-                        'trip_id'        => $trip_id,
-                        'hotel_name'          => $h['hotel_name'] ?? null,
-                        'check_in'            => $h['check_in'] ? date('Y-m-d', strtotime($h['check_in'])) : null,
-                        'check_out'           => $h['check_out'] ? date('Y-m-d', strtotime($h['check_out'])) : null,
-                        'location'            => $h['location'] ?? null,
-                        'room_type'           => null,
-                        'booking_reference'   => null,
-                        'cost'                => null,
-                        'description'         => $h['description'] ?? null,
-                        'is_active'      => 0,
-                        'current_status' => 0,
-                        'status_date'    => $now,
-                        'created_by'     => $user_id,
-                        'created_date'   => $now,
-                    ];
-                    $callConfig->insertRecord('trip_hotels', $rec);
-                }
-                foreach ($non_empty_rows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose']) as $c) {
-                    $rec = [
-                        'company_id'     => $company_id,
-                        'trip_id'        => $trip_id,
-                        'user_id'        => $user_id,
-                        'trip_purpose'   => $c['trip_purpose'] ?? null,
-                        'trip_date'      => $c['pickup_at'] ? date('Y-m-d', strtotime($c['pickup_at'])) : null,
-                        'from_location'  => $c['from_location'] ?? null,
-                        'to_location'    => $c['to_location'] ?? null,
-                        'travel_mode'    => $c['travel_mode'] ?? null,
-                        'estimated_cost' => null,
-                        'pickup_at'      => $c['pickup_at'] ? date(self::DATE_FORMAT_Y_M_D_H_I_S_56, strtotime($c['pickup_at'])) : null,
-                        'dropoff_at'     => $c['dropoff_at'] ? date(self::DATE_FORMAT_Y_M_D_H_I_S_56, strtotime($c['dropoff_at'])) : null,
-                        'car_type'       => $c['car_type'] ?? null,
-                        'driver_needed'  => $c['driver_needed'] ?? null,
-                        'is_active'      => 0,
-                        'current_status' => 0,
-                        'status_date'    => $now,
-                        'created_by'     => $user_id,
-                        'created_date'   => $now,
-                    ];
-                    $callConfig->insertRecord('local_trips', $rec);
-                }
+            if (!empty($trip_id)) {
+                $this->persistTripChildren($callConfig, $company_id, $trip_id, $user_id, $post, $now);
             }
         }
         return $return;
@@ -5770,6 +5796,25 @@ public function getTrevllingPlanDataOld($get){
         return array('processes'=>$this->getProcessQcAllowedProcesses($get['company_id']));
     }
 
+    protected function resolveProcessQcColumns(array $columns) {
+        $number_fields = array('transaction_no','transaction_number','forecast_no','firm_order_no','qo_number','doc_ref_no');
+        $item_fields = array('item_id','work_order_item_id','product_id');
+        $date_fields = array('transaction_date','created_date','status_date');
+        $number_field = 'id';
+        $item_field = '';
+        $date_field = 'created_date';
+        foreach($number_fields as $field){
+            if(in_array($field, $columns)){ $number_field = $field; break; }
+        }
+        foreach($item_fields as $field){
+            if(in_array($field, $columns)){ $item_field = $field; break; }
+        }
+        foreach($date_fields as $field){
+            if(in_array($field, $columns)){ $date_field = $field; break; }
+        }
+        return ['number_field' => $number_field, 'item_field' => $item_field, 'date_field' => $date_field];
+    }
+
     public function getprocessqctransactions($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
@@ -5782,27 +5827,14 @@ public function getTrevllingPlanDataOld($get){
         foreach((array)$columns_data as $col){
             $columns[] = $col->Field;
         }
-        if(!in_array('id', $columns)){
-            return array('status'=>'error','message'=>'Process table not found');
+        $resolved = $this->resolveProcessQcColumns($columns);
+        if(!in_array('id', $columns) || empty($resolved['item_field'])){
+            $msg = !in_array('id', $columns) ? 'Process table not found' : 'This process does not have a direct item/product field yet';
+            return array('status'=>'error','message'=>$msg);
         }
-        $number_fields = array('transaction_no','transaction_number','forecast_no','firm_order_no','qo_number','doc_ref_no');
-        $item_fields = array('item_id','work_order_item_id','product_id');
-        $date_fields = array('transaction_date','created_date','status_date');
-        $number_field = 'id';
-        $item_field = '';
-        $date_field = 'created_date';
-        foreach($number_fields as $field){ if(in_array($field, $columns)){ $number_field = $field; break;
-        }
-        }
-        foreach($item_fields as $field){ if(in_array($field, $columns)){ $item_field = $field; break;
-        }
-        }
-        foreach($date_fields as $field){ if(in_array($field, $columns)){ $date_field = $field; break;
-        }
-        }
-        if($item_field == ''){
-            return array('status'=>'error','message'=>'This process does not have a direct item/product field yet');
-        }
+        $number_field = $resolved['number_field'];
+        $item_field = $resolved['item_field'];
+        $date_field = $resolved['date_field'];
         $query = "SELECT t.id AS transaction_id, t.".$number_field." AS transaction_no, t.".$date_field." AS transaction_date,
                 t.".$item_field." AS item_id, i.item_name, i.sku, i.category_id AS item_cat_id,
                 IFNULL(i.quality_check, 0) AS quality_check,
@@ -5969,15 +6001,20 @@ public function getProcessQcHeader($company_id, $process, $tranid, $user_id){
         $process = $get['process'] ?? $get['table'] ?? '';
         $tranid = intval($get['tranid'] ?? 0);
         $item_id = intval($get['item_id'] ?? 0);
+        $item = null;
+        $err = null;
         if(!preg_match(self::CONST_A_ZA_Z0_9, $process) || $tranid <= 0 || $item_id <= 0){
-            return array('status'=>'error','message'=>'Process, transaction and item are required');
+            $err = 'Process, transaction and item are required';
+        } else {
+            $item = $callConfig->getRow("SELECT * FROM items WHERE company_id = '{$company_id}self::SQL_COND_AND_ID_23{$item_id}' AND is_active = 0");
+            if(empty($item->id)){
+                $err = 'Item not found';
+            } elseif(intval($item->quality_check ?? 0) != 1){
+                $err = 'This item is not marked for QC check';
+            }
         }
-        $item = $callConfig->getRow("SELECT * FROM items WHERE company_id = '{$company_id}self::SQL_COND_AND_ID_23{$item_id}' AND is_active = 0");
-        if(empty($item->id)){
-            return array('status'=>'error','message'=>'Item not found');
-        }
-        if(intval($item->quality_check ?? 0) != 1){
-            return array('status'=>'error','message'=>'This item is not marked for QC check');
+        if($err !== null){
+            return array('status'=>'error','message'=>$err);
         }
         $mapping = $this->getProcessQcMappingByPriority($company_id, $process, intval($item->category_id ?? 0), $item_id);
         if(empty($mapping->id)){
@@ -6140,6 +6177,42 @@ public function getProcessQcHeader($company_id, $process, $tranid, $user_id){
         return null;
     }
 
+    protected function evaluateOptionProcessQcParameter($param, $value, $expected) {
+        $expected_label = $this->getProcessQcOptionLabel($param['quality_parameters'] ?? '', $expected);
+        $pass = (strval($value) === $expected || ($expected_label !== null && strval($value) === strval($expected_label)));
+        return array('failed'=>$pass ? 0 : 1,'message'=>$pass ? '' : 'Expected '.$expected_label);
+    }
+
+    protected function evaluateRatingProcessQcParameter($value, $expected) {
+        if(!is_numeric($value)){
+            return array('failed'=>1,'message'=>'Numeric rating is required');
+        }
+        $number = floatval($value);
+        $target = is_numeric($expected) ? floatval($expected) : 0;
+        $pass = ($number >= 1 && $number <= 5 && $number >= $target);
+        return array('failed'=>$pass ? 0 : 1,'message'=>'Target is '.$target.' or above');
+    }
+
+    protected function evaluateRangeProcessQcParameter($param, $value, $expected) {
+        $range = json_decode($param['quality_parameters'] ?? '', true);
+        $min = $range['min'] ?? null;
+        $max = $range['max'] ?? null;
+        if(!is_numeric($value) || !is_numeric($min) || !is_numeric($max)){
+            return array('failed'=>1,'message'=>'Valid range value is required');
+        }
+        $number = floatval($value);
+        $inside = ($number >= floatval($min) && $number <= floatval($max));
+        $expects_inside = ($expected === '0' || $expected === '');
+        $pass = $expects_inside ? $inside : !$inside;
+        return array('failed'=>$pass ? 0 : 1,'message'=>($expects_inside ? 'Expected within ' : 'Expected outside ').$min.' - '.$max);
+    }
+
+    protected function evaluateTextProcessQcParameter($value) {
+        $value_lower = strtolower($value);
+        $failed = (strpos($value_lower, 'fail') !== false || strpos($value_lower, 'reject') !== false || strpos($value_lower, 'not ok') !== false) ? 1 : 0;
+        return array('failed'=>$failed,'message'=>'');
+    }
+
     public function evaluateProcessQcParameter($param, $value){
         $value = trim((string)$value);
         if($value === ''){
@@ -6148,35 +6221,172 @@ public function getProcessQcHeader($company_id, $process, $tranid, $user_id){
         $display_type = strval($param['display_type'] ?? '');
         $expected = strval($param['res'] ?? '0');
         if($display_type == '1' || $display_type == '2'){
-            $expected_label = $this->getProcessQcOptionLabel($param['quality_parameters'] ?? '', $expected);
-            $pass = (strval($value) === $expected || ($expected_label !== null && strval($value) === strval($expected_label)));
-            return array('failed'=>$pass ? 0 : 1,'message'=>$pass ? '' : 'Expected '.$expected_label);
+            $res = $this->evaluateOptionProcessQcParameter($param, $value, $expected);
+        } elseif($display_type == '3' || $display_type == '4'){
+            $res = $this->evaluateRatingProcessQcParameter($value, $expected);
+        } elseif($display_type == '5'){
+            $res = $this->evaluateRangeProcessQcParameter($param, $value, $expected);
+        } else {
+            $res = $this->evaluateTextProcessQcParameter($value);
         }
-        if($display_type == '3' || $display_type == '4'){
-            if(!is_numeric($value)){
-                return array('failed'=>1,'message'=>'Numeric rating is required');
+        return $res;
+    }
+
+    protected function collectProcessQcGroupParameters($company_id, $mapping) {
+        $groups = $this->getProcessQcGroupedParameters($company_id, $mapping);
+        $required = array();
+        $valid_param_ids = array();
+        $param_rules = array();
+        foreach((array)$groups as $group){
+            foreach((array)$group['parameters'] as $param){
+                $pid = intval($param['id']);
+                $valid_param_ids[$pid] = $pid;
+                $param_rules[$pid] = $param;
+                if(intval($param['mand'] ?? 0) == 1){
+                    $required[$pid] = $param['name'];
+                }
             }
-            $number = floatval($value);
-            $target = is_numeric($expected) ? floatval($expected) : 0;
-            $pass = ($number >= 1 && $number <= 5 && $number >= $target);
-            return array('failed'=>$pass ? 0 : 1,'message'=>'Target is '.$target.' or above');
         }
-        if($display_type == '5'){
-            $range = json_decode($param['quality_parameters'] ?? '', true);
-            $min = $range['min'] ?? null;
-            $max = $range['max'] ?? null;
-            if(!is_numeric($value) || !is_numeric($min) || !is_numeric($max)){
-                return array('failed'=>1,'message'=>'Valid range value is required');
+        return [
+            'required' => $required,
+            'valid_param_ids' => $valid_param_ids,
+            'param_rules' => $param_rules
+        ];
+    }
+
+    protected function validateProcessQcPreconditions($progress, array $required, array $responses, $complete) {
+        if(empty($progress->id)){
+            return array('status'=>'error','message'=>'QC row not found');
+        }
+        if(in_array(intval($progress->qc_status ?? 0), array(2,3))){
+            return array('status'=>'error','message'=>'QC is already completed and locked.');
+        }
+        if($complete){
+            foreach($required as $pid=>$name){
+                if(!isset($responses[$pid]) || trim((string)$responses[$pid]) === ''){
+                    return array('status'=>'error','message'=>'Please answer mandatory QC parameter: '.$name);
+                }
             }
-            $number = floatval($value);
-            $inside = ($number >= floatval($min) && $number <= floatval($max));
-            $expects_inside = ($expected === '0' || $expected === '');
-            $pass = $expects_inside ? $inside : !$inside;
-            return array('failed'=>$pass ? 0 : 1,'message'=>($expects_inside ? 'Expected within ' : 'Expected outside ').$min.' - '.$max);
         }
-        $value_lower = strtolower($value);
-        $failed = (strpos($value_lower, 'fail') !== false || strpos($value_lower, 'reject') !== false || strpos($value_lower, 'not ok') !== false) ? 1 : 0;
-        return array('failed'=>$failed,'message'=>'');
+        return null;
+    }
+
+    protected function persistProcessQcResponses($callConfig, $context, $progress, array $param_rules, array $valid_param_ids, array $required, array $responses, array $remarks, $userId, $companyId, $complete) {
+        $checked_count = 0;
+        $failed_count = 0;
+        $detail_ids = array();
+        $has_required_params = !empty($required);
+        foreach($responses as $pid=>$value){
+            $pid = intval($pid);
+            if(!isset($valid_param_ids[$pid]) || trim((string)$value) === ''){
+                continue;
+            }
+            $evaluation = $this->evaluateProcessQcParameter($param_rules[$pid], $value);
+            $quality_check = intval($evaluation['failed']);
+            $remark = trim((string)($remarks[$pid] ?? ''));
+            $is_required_result = (!$has_required_params || isset($required[$pid]));
+            if($complete && $is_required_result && $quality_check == 1 && $remark == ''){
+                return array('error' => array('status'=>'error','message'=>'Remarks are required for failed QC check: '.$param_rules[$pid]['name']));
+            }
+            $old = $callConfig->getRow("SELECT id FROM item_quality_check WHERE company_id = '{$companyId}' AND application_table_name = '".$callConfig->real_escape_string($context['process']).self::SQL_COND_AND_TRANSACTION_ID.intval($context['tranid']).self::SQL_COND_AND_ITEM_ID_63.intval($context['item_id'])." AND item_serial_lot_id = ".intval($progress->item_serial_lot_id)." AND item_attribute_id = ".$pid.self::SQL_COND_AND_IS_ACTIVE_0);
+            if(!empty($old->id)){
+                $callConfig->executeQuery("UPDATE item_quality_check SET is_active = 1, updated_by = '{$userId}', updated_date = '".date(self::DATE_FORMAT_Y_M_D_H_I_S_56)."' WHERE id = ".intval($old->id));
+            }
+            $insert = $callConfig->insertRecord('item_quality_check', array(
+                'company_id'=>$companyId,
+                'application_table_name'=>$callConfig->real_escape_string($context['process']),
+                'transaction_id'=>intval($context['tranid']),
+                'item_id'=>intval($context['item_id']),
+                'item_serial_lot_id'=>intval($progress->item_serial_lot_id),
+                'item_attribute_id'=>$pid,
+                'specification_result'=>$callConfig->real_escape_string($value),
+                'quality_check'=>$quality_check,
+                'remarks'=>$callConfig->real_escape_string($remark),
+                'is_active'=>0,
+                'current_status'=>0,
+                'created_by'=>$userId,
+                'created_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
+            ));
+            $detail_ids[] = $insert;
+            if($is_required_result){
+                $checked_count++;
+                if($quality_check == 1){ $failed_count++; }
+            }
+        }
+        return [
+            'checked_count' => $checked_count,
+            'failed_count' => $failed_count,
+            'detail_ids' => $detail_ids
+        ];
+    }
+
+    protected function finalizeProcessQcItemRecords($callConfig, $context, $progressId, $userId, $companyId, $checked_count, $failed_count, $complete) {
+        $required_count = $this->getProcessQcParameterCount($context['mapping']);
+        if ($complete) {
+            $qc_status = ($failed_count > 0) ? 3 : 2;
+        } else {
+            $qc_status = ($checked_count > 0) ? 1 : 0;
+        }
+        $callConfig->updateRecord('application_table_quality_check_items', array(
+            'qc_status'=>$qc_status,
+            'required_count'=>$required_count,
+            'checked_count'=>$checked_count,
+            'failed_count'=>$failed_count,
+            'inspected_by'=>$userId,
+            'inspected_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56),
+            'updated_by'=>$userId,
+            'updated_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
+        ), 'id', $progressId);
+
+        $old_head = $callConfig->getRow("SELECT id FROM item_head_quality_check WHERE company_id = '{$companyId}' AND application_table_name = '".$callConfig->real_escape_string($context['process']).self::SQL_COND_AND_TRANSACTION_ID.intval($context['tranid']).self::SQL_COND_AND_ITEM_ID_63.intval($context['item_id']).self::SQL_COND_AND_IS_ACTIVE_0);
+        if(!empty($old_head->id)){
+            $callConfig->executeQuery("UPDATE item_head_quality_check SET is_active = 1 WHERE id = ".intval($old_head->id));
+        }
+
+        $summary = $this->getProcessQcSummaryData($companyId, $context['process'], $context['tranid'], $context['item_id']);
+        if ($summary['failed'] > 0) {
+            $head_quality_check = 2;
+        } elseif ($summary['total'] > 0 && $summary['pending'] == 0 && $summary['draft'] == 0) {
+            $head_quality_check = 1;
+        } else {
+            $head_quality_check = 0;
+        }
+
+        $remarksSummary = 'Process QC summary: Passed '.$summary['passed'].', Failed '.$summary['failed'].', Draft '.$summary['draft'].', Pending '.$summary['pending'];
+        $callConfig->insertRecord('item_head_quality_check', array(
+            'company_id'=>$companyId,
+            'application_table_name'=>$callConfig->real_escape_string($context['process']),
+            'transaction_id'=>intval($context['tranid']),
+            'item_id'=>intval($context['item_id']),
+            'quality_check'=>$head_quality_check,
+            'remarks'=>$remarksSummary,
+            'is_active'=>0,
+            'current_status'=>0,
+            'created_by'=>$userId,
+            'created_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
+        ));
+        $callConfig->updateRecord('application_table_quality_check', array(
+            'quality_check'=>$head_quality_check,
+            'remarks'=>$remarksSummary,
+            'updated_by'=>$userId,
+            'updated_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
+        ), 'id', $context['header']->id);
+
+        $inventory_posting = array();
+        if($complete && $context['process'] == 'manufacturing_product_notes' && $head_quality_check == 1){
+            include_once "model/manfacturing_forecast.class.php";
+            if(class_exists('manfacturingForecastUserClass')){
+                $manufacturingObj = new manfacturingForecastUserClass();
+                $inventory_posting = $manufacturingObj->postManufacturingProductNoteInventoryById($companyId, $userId, intval($context['tranid']));
+            }
+        }
+        $next = $callConfig->getRow("SELECT id FROM application_table_quality_check_items WHERE company_id = '{$companyId}' AND application_table_name = '".$callConfig->real_escape_string($context['process']).self::SQL_COND_AND_TRANSACTION_ID.intval($context['tranid']).self::SQL_COND_AND_ITEM_ID_63.intval($context['item_id'])." AND qc_status IN (0,1) AND is_active = 0 ORDER BY id ASC LIMIT 0,1");
+
+        return [
+            'summary' => $summary,
+            'inventory_posting' => $inventory_posting,
+            'next_progress_id' => intval($next->id ?? 0)
+        ];
     }
 
     public function saveProcessQcItem($post, $get, $complete){
@@ -6192,143 +6402,29 @@ public function getProcessQcHeader($company_id, $process, $tranid, $user_id){
         $user_id = intval($get['user_id'] ?? 0);
         $progress_id = intval($post['progress_id'] ?? 0);
         $progress = $callConfig->getRow("SELECT * FROM application_table_quality_check_items WHERE company_id = '{$company_id}self::SQL_COND_AND_ID_23{$progress_id}' AND is_active = 0");
-        if(empty($progress->id)){
-            return array('status'=>'error','message'=>'QC row not found');
-        }
-        if(in_array(intval($progress->qc_status ?? 0), array(2,3))){
-            return array('status'=>'error','message'=>'QC is already completed and locked.');
-        }
-        $groups = $this->getProcessQcGroupedParameters($company_id, $context['mapping']);
-        $required = array();
-        $valid_param_ids = array();
-        $param_rules = array();
-        foreach((array)$groups as $group){
-            foreach((array)$group['parameters'] as $param){
-                $pid = intval($param['id']);
-                $valid_param_ids[$pid] = $pid;
-                $param_rules[$pid] = $param;
-                if(intval($param['mand'] ?? 0) == 1){
-                    $required[$pid] = $param['name'];
-                }
-            }
-        }
-        $responses = $post['item_attribute_res'] ?? array();
-        $remarks = $post['item_attribute_remarks'] ?? array();
-        if(!is_array($responses)){ $responses = array();
-        }
-        if(!is_array($remarks)){ $remarks = array();
-        }
-        if($complete){
-            foreach($required as $pid=>$name){
-                if(!isset($responses[$pid]) || trim((string)$responses[$pid]) === ''){
-                    return array('status'=>'error','message'=>'Please answer mandatory QC parameter: '.$name);
-                }
-            }
-        }
-        $checked_count = 0;
-        $failed_count = 0;
-        $detail_ids = array();
-        $has_required_params = !empty($required);
-        foreach($responses as $pid=>$value){
-            $pid = intval($pid);
-            if(!isset($valid_param_ids[$pid]) || trim((string)$value) === ''){
-                continue;
-            }
-            $evaluation = $this->evaluateProcessQcParameter($param_rules[$pid], $value);
-            $quality_check = intval($evaluation['failed']);
-            $remark = trim((string)($remarks[$pid] ?? ''));
-            $is_required_result = (!$has_required_params || isset($required[$pid]));
-            if($complete && $is_required_result && $quality_check == 1 && $remark == ''){
-                return array('status'=>'error','message'=>'Remarks are required for failed QC check: '.$param_rules[$pid]['name']);
-            }
-            $old = $callConfig->getRow("SELECT id FROM item_quality_check WHERE company_id = '{$company_id}' AND application_table_name = '".$callConfig->real_escape_string($context['process']).self::SQL_COND_AND_TRANSACTION_ID.intval($context['tranid']).self::SQL_COND_AND_ITEM_ID_63.intval($context['item_id'])." AND item_serial_lot_id = ".intval($progress->item_serial_lot_id)." AND item_attribute_id = ".$pid.self::SQL_COND_AND_IS_ACTIVE_0);
-            if(!empty($old->id)){
-                $callConfig->executeQuery("UPDATE item_quality_check SET is_active = 1, updated_by = '{$user_id}', updated_date = '".date(self::DATE_FORMAT_Y_M_D_H_I_S_56)."' WHERE id = ".intval($old->id));
-            }
-            $insert = $callConfig->insertRecord('item_quality_check', array(
-                'company_id'=>$company_id,
-                'application_table_name'=>$callConfig->real_escape_string($context['process']),
-                'transaction_id'=>intval($context['tranid']),
-                'item_id'=>intval($context['item_id']),
-                'item_serial_lot_id'=>intval($progress->item_serial_lot_id),
-                'item_attribute_id'=>$pid,
-                'specification_result'=>$callConfig->real_escape_string($value),
-                'quality_check'=>$quality_check,
-                'remarks'=>$callConfig->real_escape_string($remark),
-                'is_active'=>0,
-                'current_status'=>0,
-                'created_by'=>$user_id,
-                'created_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
-            ));
-            $detail_ids[] = $insert;
-            if($is_required_result){
-                $checked_count++;
-                if($quality_check == 1){ $failed_count++;
-                }
-            }
-        }
-        $required_count = $this->getProcessQcParameterCount($context['mapping']);
-        if ($complete) {
-            $qc_status = ($failed_count > 0) ? 3 : 2;
+
+        $paramInfo = $this->collectProcessQcGroupParameters($company_id, $context['mapping']);
+        $responses = (array)($post['item_attribute_res'] ?? []);
+        $remarks = (array)($post['item_attribute_remarks'] ?? []);
+
+        $err = $this->validateProcessQcPreconditions($progress, $paramInfo['required'], $responses, $complete);
+        if($err !== null){
+            $respResult = ['error' => $err];
         } else {
-            $qc_status = ($checked_count > 0) ? 1 : 0;
+            $respResult = $this->persistProcessQcResponses($callConfig, $context, $progress, $paramInfo['param_rules'], $paramInfo['valid_param_ids'], $paramInfo['required'], $responses, $remarks, $user_id, $company_id, $complete);
         }
-        $callConfig->updateRecord('application_table_quality_check_items', array(
-            'qc_status'=>$qc_status,
-            'required_count'=>$required_count,
-            'checked_count'=>$checked_count,
-            'failed_count'=>$failed_count,
-            'inspected_by'=>$user_id,
-            'inspected_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56),
-            'updated_by'=>$user_id,
-            'updated_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
-        ), 'id', $progress_id);
-        $old_head = $callConfig->getRow("SELECT id FROM item_head_quality_check WHERE company_id = '{$company_id}' AND application_table_name = '".$callConfig->real_escape_string($context['process']).self::SQL_COND_AND_TRANSACTION_ID.intval($context['tranid']).self::SQL_COND_AND_ITEM_ID_63.intval($context['item_id']).self::SQL_COND_AND_IS_ACTIVE_0);
-        if(!empty($old_head->id)){
-            $callConfig->executeQuery("UPDATE item_head_quality_check SET is_active = 1 WHERE id = ".intval($old_head->id));
+        if(!empty($respResult['error'])){
+            return $respResult['error'];
         }
-        $summary = $this->getProcessQcSummaryData($company_id, $context['process'], $context['tranid'], $context['item_id']);
-        if ($summary['failed'] > 0) {
-            $head_quality_check = 2;
-        } elseif ($summary['total'] > 0 && $summary['pending'] == 0 && $summary['draft'] == 0) {
-            $head_quality_check = 1;
-        } else {
-            $head_quality_check = 0;
-        }
-        $callConfig->insertRecord('item_head_quality_check', array(
-            'company_id'=>$company_id,
-            'application_table_name'=>$callConfig->real_escape_string($context['process']),
-            'transaction_id'=>intval($context['tranid']),
-            'item_id'=>intval($context['item_id']),
-            'quality_check'=>$head_quality_check,
-            'remarks'=>'Process QC summary: Passed '.$summary['passed'].', Failed '.$summary['failed'].', Draft '.$summary['draft'].', Pending '.$summary['pending'],
-            'is_active'=>0,
-            'current_status'=>0,
-            'created_by'=>$user_id,
-            'created_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
-        ));
-        $callConfig->updateRecord('application_table_quality_check', array(
-            'quality_check'=>$head_quality_check,
-            'remarks'=>'Process QC summary: Passed '.$summary['passed'].', Failed '.$summary['failed'].', Draft '.$summary['draft'].', Pending '.$summary['pending'],
-            'updated_by'=>$user_id,
-            'updated_date'=>date(self::DATE_FORMAT_Y_M_D_H_I_S_56)
-        ), 'id', $context['header']->id);
-        $inventory_posting = array();
-        if($complete && $context['process'] == 'manufacturing_product_notes' && $head_quality_check == 1){
-            include_once "model/manfacturing_forecast.class.php";
-            if(class_exists('manfacturingForecastUserClass')){
-                $manufacturingObj = new manfacturingForecastUserClass();
-                $inventory_posting = $manufacturingObj->postManufacturingProductNoteInventoryById($company_id, $user_id, intval($context['tranid']));
-            }
-        }
-        $next = $callConfig->getRow("SELECT id FROM application_table_quality_check_items WHERE company_id = '{$company_id}' AND application_table_name = '".$callConfig->real_escape_string($context['process']).self::SQL_COND_AND_TRANSACTION_ID.intval($context['tranid']).self::SQL_COND_AND_ITEM_ID_63.intval($context['item_id'])." AND qc_status IN (0,1) AND is_active = 0 ORDER BY id ASC LIMIT 0,1");
+
+        $final = $this->finalizeProcessQcItemRecords($callConfig, $context, $progress_id, $user_id, $company_id, $respResult['checked_count'], $respResult['failed_count'], $complete);
         return array(
             'status'=>'success',
             'message'=>$complete ? 'QC completed successfully.' : 'QC draft saved successfully.',
-            'summary'=>$summary,
-            'details'=>$detail_ids,
-            'inventory_posting'=>$inventory_posting,
-            'next_progress_id'=>intval($next->id ?? 0)
+            'summary'=>$final['summary'],
+            'details'=>$respResult['detail_ids'],
+            'inventory_posting'=>$final['inventory_posting'],
+            'next_progress_id'=>$final['next_progress_id']
         );
     }
 
@@ -6341,8 +6437,18 @@ public function getProcessQcHeader($company_id, $process, $tranid, $user_id){
     }
 
     //manufacturing related end
-    public function getProjectEmployeeTaskReport($get){
+    protected function buildProjectEmployeeTaskWhere($company_id, $from_date, $to_date, $project_id, $employee_id) {
+        $where = " ptd.company_id = '".$company_id."' AND p.company_id = '".$company_id."' AND e.company_id = '".$company_id."' AND ptd.is_active = 0 AND p.is_active = 0 AND e.is_active = 0 AND ptd.assigen_id = e.id AND ptd.project_id = p.id AND ptd.planned_start <= '".$to_date."' AND ptd.planned_finish >= '".$from_date."' ";
+        if($project_id != ''){
+            $where .= " AND ptd.project_id = '".$project_id."' ";
+        }
+        if($employee_id != ''){
+            $where .= " AND ptd.assigen_id = '".$employee_id."' ";
+        }
+        return $where;
+    }
 
+    public function getProjectEmployeeTaskReport($get){
         global $callConfig;
         $return = array();
         $return['projects'] = array();
@@ -6356,59 +6462,38 @@ public function getProcessQcHeader($company_id, $process, $tranid, $user_id){
 
         $projects_sql = "SELECT id, project_name FROM projects WHERE company_id = '".$company_id."' AND is_active = 0 ORDER BY project_name ASC";
         $projects_res = $callConfig->getAllRows($projects_sql);
-
-        if(count((array)$projects_res) > 0){
-            foreach($projects_res as $project_row){
-                $return['projects'][] = $project_row;
-            }
+        foreach((array)$projects_res as $project_row){
+            $return['projects'][] = $project_row;
         }
 
         $employees_sql = "SELECT id, display_name, image FROM employees WHERE company_id = '".$company_id."' AND is_active = 0 ORDER BY display_name ASC";
         $employees_res = $callConfig->getAllRows($employees_sql);
-        if(count((array)$employees_res) > 0){
-            foreach($employees_res as $employee_row){
-                $return['employees'][] = $employee_row;
-            }
+        foreach((array)$employees_res as $employee_row){
+            $return['employees'][] = $employee_row;
         }
 
         $filters_only = isset($get['filters_only']) ? $get['filters_only'] : '';
-        if($filters_only == 'Y'){
-            return $return;
-        }
-
         $from_date = isset($get['from_date']) ? $get['from_date'] : '';
         $to_date = isset($get['to_date']) ? $get['to_date'] : '';
-        if($from_date == '' || $to_date == ''){
+        if($filters_only == 'Y' || $from_date == '' || $to_date == ''){
             return $return;
         }
 
-        $where = " ptd.company_id = '".$company_id."' AND p.company_id = '".$company_id."' AND e.company_id = '".$company_id."' AND ptd.is_active = 0 AND p.is_active = 0 AND e.is_active = 0 AND ptd.assigen_id = e.id AND ptd.project_id = p.id AND ptd.planned_start <= '".$to_date."' AND ptd.planned_finish >= '".$from_date."' ";
-
         $project_id = isset($get['project_id']) ? $get['project_id'] : '';
-        if($project_id != ''){
-            $where .= " AND ptd.project_id = '".$project_id."' ";
-        }
-
         $employee_id = isset($get['employee_id']) ? $get['employee_id'] : '';
-        if($employee_id != ''){
-            $where .= " AND ptd.assigen_id = '".$employee_id."' ";
-        }
+        $where = $this->buildProjectEmployeeTaskWhere($company_id, $from_date, $to_date, $project_id, $employee_id);
 
         $tasks_sql = "SELECT e.display_name, e.emp_code, e.image, p.project_name, ptd.task_name, ptd.id AS task_id, ptd.planned_start, ptd.planned_finish, ptd.current_status FROM project_task_details ptd, projects p, employees e WHERE ".$where." ORDER BY e.display_name ASC, p.project_name ASC, ptd.planned_start ASC";
         $return['sql'] = $tasks_sql;
         $tasks_res = $callConfig->getAllRows($tasks_sql);
-        if(count((array)$tasks_res) > 0){
-            foreach($tasks_res as $task_row){
-                $return['tasks'][] = $task_row;
-            }
+        foreach((array)$tasks_res as $task_row){
+            $return['tasks'][] = $task_row;
         }
+
         $query = "SELECT name, action_label,status FROM project_status WHERE company_id = '".$company_id."' AND is_active = 0 ORDER BY status ASC";
         $res = $callConfig->getAllRows($query);
-
-        if(count((array)$res) > 0){
-            foreach($res as $row){
-                $return['project_status'][$row->status] = $row;
-            }
+        foreach((array)$res as $row){
+            $return['project_status'][$row->status] = $row;
         }
 
         return $return;
