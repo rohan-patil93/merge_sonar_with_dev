@@ -13,6 +13,7 @@ interface EmployeeLoanConstants
     public const AND_COMPANY_ID_QUOTE = "' AND company_id='";
     public const ZERO_HM = '00:00';
     public const ZERO_DATE = '0000-00-00';
+    public const FORMAT_H_I_A = 'h:i A';
 }
 trait EmployeeTransportGatewayTrait
 {
@@ -203,7 +204,7 @@ trait EmployeeTransportGatewayTrait
 
         $formatted_time = '';
         if (!empty($display_time)) {
-            $formatted_time = date('h:i A', strtotime($display_time));
+            $formatted_time = date(EmployeeLoanConstants::FORMAT_H_I_A, strtotime($display_time));
         }
 
         return [
@@ -550,15 +551,17 @@ trait EmployeeTransportGatewayTrait
             $authorized_by = $post['authorized_by'] ?? '';
             $meater_reading = $post['meater_reading'] ?? null;
 
+            $response = ['status' => 'error', 'message' => 'Vehicle ID is required'];
             if (!$vehicle_id) {
-                return ['status' => 'error', 'message' => 'Vehicle ID is required'];
+                return $response;
             }
 
             $query = "SELECT * FROM transport_gateway WHERE id = {$vehicle_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
             $vehicle = $callConfig->getRow($query);
 
             if (!$vehicle) {
-                return ['status' => 'error', 'message' => 'Vehicle not found'];
+                $response['message'] = 'Vehicle not found';
+                return $response;
             }
 
             if (strlen($exit_time) == 5) {
@@ -600,13 +603,15 @@ trait EmployeeTransportGatewayTrait
 
             if ($result) {
                 $this->toupdatetransportgatewayprocessVal(['id' => $vehicle_id, 'company_id' => $company_id]);
-                return [
+                $response = [
                     'status' => 'success',
                     'message' => 'Vehicle status updated successfully',
                     'vehicle_id' => $vehicle_id
                 ];
+            } else {
+                $response = ['status' => 'error', 'message' => 'Failed to update vehicle record'];
             }
-            return ['status' => 'error', 'message' => 'Failed to update vehicle record'];
+            return $response;
         } catch (Exception $e) {
             return ['status' => 'error', 'message' => 'Error: ' . $e->getMessage()];
         }
@@ -620,7 +625,7 @@ trait EmployeeTransportGatewayTrait
             if (!$id) {
                 return ['status' => 'error', 'message' => 'ID is required'];
             }
-            $sql = "SELECT entry_date, entry_time, exit_date, exit_time FROM transport_gateway WHERE id='" . $id . "' AND company_id='" . $company_id . "' AND is_active=0 LIMIT 1";
+            $sql = "SELECT entry_date, entry_time, exit_date, exit_time FROM transport_gateway WHERE id='" . $id . EmployeeLoanConstants::AND_COMPANY_ID_QUOTE . $company_id . EmployeeLoanConstants::AND_IS_ACTIVE_0_QUOTE . " LIMIT 1";
             $row = $callConfig->getRow($sql);
             if (!$row) {
                 return ['status' => 'error', 'message' => 'Record not found'];
@@ -700,7 +705,7 @@ trait EmployeePersonalGatewayTrait
         }
 
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $where .= " AND ((entry_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "') OR (exit_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'))";
+            $where .= " AND ((entry_date BETWEEN '" . $get['from_date'] . EmployeeLoanConstants::AND_QUOTE . $get['to_date'] . "') OR (exit_date BETWEEN '" . $get['from_date'] . EmployeeLoanConstants::AND_QUOTE . $get['to_date'] . "'))";
         } elseif (!empty($get['from_date'])) {
             $where .= " AND (entry_date >= '" . $get['from_date'] . "' OR exit_date >= '" . $get['from_date'] . "')";
         } elseif (!empty($get['to_date'])) {
@@ -742,8 +747,8 @@ trait EmployeePersonalGatewayTrait
             'method_type' => $entry->method_type ?? '-',
             'gate_pass' => $entry->gate_pass ?? '-',
             'location' => $location_display,
-            'entry_time' => !empty($entry->entry_time) ? date('h:i A', strtotime($entry->entry_time)) : '-',
-            'exit_time' => !empty($entry->exit_time) ? date('h:i A', strtotime($entry->exit_time)) : '-',
+            'entry_time' => !empty($entry->entry_time) ? date(EmployeeLoanConstants::FORMAT_H_I_A, strtotime($entry->entry_time)) : '-',
+            'exit_time' => !empty($entry->exit_time) ? date(EmployeeLoanConstants::FORMAT_H_I_A, strtotime($entry->exit_time)) : '-',
             'entry_date' => $entry->entry_date ?? '-',
             'exit_date' => $entry->exit_date ?? '-',
             'current_status' => $entry->current_status ?? '0',
@@ -923,7 +928,7 @@ trait EmployeePersonalGatewayTrait
 
         $formatted_time = '';
         if (!empty($display_time)) {
-            $formatted_time = date('h:i A', strtotime($display_time));
+            $formatted_time = date(EmployeeLoanConstants::FORMAT_H_I_A, strtotime($display_time));
         }
 
         return [
@@ -1143,15 +1148,17 @@ trait EmployeePersonalGatewayTrait
             $action_status = $post['action_status'] ?? '';
             $process_val = ($gateway_type == 1 || $action_status == 'PENDING') ? 2 : 0;
 
+            $response = ['status' => 'error', 'message' => 'Entry ID is required'];
             if (!$entry_id) {
-                return ['status' => 'error', 'message' => 'Entry ID is required'];
+                return $response;
             }
 
             $query = "SELECT * FROM transport_personal_gateway WHERE id = {$entry_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
             $entry = $callConfig->getRow($query);
 
             if (!$entry) {
-                return ['status' => 'error', 'message' => 'Entry record not found'];
+                $response['message'] = 'Entry record not found';
+                return $response;
             }
 
             $exit_date = $post['exit_date'] ?? date('Y-m-d');
@@ -1194,13 +1201,15 @@ trait EmployeePersonalGatewayTrait
 
             if ($result) {
                 $this->toupdatetransportpersonalgatewayprocessVal(['id' => $entry_id, 'company_id' => $company_id]);
-                return [
+                $response = [
                     'status' => 'success',
                     'message' => 'Exit updated successfully',
                     'entry_id' => $entry_id
                 ];
+            } else {
+                $response = ['status' => 'error', 'message' => 'Failed to update record in database'];
             }
-            return ['status' => 'error', 'message' => 'Failed to update record in database'];
+            return $response;
         } catch (Exception $e) {
             error_log("updatepersonalgatewayexit: Exception - " . $e->getMessage());
             return ['status' => 'error', 'message' => 'Error: ' . $e->getMessage()];
@@ -1215,7 +1224,7 @@ trait EmployeePersonalGatewayTrait
             if (!$id) {
                 return ['status' => 'error', 'message' => 'ID is required'];
             }
-            $sql = "SELECT entry_date, entry_time, exit_date, exit_time, process_val FROM transport_personal_gateway WHERE id='" . $id . "' AND company_id='" . $company_id . "' AND is_active=0 LIMIT 1";
+            $sql = "SELECT entry_date, entry_time, exit_date, exit_time, process_val FROM transport_personal_gateway WHERE id='" . $id . EmployeeLoanConstants::AND_COMPANY_ID_QUOTE . $company_id . EmployeeLoanConstants::AND_IS_ACTIVE_0_QUOTE . " LIMIT 1";
             $row = $callConfig->getRow($sql);
             if (!$row) {
                 return ['status' => 'error', 'message' => 'Record not found'];
@@ -1303,7 +1312,7 @@ trait EmployeePersonalGatewayTrait
             LEFT JOIN employees e ON e.user_id = tg.created_by AND e.company_id = tg.company_id AND e.is_active = 0
             WHERE tg.company_id = '" . $company_id . "'
             AND tg.is_active = 0
-            AND tg.entry_date BETWEEN '" . $from_date . "' AND '" . $to_date . "'
+            AND tg.entry_date BETWEEN '" . $from_date . EmployeeLoanConstants::AND_QUOTE . $to_date . "'
             " . $filter_where . "
             ORDER BY tg.entry_date DESC, tg.entry_time DESC";
 
@@ -1879,53 +1888,21 @@ trait EmployeeAttendanceTrait
             'res1' => $res1
         );
     }
-    public function saveEmployeeAttendance($get, $post){
-        global $callConfig;
-
-        $company_id = $get['company_id'];
-        $user_id    = $get['user_id'];
-
-        $id              = $post['id'] ?? 0;
-        $employee_id     = $post['emp_id'];
-        $type        = $post['presentcheck']; // present | absent | leave
-
-        // ------------------------------
-        // Normalize input based on type
-        // ------------------------------
-        $attendace_date = $post['timesheet_date'];
-        $clock_in  = null;
-        $clock_out = null;
-        $leave_type_id = null;
-
+    private function normalizeAttendanceTypeInputs($type, &$post, &$attendace_date, &$clock_in, &$clock_out, &$leave_type_id)
+    {
         if ($type === 'present') {
-            $clock_in  = !empty($post['clock_in'])
-                ? date('H:i:s', strtotime($post['clock_in']))
-                : null;
-
-            $clock_out = !empty($post['clock_out'])
-                ? date('H:i:s', strtotime($post['clock_out']))
-                : null;
-                $post['original_status'] = 'P';
-
-        }
-
-        if ($type === 'absent') {
+            $clock_in  = !empty($post['clock_in']) ? date('H:i:s', strtotime($post['clock_in'])) : null;
+            $clock_out = !empty($post['clock_out']) ? date('H:i:s', strtotime($post['clock_out'])) : null;
+            $post['original_status'] = 'P';
+        } elseif ($type === 'absent') {
             $attendace_date = $post['absent_date'];
             $post['original_status'] = 'A';
-        }
-
-        if ($type === 'leave') {
+        } elseif ($type === 'leave') {
             $attendace_date = $post['leave_date'];
             $leave_type_id  = $post['leave_type_id'] ?? null;
-
-        }
-        if ($type === 'halfday') {
+        } elseif ($type === 'halfday') {
             $post['original_status'] = 'Z';
-
-            $clock_in = !empty($post['shift_clock_in'])
-                ? date('H:i:s', strtotime($post['shift_clock_in']))
-                : null;
-
+            $clock_in = !empty($post['shift_clock_in']) ? date('H:i:s', strtotime($post['shift_clock_in'])) : null;
             $clock_out = null;
 
             if (!empty($attendace_date) && !empty($post['shift_clock_in']) && !empty($post['shift_clock_out'])) {
@@ -1938,6 +1915,24 @@ trait EmployeeAttendanceTrait
                 }
             }
         }
+    }
+    public function saveEmployeeAttendance($get, $post)
+    {
+        global $callConfig;
+
+        $company_id = $get['company_id'];
+        $user_id    = $get['user_id'];
+
+        $id          = $post['id'] ?? 0;
+        $employee_id = $post['emp_id'];
+        $type        = $post['presentcheck']; // present | absent | leave
+
+        $attendace_date = $post['timesheet_date'];
+        $clock_in  = null;
+        $clock_out = null;
+        $leave_type_id = null;
+
+        $this->normalizeAttendanceTypeInputs($type, $post, $attendace_date, $clock_in, $clock_out, $leave_type_id);
 
 
         // ==============================
@@ -2137,8 +2132,6 @@ trait EmployeeAttendanceTrait
 
     public function saveClockTime($get, $post)
     {
-        global $callConfig;
-
         $company_id = $get['company_id'] ?? 0;
         $user_id = $post['user_id'] ?? 0;
         $rid = $post['rid'] ?? 0;
@@ -2155,15 +2148,7 @@ trait EmployeeAttendanceTrait
         $old_clock_times = '';
 
         if ($rid > 0) {
-            $query = "SELECT clock_in, clock_out FROM employee_daily_attendances WHERE id = {$rid} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
-            $existing = $callConfig->getRow($query);
-            if ($existing) {
-                $clock_in = $existing->clock_in ?? '';
-                $clock_out = $existing->clock_out ?? '';
-                if ($clock_in || $clock_out) {
-                    $old_clock_times = ($clock_in ?: '--') . ' - ' . ($clock_out ?: '--');
-                }
-            }
+            $this->loadExistingClockTimes($rid, $company_id, $clock_in, $clock_out, $old_clock_times);
         }
 
         $clock_out_date = $attendace_date;
@@ -2175,9 +2160,36 @@ trait EmployeeAttendanceTrait
         }
 
         $attendance_key_short_code = $this->calculateClockTimeAttendanceKey($company_id, $emp_id, $clock_in, $clock_out, $clock_in_date, $clock_out_date);
-
         $now = date(EmployeeLoanConstants::DATE_TIME_FORMAT);
-        $record_id = $rid;
+        $record_id = $this->persistDailyAttendanceClockTime($rid, $company_id, $emp_id, $attendace_date, $clock_in, $clock_out, $clock_in_date, $clock_out_date, $attendance_key_short_code, $old_clock_times, $user_id, $now);
+
+        return array(
+            'status' => 'success',
+            'rid' => $record_id,
+            'clock_in' => $clock_in,
+            'clock_out' => $clock_out,
+            'attendance_key_short_code' => $attendance_key_short_code,
+            'message' => 'Time updated successfully'
+        );
+    }
+
+    private function loadExistingClockTimes($rid, $company_id, &$clock_in, &$clock_out, &$old_clock_times)
+    {
+        global $callConfig;
+        $query = "SELECT clock_in, clock_out FROM employee_daily_attendances WHERE id = {$rid} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
+        $existing = $callConfig->getRow($query);
+        if ($existing) {
+            $clock_in = $existing->clock_in ?? '';
+            $clock_out = $existing->clock_out ?? '';
+            if ($clock_in || $clock_out) {
+                $old_clock_times = ($clock_in ?: '--') . ' - ' . ($clock_out ?: '--');
+            }
+        }
+    }
+
+    private function persistDailyAttendanceClockTime($rid, $company_id, $emp_id, $attendace_date, $clock_in, $clock_out, $clock_in_date, $clock_out_date, $attendance_key_short_code, $old_clock_times, $user_id, $now)
+    {
+        global $callConfig;
         if ($rid > 0) {
             $update_data = array(
                 'clock_in' => $clock_in,
@@ -2191,81 +2203,75 @@ trait EmployeeAttendanceTrait
                 'updated_date' => $now
             );
             $callConfig->updateRecord('employee_daily_attendances', $update_data, 'id', $rid);
-        } else {
-            $insert_data = array(
-                'company_id' => $company_id,
-                'employee_id' => $emp_id,
-                'attendace_date' => $attendace_date,
-                'clock_in' => $clock_in,
-                'clock_out' => $clock_out,
-                'clock_in_date' => $clock_in_date,
-                'clock_out_date' => $clock_out_date,
-                'attendance_key_short_code' => $attendance_key_short_code,
-                'old_clock_times' => $old_clock_times,
-                'leave_type_id' => null,
-                'is_active' => 0,
-                'current_status' => 0,
-                'created_by' => $user_id,
-                'created_date' => $now
-            );
-            $inserted = $callConfig->insertRecord('employee_daily_attendances', $insert_data);
-            $record_id = is_array($inserted) && isset($inserted['LASTID']) ? $inserted['LASTID'] : $inserted;
+            return $rid;
         }
 
-        return array(
-            'status' => 'success',
-            'rid' => $record_id,
+        $insert_data = array(
+            'company_id' => $company_id,
+            'employee_id' => $emp_id,
+            'attendace_date' => $attendace_date,
             'clock_in' => $clock_in,
             'clock_out' => $clock_out,
+            'clock_in_date' => $clock_in_date,
+            'clock_out_date' => $clock_out_date,
             'attendance_key_short_code' => $attendance_key_short_code,
-            'message' => 'Time updated successfully'
+            'old_clock_times' => $old_clock_times,
+            'leave_type_id' => null,
+            'is_active' => 0,
+            'current_status' => 0,
+            'created_by' => $user_id,
+            'created_date' => $now
         );
+        $inserted = $callConfig->insertRecord('employee_daily_attendances', $insert_data);
+        return is_array($inserted) && isset($inserted['LASTID']) ? $inserted['LASTID'] : $inserted;
     }
 
     private function calculateClockTimeAttendanceKey($company_id, $emp_id, $clock_in, $clock_out, $clock_in_date, $clock_out_date)
     {
-        global $callConfig;
-        if (
-            ($clock_in != '' && $clock_in != EmployeeLoanConstants::ZERO_TIME && $clock_in != EmployeeLoanConstants::ZERO_HM) &&
-            ($clock_out == '' || $clock_out == EmployeeLoanConstants::ZERO_TIME || $clock_out == EmployeeLoanConstants::ZERO_HM)
-        ) {
+        $hasIn = ($clock_in != '' && $clock_in != EmployeeLoanConstants::ZERO_TIME && $clock_in != EmployeeLoanConstants::ZERO_HM);
+        $hasOut = ($clock_out != '' && $clock_out != EmployeeLoanConstants::ZERO_TIME && $clock_out != EmployeeLoanConstants::ZERO_HM);
+
+        if ($hasIn && !$hasOut) {
             return 'MP';
         }
+        if ($hasIn && $hasOut) {
+            return $this->computeShiftHoursKey($company_id, $emp_id, $clock_in, $clock_out, $clock_in_date, $clock_out_date);
+        }
+        return '';
+    }
 
-        if (
-            ($clock_in != '' && $clock_in != EmployeeLoanConstants::ZERO_TIME && $clock_in != EmployeeLoanConstants::ZERO_HM) &&
-            ($clock_out != '' && $clock_out != EmployeeLoanConstants::ZERO_TIME && $clock_out != EmployeeLoanConstants::ZERO_HM)
-        ) {
-            $query = "SELECT shift_id FROM emp_shifts WHERE emp_id = {$emp_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
-            $data1 = $callConfig->getRow($query);
-            if (!empty($data1) && $data1->shift_id > 0) {
-                $query = "SELECT shift_setting_id FROM shifts WHERE id = {$data1->shift_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
-                $data2 = $callConfig->getRow($query);
-                if (!empty($data2) && $data2->shift_setting_id > 0) {
-                    $query = "SELECT * FROM shift_settings WHERE id = {$data2->shift_setting_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
-                    $data3 = $callConfig->getRow($query);
-                    if (!empty($data3)) {
-                        $in  = new DateTime($clock_in_date . ' ' . $clock_in);
-                        $out = new DateTime($clock_out_date . ' ' . $clock_out);
-                        $diff = $in->diff($out);
-                        $total_hours = ($diff->days * 24) + $diff->h + ($diff->i / 60);
+    private function computeShiftHoursKey($company_id, $emp_id, $clock_in, $clock_out, $clock_in_date, $clock_out_date)
+    {
+        global $callConfig;
+        $key = 'P';
+        $query = "SELECT shift_id FROM emp_shifts WHERE emp_id = {$emp_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
+        $data1 = $callConfig->getRow($query);
+        if (!empty($data1) && $data1->shift_id > 0) {
+            $query = "SELECT shift_setting_id FROM shifts WHERE id = {$data1->shift_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
+            $data2 = $callConfig->getRow($query);
+            if (!empty($data2) && $data2->shift_setting_id > 0) {
+                $query = "SELECT * FROM shift_settings WHERE id = {$data2->shift_setting_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
+                $data3 = $callConfig->getRow($query);
+                if (!empty($data3)) {
+                    $in  = new DateTime($clock_in_date . ' ' . $clock_in);
+                    $out = new DateTime($clock_out_date . ' ' . $clock_out);
+                    $diff = $in->diff($out);
+                    $total_hours = ($diff->days * 24) + $diff->h + ($diff->i / 60);
 
-                        $full_day_hours = floatval($data3->full_day_hours ?? 8);
-                        $half_day_hours = floatval($data3->half_day_hours ?? 4);
+                    $full_day_hours = floatval($data3->full_day_hours ?? 8);
+                    $half_day_hours = floatval($data3->half_day_hours ?? 4);
 
-                        if ($total_hours >= $full_day_hours) {
-                            return 'P';
-                        } elseif ($total_hours >= $half_day_hours) {
-                            return 'HP';
-                        } else {
-                            return 'A';
-                        }
+                    if ($total_hours >= $full_day_hours) {
+                        $key = 'P';
+                    } elseif ($total_hours >= $half_day_hours) {
+                        $key = 'HP';
+                    } else {
+                        $key = 'A';
                     }
                 }
             }
-            return 'P';
         }
-        return '';
+        return $key;
     }
     public function employeeattendancechangebaseonshift($get, $post)
     {
@@ -2303,50 +2309,7 @@ trait EmployeeAttendanceTrait
 
     private function determineShiftAttendanceKey($row, $emp_id, $company_id, $clock_in, $clock_out)
     {
-        global $callConfig;
-        if (
-            ($clock_in != '' && $clock_in != EmployeeLoanConstants::ZERO_TIME && $clock_in != EmployeeLoanConstants::ZERO_HM) &&
-            ($clock_out == '' || $clock_out == EmployeeLoanConstants::ZERO_TIME || $clock_out == EmployeeLoanConstants::ZERO_HM)
-        ) {
-            return 'MP';
-        }
-
-        if (
-            ($clock_in != '' && $clock_in != EmployeeLoanConstants::ZERO_TIME && $clock_in != EmployeeLoanConstants::ZERO_HM) &&
-            ($clock_out != '' && $clock_out != EmployeeLoanConstants::ZERO_TIME && $clock_out != EmployeeLoanConstants::ZERO_HM)
-        ) {
-            $query = "SELECT shift_id FROM emp_shifts WHERE emp_id = {$emp_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
-            $data1 = $callConfig->getRow($query);
-            if (!empty($data1) && $data1->shift_id > 0) {
-                $query = "SELECT shift_setting_id FROM shifts WHERE id = {$data1->shift_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
-                $data2 = $callConfig->getRow($query);
-                if (!empty($data2) && $data2->shift_setting_id > 0) {
-                    $query = "SELECT * FROM shift_settings WHERE id = {$data2->shift_setting_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
-                    $data3 = $callConfig->getRow($query);
-                    if (!empty($data3)) {
-                        $clockInDate = $row->clock_in_date;
-                        $clockOutDate = $row->clock_out_date;
-                        $in  = new DateTime($clockInDate . ' ' . $clock_in);
-                        $out = new DateTime($clockOutDate . ' ' . $clock_out);
-                        $diff = $in->diff($out);
-                        $total_hours = ($diff->days * 24) + $diff->h + ($diff->i / 60);
-
-                        $full_day_hours = floatval($data3->full_day_hours ?? 8);
-                        $half_day_hours = floatval($data3->half_day_hours ?? 4);
-
-                        if ($total_hours >= $full_day_hours) {
-                            return 'P';
-                        } elseif ($total_hours >= $half_day_hours) {
-                            return 'HP';
-                        } else {
-                            return 'A';
-                        }
-                    }
-                }
-            }
-            return 'P';
-        }
-        return '';
+        return $this->calculateClockTimeAttendanceKey($company_id, $emp_id, $clock_in, $clock_out, $row->clock_in_date, $row->clock_out_date);
     }
     public function updateAttendanceKey($get)
     {
@@ -2527,23 +2490,20 @@ trait EmployeeLeaveBuddyTrait
         $query = "SELECT DISTINCT " . $buddy_type . " FROM employees WHERE company_id='" . $company_id . "' AND is_active=0 AND " . $buddy_type . " IS NOT NULL AND " . $buddy_type . " != ''";
         $buddy_ids = $callConfig->getAllRows($query);
 
-        if (empty($buddy_ids)) {
-            return array('success' => true, 'data' => array());
-        }
-
         $id_list = array();
-        foreach ($buddy_ids as $row) {
-            if (!empty($row->{$buddy_type})) {
-                $id_list[] = "'" . $row->{$buddy_type} . "'";
+        if (!empty($buddy_ids)) {
+            foreach ($buddy_ids as $row) {
+                if (!empty($row->{$buddy_type})) {
+                    $id_list[] = "'" . $row->{$buddy_type} . "'";
+                }
             }
         }
 
-        if (empty($id_list)) {
-            return array('success' => true, 'data' => array());
+        $employees = array();
+        if (!empty($id_list)) {
+            $employees_query = "SELECT id, emp_code, display_name, first_name, last_name, email, phone_number FROM employees WHERE company_id='" . $company_id . "' AND is_active=0 AND id IN (" . implode(',', $id_list) . ") ORDER BY display_name ASC";
+            $employees = $callConfig->getAllRows($employees_query);
         }
-
-        $employees_query = "SELECT id, emp_code, display_name, first_name, last_name, email, phone_number FROM employees WHERE company_id='" . $company_id . "' AND is_active=0 AND id IN (" . implode(',', $id_list) . ") ORDER BY display_name ASC";
-        $employees = $callConfig->getAllRows($employees_query);
 
         return array('success' => true, 'data' => $employees ?: array());
     }
@@ -2624,7 +2584,7 @@ trait EmployeeLeaveBuddyTrait
         $updated_count = 0;
         $current_date = date(EmployeeLoanConstants::DATE_TIME_FORMAT);
         foreach ($employee_ids as $emp_id) {
-            $update_query = "UPDATE employees SET " . $buddy_type . "='" . $to_buddy . "', updated_date='" . $current_date . "' WHERE id='" . $emp_id . "' AND company_id='" . $company_id . "' AND is_active=0";
+            $update_query = "UPDATE employees SET " . $buddy_type . "='" . $to_buddy . "', updated_date='" . $current_date . "' WHERE id='" . $emp_id . EmployeeLoanConstants::AND_COMPANY_ID_QUOTE . $company_id . EmployeeLoanConstants::AND_IS_ACTIVE_0_QUOTE . "";
             if ($callConfig->executeQuery($update_query)) {
                 $updated_count++;
             }
@@ -3137,17 +3097,15 @@ class EmployeeLoanClass extends userClass
 
     public function __call($name, $args)
     {
-        if ($name === 'toupdatetransportgatewayprocess_val') {
-            return $this->toupdatetransportgatewayprocessVal(...$args);
-        }
-        if ($name === 'toupdatetransportpersonalgatewayprocess_val') {
-            return $this->toupdatetransportpersonalgatewayprocessVal(...$args);
-        }
-        if ($name === 'togetalldetailsforemployeevalattendance_old') {
-            return $this->togetalldetailsforemployeevalattendance(...$args);
-        }
-        if ($name === 'getAutoAttendanceTime_old') {
-            return $this->getAutoAttendanceTime(...$args);
+        $map = [
+            'toupdatetransportgatewayprocess_val' => 'toupdatetransportgatewayprocessVal',
+            'toupdatetransportpersonalgatewayprocess_val' => 'toupdatetransportpersonalgatewayprocessVal',
+            'togetalldetailsforemployeevalattendance_old' => 'togetalldetailsforemployeevalattendance',
+            'getAutoAttendanceTime_old' => 'getAutoAttendanceTime',
+        ];
+        if (isset($map[$name])) {
+            $method = $map[$name];
+            return $this->$method(...$args);
         }
         throw new BadMethodCallException("Method {$name} does not exist.");
     }
