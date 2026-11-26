@@ -111,9 +111,7 @@ interface IntegartionConstants
             ORDER BY location_name ASC';
     public const SQL_COND_AND_SI_CATEGORY_ID_IN = ' AND si.category_id IN (';
     public const SQL_COND_AND_SI_LOCATION_ID = ' AND si.location_id = ';
-    public const SQL_COND_AND_SI_IS_ACTIVE_0 = '
-                AND si.is_active = 0
-                ';
+    public const SQL_COND_AND_SI_IS_ACTIVE_0 = '" . self::SQL_COND_AND_SI_IS_ACTIVE_0 . "';
     public const SQL_COND_AND = '\' AND \'';
     public const CONST_A_ZA_Z0_9 = '/^[A-Za-z0-9_]+$/';
     public const SQL_COND_AND_PQI_TRANSACTION_ID_T_ID_AN = '\' AND pqi.transaction_id = t.id AND pqi.item_id = t.';
@@ -4263,20 +4261,14 @@ public function gnrolepermision($get){
         AND vrc.customer_id = ven.id
         AND vrcitm.item_id = jb.id
         AND vrc.company_id=".$get['company_id']."
-         AND  vrc.id = ".$get['trn']."
-        AND vrcitm.item_id = ".$get['job_id']."
-        AND vrcitm.min_exp = ".$get['min']."
-        AND vrcitm.max_exp = ".$get['max']."
+        " . self::SQL_COND_AND_VRC_ID . $get['trn'] . self::SQL_COND_AND_VRCITM_ITEM_ID . $get['job_id'] . self::SQL_COND_AND_VRCITM_MIN_EXP . $get['min'] . self::SQL_COND_AND_VRCITM_MAX_EXP . $get['max'] . "
         AND vrcitm.is_active = 0";
         $return['fullquery'] = $query;
         $fulldata = $callConfig->getAllRows($query);
          $return['fulldata'] = $fulldata;
          if(count((array)$fulldata)>0){
          $wquery="SELECT vrc.transaction_number, vrc.effective_from_date, vrc.effective_to_date, vrcitm.id vrcitm_vid, vrcitm.item_name, vrcitm.min_exp, vrcitm.max_exp, vrcitm.item_price, ven.id vendor_id, ven.display_name vendor_name FROM vendor_rate_cards vrc, vrc_items vrcitm , vendors_vms ven WHERE vrc.company_id = vrcitm.company_id AND vrc.id = vrcitm.transaction_id AND vrc.customer_id = ven.id AND vrc.company_id=".$get['company_id']."
-         AND  vrc.id = ".$get['trn']."
-        AND vrcitm.item_id = ".$get['job_id']."
-        AND vrcitm.min_exp = ".$get['min']."
-        AND vrcitm.max_exp = ".$get['max']."
+        " . self::SQL_COND_AND_VRC_ID . $get['trn'] . self::SQL_COND_AND_VRCITM_ITEM_ID . $get['job_id'] . self::SQL_COND_AND_VRCITM_MIN_EXP . $get['min'] . self::SQL_COND_AND_VRCITM_MAX_EXP . $get['max'] . "
         AND vrcitm.is_active = 0 ORDER BY vrcitm.item_price ASC";
         $return['wquery'] = $wquery;
         $rela_data = $callConfig->getAllRows($wquery);
@@ -4307,10 +4299,7 @@ public function gnrolepermision($get){
         AND vrc.customer_id = ven.id
         AND vrcitm.item_id = jb.id
         AND vrc.company_id=".$get['company_id']."
-         AND  vrc.id = ".$get['trn']."
-        AND vrcitm.item_id = ".$get['job_id']."
-        AND vrcitm.min_exp = ".$get['min']."
-        AND vrcitm.max_exp = ".$get['max']."
+        " . self::SQL_COND_AND_VRC_ID . $get['trn'] . self::SQL_COND_AND_VRCITM_ITEM_ID . $get['job_id'] . self::SQL_COND_AND_VRCITM_MIN_EXP . $get['min'] . self::SQL_COND_AND_VRCITM_MAX_EXP . $get['max'] . "
         AND vrcitm.is_active = 0 LIMIT 0,1";
         $return['subquery'] = $query;
         $fulldata = $callConfig->getAllRows($query);
@@ -5397,18 +5386,10 @@ public function getTrevllingPlanDataOld($get){
     public function getStationeryAvailableItemsData($get){
         global $callConfig;
         $return = array();
-        $query = "SELECT id, name
-            FROM stationery_categories
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_NAME_FROM_STATIONERY . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_NAME;
         $data = $callConfig->getAllRows($query);
         $return['category_res'] = $data;
-        $query = "SELECT id, location_name
-            FROM locations
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY location_name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT;
         $data = $callConfig->getAllRows($query);
         $return['location_res'] = $data;
         if(isset($get['ajax']) && $get['ajax'] =='Y'){
@@ -5436,9 +5417,7 @@ public function getTrevllingPlanDataOld($get){
                 LEFT JOIN stationery_item_ledger sil
                     ON sil.item_id = si.id AND sil.company_id = si.company_id
                     AND sil.is_active = 0
-                WHERE si.company_id = ".$get['company_id']."
-                AND si.is_active = 0
-                ".$whr."
+                WHERE si.company_id = ".$get['company_id']."" . self::SQL_COND_AND_SI_IS_ACTIVE_0 . "".$whr."
                 GROUP BY si.id
                 ORDER BY sc.name, si.item_name";
 
@@ -5454,19 +5433,11 @@ public function getTrevllingPlanDataOld($get){
         $return = array();
 
         /* Categories for filter */
-        $query = "SELECT id, name
-            FROM stationery_categories
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_NAME_FROM_STATIONERY . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_NAME;
 
         $data = $callConfig->getAllRows($query);
         $return['category_res'] = $data;
-        $query = "SELECT id, location_name
-            FROM locations
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY location_name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT;
 
         $data = $callConfig->getAllRows($query);
         $return['location_res'] = $data;
@@ -5535,19 +5506,11 @@ public function getTrevllingPlanDataOld($get){
         $return = array();
 
         /* Categories for filter */
-        $query = "SELECT id, name
-            FROM stationery_categories
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_NAME_FROM_STATIONERY . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_NAME;
 
         $data = $callConfig->getAllRows($query);
         $return['category_res'] = $data;
-        $query = "SELECT id, location_name
-            FROM locations
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY location_name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT;
 
         $data = $callConfig->getAllRows($query);
         $return['location_res'] = $data;
@@ -5579,9 +5542,7 @@ public function getTrevllingPlanDataOld($get){
                     ON l.id = si.location_id
                     AND l.company_id = si.company_id
                     AND l.is_active = 0
-                WHERE si.company_id = ".$get['company_id']."
-                AND si.is_active = 0
-                ".$whr."
+                WHERE si.company_id = ".$get['company_id']."" . self::SQL_COND_AND_SI_IS_ACTIVE_0 . "".$whr."
                 ORDER BY sc.name, si.item_name";
 
             $data = $callConfig->getAllRows($query);
@@ -5596,11 +5557,7 @@ public function getTrevllingPlanDataOld($get){
         $return = array();
 
         /* Categories */
-        $query = "SELECT id, name
-            FROM stationery_categories
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_NAME_FROM_STATIONERY . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_NAME;
         $return['category_res'] = $callConfig->getAllRows($query);
 
         /* Items */
@@ -5610,11 +5567,7 @@ public function getTrevllingPlanDataOld($get){
             AND is_active = 0
             ORDER BY item_name ASC";
         $return['item_res'] = $callConfig->getAllRows($query);
-        $query = "SELECT id, location_name
-            FROM locations
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY location_name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT;
         $return['location_res'] = $callConfig->getAllRows($query);
 
         /* Report data */
@@ -5680,18 +5633,10 @@ public function getTrevllingPlanDataOld($get){
 
         $return = array();
 
-        $query = "SELECT id, name
-            FROM stationery_categories
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_NAME_FROM_STATIONERY . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_NAME;
         $return['category_res'] = $callConfig->getAllRows($query);
 
-        $query = "SELECT id, location_name
-            FROM locations
-            WHERE company_id = ".$get['company_id']."
-            AND is_active = 0
-            ORDER BY location_name ASC";
+        $query = self::SQL_SELECT_SELECT_ID_LOCATION_NAME_FROM_L . $get['company_id'] . self::SQL_COND_AND_IS_ACTIVE_0_ORDER_BY_LOCAT;
         $return['location_res'] = $callConfig->getAllRows($query);
 
         if(isset($get['ajax']) && $get['ajax'] == 'Y'){
@@ -5727,9 +5672,7 @@ public function getTrevllingPlanDataOld($get){
                     ON sil.item_id = si.id
                     AND sil.company_id = si.company_id
                     AND sil.is_active = 0
-                WHERE si.company_id = ".$get['company_id']."
-                AND si.is_active = 0
-                ".$whr."
+                WHERE si.company_id = ".$get['company_id']."" . self::SQL_COND_AND_SI_IS_ACTIVE_0 . "".$whr."
                 GROUP BY si.id, si.location_id
                 ORDER BY l.location_name, sc.name, si.item_name";
 
