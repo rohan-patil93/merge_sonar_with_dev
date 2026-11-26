@@ -84,10 +84,13 @@ trait SurveyPollDashboardTrait
         );
     }
 
-    private function buildAdminDashboardSurveyMeta($surveyRows, $companyId, $last30Start, $prev30Start, $nowTs, &$details, &$completedEndLast30, &$completedEndPrev30): array
+    private function buildAdminDashboardSurveyMeta($surveyRows, $companyId, $timeWindows, &$details, &$completedEndLast30, &$completedEndPrev30): array
     {
         global $callConfig;
         $surveyMeta = array();
+        $last30Start = $timeWindows['last30Start'];
+        $prev30Start = $timeWindows['prev30Start'];
+        $nowTs = $timeWindows['nowTs'];
 
         foreach ($surveyRows as $surveyRow) {
             $questionQuery = "SELECT count(id) as totalquestion FROM " . TBL_SURVEY_SETUP_QUESTIONS . self::WHERE_COMPANY_ID_QUOTE . $companyId . "' AND is_active='0' AND survey_id='" . $surveyRow->id . "'";
@@ -158,7 +161,7 @@ trait SurveyPollDashboardTrait
         $trendStartDate = date('Y-m-01', strtotime('-11 months'));
         $monthlyQuery = "SELECT DATE_FORMAT(response_end_date, '%Y-%m') as month_key, count(id) as response_count
             FROM " . TBL_SURVEY_RESPONSES . "
-            WHERE company_id='" . $companyId . "' AND is_active='0' AND category='" . $category . "' AND current_status='" . ST_COMPLETE . "'
+            " . self::WHERE_COMPANY_ID_QUOTE . $companyId . "' AND is_active='0' AND category='" . $category . "' AND current_status='" . ST_COMPLETE . "'
             AND response_end_date >= '" . $trendStartDate . "'
             GROUP BY month_key
             ORDER BY month_key ASC";
@@ -177,6 +180,31 @@ trait SurveyPollDashboardTrait
             );
         }
         return $trend;
+    }
+
+    private function calculateAdminCompletionRate(&$details, $completedEndLast30, $completedEndPrev30)
+    {
+        $details['completion_rate']['completed_count'] = $details['summary']['completed'];
+        $details['completion_rate']['total_count'] = $details['summary']['total'];
+        if ($details['summary']['total'] > 0) {
+            $details['completion_rate']['percent'] = round(($details['summary']['completed'] / $details['summary']['total']) * 100);
+        }
+
+        if ($completedEndPrev30 > 0) {
+            $trendDelta = round((($completedEndLast30 - $completedEndPrev30) / $completedEndPrev30) * 100);
+        } elseif ($completedEndLast30 > 0) {
+            $trendDelta = 100;
+        } else {
+            $trendDelta = 0;
+        }
+        $trendDirection = 'flat';
+        if ($trendDelta > 0) {
+            $trendDirection = 'up';
+        } elseif ($trendDelta < 0) {
+            $trendDirection = 'down';
+        }
+        $details['completion_rate']['trend_percent'] = abs($trendDelta);
+        $details['completion_rate']['trend_direction'] = $trendDirection;
     }
 
     public function getsurveyadmindashboard($get)
@@ -202,7 +230,7 @@ trait SurveyPollDashboardTrait
         );
 
         $typeMap = array();
-        $typeQuery = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id='" . $companyId . "' AND is_active='0' AND genc_code='" . $typeGencCode . "'";
+        $typeQuery = "SELECT genc_detail_code, genc_detail_name FROM general_code_details" . self::WHERE_COMPANY_ID_QUOTE . $companyId . "' AND is_active='0' AND genc_code='" . $typeGencCode . "'";
         $typeRows = $callConfig->getAllRows($typeQuery);
         if (count((array)$typeRows) > 0) {
             foreach ($typeRows as $typeRow) {
@@ -210,7 +238,7 @@ trait SurveyPollDashboardTrait
             }
         }
 
-        $empCountQuery = "SELECT count(id) as total_employees FROM employees WHERE company_id='" . $companyId . "' AND is_active='0'";
+        $empCountQuery = "SELECT count(id) as total_employees FROM employees" . self::WHERE_COMPANY_ID_QUOTE . $companyId . "' AND is_active='0'";
         $empCountRow = $callConfig->getRow($empCountQuery);
         $totalEmployeeCount = (int)$empCountRow->total_employees;
 
@@ -220,26 +248,15 @@ trait SurveyPollDashboardTrait
         $completedEndLast30 = 0;
         $completedEndPrev30 = 0;
         $nowTs = time();
-        $last30Start = strtotime('-30 days', $nowTs);
-        $prev30Start = strtotime('-60 days', $nowTs);
+        $timeWindows = array(
+            'last30Start' => strtotime('-30 days', $nowTs),
+            'prev30Start' => strtotime('-60 days', $nowTs),
+            'nowTs' => $nowTs
+        );
 
-        $surveyMeta = $this->buildAdminDashboardSurveyMeta($surveyRows, $companyId, $last30Start, $prev30Start, $nowTs, $details, $completedEndLast30, $completedEndPrev30);
+        $surveyMeta = $this->buildAdminDashboardSurveyMeta($surveyRows, $companyId, $timeWindows, $details, $completedEndLast30, $completedEndPrev30);
 
-        $details['completion_rate']['completed_count'] = $details['summary']['completed'];
-        $details['completion_rate']['total_count'] = $details['summary']['total'];
-        if ($details['summary']['total'] > 0) {
-            $details['completion_rate']['percent'] = round(($details['summary']['completed'] / $details['summary']['total']) * 100);
-        }
-
-        if ($completedEndPrev30 > 0) {
-            $trendDelta = round((($completedEndLast30 - $completedEndPrev30) / $completedEndPrev30) * 100);
-        } elseif ($completedEndLast30 > 0) {
-            $trendDelta = 100;
-        } else {
-            $trendDelta = 0;
-        }
-        $details['completion_rate']['trend_percent'] = abs($trendDelta);
-        $details['completion_rate']['trend_direction'] = $trendDelta > 0 ? 'up' : ($trendDelta < 0 ? 'down' : 'flat');
+        $this->calculateAdminCompletionRate($details, $completedEndLast30, $completedEndPrev30);
 
         $details['responses_by_department'] = $this->fetchAdminDepartmentResponses($companyId, $category);
         $details['monthly_response_trend'] = $this->fetchAdminMonthlyTrend($companyId, $category);
@@ -281,7 +298,7 @@ trait SurveyPollDashboardTrait
 
         $surveyIdIn = implode(',', array_map('intval', $surveyIds));
 
-        $questionQuery = "SELECT survey_id, count(id) as total FROM " . TBL_SURVEY_SETUP_QUESTIONS . " WHERE company_id='" . $companyId . "' AND is_active='0' AND survey_id IN (" . $surveyIdIn . ") GROUP BY survey_id";
+        $questionQuery = "SELECT survey_id, count(id) as total FROM " . TBL_SURVEY_SETUP_QUESTIONS . self::WHERE_COMPANY_ID_QUOTE . $companyId . "' AND is_active='0' AND survey_id IN (" . $surveyIdIn . ") GROUP BY survey_id";
         $questionRows = $callConfig->getAllRows($questionQuery);
         if (count((array)$questionRows) > 0) {
             foreach ($questionRows as $questionRow) {
@@ -289,7 +306,7 @@ trait SurveyPollDashboardTrait
             }
         }
 
-        $answeredQuery = "SELECT survey_id, count(DISTINCT question_id) as answered FROM " . TBL_SURVEY_RESPONSE_DETAILS . " WHERE company_id='" . $companyId . "' AND is_active='0' AND employee_id='" . $empId . "' AND survey_id IN (" . $surveyIdIn . ") GROUP BY survey_id";
+        $answeredQuery = "SELECT survey_id, count(DISTINCT question_id) as answered FROM " . TBL_SURVEY_RESPONSE_DETAILS . self::WHERE_COMPANY_ID_QUOTE . $companyId . "' AND is_active='0' AND employee_id='" . $empId . "' AND survey_id IN (" . $surveyIdIn . ") GROUP BY survey_id";
         $answeredRows = $callConfig->getAllRows($answeredQuery);
         if (count((array)$answeredRows) > 0) {
             foreach ($answeredRows as $answeredRow) {
@@ -416,7 +433,7 @@ trait SurveyPollDashboardTrait
         $userId = isset($get['user_id']) ? trim($get['user_id']) : '';
         $companyId = isset($get['company_id']) ? trim($get['company_id']) : '';
         if ($userId != '' && $companyId != '') {
-            $empQuery = "SELECT id FROM employees WHERE company_id='" . $companyId . "' AND user_id='" . $userId . "' AND is_active='0' LIMIT 1";
+            $empQuery = "SELECT id FROM employees" . self::WHERE_COMPANY_ID_QUOTE . $companyId . "' AND user_id='" . $userId . "' AND is_active='0' LIMIT 1";
             $empRow = $callConfig->getRow($empQuery);
             if (!empty($empRow->id)) {
                 return $empRow->id;
@@ -448,7 +465,7 @@ trait SurveyPollDashboardTrait
 
         $typeGencCode = $category == '2' ? 'POLL_TYPES' : 'SURVEY_TYPES';
         $typeMap = array();
-        $typeQuery = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id='" . $companyId . "' AND is_active='0' AND genc_code='" . $typeGencCode . "'";
+        $typeQuery = "SELECT genc_detail_code, genc_detail_name FROM general_code_details" . self::WHERE_COMPANY_ID_QUOTE . $companyId . "' AND is_active='0' AND genc_code='" . $typeGencCode . "'";
         $typeRows = $callConfig->getAllRows($typeQuery);
         if (count((array)$typeRows) > 0) {
             foreach ($typeRows as $typeRow) {
@@ -492,89 +509,25 @@ trait SurveyPollDashboardTrait
         $deadlineRows = array();
         $activityRows = array();
         $tableRows = array();
-        $nowTs = time();
 
-        if (count((array)$assignmentRows) > 0) {
-            foreach ($assignmentRows as $assignmentRow) {
-                $surveyRow = (object)array(
-                    'id' => $assignmentRow->survey_id,
-                    'survey_name' => $assignmentRow->survey_name,
-                    'survey_start_date' => $assignmentRow->survey_start_date,
-                    'survey_end_date' => $assignmentRow->survey_end_date,
-                    'survey_start_time' => $assignmentRow->survey_start_time,
-                    'survey_end_time' => $assignmentRow->survey_end_time,
-                    'survey_type' => $assignmentRow->survey_type
-                );
+        $context = array(
+            'category' => $category,
+            'statusFilter' => $statusFilter,
+            'collectRows' => $collectRows,
+            'tableOnlyMode' => $tableOnlyMode,
+            'typeMap' => $typeMap,
+            'questionMap' => $questionMap,
+            'answeredMap' => $answeredMap
+        );
 
-                $surveyId = (int)$assignmentRow->survey_id;
-                $questionCount = isset($questionMap[$surveyId]) ? (int)$questionMap[$surveyId] : 0;
-                $answered = isset($answeredMap[$surveyId]) ? (int)$answeredMap[$surveyId] : 0;
-                $progressPercent = ($questionCount > 0 && $answered > 0) ? (int)round(($answered / $questionCount) * 100) : 0;
-
-                $endTime = $surveyRow->survey_end_time != "" ? $surveyRow->survey_end_time : self::TIME_DEFAULT_NOON;
-                $endTs = strtotime($surveyRow->survey_end_date . " " . $endTime);
-                $isExpired = ($endTs && $endTs < $nowTs);
-
-                if (!$tableOnlyMode) {
-                    $details['summary']['assigned']++;
-                    if ($assignmentRow->current_status == ST_COMPLETE) {
-                        $details['summary']['completed']++;
-                    } elseif ($assignmentRow->current_status == ST_INPROGRESS) {
-                        $details['summary']['in_progress']++;
-                    } elseif ($isExpired) {
-                        $details['summary']['pending']++;
-                    }
-                }
-
-                if ($collectRows && $this->matchesEmployeeSurveyDashboardFilter($assignmentRow, $isExpired, $statusFilter)) {
-                    $tableRows[] = $this->mapSurveyEmployeeDashboardTableRow($assignmentRow, $surveyRow, $progressPercent, $typeMap, $category);
-                }
-
-                if (!$tableOnlyMode) {
-                    if ($assignmentRow->current_status == ST_COMPLETE) {
-                        $activityRows[] = array(
-                            'type' => 'completed',
-                            'title' => 'Completed: ' . $assignmentRow->survey_name,
-                            'subtitle' => date(self::DATE_FORMAT_M_D_Y, strtotime($assignmentRow->response_end_date)),
-                            'icon_class' => 'fa fa-check f-w-600 bg-c-green',
-                            'sort_ts' => strtotime($assignmentRow->response_end_date . " " . ($assignmentRow->response_end_time != "" ? $assignmentRow->response_end_time : "00:00:00"))
-                        );
-                    } else {
-                        if ($assignmentRow->current_status == ST_INPROGRESS) {
-                            $activityRows[] = array(
-                                'type' => 'resumed',
-                                'title' => 'Resumed: ' . $assignmentRow->survey_name,
-                                'subtitle' => date(self::DATE_FORMAT_M_D_Y, strtotime($assignmentRow->response_start_date)),
-                                'icon_class' => 'ti-pencil-alt bg-c-blue',
-                                'sort_ts' => strtotime($assignmentRow->response_start_date . " " . ($assignmentRow->response_start_time != "" ? $assignmentRow->response_start_time : "00:00:00"))
-                            );
-                        } elseif ($progressPercent == 0) {
-                            $activityRows[] = array(
-                                'type' => 'assigned',
-                                'title' => 'Assigned: ' . $assignmentRow->survey_name,
-                                'subtitle' => date(self::DATE_FORMAT_M_D_Y, strtotime($assignmentRow->created_date)),
-                                'icon_class' => 'ti-timer bg-c-yellow',
-                                'sort_ts' => strtotime($assignmentRow->created_date)
-                            );
-                        }
-
-                        if (!$isExpired) {
-                            $daysLeft = $endTs ? max(0, (int)ceil(($endTs - $nowTs) / 86400)) : 0;
-                            $urgency = $daysLeft <= 3 ? 'danger' : ($daysLeft <= 7 ? 'warning' : 'info');
-                            $deadlineRows[] = array(
-                                'survey_id' => $assignmentRow->survey_id,
-                                'survey_name' => $assignmentRow->survey_name,
-                                'due_date' => date(self::DATE_FORMAT_M_D_Y, $endTs),
-                                'days_left' => $daysLeft,
-                                'days_left_label' => $daysLeft . ' Day' . ($daysLeft == 1 ? '' : 's') . ' Left',
-                                'urgency' => $urgency,
-                                'sort_ts' => $endTs
-                            );
-                        }
-                    }
-                }
-            }
-        }
+        $this->processEmployeeSurveyDashboardAssignments(
+            $assignmentRows,
+            $context,
+            $details,
+            $deadlineRows,
+            $activityRows,
+            $tableRows
+        );
 
         if ($collectRows && count((array)$tableRows) > 0) {
             usort($tableRows, function ($a, $b) {
@@ -598,6 +551,119 @@ trait SurveyPollDashboardTrait
         }
         $details['completion_rate']['message_text'] = "You've completed " . $details['completion_rate']['completed_count'] . " of " . $details['completion_rate']['required_count'] . " required " . $displayTag . ".";
 
+        $this->finalizeEmployeeDeadlinesAndActivities($deadlineRows, $activityRows, $details);
+
+        return $details;
+    }
+
+    private function appendEmployeeDashboardActivityAndDeadline($assignmentRow, $isExpired, $progressPercent, $endTs, $nowTs, &$activityRows, &$deadlineRows)
+    {
+        if ($assignmentRow->current_status == ST_COMPLETE) {
+            $activityRows[] = array(
+                'type' => 'completed',
+                'title' => 'Completed: ' . $assignmentRow->survey_name,
+                'subtitle' => date(self::DATE_FORMAT_M_D_Y, strtotime($assignmentRow->response_end_date)),
+                'icon_class' => 'fa fa-check f-w-600 bg-c-green',
+                'sort_ts' => strtotime($assignmentRow->response_end_date . " " . ($assignmentRow->response_end_time != "" ? $assignmentRow->response_end_time : "00:00:00"))
+            );
+        } else {
+            if ($assignmentRow->current_status == ST_INPROGRESS) {
+                $activityRows[] = array(
+                    'type' => 'resumed',
+                    'title' => 'Resumed: ' . $assignmentRow->survey_name,
+                    'subtitle' => date(self::DATE_FORMAT_M_D_Y, strtotime($assignmentRow->response_start_date)),
+                    'icon_class' => 'ti-pencil-alt bg-c-blue',
+                    'sort_ts' => strtotime($assignmentRow->response_start_date . " " . ($assignmentRow->response_start_time != "" ? $assignmentRow->response_start_time : "00:00:00"))
+                );
+            } elseif ($progressPercent == 0) {
+                $activityRows[] = array(
+                    'type' => 'assigned',
+                    'title' => 'Assigned: ' . $assignmentRow->survey_name,
+                    'subtitle' => date(self::DATE_FORMAT_M_D_Y, strtotime($assignmentRow->created_date)),
+                    'icon_class' => 'ti-timer bg-c-yellow',
+                    'sort_ts' => strtotime($assignmentRow->created_date)
+                );
+            }
+
+            if (!$isExpired) {
+                $daysLeft = $endTs ? max(0, (int)ceil(($endTs - $nowTs) / 86400)) : 0;
+                $urgency = 'info';
+                if ($daysLeft <= 3) {
+                    $urgency = 'danger';
+                } elseif ($daysLeft <= 7) {
+                    $urgency = 'warning';
+                }
+                $deadlineRows[] = array(
+                    'survey_id' => $assignmentRow->survey_id,
+                    'survey_name' => $assignmentRow->survey_name,
+                    'due_date' => date(self::DATE_FORMAT_M_D_Y, $endTs),
+                    'days_left' => $daysLeft,
+                    'days_left_label' => $daysLeft . ' Day' . ($daysLeft == 1 ? '' : 's') . ' Left',
+                    'urgency' => $urgency,
+                    'sort_ts' => $endTs
+                );
+            }
+        }
+    }
+
+    private function processEmployeeSurveyDashboardAssignments($assignmentRows, $context, &$details, &$deadlineRows, &$activityRows, &$tableRows)
+    {
+        $category = $context['category'];
+        $statusFilter = $context['statusFilter'];
+        $collectRows = $context['collectRows'];
+        $tableOnlyMode = $context['tableOnlyMode'];
+        $typeMap = $context['typeMap'];
+        $questionMap = $context['questionMap'];
+        $answeredMap = $context['answeredMap'];
+        $nowTs = time();
+
+        if (count((array)$assignmentRows) == 0) {
+            return;
+        }
+
+        foreach ($assignmentRows as $assignmentRow) {
+            $surveyRow = (object)array(
+                'id' => $assignmentRow->survey_id,
+                'survey_name' => $assignmentRow->survey_name,
+                'survey_start_date' => $assignmentRow->survey_start_date,
+                'survey_end_date' => $assignmentRow->survey_end_date,
+                'survey_start_time' => $assignmentRow->survey_start_time,
+                'survey_end_time' => $assignmentRow->survey_end_time,
+                'survey_type' => $assignmentRow->survey_type
+            );
+
+            $surveyId = (int)$assignmentRow->survey_id;
+            $questionCount = isset($questionMap[$surveyId]) ? (int)$questionMap[$surveyId] : 0;
+            $answered = isset($answeredMap[$surveyId]) ? (int)$answeredMap[$surveyId] : 0;
+            $progressPercent = ($questionCount > 0 && $answered > 0) ? (int)round(($answered / $questionCount) * 100) : 0;
+
+            $endTime = $surveyRow->survey_end_time != "" ? $surveyRow->survey_end_time : self::TIME_DEFAULT_NOON;
+            $endTs = strtotime($surveyRow->survey_end_date . " " . $endTime);
+            $isExpired = ($endTs && $endTs < $nowTs);
+
+            if (!$tableOnlyMode) {
+                $details['summary']['assigned']++;
+                if ($assignmentRow->current_status == ST_COMPLETE) {
+                    $details['summary']['completed']++;
+                } elseif ($assignmentRow->current_status == ST_INPROGRESS) {
+                    $details['summary']['in_progress']++;
+                } elseif ($isExpired) {
+                    $details['summary']['pending']++;
+                }
+            }
+
+            if ($collectRows && $this->matchesEmployeeSurveyDashboardFilter($assignmentRow, $isExpired, $statusFilter)) {
+                $tableRows[] = $this->mapSurveyEmployeeDashboardTableRow($assignmentRow, $surveyRow, $progressPercent, $typeMap, $category);
+            }
+
+            if (!$tableOnlyMode) {
+                $this->appendEmployeeDashboardActivityAndDeadline($assignmentRow, $isExpired, $progressPercent, $endTs, $nowTs, $activityRows, $deadlineRows);
+            }
+        }
+    }
+
+    private function finalizeEmployeeDeadlinesAndActivities($deadlineRows, $activityRows, &$details)
+    {
         if (count((array)$deadlineRows) > 0) {
             usort($deadlineRows, function ($a, $b) {
                 return $a['sort_ts'] <=> $b['sort_ts'];
@@ -627,8 +693,6 @@ trait SurveyPollDashboardTrait
                 $activityLimit++;
             }
         }
-
-        return $details;
     }
 }
 
@@ -792,7 +856,7 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
     public function savesurveyreponses($post, $get = array())
     {
         global $callConfig;
-        $whr = "survey_id=" . $post['survey_response']['survey_id'] . " and employee_id=" . $post['survey_response']['employee_id'];
+        $whr = "survey_id=" . $post['survey_response']['survey_id'] . self::AND_EMPLOYEE_ID . $post['survey_response']['employee_id'];
         if (!empty($get['company_id'])) {
             $whr .= " and company_id=" . intval($get['company_id']);
         }
@@ -826,7 +890,7 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         $surveyvalues['totalquestion'] = $qresponse->totalquestion;
 
         $surveyed = $svalues->assigned_to_count;
-        $whr = self::COMPANY_ID . $company_id . self::AND_ACTIVE_0_SURVEY_ID . $svalues->id . self::AND_CATEGORY . $category . " and current_status=" . ST_COMPLETE;
+        $whr = self::COMPANY_ID . $company_id . self::AND_ACTIVE_0_SURVEY_ID . $svalues->id . self::AND_CATEGORY . $category . self::AND_CURRENT_STATUS . ST_COMPLETE;
         $questions = $callConfig->selectQuery(TBL_SURVEY_RESPONSES, 'count(id) as totalresponse', $whr, '', '', '');
         $resp = $callConfig->getRow($questions);
 
@@ -862,11 +926,11 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         $details['summary'][] = array('data' => $sresponse->total_surveys, 'name' => $tag1, 'bgcolor' => 'primary');
         $details['summary'][] = array('data' => $sresponse->collectors, 'name' => $tag2, 'bgcolor' => 'secondary');
 
-        $queryresponse = "SELECT count(id) as total_responses,round(sum(duration_taken)/count(id),2) as avg_duration_taken FROM " . TBL_SURVEY_RESPONSES . self::WHERE_ACTIVE_0_COMPANY . $get['company_id'] . self::AND_CATEGORY . $get['category'] . " and current_status=" . ST_COMPLETE;
+        $queryresponse = "SELECT count(id) as total_responses,round(sum(duration_taken)/count(id),2) as avg_duration_taken FROM " . TBL_SURVEY_RESPONSES . self::WHERE_ACTIVE_0_COMPANY . $get['company_id'] . self::AND_CATEGORY . $get['category'] . self::AND_CURRENT_STATUS . ST_COMPLETE;
         $response = $callConfig->getRow($queryresponse);
         $details['summary'][] = array('data' => $response->total_responses == '' ? '0' : $response->total_responses, 'name' => 'Responses', 'bgcolor' => 'success');
 
-        $queryresponse = "SELECT count(id) as partial FROM " . TBL_SURVEY_RESPONSES . self::WHERE_ACTIVE_0_COMPANY . $get['company_id'] . self::AND_CATEGORY . $get['category'] . " and current_status=" . ST_INPROGRESS;
+        $queryresponse = "SELECT count(id) as partial FROM " . TBL_SURVEY_RESPONSES . self::WHERE_ACTIVE_0_COMPANY . $get['company_id'] . self::AND_CATEGORY . $get['category'] . self::AND_CURRENT_STATUS . ST_INPROGRESS;
         $presponse = $callConfig->getRow($queryresponse);
         $details['summary'][] = array('data' => $presponse->partial == '' ? '0' : $presponse->partial, 'name' => 'Partial', 'bgcolor' => 'warning');
         $details['summary'][] = array('data' => $response->avg_duration_taken == '' ? '0' : $response->avg_duration_taken, 'name' => 'Avg Time', 'bgcolor' => 'dark');
@@ -898,7 +962,7 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         }
         $details['employees'] = $employees;
 
-        $queryresponse = "SELECT count(id) as total_surveys_responses FROM " . TBL_SURVEY_RESPONSES . self::WHERE_ACTIVE_0_COMPANY . $get['company_id'] . self::AND_SURVEY_ID . $get['survey_id'] . " and current_status=" . ST_COMPLETE;
+        $queryresponse = "SELECT count(id) as total_surveys_responses FROM " . TBL_SURVEY_RESPONSES . self::WHERE_ACTIVE_0_COMPANY . $get['company_id'] . self::AND_SURVEY_ID . $get['survey_id'] . self::AND_CURRENT_STATUS . ST_COMPLETE;
         $response = $callConfig->getRow($queryresponse);
         $details['no_of_responds'] = $response->total_surveys_responses == '' ? '0' : $response->total_surveys_responses;
 
@@ -915,7 +979,7 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
     public function getsurveyresult($get)
     {
         global $callConfig;
-        $queryresponse = self::SQL_SELECT_ALL_FROM . TBL_SURVEY_RESPONSE_DETAILS . self::WHERE_ACTIVE_0_COMPANY . $get['company_id'] . self::AND_SURVEY_ID . $get['survey_id'] . " and employee_id=" . $get['survey_emp_id'];
+        $queryresponse = self::SQL_SELECT_ALL_FROM . TBL_SURVEY_RESPONSE_DETAILS . self::WHERE_ACTIVE_0_COMPANY . $get['company_id'] . self::AND_SURVEY_ID . $get['survey_id'] . self::AND_EMPLOYEE_ID . $get['survey_emp_id'];
         $response = $callConfig->getAllRows($queryresponse);
         $resultdata = array();
         foreach ($response as $result) {
@@ -966,6 +1030,27 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         return array("Remarks");
     }
 
+    private function countSurveyOptionResponses($query_opt_details, $optionsdata, $qtype)
+    {
+        $count = 0;
+        if ($qtype != 4) {
+            foreach ($query_opt_details as $opt) {
+                $response = json_decode($opt->response_option, 1);
+                if (in_array($optionsdata, (array)$response)) {
+                    $count++;
+                }
+            }
+        } else {
+            foreach ($query_opt_details as $opt) {
+                $response = json_decode($opt->response_option, 1)[0] ?? '';
+                if ($response != '') {
+                    $count++;
+                }
+            }
+        }
+        return $count;
+    }
+
     public function getsurveyreport($get)
     {
         global $callConfig;
@@ -994,29 +1079,41 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
                 $whr = self::COMPANY_ID . $get['company_id'] . self::AND_ACTIVE_0_SURVEY_ID . $get['survey_id'] . self::AND_QUESTION_ID . $value->id;
                 $query_opt = $callConfig->selectQuery(TBL_SURVEY_RESPONSE_DETAILS, '*', $whr, '', '', '');
                 $query_opt_details = $callConfig->getAllRows($query_opt);
-                $count = 0;
 
-                if ($qtype != 4) {
-                    foreach ($query_opt_details as $opt) {
-                        $response = json_decode($opt->response_option, 1);
-                        if (in_array($optionsdata, (array)$response)) {
-                            $count++;
-                        }
-                    }
-                } else {
-                    foreach ($query_opt_details as $opt) {
-                        $response = json_decode($opt->response_option, 1)[0] ?? '';
-                        if ($response != '') {
-                            $count++;
-                        }
-                    }
-                }
-                $details['option'][$value->id]['answer'][$optionid] = $count;
+                $details['option'][$value->id]['answer'][$optionid] = $this->countSurveyOptionResponses($query_opt_details, $optionsdata, $qtype);
                 $optionid++;
             }
         }
         $details['maxoptions'] = $maxoptions;
         return $details;
+    }
+
+    private function processEmpSurveyRow($svalues, $currentStatus, $companyId)
+    {
+        global $callConfig;
+        $surveyvalues = array(
+            'survey_id' => $svalues->id,
+            'survey_name' => $svalues->survey_name,
+            'survey_start_date' => date(self::DATE_FORMAT_D_M_Y, strtotime($svalues->survey_start_date)),
+            'survey_end_date' => date(self::DATE_FORMAT_D_M_Y, strtotime($svalues->survey_end_date)),
+            'current_status' => $currentStatus
+        );
+        $whr = self::COMPANY_ID . $companyId . self::AND_ACTIVE_0_SURVEY_ID . $svalues->id;
+        $questions = $callConfig->selectQuery(TBL_SURVEY_SETUP_QUESTIONS, 'count(id) as totalquestion', $whr, '', '', '');
+        $qresponse = $callConfig->getRow($questions);
+        $surveyvalues['totalquestion'] = $qresponse->totalquestion;
+
+        if ($currentStatus == ST_COMPLETE) {
+            $surveyvalues['completionrate'] = ST_COMPLETE;
+            $surveyvalues['completionratecolor'] = "success";
+        } elseif (date('Y-m-d') > $svalues->survey_end_date && strtotime($svalues->survey_end_date . " " . $svalues->survey_end_time) < strtotime(date(self::DATE_FORMAT_D_M_Y))) {
+            $surveyvalues['completionratecolor'] = "warning";
+            $surveyvalues['completionrate'] = ST_INACTIVE;
+        } else {
+            $surveyvalues['completionrate'] = ST_ACTIVE;
+            $surveyvalues['completionratecolor'] = "primary";
+        }
+        return $surveyvalues;
     }
 
     public function getempsurvey($get)
@@ -1036,41 +1133,19 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
 
             foreach ($response as $svalues) {
                 $survyidlist[] = $svalues->id;
-                $surveyvalues = array(
-                    'survey_id' => $svalues->id,
-                    'survey_name' => $svalues->survey_name,
-                    'survey_start_date' => date(self::DATE_FORMAT_D_M_Y, strtotime($svalues->survey_start_date)),
-                    'survey_end_date' => date(self::DATE_FORMAT_D_M_Y, strtotime($svalues->survey_end_date)),
-                    'current_status' => $list->current_status
-                );
-                $whr = self::COMPANY_ID . $get['company_id'] . self::AND_ACTIVE_0_SURVEY_ID . $svalues->id;
-                $questions = $callConfig->selectQuery(TBL_SURVEY_SETUP_QUESTIONS, 'count(id) as totalquestion', $whr, '', '', '');
-                $qresponse = $callConfig->getRow($questions);
-                $surveyvalues['totalquestion'] = $qresponse->totalquestion;
-
-                if ($list->current_status == ST_COMPLETE) {
-                    $surveyvalues['completionrate'] = ST_COMPLETE;
-                    $surveyvalues['completionratecolor'] = "success";
-                } elseif (date('Y-m-d') > $svalues->survey_end_date && strtotime($svalues->survey_end_date . " " . $svalues->survey_end_time) < strtotime(date(self::DATE_FORMAT_D_M_Y))) {
-                    $surveyvalues['completionratecolor'] = "warning";
-                    $surveyvalues['completionrate'] = ST_INACTIVE;
-                } else {
-                    $surveyvalues['completionrate'] = ST_ACTIVE;
-                    $surveyvalues['completionratecolor'] = "primary";
-                }
-                $details['survey_details'][] = $surveyvalues;
+                $details['survey_details'][] = $this->processEmpSurveyRow($svalues, $list->current_status, $get['company_id']);
             }
         }
 
         $survyidlist_str = implode(',', (array)$survyidlist);
         $details['summary'][] = array('data' => count((array)$survey_list), 'name' => $tag1, 'bgcolor' => 'primary');
 
-        $queryresponse = "SELECT count(id) as total_responses, round(sum(duration_taken)/count(id),2) as avg_duration_taken FROM " . TBL_SURVEY_RESPONSES . " WHERE employee_id=" . $get['emp_id'] . " and is_active=0 and company_id=" . $get['company_id'] . self::AND_CATEGORY . $get['category'] . " and survey_id in (" . ($survyidlist_str ?: '0') . ") and current_status=" . ST_COMPLETE;
+        $queryresponse = "SELECT count(id) as total_responses, round(sum(duration_taken)/count(id),2) as avg_duration_taken FROM " . TBL_SURVEY_RESPONSES . " WHERE employee_id=" . $get['emp_id'] . " and is_active=0 and company_id=" . $get['company_id'] . self::AND_CATEGORY . $get['category'] . " and survey_id in (" . ($survyidlist_str ?: '0') . ")" . self::AND_CURRENT_STATUS . ST_COMPLETE;
         $response = $callConfig->getRow($queryresponse);
 
         $details['summary'][] = array('data' => ($response->total_responses == '' ? '0' : $response->total_responses), 'name' => 'Complete', 'bgcolor' => 'success');
 
-        $queryresponse = "SELECT count(id) as partial FROM " . TBL_SURVEY_RESPONSES . " WHERE employee_id=" . $get['emp_id'] . " and is_active=0 and company_id=" . $get['company_id'] . self::AND_CATEGORY . $get['category'] . " and survey_id in (" . ($survyidlist_str ?: '0') . ") and current_status=" . ST_INPROGRESS;
+        $queryresponse = "SELECT count(id) as partial FROM " . TBL_SURVEY_RESPONSES . " WHERE employee_id=" . $get['emp_id'] . " and is_active=0 and company_id=" . $get['company_id'] . self::AND_CATEGORY . $get['category'] . " and survey_id in (" . ($survyidlist_str ?: '0') . ")" . self::AND_CURRENT_STATUS . ST_INPROGRESS;
         $presponse = $callConfig->getRow($queryresponse);
 
         $details['summary'][] = array('data' => ($presponse->partial == '' ? '0' : $presponse->partial), 'name' => 'Partial', 'bgcolor' => 'warning');
@@ -1093,6 +1168,74 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         $details['survey_qtypes'] = $survey_qtypes;
 
         return $details;
+    }
+
+    private function calculateEmpWorkSummary($emp, $context)
+    {
+        $empwork = $context['empwork'];
+        $card = $context['card'];
+        $vrc = $context['vrc'];
+        $mpc = $context['mpc'];
+        $vend = $context['vend'];
+        $timesheet = $context['timesheet'];
+        $lea = $context['lea'];
+        $loc_holiday = $context['loc_holiday'];
+
+        $emp_all = (array)$emp;
+        $emp_id = $emp->employee_id;
+        $emp_rate_card_id = $empwork[$emp_id]['vrc_id'];
+        $emp_vendor_id = $card[$emp_rate_card_id]['customer_id'] ?? '';
+        $rate_uom = $vrc[$empwork[$emp_id]['vrc_item_id']]['purchase_uom'] ?? '';
+        $rate_amount = floatval($vrc[$empwork[$emp_id]['vrc_item_id']]['item_price'] ?? 0);
+        $mpc_uom = $mpc[$empwork[$emp_id]['work_order_detail_id']]['purchase_uom'] ?? '';
+        $mpc_amount = floatval($mpc[$empwork[$emp_id]['work_order_detail_id']]['item_price'] ?? 0);
+        $location_id = $emp->location_id;
+        $working_days = $loc_holiday[$location_id]['count_working_days'] ?? 1;
+        if ($working_days <= 0) {
+            $working_days = 1;
+        }
+
+        $emp_all['vendor_id'] = $emp_vendor_id;
+        $emp_all['vendor_name'] = $vend[$emp_vendor_id]['display_name'] ?? '';
+        $emp_all['billable_hrs'] = isset($timesheet[$emp_id]['billable_hrs']) ? $timesheet[$emp_id]['billable_hrs'] : 0;
+        $emp_all['nonbillable_hrs'] = isset($timesheet[$emp_id]['nonbillable_hrs']) ? $timesheet[$emp_id]['nonbillable_hrs'] : 0;
+        $emp_all['current_status'] = isset($timesheet[$emp_id]['current_status']) ? $timesheet[$emp_id]['current_status'] : 0;
+        if ($rate_uom == 'PD') {
+            $rate_amount = $rate_amount * $working_days;
+        }
+        if ($mpc_uom == 'PD') {
+            $mpc_amount = $mpc_amount * $working_days;
+        }
+        $amount = round(($emp_all['billable_hrs'] / 8) * ($rate_amount / $working_days));
+        $main_amount = round(($emp_all['billable_hrs'] / 8) * ($mpc_amount / $working_days));
+        $non_amount = round(($emp_all['nonbillable_hrs'] / 8) * ($rate_amount / $working_days));
+
+        $emp_all['vrc_uom'] = $rate_uom;
+        $emp_all['mpc_uom'] = $mpc_uom;
+        $emp_all['min_exp'] = $vrc[$empwork[$emp_id]['vrc_item_id']]['min_exp'] ?? 0;
+        $emp_all['max_exp'] = $vrc[$empwork[$emp_id]['vrc_item_id']]['max_exp'] ?? 0;
+        $emp_all['vrc_budgeted_amount'] = $rate_amount;
+        $emp_all['vrc_billable_amount'] = $amount;
+        $emp_all['billable_amount'] = $main_amount;
+        $emp_all['budgeted_amount'] = $mpc_amount;
+        $emp_all['nonbillable_amount'] = $non_amount;
+        $emp_all['work_order_id'] = $empwork[$emp_id]['work_order_id'];
+        $emp_all['work_order_detail_id'] = $empwork[$emp_id]['work_order_detail_id'];
+        $emp_all['vrc_id'] = $empwork[$emp_id]['vrc_id'];
+        $emp_all['vrc_item_id'] = $empwork[$emp_id]['vrc_item_id'];
+        $emp_all['mpc_item_price'] = $mpc[$empwork[$emp_id]['work_order_detail_id']]['item_price'] ?? 0;
+        $emp_all['vrc_item_price'] = $vrc[$empwork[$emp_id]['vrc_item_id']]['item_price'] ?? 0;
+        $emp_all['experience_base'] = $vrc[$empwork[$emp_id]['vrc_item_id']]['experience_base'] ?? '';
+        $emp_all['leave_days'] = isset($lea[$emp_id]) ? $lea[$emp_id] : 0;
+        $joining_timestamp = strtotime($emp->joining_date);
+        $current_exp = (time() - $joining_timestamp) / (365 * 24 * 60 * 60);
+        $experience = $emp->total_experiance + $current_exp;
+        $min_exp = $emp_all['min_exp'];
+        $max_exp = $emp_all['max_exp'];
+        $remark = ($experience >= $min_exp && $experience <= $max_exp) ? '' : 'Experience Mismatch';
+        $emp_all['remark'] = $remark;
+
+        return $emp_all;
     }
 
     public function totestcodems($get)
@@ -1120,7 +1263,7 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         }
 
         $emp_data = array();
-        if (count($emps) > 0) {
+        if (!empty($emps)) {
             $query = "SELECT id as employee_id, emp_code, display_name as employee_name, department_id, (SELECT dp.department_name FROM departments dp WHERE dp.id = department_id) as department_name, vertical_id, (SELECT tc.vertical_name FROM verticals tc WHERE tc.id = vertical_id) as verticle_name, location_id, (SELECT lc.location_name FROM locations lc WHERE lc.id = location_id) as location_name, billable as emp_billable, cost_center_id, cost_center_id as cost_center, (SELECT cc.cost_center_name FROM cost_centers cc WHERE cc.id = cost_center_id) as cost_center_name, (total_experiance + (DATEDIFF(NOW(), joining_date) / 365)) exp_joining_date, joining_date, COALESCE(total_experiance, '0') AS total_experiance, job_title_id AS job_title_id, (SELECT jt.job_title FROM job_titles jt WHERE jt.company_id = company_id AND jt.id =job_title_id) job_title, approval_manager_id as reports_to, '' as remark FROM `employees` WHERE id IN (" . implode(",", $emps) . ")";
             $emp_data = $callConfig->getAllRows($query);
         }
@@ -1135,7 +1278,7 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         $card = array();
         $vendors = array();
         $vrc = array();
-        if (count($vrc_ids) > 0) {
+        if (!empty($vrc_ids)) {
             $query = "SELECT id, customer_id FROM vendor_rate_cards WHERE company_id =" . $get['company_id'] . self::AND_ID_IN . implode(",", $vrc_ids) . ")";
             $ratecards = $callConfig->getAllRows($query);
             foreach ($ratecards as $rate) {
@@ -1150,7 +1293,7 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         }
 
         $mpc = array();
-        if (count($work_order_ids) > 0) {
+        if (!empty($work_order_ids)) {
             $query = "SELECT id, transaction_id, item_id, purchase_uom, min_exp, max_exp, item_price FROM mpc_items WHERE company_id =" . $get['company_id'] . self::AND_ID_IN . implode(",", $work_order_detail_ids) . ")";
             $impcs = $callConfig->getAllRows($query);
             foreach ($impcs as $impc) {
@@ -1159,7 +1302,7 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         }
 
         $vend = array();
-        if (count($vendors) > 0) {
+        if (!empty($vendors)) {
             $query = "SELECT id, IFNULL(company, display_name) as display_name FROM vendors WHERE company_id =" . $get['company_id'] . self::AND_ID_IN . implode(",", $vendors) . ")";
             $vendordata = $callConfig->getAllRows($query);
             foreach ($vendordata as $vendor) {
@@ -1179,61 +1322,18 @@ class SurveyPollUserClass extends userClass implements SurveyPollConstants
         $loc_holiday = $this->toretriveminhorsandweksanddayebasedondateswork($get);
         $return = array();
 
+        $empWorkContext = array(
+            'empwork' => $empwork,
+            'card' => $card,
+            'vrc' => $vrc,
+            'mpc' => $mpc,
+            'vend' => $vend,
+            'timesheet' => $timesheet,
+            'lea' => $lea,
+            'loc_holiday' => $loc_holiday
+        );
         foreach ($emp_data as $emp) {
-            $emp_all = (array)$emp;
-            $emp_id = $emp->employee_id;
-            $emp_rate_card_id = $empwork[$emp_id]['vrc_id'];
-            $emp_vendor_id = $card[$emp_rate_card_id]['customer_id'] ?? '';
-            $rate_uom = $vrc[$empwork[$emp_id]['vrc_item_id']]['purchase_uom'] ?? '';
-            $rate_amount = floatval($vrc[$empwork[$emp_id]['vrc_item_id']]['item_price'] ?? 0);
-            $mpc_uom = $mpc[$empwork[$emp_id]['work_order_detail_id']]['purchase_uom'] ?? '';
-            $mpc_amount = floatval($mpc[$empwork[$emp_id]['work_order_detail_id']]['item_price'] ?? 0);
-            $location_id = $emp->location_id;
-            $working_days = $loc_holiday[$location_id]['count_working_days'] ?? 1;
-            if ($working_days <= 0) {
-                $working_days = 1;
-            }
-
-            $emp_all['vendor_id'] = $emp_vendor_id;
-            $emp_all['vendor_name'] = $vend[$emp_vendor_id]['display_name'] ?? '';
-            $emp_all['billable_hrs'] = isset($timesheet[$emp_id]['billable_hrs']) ? $timesheet[$emp_id]['billable_hrs'] : 0;
-            $emp_all['nonbillable_hrs'] = isset($timesheet[$emp_id]['nonbillable_hrs']) ? $timesheet[$emp_id]['nonbillable_hrs'] : 0;
-            $emp_all['current_status'] = isset($timesheet[$emp_id]['current_status']) ? $timesheet[$emp_id]['current_status'] : 0;
-            if ($rate_uom == 'PD') {
-                $rate_amount = $rate_amount * $working_days;
-            }
-            if ($mpc_uom == 'PD') {
-                $mpc_amount = $mpc_amount * $working_days;
-            }
-            $amount = round(($emp_all['billable_hrs'] / 8) * ($rate_amount / $working_days));
-            $main_amount = round(($emp_all['billable_hrs'] / 8) * ($mpc_amount / $working_days));
-            $non_amount = round(($emp_all['nonbillable_hrs'] / 8) * ($rate_amount / $working_days));
-
-            $emp_all['vrc_uom'] = $rate_uom;
-            $emp_all['mpc_uom'] = $mpc_uom;
-            $emp_all['min_exp'] = $vrc[$empwork[$emp_id]['vrc_item_id']]['min_exp'] ?? 0;
-            $emp_all['max_exp'] = $vrc[$empwork[$emp_id]['vrc_item_id']]['max_exp'] ?? 0;
-            $emp_all['vrc_budgeted_amount'] = $rate_amount;
-            $emp_all['vrc_billable_amount'] = $amount;
-            $emp_all['billable_amount'] = $main_amount;
-            $emp_all['budgeted_amount'] = $mpc_amount;
-            $emp_all['nonbillable_amount'] = $non_amount;
-            $emp_all['work_order_id'] = $empwork[$emp_id]['work_order_id'];
-            $emp_all['work_order_detail_id'] = $empwork[$emp_id]['work_order_detail_id'];
-            $emp_all['vrc_id'] = $empwork[$emp_id]['vrc_id'];
-            $emp_all['vrc_item_id'] = $empwork[$emp_id]['vrc_item_id'];
-            $emp_all['mpc_item_price'] = $mpc[$empwork[$emp_id]['work_order_detail_id']]['item_price'] ?? 0;
-            $emp_all['vrc_item_price'] = $vrc[$empwork[$emp_id]['vrc_item_id']]['item_price'] ?? 0;
-            $emp_all['experience_base'] = $vrc[$empwork[$emp_id]['vrc_item_id']]['experience_base'] ?? '';
-            $emp_all['leave_days'] = isset($lea[$emp_id]) ? $lea[$emp_id] : 0;
-            $joining_timestamp = strtotime($emp->joining_date);
-            $current_exp = (time() - $joining_timestamp) / (365 * 24 * 60 * 60);
-            $experience = $emp->total_experiance + $current_exp;
-            $min_exp = $emp_all['min_exp'];
-            $max_exp = $emp_all['max_exp'];
-            $remark = ($experience >= $min_exp && $experience <= $max_exp) ? '' : 'Experience Mismatch';
-            $emp_all['remark'] = $remark;
-            $return[] = $emp_all;
+            $return[] = $this->calculateEmpWorkSummary($emp, $empWorkContext);
         }
         return $return;
     }
